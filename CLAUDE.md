@@ -1,0 +1,43 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+This is an MTG deck shuffler web app designed for remote Magic: The Gathering play. The app fetches deck information from Archidekt.com and displays card information to help players set up remote games using tools like Mural.
+
+## Architecture
+
+- **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks
+- **Backend**: Express.js server serving static files and handling form submissions
+- **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
+- **Telemetry**: OpenTelemetry instrumentation configured for Honeycomb (requires `.env` file)
+
+## Key Files
+
+- `server.ts` - Main Express server entry point
+- `tracing.ts` - OpenTelemetry configuration (imported by server)
+- `index.html` - Frontend with HTMX-powered deck input form
+- `run` - Shell script that sources `.env` and runs the app
+- `tsconfig.json` - TypeScript configuration targeting ES2022
+
+## Development Commands
+
+- **Build**: `npm run build` - Compiles TypeScript to `dist/`
+- **Clean**: `npm run clean` - Removes `dist/` directory
+- **Start**: `npm start` - Builds and runs the server from `dist/`
+- **Run locally**: `./run` - Sources `.env` file and starts the app (preferred)
+
+## Environment Setup
+
+The app requires a `.env` file for OpenTelemetry configuration. The `./run` script sources this file before starting the server.
+
+## API Integration
+
+The app is designed to integrate with:
+- Archidekt API: `https://archidekt.com/api/decks/{deckId}/`
+- Scryfall for card images (referenced in README goals)
+
+## Port Configuration
+
+Server runs on port 3000 by default, configurable via `PORT` environment variable.
