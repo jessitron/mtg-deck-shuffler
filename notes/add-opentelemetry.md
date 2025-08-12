@@ -36,7 +36,8 @@ Please help me add OpenTelemetry instrumentation to my TypeScript Node.js projec
 3. **Package.json updates**:
    - Add/update start scripts to include the tracing file:
      - eg, for development: `ts-node -r ./tracing.ts src/index.ts`
-     - Adjust the main file path as needed for my project structure
+     - eg, for production: `node -r ./tracing.js dist/index.js`
+     - However this project is started up, adapt these instructions to bring tracing into the startup
 
 ## Additional Considerations
 
