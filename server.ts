@@ -11,6 +11,7 @@ interface ArchidektDeck {
       name: string;
     };
     quantity: number;
+    categories: string[];
   }>;
 }
 
@@ -18,21 +19,30 @@ interface Deck {
   id: number;
   name: string;
   totalCards: number;
+  commander?: string;
 }
 
 function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
   const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
   
+  const commanderCard = archidektDeck.cards.find(card => 
+    card.categories.includes("Commander")
+  );
+  
   return {
     id: archidektDeck.id,
     name: archidektDeck.name,
-    totalCards
+    totalCards,
+    commander: commanderCard?.card.name
   };
 }
 
 function formatDeckHtml(deck: Deck): string {
+  const commanderInfo = deck.commander ? `<p>Commander: <strong>${deck.commander}</strong></p>` : '';
+  
   return `<div id="deck-input">
         <h2>${deck.name}</h2>
+        ${commanderInfo}
         <p>This deck has ${deck.totalCards} cards</p>
         <a href="/">Choose another deck</a>
     </div>`;
