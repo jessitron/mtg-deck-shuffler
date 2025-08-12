@@ -7,9 +7,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "start": "npm run build && node dist/server.js",
-    "start:trace": "ts-node --esm server.ts",
-    "dev": "npm run start:trace"
+    "start": "npm run build && cd dist && node server.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
