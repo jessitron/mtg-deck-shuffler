@@ -6,9 +6,14 @@
   "scripts": {
     "build": "esbuild server.ts --bundle --platform=node --target=node22 --outfile=dist/server.js",
     "start": "npm run build && node dist/server.js",
-    "dev": "npm run build && node dist/server.js"
+    "start:trace": "ts-node -r ./tracing.ts server.ts",
+    "dev": "npm run start:trace"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.62.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.203.0",
+    "@opentelemetry/sdk-node": "^0.203.0",
     "express": "^4.18.2"
   },
   "engines": {
@@ -18,6 +23,7 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.2.1",
     "esbuild": "^0.25.8",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
 }
