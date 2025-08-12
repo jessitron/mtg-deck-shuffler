@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTG Deck Shuffler</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body>
     <h1>Woohoo it's Magic time</h1>
+    
+    <div id="deck-input">
+        <label for="deck-number">Archidekt Deck Number:</label>
+        <input type="text" id="deck-number" name="deck-number" placeholder="14669648">
+        <button hx-post="/deck" 
+                hx-include="#deck-number" 
+                hx-target="#deck-input">
+            Load Deck
+        </button>
+    </div>
 </body>
 </html>
