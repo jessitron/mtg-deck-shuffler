@@ -14,6 +14,12 @@ So, given a deck in archidekt.com, this web app will
 
 ... that's enough for now.
 
+## Running
+
+`npm install`
+
+`./run`
+
 ## Technical notes
 
 This app uses TypeScript, with esbuild for converting to JS. It's a toy, so keep it dead simple.
