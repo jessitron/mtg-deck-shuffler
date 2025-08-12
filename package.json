@@ -1,0 +1,16 @@
+{
+  "name": "mtg-deck-shuffler",
+  "version": "1.0.0",
+  "description": "Simple MTG deck app for remote play",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
