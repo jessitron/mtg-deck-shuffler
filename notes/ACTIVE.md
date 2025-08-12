@@ -19,3 +19,10 @@ It needs an endpoint to accept that input and return some html that says "you ha
 It'll need to bring htmx in as a script tag.
 
 the input can then hit the endpoint, get the response, and replace its parent div with the response.
+
+the latest version of htmx is 2.0.6
+
+## second ability: how many cards are in the deck?
+
+next, the server will call out to the archidekt api to get the deck, convert the result into its own type,
+and then populate the HTML with the name and number of cards in the deck.
