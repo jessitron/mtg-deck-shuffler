@@ -3,6 +3,17 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 
+interface ArchidektDeck {
+  id: number;
+  name: string;
+  cards: Array<{
+    card: {
+      name: string;
+    };
+    quantity: number;
+  }>;
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,12 +23,31 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
 
-app.post("/deck", (req, res) => {
+app.post("/deck", async (req, res) => {
   const deckNumber = req.body["deck-number"];
-  res.send(`<div id="deck-input">
-        <p>You have chosen deck ${deckNumber}</p>
+  
+  try {
+    const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch deck: ${response.status}`);
+    }
+    
+    const deck: ArchidektDeck = await response.json();
+    const totalCards = deck.cards.reduce((sum, card) => sum + card.quantity, 0);
+    
+    res.send(`<div id="deck-input">
+        <h2>${deck.name}</h2>
+        <p>This deck has ${totalCards} cards</p>
         <a href="/">Choose another deck</a>
     </div>`);
+  } catch (error) {
+    console.error("Error fetching deck:", error);
+    res.send(`<div id="deck-input">
+        <p>Error: Could not fetch deck ${deckNumber}</p>
+        <a href="/">Try another deck</a>
+    </div>`);
+  }
 });
 
 app.listen(PORT, () => {
