@@ -6,6 +6,7 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc",
+    "clean": "rm -rf dist",
     "start": "npm run build && node dist/server.js",
     "start:trace": "ts-node --esm server.ts",
     "dev": "npm run start:trace"
