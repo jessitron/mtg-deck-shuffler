@@ -14,6 +14,30 @@ interface ArchidektDeck {
   }>;
 }
 
+interface Deck {
+  id: number;
+  name: string;
+  totalCards: number;
+}
+
+function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
+  const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
+  
+  return {
+    id: archidektDeck.id,
+    name: archidektDeck.name,
+    totalCards
+  };
+}
+
+function formatDeckHtml(deck: Deck): string {
+  return `<div id="deck-input">
+        <h2>${deck.name}</h2>
+        <p>This deck has ${deck.totalCards} cards</p>
+        <a href="/">Choose another deck</a>
+    </div>`;
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -33,14 +57,11 @@ app.post("/deck", async (req, res) => {
       throw new Error(`Failed to fetch deck: ${response.status}`);
     }
     
-    const deck: ArchidektDeck = await response.json();
-    const totalCards = deck.cards.reduce((sum, card) => sum + card.quantity, 0);
+    const archidektDeck: ArchidektDeck = await response.json();
+    const deck = convertArchidektToDeck(archidektDeck);
+    const html = formatDeckHtml(deck);
     
-    res.send(`<div id="deck-input">
-        <h2>${deck.name}</h2>
-        <p>This deck has ${totalCards} cards</p>
-        <a href="/">Choose another deck</a>
-    </div>`);
+    res.send(html);
   } catch (error) {
     console.error("Error fetching deck:", error);
     res.send(`<div id="deck-input">
