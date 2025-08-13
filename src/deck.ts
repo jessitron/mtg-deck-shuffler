@@ -1,3 +1,7 @@
+export interface Card {
+  name: string;
+}
+
 export interface ArchidektDeck {
   id: number;
   name: string;
@@ -26,39 +30,34 @@ export interface Deck {
   totalCards: number;
   includedCards: number;
   excludedCards: number;
-  commander?: string;
+  commander?: Card;
 }
 
 export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
   const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
-  
+
   // Create a map of category names to their includedInDeck status
-  const categoryInclusionMap = new Map(
-    archidektDeck.categories.map(cat => [cat.name, cat.includedInDeck])
-  );
-  
+  const categoryInclusionMap = new Map(archidektDeck.categories.map((cat) => [cat.name, cat.includedInDeck]));
+
   // Check if a card's primary category (first in the list) is included in deck
-  const isCardIncluded = (card: typeof archidektDeck.cards[0]) => {
+  const isCardIncluded = (card: (typeof archidektDeck.cards)[0]) => {
     const primaryCategory = card.categories[0];
-    
+
     // Sideboard cards are always excluded from the deck
     if (primaryCategory === "Sideboard") {
       return false;
     }
-    
+
     // Other categories are excluded if they have includedInDeck: false
     return categoryInclusionMap.get(primaryCategory) ?? true; // default to included if not found
   };
-  
-  const includedCards = archidektDeck.cards
-    .filter(isCardIncluded)
-    .reduce((sum, card) => sum + card.quantity, 0);
-  
-  const excludedCards = archidektDeck.cards
-    .filter(card => !isCardIncluded(card))
-    .reduce((sum, card) => sum + card.quantity, 0);
+
+  const includedCards = archidektDeck.cards.filter(isCardIncluded).reduce((sum, card) => sum + card.quantity, 0);
+
+  const excludedCards = archidektDeck.cards.filter((card) => !isCardIncluded(card)).reduce((sum, card) => sum + card.quantity, 0);
 
   const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
+  const commanderName = commanderCard?.card.oracleCard?.name || commanderCard?.card.name;
 
   return {
     id: archidektDeck.id,
@@ -66,6 +65,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     totalCards,
     includedCards,
     excludedCards,
-    commander: commanderCard?.card.oracleCard?.name || commanderCard?.card.name,
+    commander: commanderName ? { name: commanderName } : undefined,
   };
 }

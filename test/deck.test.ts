@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { ArchidektDeck, Deck, convertArchidektToDeck } from "../src/deck.js";
+import { ArchidektDeck, Deck, Card, convertArchidektToDeck } from "../src/deck.js";
 
 describe("convertArchidektToDeck", () => {
   test("converts basic deck without commander", () => {
@@ -101,7 +101,7 @@ describe("convertArchidektToDeck", () => {
     assert.strictEqual(result.totalCards, 32);
     assert.strictEqual(result.includedCards, 32);
     assert.strictEqual(result.excludedCards, 0);
-    assert.strictEqual(result.commander, "Urza, Lord High Artificer");
+    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer" });
   });
 
   test("handles empty deck", () => {
@@ -197,7 +197,7 @@ describe("convertArchidektToDeck", () => {
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.strictEqual(result.commander, "Ygra, Eater of All");
+    assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All" });
     assert.strictEqual(result.totalCards, 4);
     assert.strictEqual(result.includedCards, 3);
     assert.strictEqual(result.excludedCards, 1);
