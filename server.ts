@@ -2,38 +2,7 @@ import "./tracing.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-
-interface ArchidektDeck {
-  id: number;
-  name: string;
-  cards: Array<{
-    card: {
-      name: string;
-    };
-    quantity: number;
-    categories: string[];
-  }>;
-}
-
-interface Deck {
-  id: number;
-  name: string;
-  totalCards: number;
-  commander?: string;
-}
-
-function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
-  const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
-
-  const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
-
-  return {
-    id: archidektDeck.id,
-    name: archidektDeck.name,
-    totalCards,
-    commander: commanderCard?.card.name,
-  };
-}
+import { ArchidektDeck, Deck, convertArchidektToDeck } from "./src/deck.js";
 
 function formatDeckHtml(deck: Deck): string {
   const commanderInfo = deck.commander ? `<p>Commander: <strong>${deck.commander}</strong></p>` : "No commander detected";

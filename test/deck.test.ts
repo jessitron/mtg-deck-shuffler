@@ -1,37 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-
-interface ArchidektDeck {
-  id: number;
-  name: string;
-  cards: Array<{
-    card: {
-      name: string;
-    };
-    quantity: number;
-    categories: string[];
-  }>;
-}
-
-interface Deck {
-  id: number;
-  name: string;
-  totalCards: number;
-  commander?: string;
-}
-
-function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
-  const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
-
-  const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
-
-  return {
-    id: archidektDeck.id,
-    name: archidektDeck.name,
-    totalCards,
-    commander: commanderCard?.card.name,
-  };
-}
+import { ArchidektDeck, Deck, convertArchidektToDeck } from '../src/deck.js';
 
 describe('convertArchidektToDeck', () => {
   test('converts basic deck without commander', () => {
