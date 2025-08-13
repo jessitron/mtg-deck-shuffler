@@ -12,7 +12,9 @@
       "Bash(npm run start:trace:*)",
       "Bash(npm run dev:*)",
       "Bash(./run)",
-      "Bash(npm run clean:*)"
+      "Bash(npm run clean:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm test)"
     ],
     "deny": []
   }
