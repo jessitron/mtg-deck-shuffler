@@ -14,7 +14,8 @@
       "Bash(./run)",
       "Bash(npm run clean:*)",
       "Bash(npm uninstall:*)",
-      "Bash(npm test)"
+      "Bash(npm test)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
