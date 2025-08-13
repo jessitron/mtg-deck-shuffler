@@ -1,10 +1,10 @@
-import { test, describe } from 'node:test';
-import assert from 'node:assert';
-import fs from 'node:fs';
-import { ArchidektDeck, Deck, convertArchidektToDeck } from '../src/deck.js';
+import { test, describe } from "node:test";
+import assert from "node:assert";
+import fs from "node:fs";
+import { ArchidektDeck, Deck, convertArchidektToDeck } from "../src/deck.js";
 
-describe('convertArchidektToDeck', () => {
-  test('converts basic deck without commander', () => {
+describe("convertArchidektToDeck", () => {
+  test("converts basic deck without commander", () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Test Deck",
@@ -12,17 +12,17 @@ describe('convertArchidektToDeck', () => {
         {
           card: { name: "Lightning Bolt" },
           quantity: 4,
-          categories: ["Instant"]
+          categories: ["Instant"],
         },
         {
           card: { name: "Mountain" },
           quantity: 20,
-          categories: ["Land"]
-        }
-      ]
+          categories: ["Land"],
+        },
+      ],
     };
 
-    const result = convertArchidektToDeck(archidektDeck);
+    const result: Deck = convertArchidektToDeck(archidektDeck);
 
     assert.strictEqual(result.id, 123);
     assert.strictEqual(result.name, "Test Deck");
@@ -30,7 +30,7 @@ describe('convertArchidektToDeck', () => {
     assert.strictEqual(result.commander, undefined);
   });
 
-  test('converts deck with commander', () => {
+  test("converts deck with commander", () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Commander Deck",
@@ -38,19 +38,19 @@ describe('convertArchidektToDeck', () => {
         {
           card: { name: "Urza, Lord High Artificer" },
           quantity: 1,
-          categories: ["Commander"]
+          categories: ["Commander"],
         },
         {
           card: { name: "Island" },
           quantity: 30,
-          categories: ["Land"]
+          categories: ["Land"],
         },
         {
           card: { name: "Counterspell" },
           quantity: 1,
-          categories: ["Instant"]
-        }
-      ]
+          categories: ["Instant"],
+        },
+      ],
     };
 
     const result = convertArchidektToDeck(archidektDeck);
@@ -61,11 +61,11 @@ describe('convertArchidektToDeck', () => {
     assert.strictEqual(result.commander, "Urza, Lord High Artificer");
   });
 
-  test('handles empty deck', () => {
+  test("handles empty deck", () => {
     const archidektDeck: ArchidektDeck = {
       id: 789,
       name: "Empty Deck",
-      cards: []
+      cards: [],
     };
 
     const result = convertArchidektToDeck(archidektDeck);
@@ -76,11 +76,11 @@ describe('convertArchidektToDeck', () => {
     assert.strictEqual(result.commander, undefined);
   });
 
-  test('converts real Ygra deck data correctly', () => {
-    const ygraData = JSON.parse(fs.readFileSync('./test/deck-ygra.json', 'utf8'));
-    
+  test("converts real Ygra deck data correctly", () => {
+    const ygraData = JSON.parse(fs.readFileSync("./test/deck-ygra.json", "utf8"));
+
     const result = convertArchidektToDeck(ygraData);
-    
+
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
     assert.strictEqual(result.commander, "Ygra, Eater of All");
