@@ -2,6 +2,18 @@ export interface Card {
   name: string;
 }
 
+export function convertArchidektToCard(archidektCard: {
+  card: {
+    name?: string;
+    oracleCard?: {
+      name: string;
+    };
+  };
+}): Card | undefined {
+  const cardName = archidektCard.card.oracleCard?.name || archidektCard.card.name;
+  return cardName ? { name: cardName } : undefined;
+}
+
 export interface ArchidektDeck {
   id: number;
   name: string;
@@ -57,7 +69,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
   const excludedCards = archidektDeck.cards.filter((card) => !isCardIncluded(card)).reduce((sum, card) => sum + card.quantity, 0);
 
   const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
-  const commanderName = commanderCard?.card.oracleCard?.name || commanderCard?.card.name;
 
   return {
     id: archidektDeck.id,
@@ -65,6 +76,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     totalCards,
     includedCards,
     excludedCards,
-    commander: commanderName ? { name: commanderName } : undefined,
+    commander: commanderCard ? convertArchidektToCard(commanderCard) : undefined,
   };
 }

@@ -1,7 +1,46 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { ArchidektDeck, Deck, Card, convertArchidektToDeck } from "../src/deck.js";
+import { ArchidektDeck, Deck, Card, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
+
+describe("convertArchidektToCard", () => {
+  test("converts card with oracle name", () => {
+    const archidektCard = {
+      card: {
+        name: "Some Name",
+        oracleCard: {
+          name: "Oracle Name",
+        },
+      },
+    };
+
+    const result = convertArchidektToCard(archidektCard);
+
+    assert.deepStrictEqual(result, { name: "Oracle Name" });
+  });
+
+  test("converts card with regular name when no oracle name", () => {
+    const archidektCard = {
+      card: {
+        name: "Regular Name",
+      },
+    };
+
+    const result = convertArchidektToCard(archidektCard);
+
+    assert.deepStrictEqual(result, { name: "Regular Name" });
+  });
+
+  test("returns undefined when no name available", () => {
+    const archidektCard = {
+      card: {},
+    };
+
+    const result = convertArchidektToCard(archidektCard);
+
+    assert.strictEqual(result, undefined);
+  });
+});
 
 describe("convertArchidektToDeck", () => {
   test("converts basic deck without commander", () => {
