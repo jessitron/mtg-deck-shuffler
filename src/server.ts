@@ -8,7 +8,7 @@ function formatDeckHtml(deck: Deck): string {
   const commanderInfo = deck.commander ? `<p>Commander: <strong>${deck.commander}</strong></p>` : "No commander detected";
 
   return `<div id="deck-input">
-        <h2>${deck.name}</h2>
+        <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
         ${commanderInfo}
         <p>This deck has ${deck.totalCards} cards</p>
         <a href="/">Choose another deck</a>

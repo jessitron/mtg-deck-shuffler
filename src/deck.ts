@@ -3,7 +3,10 @@ export interface ArchidektDeck {
   name: string;
   cards: Array<{
     card: {
-      name: string;
+      name?: string;
+      oracleCard?: {
+        name: string;
+      };
     };
     quantity: number;
     categories: string[];
@@ -26,6 +29,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     id: archidektDeck.id,
     name: archidektDeck.name,
     totalCards,
-    commander: commanderCard?.card.name,
+    commander: commanderCard?.card.oracleCard?.name || commanderCard?.card.name,
   };
 }

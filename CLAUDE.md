@@ -28,6 +28,14 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - **Start**: `npm start` - Builds and runs the server from `dist/`
 - **Run locally**: `./run` - Sources `.env` file and starts the app (preferred)
 
+## Testing
+
+To verify changes, you can
+
+- `npm run build`
+- `npm run test` (this only tests some functions)
+- `./run` and make sure the app starts up and can load the default deck
+
 ## Environment Setup
 
 The app requires a `.env` file for OpenTelemetry configuration. The `./run` script sources this file before starting the server.
@@ -35,7 +43,9 @@ The app requires a `.env` file for OpenTelemetry configuration. The `./run` scri
 ## API Integration
 
 The app is designed to integrate with:
+
 - Archidekt API: `https://archidekt.com/api/decks/{deckId}/`
+- Archidekt link: `https://archidekt.com/decks/{deckId}/`
 - Scryfall for card images (referenced in README goals)
 
 ## Port Configuration

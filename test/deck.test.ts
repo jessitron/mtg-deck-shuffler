@@ -1,5 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
+import fs from 'node:fs';
 import { ArchidektDeck, Deck, convertArchidektToDeck } from '../src/deck.js';
 
 describe('convertArchidektToDeck', () => {
@@ -73,5 +74,16 @@ describe('convertArchidektToDeck', () => {
     assert.strictEqual(result.name, "Empty Deck");
     assert.strictEqual(result.totalCards, 0);
     assert.strictEqual(result.commander, undefined);
+  });
+
+  test('converts real Ygra deck data correctly', () => {
+    const ygraData = JSON.parse(fs.readFileSync('./test/deck-ygra.json', 'utf8'));
+    
+    const result = convertArchidektToDeck(ygraData);
+    
+    assert.strictEqual(result.id, 14669648);
+    assert.strictEqual(result.name, "Ygra EATS IT ALL");
+    assert.strictEqual(result.commander, "Ygra, Eater of All");
+    assert.strictEqual(result.totalCards, 4);
   });
 });

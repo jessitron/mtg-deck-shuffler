@@ -27,14 +27,20 @@ the latest version of htmx is 2.0.6
 next, the server will call out to the archidekt api to get the deck, convert the result into its own type,
 and then populate the HTML with the name and number of cards in the deck.
 
-- please make a type of our own that is optimized for use in this app. Let's call it Deck.
-- make a conversion function from the archidekt type to our type.
-- call that conversion function from the endpoint.
+[x] please make a type of our own that is optimized for use in this app. Let's call it Deck.
+[x] make a conversion function from the archidekt type to our type.
+[x] call that conversion function from the endpoint.
 
-- make another function that formats the html based on our type, and call that in the endpoint.
+[x] make another function that formats the html based on our type, and call that in the endpoint.
 
 ## next ability: show the commander name
 
 This isn't working, so it's time to introduce tests. We will write tests for the conversion function.
 
-What is the simplest test framework we can use, that lets us write tests in typescript?
+[x] move code into src/ and put the conversion function in its own file.
+[x] implement basic tests in typescript
+[x] implement a test with a subset of real data: have the test read in test/deck-ygra.json and make sure we see the right commander.
+
+## next ability: link to archidekt
+
+Make the deck name a link to the deck on archidekt. Here's an example link to a (different) deck: https://archidekt.com/decks/13083247
