@@ -32,3 +32,9 @@ and then populate the HTML with the name and number of cards in the deck.
 - call that conversion function from the endpoint.
 
 - make another function that formats the html based on our type, and call that in the endpoint.
+
+## next ability: show the commander name
+
+This isn't working, so it's time to introduce tests. We will write tests for the conversion function.
+
+What is the simplest test framework we can use, that lets us write tests in typescript?
