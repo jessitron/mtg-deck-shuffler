@@ -13,9 +13,9 @@ Current:
 Definitions:
 
 - A card's primary category is the first one in the list of categories.
-- Sideboard is a special category, indicating cards that are not in the deck. They are saved with the deck because they might be swapped in later.
+- Sideboard and Maybeboard are special categories, indicating cards that are not in the deck. They are saved with the deck because they might be swapped in later. The way you can tell it's a special category that isn't included in the deck is: in the categories list at the deck level, the category has 'includedInDeck': false.
 
 Needed:
 
-- we display the number of cards not in "Sideboard" as their primary category. This is the count of cards in the deck.
-- and separately, the number of cards in "Sideboard" category. These are extra cards that might get swapped in.
+- we display the number of cards included in the deck
+- and separately, the number of cards not included in the deck, but still in the list.
