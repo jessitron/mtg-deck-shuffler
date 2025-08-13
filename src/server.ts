@@ -7,9 +7,9 @@ import { ArchidektDeck, Deck, convertArchidektToDeck } from "./deck.js";
 function formatDeckHtml(deck: Deck): string {
   const commanderInfo = deck.commander ? `<p>Commander: <strong>${deck.commander}</strong></p>` : "No commander detected";
 
-  const cardCountInfo = deck.sideboardCards > 0 
-    ? `<p>This deck has ${deck.deckCards} cards, plus ${deck.sideboardCards} cards in sideboard</p>`
-    : `<p>This deck has ${deck.deckCards} cards</p>`;
+  const cardCountInfo = deck.excludedCards > 0 
+    ? `<p>This deck has ${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards</p>`
+    : `<p>This deck has ${deck.includedCards} cards</p>`;
 
   return `<div id="deck-input">
         <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
