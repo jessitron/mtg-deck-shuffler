@@ -152,7 +152,7 @@ describe("convertArchidektToDeck", () => {
           id: 4,
           name: "Sideboard",
           isPremier: false,
-          includedInDeck: false,
+          includedInDeck: true,
           includedInPrice: true,
         },
       ],

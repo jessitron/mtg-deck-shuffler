@@ -15,7 +15,10 @@
       "Bash(npm run clean:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm test)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "mcp__playwright__browser_press_key"
     ],
     "deny": []
   }
