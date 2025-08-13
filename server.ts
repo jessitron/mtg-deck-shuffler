@@ -1,8 +1,8 @@
-import "../tracing.js";
+import "./tracing.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ArchidektDeck, Deck, convertArchidektToDeck } from "./deck.js";
+import { ArchidektDeck, Deck, convertArchidektToDeck } from "./src/deck.js";
 
 function formatDeckHtml(deck: Deck): string {
   const commanderInfo = deck.commander ? `<p>Commander: <strong>${deck.commander}</strong></p>` : "No commander detected";
@@ -22,7 +22,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "..", "..")));
+app.use(express.static(path.join(__dirname, "..")));
 
 app.post("/deck", async (req, res) => {
   const deckNumber = req.body["deck-number"];
