@@ -18,7 +18,11 @@
       "Bash(mv:*)",
       "Bash(curl:*)",
       "Bash(cat:*)",
-      "mcp__playwright__browser_press_key"
+      "mcp__playwright__browser_press_key",
+      "WebFetch(domain:scryfall.com)",
+      "WebFetch(domain:api.scryfall.com)",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_close"
     ],
     "deny": []
   }

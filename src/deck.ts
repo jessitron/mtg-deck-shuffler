@@ -1,17 +1,23 @@
 export interface Card {
   name: string;
+  uid?: string;
 }
 
-export function convertArchidektToCard(archidektCard: {
+export interface ArchidektCard {
   card: {
     name?: string;
+    uid?: string;
     oracleCard?: {
       name: string;
     };
   };
-}): Card | undefined {
+  quantity: number;
+  categories: string[];
+}
+
+export function convertArchidektToCard(archidektCard: ArchidektCard): Card | undefined {
   const cardName = archidektCard.card.oracleCard?.name || archidektCard.card.name;
-  return cardName ? { name: cardName } : undefined;
+  return cardName ? { name: cardName, uid: archidektCard.card.uid } : undefined;
 }
 
 export interface ArchidektDeck {
@@ -24,16 +30,7 @@ export interface ArchidektDeck {
     includedInDeck: boolean;
     includedInPrice: boolean;
   }>;
-  cards: Array<{
-    card: {
-      name?: string;
-      oracleCard?: {
-        name: string;
-      };
-    };
-    quantity: number;
-    categories: string[];
-  }>;
+  cards: ArchidektCard[];
 }
 
 export interface Deck {
@@ -45,6 +42,13 @@ export interface Deck {
   commander?: Card;
 }
 
+export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "normal"): string {
+  const extension = format === "png" ? "png" : "jpg";
+  const firstTwo = uid.substring(0, 1);
+  const nextTwo = uid.substring(1, 2);
+  return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${uid}.${extension}`;
+}
+
 export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
   const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
 
@@ -52,7 +56,7 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
   const categoryInclusionMap = new Map(archidektDeck.categories.map((cat) => [cat.name, cat.includedInDeck]));
 
   // Check if a card's primary category (first in the list) is included in deck
-  const isCardIncluded = (card: (typeof archidektDeck.cards)[0]) => {
+  const isCardIncluded = (card: ArchidektCard) => {
     const primaryCategory = card.categories[0];
 
     // Sideboard cards are always excluded from the deck

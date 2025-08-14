@@ -1,39 +1,45 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { ArchidektDeck, Deck, Card, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
+import { ArchidektDeck, Deck, Card, ArchidektCard, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
 
 describe("convertArchidektToCard", () => {
   test("converts card with oracle name", () => {
-    const archidektCard = {
+    const archidektCard: ArchidektCard = {
       card: {
         name: "Some Name",
         oracleCard: {
           name: "Oracle Name",
         },
       },
+      quantity: 1,
+      categories: ["Test"],
     };
 
     const result = convertArchidektToCard(archidektCard);
 
-    assert.deepStrictEqual(result, { name: "Oracle Name" });
+    assert.deepStrictEqual(result, { name: "Oracle Name", uid: undefined });
   });
 
   test("converts card with regular name when no oracle name", () => {
-    const archidektCard = {
+    const archidektCard: ArchidektCard = {
       card: {
         name: "Regular Name",
       },
+      quantity: 1,
+      categories: ["Test"],
     };
 
     const result = convertArchidektToCard(archidektCard);
 
-    assert.deepStrictEqual(result, { name: "Regular Name" });
+    assert.deepStrictEqual(result, { name: "Regular Name", uid: undefined });
   });
 
   test("returns undefined when no name available", () => {
-    const archidektCard = {
+    const archidektCard: ArchidektCard = {
       card: {},
+      quantity: 1,
+      categories: ["Test"],
     };
 
     const result = convertArchidektToCard(archidektCard);
@@ -140,7 +146,7 @@ describe("convertArchidektToDeck", () => {
     assert.strictEqual(result.totalCards, 32);
     assert.strictEqual(result.includedCards, 32);
     assert.strictEqual(result.excludedCards, 0);
-    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer" });
+    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer", uid: undefined });
   });
 
   test("handles empty deck", () => {
@@ -236,7 +242,7 @@ describe("convertArchidektToDeck", () => {
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All" });
+    assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151" });
     assert.strictEqual(result.totalCards, 4);
     assert.strictEqual(result.includedCards, 3);
     assert.strictEqual(result.excludedCards, 1);
