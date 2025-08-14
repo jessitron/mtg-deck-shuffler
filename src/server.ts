@@ -17,7 +17,7 @@ function formatDeckHtml(deck: Deck): string {
       ? `<p>This deck has ${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards</p>`
       : `<p>This deck has ${deck.includedCards} cards</p>`;
 
-  return `<div id="deck-input">
+  return `<div>
         <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
         ${commanderInfo}
         ${cardCountInfo}
@@ -51,7 +51,7 @@ app.post("/deck", async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error("Error fetching deck:", error);
-    res.send(`<div id="deck-input">
+    res.send(`<div>
         <p>Error: Could not fetch deck ${deckNumber}</p>
         <a href="/">Try another deck</a>
     </div>`);
