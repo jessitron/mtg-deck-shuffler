@@ -7,7 +7,7 @@ describe("convertArchidektToCard", () => {
   test("converts card with oracle name", () => {
     const archidektCard: ArchidektCard = {
       card: {
-        name: "Some Name",
+        uid: "test-uid",
         oracleCard: {
           name: "Oracle Name",
         },
@@ -18,13 +18,17 @@ describe("convertArchidektToCard", () => {
 
     const result = convertArchidektToCard(archidektCard);
 
-    assert.deepStrictEqual(result, { name: "Oracle Name", uid: undefined });
+    assert.deepStrictEqual(result, { name: "Oracle Name", uid: "test-uid" });
   });
 
-  test("converts card with regular name when no oracle name", () => {
+  test("converts card with display name when available", () => {
     const archidektCard: ArchidektCard = {
       card: {
-        name: "Regular Name",
+        displayName: "Display Name",
+        uid: "test-uid-2",
+        oracleCard: {
+          name: "Oracle Name",
+        },
       },
       quantity: 1,
       categories: ["Test"],
@@ -32,12 +36,17 @@ describe("convertArchidektToCard", () => {
 
     const result = convertArchidektToCard(archidektCard);
 
-    assert.deepStrictEqual(result, { name: "Regular Name", uid: undefined });
+    assert.deepStrictEqual(result, { name: "Display Name", uid: "test-uid-2" });
   });
 
   test("returns undefined when no name available", () => {
     const archidektCard: ArchidektCard = {
-      card: {},
+      card: {
+        uid: "test-uid-3",
+        oracleCard: {
+          name: "",
+        },
+      },
       quantity: 1,
       categories: ["Test"],
     };
@@ -71,12 +80,18 @@ describe("convertArchidektToDeck", () => {
       ],
       cards: [
         {
-          card: { name: "Lightning Bolt" },
+          card: {
+            uid: "lightning-bolt-uid",
+            oracleCard: { name: "Lightning Bolt" },
+          },
           quantity: 4,
           categories: ["Instant"],
         },
         {
-          card: { name: "Mountain" },
+          card: {
+            uid: "mountain-uid",
+            oracleCard: { name: "Mountain" },
+          },
           quantity: 20,
           categories: ["Land"],
         },
@@ -122,17 +137,26 @@ describe("convertArchidektToDeck", () => {
       ],
       cards: [
         {
-          card: { name: "Urza, Lord High Artificer" },
+          card: {
+            uid: "urza-uid",
+            oracleCard: { name: "Urza, Lord High Artificer" },
+          },
           quantity: 1,
           categories: ["Commander"],
         },
         {
-          card: { name: "Island" },
+          card: {
+            uid: "island-uid",
+            oracleCard: { name: "Island" },
+          },
           quantity: 30,
           categories: ["Land"],
         },
         {
-          card: { name: "Counterspell" },
+          card: {
+            uid: "counterspell-uid",
+            oracleCard: { name: "Counterspell" },
+          },
           quantity: 1,
           categories: ["Instant"],
         },
@@ -146,7 +170,7 @@ describe("convertArchidektToDeck", () => {
     assert.strictEqual(result.totalCards, 32);
     assert.strictEqual(result.includedCards, 32);
     assert.strictEqual(result.excludedCards, 0);
-    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer", uid: undefined });
+    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer", uid: "urza-uid" });
   });
 
   test("handles empty deck", () => {
@@ -203,22 +227,34 @@ describe("convertArchidektToDeck", () => {
       ],
       cards: [
         {
-          card: { name: "Lightning Bolt" },
+          card: {
+            uid: "lightning-bolt-uid-2",
+            oracleCard: { name: "Lightning Bolt" },
+          },
           quantity: 4,
           categories: ["Instant"],
         },
         {
-          card: { name: "Mountain" },
+          card: {
+            uid: "mountain-uid-2",
+            oracleCard: { name: "Mountain" },
+          },
           quantity: 20,
           categories: ["Land"],
         },
         {
-          card: { name: "Maybe Card" },
+          card: {
+            uid: "maybe-card-uid",
+            oracleCard: { name: "Maybe Card" },
+          },
           quantity: 2,
           categories: ["Maybeboard", "Creature"],
         },
         {
-          card: { name: "Sideboard Card" },
+          card: {
+            uid: "sideboard-card-uid",
+            oracleCard: { name: "Sideboard Card" },
+          },
           quantity: 1,
           categories: ["Sideboard", "Instant"],
         },
@@ -243,8 +279,8 @@ describe("convertArchidektToDeck", () => {
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
     assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151" });
-    assert.strictEqual(result.totalCards, 4);
-    assert.strictEqual(result.includedCards, 3);
+    assert.strictEqual(result.totalCards, 5);
+    assert.strictEqual(result.includedCards, 4);
     assert.strictEqual(result.excludedCards, 1);
   });
 });
