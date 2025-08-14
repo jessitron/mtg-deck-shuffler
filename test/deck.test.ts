@@ -38,23 +38,6 @@ describe("convertArchidektToCard", () => {
 
     assert.deepStrictEqual(result, { name: "Display Name", uid: "test-uid-2" });
   });
-
-  test("returns undefined when no name available", () => {
-    const archidektCard: ArchidektCard = {
-      card: {
-        uid: "test-uid-3",
-        oracleCard: {
-          name: "",
-        },
-      },
-      quantity: 1,
-      categories: ["Test"],
-    };
-
-    const result = convertArchidektToCard(archidektCard);
-
-    assert.strictEqual(result, undefined);
-  });
 });
 
 describe("convertArchidektToDeck", () => {

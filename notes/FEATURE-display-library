@@ -1,0 +1,5 @@
+# Display the library
+
+The library is a stack of cards, face-down. To start with, all cards except the commander are in the library.
+
+The display of the library is the back of a Magic card (with an effect to make it look like a deep stack) and a count of the number of cards in the library.
