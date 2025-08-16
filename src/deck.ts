@@ -46,6 +46,7 @@ export interface Deck {
   excludedCards: number;
   commander?: Card;
   cards: Card[];
+  retrievedDate: Date;
 }
 
 export interface Library {
@@ -126,5 +127,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     excludedCards,
     commander: commanderCard ? convertArchidektToCard(commanderCard) : undefined,
     cards: allCards,
+    retrievedDate: new Date(),
   };
 }
