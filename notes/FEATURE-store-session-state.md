@@ -1,21 +1,21 @@
 # Tracking the library
 
-Status: not started. not there yet.
+Status: not started.
 
-Instead of keeping a count of cards, we need to store a list of cards in the library.
+Before we can manipulate the library, we have to save the state of the library.
 
-Hmm, this introduces a wrinkle. I like using htmx, but when someone draws from the library, that list needs to change, and we will display the card.
+We will use a Hexagonal Architecture for state management.
 
-We will need to store the session state on the server.
+Create an adapter for game state.
 
-## Where am I going with this app anyway?
+It can save the game state, starting with "start game". It will be updated when we add library manipulation. At "end game" it is deleted. It can be retrieved, too. The start date and last updated date are recorded.
 
-In the end, I want to be able to save my state, but it doesn't have to be on the server; I'd be happy with cut-and-paste in the client.
+Locally, we will use sqlite. In production, we will use probably dynamodb (later). Warn me if that's going to be hard. Warn me if any of these plans are going to be hard in dynamodb.
 
-It's probably silly to use htmx here, because this is more of an app than a site. Anything we can do on the server is trivial.
+Create an implementation that uses sqlite.
 
-As much as I dislike client-side javascript, it's probably worthwhile here.
+Create an implementation that stores the state in memory.
 
-And while we're making an app with cut-and-pasteable state, it makes a lot of sense to use React. With a top-level State object that flows down.
+Create tests for the adapter interface. Test both the in-memory and sqlite implementations through a lifecycle of start, retrieve, update, retrieve, delete, attempt to retrieve but fail.
 
-Do people still use Redux? That's the style of programming needed here.
+Summarize the results in here, including anything you learned, like what didn't work.

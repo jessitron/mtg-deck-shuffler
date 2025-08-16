@@ -26,6 +26,8 @@ Display Name (Scryfall): at the top of a card. What we call it.
 
 Oracle Name (Archidekt referring to Scryfall): the unique identifier for a card. Usually this is the Display Name at the top of a card, but sometimes it is instead a subtitle under that name. For instance, "Miku, the Renowned" is the Display Name, and "Feather, the Redeemed" is the Card Oracle Name. For game-rule purposes, the card is "Feather, the Redeemed." The Display Name in this case is a vanity name, to go with the sweet Secret Lair art.
 
+Archidect Deck ID: a unique identifier for a deck in the Archidekt system. The deck is mutable in Archidekt!
+
 Deck (Archidekt): a collection of cards meant to be played in a game.
 
 Deck (LibraryTRON): an unordered collection of cards that can be shuffled into a Library. These are immutable in the LibraryTRON domain.
