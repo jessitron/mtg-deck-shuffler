@@ -43,3 +43,7 @@ Game State (LibraryTRON, game scope): all the state that is local to a game. Thi
 Hand (LibraryTRON, game scope): a set of cards that are visible to a player. One per game, mutable.
 
 Cards on Table (LibraryTRON, game scope): a set of cards that are not in the Library or in Hand. They're on the table somewhere. This app does not track cards that are on the table. The only reason we even track them is so that (on rare occasions) we can put them back in the Library.
+
+Included Card (LibraryTRON, deck scope): a card that is played in a deck.
+
+Excluded Card (LibraryTRON, deck scope): a card that is associated with a deck, but not currently played. It does not go into the Library at the start of the game.

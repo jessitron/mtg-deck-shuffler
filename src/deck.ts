@@ -43,6 +43,17 @@ export interface Deck {
   includedCards: number;
   excludedCards: number;
   commander?: Card;
+  cards: Card[];
+}
+
+export interface Library {
+  cards: Card[];
+  count: number;
+}
+
+export interface Game {
+  deck: Deck;
+  library: Library;
 }
 
 export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "normal"): string {
@@ -50,6 +61,21 @@ export function getCardImageUrl(uid: string, format: "small" | "normal" | "large
   const firstTwo = uid.substring(0, 1);
   const nextTwo = uid.substring(1, 2);
   return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${uid}.${extension}`;
+}
+
+export function shuffleDeck(deck: Deck): Library {
+  const shuffledCards = [...deck.cards];
+  
+  // Fisher-Yates shuffle algorithm
+  for (let i = shuffledCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
+  }
+  
+  return {
+    cards: shuffledCards,
+    count: shuffledCards.length
+  };
 }
 
 export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
@@ -71,6 +97,19 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     return categoryInclusionMap.get(primaryCategory) ?? true; // default to included if not found
   };
 
+  // Expand cards based on quantity, excluding commander from main deck
+  const allCards: Card[] = [];
+  for (const archidektCard of archidektDeck.cards) {
+    if (isCardIncluded(archidektCard) && !archidektCard.categories.includes("Commander")) {
+      const card = convertArchidektToCard(archidektCard);
+      if (card) {
+        for (let i = 0; i < archidektCard.quantity; i++) {
+          allCards.push(card);
+        }
+      }
+    }
+  }
+
   const includedCards = archidektDeck.cards.filter(isCardIncluded).reduce((sum, card) => sum + card.quantity, 0);
 
   const excludedCards = archidektDeck.cards.filter((card) => !isCardIncluded(card)).reduce((sum, card) => sum + card.quantity, 0);
@@ -84,5 +123,6 @@ export function convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
     includedCards,
     excludedCards,
     commander: commanderCard ? convertArchidektToCard(commanderCard) : undefined,
+    cards: allCards,
   };
 }
