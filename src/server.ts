@@ -27,9 +27,9 @@ function formatDeckHtml(deck: Deck): string {
 
   return `<div id="deck-info">
         <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
+        ${retrievedInfo}
         ${commanderInfo}
         ${cardCountInfo}
-        ${retrievedInfo}
         <button hx-post="/start-game" hx-include="closest div" hx-target="#deck-input">Start Game</button>
         <input type="hidden" name="deck-id" value="${deck.id}" />
         <a href="/">Choose another deck</a>
@@ -37,20 +37,20 @@ function formatDeckHtml(deck: Deck): string {
 }
 
 function formatCommanderHtml(commander?: Card): string {
-  return commander 
+  return commander
     ? `<div>
         <p>Commander: <strong>${commander.name}</strong></p>
-        ${commander.uid ? `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />` : ''}
-       </div>` 
-    : "No commander detected"
+        ${commander.uid ? `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />` : ""}
+       </div>`
+    : "No commander detected";
 }
 
 function formatGameHtml(game: Game): string {
   const commanderInfo = formatCommanderHtml(game.deck.commander);
 
   const libraryCardList = game.library.cards
-    .map(card => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
-    .join('');
+    .map((card) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
+    .join("");
 
   return `<div id="game-state">
         <h2>Game: <a href="https://archidekt.com/decks/${game.deck.id}" target="_blank">${game.deck.name}</a></h2>
