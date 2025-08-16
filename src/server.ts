@@ -2,7 +2,7 @@ import "./tracing.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDeck, Library, Game } from "./deck.js";
+import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
   const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
@@ -16,19 +16,14 @@ async function retrieveDeck(deckNumber: string): Promise<Deck> {
 }
 
 function formatDeckHtml(deck: Deck): string {
-  const commanderInfo = deck.commander 
-    ? `<div>
-        <p>Commander: <strong>${deck.commander.name}</strong></p>
-        ${deck.commander.uid ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" style="max-width: 300px; height: auto;" />` : ''}
-       </div>` 
-    : "No commander detected";
+  const commanderInfo = formatCommanderHtml(deck.commander);
 
   const cardCountInfo =
     deck.excludedCards > 0
       ? `<p>This deck has ${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards</p>`
       : `<p>This deck has ${deck.includedCards} cards</p>`;
 
-  return `<div>
+  return `<div id="deck-info">
         <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
         ${commanderInfo}
         ${cardCountInfo}
@@ -38,13 +33,17 @@ function formatDeckHtml(deck: Deck): string {
     </div>`;
 }
 
-function formatGameHtml(game: Game): string {
-  const commanderInfo = game.deck.commander 
+function formatCommanderHtml(commander?: Card): string {
+  return commander 
     ? `<div>
-        <p>Commander: <strong>${game.deck.commander.name}</strong></p>
-        ${game.deck.commander.uid ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" style="max-width: 300px; height: auto;" />` : ''}
+        <p>Commander: <strong>${commander.name}</strong></p>
+        ${commander.uid ? `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" style="max-width: 300px; height: auto;" />` : ''}
        </div>` 
-    : "No commander detected";
+    : "No commander detected"
+}
+
+function formatGameHtml(game: Game): string {
+  const commanderInfo = formatCommanderHtml(game.deck.commander);
 
   const libraryCardList = game.library.cards
     .map(card => `<li>${card.name}</li>`)
