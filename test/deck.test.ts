@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { ArchidektDeck, Deck, Card, ArchidektCard, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
+import { ArchidektDeck, Deck, ArchidektCard, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
 
 describe("convertArchidektToCard", () => {
   test("converts card with oracle name", () => {

@@ -73,3 +73,10 @@ When the game starts, we create a Game state. The Game state has a pointer to th
 - All existing tests pass
 - Build completes without errors
 - Ready for manual testing with `./run`
+
+## Updates
+
+### Fixed End Game Button (2025-08-16):
+- End Game button now returns to loaded deck state instead of empty form
+- Added deck-id hidden input to game state for proper state restoration
+- Updated /end-game route to fetch and display deck information

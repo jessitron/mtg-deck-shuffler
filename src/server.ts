@@ -71,7 +71,8 @@ function formatGameHtml(game: Game): string {
           </details>
         </div>
         
-        <button hx-post="/end-game" hx-target="#deck-input">End Game</button>
+        <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
+        <input type="hidden" name="deck-id" value="${game.deck.id}" />
     </div>`;
 }
 
@@ -120,12 +121,20 @@ app.post("/start-game", async (req, res) => {
   }
 });
 
-app.post("/end-game", (req, res) => {
-  res.send(`<div id="deck-input">
-      <label for="deck-number">Archidekt Deck Number:</label>
-      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" />
-      <button hx-post="/deck" hx-include="#deck-number" hx-target="#deck-input">Load Deck</button>
+app.post("/end-game", async (req, res) => {
+  const deckId = req.body["deck-id"];
+
+  try {
+    const deck = await retrieveDeck(deckId);
+    const html = formatDeckHtml(deck);
+    res.send(html);
+  } catch (error) {
+    console.error("Error ending game:", error);
+    res.send(`<div>
+        <p>Error: Could not reload deck ${deckId}</p>
+        <a href="/">Try another deck</a>
     </div>`);
+  }
 });
 
 app.listen(PORT, () => {
