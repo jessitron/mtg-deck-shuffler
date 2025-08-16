@@ -9,3 +9,38 @@ h1 {
     color: #333;
     font-size: 2rem;
 }
+
+.commander-image {
+    max-width: 300px;
+    height: auto;
+}
+
+.game-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.library-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-back {
+    width: 80px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.library-details {
+    margin-top: 20px;
+}
+
+.library-list {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+}

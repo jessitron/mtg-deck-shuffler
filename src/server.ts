@@ -37,7 +37,7 @@ function formatCommanderHtml(commander?: Card): string {
   return commander 
     ? `<div>
         <p>Commander: <strong>${commander.name}</strong></p>
-        ${commander.uid ? `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" style="max-width: 300px; height: auto;" />` : ''}
+        ${commander.uid ? `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />` : ''}
        </div>` 
     : "No commander detected"
 }
@@ -52,7 +52,7 @@ function formatGameHtml(game: Game): string {
   return `<div id="game-state">
         <h2>Game: <a href="https://archidekt.com/decks/${game.deck.id}" target="_blank">${game.deck.name}</a></h2>
         
-        <div style="display: flex; align-items: flex-start; gap: 40px; margin: 20px 0;">
+        <div class="game-layout">
           <div id="commander-display">
             <h3>Commander</h3>
             ${commanderInfo}
@@ -60,14 +60,14 @@ function formatGameHtml(game: Game): string {
           
           <div id="library-display">
             <h3>Library</h3>
-            <div style="display: flex; align-items: center; gap: 20px;">
-              <img src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" alt="Magic card back" style="width: 80px; height: 120px; border-radius: 10px; box-shadow: 2px 2px 8px rgba(0,0,0,0.5);" />
+            <div class="library-info">
+              <img src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" alt="Magic card back" class="card-back" />
               <p>Cards in library: <strong>${game.library.count}</strong></p>
             </div>
             
-            <details style="margin-top: 20px;">
+            <details class="library-details">
               <summary>View library contents (for testing)</summary>
-              <ol style="max-height: 300px; overflow-y: auto;">
+              <ol class="library-list">
                 ${libraryCardList}
               </ol>
             </details>
