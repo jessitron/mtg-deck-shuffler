@@ -46,7 +46,7 @@ function formatGameHtml(game: Game): string {
   const commanderInfo = formatCommanderHtml(game.deck.commander);
 
   const libraryCardList = game.library.cards
-    .map(card => `<li>${card.name}</li>`)
+    .map(card => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
     .join('');
 
   return `<div id="game-state">

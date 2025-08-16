@@ -23,7 +23,8 @@
       "WebFetch(domain:api.scryfall.com)",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_close",
-      "Bash(npm run test:*)"
+      "Bash(npm run test:*)",
+      "Bash(PORT=3001 ./run)"
     ],
     "deny": []
   }

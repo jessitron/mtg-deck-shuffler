@@ -1,12 +1,14 @@
 export interface Card {
   name: string;
   uid: string;
+  multiverseid: number;
 }
 
 export interface ArchidektCard {
   card: {
     displayName?: string;
     uid: string;
+    multiverseid: number;
     oracleCard: {
       name: string;
     };
@@ -20,7 +22,7 @@ export function convertArchidektToCard(archidektCard: ArchidektCard): Card | und
    * The Oracle Card is the canonical card, like you can't have two of the same in a Commander deck,
    * while certain fancy cards get a vanity name. On the printed card, the Oracle Name shows up as a subtitle */
   const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
-  return { name: cardName, uid: archidektCard.card.uid };
+  return { name: cardName, uid: archidektCard.card.uid, multiverseid: archidektCard.card.multiverseid };
 }
 
 export interface ArchidektDeck {
