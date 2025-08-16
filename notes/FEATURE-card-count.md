@@ -1,5 +1,7 @@
 # Card Count
 
+status: implemented
+
 Processing of the Archidekt deck definition takes place in src/deck.ts
 
 Tests for this function are in test/deck.test.ts

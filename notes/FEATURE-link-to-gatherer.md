@@ -1,6 +1,6 @@
 # Link to Gatherer
 
-status: next to work
+status: implemented
 
 In the list of cards in the library, we want to link to the card on Gatherer.
 

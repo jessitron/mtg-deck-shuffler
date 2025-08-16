@@ -1,5 +1,7 @@
 # Display the library
 
+Status: implemented
+
 Now it's time for the player to start a game.
 
 [x] add a "Start Game" button.

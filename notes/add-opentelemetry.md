@@ -1,5 +1,7 @@
 # Add OpenTelemetry Instrumentation to TypeScript Project
 
+This instruction is applicable only to a Node.js project that does not yet depend on OpenTelemetry.
+
 Please help me add OpenTelemetry instrumentation to my TypeScript Node.js project to send telemetry data to Honeycomb. Follow these specific requirements:
 
 ## Installation Requirements

@@ -1,5 +1,7 @@
 # Display Commander Image
 
+status: implemented
+
 We want to display the commander's card image.
 Card images live at Scryfall.
 

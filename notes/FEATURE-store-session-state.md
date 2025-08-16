@@ -1,6 +1,6 @@
 # Tracking the library
 
-Status: not started.
+Status: implemented, but not integrated into the web app
 
 Before we can manipulate the library, we have to save the state of the library.
 
@@ -25,15 +25,18 @@ Create tests for the adapter interface. Test both the in-memory and sqlite imple
 ### What was implemented:
 
 1. **GameState interface and adapter pattern** - Created a clean hexagonal architecture with:
+
    - `GameState` type definition with id, status, deckId, libraryCards, startDate, lastUpdated
    - `GameStateAdapter` interface with startGame, retrieveGame, updateGame, endGame methods
 
 2. **InMemoryGameStateAdapter** - Simple Map-based implementation:
+
    - Fast and lightweight for testing/development
    - No external dependencies
    - Perfect for unit tests
 
 3. **SQLiteGameStateAdapter** - Persistent storage implementation:
+
    - Uses SQLite database with proper schema
    - JSON serialization for complex fields (libraryCards)
    - Supports both file-based and in-memory databases
@@ -68,10 +71,12 @@ Create tests for the adapter interface. Test both the in-memory and sqlite imple
 **Recommendation:** The interface design is solid and will transition to DynamoDB smoothly with minimal changes to the adapter implementation.
 
 ### Files created:
+
 - `src/gameState.ts` - Interface definitions
-- `src/gameStateInMemory.ts` - In-memory implementation  
+- `src/gameStateInMemory.ts` - In-memory implementation
 - `src/gameStateSqlite.ts` - SQLite implementation
 - `test/gameState.test.ts` - Comprehensive test suite
 
 ### Dependencies added:
+
 - `sqlite3` and `@types/sqlite3` for database support
