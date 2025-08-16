@@ -23,10 +23,13 @@ function formatDeckHtml(deck: Deck): string {
       ? `<p>This deck has ${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards</p>`
       : `<p>This deck has ${deck.includedCards} cards</p>`;
 
+  const retrievedInfo = `<p><small>Retrieved: ${deck.retrievedDate.toLocaleString()}</small></p>`;
+
   return `<div id="deck-info">
         <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
         ${commanderInfo}
         ${cardCountInfo}
+        ${retrievedInfo}
         <button hx-post="/start-game" hx-include="closest div" hx-target="#deck-input">Start Game</button>
         <input type="hidden" name="deck-id" value="${deck.id}" />
         <a href="/">Choose another deck</a>
