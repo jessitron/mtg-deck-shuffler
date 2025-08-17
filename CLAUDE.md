@@ -11,12 +11,10 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
-- **Telemetry**: OpenTelemetry instrumentation configured for Honeycomb (requires `.env` file)
 
 ## Key Files
 
 - `server.ts` - Main Express server entry point
-- `tracing.ts` - OpenTelemetry configuration (imported by server)
 - `index.html` - Frontend with HTMX-powered deck input form
 - `run` - Shell script that sources `.env` and runs the app
 - `tsconfig.json` - TypeScript configuration targeting ES2022
