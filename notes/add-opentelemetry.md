@@ -113,7 +113,7 @@ Finally, provide the user with a link to a recent trace in the Honeycomb dataset
 
 ## Troubleshooting
 
-## If OpenTelemetry prints errors about sending data
+### If OpenTelemetry prints errors about sending data
 
 If OpenTelemetry prints errors, then read the error.
 
@@ -124,11 +124,13 @@ OTEL_EXPORTER_OTLP_HEADERS should look a bit like "x-honeycomb-team=hcaik_123456
 
 If it is getting a 400, then the endpoint might be wrong. Print that environment variable and check its value. Report to the user.
 
-## If no data is found in Honeycomb
+### If no data is found in Honeycomb
 
 This one is harder.
 
-Is OpenTelemetry printing anything at all? Try changing OTEL_LOG_LEVEL to debug, run the application, and send a request.
+Do we have the right environment? Run `curl -s -H "X-Honeycomb-Team: $HONEYCOMB_API_KEY" "https://api.honeycomb.io/1/auth"` and verify the team name and environment slug.
+
+Is OpenTelemetry printing anything at all? Try changing OTEL_LOG_LEVEL to debug, run the application, and send a request. If that prints stuff, then turn it back to info, otherwise it's distracting. If it prints nothing, check whether tracing.ts is being loaded before startup.
 
 Is tracing.ts being loaded before startup? Add a console.log to the bottom of tracing.ts and see if it prints before the server starts.
 
