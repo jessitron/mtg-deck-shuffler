@@ -1,4 +1,3 @@
-import "./tracing.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -145,12 +144,4 @@ app.post("/end-game", async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  
-  // Test span to verify OpenTelemetry is working
-  import('@opentelemetry/api').then(({ trace }) => {
-    const tracer = trace.getTracer('test-span');
-    const span = tracer.startSpan('test span');
-    console.log("Creating a test span. The trace ID is: " + span.spanContext().traceId);
-    span.end();
-  });
 });
