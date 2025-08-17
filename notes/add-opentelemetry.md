@@ -40,6 +40,9 @@ OTEL_LOG_LEVEL="info"
 
 Change your-service-name to the name of this service.
 
+The x-honeycomb-team header tells Honeycomb who is sending this data. Encoded in that API key is both the team and the environment. That's why we never have to specify environment.
+The OTEL_SERVICE_NAME will be sent in the service.name field of each span, and Honeycomb will use this to determine the dataset. That's why we do not specify dataset.
+
 ## Initialize tracing in code
 
 [] Where is the main entry point for the service?
@@ -84,11 +87,7 @@ For example, if the service is started with `ts-node src/index.ts`, change it to
 
 ### Option 2: load tracing in the main entry point
 
-[] In the main entry point, add the following code before anything else:
-
-```
-import './tracing';
-```
+[] In the main entry point, add the following code before anything else, import the tracing module.
 
 ## Verify
 

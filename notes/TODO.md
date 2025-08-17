@@ -8,6 +8,7 @@
 
 - we need events, eventually. CRUD is technically the wrong model for this
 
+- decide on a project name and make it consistent
 
 - If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
 
