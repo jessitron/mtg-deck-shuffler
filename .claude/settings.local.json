@@ -36,7 +36,8 @@
       "mcp__honeycomb__run_query",
       "mcp__honeycomb__run_query",
       "mcp__honeycomb__run_query",
-      "mcp__honeycomb__get_trace"
+      "mcp__honeycomb__get_trace",
+      "WebFetch(domain:docs.honeycomb.io)"
     ],
     "deny": []
   }

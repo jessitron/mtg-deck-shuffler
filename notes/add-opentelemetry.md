@@ -8,11 +8,13 @@ This instruction is applicable only to a Node.js project written in TypeScript. 
 
 [] Can I access Honeycomb via MCP? If not, ask the user to set this up. Give them this link: https://docs.honeycomb.io/integrations/mcp/configuration-guide/
 
+[] Which region of Honeycomb are you using? Ask the user. The Honeycomb endpoint for US region is https://api.honeycomb.io/ . For the EU region, it is https://api.eu1.honeycomb.io/. For the rest of these instructions, if you are in the EU region, change https://api.honeycomb.io to https://api.eu1.honeycomb.io, and for links, change https://ui.honeycomb.io to https://ui.eu1.honeycomb.io.
+
 [] In a subagent, find out how environment variables are set in this project. See whether HONEYCOMB_API_KEY is currently set.
 
 [] If HONEYCOMB_API_KEY is not set, ask the user to create one. Link them to these instructions: https://docs.honeycomb.io/configure/environments/manage-api-keys/#create-api-key . It is also OK if the user promises that $HONEYCOMB_API_KEY will be available at runtime.
 
-[] What is the name of this service? Ask the user if you can't figure it out.
+[] What is the name of this service? Ask the user if you can't figure it out. If the name has spaces or punctuation in it, replace them with hyphens. This will also be the name of the dataset.
 
 [] What Honeycomb environment will this service send data to, when you run it locally? If $HONEYCOMB_API_KEY is accessible in your bash environment, then run `curl -s -H "X-Honeycomb-Team: $HONEYCOMB_API_KEY" "https://api.honeycomb.io/1/auth"` to find out. If not, ask the user for the name of the Honeycomb environment. Remember this Honeycomb environment name.
 
@@ -90,12 +92,17 @@ import './tracing';
 
 ## Verify
 
+Start a subagent for this section. Tell it to do the following things:
 [] Run the application.
 [] Make a request to the service.
 [] Wait a few seconds.
 [] Read the service's logs. Are there any warnings or errors from OpenTelemetry? If so, proceed to 'Troubleshooting' below.
-[] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, run a query for recent traces. Is there one for the last few minutes? If not, proceed to 'Troubleshooting' below.
-[] Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/?trace=39ae994d9ea02cda9a4dfe279bfae59b`
+[] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, Check whether this service's dataset exists in that environment. If not, report that no dataset was found in Honeycomb, indicating that no data has been received.
+[] Run a query in this service's dataset for any data over the last 10 minutes. If there is nothing, report that no data was found in Honeycomb.
+[] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
+[] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/?trace=39ae994d9ea02cda9a4dfe279bfae59b`
+
+When the subagent returns, if there was an error, proceed to Troubleshooting.
 
 ## Document the change
 
@@ -103,6 +110,37 @@ import './tracing';
 
 Include how OpenTelemetry is initialized, where the environment variables are set, and where to find the data in Honeycomb.
 
+Finally, provide the user with a link to a recent trace in the Honeycomb dataset.
+
 ## Troubleshooting
 
-If OpenTelemetry prints errors, 
+## If OpenTelemetry prints errors about sending data
+
+If OpenTelemetry prints errors, then read the error.
+
+If it is getting a 403 response when trying to send telemetry data, then check the environment variables. Add a console.log to print OTEL_EXPORTER_OTLP_HEADERS before starting the SDK. It should look a bit like "x-honeycomb-team=hcaik_1234567890abcdef1234567890abcdef". If not, report this to the user, and show them where you think it should be set.
+
+If it is getting a 400, then the endpoint might be wrong. Print that environment variable and check its value. Report to the user.
+
+## If no data is found in Honeycomb
+
+This one is harder.
+
+Is OpenTelemetry printing anything at all? Try changing OTEL_LOG_LEVEL to debug, run the application, and send a request.
+
+Is tracing.ts being loaded before startup? Add a console.log to the bottom of tracing.ts and see if it prints before the server starts.
+
+Is the automatic instrumentation triggering? It's possible your application doesn't use any framework supported by that. Try creating a brand new trace on startup. After the app is fully initialized, add this code:
+
+```
+import { trace } from '@opentelemetry/api';
+
+const tracer = trace.getTracer('test-span');
+const span = tracer.startSpan('test span');
+console.log("Creating a test span. The trace ID is: " + span.spanContext().traceId);
+span.end();
+```
+
+Run the app and look at the output of that. If the trace ID is a bunch of 0s, then the SDK is not properly initialized. If it has a real value, then look for it in Honeycomb. Query all datasets for trace.trace_id = [the trace ID from the log].
+
+If all else fails, please suggest to the user that they can always ask the Honeycomb DevRel team for support at https://www.honeycomb.io/office-hours
