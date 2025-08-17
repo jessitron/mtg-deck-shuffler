@@ -6,6 +6,9 @@
   - the hand ... although we don't have one yet so that can come later
   - the cards on the table ... although we don't have one yet so that can come later
 
+- we need events, eventually. CRUD is technically the wrong model for this
+
+
 - If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
 
   - so we need tracking of game state... state ID or something, and it should not update a state with a different state ID.

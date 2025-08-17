@@ -1,4 +1,4 @@
-# Add OpenTelemetry Instrumentation to TypeScript Project
+# Add OpenTelemetry Instrumentation to a TypeScript Service
 
 This instruction is applicable only to a Node.js project that does not yet depend on OpenTelemetry.
 
