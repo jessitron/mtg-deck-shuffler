@@ -8,9 +8,10 @@ Now, I want to try this today, but I don't have my deck with me. Also I want to 
 
 So, given a deck in archidekt.com, this web app will
 
-- download the deck information from archidekt. https://archidekt.com/api/decks/14669648/ retrieves a bunch of JSON, including the cards, including a scryfall image hash.
-- tell me how many cards are in the library
+- download the deck information from archidekt. https://archidekt.com/api/decks/14669648/ retrieves a bunch of JSON, including the cards, including a scryfall UID that we can use to get an image.
+- tell me how many cards are in the deck
 - put an image of my commander on the screen for me to copy into Mural
+- shuffle the deck into a library.
 
 ... that's enough for now.
 
@@ -22,12 +23,12 @@ So, given a deck in archidekt.com, this web app will
 
 ## Technical notes
 
-This app uses TypeScript, with esbuild for converting to JS. It's a toy, so keep it dead simple.
+This app uses TypeScript, with esbuild for converting to JS. It's a toy.
 
 It will use htmx only, and no JS frameworks.
 
 For that, it'll need a Node backend with express.
 
-We'll use npm for dependencies and for run scripts.
+We'll use npm for dependencies and for running its scripts.
 
-We'll deploy it to Github Pages eventually. It is a toy.
+We will eventually deploy to a toy EKS cluster.
