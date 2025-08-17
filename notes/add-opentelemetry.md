@@ -96,8 +96,8 @@ Start a subagent for this section. Tell it to do the following things:
 [] Make a request to the service.
 [] Wait a few seconds.
 [] Read the service's logs. Are there any warnings or errors from OpenTelemetry? If so, proceed to 'Troubleshooting' below.
-[] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, Check whether this service's dataset exists in that environment. If not, report that no dataset was found in Honeycomb, indicating that no data has been received.
-[] Run a query in this service's dataset for any data over the last 10 minutes. If there is nothing, report that no data was found in Honeycomb.
+[] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, Check whether this service's dataset exists in that environment. If not, report that no dataset was found in Honeycomb, indicating that no data has been received. Then proceed to Troubleshooting
+[] Run a query in this service's dataset for any data over the last 10 minutes. If there is nothing, report that no data was found in Honeycomb. Then proceed to Troubleshooting
 [] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
 [] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/?trace=39ae994d9ea02cda9a4dfe279bfae59b`
 
@@ -117,7 +117,10 @@ Finally, provide the user with a link to a recent trace in the Honeycomb dataset
 
 If OpenTelemetry prints errors, then read the error.
 
-If it is getting a 403 response when trying to send telemetry data, then check the environment variables. Add a console.log to print OTEL_EXPORTER_OTLP_HEADERS before starting the SDK. It should look a bit like "x-honeycomb-team=hcaik_1234567890abcdef1234567890abcdef". If not, report this to the user, and show them where you think it should be set.
+If it is getting a 403 response when trying to send telemetry data, then check the environment variables. Add a console.log to print OTEL_EXPORTER_OTLP_HEADERS before starting the SDK.
+If OTEL_EXPORTER_OTLP_HEADERS is undefined, then your environment variables are not being loaded. Stop everything else until that is fixed!!
+
+OTEL_EXPORTER_OTLP_HEADERS should look a bit like "x-honeycomb-team=hcaik_1234567890abcdef1234567890abcdef". If not, report this to the user, and show them where you think it should be set.
 
 If it is getting a 400, then the endpoint might be wrong. Print that environment variable and check its value. Report to the user.
 
