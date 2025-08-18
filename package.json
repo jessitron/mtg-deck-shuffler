@@ -7,10 +7,14 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "start": "npm run build && cd dist && node server.js",
-    "test": "node --test --loader ts-node/esm test/**/*.test.ts"
+    "start": "npm run build && cd dist && node -r tracing.js server.js",
+    "test": "node --test --loader ts-node/esm -r src/tracing.ts test/**/*.test.ts"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.62.1",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.203.0",
+    "@opentelemetry/sdk-node": "^0.203.0",
     "@types/sqlite3": "^3.1.11",
     "express": "^4.18.2",
     "sqlite3": "^5.1.7"
