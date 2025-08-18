@@ -38,7 +38,9 @@
       "mcp__honeycomb__run_query",
       "mcp__honeycomb__get_trace",
       "WebFetch(domain:docs.honeycomb.io)",
-      "mcp__honeycomb__get_environment"
+      "mcp__honeycomb__get_environment",
+      "Bash(env)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }
