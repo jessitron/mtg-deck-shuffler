@@ -2,7 +2,7 @@
 
 Status: planned
 
-When we create a game, we want the URL in the browser to reflect that. For instance, if the game ID is 12345, we want the URL to be https://librarytron.com/game/12345
+When we create a game, we want the URL in the browser to reflect that. For instance, if the game ID is 12345, we want the URL to be https://mtg-deck-shuffler.com/game/12345
 
 Likewise, when we end the game, we want the URL to revert to the default.
 
@@ -14,8 +14,8 @@ Please put an implementation plan here:
 
 ### Phase 1: URL Structure Design
 
-- **URL pattern**: `https://librarytron.com/game/{gameId}` for active games
-- **Default URL**: `https://librarytron.com/` when no game or game ended
+- **URL pattern**: `https://mtg-deck-shuffler.com/game/{gameId}` for active games
+- **Default URL**: `https://mtg-deck-shuffler.com/` when no game or game ended
 - **Game ID**: Use UUIDs (e.g., `550e8400-e29b-41d4-a716-446655440000`) for uniqueness and security
 
 ### Phase 2: Server-Side Routing Changes

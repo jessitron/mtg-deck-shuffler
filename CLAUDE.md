@@ -44,10 +44,11 @@ This application is instrumented with OpenTelemetry and sends telemetry data to 
 
 - **Initialization**: `src/tracing.ts` initializes the OpenTelemetry SDK with automatic instrumentation
 - **Configuration**: Environment variables in `.env` configure the OTLP exporter for Honeycomb
-- **Dataset**: Telemetry data appears in the `mtg-deck-shuffler` dataset in the `librarytron-local` environment
+- **Dataset**: Telemetry data appears in the `mtg-deck-shuffler` dataset in the `mtg-deck-shuffler-local` environment
 - **Startup**: Tracing is automatically loaded before the main application via `-r` flag in npm scripts
 
 ### Environment Variables Required:
+
 ```
 HONEYCOMB_API_KEY=your-api-key
 OTEL_SERVICE_NAME="mtg-deck-shuffler"
@@ -58,6 +59,7 @@ OTEL_LOG_LEVEL="info"
 ```
 
 ### Observability Features:
+
 - HTTP request/response tracing (incoming and outgoing)
 - External API call instrumentation (Archidekt API)
 - Network-level operation tracking (TCP/TLS connections)

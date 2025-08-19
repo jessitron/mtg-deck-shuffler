@@ -2,7 +2,7 @@
 
 We are in the domain of MTG, Magic: the Gathering. This is a card game published by Wizards of the Coast.
 
-Our app is called LibraryTRON.
+Our app is called MTG Deck Shuffler.
 
 ## Bounded Contexts
 
@@ -10,11 +10,11 @@ Archidekt: this is an external domain, a particular API we call.
 
 Scryfall: this is an industry standard domain, standardized by Wizards at scryfall.com. It provides a database of all cards every published, including images of them. https://scryfall.com/docs/api
 
-LibraryTRON: this is our bounded context. For now we only have one.
+MTG Deck Shuffler: this is our bounded context. For now we only have one.
 
 ## Definitions
 
-Player (LibraryTRON): this is what we call the user of the app. They're here to play a game of MTG; this app will track part of the game state for them.
+Player (MTG Deck Shuffler): this is what we call the user of the app. They're here to play a game of MTG; this app will track part of the game state for them.
 
 Card - this is ambiguous. Are we talking about a card conceptually, or a particular card in a deck? A card by name, or a particular edition of it? This word by itself does not have a specific meaning.
 
@@ -30,19 +30,19 @@ Archidect Deck ID: a unique identifier for a deck in the Archidekt system. The d
 
 Deck (Archidekt): a collection of cards meant to be played in a game.
 
-Deck (LibraryTRON): an unordered collection of cards that can be shuffled into a Library. These are immutable in the LibraryTRON domain.
+Deck (MTG Deck Shuffler): an unordered collection of cards that can be shuffled into a Library. These are immutable in the MTG Deck Shuffler domain.
 
-Library (LibraryTRON): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
+Library (MTG Deck Shuffler): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
 
-Game (LibraryTRON): a temporal scope. At the beginning of a game, the cards in a Deck initialize a Library. The Library can be manipulated in various ways during the game. At the end of the game, the Library doesn't exist anymore.
+Game (MTG Deck Shuffler): a temporal scope. At the beginning of a game, the cards in a Deck initialize a Library. The Library can be manipulated in various ways during the game. At the end of the game, the Library doesn't exist anymore.
 
-Card in Deck (LibraryTRON): a definition of a card that is present in a Deck. Immutable, doesn't go anywhere.
+Card in Deck (MTG Deck Shuffler): a definition of a card that is present in a Deck. Immutable, doesn't go anywhere.
 
-Card in Library (LibraryTRON, game scope): an instance of a Card in Deck that is present in a Library. Immutable, can move around or be removed from the Library.
+Card in Library (MTG Deck Shuffler, game scope): an instance of a Card in Deck that is present in a Library. Immutable, can move around or be removed from the Library.
 
-Game State (LibraryTRON, game scope): all the state that is local to a game. This includes the Library, cards in hand, revealed cards, and cards on the table. v mutable
+Game State (MTG Deck Shuffler, game scope): all the state that is local to a game. This includes the Library, cards in hand, revealed cards, and cards on the table. v mutable
 
-Hand (LibraryTRON, game scope): a set of cards that are visible to a player. One per game, mutable.
+Hand (MTG Deck Shuffler, game scope): a set of cards that are visible to a player. One per game, mutable.
 
 Draw: move a card from the Library to the Hand
 
@@ -50,10 +50,10 @@ Reveal: flip a card from the top of the Library so that the player can look at i
 
 Revealed cards: a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
 
-Table: when cards go here, they are not visible in LibraryTRON.
+Table: when cards go here, they are not visible in MTG Deck Shuffler.
 
-Cards on Table (LibraryTRON, game scope): a set of cards that are not in the Library or in Hand. They're on the table somewhere. This app does not track cards that are on the table. The only reason we even track them is so that (on rare occasions) we can put them back in the Library.
+Cards on Table (MTG Deck Shuffler, game scope): a set of cards that are not in the Library or in Hand. They're on the table somewhere. This app does not track cards that are on the table. The only reason we even track them is so that (on rare occasions) we can put them back in the Library.
 
-Included Card (LibraryTRON, deck scope): a card that is played in a deck.
+Included Card (MTG Deck Shuffler, deck scope): a card that is played in a deck.
 
-Excluded Card (LibraryTRON, deck scope): a card that is associated with a deck, but not currently played. It does not go into the Library at the start of the game.
+Excluded Card (MTG Deck Shuffler, deck scope): a card that is associated with a deck, but not currently played. It does not go into the Library at the start of the game.
