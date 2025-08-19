@@ -6,4 +6,5 @@ The goal is to take a card off the top of the library, turn it over, and reveal 
 
 The card will be displayed in the Revealed Cards section.
 
-First, we need to have a revealed card section! Find a layout in ./interface.md
+First, we need to have a revealed card section! Find a layout in notes/interface.md
+    
