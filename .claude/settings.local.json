@@ -40,7 +40,8 @@
       "WebFetch(domain:docs.honeycomb.io)",
       "mcp__honeycomb__get_environment",
       "Bash(env)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "mcp__honeycomb__feedback"
     ],
     "deny": []
   }
