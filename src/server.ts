@@ -15,23 +15,34 @@ async function retrieveDeck(deckNumber: string): Promise<Deck> {
 }
 
 function formatDeckHtml(deck: Deck): string {
-  const commanderInfo = formatCommanderHtml(deck.commander);
+  const commanderImageHtml = deck.commander && deck.commander.uid
+    ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" class="commander-image" />`
+    : `<div class="commander-placeholder">No Commander Image</div>`;
 
   const cardCountInfo =
     deck.excludedCards > 0
-      ? `<p>This deck has ${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards</p>`
-      : `<p>This deck has ${deck.includedCards} cards</p>`;
+      ? `${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards`
+      : `${deck.includedCards} cards`;
 
-  const retrievedInfo = `<p><small>Retrieved: ${deck.retrievedDate.toLocaleString()}</small></p>`;
+  const retrievedInfo = `Retrieved: ${deck.retrievedDate.toLocaleString()}`;
 
   return `<div id="deck-info">
-        <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
-        ${retrievedInfo}
-        ${commanderInfo}
-        ${cardCountInfo}
-        <button hx-post="/start-game" hx-include="closest div" hx-target="#deck-input">Start Game</button>
+        <h1>*Woohoo it's Magic time!*</h1>
+        <div class="deck-details-layout">
+          <div class="commander-section">
+            ${commanderImageHtml}
+          </div>
+          <div class="deck-info-section">
+            <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
+            <p>${cardCountInfo}</p>
+            <p><small>${retrievedInfo}</small></p>
+          </div>
+        </div>
+        <div class="deck-actions">
+          <button hx-post="/start-game" hx-include="closest div" hx-target="#deck-input">Start Game</button>
+          <button onclick="location.reload()">Choose Another Deck</button>
+        </div>
         <input type="hidden" name="deck-id" value="${deck.id}" />
-        <a href="/">Choose another deck</a>
     </div>`;
 }
 
@@ -45,38 +56,69 @@ function formatCommanderHtml(commander?: Card): string {
 }
 
 function formatGameHtml(game: Game): string {
-  const commanderInfo = formatCommanderHtml(game.deck.commander);
+  const commanderImageHtml = game.deck.commander && game.deck.commander.uid
+    ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" class="commander-image" />`
+    : `<div class="commander-placeholder">No Commander</div>`;
+
+  const cardCountInfo =
+    game.deck.excludedCards > 0
+      ? `${game.deck.includedCards} cards, plus ${game.deck.excludedCards} excluded cards`
+      : `${game.deck.includedCards} cards`;
 
   const libraryCardList = game.library.cards
     .map((card) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
     .join("");
 
   return `<div id="game-state">
-        <h2>Game: <a href="https://archidekt.com/decks/${game.deck.id}" target="_blank">${game.deck.name}</a></h2>
-        
-        <div class="game-layout">
-          <div id="commander-display">
-            <h3>Commander</h3>
-            ${commanderInfo}
+        <div class="game-header">
+          <div class="commander-info">
+            ${commanderImageHtml}
           </div>
-          
-          <div id="library-display">
-            <h3>Library</h3>
-            <div class="library-info">
-              <img src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" alt="Magic card back" class="card-back" />
-              <p>Cards in library: <strong>${game.library.count}</strong></p>
-            </div>
-            
-            <details class="library-details">
-              <summary>View library contents (for testing)</summary>
-              <ol class="library-list">
-                ${libraryCardList}
-              </ol>
-            </details>
+          <div class="deck-info-right">
+            <h2><a href="https://archidekt.com/decks/${game.deck.id}" target="_blank">${game.deck.name}</a></h2>
+            <p>${cardCountInfo}</p>
+            <p><strong>Game ID:</strong> ${game.deck.id}</p>
           </div>
         </div>
         
-        <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
+        <div class="game-board">
+          <div class="library-section">
+            <div class="library-stack">
+              <div class="card-back card-back-1"></div>
+              <div class="card-back card-back-2"></div>
+              <div class="card-back card-back-3"></div>
+            </div>
+            <p>Library</p>
+          </div>
+          
+          <div class="revealed-cards-section">
+            <h3>Revealed Cards</h3>
+            <div class="revealed-cards-area">
+              <div class="card-placeholder">Card</div>
+              <div class="card-placeholder">Card</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hand-section">
+          <h3>Hand</h3>
+          <div class="hand-cards">
+            <div class="card-placeholder">Card</div>
+            <div class="card-placeholder">Card</div>
+            <div class="card-placeholder">Card</div>
+          </div>
+        </div>
+        
+        <details class="library-details">
+          <summary>⏵ View library contents (for testing)</summary>
+          <ol class="library-list">
+            ${libraryCardList}
+          </ol>
+        </details>
+        
+        <div class="game-actions">
+          <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
+        </div>
         <input type="hidden" name="deck-id" value="${game.deck.id}" />
     </div>`;
 }

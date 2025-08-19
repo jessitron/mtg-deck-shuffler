@@ -1,10 +1,13 @@
 # Things to change
 
+- the app state needs to store the deck after loading, even before the game starts
+
 - the game state needs to store
 
-  - the full deck. it is mutable in archidekt
+  - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
   - the hand ... although we don't have one yet so that can come later
   - the cards on the table ... although we don't have one yet so that can come later
+  - one list of cards, each with a position.
 
 - we need events, eventually. CRUD is technically the wrong model for this
 
