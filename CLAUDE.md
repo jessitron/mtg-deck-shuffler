@@ -14,7 +14,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 ## Key Files
 
-- `server.ts` - Main Express server entry point
+- `src/server.ts` - Main Express server entry point
 - `index.html` - Frontend with HTMX-powered deck input form
 - `run` - Shell script that sources `.env` and runs the app
 - `tsconfig.json` - TypeScript configuration targeting ES2022
@@ -38,41 +38,14 @@ To verify changes, you can
 
 The app requires a `.env` file for OpenTelemetry configuration. The `./run` script sources this file before starting the server.
 
-## OpenTelemetry & Observability
-
-This application is instrumented with OpenTelemetry and sends telemetry data to Honeycomb:
-
-- **Initialization**: `src/tracing.ts` initializes the OpenTelemetry SDK with automatic instrumentation
-- **Configuration**: Environment variables in `.env` configure the OTLP exporter for Honeycomb
-- **Dataset**: Telemetry data appears in the `mtg-deck-shuffler` dataset in the `mtg-deck-shuffler-local` environment
-- **Startup**: Tracing is automatically loaded before the main application via `-r` flag in npm scripts
-
-### Environment Variables Required:
-
-```
-HONEYCOMB_API_KEY=your-api-key
-OTEL_SERVICE_NAME="mtg-deck-shuffler"
-OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
-OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io:443"
-OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"
-OTEL_LOG_LEVEL="info"
-```
-
-### Observability Features:
-
-- HTTP request/response tracing (incoming and outgoing)
-- External API call instrumentation (Archidekt API)
-- Network-level operation tracking (TCP/TLS connections)
-- Distributed tracing across service boundaries
-
 ## API Integration
 
 The app is designed to integrate with:
 
 - Archidekt API: `https://archidekt.com/api/decks/{deckId}/`
 - Archidekt link: `https://archidekt.com/decks/{deckId}/`
-- Scryfall for card images (referenced in README goals)
+- Scryfall for card images
 
 ## Port Configuration
 
-Server runs on port 3000 by default, configurable via `PORT` environment variable.
+Server runs on port 3000 by default, configurable via `PORT` environment variable. Run it on 3001, so it doesn't conflict with the user's testing server.

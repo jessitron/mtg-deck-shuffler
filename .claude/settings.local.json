@@ -41,7 +41,8 @@
       "mcp__honeycomb__get_environment",
       "Bash(env)",
       "Bash(chmod:*)",
-      "mcp__honeycomb__feedback"
+      "mcp__honeycomb__feedback",
+      "Bash(PORT=3001 npm start)"
     ],
     "deny": []
   }
