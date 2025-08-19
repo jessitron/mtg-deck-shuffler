@@ -40,9 +40,17 @@ Card in Deck (LibraryTRON): a definition of a card that is present in a Deck. Im
 
 Card in Library (LibraryTRON, game scope): an instance of a Card in Deck that is present in a Library. Immutable, can move around or be removed from the Library.
 
-Game State (LibraryTRON, game scope): all the state that is local to a game. This includes the Library, cards in hand, and cards on the table. v mutable
+Game State (LibraryTRON, game scope): all the state that is local to a game. This includes the Library, cards in hand, revealed cards, and cards on the table. v mutable
 
 Hand (LibraryTRON, game scope): a set of cards that are visible to a player. One per game, mutable.
+
+Draw: move a card from the Library to the Hand
+
+Reveal: flip a card from the top of the Library so that the player can look at it.
+
+Revealed cards: a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
+
+Table: when cards go here, they are not visible in LibraryTRON.
 
 Cards on Table (LibraryTRON, game scope): a set of cards that are not in the Library or in Hand. They're on the table somewhere. This app does not track cards that are on the table. The only reason we even track them is so that (on rare occasions) we can put them back in the Library.
 

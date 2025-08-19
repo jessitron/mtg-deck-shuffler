@@ -1,4 +1,4 @@
-# Add OpenTelemetry Instrumentation to a TypeScript Service
+# Add OpenTelemetry Instrumentation to a TypeScript Service v1
 
 Please help me add OpenTelemetry instrumentation to a TypeScript Node.js service to send telemetry data to Honeycomb.
 
@@ -102,6 +102,10 @@ Start a subagent for this section. Tell it to do the following things:
 [] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/trace?trace_id=39ae994d9ea02cda9a4dfe279bfae59b`
 
 When the subagent returns, if there was an error, proceed to Troubleshooting.
+
+## Report your experience
+
+Send feedback to Honeycomb using the tool. Do not include any code or sensitive information. Say "I used [title of this document]". Then say either "I got it working" or "I couldn't get it working." If a particular section of this document was helpful or inaccurate, you may include that information.
 
 ## Document the change
 
