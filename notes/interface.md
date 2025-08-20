@@ -16,27 +16,6 @@ The deck number defaults to my favorite deck.
 
 The 'Load Deck' button brings out the deck details.
 
-### Second screen: deck details
-
-After the backend fetches the deck from archidekt, we display the commander and a few other details
-
-```
-             *Woohoo it's Magic time!*
-  ┌────────────┐
-  │            │
-  │            │
-  │  Commander │         Deck Name
-  │            │
-  │            │         other details
-  │            │
-  └────────────┘
-         [Start Game]  [Choose Another Deck]
-```
-
-Choose Another Deck returns to the load deck screen.
-
-Start Game moves to the game in progress screen.
-
 ### Main screen: game in progress
 
 Here is a rough layout for when a game is in progress:
@@ -81,5 +60,5 @@ Here is a rough layout for when a game is in progress:
       │                                                            │
       └────────────────────────────────────────────────────────────┘
       ⏵ View library contents (for testing)
-                               [End Game]
+                   [Restart Game] [Choose Another Deck]
 ```

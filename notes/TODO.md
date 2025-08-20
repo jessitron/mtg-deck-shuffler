@@ -1,15 +1,18 @@
 # Things to change
 
-- the app state needs to store the deck after loading, even before the game starts
+- the app state needs to store the deck after loading, even before the game starts. Or maybe, it should go straight into the start of a game. Yeah, skip the "deck details" page, go right into a shuffled library.
+- give them buttons to restart game or choose another deck.
 
 - the game state needs to store
 
   - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
   - the hand ... although we don't have one yet so that can come later
   - the cards on the table ... although we don't have one yet so that can come later
-  - one list of cards, each with a position.
+  - one list of cards, each with a position. NOT a bunch of lists of cards by position.
 
-- we need events, eventually. CRUD is technically the wrong model for this
+- we need events, eventually. CRUD is technically the wrong model for this. We can use CRUD in the data layer while keeping the domain logic event-based.
+
+- the formatting needs to happen in a view layer. Just functions, in a different file, that accept app state and return HTML.
 
 - decide on a project name and make it consistent
 
