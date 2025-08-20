@@ -5,22 +5,22 @@ import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDe
 import { SpanStatusCode, trace } from "@opentelemetry/api";
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
-  const tracer = trace.getTracer("archidekt-trace");
-  return tracer.startActiveSpan("retrieveDeck", async (span) => {
-    console.log("span: " + span?.spanContext().traceId + " " + span?.spanContext().spanId);
-    span?.setAttribute("archidekt.deck_number", deckNumber || "missing");
-    const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
+  const span = trace.getActiveSpan();
+  console.log("span: " + span?.spanContext().traceId + " " + span?.spanContext().spanId);
+  span?.setAttribute("archidekt.deck_number", deckNumber || "missing");
+  const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
 
-    if (!response.ok) {
-      trace.getActiveSpan()?.setStatus({ code: SpanStatusCode.ERROR, message: `Failed to fetch deck: ${response.status}` });
-      span.end();
-      throw new Error(`Failed to fetch deck: ${response.status}`);
-    }
+  if (!response.ok) {
+    trace.getActiveSpan()?.setStatus({ code: SpanStatusCode.ERROR, message: `Failed to fetch deck: ${response.status}` });
+    span?.setAttribute("error.message", "Failed to fetch deck");
+    span?.setAttribute("error.status_code", response.status);
+    span?.setAttribute("error.response_body", await response.text());
+    span?.setAttribute("error", true);
+    throw new Error(`Failed to fetch deck: ${response.status}`);
+  }
 
-    const archidektDeck: ArchidektDeck = await response.json();
-    span.end();
-    return convertArchidektToDeck(archidektDeck);
-  });
+  const archidektDeck: ArchidektDeck = await response.json();
+  return convertArchidektToDeck(archidektDeck);
 }
 
 function formatDeckHtml(deck: Deck): string {
