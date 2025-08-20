@@ -42,10 +42,10 @@ function formatDeckHtml(deck: Deck): string {
           </div>
         </div>
         <div class="deck-actions">
+          <input type="hidden" name="deck-id" value="${deck.id}" />
           <button hx-post="/start-game" hx-include="closest div" hx-target="#deck-input">Start Game</button>
           <button onclick="location.reload()">Choose Another Deck</button>
         </div>
-        <input type="hidden" name="deck-id" value="${deck.id}" />
     </div>`;
 }
 
