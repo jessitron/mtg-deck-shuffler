@@ -2,20 +2,16 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
-import { SpanStatusCode, trace } from "@opentelemetry/api";
+import { markCurrentSpanAsError, setCommonSpanAttributes } from "./tracing_util.js";
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
-  const span = trace.getActiveSpan();
-  console.log("span: " + span?.spanContext().traceId + " " + span?.spanContext().spanId);
-  span?.setAttribute("archidekt.deck_number", deckNumber || "missing");
+  setCommonSpanAttributes({ archidektDeckNumber: deckNumber || "missing" });
   const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
 
   if (!response.ok) {
-    trace.getActiveSpan()?.setStatus({ code: SpanStatusCode.ERROR, message: `Failed to fetch deck: ${response.status}` });
-    span?.setAttribute("error.message", "Failed to fetch deck");
-    span?.setAttribute("error.status_code", response.status);
-    span?.setAttribute("error.response_body", await response.text());
-    span?.setAttribute("error", true);
+    markCurrentSpanAsError(`Failed to fetch deck`, {
+      "error.response_body": await response.text(),
+    });
     throw new Error(`Failed to fetch deck: ${response.status}`);
   }
 
