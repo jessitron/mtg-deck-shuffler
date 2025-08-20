@@ -1,5 +1,8 @@
 #!/bin/bash
 
+port_override=$PORT
+
 source .env
 
-npm start
+# port_override if defined, otherwise $PORT as defined in .env
+PORT=${port_override:-${PORT}} npm start
