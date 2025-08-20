@@ -2,27 +2,34 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
+import { SpanStatusCode, trace } from "@opentelemetry/api";
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
-  const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
+  const tracer = trace.getTracer("archidekt-trace");
+  return tracer.startActiveSpan("retrieveDeck", async (span) => {
+    console.log("span: " + span?.spanContext().traceId + " " + span?.spanContext().spanId);
+    span?.setAttribute("archidekt.deck_number", deckNumber || "missing");
+    const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch deck: ${response.status}`);
-  }
+    if (!response.ok) {
+      trace.getActiveSpan()?.setStatus({ code: SpanStatusCode.ERROR, message: `Failed to fetch deck: ${response.status}` });
+      span.end();
+      throw new Error(`Failed to fetch deck: ${response.status}`);
+    }
 
-  const archidektDeck: ArchidektDeck = await response.json();
-  return convertArchidektToDeck(archidektDeck);
+    const archidektDeck: ArchidektDeck = await response.json();
+    span.end();
+    return convertArchidektToDeck(archidektDeck);
+  });
 }
 
 function formatDeckHtml(deck: Deck): string {
-  const commanderImageHtml = deck.commander && deck.commander.uid
-    ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" class="commander-image" />`
-    : `<div class="commander-placeholder">No Commander Image</div>`;
+  const commanderImageHtml =
+    deck.commander && deck.commander.uid
+      ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" class="commander-image" />`
+      : `<div class="commander-placeholder">No Commander Image</div>`;
 
-  const cardCountInfo =
-    deck.excludedCards > 0
-      ? `${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards`
-      : `${deck.includedCards} cards`;
+  const cardCountInfo = deck.excludedCards > 0 ? `${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards` : `${deck.includedCards} cards`;
 
   const retrievedInfo = `Retrieved: ${deck.retrievedDate.toLocaleString()}`;
 
@@ -56,14 +63,13 @@ function formatCommanderHtml(commander?: Card): string {
 }
 
 function formatGameHtml(game: Game): string {
-  const commanderImageHtml = game.deck.commander && game.deck.commander.uid
-    ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" class="commander-image" />`
-    : `<div class="commander-placeholder">No Commander</div>`;
+  const commanderImageHtml =
+    game.deck.commander && game.deck.commander.uid
+      ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" class="commander-image" />`
+      : `<div class="commander-placeholder">No Commander</div>`;
 
   const cardCountInfo =
-    game.deck.excludedCards > 0
-      ? `${game.deck.includedCards} cards, plus ${game.deck.excludedCards} excluded cards`
-      : `${game.deck.includedCards} cards`;
+    game.deck.excludedCards > 0 ? `${game.deck.includedCards} cards, plus ${game.deck.excludedCards} excluded cards` : `${game.deck.includedCards} cards`;
 
   const libraryCardList = game.library.cards
     .map((card) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
