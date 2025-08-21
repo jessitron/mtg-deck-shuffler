@@ -6,7 +6,7 @@ This instruction is applicable only to a Node.js project written in TypeScript. 
 
 ## Prerequisites
 
-[] Can I access Honeycomb via MCP? If not, ask the user to set this up. Give them this link: https://docs.honeycomb.io/integrations/mcp/configuration-guide/
+[] Do you have tools to access Honeycomb data? If not, ask the user to set this up. Give them this link: https://docs.honeycomb.io/integrations/mcp/configuration-guide/
 
 [] Which region of Honeycomb are you using? Ask the user. The Honeycomb endpoint for US region is https://api.honeycomb.io/ . For the EU region, it is https://api.eu1.honeycomb.io/. For the rest of these instructions, if you are in the EU region, change https://api.honeycomb.io to https://api.eu1.honeycomb.io, and for links, change https://ui.honeycomb.io to https://ui.eu1.honeycomb.io.
 
