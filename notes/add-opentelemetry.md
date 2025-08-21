@@ -10,7 +10,7 @@ This instruction is applicable only to a Node.js project written in TypeScript. 
 
 [] Which region of Honeycomb are you using? Ask the user. The Honeycomb endpoint for US region is https://api.honeycomb.io/ . For the EU region, it is https://api.eu1.honeycomb.io/. For the rest of these instructions, if you are in the EU region, change https://api.honeycomb.io to https://api.eu1.honeycomb.io, and for links, change https://ui.honeycomb.io to https://ui.eu1.honeycomb.io.
 
-[] In a subagent, find out how environment variables are set in this project. See whether HONEYCOMB_API_KEY is currently set.
+[] As a task, find out how environment variables are set in this project. See whether HONEYCOMB_API_KEY is currently set.
 
 [] If HONEYCOMB_API_KEY is not set, ask the user to create one. Link them to these instructions: https://docs.honeycomb.io/configure/environments/manage-api-keys/#create-api-key . It is also OK if the user promises that $HONEYCOMB_API_KEY will be available at runtime.
 
