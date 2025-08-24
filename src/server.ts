@@ -24,7 +24,6 @@ function formatDeckHtml(deck: Deck): string {
   const retrievedInfo = `Retrieved: ${deck.retrievedDate.toLocaleString()}`;
 
   return `<div id="deck-info">
-        <h1>*Woohoo it's Magic time!*</h1>
         <div class="deck-details-layout">
           <div class="commander-section">
             ${commanderImageHtml}
