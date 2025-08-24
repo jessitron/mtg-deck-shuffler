@@ -1,47 +1,9 @@
 import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { Deck, convertArchidektToCard } from "../src/deck.js";
+import { Deck } from "../src/deck.js";
 import { ArchidektDeck, ArchidektCard, ArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektDeckRetrievalRequest } from "../src/deck-retrieval/index.js";
 
-describe("convertArchidektToCard", () => {
-  test("converts card with oracle name", () => {
-    const archidektCard: ArchidektCard = {
-      card: {
-        uid: "test-uid",
-        multiverseid: 123456,
-        oracleCard: {
-          name: "Oracle Name",
-        },
-      },
-      quantity: 1,
-      categories: ["Test"],
-    };
-
-    const result = convertArchidektToCard(archidektCard);
-
-    assert.deepStrictEqual(result, { name: "Oracle Name", uid: "test-uid", multiverseid: 123456 });
-  });
-
-  test("converts card with display name when available", () => {
-    const archidektCard: ArchidektCard = {
-      card: {
-        displayName: "Display Name",
-        uid: "test-uid-2",
-        multiverseid: 789012,
-        oracleCard: {
-          name: "Oracle Name",
-        },
-      },
-      quantity: 1,
-      categories: ["Test"],
-    };
-
-    const result = convertArchidektToCard(archidektCard);
-
-    assert.deepStrictEqual(result, { name: "Display Name", uid: "test-uid-2", multiverseid: 789012 });
-  });
-});
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: ArchidektDeckToDeckAdapter;
@@ -309,5 +271,80 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.totalCards, 5);
     assert.strictEqual(result.includedCards, 4);
     assert.strictEqual(result.excludedCards, 1);
+  });
+
+  test("converts cards with oracle name correctly", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 123,
+      name: "Oracle Name Test",
+      categories: [
+        {
+          id: 1,
+          name: "Instant",
+          isPremier: false,
+          includedInDeck: true,
+          includedInPrice: true,
+        },
+      ],
+      cards: [
+        {
+          card: {
+            uid: "test-uid",
+            multiverseid: 123456,
+            oracleCard: {
+              name: "Oracle Name",
+            },
+          },
+          quantity: 1,
+          categories: ["Instant"],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "123" };
+    const result = await adapter.retrieveDeck(request);
+
+    assert.strictEqual(result.cards.length, 1);
+    assert.deepStrictEqual(result.cards[0], { name: "Oracle Name", uid: "test-uid", multiverseid: 123456 });
+  });
+
+  test("converts cards with display name correctly", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 456,
+      name: "Display Name Test",
+      categories: [
+        {
+          id: 1,
+          name: "Creature",
+          isPremier: false,
+          includedInDeck: true,
+          includedInPrice: true,
+        },
+      ],
+      cards: [
+        {
+          card: {
+            displayName: "Display Name",
+            uid: "test-uid-2",
+            multiverseid: 789012,
+            oracleCard: {
+              name: "Oracle Name",
+            },
+          },
+          quantity: 1,
+          categories: ["Creature"],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "456" };
+    const result = await adapter.retrieveDeck(request);
+
+    assert.strictEqual(result.cards.length, 1);
+    assert.deepStrictEqual(result.cards[0], { name: "Display Name", uid: "test-uid-2", multiverseid: 789012 });
   });
 });

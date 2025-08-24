@@ -7,7 +7,7 @@ import {
   isArchidektDeckRetrievalRequest,
 } from "./types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
-import { Deck, Card, convertArchidektToCard } from "../deck.js";
+import { Deck, Card } from "../deck.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGateway) {}
@@ -44,7 +44,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     const allCards: Card[] = [];
     for (const archidektCard of archidektDeck.cards) {
       if (isCardIncluded(archidektCard) && !archidektCard.categories.includes("Commander")) {
-        const card = convertArchidektToCard(archidektCard);
+        const card = this.convertArchidektToCard(archidektCard);
         if (card) {
           for (let i = 0; i < archidektCard.quantity; i++) {
             allCards.push(card);
@@ -63,9 +63,17 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       totalCards,
       includedCards,
       excludedCards,
-      commander: commanderCard ? convertArchidektToCard(commanderCard) : undefined,
+      commander: commanderCard ? this.convertArchidektToCard(commanderCard) : undefined,
       cards: allCards,
       retrievedDate: new Date(),
     };
+  }
+
+  private convertArchidektToCard(archidektCard: ArchidektCard): Card | undefined {
+    /* A few cards, such as "Miku, the Renowned" have a display name that's different from the oracle name.
+     * The Oracle Card is the canonical card, like you can't have two of the same in a Commander deck,
+     * while certain fancy cards get a vanity name. On the printed card, the Oracle Name shows up as a subtitle */
+    const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
+    return { name: cardName, uid: archidektCard.card.uid, multiverseid: archidektCard.card.multiverseid };
   }
 }
