@@ -1,6 +1,6 @@
 # Reveal a Card
 
-Status: next up
+Status: not implemented
 
 The goal is to take a card off the top of the library, turn it over, and reveal its face to the player.
 

@@ -3,12 +3,12 @@
 - the app state needs to store the deck after loading, even before the game starts. Or maybe, it should go straight into the start of a game. Yeah, skip the "deck details" page, go right into a shuffled library.
 - give them buttons to restart game or choose another deck.
 
+- I need a port, adapter, and gateway for retrieving a deck from Archidekt. The adapter will accept { archidektDeckId: string } and return a Deck in our domain. The adapter calls the gateway. The gateway calls Archidekt and returns the same shape of data that Archidekt returns, but stripped down to only what we use.
+
 - the game state needs to store
 
   - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
-  - the hand ... although we don't have one yet so that can come later
-  - the cards on the table ... although we don't have one yet so that can come later
-  - one list of cards, each with a position. NOT a bunch of lists of cards by position.
+  - The cards as a single list, not separate lists. Each card has a place where it is. Each card can be in the library, in the hand, or revealed. In each case, the card is at a specific position.
 
 - we need events, eventually. CRUD is technically the wrong model for this. We can use CRUD in the data layer while keeping the domain logic event-based.
 

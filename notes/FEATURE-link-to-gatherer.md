@@ -8,5 +8,5 @@ Link format: https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1
 
 the multiverseid is in the Archidekt data. For example, Ygra's multiverseid is 669155.
 
-[] save multiverseid in the Card interface
-[] generate link in the HTML
+[x] save multiverseid in the Card interface
+[x] generate link in the HTML

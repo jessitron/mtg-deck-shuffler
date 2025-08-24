@@ -42,7 +42,8 @@
       "Bash(env)",
       "Bash(chmod:*)",
       "mcp__honeycomb__feedback",
-      "Bash(PORT=3001 npm start)"
+      "Bash(PORT=3001 npm start)",
+      "mcp__playwright__browser_evaluate"
     ],
     "deny": []
   }
