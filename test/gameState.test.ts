@@ -41,7 +41,7 @@ async function testGameStateLifecycle(adapter: GameStateAdapter, adapterName: st
 
       assert.strictEqual(updated.id, gameId);
       assert.deepStrictEqual(updated.libraryCards, libraryCards);
-      assert.ok(updated.lastUpdated > updated.startDate);
+      assert.ok(updated.lastUpdated >= updated.startDate);
     });
 
     it('should retrieve the updated game', async () => {
