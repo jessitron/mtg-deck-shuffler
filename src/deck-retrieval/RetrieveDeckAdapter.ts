@@ -6,15 +6,12 @@ import { LocalDeckGateway } from "./LocalDeckGateway.js";
 
 export class RetrieveDeckAdapter implements RetrieveDeckPort {
   constructor(
-    ...adapters
+    private archidektGateway: ArchidektGateway,
+    private archidektDeckToDeckAdapter: ArchidektDeckToDeckAdapter,
+    private localDeckGateway: LocalDeckGateway
   ) {}
 
   async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
-    for (const adapter of this.adapters) {
-      if (adapter.canHandle(request)) {
-        return adapter.retrieveDeck(request);
-      }
-    }
     if (isArchidektRequest(request)) {
       const archidektDeck = await this.archidektGateway.fetchDeck(request.archidektDeckId);
       return this.archidektDeckToDeckAdapter.convert(archidektDeck);

@@ -10,9 +10,10 @@ import {
   FileSystemLocalDeckGateway 
 } from "./deck-retrieval/index.js";
 
-const deckRetriever = new CascadingDeckRetriever(
-  new ArchidektDeckRetrieverAdapter(new ArchidektGateway()),
-  new LocalDeckAdapter()  
+const deckRetriever = new RetrieveDeckAdapter(
+  new HttpArchidektGateway(),
+  new StandardArchidektDeckToDeckAdapter(),
+  new FileSystemLocalDeckGateway()
 );
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
