@@ -2,6 +2,8 @@
 
 status: implemented
 
+LIMITATION: this has been implemented for a single commander. It is possible for a deck to have two commanders.
+
 We want to display the commander's card image.
 Card images live at Scryfall.
 

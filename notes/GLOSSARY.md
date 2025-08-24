@@ -57,3 +57,5 @@ Cards on Table (MTG Deck Shuffler, game scope): a set of cards that are not in t
 Included Card (MTG Deck Shuffler, deck scope): a card that is played in a deck.
 
 Excluded Card (MTG Deck Shuffler, deck scope): a card that is associated with a deck, but not currently played. It does not go into the Library at the start of the game.
+
+Commander: a card in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.

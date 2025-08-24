@@ -5,7 +5,13 @@
 
 - I need a port, adapter, and gateway for retrieving a deck from Archidekt. The adapter will accept { archidektDeckId: string } and return a Deck in our domain. The adapter calls the gateway. The gateway calls Archidekt and returns the same shape of data that Archidekt returns, but stripped down to only what we use.
 
-- the game state needs to store
+Defining Port, Adapter, and Gateway:
+- a port is an interface. It defines operations on an external service in this app's domain language.
+- an adapter is an implementation of the port.
+
+
+
+- the game state needs to store 
 
   - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
   - The cards as a single list, not separate lists. Each card has a place where it is. Each card can be in the library, in the hand, or revealed. In each case, the card is at a specific position.
