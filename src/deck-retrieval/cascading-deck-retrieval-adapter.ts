@@ -1,0 +1,24 @@
+import { Deck } from "../deck.js";
+import { RetrieveDeckPort, DeckRetrievalRequest } from "./types.js";
+
+export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
+  private adapters: RetrieveDeckPort[];
+
+  constructor(adapters: RetrieveDeckPort[]) {
+    this.adapters = adapters;
+  }
+
+  canHandle(request: DeckRetrievalRequest): boolean {
+    return this.adapters.some(adapter => adapter.canHandle(request));
+  }
+
+  async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
+    for (const adapter of this.adapters) {
+      if (adapter.canHandle(request)) {
+        return adapter.retrieveDeck(request);
+      }
+    }
+    
+    throw new Error("No adapter found that can handle this request");
+  }
+}

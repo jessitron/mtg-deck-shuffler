@@ -1,22 +1,22 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ArchidektDeck, Deck, convertArchidektToDeck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
-import { markCurrentSpanAsError, setCommonSpanAttributes } from "./tracing_util.js";
+import { Deck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
+import { 
+  CascadingDeckRetrievalAdapter,
+  ArchidektDeckRetrievalAdapter,
+  LocalDeckAdapter,
+  ArchidektDeckRetrievalRequest
+} from "./deck-retrieval/index.js";
+
+const deckRetriever = new CascadingDeckRetrievalAdapter([
+  new ArchidektDeckRetrievalAdapter(),
+  new LocalDeckAdapter()
+]);
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
-  setCommonSpanAttributes({ archidektDeckNumber: deckNumber || "missing" });
-  const response = await fetch(`https://archidekt.com/api/decks/${deckNumber}/`);
-
-  if (!response.ok) {
-    markCurrentSpanAsError(`Failed to fetch deck`, {
-      "error.response_body": await response.text(),
-    });
-    throw new Error(`Failed to fetch deck: ${response.status}`);
-  }
-
-  const archidektDeck: ArchidektDeck = await response.json();
-  return convertArchidektToDeck(archidektDeck);
+  const request: ArchidektDeckRetrievalRequest = { archidektDeckId: deckNumber };
+  return deckRetriever.retrieveDeck(request);
 }
 
 function formatDeckHtml(deck: Deck): string {
