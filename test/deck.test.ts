@@ -1,7 +1,8 @@
-import { test, describe } from "node:test";
+import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { ArchidektDeck, Deck, ArchidektCard, convertArchidektToDeck, convertArchidektToCard } from "../src/deck.js";
+import { Deck, convertArchidektToCard } from "../src/deck.js";
+import { ArchidektDeck, ArchidektCard, ArchidektGateway, ArchidektDeckToDeckAdapter } from "../src/deck-retrieval/index.js";
 
 describe("convertArchidektToCard", () => {
   test("converts card with oracle name", () => {
@@ -42,7 +43,14 @@ describe("convertArchidektToCard", () => {
   });
 });
 
-describe("convertArchidektToDeck", () => {
+describe("ArchidektDeckToDeckAdapter", () => {
+  let adapter: ArchidektDeckToDeckAdapter;
+  let mockGateway: ArchidektGateway;
+
+  beforeEach(() => {
+    mockGateway = {} as ArchidektGateway; // We won't use the gateway in these tests
+    adapter = new ArchidektDeckToDeckAdapter(mockGateway);
+  });
   test("converts basic deck without commander", () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
@@ -85,7 +93,7 @@ describe("convertArchidektToDeck", () => {
       ],
     };
 
-    const result: Deck = convertArchidektToDeck(archidektDeck);
+    const result: Deck = (adapter as any).convertArchidektToDeck(archidektDeck);
 
     assert.strictEqual(result.id, 123);
     assert.strictEqual(result.name, "Test Deck");
@@ -153,7 +161,7 @@ describe("convertArchidektToDeck", () => {
       ],
     };
 
-    const result = convertArchidektToDeck(archidektDeck);
+    const result = (adapter as any).convertArchidektToDeck(archidektDeck);
 
     assert.strictEqual(result.id, 456);
     assert.strictEqual(result.name, "Commander Deck");
@@ -171,7 +179,7 @@ describe("convertArchidektToDeck", () => {
       cards: [],
     };
 
-    const result = convertArchidektToDeck(archidektDeck);
+    const result = (adapter as any).convertArchidektToDeck(archidektDeck);
 
     assert.strictEqual(result.id, 789);
     assert.strictEqual(result.name, "Empty Deck");
@@ -255,7 +263,7 @@ describe("convertArchidektToDeck", () => {
       ],
     };
 
-    const result = convertArchidektToDeck(archidektDeck);
+    const result = (adapter as any).convertArchidektToDeck(archidektDeck);
 
     assert.strictEqual(result.id, 999);
     assert.strictEqual(result.name, "Deck with Excluded Cards");
@@ -268,7 +276,7 @@ describe("convertArchidektToDeck", () => {
   test("converts real Ygra deck data correctly", () => {
     const ygraData = JSON.parse(fs.readFileSync("./test/deck-ygra.json", "utf8"));
 
-    const result = convertArchidektToDeck(ygraData);
+    const result = (adapter as any).convertArchidektToDeck(ygraData);
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
