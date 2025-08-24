@@ -13,11 +13,6 @@ import {
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 
-async function retrieveDeck(deckNumber: string): Promise<Deck> {
-  const request: ArchidektDeckRetrievalRequest = { archidektDeckId: deckNumber };
-  return await deckRetriever.retrieveDeck(request);
-}
-
 function formatDeckHtml(deck: Deck): string {
   const commanderImageHtml =
     deck.commander && deck.commander.uid
@@ -134,10 +129,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
 
 app.post("/deck", async (req, res) => {
-  const deckNumber = req.body["deck-number"];
+  const deckNumber: string = req.body["deck-number"];
 
   try {
-    const deck = await retrieveDeck(deckNumber);
+    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckNumber });
     const html = formatDeckHtml(deck);
 
     res.send(html);
@@ -151,10 +146,10 @@ app.post("/deck", async (req, res) => {
 });
 
 app.post("/start-game", async (req, res) => {
-  const deckId = req.body["deck-id"];
+  const deckId: string = req.body["deck-id"];
 
   try {
-    const deck = await retrieveDeck(deckId);
+    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckId });
     const library = shuffleDeck(deck);
     const game: Game = { deck, library };
     const html = formatGameHtml(game);
@@ -173,7 +168,7 @@ app.post("/end-game", async (req, res) => {
   const deckId = req.body["deck-id"];
 
   try {
-    const deck = await retrieveDeck(deckId);
+    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckId });
     const html = formatDeckHtml(deck);
     res.send(html);
   } catch (error) {
