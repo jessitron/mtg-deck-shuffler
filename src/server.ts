@@ -11,11 +11,7 @@ import {
   RetrieveDeckPort,
 } from "./deck-retrieval/index.js";
 
-const deckRetriever = createDeckRetriever();
-
-function createDeckRetriever(): RetrieveDeckPort {
-  return new CascadingDeckRetrievalAdapter([new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway())]);
-}
+const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {
   const request: ArchidektDeckRetrievalRequest = { archidektDeckId: deckNumber };
