@@ -1,18 +1,20 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { Deck, getCardImageUrl, shuffleDeck, Library, Game, Card } from "./deck.js";
-import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter, ArchidektDeckRetrievalRequest, RetrieveDeckPort } from "./deck-retrieval/index.js";
-import { markCurrentSpanAsError, setCommonSpanAttributes } from "./tracing_util.js";
+import { Deck, getCardImageUrl, shuffleDeck, Game, Card } from "./deck.js";
+import {
+  ArchidektGateway,
+  ArchidektDeckToDeckAdapter,
+  LocalDeckAdapter,
+  CascadingDeckRetrievalAdapter,
+  ArchidektDeckRetrievalRequest,
+  RetrieveDeckPort,
+} from "./deck-retrieval/index.js";
 
 const deckRetriever = createDeckRetriever();
 
 function createDeckRetriever(): RetrieveDeckPort {
-  const archidektGateway = new ArchidektGateway();
-  const archidektAdapter = new ArchidektDeckToDeckAdapter(archidektGateway);
-  const localAdapter = new LocalDeckAdapter();
-  
-  return new CascadingDeckRetrievalAdapter([localAdapter, archidektAdapter]);
+  return new CascadingDeckRetrievalAdapter([new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway())]);
 }
 
 async function retrieveDeck(deckNumber: string): Promise<Deck> {

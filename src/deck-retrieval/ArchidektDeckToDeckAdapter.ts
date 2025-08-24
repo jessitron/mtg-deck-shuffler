@@ -1,4 +1,11 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, ArchidektDeckRetrievalRequest, ArchidektDeck, ArchidektCard } from "./types.js";
+import {
+  RetrieveDeckPort,
+  DeckRetrievalRequest,
+  ArchidektDeckRetrievalRequest,
+  ArchidektDeck,
+  ArchidektCard,
+  isArchidektDeckRetrievalRequest,
+} from "./types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
 import { Deck, Card, convertArchidektToCard } from "../deck.js";
 
@@ -6,16 +13,16 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGateway) {}
 
   canHandle(request: DeckRetrievalRequest): boolean {
-    return "archidektDeckId" in request;
+    return isArchidektDeckRetrievalRequest(request);
   }
 
   async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
-    if (!this.canHandle(request)) {
+    if (!isArchidektDeckRetrievalRequest(request)) {
       throw new Error("Cannot handle this request type");
     }
 
-    const archidektRequest = request as ArchidektDeckRetrievalRequest;
-    const archidektDeck = await this.gateway.fetchDeck(archidektRequest.archidektDeckId);
+    // TypeScript now knows request is ArchidektDeckRetrievalRequest
+    const archidektDeck = await this.gateway.fetchDeck(request.archidektDeckId);
     return this.convertArchidektToDeck(archidektDeck);
   }
 

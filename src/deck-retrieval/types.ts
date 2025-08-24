@@ -10,6 +10,15 @@ export interface LocalDeckRetrievalRequest {
 
 export type DeckRetrievalRequest = ArchidektDeckRetrievalRequest | LocalDeckRetrievalRequest;
 
+// Type guards
+export function isArchidektDeckRetrievalRequest(request: DeckRetrievalRequest): request is ArchidektDeckRetrievalRequest {
+  return "archidektDeckId" in request;
+}
+
+export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): request is LocalDeckRetrievalRequest {
+  return "localFile" in request;
+}
+
 export interface RetrieveDeckPort {
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;

@@ -1,27 +1,27 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, LocalDeckRetrievalRequest } from "./types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, LocalDeckRetrievalRequest, isLocalDeckRetrievalRequest } from "./types.js";
 import { Deck } from "../deck.js";
 import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
   canHandle(request: DeckRetrievalRequest): boolean {
-    return "localFile" in request;
+    return isLocalDeckRetrievalRequest(request);
   }
 
   async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
-    if (!this.canHandle(request)) {
+    if (!isLocalDeckRetrievalRequest(request)) {
       throw new Error("Cannot handle this request type");
     }
 
-    const localRequest = request as LocalDeckRetrievalRequest;
-    
+    // TypeScript now knows request is LocalDeckRetrievalRequest
+
     try {
-      const fileContent = fs.readFileSync(localRequest.localFile, "utf8");
+      const fileContent = fs.readFileSync(request.localFile, "utf8");
       const deck: Deck = JSON.parse(fileContent);
-      
+
       deck.retrievedDate = new Date();
       return deck;
     } catch (error) {
-      throw new Error(`Failed to read local deck file: ${localRequest.localFile}`);
+      throw new Error(`Failed to read local deck file: ${request.localFile}`);
     }
   }
 }
