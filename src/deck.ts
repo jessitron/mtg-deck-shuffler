@@ -1,4 +1,4 @@
-export interface Card {
+export interface CardDefinition {
   name: string;
   uid: string;
   multiverseid: number;
@@ -8,13 +8,13 @@ export interface Deck {
   id: number;
   name: string;
   totalCards: number;
-  commander?: Card;
-  cards: Card[];
+  commander?: CardDefinition;
+  cards: CardDefinition[];
   retrievedDate: Date;
 }
 
 export interface Library {
-  cards: Card[];
+  cards: CardDefinition[];
   count: number;
 }
 
