@@ -1,4 +1,4 @@
-import { Deck } from "../deck.js";
+import { Deck } from "./types.js";
 
 // this is really config
 export const LOCAL_DECK_RELATIVE_PATH = "./decks/";
@@ -23,37 +23,17 @@ export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): requ
 }
 
 export type SearchUrl = { description: string; url: string };
-export type DescribedDeckRetrievalRequests = { description: string; options: Array<{ description: string } & DeckRetrievalRequest> };
-export type AvailableDecks = DescribedDeckRetrievalRequests | SearchUrl;
+export type DropdownOptions = { description: string; options: Array<{ description: string } & DeckRetrievalRequest> };
+export type AvailableDecks = DropdownOptions | SearchUrl;
+export function isSearchUrl(ad: DropdownOptions | SearchUrl): ad is SearchUrl {
+  return "url" in ad;
+}
+export function isDropdownOptions(ad: DropdownOptions | SearchUrl): ad is DropdownOptions {
+  return "options" in ad;
+}
 
 export interface RetrieveDeckPort {
   listAvailableDecks(): AvailableDecks[];
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
-}
-
-export interface ArchidektCard {
-  card: {
-    displayName?: string;
-    uid: string;
-    multiverseid: number;
-    oracleCard: {
-      name: string;
-    };
-  };
-  quantity: number;
-  categories: string[];
-}
-
-export interface ArchidektDeck {
-  id: number;
-  name: string;
-  categories: Array<{
-    id: number;
-    name: string;
-    isPremier: boolean;
-    includedInDeck: boolean;
-    includedInPrice: boolean;
-  }>;
-  cards: ArchidektCard[];
 }

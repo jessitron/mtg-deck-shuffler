@@ -11,9 +11,7 @@
     <h1>*Woohoo it's Magic time!*</h1>
 
     <div id="deck-input">
-      <label for="deck-number">Enter Archidekt Deck Number:</label>
-      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" />
-      <button hx-post="/deck" hx-include="#deck-number" hx-target="#deck-input">Load Deck</button>
+      <button hx-get="/choose-deck" hx-target="#deck-input">Choose Deck</button>
     </div>
   </body>
 </html>

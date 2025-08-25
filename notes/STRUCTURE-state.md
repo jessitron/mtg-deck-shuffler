@@ -22,7 +22,7 @@ Remember that these are defined in @notes/DESIGN-state.md
 
 - **Step 2.1**: Implement initialize operation (from deck to game state) in the GameState constructor
 - **Step 2.2**: Unit test initialize operation
-- **Step 2.2**: Implement shuffle operation as a method on GameState; it alters the positions of cards in Library and returns `this`. The implementation moves out of @src/deck.ts
+- **Step 2.2**: Implement shuffle operation as a method on GameState; it alters the positions of cards in Library and returns `this`. The implementation moves out of @src/types.ts
 - **Step 2.3**: Unit test shuffle operation. Check that the positions of the cards change, and verify invariants.
 - **Step 2.3**: Integrate initialize and shuffle operations into app flow
 - **Step 2.4**: Test that the app functions as before: you can start a game, and you can see the list of cards in the library.
@@ -66,7 +66,7 @@ Remember that these are defined in @notes/DESIGN-state.md
 - Current `Game` interface has `deck: Deck` and `library: Library`
 - Current `GameState` interface is for persistence only (simple status tracking)
 - Current `GameStateAdapter` implementations (InMemory, SQLite) will be replaced
-- Current card structure in `deck.ts` is basic with `name`, `uid`, `multiverseid`
+- Current card structure in `src/types.ts` is basic with `name`, `uid`, `multiverseid`
 
 **Key Decisions:**
 

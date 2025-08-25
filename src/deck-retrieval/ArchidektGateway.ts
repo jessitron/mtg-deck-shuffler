@@ -1,4 +1,4 @@
-import { ArchidektDeck } from "./types.js";
+import { ArchidektDeck } from "./archidektTypes.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes } from "../tracing_util.js";
 
 export class ArchidektGateway {

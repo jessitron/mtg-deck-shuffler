@@ -1,9 +1,9 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { shuffleDeck, Game } from "./deck.js";
+import { shuffleDeck, Game } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter, RetrieveDeckPort } from "./deck-retrieval/index.js";
-import { formatDeckHtml, formatGameHtml } from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 
@@ -15,6 +15,21 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
+
+app.get("/choose-deck", async (req, res) => {
+  try {
+    const availableDecks = deckRetriever.listAvailableDecks();
+    const html = formatChooseDeckHtml(availableDecks);
+
+    res.send(html);
+  } catch (error) {
+    console.error("Error fetching deck:", error);
+    res.send(`<div>
+        <p>Error: Could not figure out how you might load a deck</p>
+        <a href="/">Try another deck</a>
+    </div>`);
+  }
+});
 
 app.post("/deck", async (req, res) => {
   const deckNumber: string = req.body["deck-number"];

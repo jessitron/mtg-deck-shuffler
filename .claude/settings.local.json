@@ -44,8 +44,7 @@
       "mcp__honeycomb__feedback",
       "Bash(PORT=3001 npm start)",
       "mcp__playwright__browser_evaluate",
-      "Bash(mkdir:*)",
-      "Bash(tsx scripts/download-deck.ts:*)"
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

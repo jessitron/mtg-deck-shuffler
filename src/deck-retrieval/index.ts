@@ -3,11 +3,9 @@ export {
   DeckRetrievalRequest,
   ArchidektDeckRetrievalRequest,
   LocalDeckRetrievalRequest,
-  ArchidektDeck,
-  ArchidektCard,
   isArchidektDeckRetrievalRequest,
   isLocalDeckRetrievalRequest,
-} from "./types.js";
+} from "../deckRetrievalPort.js";
 export { ArchidektGateway } from "./ArchidektGateway.js";
 export { ArchidektDeckToDeckAdapter } from "./ArchidektDeckToDeckAdapter.js";
 export { LocalDeckAdapter } from "./LocalDeckAdapter.js";

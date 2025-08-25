@@ -1,4 +1,39 @@
-import { Deck, getCardImageUrl, Game } from "./deck.js";
+import { AvailableDecks, DropdownOptions, isDropdownOptions, isSearchUrl, SearchUrl } from "./deckRetrievalPort.js";
+import { Deck, getCardImageUrl, Game } from "./types.js";
+
+export function formatChooseDeckHtml(availableDecks: AvailableDecks[]) {
+  const archidektSearchUrl = availableDecks.find(isSearchUrl);
+  const archidektSelectionHtml = archidektSearchUrl ? formatArchidektInput(archidektSearchUrl) : "";
+
+  const localSelections = availableDecks.find(isDropdownOptions);
+
+  const localSelectionHtml = localSelections ? formatLocalDeckInput(localSelections) : "";
+  return `<div id="deck-input">
+      ${archidektSelectionHtml}
+      ${localSelectionHtml}
+    </div>`;
+}
+
+function formatArchidektInput(archidektSearchUrl: SearchUrl) {
+  return `<div>
+      <label for="deck-number">Enter Archidekt Deck Number:</label>
+      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" />
+      <input type="hidden" name="where-to-load-from" value="archidekt" />
+      <a href="${archidektSearchUrl.url}" target="_blank">${archidektSearchUrl.description}</a>
+      <button hx-post="/deck" hx-include="closest div" hx-target="#deck-input">Load Deck from Archidekt</button>
+   </div>`;
+}
+
+function formatLocalDeckInput(localSelections: DropdownOptions) {
+  // TODO: how does html work for dropdowns
+  const options = localSelections.options.map((o) => `<option value="${o.description}">${o.description}</option>`);
+  return `<div>
+      <label for="local-deck-selection">Or choose a pre-loaded deck:</label> 
+      <input type="hidden" name="where-to-load-from" value="local" />
+      <input id="local-deck-selection" name="local-deck-selection" type="options">${options}</input>
+      <button hx-post="/deck hx-include="#local-deck-selection" hx-target="#deck-input>Load deck</button>
+    </div>`;
+}
 
 export function formatDeckHtml(deck: Deck): string {
   const commanderImageHtml =

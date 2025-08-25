@@ -1,5 +1,5 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, AvailableDecks } from "./types.js";
-import { Deck } from "../deck.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, AvailableDecks } from "../deckRetrievalPort.js";
+import { Deck } from "../types.js";
 
 export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
   private adapters: RetrieveDeckPort[];
