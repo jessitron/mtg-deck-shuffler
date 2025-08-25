@@ -7,8 +7,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
   test("reads files from the local directory", async () => {
     const availableDecks = adapter.listAvailableDecks()[0];
-    assert.notStrictEqual(availableDecks, null);
-    console.log("JESS really how am I supposed to debug when all the output is 'test failed'" + JSON.stringify(availableDecks));
+
     assert.strictEqual(availableDecks.description, "Locally stored decks");
     assert(availableDecks.options.length >= 3, "I expect to find at least three decks in ./decks/ ... found " + availableDecks.options.length);
   });

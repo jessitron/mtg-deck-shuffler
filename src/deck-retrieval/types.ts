@@ -1,7 +1,7 @@
 import { Deck } from "../deck.js";
 
 // this is really config
-export const LOCAL_DECK_RELATIVE_PATH = "/decks/";
+export const LOCAL_DECK_RELATIVE_PATH = "./decks/";
 
 export interface ArchidektDeckRetrievalRequest {
   archidektDeckId: string;

@@ -1,10 +1,15 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, DescribedDeckRetrievalRequests } from "./types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, DescribedDeckRetrievalRequests, LOCAL_DECK_RELATIVE_PATH } from "./types.js";
 import { Deck } from "../deck.js";
 import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
+  private readonly Directory = LOCAL_DECK_RELATIVE_PATH;
+
   listAvailableDecks(): DescribedDeckRetrievalRequests[] {
-    return [{ description: "Locally stored decks", options: [] }];
+    const ls = fs.readdirSync(this.Directory);
+    const options = ls.map((l) => ({ description: l, localFile: l }));
+    console.log("OPTIONS: " + JSON.stringify(options));
+    return [{ description: "Locally stored decks", options }];
   }
 
   canHandle(request: DeckRetrievalRequest): boolean {
