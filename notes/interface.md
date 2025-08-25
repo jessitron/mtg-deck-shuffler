@@ -62,3 +62,5 @@ Here is a rough layout for when a game is in progress:
       ⏵ View library contents (for testing)
                    [Restart Game] [Choose Another Deck]
 ```
+
+The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
