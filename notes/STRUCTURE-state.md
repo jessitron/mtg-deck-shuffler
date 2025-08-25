@@ -34,27 +34,29 @@ Status: planning
 - **Step 5.5**: Implement list table view (ordered by display name)
 
 ### Phase 6: Integration
-- **Step 6.1**: Update server endpoints to use new GameState
+- **Step 6.1**: Replace server endpoints to use new GameState operations
 - **Step 6.2**: Update HTML formatters for new game state structure
-- **Step 6.3**: Add persistence layer integration
-- **Step 6.4**: Update existing Game interface to be compatible or migrate
+- **Step 6.3**: Remove old GameState files (gameState.ts, gameStateInMemory.ts, gameStateSqlite.ts)
+- **Step 6.4**: Replace existing Game interface usage with new GameState
 
 ### Implementation Notes
 
 **Current State Analysis:**
 - Current `Game` interface has `deck: Deck` and `library: Library`
-- Current `GameState` interface exists but is for persistence, not game logic
-- Need to avoid naming conflicts - suggest `GameSession` for the new design
+- Current `GameState` interface is for persistence only (simple status tracking)
+- Current `GameStateAdapter` implementations (InMemory, SQLite) will be replaced
 - Current card structure in `deck.ts` is basic with `name`, `uid`, `multiverseid`
 
 **Key Decisions:**
-- Use `GameSession` name to avoid conflict with existing `GameState` interface
+- Replace existing `GameState` interface completely with new design
+- Replace `GameStateAdapter` with new game state operations
 - Extend current `Card` interface rather than replace it
 - Implement operations as pure functions that return new state
 - Position tracking starts at 0 for consistency
 - Commander detection should use existing deck structure
 
-**Compatibility:**
-- Phase 6 will ensure existing endpoints continue to work
+**Implementation Strategy:**
+- Complete replacement of existing GameState with new design
+- Remove existing gameState.ts, gameStateInMemory.ts and gameStateSqlite.ts
 - Current `shuffleDeck` function can be adapted for the new shuffle operation
-- HTML formatters will need updates but can reuse display logic
+- HTML formatters will be updated for new game state structure
