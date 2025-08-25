@@ -1,5 +1,8 @@
 import { Deck } from "../deck.js";
 
+// this is really config
+export const LOCAL_DECK_RELATIVE_PATH = "/decks/";
+
 export interface ArchidektDeckRetrievalRequest {
   archidektDeckId: string;
 }
@@ -19,7 +22,12 @@ export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): requ
   return "localFile" in request;
 }
 
+export type SearchUrl = { description: string; url: string };
+export type DescribedDeckRetrievalRequest = DeckRetrievalRequest & { description: string };
+export type AvailableDecks = { description: string; options: Array<DescribedDeckRetrievalRequest | SearchUrl> };
+
 export interface RetrieveDeckPort {
+  listAvailableDecks(): AvailableDecks;
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
 }

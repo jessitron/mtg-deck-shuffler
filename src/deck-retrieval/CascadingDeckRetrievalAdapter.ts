@@ -1,4 +1,4 @@
-import { RetrieveDeckPort, DeckRetrievalRequest } from "./types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, AvailableDecks } from "./types.js";
 import { Deck } from "../deck.js";
 
 export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
@@ -6,6 +6,9 @@ export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
 
   constructor(...adapters: RetrieveDeckPort[]) {
     this.adapters = adapters;
+  }
+  listAvailableDecks(): AvailableDecks {
+    return this.adapters.flatMap((a) => a.listAvailableDecks());
   }
 
   canHandle(request: DeckRetrievalRequest): boolean {

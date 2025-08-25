@@ -5,6 +5,10 @@
 
 - persistence is of session state. Actually implement it.
 
+- commanders should be a list; there are sometimes two cards in the command zone.
+
+- either commanders are in the card list, or else CommandZone is not a location.
+
 - the game state needs to store
 
   - the full deck. it is mutable in archidekt, so don't count on retrieving it again.

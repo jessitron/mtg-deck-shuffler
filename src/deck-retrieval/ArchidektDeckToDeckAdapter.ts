@@ -5,12 +5,17 @@ import {
   ArchidektDeck,
   ArchidektCard,
   isArchidektDeckRetrievalRequest,
+  AvailableDecks,
 } from "./types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
 import { Deck, Card } from "../deck.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGateway) {}
+
+  listAvailableDecks(): AvailableDecks {
+    return [{ description: "Search Decks", url: "https://archidekt.com/" }];
+  }
 
   canHandle(request: DeckRetrievalRequest): boolean {
     return isArchidektDeckRetrievalRequest(request);
@@ -62,8 +67,8 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       cards: includedCards,
       provenance: {
         retrievedDate: now,
-        sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`
-      }
+        sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`,
+      },
     };
   }
 

@@ -1,9 +1,8 @@
 import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
-import { Deck } from "../src/deck.js";
-import { ArchidektDeck, ArchidektCard, ArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektDeckRetrievalRequest } from "../src/deck-retrieval/index.js";
-
+import { Deck } from "../../src/deck.js";
+import { ArchidektDeck, ArchidektCard, ArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektDeckRetrievalRequest } from "../../src/deck-retrieval/index.js";
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: ArchidektDeckToDeckAdapter;
@@ -66,7 +65,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "123" };
     const result: Deck = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 123);
+    console.log("WTAF");
+    assert.strictEqual(result.id, 123, "wtf are you going to give me the output");
     assert.strictEqual(result.name, "Test Deck");
     assert.strictEqual(result.totalCards, 24);
     assert.strictEqual(result.commander, undefined);
