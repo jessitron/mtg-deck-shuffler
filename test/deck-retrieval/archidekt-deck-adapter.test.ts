@@ -2,7 +2,7 @@ import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert";
 import fs from "node:fs";
 import { Deck } from "../../src/deck.js";
-import { ArchidektDeck, ArchidektCard, ArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektDeckRetrievalRequest } from "../../src/deck-retrieval/index.js";
+import { ArchidektDeck, ArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektDeckRetrievalRequest } from "../../src/deck-retrieval/index.js";
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: ArchidektDeckToDeckAdapter;

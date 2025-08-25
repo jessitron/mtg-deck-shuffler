@@ -23,11 +23,11 @@ export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): requ
 }
 
 export type SearchUrl = { description: string; url: string };
-export type DescribedDeckRetrievalRequest = DeckRetrievalRequest & { description: string };
-export type AvailableDecks = { description: string; options: Array<DescribedDeckRetrievalRequest | SearchUrl> };
+export type DescribedDeckRetrievalRequests = { description: string; options: Array<{ description: string } & DeckRetrievalRequest> };
+export type AvailableDecks = DescribedDeckRetrievalRequests | SearchUrl;
 
 export interface RetrieveDeckPort {
-  listAvailableDecks(): AvailableDecks;
+  listAvailableDecks(): AvailableDecks[];
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
 }
