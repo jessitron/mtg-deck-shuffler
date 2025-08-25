@@ -4,25 +4,31 @@ Status: planning
 
 ## Implementation Plan
 
-Make a gameState directory for all this. Game State becomes a subdomain, so it gets its own types.ts
-
 ### Phase 0: Prepare existing types to support these changes
 
 - the current Card type should be CardDefinition.
+- Make a gameState directory for all this. Game State becomes a subdomain, so it gets its own types.ts
 
 ### Phase 1: Core Data Types
 
 - **Step 1.1**: Define card location types (CommandZone, Library, Hand, Revealed, Table)
-- **Step 1.2**: Define GameCard interface that combines Card with location
-- **Step 1.3**: Create GameState interface with deck retrieval spec and card list
+- **Step 1.2**: Define GameCard type that combines CardDefinition with location
+- **Step 1.3**: Create GameState class, holding deck retrieval spec and card list
 - **Step 1.4**: Add invariant validation functions
 
 Remember that these are defined in @notes/DESIGN-state.md
 
 ### Phase 2: Game State Operations
 
-- **Step 2.1**: Implement initialize operation (from deck to game state)
-- **Step 2.2**: Implement shuffle operation
+- **Step 2.1**: Implement initialize operation (from deck to game state) in the GameState constructor
+- **Step 2.2**: Unit test initialize operation
+- **Step 2.2**: Implement shuffle operation as a method on GameState; it alters the positions of cards in Library and returns `this`. The implementation moves out of @src/deck.ts
+- **Step 2.3**: Unit test shuffle operation. Check that the positions of the cards change, and verify invariants.
+- **Step 2.3**: Integrate initialize and shuffle operations into app flow
+- **Step 2.4**: Test that the app functions as before: you can start a game, and you can see the list of cards in the library.
+
+### Phase 3: Game State Operations - STOP HERE, NOT YET
+
 - **Step 2.3**: Implement draw operation (Library → Hand)
 - **Step 2.4**: Implement reveal operation (Library → Revealed)
 

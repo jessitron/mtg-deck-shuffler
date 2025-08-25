@@ -26,11 +26,11 @@ Invariants:
 - there are zero, one, or two commander cards
 - there are no duplicate positions except Table
 - the card definitions never change, only the locations.
-- the order of cards in the game state never changes.
+- the order of cards in the game state never changes. To make this easier to verify, it is ordered by Display Name.
 
 Operations possible on game state:
 
-- initialize from a deck. Place all included cards except the commander(s) in the library, with position incrementing. Excluded card definitions are dropped.
+- initialize from a deck. Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
 - reveal: move the top card from Library to Revealed. Check: one fewer card in Library, one more card in Revealed.
