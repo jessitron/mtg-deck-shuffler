@@ -4,6 +4,11 @@ export interface Card {
   multiverseid: number;
 }
 
+export interface DeckProvenance {
+  retrievedDate: Date;
+  sourceUrl: string;
+}
+
 export interface Deck {
   id: number;
   name: string;
@@ -11,6 +16,7 @@ export interface Deck {
   commander?: Card;
   cards: Card[];
   retrievedDate: Date;
+  provenance: DeckProvenance;
 }
 
 export interface Library {

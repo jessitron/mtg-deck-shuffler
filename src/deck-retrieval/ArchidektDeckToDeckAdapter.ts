@@ -23,10 +23,10 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
     // TypeScript now knows request is ArchidektDeckRetrievalRequest
     const archidektDeck = await this.gateway.fetchDeck(request.archidektDeckId);
-    return this.convertArchidektToDeck(archidektDeck);
+    return this.convertArchidektToDeck(archidektDeck, request.archidektDeckId);
   }
 
-  private convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
+  private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {
     const categoryInclusionMap = new Map(archidektDeck.categories.map((cat) => [cat.name, cat.includedInDeck]));
 
     const isCardIncluded = (card: ArchidektCard) => {
@@ -53,13 +53,18 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
     const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
 
+    const now = new Date();
     return {
       id: archidektDeck.id,
       name: archidektDeck.name,
       totalCards: includedCards.length,
       commander: commanderCard ? this.convertArchidektToCard(commanderCard) : undefined,
       cards: includedCards,
-      retrievedDate: new Date(),
+      retrievedDate: now,
+      provenance: {
+        retrievedDate: now,
+        sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`
+      }
     };
   }
 

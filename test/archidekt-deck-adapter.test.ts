@@ -70,6 +70,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.name, "Test Deck");
     assert.strictEqual(result.totalCards, 24);
     assert.strictEqual(result.commander, undefined);
+    assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/123");
+    assert.ok(result.provenance.retrievedDate instanceof Date);
   });
 
   test("converts deck with commander", async () => {
