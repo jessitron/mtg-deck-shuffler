@@ -10,7 +10,11 @@ Archidekt: this is an external domain, a particular API we call.
 
 Scryfall: this is an industry standard domain, standardized by Wizards at scryfall.com. It provides a database of all cards every published, including images of them. https://scryfall.com/docs/api
 
-MTG Deck Shuffler: this is our bounded context. For now we only have one.
+MTG Deck Shuffler: this is our bounded context. There are two subdomains:
+
+MTG Deck Shuffler UI: this is the user interface. The vocabulary here is presented to the user.
+
+MTG Deck Shuffler Game State: this is where we track the game state. The vocabulary here is for developers, optimized for making invalid state unrepresentable.
 
 ## Definitions
 
@@ -20,7 +24,7 @@ Card - this is ambiguous. Are we talking about a card conceptually, or a particu
 
 Oracle Card: this word is defined by Archidekt, referring to a definition in the Scryfall domain. It references a card by name.
 
-Card Name: this is slightly ambiguous. Usually the Card Display Name and the Card Oracle Name are the same, but not always. The Card Oracle Name is the unique identifier for a card. The Card Display Name is at the very top of the card, andwhat we show to the user.
+Card Name: this is slightly ambiguous. Usually the Card Display Name and the Card Oracle Name are the same, but not always. The Card Oracle Name is the unique identifier for a card. The Card Display Name is at the very top of the card, and this is what we show to the user.
 
 Display Name (Scryfall): at the top of a card. What we call it.
 
@@ -28,34 +32,34 @@ Oracle Name (Archidekt referring to Scryfall): the unique identifier for a card.
 
 Archidect Deck ID: a unique identifier for a deck in the Archidekt system. The deck is mutable in Archidekt!
 
-Deck (Archidekt): a collection of cards meant to be played in a game.
+Deck (Archidekt): a collection of cards meant to be played in a game. Archidekt exists to help people build decks, so the Deck in Archidekt is mutable, and it contains cards in categories like "Maybeboard" and "Sideboard" that aren't used in play (Excluded Cards).
 
-Deck (MTG Deck Shuffler): an unordered collection of cards that can be shuffled into a Library. These are immutable in the MTG Deck Shuffler domain.
+Deck (MTG Deck Shuffler): an unordered collection of cards, along with some provenance info. These are immutable in the MTG Deck Shuffler domain. A deck is necessary to initiate a game.
 
-Library (MTG Deck Shuffler): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
+Library (MTG Deck Shuffler UI): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
 
-Game (MTG Deck Shuffler): a temporal scope. At the beginning of a game, the cards in a Deck initialize a Library. The Library can be manipulated in various ways during the game. At the end of the game, the Library doesn't exist anymore.
+Game (MTG Deck Shuffler): a temporal scope. During a game, the position of each card is tracked.
 
-Card in Deck (MTG Deck Shuffler): a definition of a card that is present in a Deck. Immutable, doesn't go anywhere.
+Card Definition (MTG Deck Shuffler): a definition of a card, including Display Name, Oracle Name, how to find its picture. Immutable.
 
-Card in Library (MTG Deck Shuffler, game scope): an instance of a Card in Deck that is present in a Library. Immutable, can move around or be removed from the Library.
+Game Card (MTG Deck Shuffler, game scope): a card involved in a game. It has a Card Definition and a Location.
 
-Game State (MTG Deck Shuffler, game scope): all the state that is local to a game. This includes the Library, cards in hand, revealed cards, and cards on the table. v mutable
+Location (MTG Deck Shuffler, game scope): where a card is. A card is in exactly one location at a time. Many locations include a position, which is unique among cards in that location, for ordering. Locations include: Library(position), Table, Hand(position), Revealed(position), Command Zone.
 
-Hand (MTG Deck Shuffler, game scope): a set of cards that are visible to a player. One per game, mutable.
+Game State (MTG Deck Shuffler, game scope): all the state that is local to a game. This includes a list of Game Cards.
+
+Hand (MTG Deck Shuffler, UI): a set of cards that are visible to a player. They represent cards a player has access to; the player can reorder them, or move a card to the table.
 
 Draw: move a card from the Library to the Hand
 
 Reveal: flip a card from the top of the Library so that the player can look at it.
 
-Revealed cards: a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
+Revealed cards (MTG Deck Shuffler, UI): a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
 
-Table: when cards go here, they are not visible in MTG Deck Shuffler.
+Table: where cards go when they are played. The table is where the game happens, but we don't track it in MTG Deck Shuffler. That is mysterious to us. It is possible for a player to return a card from the Table to the library or hand.
 
-Cards on Table (MTG Deck Shuffler, game scope): a set of cards that are not in the Library or in Hand. They're on the table somewhere. This app does not track cards that are on the table. The only reason we even track them is so that (on rare occasions) we can put them back in the Library.
+Included Card (Archidekt): a card that is played in a deck. We keep these.
 
-Included Card (MTG Deck Shuffler, deck scope): a card that is played in a deck.
+Excluded Card (Archidekt): a card that is associated with a deck, but not currently played. We don't need to track these.
 
-Excluded Card (MTG Deck Shuffler, deck scope): a card that is associated with a deck, but not currently played. It does not go into the Library at the start of the game.
-
-Commander: a card in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.
+Commander: a card (or two) in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.

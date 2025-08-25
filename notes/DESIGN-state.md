@@ -11,7 +11,7 @@ Operations on game state accept a game state, and return a game state. (It might
 The game state includes:
 
 - a deck retrieval spec, the same as a DeckRetrievalRequest -- with the addition of a timestamp when the deck was retrieved.
-- a list of cards, each with a card definition and a location.
+- a list of cards, each with a card definition and a location, ordered by Display Name.
 - a card location is one of:
   - command zone (for the commander or commanders)
   - Library(position: non-negative integer)
@@ -26,6 +26,7 @@ Invariants:
 - there are zero, one, or two commander cards
 - there are no duplicate positions except Table
 - the card definitions never change, only the locations.
+- the order of cards in the game state never changes.
 
 Operations possible on game state:
 
