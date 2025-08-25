@@ -3,6 +3,8 @@
 - the app state needs to store the deck after loading, even before the game starts. Or maybe, it should go straight into the start of a game. Yeah, skip the "deck details" page, go right into a shuffled library.
 - give them buttons to restart game or choose another deck.
 
+- persistence is of session state. Actually implement it.
+
 - the game state needs to store
 
   - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
@@ -21,7 +23,10 @@
   - how does it work in dynamodb?
   - in memory, what can we use to guarantee integrity?
 
-- I need tracing in Honeycomb of what is happening
+- I need tracing in Honeycomb of what is happening. THe trick is that I want to do this by creating generic instructions and using them.
+  [x] initialize tracing, get autoinstrumentation
+  [ ] identify crucial fields to add as attributes
+  [ ] create a library of utility functions specific to this project
 
 - I also want tracing of pageloads, a frontend dataset.
 
@@ -30,3 +35,5 @@
 - implement dynamodb and test locally somehow
 
 - the site needs to save and delete the game, it doesn't currently use the game state mechanism
+
+- get the Deck to include a "source", which has a URL that links to where we got the deck. Local files will work for this if we serve them
