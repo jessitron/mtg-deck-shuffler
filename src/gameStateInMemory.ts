@@ -1,15 +1,15 @@
-import { OldGameState, GameStateAdapter } from './gameState.js';
+import { GameState, GameStateAdapter } from './gameState.js';
 
 export class InMemoryGameStateAdapter implements GameStateAdapter {
-  private games: Map<string, OldGameState> = new Map();
+  private games: Map<string, GameState> = new Map();
 
-  async startGame(gameId: string, deckId?: string): Promise<OldGameState> {
+  async startGame(gameId: string, deckId?: string): Promise<GameState> {
     if (this.games.has(gameId)) {
       throw new Error(`Game with id ${gameId} already exists`);
     }
 
     const now = new Date();
-    const gameState: OldGameState = {
+    const gameState: GameState = {
       id: gameId,
       status: 'active',
       deckId,
@@ -21,17 +21,17 @@ export class InMemoryGameStateAdapter implements GameStateAdapter {
     return gameState;
   }
 
-  async retrieveGame(gameId: string): Promise<OldGameState | null> {
+  async retrieveGame(gameId: string): Promise<GameState | null> {
     return this.games.get(gameId) || null;
   }
 
-  async updateGame(gameId: string, updates: Partial<Omit<OldGameState, 'id' | 'startDate'>>): Promise<OldGameState> {
+  async updateGame(gameId: string, updates: Partial<Omit<GameState, 'id' | 'startDate'>>): Promise<GameState> {
     const existingGame = this.games.get(gameId);
     if (!existingGame) {
       throw new Error(`Game with id ${gameId} not found`);
     }
 
-    const updatedGame: OldGameState = {
+    const updatedGame: GameState = {
       ...existingGame,
       ...updates,
       id: gameId,
