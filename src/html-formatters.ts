@@ -6,7 +6,7 @@ export function formatDeckHtml(deck: Deck): string {
       ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" class="commander-image" />`
       : `<div class="commander-placeholder">No Commander Image</div>`;
 
-  const cardCountInfo = deck.excludedCards > 0 ? `${deck.includedCards} cards, plus ${deck.excludedCards} excluded cards` : `${deck.includedCards} cards`;
+  const cardCountInfo = `${deck.totalCards} cards`;
 
   const retrievedInfo = `Retrieved: ${deck.retrievedDate.toLocaleString()}`;
 
@@ -35,8 +35,7 @@ export function formatGameHtml(game: Game): string {
       ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" class="commander-image" />`
       : `<div class="commander-placeholder">No Commander</div>`;
 
-  const cardCountInfo =
-    game.deck.excludedCards > 0 ? `${game.deck.includedCards} cards, plus ${game.deck.excludedCards} excluded cards` : `${game.deck.includedCards} cards`;
+  const cardCountInfo = `${game.deck.totalCards} cards`;
 
   const libraryCardList = game.library.cards
     .map((card) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)

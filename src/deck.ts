@@ -8,8 +8,6 @@ export interface Deck {
   id: number;
   name: string;
   totalCards: number;
-  includedCards: number;
-  excludedCards: number;
   commander?: Card;
   cards: Card[];
   retrievedDate: Date;

@@ -27,8 +27,6 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   }
 
   private convertArchidektToDeck(archidektDeck: ArchidektDeck): Deck {
-    const totalCards = archidektDeck.cards.reduce((sum, card) => sum + card.quantity, 0);
-
     const categoryInclusionMap = new Map(archidektDeck.categories.map((cat) => [cat.name, cat.includedInDeck]));
 
     const isCardIncluded = (card: ArchidektCard) => {
@@ -41,30 +39,26 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       return categoryInclusionMap.get(primaryCategory) ?? true;
     };
 
-    const allCards: Card[] = [];
+    const includedCards: Card[] = [];
     for (const archidektCard of archidektDeck.cards) {
       if (isCardIncluded(archidektCard) && !archidektCard.categories.includes("Commander")) {
         const card = this.convertArchidektToCard(archidektCard);
         if (card) {
           for (let i = 0; i < archidektCard.quantity; i++) {
-            allCards.push(card);
+            includedCards.push(card);
           }
         }
       }
     }
 
-    const includedCards = archidektDeck.cards.filter(isCardIncluded).reduce((sum, card) => sum + card.quantity, 0);
-    const excludedCards = archidektDeck.cards.filter((card) => !isCardIncluded(card)).reduce((sum, card) => sum + card.quantity, 0);
     const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
 
     return {
       id: archidektDeck.id,
       name: archidektDeck.name,
-      totalCards,
-      includedCards,
-      excludedCards,
+      totalCards: includedCards.length,
       commander: commanderCard ? this.convertArchidektToCard(commanderCard) : undefined,
-      cards: allCards,
+      cards: includedCards,
       retrievedDate: new Date(),
     };
   }
