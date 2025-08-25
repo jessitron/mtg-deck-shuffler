@@ -8,7 +8,7 @@ export function formatDeckHtml(deck: Deck): string {
 
   const cardCountInfo = `${deck.totalCards} cards`;
 
-  const retrievedInfo = `Retrieved: ${deck.retrievedDate.toLocaleString()}`;
+  const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
 
   return `<div id="deck-info">
         <div class="deck-details-layout">

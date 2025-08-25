@@ -15,7 +15,6 @@ export interface Deck {
   totalCards: number;
   commander?: Card;
   cards: Card[];
-  retrievedDate: Date;
   provenance: DeckProvenance;
 }
 

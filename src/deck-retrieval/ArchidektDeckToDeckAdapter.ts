@@ -60,7 +60,6 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       totalCards: includedCards.length,
       commander: commanderCard ? this.convertArchidektToCard(commanderCard) : undefined,
       cards: includedCards,
-      retrievedDate: now,
       provenance: {
         retrievedDate: now,
         sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`
