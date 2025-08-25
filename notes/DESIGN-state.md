@@ -10,7 +10,7 @@ Operations on game state accept a game state, and return a game state. (It might
 
 The game state includes:
 
-- a deck retrieval spec, the same as a DeckRetrievalRequest -- with the addition of a timestamp when the deck was retrieved.
+- a DeckProvenance, which is immutable
 - a list of cards, each with a card definition and a location, ordered by Display Name.
 - a card location is one of:
   - command zone (for the commander or commanders)
@@ -30,7 +30,7 @@ Invariants:
 
 Operations possible on game state:
 
-- initialize from a deck. Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
+- initialize from a Deck. Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
 - reveal: move the top card from Library to Revealed. Check: one fewer card in Library, one more card in Revealed.
