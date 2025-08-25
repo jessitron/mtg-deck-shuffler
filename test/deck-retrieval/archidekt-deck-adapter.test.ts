@@ -65,8 +65,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "123" };
     const result: Deck = await adapter.retrieveDeck(request);
 
-    console.log("WTAF");
-    assert.strictEqual(result.id, 123, "wtf are you going to give me the output");
+    assert.strictEqual(result.id, 123, "ID is not what we hard-coded");
     assert.strictEqual(result.name, "Test Deck");
     assert.strictEqual(result.totalCards, 24);
     assert.strictEqual(result.commander, undefined);

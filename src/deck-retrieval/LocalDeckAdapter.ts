@@ -4,7 +4,7 @@ import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
   listAvailableDecks(): DescribedDeckRetrievalRequests[] {
-    return [{ description: "locally stored decks", options: [] }];
+    return [{ description: "Locally stored decks", options: [] }];
   }
 
   canHandle(request: DeckRetrievalRequest): boolean {
