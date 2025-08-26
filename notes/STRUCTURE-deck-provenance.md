@@ -1,7 +1,7 @@
 # Deck Provenance
 
 each Deck needs a DeckProvenance object. It describes where the list of cards came from.
-Every DeckProvenance has a retrievedDate and a source URL.
+Every DeckProvenance has a retrievedDate, a deckSource, and a source URL.
 
 Each DeckRetrieverAdapter knows how to create a DeckProvenance object for the decks it retrieves, and includes it.
 

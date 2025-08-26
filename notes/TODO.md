@@ -1,6 +1,5 @@
 # Things to change
 
-- the app state needs to store the deck after loading, even before the game starts. Or maybe, it should go straight into the start of a game. Yeah, skip the "deck details" page, go right into a shuffled library.
 - give them buttons to restart game or choose another deck.
 
 - persistence is of session state. Actually implement it.

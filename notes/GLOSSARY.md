@@ -36,6 +36,10 @@ Deck (Archidekt): a collection of cards meant to be played in a game. Archidekt 
 
 Deck (MTG Deck Shuffler): an unordered collection of cards, along with some provenance info. These are immutable in the MTG Deck Shuffler domain. A deck is necessary to initiate a game.
 
+Deck Source: where a deck came from. This is either "archidekt" or "local".
+
+Deck Provenance: information about where a deck came from. This includes the Deck Source, a URL, and the retrieved date. Decks are mutable at their source, see, but immutable in MTG Deck Shuffler.
+
 Library (MTG Deck Shuffler UI): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
 
 Game (MTG Deck Shuffler): a temporal scope. During a game, the position of each card is tracked.
