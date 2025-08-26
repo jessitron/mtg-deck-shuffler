@@ -1,4 +1,4 @@
-import { Deck } from "./types.js";
+import { Deck } from "../types.js";
 
 // this is really config
 export const LOCAL_DECK_RELATIVE_PATH = "./decks/";

@@ -1,6 +1,6 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
-import { LocalDeckAdapter } from "../../src/deck-retrieval/LocalDeckAdapter.js";
+import { LocalDeckAdapter } from "../../src/port-deck-retrieval/localAdapter/LocalDeckAdapter.js";
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: LocalDeckAdapter = new LocalDeckAdapter();

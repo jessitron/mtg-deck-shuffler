@@ -1,5 +1,5 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, DropdownOptions, LOCAL_DECK_RELATIVE_PATH } from "../deckRetrievalPort.js";
-import { Deck } from "../types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, DropdownOptions, LOCAL_DECK_RELATIVE_PATH } from "../types.js";
+import { Deck } from "../../types.js";
 import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {

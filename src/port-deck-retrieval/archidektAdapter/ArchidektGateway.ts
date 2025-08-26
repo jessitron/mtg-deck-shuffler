@@ -1,5 +1,5 @@
 import { ArchidektDeck } from "./archidektTypes.js";
-import { markCurrentSpanAsError, setCommonSpanAttributes } from "../tracing_util.js";
+import { markCurrentSpanAsError, setCommonSpanAttributes } from "../../tracing_util.js";
 
 export class ArchidektGateway {
   async fetchDeck(deckId: string): Promise<ArchidektDeck> {

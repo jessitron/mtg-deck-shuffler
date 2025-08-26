@@ -7,11 +7,10 @@ import {
   ArchidektDeckToDeckAdapter,
   LocalDeckAdapter,
   CascadingDeckRetrievalAdapter,
-  RetrieveDeckPort,
-  DeckRetrievalRequest,
-} from "./deck-retrieval/index.js";
+} from "./port-deck-retrieval/implementations.js";
 import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
+import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 

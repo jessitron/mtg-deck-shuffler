@@ -1,4 +1,4 @@
-import { AvailableDecks, DropdownOptions, isDropdownOptions, isSearchUrl, SearchUrl } from "./deckRetrievalPort.js";
+import { AvailableDecks, DropdownOptions, isDropdownOptions, isSearchUrl, SearchUrl } from "./port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl, Game } from "./types.js";
 
 export function formatChooseDeckHtml(availableDecks: AvailableDecks[]) {

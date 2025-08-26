@@ -1,6 +1,6 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest, SearchUrl } from "../deckRetrievalPort.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest, SearchUrl } from "../types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
-import { Deck, Card } from "../types.js";
+import { Deck, Card } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
