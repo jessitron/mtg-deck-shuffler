@@ -1,4 +1,4 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest, SearchUrl } from "../types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
 import { Deck, Card } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
@@ -6,10 +6,9 @@ import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGateway) {}
 
-  listAvailableDecks(): SearchUrl[] {
-    return [{ description: "Search Decks", url: "https://archidekt.com/" }];
+  listAvailableDecks() {
+    return [];
   }
-
   canHandle(request: DeckRetrievalRequest): boolean {
     return isArchidektDeckRetrievalRequest(request);
   }
@@ -61,6 +60,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       provenance: {
         retrievedDate: now,
         sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`,
+        deckSource: "archidekt",
       },
     };
   }

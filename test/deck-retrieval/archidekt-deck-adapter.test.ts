@@ -64,7 +64,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     // Mock the gateway to return our test data
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "123" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "123" };
     const result: Deck = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.id, 123, "ID is not what we hard-coded");
@@ -72,6 +72,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.totalCards, 24);
     assert.strictEqual(result.commander, undefined);
     assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/123");
+    assert.strictEqual(result.provenance.deckSource, "archidekt");
     assert.ok(result.provenance.retrievedDate instanceof Date);
   });
 
@@ -136,7 +137,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     // Mock the gateway to return our test data
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "456" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "456" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.id, 456);
@@ -156,7 +157,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     // Mock the gateway to return our test data
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "789" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "789" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.id, 789);
@@ -242,7 +243,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     // Mock the gateway to return our test data
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "999" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "999" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.id, 999);
@@ -257,7 +258,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     // Mock the gateway to return our test data
     mockGateway.fetchDeck = async (_deckId: string) => ygraData;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "14669648" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "14669648" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.id, 14669648);
@@ -296,7 +297,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "123" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "123" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.cards.length, 1);
@@ -334,7 +335,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
 
-    const request: ArchidektDeckRetrievalRequest = { archidektDeckId: "456" };
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "456" };
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.cards.length, 1);
