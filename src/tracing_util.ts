@@ -7,16 +7,19 @@ import { Attributes, SpanStatusCode, trace } from "@opentelemetry/api";
  * archidektDeckNumber    | archidekt.deck_number | deck number from Archidekt
  *
  */
-const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "archidekt.deck_number";
+const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
+const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
 
 export type CommonAttributes = Partial<{
-  archidektDeckNumber: string;
+  archidektDeckId: string;
+  deckSource: string;
 }>;
 
 function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attributes {
   // these won't all be populated, and that's fine
   return {
-    [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckNumber,
+    [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckId,
+    [SPAN_ATTRIBUTE_DECK_SOURCE]: attributes.deckSource,
   };
 }
 

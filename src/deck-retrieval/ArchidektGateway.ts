@@ -3,7 +3,7 @@ import { markCurrentSpanAsError, setCommonSpanAttributes } from "../tracing_util
 
 export class ArchidektGateway {
   async fetchDeck(deckId: string): Promise<ArchidektDeck> {
-    setCommonSpanAttributes({ archidektDeckNumber: deckId || "missing" });
+    setCommonSpanAttributes({ archidektDeckId: deckId || "missing" });
     const response = await fetch(`https://archidekt.com/api/decks/${deckId}/`);
 
     if (!response.ok) {

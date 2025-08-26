@@ -17,6 +17,9 @@ interface ExternalCRM {
 }
 ```
 
+The port is part of the main project. Adapters depend upon the port.
+The main project does not depend upon adapters, except when wiring them up, like during dependency injection.
+
 ## Adapter
 
 An adapter is an implementation of the port. Each implementation could be for a service provider, a fake, or compositional.

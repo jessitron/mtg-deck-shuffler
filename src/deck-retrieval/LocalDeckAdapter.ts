@@ -23,18 +23,20 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
 
     // TypeScript now knows request is LocalDeckRetrievalRequest
 
+    const pathToLocalFile = this.Directory + request.localFile;
+
     try {
-      const fileContent = fs.readFileSync(request.localFile, "utf8");
+      const fileContent = fs.readFileSync(pathToLocalFile, "utf8");
       const deck: Deck = JSON.parse(fileContent);
 
       const now = new Date();
       deck.provenance = {
         retrievedDate: now,
-        sourceUrl: `local://${request.localFile}`,
+        sourceUrl: `local://${pathToLocalFile}`,
       };
       return deck;
     } catch (error) {
-      throw new Error(`Failed to read local deck file: ${request.localFile}`);
+      throw new Error(`Failed to read local deck file: ${pathToLocalFile}`);
     }
   }
 }

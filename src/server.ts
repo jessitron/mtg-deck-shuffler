@@ -2,8 +2,16 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck, Game } from "./types.js";
-import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter, RetrieveDeckPort } from "./deck-retrieval/index.js";
+import {
+  ArchidektGateway,
+  ArchidektDeckToDeckAdapter,
+  LocalDeckAdapter,
+  CascadingDeckRetrievalAdapter,
+  RetrieveDeckPort,
+  DeckRetrievalRequest,
+} from "./deck-retrieval/index.js";
 import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
+import { setCommonSpanAttributes } from "./tracing_util.js";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 
@@ -33,16 +41,20 @@ app.get("/choose-deck", async (req, res) => {
 
 app.post("/deck", async (req, res) => {
   const deckNumber: string = req.body["deck-number"];
+  const deckSource: string = req.body["deck-source"];
+  const localFile: string = req.body["local-deck"];
+  setCommonSpanAttributes({ archidektDeckId: deckNumber, deckSource });
+  const deckRequest: DeckRetrievalRequest = deckSource === "archidekt" ? { archidektDeckId: deckNumber } : { localFile };
 
   try {
-    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckNumber });
+    const deck = await deckRetriever.retrieveDeck(deckRequest);
     const html = formatDeckHtml(deck);
 
     res.send(html);
   } catch (error) {
     console.error("Error fetching deck:", error);
     res.send(`<div>
-        <p>Error: Could not fetch deck ${deckNumber}</p>
+        <p>Error: Could not fetch deck ${deckNumber || localFile} from ${deckSource}</p>
         <a href="/">Try another deck</a>
     </div>`);
   }
