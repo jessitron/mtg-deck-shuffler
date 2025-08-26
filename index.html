@@ -21,8 +21,7 @@
   <body>
     <h1>*Woohoo it's Magic time!*</h1>
 
-    <div id="deck-input">
-      <button hx-get="/choose-deck" hx-target="#deck-input">Choose Deck</button>
+    <div id="deck-input" hx-get="/choose-deck" hx-target="#deck-input" hx-trigger="load">
     </div>
   </body>
 </html>
