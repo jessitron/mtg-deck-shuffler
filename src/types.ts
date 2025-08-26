@@ -7,6 +7,7 @@ export interface Card {
 export interface DeckProvenance {
   retrievedDate: Date;
   sourceUrl: string;
+  deckSource: string;
 }
 
 export interface Deck {
