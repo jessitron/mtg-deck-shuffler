@@ -7,7 +7,7 @@ export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
   constructor(...adapters: RetrieveDeckPort[]) {
     this.adapters = adapters;
   }
-  listAvailableDecks(): AvailableDecks[] {
+  listAvailableDecks(): AvailableDecks {
     return this.adapters.flatMap((a) => a.listAvailableDecks());
   }
 

@@ -2,12 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck, Game } from "./types.js";
-import {
-  ArchidektGateway,
-  ArchidektDeckToDeckAdapter,
-  LocalDeckAdapter,
-  CascadingDeckRetrievalAdapter,
-} from "./port-deck-retrieval/implementations.js";
+import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
 import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -43,7 +38,8 @@ app.post("/deck", async (req, res) => {
   const deckSource: string = req.body["deck-source"];
   const localFile: string = req.body["local-deck"];
   setCommonSpanAttributes({ archidektDeckId: deckNumber, deckSource });
-  const deckRequest: DeckRetrievalRequest = deckSource === "archidekt" ? { archidektDeckId: deckNumber } : { localFile };
+  const deckRequest: DeckRetrievalRequest =
+    deckSource === "archidekt" ? { deckSource: "archidekt", archidektDeckId: deckNumber } : { deckSource: "local", localFile };
 
   try {
     const deck = await deckRetriever.retrieveDeck(deckRequest);
@@ -63,7 +59,8 @@ app.post("/start-game", async (req, res) => {
   const deckId: string = req.body["deck-id"];
 
   try {
-    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckId });
+    // TODO: get this stuff from game state !!!
+    const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
     const library = shuffleDeck(deck);
     const game: Game = { deck, library };
     const html = formatGameHtml(game);
@@ -80,9 +77,9 @@ app.post("/start-game", async (req, res) => {
 
 app.post("/end-game", async (req, res) => {
   const deckId = req.body["deck-id"];
-
+  // TODO: get this stuff from game state !!!
   try {
-    const deck = await deckRetriever.retrieveDeck({ archidektDeckId: deckId });
+    const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
     const html = formatDeckHtml(deck);
     res.send(html);
   } catch (error) {

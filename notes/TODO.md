@@ -1,5 +1,7 @@
 # Things to change
 
+- get Deck Source into provenance and Deck Retrieval Request
+
 - give them buttons to restart game or choose another deck.
 
 - persistence is of session state. Actually implement it.

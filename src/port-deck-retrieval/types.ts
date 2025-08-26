@@ -3,11 +3,15 @@ import { Deck } from "../types.js";
 // this is really config
 export const LOCAL_DECK_RELATIVE_PATH = "./decks/";
 
+export type DeckSource = "archidekt" | "local";
+
 export interface ArchidektDeckRetrievalRequest {
+  deckSource: "archidekt";
   archidektDeckId: string;
 }
 
 export interface LocalDeckRetrievalRequest {
+  deckSource: "local";
   localFile: string;
 }
 
@@ -15,25 +19,18 @@ export type DeckRetrievalRequest = ArchidektDeckRetrievalRequest | LocalDeckRetr
 
 // Type guards
 export function isArchidektDeckRetrievalRequest(request: DeckRetrievalRequest): request is ArchidektDeckRetrievalRequest {
-  return "archidektDeckId" in request;
+  return request.deckSource === "archidekt";
 }
 
 export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): request is LocalDeckRetrievalRequest {
-  return "localFile" in request;
+  return request.deckSource === "local";
 }
 
-export type SearchUrl = { description: string; url: string };
-export type DropdownOptions = { description: string; options: Array<{ description: string } & DeckRetrievalRequest> };
-export type AvailableDecks = DropdownOptions | SearchUrl;
-export function isSearchUrl(ad: DropdownOptions | SearchUrl): ad is SearchUrl {
-  return "url" in ad;
-}
-export function isDropdownOptions(ad: DropdownOptions | SearchUrl): ad is DropdownOptions {
-  return "options" in ad;
-}
+export type AvailableDeck = { description: string } & DeckRetrievalRequest;
+export type AvailableDecks = AvailableDeck[];
 
 export interface RetrieveDeckPort {
-  listAvailableDecks(): AvailableDecks[];
+  listAvailableDecks(): AvailableDecks;
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
 }

@@ -1,33 +1,33 @@
-import { AvailableDecks, DropdownOptions, isDropdownOptions, isSearchUrl, SearchUrl } from "./port-deck-retrieval/types.js";
+import { AvailableDecks } from "./port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl, Game } from "./types.js";
 
-export function formatChooseDeckHtml(availableDecks: AvailableDecks[]) {
-  const archidektSearchUrl = availableDecks.find(isSearchUrl);
-  const archidektSelectionHtml = archidektSearchUrl ? formatArchidektInput(archidektSearchUrl) : "";
+export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
+  const archidektSelectionHtml = formatArchidektInput();
 
-  const localSelections = availableDecks.find(isDropdownOptions);
-
-  const localSelectionHtml = localSelections ? formatLocalDeckInput(localSelections) : "";
+  const localSelectionHtml = formatLocalDeckInput(availableDecks);
   return `<div id="deck-input">
       ${archidektSelectionHtml}
       ${localSelectionHtml}
     </div>`;
 }
 
-function formatArchidektInput(archidektSearchUrl: SearchUrl) {
+function formatArchidektInput() {
   return `<div>
-      <label for="deck-number">Enter Archidekt Deck Number:</label>
+      <label for="deck-number">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
       <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" />
       <input type="hidden" name="deck-source" value="archidekt" />
-      <a href="${archidektSearchUrl.url}" target="_blank">${archidektSearchUrl.description}</a>
       <button hx-post="/deck" hx-include="closest div" hx-target="#deck-input">Load Deck from Archidekt</button>
    </div>`;
 }
 
-function formatLocalDeckInput(localSelections: DropdownOptions) {
-  // TODO: how does html work for dropdowns
+function formatLocalDeckInput(availableDecks: AvailableDecks) {
+  if (availableDecks.length === 0) {
+    return "";
+  }
 
-  const options = localSelections.options.map((o) => `<option value="${o.description}">${o.description}</option>`);
+  const options = availableDecks
+    .filter((o) => o.deckSource === "local")
+    .map((o) => `<option value="${o.localFile}">${o.description}</option>`);
   return `<div>
       <label for="local-deck">Or choose a pre-loaded deck:</label> 
       <input type="hidden" name="deck-source" value="local" />
