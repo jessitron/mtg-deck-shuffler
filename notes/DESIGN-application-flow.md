@@ -1,35 +1,41 @@
 # MTG Deck Shuffler Application Flow
 
-## Flow Diagram
-
 ```
-    ┌─────────────────┐
-    │  Deck Selection │ ◄─────────────┐
-    └─────────┬───────┘               │
-              │                       │
-              │ Select/Load Deck      │ Quit
-              ▼                       │
-    ┌─────────────────┐               │
-    │   Deck Review   │               │
-    │                 │               │
-    │ • Game: Not     │               │
-    │   Started       │  Choose       │
-    │ • Library: Not  │  Another ─────┘
-    │   Shuffled      │  Deck
-    │ • No Game ID    │
-    └─────────┬───────┘
-              │
-              │ Start Game
-              ▼
-    ┌─────────────────┐
-    │   Play Game     │
-    │                 │ Restart Game
-    │ • Game: Active  │ ┌─────────┐
-    │ • Library:      │ │         ▼
-    │   Shuffled      │ └─────────┘
-    │ • Game ID       │
-    │   in URL        │
-    └─────────────────┘
+┌─────────────────┐
+│  Deck Selection │ ◄─────────────────────────┐
+│   (Entry Point) │                           │
+└─────────────────┘                           │
+         │                                    │
+         │ Select/Load Deck                   │
+         ▼                                    │
+┌─────────────────┐                           │
+│   Deck Review   │                           │
+│                 │                           │
+│ State:          │ ◄─┐                       │
+│ • Not Started   │   │                       │
+│ • Unshuffled    │   │ Choose Another Deck   │
+│ • Game ID in URL│   │                       │
+└─────────────────┘   │                       │
+         │             │                       │
+         │ Shuffle Up  │                       │
+         ▼             │                       │
+┌─────────────────┐    │                       │
+│   Play Game     │    │                       │
+│                 │    │                       │
+│ State:          │    │                       │
+│ • Game Active   │    │                       │
+│ • Library       │    │                       │
+│   Shuffled      │    │                       │
+│ • Game ID in URL│    │                       │
+└─────────────────┘    │                       │
+         │              │                       │
+    ┌────┴────┐         │                       │
+    │         │         │                       │
+    ▼         ▼         │                       │
+ Restart    Quit ───────┴───────────────────────┘
+   Game        
+    │           
+    └─────┘     
 ```
 
 ## Screen Flow Overview
@@ -58,7 +64,7 @@ Shows deck information and allows final preparation before starting the game.
 
 - Game exists but is "Not Started"
 - Library is not shuffled
-- No Game ID in URL yet
+- Game ID in URL
 
 **Display:**
 
@@ -68,7 +74,7 @@ Shows deck information and allows final preparation before starting the game.
 
 **Actions:**
 
-- **Start Game** → Proceeds to Play Game (shuffles library, adds Game ID to URL)
+- **Shuffle Up** → Proceeds to Play Game (shuffles library)
 - **Choose Another Deck** → Returns to Deck Selection
 
 ## 3. Play Game
@@ -79,7 +85,7 @@ The active game screen where gameplay occurs.
 
 - Game is active
 - Library is shuffled
-- Game ID present in URL
+- Game ID in URL
 
 **Display:**
 
@@ -95,7 +101,7 @@ The active game screen where gameplay occurs.
 
 ## Key State Transitions
 
-- **Deck Selection → Deck Review:** Deck is loaded but game not started
+- **Deck Selection → Deck Review:** Deck is loaded, game exists but is Not Started
 - **Deck Review → Play Game:** Library gets shuffled, Game ID added to URL
 - **Play Game → Play Game (restart):** Game state reinitialized
 - **Any screen → Deck Selection:** Via Quit/Choose Another Deck buttons
