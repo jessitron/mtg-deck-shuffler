@@ -1,37 +1,35 @@
 # MTG Deck Shuffler Application Flow
 
-## Happy Little Flow Diagram
+## Flow Diagram
 
 ```
     ┌─────────────────┐
-    │  Deck Selection │
-    │      🎴         │
+    │  Deck Selection │ ◄─────────────┐
+    └─────────┬───────┘               │
+              │                       │
+              │ Select/Load Deck      │ Quit
+              ▼                       │
+    ┌─────────────────┐               │
+    │   Deck Review   │               │
+    │                 │               │
+    │ • Game: Not     │               │
+    │   Started       │  Choose       │
+    │ • Library: Not  │  Another ─────┘
+    │   Shuffled      │  Deck
+    │ • No Game ID    │
     └─────────┬───────┘
-              │ select deck
+              │
+              │ Start Game
               ▼
     ┌─────────────────┐
-    │   Deck Review   │◄─────────┐
-    │  📋 Not Started │          │
-    │  🔍 Search Lib  │          │ choose another
-    └─────┬─────┬─────┘          │
-          │     │                │
- start    │     └────────────────┘
- game     │
-          ▼
-    ┌─────────────────┐
     │   Play Game     │
-    │   🎮 Active     │◄─┐ restart
-    │   🃏 Shuffled   │  │
-    └─────────┬───────┘  │
-              │          │
-              │ quit     │
-              ▼          │
-    ┌─────────────────┐  │
-    │  Deck Selection │  │
-    │      🎴         │  │
-    └─────────────────┘  │
-              ▲          │
-              └──────────┘
+    │                 │ Restart Game
+    │ • Game: Active  │ ┌─────────┐
+    │ • Library:      │ │         ▼
+    │   Shuffled      │ └─────────┘
+    │ • Game ID       │
+    │   in URL        │
+    └─────────────────┘
 ```
 
 ## Screen Flow Overview
@@ -45,26 +43,31 @@ The application follows a linear progression through three main screens:
 The entry point where users choose which deck to load for their game session.
 
 **Actions:**
+
 - Select/load a deck
 
 **Navigation:**
+
 - Proceeds to: Deck Review
 
 ## 2. Deck Review
 
 Shows deck information and allows final preparation before starting the game.
 
-**State:** 
+**State:**
+
 - Game exists but is "Not Started"
 - Library is not shuffled
 - No Game ID in URL yet
 
 **Display:**
+
 - Deck information
-- Commander card(s) 
+- Commander card(s)
 - Library with Search button (reveals full card list)
 
 **Actions:**
+
 - **Start Game** → Proceeds to Play Game (shuffles library, adds Game ID to URL)
 - **Choose Another Deck** → Returns to Deck Selection
 
@@ -73,17 +76,20 @@ Shows deck information and allows final preparation before starting the game.
 The active game screen where gameplay occurs.
 
 **State:**
+
 - Game is active
 - Library is shuffled
 - Game ID present in URL
 
 **Display:**
+
 - Commander card(s)
 - Library
 - Revealed cards (future)
 - Hand (future)
 
 **Actions:**
+
 - **Restart Game** → Reinitializes Play Game screen
 - **Quit** → Returns to Deck Selection
 
