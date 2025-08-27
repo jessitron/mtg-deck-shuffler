@@ -98,23 +98,6 @@ export function formatGameHtml(game: Game): string {
             </div>
             <p>Library</p>
           </div>
-          
-          <div class="revealed-cards-section">
-            <h3>Revealed Cards</h3>
-            <div class="revealed-cards-area">
-              <div class="card-placeholder">Card</div>
-              <div class="card-placeholder">Card</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="hand-section">
-          <h3>Hand</h3>
-          <div class="hand-cards">
-            <div class="card-placeholder">Card</div>
-            <div class="card-placeholder">Card</div>
-            <div class="card-placeholder">Card</div>
-          </div>
         </div>
         
         <details class="library-details">
