@@ -2,11 +2,11 @@
   "id": 13083247,
   "name": "Rat Girl's Food Hoarding",
   "totalCards": 98,
-  "commander": {
+  "commanders": [{
     "name": "Jaheira, Friend of the Forest",
     "uid": "feb7ad1b-4466-48f7-b46d-cc83d4e22b51",
     "multiverseid": 563120
-  },
+  }],
   "cards": [
     {
       "name": "The Underworld Cookbook",

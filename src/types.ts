@@ -14,7 +14,7 @@ export interface Deck {
   id: number;
   name: string;
   totalCards: number;
-  commander?: Card;
+  commanders: Card[];
   cards: Card[];
   provenance: DeckProvenance;
 }

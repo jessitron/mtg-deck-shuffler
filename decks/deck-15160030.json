@@ -2,11 +2,11 @@
   "id": 15160030,
   "name": "Stop that squirrel",
   "totalCards": 99,
-  "commander": {
+  "commanders": [{
     "name": "Toski, Bearer of Secrets",
     "uid": "0b261989-b34e-4bba-90f8-2adfda58c89b",
     "multiverseid": 671602
-  },
+  }],
   "cards": [
     {
       "name": "Beastmaster Ascension",

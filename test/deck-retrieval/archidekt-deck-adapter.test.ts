@@ -19,7 +19,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     adapter = new ArchidektDeckToDeckAdapter(mockGateway);
   });
 
-  test("converts basic deck without commander", async () => {
+  test("converts basic deck without commanders", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Test Deck",
@@ -70,13 +70,13 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 123, "ID is not what we hard-coded");
     assert.strictEqual(result.name, "Test Deck");
     assert.strictEqual(result.totalCards, 24);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
     assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/123");
     assert.strictEqual(result.provenance.deckSource, "archidekt");
     assert.ok(result.provenance.retrievedDate instanceof Date);
   });
 
-  test("converts deck with commander", async () => {
+  test("converts deck with commanders", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Commander Deck",
@@ -143,7 +143,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 456);
     assert.strictEqual(result.name, "Commander Deck");
     assert.strictEqual(result.totalCards, 31);
-    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 });
+    assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 }]);
   });
 
   test("handles empty deck", async () => {
@@ -163,7 +163,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 789);
     assert.strictEqual(result.name, "Empty Deck");
     assert.strictEqual(result.totalCards, 0);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
   });
 
   test("separates included cards from excluded cards", async () => {
@@ -249,7 +249,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 999);
     assert.strictEqual(result.name, "Deck with Excluded Cards");
     assert.strictEqual(result.totalCards, 24);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
   });
 
   test("converts real Ygra deck data correctly", async () => {
@@ -263,7 +263,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 });
+    assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
     assert.strictEqual(result.totalCards, 3);
   });
 
