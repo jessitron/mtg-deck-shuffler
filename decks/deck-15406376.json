@@ -1,12 +1,14 @@
 {
   "id": 15406376,
   "name": "Ygra especially likes to eat squirrels",
-  "totalCards": 99,
-  "commander": {
-    "name": "Ygra, Eater of All",
-    "uid": "b9ac7673-eae8-4c4b-889e-5025213a6151",
-    "multiverseid": 669155
-  },
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Ygra, Eater of All",
+      "uid": "b9ac7673-eae8-4c4b-889e-5025213a6151",
+      "multiverseid": 669155
+    }
+  ],
   "cards": [
     {
       "name": "Swamp",
@@ -505,7 +507,8 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-08-25T18:09:05.355Z",
-    "sourceUrl": "https://archidekt.com/decks/15406376"
+    "retrievedDate": "2025-08-29T13:26:06.287Z",
+    "sourceUrl": "https://archidekt.com/decks/15406376",
+    "deckSource": "archidekt"
   }
 }

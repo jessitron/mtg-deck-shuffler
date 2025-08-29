@@ -1,12 +1,14 @@
 {
   "id": 15160030,
   "name": "Stop that squirrel",
-  "totalCards": 99,
-  "commander": {
-    "name": "Toski, Bearer of Secrets",
-    "uid": "0b261989-b34e-4bba-90f8-2adfda58c89b",
-    "multiverseid": 671602
-  },
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Toski, Bearer of Secrets",
+      "uid": "0b261989-b34e-4bba-90f8-2adfda58c89b",
+      "multiverseid": 671602
+    }
+  ],
   "cards": [
     {
       "name": "Beastmaster Ascension",
@@ -505,7 +507,8 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-08-25T18:07:54.324Z",
-    "sourceUrl": "https://archidekt.com/decks/15160030"
+    "retrievedDate": "2025-08-29T13:25:59.435Z",
+    "sourceUrl": "https://archidekt.com/decks/15160030",
+    "deckSource": "archidekt"
   }
 }
