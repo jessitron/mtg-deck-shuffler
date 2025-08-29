@@ -1,12 +1,16 @@
 # User Interface
 
+Status: imperfectly implemented
+
 This document describes the user interface for the MTG Deck Shuffler app. It is not complete.
 
 ## Wireframes
 
-### First screen: load deck
+### First screen: Deck Selection
 
-This has an encouraging title and a way to enter a deck number and load it.
+This has an encouraging title and ways to choose a deck.
+
+This includes loading a deck from Archidekt by deck number.
 The deck number defaults to my favorite deck.
 
 ```
@@ -16,20 +20,24 @@ The deck number defaults to my favorite deck.
 
 The 'Load Deck' button brings out the deck details.
 
+At the moment, there's a dropdown for local decks, as referenced in FEATURE-local-decks.md. That file includes desired improvements.
+
 ### Main screen: game in progress
 
-Here is a rough layout for when a game is in progress:
+Here is a rough layout for when a game is in progress.
+
+Revealed Cards is not always visible. Hand starts empty.
 
 ```
 
-   ┌────────────┐
-   │            │        Deck Name
-   │            │
-   │  Commander │        other details
-   │            │
-   │            │        Game ID
-   │            │
-   └────────────┘
+   ┌───────────────┐
+   │               │        Deck Name
+   │               │
+   │  Command zone │        other details
+   │               │
+   │               │        Game ID
+   │               │
+   └───────────────┘
 
            ┌───────────┐   ┌────────────────────────────────┐
           ┌───────────┐│   │        Revealed Cards          │
@@ -39,8 +47,6 @@ Here is a rough layout for when a game is in progress:
          │           │││   │   │        │   │       │       │
          │           │││   │   │        │   │       │       │
          │  Library  │││   │   │        │   │       │       │
-         │           │││   │   │        │   │       │       │
-         │           │││   │   │        │   │       │       │
          │           │││   │   │        │   │       │       │
          │           ││┘   │   └────────┘   └───────┘       │
          │           │┘    │                                │
@@ -59,7 +65,6 @@ Here is a rough layout for when a game is in progress:
       │     └─────────┘   └─────────┘   └──────────┘               │
       │                                                            │
       └────────────────────────────────────────────────────────────┘
-      ⏵ View library contents (for testing)
                    [Restart Game] [Choose Another Deck]
 ```
 

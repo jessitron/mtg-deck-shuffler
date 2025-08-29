@@ -1,6 +1,6 @@
 # Architecture of dataflow
 
-status: let's work on this
+status: current
 
 # External interfaces are behind ports, adapters, and gateways.
 

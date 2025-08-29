@@ -16,26 +16,26 @@
 │ • Unshuffled    │   │ Choose Another Deck   │
 │ • Game ID in URL│   │                       │
 └─────────────────┘   │                       │
-         │             │                       │
-         │ Shuffle Up  │                       │
-         ▼             │                       │
-┌─────────────────┐    │                       │
-│   Play Game     │    │                       │
-│                 │    │                       │
-│ State:          │    │                       │
-│ • Game Active   │    │                       │
-│ • Library       │    │                       │
-│   Shuffled      │    │                       │
-│ • Game ID in URL│    │                       │
-└─────────────────┘    │                       │
-         │              │                       │
-    ┌────┴────┐         │                       │
-    │         │         │                       │
-    ▼         ▼         │                       │
- Restart    Quit ───────┴───────────────────────┘
-   Game        
-    │           
-    └─────┘     
+         │            │                       │
+         │ Shuffle Up │                       │
+         ▼            │                       │
+┌─────────────────┐   │                       │
+│   Play Game     │   │                       │
+│                 │   │                       │
+│ State:          │   │                       │
+│ • Game Active   │   │                       │
+│ • Library       │   │                       │
+│   Shuffled      │   │                       │
+│ • Game ID in URL│   │                       │
+└─────────────────┘   │                       │
+         │            │                       │
+    ┌────┴────┐       │                       │
+    │         │       │                       │
+    ▼         ▼       │                       │
+ Restart    Quit ─────┴───────────────────────┘
+   Game       │
+    │         │
+    └─────────┘
 ```
 
 ## Screen Flow Overview

@@ -1,12 +1,15 @@
-# Link to Gatherer
+# Search Library
 
-status: implemented
+status: not implemented
 
-In the list of cards in the library, we want to link to the card on Gatherer.
+Near the library is a Search button. Clicking Search opens a list of cards in the library.
+
+Cards are listed in order by their position in the library.
+
+For now, cards are listed by Display Name only. The display name links to Gatherer.
 
 Link format: https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=129643
 
-the multiverseid is in the Archidekt data. For example, Ygra's multiverseid is 669155.
+the multiverseid is in the Card Definition. For example, Ygra's multiverseid is 669155.
 
-[x] save multiverseid in the Card interface
-[x] generate link in the HTML
+Next to each card in the list is a button: Reveal. This moves the card to the Revealed area.

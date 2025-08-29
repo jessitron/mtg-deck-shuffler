@@ -11,9 +11,9 @@ Operations on game state accept a game state, and return a game state. (It might
 The game state includes:
 
 - a DeckProvenance, which is immutable
+- 0-2 commander cards, which are in the Command Zone at all times.
 - a list of cards, each with a card definition and a location, ordered by Display Name.
 - a card location is one of:
-  - command zone (for the commander or commanders)
   - Library(position: non-negative integer)
   - Hand(position: non-negative integer)
   - Revealed(position: non-negative integer)

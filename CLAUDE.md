@@ -49,3 +49,7 @@ The app is designed to integrate with:
 ## Port Configuration
 
 Server runs on port 3000 by default, configurable via `PORT` environment variable. Run it with `PORT=3001 ./run`, so it doesn't conflict with the user's testing server.
+
+## Documentation
+
+Design directives, features, vocabulary, and code structure are described in files in the notes/ directory. Keep these up to date as you change things.
