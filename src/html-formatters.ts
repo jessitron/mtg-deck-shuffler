@@ -12,11 +12,11 @@ export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
 }
 
 function formatArchidektInput() {
-  return `<div>
-      <label for="deck-number">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
-      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" />
+  return `<div class="deck-input-section">
+      <label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
+      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" class="deck-input" />
       <input type="hidden" name="deck-source" value="archidekt" />
-      <button hx-post="/deck" hx-include="closest div" hx-target="#deck-input">Load Deck from Archidekt</button>
+      <button hx-post="/deck" hx-include="closest div" hx-target="#deck-input" class="load-deck-button">Load Deck from Archidekt</button>
    </div>`;
 }
 
@@ -28,11 +28,11 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
   const options = availableDecks
     .filter((o) => o.deckSource === "local")
     .map((o) => `<option value="${o.localFile}">${o.description}</option>`);
-  return `<div>
-      <label for="local-deck">Or choose a pre-loaded deck:</label> 
+  return `<div class="deck-input-section">
+      <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label> 
       <input type="hidden" name="deck-source" value="local" />
-      <select id="local-deck" name="local-deck">${options}</select>
-      <button id="load-local-deck" hx-post="/deck" hx-include="closest div" hx-target="#deck-input">Load deck</button>
+      <select id="local-deck" name="local-deck" class="deck-select">${options}</select>
+      <button id="load-local-deck" hx-post="/deck" hx-include="closest div" hx-target="#deck-input" class="load-deck-button">Load deck</button>
     </div>`;
 }
 
