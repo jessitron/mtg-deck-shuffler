@@ -2,11 +2,11 @@
   "id": 15406376,
   "name": "Ygra especially likes to eat squirrels",
   "totalCards": 99,
-  "commanders": [{
+  "commander": {
     "name": "Ygra, Eater of All",
     "uid": "b9ac7673-eae8-4c4b-889e-5025213a6151",
     "multiverseid": 669155
-  }],
+  },
   "cards": [
     {
       "name": "Swamp",

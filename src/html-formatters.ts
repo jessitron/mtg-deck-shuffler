@@ -37,11 +37,10 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
 }
 
 export function formatDeckHtml(deck: Deck): string {
-  const commanderImageHtml = deck.commanders.length > 0
-    ? deck.commanders.map(commander => 
-        `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`
-      ).join('')
-    : `<div class="commander-placeholder">No Commander Image</div>`;
+  const commanderImageHtml =
+    deck.commander && deck.commander.uid
+      ? `<img src="${getCardImageUrl(deck.commander.uid)}" alt="${deck.commander.name}" class="commander-image" />`
+      : `<div class="commander-placeholder">No Commander Image</div>`;
 
   const cardCountInfo = `${deck.totalCards} cards`;
 
@@ -67,11 +66,10 @@ export function formatDeckHtml(deck: Deck): string {
 }
 
 export function formatGameHtml(game: Game): string {
-  const commanderImageHtml = game.deck.commanders.length > 0
-    ? game.deck.commanders.map(commander => 
-        `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`
-      ).join('')
-    : `<div class="commander-placeholder">No Commander</div>`;
+  const commanderImageHtml =
+    game.deck.commander && game.deck.commander.uid
+      ? `<img src="${getCardImageUrl(game.deck.commander.uid)}" alt="${game.deck.commander.name}" class="commander-image" />`
+      : `<div class="commander-placeholder">No Commander</div>`;
 
   const cardCountInfo = `${game.deck.totalCards} cards`;
 
