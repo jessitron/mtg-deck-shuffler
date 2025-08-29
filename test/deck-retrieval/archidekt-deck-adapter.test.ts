@@ -70,7 +70,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 123, "ID is not what we hard-coded");
     assert.strictEqual(result.name, "Test Deck");
     assert.strictEqual(result.totalCards, 24);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
     assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/123");
     assert.strictEqual(result.provenance.deckSource, "archidekt");
     assert.ok(result.provenance.retrievedDate instanceof Date);
@@ -143,7 +143,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 456);
     assert.strictEqual(result.name, "Commander Deck");
     assert.strictEqual(result.totalCards, 31);
-    assert.deepStrictEqual(result.commander, { name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 });
+    assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 }]);
   });
 
   test("handles empty deck", async () => {
@@ -163,7 +163,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 789);
     assert.strictEqual(result.name, "Empty Deck");
     assert.strictEqual(result.totalCards, 0);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
   });
 
   test("separates included cards from excluded cards", async () => {
@@ -249,7 +249,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 999);
     assert.strictEqual(result.name, "Deck with Excluded Cards");
     assert.strictEqual(result.totalCards, 24);
-    assert.strictEqual(result.commander, undefined);
+    assert.deepStrictEqual(result.commanders, []);
   });
 
   test("converts real Ygra deck data correctly", async () => {
@@ -263,7 +263,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.deepStrictEqual(result.commander, { name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 });
+    assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
     assert.strictEqual(result.totalCards, 3);
   });
 
@@ -340,5 +340,70 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.cards.length, 1);
     assert.deepStrictEqual(result.cards[0], { name: "Display Name", uid: "test-uid-2", multiverseid: 789012 });
+  });
+
+  test("converts deck with multiple commanders", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 13083247,
+      name: "Dual Commander Deck",
+      categories: [
+        {
+          id: 1,
+          name: "Commander",
+          isPremier: true,
+          includedInDeck: true,
+          includedInPrice: true,
+        },
+        {
+          id: 2,
+          name: "Land",
+          isPremier: false,
+          includedInDeck: true,
+          includedInPrice: true,
+        },
+      ],
+      cards: [
+        {
+          card: {
+            uid: "jaheira-uid",
+            multiverseid: 111111,
+            oracleCard: { name: "Jaheira, Friend of the Forest" },
+          },
+          quantity: 1,
+          categories: ["Commander"],
+        },
+        {
+          card: {
+            uid: "agent-uid",
+            multiverseid: 222222,
+            oracleCard: { name: "Agent of the Iron Throne" },
+          },
+          quantity: 1,
+          categories: ["Commander"],
+        },
+        {
+          card: {
+            uid: "forest-uid",
+            multiverseid: 333333,
+            oracleCard: { name: "Forest" },
+          },
+          quantity: 20,
+          categories: ["Land"],
+        },
+      ],
+    };
+
+    // Mock the gateway to return our test data
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "13083247" };
+    const result = await adapter.retrieveDeck(request);
+
+    assert.strictEqual(result.id, 13083247);
+    assert.strictEqual(result.name, "Dual Commander Deck");
+    assert.strictEqual(result.totalCards, 20); // Only non-commander cards
+    assert.strictEqual(result.commanders.length, 2);
+    assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", uid: "jaheira-uid", multiverseid: 111111 });
+    assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", uid: "agent-uid", multiverseid: 222222 });
   });
 });

@@ -48,14 +48,17 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       }
     }
 
-    const commanderCard = archidektDeck.cards.find((card) => card.categories.includes("Commander"));
+    const commanderCards = archidektDeck.cards
+      .filter((card) => card.categories.includes("Commander"))
+      .map((card) => this.convertArchidektToCard(card))
+      .filter((card): card is Card => card !== undefined);
 
     const now = new Date();
     return {
       id: archidektDeck.id,
       name: archidektDeck.name,
       totalCards: includedCards.length,
-      commander: commanderCard ? this.convertArchidektToCard(commanderCard) : undefined,
+      commanders: commanderCards,
       cards: includedCards,
       provenance: {
         retrievedDate: now,
