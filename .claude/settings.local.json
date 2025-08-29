@@ -45,7 +45,8 @@
       "Bash(PORT=3001 npm start)",
       "mcp__playwright__browser_evaluate",
       "Bash(mkdir:*)",
-      "WebFetch(domain:developers.hubspot.com)"
+      "WebFetch(domain:developers.hubspot.com)",
+      "mcp__playwright__browser_tabs"
     ],
     "deny": []
   }

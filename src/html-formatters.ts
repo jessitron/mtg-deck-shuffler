@@ -92,13 +92,13 @@ export function formatGameHtml(game: Game): string {
         </div>
         
         <div class="game-board">
-          <div class="library-section">
-            <div class="library-stack">
-              <div class="card-back card-back-1"></div>
-              <div class="card-back card-back-2"></div>
-              <div class="card-back card-back-3"></div>
+          <div class="library-section" data-testid="library-section">
+            <div class="library-stack" data-testid="library-stack">
+              <div class="card-back card-back-1" data-testid="card-back"></div>
+              <div class="card-back card-back-2" data-testid="card-back"></div>
+              <div class="card-back card-back-3" data-testid="card-back"></div>
             </div>
-            <p>Library</p>
+            <p data-testid="library-label">Library</p>
           </div>
         </div>
         
