@@ -57,7 +57,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     return {
       id: archidektDeck.id,
       name: archidektDeck.name,
-      totalCards: includedCards.length,
+      totalCards: includedCards.length + commanderCards.length,
       commanders: commanderCards,
       cards: includedCards,
       provenance: {

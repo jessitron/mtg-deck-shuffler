@@ -142,7 +142,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.id, 456);
     assert.strictEqual(result.name, "Commander Deck");
-    assert.strictEqual(result.totalCards, 31);
+    assert.strictEqual(result.totalCards, 32); // 31 non-commander cards + 1 commander
     assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 }]);
   });
 
@@ -264,7 +264,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
     assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
-    assert.strictEqual(result.totalCards, 3);
+    assert.strictEqual(result.totalCards, 4); // 3 non-commander cards + 1 commander
   });
 
   test("converts cards with oracle name correctly", async () => {
@@ -401,7 +401,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.id, 13083247);
     assert.strictEqual(result.name, "Dual Commander Deck");
-    assert.strictEqual(result.totalCards, 20); // Only non-commander cards
+    assert.strictEqual(result.totalCards, 22); // 20 non-commander cards + 2 commanders
     assert.strictEqual(result.commanders.length, 2);
     assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", uid: "jaheira-uid", multiverseid: 111111 });
     assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", uid: "agent-uid", multiverseid: 222222 });
