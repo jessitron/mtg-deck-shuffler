@@ -32,3 +32,9 @@ For that, it'll need a Node backend with express.
 We'll use npm for dependencies and for running its scripts.
 
 We will eventually deploy to a toy EKS cluster.
+
+# Downloading decks for local use
+
+`npm run deck:download -- <archidektDeckId>`
+
+This will download the deck from archidekt and save it to the decks directory.
