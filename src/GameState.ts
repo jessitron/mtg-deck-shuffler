@@ -1,4 +1,5 @@
 import { CardDefinition, DeckProvenance, Deck } from "./types.js";
+import { PersistedGameState } from "./port-persist-state/types.js";
 
 export type GameId = number;
 
@@ -69,6 +70,21 @@ export class GameState {
     this.validateInvariants();
   }
 
+  static fromPersistedGameState(psg: PersistedGameState): GameState {
+    const gameState = Object.create(GameState.prototype);
+    gameState.gameId = psg.gameId;
+    gameState.status = psg.status;
+    gameState.deckProvenance = psg.deckProvenance;
+    gameState.commanders = [...psg.commanders];
+    gameState.deckName = psg.deckName;
+    gameState.deckId = psg.deckId;
+    gameState.totalCards = psg.totalCards;
+    gameState.gameCards = [...psg.gameCards];
+    
+    gameState.validateInvariants();
+    return gameState;
+  }
+
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
 
@@ -98,5 +114,18 @@ export class GameState {
 
   public getCards(): readonly GameCard[] {
     return this.gameCards;
+  }
+
+  public toPersistedGameState(): PersistedGameState {
+    return {
+      gameId: this.gameId,
+      status: this.status,
+      deckProvenance: this.deckProvenance,
+      commanders: [...this.commanders],
+      deckName: this.deckName,
+      deckId: this.deckId,
+      totalCards: this.totalCards,
+      gameCards: [...this.gameCards],
+    };
   }
 }
