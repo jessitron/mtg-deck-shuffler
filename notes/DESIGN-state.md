@@ -1,6 +1,8 @@
 # Game State
 
-status: time to iterate
+status: partially implemented
+
+## Implemented
 
 GameState is a class. Its data will have a structure that prevents many invalid conditions.
 
@@ -37,7 +39,7 @@ Operations possible on game state:
 
 - initialize from a Deck (in the constructor). Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 
-## Future Operations - STOP HERE
+## Not Yet Implemented
 
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.

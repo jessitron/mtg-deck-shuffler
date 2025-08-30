@@ -8,9 +8,9 @@ We will use a Hexagonal Architecture for state management; see @notes/DESIGN-lay
 
 ## Port
 
-The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type.
+The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/types.ts, and it is simple data.
 
-The PersistStatePort interface will use types from GameState, but not the GameState class.
+The PersistStatePort interface
 
 ```
 save(psg: PersistedGameState): StateId
@@ -23,3 +23,7 @@ newGameId(): GameId
 We will implement two adapters: InMemory and Sqlite.
 
 Sqlite will store to a file, specified in adapter construction, right now "./data.db". As we iterate on PersistedGameState, we can wipe out and recreate the database file. We have no production environment right now.
+
+## Gateways
+
+There are no external services to wrap.
