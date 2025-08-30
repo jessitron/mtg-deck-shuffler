@@ -4,12 +4,10 @@ Status: not implemented
 
 We initialize a PersistStatePort using an InMemoryAdapter in src/server.ts.
 
-When we load a deck, we start a new game, persist it, then redirect to https://mtg-deck-shuffler.com/game/12345 (where 12345 is the game ID). 
+When we load a deck, we start a new game, persist it, then redirect to https://mtg-deck-shuffler.com/game/12345 (where 12345 is the game ID).
 
-The Deck Review screen loads that deck and displays it.
+When a game is Not Started, it displays as Deck Review in @notes/DESIGN-application-flow.md.
 
-Likewise, when we end the game, we want the URL to revert to the default.
+When Start Game is pushed, include the game ID in the request. The server starts the game, persists it, then redirects to the same URL. Now the game is Active, and displays as Play Game.
 
-If the player copies the URL to a different browser, it should load all the state for that game, and let them continue playing.
-
-I'd like the game ID to be an incrementing sequence, because that's fun. We need to check whether every planned game state storage adapter can implement that.
+This way, if the player copies the URL to a different browser, it should load all the state for that game, and let them continue playing.
