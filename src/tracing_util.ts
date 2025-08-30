@@ -11,7 +11,7 @@ const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
 const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
 
 export type CommonAttributes = Partial<{
-  archidektDeckId: string;
+  archidektDeckId: string; // TODO: should be sourceUrl from DeckProvenance
   deckSource: string;
 }>;
 
