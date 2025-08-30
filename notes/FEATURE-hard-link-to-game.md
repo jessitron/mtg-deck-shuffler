@@ -1,8 +1,12 @@
 # Make the URL in the browser point back to the game
 
-Status: not started
+Status: not implemented
 
-When we load a deck, we start a new game. We want the URL in the browser to reflect that. For instance, if the game ID is 12345, we want the URL to be https://mtg-deck-shuffler.com/game/12345
+We initialize a PersistStatePort using an InMemoryAdapter in src/server.ts.
+
+When we load a deck, we start a new game, persist it, then redirect to https://mtg-deck-shuffler.com/game/12345 (where 12345 is the game ID). 
+
+The Deck Review screen loads that deck and displays it.
 
 Likewise, when we end the game, we want the URL to revert to the default.
 

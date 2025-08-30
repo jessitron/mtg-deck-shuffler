@@ -4,11 +4,12 @@ status: partially implemented
 
 ## Implemented
 
-GameState is a class. Its data will have a structure that prevents many invalid conditions.
+GameState is a class. Its datahas a structure that prevents many invalid conditions.
 
-At all times during a game, each card is in exactly one place. Therefore, we will store each card once, along with a location.
+At all times during a game, each card is in exactly one place. Therefore, we store each card once, along with a location.
 
-Operations on game state accept a game state, and return a game state. (It might alter the input game state and return it, don't count on that either way.)
+Operations on game state accept a game state, and return a game state. (usually 'this', as GameState is mutable)
+Tests are in @notes/test/GameState.test.ts
 
 The game state includes:
 
@@ -30,7 +31,7 @@ Any number of cards may be in Table, and their position is not tracked.
 
 Invariants:
 
-- there are zero, one, or two commander cards
+- there are zero, one, or two commander cards (or else behavior is undefined)
 - there are no duplicate positions except Table
 - the card definitions never change, only the locations.
 - the order of cards in the game state never changes. To make this easier to verify, it is ordered by Display Name.
@@ -39,9 +40,13 @@ Operations possible on game state:
 
 - initialize from a Deck (in the constructor). Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 
-## Not Yet Implemented
+## Next
 
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
+- start game: change the status to Active. Shuffle the library.
+
+## Not Yets
+
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
 - reveal: move the top card from Library to Revealed. Check: one fewer card in Library, one more card in Revealed.
 - return to bottom (for any revealed card): move this card from Revealed to the last position in Library. Check: one fewer card in Revealed, one more card in Library. The card now has the highest-numbered position in Library.
