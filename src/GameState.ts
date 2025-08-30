@@ -1,5 +1,4 @@
 import { CardDefinition, DeckProvenance, Deck } from "./types.js";
-import { PersistedGameState } from "./port-persist-state/types.js";
 
 export type GameId = number;
 
@@ -45,51 +44,27 @@ export class GameState {
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 
-  constructor(gameId: GameId, deck: Deck);
-  constructor(persistedState: PersistedGameState);
-  constructor(gameIdOrState: GameId | PersistedGameState, deck?: Deck) {
-    if (typeof gameIdOrState === "object") {
-      // Constructor from persisted state
-      const persistedState = gameIdOrState;
-      this.gameId = persistedState.gameId;
-      this.status = persistedState.status;
-      this.deckProvenance = persistedState.deckProvenance;
-      this.commanders = [...persistedState.commanders];
-      this.deckName = persistedState.deckName;
-      this.deckId = persistedState.deckId;
-      this.totalCards = persistedState.totalCards;
-      this.gameCards = persistedState.gameCards.map(gc => ({
-        card: { ...gc.card },
-        location: { ...gc.location } as CardLocation
-      }));
-    } else {
-      // Original constructor from deck
-      const gameId = gameIdOrState;
-      if (!deck) {
-        throw new Error("Deck is required when constructing from gameId");
-      }
-      
-      if (deck.commanders.length > 2) {
-        // TODO: make a warning function
-        console.log("Warning: Deck has more than two commanders. Behavior undefined");
-      }
-
-      const gameCards: GameCard[] = [...deck.cards]
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((card, index) => ({
-          card,
-          location: { type: "Library", position: index } as LibraryLocation,
-        }));
-
-      this.gameId = gameId;
-      this.status = GameStatus.NotStarted;
-      this.deckProvenance = deck.provenance;
-      this.commanders = [...deck.commanders];
-      this.deckName = deck.name;
-      this.deckId = deck.id;
-      this.totalCards = deck.totalCards;
-      this.gameCards = gameCards;
+  constructor(gameId: GameId, deck: Deck) {
+    if (deck.commanders.length > 2) {
+      // TODO: make a warning function
+      console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
+
+    const gameCards: GameCard[] = [...deck.cards]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((card, index) => ({
+        card,
+        location: { type: "Library", position: index } as LibraryLocation,
+      }));
+
+    this.gameId = gameId;
+    this.status = GameStatus.NotStarted;
+    this.deckProvenance = deck.provenance;
+    this.commanders = [...deck.commanders];
+    this.deckName = deck.name;
+    this.deckId = deck.id;
+    this.totalCards = deck.totalCards;
+    this.gameCards = gameCards;
 
     this.validateInvariants();
   }
@@ -123,25 +98,5 @@ export class GameState {
 
   public getCards(): readonly GameCard[] {
     return this.gameCards;
-  }
-
-  public toPersistedState(): PersistedGameState {
-    return {
-      gameId: this.gameId,
-      status: this.status,
-      deckProvenance: this.deckProvenance,
-      commanders: [...this.commanders],
-      deckName: this.deckName,
-      deckId: this.deckId,
-      totalCards: this.totalCards,
-      gameCards: this.gameCards.map(gc => ({
-        card: { ...gc.card },
-        location: { ...gc.location }
-      }))
-    };
-  }
-
-  public static fromPersistedState(persistedState: PersistedGameState): GameState {
-    return new GameState(persistedState);
   }
 }
