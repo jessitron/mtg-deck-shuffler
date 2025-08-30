@@ -7,12 +7,8 @@ import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-for
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
-import { PersistStatePort } from "./port-persist-state/types.js";
-import { InMemoryAdapter } from "./port-persist-state/InMemoryAdapter.js";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
-const persistStateAdapter = new InMemoryAdapter();
-const persistStatePort: PersistStatePort = persistStateAdapter;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,40 +18,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..")));
-
-app.get("/game/:gameId", async (req, res) => {
-  const gameId = parseInt(req.params.gameId);
-  
-  if (isNaN(gameId)) {
-    res.status(400).send(`<div>
-        <p>Error: Invalid game ID</p>
-        <a href="/">Try another deck</a>
-    </div>`);
-    return;
-  }
-
-  try {
-    const persistedState = await persistStateAdapter.retrieveLatest(gameId);
-    
-    if (!persistedState) {
-      res.status(404).send(`<div>
-          <p>Error: Game ${gameId} not found</p>
-          <a href="/">Start a new game</a>
-      </div>`);
-      return;
-    }
-
-    const game = GameState.fromPersistedGameState(persistedState);
-    const html = formatGameHtml(game);
-    res.send(html);
-  } catch (error) {
-    console.error("Error loading game:", error);
-    res.status(500).send(`<div>
-        <p>Error: Could not load game ${gameId}</p>
-        <a href="/">Try another deck</a>
-    </div>`);
-  }
-});
 
 app.get("/choose-deck", async (req, res) => {
   try {
@@ -82,11 +44,9 @@ app.post("/deck", async (req, res) => {
 
   try {
     const deck = await deckRetriever.retrieveDeck(deckRequest);
-    const gameId = await persistStatePort.newGameId();
-    const game = new GameState(gameId, deck);
-    const stateId = await persistStatePort.save(game.toPersistedGameState());
+    const html = formatDeckHtml(deck);
 
-    res.redirect(`/game/${gameId}`);
+    res.send(html);
   } catch (error) {
     console.error("Error fetching deck:", error);
     res.send(`<div>
@@ -97,38 +57,18 @@ app.post("/deck", async (req, res) => {
 });
 
 app.post("/start-game", async (req, res) => {
-  const gameIdStr: string = req.body["game-id"];
-  const gameId = parseInt(gameIdStr);
-
-  if (isNaN(gameId)) {
-    res.status(400).send(`<div>
-        <p>Error: Invalid game ID</p>
-        <a href="/">Try another deck</a>
-    </div>`);
-    return;
-  }
+  const deckId: string = req.body["deck-id"];
 
   try {
-    const persistedState = await persistStateAdapter.retrieveLatest(gameId);
-    
-    if (!persistedState) {
-      res.status(404).send(`<div>
-          <p>Error: Game ${gameId} not found</p>
-          <a href="/">Start a new game</a>
-      </div>`);
-      return;
-    }
+    const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
+    const game = new GameState(1, deck); // TODO: generate proper game ID
+    const html = formatGameHtml(game);
 
-    const game = GameState.fromPersistedGameState(persistedState);
-    const startedGame = game.startGame();
-    const stateId = await persistStatePort.save(startedGame.toPersistedGameState());
-
-    const html = formatGameHtml(startedGame);
     res.send(html);
   } catch (error) {
     console.error("Error starting game:", error);
     res.send(`<div>
-        <p>Error: Could not start game ${gameId}</p>
+        <p>Error: Could not start game with deck ${deckId}</p>
         <a href="/">Try another deck</a>
     </div>`);
   }
