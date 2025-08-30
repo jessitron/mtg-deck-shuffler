@@ -40,7 +40,7 @@ export class GameState {
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: Card[];
   public readonly deckName: string;
-  public readonly deckId: number;
+  public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 

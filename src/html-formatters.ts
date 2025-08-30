@@ -26,9 +26,7 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
     return "";
   }
 
-  const options = availableDecks
-    .filter((o) => o.deckSource === "local")
-    .map((o) => `<option value="${o.localFile}">${o.description}</option>`);
+  const options = availableDecks.filter((o) => o.deckSource === "local").map((o) => `<option value="${o.localFile}">${o.description}</option>`);
   return `<div class="deck-input-section">
       <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label> 
       <input type="hidden" name="deck-source" value="local" />
@@ -38,11 +36,10 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
 }
 
 export function formatDeckHtml(deck: Deck): string {
-  const commanderImageHtml = deck.commanders.length > 0
-    ? deck.commanders.map(commander => 
-        `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`
-      ).join('')
-    : `<div class="commander-placeholder">No Commander Image</div>`;
+  const commanderImageHtml =
+    deck.commanders.length > 0
+      ? deck.commanders.map((commander) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      : `<div class="commander-placeholder">No Commander Image</div>`;
 
   const cardCountInfo = `${deck.totalCards} cards`;
 
@@ -68,17 +65,19 @@ export function formatDeckHtml(deck: Deck): string {
 }
 
 export function formatGameHtml(game: GameState): string {
-  const commanderImageHtml = game.commanders.length > 0
-    ? game.commanders.map((commander: any) => 
-        `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`
-      ).join('')
-    : `<div class="commander-placeholder">No Commander</div>`;
+  const commanderImageHtml =
+    game.commanders.length > 0
+      ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      : `<div class="commander-placeholder">No Commander</div>`;
 
-  const libraryCards = game.getCards().filter(gameCard => gameCard.location.type === "Library");
+  const libraryCards = game.getCards().filter((gameCard) => gameCard.location.type === "Library");
   const cardCountInfo = `${game.totalCards} cards`;
 
   const libraryCardList = libraryCards
-    .map((gameCard: any) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank">${gameCard.card.name}</a></li>`)
+    .map(
+      (gameCard: any) =>
+        `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank">${gameCard.card.name}</a></li>`
+    )
     .join("");
 
   return `<div id="game-state">
@@ -87,7 +86,7 @@ export function formatGameHtml(game: GameState): string {
             ${commanderImageHtml}
           </div>
           <div class="deck-info-right">
-            <h2><a href="https://archidekt.com/decks/${game.deckId}" target="_blank">${game.deckName}</a></h2>
+            <h2><a href="game.deckProvenance.sourceUrl" target="_blank">${game.deckProvenance.sourceUrl}</a></h2>
             <p>${cardCountInfo}</p>
             <p><strong>Game ID:</strong> ${game.gameId}</p>
           </div>
