@@ -1,5 +1,7 @@
 import { Card, DeckProvenance, Deck } from "./types.js";
 
+export type GameId = number;
+
 export enum GameStatus {
   NotStarted = "NotStarted",
   Active = "Active",
@@ -33,9 +35,7 @@ export interface GameCard {
 }
 
 export class GameState {
-  private static nextGameId = 1;
-
-  public readonly gameId: number;
+  public readonly gameId: GameId;
   public readonly status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: Card[];
@@ -44,7 +44,7 @@ export class GameState {
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 
-  constructor(gameId: number, deck: Deck) {
+  constructor(gameId: GameId, deck: Deck) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
