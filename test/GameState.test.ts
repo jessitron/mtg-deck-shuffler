@@ -34,67 +34,75 @@ describe("GameState", () => {
     multiverseid: 22222
   };
 
-  test("creates game state with incrementing game ID", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
-
-    const state1 = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
-    const state2 = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
-
-    assert.strictEqual(state2.gameId, state1.gameId + 1);
-  });
-
   test("stores game status correctly", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.Active, fakeProvenance, [], gameCards);
-    assert.strictEqual(state.status, GameStatus.Active);
+    const state = new GameState(1, fakeDeck);
+    assert.strictEqual(state.status, GameStatus.NotStarted);
   });
 
   test("stores deck provenance correctly", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
+    const state = new GameState(1, fakeDeck);
     assert.deepStrictEqual(state.deckProvenance, fakeProvenance);
   });
 
   test("allows zero commanders", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
+    const state = new GameState(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 0);
   });
 
   test("allows one commander", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [fakeCommander],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [fakeCommander], gameCards);
+    const state = new GameState(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 1);
     assert.deepStrictEqual(state.commanders[0], fakeCommander);
   });
 
   test("allows two commanders", () => {
     const commander2: Card = { name: "Partner Commander", uid: "cmd002", multiverseid: 33333 };
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [fakeCommander, commander2],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [fakeCommander, commander2], gameCards);
+    const state = new GameState(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 2);
     assert.deepStrictEqual(state.commanders[0], fakeCommander);
     assert.deepStrictEqual(state.commanders[1], commander2);
@@ -103,25 +111,32 @@ describe("GameState", () => {
   test("throws error for more than two commanders", () => {
     const commander2: Card = { name: "Commander 2", uid: "cmd002", multiverseid: 33333 };
     const commander3: Card = { name: "Commander 3", uid: "cmd003", multiverseid: 44444 };
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [fakeCommander, commander2, commander3],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
     assert.throws(
-      () => new GameState(GameStatus.NotStarted, fakeProvenance, [fakeCommander, commander2, commander3], gameCards),
+      () => new GameState(1, fakeDeck),
       { message: "Cannot have more than 2 commanders" }
     );
   });
 
   test("sorts cards by display name", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Library", position: 0 } }, // Lightning Bolt
-      { card: fakeCard2, location: { type: "Library", position: 1 } }, // Ancestral Recall
-      { card: fakeCard3, location: { type: "Library", position: 2 } }  // Black Lotus
-    ];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
+    const state = new GameState(1, fakeDeck);
     const cards = state.getCards();
     
     // Should be sorted: Ancestral Recall, Black Lotus, Lightning Bolt
@@ -131,63 +146,94 @@ describe("GameState", () => {
   });
 
   test("prevents duplicate positions in Library", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Library", position: 0 } },
-      { card: fakeCard2, location: { type: "Library", position: 0 } } // Duplicate position
-    ];
+    // This test no longer applies since constructor now creates positions automatically
+    // Cards are placed in Library with sequential positions based on their order in deck.cards
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 2,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2],
+      provenance: fakeProvenance
+    };
 
-    assert.throws(
-      () => new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards),
-      { message: "Duplicate position 0 in Library" }
-    );
+    // Should not throw - constructor assigns unique positions
+    const state = new GameState(1, fakeDeck);
+    assert.strictEqual(state.getCards().length, 2);
   });
 
-  test("prevents duplicate positions in Hand", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Hand", position: 0 } },
-      { card: fakeCard2, location: { type: "Hand", position: 0 } } // Duplicate position
-    ];
+  test("all cards start in Library with unique positions", () => {
+    // Constructor now places all cards in Library with unique positions
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance
+    };
 
-    assert.throws(
-      () => new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards),
-      { message: "Duplicate position 0 in Hand" }
-    );
+    const state = new GameState(1, fakeDeck);
+    const cards = state.getCards();
+    
+    // All cards should be in Library
+    cards.forEach(gameCard => {
+      assert.strictEqual(gameCard.location.type, "Library");
+    });
+    
+    // All positions should be unique
+    const positions = cards.map(c => (c.location as LibraryLocation).position);
+    const uniquePositions = new Set(positions);
+    assert.strictEqual(positions.length, uniquePositions.size);
   });
 
-  test("prevents duplicate positions in Revealed", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Revealed", position: 1 } },
-      { card: fakeCard2, location: { type: "Revealed", position: 1 } } // Duplicate position
-    ];
+  test("constructor assigns sequential positions", () => {
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance
+    };
 
-    assert.throws(
-      () => new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards),
-      { message: "Duplicate position 1 in Revealed" }
-    );
+    const state = new GameState(1, fakeDeck);
+    const cards = state.getCards();
+    
+    // Cards should have positions 0, 1, 2 (based on original order before sorting)
+    const positions = cards.map(c => (c.location as LibraryLocation).position).sort();
+    assert.deepStrictEqual(positions, [0, 1, 2]);
   });
 
-  test("allows multiple cards on Table", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Table" } },
-      { card: fakeCard2, location: { type: "Table" } },
-      { card: fakeCard3, location: { type: "Table" } }
-    ];
+  test("constructor creates correct number of cards", () => {
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance
+    };
 
-    // Should not throw
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
+    const state = new GameState(1, fakeDeck);
     assert.strictEqual(state.getCards().length, 3);
   });
 
-  test("allows same positions across different zones", () => {
-    const gameCards: GameCard[] = [
-      { card: fakeCard1, location: { type: "Library", position: 0 } },
-      { card: fakeCard2, location: { type: "Hand", position: 0 } },
-      { card: fakeCard3, location: { type: "Revealed", position: 0 } }
-    ];
+  test("constructor uses provided gameId", () => {
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    // Should not throw - same position is allowed in different zones
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
-    assert.strictEqual(state.getCards().length, 3);
+    const state1 = new GameState(42, fakeDeck);
+    const state2 = new GameState(100, fakeDeck);
+    
+    assert.strictEqual(state1.gameId, 42);
+    assert.strictEqual(state2.gameId, 100);
   });
 
   test("initialize creates game state from deck", () => {
@@ -245,12 +291,16 @@ describe("GameState", () => {
   });
 
   test("getCards returns readonly array", () => {
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, [], gameCards);
+    const state = new GameState(1, fakeDeck);
     const cards = state.getCards();
     
     // Should be readonly - TypeScript will catch this at compile time
@@ -260,12 +310,16 @@ describe("GameState", () => {
 
   test("commanders array is immutable", () => {
     const originalCommanders = [fakeCommander];
-    const gameCards: GameCard[] = [{
-      card: fakeCard1,
-      location: { type: "Library", position: 0 }
-    }];
+    const fakeDeck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: originalCommanders,
+      cards: [fakeCard1],
+      provenance: fakeProvenance
+    };
 
-    const state = new GameState(GameStatus.NotStarted, fakeProvenance, originalCommanders, gameCards);
+    const state = new GameState(1, fakeDeck);
     
     // Modifying original array shouldn't affect game state
     originalCommanders.push({name: "New Commander", uid: "new", multiverseid: 99999});

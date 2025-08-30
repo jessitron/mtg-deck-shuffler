@@ -41,20 +41,20 @@ export class GameState {
   public readonly commanders: Card[];
   private readonly gameCards: GameCard[];
   
-  constructor(
-    status: GameStatus,
-    deckProvenance: DeckProvenance,
-    commanders: Card[],
-    gameCards: GameCard[]
-  ) {
-    if (commanders.length > 2) {
+  constructor(gameId: number, deck: Deck) {
+    if (deck.commanders.length > 2) {
       throw new Error("Cannot have more than 2 commanders");
     }
     
-    this.gameId = GameState.nextGameId++;
-    this.status = status;
-    this.deckProvenance = deckProvenance;
-    this.commanders = [...commanders];
+    const gameCards: GameCard[] = deck.cards.map((card, index) => ({
+      card,
+      location: { type: "Library", position: index } as LibraryLocation
+    }));
+    
+    this.gameId = gameId;
+    this.status = GameStatus.NotStarted;
+    this.deckProvenance = deck.provenance;
+    this.commanders = [...deck.commanders];
     this.gameCards = [...gameCards].sort((a, b) => a.card.name.localeCompare(b.card.name));
     
     this.validateInvariants();
@@ -84,16 +84,6 @@ export class GameState {
   }
   
   static initialize(deck: Deck): GameState {
-    const gameCards: GameCard[] = deck.cards.map((card, index) => ({
-      card,
-      location: { type: "Library", position: index } as LibraryLocation
-    }));
-    
-    return new GameState(
-      GameStatus.NotStarted,
-      deck.provenance,
-      deck.commanders,
-      gameCards
-    );
+    return new GameState(GameState.nextGameId++, deck);
   }
 }
