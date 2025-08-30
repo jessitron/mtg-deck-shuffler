@@ -117,6 +117,33 @@ export class GameState {
     };
   }
 
+  public shuffle(): GameState {
+    const libraryCardIndices: number[] = [];
+    
+    this.gameCards.forEach((gameCard, index) => {
+      if (gameCard.location.type === "Library") {
+        libraryCardIndices.push(index);
+      }
+    });
+    
+    for (let i = libraryCardIndices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [libraryCardIndices[i], libraryCardIndices[j]] = [libraryCardIndices[j], libraryCardIndices[i]];
+    }
+    
+    libraryCardIndices.forEach((gameCardIndex, position) => {
+      this.gameCards[gameCardIndex].location = { type: "Library", position };
+    });
+    
+    this.validateInvariants();
+    return this;
+  }
+
+  public startGame(): GameState {
+    (this as any).status = GameStatus.Active;
+    return this.shuffle();
+  }
+
   public static fromPersistedGameState(pgs: PersistedGameState): GameState {
     const tempDeck: Deck = {
       id: pgs.deckId,

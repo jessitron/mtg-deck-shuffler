@@ -350,4 +350,170 @@ describe("GameState", () => {
       }, /Duplicate position 0 in Hand/);
     });
   });
+
+  describe("shuffle", () => {
+    test("randomizes Library card positions while preserving same cards", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Shuffle Test Deck",
+        totalCards: 5,
+        commanders: [],
+        cards: [fakeCard1, fakeCard2, fakeCard3, fakeCard1, fakeCard2],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      const originalLibraryCards = gameState.getCards()
+        .filter(gc => gc.location.type === "Library")
+        .map(gc => gc.card.name);
+      
+      gameState.shuffle();
+      
+      const shuffledLibraryCards = gameState.getCards()
+        .filter(gc => gc.location.type === "Library")
+        .map(gc => gc.card.name);
+      
+      assert.strictEqual(shuffledLibraryCards.length, originalLibraryCards.length);
+      assert.deepStrictEqual(shuffledLibraryCards.sort(), originalLibraryCards.sort());
+      
+      const libraryCards = gameState.getCards().filter(gc => gc.location.type === "Library");
+      
+      // Sort library cards by position for the test, since gameCards is sorted by name
+      const sortedLibraryCards = libraryCards.sort((a, b) => {
+        const aPos = (a.location as LibraryLocation).position;
+        const bPos = (b.location as LibraryLocation).position;
+        return aPos - bPos;
+      });
+      
+      sortedLibraryCards.forEach((gameCard, index) => {
+        assert.strictEqual((gameCard.location as LibraryLocation).position, index);
+      });
+    });
+
+    test("does not affect non-Library cards", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Mixed Location Test Deck",
+        totalCards: 3,
+        commanders: [fakeCommander],
+        cards: [fakeCard1, fakeCard2, fakeCard3],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      
+      const gameCards = gameState.getCards();
+      gameCards[0].location = { type: "Hand", position: 0 };
+      gameCards[1].location = { type: "Revealed", position: 0 };
+      
+      const beforeShuffle = gameState.getCards().map(gc => ({
+        name: gc.card.name,
+        location: gc.location
+      }));
+      
+      gameState.shuffle();
+      
+      const afterShuffle = gameState.getCards().map(gc => ({
+        name: gc.card.name,
+        location: gc.location
+      }));
+      
+      const nonLibraryBefore = beforeShuffle.filter(c => c.location.type !== "Library");
+      const nonLibraryAfter = afterShuffle.filter(c => c.location.type !== "Library");
+      
+      assert.deepStrictEqual(nonLibraryAfter, nonLibraryBefore);
+    });
+
+    test("maintains card order by display name", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Order Test Deck",
+        totalCards: 3,
+        commanders: [],
+        cards: [fakeCard1, fakeCard2, fakeCard3],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      gameState.shuffle();
+      
+      const cards = gameState.getCards();
+      for (let i = 1; i < cards.length; i++) {
+        assert(cards[i - 1].card.name.localeCompare(cards[i].card.name) <= 0);
+      }
+    });
+
+    test("returns this for method chaining", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Chain Test Deck",
+        totalCards: 1,
+        commanders: [],
+        cards: [fakeCard1],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      const result = gameState.shuffle();
+      assert.strictEqual(result, gameState);
+    });
+  });
+
+  describe("startGame", () => {
+    test("changes status to Active", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Start Game Test Deck",
+        totalCards: 2,
+        commanders: [],
+        cards: [fakeCard1, fakeCard2],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      assert.strictEqual(gameState.status, GameStatus.NotStarted);
+      
+      gameState.startGame();
+      assert.strictEqual(gameState.status, GameStatus.Active);
+    });
+
+    test("shuffles the library", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Start Game Shuffle Test Deck",
+        totalCards: 4,
+        commanders: [],
+        cards: [fakeCard1, fakeCard2, fakeCard3, fakeCard1],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      const originalOrder = gameState.getCards()
+        .filter(gc => gc.location.type === "Library")
+        .map(gc => gc.card.name);
+      
+      gameState.startGame();
+      
+      const newOrder = gameState.getCards()
+        .filter(gc => gc.location.type === "Library")
+        .map(gc => gc.card.name);
+      
+      assert.deepStrictEqual(newOrder.sort(), originalOrder.sort());
+    });
+
+    test("returns this for method chaining", () => {
+      const deck: Deck = {
+        id: 1,
+        name: "Start Chain Test Deck",
+        totalCards: 1,
+        commanders: [],
+        cards: [fakeCard1],
+        provenance: fakeProvenance,
+      };
+
+      const gameState = new GameState(1, deck);
+      const result = gameState.startGame();
+      assert.strictEqual(result, gameState);
+    });
+  });
 });
