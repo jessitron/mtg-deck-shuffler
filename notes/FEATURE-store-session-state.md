@@ -18,7 +18,7 @@ retrieve(gameId: GameId): Promise<PersistedGameState | null>
 newGameId(): GameId
 ```
 
-Include conversion functions from GameState to PersistedGameState and back. It's OK to add a new constructor in GameState.
+Include conversion functions from GameState to PersistedGameState and back. It's OK to add a new constructor in GameState. Add tests for these. 
 
 ## Adapters
 

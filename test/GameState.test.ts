@@ -1,6 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
-import { GameState, GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/GameState.js";
+import { GameState } from "../src/GameState.js";
+import { GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/port-persist-state/types.js";
 import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
 
 describe("GameState", () => {

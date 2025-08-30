@@ -1,5 +1,4 @@
-import { GameId } from "../GameState.js";
-import { PersistStatePort, PersistedGameState } from "./types.js";
+import { PersistStatePort, PersistedGameState, GameId } from "./types.js";
 
 export class InMemoryPersistStateAdapter implements PersistStatePort {
   private storage = new Map<GameId, PersistedGameState>();
