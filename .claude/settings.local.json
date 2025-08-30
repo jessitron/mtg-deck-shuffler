@@ -48,7 +48,8 @@
       "WebFetch(domain:developers.hubspot.com)",
       "mcp__playwright__browser_tabs",
       "Bash(npm run deck:download:*)",
-      "Bash(node --test:*)"
+      "Bash(node --test:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }
