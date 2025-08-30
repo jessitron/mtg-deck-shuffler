@@ -184,4 +184,108 @@ describe("GameState", () => {
       );
     });
   });
+
+  test("shuffle randomizes Library positions but preserves card count", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    const originalOrder = gameState.getCards().map(gc => gc.card.name);
+    
+    gameState.shuffle();
+    
+    const cards = gameState.getCards();
+    const libraryCards = cards.filter(gc => gc.location.type === "Library");
+    
+    // Same number of cards in library
+    assert.strictEqual(libraryCards.length, 3);
+    
+    // Positions should still be sequential from 0
+    const positions = libraryCards.map(gc => (gc.location as LibraryLocation).position).sort();
+    assert.deepStrictEqual(positions, [0, 1, 2]);
+    
+    // Cards should still exist (order might be different)
+    const shuffledNames = cards.map(gc => gc.card.name).sort();
+    const originalNames = originalOrder.sort();
+    assert.deepStrictEqual(shuffledNames, originalNames);
+  });
+
+  test("shuffle only affects Library cards", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck", 
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Manually move a card to Hand for testing
+    const cards = gameState.getCards();
+    (cards[0].location as any) = { type: "Hand", position: 0 };
+    
+    const handCardBefore = cards[0].card.name;
+    
+    gameState.shuffle();
+    
+    // Hand card should be unchanged
+    assert.strictEqual(cards[0].location.type, "Hand");
+    assert.strictEqual((cards[0].location as HandLocation).position, 0);
+    assert.strictEqual(cards[0].card.name, handCardBefore);
+    
+    // Only 2 cards should be in library now
+    const libraryCards = cards.filter(gc => gc.location.type === "Library");
+    assert.strictEqual(libraryCards.length, 2);
+  });
+
+  test("startGame changes status to Active and shuffles", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 2,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    assert.strictEqual(gameState.status, GameStatus.NotStarted);
+    
+    gameState.startGame();
+    
+    assert.strictEqual(gameState.status, GameStatus.Active);
+    
+    // Verify shuffle happened - cards should still be in library with valid positions
+    const libraryCards = gameState.getCards().filter(gc => gc.location.type === "Library");
+    assert.strictEqual(libraryCards.length, 2);
+    
+    const positions = libraryCards.map(gc => (gc.location as LibraryLocation).position).sort();
+    assert.deepStrictEqual(positions, [0, 1]);
+  });
+
+  test("startGame throws error if game already started", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    gameState.startGame();
+    
+    assert.throws(() => {
+      gameState.startGame();
+    }, /Cannot start game: current status is Active/);
+  });
 });

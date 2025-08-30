@@ -91,6 +91,35 @@ export class GameState {
     return this.gameCards;
   }
 
+  public shuffle(): this {
+    const libraryCards = this.gameCards.filter(gc => gc.location.type === "Library");
+    
+    // Fisher-Yates shuffle for the library cards array
+    for (let i = libraryCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [libraryCards[i], libraryCards[j]] = [libraryCards[j], libraryCards[i]];
+    }
+    
+    // Update positions after shuffle - top card is position 0
+    libraryCards.forEach((gameCard, index) => {
+      (gameCard.location as LibraryLocation).position = index;
+    });
+    
+    this.validateInvariants();
+    return this;
+  }
+
+  public startGame(): this {
+    if (this.status !== GameStatus.NotStarted) {
+      throw new Error(`Cannot start game: current status is ${this.status}`);
+    }
+    
+    (this as any).status = GameStatus.Active;
+    this.shuffle();
+    
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       gameId: this.gameId,
