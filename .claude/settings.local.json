@@ -47,7 +47,8 @@
       "Bash(mkdir:*)",
       "WebFetch(domain:developers.hubspot.com)",
       "mcp__playwright__browser_tabs",
-      "Bash(npm run deck:download:*)"
+      "Bash(npm run deck:download:*)",
+      "Bash(node --test:*)"
     ],
     "deny": []
   }
