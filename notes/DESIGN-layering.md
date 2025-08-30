@@ -15,3 +15,5 @@ There are two adapters, ArchidektDeckToDeckAdapter and LocalDeckAdapter, plus a 
 There is one gateway, ArchidektGateway. LocalDeckAdapter is too simple to need a gateway.
 
 The adapter is initialized in @src/server.ts
+
+The tests in @test/ports-deck-retrieval/ test each of the adapters. Gateways do not get automated tests.

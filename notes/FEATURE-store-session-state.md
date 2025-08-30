@@ -14,7 +14,7 @@ The PersistStatePort interface
 
 ```
 save(psg: PersistedGameState): Promise<GameId>
-retrieve(gameId: GameId)
+retrieve(gameId: GameId): Promise<PersistedGameState | null>
 newGameId(): GameId
 ```
 
