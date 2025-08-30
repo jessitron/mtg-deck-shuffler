@@ -47,16 +47,18 @@ export class GameState {
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
 
-    const gameCards: GameCard[] = deck.cards.map((card, index) => ({
-      card,
-      location: { type: "Library", position: index } as LibraryLocation,
-    }));
+    const gameCards: GameCard[] = [...deck.cards]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((card, index) => ({
+        card,
+        location: { type: "Library", position: index } as LibraryLocation,
+      }));
 
     this.gameId = gameId;
     this.status = GameStatus.NotStarted;
     this.deckProvenance = deck.provenance;
     this.commanders = [...deck.commanders];
-    this.gameCards = [...gameCards].sort((a, b) => a.card.name.localeCompare(b.card.name));
+    this.gameCards = gameCards;
 
     this.validateInvariants();
   }
