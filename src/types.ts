@@ -24,11 +24,6 @@ export interface Library {
   count: number;
 }
 
-export interface Game {
-  deck: Deck;
-  library: Library;
-}
-
 export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "normal"): string {
   const extension = format === "png" ? "png" : "jpg";
   const firstTwo = uid.substring(0, 1);
