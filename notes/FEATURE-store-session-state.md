@@ -8,7 +8,7 @@ We will use a Hexagonal Architecture for state management; see @notes/DESIGN-lay
 
 ## Port
 
-The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/types.ts, and it is simple data.
+The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/gameState.ts where it can, and it is simple data. GameId is a number, while StateId is a UUID string.
 
 The PersistStatePort interface
 
