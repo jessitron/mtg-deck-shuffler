@@ -4,17 +4,19 @@ import { PersistStatePort, PersistedGameState, StateId } from "./types.js";
 
 export class InMemoryAdapter implements PersistStatePort {
   private gameStates = new Map<string, PersistedGameState>();
+  private latestStateIds = new Map<GameId, StateId>();
   private nextGameId = 1;
 
   private makeKey(gameId: GameId, stateId: StateId): string {
     return `${gameId}:${stateId}`;
   }
 
-  async save(psg: PersistedGameState): Promise<StateId> {
+  async save(psg: Omit<PersistedGameState, 'stateId'>): Promise<StateId> {
     const stateId = randomUUID();
     const gameStateWithId = { ...psg, stateId };
     const key = this.makeKey(psg.gameId, stateId);
     this.gameStates.set(key, gameStateWithId);
+    this.latestStateIds.set(psg.gameId, stateId);
     return stateId;
   }
 
@@ -25,5 +27,13 @@ export class InMemoryAdapter implements PersistStatePort {
 
   async newGameId(): Promise<GameId> {
     return this.nextGameId++;
+  }
+
+  async retrieveLatest(gameId: GameId): Promise<PersistedGameState | null> {
+    const latestStateId = this.latestStateIds.get(gameId);
+    if (!latestStateId) {
+      return null;
+    }
+    return this.retrieve(gameId, latestStateId);
   }
 }

@@ -57,8 +57,6 @@ export function formatDeckHtml(deck: Deck): string {
           </div>
         </div>
         <div class="deck-actions">
-          <input type="hidden" name="deck-id" value="${deck.id}" />
-          <button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
           <button onclick="location.reload()">Choose Another Deck</button>
         </div>
     </div>`;
@@ -80,15 +78,29 @@ export function formatGameHtml(game: GameState): string {
     )
     .join("");
 
+  const isGameActive = game.status === "Active";
+  const pageTitle = isGameActive ? "Play Game" : "Deck Review";
+  const gameActions = isGameActive
+    ? `<div class="game-actions">
+         <button onclick="location.reload()">Restart Game</button>
+         <button onclick="window.location.href='/'">Quit</button>
+       </div>`
+    : `<div class="game-actions">
+         <input type="hidden" name="game-id" value="${game.gameId}" />
+         <button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="body">Shuffle Up</button>
+         <button onclick="window.location.href='/'">Choose Another Deck</button>
+       </div>`;
+
   return `<div id="game-state">
         <div class="game-header">
           <div class="commander-info">
             ${commanderImageHtml}
           </div>
           <div class="deck-info-right">
-            <h2><a href="game.deckProvenance.sourceUrl" target="_blank">${game.deckProvenance.sourceUrl}</a></h2>
+            <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
             <p>${cardCountInfo}</p>
             <p><strong>Game ID:</strong> ${game.gameId}</p>
+            <p><strong>Status:</strong> ${pageTitle}</p>
           </div>
         </div>
         
@@ -99,7 +111,7 @@ export function formatGameHtml(game: GameState): string {
               <div class="card-back card-back-2" data-testid="card-back"></div>
               <div class="card-back card-back-3" data-testid="card-back"></div>
             </div>
-            <p data-testid="library-label">Library</p>
+            <p data-testid="library-label">Library${isGameActive ? " (Shuffled)" : ""}</p>
           </div>
         </div>
         
@@ -110,9 +122,6 @@ export function formatGameHtml(game: GameState): string {
           </ol>
         </details>
         
-        <div class="game-actions">
-          <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
-        </div>
-        <input type="hidden" name="deck-id" value="${game.deckId}" />
+        ${gameActions}
     </div>`;
 }

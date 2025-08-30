@@ -21,7 +21,7 @@ export interface PersistedGameState {
 }
 
 export interface PersistStatePort {
-  save(psg: PersistedGameState): Promise<StateId>;
+  save(psg: Omit<PersistedGameState, 'stateId'>): Promise<StateId>;
   retrieve(gameId: GameId, expectedStateId: StateId): Promise<PersistedGameState | null>;
   newGameId(): Promise<GameId>;
 }
