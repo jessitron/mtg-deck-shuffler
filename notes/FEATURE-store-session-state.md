@@ -22,9 +22,11 @@ Include conversion functions from GameState to PersistedGameState and back. It's
 
 ## Adapters
 
-We will implement two adapters: InMemory and Sqlite.
+We will implement one adapter, InMemoryPersistStateAdapter.
 
-Sqlite will store to a file, specified in adapter construction, right now "./data.db". As we iterate on PersistedGameState, we can wipe out and recreate the database file. We have no production environment right now.
+LATER: there will be a SqlitePersistStateAdapter. Sqlite will store to a file, specified in adapter construction, right now "./data.db". As we iterate on PersistedGameState, we can wipe out and recreate the database file. We have no production environment right now. So we don't even need this adapter right now, haha.
+
+Create tests for the adapter in test/ports-persist-state/
 
 ## Gateways
 
