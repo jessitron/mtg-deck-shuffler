@@ -1,9 +1,10 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { shuffleDeck, Game } from "./types.js";
+import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
 import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
+import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 
@@ -59,10 +60,8 @@ app.post("/start-game", async (req, res) => {
   const deckId: string = req.body["deck-id"];
 
   try {
-    // TODO: get this stuff from game state !!!
     const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
-    const library = shuffleDeck(deck);
-    const game: Game = { deck, library };
+    const game = new GameState(1, deck); // TODO: generate proper game ID
     const html = formatGameHtml(game);
 
     res.send(html);

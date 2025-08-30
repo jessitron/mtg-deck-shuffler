@@ -1,5 +1,6 @@
 import { AvailableDecks } from "./port-deck-retrieval/types.js";
-import { Deck, getCardImageUrl, Game } from "./types.js";
+import { Deck, getCardImageUrl } from "./types.js";
+import { GameState } from "./GameState.js";
 
 export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInput();
@@ -66,17 +67,18 @@ export function formatDeckHtml(deck: Deck): string {
     </div>`;
 }
 
-export function formatGameHtml(game: Game): string {
-  const commanderImageHtml = game.deck.commanders.length > 0
-    ? game.deck.commanders.map(commander => 
+export function formatGameHtml(game: GameState): string {
+  const commanderImageHtml = game.commanders.length > 0
+    ? game.commanders.map((commander: any) => 
         `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`
       ).join('')
     : `<div class="commander-placeholder">No Commander</div>`;
 
-  const cardCountInfo = `${game.deck.totalCards} cards`;
+  const libraryCards = game.getCards().filter(gameCard => gameCard.location.type === "Library");
+  const cardCountInfo = `${game.totalCards} cards`;
 
-  const libraryCardList = game.library.cards
-    .map((card) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank">${card.name}</a></li>`)
+  const libraryCardList = libraryCards
+    .map((gameCard: any) => `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank">${gameCard.card.name}</a></li>`)
     .join("");
 
   return `<div id="game-state">
@@ -85,9 +87,9 @@ export function formatGameHtml(game: Game): string {
             ${commanderImageHtml}
           </div>
           <div class="deck-info-right">
-            <h2><a href="https://archidekt.com/decks/${game.deck.id}" target="_blank">${game.deck.name}</a></h2>
+            <h2><a href="https://archidekt.com/decks/${game.deckId}" target="_blank">${game.deckName}</a></h2>
             <p>${cardCountInfo}</p>
-            <p><strong>Game ID:</strong> ${game.deck.id}</p>
+            <p><strong>Game ID:</strong> ${game.gameId}</p>
           </div>
         </div>
         
@@ -112,6 +114,6 @@ export function formatGameHtml(game: Game): string {
         <div class="game-actions">
           <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
         </div>
-        <input type="hidden" name="deck-id" value="${game.deck.id}" />
+        <input type="hidden" name="deck-id" value="${game.deckId}" />
     </div>`;
 }

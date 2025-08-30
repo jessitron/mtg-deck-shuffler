@@ -39,6 +39,9 @@ export class GameState {
   public readonly status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: Card[];
+  public readonly deckName: string;
+  public readonly deckId: number;
+  public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 
   constructor(gameId: number, deck: Deck) {
@@ -58,6 +61,9 @@ export class GameState {
     this.status = GameStatus.NotStarted;
     this.deckProvenance = deck.provenance;
     this.commanders = [...deck.commanders];
+    this.deckName = deck.name;
+    this.deckId = deck.id;
+    this.totalCards = deck.totalCards;
     this.gameCards = gameCards;
 
     this.validateInvariants();
