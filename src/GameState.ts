@@ -1,9 +1,9 @@
-import { Card, DeckProvenance, Deck } from './types.js';
+import { Card, DeckProvenance, Deck } from "./types.js";
 
 export enum GameStatus {
   NotStarted = "NotStarted",
-  Active = "Active", 
-  Ended = "Ended"
+  Active = "Active",
+  Ended = "Ended",
 }
 
 export interface LibraryLocation {
@@ -34,35 +34,36 @@ export interface GameCard {
 
 export class GameState {
   private static nextGameId = 1;
-  
+
   public readonly gameId: number;
   public readonly status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: Card[];
   private readonly gameCards: GameCard[];
-  
+
   constructor(gameId: number, deck: Deck) {
     if (deck.commanders.length > 2) {
-      throw new Error("Cannot have more than 2 commanders");
+      // TODO: make a warning function
+      console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
-    
+
     const gameCards: GameCard[] = deck.cards.map((card, index) => ({
       card,
-      location: { type: "Library", position: index } as LibraryLocation
+      location: { type: "Library", position: index } as LibraryLocation,
     }));
-    
+
     this.gameId = gameId;
     this.status = GameStatus.NotStarted;
     this.deckProvenance = deck.provenance;
     this.commanders = [...deck.commanders];
     this.gameCards = [...gameCards].sort((a, b) => a.card.name.localeCompare(b.card.name));
-    
+
     this.validateInvariants();
   }
-  
+
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
-    
+
     for (const gameCard of this.gameCards) {
       const location = gameCard.location;
       if (location.type !== "Table") {
@@ -77,13 +78,17 @@ export class GameState {
         positions.add(location.position);
       }
     }
+
+    for (let i = 1; i < this.gameCards.length; i++) {
+      const currentCard = this.gameCards[i].card.name;
+      const previousCard = this.gameCards[i - 1].card.name;
+      if (currentCard.localeCompare(previousCard) < 0) {
+        throw new Error(`Cards are not sorted by display name: "${previousCard}" should come after "${currentCard}"`);
+      }
+    }
   }
-  
+
   public getCards(): readonly GameCard[] {
     return this.gameCards;
-  }
-  
-  static initialize(deck: Deck): GameState {
-    return new GameState(GameState.nextGameId++, deck);
   }
 }

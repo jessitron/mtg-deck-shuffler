@@ -7,7 +7,7 @@ export interface Card {
 export interface DeckProvenance {
   retrievedDate: Date;
   sourceUrl: string;
-  deckSource: string;
+  deckSource: "archidekt" | "local" | "test";
 }
 
 export interface Deck {
@@ -36,19 +36,17 @@ export function getCardImageUrl(uid: string, format: "small" | "normal" | "large
   return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${uid}.${extension}`;
 }
 
-
 export function shuffleDeck(deck: Deck): Library {
   const shuffledCards = [...deck.cards];
-  
+
   // Fisher-Yates shuffle algorithm
   for (let i = shuffledCards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
   }
-  
+
   return {
     cards: shuffledCards,
-    count: shuffledCards.length
+    count: shuffledCards.length,
   };
 }
-

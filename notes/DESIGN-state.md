@@ -10,7 +10,7 @@ Operations on game state accept a game state, and return a game state. (It might
 
 The game state includes:
 
-- a Game ID, which is an incrementinginteger
+- a Game ID, which is an incrementing integer. This is supplied at construction.
 - a Game Status, which is one of:
   - NotStarted
   - Active
@@ -35,7 +35,7 @@ Invariants:
 
 Operations possible on game state:
 
-- initialize from a Deck. Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
+- initialize from a Deck (in the constructor). Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 
 ## Future Operations - STOP HERE
 
