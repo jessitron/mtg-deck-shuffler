@@ -1,4 +1,5 @@
 import { Card, DeckProvenance, Deck } from "./types.js";
+import { PersistedGameState, StateId } from "./port-persist-state/types.js";
 
 export type GameId = number;
 
@@ -98,5 +99,43 @@ export class GameState {
 
   public getCards(): readonly GameCard[] {
     return this.gameCards;
+  }
+
+  public toPersistedGameState(): Omit<PersistedGameState, 'stateId'> {
+    return {
+      gameId: this.gameId,
+      status: this.status,
+      deckProvenance: this.deckProvenance,
+      commanders: [...this.commanders],
+      deckName: this.deckName,
+      deckId: this.deckId,
+      totalCards: this.totalCards,
+      gameCards: this.gameCards.map(gc => ({ 
+        card: gc.card, 
+        location: gc.location 
+      }))
+    };
+  }
+
+  public static fromPersistedGameState(pgs: PersistedGameState): GameState {
+    const tempDeck: Deck = {
+      id: pgs.deckId,
+      name: pgs.deckName,
+      provenance: pgs.deckProvenance,
+      commanders: pgs.commanders,
+      cards: pgs.gameCards.map(gc => gc.card),
+      totalCards: pgs.totalCards
+    };
+
+    const gameState = new GameState(pgs.gameId, tempDeck);
+    
+    (gameState as any).status = pgs.status;
+    (gameState as any).gameCards = pgs.gameCards.map(gc => ({
+      card: gc.card,
+      location: gc.location
+    }));
+
+    gameState.validateInvariants();
+    return gameState;
   }
 }
