@@ -18,7 +18,7 @@ retrieve(gameId: GameId)
 newGameId(): GameId
 ```
 
-Include conversion functions from GameState to PersistedGameState and back.
+Include conversion functions from GameState to PersistedGameState and back. It's OK to add a new constructor in GameState.
 
 ## Adapters
 
