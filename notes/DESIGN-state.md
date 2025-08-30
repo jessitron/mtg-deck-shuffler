@@ -2,7 +2,7 @@
 
 status: partially implemented
 
-## Implemented
+## Phase 1
 
 GameState is a class. Its datahas a structure that prevents many invalid conditions.
 
@@ -19,6 +19,7 @@ The game state includes:
   - Active
   - Ended
 - a DeckProvenance, which is immutable
+- a Deck Name
 - 0-2 commander cards, which are in the Command Zone at all times.
 - a list of cards, each with a card definition and a location, ordered by Display Name.
 - a card location is one of:
@@ -26,12 +27,12 @@ The game state includes:
   - Hand(position: non-negative integer)
   - Revealed(position: non-negative integer)
   - Table
+- totalCards (implemented as a readonly property, counting cards plus commanders)
 
 Any number of cards may be in Table, and their position is not tracked.
 
 Invariants:
 
-- there are zero, one, or two commander cards (or else behavior is undefined)
 - there are no duplicate positions except Table
 - the card definitions never change, only the locations.
 - the order of cards in the game state never changes. To make this easier to verify, it is ordered by Display Name.
@@ -40,12 +41,12 @@ Operations possible on game state:
 
 - initialize from a Deck (in the constructor). Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 
-## Next
+## Phase 2
 
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
 - start game: change the status to Active. Shuffle the library.
 
-## Not Yets
+## Not Yet
 
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
 - reveal: move the top card from Library to Revealed. Check: one fewer card in Library, one more card in Revealed.
