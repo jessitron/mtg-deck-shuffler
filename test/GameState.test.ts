@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import { GameState, GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/GameState.js";
-import { Card, Deck, DeckProvenance } from "../src/types.js";
+import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
 
 describe("GameState", () => {
   const fakeProvenance: DeckProvenance = {
@@ -10,25 +10,25 @@ describe("GameState", () => {
     deckSource: "test",
   };
 
-  const fakeCard1: Card = {
+  const fakeCard1: CardDefinition = {
     name: "Lightning Bolt",
     uid: "abc123",
     multiverseid: 12345,
   };
 
-  const fakeCard2: Card = {
+  const fakeCard2: CardDefinition = {
     name: "Ancestral Recall",
     uid: "def456",
     multiverseid: 67890,
   };
 
-  const fakeCard3: Card = {
+  const fakeCard3: CardDefinition = {
     name: "Black Lotus",
     uid: "ghi789",
     multiverseid: 11111,
   };
 
-  const fakeCommander: Card = {
+  const fakeCommander: CardDefinition = {
     name: "Atraxa, Praetors' Voice",
     uid: "cmd001",
     multiverseid: 22222,
@@ -92,7 +92,7 @@ describe("GameState", () => {
   });
 
   test("allows two commanders", () => {
-    const commander2: Card = { name: "Partner Commander", uid: "cmd002", multiverseid: 33333 };
+    const commander2: CardDefinition = { name: "Partner Commander", uid: "cmd002", multiverseid: 33333 };
     const fakeDeck: Deck = {
       id: 1,
       name: "Test Deck",

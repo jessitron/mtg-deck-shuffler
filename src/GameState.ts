@@ -1,4 +1,4 @@
-import { Card, DeckProvenance, Deck } from "./types.js";
+import { CardDefinition, DeckProvenance, Deck } from "./types.js";
 
 export type GameId = number;
 
@@ -30,7 +30,7 @@ export interface TableLocation {
 export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
 
 export interface GameCard {
-  card: Card;
+  card: CardDefinition;
   location: CardLocation;
 }
 
@@ -38,7 +38,7 @@ export class GameState {
   public readonly gameId: GameId;
   public readonly status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
-  public readonly commanders: Card[];
+  public readonly commanders: CardDefinition[];
   public readonly deckName: string;
   public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
   public readonly totalCards: number;
