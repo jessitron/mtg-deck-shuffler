@@ -8,7 +8,7 @@ We will use a Hexagonal Architecture for state management; see @notes/DESIGN-lay
 
 ## Port
 
-The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/gameState.ts where it can, and it is simple data. GameId is a number, as defined in @src/gameState.ts.
+The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/GameState.ts where it can, and it is simple data. GameId is a number, as defined in @src/GameState.ts.
 
 The PersistStatePort interface
 
@@ -17,6 +17,8 @@ save(psg: PersistedGameState): Promise<GameId>
 retrieve(gameId: GameId)
 newGameId(): GameId
 ```
+
+Include conversion functions from GameState to PersistedGameState and back.
 
 ## Adapters
 
