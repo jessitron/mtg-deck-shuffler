@@ -142,9 +142,9 @@ export function formatGameHtml(game: GameState): string {
         <div class="game-board">
           <div class="library-section" data-testid="library-section">
             <div class="library-stack" data-testid="library-stack">
-              <div class="card-back card-back-1" data-testid="card-back"></div>
-              <div class="card-back card-back-2" data-testid="card-back"></div>
-              <div class="card-back card-back-3" data-testid="card-back"></div>
+              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-1" data-testid="card-back" />
+              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
+              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
             </div>
             <p data-testid="library-label">Library</p>
           </div>

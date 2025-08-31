@@ -168,32 +168,31 @@ h1 {
 
 .library-stack {
   position: relative;
-  width: 80px;
-  height: 120px;
+  width: 200px;
+  height: 280px;
 }
 
-.card-back {
-  width: 80px;
-  height: 120px;
+.library-card-back {
+  width: 200px;
+  height: auto;
   border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   position: absolute;
 }
 
-.card-back-1 {
+.library-card-1 {
   top: 0;
   left: 0;
   z-index: 3;
 }
 
-.card-back-2 {
+.library-card-2 {
   top: 2px;
   left: 2px;
   z-index: 2;
 }
 
-.card-back-3 {
+.library-card-3 {
   top: 4px;
   left: 4px;
   z-index: 1;
