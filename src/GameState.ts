@@ -112,7 +112,7 @@ export class GameState {
     return this.gameCards;
   }
 
-  public listLibrary(): readonly GameCard[] {
+  public listLibrary(): readonly (GameCard & { location: LibraryLocation })[] {
     return this.gameCards.filter(isInLibrary).sort((a, b) => a.location.position - b.location.position);
   }
 
@@ -157,6 +157,14 @@ export class GameState {
     return this;
   }
 
+  private addToRevealed(gameCard: GameCard): this {
+    const revealedCards = this.listRevealed();
+    const maxPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
+    const nextPosition = maxPosition + 1;
+    gameCard.location = { type: "Revealed", position: nextPosition };
+    return this;
+  }
+
   private addToHand(gameCard: GameCard): this {
     const handCards = this.listHand();
     const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) : -1;
@@ -184,7 +192,7 @@ export class GameState {
 
   public playCardFromHand(handPosition: number): this {
     const handCards = this.listHand();
-    const cardToPlay = handCards.find(gc => gc.location.position === handPosition);
+    const cardToPlay = handCards.find((gc) => gc.location.position === handPosition);
 
     if (!cardToPlay) {
       throw new Error(`No card found at hand position ${handPosition}`);
@@ -199,19 +207,14 @@ export class GameState {
 
   public reveal(position: number): this {
     const libraryCards = this.listLibrary();
-    const cardToReveal = libraryCards.find(gc => (gc.location as LibraryLocation).position === position);
+    const cardToReveal = libraryCards.find((gc) => (gc.location as LibraryLocation).position === position);
 
     if (!cardToReveal) {
       throw new Error(`No card found at library position ${position}`);
     }
 
     // Find the next available revealed position
-    const revealedCards = this.listRevealed();
-    const maxRevealedPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
-    const nextRevealedPosition = maxRevealedPosition + 1;
-
-    // Move card to revealed
-    (cardToReveal as any).location = { type: "Revealed", position: nextRevealedPosition };
+    this.addToRevealed(cardToReveal);
 
     this.validateInvariants();
     return this;
