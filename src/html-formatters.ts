@@ -221,9 +221,9 @@ export function formatDeckReviewHtml(game: GameState): string {
       <!-- Modal Container -->
       <div id="modal-container"></div>
       
-      <div id="game-actions">
+      <div id="start-game-buttons" class="deck-actions">
         <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container" class="start-game-button">Shuffle Up</button>
+        <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
         <form method="post" action="/end-game" style="display: inline;">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
@@ -317,7 +317,7 @@ export function formatActiveGameHtml(game: GameState): string {
       <!-- Modal Container -->
       <div id="modal-container"></div>
       
-      <div id="game-actions">
+      <div id="end-game-actions" class="game-actions">
         <form method="post" action="/restart-game" style="display: inline;">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Restart Game</button>

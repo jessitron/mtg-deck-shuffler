@@ -115,6 +115,7 @@ h1 {
 .deck-actions {
   margin: 30px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
 }
@@ -127,7 +128,12 @@ h1 {
   cursor: pointer;
 }
 
-.deck-actions button:last-child {
+.deck-actions button.start-game-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.deck-actions button {
   background-color: #f44336;
   color: white;
 }
@@ -141,7 +147,7 @@ h1 {
     "command-zone game-details table-section"
     "library-section revealed-cards revealed-cards"
     "hand-section hand-section hand-section"
-    "game-actions game-actions game-actions";
+    "end-game-actions end-game-actions end-game-actions";
   gap: 20px;
   margin: 20px;
   min-height: 600px;
@@ -366,29 +372,19 @@ h1 {
   padding-left: 20px;
 }
 
-#game-actions {
-  grid-area: game-actions;
+#end-game-actions {
+  grid-area: end-game-actions;
   text-align: center;
   padding: 20px;
 }
 
-.game-actions {
+#end-game-actions {
   display: flex;
   gap: 20px;
   justify-content: center;
 }
 
-.game-actions .start-game-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-}
-
-.game-actions button:not(.start-game-button) {
+.game-actions button {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;

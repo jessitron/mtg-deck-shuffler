@@ -40,7 +40,7 @@ div: game-container
    │               │
    └───────────────┘
 
-div: library-section       div: game-actions
+div: library-section       div: start-game-buttons
       ┌───────────┐
      ┌───────────┐│
     ┌───────────┐││
@@ -78,7 +78,7 @@ The library displays the back of a magic card: https://backs.scryfall.io/normal/
 
 ```
 div: game-container
-  div: command-zone       div: game-details           div: table-section
+  div: command-zone       div: game-details           div: mid-game-buttons
    ┌───────────────┐
    │               │        Deck Name
    │               │
@@ -119,7 +119,7 @@ div: hand-section (width 4)
       │        [Play]        [Play]         [Play]                 │
       └────────────────────────────────────────────────────────────┘
 
-div: game-actions
+div: end-game-actions
                    [Restart Game] [Choose Another Deck]
 ```
 
