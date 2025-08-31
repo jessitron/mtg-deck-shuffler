@@ -24,6 +24,40 @@ The 'Let's Play' button brings out the deck details.
 
 At the moment, there's a dropdown for local decks, as referenced in FEATURE-local-decks.md. That file includes desired improvements.
 
+### Second Screen: Deck Review
+
+Here, we have a game in status Not Started.
+
+```
+div: game-container
+  div: command-zone       div: game-details
+   ┌───────────────┐
+   │               │        Deck Name
+   │               │
+   │  Command zone │        other details
+   │               │
+   │               │        Game ID
+   │               │
+   └───────────────┘
+
+div: library-section       div: game-actions
+      ┌───────────┐
+     ┌───────────┐│
+    ┌───────────┐││
+    │           │││
+    │           │││         [Shuffle Up]
+    │           │││
+    │           │││         [Choose Another Deck]
+    │  Library  │││
+    │           │││
+    │           ││┘
+    │           │┘
+    └───────────┘
+      [Search]
+       [Draw]
+
+```
+
 ### Main screen: game in progress
 
 Here is a rough layout for when a game is in progress.
@@ -37,6 +71,8 @@ After the game is started, the Draw button is available. It moves the top card f
 the [Play] button moves a card from Hand or Revealed to the Table.
 
 The [X Cards on table] button (where X is a number of cards on table) displays the same modal as Search, but shows cards on the Table instead of in the Library.
+
+Revealed Cards and Hand sections scroll horizontally if there are enough cards in them.
 
 The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
 
