@@ -119,7 +119,7 @@ h1 {
 }
 
 .start-game-button {
-  background-color: #4caf50;
+  background-color: #4caf50 !important;
   color: white;
 }
 
