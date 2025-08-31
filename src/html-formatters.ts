@@ -220,6 +220,10 @@ export function formatDeckReviewHtml(game: GameState): string {
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search</button>
+          <button class="shuffle-button"
+                  hx-post="/shuffle/${game.gameId}"
+                  hx-target="#game-container"
+                  hx-swap="outerHTML">Shuffle</button>
         </div>
       </div>
 
@@ -300,6 +304,10 @@ export function formatActiveGameHtml(game: GameState): string {
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search</button>
+          <button class="shuffle-button"
+                  hx-post="/shuffle/${game.gameId}"
+                  hx-target="#game-container"
+                  hx-swap="outerHTML">Shuffle</button>
           <button class="draw-button"
                   hx-post="/draw/${game.gameId}"
                   hx-target="#game-container"
