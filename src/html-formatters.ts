@@ -93,26 +93,30 @@ export function formatGamePageHtml(game: GameState): string {
     <script src="/modal.js"></script>
     <script>
       async function playCard(imageUrl, cardName, handPosition, gameId, buttonElement) {
+        let clipboardSuccess = false;
+        
+        // Try to copy to clipboard first, but don't fail if it doesn't work
         try {
-          // Fetch the image as a blob
           const response = await fetch(imageUrl);
-          if (!response.ok) {
-            throw new Error('Failed to fetch image');
+          if (response.ok) {
+            const blob = await response.blob();
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                [blob.type]: blob
+              })
+            ]);
+            clipboardSuccess = true;
           }
-          const blob = await response.blob();
-          
-          // Copy to clipboard
-          await navigator.clipboard.write([
-            new ClipboardItem({
-              [blob.type]: blob
-            })
-          ]);
-          
-          // Show feedback that image was copied
-          buttonElement.textContent = 'Copied!';
+        } catch (clipboardErr) {
+          console.warn('Failed to copy image to clipboard:', clipboardErr);
+          // Continue with backend call even if clipboard fails
+        }
+        
+        // Always call backend to play the card
+        try {
+          buttonElement.textContent = clipboardSuccess ? 'Copied!' : 'Playing...';
           buttonElement.disabled = true;
           
-          // Call backend to remove card from hand and update game state
           const playResponse = await fetch(\`/play-card/\${gameId}/\${handPosition}\`, {
             method: 'POST'
           });
@@ -125,12 +129,13 @@ export function formatGamePageHtml(game: GameState): string {
           const updatedGameHtml = await playResponse.text();
           document.querySelector('.game-header').parentNode.innerHTML = updatedGameHtml;
           
-        } catch (err) {
-          console.error('Failed to play card:', err);
+        } catch (backendErr) {
+          console.error('Failed to play card on backend:', backendErr);
           buttonElement.textContent = 'Error';
           buttonElement.disabled = false;
           setTimeout(() => {
             buttonElement.textContent = 'Play';
+            buttonElement.disabled = false;
           }, 2000);
         }
       }
