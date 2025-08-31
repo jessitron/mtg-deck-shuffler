@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "..")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.get("/choose-deck", async (req, res) => {
   try {
@@ -263,7 +263,7 @@ app.post("/draw/:gameId", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    
+
     if (game.status !== "Active") {
       res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
       return;
@@ -283,7 +283,7 @@ app.post("/draw/:gameId", async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error("Error drawing card:", error);
-    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : 'Could not draw card'}</div>`);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
   }
 });
 
@@ -299,7 +299,7 @@ app.post("/play-card/:gameId/:handPosition", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    
+
     if (game.status !== "Active") {
       res.status(400).send(`<div>Cannot play card: Game is not active</div>`);
       return;
@@ -320,7 +320,7 @@ app.post("/play-card/:gameId/:handPosition", async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error("Error playing card:", error);
-    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : 'Could not play card'}</div>`);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not play card"}</div>`);
   }
 });
 
