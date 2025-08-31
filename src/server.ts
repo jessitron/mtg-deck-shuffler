@@ -287,6 +287,43 @@ app.post("/draw/:gameId", async (req, res) => {
   }
 });
 
+app.post("/play-card/:gameId/:handPosition", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const handPosition = parseInt(req.params.handPosition);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    
+    if (game.status !== "Active") {
+      res.status(400).send(`<div>Cannot play card: Game is not active</div>`);
+      return;
+    }
+
+    game.playCardFromHand(handPosition);
+    const persistedGameState = game.toPersistedGameState();
+    trace.getActiveSpan()?.setAttributes({
+      "game.status": game.status,
+      "game.cardsInLibrary": game.listLibrary().length,
+      "game.cardsInHand": game.listHand().length,
+      "game.full_json": JSON.stringify(persistedGameState),
+    });
+
+    await persistStatePort.save(persistedGameState);
+
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error playing card:", error);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : 'Could not play card'}</div>`);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

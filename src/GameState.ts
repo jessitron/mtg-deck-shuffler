@@ -174,6 +174,21 @@ export class GameState {
     return this;
   }
 
+  public playCardFromHand(handPosition: number): this {
+    const handCards = this.listHand();
+    const cardToPlay = handCards.find(gc => gc.location.position === handPosition);
+
+    if (!cardToPlay) {
+      throw new Error(`No card found at hand position ${handPosition}`);
+    }
+
+    // Move card to table
+    (cardToPlay as any).location = { type: "Table" };
+
+    this.validateInvariants();
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       gameId: this.gameId,

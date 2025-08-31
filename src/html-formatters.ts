@@ -92,7 +92,7 @@ export function formatGamePageHtml(game: GameState): string {
     <script src="/htmx.js"></script>
     <script src="/modal.js"></script>
     <script>
-      async function playCard(imageUrl, cardName, buttonElement) {
+      async function playCard(imageUrl, cardName, handPosition, gameId, buttonElement) {
         try {
           // Fetch the image as a blob
           const response = await fetch(imageUrl);
@@ -108,22 +108,27 @@ export function formatGamePageHtml(game: GameState): string {
             })
           ]);
           
-          // Remove the card from the hand visually
-          const cardContainer = buttonElement.parentElement;
-          cardContainer.style.opacity = '0.5';
-          cardContainer.style.transition = 'opacity 0.3s ease';
-          
-          // Show feedback
+          // Show feedback that image was copied
           buttonElement.textContent = 'Copied!';
           buttonElement.disabled = true;
           
-          setTimeout(() => {
-            cardContainer.remove();
-          }, 1000);
+          // Call backend to remove card from hand and update game state
+          const playResponse = await fetch(\`/play-card/\${gameId}/\${handPosition}\`, {
+            method: 'POST'
+          });
+          
+          if (!playResponse.ok) {
+            throw new Error('Failed to play card on server');
+          }
+          
+          // Replace the game content with the updated state
+          const updatedGameHtml = await playResponse.text();
+          document.querySelector('.game-header').parentNode.innerHTML = updatedGameHtml;
           
         } catch (err) {
-          console.error('Failed to copy image to clipboard:', err);
+          console.error('Failed to play card:', err);
           buttonElement.textContent = 'Error';
+          buttonElement.disabled = false;
           setTimeout(() => {
             buttonElement.textContent = 'Play';
           }, 2000);
@@ -282,7 +287,7 @@ export function formatGameHtml(game: GameState): string {
                       class="hand-card"
                       title="${gameCard.card.name}" />
                      <button class="play-button"
-                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', this)"
+                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${game.gameId}', this)"
                              title="Copy image and remove from hand">
                        Play
                      </button>
