@@ -208,16 +208,16 @@ export function formatGameHtml(game: GameState): string {
               <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
               <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
             </div>
-            <p data-testid="library-label">Library</p>
-          </div>
-        </div>
-        
-        <div style="text-align: center; margin: 20px 0;">
+                    <div style="text-align: center; margin: 20px 0;">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search Library</button>
         </div>
+          </div>
+        </div>
+        
+
 
         <!-- Modal Container -->
         <div id="modal-container"></div>
