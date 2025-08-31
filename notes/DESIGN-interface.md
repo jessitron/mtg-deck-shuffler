@@ -38,32 +38,37 @@ the [Play] button moves a card from Hand or Revealed to the Table.
 
 The [X Cards on table] button (where X is a number of cards on table) displays the same modal as Search, but shows cards on the Table instead of in the Library.
 
-```
+The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
 
+```
+div: game-container
+  div: command-zone       div: game-details           div: table-section
    ┌───────────────┐
    │               │        Deck Name
    │               │
-   │  Command zone │        other details
+   │  Command zone │        other details             [X Cards on table]
    │               │
    │               │        Game ID
    │               │
    └───────────────┘
 
-      ┌───────────┐   ┌────────────────────────────────┐
-     ┌───────────┐│   │        Revealed Cards          │
-    ┌───────────┐││   │                                │
-    │           │││   │   ┌────────┐   ┌───────┐       │
-    │           │││   │   │        │   │       │       │
-    │           │││   │   │        │   │       │       │
-    │           │││   │   │        │   │       │       │ [X Cards on table]
-    │  Library  │││   │   │        │   │       │       │
-    │           │││   │   │        │   │       │       │
-    │           ││┘   │   └────────┘   └───────┘       │
-    │           │┘    │                                │
-    └───────────┘     └────────────────────────────────┘
+div: library-section          div: revealed-cards-section (width 3)
+      ┌───────────┐     ┌────────────────────────────────┐
+     ┌───────────┐│     │        Revealed Cards          │
+    ┌───────────┐││     │                                │
+    │           │││     │   ┌────────┐   ┌───────┐       │
+    │           │││     │   │        │   │       │       │
+    │           │││     │   │        │   │       │       │
+    │           │││     │   │        │   │       │       │
+    │  Library  │││     │   │        │   │       │       │
+    │           │││     │   │        │   │       │       │
+    │           ││┘     │   └────────┘   └───────┘       │
+    │           │┘      │                                │
+    └───────────┘       └────────────────────────────────┘
       [Search]
        [Draw]
 
+div: hand-section (width 4)
       ┌────────────────────────────────────────────────────────────┐
       │                                                            │
       │                    Hand                                    │
@@ -78,13 +83,11 @@ The [X Cards on table] button (where X is a number of cards on table) displays t
       │        [Play]        [Play]         [Play]                 │
       └────────────────────────────────────────────────────────────┘
 
-
-
-
+div: game-actions
                    [Restart Game] [Choose Another Deck]
 ```
 
-The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
+## Layout
 
 ## Search Library Modal
 
