@@ -236,11 +236,18 @@ export function formatGameHtml(game: GameState): string {
             ${game
               .listHand()
               .map(
-                (gameCard: any) =>
-                  `<img src="${getCardImageUrl(gameCard.card.uid)}"
-                   alt="${gameCard.card.name}"
-                   class="hand-card"
-                   title="${gameCard.card.name}" />`
+                (gameCard: any, index: number) =>
+                  `<div class="hand-card-container">
+                     <img src="${getCardImageUrl(gameCard.card.uid)}"
+                      alt="${gameCard.card.name}"
+                      class="hand-card"
+                      title="${gameCard.card.name}" />
+                     <button class="play-button"
+                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', this)"
+                             title="Copy image and remove from hand">
+                       Play
+                     </button>
+                   </div>`
               )
               .join("")}
           </div>
