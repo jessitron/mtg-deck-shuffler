@@ -53,7 +53,8 @@
       "Bash(npm test:*)",
       "mcp__playwright__browser_network_requests",
       "mcp__playwright__browser_wait_for",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "mcp__playwright__browser_console_messages"
     ],
     "deny": []
   }

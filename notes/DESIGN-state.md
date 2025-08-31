@@ -65,8 +65,8 @@ Operations possible on game state:
 - move to hand (for any revealed card): move this card from Revealed to the last position in Hand
 - move to table (for any revealed card or any card in hand): move the card to Table
 - return from table (for any card in Table): move the card to Revealed
-- move left in hand (for any card in Hand, except the first): move this card one position to the left in Hand. Check: same number of cards in Hand. One more card with larger position than this one.
-- move right in hand (for any card in Hand, except the last): move this card one position to the right in Hand. Check: same number of cards in Hand. One more card to with smaller position than this one.
+- move left in hand (for any card in Hand, except the first): move this card one position to the left in Hand. Swap it with the card to the left. Check: same number of cards in Hand. One more card with larger position than this one.
+- move right in hand (for any card in Hand, except the last): move this card one position to the right in Hand. Swap it with the card to the right. Check: same number of cards in Hand. One more card to with smaller position than this one.
 - return all revealed cards to bottom of library in a random order
 - choose card from hand at random
 - exile face-down (store where other players can't see, copy a card-back... ideally with a number on it)
