@@ -235,10 +235,11 @@ app.post("/reveal-card/:gameId/:cardIndex", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    // TODO: Implement reveal card functionality
-    console.log(`Reveal card at position: ${cardIndex} in game ${gameId}`);
+    game.reveal(cardIndex);
+    
+    // Persist the updated state
+    await persistStatePort.save(game.toPersistedGameState());
 
-    // For now, just return the current game state
     const html = formatGameHtml(game);
     res.send(html);
   } catch (error) {
