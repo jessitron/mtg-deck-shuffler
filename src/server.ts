@@ -160,18 +160,21 @@ app.post("/restart-game", async (req, res) => {
 });
 
 app.post("/end-game", async (req, res) => {
-  const deckId = req.body["deck-id"];
-  // TODO: get this stuff from game state !!!
+  const gameId: number = parseInt(req.body["game-id"]);
+
   try {
-    const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
-    const html = formatDeckHtml(deck);
-    res.send(html);
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (persistedGame) {
+      // Mark the game as ended by updating its status
+      const game = GameState.fromPersistedGameState(persistedGame);
+      // TODO: Add an "ended" status to GameState if needed
+      await persistStatePort.save(game.toPersistedGameState());
+    }
+
+    res.redirect("/");
   } catch (error) {
     console.error("Error ending game:", error);
-    res.send(`<div>
-        <p>Error: Could not reload deck ${deckId}</p>
-        <a href="/">Try another deck</a>
-    </div>`);
+    res.redirect("/");
   }
 });
 

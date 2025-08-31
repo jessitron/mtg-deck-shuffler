@@ -63,7 +63,9 @@ export function formatDeckHtml(deck: Deck): string {
         <div class="deck-actions">
           <input type="hidden" name="deck-id" value="${deck.id}" />
           <button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
-          <button onclick="location.reload()">Choose Another Deck</button>
+          <form method="post" action="/" style="display: inline;">
+            <button type="submit">Choose Another Deck</button>
+          </form>
         </div>
     </div>`;
 }
@@ -116,12 +118,19 @@ export function formatGameHtml(game: GameState): string {
     ? `<div class="game-actions">
          <input type="hidden" name="game-id" value="${game.gameId}" />
          <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container" class="start-game-button">Shuffle Up</button>
-         <button onclick="location.reload()">Choose Another Deck</button>
+         <form method="post" action="/end-game" style="display: inline;">
+           <input type="hidden" name="game-id" value="${game.gameId}" />
+           <button type="submit">Choose Another Deck</button>
+         </form>
        </div>`
     : `<div class="game-actions">
-         <form method="post" action="/restart-game">
+         <form method="post" action="/restart-game" style="display: inline;">
            <input type="hidden" name="game-id" value="${game.gameId}" />
            <button type="submit">Restart Game</button>
+         </form>
+         <form method="post" action="/end-game" style="display: inline;">
+           <input type="hidden" name="game-id" value="${game.gameId}" />
+           <button type="submit">Choose Another Deck</button>
          </form>
        </div>`;
 
