@@ -114,6 +114,51 @@ app.get("/game/:gameId", async (req, res) => {
   }
 });
 
+app.post("/restart-game", async (req, res) => {
+  const gameId: number = parseInt(req.body["game-id"]);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>
+          <p>Game ${gameId} not found</p>
+          <a href="/">Start a new game</a>
+      </div>`);
+      return;
+    }
+
+    // Create new game with same deck data
+    let deckRequest: DeckRetrievalRequest;
+    if (persistedGame.deckProvenance.deckSource === "archidekt") {
+      // Extract archidekt deck ID from sourceUrl like "https://archidekt.com/decks/14669648"
+      const match = persistedGame.deckProvenance.sourceUrl.match(/\/decks\/(\d+)/);
+      if (!match) {
+        throw new Error(`Cannot extract archidekt deck ID from URL: ${persistedGame.deckProvenance.sourceUrl}`);
+      }
+      deckRequest = { deckSource: "archidekt", archidektDeckId: match[1] };
+    } else if (persistedGame.deckProvenance.deckSource === "local") {
+      // Extract local file path from sourceUrl like "local://path/to/file.json"
+      const localFile = persistedGame.deckProvenance.sourceUrl.replace("local://", "");
+      deckRequest = { deckSource: "local", localFile };
+    } else {
+      throw new Error(`Unsupported deck source: ${persistedGame.deckProvenance.deckSource}`);
+    }
+    
+    const deck = await deckRetriever.retrieveDeck(deckRequest);
+    const newGameId = persistStatePort.newGameId();
+    const newGame = new GameState(newGameId, deck);
+    await persistStatePort.save(newGame.toPersistedGameState());
+
+    res.redirect(`/game/${newGameId}`);
+  } catch (error) {
+    console.error("Error restarting game:", error);
+    res.status(500).send(`<div>
+        <p>Error: Could not restart game ${gameId}</p>
+        <a href="/">Try starting a new game</a>
+    </div>`);
+  }
+});
+
 app.post("/end-game", async (req, res) => {
   const deckId = req.body["deck-id"];
   // TODO: get this stuff from game state !!!
