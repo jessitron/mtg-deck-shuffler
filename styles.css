@@ -118,10 +118,6 @@ h1 {
   cursor: pointer;
 }
 
-.start-game-button {
-  background-color: #4caf50;
-  color: white;
-}
 
 .deck-actions button:last-child {
   background-color: #f44336;
@@ -270,12 +266,22 @@ h1 {
   text-align: center;
 }
 
-.game-actions button {
+.game-actions .start-game-button {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #f44336;
+  background-color: #4caf50;
+  color: white;
+}
+
+.game-actions button:not(.start-game-button) {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #6c757d;
   color: white;
 }
