@@ -67,6 +67,10 @@ Operations possible on game state:
 - return from table (for any card in Table): move the card to Revealed
 - move left in hand (for any card in Hand, except the first): move this card one position to the left in Hand. Check: same number of cards in Hand. One more card with larger position than this one.
 - move right in hand (for any card in Hand, except the last): move this card one position to the right in Hand. Check: same number of cards in Hand. One more card to with smaller position than this one.
+- return all revealed cards to bottom of library in a random order
+- choose card from hand at random
+- exile face-down (store where other players can't see, copy a card-back... ideally with a number on it)
+- probably will never implement: Gonti, Lord of Luxury lets an opponent exile your card face-down, they see it, you don't.
 
 Views on game state include:
 
