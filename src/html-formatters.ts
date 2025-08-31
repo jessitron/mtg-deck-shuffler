@@ -117,19 +117,6 @@ export function formatGamePageHtml(game: GameState): string {
           button.disabled = true;
         }
       });
-
-      // Handle errors from HTMX requests
-      document.addEventListener('htmx:responseError', function(evt) {
-        if (evt.detail.elt.classList.contains('play-button')) {
-          const button = evt.detail.elt;
-          button.textContent = 'Error';
-          button.disabled = false;
-          setTimeout(() => {
-            button.textContent = 'Play';
-            button.disabled = false;
-          }, 2000);
-        }
-      });
     </script>
   </head>
   <body>
