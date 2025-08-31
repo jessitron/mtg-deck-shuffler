@@ -240,11 +240,20 @@ export function formatActiveGameHtml(game: GameState): string {
 
   const cardCountInfo = `${game.totalCards} cards`;
 
+  const revealedCards = game.listRevealed();
   const revealedCardsHtml = `
     <div class="revealed-cards-section">
-      <h3>Revealed Cards</h3>
+      <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ''}</h3>
       <div class="revealed-cards-area">
-        <!-- Placeholder for revealed cards -->
+        ${revealedCards.map((gameCard: any) => 
+          `<div class="revealed-card-container">
+             <img src="${getCardImageUrl(gameCard.card.uid)}"
+                  alt="${gameCard.card.name}"
+                  class="revealed-card"
+                  title="${gameCard.card.name}" />
+           </div>`
+        ).join('')}
+        ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ''}
       </div>
     </div>`;
 
