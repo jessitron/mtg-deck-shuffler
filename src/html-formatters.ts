@@ -270,17 +270,6 @@ export function formatGameHtml(game: GameState): string {
                       hx-target="#game-container"
                       hx-swap="outerHTML">Draw</button>
               `
-                  : game.status === "NotStarted"
-                  ? `
-              <div style="margin-top: 20px;">
-                <input type="hidden" name="game-id" value="${game.gameId}" />
-                <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container" class="start-game-button">Shuffle Up</button>
-                <form method="post" action="/end-game" style="display: inline; margin-left: 10px;">
-                  <input type="hidden" name="game-id" value="${game.gameId}" />
-                  <button type="submit">Choose Another Deck</button>
-                </form>
-              </div>
-              `
                   : ""
               }
             </div>
@@ -303,9 +292,7 @@ export function formatGameHtml(game: GameState): string {
                       class="hand-card"
                       title="${gameCard.card.name}" />
                      <button class="play-button"
-                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${
-                    game.gameId
-                  }', this)"
+                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${game.gameId}', this)"
                              title="Copy image and remove from hand">
                        Play
                      </button>
@@ -320,8 +307,8 @@ export function formatGameHtml(game: GameState): string {
 
         <!-- Modal Container -->
         <div id="modal-container"></div>
-
-        ${game.status === "Active" ? gameActions : ""}
+        
+        ${gameActions}
       </div>
     </div>`;
 }
