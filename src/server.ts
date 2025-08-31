@@ -47,9 +47,11 @@ app.post("/deck", async (req, res) => {
 
   try {
     const deck = await deckRetriever.retrieveDeck(deckRequest);
-    const html = formatDeckHtml(deck);
+    const gameId = persistStatePort.newGameId();
+    const game = new GameState(gameId, deck);
+    await persistStatePort.save(game.toPersistedGameState());
 
-    res.send(html);
+    res.redirect(`/game/${gameId}`);
   } catch (error) {
     console.error("Error fetching deck:", error);
     res.send(`<div>
