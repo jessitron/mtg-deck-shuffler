@@ -80,15 +80,28 @@ export function formatGameHtml(game: GameState): string {
     )
     .join("");
 
-  return `<div id="game-state">
+  const gameActions = game.status === "NotStarted" 
+    ? `<div class="game-actions">
+         <input type="hidden" name="game-id" value="${game.gameId}" />
+         <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container" class="start-game-button">Shuffle Up</button>
+         <button onclick="location.reload()">Choose Another Deck</button>
+       </div>`
+    : `<div class="game-actions">
+         <input type="hidden" name="game-id" value="${game.gameId}" />
+         <button hx-post="/restart-game" hx-include="closest div">Restart Game</button>
+       </div>`;
+
+  return `<div id="game-container">
+      <div id="game-state">
         <div class="game-header">
           <div class="commander-info">
             ${commanderImageHtml}
           </div>
           <div class="deck-info-right">
-            <h2><a href="game.deckProvenance.sourceUrl" target="_blank">${game.deckProvenance.sourceUrl}</a></h2>
+            <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
             <p>${cardCountInfo}</p>
             <p><strong>Game ID:</strong> ${game.gameId}</p>
+            <p><strong>Status:</strong> ${game.status === "NotStarted" ? "Deck Review" : game.status}</p>
           </div>
         </div>
         
@@ -110,9 +123,7 @@ export function formatGameHtml(game: GameState): string {
           </ol>
         </details>
         
-        <div class="game-actions">
-          <button hx-post="/end-game" hx-include="closest div" hx-target="#deck-input">End Game</button>
-        </div>
-        <input type="hidden" name="deck-id" value="${game.deckId}" />
+        ${gameActions}
+      </div>
     </div>`;
 }

@@ -62,20 +62,29 @@ app.post("/deck", async (req, res) => {
 });
 
 app.post("/start-game", async (req, res) => {
-  const deckId: string = req.body["deck-id"];
+  const gameId: number = parseInt(req.body["game-id"]);
 
   try {
-    const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
-    const gameId = persistStatePort.newGameId();
-    const game = new GameState(gameId, deck);
-    const html = formatGameHtml(game);
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>
+          <p>Game ${gameId} not found</p>
+          <a href="/">Start a new game</a>
+      </div>`);
+      return;
+    }
 
+    const game = GameState.fromPersistedGameState(persistedGame);
+    game.startGame();
+    await persistStatePort.save(game.toPersistedGameState());
+
+    const html = formatGameHtml(game);
     res.send(html);
   } catch (error) {
     console.error("Error starting game:", error);
     res.send(`<div>
-        <p>Error: Could not start game with deck ${deckId}</p>
-        <a href="/">Try another deck</a>
+        <p>Error: Could not start game ${gameId}</p>
+        <a href="/">Try starting a new game</a>
     </div>`);
   }
 });
