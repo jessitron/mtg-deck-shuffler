@@ -24,7 +24,7 @@ export interface Library {
   count: number;
 }
 
-export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "normal"): string {
+export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png"): string {
   const extension = format === "png" ? "png" : "jpg";
   const firstTwo = uid.substring(0, 1);
   const nextTwo = uid.substring(1, 2);
