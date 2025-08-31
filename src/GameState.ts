@@ -120,6 +120,10 @@ export class GameState {
     return this.gameCards.filter(isInHand).sort((a, b) => a.location.position - b.location.position);
   }
 
+  public listRevealed(): readonly (GameCard & { location: RevealedLocation })[] {
+    return this.gameCards.filter(isRevealed).sort((a, b) => a.location.position - b.location.position);
+  }
+
   public listTable(): readonly (GameCard & { location: TableLocation })[] {
     return this.gameCards.filter(isOnTable);
   }
@@ -188,6 +192,26 @@ export class GameState {
 
     // Move card to table
     (cardToPlay as any).location = { type: "Table" };
+
+    this.validateInvariants();
+    return this;
+  }
+
+  public reveal(position: number): this {
+    const libraryCards = this.listLibrary();
+    const cardToReveal = libraryCards.find(gc => (gc.location as LibraryLocation).position === position);
+
+    if (!cardToReveal) {
+      throw new Error(`No card found at library position ${position}`);
+    }
+
+    // Find the next available revealed position
+    const revealedCards = this.listRevealed();
+    const maxRevealedPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
+    const nextRevealedPosition = maxRevealedPosition + 1;
+
+    // Move card to revealed
+    (cardToReveal as any).location = { type: "Revealed", position: nextRevealedPosition };
 
     this.validateInvariants();
     return this;

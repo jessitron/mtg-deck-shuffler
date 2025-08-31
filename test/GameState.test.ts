@@ -412,4 +412,122 @@ describe("GameState", () => {
     assert.strictEqual(handAfter.length, 1);
     assert.strictEqual(handAfter[0].card.name, topCardBefore.card.name);
   });
+
+  test("reveal moves card from Library to Revealed", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Cards are sorted: Ancestral Recall (pos 0), Black Lotus (pos 1), Lightning Bolt (pos 2)
+    const libraryBefore = gameState.listLibrary();
+    assert.strictEqual(libraryBefore.length, 3);
+    assert.strictEqual(libraryBefore[1].card.name, "Black Lotus"); // position 1
+    
+    const revealedBefore = gameState.listRevealed();
+    assert.strictEqual(revealedBefore.length, 0);
+    
+    gameState.reveal(1); // reveal Black Lotus
+    
+    // Check library: should have 2 cards now
+    const libraryAfter = gameState.listLibrary();
+    assert.strictEqual(libraryAfter.length, 2);
+    assert.strictEqual(libraryAfter[0].card.name, "Ancestral Recall"); // position 0
+    assert.strictEqual(libraryAfter[1].card.name, "Lightning Bolt"); // position 2
+    
+    // Check revealed: should have 1 card now
+    const revealedAfter = gameState.listRevealed();
+    assert.strictEqual(revealedAfter.length, 1);
+    assert.strictEqual(revealedAfter[0].card.name, "Black Lotus");
+    assert.strictEqual((revealedAfter[0].location as RevealedLocation).position, 0);
+  });
+
+  test("reveal throws error when position does not exist in Library", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 2,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    assert.throws(() => {
+      gameState.reveal(5); // position 5 doesn't exist
+    }, /No card found at library position 5/);
+  });
+
+  test("multiple reveals position cards correctly in Revealed", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Reveal first card (position 0: Ancestral Recall)
+    gameState.reveal(0);
+    let revealed = gameState.listRevealed();
+    assert.strictEqual(revealed.length, 1);
+    assert.strictEqual(revealed[0].card.name, "Ancestral Recall");
+    assert.strictEqual((revealed[0].location as RevealedLocation).position, 0);
+    
+    // Reveal second card (position 1: Black Lotus)
+    gameState.reveal(1);
+    revealed = gameState.listRevealed();
+    assert.strictEqual(revealed.length, 2);
+    assert.strictEqual(revealed[0].card.name, "Ancestral Recall"); // position 0
+    assert.strictEqual(revealed[1].card.name, "Black Lotus"); // position 1
+    assert.strictEqual((revealed[1].location as RevealedLocation).position, 1);
+    
+    // Library should have 1 card remaining
+    const library = gameState.listLibrary();
+    assert.strictEqual(library.length, 1);
+    assert.strictEqual(library[0].card.name, "Lightning Bolt");
+  });
+
+  test("reveal works with any library position", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Reveal the last card first
+    gameState.reveal(2); // Lightning Bolt at position 2
+    
+    let revealed = gameState.listRevealed();
+    assert.strictEqual(revealed.length, 1);
+    assert.strictEqual(revealed[0].card.name, "Lightning Bolt");
+    
+    // Then reveal the first card
+    gameState.reveal(0); // Ancestral Recall at position 0
+    
+    revealed = gameState.listRevealed();
+    assert.strictEqual(revealed.length, 2);
+    assert.strictEqual(revealed[0].card.name, "Lightning Bolt"); // position 0 in revealed
+    assert.strictEqual(revealed[1].card.name, "Ancestral Recall"); // position 1 in revealed
+    
+    // Library should have 1 card remaining
+    const library = gameState.listLibrary();
+    assert.strictEqual(library.length, 1);
+    assert.strictEqual(library[0].card.name, "Black Lotus"); // position 1 originally
+  });
 });
