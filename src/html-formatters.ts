@@ -14,10 +14,12 @@ export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
 
 function formatArchidektInput() {
   return `<div class="deck-input-section">
-      <label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
-      <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" class="deck-input" />
-      <input type="hidden" name="deck-source" value="archidekt" />
-      <button hx-post="/deck" hx-include="closest div" hx-target="#deck-input" class="lets-play-button">Let's Play (from Archidekt)</button>
+      <form method="POST" action="/deck">
+        <label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
+        <input type="text" id="deck-number" name="deck-number" value="14669648" placeholder="14669648" class="deck-input" />
+        <input type="hidden" name="deck-source" value="archidekt" />
+        <button type="submit" class="lets-play-button">Let's Play (from Archidekt)</button>
+      </form>
    </div>`;
 }
 
@@ -28,10 +30,12 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
 
   const options = availableDecks.filter((o) => o.deckSource === "local").map((o) => `<option value="${o.localFile}">${o.description}</option>`);
   return `<div class="deck-input-section">
-      <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label> 
-      <input type="hidden" name="deck-source" value="local" />
-      <select id="local-deck" name="local-deck" class="deck-select">${options}</select>
-      <button id="lets-play-local" hx-post="/deck" hx-include="closest div" hx-target="#deck-input" class="lets-play-button">Let's Play</button>
+      <form method="POST" action="/deck">
+        <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label> 
+        <input type="hidden" name="deck-source" value="local" />
+        <select id="local-deck" name="local-deck" class="deck-select">${options}</select>
+        <button type="submit" class="lets-play-button">Let's Play</button>
+      </form>
     </div>`;
 }
 
