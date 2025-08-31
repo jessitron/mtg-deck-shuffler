@@ -32,6 +32,8 @@ Revealed Cards is not always visible. Hand starts empty.
 
 The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
 
+After the game is started, the Draw button is available. It moves the top card from Library to Hand.
+
 ```
 
    ┌───────────────┐
@@ -55,7 +57,8 @@ The Search button is available even before the game is started. It makes visible
          │           ││┘   │   └────────┘   └───────┘       │
          │           │┘    │                                │
          └───────────┘     └────────────────────────────────┘
-          [Search]
+           [Search]
+            [Draw]
 
       ┌────────────────────────────────────────────────────────────┐
       │                                                            │
@@ -145,23 +148,3 @@ Each card displays:
 
 - **Before game starts (Deck Review)**: Shows card list without action buttons
 - **During active game**: Shows card list with Reveal and Put in Hand buttons for each card
-
-### Implementation Status
-
-✅ **Completed:**
-
-- Modal dialog structure and styling
-- Open/close functionality with multiple interaction methods
-- Card list display with position numbers
-- Gatherer links for card names
-- Game state-aware action button display
-- Keyboard accessibility (Escape key)
-- Click-outside-to-close functionality
-
-🔄 **Future Enhancements:**
-
-- Search/filter functionality within the modal
-- Sorting by card attributes (name, type, mana cost, etc.)
-- Actual implementation of Reveal and Put in Hand actions
-- Card image thumbnails
-- Advanced card information display

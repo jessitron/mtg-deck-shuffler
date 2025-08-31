@@ -50,9 +50,12 @@ Operations possible on game state:
 
 - search library: list all cards in the library, ordered by position.
 
-## Not Yet
+## Phase 4
 
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
+
+## Not Yet
+
 - reveal: move the top card from Library to Revealed. Check: one fewer card in Library, one more card in Revealed.
 - return to bottom (for any revealed card): move this card from Revealed to the last position in Library. Check: one fewer card in Revealed, one more card in Library. The card now has the highest-numbered position in Library.
 - return to top (for any revealed card): move this card from Revealed to the top position in Library. Check: one fewer card in Revealed, one more card in Library. The card now has position Library(0).

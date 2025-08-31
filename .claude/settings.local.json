@@ -52,7 +52,8 @@
       "Bash(find:*)",
       "Bash(npm test:*)",
       "mcp__playwright__browser_network_requests",
-      "mcp__playwright__browser_wait_for"
+      "mcp__playwright__browser_wait_for",
+      "Bash(timeout:*)"
     ],
     "deny": []
   }
