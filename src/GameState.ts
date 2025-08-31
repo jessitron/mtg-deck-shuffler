@@ -83,6 +83,7 @@ export class GameState {
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
 
+    // note that positions must be unique, but they are not required to be a contiguous set. There can be gaps.
     for (const gameCard of this.gameCards) {
       const location = gameCard.location;
       if (location.type !== "Table") {
@@ -148,6 +149,14 @@ export class GameState {
     return this;
   }
 
+  private addToHand(gameCard: GameCard): this {
+    const handCards = this.listHand();
+    const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) : -1;
+    const nextHandPosition = maxHandPosition + 1;
+    gameCard.location = { type: "Hand", position: nextHandPosition };
+    return this;
+  }
+
   public draw(): this {
     const libraryCards = this.listLibrary();
 
@@ -159,12 +168,7 @@ export class GameState {
     const topCard = libraryCards[0];
 
     // Find the next available hand position
-    const handCards = this.listHand();
-    const maxHandPosition = Math.max(...handCards.map((gc) => gc.location.position)) || -1;
-    const nextHandPosition = maxHandPosition + 1;
-
-    // Move the card from Library to Hand
-    topCard.location = { type: "Hand", position: nextHandPosition };
+    this.addToHand(topCard);
 
     this.validateInvariants();
     return this;
