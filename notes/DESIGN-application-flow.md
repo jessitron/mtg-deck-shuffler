@@ -6,7 +6,7 @@
 │   (Entry Point) │                           │
 └─────────────────┘                           │
          │                                    │
-         │ Select/Load Deck                   │
+         │ Let's Play                         │
          ▼                                    │
 ┌─────────────────┐                           │
 │   Deck Review   │                           │
@@ -50,7 +50,7 @@ The entry point where users choose which deck to load for their game session.
 
 **Actions:**
 
-- Select/load a deck
+- Let's Play (choose a deck and create a game)
 
 **Navigation:**
 
@@ -101,7 +101,7 @@ The active game screen where gameplay occurs.
 
 ## Key State Transitions
 
-- **Deck Selection → Deck Review:** Deck is loaded, game exists but is Not Started
+- **Deck Selection → Deck Review:** "Let's Play" clicked, deck is loaded, game exists but is Not Started
 - **Deck Review → Play Game:** Library gets shuffled, Game ID added to URL
 - **Play Game → Play Game (restart):** Game state reinitialized
 - **Any screen → Deck Selection:** Via Quit/Choose Another Deck buttons

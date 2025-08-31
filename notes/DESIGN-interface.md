@@ -15,10 +15,10 @@ The deck number defaults to my favorite deck.
 
 ```
         *Woohoo it's Magic time!*
-  Enter Archidekt Deck Number: [__14669648_______] [Load Deck]
+  Enter Archidekt Deck Number: [__14669648_______] [Let's Play]
 ```
 
-The 'Load Deck' button brings out the deck details.
+The 'Let's Play' button brings out the deck details.
 
 At the moment, there's a dropdown for local decks, as referenced in FEATURE-local-decks.md. That file includes desired improvements.
 

@@ -1,4 +1,4 @@
-# Load decks from the local filesystem
+# Load decks from the local filesystem (Let's Play feature)
 
 This feature will make it possible to run this app on an airplane.
 

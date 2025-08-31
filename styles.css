@@ -46,7 +46,7 @@ h1 {
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
-.load-deck-button {
+.lets-play-button {
   width: 100%;
   padding: 15px;
   font-size: 1.1rem;
@@ -59,7 +59,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.load-deck-button:hover {
+.lets-play-button:hover {
   background-color: #45a049;
 }
 
