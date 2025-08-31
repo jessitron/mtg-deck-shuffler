@@ -89,7 +89,7 @@ The Search button opens a modal dialog that displays the library contents in a u
 │    │                    Library Contents                         ×   │     │
 │    ├─────────────────────────────────────────────────────────────────┤     │
 │    │                                                             │     │
-│    │  100 cards in library, ordered by position                 │     │
+│    │  99 cards in library, ordered by position                 │     │
 │    │                                                             │     │
 │    │  1  Academy Manufactor                    [Reveal] [Put in Hand] │     │
 │    │  2  Adventurous Impulse                   [Reveal] [Put in Hand] │     │

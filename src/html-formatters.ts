@@ -99,14 +99,8 @@ export function formatGamePageHtml(game: GameState): string {
 </html>`;
 }
 
-export function formatGameHtml(game: GameState): string {
-  const commanderImageHtml =
-    game.commanders.length > 0
-      ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
-      : `<div class="commander-placeholder">No Commander</div>`;
-
+export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
-  const cardCountInfo = `${game.totalCards} cards`;
 
   const libraryCardList = libraryCards
     .map(
@@ -122,8 +116,14 @@ export function formatGameHtml(game: GameState): string {
             game.status === "Active"
               ? `
           <div class="card-actions">
-            <button class="card-action-button" onclick="revealCard(${index})">Reveal</button>
-            <button class="card-action-button secondary" onclick="putInHand(${index})">Put in Hand</button>
+            <button class="card-action-button"
+                    hx-post="/reveal-card/${game.gameId}/${index}"
+                    hx-target="#game-container"
+                    hx-swap="outerHTML">Reveal</button>
+            <button class="card-action-button secondary"
+                    hx-post="/put-in-hand/${game.gameId}/${index}"
+                    hx-target="#game-container"
+                    hx-swap="outerHTML">Put in Hand</button>
           </div>
           `
               : ""
@@ -131,6 +131,40 @@ export function formatGameHtml(game: GameState): string {
         </li>`
     )
     .join("");
+
+  return `<div class="modal-overlay"
+               hx-get="/close-modal"
+               hx-target="#modal-container"
+               hx-swap="innerHTML"
+               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+               tabindex="0">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title">Library Contents</h2>
+        <button class="modal-close"
+                hx-get="/close-modal"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+          ${libraryCards.length} cards in library, ordered by position
+        </p>
+        <ul class="library-search-list">
+          ${libraryCardList}
+        </ul>
+      </div>
+    </div>
+  </div>`;
+}
+
+export function formatGameHtml(game: GameState): string {
+  const commanderImageHtml =
+    game.commanders.length > 0
+      ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      : `<div class="commander-placeholder">No Commander</div>`;
+
+  const cardCountInfo = `${game.totalCards} cards`;
 
   const gameActions =
     game.status === "NotStarted"
@@ -179,26 +213,14 @@ export function formatGameHtml(game: GameState): string {
         </div>
         
         <div style="text-align: center; margin: 20px 0;">
-          <button class="search-button" onclick="openLibraryModal()">Search Library</button>
+          <button class="search-button"
+                  hx-get="/library-modal/${game.gameId}"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML">Search Library</button>
         </div>
 
-        <!-- Library Search Modal -->
-        <div id="library-modal" class="modal-overlay" style="display: none;">
-          <div class="modal-dialog">
-            <div class="modal-header">
-              <h2 class="modal-title">Library Contents</h2>
-              <button class="modal-close" onclick="closeLibraryModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-              <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
-                ${libraryCards.length} cards in library, ordered by position
-              </p>
-              <ul class="library-search-list">
-                ${libraryCardList}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <!-- Modal Container -->
+        <div id="modal-container"></div>
         
         ${gameActions}
       </div>

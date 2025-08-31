@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml } from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -143,7 +143,7 @@ app.post("/restart-game", async (req, res) => {
     } else {
       throw new Error(`Unsupported deck source: ${persistedGame.deckProvenance.deckSource}`);
     }
-    
+
     const deck = await deckRetriever.retrieveDeck(deckRequest);
     const newGameId = persistStatePort.newGameId();
     const newGame = new GameState(newGameId, deck);
@@ -175,6 +175,79 @@ app.post("/end-game", async (req, res) => {
   } catch (error) {
     console.error("Error ending game:", error);
     res.redirect("/");
+  }
+});
+
+// Modal endpoints
+app.get("/library-modal/:gameId", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    const modalHtml = formatLibraryModalHtml(game);
+    res.send(modalHtml);
+  } catch (error) {
+    console.error("Error loading library modal:", error);
+    res.status(500).send(`<div>Error loading library</div>`);
+  }
+});
+
+app.get("/close-modal", (req, res) => {
+  res.send("");
+});
+
+// Card action endpoints (placeholder implementations)
+app.post("/reveal-card/:gameId/:cardIndex", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const cardIndex = parseInt(req.params.cardIndex);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    // TODO: Implement reveal card functionality
+    console.log(`Reveal card at position: ${cardIndex} in game ${gameId}`);
+
+    // For now, just return the current game state
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error revealing card:", error);
+    res.status(500).send(`<div>Error revealing card</div>`);
+  }
+});
+
+app.post("/put-in-hand/:gameId/:cardIndex", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const cardIndex = parseInt(req.params.cardIndex);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    // TODO: Implement put in hand functionality
+    console.log(`Put card in hand at position: ${cardIndex} in game ${gameId}`);
+
+    // For now, just return the current game state
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error putting card in hand:", error);
+    res.status(500).send(`<div>Error putting card in hand</div>`);
   }
 });
 

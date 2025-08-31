@@ -25,7 +25,7 @@ So, given a deck in archidekt.com, this web app will
 
 This app uses TypeScript, with esbuild for converting to JS. It's a toy.
 
-It will use htmx only, and no JS frameworks.
+It will use htmx only, and no JS unless absolutely necessary (such as for OTel instrumentation).
 
 For that, it'll need a Node backend with express.
 
