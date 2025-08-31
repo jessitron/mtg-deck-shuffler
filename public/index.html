@@ -53,6 +53,17 @@
             }, 2000);
           }
         }
+
+        // Shuffle animation trigger using HTMX events
+        document.addEventListener('htmx:beforeRequest', function(event) {
+          if (event.target.classList.contains('shuffle-button')) {
+            const libraryStack = document.querySelector('.library-stack');
+            if (libraryStack) {
+              // Add shuffling animation
+              libraryStack.classList.add('shuffling');
+            }
+          }
+        });
       </script>
   </head>
   <body>
