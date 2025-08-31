@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml } from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml, formatTableModalHtml } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -196,6 +196,25 @@ app.get("/library-modal/:gameId", async (req, res) => {
   } catch (error) {
     console.error("Error loading library modal:", error);
     res.status(500).send(`<div>Error loading library</div>`);
+  }
+});
+
+app.get("/table-modal/:gameId", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    const modalHtml = formatTableModalHtml(game);
+    res.send(modalHtml);
+  } catch (error) {
+    console.error("Error loading table modal:", error);
+    res.status(500).send(`<div>Error loading table contents</div>`);
   }
 });
 

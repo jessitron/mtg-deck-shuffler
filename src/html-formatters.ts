@@ -248,7 +248,7 @@ export function formatActiveGameHtml(game: GameState): string {
       </div>
     </div>`;
 
-  const tableCardsCount = 0; // TODO: Get actual count from game state
+  const tableCardsCount = game.listTable().length;
 
   return `<div id="game-container">
       <div id="command-zone">
@@ -262,8 +262,11 @@ export function formatActiveGameHtml(game: GameState): string {
         <p><strong>Status:</strong> ${game.status}</p>
       </div>
       
-      <div id="table-section">
-        <button class="table-cards-button">${tableCardsCount} Cards on table</button>
+      <div id="mid-game-buttons">
+        <button class="table-cards-button"
+                hx-get="/table-modal/${game.gameId}"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
       </div>
       
       <div id="library-section" data-testid="library-section">
@@ -328,6 +331,48 @@ export function formatActiveGameHtml(game: GameState): string {
         </form>
       </div>
     </div>`;
+}
+
+export function formatTableModalHtml(game: GameState): string {
+  const tableCards = game.listTable();
+
+  const tableCardList = tableCards
+    .map(
+      (gameCard: any, index: number) =>
+        `<li class="table-card-item">
+          <div class="card-info">
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
+          gameCard.card.name
+        }</a>
+          </div>
+        </li>`
+    )
+    .join("");
+
+  return `<div class="modal-overlay"
+               hx-get="/close-modal"
+               hx-target="#modal-container"
+               hx-swap="innerHTML"
+               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+               tabindex="0">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title">Cards on Table</h2>
+        <button class="modal-close"
+                hx-get="/close-modal"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+          ${tableCards.length} cards on table
+        </p>
+        <ul class="table-search-list">
+          ${tableCardList}
+        </ul>
+      </div>
+    </div>
+  </div>`;
 }
 
 export function formatGameHtml(game: GameState): string {

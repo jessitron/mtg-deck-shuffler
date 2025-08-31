@@ -120,6 +120,10 @@ export class GameState {
     return this.gameCards.filter(isInHand).sort((a, b) => a.location.position - b.location.position);
   }
 
+  public listTable(): readonly (GameCard & { location: TableLocation })[] {
+    return this.gameCards.filter(isOnTable);
+  }
+
   public shuffle(): this {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
