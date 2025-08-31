@@ -115,7 +115,7 @@ export class GameState {
     return this.gameCards.filter(isInLibrary).sort((a, b) => a.location.position - b.location.position);
   }
 
-  public listHand(): readonly GameCard[] {
+  public listHand(): readonly (GameCard & { location: HandLocation })[] {
     return this.gameCards.filter(isInHand).sort((a, b) => a.location.position - b.location.position);
   }
 
@@ -149,33 +149,22 @@ export class GameState {
   }
 
   public draw(): this {
-    const libraryCards = this.gameCards.filter(isInLibrary);
+    const libraryCards = this.listLibrary();
 
     if (libraryCards.length === 0) {
       throw new Error("Cannot draw: Library is empty");
     }
 
     // Find the top card (position 0)
-    const topCard = libraryCards.find((gc) => gc.location.position === 0);
-    if (!topCard) {
-      throw new Error("Cannot draw: No card at Library position 0");
-    }
+    const topCard = libraryCards[0];
 
     // Find the next available hand position
-    const handCards = this.gameCards.filter(isInHand);
-    const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) : -1;
+    const handCards = this.listHand();
+    const maxHandPosition = Math.max(...handCards.map((gc) => gc.location.position)) || -1;
     const nextHandPosition = maxHandPosition + 1;
 
     // Move the card from Library to Hand
-    (topCard as GameCard).location = { type: "Hand", position: nextHandPosition } as HandLocation;
-
-    // Adjust positions of remaining library cards - shift all down by 1
-    libraryCards
-      .filter((gc) => gc !== topCard) // exclude the card we just moved
-      .forEach((gc) => {
-        const libLocation = gc.location as LibraryLocation;
-        libLocation.position = libLocation.position - 1;
-      });
+    topCard.location = { type: "Hand", position: nextHandPosition };
 
     this.validateInvariants();
     return this;
