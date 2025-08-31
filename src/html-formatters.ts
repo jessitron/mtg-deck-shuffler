@@ -236,78 +236,89 @@ export function formatGameHtml(game: GameState): string {
          </form>
        </div>`;
 
-  return `<div id="game-container">
-      <div id="game-state">
-        <div class="game-header">
-          <div class="commander-info">
-            ${commanderImageHtml}
-          </div>
-          <div class="deck-info-right">
-            <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
-            <p>${cardCountInfo}</p>
-            <p><strong>Game ID:</strong> ${game.gameId}</p>
-            <p><strong>Status:</strong> ${game.status === "NotStarted" ? "Deck Review" : game.status}</p>
-          </div>
-        </div>
-        
-        <div class="game-board">
-          <div class="library-section" data-testid="library-section">
-            <div class="library-stack" data-testid="library-stack">
-              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-1" data-testid="card-back" />
-              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
-              <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
-            </div>
-            <div style="text-align: center; margin: 20px 0;">
-              <button class="search-button"
-                      hx-get="/library-modal/${game.gameId}"
-                      hx-target="#modal-container"
-                      hx-swap="innerHTML">Search</button>
-              ${
-                game.status === "Active"
-                  ? `
-              <button class="draw-button"
-                      hx-post="/draw/${game.gameId}"
-                      hx-target="#game-container"
-                      hx-swap="outerHTML">Draw</button>
-              `
-                  : ""
-              }
-            </div>
-          </div>
-        </div>
-        
-        ${
-          game.status === "Active"
-            ? `
-        <div class="hand-section" data-testid="hand-section">
-          <h3>Hand</h3>
-          <div class="hand-cards">
-            ${game
-              .listHand()
-              .map(
-                (gameCard: any, index: number) =>
-                  `<div class="hand-card-container">
-                     <img src="${getCardImageUrl(gameCard.card.uid)}"
-                      alt="${gameCard.card.name}"
-                      class="hand-card"
-                      title="${gameCard.card.name}" />
-                     <button class="play-button"
-                             onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${game.gameId}', this)"
-                             title="Copy image and remove from hand">
-                       Play
-                     </button>
-                   </div>`
-              )
-              .join("")}
-          </div>
-        </div>
-        `
-            : ""
-        }
+  const revealedCardsHtml = game.status === "Active" ? `
+    <div class="revealed-cards-section">
+      <h3>Revealed Cards</h3>
+      <div class="revealed-cards-area">
+        <!-- Placeholder for revealed cards -->
+      </div>
+    </div>` : "";
 
-        <!-- Modal Container -->
-        <div id="modal-container"></div>
-        
+  const tableCardsCount = 0; // TODO: Get actual count from game state
+  
+  return `<div id="game-container">
+      <div id="command-zone">
+        ${commanderImageHtml}
+      </div>
+      
+      <div id="game-details">
+        <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
+        <p>${cardCountInfo}</p>
+        <p><strong>Game ID:</strong> ${game.gameId}</p>
+        <p><strong>Status:</strong> ${game.status === "NotStarted" ? "Deck Review" : game.status}</p>
+      </div>
+      
+      <div id="table-section">
+        <button class="table-cards-button">${tableCardsCount} Cards on table</button>
+      </div>
+      
+      <div id="library-section" data-testid="library-section">
+        <div class="library-stack" data-testid="library-stack">
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-1" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
+        </div>
+        <div class="library-buttons">
+          <button class="search-button"
+                  hx-get="/library-modal/${game.gameId}"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML">Search</button>
+          ${
+            game.status === "Active"
+              ? `<button class="draw-button"
+                        hx-post="/draw/${game.gameId}"
+                        hx-target="#game-container"
+                        hx-swap="outerHTML">Draw</button>`
+              : ""
+          }
+        </div>
+      </div>
+      
+      <div id="revealed-cards-section">
+        ${revealedCardsHtml}
+      </div>
+      
+      ${
+        game.status === "Active"
+          ? `<div id="hand-section" data-testid="hand-section">
+               <h3>Hand</h3>
+               <div class="hand-cards">
+                 ${game
+                   .listHand()
+                   .map(
+                     (gameCard: any, index: number) =>
+                       `<div class="hand-card-container">
+                          <img src="${getCardImageUrl(gameCard.card.uid)}"
+                           alt="${gameCard.card.name}"
+                           class="hand-card"
+                           title="${gameCard.card.name}" />
+                          <button class="play-button"
+                                  onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${game.gameId}', this)"
+                                  title="Copy image and remove from hand">
+                            Play
+                          </button>
+                        </div>`
+                   )
+                   .join("")}
+               </div>
+             </div>`
+          : ""
+      }
+
+      <!-- Modal Container -->
+      <div id="modal-container"></div>
+      
+      <div id="game-actions">
         ${gameActions}
       </div>
     </div>`;

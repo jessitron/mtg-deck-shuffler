@@ -132,42 +132,106 @@ h1 {
   color: white;
 }
 
-/* Game Layout Styles */
-.game-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 30px;
-  margin: 30px 0;
-  justify-content: center;
-}
-
-.commander-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+/* Game Layout Styles - Grid Layout */
+#game-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "command-zone game-details table-section"
+    "library-section revealed-cards revealed-cards"
+    "hand-section hand-section hand-section"
+    "game-actions game-actions game-actions";
   gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin: 20px;
+  min-height: 600px;
 }
 
-.deck-info-right {
-  text-align: left;
-  max-width: 300px;
+#command-zone {
+  grid-area: command-zone;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
-.game-board {
+#game-details {
+  grid-area: game-details;
+  text-align: center;
+  padding: 20px;
+}
+
+#game-details h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+#table-section {
+  grid-area: table-section;
   display: flex;
   align-items: flex-start;
-  gap: 40px;
-  margin: 40px 0;
   justify-content: center;
+  padding: 20px;
 }
 
-.library-section {
+.table-cards-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #6c757d;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #6c757d;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.table-cards-button:hover {
+  background-color: #5a6268;
+}
+
+#library-section {
+  grid-area: library-section;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  padding: 20px;
+}
+
+.library-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.draw-button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: 1px solid #28a745;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.draw-button:hover {
+  background-color: #218838;
+}
+
+#revealed-cards-section {
+  grid-area: revealed-cards;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  overflow-x: auto;
 }
 
 .library-stack {
@@ -217,15 +281,14 @@ h1 {
   margin-top: 10px;
 }
 
-.hand-section {
+#hand-section {
+  grid-area: hand-section;
   border: 2px solid #333;
   padding: 20px;
   border-radius: 10px;
-  margin: 40px 0;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: white;
   min-height: 320px;
+  overflow-x: auto;
 }
 
 .hand-cards {
@@ -303,9 +366,16 @@ h1 {
   padding-left: 20px;
 }
 
-.game-actions {
-  margin: 30px 0;
+#game-actions {
+  grid-area: game-actions;
   text-align: center;
+  padding: 20px;
+}
+
+.game-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .game-actions .start-game-button {
