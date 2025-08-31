@@ -7,8 +7,11 @@ import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-for
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
+import { PersistStatePort } from "./port-persist-state/types.js";
+import { InMemoryPersistStateAdapter } from "./port-persist-state/InMemoryPersistStateAdapter.js";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
+const persistStatePort: PersistStatePort = new InMemoryPersistStateAdapter();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,7 +64,8 @@ app.post("/start-game", async (req, res) => {
 
   try {
     const deck = await deckRetriever.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
-    const game = new GameState(1, deck); // TODO: generate proper game ID
+    const gameId = persistStatePort.newGameId();
+    const game = new GameState(gameId, deck);
     const html = formatGameHtml(game);
 
     res.send(html);
@@ -70,6 +74,31 @@ app.post("/start-game", async (req, res) => {
     res.send(`<div>
         <p>Error: Could not start game with deck ${deckId}</p>
         <a href="/">Try another deck</a>
+    </div>`);
+  }
+});
+
+app.get("/game/:gameId", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>
+          <p>Game ${gameId} not found</p>
+          <a href="/">Start a new game</a>
+      </div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error loading game:", error);
+    res.status(500).send(`<div>
+        <p>Error: Could not load game ${gameId}</p>
+        <a href="/">Try starting a new game</a>
     </div>`);
   }
 });
