@@ -208,16 +208,32 @@ export function formatGameHtml(game: GameState): string {
               <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
               <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
             </div>
-                    <div style="text-align: center; margin: 20px 0;">
-          <button class="search-button"
-                  hx-get="/library-modal/${game.gameId}"
-                  hx-target="#modal-container"
-                  hx-swap="innerHTML">Search Library</button>
-        </div>
+            <div style="text-align: center; margin: 20px 0;">
+              <button class="search-button"
+                      hx-get="/library-modal/${game.gameId}"
+                      hx-target="#modal-container"
+                      hx-swap="innerHTML">Search</button>
+              ${game.status === "Active" ? `
+              <button class="draw-button"
+                      hx-post="/draw/${game.gameId}"
+                      hx-target="#game-container"
+                      hx-swap="outerHTML">Draw</button>
+              ` : ''}
+            </div>
           </div>
         </div>
         
-
+        <div class="hand-section" data-testid="hand-section">
+          <h3>Hand</h3>
+          <div class="hand-cards">
+            ${game.listHand().map((gameCard: any) => 
+              `<img src="${getCardImageUrl(gameCard.card.uid)}" 
+                   alt="${gameCard.card.name}" 
+                   class="hand-card" 
+                   title="${gameCard.card.name}" />`
+            ).join('')}
+          </div>
+        </div>
 
         <!-- Modal Container -->
         <div id="modal-container"></div>
