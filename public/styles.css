@@ -65,18 +65,24 @@ h1 {
   background-color: #45a049;
 }
 
-.commander-image {
+/* Common card image styling - all MTG card images should use this class */
+.mtg-card-image {
   width: 200px;
   height: auto;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.commander-image {
+  /* Inherits from .mtg-card-image */
+}
+
 .hand-card {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  /* Inherits from .mtg-card-image */
+}
+
+.revealed-card {
+  /* Inherits from .mtg-card-image */
 }
 
 .commander-placeholder {
@@ -247,10 +253,7 @@ h1 {
 }
 
 .library-card-back {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  /* Inherits size and styling from .mtg-card-image */
   position: absolute;
 }
 

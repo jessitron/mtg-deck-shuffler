@@ -42,7 +42,9 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
 export function formatDeckHtml(deck: Deck): string {
   const commanderImageHtml =
     deck.commanders.length > 0
-      ? deck.commanders.map((commander) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      ? deck.commanders
+          .map((commander) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .join("")
       : `<div class="commander-placeholder">No Commander Image</div>`;
 
   const cardCountInfo = `${deck.totalCards} cards`;
@@ -188,7 +190,9 @@ export function formatLibraryModalHtml(game: GameState): string {
 export function formatDeckReviewHtml(game: GameState): string {
   const commanderImageHtml =
     game.commanders.length > 0
-      ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      ? game.commanders
+          .map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .join("")
       : `<div class="commander-placeholder">No Commander</div>`;
 
   const cardCountInfo = `${game.totalCards} cards`;
@@ -206,9 +210,9 @@ export function formatDeckReviewHtml(game: GameState): string {
       
       <div id="library-section" data-testid="library-section">
         <div class="library-stack" data-testid="library-stack">
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-1" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>
         <div class="library-buttons">
           <button class="search-button"
@@ -235,7 +239,9 @@ export function formatDeckReviewHtml(game: GameState): string {
 export function formatActiveGameHtml(game: GameState): string {
   const commanderImageHtml =
     game.commanders.length > 0
-      ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
+      ? game.commanders
+          .map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .join("")
       : `<div class="commander-placeholder">No Commander</div>`;
 
   const cardCountInfo = `${game.totalCards} cards`;
@@ -243,17 +249,20 @@ export function formatActiveGameHtml(game: GameState): string {
   const revealedCards = game.listRevealed();
   const revealedCardsHtml = `
     <div class="revealed-cards-section">
-      <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ''}</h3>
+      <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ""}</h3>
       <div class="revealed-cards-area">
-        ${revealedCards.map((gameCard: any) => 
-          `<div class="revealed-card-container">
+        ${revealedCards
+          .map(
+            (gameCard: any) =>
+              `<div class="revealed-card-container">
              <img src="${getCardImageUrl(gameCard.card.uid)}"
                   alt="${gameCard.card.name}"
-                  class="revealed-card"
+                  class="mtg-card-image revealed-card"
                   title="${gameCard.card.name}" />
            </div>`
-        ).join('')}
-        ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ''}
+          )
+          .join("")}
+        ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
       </div>
     </div>`;
 
@@ -280,9 +289,9 @@ export function formatActiveGameHtml(game: GameState): string {
       
       <div id="library-section" data-testid="library-section">
         <div class="library-stack" data-testid="library-stack">
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-1" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-2" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="library-card-back library-card-3" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>
         <div class="library-buttons">
           <button class="search-button"
@@ -310,7 +319,7 @@ export function formatActiveGameHtml(game: GameState): string {
                 `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
-                    class="hand-card"
+                    class="mtg-card-image hand-card"
                     title="${gameCard.card.name}" />
                    <button class="play-button"
                            hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
@@ -350,9 +359,7 @@ export function formatTableModalHtml(game: GameState): string {
       (gameCard: any, index: number) =>
         `<li class="table-card-item">
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
-          gameCard.card.name
-        }</a>
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
           </div>
         </li>`
     )
