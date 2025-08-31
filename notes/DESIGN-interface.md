@@ -28,6 +28,8 @@ Here is a rough layout for when a game is in progress.
 
 Revealed Cards is not always visible. Hand starts empty.
 
+The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
+
 ```
 
    ┌───────────────┐
@@ -51,6 +53,7 @@ Revealed Cards is not always visible. Hand starts empty.
          │           ││┘   │   └────────┘   └───────┘       │
          │           │┘    │                                │
          └───────────┘     └────────────────────────────────┘
+          [Search]
 
       ┌────────────────────────────────────────────────────────────┐
       │                                                            │

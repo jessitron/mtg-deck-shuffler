@@ -46,6 +46,10 @@ Operations possible on game state:
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
 - start game: change the status to Active. Shuffle the library.
 
+## Phase 3
+
+- search library: list all cards in the library, ordered by position.
+
 ## Not Yet
 
 - draw: move the top card from Library to Hand. Check: one fewer card in Library, one more card in Hand.
