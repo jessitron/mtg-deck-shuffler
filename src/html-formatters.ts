@@ -131,9 +131,9 @@ export function formatLibraryModalHtml(game: GameState): string {
 
   const libraryCardList = libraryCards
     .map(
-      (gameCard: any, index: number) =>
+      (gameCard: any) =>
         `<li class="library-card-item">
-          <span class="card-position">${index + 1}</span>
+          <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
             <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
           gameCard.card.name
@@ -144,11 +144,11 @@ export function formatLibraryModalHtml(game: GameState): string {
               ? `
           <div class="card-actions">
             <button class="card-action-button"
-                    hx-post="/reveal-card/${game.gameId}/${index}"
+                    hx-post="/reveal-card/${game.gameId}/${gameCard.location.position}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Reveal</button>
             <button class="card-action-button secondary"
-                    hx-post="/put-in-hand/${game.gameId}/${index}"
+                    hx-post="/put-in-hand/${game.gameId}/${gameCard.location.position}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Put in Hand</button>
           </div>

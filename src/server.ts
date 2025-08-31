@@ -222,10 +222,10 @@ app.get("/close-modal", (req, res) => {
   res.send("");
 });
 
-// Card action endpoints (placeholder implementations)
-app.post("/reveal-card/:gameId/:cardIndex", async (req, res) => {
+// Card action endpoints
+app.post("/reveal-card/:gameId/:position", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
-  const cardIndex = parseInt(req.params.cardIndex);
+  const position = parseInt(req.params.position);
 
   try {
     const persistedGame = await persistStatePort.retrieve(gameId);
@@ -235,7 +235,7 @@ app.post("/reveal-card/:gameId/:cardIndex", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    game.reveal(cardIndex);
+    game.reveal(position);
     
     // Persist the updated state
     await persistStatePort.save(game.toPersistedGameState());
