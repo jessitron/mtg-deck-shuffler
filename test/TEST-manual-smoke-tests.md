@@ -16,20 +16,29 @@
 
 3. Load the default deck from Archidekt: Click the "Let's Play (from Archidekt)" button.
 
+[] Check that the URL is https://localhost:3001/game/{game_id} (where {game_id} is a number)
+
 [] Check that the commander appears. The image URL is https://cards.scryfall.io/normal/front/b/9/b9ac7673-eae8-4c4b-889e-5025213a6151.jpg
 
 [] Check that the deck name is "Ygra EATS IT ALL"
 
-4. Click "Start Game"
+4. Click "Shuffle Up"
 
 [] Check that a library appears: there's an element with data-testid is "card-back"
 
+## Check the "Choose another deck" button
+
+5. Click "Choose Another Deck"
+
+[] Check that we're back at the deck selection screen. The URL is https://localhost:3001
+
 ## Check local deck loading
 
-5. Return to https://localhost:3001
+6. Return to https://localhost:3001
 
-6. The default for the dropdown is fine. Click "Let's Play" in the local deck loading section.
+7. The default for the dropdown is fine. Click "Let's Play" in the local deck loading section.
 
 [] Check that the deck name is "Rat Girl's Food Hoarding"
 
 [] Check that two commander cards appear.
+

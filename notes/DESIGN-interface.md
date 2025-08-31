@@ -4,6 +4,8 @@ Status: imperfectly implemented
 
 This document describes the user interface for the MTG Deck Shuffler app. It is not complete.
 
+This web app will run on PC or tablet. It would not make sense on mobile.
+
 ## Wireframes
 
 ### First screen: Deck Selection
