@@ -68,6 +68,34 @@ export function formatDeckHtml(deck: Deck): string {
     </div>`;
 }
 
+export function formatGamePageHtml(game: GameState): string {
+  const gameContent = formatGameHtml(game);
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTG Game - ${game.deckName}</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/hny.js"></script>
+    <script>
+      Hny.initializeTracing({
+        apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
+        serviceName: "mtg-deck-shuffler-web",
+        debug: false,
+        provideOneLinkToHoneycomb: true,
+      });
+    </script>
+    <script src="/htmx.js"></script>
+  </head>
+  <body>
+    <h1>*Woohoo it's Magic time!*</h1>
+    ${gameContent}
+  </body>
+</html>`;
+}
+
 export function formatGameHtml(game: GameState): string {
   const commanderImageHtml =
     game.commanders.length > 0

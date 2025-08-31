@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml } from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -103,7 +103,7 @@ app.get("/game/:gameId", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    const html = formatGameHtml(game);
+    const html = formatGamePageHtml(game);
     res.send(html);
   } catch (error) {
     console.error("Error loading game:", error);
