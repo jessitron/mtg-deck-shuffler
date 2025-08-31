@@ -34,6 +34,10 @@ The Search button is available even before the game is started. It makes visible
 
 After the game is started, the Draw button is available. It moves the top card from Library to Hand.
 
+the [Play] button moves a card from Hand or Revealed to the Table.
+
+The [X Cards on table] button (where X is a number of cards on table) displays the same modal as Search, but shows cards on the Table instead of in the Library.
+
 ```
 
    ┌───────────────┐
@@ -51,7 +55,7 @@ After the game is started, the Draw button is available. It moves the top card f
          │           │││   │   ┌────────┐   ┌───────┐       │
          │           │││   │   │        │   │       │       │
          │           │││   │   │        │   │       │       │
-         │           │││   │   │        │   │       │       │
+         │           │││   │   │        │   │       │       │ [X Cards on table]
          │  Library  │││   │   │        │   │       │       │
          │           │││   │   │        │   │       │       │
          │           ││┘   │   └────────┘   └───────┘       │
@@ -71,8 +75,12 @@ After the game is started, the Draw button is available. It moves the top card f
       │     │         │   │         │   │          │               │
       │     │         │   │         │   │          │               │
       │     └─────────┘   └─────────┘   └──────────┘               │
-      │                                                            │
+      │        [Play]        [Play]         [Play]                 │
       └────────────────────────────────────────────────────────────┘
+
+
+
+
                    [Restart Game] [Choose Another Deck]
 ```
 
