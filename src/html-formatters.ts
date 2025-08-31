@@ -119,8 +119,10 @@ export function formatGameHtml(game: GameState): string {
          <button onclick="location.reload()">Choose Another Deck</button>
        </div>`
     : `<div class="game-actions">
-         <input type="hidden" name="game-id" value="${game.gameId}" />
-         <button hx-post="/restart-game" hx-include="closest div">Restart Game</button>
+         <form method="post" action="/restart-game">
+           <input type="hidden" name="game-id" value="${game.gameId}" />
+           <button type="submit">Restart Game</button>
+         </form>
        </div>`;
 
   return `<div id="game-container">
