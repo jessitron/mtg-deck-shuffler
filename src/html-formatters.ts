@@ -91,53 +91,45 @@ export function formatGamePageHtml(game: GameState): string {
     </script>
     <script src="/htmx.js"></script>
     <script>
-      async function playCard(imageUrl, cardName, handPosition, gameId, buttonElement) {
-        let clipboardSuccess = false;
-        
-        // Try to copy to clipboard first, but don't fail if it doesn't work
-        try {
-          const response = await fetch(imageUrl);
-          if (response.ok) {
-            const blob = await response.blob();
-            await navigator.clipboard.write([
-              new ClipboardItem({
-                [blob.type]: blob
-              })
-            ]);
-            clipboardSuccess = true;
+      // Handle clipboard copying when HTMX is about to make the request
+      document.addEventListener('htmx:beforeRequest', async function(evt) {
+        if (evt.detail.elt.classList.contains('play-button')) {
+          const button = evt.detail.elt;
+          const imageUrl = button.dataset.imageUrl;
+
+          // Try to copy to clipboard first
+          try {
+            const response = await fetch(imageUrl);
+            if (response.ok) {
+              const blob = await response.blob();
+              await navigator.clipboard.write([
+                new ClipboardItem({
+                  [blob.type]: blob
+                })
+              ]);
+              button.textContent = 'Copied!';
+            }
+          } catch (clipboardErr) {
+            console.warn('Failed to copy image to clipboard:', clipboardErr);
+            button.textContent = 'Playing...';
           }
-        } catch (clipboardErr) {
-          console.warn('Failed to copy image to clipboard:', clipboardErr);
-          // Continue with backend call even if clipboard fails
+
+          button.disabled = true;
         }
-        
-        // Always call backend to play the card
-        try {
-          buttonElement.textContent = clipboardSuccess ? 'Copied!' : 'Playing...';
-          buttonElement.disabled = true;
-          
-          const playResponse = await fetch(\`/play-card/\${gameId}/\${handPosition}\`, {
-            method: 'POST'
-          });
-          
-          if (!playResponse.ok) {
-            throw new Error('Failed to play card on server');
-          }
-          
-          // Replace the game content with the updated state
-          const updatedGameHtml = await playResponse.text();
-          document.querySelector('.game-header').parentNode.innerHTML = updatedGameHtml;
-          
-        } catch (backendErr) {
-          console.error('Failed to play card on backend:', backendErr);
-          buttonElement.textContent = 'Error';
-          buttonElement.disabled = false;
+      });
+
+      // Handle errors from HTMX requests
+      document.addEventListener('htmx:responseError', function(evt) {
+        if (evt.detail.elt.classList.contains('play-button')) {
+          const button = evt.detail.elt;
+          button.textContent = 'Error';
+          button.disabled = false;
           setTimeout(() => {
-            buttonElement.textContent = 'Play';
-            buttonElement.disabled = false;
+            button.textContent = 'Play';
+            button.disabled = false;
           }, 2000);
         }
-      }
+      });
     </script>
   </head>
   <body>
@@ -322,9 +314,10 @@ export function formatActiveGameHtml(game: GameState): string {
                     class="hand-card"
                     title="${gameCard.card.name}" />
                    <button class="play-button"
-                           onclick="playCard('${getCardImageUrl(gameCard.card.uid)}', '${gameCard.card.name}', ${gameCard.location.position}, '${
-                  game.gameId
-                }', this)"
+                           hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
+                           hx-target="#game-container"
+                           hx-swap="outerHTML"
+                           data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                            title="Copy image and remove from hand">
                      Play
                    </button>
