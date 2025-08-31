@@ -209,6 +209,7 @@ export function formatDeckReviewHtml(game: GameState): string {
       </div>
       
       <div id="library-section" data-testid="library-section">
+        <h3>Library (${game.listLibrary().length})</h3>
         <div class="library-stack" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
@@ -288,6 +289,7 @@ export function formatActiveGameHtml(game: GameState): string {
       </div>
       
       <div id="library-section" data-testid="library-section">
+        <h3>Library (${game.listLibrary().length})</h3>
         <div class="library-stack" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
