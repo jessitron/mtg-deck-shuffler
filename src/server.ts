@@ -9,6 +9,7 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort } from "./port-persist-state/types.js";
 import { InMemoryPersistStateAdapter } from "./port-persist-state/InMemoryPersistStateAdapter.js";
+import { trace } from "@opentelemetry/api";
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 const persistStatePort: PersistStatePort = new InMemoryPersistStateAdapter();
@@ -269,7 +270,14 @@ app.post("/draw/:gameId", async (req, res) => {
     }
 
     game.draw();
-    await persistStatePort.save(game.toPersistedGameState());
+    const persistedGameState = game.toPersistedGameState();
+    trace.getActiveSpan()?.setAttributes({
+      "game.status": game.status,
+      "game.cardsInLibrary": game.listLibrary().length,
+      "game.cardsInHand": game.listHand().length,
+      "game.full_json": JSON.stringify(persistedGameState),
+    });
+    await persistStatePort.save(persistedGameState);
 
     const html = formatGameHtml(game);
     res.send(html);

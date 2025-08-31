@@ -213,27 +213,41 @@ export function formatGameHtml(game: GameState): string {
                       hx-get="/library-modal/${game.gameId}"
                       hx-target="#modal-container"
                       hx-swap="innerHTML">Search</button>
-              ${game.status === "Active" ? `
+              ${
+                game.status === "Active"
+                  ? `
               <button class="draw-button"
                       hx-post="/draw/${game.gameId}"
                       hx-target="#game-container"
                       hx-swap="outerHTML">Draw</button>
-              ` : ''}
+              `
+                  : ""
+              }
             </div>
           </div>
         </div>
         
+        ${
+          game.status === "Active"
+            ? `
         <div class="hand-section" data-testid="hand-section">
           <h3>Hand</h3>
           <div class="hand-cards">
-            ${game.listHand().map((gameCard: any) => 
-              `<img src="${getCardImageUrl(gameCard.card.uid)}" 
-                   alt="${gameCard.card.name}" 
-                   class="hand-card" 
+            ${game
+              .listHand()
+              .map(
+                (gameCard: any) =>
+                  `<img src="${getCardImageUrl(gameCard.card.uid)}"
+                   alt="${gameCard.card.name}"
+                   class="hand-card"
                    title="${gameCard.card.name}" />`
-            ).join('')}
+              )
+              .join("")}
           </div>
         </div>
+        `
+            : ""
+        }
 
         <!-- Modal Container -->
         <div id="modal-container"></div>

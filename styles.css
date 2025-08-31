@@ -72,6 +72,13 @@ h1 {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.hand-card {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .commander-placeholder {
   width: 200px;
   height: 280px;
@@ -223,9 +230,11 @@ h1 {
 .hand-cards {
   display: flex;
   gap: 15px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 15px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
 .card-placeholder {
