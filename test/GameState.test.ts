@@ -288,4 +288,128 @@ describe("GameState", () => {
       gameState.startGame();
     }, /Cannot start game: current status is Active/);
   });
+
+  test("draw moves top card from Library to Hand", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Cards are sorted: Ancestral Recall, Black Lotus, Lightning Bolt
+    // After construction, they are in Library positions 0, 1, 2 respectively
+    const libraryBefore = gameState.listLibrary();
+    assert.strictEqual(libraryBefore.length, 3);
+    assert.strictEqual(libraryBefore[0].card.name, "Ancestral Recall"); // position 0 (top)
+    
+    const handBefore = gameState.listHand();
+    assert.strictEqual(handBefore.length, 0);
+    
+    gameState.draw();
+    
+    // Check library: should have 2 cards now
+    const libraryAfter = gameState.listLibrary();
+    assert.strictEqual(libraryAfter.length, 2);
+    assert.strictEqual(libraryAfter[0].card.name, "Black Lotus"); // position 0 (new top)
+    assert.strictEqual(libraryAfter[1].card.name, "Lightning Bolt"); // position 1
+    
+    // Check hand: should have 1 card now
+    const handAfter = gameState.listHand();
+    assert.strictEqual(handAfter.length, 1);
+    assert.strictEqual(handAfter[0].card.name, "Ancestral Recall"); // the drawn card
+    assert.strictEqual((handAfter[0].location as HandLocation).position, 0);
+  });
+
+  test("draw throws error when Library is empty", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 1,
+      commanders: [],
+      cards: [fakeCard1],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Move the only card out of library manually
+    const cards = gameState.getCards();
+    (cards[0].location as any) = { type: "Hand", position: 0 };
+    
+    assert.throws(() => {
+      gameState.draw();
+    }, /Cannot draw: Library is empty/);
+  });
+
+  test("multiple draws position cards correctly in Hand", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    
+    // Draw first card
+    gameState.draw();
+    let hand = gameState.listHand();
+    assert.strictEqual(hand.length, 1);
+    assert.strictEqual(hand[0].card.name, "Ancestral Recall");
+    assert.strictEqual((hand[0].location as HandLocation).position, 0);
+    
+    // Draw second card
+    gameState.draw();
+    hand = gameState.listHand();
+    assert.strictEqual(hand.length, 2);
+    assert.strictEqual(hand[0].card.name, "Ancestral Recall"); // position 0
+    assert.strictEqual(hand[1].card.name, "Black Lotus"); // position 1
+    assert.strictEqual((hand[1].location as HandLocation).position, 1);
+    
+    // Draw third card
+    gameState.draw();
+    hand = gameState.listHand();
+    assert.strictEqual(hand.length, 3);
+    assert.strictEqual(hand[2].card.name, "Lightning Bolt"); // position 2
+    assert.strictEqual((hand[2].location as HandLocation).position, 2);
+    
+    // Library should be empty
+    const library = gameState.listLibrary();
+    assert.strictEqual(library.length, 0);
+  });
+
+  test("draw works correctly after shuffle", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+    gameState.shuffle();
+    
+    const libraryBefore = gameState.listLibrary();
+    assert.strictEqual(libraryBefore.length, 3);
+    
+    const topCardBefore = libraryBefore[0]; // position 0 after shuffle
+    
+    gameState.draw();
+    
+    const libraryAfter = gameState.listLibrary();
+    const handAfter = gameState.listHand();
+    
+    assert.strictEqual(libraryAfter.length, 2);
+    assert.strictEqual(handAfter.length, 1);
+    assert.strictEqual(handAfter[0].card.name, topCardBefore.card.name);
+  });
 });

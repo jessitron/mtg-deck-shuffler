@@ -1,14 +1,34 @@
 import { CardDefinition, DeckProvenance, Deck } from "./types.js";
-import { 
-  PersistedGameState, 
-  GameId, 
-  GameStatus, 
-  CardLocation, 
-  GameCard, 
-  LibraryLocation 
+import {
+  PersistedGameState,
+  GameId,
+  GameStatus,
+  CardLocation,
+  GameCard,
+  LibraryLocation,
+  HandLocation,
+  RevealedLocation,
+  TableLocation,
 } from "./port-persist-state/types.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
+
+// Type guard functions for GameCard location filtering
+export function isInLibrary(gameCard: GameCard): gameCard is GameCard & { location: LibraryLocation } {
+  return gameCard.location.type === "Library";
+}
+
+export function isInHand(gameCard: GameCard): gameCard is GameCard & { location: HandLocation } {
+  return gameCard.location.type === "Hand";
+}
+
+export function isRevealed(gameCard: GameCard): gameCard is GameCard & { location: RevealedLocation } {
+  return gameCard.location.type === "Revealed";
+}
+
+export function isOnTable(gameCard: GameCard): gameCard is GameCard & { location: TableLocation } {
+  return gameCard.location.type === "Table";
+}
 
 export class GameState {
   public readonly gameId: GameId;
@@ -55,7 +75,7 @@ export class GameState {
     gameState.deckId = psg.deckId;
     gameState.totalCards = psg.totalCards;
     gameState.gameCards = [...psg.gameCards];
-    
+
     gameState.validateInvariants();
     return gameState;
   }
@@ -93,24 +113,30 @@ export class GameState {
 
   public listLibrary(): readonly GameCard[] {
     return this.gameCards
-      .filter(gc => gc.location.type === "Library")
+      .filter((gc) => gc.location.type === "Library")
       .sort((a, b) => (a.location as LibraryLocation).position - (b.location as LibraryLocation).position);
   }
 
+  public listHand(): readonly GameCard[] {
+    return this.gameCards
+      .filter((gc) => gc.location.type === "Hand")
+      .sort((a, b) => (a.location as HandLocation).position - (b.location as HandLocation).position);
+  }
+
   public shuffle(): this {
-    const libraryCards = this.gameCards.filter(gc => gc.location.type === "Library");
-    
+    const libraryCards = this.gameCards.filter((gc) => gc.location.type === "Library");
+
     // Fisher-Yates shuffle for the library cards array
     for (let i = libraryCards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [libraryCards[i], libraryCards[j]] = [libraryCards[j], libraryCards[i]];
     }
-    
+
     // Update positions after shuffle - top card is position 0
     libraryCards.forEach((gameCard, index) => {
       (gameCard.location as LibraryLocation).position = index;
     });
-    
+
     this.validateInvariants();
     return this;
   }
@@ -119,10 +145,43 @@ export class GameState {
     if (this.status !== GameStatus.NotStarted) {
       throw new Error(`Cannot start game: current status is ${this.status}`);
     }
-    
+
     (this as any).status = GameStatus.Active;
     this.shuffle();
-    
+
+    return this;
+  }
+
+  public draw(): this {
+    const libraryCards = this.gameCards.filter((gc) => gc.location.type === "Library");
+
+    if (libraryCards.length === 0) {
+      throw new Error("Cannot draw: Library is empty");
+    }
+
+    // Find the top card (position 0)
+    const topCard = libraryCards.find((gc) => (gc.location as LibraryLocation).position === 0);
+    if (!topCard) {
+      throw new Error("Cannot draw: No card at Library position 0");
+    }
+
+    // Find the next available hand position
+    const handCards = this.gameCards.filter((gc) => gc.location.type === "Hand");
+    const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => (gc.location as HandLocation).position)) : -1;
+    const nextHandPosition = maxHandPosition + 1;
+
+    // Move the card from Library to Hand
+    topCard.location = { type: "Hand", position: nextHandPosition } as HandLocation;
+
+    // Adjust positions of remaining library cards - shift all down by 1
+    libraryCards
+      .filter((gc) => gc !== topCard) // exclude the card we just moved
+      .forEach((gc) => {
+        const libLocation = gc.location as LibraryLocation;
+        libLocation.position = libLocation.position - 1;
+      });
+
+    this.validateInvariants();
     return this;
   }
 
