@@ -72,7 +72,7 @@ export function formatDeckHtml(deck: Deck): string {
 
 export function formatGamePageHtml(game: GameState): string {
   const gameContent = formatGameHtml(game);
-  
+
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,6 +90,7 @@ export function formatGamePageHtml(game: GameState): string {
       });
     </script>
     <script src="/htmx.js"></script>
+    <script src="/modal.js"></script>
   </head>
   <body>
     <h1>*Woohoo it's Magic time!*</h1>
@@ -109,13 +110,31 @@ export function formatGameHtml(game: GameState): string {
 
   const libraryCardList = libraryCards
     .map(
-      (gameCard: any) =>
-        `<li><a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank">${gameCard.card.name}</a></li>`
+      (gameCard: any, index: number) =>
+        `<li class="library-card-item">
+          <span class="card-position">${index + 1}</span>
+          <div class="card-info">
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
+          gameCard.card.name
+        }</a>
+          </div>
+          ${
+            game.status === "Active"
+              ? `
+          <div class="card-actions">
+            <button class="card-action-button" onclick="revealCard(${index})">Reveal</button>
+            <button class="card-action-button secondary" onclick="putInHand(${index})">Put in Hand</button>
+          </div>
+          `
+              : ""
+          }
+        </li>`
     )
     .join("");
 
-  const gameActions = game.status === "NotStarted" 
-    ? `<div class="game-actions">
+  const gameActions =
+    game.status === "NotStarted"
+      ? `<div class="game-actions">
          <input type="hidden" name="game-id" value="${game.gameId}" />
          <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container" class="start-game-button">Shuffle Up</button>
          <form method="post" action="/end-game" style="display: inline;">
@@ -123,7 +142,7 @@ export function formatGameHtml(game: GameState): string {
            <button type="submit">Choose Another Deck</button>
          </form>
        </div>`
-    : `<div class="game-actions">
+      : `<div class="game-actions">
          <form method="post" action="/restart-game" style="display: inline;">
            <input type="hidden" name="game-id" value="${game.gameId}" />
            <button type="submit">Restart Game</button>
@@ -159,12 +178,27 @@ export function formatGameHtml(game: GameState): string {
           </div>
         </div>
         
-        <details class="library-details">
-          <summary>⏵ View library contents (for testing)</summary>
-          <ol class="library-list">
-            ${libraryCardList}
-          </ol>
-        </details>
+        <div style="text-align: center; margin: 20px 0;">
+          <button class="search-button" onclick="openLibraryModal()">Search Library</button>
+        </div>
+
+        <!-- Library Search Modal -->
+        <div id="library-modal" class="modal-overlay" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-header">
+              <h2 class="modal-title">Library Contents</h2>
+              <button class="modal-close" onclick="closeLibraryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+                ${libraryCards.length} cards in library, ordered by position
+              </p>
+              <ul class="library-search-list">
+                ${libraryCardList}
+              </ul>
+            </div>
+          </div>
+        </div>
         
         ${gameActions}
       </div>
