@@ -91,6 +91,12 @@ export class GameState {
     return this.gameCards;
   }
 
+  public listLibrary(): readonly GameCard[] {
+    return this.gameCards
+      .filter(gc => gc.location.type === "Library")
+      .sort((a, b) => (a.location as LibraryLocation).position - (b.location as LibraryLocation).position);
+  }
+
   public shuffle(): this {
     const libraryCards = this.gameCards.filter(gc => gc.location.type === "Library");
     

@@ -102,7 +102,7 @@ export function formatGameHtml(game: GameState): string {
       ? game.commanders.map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="commander-image" />`).join("")
       : `<div class="commander-placeholder">No Commander</div>`;
 
-  const libraryCards = game.getCards().filter((gameCard) => gameCard.location.type === "Library");
+  const libraryCards = game.listLibrary();
   const cardCountInfo = `${game.totalCards} cards`;
 
   const libraryCardList = libraryCards
