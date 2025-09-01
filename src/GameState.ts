@@ -198,10 +198,6 @@ export class GameState {
 
     const cardToPlay = this.gameCards[gameCardIndex];
 
-    if (!isInHand(cardToPlay)) {
-      throw new Error(`Card at index ${gameCardIndex} is not in hand (currently in ${cardToPlay.location.type})`);
-    }
-
     // Move card to table
     (cardToPlay as any).location = { type: "Table" };
 
@@ -230,17 +226,12 @@ export class GameState {
     }
 
     const cardToReveal = allCards[gameCardIndex];
-    
-    if (cardToReveal.location.type !== "Library") {
-      throw new Error(`Card at index ${gameCardIndex} is not in the library`);
-    }
 
     this.addToRevealed(cardToReveal);
 
     this.validateInvariants();
     return this;
   }
-
 
   public toPersistedGameState(): PersistedGameState {
     return {
