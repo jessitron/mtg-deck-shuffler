@@ -10,6 +10,16 @@ We will use a Hexagonal Architecture for state management; see @notes/DESIGN-lay
 
 The port definition will live in src/port-persist-state/types.ts, including a PersistedGameState type. PersistedGameState will use types from @src/GameState.ts where it can, and it is simple data. GameId is a number, as defined in @src/GameState.ts.
 
+PersistedGameState should include a version field with a constant value that can be incremented when the schema changes:
+```typescript
+export const PERSISTED_GAME_STATE_VERSION = 1;
+
+export interface PersistedGameState {
+  version: typeof PERSISTED_GAME_STATE_VERSION;
+  // ... other fields
+}
+```
+
 The PersistStatePort interface
 
 ```
@@ -36,17 +46,18 @@ When implementing the SqlitePersistStateAdapter:
    CREATE TABLE IF NOT EXISTS game_states (
      id INTEGER PRIMARY KEY,
      state TEXT NOT NULL,
+     version INTEGER NOT NULL,
      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
    );
    ```
 3. **Implementation**:
-   - Store PersistedGameState as JSON in the `state` column
+   - Store PersistedGameState as JSON in the `state` column, with version stored separately
    - Use `sqlite3.Database` with promisified callbacks or `sqlite3` in async mode
    - Initialize database and create tables in constructor
    - Implement proper connection cleanup in a `close()` method
 4. **Error handling**: Wrap SQLite operations in try-catch and convert to appropriate errors
-5. **Migration strategy**: Since we can recreate the DB file during iteration, use a simple "drop and recreate" approach for schema changes
+5. **Migration strategy**: Since we can recreate the DB file during iteration, use a simple "drop and recreate" approach for schema changes. The version field enables future migration logic when needed.
 
 Create tests for the adapter in test/ports-persist-state/
 
