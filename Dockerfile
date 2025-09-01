@@ -30,5 +30,7 @@ RUN echo "=== DEBUG INFO ===" && \
     echo "Package.json:" && \
     cat package.json
 
+ENTRYPOINT []
+
 EXPOSE 3000
 CMD ["./run-in-docker"]
