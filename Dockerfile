@@ -12,7 +12,7 @@ COPY run-in-docker ./run-in-docker
 
 RUN npm run build
 
-FROM gcr.io/distroless/nodejs22-debian12
+FROM node:22-alpine
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
@@ -21,5 +21,7 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/run-in-docker ./run-in-docker
 COPY --from=builder /app/decks ./decks
 
+ENV NODE_OPTIONS="-r ./dist/tracing.js"
+
 EXPOSE 3000
-CMD ["node", "-r", "./dist/tracing.js", "./dist/server.js"]
+CMD ["./dist/server.js"]
