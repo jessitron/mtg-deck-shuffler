@@ -174,6 +174,19 @@ export class GameState {
     return this;
   }
 
+  private addToTopOfLibrary(gameCard: GameCard): this {
+    const libraryCards = this.listLibrary();
+    
+    // Shift all existing library cards down by 1 position
+    libraryCards.forEach((libCard) => {
+      (libCard.location as LibraryLocation).position += 1;
+    });
+    
+    // Put the new card at position 0 (top of library)
+    gameCard.location = { type: "Library", position: 0 };
+    return this;
+  }
+
   public draw(): this {
     const libraryCards = this.listLibrary();
 
@@ -242,6 +255,20 @@ export class GameState {
     const cardToPutInHand = allCards[gameCardIndex];
 
     this.addToHand(cardToPutInHand);
+
+    this.validateInvariants();
+    return this;
+  }
+
+  public putOnTopByGameCardIndex(gameCardIndex: number): this {
+    const allCards = this.getCards();
+    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
+      throw new Error(`Invalid game card index: ${gameCardIndex}`);
+    }
+
+    const cardToPutOnTop = allCards[gameCardIndex];
+
+    this.addToTopOfLibrary(cardToPutOnTop);
 
     this.validateInvariants();
     return this;
