@@ -2,31 +2,15 @@
 
 - get Deck Source into provenance and Deck Retrieval Request
 
-- give them buttons to restart game or choose another deck.
+- undo button will drive the implementation of state history tracking
 
 - persistence is of session state. Actually implement it.
 
-- commanders should be a list; there are sometimes two cards in the command zone.
-
-- either commanders are in the card list, or else CommandZone is not a location.
-
-- the game state needs to store
-
-  - the full deck. it is mutable in archidekt, so don't count on retrieving it again.
-  - The cards as a single list, not separate lists. Each card has a place where it is. Each card can be in the library, in the hand, or revealed. In each case, the card is at a specific position.
-
 - we need events, eventually. CRUD is technically the wrong model for this. We can use CRUD in the data layer while keeping the domain logic event-based.
 
-- the formatting needs to happen in a view layer. Just functions, in a different file, that accept app state and return HTML.
-
-- decide on a project name and make it consistent
+- decide on a project name and make it consistent. It's still librarytron in hny env
 
 - If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
-
-  - so we need tracking of game state... state ID or something, and it should not update a state with a different state ID.
-  - I know how that can work in SQLite, with transactions
-  - how does it work in dynamodb?
-  - in memory, what can we use to guarantee integrity?
 
 - I need tracing in Honeycomb of what is happening. THe trick is that I want to do this by creating generic instructions and using them.
   [x] initialize tracing, get autoinstrumentation
@@ -35,10 +19,10 @@
 
 - I also want tracing of pageloads, a frontend dataset.
 
-- SQLite needs to use a real file
-
-- implement dynamodb and test locally somehow
+- implement SQLite again. Not have to recreate the game on restart
 
 - the site needs to save and delete the game, it doesn't currently use the game state mechanism
 
-- get the Deck to include a "source", which has a URL that links to where we got the deck. Local files will work for this if we serve them
+- get the Deck to include a "source", which has a URL that links to where we got the deck. Local files will work for this if we serve them (it has a source now, but doesn't work for local files)
+
+- handle empty library

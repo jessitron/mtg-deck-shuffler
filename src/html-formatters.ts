@@ -1,6 +1,6 @@
 import { AvailableDecks } from "./port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl } from "./types.js";
-import { GameState } from "./GameState.js";
+import { GameCard, GameState } from "./GameState.js";
 
 export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInput();
@@ -132,26 +132,24 @@ export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
 
   const libraryCardList = libraryCards
-    .map(
-      (gameCard: any) => {
-        const gameCardIndex = game.getCards().findIndex(gc => gc === gameCard);
-        return `<li class="library-card-item">
+    .map((gameCard: any) => {
+      return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
             <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
-          gameCard.card.name
-        }</a>
+        gameCard.card.name
+      }</a>
           </div>
           ${
             game.status === "Active"
               ? `
           <div class="card-actions">
             <button class="card-action-button"
-                    hx-post="/reveal-card/${game.gameId}/${gameCardIndex}"
+                    hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Reveal</button>
             <button class="card-action-button secondary"
-                    hx-post="/put-in-hand/${game.gameId}/${gameCardIndex}"
+                    hx-post="/put-in-hand/${game.gameId}/${gameCard.gameCardIndex}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Put in Hand</button>
           </div>
@@ -159,8 +157,7 @@ export function formatLibraryModalHtml(game: GameState): string {
               : ""
           }
         </li>`;
-      }
-    )
+    })
     .join("");
 
   return `<div class="modal-overlay"
@@ -278,16 +275,14 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
         <div class="hand-cards">
           ${game
             .listHand()
-            .map(
-              (gameCard: any, index: number) => {
-                const gameCardIndex = game.getCards().findIndex(gc => gc === gameCard);
-                return `<div class="hand-card-container">
+            .map((gameCard: GameCard, index: number) => {
+              return `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
                     class="mtg-card-image hand-card"
                     title="${gameCard.card.name}" />
                    <button class="play-button"
-                           hx-post="/play-card/${game.gameId}/${gameCardIndex}"
+                           hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
                            hx-swap="outerHTML"
                            data-image-url="${getCardImageUrl(gameCard.card.uid)}"
@@ -295,8 +290,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                      Play
                    </button>
                  </div>`;
-              }
-            )
+            })
             .join("")}
         </div>
       </div>`;
@@ -343,7 +337,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                   hx-target="#game-container"
                   hx-swap="outerHTML">Draw</button>
           <button class="reveal-button"
-                  hx-post="/reveal-top/${game.gameId}"
+                  hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"
                   hx-target="#game-container"
                   hx-swap="outerHTML">Reveal</button>
         </div>
