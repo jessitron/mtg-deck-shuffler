@@ -320,7 +320,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
       </div>
       
       <div id="hand-section" data-testid="hand-section">
-        <h3>Hand</h3>
+        <h3>Hand (${game.listHand().length})</h3>
         <div class="hand-cards">
           ${game
             .listHand()
