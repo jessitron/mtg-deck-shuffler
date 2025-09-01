@@ -31,6 +31,10 @@ export function getCardImageUrl(uid: string, format: "small" | "normal" | "large
   return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${uid}.${extension}`;
 }
 
+export interface WhatHappened {
+  shuffling?: boolean;
+}
+
 export function shuffleDeck(deck: Deck): Library {
   const shuffledCards = [...deck.cards];
 

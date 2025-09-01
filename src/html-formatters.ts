@@ -1,5 +1,5 @@
 import { AvailableDecks } from "./port-deck-retrieval/types.js";
-import { Deck, getCardImageUrl } from "./types.js";
+import { Deck, getCardImageUrl, WhatHappened } from "./types.js";
 import { GameCard, GameState } from "./GameState.js";
 
 export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
@@ -240,7 +240,7 @@ export function formatDeckReviewHtml(game: GameState): string {
     </div>`;
 }
 
-export function formatActiveGameHtml(game: GameState, shuffling: boolean): string {
+export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened): string {
   const commanderImageHtml =
     game.commanders.length > 0
       ? game.commanders
@@ -308,27 +308,33 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
             .listHand()
             .map((gameCard: GameCard, index: number) => {
               const handSize = game.listHand().length;
-              const moveToLeftButton = index > 0 ? 
-                `<button class="move-to-left-button"
+              const moveToLeftButton =
+                index > 0
+                  ? `<button class="move-to-left-button"
                          hx-post="/move-to-left/${game.gameId}/${index}"
                          hx-target="#game-container"
                          hx-swap="outerHTML"
                          title="Move card to the left">
                    ←
-                 </button>` : '';
-              const moveToRightButton = index < handSize - 1 ? 
-                `<button class="move-to-right-button"
+                 </button>`
+                  : "";
+              const moveToRightButton =
+                index < handSize - 1
+                  ? `<button class="move-to-right-button"
                          hx-post="/move-to-right/${game.gameId}/${index}"
                          hx-target="#game-container"
                          hx-swap="outerHTML"
                          title="Move card to the right">
                    →
-                 </button>` : '';
+                 </button>`
+                  : "";
               return `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
                     class="mtg-card-image hand-card"
                     title="${gameCard.card.name}" />
+                    <div class="hand-card-buttons">
+                    ${moveToLeftButton}
                    <button class="play-button"
                            hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
@@ -337,8 +343,9 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                            title="Copy image and remove from hand">
                      Play
                    </button>
-                   ${moveToLeftButton}
                    ${moveToRightButton}
+                   </div>
+                   
                  </div>`;
             })
             .join("")}
@@ -368,7 +375,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
       
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        <div class="library-stack ${shuffling ? "shuffling" : ""}" data-testid="library-stack">
+        <div class="library-stack ${whatHappened.shuffling ? "shuffling" : ""}" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
@@ -480,10 +487,10 @@ export function formatGameNotFoundPageHtml(gameId: number): string {
 </html>`;
 }
 
-export function formatGameHtml(game: GameState, shuffling: boolean = false): string {
+export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.status === "NotStarted") {
     return formatDeckReviewHtml(game);
   } else {
-    return formatActiveGameHtml(game, shuffling);
+    return formatActiveGameHtml(game, whatHappened);
   }
 }

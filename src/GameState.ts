@@ -1,4 +1,4 @@
-import { CardDefinition, DeckProvenance, Deck } from "./types.js";
+import { CardDefinition, DeckProvenance, Deck, WhatHappened } from "./types.js";
 import {
   PersistedGameState,
   GameId,
@@ -129,7 +129,7 @@ export class GameState {
     return this.gameCards.filter(isOnTable);
   }
 
-  public shuffle(): this {
+  public shuffle(): WhatHappened {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
     // Fisher-Yates shuffle for the library cards array
@@ -144,7 +144,7 @@ export class GameState {
     });
 
     this.validateInvariants();
-    return this;
+    return { shuffling: true };
   }
 
   public startGame(): this {
@@ -153,7 +153,7 @@ export class GameState {
     }
 
     (this as any).status = GameStatus.Active;
-    this.shuffle();
+    this.shuffle(); // We don't need the return value here, just the side effect
 
     return this;
   }
@@ -176,12 +176,12 @@ export class GameState {
 
   private addToTopOfLibrary(gameCard: GameCard): this {
     const libraryCards = this.listLibrary();
-    
+
     // Shift all existing library cards down by 1 position
     libraryCards.forEach((libCard) => {
       (libCard.location as LibraryLocation).position += 1;
     });
-    
+
     // Put the new card at position 0 (top of library)
     gameCard.location = { type: "Library", position: 0 };
     return this;
@@ -298,7 +298,7 @@ export class GameState {
 
   public swapHandCardWithLeft(handPosition: number): this {
     const handCards = this.listHand();
-    
+
     if (handPosition <= 0 || handPosition >= handCards.length) {
       throw new Error(`Invalid hand position for swap: ${handPosition}. Must be between 1 and ${handCards.length - 1}`);
     }
@@ -317,7 +317,7 @@ export class GameState {
 
   public swapHandCardWithRight(handPosition: number): this {
     const handCards = this.listHand();
-    
+
     if (handPosition < 0 || handPosition >= handCards.length - 1) {
       throw new Error(`Invalid hand position for swap: ${handPosition}. Must be between 0 and ${handCards.length - 2}`);
     }

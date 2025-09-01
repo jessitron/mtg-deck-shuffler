@@ -3,7 +3,15 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml, formatTableModalHtml, formatGameNotFoundPageHtml } from "./html-formatters.js";
+import {
+  formatChooseDeckHtml,
+  formatDeckHtml,
+  formatGameHtml,
+  formatGamePageHtml,
+  formatLibraryModalHtml,
+  formatTableModalHtml,
+  formatGameNotFoundPageHtml,
+} from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -79,7 +87,7 @@ app.post("/start-game", async (req, res) => {
     game.startGame();
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game, true);
+    const html = formatGameHtml(game, { shuffling: true });
     res.send(html);
   } catch (error) {
     console.error("Error starting game:", error);
@@ -400,10 +408,10 @@ app.post("/shuffle/:gameId", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    game.shuffle();
+    const whatHappened = game.shuffle();
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game, true);
+    const html = formatGameHtml(game, whatHappened);
     res.send(html);
   } catch (error) {
     console.error("Error shuffling library:", error);
