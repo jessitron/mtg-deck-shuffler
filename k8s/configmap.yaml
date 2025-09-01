@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mtg-deck-shuffler-config
+  namespace: mtg-deck-shuffler
+data:
+  PORT: "3000"
+  OTEL_SERVICE_NAME: "mtg-deck-shuffler"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
+  OTEL_METRICS_EXPORTER: "none"
+  OTEL_LOG_LEVEL: "info"

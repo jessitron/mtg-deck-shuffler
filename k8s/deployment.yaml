@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtg-deck-shuffler
+  namespace: mtg-deck-shuffler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mtg-deck-shuffler
+  template:
+    metadata:
+      labels:
+        app: mtg-deck-shuffler
+    spec:
+      containers:
+      - name: mtg-deck-shuffler
+        image: <your-ecr-repo>/mtg-deck-shuffler:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: OTEL_EXPORTER_OTLP_HEADERS
+          value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
+        envFrom:
+        - configMapRef:
+            name: mtg-deck-shuffler-config
+        - secretRef:
+            name: mtg-deck-shuffler-secret
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app
+          subPath: data
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: mtg-deck-shuffler-data
