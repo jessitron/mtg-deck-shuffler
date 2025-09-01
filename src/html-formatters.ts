@@ -259,14 +259,14 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
           .map(
             (gameCard: any) =>
               `<div class="revealed-card-container">
-             <img src="${getCardImageUrl(gameCard.card.uid)}"
+             <img src="${getCardImageUrl(gameCard.card.uid)}" id="revealed-card-${gameCard.gameCardIndex}"
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card"
                   title="${gameCard.card.name}" />
              <button class="play-button"
                      hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                      hx-target="#game-container"
-                     hx-swap="outerHTML"
+                     hx-swap="outerHTML swap:5.3s"
                      data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                      title="Copy image and remove from revealed">
                Play
