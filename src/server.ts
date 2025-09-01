@@ -440,6 +440,35 @@ app.post("/move-to-left/:gameId/:handPosition", async (req, res) => {
   }
 });
 
+app.post("/move-to-right/:gameId/:handPosition", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const handPosition = parseInt(req.params.handPosition);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+
+    if (game.status !== "Active") {
+      res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
+      return;
+    }
+
+    game.swapHandCardWithRight(handPosition);
+    await persistStatePort.save(game.toPersistedGameState());
+
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error moving card to right:", error);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not move card to right"}</div>`);
+  }
+});
+
 // 404 handler - must be last
 app.get("*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "..", "public", "404.html"));

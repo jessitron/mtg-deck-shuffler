@@ -315,6 +315,25 @@ export class GameState {
     return this;
   }
 
+  public swapHandCardWithRight(handPosition: number): this {
+    const handCards = this.listHand();
+    
+    if (handPosition < 0 || handPosition >= handCards.length - 1) {
+      throw new Error(`Invalid hand position for swap: ${handPosition}. Must be between 0 and ${handCards.length - 2}`);
+    }
+
+    const cardToSwap = handCards[handPosition];
+    const cardToRight = handCards[handPosition + 1];
+
+    // Swap their positions
+    const tempPosition = cardToSwap.location.position;
+    (cardToSwap.location as HandLocation).position = cardToRight.location.position;
+    (cardToRight.location as HandLocation).position = tempPosition;
+
+    this.validateInvariants();
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       gameId: this.gameId,
