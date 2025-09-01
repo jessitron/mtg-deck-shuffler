@@ -307,6 +307,14 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
           ${game
             .listHand()
             .map((gameCard: GameCard, index: number) => {
+              const moveToLeftButton = index > 0 ? 
+                `<button class="move-to-left-button"
+                         hx-post="/move-to-left/${game.gameId}/${index}"
+                         hx-target="#game-container"
+                         hx-swap="outerHTML"
+                         title="Move card to the left">
+                   ←
+                 </button>` : '';
               return `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
@@ -320,6 +328,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                            title="Copy image and remove from hand">
                      Play
                    </button>
+                   ${moveToLeftButton}
                  </div>`;
             })
             .join("")}

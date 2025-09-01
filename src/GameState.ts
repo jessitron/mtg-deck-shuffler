@@ -296,6 +296,25 @@ export class GameState {
     return this;
   }
 
+  public swapHandCardWithLeft(handPosition: number): this {
+    const handCards = this.listHand();
+    
+    if (handPosition <= 0 || handPosition >= handCards.length) {
+      throw new Error(`Invalid hand position for swap: ${handPosition}. Must be between 1 and ${handCards.length - 1}`);
+    }
+
+    const cardToSwap = handCards[handPosition];
+    const cardToLeft = handCards[handPosition - 1];
+
+    // Swap their positions
+    const tempPosition = cardToSwap.location.position;
+    (cardToSwap.location as HandLocation).position = cardToLeft.location.position;
+    (cardToLeft.location as HandLocation).position = tempPosition;
+
+    this.validateInvariants();
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       gameId: this.gameId,
