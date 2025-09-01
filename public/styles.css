@@ -439,6 +439,42 @@ h1 {
   cursor: not-allowed;
 }
 
+/* Style for cards that are being played */
+.being-played {
+  opacity: 0.7;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.being-played .mtg-card-image {
+  filter: grayscale(0.3);
+}
+
+/* Cool exit animation for played cards */
+.being-played .mtg-card-image {
+  animation: cardPlayExit 1.5s ease-in-out forwards;
+}
+
+@keyframes cardPlayExit {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.95) translateY(0) rotateZ(0deg);
+  }
+  30% {
+    opacity: 0.9;
+    transform: scale(1.05) translateY(-20px) rotateZ(-5deg);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(0.8) translateY(-10px) rotateZ(10deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px) rotateZ(45deg);
+    pointer-events: none;
+  }
+}
+
 .card-placeholder {
   width: 80px;
   height: 120px;

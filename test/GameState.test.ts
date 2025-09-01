@@ -713,8 +713,8 @@ describe("GameState", () => {
     const whatHappened = gameState.swapHandCardWithLeft(1);
 
     // Black Lotus moved left, Ancestral Recall moved right
-    assert.strictEqual(whatHappened.movedLeft?.name, "Black Lotus");
-    assert.strictEqual(whatHappened.movedRight?.name, "Ancestral Recall");
+    assert.strictEqual(whatHappened.movedLeft?.[0]?.name, "Black Lotus");
+    assert.strictEqual(whatHappened.movedRight?.[0]?.name, "Ancestral Recall");
   });
 
   test("swapHandCardWithRight swaps cards at adjacent positions", () => {
@@ -899,7 +899,7 @@ describe("GameState", () => {
     const whatHappened = gameState.swapHandCardWithRight(0);
 
     // Ancestral Recall moved right, Black Lotus moved left
-    assert.strictEqual(whatHappened.movedRight?.name, "Ancestral Recall");
-    assert.strictEqual(whatHappened.movedLeft?.name, "Black Lotus");
+    assert.strictEqual(whatHappened.movedRight?.[0]?.name, "Ancestral Recall");
+    assert.strictEqual(whatHappened.movedLeft?.[0]?.name, "Black Lotus");
   });
 });

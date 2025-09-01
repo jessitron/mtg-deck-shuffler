@@ -33,8 +33,8 @@ export function getCardImageUrl(uid: string, format: "small" | "normal" | "large
 
 export interface WhatHappened {
   shuffling?: boolean;
-  movedRight?: CardDefinition;
-  movedLeft?: CardDefinition;
+  movedRight?: CardDefinition[];
+  movedLeft?: CardDefinition[];
 }
 
 export function shuffleDeck(deck: Deck): Library {

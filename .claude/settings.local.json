@@ -54,7 +54,8 @@
       "mcp__playwright__browser_network_requests",
       "mcp__playwright__browser_wait_for",
       "Bash(timeout:*)",
-      "mcp__playwright__browser_console_messages"
+      "mcp__playwright__browser_console_messages",
+      "Bash(PORT=3001 PORT_PERSIST_STATE=in-memory npm start)"
     ],
     "deny": []
   }

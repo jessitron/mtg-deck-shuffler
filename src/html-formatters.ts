@@ -113,10 +113,17 @@ export function formatGamePageHtml(game: GameState): string {
             }
           } catch (clipboardErr) {
             console.warn('Failed to copy image to clipboard:', clipboardErr);
-            button.textContent = 'Playing...';
+            button.textContent = 'Copy failed 😨';
           }
 
           button.disabled = true;
+
+          // Find the card container and add "being-played" class
+          const cardContainer = button.closest('.revealed-card-container, .hand-card-container');
+          console.log('cardContainer', cardContainer);
+          if (cardContainer) {
+            cardContainer.classList.add('being-played');
+          }
         }
       });
     </script>
@@ -214,15 +221,11 @@ export function formatDeckReviewHtml(game: GameState): string {
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>
-        <div class="library-buttons">
+        <div class="library-buttons-single">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search</button>
-          <button class="shuffle-button"
-                  hx-post="/shuffle/${game.gameId}"
-                  hx-target="#game-container"
-                  hx-swap="outerHTML">Shuffle</button>
         </div>
       </div>
 
@@ -267,7 +270,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                <button class="play-button"
                        hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                        hx-target="#game-container"
-                       hx-swap="outerHTML"
+                       hx-swap="outerHTML swap:1.5s"
                        data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                        title="Copy image and remove from revealed">
                  Play
@@ -331,9 +334,9 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
 
               // Add animation classes based on what happened
               let animationClass = "";
-              if (whatHappened.movedLeft && gameCard.card.uid === whatHappened.movedLeft.uid) {
+              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.uid === gameCard.card.uid)) {
                 animationClass = " card-moved-left";
-              } else if (whatHappened.movedRight && gameCard.card.uid === whatHappened.movedRight.uid) {
+              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.uid === gameCard.card.uid)) {
                 animationClass = " card-moved-right";
               }
 
@@ -347,7 +350,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                    <button class="play-button"
                            hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
-                           hx-swap="outerHTML"
+                           hx-swap="outerHTML swap:1.5s"
                            data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                            title="Copy image and remove from hand">
                      Play
