@@ -290,6 +290,36 @@ app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
   }
 });
 
+app.post("/put-down/:gameId/:gameCardIndex", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const gameCardIndex = parseInt(req.params.gameCardIndex);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    game.revealByGameCardIndex(gameCardIndex);
+
+    // Persist the updated state
+    await persistStatePort.save(game.toPersistedGameState());
+
+    trace.getActiveSpan()?.setAttributes({
+      "game.cardsInHand": game.listHand().length,
+      "game.cardsRevealed": game.listRevealed().length,
+    });
+
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error putting card down:", error);
+    res.status(500).send(`<div>Error putting card down</div>`);
+  }
+});
+
 app.post("/put-on-top/:gameId/:gameCardIndex", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
   const gameCardIndex = parseInt(req.params.gameCardIndex);
