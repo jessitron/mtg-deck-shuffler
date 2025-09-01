@@ -97,15 +97,6 @@ export function formatGamePageHtml(game: GameState): string {
       document.addEventListener('htmx:beforeRequest', async function(evt) {
         if (evt.detail.elt.classList.contains('play-button')) {
           const button = evt.detail.elt;
-
-          // Check if we've already processed this button (to avoid infinite loop)
-          if (button.dataset.processed === 'true') {
-            return; // Let the request proceed normally
-          }
-
-          // Prevent the immediate request
-          evt.preventDefault();
-
           const imageUrl = button.dataset.imageUrl;
 
           // Try to copy to clipboard first
@@ -126,13 +117,6 @@ export function formatGamePageHtml(game: GameState): string {
           }
 
           button.disabled = true;
-
-          // Wait half a second to show the "Copied!" message, then trigger the swap
-          setTimeout(() => {
-            // Mark as processed and manually trigger the HTMX request
-            button.dataset.processed = 'true';
-            htmx.trigger(button, 'click');
-          }, 500);
         }
       });
     </script>
@@ -230,11 +214,15 @@ export function formatDeckReviewHtml(game: GameState): string {
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>
-        <div class="library-buttons-single">
+        <div class="library-buttons">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search</button>
+          <button class="shuffle-button"
+                  hx-post="/shuffle/${game.gameId}"
+                  hx-target="#game-container"
+                  hx-swap="outerHTML">Shuffle</button>
         </div>
       </div>
 
