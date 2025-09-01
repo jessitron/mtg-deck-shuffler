@@ -53,4 +53,4 @@ spec:
       volumes:
         - name: data-volume
           persistentVolumeClaim:
-            claimName: mtg-deck-shuffler-data
+            claimName: mtg-deck-shuffler-data2

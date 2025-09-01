@@ -3,7 +3,10 @@ set -e
 
 # Configuration - EDIT THESE VALUES
 AWS_REGION="us-west-2"  # Change to your region
-ECR_REPO="your-account-id.dkr.ecr.us-west-2.amazonaws.com/mtg-deck-shuffler"  # Change to your ECR repo
+if [ -z "ECR_REPO" ]; then
+    echo "ECR_REPO not set in .env. Please set it."
+    exit 1
+fi
 HONEYCOMB_API_KEY=""  # Add your Honeycomb API key here
 
 # Derived values
@@ -34,33 +37,32 @@ npm run build
 # Build and push Docker image
 echo ""
 echo "🐳 Building Docker image..."
-docker build -t mtg-deck-shuffler:${IMAGE_TAG} .
+docker build --platform=linux/arm64 -t mtg-deck-shuffler:${IMAGE_TAG} .
 docker tag mtg-deck-shuffler:${IMAGE_TAG} ${FULL_IMAGE_NAME}
 docker tag mtg-deck-shuffler:${IMAGE_TAG} ${LATEST_IMAGE_NAME}
 
 echo "📤 Pushing to ECR..."
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO%/*}
+echo "   Pushing ${FULL_IMAGE_NAME}..."
 docker push ${FULL_IMAGE_NAME}
 docker push ${LATEST_IMAGE_NAME}
 
-# Create Kubernetes secret with Honeycomb API key
-echo ""
-echo "🔑 Creating Kubernetes secret..."
-if [ -z "$HONEYCOMB_API_KEY" ]; then
-    echo "❌ HONEYCOMB_API_KEY not set in script. Please add your API key."
-    exit 1
-fi
+
 
 # Apply Kubernetes manifests
 echo ""
 echo "☸️  Deploying to Kubernetes..."
 
-# Create secret with labels
-kubectl create secret generic mtg-deck-shuffler-secret \
-    --from-literal=HONEYCOMB_API_KEY="$HONEYCOMB_API_KEY" \
-    --dry-run=client -o yaml | \
-    sed '/^metadata:/a \ \ labels:\n\ \ \ \ app: mtg-deck-shuffler' | \
-    kubectl apply -f -
+# Create Kubernetes secret with Honeycomb API key
+# once is enough
+# echo ""
+# echo "🔑 Creating Kubernetes secret..."
+# if [ -z "$HONEYCOMB_API_KEY" ]; then
+#     echo "❌ HONEYCOMB_API_KEY not set in script. Please add your API key."
+#     exit 1
+# fi
+# kubectl create secret generic mtg-deck-shuffler-secret \
+#     --from-literal=HONEYCOMB_API_KEY="$HONEYCOMB_API_KEY" 
 
 # Apply other manifests
 kubectl apply -f k8s/configmap.yaml

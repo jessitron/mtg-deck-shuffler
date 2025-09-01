@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mtg-deck-shuffler-data
+  name: mtg-deck-shuffler-data2
   labels:
     app: mtg-deck-shuffler
 spec:
