@@ -267,13 +267,18 @@ h1 {
   border-radius: 10px;
   min-width: 300px;
   min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  grid-area: revealed-cards;
 }
 
 .revealed-cards-area {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  direction: row;
+  flex-wrap: nowrap;
   margin-top: 10px;
+  overflow: scroll;
 }
 
 #hand-section {
