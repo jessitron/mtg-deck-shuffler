@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml, formatTableModalHtml } from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameHtml, formatGamePageHtml, formatLibraryModalHtml, formatTableModalHtml, formatGameNotFoundPageHtml } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -96,10 +96,7 @@ app.get("/game/:gameId", async (req, res) => {
   try {
     const persistedGame = await persistStatePort.retrieve(gameId);
     if (!persistedGame) {
-      res.status(404).send(`<div>
-          <p>Game ${gameId} not found</p>
-          <a href="/">Start a new game</a>
-      </div>`);
+      res.status(404).send(formatGameNotFoundPageHtml(gameId));
       return;
     }
 

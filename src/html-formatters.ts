@@ -411,6 +411,33 @@ export function formatTableModalHtml(game: GameState): string {
   </div>`;
 }
 
+export function formatGameNotFoundPageHtml(gameId: number): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Not Found - MTG Deck Shuffler</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>*Woohoo it's Magic time!*</h1>
+    <div class="deck-input-section">
+      <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
+        <h2>🎯 Game Not Found</h2>
+        <p>Game <strong>${gameId}</strong> could not be found.</p>
+        <p style="color: #666; font-size: 0.9rem;">It may have expired or the ID might be incorrect.</p>
+      </div>
+      <div class="deck-actions">
+        <form method="get" action="/" style="display: inline;">
+          <button type="submit" class="lets-play-button">Start a New Game</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>`;
+}
+
 export function formatGameHtml(game: GameState, shuffling: boolean = false): string {
   if (game.status === "NotStarted") {
     return formatDeckReviewHtml(game);
