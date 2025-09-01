@@ -253,7 +253,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
 
   const revealedCards = game.listRevealed();
   const revealedCardsHtml = `
-    <div class="revealed-cards-section" class="revealed-cards-section">
+    <div id="revealed-cards-section" class="revealed-cards-section">
       <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ""}</h3>
       <div class="revealed-cards-area">
         ${revealedCards
@@ -264,6 +264,14 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card"
                   title="${gameCard.card.name}" />
+             <button class="play-button"
+                     hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
+                     hx-target="#game-container"
+                     hx-swap="outerHTML"
+                     data-image-url="${getCardImageUrl(gameCard.card.uid)}"
+                     title="Copy image and remove from revealed">
+               Play
+             </button>
            </div>`
           )
           .join("")}
