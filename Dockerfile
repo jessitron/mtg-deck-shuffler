@@ -7,6 +7,8 @@ RUN npm ci
 COPY tsconfig.json ./
 COPY src/ ./src/
 COPY public/ ./public/
+COPY decks/ ./decks/
+COPY run-in-docker ./run-in-docker
 
 RUN npm run build
 
@@ -16,8 +18,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
-COPY decks/ ./decks/
-COPY run-in-docker run-in-docker
+COPY --from=builder /app/run-in-docker ./run-in-docker
+COPY --from=builder /app/decks ./decks
 
 RUN echo "=== DEBUG INFO ===" && \
     pwd && \
