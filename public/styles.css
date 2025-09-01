@@ -134,12 +134,6 @@ h1 {
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
   transform: scale(1);
   transition: all 0.3s ease;
-  border-radius: 50px 20px 50px 20px;
-  border: none;
-  padding: 20px 30px;
-  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-  position: relative;
-  overflow: hidden;
 }
 
 .deck-actions button.start-game-button:hover {
