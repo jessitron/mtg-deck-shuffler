@@ -32,6 +32,7 @@ export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | T
 export interface GameCard {
   card: CardDefinition;
   location: CardLocation;
+  gameCardIndex: number;
 }
 
 export interface PersistedGameState {

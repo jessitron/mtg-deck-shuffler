@@ -36,6 +36,7 @@ describe("InMemoryPersistStateAdapter", () => {
             multiverseid: 67890,
           },
           location: { type: "Library", position: 0 },
+          gameCardIndex: 0,
         },
       ],
     };

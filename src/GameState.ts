@@ -51,6 +51,7 @@ export class GameState {
       .map((card, index) => ({
         card,
         location: { type: "Library", position: index } as LibraryLocation,
+        gameCardIndex: index,
       }));
 
     this.gameId = gameId;
