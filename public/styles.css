@@ -452,14 +452,9 @@ h1 {
   white-space: nowrap;
 }
 
-.put-down-button:hover:not(:disabled) {
+.put-down-button:hover {
   background-color: #5a6268;
   transform: translateY(-2px);
-}
-
-.put-down-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 /* Style for cards that are being played */
