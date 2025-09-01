@@ -253,7 +253,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
 
   const revealedCards = game.listRevealed();
   const revealedCardsHtml = `
-    <div class="revealed-cards-section">
+    <div class="revealed-cards-section" class="revealed-cards-section">
       <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ""}</h3>
       <div class="revealed-cards-area">
         ${revealedCards
@@ -270,6 +270,32 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
       </div>
     </div>`;
+
+  const handCardsHtml = `<div id="hand-section" data-testid="hand-section">
+        <h3>Hand (${game.listHand().length})</h3>
+        <div class="hand-cards">
+          ${game
+            .listHand()
+            .map(
+              (gameCard: any, index: number) =>
+                `<div class="hand-card-container">
+                   <img src="${getCardImageUrl(gameCard.card.uid)}"
+                    alt="${gameCard.card.name}"
+                    class="mtg-card-image hand-card"
+                    title="${gameCard.card.name}" />
+                   <button class="play-button"
+                           hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
+                           hx-target="#game-container"
+                           hx-swap="outerHTML"
+                           data-image-url="${getCardImageUrl(gameCard.card.uid)}"
+                           title="Copy image and remove from hand">
+                     Play
+                   </button>
+                 </div>`
+            )
+            .join("")}
+        </div>
+      </div>`;
 
   const tableCardsCount = game.listTable().length;
 
@@ -312,38 +338,16 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                   hx-post="/draw/${game.gameId}"
                   hx-target="#game-container"
                   hx-swap="outerHTML">Draw</button>
+          <button class="reveal-button"
+                  hx-post="/reveal-top/${game.gameId}"
+                  hx-target="#game-container"
+                  hx-swap="outerHTML">Reveal</button>
         </div>
       </div>
       
-      <div id="revealed-cards-section">
         ${revealedCardsHtml}
-      </div>
       
-      <div id="hand-section" data-testid="hand-section">
-        <h3>Hand (${game.listHand().length})</h3>
-        <div class="hand-cards">
-          ${game
-            .listHand()
-            .map(
-              (gameCard: any, index: number) =>
-                `<div class="hand-card-container">
-                   <img src="${getCardImageUrl(gameCard.card.uid)}"
-                    alt="${gameCard.card.name}"
-                    class="mtg-card-image hand-card"
-                    title="${gameCard.card.name}" />
-                   <button class="play-button"
-                           hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
-                           hx-target="#game-container"
-                           hx-swap="outerHTML"
-                           data-image-url="${getCardImageUrl(gameCard.card.uid)}"
-                           title="Copy image and remove from hand">
-                     Play
-                   </button>
-                 </div>`
-            )
-            .join("")}
-        </div>
-      </div>
+     ${handCardsHtml}
 
       <!-- Modal Container -->
       <div id="modal-container"></div>

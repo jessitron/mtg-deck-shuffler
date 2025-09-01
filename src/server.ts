@@ -366,6 +366,34 @@ app.post("/shuffle/:gameId", async (req, res) => {
   }
 });
 
+app.post("/reveal-top/:gameId", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+
+    if (game.status !== "Active") {
+      res.status(400).send(`<div>Cannot reveal: Game is not active</div>`);
+      return;
+    }
+
+    game.reveal(0); // Reveal the top card (position 0)
+    await persistStatePort.save(game.toPersistedGameState());
+
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error revealing top card:", error);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not reveal top card"}</div>`);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
