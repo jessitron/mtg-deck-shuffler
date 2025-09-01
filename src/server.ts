@@ -245,9 +245,9 @@ app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
   }
 });
 
-app.post("/put-in-hand/:gameId/:cardIndex", async (req, res) => {
+app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
-  const cardIndex = parseInt(req.params.cardIndex);
+  const gameCardIndex = parseInt(req.params.gameCardIndex);
 
   try {
     const persistedGame = await persistStatePort.retrieve(gameId);
@@ -257,7 +257,7 @@ app.post("/put-in-hand/:gameId/:cardIndex", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    game.putInHandByGameCardIndex(cardIndex);
+    game.putInHandByGameCardIndex(gameCardIndex);
 
     await persistStatePort.save(game.toPersistedGameState());
 

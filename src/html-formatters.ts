@@ -263,14 +263,23 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card"
                   title="${gameCard.card.name}" />
-             <button class="play-button"
-                     hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
-                     hx-target="#game-container"
-                     hx-swap="outerHTML"
-                     data-image-url="${getCardImageUrl(gameCard.card.uid)}"
-                     title="Copy image and remove from revealed">
-               Play
-             </button>
+             <div class="card-buttons">
+               <button class="play-button"
+                       hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"
+                       data-image-url="${getCardImageUrl(gameCard.card.uid)}"
+                       title="Copy image and remove from revealed">
+                 Play
+               </button>
+               <button class="put-in-hand-button"
+                       hx-post="/put-in-hand/${game.gameId}/${gameCard.gameCardIndex}"
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"
+                       title="Move card to hand">
+                 Put in Hand
+               </button>
+             </div>
            </div>`
           )
           .join("")}
