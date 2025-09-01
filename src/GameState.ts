@@ -190,12 +190,15 @@ export class GameState {
     return this;
   }
 
-  public playCardFromHand(handPosition: number): this {
-    const handCards = this.listHand();
-    const cardToPlay = handCards.find((gc) => gc.location.position === handPosition);
+  public playCardFromHand(gameCardIndex: number): this {
+    if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
+      throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
+    }
 
-    if (!cardToPlay) {
-      throw new Error(`No card found at hand position ${handPosition}`);
+    const cardToPlay = this.gameCards[gameCardIndex];
+
+    if (!isInHand(cardToPlay)) {
+      throw new Error(`Card at index ${gameCardIndex} is not in hand (currently in ${cardToPlay.location.type})`);
     }
 
     // Move card to table

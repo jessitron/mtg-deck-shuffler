@@ -277,21 +277,23 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
           ${game
             .listHand()
             .map(
-              (gameCard: any, index: number) =>
-                `<div class="hand-card-container">
+              (gameCard: any, index: number) => {
+                const gameCardIndex = game.getCards().findIndex(gc => gc === gameCard);
+                return `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
                     class="mtg-card-image hand-card"
                     title="${gameCard.card.name}" />
                    <button class="play-button"
-                           hx-post="/play-card/${game.gameId}/${gameCard.location.position}"
+                           hx-post="/play-card/${game.gameId}/${gameCardIndex}"
                            hx-target="#game-container"
                            hx-swap="outerHTML"
                            data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                            title="Copy image and remove from hand">
                      Play
                    </button>
-                 </div>`
+                 </div>`;
+              }
             )
             .join("")}
         </div>

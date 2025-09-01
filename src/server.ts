@@ -307,9 +307,9 @@ app.post("/draw/:gameId", async (req, res) => {
   }
 });
 
-app.post("/play-card/:gameId/:handPosition", async (req, res) => {
+app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
-  const handPosition = parseInt(req.params.handPosition);
+  const gameCardIndex = parseInt(req.params.gameCardIndex);
 
   try {
     const persistedGame = await persistStatePort.retrieve(gameId);
@@ -325,7 +325,7 @@ app.post("/play-card/:gameId/:handPosition", async (req, res) => {
       return;
     }
 
-    game.playCardFromHand(handPosition);
+    game.playCardFromHand(gameCardIndex);
     const persistedGameState = game.toPersistedGameState();
     trace.getActiveSpan()?.setAttributes({
       "game.status": game.status,
