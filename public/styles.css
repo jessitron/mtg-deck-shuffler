@@ -71,6 +71,12 @@ h1 {
   height: auto;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-out;
+}
+
+.mtg-card-image.htmx-swapping {
+  opacity: 0;
+  transform: translateY(-30px) translateX(100px) rotate(15deg) scale(0.7);
 }
 
 .commander-placeholder {
