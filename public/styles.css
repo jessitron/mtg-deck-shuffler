@@ -73,18 +73,6 @@ h1 {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.commander-image {
-  /* Inherits from .mtg-card-image */
-}
-
-.hand-card {
-  /* Inherits from .mtg-card-image */
-}
-
-.revealed-card {
-  /* Inherits from .mtg-card-image */
-}
-
 .commander-placeholder {
   width: 200px;
   height: 280px;
@@ -261,15 +249,6 @@ h1 {
 }
 
 #revealed-cards-section {
-  grid-area: revealed-cards;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: white;
-  overflow-x: auto;
-}
-
-.revealed-cards-section {
   border: 2px solid #ddd;
   padding: 20px;
   border-radius: 10px;

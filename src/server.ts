@@ -383,7 +383,7 @@ app.post("/reveal-top/:gameId", async (req, res) => {
       return;
     }
 
-    game.reveal(0); // Reveal the top card (position 0)
+    game.revealTop();
     await persistStatePort.save(game.toPersistedGameState());
 
     const html = formatGameHtml(game);

@@ -213,7 +213,19 @@ export class GameState {
       throw new Error(`No card found at library position ${position}`);
     }
 
-    // Find the next available revealed position
+    this.addToRevealed(cardToReveal);
+
+    this.validateInvariants();
+    return this;
+  }
+
+  public revealTop(): this {
+    const libraryCards = this.listLibrary();
+    if (libraryCards.length === 0) {
+      throw new Error("Cannot reveal: Library is empty");
+    }
+    const cardToReveal = libraryCards[0];
+
     this.addToRevealed(cardToReveal);
 
     this.validateInvariants();

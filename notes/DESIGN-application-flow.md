@@ -91,8 +91,8 @@ The active game screen where gameplay occurs.
 
 - Commander card(s)
 - Library
-- Revealed cards (future)
-- Hand (future)
+- Revealed cards
+- Hand
 
 **Actions:**
 
