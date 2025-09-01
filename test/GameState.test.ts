@@ -902,4 +902,72 @@ describe("GameState", () => {
     assert.strictEqual(whatHappened.movedRight?.[0]?.card.name, "Ancestral Recall");
     assert.strictEqual(whatHappened.movedLeft?.[0]?.card.name, "Black Lotus");
   });
+
+  test("playCardFromHand moves card to table and shifts remaining cards left", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 4,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", uid: "xyz999", multiverseid: 33333 }],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+
+    // Draw cards to populate hand naturally
+    gameState.draw(); // Ancestral Recall to position 0
+    gameState.draw(); // Black Lotus to position 1
+    gameState.draw(); // Counterspell to position 2
+    gameState.draw(); // Lightning Bolt to position 3
+
+    const handBefore = gameState.listHand();
+    assert.strictEqual(handBefore.length, 4);
+    assert.strictEqual(handBefore[0].card.name, "Ancestral Recall");
+    assert.strictEqual(handBefore[1].card.name, "Black Lotus");
+    assert.strictEqual(handBefore[2].card.name, "Counterspell");
+    assert.strictEqual(handBefore[3].card.name, "Lightning Bolt");
+
+    // Play the second card (Black Lotus at position 1)
+    const blackLotusGameCardIndex = handBefore[1].gameCardIndex;
+    const whatHappened = gameState.playCardFromHand(blackLotusGameCardIndex);
+
+    // Check that the card moved to table
+    const tableCards = gameState.listTable();
+    assert.strictEqual(tableCards.length, 1);
+    assert.strictEqual(tableCards[0].card.name, "Black Lotus");
+
+    // Check that remaining hand cards shifted left
+    const handAfter = gameState.listHand();
+    assert.strictEqual(handAfter.length, 3);
+    assert.strictEqual(handAfter[0].card.name, "Ancestral Recall"); // position 0 unchanged
+    assert.strictEqual(handAfter[1].card.name, "Counterspell"); // moved from position 2 to 1
+    assert.strictEqual(handAfter[2].card.name, "Lightning Bolt"); // moved from position 3 to 2
+
+    // Check WhatHappened contains the cards that moved left
+    assert.strictEqual(whatHappened.movedLeft?.length, 2);
+    assert.strictEqual(whatHappened.movedLeft?.[0]?.card.name, "Counterspell");
+    assert.strictEqual(whatHappened.movedLeft?.[1]?.card.name, "Lightning Bolt");
+  });
+
+  test("playCardFromHand throws error when card is not in hand", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 2,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+
+    // Try to play a card that's still in library
+    const libraryCards = gameState.listLibrary();
+    const libraryCardIndex = libraryCards[0].gameCardIndex;
+
+    assert.throws(() => {
+      gameState.playCardFromHand(libraryCardIndex);
+    }, /Card at gameCardIndex \d+ is not in hand/);
+  });
 });

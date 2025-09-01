@@ -213,18 +213,37 @@ export class GameState {
     return this;
   }
 
-  public playCardFromHand(gameCardIndex: number): this {
+  public playCardFromHand(gameCardIndex: number): WhatHappened {
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
     }
 
     const cardToPlay = this.gameCards[gameCardIndex];
 
+    // Verify the card is actually in hand
+    if (!isInHand(cardToPlay)) {
+      throw new Error(`Card at gameCardIndex ${gameCardIndex} is not in hand`);
+    }
+
+    const handCards = this.listHand();
+    const playedCardPosition = cardToPlay.location.position;
+
+    // Find all cards to the right of the played card (higher positions)
+    const cardsToMoveLeft = handCards.filter((card) => card.location.position > playedCardPosition);
+
+    // Move each card one position to the left
+    cardsToMoveLeft.forEach((card) => {
+      (card.location as HandLocation).position -= 1;
+    });
+
     // Move card to table
     (cardToPlay as any).location = { type: "Table" };
 
     this.validateInvariants();
-    return this;
+
+    return {
+      movedLeft: cardsToMoveLeft,
+    };
   }
 
   public reveal(position: number): this {
