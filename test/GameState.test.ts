@@ -903,7 +903,7 @@ describe("GameState", () => {
     assert.strictEqual(whatHappened.movedLeft?.[0]?.card.name, "Black Lotus");
   });
 
-  test("playCardFromHand moves card to table and shifts remaining cards left", () => {
+  test("playCard moves card from hand to table and shifts remaining cards left", () => {
     const deck: Deck = {
       id: 1,
       name: "Test Deck",
@@ -930,7 +930,7 @@ describe("GameState", () => {
 
     // Play the second card (Black Lotus at position 1)
     const blackLotusGameCardIndex = handBefore[1].gameCardIndex;
-    const whatHappened = gameState.playCardFromHand(blackLotusGameCardIndex);
+    const whatHappened = gameState.playCard(blackLotusGameCardIndex);
 
     // Check that the card moved to table
     const tableCards = gameState.listTable();
@@ -950,7 +950,56 @@ describe("GameState", () => {
     assert.strictEqual(whatHappened.movedLeft?.[1]?.card.name, "Lightning Bolt");
   });
 
-  test("playCardFromHand throws error when card is not in hand", () => {
+  test("playCard moves card from revealed to table and shifts remaining cards left", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 4,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", uid: "xyz999", multiverseid: 33333 }],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+
+    // Reveal cards to populate revealed zone using revealByGameCardIndex
+    const libraryCards = gameState.listLibrary();
+    gameState.revealByGameCardIndex(libraryCards[0].gameCardIndex); // Ancestral Recall to revealed position 0
+    gameState.revealByGameCardIndex(libraryCards[1].gameCardIndex); // Black Lotus to revealed position 1
+    gameState.revealByGameCardIndex(libraryCards[2].gameCardIndex); // Counterspell to revealed position 2
+    gameState.revealByGameCardIndex(libraryCards[3].gameCardIndex); // Lightning Bolt to revealed position 3
+
+    const revealedBefore = gameState.listRevealed();
+    assert.strictEqual(revealedBefore.length, 4);
+    // Cards are revealed in order they were revealed
+    assert.strictEqual(revealedBefore[0].card.name, "Ancestral Recall");
+    assert.strictEqual(revealedBefore[1].card.name, "Black Lotus");
+    assert.strictEqual(revealedBefore[2].card.name, "Counterspell");
+    assert.strictEqual(revealedBefore[3].card.name, "Lightning Bolt");
+
+    // Play the second card (Black Lotus at position 1)
+    const blackLotusGameCardIndex = revealedBefore[1].gameCardIndex;
+    const whatHappened = gameState.playCard(blackLotusGameCardIndex);
+
+    // Check that the card moved to table
+    const tableCards = gameState.listTable();
+    assert.strictEqual(tableCards.length, 1);
+    assert.strictEqual(tableCards[0].card.name, "Black Lotus");
+
+    // Check that remaining revealed cards shifted left
+    const revealedAfter = gameState.listRevealed();
+    assert.strictEqual(revealedAfter.length, 3);
+    assert.strictEqual(revealedAfter[0].card.name, "Ancestral Recall"); // position 0 unchanged
+    assert.strictEqual(revealedAfter[1].card.name, "Counterspell"); // moved from position 2 to 1
+    assert.strictEqual(revealedAfter[2].card.name, "Lightning Bolt"); // moved from position 3 to 2
+
+    // Check WhatHappened contains the cards that moved left
+    assert.strictEqual(whatHappened.movedLeft?.length, 2);
+    assert.strictEqual(whatHappened.movedLeft?.[0]?.card.name, "Counterspell");
+    assert.strictEqual(whatHappened.movedLeft?.[1]?.card.name, "Lightning Bolt");
+  });
+
+  test("playCard throws error when card is not in hand or revealed", () => {
     const deck: Deck = {
       id: 1,
       name: "Test Deck",
@@ -967,7 +1016,7 @@ describe("GameState", () => {
     const libraryCardIndex = libraryCards[0].gameCardIndex;
 
     assert.throws(() => {
-      gameState.playCardFromHand(libraryCardIndex);
-    }, /Card at gameCardIndex \d+ is not in hand/);
+      gameState.playCard(libraryCardIndex);
+    }, /Card at gameCardIndex \d+ is not in hand or revealed/);
   });
 });

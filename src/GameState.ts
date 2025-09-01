@@ -213,28 +213,43 @@ export class GameState {
     return this;
   }
 
-  public playCardFromHand(gameCardIndex: number): WhatHappened {
+  public playCard(gameCardIndex: number): WhatHappened {
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
     }
 
     const cardToPlay = this.gameCards[gameCardIndex];
 
-    // Verify the card is actually in hand
-    if (!isInHand(cardToPlay)) {
-      throw new Error(`Card at gameCardIndex ${gameCardIndex} is not in hand`);
+    // Verify the card is in hand or revealed
+    if (!isInHand(cardToPlay) && !isRevealed(cardToPlay)) {
+      throw new Error(`Card at gameCardIndex ${gameCardIndex} is not in hand or revealed`);
     }
 
-    const handCards = this.listHand();
-    const playedCardPosition = cardToPlay.location.position;
+    let cardsToMoveLeft: GameCard[] = [];
 
-    // Find all cards to the right of the played card (higher positions)
-    const cardsToMoveLeft = handCards.filter((card) => card.location.position > playedCardPosition);
+    if (isInHand(cardToPlay)) {
+      const handCards = this.listHand();
+      const playedCardPosition = cardToPlay.location.position;
 
-    // Move each card one position to the left
-    cardsToMoveLeft.forEach((card) => {
-      (card.location as HandLocation).position -= 1;
-    });
+      // Find all cards to the right of the played card (higher positions)
+      cardsToMoveLeft = handCards.filter((card) => card.location.position > playedCardPosition);
+
+      // Move each card one position to the left
+      cardsToMoveLeft.forEach((card) => {
+        (card.location as HandLocation).position -= 1;
+      });
+    } else if (isRevealed(cardToPlay)) {
+      const revealedCards = this.listRevealed();
+      const playedCardPosition = cardToPlay.location.position;
+
+      // Find all cards to the right of the played card (higher positions)
+      cardsToMoveLeft = revealedCards.filter((card) => card.location.position > playedCardPosition);
+
+      // Move each card one position to the left
+      cardsToMoveLeft.forEach((card) => {
+        (card.location as RevealedLocation).position -= 1;
+      });
+    }
 
     // Move card to table
     (cardToPlay as any).location = { type: "Table" };

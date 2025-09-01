@@ -22,7 +22,7 @@ import { trace } from "@opentelemetry/api";
 
 function createPersistStateAdapter(): PersistStatePort {
   const adapterType = process.env.PORT_PERSIST_STATE;
-  
+
   if (adapterType === "in-memory") {
     console.log("Using in-memory persistence adapter");
     return new InMemoryPersistStateAdapter();
@@ -421,7 +421,7 @@ app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
       return;
     }
 
-    game.playCardFromHand(gameCardIndex);
+    game.playCard(gameCardIndex);
     const persistedGameState = game.toPersistedGameState();
     trace.getActiveSpan()?.setAttributes({
       "game.status": game.status,
