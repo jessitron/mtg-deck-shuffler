@@ -36,7 +36,6 @@ Dead-simple deployment to push the MTG deck shuffler app to your existing EKS cl
 
 ### Database Strategy
 - **Development**: SQLite with PersistentVolume (simple, works for single replica)
-- **Future**: Easy migration to external database by changing env var `PORT_PERSIST_STATE=in-memory` and adding DB service
 
 ## Deployment Files
 

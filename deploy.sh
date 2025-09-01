@@ -9,7 +9,7 @@ HONEYCOMB_API_KEY=""  # Add your Honeycomb API key here
 # Derived values
 IMAGE_TAG="$(git rev-parse --short HEAD)"
 FULL_IMAGE_NAME="${ECR_REPO}:${IMAGE_TAG}"
-LATEST_IMAGE_NAME="${ECR_REPO}:latest"`
+LATEST_IMAGE_NAME="${ECR_REPO}:latest"
 
 echo "🚀 Deploying MTG Deck Shuffler to EKS"
 echo "   Image: ${FULL_IMAGE_NAME}"
@@ -67,7 +67,7 @@ kubectl apply -f k8s/configmap.yaml
 kubectl apply -f k8s/pvc.yaml
 
 # Update deployment with new image
-sed "s|<your-ecr-repo>/mtg-deck-shuffler:latest|${LATEST_IMAGE_NAME}|g" k8s/deployment.yaml | kubectl apply -f -
+sed "s|<your-ecr-repo>/mtg-deck-shuffler:latest|${FULL_IMAGE_NAME}|g" k8s/deployment.yaml | kubectl apply -f -
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
 

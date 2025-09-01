@@ -5,18 +5,23 @@ metadata:
   labels:
     app: mtg-deck-shuffler
   annotations:
+    external-dns.alpha.kubernetes.io/hostname: mtg.jessitron.honeydemo.io # give your domain name here
     kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: quiz-booth-game
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+    alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=otel-demo-alb-access-logs,access_logs.s3.prefix=quiz-booth-game-alb
 spec:
+  ingressClassName: alb
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: mtg-deck-shuffler-service
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mtg-deck-shuffler-service
+                port:
+                  number: 80
