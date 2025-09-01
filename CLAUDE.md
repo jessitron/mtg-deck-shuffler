@@ -39,6 +39,13 @@ To verify changes, you can
 
 The app requires a `.env` file for OpenTelemetry configuration. The `./run` script sources this file before starting the server.
 
+### Persistence Configuration
+
+The app uses **SQLite by default** for game state persistence, creating a `data.db` file in the project root. 
+
+- **SQLite (default)**: Persistent storage across server restarts
+- **In-memory**: Set `PORT_PERSIST_STATE=in-memory` for testing/development - data is lost when server stops
+
 ## API Integration
 
 The app is designed to integrate with:
