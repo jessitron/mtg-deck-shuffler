@@ -266,7 +266,7 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
              <button class="play-button"
                      hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                      hx-target="#game-container"
-                     hx-swap="outerHTML swap:5.3s"
+                     hx-swap="outerHTML"
                      data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                      title="Copy image and remove from revealed">
                Play
