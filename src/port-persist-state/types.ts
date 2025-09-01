@@ -35,7 +35,10 @@ export interface GameCard {
   gameCardIndex: number;
 }
 
+export const PERSISTED_GAME_STATE_VERSION = 1;
+
 export interface PersistedGameState {
+  version: typeof PERSISTED_GAME_STATE_VERSION;
   gameId: GameId;
   status: GameStatus;
   deckProvenance: DeckProvenance;

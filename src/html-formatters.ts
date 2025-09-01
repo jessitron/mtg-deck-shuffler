@@ -328,10 +328,19 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                    →
                  </button>`
                   : "";
+
+              // Add animation classes based on what happened
+              let animationClass = "";
+              if (whatHappened.movedLeft && gameCard.card.uid === whatHappened.movedLeft.uid) {
+                animationClass = " card-moved-left";
+              } else if (whatHappened.movedRight && gameCard.card.uid === whatHappened.movedRight.uid) {
+                animationClass = " card-moved-right";
+              }
+
               return `<div class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
-                    class="mtg-card-image hand-card"
+                    class="mtg-card-image hand-card${animationClass}"
                     title="${gameCard.card.name}" />
                     <div class="hand-card-buttons">
                     ${moveToLeftButton}
@@ -345,7 +354,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                    </button>
                    ${moveToRightButton}
                    </div>
-                   
+
                  </div>`;
             })
             .join("")}

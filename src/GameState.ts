@@ -9,6 +9,7 @@ import {
   HandLocation,
   RevealedLocation,
   TableLocation,
+  PERSISTED_GAME_STATE_VERSION,
 } from "./port-persist-state/types.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
@@ -296,7 +297,7 @@ export class GameState {
     return this;
   }
 
-  public swapHandCardWithLeft(handPosition: number): this {
+  public swapHandCardWithLeft(handPosition: number): WhatHappened {
     const handCards = this.listHand();
 
     if (handPosition <= 0 || handPosition >= handCards.length) {
@@ -312,10 +313,14 @@ export class GameState {
     (cardToLeft.location as HandLocation).position = tempPosition;
 
     this.validateInvariants();
-    return this;
+
+    return {
+      movedLeft: cardToSwap.card,
+      movedRight: cardToLeft.card,
+    };
   }
 
-  public swapHandCardWithRight(handPosition: number): this {
+  public swapHandCardWithRight(handPosition: number): WhatHappened {
     const handCards = this.listHand();
 
     if (handPosition < 0 || handPosition >= handCards.length - 1) {
@@ -331,11 +336,16 @@ export class GameState {
     (cardToRight.location as HandLocation).position = tempPosition;
 
     this.validateInvariants();
-    return this;
+
+    return {
+      movedRight: cardToSwap.card,
+      movedLeft: cardToRight.card,
+    };
   }
 
   public toPersistedGameState(): PersistedGameState {
     return {
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: this.gameId,
       status: this.status,
       deckProvenance: this.deckProvenance,

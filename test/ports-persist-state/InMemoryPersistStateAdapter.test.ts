@@ -1,7 +1,7 @@
 import { describe, it, beforeEach } from "node:test";
 import { strict as assert } from "node:assert";
 import { InMemoryPersistStateAdapter } from "../../src/port-persist-state/InMemoryPersistStateAdapter.js";
-import { PersistedGameState } from "../../src/port-persist-state/types.js";
+import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
 import { GameStatus } from "../../src/GameState.js";
 
 describe("InMemoryPersistStateAdapter", () => {
@@ -11,6 +11,7 @@ describe("InMemoryPersistStateAdapter", () => {
   beforeEach(() => {
     adapter = new InMemoryPersistStateAdapter();
     testGameState = {
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 1,
       status: GameStatus.NotStarted,
       deckProvenance: {

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import { strict as assert } from "node:assert";
 import { GameState } from "../src/GameState.js";
-import { GameStatus } from "../src/port-persist-state/types.js";
+import { GameStatus, PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
 import { Deck } from "../src/types.js";
 
 test("should convert GameState to PersistedGameState and back", () => {
@@ -35,6 +35,7 @@ test("should convert GameState to PersistedGameState and back", () => {
   const persistedGameState = originalGameState.toPersistedGameState();
 
   // Verify persisted format has expected structure
+  assert.equal(persistedGameState.version, PERSISTED_GAME_STATE_VERSION);
   assert.equal(persistedGameState.gameId, gameId);
   assert.equal(persistedGameState.status, GameStatus.NotStarted);
   assert.equal(persistedGameState.deckName, "Test Deck");

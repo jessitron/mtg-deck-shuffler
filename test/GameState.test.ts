@@ -196,22 +196,22 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    const originalOrder = gameState.getCards().map(gc => gc.card.name);
-    
+    const originalOrder = gameState.getCards().map((gc) => gc.card.name);
+
     gameState.shuffle();
-    
+
     const cards = gameState.getCards();
-    const libraryCards = cards.filter(gc => gc.location.type === "Library");
-    
+    const libraryCards = cards.filter((gc) => gc.location.type === "Library");
+
     // Same number of cards in library
     assert.strictEqual(libraryCards.length, 3);
-    
+
     // Positions should still be sequential from 0
-    const positions = libraryCards.map(gc => (gc.location as LibraryLocation).position).sort();
+    const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
     assert.deepStrictEqual(positions, [0, 1, 2]);
-    
+
     // Cards should still exist (order might be different)
-    const shuffledNames = cards.map(gc => gc.card.name).sort();
+    const shuffledNames = cards.map((gc) => gc.card.name).sort();
     const originalNames = originalOrder.sort();
     assert.deepStrictEqual(shuffledNames, originalNames);
   });
@@ -219,7 +219,7 @@ describe("GameState", () => {
   test("shuffle only affects Library cards", () => {
     const deck: Deck = {
       id: 1,
-      name: "Test Deck", 
+      name: "Test Deck",
       totalCards: 3,
       commanders: [],
       cards: [fakeCard1, fakeCard2, fakeCard3],
@@ -227,22 +227,22 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Manually move a card to Hand for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
-    
+
     const handCardBefore = cards[0].card.name;
-    
+
     gameState.shuffle();
-    
+
     // Hand card should be unchanged
     assert.strictEqual(cards[0].location.type, "Hand");
     assert.strictEqual((cards[0].location as HandLocation).position, 0);
     assert.strictEqual(cards[0].card.name, handCardBefore);
-    
+
     // Only 2 cards should be in library now
-    const libraryCards = cards.filter(gc => gc.location.type === "Library");
+    const libraryCards = cards.filter((gc) => gc.location.type === "Library");
     assert.strictEqual(libraryCards.length, 2);
   });
 
@@ -258,16 +258,16 @@ describe("GameState", () => {
 
     const gameState = new GameState(1, deck);
     assert.strictEqual(gameState.status, GameStatus.NotStarted);
-    
+
     gameState.startGame();
-    
+
     assert.strictEqual(gameState.status, GameStatus.Active);
-    
+
     // Verify shuffle happened - cards should still be in library with valid positions
-    const libraryCards = gameState.getCards().filter(gc => gc.location.type === "Library");
+    const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
     assert.strictEqual(libraryCards.length, 2);
-    
-    const positions = libraryCards.map(gc => (gc.location as LibraryLocation).position).sort();
+
+    const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
     assert.deepStrictEqual(positions, [0, 1]);
   });
 
@@ -283,7 +283,7 @@ describe("GameState", () => {
 
     const gameState = new GameState(1, deck);
     gameState.startGame();
-    
+
     assert.throws(() => {
       gameState.startGame();
     }, /Cannot start game: current status is Active/);
@@ -300,24 +300,24 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Cards are sorted: Ancestral Recall, Black Lotus, Lightning Bolt
     // After construction, they are in Library positions 0, 1, 2 respectively
     const libraryBefore = gameState.listLibrary();
     assert.strictEqual(libraryBefore.length, 3);
     assert.strictEqual(libraryBefore[0].card.name, "Ancestral Recall"); // position 0 (top)
-    
+
     const handBefore = gameState.listHand();
     assert.strictEqual(handBefore.length, 0);
-    
+
     gameState.draw();
-    
+
     // Check library: should have 2 cards now
     const libraryAfter = gameState.listLibrary();
     assert.strictEqual(libraryAfter.length, 2);
     assert.strictEqual(libraryAfter[0].card.name, "Black Lotus"); // position 0 (new top)
     assert.strictEqual(libraryAfter[1].card.name, "Lightning Bolt"); // position 1
-    
+
     // Check hand: should have 1 card now
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter.length, 1);
@@ -336,11 +336,11 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move the only card out of library manually
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
-    
+
     assert.throws(() => {
       gameState.draw();
     }, /Cannot draw: Library is empty/);
@@ -357,14 +357,14 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Draw first card
     gameState.draw();
     let hand = gameState.listHand();
     assert.strictEqual(hand.length, 1);
     assert.strictEqual(hand[0].card.name, "Ancestral Recall");
     assert.strictEqual((hand[0].location as HandLocation).position, 0);
-    
+
     // Draw second card
     gameState.draw();
     hand = gameState.listHand();
@@ -372,14 +372,14 @@ describe("GameState", () => {
     assert.strictEqual(hand[0].card.name, "Ancestral Recall"); // position 0
     assert.strictEqual(hand[1].card.name, "Black Lotus"); // position 1
     assert.strictEqual((hand[1].location as HandLocation).position, 1);
-    
+
     // Draw third card
     gameState.draw();
     hand = gameState.listHand();
     assert.strictEqual(hand.length, 3);
     assert.strictEqual(hand[2].card.name, "Lightning Bolt"); // position 2
     assert.strictEqual((hand[2].location as HandLocation).position, 2);
-    
+
     // Library should be empty
     const library = gameState.listLibrary();
     assert.strictEqual(library.length, 0);
@@ -397,17 +397,17 @@ describe("GameState", () => {
 
     const gameState = new GameState(1, deck);
     gameState.shuffle();
-    
+
     const libraryBefore = gameState.listLibrary();
     assert.strictEqual(libraryBefore.length, 3);
-    
+
     const topCardBefore = libraryBefore[0]; // position 0 after shuffle
-    
+
     gameState.draw();
-    
+
     const libraryAfter = gameState.listLibrary();
     const handAfter = gameState.listHand();
-    
+
     assert.strictEqual(libraryAfter.length, 2);
     assert.strictEqual(handAfter.length, 1);
     assert.strictEqual(handAfter[0].card.name, topCardBefore.card.name);
@@ -424,23 +424,23 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Cards are sorted: Ancestral Recall (pos 0), Black Lotus (pos 1), Lightning Bolt (pos 2)
     const libraryBefore = gameState.listLibrary();
     assert.strictEqual(libraryBefore.length, 3);
     assert.strictEqual(libraryBefore[1].card.name, "Black Lotus"); // position 1
-    
+
     const revealedBefore = gameState.listRevealed();
     assert.strictEqual(revealedBefore.length, 0);
-    
+
     gameState.reveal(1); // reveal Black Lotus
-    
+
     // Check library: should have 2 cards now
     const libraryAfter = gameState.listLibrary();
     assert.strictEqual(libraryAfter.length, 2);
     assert.strictEqual(libraryAfter[0].card.name, "Ancestral Recall"); // position 0
     assert.strictEqual(libraryAfter[1].card.name, "Lightning Bolt"); // position 2
-    
+
     // Check revealed: should have 1 card now
     const revealedAfter = gameState.listRevealed();
     assert.strictEqual(revealedAfter.length, 1);
@@ -459,7 +459,7 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     assert.throws(() => {
       gameState.reveal(5); // position 5 doesn't exist
     }, /No card found at library position 5/);
@@ -476,14 +476,14 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Reveal first card (position 0: Ancestral Recall)
     gameState.reveal(0);
     let revealed = gameState.listRevealed();
     assert.strictEqual(revealed.length, 1);
     assert.strictEqual(revealed[0].card.name, "Ancestral Recall");
     assert.strictEqual((revealed[0].location as RevealedLocation).position, 0);
-    
+
     // Reveal second card (position 1: Black Lotus)
     gameState.reveal(1);
     revealed = gameState.listRevealed();
@@ -491,7 +491,7 @@ describe("GameState", () => {
     assert.strictEqual(revealed[0].card.name, "Ancestral Recall"); // position 0
     assert.strictEqual(revealed[1].card.name, "Black Lotus"); // position 1
     assert.strictEqual((revealed[1].location as RevealedLocation).position, 1);
-    
+
     // Library should have 1 card remaining
     const library = gameState.listLibrary();
     assert.strictEqual(library.length, 1);
@@ -509,22 +509,22 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Reveal the last card first
     gameState.reveal(2); // Lightning Bolt at position 2
-    
+
     let revealed = gameState.listRevealed();
     assert.strictEqual(revealed.length, 1);
     assert.strictEqual(revealed[0].card.name, "Lightning Bolt");
-    
+
     // Then reveal the first card
     gameState.reveal(0); // Ancestral Recall at position 0
-    
+
     revealed = gameState.listRevealed();
     assert.strictEqual(revealed.length, 2);
     assert.strictEqual(revealed[0].card.name, "Lightning Bolt"); // position 0 in revealed
     assert.strictEqual(revealed[1].card.name, "Ancestral Recall"); // position 1 in revealed
-    
+
     // Library should have 1 card remaining
     const library = gameState.listLibrary();
     assert.strictEqual(library.length, 1);
@@ -542,26 +542,26 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 }; // Ancestral Recall
     (cards[1].location as any) = { type: "Hand", position: 1 }; // Black Lotus
     (cards[2].location as any) = { type: "Hand", position: 2 }; // Lightning Bolt
-    
+
     const handBefore = gameState.listHand();
     assert.strictEqual(handBefore[0].card.name, "Ancestral Recall");
     assert.strictEqual(handBefore[1].card.name, "Black Lotus");
     assert.strictEqual(handBefore[2].card.name, "Lightning Bolt");
-    
+
     // Swap position 1 with position 0 (Black Lotus moves left)
     gameState.swapHandCardWithLeft(1);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Black Lotus");
     assert.strictEqual(handAfter[1].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[2].card.name, "Lightning Bolt");
-    
+
     // Verify positions are correct
     assert.strictEqual((handAfter[0].location as HandLocation).position, 0);
     assert.strictEqual((handAfter[1].location as HandLocation).position, 1);
@@ -579,16 +579,16 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 }; // Ancestral Recall
     (cards[1].location as any) = { type: "Hand", position: 1 }; // Black Lotus
     (cards[2].location as any) = { type: "Hand", position: 2 }; // Lightning Bolt
-    
+
     // Swap position 2 with position 1 (Lightning Bolt moves left)
     gameState.swapHandCardWithLeft(2);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[1].card.name, "Lightning Bolt");
@@ -606,12 +606,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithLeft(0);
     }, /Invalid hand position for swap: 0. Must be between 1 and 1/);
@@ -628,12 +628,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithLeft(5);
     }, /Invalid hand position for swap: 5. Must be between 1 and 1/);
@@ -650,12 +650,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithLeft(-1);
     }, /Invalid hand position for swap: -1. Must be between 1 and 1/);
@@ -672,24 +672,49 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Draw cards to populate hand naturally
     gameState.draw(); // Ancestral Recall to position 0
     gameState.draw(); // Black Lotus to position 1
     gameState.draw(); // Lightning Bolt to position 2
-    
+
     const handBefore = gameState.listHand();
     assert.strictEqual(handBefore[0].card.name, "Ancestral Recall");
     assert.strictEqual(handBefore[1].card.name, "Black Lotus");
     assert.strictEqual(handBefore[2].card.name, "Lightning Bolt");
-    
+
     // Swap second card with first
     gameState.swapHandCardWithLeft(1);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Black Lotus");
     assert.strictEqual(handAfter[1].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[2].card.name, "Lightning Bolt");
+  });
+
+  test("swapHandCardWithLeft returns correct WhatHappened information", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+
+    // Draw cards to populate hand naturally
+    gameState.draw(); // Ancestral Recall to position 0
+    gameState.draw(); // Black Lotus to position 1
+    gameState.draw(); // Lightning Bolt to position 2
+
+    // Swap second card with first
+    const whatHappened = gameState.swapHandCardWithLeft(1);
+
+    // Black Lotus moved left, Ancestral Recall moved right
+    assert.strictEqual(whatHappened.movedLeft?.name, "Black Lotus");
+    assert.strictEqual(whatHappened.movedRight?.name, "Ancestral Recall");
   });
 
   test("swapHandCardWithRight swaps cards at adjacent positions", () => {
@@ -703,26 +728,26 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 }; // Ancestral Recall
     (cards[1].location as any) = { type: "Hand", position: 1 }; // Black Lotus
     (cards[2].location as any) = { type: "Hand", position: 2 }; // Lightning Bolt
-    
+
     const handBefore = gameState.listHand();
     assert.strictEqual(handBefore[0].card.name, "Ancestral Recall");
     assert.strictEqual(handBefore[1].card.name, "Black Lotus");
     assert.strictEqual(handBefore[2].card.name, "Lightning Bolt");
-    
+
     // Swap position 0 with position 1 (Ancestral Recall moves right)
     gameState.swapHandCardWithRight(0);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Black Lotus");
     assert.strictEqual(handAfter[1].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[2].card.name, "Lightning Bolt");
-    
+
     // Verify positions are correct
     assert.strictEqual((handAfter[0].location as HandLocation).position, 0);
     assert.strictEqual((handAfter[1].location as HandLocation).position, 1);
@@ -740,16 +765,16 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 }; // Ancestral Recall
     (cards[1].location as any) = { type: "Hand", position: 1 }; // Black Lotus
     (cards[2].location as any) = { type: "Hand", position: 2 }; // Lightning Bolt
-    
+
     // Swap position 1 with position 2 (Black Lotus moves right)
     gameState.swapHandCardWithRight(1);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[1].card.name, "Lightning Bolt");
@@ -767,12 +792,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithRight(1);
     }, /Invalid hand position for swap: 1. Must be between 0 and 0/);
@@ -789,12 +814,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithRight(5);
     }, /Invalid hand position for swap: 5. Must be between 0 and 0/);
@@ -811,12 +836,12 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Move cards to hand manually for testing
     const cards = gameState.getCards();
     (cards[0].location as any) = { type: "Hand", position: 0 };
     (cards[1].location as any) = { type: "Hand", position: 1 };
-    
+
     assert.throws(() => {
       gameState.swapHandCardWithRight(-1);
     }, /Invalid hand position for swap: -1. Must be between 0 and 0/);
@@ -833,23 +858,48 @@ describe("GameState", () => {
     };
 
     const gameState = new GameState(1, deck);
-    
+
     // Draw cards to populate hand naturally
     gameState.draw(); // Ancestral Recall to position 0
     gameState.draw(); // Black Lotus to position 1
     gameState.draw(); // Lightning Bolt to position 2
-    
+
     const handBefore = gameState.listHand();
     assert.strictEqual(handBefore[0].card.name, "Ancestral Recall");
     assert.strictEqual(handBefore[1].card.name, "Black Lotus");
     assert.strictEqual(handBefore[2].card.name, "Lightning Bolt");
-    
+
     // Swap first card with second
     gameState.swapHandCardWithRight(0);
-    
+
     const handAfter = gameState.listHand();
     assert.strictEqual(handAfter[0].card.name, "Black Lotus");
     assert.strictEqual(handAfter[1].card.name, "Ancestral Recall");
     assert.strictEqual(handAfter[2].card.name, "Lightning Bolt");
+  });
+
+  test("swapHandCardWithRight returns correct WhatHappened information", () => {
+    const deck: Deck = {
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [fakeCard1, fakeCard2, fakeCard3],
+      provenance: fakeProvenance,
+    };
+
+    const gameState = new GameState(1, deck);
+
+    // Draw cards to populate hand naturally
+    gameState.draw(); // Ancestral Recall to position 0
+    gameState.draw(); // Black Lotus to position 1
+    gameState.draw(); // Lightning Bolt to position 2
+
+    // Swap first card with second
+    const whatHappened = gameState.swapHandCardWithRight(0);
+
+    // Ancestral Recall moved right, Black Lotus moved left
+    assert.strictEqual(whatHappened.movedRight?.name, "Ancestral Recall");
+    assert.strictEqual(whatHappened.movedLeft?.name, "Black Lotus");
   });
 });

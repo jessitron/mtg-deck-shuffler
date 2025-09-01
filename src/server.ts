@@ -437,10 +437,10 @@ app.post("/move-to-left/:gameId/:handPosition", async (req, res) => {
       return;
     }
 
-    game.swapHandCardWithLeft(handPosition);
+    const whatHappened = game.swapHandCardWithLeft(handPosition);
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game);
+    const html = formatGameHtml(game, whatHappened);
     res.send(html);
   } catch (error) {
     console.error("Error moving card to left:", error);
@@ -466,10 +466,10 @@ app.post("/move-to-right/:gameId/:handPosition", async (req, res) => {
       return;
     }
 
-    game.swapHandCardWithRight(handPosition);
+    const whatHappened = game.swapHandCardWithRight(handPosition);
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game);
+    const html = formatGameHtml(game, whatHappened);
     res.send(html);
   } catch (error) {
     console.error("Error moving card to right:", error);
