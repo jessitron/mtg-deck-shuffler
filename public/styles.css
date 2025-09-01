@@ -222,19 +222,42 @@ h1 {
   margin-top: 20px;
 }
 
-.draw-button {
+.library-buttons button {
   padding: 8px 16px;
   font-size: 0.9rem;
-  border: 1px solid #28a745;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #28a745;
   color: white;
   transition: background-color 0.2s;
 }
 
+.search-button {
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+.draw-button {
+  border: 1px solid #28a745;
+  background-color: #28a745;
+  color: white;
+}
+
 .draw-button:hover {
   background-color: #218838;
+}
+
+.shuffle-button {
+  border: 1px solid #4b0145;
+  background-color: #b75ac2;
+  color: white;
+}
+
+.shuffle-button:hover {
+  background-color: #a74ac2;
 }
 
 #revealed-cards-section {
@@ -245,31 +268,6 @@ h1 {
   background-color: white;
   overflow-x: auto;
 }
-
-.library-stack {
-  position: relative;
-  width: 200px;
-  height: 280px;
-  perspective: 1000px;
-}
-
-/* .library-card-1 {
-  top: 0;
-  left: 0;
-  z-index: 3;
-}
-
-.library-card-2 {
-  top: 2px;
-  left: 2px;
-  z-index: 2;
-}
-
-.library-card-3 {
-  top: 4px;
-  left: 4px;
-  z-index: 1;
-} */
 
 .revealed-cards-section {
   border: 2px solid #ddd;
@@ -455,21 +453,6 @@ h1 {
   flex: 1;
 }
 
-.search-button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  transition: background-color 0.2s;
-}
-
-.search-button:hover {
-  background-color: #0056b3;
-}
-
 .library-search-list {
   list-style: none;
   padding: 0;
@@ -547,9 +530,16 @@ h1 {
   perspective: 1000px;
 }
 
+.library-stack {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  perspective: 1000px;
+  text-align: left;
+}
+
 .library-card-back {
   position: absolute;
-  background: linear-gradient(45deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform-style: preserve-3d;
