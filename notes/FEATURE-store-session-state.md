@@ -26,6 +26,28 @@ We will implement one adapter, InMemoryPersistStateAdapter.
 
 LATER: there will be a SqlitePersistStateAdapter. Sqlite will store to a file, specified in adapter construction, right now "./data.db". As we iterate on PersistedGameState, we can wipe out and recreate the database file. We have no production environment right now. So we don't even need this adapter right now, haha.
 
+### SQLite Adapter Implementation Plan
+
+When implementing the SqlitePersistStateAdapter:
+
+1. **Dependencies**: Add `sqlite3` and `@types/sqlite3` to package.json
+2. **Schema**: Create a simple table structure:
+   ```sql
+   CREATE TABLE IF NOT EXISTS game_states (
+     id INTEGER PRIMARY KEY,
+     state TEXT NOT NULL,
+     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
+3. **Implementation**:
+   - Store PersistedGameState as JSON in the `state` column
+   - Use `sqlite3.Database` with promisified callbacks or `sqlite3` in async mode
+   - Initialize database and create tables in constructor
+   - Implement proper connection cleanup in a `close()` method
+4. **Error handling**: Wrap SQLite operations in try-catch and convert to appropriate errors
+5. **Migration strategy**: Since we can recreate the DB file during iteration, use a simple "drop and recreate" approach for schema changes
+
 Create tests for the adapter in test/ports-persist-state/
 
 ## Gateways
