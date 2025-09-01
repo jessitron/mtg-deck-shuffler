@@ -286,6 +286,13 @@ export function formatActiveGameHtml(game: GameState, shuffling: boolean): strin
                        title="Move card to top of library">
                  Put on Top
                </button>
+               <button class="put-on-bottom-button"
+                       hx-post="/put-on-bottom/${game.gameId}/${gameCard.gameCardIndex}"
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"
+                       title="Move card to bottom of library">
+                 Put on Bottom
+               </button>
              </div>
            </div>`
           )

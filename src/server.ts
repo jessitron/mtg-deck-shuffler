@@ -293,6 +293,30 @@ app.post("/put-on-top/:gameId/:gameCardIndex", async (req, res) => {
   }
 });
 
+app.post("/put-on-bottom/:gameId/:gameCardIndex", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const gameCardIndex = parseInt(req.params.gameCardIndex);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+    game.putOnBottomByGameCardIndex(gameCardIndex);
+
+    await persistStatePort.save(game.toPersistedGameState());
+
+    const html = formatGameHtml(game);
+    res.send(html);
+  } catch (error) {
+    console.error("Error putting card on bottom:", error);
+    res.status(500).send(`<div>Error putting card on bottom</div>`);
+  }
+});
+
 app.post("/draw/:gameId", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
 
