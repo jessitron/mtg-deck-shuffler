@@ -17,6 +17,16 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
 COPY decks/ ./decks/
+COPY run-in-docker run-in-docker
+
+RUN echo "=== DEBUG INFO ===" && \
+    pwd && \
+    echo "Working directory contents:" && \
+    ls -la && \
+    echo "Dist directory contents:" && \
+    ls -la dist/ && \
+    echo "Package.json:" && \
+    cat package.json
 
 EXPOSE 3000
-CMD ["node", "-r", "./dist/tracing.js", "dist/server.js"]
+CMD ["./run-in-docker"]
