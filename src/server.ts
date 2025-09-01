@@ -17,10 +17,23 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort } from "./port-persist-state/types.js";
 import { InMemoryPersistStateAdapter } from "./port-persist-state/InMemoryPersistStateAdapter.js";
+import { SqlitePersistStateAdapter } from "./port-persist-state/SqlitePersistStateAdapter.js";
 import { trace } from "@opentelemetry/api";
 
+function createPersistStateAdapter(): PersistStatePort {
+  const adapterType = process.env.PORT_PERSIST_STATE;
+  
+  if (adapterType === "in-memory") {
+    console.log("Using in-memory persistence adapter");
+    return new InMemoryPersistStateAdapter();
+  } else {
+    console.log("Using SQLite persistence adapter (./data.db)");
+    return new SqlitePersistStateAdapter();
+  }
+}
+
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
-const persistStatePort: PersistStatePort = new InMemoryPersistStateAdapter();
+const persistStatePort: PersistStatePort = createPersistStateAdapter();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
