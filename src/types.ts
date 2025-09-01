@@ -33,8 +33,8 @@ export function getCardImageUrl(uid: string, format: "small" | "normal" | "large
 
 export interface WhatHappened {
   shuffling?: boolean;
-  movedRight?: CardDefinition[];
-  movedLeft?: CardDefinition[];
+  movedRight?: import("./port-persist-state/types.js").GameCard[];
+  movedLeft?: import("./port-persist-state/types.js").GameCard[];
 }
 
 export function shuffleDeck(deck: Deck): Library {

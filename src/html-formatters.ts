@@ -334,9 +334,9 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
 
               // Add animation classes based on what happened
               let animationClass = "";
-              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.uid === gameCard.card.uid)) {
+              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
                 animationClass = " card-moved-left";
-              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.uid === gameCard.card.uid)) {
+              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
                 animationClass = " card-moved-right";
               }
 
@@ -354,6 +354,13 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                            data-image-url="${getCardImageUrl(gameCard.card.uid)}"
                            title="Copy image and remove from hand">
                      Play
+                   </button>
+                   <button class="put-down-button"
+                           hx-post="/put-down/${game.gameId}/${gameCard.gameCardIndex}"
+                           hx-target="#game-container"
+                           hx-swap="outerHTML"
+                           title="Move card to revealed">
+                     Put down
                    </button>
                    ${moveToRightButton}
                    </div>

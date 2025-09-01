@@ -315,8 +315,8 @@ export class GameState {
     this.validateInvariants();
 
     return {
-      movedLeft: [cardToSwap.card],
-      movedRight: [cardToLeft.card],
+      movedLeft: [cardToSwap],
+      movedRight: [cardToLeft],
     };
   }
 
@@ -338,8 +338,8 @@ export class GameState {
     this.validateInvariants();
 
     return {
-      movedRight: [cardToSwap.card],
-      movedLeft: [cardToRight.card],
+      movedRight: [cardToSwap],
+      movedLeft: [cardToRight],
     };
   }
 
