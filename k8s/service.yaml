@@ -11,4 +11,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-  type: LoadBalancer  # Creates AWS ELB
+  type: ClusterIP  # Internal service for ALB Ingress

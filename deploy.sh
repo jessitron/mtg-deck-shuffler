@@ -9,7 +9,7 @@ HONEYCOMB_API_KEY=""  # Add your Honeycomb API key here
 # Derived values
 IMAGE_TAG="$(git rev-parse --short HEAD)"
 FULL_IMAGE_NAME="${ECR_REPO}:${IMAGE_TAG}"
-LATEST_IMAGE_NAME="${ECR_REPO}:latest"
+LATEST_IMAGE_NAME="${ECR_REPO}:latest"`
 
 echo "🚀 Deploying MTG Deck Shuffler to EKS"
 echo "   Image: ${FULL_IMAGE_NAME}"
@@ -69,6 +69,7 @@ kubectl apply -f k8s/pvc.yaml
 # Update deployment with new image
 sed "s|<your-ecr-repo>/mtg-deck-shuffler:latest|${LATEST_IMAGE_NAME}|g" k8s/deployment.yaml | kubectl apply -f -
 kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/ingress.yaml
 
 # Wait for rollout
 echo ""
@@ -84,14 +85,15 @@ kubectl get pods -l app=mtg-deck-shuffler
 echo ""
 kubectl get services mtg-deck-shuffler-service
 
-# Get LoadBalancer URL
-LB_URL=$(kubectl get service mtg-deck-shuffler-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || echo "pending...")
+# Get ALB URL from Ingress
+ALB_URL=$(kubectl get ingress mtg-deck-shuffler-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || echo "pending...")
 echo ""
-echo "🌐 App will be available at: http://${LB_URL}"
-echo "   (LoadBalancer may take a few minutes to provision)"
+echo "🌐 App will be available at: http://${ALB_URL}"
+echo "   (ALB may take a few minutes to provision and configure)"
 
 echo ""
 echo "🔍 Useful commands:"
 echo "   View logs: kubectl logs -f deployment/mtg-deck-shuffler"
 echo "   Scale app: kubectl scale deployment/mtg-deck-shuffler --replicas=2"
-echo "   Delete app: kubectl delete deployment,service,configmap,secret,pvc -l app=mtg-deck-shuffler"
+echo "   Check ingress: kubectl get ingress mtg-deck-shuffler-ingress"
+echo "   Delete app: kubectl delete deployment,service,configmap,secret,pvc,ingress -l app=mtg-deck-shuffler"
