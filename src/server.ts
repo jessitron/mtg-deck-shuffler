@@ -257,10 +257,10 @@ app.post("/put-in-hand/:gameId/:cardIndex", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    // TODO: Implement put in hand functionality
-    console.log(`Put card in hand at position: ${cardIndex} in game ${gameId}`);
+    game.putInHandByGameCardIndex(cardIndex);
 
-    // For now, just return the current game state
+    await persistStatePort.save(game.toPersistedGameState());
+
     const html = formatGameHtml(game);
     res.send(html);
   } catch (error) {

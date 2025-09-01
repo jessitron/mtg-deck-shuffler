@@ -233,6 +233,20 @@ export class GameState {
     return this;
   }
 
+  public putInHandByGameCardIndex(gameCardIndex: number): this {
+    const allCards = this.getCards();
+    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
+      throw new Error(`Invalid game card index: ${gameCardIndex}`);
+    }
+
+    const cardToPutInHand = allCards[gameCardIndex];
+
+    this.addToHand(cardToPutInHand);
+
+    this.validateInvariants();
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       gameId: this.gameId,
