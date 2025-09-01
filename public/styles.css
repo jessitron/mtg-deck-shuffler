@@ -85,7 +85,7 @@ h1 {
 
 @keyframes slideFromLeft {
   0% {
-    transform: translateX(-100px);
+    transform: translateX(-215px);
     opacity: 0.7;
   }
   100% {
@@ -96,7 +96,7 @@ h1 {
 
 @keyframes slideFromRight {
   0% {
-    transform: translateX(100px);
+    transform: translateX(215px);
     opacity: 0.7;
   }
   100% {
