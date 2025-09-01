@@ -248,6 +248,16 @@ h1 {
   background-color: #a74ac2;
 }
 
+.reveal-button {
+  border: 1px solid #163b97;
+  background-color: #7b74de;
+  color: white;
+}
+
+.reveal-button:hover {
+  background-color: #214273;
+}
+
 #revealed-cards-section {
   border: 2px solid #ddd;
   padding: 20px;
