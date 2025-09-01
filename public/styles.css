@@ -282,6 +282,13 @@ h1 {
   overflow: scroll;
 }
 
+.revealed-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 #hand-section {
   grid-area: hand-section;
   border: 2px solid #333;
