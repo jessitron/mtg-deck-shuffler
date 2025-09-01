@@ -133,8 +133,9 @@ export function formatLibraryModalHtml(game: GameState): string {
 
   const libraryCardList = libraryCards
     .map(
-      (gameCard: any) =>
-        `<li class="library-card-item">
+      (gameCard: any) => {
+        const gameCardIndex = game.getCards().findIndex(gc => gc === gameCard);
+        return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
             <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
@@ -146,18 +147,19 @@ export function formatLibraryModalHtml(game: GameState): string {
               ? `
           <div class="card-actions">
             <button class="card-action-button"
-                    hx-post="/reveal-card/${game.gameId}/${gameCard.location.position}"
+                    hx-post="/reveal-card/${game.gameId}/${gameCardIndex}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Reveal</button>
             <button class="card-action-button secondary"
-                    hx-post="/put-in-hand/${game.gameId}/${gameCard.location.position}"
+                    hx-post="/put-in-hand/${game.gameId}/${gameCardIndex}"
                     hx-target="#game-container"
                     hx-swap="outerHTML">Put in Hand</button>
           </div>
           `
               : ""
           }
-        </li>`
+        </li>`;
+      }
     )
     .join("");
 

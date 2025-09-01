@@ -222,18 +222,24 @@ export class GameState {
     return this;
   }
 
-  public revealTop(): this {
-    const libraryCards = this.listLibrary();
-    if (libraryCards.length === 0) {
-      throw new Error("Cannot reveal: Library is empty");
+  public revealByGameCardIndex(gameCardIndex: number): this {
+    const allCards = this.getCards();
+    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
+      throw new Error(`Invalid game card index: ${gameCardIndex}`);
     }
-    const cardToReveal = libraryCards[0];
+
+    const cardToReveal = allCards[gameCardIndex];
+    
+    if (cardToReveal.location.type !== "Library") {
+      throw new Error(`Card at index ${gameCardIndex} is not in the library`);
+    }
 
     this.addToRevealed(cardToReveal);
 
     this.validateInvariants();
     return this;
   }
+
 
   public toPersistedGameState(): PersistedGameState {
     return {

@@ -223,9 +223,9 @@ app.get("/close-modal", (req, res) => {
 });
 
 // Card action endpoints
-app.post("/reveal-card/:gameId/:position", async (req, res) => {
+app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
   const gameId = parseInt(req.params.gameId);
-  const position = parseInt(req.params.position);
+  const gameCardIndex = parseInt(req.params.gameCardIndex);
 
   try {
     const persistedGame = await persistStatePort.retrieve(gameId);
@@ -235,7 +235,7 @@ app.post("/reveal-card/:gameId/:position", async (req, res) => {
     }
 
     const game = GameState.fromPersistedGameState(persistedGame);
-    game.reveal(position);
+    game.revealByGameCardIndex(gameCardIndex);
 
     // Persist the updated state
     await persistStatePort.save(game.toPersistedGameState());
@@ -383,7 +383,15 @@ app.post("/reveal-top/:gameId", async (req, res) => {
       return;
     }
 
-    game.revealTop();
+    const libraryCards = game.listLibrary();
+    if (libraryCards.length === 0) {
+      res.status(400).send(`<div>Cannot reveal: Library is empty</div>`);
+      return;
+    }
+
+    const topCard = libraryCards[0];
+    const gameCardIndex = game.getCards().findIndex(gc => gc === topCard);
+    game.revealByGameCardIndex(gameCardIndex);
     await persistStatePort.save(game.toPersistedGameState());
 
     const html = formatGameHtml(game);
