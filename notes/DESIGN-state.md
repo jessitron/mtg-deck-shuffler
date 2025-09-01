@@ -41,6 +41,14 @@ Operations possible on game state:
 
 - initialize from a Deck (in the constructor). Place all included cards except the commander(s) in the Library, with position incrementing. Excluded card definitions are dropped.
 
+Views on game state include:
+
+- list commanders
+- list library (list of cards in Library, ordered by position)
+- list hand (list of cards in Hand, ordered by position)
+- list revealed (list of cards in Revealed, ordered by position)
+- list table (list of cards in Table, ordered by Display Name)
+
 ## Phase 2
 
 - shuffle: randomize the position of cards in Library. After shuffling, the top card is the one with position 0. Check: The same number of cards are in the library as before, and all cards not in library remain where they were.
@@ -58,24 +66,21 @@ Operations possible on game state:
 
 - reveal(position): move any card from Library to Revealed.
 
-## Not yet
+## Phase 6
 
 - return to bottom (for any revealed card): move this card from Revealed to the last position in Library. Check: one fewer card in Revealed, one more card in Library. The card now has the highest-numbered position in Library.
 - return to top (for any revealed card): move this card from Revealed to the top position in Library. Check: one fewer card in Revealed, one more card in Library. The card now has position Library(0).
 - move to hand (for any revealed card): move this card from Revealed to the last position in Hand
-- move to table (for any revealed card or any card in hand): move the card to Table
-- return from table (for any card in Table): move the card to Revealed
+- Play (for any revealed card or any card in hand): move the card to Table
 - move left in hand (for any card in Hand, except the first): move this card one position to the left in Hand. Swap it with the card to the left. Check: same number of cards in Hand. One more card with larger position than this one.
 - move right in hand (for any card in Hand, except the last): move this card one position to the right in Hand. Swap it with the card to the right. Check: same number of cards in Hand. One more card to with smaller position than this one.
+
+## Phase 7
+
+- Return (for any card in Table): move the card to Revealed
+
+## Later
+
 - return all revealed cards to bottom of library in a random order
-- choose card from hand at random
 - exile face-down (store where other players can't see, copy a card-back... ideally with a number on it)
-- probably will never implement: Gonti, Lord of Luxury lets an opponent exile your card face-down, they see it, you don't.
-
-Views on game state include:
-
-- list commanders
-- list library (list of cards in Library, ordered by position)
-- list hand (list of cards in Hand, ordered by position)
-- list revealed (list of cards in Revealed, ordered by position)
-- list table (list of cards in Table, ordered by Display Name)
+- only if we ever do game coordination: Gonti, Lord of Luxury lets an opponent exile your card face-down, they see it, you don't.

@@ -248,7 +248,16 @@ h1 {
   max-width: 200px;
 }
 
-.library-buttons button {
+.library-buttons-single {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 200px;
+}
+
+.library-buttons button,
+.library-buttons-single button {
   padding: 8px 16px;
   font-size: 0.9rem;
   border-radius: 5px;
@@ -298,10 +307,8 @@ h1 {
   background-color: #214273;
 }
 
-#revealed-cards-section {
-  border: 2px solid #ddd;
+.revealed-cards-section {
   padding: 20px;
-  border-radius: 10px;
   min-width: 300px;
   min-height: 200px;
   display: flex;
@@ -323,6 +330,54 @@ h1 {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+
+.card-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  width: 200px;
+  justify-items: center;
+}
+
+.card-buttons button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.put-in-hand-button {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.put-in-hand-button:hover {
+  background-color: #218838;
+}
+
+.put-on-top-button {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.put-on-top-button:hover {
+  background-color: #0056b3;
+}
+
+.put-on-bottom-button {
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+}
+
+.put-on-bottom-button:hover {
+  background-color: #5a6268;
 }
 
 #hand-section {
