@@ -366,6 +366,11 @@ app.post("/shuffle/:gameId", async (req, res) => {
   }
 });
 
+// 404 handler - must be last
+app.get("*", (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "..", "public", "404.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

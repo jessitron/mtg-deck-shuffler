@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | MTG Deck Shuffler</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .error-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 70vh;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      
+      .error-number {
+        font-size: 8rem;
+        font-weight: bold;
+        color: #4caf50;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      .error-message {
+        font-size: 2rem;
+        color: #333;
+        margin: 20px 0 10px 0;
+        font-weight: bold;
+      }
+      
+      .error-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 40px;
+        max-width: 500px;
+        line-height: 1.5;
+      }
+      
+      .card-not-found {
+        width: 200px;
+        height: 280px;
+        border: 3px dashed #ccc;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #f9f9f9, #f0f0f0);
+        margin: 20px 0 40px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .card-text {
+        font-size: 1.1rem;
+        color: #666;
+        text-align: center;
+        padding: 20px;
+        font-style: italic;
+      }
+      
+      .home-link {
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+      }
+      
+      .home-link:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+      }
+      
+      .flavor-text {
+        font-style: italic;
+        color: #888;
+        margin-top: 30px;
+        font-size: 1rem;
+        max-width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-page">
+      <div class="error-number">404</div>
+      <h1 class="error-message">Page Not Found</h1>
+      <p class="error-description">
+        The page you're looking for seems to have been exiled to another realm.
+      </p>
+      
+      <div class="card-not-found">
+        <div class="card-text">
+          Missing Card<br/>
+          <small>0/0</small><br/><br/>
+          <em>"Some things are lost<br/>to the void forever."</em>
+        </div>
+      </div>
+      
+      <a href="/" class="home-link">Return to Deck Selection</a>
+      
+      <p class="flavor-text">
+        "Not all who wander are lost, but some pages definitely are."
+      </p>
+    </div>
+  </body>
+</html>
