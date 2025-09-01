@@ -421,7 +421,7 @@ app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
       return;
     }
 
-    game.playCard(gameCardIndex);
+    const whatHappened = game.playCard(gameCardIndex);
     const persistedGameState = game.toPersistedGameState();
     trace.getActiveSpan()?.setAttributes({
       "game.status": game.status,
@@ -432,7 +432,7 @@ app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
 
     await persistStatePort.save(persistedGameState);
 
-    const html = formatGameHtml(game);
+    const html = formatGameHtml(game, whatHappened);
     res.send(html);
   } catch (error) {
     console.error("Error playing card:", error);

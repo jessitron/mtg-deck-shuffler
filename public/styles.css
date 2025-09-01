@@ -413,6 +413,7 @@ h1 {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  gap: 5px;
   width: 100%;
 }
 
@@ -442,7 +443,6 @@ h1 {
 .put-down-button {
   padding: 8px 16px;
   font-size: 0.9rem;
-  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;

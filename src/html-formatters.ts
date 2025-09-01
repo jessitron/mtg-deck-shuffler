@@ -254,22 +254,24 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
   const cardCountInfo = `${game.totalCards} cards`;
 
   const revealedCards = game.listRevealed();
-  const revealedCardsHtml = `
+  const revealedCardsHtml =
+    revealedCards.length == 0
+      ? ""
+      : `
     <div class="revealed-cards-section" class="revealed-cards-section">
-      <h3>Revealed Cards ${revealedCards.length > 0 ? `(${revealedCards.length})` : ""}</h3>
+      <h3>Revealed Cards (${revealedCards.length})</h3>
       <div class="revealed-cards-area">
         ${revealedCards
-          .map(
-            (gameCard: any) => {
-              // Add animation classes based on what happened
-              let animationClass = "";
-              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-                animationClass = " card-moved-left";
-              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-                animationClass = " card-moved-right";
-              }
+          .map((gameCard: any) => {
+            // Add animation classes based on what happened
+            let animationClass = "";
+            if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
+              animationClass = " card-moved-left";
+            } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
+              animationClass = " card-moved-right";
+            }
 
-              return `<div class="revealed-card-container">
+            return `<div class="revealed-card-container">
              <img src="${getCardImageUrl(gameCard.card.uid)}" id="revealed-card-${gameCard.gameCardIndex}"
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card${animationClass}"
@@ -306,8 +308,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                </button>
              </div>
            </div>`;
-            }
-          )
+          })
           .join("")}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
       </div>

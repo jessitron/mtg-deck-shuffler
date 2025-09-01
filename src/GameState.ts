@@ -220,36 +220,14 @@ export class GameState {
 
     const cardToPlay = this.gameCards[gameCardIndex];
 
-    // Verify the card is in hand or revealed
     if (!isInHand(cardToPlay) && !isRevealed(cardToPlay)) {
       throw new Error(`Card at gameCardIndex ${gameCardIndex} is not in hand or revealed`);
     }
 
-    let cardsToMoveLeft: GameCard[] = [];
-
-    if (isInHand(cardToPlay)) {
-      const handCards = this.listHand();
-      const playedCardPosition = cardToPlay.location.position;
-
-      // Find all cards to the right of the played card (higher positions)
-      cardsToMoveLeft = handCards.filter((card) => card.location.position > playedCardPosition);
-
-      // Move each card one position to the left
-      cardsToMoveLeft.forEach((card) => {
-        (card.location as HandLocation).position -= 1;
-      });
-    } else if (isRevealed(cardToPlay)) {
-      const revealedCards = this.listRevealed();
-      const playedCardPosition = cardToPlay.location.position;
-
-      // Find all cards to the right of the played card (higher positions)
-      cardsToMoveLeft = revealedCards.filter((card) => card.location.position > playedCardPosition);
-
-      // Move each card one position to the left
-      cardsToMoveLeft.forEach((card) => {
-        (card.location as RevealedLocation).position -= 1;
-      });
-    }
+    const cardsToMoveLeft = this.gameCards
+      .filter((gc) => gc.location.type === cardToPlay.location.type)
+      .filter((gc) => isInHand(gc) || isRevealed(gc)) // this is for type happiness
+      .filter((gc) => gc.location.position > cardToPlay.location.position);
 
     // Move card to table
     (cardToPlay as any).location = { type: "Table" };
