@@ -79,7 +79,7 @@ app.post("/start-game", async (req, res) => {
     game.startGame();
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game);
+    const html = formatGameHtml(game, true);
     res.send(html);
   } catch (error) {
     console.error("Error starting game:", error);
@@ -236,7 +236,7 @@ app.post("/reveal-card/:gameId/:position", async (req, res) => {
 
     const game = GameState.fromPersistedGameState(persistedGame);
     game.reveal(position);
-    
+
     // Persist the updated state
     await persistStatePort.save(game.toPersistedGameState());
 
@@ -358,7 +358,7 @@ app.post("/shuffle/:gameId", async (req, res) => {
     game.shuffle();
     await persistStatePort.save(game.toPersistedGameState());
 
-    const html = formatGameHtml(game);
+    const html = formatGameHtml(game, true);
     res.send(html);
   } catch (error) {
     console.error("Error shuffling library:", error);

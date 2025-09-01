@@ -250,14 +250,10 @@ h1 {
   position: relative;
   width: 200px;
   height: 280px;
+  perspective: 1000px;
 }
 
-.library-card-back {
-  /* Inherits size and styling from .mtg-card-image */
-  position: absolute;
-}
-
-.library-card-1 {
+/* .library-card-1 {
   top: 0;
   left: 0;
   z-index: 3;
@@ -273,7 +269,7 @@ h1 {
   top: 4px;
   left: 4px;
   z-index: 1;
-}
+} */
 
 .revealed-cards-section {
   border: 2px solid #ddd;
@@ -540,4 +536,117 @@ h1 {
 
 .card-action-button.secondary:hover {
   background-color: #5a6268;
+}
+
+/* shuffling effect */
+
+.library-container {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  perspective: 1000px;
+}
+
+.library-card-back {
+  position: absolute;
+  background: linear-gradient(45deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  background-image: url("https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg");
+}
+
+/* Create a card back pattern */
+.library-card-back::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid #666;
+  border-radius: 8px;
+  background: repeating-linear-gradient(45deg, #333, #333 10px, #3a3a3a 10px, #3a3a3a 20px);
+  opacity: 0.5;
+}
+
+/* Position the three cards in a stack */
+.library-card-back:nth-child(1) {
+  transform: translateZ(0px) translateY(0px);
+  z-index: 3;
+}
+
+.library-card-back:nth-child(2) {
+  transform: translateZ(-20px) translateY(3px) translateX(2px);
+  z-index: 2;
+}
+
+.library-card-back:nth-child(3) {
+  transform: translateZ(-40px) translateY(6px) translateX(4px);
+  z-index: 1;
+}
+
+/* Shuffle animation keyframes */
+@keyframes shuffle-card-1 {
+  0% {
+    transform: translateZ(0px) translateY(0px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(-150px) translateY(-50px) translateZ(100px) rotateY(15deg) rotateZ(-10deg);
+  }
+  50% {
+    transform: translateX(150px) translateY(50px) translateZ(50px) rotateY(-15deg) rotateZ(10deg);
+  }
+  75% {
+    transform: translateX(-100px) translateY(0px) translateZ(75px) rotateY(10deg) rotateZ(-5deg);
+  }
+  100% {
+    transform: translateZ(0px) translateY(0px) rotateY(0deg);
+  }
+}
+
+@keyframes shuffle-card-2 {
+  0% {
+    transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(120px) translateY(-60px) translateZ(80px) rotateY(-20deg) rotateZ(8deg);
+  }
+  50% {
+    transform: translateX(-130px) translateY(40px) translateZ(60px) rotateY(18deg) rotateZ(-12deg);
+  }
+  75% {
+    transform: translateX(80px) translateY(-20px) translateZ(40px) rotateY(-10deg) rotateZ(5deg);
+  }
+  100% {
+    transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+  }
+}
+
+@keyframes shuffle-card-3 {
+  0% {
+    transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(100px) translateY(70px) translateZ(120px) rotateY(25deg) rotateZ(15deg);
+  }
+  50% {
+    transform: translateX(-140px) translateY(-30px) translateZ(90px) rotateY(-22deg) rotateZ(-8deg);
+  }
+  75% {
+    transform: translateX(60px) translateY(10px) translateZ(30px) rotateY(12deg) rotateZ(6deg);
+  }
+  100% {
+    transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+  }
+}
+
+/* Apply animations when shuffling class is added */
+.library-stack.shuffling .library-card-back:nth-child(1) {
+  animation: shuffle-card-1 1.5s ease-in-out;
+}
+
+.library-stack.shuffling .library-card-back:nth-child(2) {
+  animation: shuffle-card-2 1.5s ease-in-out;
+}
+
+.library-stack.shuffling .library-card-back:nth-child(3) {
+  animation: shuffle-card-3 1.5s ease-in-out;
 }

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Library Shuffle Animation</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            gap: 30px;
+        }
+
+        .library-container {
+            position: relative;
+            width: 200px;
+            height: 280px;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: absolute;
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(45deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+            border-radius: 12px;
+            border: 2px solid #555;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            background-image: 
+                radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+        }
+
+        /* Create a card back pattern */
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid #666;
+            border-radius: 8px;
+            background: repeating-linear-gradient(
+                45deg,
+                #333,
+                #333 10px,
+                #3a3a3a 10px,
+                #3a3a3a 20px
+            );
+            opacity: 0.5;
+        }
+
+        /* Position the three cards in a stack */
+        .card:nth-child(1) {
+            transform: translateZ(0px) translateY(0px);
+            z-index: 3;
+        }
+
+        .card:nth-child(2) {
+            transform: translateZ(-20px) translateY(3px) translateX(2px);
+            z-index: 2;
+        }
+
+        .card:nth-child(3) {
+            transform: translateZ(-40px) translateY(6px) translateX(4px);
+            z-index: 1;
+        }
+
+        /* Shuffle animation keyframes */
+        @keyframes shuffle-card-1 {
+            0% {
+                transform: translateZ(0px) translateY(0px) rotateY(0deg);
+            }
+            25% {
+                transform: translateX(-150px) translateY(-50px) translateZ(100px) rotateY(15deg) rotateZ(-10deg);
+            }
+            50% {
+                transform: translateX(150px) translateY(50px) translateZ(50px) rotateY(-15deg) rotateZ(10deg);
+            }
+            75% {
+                transform: translateX(-100px) translateY(0px) translateZ(75px) rotateY(10deg) rotateZ(-5deg);
+            }
+            100% {
+                transform: translateZ(0px) translateY(0px) rotateY(0deg);
+            }
+        }
+
+        @keyframes shuffle-card-2 {
+            0% {
+                transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+            }
+            25% {
+                transform: translateX(120px) translateY(-60px) translateZ(80px) rotateY(-20deg) rotateZ(8deg);
+            }
+            50% {
+                transform: translateX(-130px) translateY(40px) translateZ(60px) rotateY(18deg) rotateZ(-12deg);
+            }
+            75% {
+                transform: translateX(80px) translateY(-20px) translateZ(40px) rotateY(-10deg) rotateZ(5deg);
+            }
+            100% {
+                transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+            }
+        }
+
+        @keyframes shuffle-card-3 {
+            0% {
+                transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+            }
+            25% {
+                transform: translateX(100px) translateY(70px) translateZ(120px) rotateY(25deg) rotateZ(15deg);
+            }
+            50% {
+                transform: translateX(-140px) translateY(-30px) translateZ(90px) rotateY(-22deg) rotateZ(-8deg);
+            }
+            75% {
+                transform: translateX(60px) translateY(10px) translateZ(30px) rotateY(12deg) rotateZ(6deg);
+            }
+            100% {
+                transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+            }
+        }
+
+        /* Apply animations when shuffling class is added */
+        .library-container.shuffling .card:nth-child(1) {
+            animation: shuffle-card-1 1.5s ease-in-out;
+        }
+
+        .library-container.shuffling .card:nth-child(2) {
+            animation: shuffle-card-2 1.5s ease-in-out;
+        }
+
+        .library-container.shuffling .card:nth-child(3) {
+            animation: shuffle-card-3 1.5s ease-in-out;
+        }
+
+        /* Shuffle button */
+        .shuffle-btn {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .shuffle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .shuffle-btn:active {
+            transform: translateY(0);
+        }
+
+        .shuffle-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Info text */
+        .info {
+            color: #aaa;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="library-container" id="library">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+    </div>
+    
+    <button class="shuffle-btn" id="shuffleBtn">Shuffle Library</button>
+    
+    <div class="info">Click the button to shuffle your MTG library</div>
+
+    <script>
+        const library = document.getElementById('library');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+
+        shuffleBtn.addEventListener('click', () => {
+            // Prevent multiple clicks during animation
+            if (library.classList.contains('shuffling')) return;
+            
+            // Add the shuffling class to trigger animation
+            library.classList.add('shuffling');
+            shuffleBtn.disabled = true;
+            
+            // Remove the class after animation completes
+            setTimeout(() => {
+                library.classList.remove('shuffling');
+                shuffleBtn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

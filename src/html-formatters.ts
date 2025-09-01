@@ -241,7 +241,7 @@ export function formatDeckReviewHtml(game: GameState): string {
     </div>`;
 }
 
-export function formatActiveGameHtml(game: GameState): string {
+export function formatActiveGameHtml(game: GameState, shuffling: boolean): string {
   const commanderImageHtml =
     game.commanders.length > 0
       ? game.commanders
@@ -294,7 +294,7 @@ export function formatActiveGameHtml(game: GameState): string {
       
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        <div class="library-stack" data-testid="library-stack">
+        <div class="library-stack ${shuffling ? "shuffling" : ""}" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
@@ -401,10 +401,10 @@ export function formatTableModalHtml(game: GameState): string {
   </div>`;
 }
 
-export function formatGameHtml(game: GameState): string {
+export function formatGameHtml(game: GameState, shuffling: boolean = false): string {
   if (game.status === "NotStarted") {
     return formatDeckReviewHtml(game);
   } else {
-    return formatActiveGameHtml(game);
+    return formatActiveGameHtml(game, shuffling);
   }
 }
