@@ -21,16 +21,5 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/run-in-docker ./run-in-docker
 COPY --from=builder /app/decks ./decks
 
-RUN echo "=== DEBUG INFO ===" && \
-    pwd && \
-    echo "Working directory contents:" && \
-    ls -la && \
-    echo "Dist directory contents:" && \
-    ls -la dist/ && \
-    echo "Package.json:" && \
-    cat package.json
-
-ENTRYPOINT []
-
 EXPOSE 3000
-CMD ["./run-in-docker"]
+CMD ["node", "-r", "./dist/tracing.js", "./dist/server.js"]
