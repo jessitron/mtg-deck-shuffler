@@ -260,11 +260,19 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
       <div class="revealed-cards-area">
         ${revealedCards
           .map(
-            (gameCard: any) =>
-              `<div class="revealed-card-container">
+            (gameCard: any) => {
+              // Add animation classes based on what happened
+              let animationClass = "";
+              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
+                animationClass = " card-moved-left";
+              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
+                animationClass = " card-moved-right";
+              }
+
+              return `<div class="revealed-card-container">
              <img src="${getCardImageUrl(gameCard.card.uid)}" id="revealed-card-${gameCard.gameCardIndex}"
                   alt="${gameCard.card.name}"
-                  class="mtg-card-image revealed-card"
+                  class="mtg-card-image revealed-card${animationClass}"
                   title="${gameCard.card.name}" />
              <div class="card-buttons">
                <button class="play-button"
@@ -297,7 +305,8 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                  Put on Bottom
                </button>
              </div>
-           </div>`
+           </div>`;
+            }
           )
           .join("")}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
