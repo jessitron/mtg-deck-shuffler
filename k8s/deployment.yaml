@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mtg-deck-shuffler
-  namespace: mtg-deck-shuffler
+  labels:
+    app: mtg-deck-shuffler
 spec:
   replicas: 1
   selector:

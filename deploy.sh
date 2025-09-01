@@ -55,14 +55,12 @@ fi
 echo ""
 echo "☸️  Deploying to Kubernetes..."
 
-# Create namespace
-kubectl apply -f k8s/namespace.yaml
-
-# Create secret (replace placeholder with actual key)
+# Create secret with labels
 kubectl create secret generic mtg-deck-shuffler-secret \
-    --namespace=mtg-deck-shuffler \
     --from-literal=HONEYCOMB_API_KEY="$HONEYCOMB_API_KEY" \
-    --dry-run=client -o yaml | kubectl apply -f -
+    --dry-run=client -o yaml | \
+    sed '/^metadata:/a \ \ labels:\n\ \ \ \ app: mtg-deck-shuffler' | \
+    kubectl apply -f -
 
 # Apply other manifests
 kubectl apply -f k8s/configmap.yaml
@@ -75,25 +73,25 @@ kubectl apply -f k8s/service.yaml
 # Wait for rollout
 echo ""
 echo "⏳ Waiting for deployment to complete..."
-kubectl rollout status deployment/mtg-deck-shuffler -n mtg-deck-shuffler --timeout=300s
+kubectl rollout status deployment/mtg-deck-shuffler --timeout=300s
 
 # Get service URL
 echo ""
 echo "🎉 Deployment complete!"
 echo ""
 echo "📊 Service status:"
-kubectl get pods -n mtg-deck-shuffler
+kubectl get pods -l app=mtg-deck-shuffler
 echo ""
-kubectl get services -n mtg-deck-shuffler
+kubectl get services mtg-deck-shuffler-service
 
 # Get LoadBalancer URL
-LB_URL=$(kubectl get service mtg-deck-shuffler-service -n mtg-deck-shuffler -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || echo "pending...")
+LB_URL=$(kubectl get service mtg-deck-shuffler-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || echo "pending...")
 echo ""
 echo "🌐 App will be available at: http://${LB_URL}"
 echo "   (LoadBalancer may take a few minutes to provision)"
 
 echo ""
 echo "🔍 Useful commands:"
-echo "   View logs: kubectl logs -f deployment/mtg-deck-shuffler -n mtg-deck-shuffler"
-echo "   Scale app: kubectl scale deployment/mtg-deck-shuffler --replicas=2 -n mtg-deck-shuffler"
-echo "   Delete app: kubectl delete namespace mtg-deck-shuffler"
+echo "   View logs: kubectl logs -f deployment/mtg-deck-shuffler"
+echo "   Scale app: kubectl scale deployment/mtg-deck-shuffler --replicas=2"
+echo "   Delete app: kubectl delete deployment,service,configmap,secret,pvc -l app=mtg-deck-shuffler"
