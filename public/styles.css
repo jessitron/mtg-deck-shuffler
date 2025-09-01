@@ -124,34 +124,8 @@ h1 {
 }
 
 .deck-actions button.start-game-button {
-  background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02, #4caf50, #2196f3, #9c27b0, #e91e63);
-  background-size: 400% 400%;
-  animation: rainbow-shimmer 3s ease-in-out infinite;
+  background-color: #4caf50;
   color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-  transform: scale(1);
-  transition: all 0.3s ease;
-}
-
-.deck-actions button.start-game-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
-  animation-duration: 1s;
-}
-
-@keyframes rainbow-shimmer {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .deck-actions button {
