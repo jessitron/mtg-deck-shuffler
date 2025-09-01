@@ -439,6 +439,29 @@ h1 {
   cursor: not-allowed;
 }
 
+.put-down-button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #6c757d;
+  color: white;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.put-down-button:hover:not(:disabled) {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.put-down-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* Style for cards that are being played */
 .being-played {
   opacity: 0.7;
