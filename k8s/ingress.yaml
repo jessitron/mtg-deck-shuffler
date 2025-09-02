@@ -7,11 +7,12 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: mtg.jessitron.honeydemo.io # give your domain name here
     kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/group.name: onlyonealbplease
+    alb.ingress.kubernetes.io/group.name: only-one-alb-please
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
     alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=orion-alb-access-logs,access_logs.s3.prefix=orion-alb
 spec:
   ingressClassName: alb
