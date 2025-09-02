@@ -417,10 +417,12 @@ export function formatTableModalHtml(game: GameState): string {
         `<li class="table-card-item">
           <div class="card-info">
             <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
-            <button class="return-button"
-                    hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
-                    hx-target="#game-container"
-                    hx-swap="outerHTML">Return</button>
+            <div class="card-actions">
+              <button class="card-action-button"
+                      hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
+                      hx-target="#game-container"
+                      hx-swap="outerHTML">Return</button>
+            </div>
           </div>
         </li>`
     )
