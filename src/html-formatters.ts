@@ -97,6 +97,10 @@ export function formatGamePageHtml(game: GameState): string {
   <body>
     <h1>*Woohoo it's Magic time!*</h1>
     ${gameContent}
+    
+    <footer>
+      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+    </footer>
   </body>
 </html>`;
 }
@@ -467,6 +471,10 @@ export function formatGameNotFoundPageHtml(gameId: number): string {
         </form>
       </div>
     </div>
+    
+    <footer>
+      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+    </footer>
   </body>
 </html>`;
 }
