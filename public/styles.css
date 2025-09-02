@@ -624,6 +624,15 @@ h1 {
 .library-card-item {
   display: flex;
   align-items: center;
+  flex-direction: row;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 16px;
+}
+
+.table-card-item {
+  display: flex;
+  align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
   gap: 16px;
