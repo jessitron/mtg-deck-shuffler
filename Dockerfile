@@ -1,5 +1,5 @@
 # Multi-stage build for efficiency
-FROM node:22 AS builder
+FROM node:22-slim AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -12,14 +12,13 @@ COPY run-in-docker ./run-in-docker
 
 RUN npm run build
 
-FROM node:22
+FROM node:22-slim
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/run-in-docker ./run-in-docker
 COPY --from=builder /app/decks ./decks
 
 EXPOSE 3000
-CMD ["/app/run-in-docker"]
+CMD ["node", "-r", "dist/tracing.js", "dist/server.js"]

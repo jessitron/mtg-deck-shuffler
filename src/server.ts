@@ -27,8 +27,9 @@ function createPersistStateAdapter(): PersistStatePort {
     console.log("Using in-memory persistence adapter");
     return new InMemoryPersistStateAdapter();
   } else {
-    console.log("Using SQLite persistence adapter (./data.db)");
-    return new SqlitePersistStateAdapter();
+    const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
+    console.log(`Using SQLite persistence adapter (${dbPath})`);
+    return new SqlitePersistStateAdapter(dbPath);
   }
 }
 
