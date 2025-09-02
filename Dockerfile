@@ -21,4 +21,4 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/decks ./decks
 
 EXPOSE 3000
-CMD ["node", "-r", "dist/tracing.js", "dist/server.js"]
+CMD ["ls"]
