@@ -19,6 +19,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/decks ./decks
+COPY --from=builder /app/run-in-docker ./run-in-docker
 
 EXPOSE 3000
-CMD ["ls", "dist"]
+CMD ["sh", "-c", "./run-in-docker"]
