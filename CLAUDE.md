@@ -8,7 +8,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 ## Architecture
 
-- **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks
+- **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks. There is some custom JS in the header for tracing; and there is some custom JS for interactivity that can't be implemented with HTMX. Where possible, the JS triggers on HTMX events.
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
 
@@ -41,7 +41,7 @@ The app requires a `.env` file for OpenTelemetry configuration. The `./run` scri
 
 ### Persistence Configuration
 
-The app uses **SQLite by default** for game state persistence, creating a `data.db` file in the project root. 
+The app uses **SQLite by default** for game state persistence, creating a `data.db` file in the project root.
 
 - **SQLite (default)**: Persistent storage across server restarts
 - **In-memory**: Set `PORT_PERSIST_STATE=in-memory` for testing/development - data is lost when server stops
