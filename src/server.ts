@@ -44,6 +44,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.static(path.join(__dirname, "..", "decks"), {}));
 
 app.get("/choose-deck", async (req, res) => {
   try {
@@ -518,6 +519,35 @@ app.post("/move-to-right/:gameId/:handPosition", async (req, res) => {
   } catch (error) {
     console.error("Error moving card to right:", error);
     res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not move card to right"}</div>`);
+  }
+});
+
+app.post("/swap-with-next/:gameId/:handPosition", async (req, res) => {
+  const gameId = parseInt(req.params.gameId);
+  const handPosition = parseInt(req.params.handPosition);
+
+  try {
+    const persistedGame = await persistStatePort.retrieve(gameId);
+    if (!persistedGame) {
+      res.status(404).send(`<div>Game ${gameId} not found</div>`);
+      return;
+    }
+
+    const game = GameState.fromPersistedGameState(persistedGame);
+
+    if (game.status !== "Active") {
+      res.status(400).send(`<div>Cannot swap card: Game is not active</div>`);
+      return;
+    }
+
+    const whatHappened = game.swapHandCardWithNext(handPosition);
+    await persistStatePort.save(game.toPersistedGameState());
+
+    const html = formatGameHtml(game, whatHappened);
+    res.send(html);
+  } catch (error) {
+    console.error("Error swapping card with next:", error);
+    res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not swap card with next"}</div>`);
   }
 });
 

@@ -321,24 +321,14 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
             .listHand()
             .map((gameCard: GameCard, index: number) => {
               const handSize = game.listHand().length;
-              const moveToLeftButton =
-                index > 0
-                  ? `<button class="move-to-left-button"
-                         hx-post="/move-to-left/${game.gameId}/${index}"
-                         hx-target="#game-container"
-                         hx-swap="outerHTML"
-                         title="Move card to the left">
-                   ←
-                 </button>`
-                  : "";
-              const moveToRightButton =
+              const swapButton =
                 index < handSize - 1
-                  ? `<button class="move-to-right-button"
-                         hx-post="/move-to-right/${game.gameId}/${index}"
+                  ? `<button class="swap-button"
+                         hx-post="/swap-with-next/${game.gameId}/${index}"
                          hx-target="#game-container"
                          hx-swap="outerHTML"
-                         title="Move card to the right">
-                   →
+                         title="Swap with next card">
+                   ↔
                  </button>`
                   : "";
 
@@ -356,7 +346,6 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                     class="mtg-card-image hand-card${animationClass}"
                     title="${gameCard.card.name}" />
                     <div class="hand-card-buttons">
-                    ${moveToLeftButton}
                    <button class="play-button"
                            hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
@@ -365,6 +354,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                            title="Copy image and remove from hand">
                      Play
                    </button>
+                   ${swapButton}
                    <button class="put-down-button"
                            hx-post="/put-down/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
@@ -372,7 +362,6 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                            title="Move card to revealed">
                      Put down
                    </button>
-                   ${moveToRightButton}
                    </div>
 
                  </div>`;

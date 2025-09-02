@@ -355,6 +355,10 @@ export class GameState {
     };
   }
 
+  public swapHandCardWithNext(handPosition: number): WhatHappened {
+    return this.swapHandCardWithRight(handPosition);
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       version: PERSISTED_GAME_STATE_VERSION,
