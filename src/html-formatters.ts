@@ -115,13 +115,17 @@ export function formatGamePageHtml(game: GameState): string {
         // Restore the scroll position of the hand section
         const handSection = document.querySelector('#hand-section .hand-cards');
         if (handSection && handScrollPosition > 0) {
-          handSection.scrollLeft = handScrollPosition;
+          // Only restore if the scroll position is still valid (not beyond the new scroll width)
+          const maxScrollLeft = handSection.scrollWidth - handSection.clientWidth;
+          handSection.scrollLeft = Math.min(handScrollPosition, Math.max(0, maxScrollLeft));
         }
         
         // Restore the scroll position of the revealed cards section
         const revealedCardsSection = document.querySelector('#revealed-cards-area');
         if (revealedCardsSection && revealedCardsScrollPosition > 0) {
-          revealedCardsSection.scrollLeft = revealedCardsScrollPosition;
+          // Only restore if the scroll position is still valid (not beyond the new scroll width)
+          const maxScrollLeft = revealedCardsSection.scrollWidth - revealedCardsSection.clientWidth;
+          revealedCardsSection.scrollLeft = Math.min(revealedCardsScrollPosition, Math.max(0, maxScrollLeft));
         }
       });
 
