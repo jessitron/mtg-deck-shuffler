@@ -31,7 +31,7 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
       const now = new Date();
       deck.provenance = {
         retrievedDate: now,
-        sourceUrl: `local://${pathToLocalFile}`,
+        sourceUrl: `/${pathToLocalFile}`,
         deckSource: "local",
       };
       return deck;
