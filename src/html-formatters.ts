@@ -93,6 +93,25 @@ export function formatGamePageHtml(game: GameState): string {
     </script>
     <script src="/htmx.js"></script>
     <script>
+      // Store scroll position before HTMX swaps
+      let handScrollPosition = 0;
+      
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        // Store the current scroll position of the hand section
+        const handSection = document.querySelector('#hand-section .hand-cards');
+        if (handSection) {
+          handScrollPosition = handSection.scrollLeft;
+        }
+      });
+      
+      document.addEventListener('htmx:afterSwap', function(evt) {
+        // Restore the scroll position of the hand section
+        const handSection = document.querySelector('#hand-section .hand-cards');
+        if (handSection && handScrollPosition > 0) {
+          handSection.scrollLeft = handScrollPosition;
+        }
+      });
+
       // Handle clipboard copying when HTMX is about to make the request
       document.addEventListener('htmx:beforeRequest', async function(evt) {
         if (evt.detail.elt.classList.contains('play-button')) {
