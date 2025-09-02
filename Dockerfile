@@ -24,4 +24,4 @@ COPY --from=builder /app/decks ./decks
 ENV NODE_OPTIONS="-r /app/dist/tracing.js"
 
 EXPOSE 3000
-CMD ["/app/dist/server.js"]
+CMD ["node", "/app/dist/server.js"]
