@@ -21,7 +21,5 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/run-in-docker ./run-in-docker
 COPY --from=builder /app/decks ./decks
 
-ENV NODE_OPTIONS="-r /app/dist/tracing.js"
-
 EXPOSE 3000
-CMD ["node", "/app/dist/server.js"]
+CMD ["/app/run-in-docker"]
