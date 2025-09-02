@@ -143,7 +143,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.id, 456);
     assert.strictEqual(result.name, "Commander Deck");
     assert.strictEqual(result.totalCards, 32); // 31 non-commander cards + 1 commander
-    assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", uid: "urza-uid", multiverseid: 333333 }]);
+    assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333 }]);
   });
 
   test("handles empty deck", async () => {
@@ -263,7 +263,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     assert.strictEqual(result.id, 14669648);
     assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", uid: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
+    assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
     assert.strictEqual(result.totalCards, 4); // 3 non-commander cards + 1 commander
   });
 
@@ -301,7 +301,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.cards.length, 1);
-    assert.deepStrictEqual(result.cards[0], { name: "Oracle Name", uid: "test-uid", multiverseid: 123456 });
+    assert.deepStrictEqual(result.cards[0], { name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456 });
   });
 
   test("converts cards with display name correctly", async () => {
@@ -339,7 +339,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     assert.strictEqual(result.cards.length, 1);
-    assert.deepStrictEqual(result.cards[0], { name: "Display Name", uid: "test-uid-2", multiverseid: 789012 });
+    assert.deepStrictEqual(result.cards[0], { name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012 });
   });
 
   test("converts deck with multiple commanders", async () => {
@@ -403,7 +403,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.strictEqual(result.name, "Dual Commander Deck");
     assert.strictEqual(result.totalCards, 22); // 20 non-commander cards + 2 commanders
     assert.strictEqual(result.commanders.length, 2);
-    assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", uid: "jaheira-uid", multiverseid: 111111 });
-    assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", uid: "agent-uid", multiverseid: 222222 });
+    assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111 });
+    assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222 });
   });
 });

@@ -43,7 +43,7 @@ export function formatDeckHtml(deck: Deck): string {
   const commanderImageHtml =
     deck.commanders.length > 0
       ? deck.commanders
-          .map((commander) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
           .join("")
       : `<div class="commander-placeholder">No Commander Image</div>`;
 
@@ -167,7 +167,7 @@ export function formatDeckReviewHtml(game: GameState): string {
   const commanderImageHtml =
     game.commanders.length > 0
       ? game.commanders
-          .map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .map((commander: any) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
           .join("")
       : `<div class="commander-placeholder">No Commander</div>`;
 
@@ -217,7 +217,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
   const commanderImageHtml =
     game.commanders.length > 0
       ? game.commanders
-          .map((commander: any) => `<img src="${getCardImageUrl(commander.uid)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+          .map((commander: any) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
           .join("")
       : `<div class="commander-placeholder">No Commander</div>`;
 
@@ -242,7 +242,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
             }
 
             return `<div id="card-container-${gameCard.gameCardIndex}" class="revealed-card-container">
-             <img src="${getCardImageUrl(gameCard.card.uid)}" id="revealed-card-${gameCard.gameCardIndex}"
+             <img src="${getCardImageUrl(gameCard.card.scryfallId)}" id="revealed-card-${gameCard.gameCardIndex}"
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card${animationClass}"
                   title="${gameCard.card.name}" />
@@ -251,7 +251,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                        hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                        hx-target="#game-container"
                        hx-swap="outerHTML swap:1.5s"
-                       data-image-url="${getCardImageUrl(gameCard.card.uid)}"
+                       data-image-url="${getCardImageUrl(gameCard.card.scryfallId)}"
                        title="Copy image and remove from revealed">
                  Play
                </button>
@@ -311,7 +311,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
               }
 
               return `<div id="card-container-${gameCard.gameCardIndex}" class="hand-card-container">
-                   <img src="${getCardImageUrl(gameCard.card.uid)}"
+                   <img src="${getCardImageUrl(gameCard.card.scryfallId)}"
                     alt="${gameCard.card.name}"
                     class="mtg-card-image hand-card${animationClass}"
                     title="${gameCard.card.name}" />
@@ -320,7 +320,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                            hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
                            hx-target="#game-container"
                            hx-swap="outerHTML swap:1.5s"
-                           data-image-url="${getCardImageUrl(gameCard.card.uid)}"
+                           data-image-url="${getCardImageUrl(gameCard.card.scryfallId)}"
                            title="Copy image and remove from hand">
                      Play
                    </button>

@@ -1,6 +1,6 @@
 export interface CardDefinition {
   name: string;
-  uid: string;
+  scryfallId: string;
   multiverseid: number;
 }
 
@@ -24,11 +24,11 @@ export interface Library {
   count: number;
 }
 
-export function getCardImageUrl(uid: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png"): string {
+export function getCardImageUrl(scryfallId: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png"): string {
   const extension = format === "png" ? "png" : "jpg";
-  const firstTwo = uid.substring(0, 1);
-  const nextTwo = uid.substring(1, 2);
-  return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${uid}.${extension}`;
+  const firstTwo = scryfallId.substring(0, 1);
+  const nextTwo = scryfallId.substring(1, 2);
+  return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${scryfallId}.${extension}`;
 }
 
 export interface WhatHappened {
