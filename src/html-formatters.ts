@@ -93,14 +93,21 @@ export function formatGamePageHtml(game: GameState): string {
     </script>
     <script src="/htmx.js"></script>
     <script>
-      // Store scroll position before HTMX swaps
+      // Store scroll positions before HTMX swaps
       let handScrollPosition = 0;
+      let revealedCardsScrollPosition = 0;
       
       document.addEventListener('htmx:beforeSwap', function(evt) {
         // Store the current scroll position of the hand section
         const handSection = document.querySelector('#hand-section .hand-cards');
         if (handSection) {
           handScrollPosition = handSection.scrollLeft;
+        }
+        
+        // Store the current scroll position of the revealed cards section
+        const revealedCardsSection = document.querySelector('#revealed-cards-area');
+        if (revealedCardsSection) {
+          revealedCardsScrollPosition = revealedCardsSection.scrollLeft;
         }
       });
       
@@ -109,6 +116,12 @@ export function formatGamePageHtml(game: GameState): string {
         const handSection = document.querySelector('#hand-section .hand-cards');
         if (handSection && handScrollPosition > 0) {
           handSection.scrollLeft = handScrollPosition;
+        }
+        
+        // Restore the scroll position of the revealed cards section
+        const revealedCardsSection = document.querySelector('#revealed-cards-area');
+        if (revealedCardsSection && revealedCardsScrollPosition > 0) {
+          revealedCardsSection.scrollLeft = revealedCardsScrollPosition;
         }
       });
 
@@ -277,9 +290,9 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
     revealedCards.length == 0
       ? ""
       : `
-    <div class="revealed-cards-section" class="revealed-cards-section">
+    <div id="revealed-cards-section" class="revealed-cards-section" class="revealed-cards-section">
       <h3>Revealed Cards (${revealedCards.length})</h3>
-      <div class="revealed-cards-area">
+      <div id="revealed-cards-area" class="revealed-cards-area">
         ${revealedCards
           .map((gameCard: any) => {
             // Add animation classes based on what happened
@@ -290,7 +303,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
               animationClass = " card-moved-right";
             }
 
-            return `<div class="revealed-card-container">
+            return `<div id="card-container-${gameCard.gameCardIndex}" class="revealed-card-container">
              <img src="${getCardImageUrl(gameCard.card.uid)}" id="revealed-card-${gameCard.gameCardIndex}"
                   alt="${gameCard.card.name}"
                   class="mtg-card-image revealed-card${animationClass}"
@@ -335,7 +348,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
 
   const handCardsHtml = `<div id="hand-section" data-testid="hand-section">
         <h3>Hand (${game.listHand().length})</h3>
-        <div class="hand-cards">
+        <div id="hand-cards" class="hand-cards">
           ${game
             .listHand()
             .map((gameCard: GameCard, index: number) => {
@@ -359,7 +372,7 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                 animationClass = " card-moved-right";
               }
 
-              return `<div class="hand-card-container">
+              return `<div id="card-container-${gameCard.gameCardIndex}" class="hand-card-container">
                    <img src="${getCardImageUrl(gameCard.card.uid)}"
                     alt="${gameCard.card.name}"
                     class="mtg-card-image hand-card${animationClass}"
@@ -373,14 +386,14 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                            title="Copy image and remove from hand">
                      Play
                    </button>
-                   ${swapButton}
                    <button class="put-down-button"
-                           hx-post="/put-down/${game.gameId}/${gameCard.gameCardIndex}"
-                           hx-target="#game-container"
-                           hx-swap="outerHTML"
-                           title="Move card to revealed">
-                     Put down
+                   hx-post="/put-down/${game.gameId}/${gameCard.gameCardIndex}"
+                   hx-target="#game-container"
+                   hx-swap="outerHTML"
+                   title="Move card to revealed">
+                   Put down
                    </button>
+                   ${swapButton}
                    </div>
 
                  </div>`;
