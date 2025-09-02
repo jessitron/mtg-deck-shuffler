@@ -2,6 +2,11 @@
   "name": "mtg-deck-shuffler",
   "version": "1.0.0",
   "description": "Simple MTG deck app for remote play",
+  "author": "Jessica Kerr <jessitron@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jessitron/mtg-deck-shuffler.git"
+  },
   "type": "module",
   "main": "server.js",
   "scripts": {
