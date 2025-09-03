@@ -1,0 +1,514 @@
+{
+  "id": 5775225,
+  "name": "Blood Rites - The Lost Caverns of Ixalan Commander",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Clavileño, First of the Blessed",
+      "scryfallId": "9f55b648-b1ec-407a-a0c7-7647755793d1",
+      "multiverseid": 642441
+    }
+  ],
+  "cards": [
+    {
+      "name": "Champion of Dusk",
+      "scryfallId": "5fa1674a-86cc-4fdf-8671-860b2bf5043d",
+      "multiverseid": 640484
+    },
+    {
+      "name": "Bartolomé del Presidio",
+      "scryfallId": "690ccdc7-6c43-4902-9d11-2f07b7a36b11",
+      "multiverseid": 636944
+    },
+    {
+      "name": "Carmen, Cruel Skymarcher",
+      "scryfallId": "c0e07f8a-5290-47c4-a93d-0c3a14afebd3",
+      "multiverseid": 642143
+    },
+    {
+      "name": "Charismatic Conqueror",
+      "scryfallId": "599c934d-bfff-43ce-a545-6e3cde124515",
+      "multiverseid": 640030
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "d477d733-2360-4f1d-9ecd-cdedc2e8a7ae",
+      "multiverseid": 640621
+    },
+    {
+      "name": "Dusk Legion Sergeant",
+      "scryfallId": "5bfc9243-7aec-48e6-9f3b-1bbbb5370063",
+      "multiverseid": 640040
+    },
+    {
+      "name": "Elenda's Hierophant",
+      "scryfallId": "d12f728a-1bbb-4bee-96d4-d721292997ba",
+      "multiverseid": 640031
+    },
+    {
+      "name": "Falkenrath Noble",
+      "scryfallId": "0fad9e17-c45c-4f94-af5b-63dc1dda1e5b",
+      "multiverseid": 640492
+    },
+    {
+      "name": "March of the Canonized",
+      "scryfallId": "547581d0-025a-435a-8016-ee7c6b890e53",
+      "multiverseid": 640033
+    },
+    {
+      "name": "Master of Dark Rites",
+      "scryfallId": "6394a522-37bb-4cf3-b434-5121c8000ac6",
+      "multiverseid": 640043
+    },
+    {
+      "name": "Martyr of Dusk",
+      "scryfallId": "d32e68b4-2584-4b1c-9268-642e3678bae7",
+      "multiverseid": 640428
+    },
+    {
+      "name": "Order of Sacred Dusk",
+      "scryfallId": "32f34099-c6ff-49d2-911a-23ab806c77e9",
+      "multiverseid": 640057
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "f30552a5-db59-4164-bbd2-44bf7ae1e91e",
+      "multiverseid": 640642
+    },
+    {
+      "name": "Promise of Aclazotz // Foul Rebirth",
+      "scryfallId": "b88a3b40-bf04-4017-be97-08ab86e331d1",
+      "multiverseid": 640044
+    },
+    {
+      "name": "Redemption Choir",
+      "scryfallId": "981dcacb-24a3-43bb-bb64-2b227f31dc3e",
+      "multiverseid": 640034
+    },
+    {
+      "name": "Sanctum Seeker",
+      "scryfallId": "893279fb-6f51-4d1e-b2fd-a0cdb603785f",
+      "multiverseid": 640505
+    },
+    {
+      "name": "Twilight Prophet",
+      "scryfallId": "41f90e2b-cdbb-4a7c-aba0-c72055b414ed",
+      "multiverseid": 640507
+    },
+    {
+      "name": "Windbrisk Heights",
+      "scryfallId": "047f2401-d2dc-4bfd-a7fa-83ef1d825219",
+      "multiverseid": 640666
+    },
+    {
+      "name": "Yahenni, Undying Partisan",
+      "scryfallId": "2b77cd68-fbdd-4bca-a68c-299425588a61",
+      "multiverseid": 640510
+    },
+    {
+      "name": "Austere Command",
+      "scryfallId": "cf1f630e-8b55-4f5a-a7f2-3161801de767",
+      "multiverseid": 640422
+    },
+    {
+      "name": "Blade of the Bloodchief",
+      "scryfallId": "34e7bebf-1844-476c-a947-978393908fa2",
+      "multiverseid": 640596
+    },
+    {
+      "name": "Blood Artist",
+      "scryfallId": "b7f1c316-cf2f-4bbf-89a1-79c8043bdd96",
+      "multiverseid": 640478
+    },
+    {
+      "name": "Bloodghast",
+      "scryfallId": "08e01310-d192-41e9-a6f0-0edbd6fb3cfb",
+      "multiverseid": 640480
+    },
+    {
+      "name": "Bloodline Necromancer",
+      "scryfallId": "6b1e719c-4679-4cf0-8ca4-ae740eb0ba92",
+      "multiverseid": 640481
+    },
+    {
+      "name": "Bloodtracker",
+      "scryfallId": "d654462f-5346-454f-9905-41218cf6b29e",
+      "multiverseid": 640482
+    },
+    {
+      "name": "Bojuka Bog",
+      "scryfallId": "0c7d4fbe-fa7a-4b34-b339-197f08409cbf",
+      "multiverseid": 640616
+    },
+    {
+      "name": "Butcher of Malakir",
+      "scryfallId": "9d805499-0739-403e-8447-ed2707dc9eb2",
+      "multiverseid": 640483
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "c643146f-da7b-4cc0-b874-4accad99ccce",
+      "multiverseid": 640597
+    },
+    {
+      "name": "Cordial Vampire",
+      "scryfallId": "0d91e61d-e3bf-4ddc-9f01-18b1abe35a61",
+      "multiverseid": 640485
+    },
+    {
+      "name": "Crossway Troublemakers",
+      "scryfallId": "95ef4f86-9b96-4181-9442-44adce180984",
+      "multiverseid": 640486
+    },
+    {
+      "name": "Cruel Celebrant",
+      "scryfallId": "b3f8be99-a398-4664-beb6-3e98d6e62a32",
+      "multiverseid": 640563
+    },
+    {
+      "name": "Damn",
+      "scryfallId": "84056124-1a6f-4274-bee2-74cf0debddb5",
+      "multiverseid": 640487
+    },
+    {
+      "name": "Drana, Liberator of Malakir",
+      "scryfallId": "0850b41d-3589-40cd-ae22-cc5b4ddee1c4",
+      "multiverseid": 640489
+    },
+    {
+      "name": "Dusk Legion Zealot",
+      "scryfallId": "72048624-e3fd-4e9b-91a9-996ea3a1a74f",
+      "multiverseid": 640490
+    },
+    {
+      "name": "Elenda, the Dusk Rose",
+      "scryfallId": "e18feca3-1b1b-4456-8873-25a24849a917",
+      "multiverseid": 640564
+    },
+    {
+      "name": "Etchings of the Chosen",
+      "scryfallId": "496e4759-9d6b-42fa-833c-1fff2c9d03f2",
+      "multiverseid": 640565
+    },
+    {
+      "name": "Exquisite Blood",
+      "scryfallId": "0e8ccfa7-4178-476a-a155-0ca1c98556c9",
+      "multiverseid": 640491
+    },
+    {
+      "name": "Glass-Cast Heart",
+      "scryfallId": "f36a4054-903c-468a-877b-0ba43a403cc1",
+      "multiverseid": 640495
+    },
+    {
+      "name": "Heirloom Blade",
+      "scryfallId": "49fe8b13-3f83-4a35-aa2d-2292b96f3d3e",
+      "multiverseid": 640599
+    },
+    {
+      "name": "Indulgent Aristocrat",
+      "scryfallId": "296e4dc6-6997-4c4a-8137-c0835b44a1c9",
+      "multiverseid": 640496
+    },
+    {
+      "name": "Isolated Chapel",
+      "scryfallId": "c688891e-0a25-4630-acfc-c3a0bed2b2f2",
+      "multiverseid": 640633
+    },
+    {
+      "name": "Kindred Boon",
+      "scryfallId": "a9d21710-3006-45a0-9af2-275159bb5315",
+      "multiverseid": 640425
+    },
+    {
+      "name": "Legion Lieutenant",
+      "scryfallId": "85c6bd7d-537a-42fe-9c68-742bdf2e7025",
+      "multiverseid": 640571
+    },
+    {
+      "name": "Mavren Fein, Dusk Apostle",
+      "scryfallId": "fdc3e998-760b-41ca-9f92-270aaa82f3fb",
+      "multiverseid": 640429
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "e7bd3aaa-864c-4cbb-bbab-68d87c824e3d",
+      "multiverseid": 640662
+    },
+    {
+      "name": "Utter End",
+      "scryfallId": "b7d2161e-8ef5-463d-a84f-966e4419fc6c",
+      "multiverseid": 640588
+    },
+    {
+      "name": "Vault of the Archangel",
+      "scryfallId": "03a91bc2-bf45-45f3-8a14-911b6148720b",
+      "multiverseid": 640663
+    },
+    {
+      "name": "Village Rites",
+      "scryfallId": "2841339b-faef-407d-9838-d03fe80e6294",
+      "multiverseid": 640508
+    },
+    {
+      "name": "Viscera Seer",
+      "scryfallId": "486fd8a2-dd97-4082-84ef-4795c7e559a0",
+      "multiverseid": 640509
+    },
+    {
+      "name": "Voldaren Estate",
+      "scryfallId": "1fcbc704-4fb3-49c3-9040-aa1681e86e2c",
+      "multiverseid": 640665
+    },
+    {
+      "name": "Vona, Butcher of Magan",
+      "scryfallId": "27beed9c-a42e-46de-8fbc-885da337ae75",
+      "multiverseid": 640589
+    },
+    {
+      "name": "Wayfarer's Bauble",
+      "scryfallId": "2eb513b3-9c9e-4837-8f58-67d698677041",
+      "multiverseid": 640613
+    },
+    {
+      "name": "Welcoming Vampire",
+      "scryfallId": "2ea7710e-2eae-47e7-bcb1-3465f8b62728",
+      "multiverseid": 640436
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "8615e46e-56c3-49f6-b4ad-44ec25be5f05",
+      "multiverseid": 640605
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "92a45243-2ea9-4da1-984b-287a555a51f4",
+      "multiverseid": 640639
+    },
+    {
+      "name": "New Blood",
+      "scryfallId": "6ee669ab-0ae6-43e5-86fd-f0dcb621e478",
+      "multiverseid": 640498
+    },
+    {
+      "name": "Nighthawk Scavenger",
+      "scryfallId": "ebc64d89-4fa0-40fc-9d93-154d50deaaa1",
+      "multiverseid": 640499
+    },
+    {
+      "name": "Oathsworn Vampire",
+      "scryfallId": "cde542de-0b87-4eb1-be05-abdb729ada10",
+      "multiverseid": 640500
+    },
+    {
+      "name": "Olivia's Wrath",
+      "scryfallId": "3eb5cc8d-a198-43cd-a2bd-9c9414d815b2",
+      "multiverseid": 640501
+    },
+    {
+      "name": "Orzhov Basilica",
+      "scryfallId": "315107f2-3c1c-43b5-aa23-80ec8f722861",
+      "multiverseid": 640641
+    },
+    {
+      "name": "Orzhov Signet",
+      "scryfallId": "0f0d3c9c-7b3d-4dd1-bf0a-41652e2e1f94",
+      "multiverseid": 640606
+    },
+    {
+      "name": "Pact of the Serpent",
+      "scryfallId": "481d268a-848c-4ccd-95ff-eed77dc20776",
+      "multiverseid": 640502
+    },
+    {
+      "name": "Patron of the Vein",
+      "scryfallId": "a70d7b65-77d0-41d3-9735-d64b9288fde1",
+      "multiverseid": 640503
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "4716a32c-91a6-470a-a686-d5eb3d27f46e",
+      "multiverseid": 639670
+    },
+    {
+      "name": "Radiant Destiny",
+      "scryfallId": "d1d03bfb-c3bf-4837-b4df-e6339997dedb",
+      "multiverseid": 640431
+    },
+    {
+      "name": "Return to Dust",
+      "scryfallId": "664e3826-799b-4edb-8811-2d2b6355edaf",
+      "multiverseid": 640432
+    },
+    {
+      "name": "Rogue's Passage",
+      "scryfallId": "a7dc75a8-c500-4b50-aff9-32ce36566104",
+      "multiverseid": 640645
+    },
+    {
+      "name": "Secluded Courtyard",
+      "scryfallId": "26c40b2a-cb27-4fad-a9b2-1fb065d44d77",
+      "multiverseid": 640646
+    },
+    {
+      "name": "Shineshadow Snarl",
+      "scryfallId": "3d483bcf-438a-499b-86a5-6357d718faf1",
+      "multiverseid": 640647
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "2d47121d-8b90-4d28-9ffa-0a640b9dd611",
+      "multiverseid": 640609
+    },
+    {
+      "name": "Sorin, Lord of Innistrad",
+      "scryfallId": "ab98caf7-cc24-4027-ad8a-026150b61858",
+      "multiverseid": 640585
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
+      "multiverseid": 639674
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "a3b1da84-9c26-4c3c-b90f-43a0b2b20103",
+      "multiverseid": 640610
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "7cdee412-3519-4626-80ca-e3e431a604f0",
+      "multiverseid": 640433
+    },
+    {
+      "name": "Tainted Field",
+      "scryfallId": "299b3b1d-4c31-4701-870e-15ee1ef85cd2",
+      "multiverseid": 640652
+    },
+    {
+      "name": "Talisman of Hierarchy",
+      "scryfallId": "16d49e21-dbe6-41da-b4b0-fd587e3326a5",
+      "multiverseid": 640611
+    },
+    {
+      "name": "Temple of Silence",
+      "scryfallId": "dbd36bbb-2d0e-4d81-9646-b8263ef29a8e",
+      "multiverseid": 640654
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "96a31b2d-ee3f-48e5-b0dd-481a0c3efea2",
+      "multiverseid": 640655
+    },
+    {
+      "name": "Timothar, Baron of Bats",
+      "scryfallId": "7b01ecb8-02e2-4da2-8bf3-9c3753b23ba4",
+      "multiverseid": 640506
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "fc6c69a0-ac24-4486-8893-a6303d08fc6e",
+      "multiverseid": 640595
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-03T16:48:55.426Z",
+    "sourceUrl": "https://archidekt.com/decks/5775225",
+    "deckSource": "archidekt"
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "id": 7858209,
+  "name": "Eldrazi Incursion - Modern Horizons 3 Commander",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Ulalek, Fused Atrocity",
+      "scryfallId": "fdad1b0e-d3cc-4d76-ae7e-fee12558cf2c",
+      "multiverseid": 668531
+    }
+  ],
+  "cards": [
+    {
+      "name": "Command Tower",
+      "scryfallId": "27e36832-09ca-4070-8511-94580014c3ed",
+      "multiverseid": 665745
+    },
+    {
+      "name": "Azlask, the Swelling Scourge",
+      "scryfallId": "ced9db11-ba95-4b09-89b6-0b49ffb1fa82",
+      "multiverseid": 665326
+    },
+    {
+      "name": "Crib Swap",
+      "scryfallId": "31704e73-5168-4880-be9b-ae32b2197d35",
+      "multiverseid": 665582
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "19911e6e-7c35-4281-b31c-266382f052cc",
+      "multiverseid": 665719
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "156a1ca1-e4b1-4e0c-a786-fd80fe189896",
+      "multiverseid": 665697
+    },
+    {
+      "name": "Battlefield Forge",
+      "scryfallId": "8ba7cd01-5fa4-40e2-a6d3-fe5e876f69b0",
+      "multiverseid": 665735
+    },
+    {
+      "name": "Shivan Reef",
+      "scryfallId": "6fc5d0a1-8c29-4961-8567-d1ccc3669a32",
+      "multiverseid": 665789
+    },
+    {
+      "name": "Adarkar Wastes",
+      "scryfallId": "6be6ebf1-4e4c-4c6f-ace1-3fed55fe5c69",
+      "multiverseid": 665730
+    },
+    {
+      "name": "Drowner of Hope",
+      "scryfallId": "5091396e-a3cb-44a2-ade3-4f3a3bbd1942",
+      "multiverseid": 665596
+    },
+    {
+      "name": "Oblivion Sower",
+      "scryfallId": "eb179ae3-28d9-4741-a055-e7e767d8a408",
+      "multiverseid": 665572
+    },
+    {
+      "name": "Eldrazi Displacer",
+      "scryfallId": "0d87a0d9-13d5-46f2-b32a-acc080d8f480",
+      "multiverseid": 665583
+    },
+    {
+      "name": "Ulamog's Crusher",
+      "scryfallId": "ac896541-b271-4bbb-a45c-753869361df6",
+      "multiverseid": 665575
+    },
+    {
+      "name": "Elder Deep-Fiend",
+      "scryfallId": "e7b913c5-ea9b-4774-87b7-1656c072d15a",
+      "multiverseid": 665568
+    },
+    {
+      "name": "Ancient Stirrings",
+      "scryfallId": "c381f0dd-b009-4405-93f4-75a90bacbfcd",
+      "multiverseid": 665633
+    },
+    {
+      "name": "Ugin's Insight",
+      "scryfallId": "cbe80abe-cbc7-499b-92bb-accbf59bb138",
+      "multiverseid": 665610
+    },
+    {
+      "name": "Rishkar's Expertise",
+      "scryfallId": "a28ab6cc-d065-495c-a76c-7996a0e4d14d",
+      "multiverseid": 666602
+    },
+    {
+      "name": "All Is Dust",
+      "scryfallId": "600518f5-4598-436d-9513-3d32adfc93f9",
+      "multiverseid": 665566
+    },
+    {
+      "name": "Skittering Invasion",
+      "scryfallId": "0bf49859-c1ef-43ca-aa0a-6f4116825b7d",
+      "multiverseid": 665573
+    },
+    {
+      "name": "Cascading Cataracts",
+      "scryfallId": "33e6761c-cb01-4eb6-95fa-ac452684f3e7",
+      "multiverseid": 665740
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "951762f1-716c-451c-af0d-c1f6de231a72",
+      "multiverseid": 665813
+    },
+    {
+      "name": "Caves of Koilos",
+      "scryfallId": "94b2b5b9-1227-4b4b-a229-c9804550f9b6",
+      "multiverseid": 665742
+    },
+    {
+      "name": "Llanowar Wastes",
+      "scryfallId": "e34a7793-a9b5-4892-b6e2-e4b97c3acd80",
+      "multiverseid": 665768
+    },
+    {
+      "name": "Yavimaya Coast",
+      "scryfallId": "0378af42-0e35-4ee0-96ed-d588a71c0bea",
+      "multiverseid": 665824
+    },
+    {
+      "name": "Shrine of the Forsaken Gods",
+      "scryfallId": "dde7ad4e-a38b-4981-8c9f-78a9e9ea2c36",
+      "multiverseid": 665790
+    },
+    {
+      "name": "Spawning Bed",
+      "scryfallId": "c256d8c5-a8e7-4b9a-a330-899301db7f52",
+      "multiverseid": 665794
+    },
+    {
+      "name": "Brushland",
+      "scryfallId": "5541b572-28c0-4c71-b382-da70721dc321",
+      "multiverseid": 665738
+    },
+    {
+      "name": "Hedron Archive",
+      "scryfallId": "d946ad52-b09b-4ce5-800f-8415550c1936",
+      "multiverseid": 665709
+    },
+    {
+      "name": "Mystic Forge",
+      "scryfallId": "375e6985-e212-4bd0-b06c-0ca7dc1f68e6",
+      "multiverseid": 665716
+    },
+    {
+      "name": "Eldrazi Monument",
+      "scryfallId": "f8ecdf65-c6e6-4dac-899b-55cd80242629",
+      "multiverseid": 665704
+    },
+    {
+      "name": "Forsaken Monument",
+      "scryfallId": "516d5db4-92c2-4bf1-b3aa-f10ac3490bba",
+      "multiverseid": 665707
+    },
+    {
+      "name": "Dreamstone Hedron",
+      "scryfallId": "25c5e6f8-eec6-4a90-b7c6-36f882bab64a",
+      "multiverseid": 665703
+    },
+    {
+      "name": "Imprisoned in the Moon",
+      "scryfallId": "925b566c-3774-49bc-b788-59b322163c8c",
+      "multiverseid": 665602
+    },
+    {
+      "name": "Awakening Zone",
+      "scryfallId": "e8f1affa-4c7e-49a9-916f-6395da259430",
+      "multiverseid": 665636
+    },
+    {
+      "name": "Garruk's Uprising",
+      "scryfallId": "b65810e6-e163-46a9-b2c0-941c53e5255a",
+      "multiverseid": 665643
+    },
+    {
+      "name": "Eldrazi Conscription",
+      "scryfallId": "29609c18-40e7-4e50-ae8a-cfa6f49f1511",
+      "multiverseid": 665569
+    },
+    {
+      "name": "Karplusan Forest",
+      "scryfallId": "78f25169-2d3f-47b3-ad5d-87b04910783a",
+      "multiverseid": 665765
+    },
+    {
+      "name": "Sulfurous Springs",
+      "scryfallId": "38c0d259-106c-4281-b96d-2747e00e521d",
+      "multiverseid": 665795
+    },
+    {
+      "name": "Underground River",
+      "scryfallId": "5045f269-d931-4786-b7aa-4e0b1db1cd26",
+      "multiverseid": 665814
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "89f51c70-fcc8-4d97-94bb-5a75740523ad",
+      "multiverseid": 665755
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "43631610-5fad-4b73-a57c-26bf38eff309",
+      "multiverseid": 665782
+    },
+    {
+      "name": "Temple of Malady",
+      "scryfallId": "7e299990-4128-4a9c-9f8c-08838f248094",
+      "multiverseid": 665802
+    },
+    {
+      "name": "Tomb of the Spirit Dragon",
+      "scryfallId": "c5c2da3e-5e82-4236-b866-93bec88d86b0",
+      "multiverseid": 665811
+    },
+    {
+      "name": "Tectonic Edge",
+      "scryfallId": "02174040-f292-468b-9aa6-4bd468b38cf9",
+      "multiverseid": 665798
+    },
+    {
+      "name": "Corrupted Crossroads",
+      "scryfallId": "03b91bd1-de0f-4e3e-b467-174beba8ffeb",
+      "multiverseid": 665746
+    },
+    {
+      "name": "Ruins of Oran-Rief",
+      "scryfallId": "dd563d94-787d-4098-8b38-b462640c4216",
+      "multiverseid": 665784
+    },
+    {
+      "name": "Eldrazi Temple",
+      "scryfallId": "4f0ee055-1b1e-4ffa-9eb5-9ce7e8965f71",
+      "multiverseid": 665753
+    },
+    {
+      "name": "Temple of Silence",
+      "scryfallId": "627eb62a-399d-4f2b-9ea1-73ce0396ba1c",
+      "multiverseid": 665805
+    },
+    {
+      "name": "Tendo Ice Bridge",
+      "scryfallId": "929961bf-c866-4ed8-a552-b261ecd5f2fb",
+      "multiverseid": 665807
+    },
+    {
+      "name": "Opal Palace",
+      "scryfallId": "76219ec4-65dc-4137-9b3b-070e02524397",
+      "multiverseid": 665775
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "8720542c-965e-4a98-9de8-7e97ac20966f",
+      "multiverseid": 665732
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "06869588-eb99-43b4-9521-948ca9f27c3e",
+      "multiverseid": 665777
+    },
+    {
+      "name": "Bonders' Enclave",
+      "scryfallId": "290a78a2-feb0-4ea7-b681-49a4feb12b3b",
+      "multiverseid": 665737
+    },
+    {
+      "name": "Secluded Courtyard",
+      "scryfallId": "ebb1e934-b013-47bf-984b-7ac89de6811b",
+      "multiverseid": 665786
+    },
+    {
+      "name": "Eldrazi Confluence",
+      "scryfallId": "78ee2013-29dc-4879-9d59-1b492996d297",
+      "multiverseid": 665042
+    },
+    {
+      "name": "Bismuth Mindrender",
+      "scryfallId": "d1ee8ead-df6a-4c02-83f7-2902d97132b8",
+      "multiverseid": 665061
+    },
+    {
+      "name": "Chittering Dispatcher",
+      "scryfallId": "ec5fe7d0-b444-4488-b058-f3916e404cac",
+      "multiverseid": 665073
+    },
+    {
+      "name": "Benthic Anomaly",
+      "scryfallId": "08ff764d-2c0d-4599-a22a-6a64766dad3a",
+      "multiverseid": 665056
+    },
+    {
+      "name": "Angelic Aberration",
+      "scryfallId": "c79a5bbe-7b70-4b05-a336-9b2bcb2f2b8f",
+      "multiverseid": 665049
+    },
+    {
+      "name": "Eldritch Immunity",
+      "scryfallId": "64a63b90-dbd6-4b66-8031-a3e230ada5b9",
+      "multiverseid": 665043
+    },
+    {
+      "name": "Selective Obliteration",
+      "scryfallId": "f0c21e73-8db1-4ede-bea5-1dcd4b3cef01",
+      "multiverseid": 665045
+    },
+    {
+      "name": "Ulamog's Dreadsire",
+      "scryfallId": "b5821c21-8133-40f7-a28d-addf64b1e35f",
+      "multiverseid": 665048
+    },
+    {
+      "name": "Mutated Cultist",
+      "scryfallId": "cc4bb871-cde9-43a9-8089-5987fa0dd4ef",
+      "multiverseid": 665063
+    },
+    {
+      "name": "Twins of Discord",
+      "scryfallId": "b3c237a5-1d2a-457a-be4e-c07483b31799",
+      "multiverseid": 665047
+    },
+    {
+      "name": "Inversion Behemoth",
+      "scryfallId": "77a5ca5d-a377-4ee4-8e72-5a6b60c67521",
+      "multiverseid": 665044
+    },
+    {
+      "name": "Spawnbed Protector",
+      "scryfallId": "bf2d8dab-71f3-4da7-a4b1-ed3309a4c756",
+      "multiverseid": 665046
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e0281fba-d771-4431-931f-920db2f14c47",
+      "multiverseid": 660965
+    },
+    {
+      "name": "Island",
+      "scryfallId": "64daf0ac-678b-4683-9351-a6daf9c9f849",
+      "multiverseid": 660967
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "537fb023-4352-406f-8435-51b37b99a6be",
+      "multiverseid": 660970
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "8be9bbc9-77f2-4a61-b19f-30f2e61b8e88",
+      "multiverseid": 0
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "6527c8ce-4a63-45f2-ae8e-c651e8713716",
+      "multiverseid": 660974
+    },
+    {
+      "name": "Wastes",
+      "scryfallId": "475be6db-6541-412b-a07e-5357b25a499f",
+      "multiverseid": 665822
+    },
+    {
+      "name": "Twisted Landscape",
+      "scryfallId": "d0e3e7b3-7ba9-47a2-b46c-a40bffb445e2",
+      "multiverseid": 662384
+    },
+    {
+      "name": "Tranquil Landscape",
+      "scryfallId": "113f48b9-a972-4e2c-af95-05ab078e01f2",
+      "multiverseid": 662383
+    },
+    {
+      "name": "Titans' Vanguard",
+      "scryfallId": "fb3ea14e-44ac-4f69-bfea-cb6bf1bfbd74",
+      "multiverseid": 662358
+    },
+    {
+      "name": "Wastescape Battlemage",
+      "scryfallId": "6bc119b8-429c-4ab6-adba-b65b03810e98",
+      "multiverseid": 662169
+    },
+    {
+      "name": "Snapping Voidcraw",
+      "scryfallId": "9185371c-2dde-48ad-ab27-08be04b3c522",
+      "multiverseid": 662356
+    },
+    {
+      "name": "Glaring Fleshraker",
+      "scryfallId": "80c2a3c7-1486-4ff9-88ec-79ec67a437f8",
+      "multiverseid": 662159
+    },
+    {
+      "name": "Vile Redeemer",
+      "scryfallId": "7a08e28c-dee2-4ab8-bc72-1498a7dd3a40",
+      "multiverseid": 665665
+    },
+    {
+      "name": "Sifter of Skulls",
+      "scryfallId": "f824d5b6-259b-467b-93b5-e93db8b15359",
+      "multiverseid": 665617
+    },
+    {
+      "name": "Ulamog's Nullifier",
+      "scryfallId": "e991c9ad-de2d-439b-bc4c-6da9da756130",
+      "multiverseid": 665689
+    },
+    {
+      "name": "Deepfathom Skulker",
+      "scryfallId": "5f26c11a-b84b-4670-b135-359b93afb83d",
+      "multiverseid": 665594
+    },
+    {
+      "name": "Sire of Stagnation",
+      "scryfallId": "e62cddab-34ef-46c6-b700-9b59751b9a2c",
+      "multiverseid": 665686
+    },
+    {
+      "name": "Endbringer",
+      "scryfallId": "d9d7309a-d1ec-4b29-bb96-2daaa6be9eb8",
+      "multiverseid": 665570
+    },
+    {
+      "name": "World Breaker",
+      "scryfallId": "ca111e56-79a0-43be-acd1-d1de110d6509",
+      "multiverseid": 665667
+    },
+    {
+      "name": "Morophon, the Boundless",
+      "scryfallId": "33c2e889-d2e1-4197-ba97-81a2b8512746",
+      "multiverseid": 665571
+    },
+    {
+      "name": "Artisan of Kozilek",
+      "scryfallId": "c632f5a4-7f5f-4d77-9364-58ea03dfdcad",
+      "multiverseid": 665567
+    },
+    {
+      "name": "Suffer the Past",
+      "scryfallId": "e6555906-8844-4a8b-8b40-3e5af4a6ef41",
+      "multiverseid": 665619
+    },
+    {
+      "name": "Warping Wail",
+      "scryfallId": "5e3f50c4-2443-4e7a-9d3a-b360037fc94d",
+      "multiverseid": 665576
+    },
+    {
+      "name": "Kozilek's Return",
+      "scryfallId": "eed3be26-6c05-48cf-889a-9cbbd4977283",
+      "multiverseid": 665628
+    },
+    {
+      "name": "Return of the Wildspeaker",
+      "scryfallId": "3fd677c8-5989-4b33-9746-539a5dcb6f3a",
+      "multiverseid": 665656
+    },
+    {
+      "name": "Everflowing Chalice",
+      "scryfallId": "5261ff88-270b-4ab4-b5c0-e028f2a55ece",
+      "multiverseid": 665705
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "58ebb5f3-5491-4f9c-84d5-f98d9ebece38",
+      "multiverseid": 665724
+    },
+    {
+      "name": "Talisman of Impulse",
+      "scryfallId": "f2e47cb9-39c2-4419-b90f-0cd3fbb8d4b2",
+      "multiverseid": 665725
+    },
+    {
+      "name": "Talisman of Curiosity",
+      "scryfallId": "00413cf3-bc14-4881-8feb-829f11af0fdd",
+      "multiverseid": 665723
+    },
+    {
+      "name": "Talisman of Resilience",
+      "scryfallId": "e77335bc-ba8c-4d44-9f7e-57700132ca68",
+      "multiverseid": 665728
+    },
+    {
+      "name": "Idol of Oblivion",
+      "scryfallId": "1c602e17-7eee-45f5-82d9-406cb4498b18",
+      "multiverseid": 665711
+    },
+    {
+      "name": "Herald's Horn",
+      "scryfallId": "2cfafee3-c060-44bd-be6e-8d36501d72d3",
+      "multiverseid": 665710
+    },
+    {
+      "name": "Ugin, the Ineffable",
+      "scryfallId": "fba9e014-8abe-4662-8a47-998b5eaa7a6b",
+      "multiverseid": 665574
+    },
+    {
+      "name": "Hideous Taskmaster",
+      "scryfallId": "ba7191d0-d567-4814-8a92-52e96aa7660f",
+      "multiverseid": 665067
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-03T16:49:01.030Z",
+    "sourceUrl": "https://archidekt.com/decks/7858209",
+    "deckSource": "archidekt"
+  }
+}

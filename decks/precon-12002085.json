@@ -1,0 +1,514 @@
+{
+  "id": 12002085,
+  "name": "Jeskai Striker - Tarkir: Dragonstorm Commander",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Shiko and Narset, Unified",
+      "scryfallId": "5a42fc7d-52ac-4e95-9e04-8f8fa7f687c8",
+      "multiverseid": 695726
+    }
+  ],
+  "cards": [
+    {
+      "name": "Elsha, Threefold Master",
+      "scryfallId": "eee11606-5902-41d3-aec6-d6a3da01091b",
+      "multiverseid": 695721
+    },
+    {
+      "name": "Aligned Heart",
+      "scryfallId": "a235cbda-3dc3-4aed-a911-90f26c330157",
+      "multiverseid": 695941
+    },
+    {
+      "name": "Tempest Technique",
+      "scryfallId": "5d5ee7cc-4854-4b52-ba9b-64d5a401fca1",
+      "multiverseid": 695945
+    },
+    {
+      "name": "Adaptive Training Post",
+      "scryfallId": "654a1564-0356-44ad-b1ab-8c1a556fc244",
+      "multiverseid": 695947
+    },
+    {
+      "name": "Transcendent Dragon",
+      "scryfallId": "3c9a4205-eda8-4858-9d46-2428058c94fc",
+      "multiverseid": 695951
+    },
+    {
+      "name": "Voracious Bibliophile",
+      "scryfallId": "77d2c30b-3130-4d9d-bd3d-484fe6dc306d",
+      "multiverseid": 695952
+    },
+    {
+      "name": "Caldera Pyremaw",
+      "scryfallId": "f5fab7a4-3612-4b79-b2f5-8a1e52ebe409",
+      "multiverseid": 695962
+    },
+    {
+      "name": "Transforming Flourish",
+      "scryfallId": "914fdddb-cf66-4631-94e7-ce682a99fcf8",
+      "multiverseid": 695968
+    },
+    {
+      "name": "Will of the Jeskai",
+      "scryfallId": "d05bac1f-d455-4528-93b2-a94c29b5dc2c",
+      "multiverseid": 695969
+    },
+    {
+      "name": "Rite of Replication",
+      "scryfallId": "f8cd4dcc-a731-4dd3-8b8e-88877bd98718",
+      "multiverseid": 696321
+    },
+    {
+      "name": "Lier, Disciple of the Drowned",
+      "scryfallId": "b8b70585-e0ea-4cb4-9360-a8ab47626696",
+      "multiverseid": 696313
+    },
+    {
+      "name": "Haughty Djinn",
+      "scryfallId": "8cabaf8a-5e19-4f26-be2b-7627b9c8e324",
+      "multiverseid": 696310
+    },
+    {
+      "name": "Vanquish the Horde",
+      "scryfallId": "ac6ba8a3-5f6e-4eab-af91-fd58f7ea2028",
+      "multiverseid": 696180
+    },
+    {
+      "name": "Mangara, the Diplomat",
+      "scryfallId": "452b735c-791f-4843-9390-8803154cde62",
+      "multiverseid": 696280
+    },
+    {
+      "name": "Monastery Mentor",
+      "scryfallId": "2343e69d-f30e-4826-953c-fbf31c6079e6",
+      "multiverseid": 696281
+    },
+    {
+      "name": "Baral's Expertise",
+      "scryfallId": "d5beecd5-4267-454d-87db-24d476e1f352",
+      "multiverseid": 696302
+    },
+    {
+      "name": "Sublime Epiphany",
+      "scryfallId": "0f7d3839-0bc3-402b-b9ea-c903f82d39da",
+      "multiverseid": 696323
+    },
+    {
+      "name": "Narset's Reversal",
+      "scryfallId": "4ede8d68-6870-445c-b140-da98adbc246a",
+      "multiverseid": 696181
+    },
+    {
+      "name": "Dismantling Wave",
+      "scryfallId": "a06bc946-8625-4a87-8695-ecf236df95bc",
+      "multiverseid": 696268
+    },
+    {
+      "name": "Curse of the Swine",
+      "scryfallId": "4967955e-66ce-4df5-a9fa-305c3f8e2e25",
+      "multiverseid": 696305
+    },
+    {
+      "name": "Archmage Emeritus",
+      "scryfallId": "62f20d75-cfe5-427b-92d3-35c7e77db0d5",
+      "multiverseid": 696301
+    },
+    {
+      "name": "Ancestral Vision",
+      "scryfallId": "9ec075ba-db56-4dcf-b1dc-fe6270b7ab36",
+      "multiverseid": 696300
+    },
+    {
+      "name": "Adarkar Wastes",
+      "scryfallId": "1f056e21-63b3-4684-be5b-04ac220c4a52",
+      "multiverseid": 696494
+    },
+    {
+      "name": "Battlefield Forge",
+      "scryfallId": "f09bf0b7-45fa-4315-b393-f3ec0303c0c2",
+      "multiverseid": 696496
+    },
+    {
+      "name": "Cascade Bluffs",
+      "scryfallId": "51e0191b-9cd3-466c-8ff8-94c7872746f5",
+      "multiverseid": 696501
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "c5e81948-a362-4805-9bdf-ca65488a1a09",
+      "multiverseid": 696507
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "c2ea2395-4518-4683-8eed-59c43fb3328a",
+      "multiverseid": 696516
+    },
+    {
+      "name": "Ferrous Lake",
+      "scryfallId": "4105785e-cbaa-4017-ae93-ba5ac8f2fd4c",
+      "multiverseid": 696517
+    },
+    {
+      "name": "Glacial Fortress",
+      "scryfallId": "2ed2dd5e-f59a-4ce3-a50e-968a1e94f59c",
+      "multiverseid": 696523
+    },
+    {
+      "name": "Irrigated Farmland",
+      "scryfallId": "1026ec63-e71e-4d0f-ba21-57caf688b4c2",
+      "multiverseid": 696528
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "fa0af5ea-e9e1-4247-bde2-759c2653fc00",
+      "multiverseid": 696540
+    },
+    {
+      "name": "Rugged Prairie",
+      "scryfallId": "81ce61b1-5ef2-4562-b289-ceea8f3ee447",
+      "multiverseid": 696545
+    },
+    {
+      "name": "Shivan Reef",
+      "scryfallId": "a67ddfae-746f-4952-8064-7d48f9f22981",
+      "multiverseid": 696549
+    },
+    {
+      "name": "Skycloud Expanse",
+      "scryfallId": "d7a89f88-f8f2-43a7-b1f1-d98d3a07c4e3",
+      "multiverseid": 696550
+    },
+    {
+      "name": "Sulfur Falls",
+      "scryfallId": "33399b6b-67ae-499c-81aa-35132509d2d8",
+      "multiverseid": 696552
+    },
+    {
+      "name": "Temple of Enlightenment",
+      "scryfallId": "20d3434d-d88e-4d00-84a7-ed027faac70f",
+      "multiverseid": 696557
+    },
+    {
+      "name": "Temple of Epiphany",
+      "scryfallId": "700b88b4-c461-45c8-90cb-9626c5c8338f",
+      "multiverseid": 696558
+    },
+    {
+      "name": "Temple of Triumph",
+      "scryfallId": "56f75be9-7373-4ceb-850d-425ef3be9bfc",
+      "multiverseid": 696563
+    },
+    {
+      "name": "Veyran, Voice of Duality",
+      "scryfallId": "90197eca-271c-4047-90e0-00b2579a94f2",
+      "multiverseid": 696466
+    },
+    {
+      "name": "Whirlwind of Thought",
+      "scryfallId": "67d032f9-4faf-42eb-86ba-3fadfea84a27",
+      "multiverseid": 696467
+    },
+    {
+      "name": "Time Wipe",
+      "scryfallId": "eb4b75e6-3080-412b-bf40-b6029ea8bbfe",
+      "multiverseid": 696464
+    },
+    {
+      "name": "Velomachus Lorehold",
+      "scryfallId": "523d8fe6-1efd-4278-82fe-ea4517e6665c",
+      "multiverseid": 696465
+    },
+    {
+      "name": "Magma Opus",
+      "scryfallId": "1e568e10-30e4-42ba-b364-f65c93f7da32",
+      "multiverseid": 696452
+    },
+    {
+      "name": "Young Pyromancer",
+      "scryfallId": "c0d74ecd-a595-4012-81b4-083264b40c94",
+      "multiverseid": 696184
+    },
+    {
+      "name": "Manaform Hellkite",
+      "scryfallId": "99d9d5d3-28eb-4d76-bdd9-718c74df0fbf",
+      "multiverseid": 696380
+    },
+    {
+      "name": "Baral and Kari Zev",
+      "scryfallId": "e777c383-161f-4a80-acb3-2a5c9ed5e927",
+      "multiverseid": 696438
+    },
+    {
+      "name": "Prismari Command",
+      "scryfallId": "15e291f4-068a-441c-8b43-05055199aca4",
+      "multiverseid": 696455
+    },
+    {
+      "name": "Electrodominance",
+      "scryfallId": "85e29bdc-938e-4132-813e-70c5e922efaf",
+      "multiverseid": 696368
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
+      "multiverseid": 0
+    },
+    {
+      "name": "Expansion // Explosion",
+      "scryfallId": "65c091fa-00a8-4f20-8148-46db3fc3c67d",
+      "multiverseid": 696443
+    },
+    {
+      "name": "Ghostly Prison",
+      "scryfallId": "da3b83cb-f778-4096-9022-b1d6637354ff",
+      "multiverseid": 696272
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
+      "multiverseid": 0
+    },
+    {
+      "name": "Goblin Electromancer",
+      "scryfallId": "bd9eca71-2430-4112-a23a-fba76ca2efb4",
+      "multiverseid": 696188
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
+      "multiverseid": 0
+    },
+    {
+      "name": "Deep Analysis",
+      "scryfallId": "2d93b071-d303-4892-bac4-77a75eaa91a1",
+      "multiverseid": 696306
+    },
+    {
+      "name": "Consider",
+      "scryfallId": "ff6f3824-3670-46e1-af43-0db405726084",
+      "multiverseid": 696304
+    },
+    {
+      "name": "Compulsive Research",
+      "scryfallId": "a247ab59-7749-4d37-87f6-f90f44cd54f4",
+      "multiverseid": 696303
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "f87cf997-14b5-4a2c-a7d1-34b7de6561a2",
+      "multiverseid": 696290
+    },
+    {
+      "name": "Opt",
+      "scryfallId": "bbc99a51-1501-4525-a3cc-f48249b64bed",
+      "multiverseid": 696314
+    },
+    {
+      "name": "Frantic Search",
+      "scryfallId": "a1c71f3e-16be-492a-8a3e-5911867270bd",
+      "multiverseid": 696309
+    },
+    {
+      "name": "Pongify",
+      "scryfallId": "4131fa63-5afc-4b63-a4b4-f47b4bced87f",
+      "multiverseid": 696316
+    },
+    {
+      "name": "Guttersnipe",
+      "scryfallId": "fd5be605-c7c3-4c0b-a68e-65452b27d3ce",
+      "multiverseid": 696373
+    },
+    {
+      "name": "Curse of Opulence",
+      "scryfallId": "494a6f50-9cd3-4bfc-9382-dce4f7047a81",
+      "multiverseid": 696365
+    },
+    {
+      "name": "Mana Geyser",
+      "scryfallId": "bd69539a-d5df-47b4-9785-86e20a58c72b",
+      "multiverseid": 696379
+    },
+    {
+      "name": "Think Twice",
+      "scryfallId": "ce79538b-20a4-42f8-934f-bc4e2723133e",
+      "multiverseid": 696324
+    },
+    {
+      "name": "Preordain",
+      "scryfallId": "dd29a0e5-c1de-4e8a-8866-715e9f9cde1f",
+      "multiverseid": 696317
+    },
+    {
+      "name": "Faithless Looting",
+      "scryfallId": "c43aeb5a-8bdc-4aa9-89d1-156f97ac38aa",
+      "multiverseid": 696369
+    },
+    {
+      "name": "Abrade",
+      "scryfallId": "4c2a1b4e-858c-47a3-be89-9275e48d5475",
+      "multiverseid": 696359
+    },
+    {
+      "name": "Big Score",
+      "scryfallId": "c0b2deb2-b198-4d79-8cef-5b8a2577c992",
+      "multiverseid": 696362
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "62209251-4118-4843-895b-46afb7284c75",
+      "multiverseid": 693735
+    },
+    {
+      "name": "Shiny Impetus",
+      "scryfallId": "cc36705f-9b1a-42fe-bebd-f23c7af8a368",
+      "multiverseid": 696387
+    },
+    {
+      "name": "Mystic Monastery",
+      "scryfallId": "c7b8a01c-c400-47c7-8270-78902efe850e",
+      "multiverseid": 693742
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "f5314520-b8af-4416-b57c-74388542ecb6",
+      "multiverseid": 696495
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "b8504812-fcf5-47d3-977d-1d9a11231fd0",
+      "multiverseid": 696538
+    },
+    {
+      "name": "Azorius Signet",
+      "scryfallId": "41c50b99-4a29-4bef-8d41-c548c8a61dac",
+      "multiverseid": 696468
+    },
+    {
+      "name": "Boros Signet",
+      "scryfallId": "49c37c0e-d363-4033-a069-710241cd9923",
+      "multiverseid": 696470
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "ce55e00c-cd95-48eb-986e-edf5125f3534",
+      "multiverseid": 696474
+    },
+    {
+      "name": "Izzet Signet",
+      "scryfallId": "2c747a97-9070-4c1e-b7b7-52637fbb30e1",
+      "multiverseid": 696476
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "9d6a5ed4-54b3-4660-8d41-953336f2fe74",
+      "multiverseid": 696489
+    },
+    {
+      "name": "Expressive Iteration",
+      "scryfallId": "45e92d69-0684-4a57-8c1c-bbf742bd8a23",
+      "multiverseid": 696444
+    },
+    {
+      "name": "Third Path Iconoclast",
+      "scryfallId": "ca29f373-7051-4cbe-bda8-e711fda4f9bb",
+      "multiverseid": 696463
+    },
+    {
+      "name": "Perilous Landscape",
+      "scryfallId": "61fc78e0-d0db-4ecb-a29a-f1a437d7987c",
+      "multiverseid": 696539
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "6be3be55-7f9d-4a4c-b916-a1cb64f833c8",
+      "multiverseid": 696542
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "multiverseid": 693320
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "multiverseid": 693320
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "multiverseid": 693320
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "multiverseid": 693320
+    },
+    {
+      "name": "Island",
+      "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
+      "multiverseid": 693323
+    },
+    {
+      "name": "Island",
+      "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
+      "multiverseid": 693323
+    },
+    {
+      "name": "Island",
+      "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
+      "multiverseid": 693323
+    },
+    {
+      "name": "Island",
+      "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
+      "multiverseid": 693323
+    },
+    {
+      "name": "Island",
+      "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
+      "multiverseid": 693323
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "multiverseid": 693326
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "multiverseid": 693326
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "multiverseid": 693326
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "multiverseid": 693326
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "multiverseid": 693326
+    },
+    {
+      "name": "Storm-Kiln Artist",
+      "scryfallId": "1b8c1345-4279-4e29-b58c-efacccb8e47f",
+      "multiverseid": 696391
+    },
+    {
+      "name": "Ponder",
+      "scryfallId": "dc69f960-68ba-4315-8146-6a7a82047503",
+      "multiverseid": 696315
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-03T16:49:05.368Z",
+    "sourceUrl": "https://archidekt.com/decks/12002085",
+    "deckSource": "archidekt"
+  }
+}
