@@ -13,25 +13,25 @@ describe("GameState", () => {
 
   const fakeCard1: CardDefinition = {
     name: "Lightning Bolt",
-    uid: "abc123",
+    scryfallId: "abc123",
     multiverseid: 12345,
   };
 
   const fakeCard2: CardDefinition = {
     name: "Ancestral Recall",
-    uid: "def456",
+    scryfallId: "def456",
     multiverseid: 67890,
   };
 
   const fakeCard3: CardDefinition = {
     name: "Black Lotus",
-    uid: "ghi789",
+    scryfallId: "ghi789",
     multiverseid: 11111,
   };
 
   const fakeCommander: CardDefinition = {
     name: "Atraxa, Praetors' Voice",
-    uid: "cmd001",
+    scryfallId: "cmd001",
     multiverseid: 22222,
   };
 
@@ -93,7 +93,7 @@ describe("GameState", () => {
   });
 
   test("allows two commanders", () => {
-    const commander2: CardDefinition = { name: "Partner Commander", uid: "cmd002", multiverseid: 33333 };
+    const commander2: CardDefinition = { name: "Partner Commander", scryfallId: "cmd002", multiverseid: 33333 };
     const fakeDeck: Deck = {
       id: 1,
       name: "Test Deck",
@@ -909,7 +909,7 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 4,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", uid: "xyz999", multiverseid: 33333 }],
+      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
       provenance: fakeProvenance,
     };
 
@@ -956,7 +956,7 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 4,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", uid: "xyz999", multiverseid: 33333 }],
+      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
       provenance: fakeProvenance,
     };
 

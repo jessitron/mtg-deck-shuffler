@@ -22,7 +22,7 @@ describe("InMemoryPersistStateAdapter", () => {
       commanders: [
         {
           name: "Test Commander",
-          uid: "test-uid",
+          scryfallId: "test-uid",
           multiverseid: 12345,
         },
       ],
@@ -33,7 +33,7 @@ describe("InMemoryPersistStateAdapter", () => {
         {
           card: {
             name: "Test Card",
-            uid: "card-uid",
+            scryfallId: "card-uid",
             multiverseid: 67890,
           },
           location: { type: "Library", position: 0 },

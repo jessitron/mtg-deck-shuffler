@@ -12,14 +12,14 @@ test("should convert GameState to PersistedGameState and back", () => {
     commanders: [
       {
         name: "Test Commander",
-        uid: "commander-uid",
+        scryfallId: "commander-uid",
         multiverseid: 12345,
       },
     ],
     cards: [
-      { name: "Card A", uid: "card-a-uid", multiverseid: 11111 },
-      { name: "Card B", uid: "card-b-uid", multiverseid: 22222 },
-      { name: "Card C", uid: "card-c-uid", multiverseid: 33333 },
+      { name: "Card A", scryfallId: "card-a-uid", multiverseid: 11111 },
+      { name: "Card B", scryfallId: "card-b-uid", multiverseid: 22222 },
+      { name: "Card C", scryfallId: "card-c-uid", multiverseid: 33333 },
     ],
     provenance: {
       retrievedDate: new Date(2023, 0, 1),
