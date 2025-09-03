@@ -735,12 +735,12 @@ h1 {
 }
 
 .library-card-back:nth-child(2) {
-  transform: translateZ(-20px) translateY(3px) translateX(2px);
+  transform: translateZ(-2px) translateY(5px) translateX(5px);
   z-index: 2;
 }
 
 .library-card-back:nth-child(3) {
-  transform: translateZ(-40px) translateY(6px) translateX(4px);
+  transform: translateZ(-4px) translateY(10px) translateX(10px);
   z-index: 1;
 }
 
@@ -765,7 +765,7 @@ h1 {
 
 @keyframes shuffle-card-2 {
   0% {
-    transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
   }
   25% {
     transform: translateX(120px) translateY(-60px) translateZ(80px) rotateY(-20deg) rotateZ(8deg);
@@ -777,13 +777,13 @@ h1 {
     transform: translateX(80px) translateY(-20px) translateZ(40px) rotateY(-10deg) rotateZ(5deg);
   }
   100% {
-    transform: translateZ(-20px) translateY(3px) translateX(2px) rotateY(0deg);
+    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
   }
 }
 
 @keyframes shuffle-card-3 {
   0% {
-    transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
   }
   25% {
     transform: translateX(100px) translateY(70px) translateZ(120px) rotateY(25deg) rotateZ(15deg);
@@ -795,7 +795,7 @@ h1 {
     transform: translateX(60px) translateY(10px) translateZ(30px) rotateY(12deg) rotateZ(6deg);
   }
   100% {
-    transform: translateZ(-40px) translateY(6px) translateX(4px) rotateY(0deg);
+    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
   }
 }
 
