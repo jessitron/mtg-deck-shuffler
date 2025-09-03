@@ -238,6 +238,9 @@ function formatGamePageWrapper(title: string, content: string): string {
 <html lang="en">
   ${headHtml}
   <body>
+    <div id="game-summary">
+      <h2>MTG Deck Shuffler</h2>
+    </div>
     ${content}
     
     <footer>
@@ -283,7 +286,7 @@ export function formatLibraryModalHtml(game: GameState): string {
   return formatModalHtml("Library Contents", bodyContent);
 }
 
-function formatDeckReviewHeaderHtml(game: GameState): string {
+function formatGameHeaderHtml(game: GameState): string {
   const commanderImageHtml = formatCommanderImageHtml(game.commanders);
   const gameDetailsHtml = formatGameDetailsHtml(game);
   
@@ -291,21 +294,6 @@ function formatDeckReviewHeaderHtml(game: GameState): string {
         ${commanderImageHtml}
       </div>
       ${gameDetailsHtml}`;
-}
-
-function formatActiveGameHeaderHtml(game: GameState): string {
-  const commanderImageHtml = formatCommanderImageHtml(game.commanders);
-  const gameDetailsHtml = formatGameDetailsHtml(game);
-  
-  return `<div id="game-summary">
-      <div id="command-zone">
-        ${commanderImageHtml}
-      </div>
-      <div id="game-title">
-        <h2>MTG Deck Shuffler</h2>
-      </div>
-      ${gameDetailsHtml}
-    </div>`;
 }
 
 function formatLibraryStackHtml(): string {
@@ -317,7 +305,7 @@ function formatLibraryStackHtml(): string {
 }
 
 export function formatDeckReviewHtml(game: GameState): string {
-  const gameHeaderHtml = formatDeckReviewHeaderHtml(game);
+  const gameHeaderHtml = formatGameHeaderHtml(game);
   const libraryStackHtml = formatLibraryStackHtml();
 
   return `<div id="game-container">
@@ -453,15 +441,17 @@ function formatGameActionsHtml(game: GameState): string {
 }
 
 export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened): string {
-  const gameHeaderHtml = formatActiveGameHeaderHtml(game);
+  const gameHeaderHtml = formatGameHeaderHtml(game);
+  const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtml(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtml(game, whatHappened);
   const tableSectionHtml = formatTableSectionHtml(game);
   const handSectionHtml = formatHandSectionHtml(game, whatHappened);
   const gameActionsHtml = formatGameActionsHtml(game);
 
-  return `${gameHeaderHtml}
-    <div id="game-container">
+  return `<div id="game-container">
+      ${gameHeaderHtml}
+      
       ${librarySectionHtml}
       
       ${revealedCardsHtml}
