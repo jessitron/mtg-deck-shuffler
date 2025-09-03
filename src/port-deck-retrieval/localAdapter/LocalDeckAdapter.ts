@@ -7,7 +7,17 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
 
   listAvailableDecks(): AvailableDecks {
     const ls = fs.readdirSync(this.Directory);
-    const options: AvailableDeck[] = ls.map((l) => ({ deckSource: "local", description: l, localFile: l }));
+    const options: AvailableDeck[] = ls.map((filename) => {
+      try {
+        const pathToLocalFile = this.Directory + filename;
+        const fileContent = fs.readFileSync(pathToLocalFile, "utf8");
+        const deck = JSON.parse(fileContent);
+        return { deckSource: "local", description: deck.name || filename, localFile: filename };
+      } catch (error) {
+        // If we can't read the deck file, fall back to filename
+        return { deckSource: "local", description: filename, localFile: filename };
+      }
+    });
     return options;
   }
 
