@@ -406,4 +406,44 @@ describe("ArchidektDeckToDeckAdapter", () => {
     assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111 });
     assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222 });
   });
+
+  test("handles deck with null categories", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 555,
+      name: "Deck with Null Categories",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "lightning-bolt-uid",
+            multiverseid: 111111,
+            oracleCard: { name: "Lightning Bolt" },
+          },
+          quantity: 4,
+          categories: ["Instant"],
+        },
+        {
+          card: {
+            uid: "mountain-uid",
+            multiverseid: 222222,
+            oracleCard: { name: "Mountain" },
+          },
+          quantity: 20,
+          categories: ["Land"],
+        },
+      ],
+    };
+
+    // Mock the gateway to return our test data
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "555" };
+    const result = await adapter.retrieveDeck(request);
+
+    assert.strictEqual(result.id, 555);
+    assert.strictEqual(result.name, "Deck with Null Categories");
+    assert.strictEqual(result.totalCards, 24); // All cards included when categories is null
+    assert.deepStrictEqual(result.commanders, []);
+    assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/555");
+  });
 });
