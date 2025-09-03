@@ -231,9 +231,28 @@ function formatPageWrapper(title: string, content: string): string {
 </html>`;
 }
 
+function formatGamePageWrapper(title: string, content: string): string {
+  const headHtml = formatHtmlHead(title);
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+  ${headHtml}
+  <body>
+    <div id="game-summary">
+      <h2>MTG Deck Shuffler</h2>
+    </div>
+    ${content}
+    
+    <footer>
+      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+    </footer>
+  </body>
+</html>`;
+}
+
 export function formatGamePageHtml(game: GameState): string {
   const gameContent = formatGameHtml(game);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
+  return formatGamePageWrapper(`MTG Game - ${game.deckName}`, gameContent);
 }
 
 function formatLibraryCardList(game: GameState): string {
@@ -329,8 +348,6 @@ function getAnimationClass(whatHappened: WhatHappened, gameCardIndex: number): s
 function formatRevealedCardsHtml(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
   
-  if (revealedCards.length === 0) return "";
-  
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
       const animationClass = getAnimationClass(whatHappened, gameCard.gameCardIndex);
@@ -344,6 +361,20 @@ function formatRevealedCardsHtml(game: GameState, whatHappened: WhatHappened): s
       <div id="revealed-cards-area" class="revealed-cards-area">
         ${revealedCardsArea}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
+      </div>
+    </div>`;
+}
+
+function formatTableSectionHtml(game: GameState): string {
+  const tableCardsCount = game.listTable().length;
+  
+  return `<div id="table-section" class="table-section">
+      <div class="table-count">Table (${tableCardsCount})</div>
+      <div class="table-buttons">
+        <button class="search-button"
+                hx-get="/table-modal/${game.gameId}"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">Search</button>
       </div>
     </div>`;
 }
@@ -414,22 +445,18 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtml(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtml(game, whatHappened);
+  const tableSectionHtml = formatTableSectionHtml(game);
   const handSectionHtml = formatHandSectionHtml(game, whatHappened);
   const gameActionsHtml = formatGameActionsHtml(game);
 
   return `<div id="game-container">
       ${gameHeaderHtml}
       
-      <div id="mid-game-buttons">
-        <button class="table-cards-button"
-                hx-get="/table-modal/${game.gameId}"
-                hx-target="#modal-container"
-                hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
-      </div>
-      
       ${librarySectionHtml}
       
       ${revealedCardsHtml}
+      
+      ${tableSectionHtml}
       
       ${handSectionHtml}
 
