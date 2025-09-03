@@ -48,7 +48,7 @@ div: library-section       div: start-game-buttons
     │           │││         [Shuffle Up]
     │           │││
     │           │││         [Choose Another Deck]
-    │  Library  │││
+    │Library (n)│││
     │           │││
     │           ││┘
     │           │┘
@@ -65,13 +65,9 @@ Revealed Cards is not always visible. Hand starts empty.
 
 The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
 
-After the game is started, the Draw button is available. It moves the top card from Library to Hand.
-
-the [Play] button moves a card from Hand or Revealed to the Table.
-
 The [X Cards on table] button (where X is a number of cards on table) displays the same modal as Search, but shows cards on the Table instead of in the Library.
 
-Revealed Cards and Hand sections scroll horizontally if there are enough cards in them.
+Revealed Cards and Haxnd sections scroll horizontally if there are enough cards in them.
 
 The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
 
@@ -79,9 +75,9 @@ The library displays the back of a magic card: https://backs.scryfall.io/normal/
 div: game-summary
   div: command-zone       div: game-details
    ┌───────────────┐
-   │               │        Game {Game ID} in progress. Player: you. Deck: {Deck Name}
+   │               │        MTG Deck Shuffler
    │               │
-   │  Command zone │
+   │  Command zone │        Game {Game ID} in progress. Player: you. Deck: {Deck Name}
    │               │
    │               │
    └───────────────┘
