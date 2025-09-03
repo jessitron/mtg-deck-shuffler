@@ -3,15 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
-import {
-  formatChooseDeckHtml,
-  formatDeckHtml,
-  formatGameHtml,
-  formatGamePageHtml,
-  formatLibraryModalHtml,
-  formatTableModalHtml,
-  formatGameNotFoundPageHtml,
-} from "./html-formatters.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameNotFoundPageHtml } from "./view/load-deck-view.js";
+import { formatGamePageHtml, formatLibraryModalHtml } from "./view/review-deck-view.js";
+import { formatGameHtml, formatTableModalHtml } from "./view/active-game-view.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
