@@ -24,7 +24,9 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   }
 
   private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {
-    const categoryInclusionMap = new Map(archidektDeck.categories.map((cat) => [cat.name, cat.includedInDeck]));
+    const categoryInclusionMap = new Map(
+      (archidektDeck.categories || []).map((cat) => [cat.name, cat.includedInDeck])
+    );
 
     const isCardIncluded = (card: ArchidektCard) => {
       const primaryCategory = card.categories[0];

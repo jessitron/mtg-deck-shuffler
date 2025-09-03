@@ -20,6 +20,6 @@ export interface ArchidektDeck {
     isPremier: boolean;
     includedInDeck: boolean;
     includedInPrice: boolean;
-  }>;
+  }> | null;
   cards: ArchidektCard[];
 }
