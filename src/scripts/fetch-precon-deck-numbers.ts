@@ -49,6 +49,37 @@ async function downloadDeck(deckId: string, gateway: ArchidektGateway, adapter: 
     console.log(`✓ Saved: ${filename} - "${deckData.name}" (${deckData.totalCards} cards)`);
   } catch (error) {
     console.error(`✗ Failed to download deck ${deckId}:`, error);
+    
+    // Create error file with details
+    try {
+      const url = `https://archidekt.com/api/decks/${deckId}/`;
+      
+      // Try to fetch the raw JSON to include in error file
+      let rawJson = null;
+      try {
+        const response = await fetch(url);
+        rawJson = await response.text();
+      } catch (fetchError) {
+        rawJson = `Failed to fetch raw data: ${fetchError}`;
+      }
+
+      const errorData = {
+        deckId: deckId,
+        url: url,
+        timestamp: new Date().toISOString(),
+        errorMessage: error instanceof Error ? error.message : String(error),
+        errorStack: error instanceof Error ? error.stack : undefined,
+        rawJsonResponse: rawJson
+      };
+
+      const errorFilename = `error-${deckId}.json`;
+      const errorFilepath = join(process.cwd(), "decks", errorFilename);
+      
+      await fs.writeFile(errorFilepath, JSON.stringify(errorData, null, 2), "utf-8");
+      console.log(`📋 Error details saved to: ${errorFilename}`);
+    } catch (errorFileError) {
+      console.error(`Failed to save error file for deck ${deckId}:`, errorFileError);
+    }
   }
 }
 
@@ -74,7 +105,26 @@ async function main(): Promise<void> {
 
       // Download decks sequentially to avoid overwhelming the API
       for (const deckId of deckNumbers) {
-        await downloadDeck(deckId.toString(), gateway, adapter);
+        const deckIdStr = deckId.toString();
+        const filename = `precon-${deckIdStr}.json`;
+        const errorFilename = `error-${deckIdStr}.json`;
+        const filepath = join(process.cwd(), "decks", filename);
+        const errorFilepath = join(process.cwd(), "decks", errorFilename);
+        
+        // Skip if already downloaded or already has error file
+        try {
+          await fs.access(filepath);
+          console.log(`⏭️  Skipping ${deckIdStr} - already downloaded`);
+          continue;
+        } catch {}
+        
+        try {
+          await fs.access(errorFilepath);
+          console.log(`⏭️  Skipping ${deckIdStr} - error file exists`);
+          continue;
+        } catch {}
+        
+        await downloadDeck(deckIdStr, gateway, adapter);
         // Small delay between requests to be respectful to the API
         await new Promise(resolve => setTimeout(resolve, 250));
       }
