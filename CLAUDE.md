@@ -65,3 +65,5 @@ Server runs on port 3000 by default, configurable via `PORT` environment variabl
 ## Documentation
 
 Design directives, features, vocabulary, and code structure are described in files in the notes/ directory. Keep these up to date as you change things.
+
+Update this file when anything in it changes.
