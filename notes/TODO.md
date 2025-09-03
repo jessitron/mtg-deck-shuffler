@@ -30,3 +30,5 @@
 - after draw, make sure the drawn card is visible: scroll hand section to the right
 
 - bug: scroll the page until the hand is just visible, and the buttons on the bottom are not. Scroll the hand to the right. Click swap. The page scrolls down! that's ridiculous, we shouldn't change scroll on the page. Hmm, it doesn't happen in Chrome. Fuck it
+
+- game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty.

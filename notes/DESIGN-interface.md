@@ -29,7 +29,7 @@ At the moment, there's a dropdown for local decks, as referenced in FEATURE-loca
 Here, we have a game in status Not Started.
 
 ```
-div: game-container
+div: deck-summary
   div: command-zone       div: game-details
    ┌───────────────┐
    │               │        Deck Name
@@ -54,7 +54,6 @@ div: library-section       div: start-game-buttons
     │           │┘
     └───────────┘
       [Search]
-       [Draw]
 
 ```
 
@@ -77,37 +76,36 @@ Revealed Cards and Hand sections scroll horizontally if there are enough cards i
 The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
 
 ```
-div: game-container
-  div: command-zone       div: game-details           div: mid-game-buttons
+div: game-summary
+  div: command-zone       div: game-details
    ┌───────────────┐
-   │               │        Deck Name
+   │               │        Game {Game ID} in progress. Player: you. Deck: {Deck Name}
    │               │
-   │  Command zone │        other details             [X Cards on table]
+   │  Command zone │
    │               │
-   │               │        Game ID
    │               │
    └───────────────┘
+div: game-container
+  div: library-section          div: revealed-cards-section (width 2)          div: mid-game-buttons
 
-div: library-section          div: revealed-cards-section (width 3)
       ┌───────────┐     ┌────────────────────────────────┐
-     ┌───────────┐│     │        Revealed Cards          │
+     ┌───────────┐│     │        Revealed (n)            │                         Table (n)
     ┌───────────┐││     │                                │
-    │           │││     │   ┌────────┐   ┌───────┐       │
+    │Library (n)│││     │   ┌────────┐   ┌───────┐       │
     │           │││     │   │        │   │       │       │
     │           │││     │   │        │   │       │       │
+    │           │││     │   │        │   │       │       │                         table.png
     │           │││     │   │        │   │       │       │
-    │  Library  │││     │   │        │   │       │       │
     │           │││     │   │        │   │       │       │
-    │           ││┘     │   └────────┘   └───────┘       │
+    │           ││┘     │   └────────┘   └───────┘       │                          [Search]
     │           │┘      │                                │
     └───────────┘       └────────────────────────────────┘
-      [Search]
-       [Draw]
+    [Search] [Shuffle]
+     [Draw] [Reveal]
 
-div: hand-section (width 4)
+  div: hand-section (width 4)
       ┌────────────────────────────────────────────────────────────┐
-      │                                                            │
-      │                    Hand                                    │
+      │                    Hand (n)                                │
       │     ┌─────────┐   ┌─────────┐   ┌──────────┐               │
       │     │         │   │         │   │          │               │
       │     │         │   │         │   │          │               │
@@ -119,7 +117,7 @@ div: hand-section (width 4)
       │        [Play]        [Play]         [Play]                 │
       └────────────────────────────────────────────────────────────┘
 
-div: end-game-actions
+  div: end-game-actions
                    [Restart Game] [Choose Another Deck]
 ```
 
