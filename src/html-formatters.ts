@@ -2,6 +2,135 @@ import { AvailableDecks } from "./port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl, WhatHappened } from "./types.js";
 import { GameCard, GameState } from "./GameState.js";
 
+// Core building blocks
+function formatCommanderImageHtml(commanders: any[]): string {
+  return commanders.length > 0
+    ? commanders
+        .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+        .join("")
+    : `<div class="commander-placeholder">No Commander</div>`;
+}
+
+function formatGameDetailsHtml(game: GameState): string {
+  const cardCountInfo = `${game.totalCards} cards`;
+  return `<div id="game-details">
+        <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
+        <p>${cardCountInfo}</p>
+        <p><strong>Game ID:</strong> ${game.gameId}</p>
+        ${game.status !== "NotStarted" ? `<p><strong>Status:</strong> ${game.status}</p>` : ""}
+      </div>`;
+}
+
+function formatModalHtml(title: string, bodyContent: string): string {
+  return `<div class="modal-overlay"
+               hx-get="/close-modal"
+               hx-target="#modal-container"
+               hx-swap="innerHTML"
+               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+               tabindex="0">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title">${title}</h2>
+        <button class="modal-close"
+                hx-get="/close-modal"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">&times;</button>
+      </div>
+      <div class="modal-body">
+        ${bodyContent}
+      </div>
+    </div>
+  </div>`;
+}
+
+type CardAction = {
+  action: string;
+  endpoint: string;
+  title: string;
+  cssClass?: string;
+};
+
+function formatCardActionButton(action: string, endpoint: string, gameId: number, cardIndex: number, title: string, cssClass = "card-action-button", imageUrl?: string): string {
+  const extraAttrs = action === "Play" && imageUrl ? `data-image-url="${imageUrl}"` : "";
+  const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
+  return `<button class="${cssClass}"
+                    hx-post="${endpoint}/${gameId}/${cardIndex}"
+                    hx-target="#game-container"
+                    ${swapAttr}
+                    ${extraAttrs}
+                    title="${title}">
+                 ${action}
+               </button>`;
+}
+
+function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, imageUrl?: string): string {
+  return actions.map(action => 
+    formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, imageUrl)
+  ).join("");
+}
+
+function formatLibraryCardActions(game: GameState, gameCard: any): string {
+  if (game.status !== "Active") return "";
+  
+  const actions: CardAction[] = [
+    { action: "Reveal", endpoint: "/reveal-card", title: "Reveal" },
+    { action: "Put in Hand", endpoint: "/put-in-hand", title: "Put in Hand", cssClass: "card-action-button secondary" }
+  ];
+  
+  return `<div class="card-actions">
+    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex)}
+  </div>`;
+}
+
+function formatRevealedCardActions(game: GameState, gameCard: GameCard): string {
+  const actions: CardAction[] = [
+    { action: "Play", endpoint: "/play-card", title: "Copy image and remove from revealed", cssClass: "play-button" },
+    { action: "Put in Hand", endpoint: "/put-in-hand", title: "Move card to hand", cssClass: "put-in-hand-button" },
+    { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "put-on-top-button" },
+    { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "put-on-bottom-button" }
+  ];
+  
+  return `<div class="card-buttons">
+    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, getCardImageUrl(gameCard.card.scryfallId))}
+  </div>`;
+}
+
+function formatHandCardActions(game: GameState, gameCard: GameCard, index: number): string {
+  const handSize = game.listHand().length;
+  const swapButton = index < handSize - 1
+    ? `<button class="swap-button"
+             hx-post="/swap-with-next/${game.gameId}/${index}"
+             hx-target="#game-container"
+             hx-swap="outerHTML"
+             title="Swap with next card">
+       ↔
+     </button>`
+    : "";
+
+  const actions: CardAction[] = [
+    { action: "Play", endpoint: "/play-card", title: "Copy image and remove from hand", cssClass: "play-button" },
+    { action: "Put down", endpoint: "/put-down", title: "Move card to revealed", cssClass: "put-down-button" }
+  ];
+
+  return `<div class="hand-card-buttons">
+    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, getCardImageUrl(gameCard.card.scryfallId))}
+    ${swapButton}
+  </div>`;
+}
+
+function formatCardContainer(gameCard: GameCard, containerType: 'revealed' | 'hand', actions: string, animationClass = ""): string {
+  const imageUrl = getCardImageUrl(gameCard.card.scryfallId);
+  const cardClass = containerType === 'revealed' ? 'revealed-card' : 'hand-card';
+  
+  return `<div id="card-container-${gameCard.gameCardIndex}" class="${containerType}-card-container">
+    <img src="${imageUrl}"
+         alt="${gameCard.card.name}"
+         class="mtg-card-image ${cardClass}${animationClass}"
+         title="${gameCard.card.name}" />
+    ${actions}
+  </div>`;
+}
+
 export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInput();
 
@@ -40,15 +169,8 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
 }
 
 export function formatDeckHtml(deck: Deck): string {
-  const commanderImageHtml =
-    deck.commanders.length > 0
-      ? deck.commanders
-          .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
-          .join("")
-      : `<div class="commander-placeholder">No Commander Image</div>`;
-
+  const commanderImageHtml = formatCommanderImageHtml(deck.commanders);
   const cardCountInfo = `${deck.totalCards} cards`;
-
   const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
 
   return `<div id="deck-info">
@@ -72,15 +194,11 @@ export function formatDeckHtml(deck: Deck): string {
     </div>`;
 }
 
-export function formatGamePageHtml(game: GameState): string {
-  const gameContent = formatGameHtml(game);
-
-  return `<!DOCTYPE html>
-<html lang="en">
-  <head>
+function formatHtmlHead(title: string): string {
+  return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTG Game - ${game.deckName}</title>
+    <title>${title}</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/hny.js"></script>
     <script>
@@ -93,10 +211,18 @@ export function formatGamePageHtml(game: GameState): string {
     </script>
     <script src="/htmx.js"></script>
     <script src="/game.js"></script>
-  </head>
+  </head>`;
+}
+
+function formatPageWrapper(title: string, content: string): string {
+  const headHtml = formatHtmlHead(title);
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+  ${headHtml}
   <body>
     <h1>*Woohoo it's Magic time!*</h1>
-    ${gameContent}
+    ${content}
     
     <footer>
       <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
@@ -105,92 +231,70 @@ export function formatGamePageHtml(game: GameState): string {
 </html>`;
 }
 
-export function formatLibraryModalHtml(game: GameState): string {
-  const libraryCards = game.listLibrary();
+export function formatGamePageHtml(game: GameState): string {
+  const gameContent = formatGameHtml(game);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
+}
 
-  const libraryCardList = libraryCards
+function formatLibraryCardList(game: GameState): string {
+  const libraryCards = game.listLibrary();
+  
+  return libraryCards
     .map((gameCard: any) => {
+      const cardActions = formatLibraryCardActions(game, gameCard);
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
-        gameCard.card.name
-      }</a>
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
           </div>
-          ${
-            game.status === "Active"
-              ? `
-          <div class="card-actions">
-            <button class="card-action-button"
-                    hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
-                    hx-target="#game-container"
-                    hx-swap="outerHTML">Reveal</button>
-            <button class="card-action-button secondary"
-                    hx-post="/put-in-hand/${game.gameId}/${gameCard.gameCardIndex}"
-                    hx-target="#game-container"
-                    hx-swap="outerHTML">Put in Hand</button>
-          </div>
-          `
-              : ""
-          }
+          ${cardActions}
         </li>`;
     })
     .join("");
+}
 
-  return `<div class="modal-overlay"
-               hx-get="/close-modal"
-               hx-target="#modal-container"
-               hx-swap="innerHTML"
-               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
-               tabindex="0">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h2 class="modal-title">Library Contents</h2>
-        <button class="modal-close"
-                hx-get="/close-modal"
-                hx-target="#modal-container"
-                hx-swap="innerHTML">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+export function formatLibraryModalHtml(game: GameState): string {
+  const libraryCards = game.listLibrary();
+  const libraryCardList = formatLibraryCardList(game);
+  
+  const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
           ${libraryCards.length} cards in library, ordered by position
         </p>
         <ul class="library-search-list">
           ${libraryCardList}
-        </ul>
-      </div>
-    </div>
-  </div>`;
+        </ul>`;
+  
+  return formatModalHtml("Library Contents", bodyContent);
 }
 
-export function formatDeckReviewHtml(game: GameState): string {
-  const commanderImageHtml =
-    game.commanders.length > 0
-      ? game.commanders
-          .map((commander: any) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
-          .join("")
-      : `<div class="commander-placeholder">No Commander</div>`;
-
-  const cardCountInfo = `${game.totalCards} cards`;
-
-  return `<div id="game-container">
-      <div id="command-zone">
+function formatGameHeaderHtml(game: GameState): string {
+  const commanderImageHtml = formatCommanderImageHtml(game.commanders);
+  const gameDetailsHtml = formatGameDetailsHtml(game);
+  
+  return `<div id="command-zone">
         ${commanderImageHtml}
       </div>
-      
-      <div id="game-details">
-        <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
-        <p>${cardCountInfo}</p>
-        <p><strong>Game ID:</strong> ${game.gameId}</p>
-      </div>
-      
-      <div id="library-section" data-testid="library-section">
-        <h3>Library (${game.listLibrary().length})</h3>
-        <div class="library-stack" data-testid="library-stack">
+      ${gameDetailsHtml}`;
+}
+
+function formatLibraryStackHtml(): string {
+  return `<div class="library-stack" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
-        </div>
+        </div>`;
+}
+
+export function formatDeckReviewHtml(game: GameState): string {
+  const gameHeaderHtml = formatGameHeaderHtml(game);
+  const libraryStackHtml = formatLibraryStackHtml();
+
+  return `<div id="game-container">
+      ${gameHeaderHtml}
+      
+      <div id="library-section" data-testid="library-section">
+        <h3>Library (${game.listLibrary().length})</h3>
+        ${libraryStackHtml}
         <div class="library-buttons-single">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
@@ -213,157 +317,60 @@ export function formatDeckReviewHtml(game: GameState): string {
     </div>`;
 }
 
-export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened): string {
-  const commanderImageHtml =
-    game.commanders.length > 0
-      ? game.commanders
-          .map((commander: any) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
-          .join("")
-      : `<div class="commander-placeholder">No Commander</div>`;
+function getAnimationClass(whatHappened: WhatHappened, gameCardIndex: number): string {
+  if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
+    return " card-moved-left";
+  } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCardIndex)) {
+    return " card-moved-right";
+  }
+  return "";
+}
 
-  const cardCountInfo = `${game.totalCards} cards`;
-
+function formatRevealedCardsHtml(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
-  const revealedCardsHtml =
-    revealedCards.length == 0
-      ? ""
-      : `
-    <div id="revealed-cards-section" class="revealed-cards-section" class="revealed-cards-section">
+  
+  if (revealedCards.length === 0) return "";
+  
+  const revealedCardsArea = revealedCards
+    .map((gameCard: any) => {
+      const animationClass = getAnimationClass(whatHappened, gameCard.gameCardIndex);
+      const actions = formatRevealedCardActions(game, gameCard);
+      return formatCardContainer(gameCard, 'revealed', actions, animationClass);
+    })
+    .join("");
+
+  return `<div id="revealed-cards-section" class="revealed-cards-section">
       <h3>Revealed Cards (${revealedCards.length})</h3>
       <div id="revealed-cards-area" class="revealed-cards-area">
-        ${revealedCards
-          .map((gameCard: any) => {
-            // Add animation classes based on what happened
-            let animationClass = "";
-            if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-              animationClass = " card-moved-left";
-            } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-              animationClass = " card-moved-right";
-            }
-
-            return `<div id="card-container-${gameCard.gameCardIndex}" class="revealed-card-container">
-             <img src="${getCardImageUrl(gameCard.card.scryfallId)}" id="revealed-card-${gameCard.gameCardIndex}"
-                  alt="${gameCard.card.name}"
-                  class="mtg-card-image revealed-card${animationClass}"
-                  title="${gameCard.card.name}" />
-             <div class="card-buttons">
-               <button class="play-button"
-                       hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
-                       hx-target="#game-container"
-                       hx-swap="outerHTML swap:1.5s"
-                       data-image-url="${getCardImageUrl(gameCard.card.scryfallId)}"
-                       title="Copy image and remove from revealed">
-                 Play
-               </button>
-               <button class="put-in-hand-button"
-                       hx-post="/put-in-hand/${game.gameId}/${gameCard.gameCardIndex}"
-                       hx-target="#game-container"
-                       hx-swap="outerHTML"
-                       title="Move card to hand">
-                 Put in Hand
-               </button>
-               <button class="put-on-top-button"
-                       hx-post="/put-on-top/${game.gameId}/${gameCard.gameCardIndex}"
-                       hx-target="#game-container"
-                       hx-swap="outerHTML"
-                       title="Move card to top of library">
-                 Put on Top
-               </button>
-               <button class="put-on-bottom-button"
-                       hx-post="/put-on-bottom/${game.gameId}/${gameCard.gameCardIndex}"
-                       hx-target="#game-container"
-                       hx-swap="outerHTML"
-                       title="Move card to bottom of library">
-                 Put on Bottom
-               </button>
-             </div>
-           </div>`;
-          })
-          .join("")}
+        ${revealedCardsArea}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}
       </div>
     </div>`;
+}
 
-  const handCardsHtml = `<div id="hand-section" data-testid="hand-section">
+function formatHandSectionHtml(game: GameState, whatHappened: WhatHappened): string {
+  const handCards = game.listHand()
+    .map((gameCard: GameCard, index: number) => {
+      const animationClass = getAnimationClass(whatHappened, gameCard.gameCardIndex);
+      const actions = formatHandCardActions(game, gameCard, index);
+      return formatCardContainer(gameCard, 'hand', actions, animationClass);
+    })
+    .join("");
+
+  return `<div id="hand-section" data-testid="hand-section">
         <h3>Hand (${game.listHand().length})</h3>
         <div id="hand-cards" class="hand-cards">
-          ${game
-            .listHand()
-            .map((gameCard: GameCard, index: number) => {
-              const handSize = game.listHand().length;
-              const swapButton =
-                index < handSize - 1
-                  ? `<button class="swap-button"
-                         hx-post="/swap-with-next/${game.gameId}/${index}"
-                         hx-target="#game-container"
-                         hx-swap="outerHTML"
-                         title="Swap with next card">
-                   ↔
-                 </button>`
-                  : "";
-
-              // Add animation classes based on what happened
-              let animationClass = "";
-              if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-                animationClass = " card-moved-left";
-              } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCard.gameCardIndex)) {
-                animationClass = " card-moved-right";
-              }
-
-              return `<div id="card-container-${gameCard.gameCardIndex}" class="hand-card-container">
-                   <img src="${getCardImageUrl(gameCard.card.scryfallId)}"
-                    alt="${gameCard.card.name}"
-                    class="mtg-card-image hand-card${animationClass}"
-                    title="${gameCard.card.name}" />
-                    <div class="hand-card-buttons">
-                   <button class="play-button"
-                           hx-post="/play-card/${game.gameId}/${gameCard.gameCardIndex}"
-                           hx-target="#game-container"
-                           hx-swap="outerHTML swap:1.5s"
-                           data-image-url="${getCardImageUrl(gameCard.card.scryfallId)}"
-                           title="Copy image and remove from hand">
-                     Play
-                   </button>
-                   <button class="put-down-button"
-                   hx-post="/put-down/${game.gameId}/${gameCard.gameCardIndex}"
-                   hx-target="#game-container"
-                   hx-swap="outerHTML"
-                   title="Move card to revealed">
-                   Put down
-                   </button>
-                   ${swapButton}
-                   </div>
-
-                 </div>`;
-            })
-            .join("")}
+          ${handCards}
         </div>
       </div>`;
+}
 
-  const tableCardsCount = game.listTable().length;
-
-  return `<div id="game-container">
-      <div id="command-zone">
-        ${commanderImageHtml}
-      </div>
-      
-      <div id="game-details">
-        <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
-        <p>${cardCountInfo}</p>
-        <p><strong>Game ID:</strong> ${game.gameId}</p>
-        <p><strong>Status:</strong> ${game.status}</p>
-      </div>
-      
-      <div id="mid-game-buttons">
-        <button class="table-cards-button"
-                hx-get="/table-modal/${game.gameId}"
-                hx-target="#modal-container"
-                hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
-      </div>
-      
-      <div id="library-section" data-testid="library-section">
+function formatLibrarySectionHtml(game: GameState, whatHappened: WhatHappened): string {
+  const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
+  
+  return `<div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        <div class="library-stack ${whatHappened.shuffling ? "shuffling" : ""}" data-testid="library-stack">
+        <div class="library-stack${shufflingClass}" data-testid="library-stack">
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
           <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
@@ -386,16 +393,11 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
                   hx-target="#game-container"
                   hx-swap="outerHTML">Reveal</button>
         </div>
-      </div>
-      
-        ${revealedCardsHtml}
-      
-     ${handCardsHtml}
+      </div>`;
+}
 
-      <!-- Modal Container -->
-      <div id="modal-container"></div>
-      
-      <div id="end-game-actions" class="game-actions">
+function formatGameActionsHtml(game: GameState): string {
+  return `<div id="end-game-actions" class="game-actions">
         <form method="post" action="/restart-game" style="display: inline;">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Restart Game</button>
@@ -404,68 +406,76 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
         </form>
+      </div>`;
+}
+
+export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened): string {
+  const gameHeaderHtml = formatGameHeaderHtml(game);
+  const tableCardsCount = game.listTable().length;
+  const librarySectionHtml = formatLibrarySectionHtml(game, whatHappened);
+  const revealedCardsHtml = formatRevealedCardsHtml(game, whatHappened);
+  const handSectionHtml = formatHandSectionHtml(game, whatHappened);
+  const gameActionsHtml = formatGameActionsHtml(game);
+
+  return `<div id="game-container">
+      ${gameHeaderHtml}
+      
+      <div id="mid-game-buttons">
+        <button class="table-cards-button"
+                hx-get="/table-modal/${game.gameId}"
+                hx-target="#modal-container"
+                hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
       </div>
+      
+      ${librarySectionHtml}
+      
+      ${revealedCardsHtml}
+      
+      ${handSectionHtml}
+
+      <!-- Modal Container -->
+      <div id="modal-container"></div>
+      
+      ${gameActionsHtml}
     </div>`;
 }
 
-export function formatTableModalHtml(game: GameState): string {
+function formatTableCardList(game: GameState): string {
   const tableCards = game.listTable();
-
-  const tableCardList = tableCards
-    .map(
-      (gameCard: any, index: number) =>
-        `<li class="table-card-item">
+  
+  return tableCards
+    .map((gameCard: any, index: number) =>
+      `<li class="table-card-item">
           <div class="card-info">
             <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
-          </div>  <div class="card-actions">
+          </div>
+          <div class="card-actions">
               <button class="card-action-button"
                       hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
                       hx-target="#game-container"
                       hx-swap="outerHTML">Return</button>
-            </div>
-
+          </div>
         </li>`
     )
     .join("");
+}
 
-  return `<div class="modal-overlay"
-               hx-get="/close-modal"
-               hx-target="#modal-container"
-               hx-swap="innerHTML"
-               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
-               tabindex="0">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h2 class="modal-title">Cards on Table</h2>
-        <button class="modal-close"
-                hx-get="/close-modal"
-                hx-target="#modal-container"
-                hx-swap="innerHTML">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+export function formatTableModalHtml(game: GameState): string {
+  const tableCards = game.listTable();
+  const tableCardList = formatTableCardList(game);
+  
+  const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
           ${tableCards.length} cards on table
         </p>
         <ul class="table-search-list">
           ${tableCardList}
-        </ul>
-      </div>
-    </div>
-  </div>`;
+        </ul>`;
+  
+  return formatModalHtml("Cards on Table", bodyContent);
 }
 
 export function formatGameNotFoundPageHtml(gameId: number): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Not Found - MTG Deck Shuffler</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <h1>*Woohoo it's Magic time!*</h1>
-    <div class="deck-input-section">
+  const content = `<div class="deck-input-section">
       <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
         <h2>🎯 Game Not Found</h2>
         <p>Game <strong>${gameId}</strong> could not be found.</p>
@@ -476,13 +486,9 @@ export function formatGameNotFoundPageHtml(gameId: number): string {
           <button type="submit" class="lets-play-button">Start a New Game</button>
         </form>
       </div>
-    </div>
-    
-    <footer>
-      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
-    </footer>
-  </body>
-</html>`;
+    </div>`;
+  
+  return formatPageWrapper("Game Not Found - MTG Deck Shuffler", content);
 }
 
 export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
