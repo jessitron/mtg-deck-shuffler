@@ -4,7 +4,9 @@ Status: not implemented
 
 Currently, the cards appear with buttons underneath them. The buttons are hella ugly.
 
-Instead, let's
+Instead, let's change this in phases.
+
+Remember to use HTMX for the implementation, no custom JS.
 
 # Phase 1
 
@@ -25,7 +27,7 @@ Exception: the Swap button in the Hand section should stay. It only makes sense 
 # Bonus Phase
 
 - when the modal closes, the big card image animates back to its position, which might be the same, or might be different after the button click!
-    
+
 # Phase 3
 
 - change the Search and Table modals to pop the big-card modal when the card name is clicked, instead of the current link.
