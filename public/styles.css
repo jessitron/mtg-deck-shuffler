@@ -176,17 +176,27 @@ h1 {
 
 /* Game Summary Styles */
 #game-summary {
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
 
-#game-summary h2 {
+#game-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+#game-title h2 {
   margin: 0;
   color: #333;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 /* Game Layout Styles - Grid Layout */
@@ -204,8 +214,16 @@ h1 {
   min-height: 600px;
 }
 
+/* Active game container (when game-summary is separate) */
+#game-summary + #game-container {
+  grid-template-areas:
+    "library-section revealed-cards table-section"
+    "hand-section hand-section hand-section"
+    "end-game-actions end-game-actions end-game-actions";
+  grid-template-rows: auto auto auto;
+}
+
 #command-zone {
-  grid-area: command-zone;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,12 +232,35 @@ h1 {
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #f9f9f9;
+  min-width: 240px;
+}
+
+/* Command zone in deck review (inside grid) */
+#game-container #command-zone {
+  grid-area: command-zone;
+  background-color: #f9f9f9;
+}
+
+/* Command zone in active game (inside game-summary) */
+#game-summary #command-zone {
+  background-color: white;
 }
 
 #game-details {
-  grid-area: game-details;
   text-align: center;
   padding: 20px;
+}
+
+/* Game details in deck review (inside grid) */
+#game-container #game-details {
+  grid-area: game-details;
+  text-align: center;
+}
+
+/* Game details in active game (inside game-summary) */
+#game-summary #game-details {
+  text-align: left;
+  flex: 1;
 }
 
 #game-details h2 {
