@@ -73,7 +73,7 @@ function formatGameActionsHtml(game: GameState): string
 
 // Page structure
 function formatHtmlHead(title: string): string
-function formatPageWrapper(title: string, content: string): string
+function formatPageWrapper(title: string, cpontent: string): string
 ```
 
 ## Benefits

@@ -26,3 +26,7 @@
 - get the Deck to include a "source", which has a URL that links to where we got the deck. Local files will work for this if we serve them (it has a source now, but doesn't work for local files)
 
 - handle empty library
+
+- after draw, make sure the drawn card is visible: scroll hand section to the right
+
+- bug: scroll the page until the hand is just visible, and the buttons on the bottom are not. Scroll the hand to the right. Click swap. The page scrolls down! that's ridiculous, we shouldn't change scroll on the page. Hmm, it doesn't happen in Chrome. Fuck it
