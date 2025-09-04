@@ -57,7 +57,8 @@
       "mcp__playwright__browser_console_messages",
       "Bash(PORT=3001 PORT_PERSIST_STATE=in-memory npm start)",
       "Bash(node:*)",
-      "Bash(npm run precons:fetch:*)"
+      "Bash(npm run precons:fetch:*)",
+      "mcp__honeycomb__get_dataset_columns"
     ],
     "deny": []
   }
