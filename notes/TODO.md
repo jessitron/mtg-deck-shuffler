@@ -29,6 +29,10 @@
 
 - after draw, make sure the drawn card is visible: scroll hand section to the right
 
-- bug: scroll the page until the hand is just visible, and the buttons on the bottom are not. Scroll the hand to the right. Click swap. The page scrolls down! that's ridiculous, we shouldn't change scroll on the page. Hmm, it doesn't happen in Chrome. Fuck it
+- bug: scroll the page until the hand is just visible, and the buttons on the bottom are not. Scroll the hand to the right. Click swap. The page scrolls down! that's ridiculous, we shouldn't change scroll on the page. Hmm, it doesn't happen in Chrome, only Firefox. Fuck it
 
-- game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty.
+- game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty
+
+- local deck retrieval: the source URL can be the source URL of the Deck Provenance. Might not be accurate for my own decks which I change, but will be way better for the precons than the local JSON, hmm. We don't have a deck presentation screen... that one's called Deck Review. Maybe we change the link to be "source" instead of the whole deck name -- original source, so that there's an implication that it might not match what we retrieved and are using. We can display the retrieved date too, yeah.
+
+
