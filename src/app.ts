@@ -21,6 +21,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
+  // Returns whole page - deck selection screen
   app.get("/choose-deck", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
@@ -36,6 +37,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Redirects to game page or returns error fragment
   app.post("/deck", async (req, res) => {
     const deckNumber: string = req.body["deck-number"];
     const deckSource: string = req.body["deck-source"];
@@ -60,6 +62,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - game board 
   app.post("/start-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
@@ -88,6 +91,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns whole page - game review screen (deck loaded, game not started)
   app.get("/game/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -110,6 +114,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Redirects to new game page
   app.post("/restart-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
@@ -155,6 +160,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Redirects to home page
   app.post("/end-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
@@ -175,6 +181,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Modal endpoints
+  // Returns modal fragment - library contents modal
   app.get("/library-modal/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -194,6 +201,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns modal fragment - table contents modal
   app.get("/table-modal/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -213,11 +221,13 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns empty response - closes modal
   app.get("/close-modal", (req, res) => {
     res.send("");
   });
 
   // Card action endpoints
+  // Returns active game fragment - updated game board
   app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -243,6 +253,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -267,6 +278,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/put-down/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -297,6 +309,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/put-on-top/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -321,6 +334,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/put-on-bottom/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -345,6 +359,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/draw/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -380,6 +395,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -417,6 +433,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/shuffle/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -439,6 +456,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/move-to-left/:gameId/:handPosition", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const handPosition = parseInt(req.params.handPosition);
@@ -468,6 +486,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - updated game board
   app.post("/move-to-right/:gameId/:handPosition", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const handPosition = parseInt(req.params.handPosition);
