@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameNotFoundPageHtml } from "./view/load-deck-view.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatGameNotFoundPageHtml, formatDeckLoadErrorPageHtml } from "./view/load-deck-view.js";
 import { formatGamePageHtml, formatLibraryModalHtml } from "./view/review-deck-view.js";
 import { formatGameHtml, formatTableModalHtml } from "./view/active-game-view.js";
 import { GameState } from "./GameState.js";
@@ -37,7 +37,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Redirects to game page or returns whole error page
+  // Redirects to game page on success, returns whole error page on failure
   app.post("/deck", async (req, res) => {
     const deckNumber: string = req.body["deck-number"];
     const deckSource: string = req.body["deck-source"];
@@ -55,10 +55,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.redirect(`/game/${gameId}`);
     } catch (error) {
       console.error("Error fetching deck:", error);
-      res.send(`<div>
-        <p>Error: Could not fetch deck ${deckNumber || localFile} from ${deckSource}</p>
-        <a href="/">Try another deck</a>
-    </div>`);
+      res.status(500).send(formatDeckLoadErrorPageHtml(deckNumber || localFile, deckSource));
     }
   });
 

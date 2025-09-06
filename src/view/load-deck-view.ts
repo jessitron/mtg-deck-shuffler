@@ -125,3 +125,20 @@ export function formatGameNotFoundPageHtml(gameId: number): string {
   
   return formatPageWrapper("Game Not Found - MTG Deck Shuffler", content);
 }
+
+export function formatDeckLoadErrorPageHtml(deckIdentifier: string, deckSource: string): string {
+  const content = `<div class="deck-input-section">
+      <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
+        <h2>🚫 Deck Load Error</h2>
+        <p>Could not fetch deck <strong>${deckIdentifier}</strong> from <strong>${deckSource}</strong>.</p>
+        <p style="color: #666; font-size: 0.9rem;">The deck may not exist, be private, or there may be a network issue.</p>
+      </div>
+      <div class="deck-actions">
+        <form method="get" action="/" style="display: inline;">
+          <button type="submit" class="lets-play-button">Try Another Deck</button>
+        </form>
+      </div>
+    </div>`;
+  
+  return formatPageWrapper("Deck Load Error - MTG Deck Shuffler", content);
+}
