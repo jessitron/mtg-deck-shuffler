@@ -37,7 +37,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Redirects to game page or returns error fragment
+  // Redirects to game page or returns whole error page
   app.post("/deck", async (req, res) => {
     const deckNumber: string = req.body["deck-number"];
     const deckSource: string = req.body["deck-source"];
