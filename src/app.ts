@@ -2,7 +2,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
-import { formatChooseDeckHtml, formatDeckHtml, formatGameNotFoundPageHtml, formatDeckLoadErrorPageHtml } from "./view/load-deck-view.js";
+import { formatChooseDeckHtml, formatDeckHtml } from "./view/load-deck-view.js";
+import { formatErrorPage } from "./view/error-view.js";
 import { formatGamePageHtml, formatLibraryModalHtml } from "./view/review-deck-view.js";
 import { formatGameHtml, formatTableModalHtml } from "./view/active-game-view.js";
 import { GameState } from "./GameState.js";
@@ -55,11 +56,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.redirect(`/game/${gameId}`);
     } catch (error) {
       console.error("Error fetching deck:", error);
-      res.status(500).send(formatDeckLoadErrorPageHtml(deckNumber || localFile, deckSource));
+      res.status(500).send(
+        formatErrorPage({
+          icon: "🚫",
+          title: "Deck Load Error",
+          message: `Could not fetch deck <strong>${deckNumber || localFile}</strong> from <strong>${deckSource}</strong>.`,
+          details: "The deck may not exist, be private, or there may be a network issue.",
+        })
+      );
     }
   });
 
-  // Returns active game fragment - game board 
+  // Returns active game fragment - game board
   app.post("/start-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
@@ -95,7 +103,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
-        res.status(404).send(formatGameNotFoundPageHtml(gameId));
+        res.status(404).send(
+          formatErrorPage({
+            icon: "🎯",
+            title: "Game Not Found",
+            message: `Game <strong>${gameId}</strong> could not be found.`,
+            details: "It may have expired or the ID might be incorrect.",
+          })
+        );
         return;
       }
 
@@ -104,10 +119,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
-      res.status(500).send(`<div>
-        <p>Error: Could not load game ${gameId}</p>
-        <a href="/">Try starting a new game</a>
-    </div>`);
+      res.status(500).send(
+        formatErrorPage({
+          icon: "⚠️",
+          title: "Game Load Error",
+          message: `Could not load game <strong>${gameId}</strong>.`,
+          details: "There may be a technical issue with the game data.",
+        })
+      );
     }
   });
 
@@ -118,10 +137,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
-        res.status(404).send(`<div>
-          <p>Game ${gameId} not found</p>
-          <a href="/">Start a new game</a>
-      </div>`);
+        res.status(404).send(
+          formatErrorPage({
+            icon: "🎯",
+            title: "Game Not Found",
+            message: `Game <strong>${gameId}</strong> could not be found.`,
+            details: "It may have expired or the ID might be incorrect.",
+          })
+        );
         return;
       }
 
@@ -150,10 +173,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.redirect(`/game/${newGameId}`);
     } catch (error) {
       console.error("Error restarting game:", error);
-      res.status(500).send(`<div>
-        <p>Error: Could not restart game ${gameId}</p>
-        <a href="/">Try starting a new game</a>
-    </div>`);
+      res.status(500).send(
+        formatErrorPage({
+          icon: "🔄",
+          title: "Game Restart Error",
+          message: `Could not restart game <strong>${gameId}</strong>.`,
+          details: "There may be an issue with the original deck data.",
+        })
+      );
     }
   });
 

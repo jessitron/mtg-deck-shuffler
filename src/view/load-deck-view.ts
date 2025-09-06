@@ -31,7 +31,7 @@ function formatHtmlHead(title: string): string {
 
 function formatPageWrapper(title: string, content: string): string {
   const headHtml = formatHtmlHead(title);
-  
+
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
@@ -107,38 +107,4 @@ export function formatDeckHtml(deck: Deck): string {
           </form>
         </div>
     </div>`;
-}
-
-export function formatGameNotFoundPageHtml(gameId: number): string {
-  const content = `<div class="deck-input-section">
-      <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
-        <h2>🎯 Game Not Found</h2>
-        <p>Game <strong>${gameId}</strong> could not be found.</p>
-        <p style="color: #666; font-size: 0.9rem;">It may have expired or the ID might be incorrect.</p>
-      </div>
-      <div class="deck-actions">
-        <form method="get" action="/" style="display: inline;">
-          <button type="submit" class="lets-play-button">Start a New Game</button>
-        </form>
-      </div>
-    </div>`;
-  
-  return formatPageWrapper("Game Not Found - MTG Deck Shuffler", content);
-}
-
-export function formatDeckLoadErrorPageHtml(deckIdentifier: string, deckSource: string): string {
-  const content = `<div class="deck-input-section">
-      <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
-        <h2>🚫 Deck Load Error</h2>
-        <p>Could not fetch deck <strong>${deckIdentifier}</strong> from <strong>${deckSource}</strong>.</p>
-        <p style="color: #666; font-size: 0.9rem;">The deck may not exist, be private, or there may be a network issue.</p>
-      </div>
-      <div class="deck-actions">
-        <form method="get" action="/" style="display: inline;">
-          <button type="submit" class="lets-play-button">Try Another Deck</button>
-        </form>
-      </div>
-    </div>`;
-  
-  return formatPageWrapper("Deck Load Error - MTG Deck Shuffler", content);
 }
