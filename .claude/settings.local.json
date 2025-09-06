@@ -58,7 +58,8 @@
       "Bash(PORT=3001 PORT_PERSIST_STATE=in-memory npm start)",
       "Bash(node:*)",
       "Bash(npm run precons:fetch:*)",
-      "mcp__honeycomb__get_dataset_columns"
+      "mcp__honeycomb__get_dataset_columns",
+      "Bash(pkill:*)"
     ],
     "deny": []
   }
