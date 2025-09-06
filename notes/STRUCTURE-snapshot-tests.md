@@ -89,7 +89,7 @@ test/
 
 ### Test Data Requirements
 
-#### Mock Objects Needed:
+#### Fake Objects Needed:
 
 1. **AvailableDecks**: Array with both Archidekt and local deck options
 2. **Deck**: Complete deck with commanders, cards, provenance

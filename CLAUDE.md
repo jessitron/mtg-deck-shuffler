@@ -12,6 +12,10 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
 
+## Development Guidelines
+
+- Testing: the user hates mocks. Use only fakes.
+
 ## Key Files
 
 - `src/app.ts` - Core application logic with Express routes and middleware (main application file)
@@ -67,7 +71,7 @@ Server runs on port 3000 by default, configurable via `PORT` environment variabl
 
 The app sends telemetry data to Honeycomb for monitoring and debugging:
 
-- **Environment**: `librarytron-local` 
+- **Environment**: `librarytron-local`
 - **Dataset**: `mtg-deck-shuffler`
 - **Note**: This environment also contains production traces from other applications
 
