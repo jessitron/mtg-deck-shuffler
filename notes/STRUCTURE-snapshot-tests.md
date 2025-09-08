@@ -67,40 +67,181 @@ test/
 
 ### Test Coverage Plan
 
-#### Phase 1: Core Page Templates
+#### Phase 1: Load Deck Views (`src/view/load-deck-view.ts`)
 
-- `formatChooseDeckHtml()` with various deck availability scenarios
-- `formatDeckHtml()` with different deck types (Commander vs regular)
-- Error pages (`formatErrorPage()` with different error scenarios)
-- Full page wrappers with consistent head sections
+**`formatChooseDeckHtml(availableDecks: AvailableDecks)`**
+- Empty array `[]` → Only Archidekt input shown
+- Single local deck `[{localFile: "deck1.json", description: "Test Deck", deckSource: "local"}]`
+- Multiple local decks with varied descriptions
+- Mixed archidekt/local sources (edge case)
 
-#### Phase 2: Game State Views
+**`formatDeckHtml(deck: Deck)`**
+- Commander deck with 1 commander, 99 cards, Archidekt provenance
+- Commander deck with 2 commanders (partner commanders)  
+- Regular 60-card deck with no commanders
+- Deck with very long name (>50 chars)
+- Deck with special characters in name
 
-- `formatDeckReviewHtml()` for pre-game state
-- `formatLibraryModalHtml()` with different library sizes
-- Game header components with various commander configurations
+#### Phase 1b: Error Views (`src/view/error-view.ts`)
 
-#### Phase 3: Dynamic Game Content
+**`formatErrorPage(options: ErrorPageOptions)`**
+- Game not found: `{icon: "🎯", title: "Game Not Found", message: "Game 123 could not be found", details: "..."}`
+- Deck load error: `{icon: "🚫", title: "Deck Load Error", message: "Could not fetch deck...", details: null}`
+- Generic error with all fields populated
+- Error with minimal fields (no details)
 
-- Active game views with cards in different locations
-- Modal dialogs for various game actions
-- Card action buttons for different game states
-- Animation and interaction triggers
+#### Phase 2: Review Deck Views (`src/view/review-deck-view.ts`)
+
+**`formatGamePageHtml(game: GameState)`**
+- GameStatus.NotStarted, 0 commanders, 60 cards in library
+- GameStatus.NotStarted, 1 commander, 99 cards in library  
+- GameStatus.NotStarted, 2 commanders, 99 cards in library
+
+**`formatDeckReviewHtml(game: GameState)`** 
+- GameStatus.NotStarted, gameId: 12345, empty hand, full library (99 cards)
+- GameStatus.NotStarted, gameId: 67890, empty hand, small library (40 cards)
+
+**`formatLibraryModalHtml(game: GameState)`**
+- Library with 3 cards (minimal case)
+- Library with 99 cards (full Commander deck)
+- Library with 20 cards (mid-game scenario)
+
+#### Phase 3: Active Game Views (`src/view/active-game-view.ts`)
+
+**`formatGamePageHtml(game: GameState, whatHappened: WhatHappened)`**
+- GameStatus.Active, empty whatHappened `{}`
+- GameStatus.Active, card drawn: `{cardDrawn: {card: {...}, fromLocation: "Library"}}`
+- GameStatus.Active, card played: `{cardPlayed: {card: {...}, toLocation: "Table"}}`
+
+**`formatActiveGameHtml(game: GameState, whatHappened: WhatHappened)`**
+- Empty hand (0 cards), empty table (0 cards), full library (99 cards)
+- Full hand (7 cards), empty table, reduced library (92 cards)
+- Mixed state: 3 cards in hand, 5 cards on table, 84 cards in library
+- Cards revealed: 2 cards in revealed zone
+
+**`formatGameHtml(game: GameState, whatHappened: WhatHappened)`**
+- Fresh active game with default whatHappened
+- Game with recent card movement (whatHappened populated)
+
+**`formatTableModalHtml(game: GameState)`**
+- Empty table (no cards played)
+- Table with 1 card 
+- Table with 10+ cards (stress test layout)
 
 ### Test Data Requirements
 
-#### Fake Objects Needed:
+#### Specific Mock Objects Needed:
 
-1. **AvailableDecks**: Array with both Archidekt and local deck options
-2. **Deck**: Complete deck with commanders, cards, provenance
-3. **GameState**: Various game statuses (NotStarted, Active, etc.)
-4. **GameCard**: Cards in different locations (library, hand, battlefield)
-5. **Environment Variables**: Consistent Honeycomb API keys for testing
+**1. AvailableDecks Arrays:**
+```typescript
+const emptyDecks: AvailableDecks = [];
+const singleLocalDeck: AvailableDecks = [
+  {localFile: "test-deck.json", description: "Kaalia Angels", deckSource: "local"}
+];
+const multipleLocalDecks: AvailableDecks = [
+  {localFile: "deck1.json", description: "Kaalia Angels", deckSource: "local"},
+  {localFile: "deck2.json", description: "Ygra Lifegain", deckSource: "local"},
+  {localFile: "deck3.json", description: "Mono-Red Burn", deckSource: "local"}
+];
+```
 
-#### Date/Time Handling:
+**2. Deck Objects:**
+```typescript
+const commanderDeckSingle: Deck = {
+  id: "123456",
+  name: "Kaalia of the Vast Angel Tribal", 
+  totalCards: 100,
+  commanders: [{name: "Kaalia of the Vast", scryfallId: "abc123", multiverseid: 12345}],
+  provenance: {retrievedDate: new Date("2024-01-15T10:30:00Z"), sourceUrl: "https://archidekt.com/decks/123456", deckSource: "archidekt"}
+};
 
-- Mock `Date` objects for consistent timestamps
-- Use fixed dates like `2024-01-15T10:30:00Z` for reproducible output
+const commanderDeckPartners: Deck = {
+  id: "789012", 
+  name: "Tevesh & Kodama Partners",
+  totalCards: 100,
+  commanders: [
+    {name: "Tevesh Szat, Doom of Fools", scryfallId: "def456", multiverseid: 67890},
+    {name: "Kodama of the East Tree", scryfallId: "ghi789", multiverseid: 11111}
+  ],
+  provenance: {retrievedDate: new Date("2024-01-15T10:30:00Z"), sourceUrl: "https://archidekt.com/decks/789012", deckSource: "archidekt"}
+};
+
+const regularDeck: Deck = {
+  id: "345678",
+  name: "Mono Red Burn",
+  totalCards: 60, 
+  commanders: [],
+  provenance: {retrievedDate: new Date("2024-01-15T10:30:00Z"), sourceUrl: "https://archidekt.com/decks/345678", deckSource: "archidekt"}
+};
+```
+
+**3. GameState Objects:**
+```typescript
+const gameNotStartedCommander: GameState = {
+  gameId: 12345,
+  status: GameStatus.NotStarted,
+  deckName: "Kaalia of the Vast Angel Tribal",
+  totalCards: 100,
+  commanders: [{name: "Kaalia of the Vast", scryfallId: "abc123", multiverseid: 12345}],
+  deckProvenance: {...},
+  cards: [/* 99 cards in library positions 0-98 */]
+};
+
+const gameActiveWithHand: GameState = {
+  gameId: 67890, 
+  status: GameStatus.Active,
+  deckName: "Tevesh & Kodama Partners",
+  totalCards: 100,
+  commanders: [/* 2 partner commanders */],
+  deckProvenance: {...},
+  cards: [
+    /* 7 cards with HandLocation {type: "Hand", position: 0-6} */,
+    /* 92 cards with LibraryLocation {type: "Library", position: 0-91} */
+  ]
+};
+```
+
+**4. WhatHappened Objects:**
+```typescript
+const emptyWhatHappened: WhatHappened = {};
+const cardDrawnEvent: WhatHappened = {
+  cardDrawn: {
+    card: {name: "Lightning Bolt", scryfallId: "xyz789", multiverseid: 22222},
+    fromLocation: {type: "Library", position: 0}
+  }
+};
+const cardPlayedEvent: WhatHappened = {
+  cardPlayed: {
+    card: {name: "Sol Ring", scryfallId: "abc999", multiverseid: 33333},
+    toLocation: {type: "Table"}
+  }
+};
+```
+
+**5. ErrorPageOptions Objects:**
+```typescript
+const gameNotFoundError: ErrorPageOptions = {
+  icon: "🎯",
+  title: "Game Not Found", 
+  message: "Game 123 could not be found.",
+  details: "It may have expired or the ID might be incorrect."
+};
+const deckLoadError: ErrorPageOptions = {
+  icon: "🚫",
+  title: "Deck Load Error",
+  message: "Could not fetch deck 456789 from archidekt.",
+  details: null
+};
+```
+
+**6. Environment Variables:**
+- Mock `process.env.HONEYCOMB_INGEST_API_KEY = "hny_test_key_123"`
+- Mock `process.env.HONEYCOMB_API_KEY = "hny_test_key_456"` (fallback)
+
+**7. Date/Time Handling:**
+- Mock all `Date` constructors to return `new Date("2024-01-15T10:30:00Z")`
+- Use fixed `retrievedDate` in all DeckProvenance objects
+- Ensure consistent `.toLocaleString()` output across environments
 
 ### Snapshot Management
 
@@ -108,14 +249,40 @@ test/
 
 ```
 test/snapshots/
-├── choose-deck-empty.html          # No available decks
-├── choose-deck-with-locals.html    # Local decks available
-├── deck-commander.html             # Commander deck review
-├── deck-regular.html               # Regular deck review
-├── game-not-started.html           # Pre-shuffle game state
-├── game-active-empty-hand.html     # Active game, no cards in hand
-├── library-modal-small.html        # Library with few cards
-└── library-modal-large.html        # Library with many cards
+├── load-deck-view/
+│   ├── formatChooseDeckHtml-empty.html                 # formatChooseDeckHtml([])
+│   ├── formatChooseDeckHtml-single-local.html          # formatChooseDeckHtml(singleLocalDeck)
+│   ├── formatChooseDeckHtml-multiple-locals.html       # formatChooseDeckHtml(multipleLocalDecks)
+│   ├── formatDeckHtml-commander-single.html            # formatDeckHtml(commanderDeckSingle)
+│   ├── formatDeckHtml-commander-partners.html          # formatDeckHtml(commanderDeckPartners)
+│   ├── formatDeckHtml-regular-deck.html                # formatDeckHtml(regularDeck)
+│   └── formatDeckHtml-long-name.html                   # formatDeckHtml(deckWithLongName)
+├── error-view/
+│   ├── formatErrorPage-game-not-found.html             # formatErrorPage(gameNotFoundError)
+│   ├── formatErrorPage-deck-load-error.html            # formatErrorPage(deckLoadError)
+│   └── formatErrorPage-minimal.html                    # formatErrorPage(minimalError)
+├── review-deck-view/
+│   ├── formatGamePageHtml-not-started-no-commander.html    # formatGamePageHtml(gameNotStartedRegular)
+│   ├── formatGamePageHtml-not-started-one-commander.html   # formatGamePageHtml(gameNotStartedCommander)
+│   ├── formatGamePageHtml-not-started-two-commanders.html  # formatGamePageHtml(gameNotStartedPartners)
+│   ├── formatDeckReviewHtml-full-library.html              # formatDeckReviewHtml(gameWithFullLibrary)
+│   ├── formatDeckReviewHtml-small-library.html             # formatDeckReviewHtml(gameWithSmallLibrary)
+│   ├── formatLibraryModalHtml-minimal.html                 # formatLibraryModalHtml(gameWith3Cards)
+│   ├── formatLibraryModalHtml-full.html                    # formatLibraryModalHtml(gameWith99Cards)
+│   └── formatLibraryModalHtml-midgame.html                 # formatLibraryModalHtml(gameWith20Cards)
+└── active-game-view/
+    ├── formatGamePageHtml-active-empty-event.html          # formatGamePageHtml(gameActive, {})
+    ├── formatGamePageHtml-active-card-drawn.html           # formatGamePageHtml(gameActive, cardDrawnEvent)
+    ├── formatGamePageHtml-active-card-played.html          # formatGamePageHtml(gameActive, cardPlayedEvent)
+    ├── formatActiveGameHtml-empty-zones.html               # formatActiveGameHtml(gameActiveEmptyZones, {})
+    ├── formatActiveGameHtml-full-hand.html                 # formatActiveGameHtml(gameActiveFullHand, {})
+    ├── formatActiveGameHtml-mixed-state.html               # formatActiveGameHtml(gameActiveMixedState, {})
+    ├── formatActiveGameHtml-revealed-cards.html            # formatActiveGameHtml(gameActiveRevealed, {})
+    ├── formatGameHtml-fresh-game.html                      # formatGameHtml(freshActiveGame, {})
+    ├── formatGameHtml-recent-movement.html                 # formatGameHtml(activeGame, cardMovementEvent)
+    ├── formatTableModalHtml-empty.html                     # formatTableModalHtml(gameEmptyTable)
+    ├── formatTableModalHtml-single-card.html               # formatTableModalHtml(gameSingleCardTable)
+    └── formatTableModalHtml-many-cards.html                # formatTableModalHtml(gameManyCardsTable)
 ```
 
 #### Snapshot Update Workflow:
