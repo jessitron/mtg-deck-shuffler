@@ -83,6 +83,44 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
     </div>`;
 }
 
+export function formatHomepageHtml(availableDecks: AvailableDecks): string {
+  const deckSelectionHtml = formatChooseDeckHtml(availableDecks);
+  
+  const content = `
+    ${deckSelectionHtml}
+    <div class="expository-text">
+      <h3>How to use MTG Deck Shuffler</h3>
+      <p>
+        Want to play Magic with people who aren't in the room with you? You can play remotely using an online white board like Mural or Miro. Paste the cards in and move them around, like you would on a table. 
+      </p>
+      <p>
+        My sister and I play that way, and our board winds up looking like this:
+      </p>
+      <img src="mural-board.png" class="how-to-mural" alt="a bunch of Magic cards scattered across a white board" />
+      <p>
+        That picture won't tell you much. We're on voice chat when we play, so we talk through what we're doing. Then it makes sense. It's fun, because we can use any fancy land or token. We can make little notes on top of the cards as counters or to track effects.
+      </p>
+      <p>
+        This works with a physical deck; we each shuffle and draw cards from our own decks. Then when we want to put a card on the table, we find the image at Scryfall, right-click to copy, and paste it in.
+      </p>
+      <p>
+        This app makes that easier! It manages the shuffling and drawing, and then push "Play" to copy the card image to the clipboard! Now I don't have to have a physical deck with me. I don't have to own the physical deck at all. I can play any deck on Archidekt--any <a href="https://archidekt.com/commander-precons/" target="_blank">precon</a>, anyone else's deck, or any deck I create from all cards available anywhere. My sister can play a deck full of Relentless Rats, and I can have all the Secret Lair cards.
+      </p>
+      <p>
+        With a combination of
+        <ul>
+          <li>Discord for voice chat</li>
+          <li>Archidekt for deck definition</li>
+          <li>Mural for the board</li>
+          <li>This app for library management</li>
+        </ul>
+        We can play any deck, anywhere, with our favorite people.
+      </p>
+    </div>`;
+
+  return formatPageWrapper("MTG Deck Shuffler", content);
+}
+
 export function formatDeckHtml(deck: Deck): string {
   const commanderImageHtml = formatCommanderImageHtml(deck.commanders);
   const cardCountInfo = `${deck.totalCards} cards`;

@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { shuffleDeck } from "./types.js";
-import { formatChooseDeckHtml, formatDeckHtml } from "./view/load-deck-view.js";
+import { formatChooseDeckHtml, formatDeckHtml, formatHomepageHtml } from "./view/load-deck-view.js";
 import { formatErrorPage } from "./view/error-view.js";
 import { formatGamePageHtml, formatLibraryModalHtml } from "./view/review-deck-view.js";
 import { formatGameHtml, formatTableModalHtml } from "./view/active-game-view.js";
@@ -19,24 +19,25 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   const app = express();
 
   app.use(express.urlencoded({ extended: true }));
-  app.use(express.static(path.join(__dirname, "..", "public")));
-  app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
-  // Returns whole page - deck selection screen
-  app.get("/choose-deck", async (req, res) => {
+  // Returns whole page - homepage with deck selection
+  app.get("/", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
-      const html = formatChooseDeckHtml(availableDecks);
+      const html = formatHomepageHtml(availableDecks);
 
       res.send(html);
     } catch (error) {
-      console.error("Error fetching deck:", error);
-      res.send(`<div>
-        <p>Error: Could not figure out how you might load a deck</p>
-        <a href="/">Try another deck</a>
+      console.error("Error loading homepage:", error);
+      res.status(500).send(`<div>
+        <p>Error: Could not load the homepage</p>
+        <p>Please try refreshing the page</p>
     </div>`);
     }
   });
+
+  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
   // Redirects to game page on success, returns whole error page on failure
   app.post("/deck", async (req, res) => {
