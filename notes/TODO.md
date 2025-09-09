@@ -23,4 +23,13 @@
 
 - local deck retrieved: the JSON of the local deck is not what I want to link to. Make a link separate from the name, and note the retrieved date next to it, but point it to the deck definition in Archidekt if that's where it came from. There's a deck source inside the local deck that it reads in... it's like a source of the source, oh dear
 
+## UI Changes
 
+I want to change the UI, target documented in notes/DESIGN-interface.md
+
+Before that, I need to rearrange the view methods, they're a mess. Target documented in notes/STRUCTURE-view-organization.md
+
+Before that, I need snapshot tests. It made a plan in notes/STRUCTURE-snapshot-tests.md but I don't like it. I think I'll have it implement one snapshot test, and then see what else I want. 
+The first test can be for the / endpoint. That calls formatChooseDeckHtml, so we can test it at that level. It makes an htmx call ... but does it have to? It doesn't, if I generate the / endpoint dynamically. Which would be a UI refactor. Which wants snapshot tests!
+
+Hmm, that might be a change it can make without screwing it up, though. The structure of the view functions won't affect that as much maybe?

@@ -309,7 +309,7 @@ export class GameState {
     return this;
   }
 
-  public swapHandCardWithRight(handPosition: number): WhatHappened {
+  public swapHandCardWithNext(handPosition: number): WhatHappened {
     const handCards = this.listHand();
 
     if (handPosition < 0 || handPosition >= handCards.length - 1) {
@@ -330,10 +330,6 @@ export class GameState {
       movedRight: [cardToSwap],
       movedLeft: [cardToRight],
     };
-  }
-
-  public swapHandCardWithNext(handPosition: number): WhatHappened {
-    return this.swapHandCardWithRight(handPosition);
   }
 
   public toPersistedGameState(): PersistedGameState {

@@ -480,36 +480,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Returns active game fragment - updated game board
-  app.post("/move-to-right/:gameId/:handPosition", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const handPosition = parseInt(req.params.handPosition);
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.status !== "Active") {
-        res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
-        return;
-      }
-
-      const whatHappened = game.swapHandCardWithRight(handPosition);
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatGameHtml(game, whatHappened);
-      res.send(html);
-    } catch (error) {
-      console.error("Error moving card to right:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not move card to right"}</div>`);
-    }
-  });
-
   app.post("/swap-with-next/:gameId/:handPosition", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const handPosition = parseInt(req.params.handPosition);
