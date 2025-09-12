@@ -1,0 +1,19 @@
+<div id="deck-info">
+<div class="deck-details-layout">
+<div class="commander-section">
+<div class="commander-placeholder">No Commander</div>
+</div>
+<div class="deck-info-section">
+<h2><a href="https://archidekt.com/decks/12345" target="_blank">Test Deck with 0 Commanders</a></h2>
+<p>3 cards</p>
+<p><small>Retrieved: 1/1/2024, 4:00:00 AM</small></p>
+</div>
+</div>
+<div class="deck-actions">
+<input type="hidden" name="deck-id" value="12345" />
+<button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
+<form method="post" action="/" style="display: inline;">
+<button type="submit">Choose Another Deck</button>
+</form>
+</div>
+</div>
