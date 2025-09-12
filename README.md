@@ -21,47 +21,6 @@ So, given a deck in archidekt.com, this web app will
 
 `./run`
 
-## Testing
-
-This project uses snapshot testing (golden master testing) for HTML output verification. Snapshot tests capture the complete HTML output of view functions and detect any changes during refactoring.
-
-### Running Tests
-
-```bash
-npm test                    # Run all tests
-npm test <test-file>       # Run specific test file
-```
-
-### Working with Snapshot Tests
-
-**Normal workflow:**
-1. Run tests after making changes: `npm test`
-2. If snapshot tests fail, review the differences shown in the output
-3. If changes are intentional, update the snapshot (see below)
-4. If changes are unintentional, fix your code
-
-**Updating snapshots:**
-When you intentionally change HTML output and want to update the snapshot:
-1. Delete the snapshot file (e.g., `test/view/snapshots/formatHomepageHtml.html`)
-2. Run the test again: `npm test test/view/formatHomepageHtml.snapshot.test.ts`
-3. The test will create a new snapshot with your current output
-4. Review the new snapshot file to ensure it looks correct
-5. Commit both your code changes and the updated snapshot
-
-**Example workflow:**
-```bash
-# Make changes to view function
-# Run test to see what changed
-npm test test/view/formatHomepageHtml.snapshot.test.ts
-
-# If changes look good, update snapshot
-rm test/view/snapshots/formatHomepageHtml.html
-npm test test/view/formatHomepageHtml.snapshot.test.ts
-
-# Commit both code and snapshot
-git add . && git commit -m "Update homepage layout - claude"
-```
-
 ## Technical notes
 
 This app uses TypeScript, with esbuild for converting to JS. It's a toy.
