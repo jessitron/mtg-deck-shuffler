@@ -47,17 +47,8 @@ To verify changes, you can
 
 ### Snapshot Testing
 
-Snapshot tests capture the current HTML output of view formatting functions to detect unintended changes during refactoring.
-
-- **Command**: `npm run test:snapshot`
-- **Location**: `test/snapshot/`
-- **Snapshots stored in**: `test/snapshot/snapshots/`
-
-**Usage Guidelines**:
-- **Unintended HTML changes**: Agent should run snapshot tests to verify no changes occurred
-- **Intended HTML changes**: Only user should run snapshot tests to review and approve changes
-- When tests fail, check the `.actual` files to see what changed
-- Snapshot tests are separate from unit tests and should NOT be run automatically on every change
+- No HTML changes intended: Agent should run snapshot tests to verify no changes occurred
+- Intended HTML changes: Only user should run snapshot tests to review and approve changes
 
 ## Environment Setup
 
