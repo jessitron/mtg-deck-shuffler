@@ -29,7 +29,9 @@ I want to change the UI, target documented in notes/DESIGN-interface.md
 
 Before that, I need to rearrange the view methods, they're a mess. Target documented in notes/STRUCTURE-view-organization.md
 
-Before that, I need snapshot tests. It made a plan in notes/STRUCTURE-snapshot-tests.md but I don't like it. I think I'll have it implement one snapshot test, and then see what else I want. 
+Before that, I need snapshot tests. It made a plan in notes/STRUCTURE-snapshot-tests.md but I don't like it. I think I'll have it implement one snapshot test, and then see what else I want.
 The first test can be for the / endpoint. That calls formatChooseDeckHtml, so we can test it at that level. It makes an htmx call ... but does it have to? It doesn't, if I generate the / endpoint dynamically. Which would be a UI refactor. Which wants snapshot tests!
 
 Hmm, that might be a change it can make without screwing it up, though. The structure of the view functions won't affect that as much maybe?
+
+It would be nicer with templates. Templates come after snapshot tests though.
