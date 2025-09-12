@@ -38,11 +38,51 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 ## Testing
 
-To verify changes, you can
+### Test Types
 
-- `npm run build`
-- `npm run test` (this only tests some functions)
-- `./run` and make sure the app starts up and can load the default deck
+This project uses two types of tests:
+- **Unit tests**: Test individual functions and components (use only fakes, never mocks)
+- **Snapshot tests**: Golden master testing for HTML output verification
+
+### Running Tests
+
+- `npm run build` - Compile TypeScript
+- `npm test` - Run all tests
+- `npm test <specific-test-file>` - Run a specific test
+- `./run` - Start the app to verify it loads the default deck
+
+### Snapshot Testing Guidelines
+
+**When to use snapshot tests:**
+- For HTML formatting functions in `src/view/`
+- To detect unintended changes during refactoring
+- To review intended changes before committing
+
+**Snapshot test workflow:**
+1. **After making changes**: Run `npm test` to see if any HTML output changed
+2. **Review differences**: The test output shows exactly what changed
+3. **If changes are intentional**: Delete the snapshot file and re-run the test to create a new one
+4. **If changes are unintentional**: Fix your code to match the expected output
+
+**Example: Working with formatHomepageHtml snapshot**
+```bash
+# Make changes to load-deck-view.ts
+npm test test/view/formatHomepageHtml.snapshot.test.ts
+
+# If output changed and you want to accept the changes:
+rm test/view/snapshots/formatHomepageHtml.html
+npm test test/view/formatHomepageHtml.snapshot.test.ts
+
+# Review the new snapshot file, then commit both code and snapshot
+git add . && git commit -m "Update homepage layout - claude"
+```
+
+**Creating new snapshot tests:**
+Follow the pattern in `test/view/formatHomepageHtml.snapshot.test.ts`:
+- Create realistic fake data (no mocks)
+- Use descriptive test names
+- Store snapshots in `test/view/snapshots/`
+- Provide clear error messages with diff output
 
 ## Environment Setup
 
