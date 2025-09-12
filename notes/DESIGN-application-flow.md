@@ -48,6 +48,10 @@ The application follows a linear progression through three main screens:
 
 The entry point where users choose which deck to load for their game session.
 
+Endpoints:
+
+- GET / (loads index.html)
+
 **Actions:**
 
 - Let's Play (choose a deck and create a game)
@@ -59,6 +63,11 @@ The entry point where users choose which deck to load for their game session.
 ## 2. Deck Review
 
 Shows deck information and allows final preparation before starting the game.
+
+Endpoints:
+
+- GET /deck (loads deck-review.html)
+- GET /game/:gameId (redirects to /deck if game is Not Started)
 
 **State:**
 
@@ -80,6 +89,10 @@ Shows deck information and allows final preparation before starting the game.
 ## 3. Play Game
 
 The active game screen where gameplay occurs.
+
+Endpoints:
+
+- GET /game/:gameId (loads game.html)
 
 **State:**
 

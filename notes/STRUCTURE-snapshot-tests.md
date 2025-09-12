@@ -17,8 +17,12 @@ If HTML changes are not intended, then the agent should run snapshot tests too. 
 [x] Start by implementing one test, for the view method called by "/", which is formatHomepageHtml. That's the simplest one.
 The input to formatHomepageHtml is the list of available decks. That's a simple data structure. Add a few fake decks and call the function.
 
+[] The view method called by "/deck" is formatDeckHtml. The input is a Deck object. Test with zero, one, and two commanders. Include only a few other cards.
+
+[] The view method called by "/game/:gameId" is formatGameHtml. The input is a GameState object. Test with a game state that includes cards in hand, cards revealed, and cards on the table.
+
 ## Document
 
-The snapshot tests need their own script in package.json. They should not be run by the normal "test" script.
+[x] The snapshot tests need their own script in package.json. They should not be run by the normal "test" script.
 
-Document procedures in the README and CLAUDE.md.
+[x] Document procedures in the README and CLAUDE.md.

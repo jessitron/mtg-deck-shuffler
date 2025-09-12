@@ -15,6 +15,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 ## Development Guidelines
 
 - Testing: the user hates mocks. Use only fakes.
+- Cleanup: after each change, ask, is there some newly-unused code that I can delete?
 
 ## Key Files
 
