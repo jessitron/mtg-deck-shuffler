@@ -37,7 +37,7 @@ So, given a deck in archidekt.com, this web app will
 
 ## Technical notes
 
-This app uses TypeScript, with esbuild for converting to JS. It's a toy.
+This app uses TypeScript, with tsc for converting to JS. It's a toy.
 
 It will use htmx only, and no JS unless absolutely necessary (such as for OTel instrumentation).
 
