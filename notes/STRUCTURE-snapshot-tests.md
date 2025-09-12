@@ -14,7 +14,7 @@ If HTML changes are not intended, then the agent should run snapshot tests too. 
 
 ## Implement
 
-Start by implementing one test, for the view method called by "/", which is formatHomepageHtml. That's the simplest one.
+[x] Start by implementing one test, for the view method called by "/", which is formatHomepageHtml. That's the simplest one.
 The input to formatHomepageHtml is the list of available decks. That's a simple data structure. Add a few fake decks and call the function.
 
 ## Document
