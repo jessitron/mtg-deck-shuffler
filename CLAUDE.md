@@ -42,7 +42,22 @@ To verify changes, you can
 
 - `npm run build`
 - `npm run test` (this only tests some functions)
+- `npm run test:snapshot` (run HTML output snapshot tests - see below)
 - `./run` and make sure the app starts up and can load the default deck
+
+### Snapshot Testing
+
+Snapshot tests capture the current HTML output of view formatting functions to detect unintended changes during refactoring.
+
+- **Command**: `npm run test:snapshot`
+- **Location**: `test/snapshot/`
+- **Snapshots stored in**: `test/snapshot/snapshots/`
+
+**Usage Guidelines**:
+- **Unintended HTML changes**: Agent should run snapshot tests to verify no changes occurred
+- **Intended HTML changes**: Only user should run snapshot tests to review and approve changes
+- When tests fail, check the `.actual` files to see what changed
+- Snapshot tests are separate from unit tests and should NOT be run automatically on every change
 
 ## Environment Setup
 
