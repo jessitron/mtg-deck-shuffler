@@ -10,6 +10,7 @@ import {
   RevealedLocation,
   TableLocation,
   PERSISTED_GAME_STATE_VERSION,
+  printLocation,
 } from "./port-persist-state/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
 
@@ -177,7 +178,7 @@ export class GameState {
 
     this.validateInvariants();
 
-    this.eventLog.record({ eventName: "shuffle library", moves})
+    this.eventLog.record({ eventName: "shuffle library", moves });
     return { shuffling: true };
   }
 
@@ -193,11 +194,38 @@ export class GameState {
     return this;
   }
 
+  private executeMove(move: CardMove) {
+    function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
+      // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
+      const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
+      if (!identical) {
+        console.log(
+          `Warning! I'm supposed to move card ${move.gameCardIndex} (${gameCard.card.name}) from ${printLocation(
+            move.toLocation
+          )} but I found it in ${printLocation(gameCard.location)} `
+        );
+      }
+    }
+    const gameCard = this.gameCards[move.gameCardIndex];
+    verifyLocationsAreIdentical(move.toLocation, gameCard.location);
+    gameCard.location = move.toLocation;
+    this.eventLog.record({ eventName: "move card", move });
+  }
+
+  private moveCard(gameCard: GameCard, toLocation: CardLocation) {
+    const move = {
+      gameCardIndex: gameCard.gameCardIndex,
+      fromLocation: gameCard.location,
+      toLocation,
+    };
+    return this.executeMove(move);
+  }
+
   private addToRevealed(gameCard: GameCard): this {
     const revealedCards = this.listRevealed();
     const maxPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
     const nextPosition = maxPosition + 1;
-    gameCard.location = { type: "Revealed", position: nextPosition };
+    this.moveCard(gameCard, { type: "Revealed", position: nextPosition });
     return this;
   }
 
@@ -205,7 +233,7 @@ export class GameState {
     const handCards = this.listHand();
     const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) : -1;
     const nextHandPosition = maxHandPosition + 1;
-    gameCard.location = { type: "Hand", position: nextHandPosition };
+    this.moveCard(gameCard, { type: "Hand", position: nextHandPosition });
     return this;
   }
 
@@ -218,7 +246,7 @@ export class GameState {
     });
 
     // Put the new card at position 0 (top of library)
-    gameCard.location = { type: "Library", position: 0 };
+    this.moveCard(gameCard, { type: "Library", position: 0 });
     return this;
   }
 
@@ -226,7 +254,7 @@ export class GameState {
     const libraryCards = this.listLibrary();
     const maxLibraryPosition = libraryCards.length > 0 ? Math.max(...libraryCards.map((gc) => gc.location.position)) : -1;
     const nextLibraryPosition = maxLibraryPosition + 1;
-    gameCard.location = { type: "Library", position: nextLibraryPosition };
+    this.moveCard(gameCard, { type: "Library", position: nextLibraryPosition });
     return this;
   }
 
@@ -264,7 +292,7 @@ export class GameState {
       .filter((gc) => gc.location.position > cardToPlay.location.position);
 
     // Move card to table
-    (cardToPlay as any).location = { type: "Table" };
+    this.moveCard(cardToPlay, { type: "Table" });
 
     this.validateInvariants();
 

@@ -29,6 +29,17 @@ export interface TableLocation {
 
 export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
 
+export function printLocation(l: CardLocation) {
+  switch (l.type) {
+    case "Hand":
+    case "Revealed":
+    case "Library":
+      return `${l.type}(${l.position})`;
+    case "Table":
+      return l.type;
+  }
+}
+
 export interface GameCard {
   card: CardDefinition;
   location: CardLocation;
