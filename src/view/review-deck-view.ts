@@ -48,8 +48,8 @@ type CardAction = {
   cssClass?: string;
 };
 
-function formatCardActionButton(action: string, endpoint: string, gameId: number, cardIndex: number, title: string, cssClass = "card-action-button", imageUrl?: string): string {
-  const extraAttrs = action === "Play" && imageUrl ? `data-image-url="${imageUrl}"` : "";
+function formatCardActionButton(action: string, endpoint: string, gameId: number, cardIndex: number, title: string, cssClass = "card-action-button", cardId?: string): string {
+  const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"

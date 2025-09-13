@@ -38,12 +38,12 @@ document.addEventListener('htmx:afterSwap', function(evt) {
 document.addEventListener('htmx:beforeRequest', async function(evt) {
   if (evt.detail.elt.classList.contains('play-button')) {
     const button = evt.detail.elt;
-    const imageUrl = button.dataset.imageUrl;
+    const cardId = button.dataset.cardId;
 
     // Try to copy to clipboard first
     try {
       // Use proxy endpoint to avoid CORS issues
-      const proxyUrl = `/proxy-image?url=${encodeURIComponent(imageUrl)}`;
+      const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}`;
       const response = await fetch(proxyUrl);
       if (response.ok) {
         const blob = await response.blob();

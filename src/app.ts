@@ -512,13 +512,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
   // Proxy endpoint for card images to avoid CORS issues
   app.get("/proxy-image", async (req, res) => {
-    const imageUrl = req.query.url as string;
+    const cardId = req.query.cardId as string;
     
-    if (!imageUrl || !imageUrl.startsWith('https://cards.scryfall.io/')) {
-      return res.status(400).send('Invalid image URL');
+    if (!cardId || typeof cardId !== 'string' || cardId.length !== 36) {
+      return res.status(400).send('Invalid card ID');
     }
 
     try {
+      // Import getCardImageUrl function
+      const { getCardImageUrl } = await import('./types.js');
+      const imageUrl = getCardImageUrl(cardId);
+      
       const response = await fetch(imageUrl);
       if (!response.ok) {
         return res.status(response.status).send('Failed to fetch image');

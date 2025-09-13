@@ -57,9 +57,9 @@ function formatCardActionButton(
   cardIndex: number,
   title: string,
   cssClass = "card-action-button",
-  imageUrl?: string
+  cardId?: string
 ): string {
-  const extraAttrs = action === "Play" && imageUrl ? `data-image-url="${imageUrl}"` : "";
+  const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
@@ -71,8 +71,8 @@ function formatCardActionButton(
                </button>`;
 }
 
-function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, imageUrl?: string): string {
-  return actions.map((action) => formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, imageUrl)).join("");
+function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string): string {
+  return actions.map((action) => formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId)).join("");
 }
 
 function formatLibraryCardActions(game: GameState, gameCard: any): string {
@@ -97,7 +97,7 @@ function formatRevealedCardActions(game: GameState, gameCard: GameCard): string 
   ];
 
   return `<div class="card-buttons">
-    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, getCardImageUrl(gameCard.card.scryfallId))}
+    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
   </div>`;
 }
 
@@ -120,7 +120,7 @@ function formatHandCardActions(game: GameState, gameCard: GameCard, index: numbe
   ];
 
   return `<div class="hand-card-buttons">
-    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, getCardImageUrl(gameCard.card.scryfallId))}
+    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
     ${swapButton}
   </div>`;
 }
