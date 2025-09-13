@@ -15,10 +15,17 @@ function formatCommanderImageHtml(commanders: any[]): string {
 function formatGameDetailsHtml(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
   return `<div id="game-details">
+  this is in html formatters
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
-        ${game.gameStatus() !== "NotStarted" ? `<p><strong>Status:</strong> ${game.gameStatus()}</p>` : ""}
+        <p><strong>Status:</strong> ${game.gameStatus()}</p>
+        <div class="history">
+        You've done ${game.gameEvents().length} things so far
+        <ol>
+        ${game.gameEvents().map((e) => `<li>${e.eventName}</li>`)}
+        </ol>
+        </div>
       </div>`;
 }
 

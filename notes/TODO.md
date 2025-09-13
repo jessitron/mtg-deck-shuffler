@@ -1,5 +1,7 @@
 # Things to change
 
+- OMG get the view functions renamed to HtmlSection or HtmlPage asap. There are duplicate names!! It's horrible!!
+
 - **Why are tests totally broken? God fuck this no-information-at-all failure, fuck it all to hell**
 - why does test output NOTHING USEFUL?? Switch to jest. Fuck this built-in shit, it's not good enough.
 

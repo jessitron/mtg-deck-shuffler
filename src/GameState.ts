@@ -11,7 +11,7 @@ import {
   TableLocation,
   PERSISTED_GAME_STATE_VERSION,
 } from "./port-persist-state/types.js";
-import { GameEvent, GameEventLog } from "./GameEvents.js";
+import { GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
 
@@ -103,6 +103,10 @@ export class GameState {
     return this.status;
   }
 
+  public gameEvents() {
+    return this.eventLog.getEvents();
+  }
+
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
 
@@ -175,7 +179,7 @@ export class GameState {
     }
 
     this.status = GameStatus.Active;
-    this.eventLog;
+    this.eventLog.record(StartGameEvent);
     this.shuffle(); // We don't need the return value here, just the side effect
 
     return this;

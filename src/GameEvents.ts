@@ -18,6 +18,9 @@ export type StartEvent = {
 export const GameStartedEvent: StartEvent = {
   eventName: "start game",
 };
+export const StartGameEvent: StartEvent = {
+  eventName: "start game",
+};
 
 export type MoveCardEvent = {
   eventName: "move card";
@@ -42,6 +45,7 @@ export class GameEventLog {
   }
 
   public record(event: GameEvent) {
+    console.log("recording: " + event.eventName);
     this.events.push(event);
   }
 
