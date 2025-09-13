@@ -1,6 +1,9 @@
 # Template Structure Analysis
 
-Status: planning
+Status: considering
+
+After notes/STRUCTURE-view-organization.md is implemented, I might not want this.
+The benefit of templates is html highlighting. Can I get that in vscode without moving the html out of the code?
 
 ## Current State
 

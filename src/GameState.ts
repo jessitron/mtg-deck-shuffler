@@ -1,18 +1,19 @@
-import { CardDefinition, DeckProvenance, Deck, WhatHappened } from "./types.js";
 import {
-  PersistedGameState,
-  GameId,
-  GameStatus,
-  CardLocation,
+  CardDefinition,
+  DeckProvenance,
+  Deck,
+  WhatHappened,
   GameCard,
   LibraryLocation,
   HandLocation,
   RevealedLocation,
   TableLocation,
-  PERSISTED_GAME_STATE_VERSION,
-} from "./port-persist-state/types.js";
+  GameId,
+  GameStatus,
+} from "./types.js";
+import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "./port-persist-state/types.js";
 
-export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
+export { GameCard };
 
 // Type guard functions for GameCard location filtering
 export function isInLibrary(gameCard: GameCard): gameCard is GameCard & { location: LibraryLocation } {
@@ -37,7 +38,7 @@ export class GameState {
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: CardDefinition[];
   public readonly deckName: string;
-  public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
+  public readonly deckId: number; // TODO: remove, once it is no longer used in the UI; use deckProvenance instead
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 

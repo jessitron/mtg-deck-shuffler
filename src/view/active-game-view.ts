@@ -1,5 +1,5 @@
-import { getCardImageUrl, WhatHappened } from "../types.js";
-import { GameCard, GameState } from "../GameState.js";
+import { GameCard, getCardImageUrl, WhatHappened } from "../types.js";
+import { GameState } from "../GameState.js";
 import { CARD_BACK } from "./common.js";
 
 function formatCommanderImageHtml(commanders: any[]): string {

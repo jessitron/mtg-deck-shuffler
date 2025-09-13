@@ -1,8 +1,10 @@
 # Things to change
 
-- get it to tell me how to update the snapshots!!!
+- find out how to update the snapshots!!!
 
 ## Bugs to fix
+
+- the snapshot tests are finding a bunch of irrelevant formatting differences. Why? Why does this change?
 
 ## Things to change
 

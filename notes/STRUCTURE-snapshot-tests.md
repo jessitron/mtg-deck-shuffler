@@ -21,6 +21,10 @@ The input to formatHomepageHtml is the list of available decks. That's a simple 
 
 [x] The view method called by "/game/:gameId" is formatGameHtml. The input is a GameState object. Test with a game state that includes cards in hand, cards revealed, and cards on the table.
 
+[] what other routes are in app.ts, and what format functions do they call? List additional methods to test here:
+
+...
+
 ## Document
 
 [x] The snapshot tests need their own script in package.json. They should not be run by the normal "test" script.

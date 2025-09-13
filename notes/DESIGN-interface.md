@@ -28,6 +28,8 @@ At the moment, there's a dropdown for local decks, as referenced in FEATURE-loca
 
 Here, we have a game in status Not Started.
 
+The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
+
 ```
 div: deck-summary
   div: command-zone       div: game-details
@@ -63,9 +65,9 @@ Here is a rough layout for when a game is in progress.
 
 Revealed Cards is not always visible. Hand starts empty.
 
-The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
+The Search button under the Library makes visible a list of all cards in the library, ordered by position.
 
-The [X Cards on table] button (where X is a number of cards on table) displays the same modal as Search, but shows cards on the Table instead of in the Library.
+The Search button near table.png displays the same modal as the library's Search, but shows cards on the Table instead of in the Library.
 
 Revealed Cards and Haxnd sections scroll horizontally if there are enough cards in them.
 
@@ -79,7 +81,7 @@ div: game-summary
    │               │
    │  Command zone │        Game {Game ID} in progress. Player: you. Deck: {Deck Name}
    │               │
-   │               │
+   │               │        [History]
    └───────────────┘
 div: game-container
   div: library-section          div: revealed-cards-section (width 2)          div: mid-game-buttons
