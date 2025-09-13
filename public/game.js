@@ -42,7 +42,9 @@ document.addEventListener('htmx:beforeRequest', async function(evt) {
 
     // Try to copy to clipboard first
     try {
-      const response = await fetch(imageUrl);
+      // Use proxy endpoint to avoid CORS issues
+      const proxyUrl = `/proxy-image?url=${encodeURIComponent(imageUrl)}`;
+      const response = await fetch(proxyUrl);
       if (response.ok) {
         const blob = await response.blob();
         await navigator.clipboard.write([

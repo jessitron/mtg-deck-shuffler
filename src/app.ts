@@ -510,6 +510,33 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Proxy endpoint for card images to avoid CORS issues
+  app.get("/proxy-image", async (req, res) => {
+    const imageUrl = req.query.url as string;
+    
+    if (!imageUrl || !imageUrl.startsWith('https://cards.scryfall.io/')) {
+      return res.status(400).send('Invalid image URL');
+    }
+
+    try {
+      const response = await fetch(imageUrl);
+      if (!response.ok) {
+        return res.status(response.status).send('Failed to fetch image');
+      }
+
+      // Set CORS headers to allow the frontend to access the image
+      res.set('Access-Control-Allow-Origin', '*');
+      res.set('Content-Type', response.headers.get('content-type') || 'image/png');
+      
+      // Pipe the image data through
+      const buffer = await response.arrayBuffer();
+      res.send(Buffer.from(buffer));
+    } catch (error) {
+      console.error('Error proxying image:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
+
   // 404 handler - must be last
   app.get("*", (req, res) => {
     res.status(404).sendFile(path.join(__dirname, "..", "public", "404.html"));
