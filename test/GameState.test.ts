@@ -45,7 +45,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.strictEqual(state.status, GameStatus.NotStarted);
   });
 
@@ -59,7 +59,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.deepStrictEqual(state.deckProvenance, fakeProvenance);
   });
 
@@ -73,7 +73,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 0);
   });
 
@@ -87,7 +87,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 1);
     assert.deepStrictEqual(state.commanders[0], fakeCommander);
   });
@@ -103,7 +103,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.strictEqual(state.commanders.length, 2);
     assert.deepStrictEqual(state.commanders[0], fakeCommander);
     assert.deepStrictEqual(state.commanders[1], commander2);
@@ -119,7 +119,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     const cards = state.getCards();
 
     // Should be sorted: Ancestral Recall, Black Lotus, Lightning Bolt
@@ -138,7 +138,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state = new GameState(1, fakeDeck);
+    const state = GameState.newGame(1, fakeDeck);
     assert.strictEqual(state.getCards().length, 3);
   });
 
@@ -152,8 +152,8 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const state1 = new GameState(42, fakeDeck);
-    const state2 = new GameState(100, fakeDeck);
+    const state1 = GameState.newGame(42, fakeDeck);
+    const state2 = GameState.newGame(100, fakeDeck);
 
     assert.strictEqual(state1.gameId, 42);
     assert.strictEqual(state2.gameId, 100);
@@ -169,7 +169,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     const cards = gameState.getCards();
     assert.strictEqual(cards.length, 3);
@@ -195,7 +195,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
     const originalOrder = gameState.getCards().map((gc) => gc.card.name);
 
     gameState.shuffle();
@@ -226,7 +226,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Manually move a card to Hand for testing
     const cards = gameState.getCards();
@@ -256,7 +256,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
     assert.strictEqual(gameState.status, GameStatus.NotStarted);
 
     gameState.startGame();
@@ -281,7 +281,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
     gameState.startGame();
 
     assert.throws(() => {
@@ -299,7 +299,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Cards are sorted: Ancestral Recall, Black Lotus, Lightning Bolt
     // After construction, they are in Library positions 0, 1, 2 respectively
@@ -335,7 +335,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Move the only card out of library manually
     const cards = gameState.getCards();
@@ -356,7 +356,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Draw first card
     gameState.draw();
@@ -395,7 +395,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
     gameState.shuffle();
 
     const libraryBefore = gameState.listLibrary();
@@ -423,7 +423,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Cards are sorted: Ancestral Recall (pos 0), Black Lotus (pos 1), Lightning Bolt (pos 2)
     const libraryBefore = gameState.listLibrary();
@@ -458,7 +458,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     assert.throws(() => {
       gameState.reveal(5); // position 5 doesn't exist
@@ -475,7 +475,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Reveal first card (position 0: Ancestral Recall)
     gameState.reveal(0);
@@ -508,7 +508,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Reveal the last card first
     gameState.reveal(2); // Lightning Bolt at position 2
@@ -541,7 +541,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Draw cards to populate hand naturally
     gameState.draw(); // Ancestral Recall to position 0
@@ -588,7 +588,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Reveal cards to populate revealed zone using revealByGameCardIndex
     const libraryCards = gameState.listLibrary();
@@ -637,7 +637,7 @@ describe("GameState", () => {
       provenance: fakeProvenance,
     };
 
-    const gameState = new GameState(1, deck);
+    const gameState = GameState.newGame(1, deck);
 
     // Try to play a card that's still in library
     const libraryCards = gameState.listLibrary();

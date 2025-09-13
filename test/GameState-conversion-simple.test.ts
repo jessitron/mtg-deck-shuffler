@@ -29,7 +29,7 @@ test("should convert GameState to PersistedGameState and back", () => {
   };
 
   const gameId = 42;
-  const originalGameState = new GameState(gameId, testDeck);
+  const originalGameState = GameState.newGame(gameId, testDeck);
 
   // Convert to persisted format
   const persistedGameState = originalGameState.toPersistedGameState();

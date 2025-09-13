@@ -11,6 +11,7 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort } from "./port-persist-state/types.js";
 import { trace } from "@opentelemetry/api";
+import { Deck } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,7 +52,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     try {
       const deck = await deckRetriever.retrieveDeck(deckRequest);
       const gameId = persistStatePort.newGameId();
-      const game = new GameState(gameId, deck);
+      const game = GameState.newGame(gameId, deck);
       await persistStatePort.save(game.toPersistedGameState());
 
       res.redirect(`/game/${gameId}`);
@@ -168,7 +169,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const deck = await deckRetriever.retrieveDeck(deckRequest);
       const newGameId = persistStatePort.newGameId();
-      const newGame = new GameState(newGameId, deck);
+      const newGame = GameState.newGame(newGameId, deck);
       await persistStatePort.save(newGame.toPersistedGameState());
 
       res.redirect(`/game/${newGameId}`);
@@ -513,31 +514,31 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   // Proxy endpoint for card images to avoid CORS issues
   app.get("/proxy-image", async (req, res) => {
     const cardId = req.query.cardId as string;
-    
-    if (!cardId || typeof cardId !== 'string' || cardId.length !== 36) {
-      return res.status(400).send('Invalid card ID');
+
+    if (!cardId || typeof cardId !== "string" || cardId.length !== 36) {
+      return res.status(400).send("Invalid card ID");
     }
 
     try {
       // Import getCardImageUrl function
-      const { getCardImageUrl } = await import('./types.js');
+      const { getCardImageUrl } = await import("./types.js");
       const imageUrl = getCardImageUrl(cardId);
-      
+
       const response = await fetch(imageUrl);
       if (!response.ok) {
-        return res.status(response.status).send('Failed to fetch image');
+        return res.status(response.status).send("Failed to fetch image");
       }
 
       // Set CORS headers to allow the frontend to access the image
-      res.set('Access-Control-Allow-Origin', '*');
-      res.set('Content-Type', response.headers.get('content-type') || 'image/png');
-      
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Content-Type", response.headers.get("content-type") || "image/png");
+
       // Pipe the image data through
       const buffer = await response.arrayBuffer();
       res.send(Buffer.from(buffer));
     } catch (error) {
-      console.error('Error proxying image:', error);
-      res.status(500).send('Internal server error');
+      console.error("Error proxying image:", error);
+      res.status(500).send("Internal server error");
     }
   });
 

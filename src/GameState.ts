@@ -41,7 +41,7 @@ export class GameState {
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
 
-  constructor(gameId: GameId, deck: Deck) {
+  static newGame(gameId: GameId, deck: Deck) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -55,31 +55,42 @@ export class GameState {
         gameCardIndex: index,
       }));
 
-    this.gameId = gameId;
-    this.status = GameStatus.NotStarted;
-    this.deckProvenance = deck.provenance;
-    this.commanders = [...deck.commanders];
-    this.deckName = deck.name;
-    this.deckId = deck.id;
-    this.totalCards = deck.totalCards;
-    this.gameCards = gameCards;
+    return new GameState({
+      gameId,
+      gameStatus: GameStatus.NotStarted,
+      deckId: deck.id,
+      deckName: deck.name,
+      deckProvenance: deck.provenance,
+      commanders: [...deck.commanders],
+      cards: gameCards,
+    });
+  }
 
-    this.validateInvariants();
+  constructor(params: {
+    gameId: GameId;
+    gameStatus: GameStatus;
+    deckId: number;
+    deckName: string;
+    deckProvenance: DeckProvenance;
+    commanders: CardDefinition[];
+    cards: GameCard[];
+  }) {
+    this.gameId = params.gameId;
+    this.status = params.gameStatus;
+    this.deckProvenance = params.deckProvenance;
+    this.commanders = params.commanders;
+    this.deckName = params.deckName;
+    this.deckId = params.deckId;
+    this.totalCards = params.cards.length;
+    this.gameCards = params.cards;
   }
 
   static fromPersistedGameState(psg: PersistedGameState): GameState {
-    const gameState = Object.create(GameState.prototype);
-    gameState.gameId = psg.gameId;
-    gameState.status = psg.status;
-    gameState.deckProvenance = psg.deckProvenance;
-    gameState.commanders = [...psg.commanders];
-    gameState.deckName = psg.deckName;
-    gameState.deckId = psg.deckId;
-    gameState.totalCards = psg.totalCards;
-    gameState.gameCards = [...psg.gameCards];
-
-    gameState.validateInvariants();
-    return gameState;
+    return new GameState({
+      ...psg,
+      gameStatus: psg.status, // todo: use gameStatus in both places
+      cards: psg.gameCards, // todo: use gameCards in both places
+    });
   }
 
   private validateInvariants(): void {
