@@ -27,14 +27,6 @@
       "Bash(PORT=3001 ./run)",
       "mcp__honeycomb__get_workspace_context",
       "mcp__honeycomb__get_query_history",
-      "mcp__honeycomb__get_query_history",
-      "mcp__honeycomb__get_query_history",
-      "mcp__honeycomb__get_query_history",
-      "mcp__honeycomb__get_query_history",
-      "mcp__honeycomb__run_query",
-      "mcp__honeycomb__run_query",
-      "mcp__honeycomb__run_query",
-      "mcp__honeycomb__run_query",
       "mcp__honeycomb__run_query",
       "mcp__honeycomb__get_trace",
       "WebFetch(domain:docs.honeycomb.io)",
@@ -63,5 +55,6 @@
       "Bash(npx tsc:*)"
     ],
     "deny": []
-  }
+  },
+  "hooks": {}
 }
