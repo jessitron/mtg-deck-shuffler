@@ -13,7 +13,7 @@
     "build": "npx tsc",
     "clean": "rm -rf dist",
     "start": "npm run build && node -r ./dist/tracing.js dist/server.js",
-    "test": "node --test --loader ts-node/esm --test-ignore='test/snapshot/**'",
+    "test": "node --test  'test/*.test.ts' 'test/ports-persist-state/*.test.ts' 'test/port-deck-retrieval/*.test.ts'",
     "test:snapshot": "node --test --loader ts-node/esm 'test/snapshot/**/*.snapshot.test.ts'",
     "deck:download": "node dist/scripts/download-deck.js",
     "precons:fetch": "node dist/scripts/fetch-precon-deck-numbers.js"
