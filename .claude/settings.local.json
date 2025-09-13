@@ -22,7 +22,7 @@
       "WebFetch(domain:scryfall.com)",
       "WebFetch(domain:api.scryfall.com)",
       "mcp__playwright__browser_take_screenshot",
-      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_close",p
       "Bash(npm run test:*)",
       "Bash(PORT=3001 ./run)",
       "mcp__honeycomb__get_workspace_context",

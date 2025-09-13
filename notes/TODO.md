@@ -2,11 +2,9 @@
 
 ## Bugs to fix
 
-- in production, games don't load after start, it goes back to Shuffle Up and then fails
-
-- copy is failing!! in hny.js, too
-
 ## Things to change
+
+- I want a log of what happened! Today I clicked some stuff in my hand too fast and wondered whether I put too many cards on the table. I need that list of actions.
 
 - make a save/load game feature so I can move game states from prod to local for testing
 
