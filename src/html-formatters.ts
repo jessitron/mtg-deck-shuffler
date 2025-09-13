@@ -295,7 +295,7 @@ function formatLibraryStackHtml(): string {
         </div>`;
 }
 
-export function formatDeckReviewHtmlSection(game: GameState): string {
+export function formatDeckReviewHtml(game: GameState): string {
   const gameHeaderHtml = formatGameHeaderHtml(game);
   const libraryStackHtml = formatLibraryStackHtml();
 
@@ -488,7 +488,7 @@ export function formatTableModalHtml(game: GameState): string {
 
 export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.status === "NotStarted") {
-    return formatDeckReviewHtmlSection(game);
+    return formatDeckReviewHtml(game);
   } else {
     return formatActiveGameHtml(game, whatHappened);
   }

@@ -13,7 +13,7 @@ export interface DeckProvenance {
 export interface Deck {
   id: number;
   name: string;
-  totalCards: number; // TODO: remove, derive from cards
+  totalCards: number;
   commanders: CardDefinition[];
   cards: CardDefinition[];
   provenance: DeckProvenance;
@@ -22,41 +22,6 @@ export interface Deck {
 export interface Library {
   cards: CardDefinition[];
   count: number;
-}
-
-export interface LibraryLocation {
-  type: "Library";
-  position: number;
-}
-
-export interface HandLocation {
-  type: "Hand";
-  position: number;
-}
-
-export interface RevealedLocation {
-  type: "Revealed";
-  position: number;
-}
-
-export interface TableLocation {
-  type: "Table";
-}
-
-export type GameId = number;
-
-export enum GameStatus {
-  NotStarted = "NotStarted",
-  Active = "Active",
-  Ended = "Ended",
-}
-
-export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
-
-export interface GameCard {
-  card: CardDefinition; // TODO: rename to cardDefinition
-  location: CardLocation;
-  gameCardIndex: number;
 }
 
 export function getCardImageUrl(scryfallId: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png"): string {
@@ -68,8 +33,8 @@ export function getCardImageUrl(scryfallId: string, format: "small" | "normal" |
 
 export interface WhatHappened {
   shuffling?: boolean;
-  movedRight?: GameCard[];
-  movedLeft?: GameCard[];
+  movedRight?: import("./port-persist-state/types.js").GameCard[];
+  movedLeft?: import("./port-persist-state/types.js").GameCard[];
 }
 
 export function shuffleDeck(deck: Deck): Library {

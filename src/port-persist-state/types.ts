@@ -1,7 +1,39 @@
-import { CardDefinition, DeckProvenance, GameCard, GameId, GameStatus } from "../types.js";
+import { CardDefinition, DeckProvenance } from "../types.js";
 
-/* These exports are for downward, the adapters depend on the port */
-export { GameId, GameCard, DeckProvenance, CardDefinition, GameStatus };
+export type GameId = number;
+
+export enum GameStatus {
+  NotStarted = "NotStarted",
+  Active = "Active",
+  Ended = "Ended",
+}
+
+export interface LibraryLocation {
+  type: "Library";
+  position: number;
+}
+
+export interface HandLocation {
+  type: "Hand";
+  position: number;
+}
+
+export interface RevealedLocation {
+  type: "Revealed";
+  position: number;
+}
+
+export interface TableLocation {
+  type: "Table";
+}
+
+export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
+
+export interface GameCard {
+  card: CardDefinition;
+  location: CardLocation;
+  gameCardIndex: number;
+}
 
 export const PERSISTED_GAME_STATE_VERSION: 1 = 1;
 
@@ -12,7 +44,7 @@ export interface PersistedGameState {
   deckProvenance: DeckProvenance;
   commanders: CardDefinition[];
   deckName: string;
-  deckId: number; // TODO: can we remove this?
+  deckId: number;
   totalCards: number;
   gameCards: GameCard[];
 }
