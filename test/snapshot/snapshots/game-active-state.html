@@ -1,149 +1,117 @@
 <div id="game-container">
-<div id="command-zone">
-<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
-</div>
-<div id="game-details">
-<h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Game Deck</a></h2>
-<p>6 cards</p>
-<p><strong>Game ID:</strong> 123</p>
-<p><strong>Status:</strong> Active</p>
-</div>
-<div id="mid-game-buttons">
-<button class="table-cards-button"
-hx-get="/table-modal/123"
-hx-target="#modal-container"
-hx-swap="innerHTML">1 Cards on table</button>
-</div>
-<div id="library-section" data-testid="library-section">
-<h3>Library (2)</h3>
-<div class="library-stack" data-testid="library-stack">
-<img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-<img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-<img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
-</div>
-<div class="library-buttons">
-<button class="search-button"
-hx-get="/library-modal/123"
-hx-target="#modal-container"
-hx-swap="innerHTML">Search</button>
-<button class="shuffle-button"
-hx-post="/shuffle/123"
-hx-target="#game-container"
-hx-swap="outerHTML">Shuffle</button>
-<button class="draw-button"
-hx-post="/draw/123"
-hx-target="#game-container"
-hx-swap="outerHTML">Draw</button>
-<button class="reveal-button"
-hx-post="/reveal-card/123/0"
-hx-target="#game-container"
-hx-swap="outerHTML">Reveal</button>
-</div>
-</div>
-<div id="revealed-cards-section" class="revealed-cards-section">
-<h3>Revealed Cards (1)</h3>
-<div id="revealed-cards-area" class="revealed-cards-area">
-<div id="card-container-4" class="revealed-card-container">
-<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-105.png"
-alt="Mountain"
-class="mtg-card-image revealed-card"
-title="Mountain" />
-<div class="card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/4"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-105"
-title="Copy image and remove from revealed">
-Play
-</button><button class="put-in-hand-button"
-hx-post="/put-in-hand/123/4"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to hand">
-Put in Hand
-</button><button class="put-on-top-button"
-hx-post="/put-on-top/123/4"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to top of library">
-Put on Top
-</button><button class="put-on-bottom-button"
-hx-post="/put-on-bottom/123/4"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to bottom of library">
-Put on Bottom
-</button>
-</div>
-</div>
-</div>
-</div>
-<div id="hand-section" data-testid="hand-section">
-<h3>Hand (2)</h3>
-<div id="hand-cards" class="hand-cards">
-<div id="card-container-2" class="hand-card-container">
-<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-104.png"
-alt="Island"
-class="mtg-card-image hand-card"
-title="Island" />
-<div class="hand-card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/2"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-104"
-title="Copy image and remove from hand">
-Play
-</button><button class="put-down-button"
-hx-post="/put-down/123/2"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to revealed">
-Put down
-</button>
-<button class="swap-button"
-hx-post="/swap-with-next/123/0"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Swap with next card">
-↔
-</button>
-</div>
-</div><div id="card-container-3" class="hand-card-container">
-<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-100.png"
-alt="Lightning Bolt"
-class="mtg-card-image hand-card"
-title="Lightning Bolt" />
-<div class="hand-card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/3"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-100"
-title="Copy image and remove from hand">
-Play
-</button><button class="put-down-button"
-hx-post="/put-down/123/3"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to revealed">
-Put down
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Modal Container -->
-<div id="modal-container"></div>
-<div id="end-game-actions" class="game-actions">
-<form method="post" action="/restart-game" style="display: inline;">
-<input type="hidden" name="game-id" value="123" />
-<button type="submit">Restart Game</button>
-</form>
-<form method="post" action="/end-game" style="display: inline;">
-<input type="hidden" name="game-id" value="123" />
-<button type="submit">Choose Another Deck</button>
-</form>
-</div>
+  <div id="command-zone">
+    <img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
+  </div>
+  <div id="game-details">
+    <h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Game Deck</a></h2>
+    <p>6 cards</p>
+    <p><strong>Game ID:</strong> 123</p>
+    <p><strong>Status:</strong> Active</p>
+  </div>
+  <div id="mid-game-buttons">
+    <button class="table-cards-button" hx-get="/table-modal/123" hx-target="#modal-container" hx-swap="innerHTML">1 Cards on table</button>
+  </div>
+  <div id="library-section" data-testid="library-section">
+    <h3>Library (2)</h3>
+    <div class="library-stack" data-testid="library-stack">
+      <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+      <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+      <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+    </div>
+    <div class="library-buttons">
+      <button class="search-button" hx-get="/library-modal/123" hx-target="#modal-container" hx-swap="innerHTML">Search</button>
+      <button class="shuffle-button" hx-post="/shuffle/123" hx-target="#game-container" hx-swap="outerHTML">Shuffle</button>
+      <button class="draw-button" hx-post="/draw/123" hx-target="#game-container" hx-swap="outerHTML">Draw</button>
+      <button class="reveal-button" hx-post="/reveal-card/123/0" hx-target="#game-container" hx-swap="outerHTML">Reveal</button>
+    </div>
+  </div>
+  <div id="revealed-cards-section" class="revealed-cards-section">
+    <h3>Revealed Cards (1)</h3>
+    <div id="revealed-cards-area" class="revealed-cards-area">
+      <div id="card-container-4" class="revealed-card-container">
+        <img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-105.png" alt="Mountain" class="mtg-card-image revealed-card" title="Mountain" />
+        <div class="card-buttons">
+          <button
+            class="play-button"
+            hx-post="/play-card/123/4"
+            hx-target="#game-container"
+            hx-swap="outerHTML swap:1.5s"
+            data-card-id="fake-scryfall-id-105"
+            title="Copy image and remove from revealed"
+          >
+            Play</button
+          ><button class="put-in-hand-button" hx-post="/put-in-hand/123/4" hx-target="#game-container" hx-swap="outerHTML" title="Move card to hand">
+            Put in Hand</button
+          ><button class="put-on-top-button" hx-post="/put-on-top/123/4" hx-target="#game-container" hx-swap="outerHTML" title="Move card to top of library">
+            Put on Top</button
+          ><button
+            class="put-on-bottom-button"
+            hx-post="/put-on-bottom/123/4"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            title="Move card to bottom of library"
+          >
+            Put on Bottom
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="hand-section" data-testid="hand-section">
+    <h3>Hand (2)</h3>
+    <div id="hand-cards" class="hand-cards">
+      <div id="card-container-2" class="hand-card-container">
+        <img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-104.png" alt="Island" class="mtg-card-image hand-card" title="Island" />
+        <div class="hand-card-buttons">
+          <button
+            class="play-button"
+            hx-post="/play-card/123/2"
+            hx-target="#game-container"
+            hx-swap="outerHTML swap:1.5s"
+            data-card-id="fake-scryfall-id-104"
+            title="Copy image and remove from hand"
+          >
+            Play</button
+          ><button class="put-down-button" hx-post="/put-down/123/2" hx-target="#game-container" hx-swap="outerHTML" title="Move card to revealed">
+            Put down
+          </button>
+          <button class="swap-button" hx-post="/swap-with-next/123/0" hx-target="#game-container" hx-swap="outerHTML" title="Swap with next card">↔</button>
+        </div>
+      </div>
+      <div id="card-container-3" class="hand-card-container">
+        <img
+          src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-100.png"
+          alt="Lightning Bolt"
+          class="mtg-card-image hand-card"
+          title="Lightning Bolt"
+        />
+        <div class="hand-card-buttons">
+          <button
+            class="play-button"
+            hx-post="/play-card/123/3"
+            hx-target="#game-container"
+            hx-swap="outerHTML swap:1.5s"
+            data-card-id="fake-scryfall-id-100"
+            title="Copy image and remove from hand"
+          >
+            Play</button
+          ><button class="put-down-button" hx-post="/put-down/123/3" hx-target="#game-container" hx-swap="outerHTML" title="Move card to revealed">
+            Put down
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Container -->
+  <div id="modal-container"></div>
+  <div id="end-game-actions" class="game-actions">
+    <form method="post" action="/restart-game" style="display: inline">
+      <input type="hidden" name="game-id" value="123" />
+      <button type="submit">Restart Game</button>
+    </form>
+    <form method="post" action="/end-game" style="display: inline">
+      <input type="hidden" name="game-id" value="123" />
+      <button type="submit">Choose Another Deck</button>
+    </form>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import { AvailableDecks } from "./port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl, WhatHappened } from "./types.js";
 import { GameCard, GameState } from "./GameState.js";
+import { CARD_BACK } from "./view/common.js";
 
 // Core building blocks
 function formatCommanderImageHtml(commanders: any[]): string {
@@ -288,9 +289,9 @@ function formatGameHeaderHtml(game: GameState): string {
 
 function formatLibraryStackHtml(): string {
   return `<div class="library-stack" data-testid="library-stack">
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>`;
 }
 
@@ -381,9 +382,9 @@ function formatLibrarySectionHtml(game: GameState, whatHappened: WhatHappened): 
   return `<div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
         <div class="library-stack${shufflingClass}" data-testid="library-stack">
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>
         <div class="library-buttons">
           <button class="search-button"

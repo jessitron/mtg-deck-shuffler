@@ -69,7 +69,7 @@ The [X Cards on table] button (where X is a number of cards on table) displays t
 
 Revealed Cards and Haxnd sections scroll horizontally if there are enough cards in them.
 
-The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg
+The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg -> public/mtg-card-back.jpg
 
 ```
 div: game-summary

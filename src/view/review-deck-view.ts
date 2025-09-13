@@ -1,5 +1,6 @@
 import { getCardImageUrl } from "../types.js";
 import { GameState } from "../GameState.js";
+import { CARD_BACK } from "./common.js";
 
 function formatCommanderImageHtml(commanders: any[]): string {
   return commanders.length > 0
@@ -48,7 +49,15 @@ type CardAction = {
   cssClass?: string;
 };
 
-function formatCardActionButton(action: string, endpoint: string, gameId: number, cardIndex: number, title: string, cssClass = "card-action-button", cardId?: string): string {
+function formatCardActionButton(
+  action: string,
+  endpoint: string,
+  gameId: number,
+  cardIndex: number,
+  title: string,
+  cssClass = "card-action-button",
+  cardId?: string
+): string {
   const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
   return `<button class="${cssClass}"
@@ -62,19 +71,17 @@ function formatCardActionButton(action: string, endpoint: string, gameId: number
 }
 
 function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, imageUrl?: string): string {
-  return actions.map(action => 
-    formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, imageUrl)
-  ).join("");
+  return actions.map((action) => formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, imageUrl)).join("");
 }
 
 function formatLibraryCardActions(game: GameState, gameCard: any): string {
   if (game.status !== "Active") return "";
-  
+
   const actions: CardAction[] = [
     { action: "Reveal", endpoint: "/reveal-card", title: "Reveal" },
-    { action: "Put in Hand", endpoint: "/put-in-hand", title: "Put in Hand", cssClass: "card-action-button secondary" }
+    { action: "Put in Hand", endpoint: "/put-in-hand", title: "Put in Hand", cssClass: "card-action-button secondary" },
   ];
-  
+
   return `<div class="card-actions">
     ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex)}
   </div>`;
@@ -102,7 +109,7 @@ function formatHtmlHead(title: string): string {
 
 function formatPageWrapper(title: string, content: string): string {
   const headHtml = formatHtmlHead(title);
-  
+
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
@@ -120,7 +127,7 @@ function formatPageWrapper(title: string, content: string): string {
 function formatGameHeaderHtml(game: GameState): string {
   const commanderImageHtml = formatCommanderImageHtml(game.commanders);
   const gameDetailsHtml = formatGameDetailsHtml(game);
-  
+
   return `<div id="command-zone">
         ${commanderImageHtml}
       </div>
@@ -129,22 +136,24 @@ function formatGameHeaderHtml(game: GameState): string {
 
 function formatLibraryStackHtml(): string {
   return `<div class="library-stack" data-testid="library-stack">
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
         </div>`;
 }
 
 function formatLibraryCardList(game: GameState): string {
   const libraryCards = game.listLibrary();
-  
+
   return libraryCards
     .map((gameCard: any) => {
       const cardActions = formatLibraryCardActions(game, gameCard);
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${
+        gameCard.card.name
+      }</a>
           </div>
           ${cardActions}
         </li>`;
@@ -160,14 +169,14 @@ export function formatGamePageHtml(game: GameState): string {
 export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
   const libraryCardList = formatLibraryCardList(game);
-  
+
   const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
           ${libraryCards.length} cards in library, ordered by position
         </p>
         <ul class="library-search-list">
           ${libraryCardList}
         </ul>`;
-  
+
   return formatModalHtml("Library Contents", bodyContent);
 }
 
