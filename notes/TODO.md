@@ -13,7 +13,9 @@
 
 - Restart Game button is broken
 
-## Things to change
+- Game Event Log is not persisted
+
+## More Things to change
 
 - I want a log of what happened! Today I clicked some stuff in my hand too fast and wondered whether I put too many cards on the table. I need that list of actions.
 

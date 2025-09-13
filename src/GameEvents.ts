@@ -8,7 +8,7 @@ export type CardMove = {
 
 export type ShuffleEvent = {
   eventName: "shuffle library";
-  rearrangement: CardMove[];
+  moves: CardMove[];
 };
 
 export type StartEvent = {

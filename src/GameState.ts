@@ -11,7 +11,7 @@ import {
   TableLocation,
   PERSISTED_GAME_STATE_VERSION,
 } from "./port-persist-state/types.js";
-import { GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
+import { CardMove, GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
 
@@ -164,12 +164,20 @@ export class GameState {
       [libraryCards[i], libraryCards[j]] = [libraryCards[j], libraryCards[i]];
     }
 
+    const moves: CardMove[] = libraryCards.map((gameCard, index) => ({
+      gameCardIndex: gameCard.gameCardIndex,
+      fromLocation: gameCard.location,
+      toLocation: { type: "Library", position: index },
+    }));
+
     // Update positions after shuffle - top card is position 0
     libraryCards.forEach((gameCard, index) => {
       (gameCard.location as LibraryLocation).position = index;
     });
 
     this.validateInvariants();
+
+    this.eventLog.record({ eventName: "shuffle library", moves})
     return { shuffling: true };
   }
 
