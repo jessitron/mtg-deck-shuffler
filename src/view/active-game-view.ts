@@ -1,6 +1,8 @@
-import { getCardImageUrl, WhatHappened } from "../types.js";
+import { CardDefinition, getCardImageUrl, WhatHappened } from "../types.js";
 import { GameCard, GameState } from "../GameState.js";
 import { CARD_BACK } from "./common.js";
+import { GameEvent } from "../GameEvents.js";
+import { printLocation } from "../port-persist-state/types.js";
 
 function formatCommanderImageHtml(commanders: any[]): string {
   return commanders.length > 0
@@ -21,10 +23,26 @@ function formatGameDetailsHtml(game: GameState): string {
         <div class="history">
         You've done ${game.gameEvents().length} things so far
         <ol>
-        ${game.gameEvents().map((e) => `<li>${e.eventName}</li>`)}
+        ${game.gameEvents().map((e) => `<li>${formatGameEvent(e, game)}</li>`)}
         </ol>
         </div>
       </div>`;
+}
+
+function cardIndexToDefinition(game: GameState, gci: number) {
+  return game.getCards()[gci].card;
+}
+
+function formatGameEvent(event: GameEvent, game: GameState) {
+  switch (event.eventName) {
+    case "move card":
+      const cardName = cardIndexToDefinition(game, event.move.gameCardIndex).name;
+      return `Move ${cardName} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
+    case "shuffle library":
+      return `Shuffle ${event.moves.length} cards in library`;
+    case "start game":
+      return "Start game";
+  }
 }
 
 function formatModalHtml(title: string, bodyContent: string): string {
