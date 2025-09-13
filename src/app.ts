@@ -398,7 +398,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const game = GameState.fromPersistedGameState(persistedGame);
 
-      if (game.status !== "Active") {
+      if (game.gameStatus() !== "Active") {
         res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
         return;
       }
@@ -406,7 +406,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       game.draw();
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
-        "game.status": game.status,
+        "game.gameStatus()": game.gameStatus(),
         "game.cardsInLibrary": game.listLibrary().length,
         "game.cardsInHand": game.listHand().length,
         "game.full_json": JSON.stringify(persistedGameState),
@@ -435,7 +435,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const game = GameState.fromPersistedGameState(persistedGame);
 
-      if (game.status !== "Active") {
+      if (game.gameStatus() !== "Active") {
         res.status(400).send(`<div>Cannot play card: Game is not active</div>`);
         return;
       }
@@ -443,7 +443,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const whatHappened = game.playCard(gameCardIndex);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
-        "game.status": game.status,
+        "game.gameStatus()": game.gameStatus(),
         "game.cardsInLibrary": game.listLibrary().length,
         "game.cardsInHand": game.listHand().length,
         "game.full_json": JSON.stringify(persistedGameState),
@@ -495,7 +495,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const game = GameState.fromPersistedGameState(persistedGame);
 
-      if (game.status !== "Active") {
+      if (game.gameStatus() !== "Active") {
         res.status(400).send(`<div>Cannot swap card: Game is not active</div>`);
         return;
       }

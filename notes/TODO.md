@@ -5,9 +5,11 @@
 
 - find out how to update the snapshots!!!
 
+- the snapshot tests are finding a bunch of irrelevant formatting differences. Why? Why does this change?
+
 ## Bugs to fix
 
-- the snapshot tests are finding a bunch of irrelevant formatting differences. Why? Why does this change?
+- Restart Game button is broken
 
 ## Things to change
 

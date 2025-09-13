@@ -16,7 +16,7 @@ function formatGameDetailsHtml(game: GameState): string {
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
-        ${game.status !== "NotStarted" ? `<p><strong>Status:</strong> ${game.status}</p>` : ""}
+        ${game.gameStatus() !== "NotStarted" ? `<p><strong>Status:</strong> ${game.gameStatus()}</p>` : ""}
       </div>`;
 }
 
@@ -336,7 +336,7 @@ export function formatTableModalHtml(game: GameState): string {
 }
 
 export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
-  if (game.status === "NotStarted") {
+  if (game.gameStatus() === "NotStarted") {
     const { formatDeckReviewHtml } = require("./review-deck-view.js");
     return formatDeckReviewHtml(game);
   } else {

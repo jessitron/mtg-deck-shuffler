@@ -11,6 +11,7 @@ import {
   TableLocation,
   PERSISTED_GAME_STATE_VERSION,
 } from "./port-persist-state/types.js";
+import { GameEvent, GameEventLog } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
 
@@ -33,17 +34,18 @@ export function isOnTable(gameCard: GameCard): gameCard is GameCard & { location
 
 export class GameState {
   public readonly gameId: GameId;
-  public readonly status: GameStatus;
+  private status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
   public readonly commanders: CardDefinition[];
   public readonly deckName: string;
   public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
+  private readonly eventLog: GameEventLog;
 
   static newGame(gameId: GameId, deck: Deck) {
     if (deck.commanders.length > 2) {
-      // TODO: make a warning function
+      // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
 
@@ -63,10 +65,11 @@ export class GameState {
       deckProvenance: deck.provenance,
       commanders: [...deck.commanders],
       cards: gameCards,
+      events: [],
     });
   }
 
-  constructor(params: {
+  private constructor(params: {
     gameId: GameId;
     gameStatus: GameStatus;
     deckId: number;
@@ -74,6 +77,7 @@ export class GameState {
     deckProvenance: DeckProvenance;
     commanders: CardDefinition[];
     cards: GameCard[];
+    events: GameEvent[];
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
@@ -83,6 +87,7 @@ export class GameState {
     this.deckId = params.deckId;
     this.totalCards = params.cards.length;
     this.gameCards = params.cards;
+    this.eventLog = GameEventLog.fromPersisted(params.events);
   }
 
   static fromPersistedGameState(psg: PersistedGameState): GameState {
@@ -90,7 +95,12 @@ export class GameState {
       ...psg,
       gameStatus: psg.status, // todo: use gameStatus in both places
       cards: psg.gameCards, // todo: use gameCards in both places
+      events: [],
     });
+  }
+
+  public gameStatus() {
+    return this.status;
   }
 
   private validateInvariants(): void {
@@ -164,7 +174,8 @@ export class GameState {
       throw new Error(`Cannot start game: current status is ${this.status}`);
     }
 
-    (this as any).status = GameStatus.Active;
+    this.status = GameStatus.Active;
+    this.eventLog;
     this.shuffle(); // We don't need the return value here, just the side effect
 
     return this;

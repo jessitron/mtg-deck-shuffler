@@ -18,7 +18,7 @@ function formatGameDetailsHtml(game: GameState): string {
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
-        ${game.status !== "NotStarted" ? `<p><strong>Status:</strong> ${game.status}</p>` : ""}
+        ${game.gameStatus() !== "NotStarted" ? `<p><strong>Status:</strong> ${game.gameStatus()}</p>` : ""}
       </div>`;
 }
 
@@ -77,7 +77,7 @@ function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex
 }
 
 function formatLibraryCardActions(game: GameState, gameCard: any): string {
-  if (game.status !== "Active") return "";
+  if (game.gameStatus() !== "Active") return "";
 
   const actions: CardAction[] = [
     { action: "Reveal", endpoint: "/reveal-card", title: "Reveal" },
@@ -487,7 +487,7 @@ export function formatTableModalHtml(game: GameState): string {
 }
 
 export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
-  if (game.status === "NotStarted") {
+  if (game.gameStatus() === "NotStarted") {
     return formatDeckReviewHtml(game);
   } else {
     return formatActiveGameHtml(game, whatHappened);
