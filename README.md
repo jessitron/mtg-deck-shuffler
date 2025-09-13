@@ -24,16 +24,19 @@ So, given a deck in archidekt.com, this web app will
 ## Testing
 
 ### Unit Tests
+
 `npm test` - Run unit tests
 
 ### Snapshot Tests
+
 `npm run test:snapshot` - Run HTML output snapshot tests
 
-**Important**: Snapshot tests capture the current HTML output to detect unintended changes during refactoring. 
+**Important**: Snapshot tests capture the current HTML output to detect unintended changes during refactoring.
 
 - **For HTML changes that are NOT intended**: Run `npm run test:snapshot` to verify no changes occurred
 - **For HTML changes that ARE intended**: Only run snapshot tests manually to review and approve changes by inspecting the generated `.actual` files
-- Snapshot tests are separate from unit tests and should not be run automatically on every change
+
+`???` - Update snapshots
 
 ## Technical notes
 

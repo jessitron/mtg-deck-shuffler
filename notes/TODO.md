@@ -1,5 +1,7 @@
 # Things to change
 
+- get it to tell me how to update the snapshots!!!
+
 ## Bugs to fix
 
 ## Things to change
