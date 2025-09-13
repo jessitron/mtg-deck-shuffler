@@ -714,7 +714,7 @@ h1 {
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform-style: preserve-3d;
-  background-image: url("/mtg-card-back.jpg");
+  /* background-image: url("/mtg-card-back.jpg"); */
 }
 
 /* Create a card back pattern */
