@@ -13,7 +13,7 @@ export interface DeckProvenance {
 export interface Deck {
   id: number;
   name: string;
-  totalCards: number;
+  totalCards: number; // TODO: remove, derive from cards
   commanders: CardDefinition[];
   cards: CardDefinition[];
   provenance: DeckProvenance;
@@ -54,7 +54,7 @@ export enum GameStatus {
 export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
 
 export interface GameCard {
-  card: CardDefinition;
+  card: CardDefinition; // TODO: rename to cardDefinition
   location: CardLocation;
   gameCardIndex: number;
 }

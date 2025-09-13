@@ -1,5 +1,7 @@
 import { CardDefinition, DeckProvenance, GameCard, GameId, GameStatus } from "../types.js";
 
+/* These exports are for downward, the adapters depend on the port */
+export { GameId, GameCard, DeckProvenance, CardDefinition, GameStatus };
 
 export const PERSISTED_GAME_STATE_VERSION: 1 = 1;
 
@@ -10,7 +12,7 @@ export interface PersistedGameState {
   deckProvenance: DeckProvenance;
   commanders: CardDefinition[];
   deckName: string;
-  deckId: number;
+  deckId: number; // TODO: can we remove this?
   totalCards: number;
   gameCards: GameCard[];
 }

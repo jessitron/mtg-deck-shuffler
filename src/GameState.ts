@@ -12,6 +12,7 @@ import {
   GameStatus,
 } from "./types.js";
 import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "./port-persist-state/types.js";
+import { GameEventLog, GameStartedEvent } from "./GameEvents.js";
 
 export { GameCard };
 
@@ -41,10 +42,11 @@ export class GameState {
   public readonly deckId: number; // TODO: remove, once it is no longer used in the UI; use deckProvenance instead
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
+  private readonly eventLog;
 
   constructor(gameId: GameId, deck: Deck) {
     if (deck.commanders.length > 2) {
-      // TODO: make a warning function
+      // TODO: make a warning function, put it in WhatHappened
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
 
@@ -64,20 +66,22 @@ export class GameState {
     this.deckId = deck.id;
     this.totalCards = deck.totalCards;
     this.gameCards = gameCards;
+    this.eventLog = new GameEventLog();
 
     this.validateInvariants();
   }
 
+  // TODO: I don't like this here at all. Put it in the port.
   static fromPersistedGameState(psg: PersistedGameState): GameState {
-    const gameState = Object.create(GameState.prototype);
-    gameState.gameId = psg.gameId;
-    gameState.status = psg.status;
-    gameState.deckProvenance = psg.deckProvenance;
-    gameState.commanders = [...psg.commanders];
-    gameState.deckName = psg.deckName;
-    gameState.deckId = psg.deckId;
-    gameState.totalCards = psg.totalCards;
-    gameState.gameCards = [...psg.gameCards];
+    const deck: Deck = {
+      ...psg,
+      id: psg.deckId,
+      name: psg.deckName,
+      provenance: psg.deckProvenance,
+      cards: psg.gameCards.map((g) => g.card),
+    };
+
+    const gameState = new GameState(psg.gameId, deck);
 
     gameState.validateInvariants();
     return gameState;
@@ -155,6 +159,8 @@ export class GameState {
     }
 
     (this as any).status = GameStatus.Active;
+    console.log("Event log: " + this.eventLog);
+    this.eventLog.record(GameStartedEvent);
     this.shuffle(); // We don't need the return value here, just the side effect
 
     return this;

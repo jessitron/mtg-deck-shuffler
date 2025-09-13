@@ -1,5 +1,8 @@
 # Things to change
 
+- **Why are tests totally broken? God fuck this no-information-at-all failure, fuck it all to hell**
+- why does test output NOTHING USEFUL?? Switch to jest. Fuck this built-in shit, it's not good enough.
+
 - find out how to update the snapshots!!!
 
 ## Bugs to fix

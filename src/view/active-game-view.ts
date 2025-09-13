@@ -1,6 +1,7 @@
 import { GameCard, getCardImageUrl, WhatHappened } from "../types.js";
 import { GameState } from "../GameState.js";
 import { CARD_BACK } from "./common.js";
+import { formatDeckReviewHtmlSection } from "../html-formatters.js";
 
 function formatCommanderImageHtml(commanders: any[]): string {
   return commanders.length > 0
@@ -337,8 +338,7 @@ export function formatTableModalHtml(game: GameState): string {
 
 export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.status === "NotStarted") {
-    const { formatDeckReviewHtml } = require("./review-deck-view.js");
-    return formatDeckReviewHtml(game);
+    return formatDeckReviewHtmlSection(game);
   } else {
     return formatActiveGameHtml(game, whatHappened);
   }
