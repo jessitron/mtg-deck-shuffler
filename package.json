@@ -16,6 +16,7 @@
     "test": "jest",
     "test:snapshot": "jest test/snapshot --testPathIgnorePatterns=[]",
     "test:snapshot:update": "find test/snapshot/snapshots -name '*.actual' -exec bash -c 'mv \"$1\" \"${1%.actual}\"' _ {} \\;",
+    "test:snapshot:diff": "find test/snapshot/snapshots -name '*.actual' -exec bash -c 'echo \"Diff for ${1##*/}:\"; git diff --no-index \"${1%.actual}\" \"$1\" || true' _ {} \\;",
     "deck:download": "node dist/scripts/download-deck.js",
     "precons:fetch": "node dist/scripts/fetch-precon-deck-numbers.js"
   },
