@@ -37,6 +37,12 @@ src/view/
    - Move error page layout functions (these are truly common across the app)
    - Export `formatFullPage(title: string, content: string)`
 
+#### Phase 1A: common components
+
+1. List functions that are duplicated in multiple places right now:
+
+(put them here)
+
 2. Create `src/view/common/shared-components.ts`:
    - Only components that appear in multiple phases of the app
    - Basic modal wrapper (if used across phases)
