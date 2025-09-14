@@ -2,7 +2,7 @@ import { GameState } from "../../GameState.js";
 
 export function formatGameDetails(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
-  return `<div id="game-details">
+  return `<div id="game-details" class="game-details game-not-started">
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>

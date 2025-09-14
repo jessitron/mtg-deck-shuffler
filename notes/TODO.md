@@ -4,9 +4,7 @@
 
 ## Bugs to fix
 
-- Restart Game button is broken
-
-- Nature's Lore from Dogs & Cats Deck had no multiverse ID. Gatherer link didn't work.
+- Nature's Lore from Dogs & Cats Deck had no multiverse ID. Gatherer link didn't work. ... nothing in that deck has a multiverseid
 
 ## More Things to change
 
