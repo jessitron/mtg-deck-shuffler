@@ -127,8 +127,28 @@ export class GameEventLog {
    * @returns boolean
    */
   public canBeUndone(gameEventIndex: number): boolean {
-    // stub
-    return true;
+    const event = this.events[gameEventIndex];
+    if (!event) return false;
+
+    // Cannot undo these event types
+    if (event.eventName === "undo" || event.eventName === "start game") {
+      return false;
+    }
+
+    // Cannot undo if already undone
+    if (this.hasBeenUndone(gameEventIndex)) {
+      return false;
+    }
+
+    // If it's the most recent event, it can be undone
+    const mostRecentIndex = this.events.length - 1;
+    if (gameEventIndex === mostRecentIndex) {
+      return true;
+    }
+
+    const moreRecentEvents = this.events.slice(gameEventIndex + 1);
+    const aMoreRecentUndoableEvent = moreRecentEvents.find((event) => event.eventName !== "undo" && !this.hasBeenUndone(event.gameEventIndex));
+    return !aMoreRecentUndoableEvent;
   }
 
   /**
@@ -137,7 +157,6 @@ export class GameEventLog {
    * @returns True if there's a later event that is an undo of this one.
    */
   public hasBeenUndone(gameEventIndex: number): boolean {
-    // stub
-    return false;
+    return this.events.slice(gameEventIndex + 1).some((event) => event.eventName === "undo" && event.originalEventIndex === gameEventIndex);
   }
 }
