@@ -4,6 +4,9 @@ export default {
   testMatch: [
     '**/*.test.ts'
   ],
+  testPathIgnorePatterns: [
+    'test/snapshot'
+  ],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
