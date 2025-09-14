@@ -207,7 +207,7 @@ export class GameState {
       }
     }
     const gameCard = this.gameCards[move.gameCardIndex];
-    verifyLocationsAreIdentical(move.toLocation, gameCard.location);
+    verifyLocationsAreIdentical(gameCard.location, move.toLocation);
     gameCard.location = move.toLocation;
     this.eventLog.record({ eventName: "move card", move });
   }
