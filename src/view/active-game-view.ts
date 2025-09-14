@@ -3,6 +3,7 @@ import { GameCard, GameState } from "../GameState.js";
 import { CARD_BACK } from "./common.js";
 import { GameEvent } from "../GameEvents.js";
 import { printLocation } from "../port-persist-state/types.js";
+import { formatPageWrapper } from "./common/html-layout.js";
 
 function formatCommanderImageHtmlFragment(commanders: any[]): string {
   return commanders.length > 0
@@ -148,42 +149,7 @@ function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "rev
   </div>`;
 }
 
-function formatHtmlHeadHtmlFragment(title: string): string {
-  return `<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title}</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <script src="/hny.js"></script>
-    <script>
-      Hny.initializeTracing({
-        apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
-        serviceName: "mtg-deck-shuffler-web",
-        debug: false,
-        provideOneLinkToHoneycomb: true,
-      });
-    </script>
-    <script src="/htmx.js"></script>
-    <script src="/game.js"></script>
-  </head>`;
-}
 
-function formatPageWrapperHtmlPage(title: string, content: string): string {
-  const headHtml = formatHtmlHeadHtmlFragment(title);
-
-  return `<!DOCTYPE html>
-<html lang="en">
-  ${headHtml}
-  <body>
-    <h1>*Woohoo it's Magic time!*</h1>
-    ${content}
-    
-    <footer>
-      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
-    </footer>
-  </body>
-</html>`;
-}
 
 function formatGameHeaderHtmlFragment(game: GameState): string {
   const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
@@ -311,7 +277,7 @@ function formatTableCardListHtmlFragment(game: GameState): string {
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  return formatPageWrapperHtmlPage(`MTG Game - ${game.deckName}`, gameContent);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {

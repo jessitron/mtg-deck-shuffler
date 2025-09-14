@@ -1,6 +1,7 @@
 import { getCardImageUrl } from "../types.js";
 import { GameState } from "../GameState.js";
 import { CARD_BACK } from "./common.js";
+import { formatPageWrapper } from "./common/html-layout.js";
 
 function formatCommanderImageHtml(commanders: any[]): string {
   return commanders.length > 0
@@ -87,42 +88,7 @@ function formatLibraryCardActions(game: GameState, gameCard: any): string {
   </div>`;
 }
 
-function formatHtmlHead(title: string): string {
-  return `<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title}</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <script src="/hny.js"></script>
-    <script>
-      Hny.initializeTracing({
-        apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
-        serviceName: "mtg-deck-shuffler-web",
-        debug: false,
-        provideOneLinkToHoneycomb: true,
-      });
-    </script>
-    <script src="/htmx.js"></script>
-    <script src="/game.js"></script>
-  </head>`;
-}
 
-function formatPageWrapper(title: string, content: string): string {
-  const headHtml = formatHtmlHead(title);
-
-  return `<!DOCTYPE html>
-<html lang="en">
-  ${headHtml}
-  <body>
-    <h1>*Woohoo it's Magic time!*</h1>
-    ${content}
-    
-    <footer>
-      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
-    </footer>
-  </body>
-</html>`;
-}
 
 function formatGameHeaderHtml(game: GameState): string {
   const commanderImageHtml = formatCommanderImageHtml(game.commanders);
