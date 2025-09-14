@@ -76,9 +76,9 @@ function formatLibraryCardList(game: GameState): string {
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link" hx-boost="false" onclick="event.stopPropagation()">${
-        gameCard.card.name
-      }</a>
+            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${
+              gameCard.card.multiverseid
+            }" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${gameCard.card.name}</a>
           </div>
           ${cardActions}
         </li>`;
