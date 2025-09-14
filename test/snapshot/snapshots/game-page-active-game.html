@@ -29,9 +29,11 @@ provideOneLinkToHoneycomb: true,
 <p><strong>Game ID:</strong> 789</p>
 <p><strong>Status:</strong> Active</p>
 <div class="history">
-You've done 0 things so far
-<ol>
-</ol>
+<p>No actions taken yet</p>
+<button class="history-button"
+hx-get="/history-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">View History (0)</button>
 </div>
 </div>
 <div id="mid-game-buttons">
