@@ -220,7 +220,30 @@ h1 {
   padding: 20px;
 }
 
+.table-image {
+  width: 60px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  display: block;
+}
+
 .table-cards-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #4084c0;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #124e82;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.table-cards-button:hover {
+  background-color: #5a6268;
+}
+
+.history-button {
   padding: 10px 20px;
   font-size: 1rem;
   border: 1px solid #6c757d;
@@ -231,7 +254,7 @@ h1 {
   transition: background-color 0.2s;
 }
 
-.table-cards-button:hover {
+.history-button:hover {
   background-color: #5a6268;
 }
 
