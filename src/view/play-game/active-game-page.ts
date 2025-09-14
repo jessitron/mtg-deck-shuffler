@@ -8,18 +8,16 @@ import { formatTableModalHtmlFragment } from "./game-modals.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
 
-
-
 function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
-  const events = game.gameEvents();
   const eventLog = game.getEventLog();
 
   // Find the most recent undoable event
-  const mostRecentUndoableEvent = events
+  const mostRecentUndoableEvent = eventLog
+    .getEvents()
     .slice()
     .reverse()
-    .find(event => eventLog.canBeUndone(event.gameEventIndex));
+    .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
   return `<div id="game-details">
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
@@ -27,20 +25,22 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
         <p><strong>Game ID:</strong> ${game.gameId}</p>
         <p><strong>Status:</strong> ${game.gameStatus()}</p>
         <div class="history">
-          ${mostRecentUndoableEvent ?
-            `<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+          ${
+            mostRecentUndoableEvent
+              ? `<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
               <span>Can undo: ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</span>
               <button class="undo-button"
                       hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
                       hx-target="#game-container"
                       hx-swap="outerHTML"
                       style="padding: 4px 8px; font-size: 0.8rem;">Undo</button>
-            </div>` :
-            "<p>No actions to undo</p>"}
+            </div>`
+              : "<p>No actions to undo</p>"
+          }
           <button class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
-                  hx-swap="innerHTML">View History (${events.length})</button>
+                  hx-swap="innerHTML">View History (${eventLog.getEvents().length})</button>
         </div>
       </div>`;
 }

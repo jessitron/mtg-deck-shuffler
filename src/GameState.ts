@@ -104,12 +104,12 @@ export class GameState {
     return this.status;
   }
 
-  public gameEvents() {
-    return this.eventLog.getEvents();
-  }
-
   public getEventLog() {
     return this.eventLog;
+  }
+
+  public getEvent(gameEventIndex: number): GameEvent {
+    return this.eventLog.getEvents()[gameEventIndex];
   }
 
   private validateInvariants(): void {

@@ -43,7 +43,7 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   <span class="event-description ${isUndone ? "undone" : ""} ${eventNameToCssClass[event.eventName]}">${description}</span>`;
 }
 
-function describeEvent(event: GameEvent, game: GameState) {
+function describeEvent(event: GameEvent, game: GameState): string {
   switch (event.eventName) {
     case "move card":
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
@@ -54,13 +54,12 @@ function describeEvent(event: GameEvent, game: GameState) {
     case "start game":
       return "Start game";
     case "undo":
-      return "Undo: ${formatGameEventHtmlFragment(game.getEventLog().getEvents()[event.originalEventIndex], game)}";
+      return `Undo: ${formatGameEventHtmlFragment(game.getEvent(event.originalEventIndex), game)}`;
   }
 }
 
 function formatHistoryListHtmlFragment(game: GameState): string {
-  const events = game.gameEvents();
-  const eventLog = game.getEventLog();
+  const events = game.getEventLog().getEvents();
 
   return events
     .map((event, index) => ({ event, originalIndex: index + 1 }))
@@ -75,11 +74,10 @@ function formatHistoryListHtmlFragment(game: GameState): string {
 }
 
 export function formatHistoryModalHtmlFragment(game: GameState): string {
-  const events = game.gameEvents();
   const historyList = formatHistoryListHtmlFragment(game);
 
   const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
-          ${events.length} actions taken
+          ${game.getEventLog().getEvents().length} actions taken
         </p>
         <ol class="history-list" style="list-style: none; padding: 0;">
           ${historyList}
