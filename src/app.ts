@@ -165,8 +165,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         }
         deckRequest = { deckSource: "archidekt", archidektDeckId: match[1] };
       } else if (persistedGame.deckProvenance.deckSource === "local") {
-        // Extract local file path from sourceUrl like "local://path/to/file.json"
-        const localFile = persistedGame.deckProvenance.sourceUrl.replace("local://", "");
+        // sourceUrl is like /decks/
+        const localFile = persistedGame.deckProvenance.sourceUrl.replace(/.*\//, "");
         deckRequest = { deckSource: "local", localFile };
       } else {
         throw new Error(`Unsupported deck source: ${persistedGame.deckProvenance.deckSource}`);
@@ -549,8 +549,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const html = formatGameHtmlSection(game);
       res.send(html);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error undoing event:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not undo event"}</div>`);
     }
