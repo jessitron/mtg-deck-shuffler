@@ -1,0 +1,19 @@
+<div id="deck-info">
+<div class="deck-details-layout">
+<div class="commander-section">
+<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" /><img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-002.png" alt="Breya, Etherium Shaper" class="mtg-card-image commander-image" />
+</div>
+<div class="deck-info-section">
+<h2><a href="https://archidekt.com/decks/12345" target="_blank">Test Deck with 2 Commanders</a></h2>
+<p>3 cards</p>
+<p><small>Retrieved: 1/1/2024, 6:00:00 AM</small></p>
+</div>
+</div>
+<div class="deck-actions">
+<input type="hidden" name="deck-id" value="12345" />
+<button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
+<form method="post" action="/" style="display: inline;">
+<button type="submit">Choose Another Deck</button>
+</form>
+</div>
+</div>

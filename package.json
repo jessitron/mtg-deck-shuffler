@@ -13,8 +13,8 @@
     "build": "npx tsc",
     "clean": "rm -rf dist",
     "start": "npm run build && node -r ./dist/tracing.js dist/server.js",
-    "test": "node --test  'test/*.test.ts' 'test/ports-persist-state/*.test.ts' 'test/port-deck-retrieval/*.test.ts'",
-    "test:snapshot": "node --test --loader ts-node/esm 'test/snapshot/**/*.snapshot.test.ts'",
+    "test": "jest",
+    "test:snapshot": "jest test/snapshot",
     "deck:download": "node dist/scripts/download-deck.js",
     "precons:fetch": "node dist/scripts/fetch-precon-deck-numbers.js"
   },
@@ -32,7 +32,10 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.2.1",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }

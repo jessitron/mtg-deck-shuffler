@@ -1,0 +1,41 @@
+<div id="game-container">
+<div id="command-zone">
+<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
+</div>
+<div id="game-details">
+this is in html formatters
+<h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Not Started Game</a></h2>
+<p>2 cards</p>
+<p><strong>Game ID:</strong> 456</p>
+<p><strong>Status:</strong> NotStarted</p>
+<div class="history">
+You've done 0 things so far
+<ol>
+</ol>
+</div>
+</div>
+<div id="library-section" data-testid="library-section">
+<h3>Library (2)</h3>
+<div class="library-stack" data-testid="library-stack">
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+</div>
+<div class="library-buttons-single">
+<button class="search-button"
+hx-get="/library-modal/456"
+hx-target="#modal-container"
+hx-swap="innerHTML">Search</button>
+</div>
+</div>
+<!-- Modal Container -->
+<div id="modal-container"></div>
+<div id="start-game-buttons" class="deck-actions">
+<input type="hidden" name="game-id" value="456" />
+<button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
+<form method="post" action="/end-game" style="display: inline;">
+<input type="hidden" name="game-id" value="456" />
+<button type="submit">Choose Another Deck</button>
+</form>
+</div>
+</div>

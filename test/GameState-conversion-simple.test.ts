@@ -1,5 +1,4 @@
-import { test } from "node:test";
-import { strict as assert } from "node:assert";
+import { test, expect } from "@jest/globals";
 import { GameState } from "../src/GameState.js";
 import { GameStatus, PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
 import { Deck } from "../src/types.js";
@@ -35,26 +34,26 @@ test("should convert GameState to PersistedGameState and back", () => {
   const persistedGameState = originalGameState.toPersistedGameState();
 
   // Verify persisted format has expected structure
-  assert.equal(persistedGameState.version, PERSISTED_GAME_STATE_VERSION);
-  assert.equal(persistedGameState.gameId, gameId);
-  assert.equal(persistedGameState.status, GameStatus.NotStarted);
-  assert.equal(persistedGameState.deckName, "Test Deck");
-  assert.equal(persistedGameState.deckId, 123);
-  assert.equal(persistedGameState.totalCards, 3);
-  assert.equal(persistedGameState.commanders.length, 1);
-  assert.equal(persistedGameState.commanders[0].name, "Test Commander");
-  assert.equal(persistedGameState.gameCards.length, 3);
+  expect(persistedGameState.version).toBe(PERSISTED_GAME_STATE_VERSION);
+  expect(persistedGameState.gameId).toBe(gameId);
+  expect(persistedGameState.status).toBe(GameStatus.NotStarted);
+  expect(persistedGameState.deckName).toBe("Test Deck");
+  expect(persistedGameState.deckId).toBe(123);
+  expect(persistedGameState.totalCards).toBe(3);
+  expect(persistedGameState.commanders.length).toBe(1);
+  expect(persistedGameState.commanders[0].name).toBe("Test Commander");
+  expect(persistedGameState.gameCards.length).toBe(3);
 
   // Convert back to GameState
   const restoredGameState = GameState.fromPersistedGameState(persistedGameState);
 
   // Verify restored state matches original
-  assert.equal(restoredGameState.gameId, originalGameState.gameId);
-  assert.equal(restoredGameState.status, originalGameState.status);
-  assert.equal(restoredGameState.deckName, originalGameState.deckName);
-  assert.equal(restoredGameState.deckId, originalGameState.deckId);
-  assert.equal(restoredGameState.totalCards, originalGameState.totalCards);
-  assert.deepEqual(restoredGameState.commanders, originalGameState.commanders);
-  assert.deepEqual(restoredGameState.getCards(), originalGameState.getCards());
-  assert.deepEqual(restoredGameState.deckProvenance, originalGameState.deckProvenance);
+  expect(restoredGameState.gameId).toBe(originalGameState.gameId);
+  expect(restoredGameState.gameStatus()).toBe(originalGameState.gameStatus());
+  expect(restoredGameState.deckName).toBe(originalGameState.deckName);
+  expect(restoredGameState.deckId).toBe(originalGameState.deckId);
+  expect(restoredGameState.totalCards).toBe(originalGameState.totalCards);
+  expect(restoredGameState.commanders).toEqual(originalGameState.commanders);
+  expect(restoredGameState.getCards()).toEqual(originalGameState.getCards());
+  expect(restoredGameState.deckProvenance).toEqual(originalGameState.deckProvenance);
 });
