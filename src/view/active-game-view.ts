@@ -327,7 +327,7 @@ export function formatTableModalHtmlFragment(game: GameState): string {
 
 export function formatGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.gameStatus() === "NotStarted") {
-    const { formatDeckReviewHtmlSection } = require("./review-deck-view.js");
+    const { formatDeckReviewHtmlSection } = require("../html-formatters.js");
     return formatDeckReviewHtmlSection(game);
   } else {
     return formatActiveGameHtmlSection(game, whatHappened);

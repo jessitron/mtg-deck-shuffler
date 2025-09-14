@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
-import { formatLibraryModalHtml } from "./view/review-deck-view.js";
+import { formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/active-game-view.js";
 import { formatGamePageHtmlPage } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
