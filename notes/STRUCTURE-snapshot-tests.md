@@ -21,9 +21,13 @@ The input to formatHomepageHtml is the list of available decks. That's a simple 
 
 [x] The view method called by "/game/:gameId" is formatGameHtml. The input is a GameState object. Test with a game state that includes cards in hand, cards revealed, and cards on the table.
 
-[] what other routes are in app.ts, and what format functions do they call? List additional methods to test here:
+[x] what other routes are in app.ts, and what format functions do they call? List additional methods to test here:
 
-...
+Missing snapshot tests for these top-level view functions called in app.ts:
+- formatErrorPageHtmlPage (src/view/error-view.ts) - Used for 500/404 error pages in multiple routes
+- formatLibraryModalHtml (src/view/review-deck-view.ts) - Library search modal at /library-modal/:gameId
+- formatTableModalHtmlFragment (src/view/active-game-view.ts) - Table contents modal at /table-modal/:gameId
+- formatGamePageHtmlPage (src/html-formatters.ts) - Complete game page wrapper at /game/:gameId
 
 ## Document
 

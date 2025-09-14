@@ -2,8 +2,6 @@
 
 Status: planned
 
-Waiting on: @notes/STRUCTURE-snapshot-tests.md
-
 ## Proposed New Structure - Organized by Application Flow
 
 ```
@@ -23,7 +21,7 @@ src/view/
     ├── hand-components.ts
     ├── library-components.ts
     ├── revealed-cards-components.ts
-    └── game-modals.ts
+    └── game-modals.ts  
 ```
 
 ## Naming conventions

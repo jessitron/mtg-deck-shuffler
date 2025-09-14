@@ -1,0 +1,124 @@
+<div class="modal-overlay"
+hx-get="/close-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+tabindex="0">
+<div class="modal-dialog">
+<div class="modal-header">
+<h2 class="modal-title">Library Contents</h2>
+<button class="modal-close"
+hx-get="/close-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML">&times;</button>
+</div>
+<div class="modal-body">
+<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+5 cards in library, ordered by position
+</p>
+<ul class="library-search-list">
+<li class="library-card-item">
+<span class="card-position">1</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1000" target="_blank" class="card-name-link">Card A</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/123/0"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/123/0"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">2</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1001" target="_blank" class="card-name-link">Card B</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/123/1"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/123/1"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">3</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1002" target="_blank" class="card-name-link">Card C</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/123/2"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/123/2"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">4</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1003" target="_blank" class="card-name-link">Card D</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/123/3"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/123/3"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">5</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1004" target="_blank" class="card-name-link">Card E</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/123/4"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/123/4"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>

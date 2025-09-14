@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple Error - MTG Deck Shuffler</title>
+<link rel="stylesheet" href="/styles.css" />
+<script src="/hny.js"></script>
+<script>
+Hny.initializeTracing({
+apiKey: "TEST_API_KEY",
+serviceName: "mtg-deck-shuffler-web",
+debug: false,
+provideOneLinkToHoneycomb: true,
+});
+</script>
+<script src="/htmx.js"></script>
+<script src="/game.js"></script>
+</head>
+<body>
+<h1>*Woohoo it's Magic time!*</h1>
+<div class="deck-input-section">
+<div style="text-align: center; color: #f44336; margin-bottom: 20px;">
+<h2>⚠️ Simple Error</h2>
+<p>Something went wrong.</p>
+</div>
+<div class="deck-actions">
+<form method="get" action="/" style="display: inline;">
+<button type="submit" class="lets-play-button">Start a New Game</button>
+</form>
+</div>
+</div>
+<footer>
+<p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+</footer>
+</body>
+</html>
