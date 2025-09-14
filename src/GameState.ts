@@ -403,34 +403,6 @@ export class GameState {
     return this;
   }
 
-  /**
-   * Is this event eligible for undo?
-   *
-   * It is eligible for undo if:
-   * - it is not an undo event
-   * - it is not Start Game
-   * - Either:
-   *   - it is the most recent event
-   *   - The events after are paired: each non-undo has a later undo of it.
-   *
-   * @param gameEventIndex
-   * @returns boolean
-   */
-  public canBeUndone(gameEventIndex: number): boolean {
-    // stub
-    return true;
-  }
-
-  /**
-   * Should this one be crossed out, and ineligible for undo?
-   * @param gameEventIndex 
-   * @returns True if there's a later event that is an undo of this one.
-   */
-  public hasBeenUndone(gameEventIndex: number): boolean {
-    // stub
-    return false;
-  }
-
   public toPersistedGameState(): PersistedGameState {
     return {
       version: PERSISTED_GAME_STATE_VERSION,

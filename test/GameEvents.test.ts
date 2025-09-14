@@ -18,7 +18,7 @@ describe("GameEventLog", () => {
         },
       });
 
-      expect(log.hasBeenUndone(moveEvent)).toBe(false);
+      expect(log.hasBeenUndone(moveEvent.gameEventIndex)).toBe(false);
     });
 
     test("returns true when event has been undone", () => {
@@ -34,7 +34,7 @@ describe("GameEventLog", () => {
 
       log.recordUndo(moveEvent);
 
-      expect(log.hasBeenUndone(moveEvent)).toBe(true);
+      expect(log.hasBeenUndone(moveEvent.gameEventIndex)).toBe(true);
     });
 
     test("returns false when a different event has been undone", () => {
@@ -58,7 +58,7 @@ describe("GameEventLog", () => {
 
       log.recordUndo(moveEvent2);
 
-      expect(log.hasBeenUndone(moveEvent1)).toBe(false);
+      expect(log.hasBeenUndone(moveEvent1.gameEventIndex)).toBe(false);
     });
 
     test("returns true when shuffle event has been undone", () => {
@@ -76,7 +76,34 @@ describe("GameEventLog", () => {
 
       log.recordUndo(shuffleEvent);
 
-      expect(log.hasBeenUndone(shuffleEvent)).toBe(true);
+      expect(log.hasBeenUndone(shuffleEvent.gameEventIndex)).toBe(true);
+    });
+
+    test("returns true when it was undone later", () => {
+      const log = GameEventLog.newLog();
+      const shuffleEvent = log.record({
+        eventName: "shuffle library",
+        moves: [
+          {
+            gameCardIndex: 1,
+            fromLocation: { type: "Library", position: 0 },
+            toLocation: { type: "Library", position: 1 },
+          },
+        ],
+      });
+      const moveEvent = log.record({
+        eventName: "move card",
+        move: {
+          gameCardIndex: 1,
+          fromLocation: libraryLocation,
+          toLocation: handLocation,
+        },
+      });
+
+      log.recordUndo(moveEvent);
+      log.recordUndo(shuffleEvent);
+
+      expect(log.hasBeenUndone(shuffleEvent.gameEventIndex)).toBe(true);
     });
   });
 
@@ -92,7 +119,7 @@ describe("GameEventLog", () => {
         },
       });
 
-      expect(log.canBeUndone(moveEvent)).toBe(true);
+      expect(log.canBeUndone(moveEvent.gameEventIndex)).toBe(true);
     });
 
     test("returns true for shuffle events", () => {
@@ -108,14 +135,14 @@ describe("GameEventLog", () => {
         ],
       });
 
-      expect(log.canBeUndone(shuffleEvent)).toBe(true);
+      expect(log.canBeUndone(shuffleEvent.gameEventIndex)).toBe(true);
     });
 
     test("returns false for start game events", () => {
       const log = GameEventLog.newLog();
       const startEvent = log.record(GameStartedEvent);
 
-      expect(log.canBeUndone(startEvent)).toBe(false);
+      expect(log.canBeUndone(startEvent.gameEventIndex)).toBe(false);
     });
 
     test("returns false for undo events", () => {
@@ -130,7 +157,7 @@ describe("GameEventLog", () => {
       });
       const undoEvent = log.recordUndo(moveEvent);
 
-      expect(log.canBeUndone(undoEvent)).toBe(false);
+      expect(log.canBeUndone(undoEvent.gameEventIndex)).toBe(false);
     });
 
     test("returns false for events that have already been undone", () => {
@@ -146,7 +173,7 @@ describe("GameEventLog", () => {
 
       log.recordUndo(moveEvent);
 
-      expect(log.canBeUndone(moveEvent)).toBe(false);
+      expect(log.canBeUndone(moveEvent.gameEventIndex)).toBe(false);
     });
 
     test("returns true for events that have not been undone", () => {
@@ -170,7 +197,7 @@ describe("GameEventLog", () => {
 
       log.recordUndo(moveEvent2);
 
-      expect(log.canBeUndone(moveEvent1)).toBe(true);
+      expect(log.canBeUndone(moveEvent1.gameEventIndex)).toBe(true);
     });
   });
 });
