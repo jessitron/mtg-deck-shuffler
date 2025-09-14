@@ -153,4 +153,28 @@ describe("SqlitePersistStateAdapter", () => {
       await adapter2.close();
     }
   });
+
+  it("should persist gameEventIndex in events", async () => {
+    const gameStateWithEvents: PersistedGameState = {
+      ...testGameState,
+      events: [
+        {
+          eventName: "start game",
+          gameEventIndex: 0,
+        },
+        {
+          eventName: "shuffle library",
+          moves: [],
+          gameEventIndex: 1,
+        },
+      ],
+    };
+
+    await adapter.save(gameStateWithEvents);
+    const retrieved = await adapter.retrieve(gameStateWithEvents.gameId);
+
+    expect(retrieved?.events).toHaveLength(2);
+    expect(retrieved?.events[0].gameEventIndex).toBe(0);
+    expect(retrieved?.events[1].gameEventIndex).toBe(1);
+  });
 });
