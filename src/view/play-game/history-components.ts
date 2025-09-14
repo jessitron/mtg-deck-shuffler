@@ -2,9 +2,13 @@ import { GameState } from "../../GameState.js";
 import { GameEvent } from "../../GameEvents.js";
 import { printLocation } from "../../port-persist-state/types.js";
 
-function formatCardNameAsGathererLink(cardName: string): string {
-  const encodedCardName = encodeURIComponent(cardName);
-  return `<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodedCardName}" target="_blank">${cardName}</a>`;
+function formatCardNameAsGathererLink(card: { name: string; multiverseid?: number }): string {
+  if (card.multiverseid) {
+    return `<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank" class="card-name-link">${card.name}</a>`;
+  } else {
+    const encodedCardName = encodeURIComponent(card.name);
+    return `<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodedCardName}" target="_blank" class="card-name-link">${card.name}</a>`;
+  }
 }
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
@@ -36,8 +40,8 @@ function cardIndexToDefinition(game: GameState, gci: number) {
 export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   switch (event.eventName) {
     case "move card":
-      const cardName = cardIndexToDefinition(game, event.move.gameCardIndex).name;
-      const cardNameLink = formatCardNameAsGathererLink(cardName);
+      const card = cardIndexToDefinition(game, event.move.gameCardIndex);
+      const cardNameLink = formatCardNameAsGathererLink(card);
       return `Move ${cardNameLink} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
     case "shuffle library":
       return `Shuffle ${event.moves.length} cards in library`;
