@@ -2,6 +2,11 @@ import { GameState } from "../../GameState.js";
 import { GameEvent } from "../../GameEvents.js";
 import { printLocation } from "../../port-persist-state/types.js";
 
+function formatCardNameAsGathererLink(cardName: string): string {
+  const encodedCardName = encodeURIComponent(cardName);
+  return `<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodedCardName}" target="_blank">${cardName}</a>`;
+}
+
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
                hx-get="/close-modal"
@@ -32,7 +37,8 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   switch (event.eventName) {
     case "move card":
       const cardName = cardIndexToDefinition(game, event.move.gameCardIndex).name;
-      return `Move ${cardName} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
+      const cardNameLink = formatCardNameAsGathererLink(cardName);
+      return `Move ${cardNameLink} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
     case "shuffle library":
       return `Shuffle ${event.moves.length} cards in library`;
     case "start game":
