@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatGameHtmlSection } from "../../src/html-formatters.js";
+import { formatGameHtmlSection } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
 import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../../src/port-persist-state/types.js";

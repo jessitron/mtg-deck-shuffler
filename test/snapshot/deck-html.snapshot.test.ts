@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatDeckHtmlSection } from "../../src/html-formatters.js";
+import { formatDeckHtmlSection } from "../../src/view/deck-selection/deck-selection-page.js";
 import { Deck, CardDefinition } from "../../src/types.js";
 
 describe("Deck HTML Snapshot Tests", () => {

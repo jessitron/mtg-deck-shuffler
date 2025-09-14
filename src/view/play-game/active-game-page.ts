@@ -109,7 +109,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
 
 export function formatGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.gameStatus() === "NotStarted") {
-    const { formatDeckReviewHtmlSection } = require("../html-formatters.js");
+    const { formatDeckReviewHtmlSection } = require("../../html-formatters.js");
     return formatDeckReviewHtmlSection(game);
   } else {
     return formatActiveGameHtmlSection(game, whatHappened);
