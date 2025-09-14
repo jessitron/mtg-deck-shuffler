@@ -1,5 +1,4 @@
-import { test, describe } from "node:test";
-import assert from "node:assert";
+// Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
 import { formatHomepageHtml } from "../../src/view/load-deck-view.js";
@@ -50,7 +49,7 @@ describe("Homepage HTML Snapshot Tests", () => {
     await fs.writeFile(path.join(snapshotDir, filename), content, "utf-8");
   }
 
-  test("formatHomepageHtml with multiple local decks", async () => {
+  it("formatHomepageHtml with multiple local decks", async () => {
     const snapshotFile = "homepage-with-decks.html";
     const actualHtml = formatHomepageHtml(fakeAvailableDecks);
     
@@ -74,7 +73,7 @@ describe("Homepage HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);
@@ -82,7 +81,7 @@ describe("Homepage HTML Snapshot Tests", () => {
     }
   });
 
-  test("formatHomepageHtml with no local decks", async () => {
+  it("formatHomepageHtml with no local decks", async () => {
     const snapshotFile = "homepage-no-decks.html";
     const actualHtml = formatHomepageHtml(emptyAvailableDecks);
     
@@ -106,7 +105,7 @@ describe("Homepage HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);

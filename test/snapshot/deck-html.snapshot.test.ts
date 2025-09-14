@@ -1,5 +1,4 @@
-import { test, describe } from "node:test";
-import assert from "node:assert";
+// Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
 import { formatDeckHtml } from "../../src/html-formatters.js";
@@ -65,7 +64,7 @@ describe("Deck HTML Snapshot Tests", () => {
     await fs.writeFile(path.join(snapshotDir, filename), content, "utf-8");
   }
 
-  test("formatDeckHtml with zero commanders", async () => {
+  it("formatDeckHtml with zero commanders", async () => {
     const snapshotFile = "deck-zero-commanders.html";
     const deck = createFakeDeck(0);
     const actualHtml = formatDeckHtml(deck);
@@ -89,7 +88,7 @@ describe("Deck HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);
@@ -97,7 +96,7 @@ describe("Deck HTML Snapshot Tests", () => {
     }
   });
 
-  test("formatDeckHtml with one commander", async () => {
+  it("formatDeckHtml with one commander", async () => {
     const snapshotFile = "deck-one-commander.html";
     const deck = createFakeDeck(1);
     const actualHtml = formatDeckHtml(deck);
@@ -121,7 +120,7 @@ describe("Deck HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);
@@ -129,7 +128,7 @@ describe("Deck HTML Snapshot Tests", () => {
     }
   });
 
-  test("formatDeckHtml with two commanders", async () => {
+  it("formatDeckHtml with two commanders", async () => {
     const snapshotFile = "deck-two-commanders.html";
     const deck = createFakeDeck(2);
     const actualHtml = formatDeckHtml(deck);
@@ -153,7 +152,7 @@ describe("Deck HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);

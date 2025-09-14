@@ -1,5 +1,4 @@
-import { test, describe } from "node:test";
-import assert from "node:assert";
+// Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
 import { formatGameHtml } from "../../src/html-formatters.js";
@@ -116,7 +115,7 @@ describe("Game HTML Snapshot Tests", () => {
     await fs.writeFile(path.join(snapshotDir, filename), content, "utf-8");
   }
 
-  test("formatGameHtml with cards in hand, revealed, and on table", async () => {
+  it("formatGameHtml with cards in hand, revealed, and on table", async () => {
     const snapshotFile = "game-active-state.html";
     const gameState = createFakeGameState();
     const actualHtml = formatGameHtml(gameState, {});
@@ -141,7 +140,7 @@ describe("Game HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);
@@ -149,7 +148,7 @@ describe("Game HTML Snapshot Tests", () => {
     }
   });
 
-  test("formatGameHtml with not started game state", async () => {
+  it("formatGameHtml with not started game state", async () => {
     const snapshotFile = "game-not-started-state.html";
     
     // Create a game state that hasn't started yet
@@ -205,7 +204,7 @@ describe("Game HTML Snapshot Tests", () => {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
         
-        assert.fail(`Snapshot mismatch for ${snapshotFile}.\n` +
+        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
           `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
           `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
           `Run snapshot tests to update if changes are expected.`);
