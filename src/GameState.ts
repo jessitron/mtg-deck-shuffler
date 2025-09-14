@@ -394,13 +394,41 @@ export class GameState {
     };
   }
 
-  undo(gameEventIndex: number): GameState {
+  public undo(gameEventIndex: number): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
     const moves = applyToState.eventName === "shuffle library" ? applyToState.moves : [applyToState.move];
     moves.forEach((move) => this.executeMove(move));
     this.eventLog.recordUndo(event);
     return this;
+  }
+
+  /**
+   * Is this event eligible for undo?
+   *
+   * It is eligible for undo if:
+   * - it is not an undo event
+   * - it is not Start Game
+   * - Either:
+   *   - it is the most recent event
+   *   - The events after are paired: each non-undo has a later undo of it.
+   *
+   * @param gameEventIndex
+   * @returns boolean
+   */
+  public canBeUndone(gameEventIndex: number): boolean {
+    // stub
+    return true;
+  }
+
+  /**
+   * Should this one be crossed out, and ineligible for undo?
+   * @param gameEventIndex 
+   * @returns True if there's a later event that is an undo of this one.
+   */
+  public hasBeenUndone(gameEventIndex: number): boolean {
+    // stub
+    return false;
   }
 
   public toPersistedGameState(): PersistedGameState {
