@@ -1,6 +1,6 @@
 # Implement @notes/DESIGN-state.md
 
-Status: planning
+Status: implemented
 
 ## Implementation Plan
 

@@ -533,6 +533,29 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  app.post("/undo/:gameId/:gameEventIndex", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const gameEventIndex = parseInt(req.params.gameEventIndex);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      var game = GameState.fromPersistedGameState(persistedGame);
+      game = game.undo(gameEventIndex);
+      await persistStatePort.save(game.toPersistedGameState());
+
+      const html = formatGameHtmlSection(game);
+      res.send(html);
+    }
+    catch (error) {
+      console.error("Error undoing event:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not undo event"}</div>`);
+    }
+  });
+
   // Proxy endpoint for card images to avoid CORS issues
   app.get("/proxy-image", async (req, res) => {
     const cardId = req.query.cardId as string;

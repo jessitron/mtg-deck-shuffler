@@ -394,6 +394,15 @@ export class GameState {
     };
   }
 
+  undo(gameEventIndex: number): GameState {
+    const event = this.eventLog.getEvents()[gameEventIndex];
+    const applyToState = this.eventLog.reverse(event);
+    const moves = applyToState.eventName === "shuffle library" ? applyToState.moves : [applyToState.move];
+    moves.forEach((move) => this.executeMove(move));
+    this.eventLog.recordUndo(event);
+    return this;
+  }
+
   public toPersistedGameState(): PersistedGameState {
     return {
       version: PERSISTED_GAME_STATE_VERSION,

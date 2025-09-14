@@ -1,6 +1,6 @@
 # Golden Master Testing for HTML Formatting
 
-status: implementing
+status: implemented
 
 ## Overview
 

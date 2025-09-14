@@ -31,7 +31,12 @@ export type MoveCardEvent = {
   move: CardMove;
 };
 
-export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent;
+export type UndoEvent = {
+  eventName: "undo";
+  originalEventIndex: number;
+};
+
+export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent;
 
 export type GameEvent = GameEventDefinition & GameEventIdentifier;
 
@@ -64,5 +69,47 @@ export class GameEventLog {
 
   public getEvents() {
     return [...this.events];
+  }
+
+  public recordUndo(event: GameEvent): GameEvent {
+    if (event.eventName === "undo") {
+      throw new Error("Cannot undo an undo, use redo instead");
+    }
+    if (event.eventName === "start game") {
+      throw new Error("Cannot undo start game");
+    }
+
+    const undoEvent: UndoEvent = {
+      eventName: "undo",
+      originalEventIndex: event.gameEventIndex,
+    };
+    return this.record(undoEvent);
+  }
+
+  public reverse(event: GameEventDefinition): MoveCardEvent | ShuffleEvent {
+    switch (event.eventName) {
+      case "undo":
+        return this.events[event.originalEventIndex] as MoveCardEvent | ShuffleEvent;
+      case "move card":
+        return {
+          eventName: "move card",
+          move: {
+            gameCardIndex: event.move.gameCardIndex,
+            fromLocation: event.move.toLocation,
+            toLocation: event.move.fromLocation,
+          },
+        };
+      case "shuffle library":
+        return {
+          eventName: "shuffle library",
+          moves: event.moves.map((move) => ({
+            gameCardIndex: move.gameCardIndex,
+            fromLocation: move.toLocation,
+            toLocation: move.fromLocation,
+          })),
+        };
+      case "start game":
+        throw new Error("there isn't an event for reversing start game");
+    }
   }
 }
