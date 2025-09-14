@@ -1,4 +1,5 @@
 import { GameState } from "../../GameState.js";
+import { formatCardNameAsGathererLink } from "../common.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -30,7 +31,7 @@ function formatTableCardListHtmlFragment(game: GameState): string {
       (gameCard: any, index: number) =>
         `<li class="table-card-item">
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}" target="_blank" class="card-name-link">${gameCard.card.name}</a>
+            ${formatCardNameAsGathererLink(gameCard.card)}
           </div>
           <div class="card-actions">
               <button class="card-action-button"

@@ -1,15 +1,8 @@
 import { GameState } from "../../GameState.js";
 import { GameEvent } from "../../GameEvents.js";
 import { printLocation } from "../../port-persist-state/types.js";
+import { formatCardNameAsGathererLink } from "../common.js";
 
-function formatCardNameAsGathererLink(card: { name: string; multiverseid?: number }): string {
-  if (card.multiverseid) {
-    return `<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank" class="card-name-link">${card.name}</a>`;
-  } else {
-    const encodedCardName = encodeURIComponent(card.name);
-    return `<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodedCardName}" target="_blank" class="card-name-link">${card.name}</a>`;
-  }
-}
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"

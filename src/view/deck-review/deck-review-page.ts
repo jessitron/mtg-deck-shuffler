@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK } from "../common.js";
+import { CARD_BACK, formatCardNameAsGathererLink } from "../common.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImage } from "./commander-display.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
@@ -76,9 +76,7 @@ function formatLibraryCardList(game: GameState): string {
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
-            <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${
-              gameCard.card.multiverseid
-            }" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${gameCard.card.name}</a>
+            ${formatCardNameAsGathererLink(gameCard.card)}
           </div>
           ${cardActions}
         </li>`;
