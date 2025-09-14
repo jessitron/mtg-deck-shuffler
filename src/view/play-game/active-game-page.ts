@@ -19,7 +19,7 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
     .reverse()
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
-  return `<div id="game-details game-active">
+  return `<div id="game-details" class="game-details game-active">
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <div><p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
@@ -56,6 +56,11 @@ function formatGameActionsHtmlFragment(game: GameState): string {
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
         </form>
+        <button class="debug-button"
+                hx-get="/debug-state/${game.gameId}"
+                hx-target="#modal-container"
+                hx-swap="innerHTML"
+                style="margin-left: 10px;">Debug State</button>
       </div>`;
 }
 

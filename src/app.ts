@@ -6,6 +6,7 @@ import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
+import { formatDebugStateModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
@@ -271,6 +272,22 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error loading history modal:", error);
       res.status(500).send(`<div>Error loading history</div>`);
+    }
+  });
+
+  app.get("/debug-state/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+      const modalHtml = formatDebugStateModalHtmlFragment(persistedGame);
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading debug state:", error);
+      res.status(500).send(`<div>Error loading debug state</div>`);
     }
   });
 
