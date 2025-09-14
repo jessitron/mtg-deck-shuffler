@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatHomepageHtmlPage } from "../../src/view/load-deck-view.js";
+import { formatHomepageHtmlPage } from "../../src/view/deck-selection/deck-selection-page.js";
 import { AvailableDecks } from "../../src/port-deck-retrieval/types.js";
 
 describe("Homepage HTML Snapshot Tests", () => {

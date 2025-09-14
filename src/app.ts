@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { formatHomepageHtmlPage } from "./view/load-deck-view.js";
+import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatLibraryModalHtml } from "./view/review-deck-view.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/active-game-view.js";
