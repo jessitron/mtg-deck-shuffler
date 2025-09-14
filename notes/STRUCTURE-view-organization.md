@@ -26,6 +26,12 @@ src/view/
     └── game-modals.ts
 ```
 
+## Naming conventions
+
+Functions called from app.ts (top-level view functions) should be named format..HtmlPage() or format..HtmlSection().
+
+Inner functions can be named (eg) formatCommanderImage() -- they don't need the suffixes. This applies to all functions that are only called from other views
+
 ## Implementation Plan - Following User Journey
 
 ### Phase 1: Extract Truly Common Infrastructure
@@ -41,7 +47,11 @@ src/view/
 
 1. List functions that are duplicated in multiple places right now:
 
-(put them here)
+   - `formatHtmlHeadHtmlFragment` / `formatHtmlHead` - HTML head with meta tags, CSS, and scripts (4 copies across load-deck, error, active-game, review-deck views)
+   - `formatPageWrapperHtmlPage` / `formatPageWrapper` - Full HTML page wrapper with DOCTYPE, head, body structure (4 copies across same files)
+   - `formatCommanderImageHtmlFragment` / `formatCommanderImageHtml` - Commander image display or placeholder (3 copies in load-deck, active-game, review-deck views)
+   - `formatModalHtmlFragment` / `formatModalHtml` - Modal dialog structure with overlay and close behavior (2 copies in active-game, review-deck views)
+   - `formatGameDetailsHtmlFragment` / `formatGameDetailsHtml` - Game details section, though with different levels of detail (2 copies in active-game, review-deck views)
 
 2. Create `src/view/common/shared-components.ts`:
    - Only components that appear in multiple phases of the app
