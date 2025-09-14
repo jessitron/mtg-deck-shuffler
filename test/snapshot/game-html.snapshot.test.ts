@@ -6,6 +6,7 @@ import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
 import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../../src/port-persist-state/types.js";
 import { StartGameEvent } from "../../src/GameEvents.js";
+import { formatDeckReviewHtmlPage } from "../../src/view/deck-review/deck-review-page.js";
 
 describe("Game HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
@@ -147,8 +148,6 @@ describe("Game HTML Snapshot Tests", () => {
   it("formatGameHtml with not started game state", async () => {
     const snapshotFile = "game-not-started-state.html";
 
-    // Create a game state that hasn't started yet
-    const gameState = createFakeGameState();
     // Change status to NotStarted by creating a fresh persisted state
     const cards = [createFakeCard("Lightning Bolt", 100), createFakeCard("Sol Ring", 102)].sort((a, b) => a.name.localeCompare(b.name));
 
@@ -176,7 +175,7 @@ describe("Game HTML Snapshot Tests", () => {
     };
 
     const notStartedGameState = GameState.fromPersistedGameState(persistedState);
-    const actualHtml = formatGameHtmlSection(notStartedGameState, {});
+    const actualHtml = formatDeckReviewHtmlPage(notStartedGameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml

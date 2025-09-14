@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
-import { formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
+import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
 import { formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
@@ -11,7 +11,6 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort } from "./port-persist-state/types.js";
 import { trace } from "@opentelemetry/api";
-import { Deck } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -117,7 +116,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const html = formatGamePageHtmlPage(game);
+      var html: string;
+      if (game.gameStatus() === "Active") {
+        html = formatGamePageHtmlPage(game);
+      } else {
+        html = formatDeckReviewHtmlPage(game);
+      }
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);

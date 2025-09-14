@@ -1,3 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MTG Game - Test Not Started Game</title>
+<link rel="stylesheet" href="/styles.css" />
+<script src="/hny.js"></script>
+<script>
+Hny.initializeTracing({
+apiKey: "TEST_API_KEY",
+serviceName: "mtg-deck-shuffler-web",
+debug: false,
+provideOneLinkToHoneycomb: true,
+});
+</script>
+<script src="/htmx.js"></script>
+<script src="/game.js"></script>
+</head>
+<body>
+<h1>*Woohoo it's Magic time!*</h1>
 <div id="game-container">
 <div id="command-zone">
 <img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
@@ -6,13 +27,6 @@
 <h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Not Started Game</a></h2>
 <p>2 cards</p>
 <p><strong>Game ID:</strong> 456</p>
-<p><strong>Status:</strong> NotStarted</p>
-<div class="history">
-You've done 1 things so far
-<ol>
-<li>start game</li>
-</ol>
-</div>
 </div>
 <div id="library-section" data-testid="library-section">
 <h3>Library (2)</h3>
@@ -39,3 +53,8 @@ hx-swap="innerHTML">Search</button>
 </form>
 </div>
 </div>
+<footer>
+<p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+</footer>
+</body>
+</html>
