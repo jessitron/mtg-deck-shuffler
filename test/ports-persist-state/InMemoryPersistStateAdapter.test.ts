@@ -38,6 +38,7 @@ describe("InMemoryPersistStateAdapter", () => {
           gameCardIndex: 0,
         },
       ],
+      events: [],
     };
   });
 

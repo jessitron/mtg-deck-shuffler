@@ -45,6 +45,7 @@ describe("SqlitePersistStateAdapter", () => {
           gameCardIndex: 0,
         },
       ],
+      events: [],
     };
   });
 

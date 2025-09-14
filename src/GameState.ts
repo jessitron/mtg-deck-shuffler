@@ -96,7 +96,7 @@ export class GameState {
       ...psg,
       gameStatus: psg.status, // todo: use gameStatus in both places
       cards: psg.gameCards, // todo: use gameCards in both places
-      events: [],
+      events: psg.events || [],
     });
   }
 
@@ -405,6 +405,7 @@ export class GameState {
       deckId: this.deckId,
       totalCards: this.totalCards,
       gameCards: [...this.gameCards],
+      events: this.eventLog.getEvents(),
     };
   }
 }

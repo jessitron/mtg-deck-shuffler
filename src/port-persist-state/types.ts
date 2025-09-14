@@ -1,4 +1,5 @@
 import { CardDefinition, DeckProvenance } from "../types.js";
+import { GameEvent } from "../GameEvents.js";
 
 export type GameId = number;
 
@@ -46,7 +47,7 @@ export interface GameCard {
   gameCardIndex: number;
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 1 = 1;
+export const PERSISTED_GAME_STATE_VERSION: 2 = 2;
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;
@@ -58,6 +59,7 @@ export interface PersistedGameState {
   deckId: number;
   totalCards: number;
   gameCards: GameCard[];
+  events: GameEvent[];
 }
 
 export interface PersistStatePort {
