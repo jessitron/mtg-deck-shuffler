@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { formatCardNameAsGathererLink } from "../common.js";
+import { formatCardNameAsGathererLink } from "../common/shared-components.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"

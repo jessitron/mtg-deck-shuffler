@@ -1,6 +1,6 @@
 import { GameState } from "../../GameState.js";
 import { WhatHappened } from "../../types.js";
-import { CARD_BACK } from "../common.js";
+import { CARD_BACK } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const shufflingClass = whatHappened.shuffling ? " shuffling" : "";

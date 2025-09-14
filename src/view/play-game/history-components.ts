@@ -1,8 +1,7 @@
 import { GameState } from "../../GameState.js";
 import { GameEvent } from "../../GameEvents.js";
 import { printLocation } from "../../port-persist-state/types.js";
-import { formatCardNameAsGathererLink } from "../common.js";
-
+import { formatCardNameAsGathererLink } from "../common/shared-components.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -47,8 +46,9 @@ function formatHistoryListHtmlFragment(game: GameState): string {
   const events = game.gameEvents();
 
   return events
-    .map((event, index) =>
-      `<li class="history-item">
+    .map(
+      (event, index) =>
+        `<li class="history-item">
         <span class="event-number">${index + 1}.</span>
         <span class="event-description">${formatGameEventHtmlFragment(event, game)}</span>
       </li>`

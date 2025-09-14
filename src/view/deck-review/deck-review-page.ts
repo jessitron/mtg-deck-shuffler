@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, formatCardNameAsGathererLink } from "../common.js";
+import { CARD_BACK, formatCardNameAsGathererLink } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImage } from "./commander-display.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
