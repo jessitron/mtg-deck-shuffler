@@ -36,6 +36,34 @@ export type UndoEvent = {
   originalEventIndex: number;
 };
 
+export function nameMove(move: CardMove): string {
+  // from library to hand is "Draw"
+  // from anywhere to revealed is "Reveal"
+  // from anywhere to Table is "Play"
+  // from anywhere to Library(0) is "Put on Top"
+  // from anywhere to Library(nonzero) is "Put in library(position)"
+  // from one position to another in the same location is "Move around"
+  if (move.fromLocation.type === "Library" && move.toLocation.type === "Hand") {
+    return "Draw";
+  }
+  if (move.toLocation.type === "Revealed") {
+    return "Reveal";
+  }
+  if (move.toLocation.type === "Table") {
+    return "Play";
+  }
+  if (move.toLocation.type === "Library" && move.toLocation.position === 0) {
+    return "Put on top";
+  }
+  if (move.toLocation.type === "Library") {
+    return `Put in library(${move.toLocation.position})`;
+  }
+  if (move.fromLocation.type === move.toLocation.type) {
+    return `Move around in ${move.toLocation.type}`;
+  }
+  return `Move from ${move.fromLocation.type} to ${move.toLocation.type}`;
+}
+
 export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent;
 
 export type GameEvent = GameEventDefinition & GameEventIdentifier;

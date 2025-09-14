@@ -28,7 +28,7 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
           ${
             mostRecentUndoableEvent
               ? `<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-              <span>Can undo: ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</span>
+              ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}
               <button class="undo-button"
                       hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
                       hx-target="#game-container"

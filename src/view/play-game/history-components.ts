@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { GameEvent } from "../../GameEvents.js";
+import { GameEvent, nameMove } from "../../GameEvents.js";
 import { printLocation } from "../../port-persist-state/types.js";
 import { formatCardNameAsGathererLink } from "../common/shared-components.js";
 
@@ -46,9 +46,10 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
 function describeEvent(event: GameEvent, game: GameState): string {
   switch (event.eventName) {
     case "move card":
+      const description = nameMove(event.move);
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
       const cardNameLink = formatCardNameAsGathererLink(card);
-      return `Move ${cardNameLink} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
+      return `${description}: ${cardNameLink}`;
     case "shuffle library":
       return `Shuffle ${event.moves.length} cards in library`;
     case "start game":

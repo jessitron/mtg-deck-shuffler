@@ -382,17 +382,25 @@ export class GameState {
   public swapHandCardWithNext(handPosition: number): WhatHappened {
     const handCards = this.listHand();
 
-    if (handPosition < 0 || handPosition >= handCards.length - 1) {
-      throw new Error(`Invalid hand position for swap: ${handPosition}. Must be between 0 and ${handCards.length - 2}`);
-    }
-
     const cardToSwap = handCards[handPosition];
     const cardToRight = handCards[handPosition + 1];
+    if (!cardToRight) {
+      throw new Error(`No card to right of ${cardToSwap.card.name}`);
+    }
+    var nextPosition = cardToRight.location.position + 1;
 
-    // Swap their positions
-    const tempPosition = cardToSwap.location.position;
-    (cardToSwap.location as HandLocation).position = cardToRight.location.position;
-    (cardToRight.location as HandLocation).position = tempPosition;
+    const cardPastThat = handCards[handPosition + 2];
+    if (cardPastThat && cardPastThat.location.position <= nextPosition) {
+      // stick this one right in between them. Fractions are numbers!
+      nextPosition = (cardPastThat.location.position - cardToRight.location.position) / 2 + cardToRight.location.position;
+    }
+
+    const move: CardMove = {
+      gameCardIndex: cardToSwap.gameCardIndex,
+      fromLocation: cardToSwap.location,
+      toLocation: { type: "Hand", position: nextPosition },
+    };
+    this.executeMove(move);
 
     this.validateInvariants();
 
