@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatGameHtml } from "../../src/html-formatters.js";
+import { formatGameHtmlSection } from "../../src/html-formatters.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
 import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../../src/port-persist-state/types.js";
@@ -112,7 +112,7 @@ describe("Game HTML Snapshot Tests", () => {
   it("formatGameHtml with cards in hand, revealed, and on table", async () => {
     const snapshotFile = "game-active-state.html";
     const gameState = createFakeGameState();
-    const actualHtml = formatGameHtml(gameState, {});
+    const actualHtml = formatGameHtmlSection(gameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml
@@ -176,7 +176,7 @@ describe("Game HTML Snapshot Tests", () => {
     };
 
     const notStartedGameState = GameState.fromPersistedGameState(persistedState);
-    const actualHtml = formatGameHtml(notStartedGameState, {});
+    const actualHtml = formatGameHtmlSection(notStartedGameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml

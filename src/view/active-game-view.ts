@@ -4,7 +4,7 @@ import { CARD_BACK } from "./common.js";
 import { GameEvent } from "../GameEvents.js";
 import { printLocation } from "../port-persist-state/types.js";
 
-function formatCommanderImageHtml(commanders: any[]): string {
+function formatCommanderImageHtmlFragment(commanders: any[]): string {
   return commanders.length > 0
     ? commanders
         .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
@@ -12,10 +12,9 @@ function formatCommanderImageHtml(commanders: any[]): string {
     : `<div class="commander-placeholder">No Commander</div>`;
 }
 
-function formatGameDetailsHtml(game: GameState): string {
+function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
   return `<div id="game-details">
-  this is in active game view
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
@@ -23,7 +22,7 @@ function formatGameDetailsHtml(game: GameState): string {
         <div class="history">
         You've done ${game.gameEvents().length} things so far
         <ol>
-        ${game.gameEvents().map((e) => `<li>${formatGameEvent(e, game)}</li>`)}
+        ${game.gameEvents().map((e) => `<li>${formatGameEventHtmlFragment(e, game)}</li>`)}
         </ol>
         </div>
       </div>`;
@@ -33,7 +32,7 @@ function cardIndexToDefinition(game: GameState, gci: number) {
   return game.getCards()[gci].card;
 }
 
-function formatGameEvent(event: GameEvent, game: GameState) {
+function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   switch (event.eventName) {
     case "move card":
       const cardName = cardIndexToDefinition(game, event.move.gameCardIndex).name;
@@ -45,7 +44,7 @@ function formatGameEvent(event: GameEvent, game: GameState) {
   }
 }
 
-function formatModalHtml(title: string, bodyContent: string): string {
+function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
                hx-get="/close-modal"
                hx-target="#modal-container"
@@ -74,7 +73,7 @@ type CardAction = {
   cssClass?: string;
 };
 
-function formatCardActionButton(
+function formatCardActionButtonHtmlFragment(
   action: string,
   endpoint: string,
   gameId: number,
@@ -95,11 +94,11 @@ function formatCardActionButton(
                </button>`;
 }
 
-function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string): string {
-  return actions.map((action) => formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId)).join("");
+function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string): string {
+  return actions.map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId)).join("");
 }
 
-function formatRevealedCardActions(game: GameState, gameCard: GameCard): string {
+function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCard): string {
   const actions: CardAction[] = [
     { action: "Play", endpoint: "/play-card", title: "Copy image and remove from revealed", cssClass: "play-button" },
     { action: "Put in Hand", endpoint: "/put-in-hand", title: "Move card to hand", cssClass: "put-in-hand-button" },
@@ -108,11 +107,11 @@ function formatRevealedCardActions(game: GameState, gameCard: GameCard): string 
   ];
 
   return `<div class="card-buttons">
-    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
+    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
   </div>`;
 }
 
-function formatHandCardActions(game: GameState, gameCard: GameCard, index: number): string {
+function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, index: number): string {
   const handSize = game.listHand().length;
   const swapButton =
     index < handSize - 1
@@ -131,12 +130,12 @@ function formatHandCardActions(game: GameState, gameCard: GameCard, index: numbe
   ];
 
   return `<div class="hand-card-buttons">
-    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
+    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
     ${swapButton}
   </div>`;
 }
 
-function formatCardContainer(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = ""): string {
+function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = ""): string {
   const imageUrl = getCardImageUrl(gameCard.card.scryfallId);
   const cardClass = containerType === "revealed" ? "revealed-card" : "hand-card";
 
@@ -149,7 +148,7 @@ function formatCardContainer(gameCard: GameCard, containerType: "revealed" | "ha
   </div>`;
 }
 
-function formatHtmlHead(title: string): string {
+function formatHtmlHeadHtmlFragment(title: string): string {
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -169,8 +168,8 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string): string {
-  const headHtml = formatHtmlHead(title);
+function formatPageWrapperHtmlPage(title: string, content: string): string {
+  const headHtml = formatHtmlHeadHtmlFragment(title);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -186,9 +185,9 @@ function formatPageWrapper(title: string, content: string): string {
 </html>`;
 }
 
-function formatGameHeaderHtml(game: GameState): string {
-  const commanderImageHtml = formatCommanderImageHtml(game.commanders);
-  const gameDetailsHtml = formatGameDetailsHtml(game);
+function formatGameHeaderHtmlFragment(game: GameState): string {
+  const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
+  const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
 
   return `<div id="command-zone">
         ${commanderImageHtml}
@@ -196,7 +195,7 @@ function formatGameHeaderHtml(game: GameState): string {
       ${gameDetailsHtml}`;
 }
 
-function getAnimationClass(whatHappened: WhatHappened, gameCardIndex: number): string {
+function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
   if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-left";
   } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCardIndex)) {
@@ -205,16 +204,16 @@ function getAnimationClass(whatHappened: WhatHappened, gameCardIndex: number): s
   return "";
 }
 
-function formatRevealedCardsHtml(game: GameState, whatHappened: WhatHappened): string {
+function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
 
   if (revealedCards.length === 0) return "";
 
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
-      const animationClass = getAnimationClass(whatHappened, gameCard.gameCardIndex);
-      const actions = formatRevealedCardActions(game, gameCard);
-      return formatCardContainer(gameCard, "revealed", actions, animationClass);
+      const animationClass = getAnimationClassHelper(whatHappened, gameCard.gameCardIndex);
+      const actions = formatRevealedCardActionsHtmlFragment(game, gameCard);
+      return formatCardContainerHtmlFragment(gameCard, "revealed", actions, animationClass);
     })
     .join("");
 
@@ -227,13 +226,13 @@ function formatRevealedCardsHtml(game: GameState, whatHappened: WhatHappened): s
     </div>`;
 }
 
-function formatHandSectionHtml(game: GameState, whatHappened: WhatHappened): string {
+function formatHandSectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const handCards = game
     .listHand()
     .map((gameCard: GameCard, index: number) => {
-      const animationClass = getAnimationClass(whatHappened, gameCard.gameCardIndex);
-      const actions = formatHandCardActions(game, gameCard, index);
-      return formatCardContainer(gameCard, "hand", actions, animationClass);
+      const animationClass = getAnimationClassHelper(whatHappened, gameCard.gameCardIndex);
+      const actions = formatHandCardActionsHtmlFragment(game, gameCard, index);
+      return formatCardContainerHtmlFragment(gameCard, "hand", actions, animationClass);
     })
     .join("");
 
@@ -245,7 +244,7 @@ function formatHandSectionHtml(game: GameState, whatHappened: WhatHappened): str
       </div>`;
 }
 
-function formatLibrarySectionHtml(game: GameState, whatHappened: WhatHappened): string {
+function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
 
   return `<div id="library-section" data-testid="library-section">
@@ -276,7 +275,7 @@ function formatLibrarySectionHtml(game: GameState, whatHappened: WhatHappened): 
       </div>`;
 }
 
-function formatGameActionsHtml(game: GameState): string {
+function formatGameActionsHtmlFragment(game: GameState): string {
   return `<div id="end-game-actions" class="game-actions">
         <form method="post" action="/restart-game" style="display: inline;">
           <input type="hidden" name="game-id" value="${game.gameId}" />
@@ -289,7 +288,7 @@ function formatGameActionsHtml(game: GameState): string {
       </div>`;
 }
 
-function formatTableCardList(game: GameState): string {
+function formatTableCardListHtmlFragment(game: GameState): string {
   const tableCards = game.listTable();
 
   return tableCards
@@ -310,18 +309,18 @@ function formatTableCardList(game: GameState): string {
     .join("");
 }
 
-export function formatGamePageHtml(game: GameState, whatHappened: WhatHappened = {}): string {
-  const gameContent = formatActiveGameHtml(game, whatHappened);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
+export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
+  const gameContent = formatActiveGameHtmlSection(game, whatHappened);
+  return formatPageWrapperHtmlPage(`MTG Game - ${game.deckName}`, gameContent);
 }
 
-export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened): string {
-  const gameHeaderHtml = formatGameHeaderHtml(game);
+export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
+  const gameHeaderHtml = formatGameHeaderHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
-  const librarySectionHtml = formatLibrarySectionHtml(game, whatHappened);
-  const revealedCardsHtml = formatRevealedCardsHtml(game, whatHappened);
-  const handSectionHtml = formatHandSectionHtml(game, whatHappened);
-  const gameActionsHtml = formatGameActionsHtml(game);
+  const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
+  const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
+  const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
+  const gameActionsHtml = formatGameActionsHtmlFragment(game);
 
   return `<div id="game-container">
       ${gameHeaderHtml}
@@ -346,9 +345,9 @@ export function formatActiveGameHtml(game: GameState, whatHappened: WhatHappened
     </div>`;
 }
 
-export function formatTableModalHtml(game: GameState): string {
+export function formatTableModalHtmlFragment(game: GameState): string {
   const tableCards = game.listTable();
-  const tableCardList = formatTableCardList(game);
+  const tableCardList = formatTableCardListHtmlFragment(game);
 
   const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
           ${tableCards.length} cards on table
@@ -357,14 +356,14 @@ export function formatTableModalHtml(game: GameState): string {
           ${tableCardList}
         </ul>`;
 
-  return formatModalHtml("Cards on Table", bodyContent);
+  return formatModalHtmlFragment("Cards on Table", bodyContent);
 }
 
-export function formatGameHtml(game: GameState, whatHappened: WhatHappened = {}): string {
+export function formatGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
   if (game.gameStatus() === "NotStarted") {
-    const { formatDeckReviewHtml } = require("./review-deck-view.js");
-    return formatDeckReviewHtml(game);
+    const { formatDeckReviewHtmlSection } = require("./review-deck-view.js");
+    return formatDeckReviewHtmlSection(game);
   } else {
-    return formatActiveGameHtml(game, whatHappened);
+    return formatActiveGameHtmlSection(game, whatHappened);
   }
 }

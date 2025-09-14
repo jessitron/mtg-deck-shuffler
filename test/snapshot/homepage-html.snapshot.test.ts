@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatHomepageHtml } from "../../src/view/load-deck-view.js";
+import { formatHomepageHtmlPage } from "../../src/view/load-deck-view.js";
 import { AvailableDecks } from "../../src/port-deck-retrieval/types.js";
 
 describe("Homepage HTML Snapshot Tests", () => {
@@ -51,7 +51,7 @@ describe("Homepage HTML Snapshot Tests", () => {
 
   it("formatHomepageHtml with multiple local decks", async () => {
     const snapshotFile = "homepage-with-decks.html";
-    const actualHtml = formatHomepageHtml(fakeAvailableDecks);
+    const actualHtml = formatHomepageHtmlPage(fakeAvailableDecks);
     
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml
@@ -83,7 +83,7 @@ describe("Homepage HTML Snapshot Tests", () => {
 
   it("formatHomepageHtml with no local decks", async () => {
     const snapshotFile = "homepage-no-decks.html";
-    const actualHtml = formatHomepageHtml(emptyAvailableDecks);
+    const actualHtml = formatHomepageHtmlPage(emptyAvailableDecks);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml

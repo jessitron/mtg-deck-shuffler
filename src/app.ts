@@ -1,11 +1,11 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { formatHomepageHtml } from "./view/load-deck-view.js";
-import { formatErrorPage } from "./view/error-view.js";
-import { formatLibraryModalHtml } from "./view/review-deck-view.js";
-import { formatGameHtml, formatTableModalHtml } from "./view/active-game-view.js";
-import { formatGamePageHtml } from "./html-formatters.js";
+import { formatHomepageHtmlPage } from "./view/load-deck-view.js";
+import { formatErrorPageHtmlPage } from "./view/error-view.js";
+import { formatLibraryModalHtmlFragment } from "./view/review-deck-view.js";
+import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/active-game-view.js";
+import { formatGamePageHtmlPage } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -25,7 +25,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.get("/", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
-      const html = formatHomepageHtml(availableDecks);
+      const html = formatHomepageHtmlPage(availableDecks);
 
       res.send(html);
     } catch (error) {
@@ -59,7 +59,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error fetching deck:", error);
       res.status(500).send(
-        formatErrorPage({
+        formatErrorPageHtmlPage({
           icon: "🚫",
           title: "Deck Load Error",
           message: `Could not fetch deck <strong>${deckNumber || localFile}</strong> from <strong>${deckSource}</strong>.`,
@@ -87,7 +87,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       game.startGame();
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game, { shuffling: true });
+      const html = formatGameHtmlSection(game, { shuffling: true });
       res.send(html);
     } catch (error) {
       console.error("Error starting game:", error);
@@ -106,7 +106,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
         res.status(404).send(
-          formatErrorPage({
+          formatErrorPageHtmlPage({
             icon: "🎯",
             title: "Game Not Found",
             message: `Game <strong>${gameId}</strong> could not be found.`,
@@ -117,12 +117,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const html = formatGamePageHtml(game);
+      const html = formatGamePageHtmlPage(game);
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
       res.status(500).send(
-        formatErrorPage({
+        formatErrorPageHtmlPage({
           icon: "⚠️",
           title: "Game Load Error",
           message: `Could not load game <strong>${gameId}</strong>.`,
@@ -140,7 +140,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
         res.status(404).send(
-          formatErrorPage({
+          formatErrorPageHtmlPage({
             icon: "🎯",
             title: "Game Not Found",
             message: `Game <strong>${gameId}</strong> could not be found.`,
@@ -176,7 +176,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error restarting game:", error);
       res.status(500).send(
-        formatErrorPage({
+        formatErrorPageHtmlPage({
           icon: "🔄",
           title: "Game Restart Error",
           message: `Could not restart game <strong>${gameId}</strong>.`,
@@ -219,7 +219,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const modalHtml = formatLibraryModalHtml(game);
+      const modalHtml = formatLibraryModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading library modal:", error);
@@ -239,7 +239,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const modalHtml = formatTableModalHtml(game);
+      const modalHtml = formatTableModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading table modal:", error);
@@ -271,7 +271,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error revealing card:", error);
@@ -296,7 +296,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card in hand:", error);
@@ -327,7 +327,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         "game.cardsRevealed": game.listRevealed().length,
       });
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card down:", error);
@@ -352,7 +352,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card on top:", error);
@@ -377,7 +377,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card on bottom:", error);
@@ -413,7 +413,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       });
       await persistStatePort.save(persistedGameState);
 
-      const html = formatGameHtml(game);
+      const html = formatGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error drawing card:", error);
@@ -451,7 +451,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(persistedGameState);
 
-      const html = formatGameHtml(game, whatHappened);
+      const html = formatGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error playing card:", error);
@@ -474,7 +474,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const whatHappened = game.shuffle();
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game, whatHappened);
+      const html = formatGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error shuffling library:", error);
@@ -503,7 +503,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const whatHappened = game.swapHandCardWithNext(handPosition);
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtml(game, whatHappened);
+      const html = formatGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error swapping card with next:", error);

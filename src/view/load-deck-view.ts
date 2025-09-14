@@ -1,7 +1,7 @@
 import { AvailableDecks } from "../port-deck-retrieval/types.js";
 import { Deck, getCardImageUrl } from "../types.js";
 
-function formatCommanderImageHtml(commanders: any[]): string {
+function formatCommanderImageHtmlFragment(commanders: any[]): string {
   return commanders.length > 0
     ? commanders
         .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
@@ -9,7 +9,7 @@ function formatCommanderImageHtml(commanders: any[]): string {
     : `<div class="commander-placeholder">No Commander</div>`;
 }
 
-function formatHtmlHead(title: string): string {
+function formatHtmlHeadHtmlFragment(title: string): string {
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,8 +29,8 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string): string {
-  const headHtml = formatHtmlHead(title);
+function formatPageWrapperHtmlPage(title: string, content: string): string {
+  const headHtml = formatHtmlHeadHtmlFragment(title);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -46,17 +46,17 @@ function formatPageWrapper(title: string, content: string): string {
 </html>`;
 }
 
-export function formatChooseDeckHtml(availableDecks: AvailableDecks) {
-  const archidektSelectionHtml = formatArchidektInput();
+export function formatChooseDeckHtmlSection(availableDecks: AvailableDecks) {
+  const archidektSelectionHtml = formatArchidektInputHtmlFragment();
 
-  const localSelectionHtml = formatLocalDeckInput(availableDecks);
+  const localSelectionHtml = formatLocalDeckInputHtmlFragment(availableDecks);
   return `<div id="deck-input">
       ${archidektSelectionHtml}
       ${localSelectionHtml}
     </div>`;
 }
 
-function formatArchidektInput() {
+function formatArchidektInputHtmlFragment() {
   return `<div class="deck-input-section">
       <form method="POST" action="/deck">
         <label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
@@ -67,7 +67,7 @@ function formatArchidektInput() {
    </div>`;
 }
 
-function formatLocalDeckInput(availableDecks: AvailableDecks) {
+function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
   if (availableDecks.length === 0) {
     return "";
   }
@@ -83,8 +83,8 @@ function formatLocalDeckInput(availableDecks: AvailableDecks) {
     </div>`;
 }
 
-export function formatHomepageHtml(availableDecks: AvailableDecks): string {
-  const deckSelectionHtml = formatChooseDeckHtml(availableDecks);
+export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
+  const deckSelectionHtml = formatChooseDeckHtmlSection(availableDecks);
   
   const content = `
     ${deckSelectionHtml}
@@ -118,11 +118,11 @@ export function formatHomepageHtml(availableDecks: AvailableDecks): string {
       </p>
     </div>`;
 
-  return formatPageWrapper("MTG Deck Shuffler", content);
+  return formatPageWrapperHtmlPage("MTG Deck Shuffler", content);
 }
 
-export function formatDeckHtml(deck: Deck): string {
-  const commanderImageHtml = formatCommanderImageHtml(deck.commanders);
+export function formatDeckHtmlSection(deck: Deck): string {
+  const commanderImageHtml = formatCommanderImageHtmlFragment(deck.commanders);
   const cardCountInfo = `${deck.totalCards} cards`;
   const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
 

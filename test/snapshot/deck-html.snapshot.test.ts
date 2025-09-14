@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatDeckHtml } from "../../src/html-formatters.js";
+import { formatDeckHtmlSection } from "../../src/html-formatters.js";
 import { Deck, CardDefinition } from "../../src/types.js";
 
 describe("Deck HTML Snapshot Tests", () => {
@@ -67,7 +67,7 @@ describe("Deck HTML Snapshot Tests", () => {
   it("formatDeckHtml with zero commanders", async () => {
     const snapshotFile = "deck-zero-commanders.html";
     const deck = createFakeDeck(0);
-    const actualHtml = formatDeckHtml(deck);
+    const actualHtml = formatDeckHtmlSection(deck);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -99,7 +99,7 @@ describe("Deck HTML Snapshot Tests", () => {
   it("formatDeckHtml with one commander", async () => {
     const snapshotFile = "deck-one-commander.html";
     const deck = createFakeDeck(1);
-    const actualHtml = formatDeckHtml(deck);
+    const actualHtml = formatDeckHtmlSection(deck);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -131,7 +131,7 @@ describe("Deck HTML Snapshot Tests", () => {
   it("formatDeckHtml with two commanders", async () => {
     const snapshotFile = "deck-two-commanders.html";
     const deck = createFakeDeck(2);
-    const actualHtml = formatDeckHtml(deck);
+    const actualHtml = formatDeckHtmlSection(deck);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml

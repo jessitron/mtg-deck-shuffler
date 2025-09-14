@@ -1,4 +1,4 @@
-function formatHtmlHead(title: string): string {
+function formatHtmlHeadHtmlFragment(title: string): string {
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,8 +18,8 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string): string {
-  const headHtml = formatHtmlHead(title);
+function formatPageWrapperHtmlPage(title: string, content: string): string {
+  const headHtml = formatHtmlHeadHtmlFragment(title);
   
   return `<!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@ interface ErrorPageOptions {
   details?: string;
 }
 
-export function formatErrorPage(options: ErrorPageOptions): string {
+export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
   const { icon, title, message, details } = options;
   
   const content = `<div class="deck-input-section">
@@ -58,5 +58,5 @@ export function formatErrorPage(options: ErrorPageOptions): string {
       </div>
     </div>`;
   
-  return formatPageWrapper(`${title} - MTG Deck Shuffler`, content);
+  return formatPageWrapperHtmlPage(`${title} - MTG Deck Shuffler`, content);
 }
