@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatHomepageHtmlPage } from "./view/load-deck-view.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
-import { formatLibraryModalHtmlFragment } from "./view/review-deck-view.js";
+import { formatLibraryModalHtml } from "./view/review-deck-view.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/active-game-view.js";
 import { formatGamePageHtmlPage } from "./html-formatters.js";
 import { GameState } from "./GameState.js";
@@ -219,7 +219,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const modalHtml = formatLibraryModalHtmlFragment(game);
+      const modalHtml = formatLibraryModalHtml(game);
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading library modal:", error);
