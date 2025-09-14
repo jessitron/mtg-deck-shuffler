@@ -45,7 +45,6 @@ export class GameEventLog {
   }
 
   public record(event: GameEvent) {
-    console.log("recording: " + event.eventName);
     this.events.push(event);
   }
 
