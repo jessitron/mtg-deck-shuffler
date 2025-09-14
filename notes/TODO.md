@@ -1,16 +1,16 @@
 # Things to change
 
-- OMG get the view functions renamed to HtmlSection or HtmlPage asap. There are duplicate names!! It's horrible!!
-
-- the snapshot tests are finding a bunch of irrelevant formatting differences. Why? Why does this change?
+- cards with two faces! we need a way to flip them
 
 ## Bugs to fix
 
 - Restart Game button is broken
 
-- Game Event Log is not persisted
+- Nature's Lore from Dogs & Cats Deck had no multiverse ID. Gatherer link didn't work.
 
 ## More Things to change
+
+- The game events would be easier to undo if they included their description.
 
 - I want a log of what happened! Today I clicked some stuff in my hand too fast and wondered whether I put too many cards on the table. I need that list of actions.
 
