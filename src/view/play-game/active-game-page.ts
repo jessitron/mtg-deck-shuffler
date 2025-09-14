@@ -1,12 +1,11 @@
 import { CardDefinition, getCardImageUrl, WhatHappened } from "../../types.js";
 import { GameCard, GameState } from "../../GameState.js";
-import { GameEvent } from "../../GameEvents.js";
-import { printLocation } from "../../port-persist-state/types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatHandSectionHtmlFragment } from "./hand-components.js";
 import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatTableModalHtmlFragment } from "./game-modals.js";
+import { formatGameEventHtmlFragment } from "./history-components.js";
 
 function formatCommanderImageHtmlFragment(commanders: any[]): string {
   return commanders.length > 0
@@ -18,35 +17,27 @@ function formatCommanderImageHtmlFragment(commanders: any[]): string {
 
 function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
+  const events = game.gameEvents();
+  const mostRecentEvent = events.length > 0 ? events[events.length - 1] : null;
+
   return `<div id="game-details">
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
         <p>${cardCountInfo}</p>
         <p><strong>Game ID:</strong> ${game.gameId}</p>
         <p><strong>Status:</strong> ${game.gameStatus()}</p>
         <div class="history">
-        You've done ${game.gameEvents().length} things so far
-        <ol>
-        ${game.gameEvents().map((e) => `<li>${formatGameEventHtmlFragment(e, game)}</li>`)}
-        </ol>
+          ${mostRecentEvent
+            ? `<p>Last action: ${formatGameEventHtmlFragment(mostRecentEvent, game)}</p>`
+            : '<p>No actions taken yet</p>'
+          }
+          <button class="history-button"
+                  hx-get="/history-modal/${game.gameId}"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML">View History (${events.length})</button>
         </div>
       </div>`;
 }
 
-function cardIndexToDefinition(game: GameState, gci: number) {
-  return game.getCards()[gci].card;
-}
-
-function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
-  switch (event.eventName) {
-    case "move card":
-      const cardName = cardIndexToDefinition(game, event.move.gameCardIndex).name;
-      return `Move ${cardName} from ${printLocation(event.move.fromLocation)} to ${printLocation(event.move.toLocation)}`;
-    case "shuffle library":
-      return `Shuffle ${event.moves.length} cards in library`;
-    case "start game":
-      return "Start game";
-  }
-}
 
 function formatGameHeaderHtmlFragment(game: GameState): string {
   const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);

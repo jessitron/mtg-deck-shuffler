@@ -5,6 +5,7 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
+import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
@@ -254,6 +255,23 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   // Returns empty response - closes modal
   app.get("/close-modal", (req, res) => {
     res.send("");
+  });
+
+  app.get("/history-modal/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+      const game = GameState.fromPersistedGameState(persistedGame);
+      const modalHtml = formatHistoryModalHtmlFragment(game);
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading history modal:", error);
+      res.status(500).send(`<div>Error loading history</div>`);
+    }
   });
 
   // Card action endpoints
