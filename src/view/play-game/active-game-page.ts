@@ -13,7 +13,13 @@ import { formatCommanderImageHtmlFragment } from "../common/shared-components.js
 function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
   const events = game.gameEvents();
-  const mostRecentEvent = events.length > 0 ? events[events.length - 1] : null;
+  const eventLog = game.getEventLog();
+
+  // Find the most recent undoable event
+  const mostRecentUndoableEvent = events
+    .slice()
+    .reverse()
+    .find(event => eventLog.canBeUndone(event.gameEventIndex));
 
   return `<div id="game-details">
         <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
@@ -21,7 +27,16 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
         <p><strong>Game ID:</strong> ${game.gameId}</p>
         <p><strong>Status:</strong> ${game.gameStatus()}</p>
         <div class="history">
-          ${mostRecentEvent ? `<p>Last action: ${formatGameEventHtmlFragment(mostRecentEvent, game)}</p>` : "<p>No actions taken yet</p>"}
+          ${mostRecentUndoableEvent ?
+            `<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <span>Can undo: ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</span>
+              <button class="undo-button"
+                      hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
+                      hx-target="#game-container"
+                      hx-swap="outerHTML"
+                      style="padding: 4px 8px; font-size: 0.8rem;">Undo</button>
+            </div>` :
+            "<p>No actions to undo</p>"}
           <button class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"

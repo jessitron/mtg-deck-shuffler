@@ -30,6 +30,20 @@ function cardIndexToDefinition(game: GameState, gci: number) {
 }
 
 export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
+  const isUndone = game.getEventLog().hasBeenUndone(event.gameEventIndex);
+  const eventNameToCssClass = {
+    "move card": "event-move-card",
+    "shuffle library": "event-shuffle-library",
+    "start game": "event-start-game",
+    undo: "event-undo",
+  };
+
+  const description = describeEvent(event, game);
+  return `
+  <span class="event-description ${isUndone ? "undone" : ""} ${eventNameToCssClass[event.eventName]}">${description}</span>`;
+}
+
+function describeEvent(event: GameEvent, game: GameState) {
   switch (event.eventName) {
     case "move card":
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
@@ -39,22 +53,24 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
       return `Shuffle ${event.moves.length} cards in library`;
     case "start game":
       return "Start game";
+    case "undo":
+      return "Undo: ${formatGameEventHtmlFragment(game.getEventLog().getEvents()[event.originalEventIndex], game)}";
   }
 }
 
 function formatHistoryListHtmlFragment(game: GameState): string {
   const events = game.gameEvents();
+  const eventLog = game.getEventLog();
 
   return events
     .map((event, index) => ({ event, originalIndex: index + 1 }))
     .reverse()
-    .map(
-      ({ event, originalIndex }) =>
-        `<li class="history-item">
+    .map(({ event, originalIndex }) => {
+      return `<li class="history-item" id="event-${event.gameEventIndex}">
         <span class="event-number">${originalIndex}.</span>
-        <span class="event-description">${formatGameEventHtmlFragment(event, game)}</span>
-      </li>`
-    )
+        ${formatGameEventHtmlFragment(event, game)}
+      </li>`;
+    })
     .join("");
 }
 

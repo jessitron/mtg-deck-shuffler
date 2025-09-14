@@ -108,6 +108,10 @@ export class GameState {
     return this.eventLog.getEvents();
   }
 
+  public getEventLog() {
+    return this.eventLog;
+  }
+
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
 

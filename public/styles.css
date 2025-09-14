@@ -267,6 +267,22 @@ h1 {
   background-color: #5a6268;
 }
 
+.event-undo {
+  color: #6c757d;
+}
+
+.undone {
+  text-decoration: line-through;
+}
+
+.event-start-game {
+  color: #4caf50;
+}
+
+.event-shuffle-library {
+  color: #4122b1;
+}
+
 #library-section {
   grid-area: library-section;
   display: flex;
