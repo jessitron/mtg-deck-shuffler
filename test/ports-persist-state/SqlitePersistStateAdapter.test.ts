@@ -1,5 +1,3 @@
-import { describe, it, beforeEach, afterEach } from "node:test";
-import { strict as assert } from "node:assert";
 import { SqlitePersistStateAdapter } from "../../src/port-persist-state/SqlitePersistStateAdapter.js";
 import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
 import { GameStatus } from "../../src/GameState.js";
@@ -63,26 +61,26 @@ describe("SqlitePersistStateAdapter", () => {
     const id2 = adapter.newGameId();
     const id3 = adapter.newGameId();
 
-    assert.equal(id1, 1);
-    assert.equal(id2, 2);
-    assert.equal(id3, 3);
+    expect(id1).toBe(1);
+    expect(id2).toBe(2);
+    expect(id3).toBe(3);
   });
 
   it("should save and retrieve game state", async () => {
     const gameId = await adapter.save(testGameState);
 
-    assert.equal(gameId, testGameState.gameId);
+    expect(gameId).toBe(testGameState.gameId);
 
     const retrieved = await adapter.retrieve(gameId);
 
-    assert.notEqual(retrieved, null);
-    assert.deepEqual(retrieved, testGameState);
-    assert.notStrictEqual(retrieved, testGameState); // Should be a copy
+    expect(retrieved).not.toBe(null);
+    expect(retrieved).toEqual(testGameState);
+    expect(retrieved).not.toBe(testGameState); // Should be a copy
   });
 
   it("should return null for non-existent game ID", async () => {
     const retrieved = await adapter.retrieve(999);
-    assert.equal(retrieved, null);
+    expect(retrieved).toBe(null);
   });
 
   it("should store multiple game states independently", async () => {
@@ -98,8 +96,8 @@ describe("SqlitePersistStateAdapter", () => {
     const retrieved1 = await adapter.retrieve(1);
     const retrieved2 = await adapter.retrieve(2);
 
-    assert.deepEqual(retrieved1?.deckName, "Test Deck");
-    assert.deepEqual(retrieved2?.deckName, "Second Deck");
+    expect(retrieved1?.deckName).toEqual("Test Deck");
+    expect(retrieved2?.deckName).toEqual("Second Deck");
   });
 
   it("should update existing game state when saving with same ID", async () => {
@@ -115,8 +113,8 @@ describe("SqlitePersistStateAdapter", () => {
 
     const retrieved = await adapter.retrieve(testGameState.gameId);
 
-    assert.equal(retrieved?.status, GameStatus.Active);
-    assert.equal(retrieved?.deckName, "Updated Deck Name");
+    expect(retrieved?.status).toBe(GameStatus.Active);
+    expect(retrieved?.deckName).toBe("Updated Deck Name");
   });
 
   it("should handle date serialization correctly", async () => {
@@ -132,11 +130,10 @@ describe("SqlitePersistStateAdapter", () => {
     await adapter.save(gameStateWithDate);
     const retrieved = await adapter.retrieve(gameStateWithDate.gameId);
 
-    assert.notEqual(retrieved, null);
-    assert.deepEqual(
-      new Date(retrieved!.deckProvenance.retrievedDate),
-      testDate
-    );
+    expect(retrieved).not.toBe(null);
+    expect(
+      new Date(retrieved!.deckProvenance.retrievedDate)
+    ).toEqual(testDate);
   });
 
   it("should persist data across adapter instances", async () => {
@@ -147,10 +144,10 @@ describe("SqlitePersistStateAdapter", () => {
     // Create new adapter instance with same database file
     const adapter2 = new SqlitePersistStateAdapter(testDbPath);
     await adapter2.waitForInitialization();
-    
+
     try {
       const retrieved = await adapter2.retrieve(testGameState.gameId);
-      assert.deepEqual(retrieved, testGameState);
+      expect(retrieved).toEqual(testGameState);
     } finally {
       await adapter2.close();
     }

@@ -1,5 +1,3 @@
-import { test, describe, beforeEach } from "node:test";
-import assert from "node:assert";
 import fs from "node:fs";
 import { Deck } from "../../src/types.js";
 import { ArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
@@ -19,7 +17,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     adapter = new ArchidektDeckToDeckAdapter(mockGateway);
   });
 
-  test("converts basic deck without commander", async () => {
+  it("converts basic deck without commander", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Test Deck",
@@ -67,16 +65,16 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "123" };
     const result: Deck = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 123, "ID is not what we hard-coded");
-    assert.strictEqual(result.name, "Test Deck");
-    assert.strictEqual(result.totalCards, 24);
-    assert.deepStrictEqual(result.commanders, []);
-    assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/123");
-    assert.strictEqual(result.provenance.deckSource, "archidekt");
-    assert.ok(result.provenance.retrievedDate instanceof Date);
+    expect(result.id).toBe(123);
+    expect(result.name).toBe("Test Deck");
+    expect(result.totalCards).toBe(24);
+    expect(result.commanders).toEqual([]);
+    expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/123");
+    expect(result.provenance.deckSource).toBe("archidekt");
+    expect(result.provenance.retrievedDate instanceof Date).toBe(true);
   });
 
-  test("converts deck with commander", async () => {
+  it("converts deck with commander", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Commander Deck",
@@ -140,13 +138,13 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "456" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 456);
-    assert.strictEqual(result.name, "Commander Deck");
-    assert.strictEqual(result.totalCards, 32); // 31 non-commander cards + 1 commander
-    assert.deepStrictEqual(result.commanders, [{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333 }]);
+    expect(result.id).toBe(456);
+    expect(result.name).toBe("Commander Deck");
+    expect(result.totalCards).toBe(32); // 31 non-commander cards + 1 commander
+    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333 }]);
   });
 
-  test("handles empty deck", async () => {
+  it("handles empty deck", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 789,
       name: "Empty Deck",
@@ -160,13 +158,13 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "789" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 789);
-    assert.strictEqual(result.name, "Empty Deck");
-    assert.strictEqual(result.totalCards, 0);
-    assert.deepStrictEqual(result.commanders, []);
+    expect(result.id).toBe(789);
+    expect(result.name).toBe("Empty Deck");
+    expect(result.totalCards).toBe(0);
+    expect(result.commanders).toEqual([]);
   });
 
-  test("separates included cards from excluded cards", async () => {
+  it("separates included cards from excluded cards", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 999,
       name: "Deck with Excluded Cards",
@@ -246,13 +244,13 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "999" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 999);
-    assert.strictEqual(result.name, "Deck with Excluded Cards");
-    assert.strictEqual(result.totalCards, 24);
-    assert.deepStrictEqual(result.commanders, []);
+    expect(result.id).toBe(999);
+    expect(result.name).toBe("Deck with Excluded Cards");
+    expect(result.totalCards).toBe(24);
+    expect(result.commanders).toEqual([]);
   });
 
-  test("converts real Ygra deck data correctly", async () => {
+  it("converts real Ygra deck data correctly", async () => {
     const ygraData = JSON.parse(fs.readFileSync("./test/deck-ygra.json", "utf8"));
 
     // Mock the gateway to return our test data
@@ -261,13 +259,13 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "14669648" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 14669648);
-    assert.strictEqual(result.name, "Ygra EATS IT ALL");
-    assert.deepStrictEqual(result.commanders, [{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
-    assert.strictEqual(result.totalCards, 4); // 3 non-commander cards + 1 commander
+    expect(result.id).toBe(14669648);
+    expect(result.name).toBe("Ygra EATS IT ALL");
+    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
+    expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
   });
 
-  test("converts cards with oracle name correctly", async () => {
+  it("converts cards with oracle name correctly", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Oracle Name Test",
@@ -300,11 +298,11 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "123" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.cards.length, 1);
-    assert.deepStrictEqual(result.cards[0], { name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456 });
+    expect(result.cards.length).toBe(1);
+    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456 });
   });
 
-  test("converts cards with display name correctly", async () => {
+  it("converts cards with display name correctly", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Display Name Test",
@@ -338,11 +336,11 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "456" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.cards.length, 1);
-    assert.deepStrictEqual(result.cards[0], { name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012 });
+    expect(result.cards.length).toBe(1);
+    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012 });
   });
 
-  test("converts deck with multiple commanders", async () => {
+  it("converts deck with multiple commanders", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 13083247,
       name: "Dual Commander Deck",
@@ -399,15 +397,15 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "13083247" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 13083247);
-    assert.strictEqual(result.name, "Dual Commander Deck");
-    assert.strictEqual(result.totalCards, 22); // 20 non-commander cards + 2 commanders
-    assert.strictEqual(result.commanders.length, 2);
-    assert.deepStrictEqual(result.commanders[0], { name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111 });
-    assert.deepStrictEqual(result.commanders[1], { name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222 });
+    expect(result.id).toBe(13083247);
+    expect(result.name).toBe("Dual Commander Deck");
+    expect(result.totalCards).toBe(22); // 20 non-commander cards + 2 commanders
+    expect(result.commanders.length).toBe(2);
+    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111 });
+    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222 });
   });
 
-  test("handles deck with null categories", async () => {
+  it("handles deck with null categories", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 555,
       name: "Deck with Null Categories",
@@ -440,10 +438,10 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "555" };
     const result = await adapter.retrieveDeck(request);
 
-    assert.strictEqual(result.id, 555);
-    assert.strictEqual(result.name, "Deck with Null Categories");
-    assert.strictEqual(result.totalCards, 24); // All cards included when categories is null
-    assert.deepStrictEqual(result.commanders, []);
-    assert.strictEqual(result.provenance.sourceUrl, "https://archidekt.com/decks/555");
+    expect(result.id).toBe(555);
+    expect(result.name).toBe("Deck with Null Categories");
+    expect(result.totalCards).toBe(24); // All cards included when categories is null
+    expect(result.commanders).toEqual([]);
+    expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/555");
   });
 });
