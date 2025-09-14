@@ -32,8 +32,8 @@
       function isFunction2(funktion) {
         return typeof funktion === "function";
       }
-      var logger = console.error.bind(console);
-      function defineProperty(obj, name, value) {
+      var logger3 = console.error.bind(console);
+      function defineProperty3(obj, name, value) {
         var enumerable = !!obj[name] && obj.propertyIsEnumerable(name);
         Object.defineProperty(obj, name, {
           configurable: true,
@@ -42,89 +42,785 @@
           value
         });
       }
-      function shimmer3(options) {
+      function shimmer4(options) {
         if (options && options.logger) {
-          if (!isFunction2(options.logger)) logger("new logger isn't a function, not replacing");
-          else logger = options.logger;
+          if (!isFunction2(options.logger)) logger3("new logger isn't a function, not replacing");
+          else logger3 = options.logger;
         }
       }
-      function wrap3(nodule, name, wrapper) {
+      function wrap4(nodule, name, wrapper) {
         if (!nodule || !nodule[name]) {
-          logger("no original function " + name + " to wrap");
+          logger3("no original function " + name + " to wrap");
           return;
         }
         if (!wrapper) {
-          logger("no wrapper function");
-          logger(new Error().stack);
+          logger3("no wrapper function");
+          logger3(new Error().stack);
           return;
         }
         if (!isFunction2(nodule[name]) || !isFunction2(wrapper)) {
-          logger("original object and wrapper must be functions");
+          logger3("original object and wrapper must be functions");
           return;
         }
         var original = nodule[name];
         var wrapped = wrapper(original, name);
-        defineProperty(wrapped, "__original", original);
-        defineProperty(wrapped, "__unwrap", function() {
-          if (nodule[name] === wrapped) defineProperty(nodule, name, original);
+        defineProperty3(wrapped, "__original", original);
+        defineProperty3(wrapped, "__unwrap", function() {
+          if (nodule[name] === wrapped) defineProperty3(nodule, name, original);
         });
-        defineProperty(wrapped, "__wrapped", true);
-        defineProperty(nodule, name, wrapped);
+        defineProperty3(wrapped, "__wrapped", true);
+        defineProperty3(nodule, name, wrapped);
         return wrapped;
       }
-      function massWrap3(nodules, names, wrapper) {
+      function massWrap4(nodules, names, wrapper) {
         if (!nodules) {
-          logger("must provide one or more modules to patch");
-          logger(new Error().stack);
+          logger3("must provide one or more modules to patch");
+          logger3(new Error().stack);
           return;
         } else if (!Array.isArray(nodules)) {
           nodules = [nodules];
         }
         if (!(names && Array.isArray(names))) {
-          logger("must provide one or more functions to wrap on modules");
+          logger3("must provide one or more functions to wrap on modules");
           return;
         }
         nodules.forEach(function(nodule) {
           names.forEach(function(name) {
-            wrap3(nodule, name, wrapper);
+            wrap4(nodule, name, wrapper);
           });
         });
       }
-      function unwrap3(nodule, name) {
+      function unwrap4(nodule, name) {
         if (!nodule || !nodule[name]) {
-          logger("no function to unwrap.");
-          logger(new Error().stack);
+          logger3("no function to unwrap.");
+          logger3(new Error().stack);
           return;
         }
         if (!nodule[name].__unwrap) {
-          logger("no original to unwrap to -- has " + name + " already been unwrapped?");
+          logger3("no original to unwrap to -- has " + name + " already been unwrapped?");
         } else {
           return nodule[name].__unwrap();
         }
       }
-      function massUnwrap3(nodules, names) {
+      function massUnwrap4(nodules, names) {
         if (!nodules) {
-          logger("must provide one or more modules to patch");
-          logger(new Error().stack);
+          logger3("must provide one or more modules to patch");
+          logger3(new Error().stack);
           return;
         } else if (!Array.isArray(nodules)) {
           nodules = [nodules];
         }
         if (!(names && Array.isArray(names))) {
-          logger("must provide one or more functions to unwrap on modules");
+          logger3("must provide one or more functions to unwrap on modules");
           return;
         }
         nodules.forEach(function(nodule) {
           names.forEach(function(name) {
-            unwrap3(nodule, name);
+            unwrap4(nodule, name);
           });
         });
       }
-      shimmer3.wrap = wrap3;
-      shimmer3.massWrap = massWrap3;
-      shimmer3.unwrap = unwrap3;
-      shimmer3.massUnwrap = massUnwrap3;
-      module.exports = shimmer3;
+      shimmer4.wrap = wrap4;
+      shimmer4.massWrap = massWrap4;
+      shimmer4.unwrap = unwrap4;
+      shimmer4.massUnwrap = massUnwrap4;
+      module.exports = shimmer4;
+    }
+  });
+
+  // node_modules/tracekit/tracekit.js
+  var require_tracekit = __commonJS({
+    "node_modules/tracekit/tracekit.js"(exports, module) {
+      (function(window2, undefined2) {
+        if (!window2) {
+          return;
+        }
+        var TraceKit = {};
+        var _oldTraceKit = window2.TraceKit;
+        var _slice = [].slice;
+        var UNKNOWN_FUNCTION = "?";
+        var ERROR_TYPES_RE = /^(?:[Uu]ncaught (?:exception: )?)?(?:((?:Eval|Internal|Range|Reference|Syntax|Type|URI|)Error): )?(.*)$/;
+        function _has(object, key) {
+          return Object.prototype.hasOwnProperty.call(object, key);
+        }
+        function _isUndefined(what) {
+          return typeof what === "undefined";
+        }
+        TraceKit.noConflict = function noConflict() {
+          window2.TraceKit = _oldTraceKit;
+          return TraceKit;
+        };
+        TraceKit.wrap = function traceKitWrapper(func) {
+          function wrapped() {
+            try {
+              return func.apply(this, arguments);
+            } catch (e2) {
+              TraceKit.report(e2);
+              throw e2;
+            }
+          }
+          return wrapped;
+        };
+        TraceKit.report = function reportModuleWrapper() {
+          var handlers = [], lastException = null, lastExceptionStack = null;
+          function subscribe(handler) {
+            installGlobalHandler();
+            installGlobalUnhandledRejectionHandler();
+            handlers.push(handler);
+          }
+          function unsubscribe(handler) {
+            for (var i2 = handlers.length - 1; i2 >= 0; --i2) {
+              if (handlers[i2] === handler) {
+                handlers.splice(i2, 1);
+              }
+            }
+            if (handlers.length === 0) {
+              uninstallGlobalHandler();
+              uninstallGlobalUnhandledRejectionHandler();
+            }
+          }
+          function notifyHandlers(stack, isWindowError, error) {
+            var exception = null;
+            if (isWindowError && !TraceKit.collectWindowErrors) {
+              return;
+            }
+            for (var i2 in handlers) {
+              if (_has(handlers, i2)) {
+                try {
+                  handlers[i2](stack, isWindowError, error);
+                } catch (inner) {
+                  exception = inner;
+                }
+              }
+            }
+            if (exception) {
+              throw exception;
+            }
+          }
+          var _oldOnerrorHandler, _onErrorHandlerInstalled;
+          var _oldOnunhandledrejectionHandler, _onUnhandledRejectionHandlerInstalled;
+          function traceKitWindowOnError(message, url, lineNo, columnNo, errorObj) {
+            var stack = null;
+            if (lastExceptionStack) {
+              TraceKit.computeStackTrace.augmentStackTraceWithInitialElement(lastExceptionStack, url, lineNo, message);
+              processLastException();
+            } else if (errorObj) {
+              stack = TraceKit.computeStackTrace(errorObj);
+              notifyHandlers(stack, true, errorObj);
+            } else {
+              var location2 = {
+                "url": url,
+                "line": lineNo,
+                "column": columnNo
+              };
+              var name;
+              var msg = message;
+              if ({}.toString.call(message) === "[object String]") {
+                var groups = message.match(ERROR_TYPES_RE);
+                if (groups) {
+                  name = groups[1];
+                  msg = groups[2];
+                }
+              }
+              location2.func = TraceKit.computeStackTrace.guessFunctionName(location2.url, location2.line);
+              location2.context = TraceKit.computeStackTrace.gatherContext(location2.url, location2.line);
+              stack = {
+                "name": name,
+                "message": msg,
+                "mode": "onerror",
+                "stack": [location2]
+              };
+              notifyHandlers(stack, true, null);
+            }
+            if (_oldOnerrorHandler) {
+              return _oldOnerrorHandler.apply(this, arguments);
+            }
+            return false;
+          }
+          function traceKitWindowOnUnhandledRejection(e2) {
+            var stack = TraceKit.computeStackTrace(e2.reason);
+            notifyHandlers(stack, true, e2.reason);
+          }
+          function installGlobalHandler() {
+            if (_onErrorHandlerInstalled === true) {
+              return;
+            }
+            _oldOnerrorHandler = window2.onerror;
+            window2.onerror = traceKitWindowOnError;
+            _onErrorHandlerInstalled = true;
+          }
+          function uninstallGlobalHandler() {
+            if (_onErrorHandlerInstalled) {
+              window2.onerror = _oldOnerrorHandler;
+              _onErrorHandlerInstalled = false;
+            }
+          }
+          function installGlobalUnhandledRejectionHandler() {
+            if (_onUnhandledRejectionHandlerInstalled === true) {
+              return;
+            }
+            _oldOnunhandledrejectionHandler = window2.onunhandledrejection;
+            window2.onunhandledrejection = traceKitWindowOnUnhandledRejection;
+            _onUnhandledRejectionHandlerInstalled = true;
+          }
+          function uninstallGlobalUnhandledRejectionHandler() {
+            if (_onUnhandledRejectionHandlerInstalled) {
+              window2.onunhandledrejection = _oldOnunhandledrejectionHandler;
+              _onUnhandledRejectionHandlerInstalled = false;
+            }
+          }
+          function processLastException() {
+            var _lastExceptionStack = lastExceptionStack, _lastException = lastException;
+            lastExceptionStack = null;
+            lastException = null;
+            notifyHandlers(_lastExceptionStack, false, _lastException);
+          }
+          function report(ex) {
+            if (lastExceptionStack) {
+              if (lastException === ex) {
+                return;
+              } else {
+                processLastException();
+              }
+            }
+            var stack = TraceKit.computeStackTrace(ex);
+            lastExceptionStack = stack;
+            lastException = ex;
+            setTimeout(function() {
+              if (lastException === ex) {
+                processLastException();
+              }
+            }, stack.incomplete ? 2e3 : 0);
+            throw ex;
+          }
+          report.subscribe = subscribe;
+          report.unsubscribe = unsubscribe;
+          return report;
+        }();
+        TraceKit.computeStackTrace = function computeStackTraceWrapper() {
+          var debug = false, sourceCache = {};
+          function loadSource(url) {
+            if (!TraceKit.remoteFetching) {
+              return "";
+            }
+            try {
+              var getXHR = function() {
+                try {
+                  return new window2.XMLHttpRequest();
+                } catch (e2) {
+                  return new window2.ActiveXObject("Microsoft.XMLHTTP");
+                }
+              };
+              var request = getXHR();
+              request.open("GET", url, false);
+              request.send("");
+              return request.responseText;
+            } catch (e2) {
+              return "";
+            }
+          }
+          function getSource(url) {
+            if (typeof url !== "string") {
+              return [];
+            }
+            if (!_has(sourceCache, url)) {
+              var source = "";
+              var domain = "";
+              try {
+                domain = window2.document.domain;
+              } catch (e2) {
+              }
+              var match = /(.*)\:\/\/([^:\/]+)([:\d]*)\/{0,1}([\s\S]*)/.exec(url);
+              if (match && match[2] === domain) {
+                source = loadSource(url);
+              }
+              sourceCache[url] = source ? source.split("\n") : [];
+            }
+            return sourceCache[url];
+          }
+          function guessFunctionName(url, lineNo) {
+            var reFunctionArgNames = /function ([^(]*)\(([^)]*)\)/, reGuessFunction = /['"]?([0-9A-Za-z$_]+)['"]?\s*[:=]\s*(function|eval|new Function)/, line = "", maxLines = 10, source = getSource(url), m2;
+            if (!source.length) {
+              return UNKNOWN_FUNCTION;
+            }
+            for (var i2 = 0; i2 < maxLines; ++i2) {
+              line = source[lineNo - i2] + line;
+              if (!_isUndefined(line)) {
+                if (m2 = reGuessFunction.exec(line)) {
+                  return m2[1];
+                } else if (m2 = reFunctionArgNames.exec(line)) {
+                  return m2[1];
+                }
+              }
+            }
+            return UNKNOWN_FUNCTION;
+          }
+          function gatherContext(url, line) {
+            var source = getSource(url);
+            if (!source.length) {
+              return null;
+            }
+            var context2 = [], linesBefore = Math.floor(TraceKit.linesOfContext / 2), linesAfter = linesBefore + TraceKit.linesOfContext % 2, start = Math.max(0, line - linesBefore - 1), end = Math.min(source.length, line + linesAfter - 1);
+            line -= 1;
+            for (var i2 = start; i2 < end; ++i2) {
+              if (!_isUndefined(source[i2])) {
+                context2.push(source[i2]);
+              }
+            }
+            return context2.length > 0 ? context2 : null;
+          }
+          function escapeRegExp(text) {
+            return text.replace(/[\-\[\]{}()*+?.,\\\^$|#]/g, "\\$&");
+          }
+          function escapeCodeAsRegExpForMatchingInsideHTML(body) {
+            return escapeRegExp(body).replace("<", "(?:<|&lt;)").replace(">", "(?:>|&gt;)").replace("&", "(?:&|&amp;)").replace('"', '(?:"|&quot;)').replace(/\s+/g, "\\s+");
+          }
+          function findSourceInUrls(re2, urls) {
+            var source, m2;
+            for (var i2 = 0, j2 = urls.length; i2 < j2; ++i2) {
+              if ((source = getSource(urls[i2])).length) {
+                source = source.join("\n");
+                if (m2 = re2.exec(source)) {
+                  return {
+                    "url": urls[i2],
+                    "line": source.substring(0, m2.index).split("\n").length,
+                    "column": m2.index - source.lastIndexOf("\n", m2.index) - 1
+                  };
+                }
+              }
+            }
+            return null;
+          }
+          function findSourceInLine(fragment, url, line) {
+            var source = getSource(url), re2 = new RegExp("\\b" + escapeRegExp(fragment) + "\\b"), m2;
+            line -= 1;
+            if (source && source.length > line && (m2 = re2.exec(source[line]))) {
+              return m2.index;
+            }
+            return null;
+          }
+          function findSourceByFunctionBody(func) {
+            if (_isUndefined(window2 && window2.document)) {
+              return;
+            }
+            var urls = [window2.location.href], scripts = window2.document.getElementsByTagName("script"), body, code = "" + func, codeRE = /^function(?:\s+([\w$]+))?\s*\(([\w\s,]*)\)\s*\{\s*(\S[\s\S]*\S)\s*\}\s*$/, eventRE = /^function on([\w$]+)\s*\(event\)\s*\{\s*(\S[\s\S]*\S)\s*\}\s*$/, re2, parts, result;
+            for (var i2 = 0; i2 < scripts.length; ++i2) {
+              var script = scripts[i2];
+              if (script.src) {
+                urls.push(script.src);
+              }
+            }
+            if (!(parts = codeRE.exec(code))) {
+              re2 = new RegExp(escapeRegExp(code).replace(/\s+/g, "\\s+"));
+            } else {
+              var name = parts[1] ? "\\s+" + parts[1] : "", args = parts[2].split(",").join("\\s*,\\s*");
+              body = escapeRegExp(parts[3]).replace(/;$/, ";?");
+              re2 = new RegExp("function" + name + "\\s*\\(\\s*" + args + "\\s*\\)\\s*{\\s*" + body + "\\s*}");
+            }
+            if (result = findSourceInUrls(re2, urls)) {
+              return result;
+            }
+            if (parts = eventRE.exec(code)) {
+              var event = parts[1];
+              body = escapeCodeAsRegExpForMatchingInsideHTML(parts[2]);
+              re2 = new RegExp("on" + event + `=[\\'"]\\s*` + body + `\\s*[\\'"]`, "i");
+              if (result = findSourceInUrls(re2, urls[0])) {
+                return result;
+              }
+              re2 = new RegExp(body);
+              if (result = findSourceInUrls(re2, urls)) {
+                return result;
+              }
+            }
+            return null;
+          }
+          function computeStackTraceFromStackProp(ex) {
+            if (!ex.stack) {
+              return null;
+            }
+            var chrome = /^\s*at (.*?) ?\(((?:file|https?|blob|chrome-extension|native|eval|webpack|<anonymous>|\/).*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i, gecko = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)((?:file|https?|blob|chrome|webpack|resource|\[native).*?|[^@]*bundle)(?::(\d+))?(?::(\d+))?\s*$/i, winjs = /^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|webpack|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i, isEval, geckoEval = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i, chromeEval = /\((\S*)(?::(\d+))(?::(\d+))\)/, lines = ex.stack.split("\n"), stack = [], submatch, parts, element, reference = /^(.*) is undefined$/.exec(ex.message);
+            for (var i2 = 0, j2 = lines.length; i2 < j2; ++i2) {
+              if (parts = chrome.exec(lines[i2])) {
+                var isNative = parts[2] && parts[2].indexOf("native") === 0;
+                isEval = parts[2] && parts[2].indexOf("eval") === 0;
+                if (isEval && (submatch = chromeEval.exec(parts[2]))) {
+                  parts[2] = submatch[1];
+                  parts[3] = submatch[2];
+                  parts[4] = submatch[3];
+                }
+                element = {
+                  "url": !isNative ? parts[2] : null,
+                  "func": parts[1] || UNKNOWN_FUNCTION,
+                  "args": isNative ? [parts[2]] : [],
+                  "line": parts[3] ? +parts[3] : null,
+                  "column": parts[4] ? +parts[4] : null
+                };
+              } else if (parts = winjs.exec(lines[i2])) {
+                element = {
+                  "url": parts[2],
+                  "func": parts[1] || UNKNOWN_FUNCTION,
+                  "args": [],
+                  "line": +parts[3],
+                  "column": parts[4] ? +parts[4] : null
+                };
+              } else if (parts = gecko.exec(lines[i2])) {
+                isEval = parts[3] && parts[3].indexOf(" > eval") > -1;
+                if (isEval && (submatch = geckoEval.exec(parts[3]))) {
+                  parts[3] = submatch[1];
+                  parts[4] = submatch[2];
+                  parts[5] = null;
+                } else if (i2 === 0 && !parts[5] && !_isUndefined(ex.columnNumber)) {
+                  stack[0].column = ex.columnNumber + 1;
+                }
+                element = {
+                  "url": parts[3],
+                  "func": parts[1] || UNKNOWN_FUNCTION,
+                  "args": parts[2] ? parts[2].split(",") : [],
+                  "line": parts[4] ? +parts[4] : null,
+                  "column": parts[5] ? +parts[5] : null
+                };
+              } else {
+                continue;
+              }
+              if (!element.func && element.line) {
+                element.func = guessFunctionName(element.url, element.line);
+              }
+              element.context = element.line ? gatherContext(element.url, element.line) : null;
+              stack.push(element);
+            }
+            if (!stack.length) {
+              return null;
+            }
+            if (stack[0] && stack[0].line && !stack[0].column && reference) {
+              stack[0].column = findSourceInLine(reference[1], stack[0].url, stack[0].line);
+            }
+            return {
+              "mode": "stack",
+              "name": ex.name,
+              "message": ex.message,
+              "stack": stack
+            };
+          }
+          function computeStackTraceFromStacktraceProp(ex) {
+            var stacktrace = ex.stacktrace;
+            if (!stacktrace) {
+              return;
+            }
+            var opera10Regex = / line (\d+).*script (?:in )?(\S+)(?:: in function (\S+))?$/i, opera11Regex = / line (\d+), column (\d+)\s*(?:in (?:<anonymous function: ([^>]+)>|([^\)]+))\((.*)\))? in (.*):\s*$/i, lines = stacktrace.split("\n"), stack = [], parts;
+            for (var line = 0; line < lines.length; line += 2) {
+              var element = null;
+              if (parts = opera10Regex.exec(lines[line])) {
+                element = {
+                  "url": parts[2],
+                  "line": +parts[1],
+                  "column": null,
+                  "func": parts[3],
+                  "args": []
+                };
+              } else if (parts = opera11Regex.exec(lines[line])) {
+                element = {
+                  "url": parts[6],
+                  "line": +parts[1],
+                  "column": +parts[2],
+                  "func": parts[3] || parts[4],
+                  "args": parts[5] ? parts[5].split(",") : []
+                };
+              }
+              if (element) {
+                if (!element.func && element.line) {
+                  element.func = guessFunctionName(element.url, element.line);
+                }
+                if (element.line) {
+                  try {
+                    element.context = gatherContext(element.url, element.line);
+                  } catch (exc) {
+                  }
+                }
+                if (!element.context) {
+                  element.context = [lines[line + 1]];
+                }
+                stack.push(element);
+              }
+            }
+            if (!stack.length) {
+              return null;
+            }
+            return {
+              "mode": "stacktrace",
+              "name": ex.name,
+              "message": ex.message,
+              "stack": stack
+            };
+          }
+          function computeStackTraceFromOperaMultiLineMessage(ex) {
+            var lines = ex.message.split("\n");
+            if (lines.length < 4) {
+              return null;
+            }
+            var lineRE1 = /^\s*Line (\d+) of linked script ((?:file|https?|blob)\S+)(?:: in function (\S+))?\s*$/i, lineRE2 = /^\s*Line (\d+) of inline#(\d+) script in ((?:file|https?|blob)\S+)(?:: in function (\S+))?\s*$/i, lineRE3 = /^\s*Line (\d+) of function script\s*$/i, stack = [], scripts = window2 && window2.document && window2.document.getElementsByTagName("script"), inlineScriptBlocks = [], parts;
+            for (var s2 in scripts) {
+              if (_has(scripts, s2) && !scripts[s2].src) {
+                inlineScriptBlocks.push(scripts[s2]);
+              }
+            }
+            for (var line = 2; line < lines.length; line += 2) {
+              var item = null;
+              if (parts = lineRE1.exec(lines[line])) {
+                item = {
+                  "url": parts[2],
+                  "func": parts[3],
+                  "args": [],
+                  "line": +parts[1],
+                  "column": null
+                };
+              } else if (parts = lineRE2.exec(lines[line])) {
+                item = {
+                  "url": parts[3],
+                  "func": parts[4],
+                  "args": [],
+                  "line": +parts[1],
+                  "column": null
+                  // TODO: Check to see if inline#1 (+parts[2]) points to the script number or column number.
+                };
+                var relativeLine = +parts[1];
+                var script = inlineScriptBlocks[parts[2] - 1];
+                if (script) {
+                  var source = getSource(item.url);
+                  if (source) {
+                    source = source.join("\n");
+                    var pos = source.indexOf(script.innerText);
+                    if (pos >= 0) {
+                      item.line = relativeLine + source.substring(0, pos).split("\n").length;
+                    }
+                  }
+                }
+              } else if (parts = lineRE3.exec(lines[line])) {
+                var url = window2.location.href.replace(/#.*$/, "");
+                var re2 = new RegExp(escapeCodeAsRegExpForMatchingInsideHTML(lines[line + 1]));
+                var src = findSourceInUrls(re2, [url]);
+                item = {
+                  "url": url,
+                  "func": "",
+                  "args": [],
+                  "line": src ? src.line : parts[1],
+                  "column": null
+                };
+              }
+              if (item) {
+                if (!item.func) {
+                  item.func = guessFunctionName(item.url, item.line);
+                }
+                var context2 = gatherContext(item.url, item.line);
+                var midline = context2 ? context2[Math.floor(context2.length / 2)] : null;
+                if (context2 && midline.replace(/^\s*/, "") === lines[line + 1].replace(/^\s*/, "")) {
+                  item.context = context2;
+                } else {
+                  item.context = [lines[line + 1]];
+                }
+                stack.push(item);
+              }
+            }
+            if (!stack.length) {
+              return null;
+            }
+            return {
+              "mode": "multiline",
+              "name": ex.name,
+              "message": lines[0],
+              "stack": stack
+            };
+          }
+          function augmentStackTraceWithInitialElement(stackInfo, url, lineNo, message) {
+            var initial = {
+              "url": url,
+              "line": lineNo
+            };
+            if (initial.url && initial.line) {
+              stackInfo.incomplete = false;
+              if (!initial.func) {
+                initial.func = guessFunctionName(initial.url, initial.line);
+              }
+              if (!initial.context) {
+                initial.context = gatherContext(initial.url, initial.line);
+              }
+              var reference = / '([^']+)' /.exec(message);
+              if (reference) {
+                initial.column = findSourceInLine(reference[1], initial.url, initial.line);
+              }
+              if (stackInfo.stack.length > 0) {
+                if (stackInfo.stack[0].url === initial.url) {
+                  if (stackInfo.stack[0].line === initial.line) {
+                    return false;
+                  } else if (!stackInfo.stack[0].line && stackInfo.stack[0].func === initial.func) {
+                    stackInfo.stack[0].line = initial.line;
+                    stackInfo.stack[0].context = initial.context;
+                    return false;
+                  }
+                }
+              }
+              stackInfo.stack.unshift(initial);
+              stackInfo.partial = true;
+              return true;
+            } else {
+              stackInfo.incomplete = true;
+            }
+            return false;
+          }
+          function computeStackTraceByWalkingCallerChain(ex, depth) {
+            var functionName = /function\s+([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*)?\s*\(/i, stack = [], funcs = {}, recursion = false, parts, item, source;
+            for (var curr = computeStackTraceByWalkingCallerChain.caller; curr && !recursion; curr = curr.caller) {
+              if (curr === computeStackTrace2 || curr === TraceKit.report) {
+                continue;
+              }
+              item = {
+                "url": null,
+                "func": UNKNOWN_FUNCTION,
+                "args": [],
+                "line": null,
+                "column": null
+              };
+              if (curr.name) {
+                item.func = curr.name;
+              } else if (parts = functionName.exec(curr.toString())) {
+                item.func = parts[1];
+              }
+              if (typeof item.func === "undefined") {
+                try {
+                  item.func = parts.input.substring(0, parts.input.indexOf("{"));
+                } catch (e2) {
+                }
+              }
+              if (source = findSourceByFunctionBody(curr)) {
+                item.url = source.url;
+                item.line = source.line;
+                if (item.func === UNKNOWN_FUNCTION) {
+                  item.func = guessFunctionName(item.url, item.line);
+                }
+                var reference = / '([^']+)' /.exec(ex.message || ex.description);
+                if (reference) {
+                  item.column = findSourceInLine(reference[1], source.url, source.line);
+                }
+              }
+              if (funcs["" + curr]) {
+                recursion = true;
+              } else {
+                funcs["" + curr] = true;
+              }
+              stack.push(item);
+            }
+            if (depth) {
+              stack.splice(0, depth);
+            }
+            var result = {
+              "mode": "callers",
+              "name": ex.name,
+              "message": ex.message,
+              "stack": stack
+            };
+            augmentStackTraceWithInitialElement(result, ex.sourceURL || ex.fileName, ex.line || ex.lineNumber, ex.message || ex.description);
+            return result;
+          }
+          function computeStackTrace2(ex, depth) {
+            var stack = null;
+            depth = depth == null ? 0 : +depth;
+            try {
+              stack = computeStackTraceFromStacktraceProp(ex);
+              if (stack) {
+                return stack;
+              }
+            } catch (e2) {
+              if (debug) {
+                throw e2;
+              }
+            }
+            try {
+              stack = computeStackTraceFromStackProp(ex);
+              if (stack) {
+                return stack;
+              }
+            } catch (e2) {
+              if (debug) {
+                throw e2;
+              }
+            }
+            try {
+              stack = computeStackTraceFromOperaMultiLineMessage(ex);
+              if (stack) {
+                return stack;
+              }
+            } catch (e2) {
+              if (debug) {
+                throw e2;
+              }
+            }
+            try {
+              stack = computeStackTraceByWalkingCallerChain(ex, depth + 1);
+              if (stack) {
+                return stack;
+              }
+            } catch (e2) {
+              if (debug) {
+                throw e2;
+              }
+            }
+            return {
+              "name": ex.name,
+              "message": ex.message,
+              "mode": "failed"
+            };
+          }
+          function computeStackTraceOfCaller(depth) {
+            depth = (depth == null ? 0 : +depth) + 1;
+            try {
+              throw new Error();
+            } catch (ex) {
+              return computeStackTrace2(ex, depth + 1);
+            }
+          }
+          computeStackTrace2.augmentStackTraceWithInitialElement = augmentStackTraceWithInitialElement;
+          computeStackTrace2.computeStackTraceFromStackProp = computeStackTraceFromStackProp;
+          computeStackTrace2.guessFunctionName = guessFunctionName;
+          computeStackTrace2.gatherContext = gatherContext;
+          computeStackTrace2.ofCaller = computeStackTraceOfCaller;
+          computeStackTrace2.getSource = getSource;
+          return computeStackTrace2;
+        }();
+        TraceKit.extendToAsynchronousCallbacks = function() {
+          var _helper = function _helper2(fnName) {
+            var originalFn = window2[fnName];
+            window2[fnName] = function traceKitAsyncExtension() {
+              var args = _slice.call(arguments);
+              var originalCallback = args[0];
+              if (typeof originalCallback === "function") {
+                args[0] = TraceKit.wrap(originalCallback);
+              }
+              if (originalFn.apply) {
+                return originalFn.apply(this, args);
+              } else {
+                return originalFn(args[0], args[1]);
+              }
+            };
+          };
+          _helper("setTimeout");
+          _helper("setInterval");
+        };
+        if (!TraceKit.remoteFetching) {
+          TraceKit.remoteFetching = true;
+        }
+        if (!TraceKit.collectWindowErrors) {
+          TraceKit.collectWindowErrors = true;
+        }
+        if (!TraceKit.linesOfContext || TraceKit.linesOfContext < 1) {
+          TraceKit.linesOfContext = 11;
+        }
+        if (typeof define === "function" && define.amd) {
+          define("TraceKit", [], TraceKit);
+        } else if (typeof module !== "undefined" && module.exports && window2.module !== module) {
+          module.exports = TraceKit;
+        } else {
+          window2.TraceKit = TraceKit;
+        }
+      })(typeof window !== "undefined" ? window : global);
     }
   });
 
@@ -1461,702 +2157,6 @@
     }
   });
 
-  // node_modules/tracekit/tracekit.js
-  var require_tracekit = __commonJS({
-    "node_modules/tracekit/tracekit.js"(exports, module) {
-      (function(window2, undefined2) {
-        if (!window2) {
-          return;
-        }
-        var TraceKit = {};
-        var _oldTraceKit = window2.TraceKit;
-        var _slice = [].slice;
-        var UNKNOWN_FUNCTION = "?";
-        var ERROR_TYPES_RE = /^(?:[Uu]ncaught (?:exception: )?)?(?:((?:Eval|Internal|Range|Reference|Syntax|Type|URI|)Error): )?(.*)$/;
-        function _has(object, key) {
-          return Object.prototype.hasOwnProperty.call(object, key);
-        }
-        function _isUndefined(what) {
-          return typeof what === "undefined";
-        }
-        TraceKit.noConflict = function noConflict() {
-          window2.TraceKit = _oldTraceKit;
-          return TraceKit;
-        };
-        TraceKit.wrap = function traceKitWrapper(func) {
-          function wrapped() {
-            try {
-              return func.apply(this, arguments);
-            } catch (e2) {
-              TraceKit.report(e2);
-              throw e2;
-            }
-          }
-          return wrapped;
-        };
-        TraceKit.report = function reportModuleWrapper() {
-          var handlers = [], lastException = null, lastExceptionStack = null;
-          function subscribe(handler) {
-            installGlobalHandler();
-            installGlobalUnhandledRejectionHandler();
-            handlers.push(handler);
-          }
-          function unsubscribe(handler) {
-            for (var i2 = handlers.length - 1; i2 >= 0; --i2) {
-              if (handlers[i2] === handler) {
-                handlers.splice(i2, 1);
-              }
-            }
-            if (handlers.length === 0) {
-              uninstallGlobalHandler();
-              uninstallGlobalUnhandledRejectionHandler();
-            }
-          }
-          function notifyHandlers(stack, isWindowError, error) {
-            var exception = null;
-            if (isWindowError && !TraceKit.collectWindowErrors) {
-              return;
-            }
-            for (var i2 in handlers) {
-              if (_has(handlers, i2)) {
-                try {
-                  handlers[i2](stack, isWindowError, error);
-                } catch (inner) {
-                  exception = inner;
-                }
-              }
-            }
-            if (exception) {
-              throw exception;
-            }
-          }
-          var _oldOnerrorHandler, _onErrorHandlerInstalled;
-          var _oldOnunhandledrejectionHandler, _onUnhandledRejectionHandlerInstalled;
-          function traceKitWindowOnError(message, url, lineNo, columnNo, errorObj) {
-            var stack = null;
-            if (lastExceptionStack) {
-              TraceKit.computeStackTrace.augmentStackTraceWithInitialElement(lastExceptionStack, url, lineNo, message);
-              processLastException();
-            } else if (errorObj) {
-              stack = TraceKit.computeStackTrace(errorObj);
-              notifyHandlers(stack, true, errorObj);
-            } else {
-              var location2 = {
-                "url": url,
-                "line": lineNo,
-                "column": columnNo
-              };
-              var name;
-              var msg = message;
-              if ({}.toString.call(message) === "[object String]") {
-                var groups = message.match(ERROR_TYPES_RE);
-                if (groups) {
-                  name = groups[1];
-                  msg = groups[2];
-                }
-              }
-              location2.func = TraceKit.computeStackTrace.guessFunctionName(location2.url, location2.line);
-              location2.context = TraceKit.computeStackTrace.gatherContext(location2.url, location2.line);
-              stack = {
-                "name": name,
-                "message": msg,
-                "mode": "onerror",
-                "stack": [location2]
-              };
-              notifyHandlers(stack, true, null);
-            }
-            if (_oldOnerrorHandler) {
-              return _oldOnerrorHandler.apply(this, arguments);
-            }
-            return false;
-          }
-          function traceKitWindowOnUnhandledRejection(e2) {
-            var stack = TraceKit.computeStackTrace(e2.reason);
-            notifyHandlers(stack, true, e2.reason);
-          }
-          function installGlobalHandler() {
-            if (_onErrorHandlerInstalled === true) {
-              return;
-            }
-            _oldOnerrorHandler = window2.onerror;
-            window2.onerror = traceKitWindowOnError;
-            _onErrorHandlerInstalled = true;
-          }
-          function uninstallGlobalHandler() {
-            if (_onErrorHandlerInstalled) {
-              window2.onerror = _oldOnerrorHandler;
-              _onErrorHandlerInstalled = false;
-            }
-          }
-          function installGlobalUnhandledRejectionHandler() {
-            if (_onUnhandledRejectionHandlerInstalled === true) {
-              return;
-            }
-            _oldOnunhandledrejectionHandler = window2.onunhandledrejection;
-            window2.onunhandledrejection = traceKitWindowOnUnhandledRejection;
-            _onUnhandledRejectionHandlerInstalled = true;
-          }
-          function uninstallGlobalUnhandledRejectionHandler() {
-            if (_onUnhandledRejectionHandlerInstalled) {
-              window2.onunhandledrejection = _oldOnunhandledrejectionHandler;
-              _onUnhandledRejectionHandlerInstalled = false;
-            }
-          }
-          function processLastException() {
-            var _lastExceptionStack = lastExceptionStack, _lastException = lastException;
-            lastExceptionStack = null;
-            lastException = null;
-            notifyHandlers(_lastExceptionStack, false, _lastException);
-          }
-          function report(ex) {
-            if (lastExceptionStack) {
-              if (lastException === ex) {
-                return;
-              } else {
-                processLastException();
-              }
-            }
-            var stack = TraceKit.computeStackTrace(ex);
-            lastExceptionStack = stack;
-            lastException = ex;
-            setTimeout(function() {
-              if (lastException === ex) {
-                processLastException();
-              }
-            }, stack.incomplete ? 2e3 : 0);
-            throw ex;
-          }
-          report.subscribe = subscribe;
-          report.unsubscribe = unsubscribe;
-          return report;
-        }();
-        TraceKit.computeStackTrace = function computeStackTraceWrapper() {
-          var debug = false, sourceCache = {};
-          function loadSource(url) {
-            if (!TraceKit.remoteFetching) {
-              return "";
-            }
-            try {
-              var getXHR = function() {
-                try {
-                  return new window2.XMLHttpRequest();
-                } catch (e2) {
-                  return new window2.ActiveXObject("Microsoft.XMLHTTP");
-                }
-              };
-              var request = getXHR();
-              request.open("GET", url, false);
-              request.send("");
-              return request.responseText;
-            } catch (e2) {
-              return "";
-            }
-          }
-          function getSource(url) {
-            if (typeof url !== "string") {
-              return [];
-            }
-            if (!_has(sourceCache, url)) {
-              var source = "";
-              var domain = "";
-              try {
-                domain = window2.document.domain;
-              } catch (e2) {
-              }
-              var match = /(.*)\:\/\/([^:\/]+)([:\d]*)\/{0,1}([\s\S]*)/.exec(url);
-              if (match && match[2] === domain) {
-                source = loadSource(url);
-              }
-              sourceCache[url] = source ? source.split("\n") : [];
-            }
-            return sourceCache[url];
-          }
-          function guessFunctionName(url, lineNo) {
-            var reFunctionArgNames = /function ([^(]*)\(([^)]*)\)/, reGuessFunction = /['"]?([0-9A-Za-z$_]+)['"]?\s*[:=]\s*(function|eval|new Function)/, line = "", maxLines = 10, source = getSource(url), m2;
-            if (!source.length) {
-              return UNKNOWN_FUNCTION;
-            }
-            for (var i2 = 0; i2 < maxLines; ++i2) {
-              line = source[lineNo - i2] + line;
-              if (!_isUndefined(line)) {
-                if (m2 = reGuessFunction.exec(line)) {
-                  return m2[1];
-                } else if (m2 = reFunctionArgNames.exec(line)) {
-                  return m2[1];
-                }
-              }
-            }
-            return UNKNOWN_FUNCTION;
-          }
-          function gatherContext(url, line) {
-            var source = getSource(url);
-            if (!source.length) {
-              return null;
-            }
-            var context2 = [], linesBefore = Math.floor(TraceKit.linesOfContext / 2), linesAfter = linesBefore + TraceKit.linesOfContext % 2, start = Math.max(0, line - linesBefore - 1), end = Math.min(source.length, line + linesAfter - 1);
-            line -= 1;
-            for (var i2 = start; i2 < end; ++i2) {
-              if (!_isUndefined(source[i2])) {
-                context2.push(source[i2]);
-              }
-            }
-            return context2.length > 0 ? context2 : null;
-          }
-          function escapeRegExp(text) {
-            return text.replace(/[\-\[\]{}()*+?.,\\\^$|#]/g, "\\$&");
-          }
-          function escapeCodeAsRegExpForMatchingInsideHTML(body) {
-            return escapeRegExp(body).replace("<", "(?:<|&lt;)").replace(">", "(?:>|&gt;)").replace("&", "(?:&|&amp;)").replace('"', '(?:"|&quot;)').replace(/\s+/g, "\\s+");
-          }
-          function findSourceInUrls(re2, urls) {
-            var source, m2;
-            for (var i2 = 0, j2 = urls.length; i2 < j2; ++i2) {
-              if ((source = getSource(urls[i2])).length) {
-                source = source.join("\n");
-                if (m2 = re2.exec(source)) {
-                  return {
-                    "url": urls[i2],
-                    "line": source.substring(0, m2.index).split("\n").length,
-                    "column": m2.index - source.lastIndexOf("\n", m2.index) - 1
-                  };
-                }
-              }
-            }
-            return null;
-          }
-          function findSourceInLine(fragment, url, line) {
-            var source = getSource(url), re2 = new RegExp("\\b" + escapeRegExp(fragment) + "\\b"), m2;
-            line -= 1;
-            if (source && source.length > line && (m2 = re2.exec(source[line]))) {
-              return m2.index;
-            }
-            return null;
-          }
-          function findSourceByFunctionBody(func) {
-            if (_isUndefined(window2 && window2.document)) {
-              return;
-            }
-            var urls = [window2.location.href], scripts = window2.document.getElementsByTagName("script"), body, code = "" + func, codeRE = /^function(?:\s+([\w$]+))?\s*\(([\w\s,]*)\)\s*\{\s*(\S[\s\S]*\S)\s*\}\s*$/, eventRE = /^function on([\w$]+)\s*\(event\)\s*\{\s*(\S[\s\S]*\S)\s*\}\s*$/, re2, parts, result;
-            for (var i2 = 0; i2 < scripts.length; ++i2) {
-              var script = scripts[i2];
-              if (script.src) {
-                urls.push(script.src);
-              }
-            }
-            if (!(parts = codeRE.exec(code))) {
-              re2 = new RegExp(escapeRegExp(code).replace(/\s+/g, "\\s+"));
-            } else {
-              var name = parts[1] ? "\\s+" + parts[1] : "", args = parts[2].split(",").join("\\s*,\\s*");
-              body = escapeRegExp(parts[3]).replace(/;$/, ";?");
-              re2 = new RegExp("function" + name + "\\s*\\(\\s*" + args + "\\s*\\)\\s*{\\s*" + body + "\\s*}");
-            }
-            if (result = findSourceInUrls(re2, urls)) {
-              return result;
-            }
-            if (parts = eventRE.exec(code)) {
-              var event = parts[1];
-              body = escapeCodeAsRegExpForMatchingInsideHTML(parts[2]);
-              re2 = new RegExp("on" + event + `=[\\'"]\\s*` + body + `\\s*[\\'"]`, "i");
-              if (result = findSourceInUrls(re2, urls[0])) {
-                return result;
-              }
-              re2 = new RegExp(body);
-              if (result = findSourceInUrls(re2, urls)) {
-                return result;
-              }
-            }
-            return null;
-          }
-          function computeStackTraceFromStackProp(ex) {
-            if (!ex.stack) {
-              return null;
-            }
-            var chrome = /^\s*at (.*?) ?\(((?:file|https?|blob|chrome-extension|native|eval|webpack|<anonymous>|\/).*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i, gecko = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)((?:file|https?|blob|chrome|webpack|resource|\[native).*?|[^@]*bundle)(?::(\d+))?(?::(\d+))?\s*$/i, winjs = /^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|webpack|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i, isEval, geckoEval = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i, chromeEval = /\((\S*)(?::(\d+))(?::(\d+))\)/, lines = ex.stack.split("\n"), stack = [], submatch, parts, element, reference = /^(.*) is undefined$/.exec(ex.message);
-            for (var i2 = 0, j2 = lines.length; i2 < j2; ++i2) {
-              if (parts = chrome.exec(lines[i2])) {
-                var isNative = parts[2] && parts[2].indexOf("native") === 0;
-                isEval = parts[2] && parts[2].indexOf("eval") === 0;
-                if (isEval && (submatch = chromeEval.exec(parts[2]))) {
-                  parts[2] = submatch[1];
-                  parts[3] = submatch[2];
-                  parts[4] = submatch[3];
-                }
-                element = {
-                  "url": !isNative ? parts[2] : null,
-                  "func": parts[1] || UNKNOWN_FUNCTION,
-                  "args": isNative ? [parts[2]] : [],
-                  "line": parts[3] ? +parts[3] : null,
-                  "column": parts[4] ? +parts[4] : null
-                };
-              } else if (parts = winjs.exec(lines[i2])) {
-                element = {
-                  "url": parts[2],
-                  "func": parts[1] || UNKNOWN_FUNCTION,
-                  "args": [],
-                  "line": +parts[3],
-                  "column": parts[4] ? +parts[4] : null
-                };
-              } else if (parts = gecko.exec(lines[i2])) {
-                isEval = parts[3] && parts[3].indexOf(" > eval") > -1;
-                if (isEval && (submatch = geckoEval.exec(parts[3]))) {
-                  parts[3] = submatch[1];
-                  parts[4] = submatch[2];
-                  parts[5] = null;
-                } else if (i2 === 0 && !parts[5] && !_isUndefined(ex.columnNumber)) {
-                  stack[0].column = ex.columnNumber + 1;
-                }
-                element = {
-                  "url": parts[3],
-                  "func": parts[1] || UNKNOWN_FUNCTION,
-                  "args": parts[2] ? parts[2].split(",") : [],
-                  "line": parts[4] ? +parts[4] : null,
-                  "column": parts[5] ? +parts[5] : null
-                };
-              } else {
-                continue;
-              }
-              if (!element.func && element.line) {
-                element.func = guessFunctionName(element.url, element.line);
-              }
-              element.context = element.line ? gatherContext(element.url, element.line) : null;
-              stack.push(element);
-            }
-            if (!stack.length) {
-              return null;
-            }
-            if (stack[0] && stack[0].line && !stack[0].column && reference) {
-              stack[0].column = findSourceInLine(reference[1], stack[0].url, stack[0].line);
-            }
-            return {
-              "mode": "stack",
-              "name": ex.name,
-              "message": ex.message,
-              "stack": stack
-            };
-          }
-          function computeStackTraceFromStacktraceProp(ex) {
-            var stacktrace = ex.stacktrace;
-            if (!stacktrace) {
-              return;
-            }
-            var opera10Regex = / line (\d+).*script (?:in )?(\S+)(?:: in function (\S+))?$/i, opera11Regex = / line (\d+), column (\d+)\s*(?:in (?:<anonymous function: ([^>]+)>|([^\)]+))\((.*)\))? in (.*):\s*$/i, lines = stacktrace.split("\n"), stack = [], parts;
-            for (var line = 0; line < lines.length; line += 2) {
-              var element = null;
-              if (parts = opera10Regex.exec(lines[line])) {
-                element = {
-                  "url": parts[2],
-                  "line": +parts[1],
-                  "column": null,
-                  "func": parts[3],
-                  "args": []
-                };
-              } else if (parts = opera11Regex.exec(lines[line])) {
-                element = {
-                  "url": parts[6],
-                  "line": +parts[1],
-                  "column": +parts[2],
-                  "func": parts[3] || parts[4],
-                  "args": parts[5] ? parts[5].split(",") : []
-                };
-              }
-              if (element) {
-                if (!element.func && element.line) {
-                  element.func = guessFunctionName(element.url, element.line);
-                }
-                if (element.line) {
-                  try {
-                    element.context = gatherContext(element.url, element.line);
-                  } catch (exc) {
-                  }
-                }
-                if (!element.context) {
-                  element.context = [lines[line + 1]];
-                }
-                stack.push(element);
-              }
-            }
-            if (!stack.length) {
-              return null;
-            }
-            return {
-              "mode": "stacktrace",
-              "name": ex.name,
-              "message": ex.message,
-              "stack": stack
-            };
-          }
-          function computeStackTraceFromOperaMultiLineMessage(ex) {
-            var lines = ex.message.split("\n");
-            if (lines.length < 4) {
-              return null;
-            }
-            var lineRE1 = /^\s*Line (\d+) of linked script ((?:file|https?|blob)\S+)(?:: in function (\S+))?\s*$/i, lineRE2 = /^\s*Line (\d+) of inline#(\d+) script in ((?:file|https?|blob)\S+)(?:: in function (\S+))?\s*$/i, lineRE3 = /^\s*Line (\d+) of function script\s*$/i, stack = [], scripts = window2 && window2.document && window2.document.getElementsByTagName("script"), inlineScriptBlocks = [], parts;
-            for (var s2 in scripts) {
-              if (_has(scripts, s2) && !scripts[s2].src) {
-                inlineScriptBlocks.push(scripts[s2]);
-              }
-            }
-            for (var line = 2; line < lines.length; line += 2) {
-              var item = null;
-              if (parts = lineRE1.exec(lines[line])) {
-                item = {
-                  "url": parts[2],
-                  "func": parts[3],
-                  "args": [],
-                  "line": +parts[1],
-                  "column": null
-                };
-              } else if (parts = lineRE2.exec(lines[line])) {
-                item = {
-                  "url": parts[3],
-                  "func": parts[4],
-                  "args": [],
-                  "line": +parts[1],
-                  "column": null
-                  // TODO: Check to see if inline#1 (+parts[2]) points to the script number or column number.
-                };
-                var relativeLine = +parts[1];
-                var script = inlineScriptBlocks[parts[2] - 1];
-                if (script) {
-                  var source = getSource(item.url);
-                  if (source) {
-                    source = source.join("\n");
-                    var pos = source.indexOf(script.innerText);
-                    if (pos >= 0) {
-                      item.line = relativeLine + source.substring(0, pos).split("\n").length;
-                    }
-                  }
-                }
-              } else if (parts = lineRE3.exec(lines[line])) {
-                var url = window2.location.href.replace(/#.*$/, "");
-                var re2 = new RegExp(escapeCodeAsRegExpForMatchingInsideHTML(lines[line + 1]));
-                var src = findSourceInUrls(re2, [url]);
-                item = {
-                  "url": url,
-                  "func": "",
-                  "args": [],
-                  "line": src ? src.line : parts[1],
-                  "column": null
-                };
-              }
-              if (item) {
-                if (!item.func) {
-                  item.func = guessFunctionName(item.url, item.line);
-                }
-                var context2 = gatherContext(item.url, item.line);
-                var midline = context2 ? context2[Math.floor(context2.length / 2)] : null;
-                if (context2 && midline.replace(/^\s*/, "") === lines[line + 1].replace(/^\s*/, "")) {
-                  item.context = context2;
-                } else {
-                  item.context = [lines[line + 1]];
-                }
-                stack.push(item);
-              }
-            }
-            if (!stack.length) {
-              return null;
-            }
-            return {
-              "mode": "multiline",
-              "name": ex.name,
-              "message": lines[0],
-              "stack": stack
-            };
-          }
-          function augmentStackTraceWithInitialElement(stackInfo, url, lineNo, message) {
-            var initial = {
-              "url": url,
-              "line": lineNo
-            };
-            if (initial.url && initial.line) {
-              stackInfo.incomplete = false;
-              if (!initial.func) {
-                initial.func = guessFunctionName(initial.url, initial.line);
-              }
-              if (!initial.context) {
-                initial.context = gatherContext(initial.url, initial.line);
-              }
-              var reference = / '([^']+)' /.exec(message);
-              if (reference) {
-                initial.column = findSourceInLine(reference[1], initial.url, initial.line);
-              }
-              if (stackInfo.stack.length > 0) {
-                if (stackInfo.stack[0].url === initial.url) {
-                  if (stackInfo.stack[0].line === initial.line) {
-                    return false;
-                  } else if (!stackInfo.stack[0].line && stackInfo.stack[0].func === initial.func) {
-                    stackInfo.stack[0].line = initial.line;
-                    stackInfo.stack[0].context = initial.context;
-                    return false;
-                  }
-                }
-              }
-              stackInfo.stack.unshift(initial);
-              stackInfo.partial = true;
-              return true;
-            } else {
-              stackInfo.incomplete = true;
-            }
-            return false;
-          }
-          function computeStackTraceByWalkingCallerChain(ex, depth) {
-            var functionName = /function\s+([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*)?\s*\(/i, stack = [], funcs = {}, recursion = false, parts, item, source;
-            for (var curr = computeStackTraceByWalkingCallerChain.caller; curr && !recursion; curr = curr.caller) {
-              if (curr === computeStackTrace2 || curr === TraceKit.report) {
-                continue;
-              }
-              item = {
-                "url": null,
-                "func": UNKNOWN_FUNCTION,
-                "args": [],
-                "line": null,
-                "column": null
-              };
-              if (curr.name) {
-                item.func = curr.name;
-              } else if (parts = functionName.exec(curr.toString())) {
-                item.func = parts[1];
-              }
-              if (typeof item.func === "undefined") {
-                try {
-                  item.func = parts.input.substring(0, parts.input.indexOf("{"));
-                } catch (e2) {
-                }
-              }
-              if (source = findSourceByFunctionBody(curr)) {
-                item.url = source.url;
-                item.line = source.line;
-                if (item.func === UNKNOWN_FUNCTION) {
-                  item.func = guessFunctionName(item.url, item.line);
-                }
-                var reference = / '([^']+)' /.exec(ex.message || ex.description);
-                if (reference) {
-                  item.column = findSourceInLine(reference[1], source.url, source.line);
-                }
-              }
-              if (funcs["" + curr]) {
-                recursion = true;
-              } else {
-                funcs["" + curr] = true;
-              }
-              stack.push(item);
-            }
-            if (depth) {
-              stack.splice(0, depth);
-            }
-            var result = {
-              "mode": "callers",
-              "name": ex.name,
-              "message": ex.message,
-              "stack": stack
-            };
-            augmentStackTraceWithInitialElement(result, ex.sourceURL || ex.fileName, ex.line || ex.lineNumber, ex.message || ex.description);
-            return result;
-          }
-          function computeStackTrace2(ex, depth) {
-            var stack = null;
-            depth = depth == null ? 0 : +depth;
-            try {
-              stack = computeStackTraceFromStacktraceProp(ex);
-              if (stack) {
-                return stack;
-              }
-            } catch (e2) {
-              if (debug) {
-                throw e2;
-              }
-            }
-            try {
-              stack = computeStackTraceFromStackProp(ex);
-              if (stack) {
-                return stack;
-              }
-            } catch (e2) {
-              if (debug) {
-                throw e2;
-              }
-            }
-            try {
-              stack = computeStackTraceFromOperaMultiLineMessage(ex);
-              if (stack) {
-                return stack;
-              }
-            } catch (e2) {
-              if (debug) {
-                throw e2;
-              }
-            }
-            try {
-              stack = computeStackTraceByWalkingCallerChain(ex, depth + 1);
-              if (stack) {
-                return stack;
-              }
-            } catch (e2) {
-              if (debug) {
-                throw e2;
-              }
-            }
-            return {
-              "name": ex.name,
-              "message": ex.message,
-              "mode": "failed"
-            };
-          }
-          function computeStackTraceOfCaller(depth) {
-            depth = (depth == null ? 0 : +depth) + 1;
-            try {
-              throw new Error();
-            } catch (ex) {
-              return computeStackTrace2(ex, depth + 1);
-            }
-          }
-          computeStackTrace2.augmentStackTraceWithInitialElement = augmentStackTraceWithInitialElement;
-          computeStackTrace2.computeStackTraceFromStackProp = computeStackTraceFromStackProp;
-          computeStackTrace2.guessFunctionName = guessFunctionName;
-          computeStackTrace2.gatherContext = gatherContext;
-          computeStackTrace2.ofCaller = computeStackTraceOfCaller;
-          computeStackTrace2.getSource = getSource;
-          return computeStackTrace2;
-        }();
-        TraceKit.extendToAsynchronousCallbacks = function() {
-          var _helper = function _helper2(fnName) {
-            var originalFn = window2[fnName];
-            window2[fnName] = function traceKitAsyncExtension() {
-              var args = _slice.call(arguments);
-              var originalCallback = args[0];
-              if (typeof originalCallback === "function") {
-                args[0] = TraceKit.wrap(originalCallback);
-              }
-              if (originalFn.apply) {
-                return originalFn.apply(this, args);
-              } else {
-                return originalFn(args[0], args[1]);
-              }
-            };
-          };
-          _helper("setTimeout");
-          _helper("setInterval");
-        };
-        if (!TraceKit.remoteFetching) {
-          TraceKit.remoteFetching = true;
-        }
-        if (!TraceKit.collectWindowErrors) {
-          TraceKit.collectWindowErrors = true;
-        }
-        if (!TraceKit.linesOfContext || TraceKit.linesOfContext < 1) {
-          TraceKit.linesOfContext = 11;
-        }
-        if (typeof define === "function" && define.amd) {
-          define("TraceKit", [], TraceKit);
-        } else if (typeof module !== "undefined" && module.exports && window2.module !== module) {
-          module.exports = TraceKit;
-        } else {
-          window2.TraceKit = TraceKit;
-        }
-      })(typeof window !== "undefined" ? window : global);
-    }
-  });
-
   // node_modules/@opentelemetry/api/build/esm/platform/browser/globalThis.js
   var _globalThis = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
 
@@ -2235,11 +2235,11 @@
   var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
   var _global = _globalThis;
   function registerGlobal(type, instance, diag3, allowOverride) {
-    var _a3;
+    var _a;
     if (allowOverride === void 0) {
       allowOverride = false;
     }
-    var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a3 !== void 0 ? _a3 : {
+    var api = _global[GLOBAL_OPENTELEMETRY_API_KEY] = (_a = _global[GLOBAL_OPENTELEMETRY_API_KEY]) !== null && _a !== void 0 ? _a : {
       version: VERSION
     };
     if (!allowOverride && api[type]) {
@@ -2257,8 +2257,8 @@
     return true;
   }
   function getGlobal(type) {
-    var _a3, _b;
-    var globalVersion = (_a3 = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a3 === void 0 ? void 0 : _a3.version;
+    var _a, _b;
+    var globalVersion = (_a = _global[GLOBAL_OPENTELEMETRY_API_KEY]) === null || _a === void 0 ? void 0 : _a.version;
     if (!globalVersion || !isCompatible(globalVersion)) {
       return;
     }
@@ -2344,12 +2344,12 @@
     }()
   );
   function logProxy(funcName, namespace, args) {
-    var logger = getGlobal("diag");
-    if (!logger) {
+    var logger3 = getGlobal("diag");
+    if (!logger3) {
       return;
     }
     args.unshift(namespace);
-    return logger[funcName].apply(logger, __spreadArray([], __read(args), false));
+    return logger3[funcName].apply(logger3, __spreadArray([], __read(args), false));
   }
 
   // node_modules/@opentelemetry/api/build/esm/diag/types.js
@@ -2365,17 +2365,17 @@
   })(DiagLogLevel || (DiagLogLevel = {}));
 
   // node_modules/@opentelemetry/api/build/esm/diag/internal/logLevelLogger.js
-  function createLogLevelDiagLogger(maxLevel, logger) {
+  function createLogLevelDiagLogger(maxLevel, logger3) {
     if (maxLevel < DiagLogLevel.NONE) {
       maxLevel = DiagLogLevel.NONE;
     } else if (maxLevel > DiagLogLevel.ALL) {
       maxLevel = DiagLogLevel.ALL;
     }
-    logger = logger || {};
+    logger3 = logger3 || {};
     function _filterFunc(funcName, theLevel) {
-      var theFunc = logger[funcName];
+      var theFunc = logger3[funcName];
       if (typeof theFunc === "function" && maxLevel >= theLevel) {
-        return theFunc.bind(logger);
+        return theFunc.bind(logger3);
       }
       return function() {
       };
@@ -2427,21 +2427,21 @@
             for (var _i = 0; _i < arguments.length; _i++) {
               args[_i] = arguments[_i];
             }
-            var logger = getGlobal("diag");
-            if (!logger)
+            var logger3 = getGlobal("diag");
+            if (!logger3)
               return;
-            return logger[funcName].apply(logger, __spreadArray2([], __read2(args), false));
+            return logger3[funcName].apply(logger3, __spreadArray2([], __read2(args), false));
           };
         }
         var self2 = this;
-        var setLogger = function(logger, optionsOrLogLevel) {
-          var _a3, _b, _c;
+        var setLogger = function(logger3, optionsOrLogLevel) {
+          var _a, _b, _c;
           if (optionsOrLogLevel === void 0) {
             optionsOrLogLevel = { logLevel: DiagLogLevel.INFO };
           }
-          if (logger === self2) {
+          if (logger3 === self2) {
             var err = new Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");
-            self2.error((_a3 = err.stack) !== null && _a3 !== void 0 ? _a3 : err.message);
+            self2.error((_a = err.stack) !== null && _a !== void 0 ? _a : err.message);
             return false;
           }
           if (typeof optionsOrLogLevel === "number") {
@@ -2450,7 +2450,7 @@
             };
           }
           var oldLogger = getGlobal("diag");
-          var newLogger = createLogLevelDiagLogger((_b = optionsOrLogLevel.logLevel) !== null && _b !== void 0 ? _b : DiagLogLevel.INFO, logger);
+          var newLogger = createLogLevelDiagLogger((_b = optionsOrLogLevel.logLevel) !== null && _b !== void 0 ? _b : DiagLogLevel.INFO, logger3);
           if (oldLogger && !optionsOrLogLevel.suppressOverrideMessage) {
             var stack = (_c = new Error().stack) !== null && _c !== void 0 ? _c : "<failed to generate stacktrace>";
             oldLogger.warn("Current logger will be overwritten from " + stack);
@@ -2524,8 +2524,8 @@
         return Object.assign({}, entry);
       };
       BaggageImpl2.prototype.getAllEntries = function() {
-        return Array.from(this._entries.entries()).map(function(_a3) {
-          var _b = __read3(_a3, 2), k2 = _b[0], v2 = _b[1];
+        return Array.from(this._entries.entries()).map(function(_a) {
+          var _b = __read3(_a, 2), k2 = _b[0], v2 = _b[1];
           return [k2, v2];
         });
       };
@@ -2540,7 +2540,7 @@
         return newBaggage;
       };
       BaggageImpl2.prototype.removeEntries = function() {
-        var e_1, _a3;
+        var e_1, _a;
         var keys = [];
         for (var _i = 0; _i < arguments.length; _i++) {
           keys[_i] = arguments[_i];
@@ -2555,7 +2555,7 @@
           e_1 = { error: e_1_1 };
         } finally {
           try {
-            if (keys_1_1 && !keys_1_1.done && (_a3 = keys_1.return)) _a3.call(keys_1);
+            if (keys_1_1 && !keys_1_1.done && (_a = keys_1.return)) _a.call(keys_1);
           } finally {
             if (e_1) throw e_1.error;
           }
@@ -2818,6 +2818,16 @@
   var NOOP_OBSERVABLE_COUNTER_METRIC = new NoopObservableCounterMetric();
   var NOOP_OBSERVABLE_GAUGE_METRIC = new NoopObservableGaugeMetric();
   var NOOP_OBSERVABLE_UP_DOWN_COUNTER_METRIC = new NoopObservableUpDownCounterMetric();
+  function createNoopMeter() {
+    return NOOP_METER;
+  }
+
+  // node_modules/@opentelemetry/api/build/esm/metrics/Metric.js
+  var ValueType;
+  (function(ValueType2) {
+    ValueType2[ValueType2["INT"] = 0] = "INT";
+    ValueType2[ValueType2["DOUBLE"] = 1] = "DOUBLE";
+  })(ValueType || (ValueType = {}));
 
   // node_modules/@opentelemetry/api/build/esm/propagation/TextMapPropagator.js
   var defaultTextMapGetter = {
@@ -2945,12 +2955,12 @@
         return this._getContextManager().active();
       };
       ContextAPI2.prototype.with = function(context2, fn, thisArg) {
-        var _a3;
+        var _a;
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
           args[_i - 3] = arguments[_i];
         }
-        return (_a3 = this._getContextManager()).with.apply(_a3, __spreadArray4([context2, fn, thisArg], __read5(args), false));
+        return (_a = this._getContextManager()).with.apply(_a, __spreadArray4([context2, fn, thisArg], __read5(args), false));
       };
       ContextAPI2.prototype.bind = function(context2, target) {
         return this._getContextManager().bind(context2, target);
@@ -3045,8 +3055,8 @@
     return setSpan(context2, new NonRecordingSpan(spanContext));
   }
   function getSpanContext(context2) {
-    var _a3;
-    return (_a3 = getSpan(context2)) === null || _a3 === void 0 ? void 0 : _a3.spanContext();
+    var _a;
+    return (_a = getSpan(context2)) === null || _a === void 0 ? void 0 : _a.spanContext();
   }
 
   // node_modules/@opentelemetry/api/build/esm/trace/spancontext-utils.js
@@ -3169,19 +3179,19 @@
       function ProxyTracerProvider2() {
       }
       ProxyTracerProvider2.prototype.getTracer = function(name, version, options) {
-        var _a3;
-        return (_a3 = this.getDelegateTracer(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyTracer(this, name, version, options);
+        var _a;
+        return (_a = this.getDelegateTracer(name, version, options)) !== null && _a !== void 0 ? _a : new ProxyTracer(this, name, version, options);
       };
       ProxyTracerProvider2.prototype.getDelegate = function() {
-        var _a3;
-        return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_TRACER_PROVIDER;
+        var _a;
+        return (_a = this._delegate) !== null && _a !== void 0 ? _a : NOOP_TRACER_PROVIDER;
       };
       ProxyTracerProvider2.prototype.setDelegate = function(delegate) {
         this._delegate = delegate;
       };
       ProxyTracerProvider2.prototype.getDelegateTracer = function(name, version, options) {
-        var _a3;
-        return (_a3 = this._delegate) === null || _a3 === void 0 ? void 0 : _a3.getTracer(name, version, options);
+        var _a;
+        return (_a = this._delegate) === null || _a === void 0 ? void 0 : _a.getTracer(name, version, options);
       };
       return ProxyTracerProvider2;
     }()
@@ -3394,142 +3404,137 @@
   // node_modules/@opentelemetry/api/build/esm/trace-api.js
   var trace = TraceAPI.getInstance();
 
-  // node_modules/@opentelemetry/api-logs/build/esm/NoopLogger.js
-  var NoopLogger = (
-    /** @class */
-    function() {
-      function NoopLogger2() {
-      }
-      NoopLogger2.prototype.emit = function(_logRecord) {
-      };
-      return NoopLogger2;
-    }()
-  );
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/NoopLogger.js
+  var NoopLogger = class {
+    emit(_logRecord) {
+    }
+  };
   var NOOP_LOGGER = new NoopLogger();
 
-  // node_modules/@opentelemetry/api-logs/build/esm/NoopLoggerProvider.js
-  var NoopLoggerProvider = (
-    /** @class */
-    function() {
-      function NoopLoggerProvider2() {
-      }
-      NoopLoggerProvider2.prototype.getLogger = function(_name, _version, _options) {
-        return new NoopLogger();
-      };
-      return NoopLoggerProvider2;
-    }()
-  );
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/NoopLoggerProvider.js
+  var NoopLoggerProvider = class {
+    getLogger(_name, _version, _options) {
+      return new NoopLogger();
+    }
+  };
   var NOOP_LOGGER_PROVIDER = new NoopLoggerProvider();
 
-  // node_modules/@opentelemetry/api-logs/build/esm/ProxyLogger.js
-  var ProxyLogger = (
-    /** @class */
-    function() {
-      function ProxyLogger2(_provider, name, version, options) {
-        this._provider = _provider;
-        this.name = name;
-        this.version = version;
-        this.options = options;
-      }
-      ProxyLogger2.prototype.emit = function(logRecord) {
-        this._getLogger().emit(logRecord);
-      };
-      ProxyLogger2.prototype._getLogger = function() {
-        if (this._delegate) {
-          return this._delegate;
-        }
-        var logger = this._provider.getDelegateLogger(this.name, this.version, this.options);
-        if (!logger) {
-          return NOOP_LOGGER;
-        }
-        this._delegate = logger;
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/ProxyLogger.js
+  var ProxyLogger = class {
+    constructor(_provider, name, version, options) {
+      this._provider = _provider;
+      this.name = name;
+      this.version = version;
+      this.options = options;
+    }
+    /**
+     * Emit a log record. This method should only be used by log appenders.
+     *
+     * @param logRecord
+     */
+    emit(logRecord) {
+      this._getLogger().emit(logRecord);
+    }
+    /**
+     * Try to get a logger from the proxy logger provider.
+     * If the proxy logger provider has no delegate, return a noop logger.
+     */
+    _getLogger() {
+      if (this._delegate) {
         return this._delegate;
-      };
-      return ProxyLogger2;
-    }()
-  );
-
-  // node_modules/@opentelemetry/api-logs/build/esm/ProxyLoggerProvider.js
-  var ProxyLoggerProvider = (
-    /** @class */
-    function() {
-      function ProxyLoggerProvider2() {
       }
-      ProxyLoggerProvider2.prototype.getLogger = function(name, version, options) {
-        var _a3;
-        return (_a3 = this.getDelegateLogger(name, version, options)) !== null && _a3 !== void 0 ? _a3 : new ProxyLogger(this, name, version, options);
-      };
-      ProxyLoggerProvider2.prototype.getDelegate = function() {
-        var _a3;
-        return (_a3 = this._delegate) !== null && _a3 !== void 0 ? _a3 : NOOP_LOGGER_PROVIDER;
-      };
-      ProxyLoggerProvider2.prototype.setDelegate = function(delegate) {
-        this._delegate = delegate;
-      };
-      ProxyLoggerProvider2.prototype.getDelegateLogger = function(name, version, options) {
-        var _a3;
-        return (_a3 = this._delegate) === null || _a3 === void 0 ? void 0 : _a3.getLogger(name, version, options);
-      };
-      return ProxyLoggerProvider2;
-    }()
-  );
+      const logger3 = this._provider.getDelegateLogger(this.name, this.version, this.options);
+      if (!logger3) {
+        return NOOP_LOGGER;
+      }
+      this._delegate = logger3;
+      return this._delegate;
+    }
+  };
 
-  // node_modules/@opentelemetry/api-logs/build/esm/platform/browser/globalThis.js
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/ProxyLoggerProvider.js
+  var ProxyLoggerProvider = class {
+    getLogger(name, version, options) {
+      var _a;
+      return (_a = this.getDelegateLogger(name, version, options)) !== null && _a !== void 0 ? _a : new ProxyLogger(this, name, version, options);
+    }
+    getDelegate() {
+      var _a;
+      return (_a = this._delegate) !== null && _a !== void 0 ? _a : NOOP_LOGGER_PROVIDER;
+    }
+    /**
+     * Set the delegate logger provider
+     */
+    setDelegate(delegate) {
+      this._delegate = delegate;
+    }
+    getDelegateLogger(name, version, options) {
+      var _a;
+      return (_a = this._delegate) === null || _a === void 0 ? void 0 : _a.getLogger(name, version, options);
+    }
+  };
+
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/platform/browser/globalThis.js
   var _globalThis2 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
 
-  // node_modules/@opentelemetry/api-logs/build/esm/internal/global-utils.js
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/internal/global-utils.js
   var GLOBAL_LOGS_API_KEY = Symbol.for("io.opentelemetry.js.api.logs");
   var _global2 = _globalThis2;
   function makeGetter(requiredVersion, instance, fallback) {
-    return function(version) {
-      return version === requiredVersion ? instance : fallback;
-    };
+    return (version) => version === requiredVersion ? instance : fallback;
   }
   var API_BACKWARDS_COMPATIBILITY_VERSION = 1;
 
-  // node_modules/@opentelemetry/api-logs/build/esm/api/logs.js
-  var LogsAPI = (
-    /** @class */
-    function() {
-      function LogsAPI2() {
-        this._proxyLoggerProvider = new ProxyLoggerProvider();
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/api/logs.js
+  var LogsAPI = class _LogsAPI {
+    constructor() {
+      this._proxyLoggerProvider = new ProxyLoggerProvider();
+    }
+    static getInstance() {
+      if (!this._instance) {
+        this._instance = new _LogsAPI();
       }
-      LogsAPI2.getInstance = function() {
-        if (!this._instance) {
-          this._instance = new LogsAPI2();
-        }
-        return this._instance;
-      };
-      LogsAPI2.prototype.setGlobalLoggerProvider = function(provider) {
-        if (_global2[GLOBAL_LOGS_API_KEY]) {
-          return this.getLoggerProvider();
-        }
-        _global2[GLOBAL_LOGS_API_KEY] = makeGetter(API_BACKWARDS_COMPATIBILITY_VERSION, provider, NOOP_LOGGER_PROVIDER);
-        this._proxyLoggerProvider.setDelegate(provider);
-        return provider;
-      };
-      LogsAPI2.prototype.getLoggerProvider = function() {
-        var _a3, _b;
-        return (_b = (_a3 = _global2[GLOBAL_LOGS_API_KEY]) === null || _a3 === void 0 ? void 0 : _a3.call(_global2, API_BACKWARDS_COMPATIBILITY_VERSION)) !== null && _b !== void 0 ? _b : this._proxyLoggerProvider;
-      };
-      LogsAPI2.prototype.getLogger = function(name, version, options) {
-        return this.getLoggerProvider().getLogger(name, version, options);
-      };
-      LogsAPI2.prototype.disable = function() {
-        delete _global2[GLOBAL_LOGS_API_KEY];
-        this._proxyLoggerProvider = new ProxyLoggerProvider();
-      };
-      return LogsAPI2;
-    }()
-  );
+      return this._instance;
+    }
+    setGlobalLoggerProvider(provider) {
+      if (_global2[GLOBAL_LOGS_API_KEY]) {
+        return this.getLoggerProvider();
+      }
+      _global2[GLOBAL_LOGS_API_KEY] = makeGetter(API_BACKWARDS_COMPATIBILITY_VERSION, provider, NOOP_LOGGER_PROVIDER);
+      this._proxyLoggerProvider.setDelegate(provider);
+      return provider;
+    }
+    /**
+     * Returns the global logger provider.
+     *
+     * @returns LoggerProvider
+     */
+    getLoggerProvider() {
+      var _a, _b;
+      return (_b = (_a = _global2[GLOBAL_LOGS_API_KEY]) === null || _a === void 0 ? void 0 : _a.call(_global2, API_BACKWARDS_COMPATIBILITY_VERSION)) !== null && _b !== void 0 ? _b : this._proxyLoggerProvider;
+    }
+    /**
+     * Returns a logger from the global logger provider.
+     *
+     * @returns Logger
+     */
+    getLogger(name, version, options) {
+      return this.getLoggerProvider().getLogger(name, version, options);
+    }
+    /** Remove the global logger provider */
+    disable() {
+      delete _global2[GLOBAL_LOGS_API_KEY];
+      this._proxyLoggerProvider = new ProxyLoggerProvider();
+    }
+  };
 
-  // node_modules/@opentelemetry/api-logs/build/esm/index.js
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/api-logs/build/esm/index.js
   var logs = LogsAPI.getInstance();
 
-  // node_modules/@opentelemetry/instrumentation/build/esm/autoLoaderUtils.js
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/instrumentation/build/esm/autoLoaderUtils.js
   function enableInstrumentations(instrumentations, tracerProvider, meterProvider, loggerProvider) {
-    for (var i2 = 0, j2 = instrumentations.length; i2 < j2; i2++) {
-      var instrumentation = instrumentations[i2];
+    for (let i2 = 0, j2 = instrumentations.length; i2 < j2; i2++) {
+      const instrumentation = instrumentations[i2];
       if (tracerProvider) {
         instrumentation.setTracerProvider(tracerProvider);
       }
@@ -3545,186 +3550,249 @@
     }
   }
   function disableInstrumentations(instrumentations) {
-    instrumentations.forEach(function(instrumentation) {
-      return instrumentation.disable();
-    });
+    instrumentations.forEach((instrumentation) => instrumentation.disable());
   }
 
-  // node_modules/@opentelemetry/instrumentation/build/esm/autoLoader.js
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/instrumentation/build/esm/autoLoader.js
   function registerInstrumentations(options) {
-    var _a3, _b;
-    var tracerProvider = options.tracerProvider || trace.getTracerProvider();
-    var meterProvider = options.meterProvider || metrics.getMeterProvider();
-    var loggerProvider = options.loggerProvider || logs.getLoggerProvider();
-    var instrumentations = (_b = (_a3 = options.instrumentations) === null || _a3 === void 0 ? void 0 : _a3.flat()) !== null && _b !== void 0 ? _b : [];
+    const tracerProvider = options.tracerProvider || trace.getTracerProvider();
+    const meterProvider = options.meterProvider || metrics.getMeterProvider();
+    const loggerProvider = options.loggerProvider || logs.getLoggerProvider();
+    const instrumentations = options.instrumentations?.flat() ?? [];
     enableInstrumentations(instrumentations, tracerProvider, meterProvider, loggerProvider);
-    return function() {
+    return () => {
       disableInstrumentations(instrumentations);
     };
   }
 
-  // node_modules/@opentelemetry/instrumentation/build/esm/instrumentation.js
-  var shimmer = __toESM(require_shimmer());
-  var __assign = function() {
-    __assign = Object.assign || function(t3) {
-      for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t3[p2] = s2[p2];
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/instrumentation/build/esm/shimmer.js
+  var logger = console.error.bind(console);
+  function defineProperty(obj, name, value) {
+    const enumerable = !!obj[name] && Object.prototype.propertyIsEnumerable.call(obj, name);
+    Object.defineProperty(obj, name, {
+      configurable: true,
+      enumerable,
+      writable: true,
+      value
+    });
+  }
+  var wrap = (nodule, name, wrapper) => {
+    if (!nodule || !nodule[name]) {
+      logger("no original function " + String(name) + " to wrap");
+      return;
+    }
+    if (!wrapper) {
+      logger("no wrapper function");
+      logger(new Error().stack);
+      return;
+    }
+    const original = nodule[name];
+    if (typeof original !== "function" || typeof wrapper !== "function") {
+      logger("original object and wrapper must be functions");
+      return;
+    }
+    const wrapped = wrapper(original, name);
+    defineProperty(wrapped, "__original", original);
+    defineProperty(wrapped, "__unwrap", () => {
+      if (nodule[name] === wrapped) {
+        defineProperty(nodule, name, original);
       }
-      return t3;
-    };
-    return __assign.apply(this, arguments);
+    });
+    defineProperty(wrapped, "__wrapped", true);
+    defineProperty(nodule, name, wrapped);
+    return wrapped;
   };
-  var InstrumentationAbstract = (
-    /** @class */
-    function() {
-      function InstrumentationAbstract3(instrumentationName, instrumentationVersion, config) {
-        this.instrumentationName = instrumentationName;
-        this.instrumentationVersion = instrumentationVersion;
-        this._config = {};
-        this._wrap = shimmer.wrap;
-        this._unwrap = shimmer.unwrap;
-        this._massWrap = shimmer.massWrap;
-        this._massUnwrap = shimmer.massUnwrap;
-        this.setConfig(config);
-        this._diag = diag2.createComponentLogger({
-          namespace: instrumentationName
-        });
-        this._tracer = trace.getTracer(instrumentationName, instrumentationVersion);
-        this._meter = metrics.getMeter(instrumentationName, instrumentationVersion);
-        this._logger = logs.getLogger(instrumentationName, instrumentationVersion);
-        this._updateMetricInstruments();
-      }
-      Object.defineProperty(InstrumentationAbstract3.prototype, "meter", {
-        /* Returns meter */
-        get: function() {
-          return this._meter;
-        },
-        enumerable: false,
-        configurable: true
+  var massWrap = (nodules, names, wrapper) => {
+    if (!nodules) {
+      logger("must provide one or more modules to patch");
+      logger(new Error().stack);
+      return;
+    } else if (!Array.isArray(nodules)) {
+      nodules = [nodules];
+    }
+    if (!(names && Array.isArray(names))) {
+      logger("must provide one or more functions to wrap on modules");
+      return;
+    }
+    nodules.forEach((nodule) => {
+      names.forEach((name) => {
+        wrap(nodule, name, wrapper);
       });
-      InstrumentationAbstract3.prototype.setMeterProvider = function(meterProvider) {
-        this._meter = meterProvider.getMeter(this.instrumentationName, this.instrumentationVersion);
-        this._updateMetricInstruments();
-      };
-      Object.defineProperty(InstrumentationAbstract3.prototype, "logger", {
-        /* Returns logger */
-        get: function() {
-          return this._logger;
-        },
-        enumerable: false,
-        configurable: true
+    });
+  };
+  var unwrap = (nodule, name) => {
+    if (!nodule || !nodule[name]) {
+      logger("no function to unwrap.");
+      logger(new Error().stack);
+      return;
+    }
+    const wrapped = nodule[name];
+    if (!wrapped.__unwrap) {
+      logger("no original to unwrap to -- has " + String(name) + " already been unwrapped?");
+    } else {
+      wrapped.__unwrap();
+      return;
+    }
+  };
+  var massUnwrap = (nodules, names) => {
+    if (!nodules) {
+      logger("must provide one or more modules to patch");
+      logger(new Error().stack);
+      return;
+    } else if (!Array.isArray(nodules)) {
+      nodules = [nodules];
+    }
+    if (!(names && Array.isArray(names))) {
+      logger("must provide one or more functions to unwrap on modules");
+      return;
+    }
+    nodules.forEach((nodule) => {
+      names.forEach((name) => {
+        unwrap(nodule, name);
       });
-      InstrumentationAbstract3.prototype.setLoggerProvider = function(loggerProvider) {
-        this._logger = loggerProvider.getLogger(this.instrumentationName, this.instrumentationVersion);
-      };
-      InstrumentationAbstract3.prototype.getModuleDefinitions = function() {
-        var _a3;
-        var initResult = (_a3 = this.init()) !== null && _a3 !== void 0 ? _a3 : [];
-        if (!Array.isArray(initResult)) {
-          return [initResult];
-        }
-        return initResult;
-      };
-      InstrumentationAbstract3.prototype._updateMetricInstruments = function() {
-        return;
-      };
-      InstrumentationAbstract3.prototype.getConfig = function() {
-        return this._config;
-      };
-      InstrumentationAbstract3.prototype.setConfig = function(config) {
-        this._config = __assign({ enabled: true }, config);
-      };
-      InstrumentationAbstract3.prototype.setTracerProvider = function(tracerProvider) {
-        this._tracer = tracerProvider.getTracer(this.instrumentationName, this.instrumentationVersion);
-      };
-      Object.defineProperty(InstrumentationAbstract3.prototype, "tracer", {
-        /* Returns tracer */
-        get: function() {
-          return this._tracer;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      InstrumentationAbstract3.prototype._runSpanCustomizationHook = function(hookHandler, triggerName, span, info) {
-        if (!hookHandler) {
-          return;
-        }
-        try {
-          hookHandler(span, info);
-        } catch (e2) {
-          this._diag.error("Error running span customization hook due to exception in handler", { triggerName }, e2);
-        }
-      };
-      return InstrumentationAbstract3;
-    }()
-  );
-
-  // node_modules/@opentelemetry/instrumentation/build/esm/platform/browser/instrumentation.js
-  var __extends2 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
+    });
+  };
+  function shimmer(options) {
+    if (options && options.logger) {
+      if (typeof options.logger !== "function") {
+        logger("new logger isn't a function, not replacing");
+      } else {
+        logger = options.logger;
       }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var InstrumentationBase = (
-    /** @class */
-    function(_super) {
-      __extends2(InstrumentationBase2, _super);
-      function InstrumentationBase2(instrumentationName, instrumentationVersion, config) {
-        var _this = _super.call(this, instrumentationName, instrumentationVersion, config) || this;
-        if (_this._config.enabled) {
-          _this.enable();
-        }
-        return _this;
-      }
-      return InstrumentationBase2;
-    }(InstrumentationAbstract)
-  );
-
-  // node_modules/@opentelemetry/instrumentation/build/esm/utils.js
-  function safeExecuteInTheMiddle(execute, onFinish, preventThrowingError) {
-    var error;
-    var result;
-    try {
-      result = execute();
-    } catch (e2) {
-      error = e2;
-    } finally {
-      onFinish(error, result);
-      if (error && !preventThrowingError) {
-        throw error;
-      }
-      return result;
     }
   }
-  function isWrapped(func) {
-    return typeof func === "function" && typeof func.__original === "function" && typeof func.__unwrap === "function" && func.__wrapped === true;
-  }
+  shimmer.wrap = wrap;
+  shimmer.massWrap = massWrap;
+  shimmer.unwrap = unwrap;
+  shimmer.massUnwrap = massUnwrap;
 
-  // node_modules/@opentelemetry/resources/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
-  var TMP_SERVICE_NAME = "service.name";
-  var TMP_TELEMETRY_SDK_NAME = "telemetry.sdk.name";
-  var TMP_TELEMETRY_SDK_LANGUAGE = "telemetry.sdk.language";
-  var TMP_TELEMETRY_SDK_VERSION = "telemetry.sdk.version";
-  var SEMRESATTRS_SERVICE_NAME = TMP_SERVICE_NAME;
-  var SEMRESATTRS_TELEMETRY_SDK_NAME = TMP_TELEMETRY_SDK_NAME;
-  var SEMRESATTRS_TELEMETRY_SDK_LANGUAGE = TMP_TELEMETRY_SDK_LANGUAGE;
-  var SEMRESATTRS_TELEMETRY_SDK_VERSION = TMP_TELEMETRY_SDK_VERSION;
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/instrumentation/build/esm/instrumentation.js
+  var InstrumentationAbstract = class {
+    instrumentationName;
+    instrumentationVersion;
+    _config = {};
+    _tracer;
+    _meter;
+    _logger;
+    _diag;
+    constructor(instrumentationName, instrumentationVersion, config) {
+      this.instrumentationName = instrumentationName;
+      this.instrumentationVersion = instrumentationVersion;
+      this.setConfig(config);
+      this._diag = diag2.createComponentLogger({
+        namespace: instrumentationName
+      });
+      this._tracer = trace.getTracer(instrumentationName, instrumentationVersion);
+      this._meter = metrics.getMeter(instrumentationName, instrumentationVersion);
+      this._logger = logs.getLogger(instrumentationName, instrumentationVersion);
+      this._updateMetricInstruments();
+    }
+    /* Api to wrap instrumented method */
+    _wrap = wrap;
+    /* Api to unwrap instrumented methods */
+    _unwrap = unwrap;
+    /* Api to mass wrap instrumented method */
+    _massWrap = massWrap;
+    /* Api to mass unwrap instrumented methods */
+    _massUnwrap = massUnwrap;
+    /* Returns meter */
+    get meter() {
+      return this._meter;
+    }
+    /**
+     * Sets MeterProvider to this plugin
+     * @param meterProvider
+     */
+    setMeterProvider(meterProvider) {
+      this._meter = meterProvider.getMeter(this.instrumentationName, this.instrumentationVersion);
+      this._updateMetricInstruments();
+    }
+    /* Returns logger */
+    get logger() {
+      return this._logger;
+    }
+    /**
+     * Sets LoggerProvider to this plugin
+     * @param loggerProvider
+     */
+    setLoggerProvider(loggerProvider) {
+      this._logger = loggerProvider.getLogger(this.instrumentationName, this.instrumentationVersion);
+    }
+    /**
+     * @experimental
+     *
+     * Get module definitions defined by {@link init}.
+     * This can be used for experimental compile-time instrumentation.
+     *
+     * @returns an array of {@link InstrumentationModuleDefinition}
+     */
+    getModuleDefinitions() {
+      const initResult = this.init() ?? [];
+      if (!Array.isArray(initResult)) {
+        return [initResult];
+      }
+      return initResult;
+    }
+    /**
+     * Sets the new metric instruments with the current Meter.
+     */
+    _updateMetricInstruments() {
+      return;
+    }
+    /* Returns InstrumentationConfig */
+    getConfig() {
+      return this._config;
+    }
+    /**
+     * Sets InstrumentationConfig to this plugin
+     * @param config
+     */
+    setConfig(config) {
+      this._config = {
+        enabled: true,
+        ...config
+      };
+    }
+    /**
+     * Sets TraceProvider to this plugin
+     * @param tracerProvider
+     */
+    setTracerProvider(tracerProvider) {
+      this._tracer = tracerProvider.getTracer(this.instrumentationName, this.instrumentationVersion);
+    }
+    /* Returns tracer */
+    get tracer() {
+      return this._tracer;
+    }
+    /**
+     * Execute span customization hook, if configured, and log any errors.
+     * Any semantics of the trigger and info are defined by the specific instrumentation.
+     * @param hookHandler The optional hook handler which the user has configured via instrumentation config
+     * @param triggerName The name of the trigger for executing the hook for logging purposes
+     * @param span The span to which the hook should be applied
+     * @param info The info object to be passed to the hook, with useful data the hook may use
+     */
+    _runSpanCustomizationHook(hookHandler, triggerName, span, info) {
+      if (!hookHandler) {
+        return;
+      }
+      try {
+        hookHandler(span, info);
+      } catch (e2) {
+        this._diag.error(`Error running span customization hook due to exception in handler`, { triggerName }, e2);
+      }
+    }
+  };
+
+  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/instrumentation/build/esm/platform/browser/instrumentation.js
+  var InstrumentationBase = class extends InstrumentationAbstract {
+    constructor(instrumentationName, instrumentationVersion, config) {
+      super(instrumentationName, instrumentationVersion, config);
+      if (this._config.enabled) {
+        this.enable();
+      }
+    }
+  };
 
   // node_modules/@opentelemetry/core/build/esm/trace/suppress-tracing.js
   var SUPPRESS_TRACING_KEY = createContextKey("OpenTelemetry SDK Context Key SUPPRESS_TRACING");
@@ -3745,33 +3813,15 @@
   var BAGGAGE_MAX_TOTAL_LENGTH = 8192;
 
   // node_modules/@opentelemetry/core/build/esm/baggage/utils.js
-  var __read6 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
   function serializeKeyPairs(keyPairs) {
-    return keyPairs.reduce(function(hValue, current) {
-      var value = "" + hValue + (hValue !== "" ? BAGGAGE_ITEMS_SEPARATOR : "") + current;
+    return keyPairs.reduce((hValue, current) => {
+      const value = `${hValue}${hValue !== "" ? BAGGAGE_ITEMS_SEPARATOR : ""}${current}`;
       return value.length > BAGGAGE_MAX_TOTAL_LENGTH ? hValue : value;
     }, "");
   }
   function getKeyPairs(baggage) {
-    return baggage.getAllEntries().map(function(_a3) {
-      var _b = __read6(_a3, 2), key = _b[0], value = _b[1];
-      var entry = encodeURIComponent(key) + "=" + encodeURIComponent(value.value);
+    return baggage.getAllEntries().map(([key, value]) => {
+      let entry = `${encodeURIComponent(key)}=${encodeURIComponent(value.value)}`;
       if (value.metadata !== void 0) {
         entry += BAGGAGE_PROPERTIES_SEPARATOR + value.metadata.toString();
       }
@@ -3779,18 +3829,18 @@
     });
   }
   function parsePairKeyValue(entry) {
-    var valueProps = entry.split(BAGGAGE_PROPERTIES_SEPARATOR);
+    const valueProps = entry.split(BAGGAGE_PROPERTIES_SEPARATOR);
     if (valueProps.length <= 0)
       return;
-    var keyPairPart = valueProps.shift();
+    const keyPairPart = valueProps.shift();
     if (!keyPairPart)
       return;
-    var separatorIndex = keyPairPart.indexOf(BAGGAGE_KEY_PAIR_SEPARATOR);
+    const separatorIndex = keyPairPart.indexOf(BAGGAGE_KEY_PAIR_SEPARATOR);
     if (separatorIndex <= 0)
       return;
-    var key = decodeURIComponent(keyPairPart.substring(0, separatorIndex).trim());
-    var value = decodeURIComponent(keyPairPart.substring(separatorIndex + 1).trim());
-    var metadata;
+    const key = decodeURIComponent(keyPairPart.substring(0, separatorIndex).trim());
+    const value = decodeURIComponent(keyPairPart.substring(separatorIndex + 1).trim());
+    let metadata;
     if (valueProps.length > 0) {
       metadata = baggageEntryMetadataFromString(valueProps.join(BAGGAGE_PROPERTIES_SEPARATOR));
     }
@@ -3798,114 +3848,68 @@
   }
 
   // node_modules/@opentelemetry/core/build/esm/baggage/propagation/W3CBaggagePropagator.js
-  var W3CBaggagePropagator = (
-    /** @class */
-    function() {
-      function W3CBaggagePropagator2() {
-      }
-      W3CBaggagePropagator2.prototype.inject = function(context2, carrier, setter) {
-        var baggage = propagation.getBaggage(context2);
-        if (!baggage || isTracingSuppressed(context2))
-          return;
-        var keyPairs = getKeyPairs(baggage).filter(function(pair) {
-          return pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS;
-        }).slice(0, BAGGAGE_MAX_NAME_VALUE_PAIRS);
-        var headerValue = serializeKeyPairs(keyPairs);
-        if (headerValue.length > 0) {
-          setter.set(carrier, BAGGAGE_HEADER, headerValue);
-        }
-      };
-      W3CBaggagePropagator2.prototype.extract = function(context2, carrier, getter) {
-        var headerValue = getter.get(carrier, BAGGAGE_HEADER);
-        var baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
-        if (!baggageString)
-          return context2;
-        var baggage = {};
-        if (baggageString.length === 0) {
-          return context2;
-        }
-        var pairs = baggageString.split(BAGGAGE_ITEMS_SEPARATOR);
-        pairs.forEach(function(entry) {
-          var keyPair = parsePairKeyValue(entry);
-          if (keyPair) {
-            var baggageEntry = { value: keyPair.value };
-            if (keyPair.metadata) {
-              baggageEntry.metadata = keyPair.metadata;
-            }
-            baggage[keyPair.key] = baggageEntry;
-          }
-        });
-        if (Object.entries(baggage).length === 0) {
-          return context2;
-        }
-        return propagation.setBaggage(context2, propagation.createBaggage(baggage));
-      };
-      W3CBaggagePropagator2.prototype.fields = function() {
-        return [BAGGAGE_HEADER];
-      };
-      return W3CBaggagePropagator2;
-    }()
-  );
-
-  // node_modules/@opentelemetry/core/build/esm/common/attributes.js
-  var __values2 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var __read7 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
+  var W3CBaggagePropagator = class {
+    inject(context2, carrier, setter) {
+      const baggage = propagation.getBaggage(context2);
+      if (!baggage || isTracingSuppressed(context2))
+        return;
+      const keyPairs = getKeyPairs(baggage).filter((pair) => {
+        return pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS;
+      }).slice(0, BAGGAGE_MAX_NAME_VALUE_PAIRS);
+      const headerValue = serializeKeyPairs(keyPairs);
+      if (headerValue.length > 0) {
+        setter.set(carrier, BAGGAGE_HEADER, headerValue);
       }
     }
-    return ar;
+    extract(context2, carrier, getter) {
+      const headerValue = getter.get(carrier, BAGGAGE_HEADER);
+      const baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
+      if (!baggageString)
+        return context2;
+      const baggage = {};
+      if (baggageString.length === 0) {
+        return context2;
+      }
+      const pairs = baggageString.split(BAGGAGE_ITEMS_SEPARATOR);
+      pairs.forEach((entry) => {
+        const keyPair = parsePairKeyValue(entry);
+        if (keyPair) {
+          const baggageEntry = { value: keyPair.value };
+          if (keyPair.metadata) {
+            baggageEntry.metadata = keyPair.metadata;
+          }
+          baggage[keyPair.key] = baggageEntry;
+        }
+      });
+      if (Object.entries(baggage).length === 0) {
+        return context2;
+      }
+      return propagation.setBaggage(context2, propagation.createBaggage(baggage));
+    }
+    fields() {
+      return [BAGGAGE_HEADER];
+    }
   };
+
+  // node_modules/@opentelemetry/core/build/esm/common/attributes.js
   function sanitizeAttributes(attributes) {
-    var e_1, _a3;
-    var out = {};
+    const out = {};
     if (typeof attributes !== "object" || attributes == null) {
       return out;
     }
-    try {
-      for (var _b = __values2(Object.entries(attributes)), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var _d = __read7(_c.value, 2), key = _d[0], val = _d[1];
-        if (!isAttributeKey(key)) {
-          diag2.warn("Invalid attribute key: " + key);
-          continue;
-        }
-        if (!isAttributeValue(val)) {
-          diag2.warn("Invalid attribute value set for key: " + key);
-          continue;
-        }
-        if (Array.isArray(val)) {
-          out[key] = val.slice();
-        } else {
-          out[key] = val;
-        }
+    for (const [key, val] of Object.entries(attributes)) {
+      if (!isAttributeKey(key)) {
+        diag2.warn(`Invalid attribute key: ${key}`);
+        continue;
       }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-      } finally {
-        if (e_1) throw e_1.error;
+      if (!isAttributeValue(val)) {
+        diag2.warn(`Invalid attribute value set for key: ${key}`);
+        continue;
+      }
+      if (Array.isArray(val)) {
+        out[key] = val.slice();
+      } else {
+        out[key] = val;
       }
     }
     return out;
@@ -3923,33 +3927,21 @@
     return isValidPrimitiveAttributeValue(val);
   }
   function isHomogeneousAttributeValueArray(arr) {
-    var e_2, _a3;
-    var type;
-    try {
-      for (var arr_1 = __values2(arr), arr_1_1 = arr_1.next(); !arr_1_1.done; arr_1_1 = arr_1.next()) {
-        var element = arr_1_1.value;
-        if (element == null)
-          continue;
-        if (!type) {
-          if (isValidPrimitiveAttributeValue(element)) {
-            type = typeof element;
-            continue;
-          }
-          return false;
-        }
-        if (typeof element === type) {
+    let type;
+    for (const element of arr) {
+      if (element == null)
+        continue;
+      if (!type) {
+        if (isValidPrimitiveAttributeValue(element)) {
+          type = typeof element;
           continue;
         }
         return false;
       }
-    } catch (e_2_1) {
-      e_2 = { error: e_2_1 };
-    } finally {
-      try {
-        if (arr_1_1 && !arr_1_1.done && (_a3 = arr_1.return)) _a3.call(arr_1);
-      } finally {
-        if (e_2) throw e_2.error;
+      if (typeof element === type) {
+        continue;
       }
+      return false;
     }
     return true;
   }
@@ -3965,7 +3957,7 @@
 
   // node_modules/@opentelemetry/core/build/esm/common/logging-error-handler.js
   function loggingErrorHandler() {
-    return function(ex) {
+    return (ex) => {
       diag2.error(stringifyException(ex));
     };
   }
@@ -3977,13 +3969,13 @@
     }
   }
   function flattenException(ex) {
-    var result = {};
-    var current = ex;
+    const result = {};
+    let current = ex;
     while (current !== null) {
-      Object.getOwnPropertyNames(current).forEach(function(propertyName) {
+      Object.getOwnPropertyNames(current).forEach((propertyName) => {
         if (result[propertyName])
           return;
-        var value = current[propertyName];
+        const value = current[propertyName];
         if (value) {
           result[propertyName] = String(value);
         }
@@ -3998,283 +3990,65 @@
   function globalErrorHandler(ex) {
     try {
       delegateHandler(ex);
-    } catch (_a3) {
+    } catch {
     }
   }
 
-  // node_modules/@opentelemetry/core/build/esm/utils/sampling.js
-  var TracesSamplerValues;
-  (function(TracesSamplerValues2) {
-    TracesSamplerValues2["AlwaysOff"] = "always_off";
-    TracesSamplerValues2["AlwaysOn"] = "always_on";
-    TracesSamplerValues2["ParentBasedAlwaysOff"] = "parentbased_always_off";
-    TracesSamplerValues2["ParentBasedAlwaysOn"] = "parentbased_always_on";
-    TracesSamplerValues2["ParentBasedTraceIdRatio"] = "parentbased_traceidratio";
-    TracesSamplerValues2["TraceIdRatio"] = "traceidratio";
-  })(TracesSamplerValues || (TracesSamplerValues = {}));
-
-  // node_modules/@opentelemetry/core/build/esm/utils/environment.js
-  var DEFAULT_LIST_SEPARATOR = ",";
-  var ENVIRONMENT_BOOLEAN_KEYS = ["OTEL_SDK_DISABLED"];
-  function isEnvVarABoolean(key) {
-    return ENVIRONMENT_BOOLEAN_KEYS.indexOf(key) > -1;
+  // node_modules/@opentelemetry/core/build/esm/platform/browser/environment.js
+  function getStringFromEnv(_2) {
+    return void 0;
   }
-  var ENVIRONMENT_NUMBERS_KEYS = [
-    "OTEL_BSP_EXPORT_TIMEOUT",
-    "OTEL_BSP_MAX_EXPORT_BATCH_SIZE",
-    "OTEL_BSP_MAX_QUEUE_SIZE",
-    "OTEL_BSP_SCHEDULE_DELAY",
-    "OTEL_BLRP_EXPORT_TIMEOUT",
-    "OTEL_BLRP_MAX_EXPORT_BATCH_SIZE",
-    "OTEL_BLRP_MAX_QUEUE_SIZE",
-    "OTEL_BLRP_SCHEDULE_DELAY",
-    "OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT",
-    "OTEL_ATTRIBUTE_COUNT_LIMIT",
-    "OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT",
-    "OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT",
-    "OTEL_LOGRECORD_ATTRIBUTE_VALUE_LENGTH_LIMIT",
-    "OTEL_LOGRECORD_ATTRIBUTE_COUNT_LIMIT",
-    "OTEL_SPAN_EVENT_COUNT_LIMIT",
-    "OTEL_SPAN_LINK_COUNT_LIMIT",
-    "OTEL_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT",
-    "OTEL_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT",
-    "OTEL_EXPORTER_OTLP_TIMEOUT",
-    "OTEL_EXPORTER_OTLP_TRACES_TIMEOUT",
-    "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT",
-    "OTEL_EXPORTER_OTLP_LOGS_TIMEOUT",
-    "OTEL_EXPORTER_JAEGER_AGENT_PORT"
-  ];
-  function isEnvVarANumber(key) {
-    return ENVIRONMENT_NUMBERS_KEYS.indexOf(key) > -1;
+  function getNumberFromEnv(_2) {
+    return void 0;
   }
-  var ENVIRONMENT_LISTS_KEYS = [
-    "OTEL_NO_PATCH_MODULES",
-    "OTEL_PROPAGATORS",
-    "OTEL_SEMCONV_STABILITY_OPT_IN"
-  ];
-  function isEnvVarAList(key) {
-    return ENVIRONMENT_LISTS_KEYS.indexOf(key) > -1;
-  }
-  var DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT = Infinity;
-  var DEFAULT_ATTRIBUTE_COUNT_LIMIT = 128;
-  var DEFAULT_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT = 128;
-  var DEFAULT_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT = 128;
-  var DEFAULT_ENVIRONMENT = {
-    OTEL_SDK_DISABLED: false,
-    CONTAINER_NAME: "",
-    ECS_CONTAINER_METADATA_URI_V4: "",
-    ECS_CONTAINER_METADATA_URI: "",
-    HOSTNAME: "",
-    KUBERNETES_SERVICE_HOST: "",
-    NAMESPACE: "",
-    OTEL_BSP_EXPORT_TIMEOUT: 3e4,
-    OTEL_BSP_MAX_EXPORT_BATCH_SIZE: 512,
-    OTEL_BSP_MAX_QUEUE_SIZE: 2048,
-    OTEL_BSP_SCHEDULE_DELAY: 5e3,
-    OTEL_BLRP_EXPORT_TIMEOUT: 3e4,
-    OTEL_BLRP_MAX_EXPORT_BATCH_SIZE: 512,
-    OTEL_BLRP_MAX_QUEUE_SIZE: 2048,
-    OTEL_BLRP_SCHEDULE_DELAY: 5e3,
-    OTEL_EXPORTER_JAEGER_AGENT_HOST: "",
-    OTEL_EXPORTER_JAEGER_AGENT_PORT: 6832,
-    OTEL_EXPORTER_JAEGER_ENDPOINT: "",
-    OTEL_EXPORTER_JAEGER_PASSWORD: "",
-    OTEL_EXPORTER_JAEGER_USER: "",
-    OTEL_EXPORTER_OTLP_ENDPOINT: "",
-    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "",
-    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "",
-    OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "",
-    OTEL_EXPORTER_OTLP_HEADERS: "",
-    OTEL_EXPORTER_OTLP_TRACES_HEADERS: "",
-    OTEL_EXPORTER_OTLP_METRICS_HEADERS: "",
-    OTEL_EXPORTER_OTLP_LOGS_HEADERS: "",
-    OTEL_EXPORTER_OTLP_TIMEOUT: 1e4,
-    OTEL_EXPORTER_OTLP_TRACES_TIMEOUT: 1e4,
-    OTEL_EXPORTER_OTLP_METRICS_TIMEOUT: 1e4,
-    OTEL_EXPORTER_OTLP_LOGS_TIMEOUT: 1e4,
-    OTEL_EXPORTER_ZIPKIN_ENDPOINT: "http://localhost:9411/api/v2/spans",
-    OTEL_LOG_LEVEL: DiagLogLevel.INFO,
-    OTEL_NO_PATCH_MODULES: [],
-    OTEL_PROPAGATORS: ["tracecontext", "baggage"],
-    OTEL_RESOURCE_ATTRIBUTES: "",
-    OTEL_SERVICE_NAME: "",
-    OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT: DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-    OTEL_ATTRIBUTE_COUNT_LIMIT: DEFAULT_ATTRIBUTE_COUNT_LIMIT,
-    OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT: DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-    OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT: DEFAULT_ATTRIBUTE_COUNT_LIMIT,
-    OTEL_LOGRECORD_ATTRIBUTE_VALUE_LENGTH_LIMIT: DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-    OTEL_LOGRECORD_ATTRIBUTE_COUNT_LIMIT: DEFAULT_ATTRIBUTE_COUNT_LIMIT,
-    OTEL_SPAN_EVENT_COUNT_LIMIT: 128,
-    OTEL_SPAN_LINK_COUNT_LIMIT: 128,
-    OTEL_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT: DEFAULT_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT,
-    OTEL_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT: DEFAULT_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT,
-    OTEL_TRACES_EXPORTER: "",
-    OTEL_TRACES_SAMPLER: TracesSamplerValues.ParentBasedAlwaysOn,
-    OTEL_TRACES_SAMPLER_ARG: "",
-    OTEL_LOGS_EXPORTER: "",
-    OTEL_EXPORTER_OTLP_INSECURE: "",
-    OTEL_EXPORTER_OTLP_TRACES_INSECURE: "",
-    OTEL_EXPORTER_OTLP_METRICS_INSECURE: "",
-    OTEL_EXPORTER_OTLP_LOGS_INSECURE: "",
-    OTEL_EXPORTER_OTLP_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_TRACES_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_LOGS_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_COMPRESSION: "",
-    OTEL_EXPORTER_OTLP_TRACES_COMPRESSION: "",
-    OTEL_EXPORTER_OTLP_METRICS_COMPRESSION: "",
-    OTEL_EXPORTER_OTLP_LOGS_COMPRESSION: "",
-    OTEL_EXPORTER_OTLP_CLIENT_KEY: "",
-    OTEL_EXPORTER_OTLP_TRACES_CLIENT_KEY: "",
-    OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY: "",
-    OTEL_EXPORTER_OTLP_LOGS_CLIENT_KEY: "",
-    OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_TRACES_CLIENT_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_LOGS_CLIENT_CERTIFICATE: "",
-    OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf",
-    OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "http/protobuf",
-    OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "http/protobuf",
-    OTEL_EXPORTER_OTLP_LOGS_PROTOCOL: "http/protobuf",
-    OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "cumulative",
-    OTEL_SEMCONV_STABILITY_OPT_IN: []
-  };
-  function parseBoolean(key, environment, values) {
-    if (typeof values[key] === "undefined") {
-      return;
-    }
-    var value = String(values[key]);
-    environment[key] = value.toLowerCase() === "true";
-  }
-  function parseNumber(name, environment, values, min, max) {
-    if (min === void 0) {
-      min = -Infinity;
-    }
-    if (max === void 0) {
-      max = Infinity;
-    }
-    if (typeof values[name] !== "undefined") {
-      var value = Number(values[name]);
-      if (!isNaN(value)) {
-        if (value < min) {
-          environment[name] = min;
-        } else if (value > max) {
-          environment[name] = max;
-        } else {
-          environment[name] = value;
-        }
-      }
-    }
-  }
-  function parseStringList(name, output, input, separator) {
-    if (separator === void 0) {
-      separator = DEFAULT_LIST_SEPARATOR;
-    }
-    var givenValue = input[name];
-    if (typeof givenValue === "string") {
-      output[name] = givenValue.split(separator).map(function(v2) {
-        return v2.trim();
-      });
-    }
-  }
-  var logLevelMap = {
-    ALL: DiagLogLevel.ALL,
-    VERBOSE: DiagLogLevel.VERBOSE,
-    DEBUG: DiagLogLevel.DEBUG,
-    INFO: DiagLogLevel.INFO,
-    WARN: DiagLogLevel.WARN,
-    ERROR: DiagLogLevel.ERROR,
-    NONE: DiagLogLevel.NONE
-  };
-  function setLogLevelFromEnv(key, environment, values) {
-    var value = values[key];
-    if (typeof value === "string") {
-      var theLevel = logLevelMap[value.toUpperCase()];
-      if (theLevel != null) {
-        environment[key] = theLevel;
-      }
-    }
-  }
-  function parseEnvironment(values) {
-    var environment = {};
-    for (var env in DEFAULT_ENVIRONMENT) {
-      var key = env;
-      switch (key) {
-        case "OTEL_LOG_LEVEL":
-          setLogLevelFromEnv(key, environment, values);
-          break;
-        default:
-          if (isEnvVarABoolean(key)) {
-            parseBoolean(key, environment, values);
-          } else if (isEnvVarANumber(key)) {
-            parseNumber(key, environment, values);
-          } else if (isEnvVarAList(key)) {
-            parseStringList(key, environment, values);
-          } else {
-            var value = values[key];
-            if (typeof value !== "undefined" && value !== null) {
-              environment[key] = String(value);
-            }
-          }
-      }
-    }
-    return environment;
+  function getStringListFromEnv(_2) {
+    return void 0;
   }
 
   // node_modules/@opentelemetry/core/build/esm/platform/browser/globalThis.js
   var _globalThis3 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
 
-  // node_modules/@opentelemetry/core/build/esm/platform/browser/environment.js
-  function getEnv() {
-    var globalEnv = parseEnvironment(_globalThis3);
-    return Object.assign({}, DEFAULT_ENVIRONMENT, globalEnv);
-  }
-  function getEnvWithoutDefaults() {
-    return parseEnvironment(_globalThis3);
-  }
-
-  // node_modules/@opentelemetry/core/build/esm/common/hex-to-binary.js
-  function intValue(charCode) {
-    if (charCode >= 48 && charCode <= 57) {
-      return charCode - 48;
-    }
-    if (charCode >= 97 && charCode <= 102) {
-      return charCode - 87;
-    }
-    return charCode - 55;
-  }
-  function hexToBinary(hexStr) {
-    var buf = new Uint8Array(hexStr.length / 2);
-    var offset = 0;
-    for (var i2 = 0; i2 < hexStr.length; i2 += 2) {
-      var hi = intValue(hexStr.charCodeAt(i2));
-      var lo = intValue(hexStr.charCodeAt(i2 + 1));
-      buf[offset++] = hi << 4 | lo;
-    }
-    return buf;
-  }
-
   // node_modules/@opentelemetry/core/build/esm/platform/browser/performance.js
   var otperformance = performance;
 
   // node_modules/@opentelemetry/core/build/esm/version.js
-  var VERSION2 = "1.30.1";
+  var VERSION2 = "2.1.0";
 
-  // node_modules/@opentelemetry/core/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
-  var TMP_PROCESS_RUNTIME_NAME = "process.runtime.name";
-  var TMP_TELEMETRY_SDK_NAME2 = "telemetry.sdk.name";
-  var TMP_TELEMETRY_SDK_LANGUAGE2 = "telemetry.sdk.language";
-  var TMP_TELEMETRY_SDK_VERSION2 = "telemetry.sdk.version";
-  var SEMRESATTRS_PROCESS_RUNTIME_NAME = TMP_PROCESS_RUNTIME_NAME;
-  var SEMRESATTRS_TELEMETRY_SDK_NAME2 = TMP_TELEMETRY_SDK_NAME2;
-  var SEMRESATTRS_TELEMETRY_SDK_LANGUAGE2 = TMP_TELEMETRY_SDK_LANGUAGE2;
-  var SEMRESATTRS_TELEMETRY_SDK_VERSION2 = TMP_TELEMETRY_SDK_VERSION2;
-  var TMP_TELEMETRYSDKLANGUAGEVALUES_WEBJS = "webjs";
-  var TELEMETRYSDKLANGUAGEVALUES_WEBJS = TMP_TELEMETRYSDKLANGUAGEVALUES_WEBJS;
+  // node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
+  var TMP_HTTP_URL = "http.url";
+  var TMP_HTTP_USER_AGENT = "http.user_agent";
+  var SEMATTRS_HTTP_URL = TMP_HTTP_URL;
+  var SEMATTRS_HTTP_USER_AGENT = TMP_HTTP_USER_AGENT;
+
+  // node_modules/@opentelemetry/semantic-conventions/build/esm/stable_attributes.js
+  var ATTR_ERROR_TYPE = "error.type";
+  var ATTR_EXCEPTION_MESSAGE = "exception.message";
+  var ATTR_EXCEPTION_STACKTRACE = "exception.stacktrace";
+  var ATTR_EXCEPTION_TYPE = "exception.type";
+  var ATTR_HTTP_REQUEST_METHOD = "http.request.method";
+  var ATTR_HTTP_REQUEST_METHOD_ORIGINAL = "http.request.method_original";
+  var ATTR_HTTP_RESPONSE_STATUS_CODE = "http.response.status_code";
+  var ATTR_SERVER_ADDRESS = "server.address";
+  var ATTR_SERVER_PORT = "server.port";
+  var ATTR_SERVICE_NAME = "service.name";
+  var ATTR_SERVICE_VERSION = "service.version";
+  var ATTR_TELEMETRY_SDK_LANGUAGE = "telemetry.sdk.language";
+  var TELEMETRY_SDK_LANGUAGE_VALUE_WEBJS = "webjs";
+  var ATTR_TELEMETRY_SDK_NAME = "telemetry.sdk.name";
+  var ATTR_TELEMETRY_SDK_VERSION = "telemetry.sdk.version";
+  var ATTR_URL_FULL = "url.full";
+  var ATTR_USER_AGENT_ORIGINAL = "user_agent.original";
+
+  // node_modules/@opentelemetry/core/build/esm/semconv.js
+  var ATTR_PROCESS_RUNTIME_NAME = "process.runtime.name";
 
   // node_modules/@opentelemetry/core/build/esm/platform/browser/sdk-info.js
-  var _a;
-  var SDK_INFO = (_a = {}, _a[SEMRESATTRS_TELEMETRY_SDK_NAME2] = "opentelemetry", _a[SEMRESATTRS_PROCESS_RUNTIME_NAME] = "browser", _a[SEMRESATTRS_TELEMETRY_SDK_LANGUAGE2] = TELEMETRYSDKLANGUAGEVALUES_WEBJS, _a[SEMRESATTRS_TELEMETRY_SDK_VERSION2] = VERSION2, _a);
+  var SDK_INFO = {
+    [ATTR_TELEMETRY_SDK_NAME]: "opentelemetry",
+    [ATTR_PROCESS_RUNTIME_NAME]: "browser",
+    [ATTR_TELEMETRY_SDK_LANGUAGE]: TELEMETRY_SDK_LANGUAGE_VALUE_WEBJS,
+    [ATTR_TELEMETRY_SDK_VERSION]: VERSION2
+  };
 
   // node_modules/@opentelemetry/core/build/esm/platform/browser/timer-util.js
   function unrefTimer(_timer) {
@@ -4286,22 +4060,22 @@
   var MILLISECONDS_TO_NANOSECONDS = Math.pow(10, NANOSECOND_DIGITS_IN_MILLIS);
   var SECOND_TO_NANOSECONDS = Math.pow(10, NANOSECOND_DIGITS);
   function millisToHrTime(epochMillis) {
-    var epochSeconds = epochMillis / 1e3;
-    var seconds = Math.trunc(epochSeconds);
-    var nanos = Math.round(epochMillis % 1e3 * MILLISECONDS_TO_NANOSECONDS);
+    const epochSeconds = epochMillis / 1e3;
+    const seconds = Math.trunc(epochSeconds);
+    const nanos = Math.round(epochMillis % 1e3 * MILLISECONDS_TO_NANOSECONDS);
     return [seconds, nanos];
   }
   function getTimeOrigin() {
-    var timeOrigin = otperformance.timeOrigin;
+    let timeOrigin = otperformance.timeOrigin;
     if (typeof timeOrigin !== "number") {
-      var perf = otperformance;
+      const perf = otperformance;
       timeOrigin = perf.timing && perf.timing.fetchStart;
     }
     return timeOrigin;
   }
   function hrTime(performanceNow) {
-    var timeOrigin = millisToHrTime(getTimeOrigin());
-    var now = millisToHrTime(typeof performanceNow === "number" ? performanceNow : otperformance.now());
+    const timeOrigin = millisToHrTime(getTimeOrigin());
+    const now = millisToHrTime(typeof performanceNow === "number" ? performanceNow : otperformance.now());
     return addHrTimes(timeOrigin, now);
   }
   function timeInputToHrTime(time) {
@@ -4320,8 +4094,8 @@
     }
   }
   function hrTimeDuration(startTime, endTime) {
-    var seconds = endTime[0] - startTime[0];
-    var nanos = endTime[1] - startTime[1];
+    let seconds = endTime[0] - startTime[0];
+    let nanos = endTime[1] - startTime[1];
     if (nanos < 0) {
       seconds -= 1;
       nanos += SECOND_TO_NANOSECONDS;
@@ -4331,6 +4105,9 @@
   function hrTimeToNanoseconds(time) {
     return time[0] * SECOND_TO_NANOSECONDS + time[1];
   }
+  function hrTimeToMicroseconds(time) {
+    return time[0] * 1e6 + time[1] / 1e3;
+  }
   function isTimeInputHrTime(value) {
     return Array.isArray(value) && value.length === 2 && typeof value[0] === "number" && typeof value[1] === "number";
   }
@@ -4338,7 +4115,7 @@
     return isTimeInputHrTime(value) || typeof value === "number" || value instanceof Date;
   }
   function addHrTimes(time1, time2) {
-    var out = [time1[0] + time2[0], time1[1] + time2[1]];
+    const out = [time1[0] + time2[0], time1[1] + time2[1]];
     if (out[1] >= SECOND_TO_NANOSECONDS) {
       out[1] -= SECOND_TO_NANOSECONDS;
       out[0] += 1;
@@ -4348,81 +4125,71 @@
 
   // node_modules/@opentelemetry/core/build/esm/ExportResult.js
   var ExportResultCode;
-  (function(ExportResultCode2) {
-    ExportResultCode2[ExportResultCode2["SUCCESS"] = 0] = "SUCCESS";
-    ExportResultCode2[ExportResultCode2["FAILED"] = 1] = "FAILED";
+  (function(ExportResultCode3) {
+    ExportResultCode3[ExportResultCode3["SUCCESS"] = 0] = "SUCCESS";
+    ExportResultCode3[ExportResultCode3["FAILED"] = 1] = "FAILED";
   })(ExportResultCode || (ExportResultCode = {}));
 
   // node_modules/@opentelemetry/core/build/esm/propagation/composite.js
-  var __values3 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var CompositePropagator = (
-    /** @class */
-    function() {
-      function CompositePropagator2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        var _a3;
-        this._propagators = (_a3 = config.propagators) !== null && _a3 !== void 0 ? _a3 : [];
-        this._fields = Array.from(new Set(this._propagators.map(function(p2) {
-          return typeof p2.fields === "function" ? p2.fields() : [];
-        }).reduce(function(x2, y2) {
-          return x2.concat(y2);
-        }, [])));
-      }
-      CompositePropagator2.prototype.inject = function(context2, carrier, setter) {
-        var e_1, _a3;
+  var CompositePropagator = class {
+    _propagators;
+    _fields;
+    /**
+     * Construct a composite propagator from a list of propagators.
+     *
+     * @param [config] Configuration object for composite propagator
+     */
+    constructor(config = {}) {
+      this._propagators = config.propagators ?? [];
+      this._fields = Array.from(new Set(this._propagators.map((p2) => typeof p2.fields === "function" ? p2.fields() : []).reduce((x2, y2) => x2.concat(y2), [])));
+    }
+    /**
+     * Run each of the configured propagators with the given context and carrier.
+     * Propagators are run in the order they are configured, so if multiple
+     * propagators write the same carrier key, the propagator later in the list
+     * will "win".
+     *
+     * @param context Context to inject
+     * @param carrier Carrier into which context will be injected
+     */
+    inject(context2, carrier, setter) {
+      for (const propagator of this._propagators) {
         try {
-          for (var _b = __values3(this._propagators), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var propagator = _c.value;
-            try {
-              propagator.inject(context2, carrier, setter);
-            } catch (err) {
-              diag2.warn("Failed to inject with " + propagator.constructor.name + ". Err: " + err.message);
-            }
-          }
-        } catch (e_1_1) {
-          e_1 = { error: e_1_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_1) throw e_1.error;
-          }
+          propagator.inject(context2, carrier, setter);
+        } catch (err) {
+          diag2.warn(`Failed to inject with ${propagator.constructor.name}. Err: ${err.message}`);
         }
-      };
-      CompositePropagator2.prototype.extract = function(context2, carrier, getter) {
-        return this._propagators.reduce(function(ctx, propagator) {
-          try {
-            return propagator.extract(ctx, carrier, getter);
-          } catch (err) {
-            diag2.warn("Failed to extract with " + propagator.constructor.name + ". Err: " + err.message);
-          }
-          return ctx;
-        }, context2);
-      };
-      CompositePropagator2.prototype.fields = function() {
-        return this._fields.slice();
-      };
-      return CompositePropagator2;
-    }()
-  );
+      }
+    }
+    /**
+     * Run each of the configured propagators with the given context and carrier.
+     * Propagators are run in the order they are configured, so if multiple
+     * propagators write the same context key, the propagator later in the list
+     * will "win".
+     *
+     * @param context Context to add values to
+     * @param carrier Carrier from which to extract context
+     */
+    extract(context2, carrier, getter) {
+      return this._propagators.reduce((ctx, propagator) => {
+        try {
+          return propagator.extract(ctx, carrier, getter);
+        } catch (err) {
+          diag2.warn(`Failed to extract with ${propagator.constructor.name}. Err: ${err.message}`);
+        }
+        return ctx;
+      }, context2);
+    }
+    fields() {
+      return this._fields.slice();
+    }
+  };
 
   // node_modules/@opentelemetry/core/build/esm/internal/validators.js
   var VALID_KEY_CHAR_RANGE = "[_0-9a-z-*/]";
-  var VALID_KEY = "[a-z]" + VALID_KEY_CHAR_RANGE + "{0,255}";
-  var VALID_VENDOR_KEY = "[a-z0-9]" + VALID_KEY_CHAR_RANGE + "{0,240}@[a-z]" + VALID_KEY_CHAR_RANGE + "{0,13}";
-  var VALID_KEY_REGEX = new RegExp("^(?:" + VALID_KEY + "|" + VALID_VENDOR_KEY + ")$");
+  var VALID_KEY = `[a-z]${VALID_KEY_CHAR_RANGE}{0,255}`;
+  var VALID_VENDOR_KEY = `[a-z0-9]${VALID_KEY_CHAR_RANGE}{0,240}@[a-z]${VALID_KEY_CHAR_RANGE}{0,13}`;
+  var VALID_KEY_REGEX = new RegExp(`^(?:${VALID_KEY}|${VALID_VENDOR_KEY})$`);
   var VALID_VALUE_BASE_REGEX = /^[ -~]{0,255}[!-~]$/;
   var INVALID_VALUE_COMMA_EQUAL_REGEX = /,|=/;
   function validateKey(key) {
@@ -4437,68 +4204,63 @@
   var MAX_TRACE_STATE_LEN = 512;
   var LIST_MEMBERS_SEPARATOR = ",";
   var LIST_MEMBER_KEY_VALUE_SPLITTER = "=";
-  var TraceState = (
-    /** @class */
-    function() {
-      function TraceState2(rawTraceState) {
-        this._internalState = /* @__PURE__ */ new Map();
-        if (rawTraceState)
-          this._parse(rawTraceState);
-      }
-      TraceState2.prototype.set = function(key, value) {
-        var traceState = this._clone();
-        if (traceState._internalState.has(key)) {
-          traceState._internalState.delete(key);
-        }
-        traceState._internalState.set(key, value);
-        return traceState;
-      };
-      TraceState2.prototype.unset = function(key) {
-        var traceState = this._clone();
+  var TraceState = class _TraceState {
+    _internalState = /* @__PURE__ */ new Map();
+    constructor(rawTraceState) {
+      if (rawTraceState)
+        this._parse(rawTraceState);
+    }
+    set(key, value) {
+      const traceState = this._clone();
+      if (traceState._internalState.has(key)) {
         traceState._internalState.delete(key);
-        return traceState;
-      };
-      TraceState2.prototype.get = function(key) {
-        return this._internalState.get(key);
-      };
-      TraceState2.prototype.serialize = function() {
-        var _this = this;
-        return this._keys().reduce(function(agg, key) {
-          agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER + _this.get(key));
-          return agg;
-        }, []).join(LIST_MEMBERS_SEPARATOR);
-      };
-      TraceState2.prototype._parse = function(rawTraceState) {
-        if (rawTraceState.length > MAX_TRACE_STATE_LEN)
-          return;
-        this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR).reverse().reduce(function(agg, part) {
-          var listMember = part.trim();
-          var i2 = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER);
-          if (i2 !== -1) {
-            var key = listMember.slice(0, i2);
-            var value = listMember.slice(i2 + 1, part.length);
-            if (validateKey(key) && validateValue(value)) {
-              agg.set(key, value);
-            } else {
-            }
+      }
+      traceState._internalState.set(key, value);
+      return traceState;
+    }
+    unset(key) {
+      const traceState = this._clone();
+      traceState._internalState.delete(key);
+      return traceState;
+    }
+    get(key) {
+      return this._internalState.get(key);
+    }
+    serialize() {
+      return this._keys().reduce((agg, key) => {
+        agg.push(key + LIST_MEMBER_KEY_VALUE_SPLITTER + this.get(key));
+        return agg;
+      }, []).join(LIST_MEMBERS_SEPARATOR);
+    }
+    _parse(rawTraceState) {
+      if (rawTraceState.length > MAX_TRACE_STATE_LEN)
+        return;
+      this._internalState = rawTraceState.split(LIST_MEMBERS_SEPARATOR).reverse().reduce((agg, part) => {
+        const listMember = part.trim();
+        const i2 = listMember.indexOf(LIST_MEMBER_KEY_VALUE_SPLITTER);
+        if (i2 !== -1) {
+          const key = listMember.slice(0, i2);
+          const value = listMember.slice(i2 + 1, part.length);
+          if (validateKey(key) && validateValue(value)) {
+            agg.set(key, value);
+          } else {
           }
-          return agg;
-        }, /* @__PURE__ */ new Map());
-        if (this._internalState.size > MAX_TRACE_STATE_ITEMS) {
-          this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS));
         }
-      };
-      TraceState2.prototype._keys = function() {
-        return Array.from(this._internalState.keys()).reverse();
-      };
-      TraceState2.prototype._clone = function() {
-        var traceState = new TraceState2();
-        traceState._internalState = new Map(this._internalState);
-        return traceState;
-      };
-      return TraceState2;
-    }()
-  );
+        return agg;
+      }, /* @__PURE__ */ new Map());
+      if (this._internalState.size > MAX_TRACE_STATE_ITEMS) {
+        this._internalState = new Map(Array.from(this._internalState.entries()).reverse().slice(0, MAX_TRACE_STATE_ITEMS));
+      }
+    }
+    _keys() {
+      return Array.from(this._internalState.keys()).reverse();
+    }
+    _clone() {
+      const traceState = new _TraceState();
+      traceState._internalState = new Map(this._internalState);
+      return traceState;
+    }
+  };
 
   // node_modules/@opentelemetry/core/build/esm/trace/W3CTraceContextPropagator.js
   var TRACE_PARENT_HEADER = "traceparent";
@@ -4508,9 +4270,9 @@
   var TRACE_ID_PART = "(?![0]{32})[\\da-f]{32}";
   var PARENT_ID_PART = "(?![0]{16})[\\da-f]{16}";
   var FLAGS_PART = "[\\da-f]{2}";
-  var TRACE_PARENT_REGEX = new RegExp("^\\s?(" + VERSION_PART + ")-(" + TRACE_ID_PART + ")-(" + PARENT_ID_PART + ")-(" + FLAGS_PART + ")(-.*)?\\s?$");
+  var TRACE_PARENT_REGEX = new RegExp(`^\\s?(${VERSION_PART})-(${TRACE_ID_PART})-(${PARENT_ID_PART})-(${FLAGS_PART})(-.*)?\\s?$`);
   function parseTraceParent(traceParent) {
-    var match = TRACE_PARENT_REGEX.exec(traceParent);
+    const match = TRACE_PARENT_REGEX.exec(traceParent);
     if (!match)
       return null;
     if (match[1] === "00" && match[5])
@@ -4521,45 +4283,39 @@
       traceFlags: parseInt(match[4], 16)
     };
   }
-  var W3CTraceContextPropagator = (
-    /** @class */
-    function() {
-      function W3CTraceContextPropagator2() {
+  var W3CTraceContextPropagator = class {
+    inject(context2, carrier, setter) {
+      const spanContext = trace.getSpanContext(context2);
+      if (!spanContext || isTracingSuppressed(context2) || !isSpanContextValid(spanContext))
+        return;
+      const traceParent = `${VERSION3}-${spanContext.traceId}-${spanContext.spanId}-0${Number(spanContext.traceFlags || TraceFlags.NONE).toString(16)}`;
+      setter.set(carrier, TRACE_PARENT_HEADER, traceParent);
+      if (spanContext.traceState) {
+        setter.set(carrier, TRACE_STATE_HEADER, spanContext.traceState.serialize());
       }
-      W3CTraceContextPropagator2.prototype.inject = function(context2, carrier, setter) {
-        var spanContext = trace.getSpanContext(context2);
-        if (!spanContext || isTracingSuppressed(context2) || !isSpanContextValid(spanContext))
-          return;
-        var traceParent = VERSION3 + "-" + spanContext.traceId + "-" + spanContext.spanId + "-0" + Number(spanContext.traceFlags || TraceFlags.NONE).toString(16);
-        setter.set(carrier, TRACE_PARENT_HEADER, traceParent);
-        if (spanContext.traceState) {
-          setter.set(carrier, TRACE_STATE_HEADER, spanContext.traceState.serialize());
-        }
-      };
-      W3CTraceContextPropagator2.prototype.extract = function(context2, carrier, getter) {
-        var traceParentHeader = getter.get(carrier, TRACE_PARENT_HEADER);
-        if (!traceParentHeader)
-          return context2;
-        var traceParent = Array.isArray(traceParentHeader) ? traceParentHeader[0] : traceParentHeader;
-        if (typeof traceParent !== "string")
-          return context2;
-        var spanContext = parseTraceParent(traceParent);
-        if (!spanContext)
-          return context2;
-        spanContext.isRemote = true;
-        var traceStateHeader = getter.get(carrier, TRACE_STATE_HEADER);
-        if (traceStateHeader) {
-          var state = Array.isArray(traceStateHeader) ? traceStateHeader.join(",") : traceStateHeader;
-          spanContext.traceState = new TraceState(typeof state === "string" ? state : void 0);
-        }
-        return trace.setSpanContext(context2, spanContext);
-      };
-      W3CTraceContextPropagator2.prototype.fields = function() {
-        return [TRACE_PARENT_HEADER, TRACE_STATE_HEADER];
-      };
-      return W3CTraceContextPropagator2;
-    }()
-  );
+    }
+    extract(context2, carrier, getter) {
+      const traceParentHeader = getter.get(carrier, TRACE_PARENT_HEADER);
+      if (!traceParentHeader)
+        return context2;
+      const traceParent = Array.isArray(traceParentHeader) ? traceParentHeader[0] : traceParentHeader;
+      if (typeof traceParent !== "string")
+        return context2;
+      const spanContext = parseTraceParent(traceParent);
+      if (!spanContext)
+        return context2;
+      spanContext.isRemote = true;
+      const traceStateHeader = getter.get(carrier, TRACE_STATE_HEADER);
+      if (traceStateHeader) {
+        const state = Array.isArray(traceStateHeader) ? traceStateHeader.join(",") : traceStateHeader;
+        spanContext.traceState = new TraceState(typeof state === "string" ? state : void 0);
+      }
+      return trace.setSpanContext(context2, spanContext);
+    }
+    fields() {
+      return [TRACE_PARENT_HEADER, TRACE_STATE_HEADER];
+    }
+  };
 
   // node_modules/@opentelemetry/core/build/esm/utils/lodash.merge.js
   var objectTag = "[object Object]";
@@ -4568,25 +4324,20 @@
   var funcProto = Function.prototype;
   var funcToString = funcProto.toString;
   var objectCtorString = funcToString.call(Object);
-  var getPrototype = overArg(Object.getPrototypeOf, Object);
+  var getPrototypeOf = Object.getPrototypeOf;
   var objectProto = Object.prototype;
   var hasOwnProperty = objectProto.hasOwnProperty;
   var symToStringTag = Symbol ? Symbol.toStringTag : void 0;
   var nativeObjectToString = objectProto.toString;
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
-  }
   function isPlainObject(value) {
     if (!isObjectLike(value) || baseGetTag(value) !== objectTag) {
       return false;
     }
-    var proto = getPrototype(value);
+    const proto = getPrototypeOf(value);
     if (proto === null) {
       return true;
     }
-    var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
+    const Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
     return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) === objectCtorString;
   }
   function isObjectLike(value) {
@@ -4599,14 +4350,14 @@
     return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
   }
   function getRawTag(value) {
-    var isOwn = hasOwnProperty.call(value, symToStringTag), tag = value[symToStringTag];
-    var unmasked = false;
+    const isOwn = hasOwnProperty.call(value, symToStringTag), tag = value[symToStringTag];
+    let unmasked = false;
     try {
       value[symToStringTag] = void 0;
       unmasked = true;
-    } catch (e2) {
+    } catch {
     }
-    var result = nativeObjectToString.call(value);
+    const result = nativeObjectToString.call(value);
     if (unmasked) {
       if (isOwn) {
         value[symToStringTag] = tag;
@@ -4622,13 +4373,9 @@
 
   // node_modules/@opentelemetry/core/build/esm/utils/merge.js
   var MAX_LEVEL = 20;
-  function merge() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
-    var result = args.shift();
-    var objects = /* @__PURE__ */ new WeakMap();
+  function merge(...args) {
+    let result = args.shift();
+    const objects = /* @__PURE__ */ new WeakMap();
     while (args.length > 0) {
       result = mergeTwoObjects(result, args.shift(), 0, objects);
     }
@@ -4640,11 +4387,8 @@
     }
     return value;
   }
-  function mergeTwoObjects(one, two, level, objects) {
-    if (level === void 0) {
-      level = 0;
-    }
-    var result;
+  function mergeTwoObjects(one, two, level = 0, objects) {
+    let result;
     if (level > MAX_LEVEL) {
       return void 0;
     }
@@ -4654,13 +4398,13 @@
     } else if (isArray(one)) {
       result = one.slice();
       if (isArray(two)) {
-        for (var i2 = 0, j2 = two.length; i2 < j2; i2++) {
+        for (let i2 = 0, j2 = two.length; i2 < j2; i2++) {
           result.push(takeValue(two[i2]));
         }
       } else if (isObject(two)) {
-        var keys = Object.keys(two);
-        for (var i2 = 0, j2 = keys.length; i2 < j2; i2++) {
-          var key = keys[i2];
+        const keys = Object.keys(two);
+        for (let i2 = 0, j2 = keys.length; i2 < j2; i2++) {
+          const key = keys[i2];
           result[key] = takeValue(two[key]);
         }
       }
@@ -4670,10 +4414,10 @@
           return two;
         }
         result = Object.assign({}, one);
-        var keys = Object.keys(two);
-        for (var i2 = 0, j2 = keys.length; i2 < j2; i2++) {
-          var key = keys[i2];
-          var twoValue = two[key];
+        const keys = Object.keys(two);
+        for (let i2 = 0, j2 = keys.length; i2 < j2; i2++) {
+          const key = keys[i2];
+          const twoValue = two[key];
           if (isPrimitive(twoValue)) {
             if (typeof twoValue === "undefined") {
               delete result[key];
@@ -4681,14 +4425,14 @@
               result[key] = twoValue;
             }
           } else {
-            var obj1 = result[key];
-            var obj2 = twoValue;
+            const obj1 = result[key];
+            const obj2 = twoValue;
             if (wasObjectReferenced(one, key, objects) || wasObjectReferenced(two, key, objects)) {
               delete result[key];
             } else {
               if (isObject(obj1) && isObject(obj2)) {
-                var arr1 = objects.get(obj1) || [];
-                var arr2 = objects.get(obj2) || [];
+                const arr1 = objects.get(obj1) || [];
+                const arr2 = objects.get(obj2) || [];
                 arr1.push({ obj: one, key });
                 arr2.push({ obj: two, key });
                 objects.set(obj1, arr1);
@@ -4705,9 +4449,9 @@
     return result;
   }
   function wasObjectReferenced(obj, key, objects) {
-    var arr = objects.get(obj[key]) || [];
-    for (var i2 = 0, j2 = arr.length; i2 < j2; i2++) {
-      var info = arr[i2];
+    const arr = objects.get(obj[key]) || [];
+    for (let i2 = 0, j2 = arr.length; i2 < j2; i2++) {
+      const info = arr[i2];
       if (info.key === key && info.obj === obj) {
         return true;
       }
@@ -4733,18 +4477,30 @@
     return true;
   }
 
-  // node_modules/@opentelemetry/core/build/esm/utils/url.js
-  var __values4 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  // node_modules/@opentelemetry/core/build/esm/utils/timeout.js
+  var TimeoutError = class _TimeoutError extends Error {
+    constructor(message) {
+      super(message);
+      Object.setPrototypeOf(this, _TimeoutError.prototype);
+    }
   };
+  function callWithTimeout(promise, timeout) {
+    let timeoutHandle;
+    const timeoutPromise = new Promise(function timeoutFunction(_resolve, reject) {
+      timeoutHandle = setTimeout(function timeoutHandler() {
+        reject(new TimeoutError("Operation timed out."));
+      }, timeout);
+    });
+    return Promise.race([promise, timeoutPromise]).then((result) => {
+      clearTimeout(timeoutHandle);
+      return result;
+    }, (reason) => {
+      clearTimeout(timeoutHandle);
+      throw reason;
+    });
+  }
+
+  // node_modules/@opentelemetry/core/build/esm/utils/url.js
   function urlMatches(url, urlToMatch) {
     if (typeof urlToMatch === "string") {
       return url === urlToMatch;
@@ -4753,831 +4509,504 @@
     }
   }
   function isUrlIgnored(url, ignoredUrls) {
-    var e_1, _a3;
     if (!ignoredUrls) {
       return false;
     }
-    try {
-      for (var ignoredUrls_1 = __values4(ignoredUrls), ignoredUrls_1_1 = ignoredUrls_1.next(); !ignoredUrls_1_1.done; ignoredUrls_1_1 = ignoredUrls_1.next()) {
-        var ignoreUrl = ignoredUrls_1_1.value;
-        if (urlMatches(url, ignoreUrl)) {
-          return true;
-        }
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (ignoredUrls_1_1 && !ignoredUrls_1_1.done && (_a3 = ignoredUrls_1.return)) _a3.call(ignoredUrls_1);
-      } finally {
-        if (e_1) throw e_1.error;
+    for (const ignoreUrl of ignoredUrls) {
+      if (urlMatches(url, ignoreUrl)) {
+        return true;
       }
     }
     return false;
   }
 
   // node_modules/@opentelemetry/core/build/esm/utils/promise.js
-  var Deferred = (
-    /** @class */
-    function() {
-      function Deferred2() {
-        var _this = this;
-        this._promise = new Promise(function(resolve, reject) {
-          _this._resolve = resolve;
-          _this._reject = reject;
-        });
-      }
-      Object.defineProperty(Deferred2.prototype, "promise", {
-        get: function() {
-          return this._promise;
-        },
-        enumerable: false,
-        configurable: true
+  var Deferred = class {
+    _promise;
+    _resolve;
+    _reject;
+    constructor() {
+      this._promise = new Promise((resolve, reject) => {
+        this._resolve = resolve;
+        this._reject = reject;
       });
-      Deferred2.prototype.resolve = function(val) {
-        this._resolve(val);
-      };
-      Deferred2.prototype.reject = function(err) {
-        this._reject(err);
-      };
-      return Deferred2;
-    }()
-  );
+    }
+    get promise() {
+      return this._promise;
+    }
+    resolve(val) {
+      this._resolve(val);
+    }
+    reject(err) {
+      this._reject(err);
+    }
+  };
 
   // node_modules/@opentelemetry/core/build/esm/utils/callback.js
-  var __read8 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
+  var BindOnceFuture = class {
+    _callback;
+    _that;
+    _isCalled = false;
+    _deferred = new Deferred();
+    constructor(_callback, _that) {
+      this._callback = _callback;
+      this._that = _that;
     }
-    return ar;
-  };
-  var __spreadArray5 = function(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
+    get isCalled() {
+      return this._isCalled;
     }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  };
-  var BindOnceFuture = (
-    /** @class */
-    function() {
-      function BindOnceFuture2(_callback, _that) {
-        this._callback = _callback;
-        this._that = _that;
-        this._isCalled = false;
-        this._deferred = new Deferred();
+    get promise() {
+      return this._deferred.promise;
+    }
+    call(...args) {
+      if (!this._isCalled) {
+        this._isCalled = true;
+        try {
+          Promise.resolve(this._callback.call(this._that, ...args)).then((val) => this._deferred.resolve(val), (err) => this._deferred.reject(err));
+        } catch (err) {
+          this._deferred.reject(err);
+        }
       }
-      Object.defineProperty(BindOnceFuture2.prototype, "isCalled", {
-        get: function() {
-          return this._isCalled;
-        },
-        enumerable: false,
-        configurable: true
+      return this._deferred.promise;
+    }
+  };
+
+  // node_modules/@opentelemetry/core/build/esm/internal/exporter.js
+  function _export(exporter, arg) {
+    return new Promise((resolve) => {
+      context.with(suppressTracing(context.active()), () => {
+        exporter.export(arg, (result) => {
+          resolve(result);
+        });
       });
-      Object.defineProperty(BindOnceFuture2.prototype, "promise", {
-        get: function() {
-          return this._deferred.promise;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      BindOnceFuture2.prototype.call = function() {
-        var _a3;
-        var _this = this;
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-          args[_i] = arguments[_i];
-        }
-        if (!this._isCalled) {
-          this._isCalled = true;
-          try {
-            Promise.resolve((_a3 = this._callback).call.apply(_a3, __spreadArray5([this._that], __read8(args), false))).then(function(val) {
-              return _this._deferred.resolve(val);
-            }, function(err) {
-              return _this._deferred.reject(err);
-            });
-          } catch (err) {
-            this._deferred.reject(err);
-          }
-        }
-        return this._deferred.promise;
-      };
-      return BindOnceFuture2;
-    }()
-  );
+    });
+  }
+
+  // node_modules/@opentelemetry/core/build/esm/index.js
+  var internal = {
+    _export
+  };
 
   // node_modules/@opentelemetry/resources/build/esm/platform/browser/default-service-name.js
   function defaultServiceName() {
     return "unknown_service";
   }
 
-  // node_modules/@opentelemetry/resources/build/esm/Resource.js
-  var __assign2 = function() {
-    __assign2 = Object.assign || function(t3) {
-      for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t3[p2] = s2[p2];
-      }
-      return t3;
-    };
-    return __assign2.apply(this, arguments);
-  };
-  var __awaiter = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  };
-  var __read9 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
-  var Resource = (
-    /** @class */
-    function() {
-      function Resource2(attributes, asyncAttributesPromise) {
-        var _this = this;
-        var _a3;
-        this._attributes = attributes;
-        this.asyncAttributesPending = asyncAttributesPromise != null;
-        this._syncAttributes = (_a3 = this._attributes) !== null && _a3 !== void 0 ? _a3 : {};
-        this._asyncAttributesPromise = asyncAttributesPromise === null || asyncAttributesPromise === void 0 ? void 0 : asyncAttributesPromise.then(function(asyncAttributes) {
-          _this._attributes = Object.assign({}, _this._attributes, asyncAttributes);
-          _this.asyncAttributesPending = false;
-          return asyncAttributes;
-        }, function(err) {
-          diag2.debug("a resource's async attributes promise rejected: %s", err);
-          _this.asyncAttributesPending = false;
-          return {};
-        });
-      }
-      Resource2.empty = function() {
-        return Resource2.EMPTY;
-      };
-      Resource2.default = function() {
-        var _a3;
-        return new Resource2((_a3 = {}, _a3[SEMRESATTRS_SERVICE_NAME] = defaultServiceName(), _a3[SEMRESATTRS_TELEMETRY_SDK_LANGUAGE] = SDK_INFO[SEMRESATTRS_TELEMETRY_SDK_LANGUAGE], _a3[SEMRESATTRS_TELEMETRY_SDK_NAME] = SDK_INFO[SEMRESATTRS_TELEMETRY_SDK_NAME], _a3[SEMRESATTRS_TELEMETRY_SDK_VERSION] = SDK_INFO[SEMRESATTRS_TELEMETRY_SDK_VERSION], _a3));
-      };
-      Object.defineProperty(Resource2.prototype, "attributes", {
-        get: function() {
-          var _a3;
-          if (this.asyncAttributesPending) {
-            diag2.error("Accessing resource attributes before async attributes settled");
-          }
-          return (_a3 = this._attributes) !== null && _a3 !== void 0 ? _a3 : {};
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Resource2.prototype.waitForAsyncAttributes = function() {
-        return __awaiter(this, void 0, void 0, function() {
-          return __generator(this, function(_a3) {
-            switch (_a3.label) {
-              case 0:
-                if (!this.asyncAttributesPending) return [3, 2];
-                return [4, this._asyncAttributesPromise];
-              case 1:
-                _a3.sent();
-                _a3.label = 2;
-              case 2:
-                return [
-                  2
-                  /*return*/
-                ];
-            }
-          });
-        });
-      };
-      Resource2.prototype.merge = function(other) {
-        var _this = this;
-        var _a3;
-        if (!other)
-          return this;
-        var mergedSyncAttributes = __assign2(__assign2({}, this._syncAttributes), (_a3 = other._syncAttributes) !== null && _a3 !== void 0 ? _a3 : other.attributes);
-        if (!this._asyncAttributesPromise && !other._asyncAttributesPromise) {
-          return new Resource2(mergedSyncAttributes);
-        }
-        var mergedAttributesPromise = Promise.all([
-          this._asyncAttributesPromise,
-          other._asyncAttributesPromise
-        ]).then(function(_a4) {
-          var _b;
-          var _c = __read9(_a4, 2), thisAsyncAttributes = _c[0], otherAsyncAttributes = _c[1];
-          return __assign2(__assign2(__assign2(__assign2({}, _this._syncAttributes), thisAsyncAttributes), (_b = other._syncAttributes) !== null && _b !== void 0 ? _b : other.attributes), otherAsyncAttributes);
-        });
-        return new Resource2(mergedSyncAttributes, mergedAttributesPromise);
-      };
-      Resource2.EMPTY = new Resource2({});
-      return Resource2;
-    }()
-  );
-
   // node_modules/@opentelemetry/resources/build/esm/utils.js
-  var isPromiseLike = function(val) {
+  var isPromiseLike = (val) => {
     return val !== null && typeof val === "object" && typeof val.then === "function";
   };
 
-  // node_modules/@opentelemetry/resources/build/esm/detect-resources.js
-  var __awaiter2 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
+  // node_modules/@opentelemetry/resources/build/esm/ResourceImpl.js
+  var ResourceImpl = class _ResourceImpl {
+    _rawAttributes;
+    _asyncAttributesPending = false;
+    _schemaUrl;
+    _memoizedAttributes;
+    static FromAttributeList(attributes, options) {
+      const res = new _ResourceImpl({}, options);
+      res._rawAttributes = guardedRawAttributes(attributes);
+      res._asyncAttributesPending = attributes.filter(([_2, val]) => isPromiseLike(val)).length > 0;
+      return res;
+    }
+    constructor(resource, options) {
+      const attributes = resource.attributes ?? {};
+      this._rawAttributes = Object.entries(attributes).map(([k2, v2]) => {
+        if (isPromiseLike(v2)) {
+          this._asyncAttributesPending = true;
+        }
+        return [k2, v2];
       });
+      this._rawAttributes = guardedRawAttributes(this._rawAttributes);
+      this._schemaUrl = validateSchemaUrl(options?.schemaUrl);
     }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
+    get asyncAttributesPending() {
+      return this._asyncAttributesPending;
+    }
+    async waitForAsyncAttributes() {
+      if (!this.asyncAttributesPending) {
+        return;
+      }
+      for (let i2 = 0; i2 < this._rawAttributes.length; i2++) {
+        const [k2, v2] = this._rawAttributes[i2];
+        this._rawAttributes[i2] = [k2, isPromiseLike(v2) ? await v2 : v2];
+      }
+      this._asyncAttributesPending = false;
+    }
+    get attributes() {
+      if (this.asyncAttributesPending) {
+        diag2.error("Accessing resource attributes before async attributes settled");
+      }
+      if (this._memoizedAttributes) {
+        return this._memoizedAttributes;
+      }
+      const attrs = {};
+      for (const [k2, v2] of this._rawAttributes) {
+        if (isPromiseLike(v2)) {
+          diag2.debug(`Unsettled resource attribute ${k2} skipped`);
+          continue;
+        }
+        if (v2 != null) {
+          attrs[k2] ??= v2;
         }
       }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
+      if (!this._asyncAttributesPending) {
+        this._memoizedAttributes = attrs;
       }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
+      return attrs;
+    }
+    getRawAttributes() {
+      return this._rawAttributes;
+    }
+    get schemaUrl() {
+      return this._schemaUrl;
+    }
+    merge(resource) {
+      if (resource == null)
+        return this;
+      const mergedSchemaUrl = mergeSchemaUrl(this, resource);
+      const mergedOptions = mergedSchemaUrl ? { schemaUrl: mergedSchemaUrl } : void 0;
+      return _ResourceImpl.FromAttributeList([...resource.getRawAttributes(), ...this.getRawAttributes()], mergedOptions);
+    }
+  };
+  function resourceFromAttributes(attributes, options) {
+    return ResourceImpl.FromAttributeList(Object.entries(attributes), options);
+  }
+  function resourceFromDetectedResource(detectedResource, options) {
+    return new ResourceImpl(detectedResource, options);
+  }
+  function emptyResource() {
+    return resourceFromAttributes({});
+  }
+  function defaultResource() {
+    return resourceFromAttributes({
+      [ATTR_SERVICE_NAME]: defaultServiceName(),
+      [ATTR_TELEMETRY_SDK_LANGUAGE]: SDK_INFO[ATTR_TELEMETRY_SDK_LANGUAGE],
+      [ATTR_TELEMETRY_SDK_NAME]: SDK_INFO[ATTR_TELEMETRY_SDK_NAME],
+      [ATTR_TELEMETRY_SDK_VERSION]: SDK_INFO[ATTR_TELEMETRY_SDK_VERSION]
     });
-  };
-  var __generator2 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
+  }
+  function guardedRawAttributes(attributes) {
+    return attributes.map(([k2, v2]) => {
+      if (isPromiseLike(v2)) {
+        return [
+          k2,
+          v2.catch((err) => {
+            diag2.debug("promise rejection for resource attribute: %s - %s", k2, err);
+            return void 0;
+          })
+        ];
       }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  };
-  var detectResourcesSync = function(config) {
-    var _a3;
-    if (config === void 0) {
-      config = {};
-    }
-    var resources = ((_a3 = config.detectors) !== null && _a3 !== void 0 ? _a3 : []).map(function(d2) {
-      try {
-        var resourceOrPromise_1 = d2.detect(config);
-        var resource_1;
-        if (isPromiseLike(resourceOrPromise_1)) {
-          var createPromise = function() {
-            return __awaiter2(void 0, void 0, void 0, function() {
-              var resolvedResource;
-              var _a4;
-              return __generator2(this, function(_b) {
-                switch (_b.label) {
-                  case 0:
-                    return [4, resourceOrPromise_1];
-                  case 1:
-                    resolvedResource = _b.sent();
-                    return [4, (_a4 = resolvedResource.waitForAsyncAttributes) === null || _a4 === void 0 ? void 0 : _a4.call(resolvedResource)];
-                  case 2:
-                    _b.sent();
-                    return [2, resolvedResource.attributes];
-                }
-              });
-            });
-          };
-          resource_1 = new Resource({}, createPromise());
-        } else {
-          resource_1 = resourceOrPromise_1;
-        }
-        if (resource_1.waitForAsyncAttributes) {
-          void resource_1.waitForAsyncAttributes().then(function() {
-            return diag2.debug(d2.constructor.name + " found resource.", resource_1);
-          });
-        } else {
-          diag2.debug(d2.constructor.name + " found resource.", resource_1);
-        }
-        return resource_1;
-      } catch (e2) {
-        diag2.error(d2.constructor.name + " failed: " + e2.message);
-        return Resource.empty();
-      }
+      return [k2, v2];
     });
-    var mergedResources = resources.reduce(function(acc, resource) {
-      return acc.merge(resource);
-    }, Resource.empty());
-    if (mergedResources.waitForAsyncAttributes) {
-      void mergedResources.waitForAsyncAttributes().then(function() {
-        logResources(resources);
-      });
+  }
+  function validateSchemaUrl(schemaUrl) {
+    if (typeof schemaUrl === "string" || schemaUrl === void 0) {
+      return schemaUrl;
     }
-    return mergedResources;
-  };
-  var logResources = function(resources) {
-    resources.forEach(function(resource) {
-      if (Object.keys(resource.attributes).length > 0) {
-        var resourceDebugString = JSON.stringify(resource.attributes, null, 4);
-        diag2.verbose(resourceDebugString);
-      }
-    });
-  };
+    diag2.warn("Schema URL must be string or undefined, got %s. Schema URL will be ignored.", schemaUrl);
+    return void 0;
+  }
+  function mergeSchemaUrl(old, updating) {
+    const oldSchemaUrl = old?.schemaUrl;
+    const updatingSchemaUrl = updating?.schemaUrl;
+    const isOldEmpty = oldSchemaUrl === void 0 || oldSchemaUrl === "";
+    const isUpdatingEmpty = updatingSchemaUrl === void 0 || updatingSchemaUrl === "";
+    if (isOldEmpty) {
+      return updatingSchemaUrl;
+    }
+    if (isUpdatingEmpty) {
+      return oldSchemaUrl;
+    }
+    if (oldSchemaUrl === updatingSchemaUrl) {
+      return oldSchemaUrl;
+    }
+    diag2.warn('Schema URL merge conflict: old resource has "%s", updating resource has "%s". Resulting resource will have undefined Schema URL.', oldSchemaUrl, updatingSchemaUrl);
+    return void 0;
+  }
 
-  // node_modules/@opentelemetry/sdk-trace-base/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_EXCEPTION_TYPE = "exception.type";
-  var TMP_EXCEPTION_MESSAGE = "exception.message";
-  var TMP_EXCEPTION_STACKTRACE = "exception.stacktrace";
-  var SEMATTRS_EXCEPTION_TYPE = TMP_EXCEPTION_TYPE;
-  var SEMATTRS_EXCEPTION_MESSAGE = TMP_EXCEPTION_MESSAGE;
-  var SEMATTRS_EXCEPTION_STACKTRACE = TMP_EXCEPTION_STACKTRACE;
+  // node_modules/@opentelemetry/resources/build/esm/detect-resources.js
+  var detectResources = (config = {}) => {
+    const resources = (config.detectors || []).map((d2) => {
+      try {
+        const resource = resourceFromDetectedResource(d2.detect(config));
+        diag2.debug(`${d2.constructor.name} found resource.`, resource);
+        return resource;
+      } catch (e2) {
+        diag2.debug(`${d2.constructor.name} failed: ${e2.message}`);
+        return emptyResource();
+      }
+    });
+    return resources.reduce((acc, resource) => acc.merge(resource), emptyResource());
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/enums.js
   var ExceptionEventName = "exception";
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/Span.js
-  var __assign3 = function() {
-    __assign3 = Object.assign || function(t3) {
-      for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t3[p2] = s2[p2];
-      }
-      return t3;
+  var SpanImpl = class {
+    // Below properties are included to implement ReadableSpan for export
+    // purposes but are not intended to be written-to directly.
+    _spanContext;
+    kind;
+    parentSpanContext;
+    attributes = {};
+    links = [];
+    events = [];
+    startTime;
+    resource;
+    instrumentationScope;
+    _droppedAttributesCount = 0;
+    _droppedEventsCount = 0;
+    _droppedLinksCount = 0;
+    name;
+    status = {
+      code: SpanStatusCode.UNSET
     };
-    return __assign3.apply(this, arguments);
-  };
-  var __values5 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
+    endTime = [0, 0];
+    _ended = false;
+    _duration = [-1, -1];
+    _spanProcessor;
+    _spanLimits;
+    _attributeValueLengthLimit;
+    _performanceStartTime;
+    _performanceOffset;
+    _startTimeProvided;
+    /**
+     * Constructs a new SpanImpl instance.
+     */
+    constructor(opts) {
+      const now = Date.now();
+      this._spanContext = opts.spanContext;
+      this._performanceStartTime = otperformance.now();
+      this._performanceOffset = now - (this._performanceStartTime + getTimeOrigin());
+      this._startTimeProvided = opts.startTime != null;
+      this._spanLimits = opts.spanLimits;
+      this._attributeValueLengthLimit = this._spanLimits.attributeValueLengthLimit || 0;
+      this._spanProcessor = opts.spanProcessor;
+      this.name = opts.name;
+      this.parentSpanContext = opts.parentSpanContext;
+      this.kind = opts.kind;
+      this.links = opts.links || [];
+      this.startTime = this._getTime(opts.startTime ?? now);
+      this.resource = opts.resource;
+      this.instrumentationScope = opts.scope;
+      if (opts.attributes != null) {
+        this.setAttributes(opts.attributes);
       }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var __read10 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
+      this._spanProcessor.onStart(this, opts.context);
+    }
+    spanContext() {
+      return this._spanContext;
+    }
+    setAttribute(key, value) {
+      if (value == null || this._isSpanEnded())
+        return this;
+      if (key.length === 0) {
+        diag2.warn(`Invalid attribute key: ${key}`);
+        return this;
+      }
+      if (!isAttributeValue(value)) {
+        diag2.warn(`Invalid attribute value set for key: ${key}`);
+        return this;
+      }
+      const { attributeCountLimit } = this._spanLimits;
+      if (attributeCountLimit !== void 0 && Object.keys(this.attributes).length >= attributeCountLimit && !Object.prototype.hasOwnProperty.call(this.attributes, key)) {
+        this._droppedAttributesCount++;
+        return this;
+      }
+      this.attributes[key] = this._truncateToSize(value);
+      return this;
+    }
+    setAttributes(attributes) {
+      for (const [k2, v2] of Object.entries(attributes)) {
+        this.setAttribute(k2, v2);
+      }
+      return this;
+    }
+    /**
+     *
+     * @param name Span Name
+     * @param [attributesOrStartTime] Span attributes or start time
+     *     if type is {@type TimeInput} and 3rd param is undefined
+     * @param [timeStamp] Specified time stamp for the event
+     */
+    addEvent(name, attributesOrStartTime, timeStamp) {
+      if (this._isSpanEnded())
+        return this;
+      const { eventCountLimit } = this._spanLimits;
+      if (eventCountLimit === 0) {
+        diag2.warn("No events allowed.");
+        this._droppedEventsCount++;
+        return this;
+      }
+      if (eventCountLimit !== void 0 && this.events.length >= eventCountLimit) {
+        if (this._droppedEventsCount === 0) {
+          diag2.debug("Dropping extra events.");
+        }
+        this.events.shift();
+        this._droppedEventsCount++;
+      }
+      if (isTimeInput(attributesOrStartTime)) {
+        if (!isTimeInput(timeStamp)) {
+          timeStamp = attributesOrStartTime;
+        }
+        attributesOrStartTime = void 0;
+      }
+      const attributes = sanitizeAttributes(attributesOrStartTime);
+      this.events.push({
+        name,
+        attributes,
+        time: this._getTime(timeStamp),
+        droppedAttributesCount: 0
+      });
+      return this;
+    }
+    addLink(link) {
+      this.links.push(link);
+      return this;
+    }
+    addLinks(links) {
+      this.links.push(...links);
+      return this;
+    }
+    setStatus(status) {
+      if (this._isSpanEnded())
+        return this;
+      this.status = { ...status };
+      if (this.status.message != null && typeof status.message !== "string") {
+        diag2.warn(`Dropping invalid status.message of type '${typeof status.message}', expected 'string'`);
+        delete this.status.message;
+      }
+      return this;
+    }
+    updateName(name) {
+      if (this._isSpanEnded())
+        return this;
+      this.name = name;
+      return this;
+    }
+    end(endTime) {
+      if (this._isSpanEnded()) {
+        diag2.error(`${this.name} ${this._spanContext.traceId}-${this._spanContext.spanId} - You can only call end() on a span once.`);
+        return;
+      }
+      this._ended = true;
+      this.endTime = this._getTime(endTime);
+      this._duration = hrTimeDuration(this.startTime, this.endTime);
+      if (this._duration[0] < 0) {
+        diag2.warn("Inconsistent start and end time, startTime > endTime. Setting span duration to 0ms.", this.startTime, this.endTime);
+        this.endTime = this.startTime.slice();
+        this._duration = [0, 0];
+      }
+      if (this._droppedEventsCount > 0) {
+        diag2.warn(`Dropped ${this._droppedEventsCount} events because eventCountLimit reached`);
+      }
+      this._spanProcessor.onEnd(this);
+    }
+    _getTime(inp) {
+      if (typeof inp === "number" && inp <= otperformance.now()) {
+        return hrTime(inp + this._performanceOffset);
+      }
+      if (typeof inp === "number") {
+        return millisToHrTime(inp);
+      }
+      if (inp instanceof Date) {
+        return millisToHrTime(inp.getTime());
+      }
+      if (isTimeInputHrTime(inp)) {
+        return inp;
+      }
+      if (this._startTimeProvided) {
+        return millisToHrTime(Date.now());
+      }
+      const msDuration = otperformance.now() - this._performanceStartTime;
+      return addHrTimes(this.startTime, millisToHrTime(msDuration));
+    }
+    isRecording() {
+      return this._ended === false;
+    }
+    recordException(exception, time) {
+      const attributes = {};
+      if (typeof exception === "string") {
+        attributes[ATTR_EXCEPTION_MESSAGE] = exception;
+      } else if (exception) {
+        if (exception.code) {
+          attributes[ATTR_EXCEPTION_TYPE] = exception.code.toString();
+        } else if (exception.name) {
+          attributes[ATTR_EXCEPTION_TYPE] = exception.name;
+        }
+        if (exception.message) {
+          attributes[ATTR_EXCEPTION_MESSAGE] = exception.message;
+        }
+        if (exception.stack) {
+          attributes[ATTR_EXCEPTION_STACKTRACE] = exception.stack;
+        }
+      }
+      if (attributes[ATTR_EXCEPTION_TYPE] || attributes[ATTR_EXCEPTION_MESSAGE]) {
+        this.addEvent(ExceptionEventName, attributes, time);
+      } else {
+        diag2.warn(`Failed to record an exception ${exception}`);
       }
     }
-    return ar;
-  };
-  var __spreadArray6 = function(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
+    get duration() {
+      return this._duration;
     }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  };
-  var Span = (
-    /** @class */
-    function() {
-      function Span2(parentTracer, context2, spanName, spanContext, kind, parentSpanId, links, startTime, _deprecatedClock, attributes) {
-        if (links === void 0) {
-          links = [];
-        }
-        this.attributes = {};
-        this.links = [];
-        this.events = [];
-        this._droppedAttributesCount = 0;
-        this._droppedEventsCount = 0;
-        this._droppedLinksCount = 0;
-        this.status = {
-          code: SpanStatusCode.UNSET
-        };
-        this.endTime = [0, 0];
-        this._ended = false;
-        this._duration = [-1, -1];
-        this.name = spanName;
-        this._spanContext = spanContext;
-        this.parentSpanId = parentSpanId;
-        this.kind = kind;
-        this.links = links;
-        var now = Date.now();
-        this._performanceStartTime = otperformance.now();
-        this._performanceOffset = now - (this._performanceStartTime + getTimeOrigin());
-        this._startTimeProvided = startTime != null;
-        this.startTime = this._getTime(startTime !== null && startTime !== void 0 ? startTime : now);
-        this.resource = parentTracer.resource;
-        this.instrumentationLibrary = parentTracer.instrumentationLibrary;
-        this._spanLimits = parentTracer.getSpanLimits();
-        this._attributeValueLengthLimit = this._spanLimits.attributeValueLengthLimit || 0;
-        if (attributes != null) {
-          this.setAttributes(attributes);
-        }
-        this._spanProcessor = parentTracer.getActiveSpanProcessor();
-        this._spanProcessor.onStart(this, context2);
+    get ended() {
+      return this._ended;
+    }
+    get droppedAttributesCount() {
+      return this._droppedAttributesCount;
+    }
+    get droppedEventsCount() {
+      return this._droppedEventsCount;
+    }
+    get droppedLinksCount() {
+      return this._droppedLinksCount;
+    }
+    _isSpanEnded() {
+      if (this._ended) {
+        const error = new Error(`Operation attempted on ended Span {traceId: ${this._spanContext.traceId}, spanId: ${this._spanContext.spanId}}`);
+        diag2.warn(`Cannot execute the operation on ended Span {traceId: ${this._spanContext.traceId}, spanId: ${this._spanContext.spanId}}`, error);
       }
-      Span2.prototype.spanContext = function() {
-        return this._spanContext;
-      };
-      Span2.prototype.setAttribute = function(key, value) {
-        if (value == null || this._isSpanEnded())
-          return this;
-        if (key.length === 0) {
-          diag2.warn("Invalid attribute key: " + key);
-          return this;
-        }
-        if (!isAttributeValue(value)) {
-          diag2.warn("Invalid attribute value set for key: " + key);
-          return this;
-        }
-        if (Object.keys(this.attributes).length >= this._spanLimits.attributeCountLimit && !Object.prototype.hasOwnProperty.call(this.attributes, key)) {
-          this._droppedAttributesCount++;
-          return this;
-        }
-        this.attributes[key] = this._truncateToSize(value);
-        return this;
-      };
-      Span2.prototype.setAttributes = function(attributes) {
-        var e_1, _a3;
-        try {
-          for (var _b = __values5(Object.entries(attributes)), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var _d = __read10(_c.value, 2), k2 = _d[0], v2 = _d[1];
-            this.setAttribute(k2, v2);
-          }
-        } catch (e_1_1) {
-          e_1 = { error: e_1_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_1) throw e_1.error;
-          }
-        }
-        return this;
-      };
-      Span2.prototype.addEvent = function(name, attributesOrStartTime, timeStamp) {
-        if (this._isSpanEnded())
-          return this;
-        if (this._spanLimits.eventCountLimit === 0) {
-          diag2.warn("No events allowed.");
-          this._droppedEventsCount++;
-          return this;
-        }
-        if (this.events.length >= this._spanLimits.eventCountLimit) {
-          if (this._droppedEventsCount === 0) {
-            diag2.debug("Dropping extra events.");
-          }
-          this.events.shift();
-          this._droppedEventsCount++;
-        }
-        if (isTimeInput(attributesOrStartTime)) {
-          if (!isTimeInput(timeStamp)) {
-            timeStamp = attributesOrStartTime;
-          }
-          attributesOrStartTime = void 0;
-        }
-        var attributes = sanitizeAttributes(attributesOrStartTime);
-        this.events.push({
-          name,
-          attributes,
-          time: this._getTime(timeStamp),
-          droppedAttributesCount: 0
-        });
-        return this;
-      };
-      Span2.prototype.addLink = function(link) {
-        this.links.push(link);
-        return this;
-      };
-      Span2.prototype.addLinks = function(links) {
-        var _a3;
-        (_a3 = this.links).push.apply(_a3, __spreadArray6([], __read10(links), false));
-        return this;
-      };
-      Span2.prototype.setStatus = function(status) {
-        if (this._isSpanEnded())
-          return this;
-        this.status = __assign3({}, status);
-        if (this.status.message != null && typeof status.message !== "string") {
-          diag2.warn("Dropping invalid status.message of type '" + typeof status.message + "', expected 'string'");
-          delete this.status.message;
-        }
-        return this;
-      };
-      Span2.prototype.updateName = function(name) {
-        if (this._isSpanEnded())
-          return this;
-        this.name = name;
-        return this;
-      };
-      Span2.prototype.end = function(endTime) {
-        if (this._isSpanEnded()) {
-          diag2.error(this.name + " " + this._spanContext.traceId + "-" + this._spanContext.spanId + " - You can only call end() on a span once.");
-          return;
-        }
-        this._ended = true;
-        this.endTime = this._getTime(endTime);
-        this._duration = hrTimeDuration(this.startTime, this.endTime);
-        if (this._duration[0] < 0) {
-          diag2.warn("Inconsistent start and end time, startTime > endTime. Setting span duration to 0ms.", this.startTime, this.endTime);
-          this.endTime = this.startTime.slice();
-          this._duration = [0, 0];
-        }
-        if (this._droppedEventsCount > 0) {
-          diag2.warn("Dropped " + this._droppedEventsCount + " events because eventCountLimit reached");
-        }
-        this._spanProcessor.onEnd(this);
-      };
-      Span2.prototype._getTime = function(inp) {
-        if (typeof inp === "number" && inp <= otperformance.now()) {
-          return hrTime(inp + this._performanceOffset);
-        }
-        if (typeof inp === "number") {
-          return millisToHrTime(inp);
-        }
-        if (inp instanceof Date) {
-          return millisToHrTime(inp.getTime());
-        }
-        if (isTimeInputHrTime(inp)) {
-          return inp;
-        }
-        if (this._startTimeProvided) {
-          return millisToHrTime(Date.now());
-        }
-        var msDuration = otperformance.now() - this._performanceStartTime;
-        return addHrTimes(this.startTime, millisToHrTime(msDuration));
-      };
-      Span2.prototype.isRecording = function() {
-        return this._ended === false;
-      };
-      Span2.prototype.recordException = function(exception, time) {
-        var attributes = {};
-        if (typeof exception === "string") {
-          attributes[SEMATTRS_EXCEPTION_MESSAGE] = exception;
-        } else if (exception) {
-          if (exception.code) {
-            attributes[SEMATTRS_EXCEPTION_TYPE] = exception.code.toString();
-          } else if (exception.name) {
-            attributes[SEMATTRS_EXCEPTION_TYPE] = exception.name;
-          }
-          if (exception.message) {
-            attributes[SEMATTRS_EXCEPTION_MESSAGE] = exception.message;
-          }
-          if (exception.stack) {
-            attributes[SEMATTRS_EXCEPTION_STACKTRACE] = exception.stack;
-          }
-        }
-        if (attributes[SEMATTRS_EXCEPTION_TYPE] || attributes[SEMATTRS_EXCEPTION_MESSAGE]) {
-          this.addEvent(ExceptionEventName, attributes, time);
-        } else {
-          diag2.warn("Failed to record an exception " + exception);
-        }
-      };
-      Object.defineProperty(Span2.prototype, "duration", {
-        get: function() {
-          return this._duration;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Object.defineProperty(Span2.prototype, "ended", {
-        get: function() {
-          return this._ended;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Object.defineProperty(Span2.prototype, "droppedAttributesCount", {
-        get: function() {
-          return this._droppedAttributesCount;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Object.defineProperty(Span2.prototype, "droppedEventsCount", {
-        get: function() {
-          return this._droppedEventsCount;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Object.defineProperty(Span2.prototype, "droppedLinksCount", {
-        get: function() {
-          return this._droppedLinksCount;
-        },
-        enumerable: false,
-        configurable: true
-      });
-      Span2.prototype._isSpanEnded = function() {
-        if (this._ended) {
-          diag2.warn("Can not execute the operation on ended Span {traceId: " + this._spanContext.traceId + ", spanId: " + this._spanContext.spanId + "}");
-        }
-        return this._ended;
-      };
-      Span2.prototype._truncateToLimitUtil = function(value, limit) {
-        if (value.length <= limit) {
-          return value;
-        }
-        return value.substring(0, limit);
-      };
-      Span2.prototype._truncateToSize = function(value) {
-        var _this = this;
-        var limit = this._attributeValueLengthLimit;
-        if (limit <= 0) {
-          diag2.warn("Attribute value limit must be positive, got " + limit);
-          return value;
-        }
-        if (typeof value === "string") {
-          return this._truncateToLimitUtil(value, limit);
-        }
-        if (Array.isArray(value)) {
-          return value.map(function(val) {
-            return typeof val === "string" ? _this._truncateToLimitUtil(val, limit) : val;
-          });
-        }
+      return this._ended;
+    }
+    // Utility function to truncate given value within size
+    // for value type of string, will truncate to given limit
+    // for type of non-string, will return same value
+    _truncateToLimitUtil(value, limit) {
+      if (value.length <= limit) {
         return value;
-      };
-      return Span2;
-    }()
-  );
+      }
+      return value.substring(0, limit);
+    }
+    /**
+     * If the given attribute value is of type string and has more characters than given {@code attributeValueLengthLimit} then
+     * return string with truncated to {@code attributeValueLengthLimit} characters
+     *
+     * If the given attribute value is array of strings then
+     * return new array of strings with each element truncated to {@code attributeValueLengthLimit} characters
+     *
+     * Otherwise return same Attribute {@code value}
+     *
+     * @param value Attribute value
+     * @returns truncated attribute value if required, otherwise same value
+     */
+    _truncateToSize(value) {
+      const limit = this._attributeValueLengthLimit;
+      if (limit <= 0) {
+        diag2.warn(`Attribute value limit must be positive, got ${limit}`);
+        return value;
+      }
+      if (typeof value === "string") {
+        return this._truncateToLimitUtil(value, limit);
+      }
+      if (Array.isArray(value)) {
+        return value.map((val) => typeof val === "string" ? this._truncateToLimitUtil(val, limit) : val);
+      }
+      return value;
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/Sampler.js
   var SamplingDecision2;
@@ -5588,146 +5017,133 @@
   })(SamplingDecision2 || (SamplingDecision2 = {}));
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOffSampler.js
-  var AlwaysOffSampler = (
-    /** @class */
-    function() {
-      function AlwaysOffSampler2() {
-      }
-      AlwaysOffSampler2.prototype.shouldSample = function() {
-        return {
-          decision: SamplingDecision2.NOT_RECORD
-        };
+  var AlwaysOffSampler = class {
+    shouldSample() {
+      return {
+        decision: SamplingDecision2.NOT_RECORD
       };
-      AlwaysOffSampler2.prototype.toString = function() {
-        return "AlwaysOffSampler";
-      };
-      return AlwaysOffSampler2;
-    }()
-  );
+    }
+    toString() {
+      return "AlwaysOffSampler";
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/AlwaysOnSampler.js
-  var AlwaysOnSampler = (
-    /** @class */
-    function() {
-      function AlwaysOnSampler2() {
-      }
-      AlwaysOnSampler2.prototype.shouldSample = function() {
-        return {
-          decision: SamplingDecision2.RECORD_AND_SAMPLED
-        };
+  var AlwaysOnSampler = class {
+    shouldSample() {
+      return {
+        decision: SamplingDecision2.RECORD_AND_SAMPLED
       };
-      AlwaysOnSampler2.prototype.toString = function() {
-        return "AlwaysOnSampler";
-      };
-      return AlwaysOnSampler2;
-    }()
-  );
+    }
+    toString() {
+      return "AlwaysOnSampler";
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/ParentBasedSampler.js
-  var ParentBasedSampler = (
-    /** @class */
-    function() {
-      function ParentBasedSampler2(config) {
-        var _a3, _b, _c, _d;
-        this._root = config.root;
-        if (!this._root) {
-          globalErrorHandler(new Error("ParentBasedSampler must have a root sampler configured"));
-          this._root = new AlwaysOnSampler();
-        }
-        this._remoteParentSampled = (_a3 = config.remoteParentSampled) !== null && _a3 !== void 0 ? _a3 : new AlwaysOnSampler();
-        this._remoteParentNotSampled = (_b = config.remoteParentNotSampled) !== null && _b !== void 0 ? _b : new AlwaysOffSampler();
-        this._localParentSampled = (_c = config.localParentSampled) !== null && _c !== void 0 ? _c : new AlwaysOnSampler();
-        this._localParentNotSampled = (_d = config.localParentNotSampled) !== null && _d !== void 0 ? _d : new AlwaysOffSampler();
+  var ParentBasedSampler = class {
+    _root;
+    _remoteParentSampled;
+    _remoteParentNotSampled;
+    _localParentSampled;
+    _localParentNotSampled;
+    constructor(config) {
+      this._root = config.root;
+      if (!this._root) {
+        globalErrorHandler(new Error("ParentBasedSampler must have a root sampler configured"));
+        this._root = new AlwaysOnSampler();
       }
-      ParentBasedSampler2.prototype.shouldSample = function(context2, traceId, spanName, spanKind, attributes, links) {
-        var parentContext = trace.getSpanContext(context2);
-        if (!parentContext || !isSpanContextValid(parentContext)) {
-          return this._root.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
-        }
-        if (parentContext.isRemote) {
-          if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-            return this._remoteParentSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
-          }
-          return this._remoteParentNotSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
-        }
+      this._remoteParentSampled = config.remoteParentSampled ?? new AlwaysOnSampler();
+      this._remoteParentNotSampled = config.remoteParentNotSampled ?? new AlwaysOffSampler();
+      this._localParentSampled = config.localParentSampled ?? new AlwaysOnSampler();
+      this._localParentNotSampled = config.localParentNotSampled ?? new AlwaysOffSampler();
+    }
+    shouldSample(context2, traceId, spanName, spanKind, attributes, links) {
+      const parentContext = trace.getSpanContext(context2);
+      if (!parentContext || !isSpanContextValid(parentContext)) {
+        return this._root.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
+      }
+      if (parentContext.isRemote) {
         if (parentContext.traceFlags & TraceFlags.SAMPLED) {
-          return this._localParentSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
+          return this._remoteParentSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
         }
-        return this._localParentNotSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
-      };
-      ParentBasedSampler2.prototype.toString = function() {
-        return "ParentBased{root=" + this._root.toString() + ", remoteParentSampled=" + this._remoteParentSampled.toString() + ", remoteParentNotSampled=" + this._remoteParentNotSampled.toString() + ", localParentSampled=" + this._localParentSampled.toString() + ", localParentNotSampled=" + this._localParentNotSampled.toString() + "}";
-      };
-      return ParentBasedSampler2;
-    }()
-  );
+        return this._remoteParentNotSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
+      }
+      if (parentContext.traceFlags & TraceFlags.SAMPLED) {
+        return this._localParentSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
+      }
+      return this._localParentNotSampled.shouldSample(context2, traceId, spanName, spanKind, attributes, links);
+    }
+    toString() {
+      return `ParentBased{root=${this._root.toString()}, remoteParentSampled=${this._remoteParentSampled.toString()}, remoteParentNotSampled=${this._remoteParentNotSampled.toString()}, localParentSampled=${this._localParentSampled.toString()}, localParentNotSampled=${this._localParentNotSampled.toString()}}`;
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/sampler/TraceIdRatioBasedSampler.js
-  var TraceIdRatioBasedSampler = (
-    /** @class */
-    function() {
-      function TraceIdRatioBasedSampler2(_ratio) {
-        if (_ratio === void 0) {
-          _ratio = 0;
-        }
-        this._ratio = _ratio;
-        this._ratio = this._normalize(_ratio);
-        this._upperBound = Math.floor(this._ratio * 4294967295);
+  var TraceIdRatioBasedSampler = class {
+    _ratio;
+    _upperBound;
+    constructor(_ratio = 0) {
+      this._ratio = _ratio;
+      this._ratio = this._normalize(_ratio);
+      this._upperBound = Math.floor(this._ratio * 4294967295);
+    }
+    shouldSample(context2, traceId) {
+      return {
+        decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision2.RECORD_AND_SAMPLED : SamplingDecision2.NOT_RECORD
+      };
+    }
+    toString() {
+      return `TraceIdRatioBased{${this._ratio}}`;
+    }
+    _normalize(ratio) {
+      if (typeof ratio !== "number" || isNaN(ratio))
+        return 0;
+      return ratio >= 1 ? 1 : ratio <= 0 ? 0 : ratio;
+    }
+    _accumulate(traceId) {
+      let accumulation = 0;
+      for (let i2 = 0; i2 < traceId.length / 8; i2++) {
+        const pos = i2 * 8;
+        const part = parseInt(traceId.slice(pos, pos + 8), 16);
+        accumulation = (accumulation ^ part) >>> 0;
       }
-      TraceIdRatioBasedSampler2.prototype.shouldSample = function(context2, traceId) {
-        return {
-          decision: isValidTraceId(traceId) && this._accumulate(traceId) < this._upperBound ? SamplingDecision2.RECORD_AND_SAMPLED : SamplingDecision2.NOT_RECORD
-        };
-      };
-      TraceIdRatioBasedSampler2.prototype.toString = function() {
-        return "TraceIdRatioBased{" + this._ratio + "}";
-      };
-      TraceIdRatioBasedSampler2.prototype._normalize = function(ratio) {
-        if (typeof ratio !== "number" || isNaN(ratio))
-          return 0;
-        return ratio >= 1 ? 1 : ratio <= 0 ? 0 : ratio;
-      };
-      TraceIdRatioBasedSampler2.prototype._accumulate = function(traceId) {
-        var accumulation = 0;
-        for (var i2 = 0; i2 < traceId.length / 8; i2++) {
-          var pos = i2 * 8;
-          var part = parseInt(traceId.slice(pos, pos + 8), 16);
-          accumulation = (accumulation ^ part) >>> 0;
-        }
-        return accumulation;
-      };
-      return TraceIdRatioBasedSampler2;
-    }()
-  );
+      return accumulation;
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/config.js
-  var FALLBACK_OTEL_TRACES_SAMPLER = TracesSamplerValues.AlwaysOn;
+  var TracesSamplerValues;
+  (function(TracesSamplerValues2) {
+    TracesSamplerValues2["AlwaysOff"] = "always_off";
+    TracesSamplerValues2["AlwaysOn"] = "always_on";
+    TracesSamplerValues2["ParentBasedAlwaysOff"] = "parentbased_always_off";
+    TracesSamplerValues2["ParentBasedAlwaysOn"] = "parentbased_always_on";
+    TracesSamplerValues2["ParentBasedTraceIdRatio"] = "parentbased_traceidratio";
+    TracesSamplerValues2["TraceIdRatio"] = "traceidratio";
+  })(TracesSamplerValues || (TracesSamplerValues = {}));
   var DEFAULT_RATIO = 1;
   function loadDefaultConfig() {
-    var env = getEnv();
     return {
-      sampler: buildSamplerFromEnv(env),
+      sampler: buildSamplerFromEnv(),
       forceFlushTimeoutMillis: 3e4,
       generalLimits: {
-        attributeValueLengthLimit: env.OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-        attributeCountLimit: env.OTEL_ATTRIBUTE_COUNT_LIMIT
+        attributeValueLengthLimit: getNumberFromEnv("OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? Infinity,
+        attributeCountLimit: getNumberFromEnv("OTEL_ATTRIBUTE_COUNT_LIMIT") ?? 128
       },
       spanLimits: {
-        attributeValueLengthLimit: env.OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT,
-        attributeCountLimit: env.OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT,
-        linkCountLimit: env.OTEL_SPAN_LINK_COUNT_LIMIT,
-        eventCountLimit: env.OTEL_SPAN_EVENT_COUNT_LIMIT,
-        attributePerEventCountLimit: env.OTEL_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT,
-        attributePerLinkCountLimit: env.OTEL_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT
-      },
-      mergeResourceWithDefaults: true
+        attributeValueLengthLimit: getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? Infinity,
+        attributeCountLimit: getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT") ?? 128,
+        linkCountLimit: getNumberFromEnv("OTEL_SPAN_LINK_COUNT_LIMIT") ?? 128,
+        eventCountLimit: getNumberFromEnv("OTEL_SPAN_EVENT_COUNT_LIMIT") ?? 128,
+        attributePerEventCountLimit: getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_PER_EVENT_COUNT_LIMIT") ?? 128,
+        attributePerLinkCountLimit: getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_PER_LINK_COUNT_LIMIT") ?? 128
+      }
     };
   }
-  function buildSamplerFromEnv(environment) {
-    if (environment === void 0) {
-      environment = getEnv();
-    }
-    switch (environment.OTEL_TRACES_SAMPLER) {
+  function buildSamplerFromEnv() {
+    const sampler = getStringFromEnv("OTEL_TRACES_SAMPLER") ?? TracesSamplerValues.ParentBasedAlwaysOn;
+    switch (sampler) {
       case TracesSamplerValues.AlwaysOn:
         return new AlwaysOnSampler();
       case TracesSamplerValues.AlwaysOff:
@@ -5741,295 +5157,271 @@
           root: new AlwaysOffSampler()
         });
       case TracesSamplerValues.TraceIdRatio:
-        return new TraceIdRatioBasedSampler(getSamplerProbabilityFromEnv(environment));
+        return new TraceIdRatioBasedSampler(getSamplerProbabilityFromEnv());
       case TracesSamplerValues.ParentBasedTraceIdRatio:
         return new ParentBasedSampler({
-          root: new TraceIdRatioBasedSampler(getSamplerProbabilityFromEnv(environment))
+          root: new TraceIdRatioBasedSampler(getSamplerProbabilityFromEnv())
         });
       default:
-        diag2.error('OTEL_TRACES_SAMPLER value "' + environment.OTEL_TRACES_SAMPLER + " invalid, defaulting to " + FALLBACK_OTEL_TRACES_SAMPLER + '".');
-        return new AlwaysOnSampler();
+        diag2.error(`OTEL_TRACES_SAMPLER value "${sampler}" invalid, defaulting to "${TracesSamplerValues.ParentBasedAlwaysOn}".`);
+        return new ParentBasedSampler({
+          root: new AlwaysOnSampler()
+        });
     }
   }
-  function getSamplerProbabilityFromEnv(environment) {
-    if (environment.OTEL_TRACES_SAMPLER_ARG === void 0 || environment.OTEL_TRACES_SAMPLER_ARG === "") {
-      diag2.error("OTEL_TRACES_SAMPLER_ARG is blank, defaulting to " + DEFAULT_RATIO + ".");
-      return DEFAULT_RATIO;
-    }
-    var probability = Number(environment.OTEL_TRACES_SAMPLER_ARG);
-    if (isNaN(probability)) {
-      diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is invalid, defaulting to " + DEFAULT_RATIO + ".");
+  function getSamplerProbabilityFromEnv() {
+    const probability = getNumberFromEnv("OTEL_TRACES_SAMPLER_ARG");
+    if (probability == null) {
+      diag2.error(`OTEL_TRACES_SAMPLER_ARG is blank, defaulting to ${DEFAULT_RATIO}.`);
       return DEFAULT_RATIO;
     }
     if (probability < 0 || probability > 1) {
-      diag2.error("OTEL_TRACES_SAMPLER_ARG=" + environment.OTEL_TRACES_SAMPLER_ARG + " was given, but it is out of range ([0..1]), defaulting to " + DEFAULT_RATIO + ".");
+      diag2.error(`OTEL_TRACES_SAMPLER_ARG=${probability} was given, but it is out of range ([0..1]), defaulting to ${DEFAULT_RATIO}.`);
       return DEFAULT_RATIO;
     }
     return probability;
   }
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/utility.js
+  var DEFAULT_ATTRIBUTE_COUNT_LIMIT = 128;
+  var DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT = Infinity;
   function mergeConfig(userConfig) {
-    var perInstanceDefaults = {
+    const perInstanceDefaults = {
       sampler: buildSamplerFromEnv()
     };
-    var DEFAULT_CONFIG = loadDefaultConfig();
-    var target = Object.assign({}, DEFAULT_CONFIG, perInstanceDefaults, userConfig);
+    const DEFAULT_CONFIG = loadDefaultConfig();
+    const target = Object.assign({}, DEFAULT_CONFIG, perInstanceDefaults, userConfig);
     target.generalLimits = Object.assign({}, DEFAULT_CONFIG.generalLimits, userConfig.generalLimits || {});
     target.spanLimits = Object.assign({}, DEFAULT_CONFIG.spanLimits, userConfig.spanLimits || {});
     return target;
   }
   function reconfigureLimits(userConfig) {
-    var _a3, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    var spanLimits = Object.assign({}, userConfig.spanLimits);
-    var parsedEnvConfig = getEnvWithoutDefaults();
-    spanLimits.attributeCountLimit = (_f = (_e = (_d = (_b = (_a3 = userConfig.spanLimits) === null || _a3 === void 0 ? void 0 : _a3.attributeCountLimit) !== null && _b !== void 0 ? _b : (_c = userConfig.generalLimits) === null || _c === void 0 ? void 0 : _c.attributeCountLimit) !== null && _d !== void 0 ? _d : parsedEnvConfig.OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT) !== null && _e !== void 0 ? _e : parsedEnvConfig.OTEL_ATTRIBUTE_COUNT_LIMIT) !== null && _f !== void 0 ? _f : DEFAULT_ATTRIBUTE_COUNT_LIMIT;
-    spanLimits.attributeValueLengthLimit = (_m = (_l = (_k = (_h = (_g = userConfig.spanLimits) === null || _g === void 0 ? void 0 : _g.attributeValueLengthLimit) !== null && _h !== void 0 ? _h : (_j = userConfig.generalLimits) === null || _j === void 0 ? void 0 : _j.attributeValueLengthLimit) !== null && _k !== void 0 ? _k : parsedEnvConfig.OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT) !== null && _l !== void 0 ? _l : parsedEnvConfig.OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT) !== null && _m !== void 0 ? _m : DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT;
+    const spanLimits = Object.assign({}, userConfig.spanLimits);
+    spanLimits.attributeCountLimit = userConfig.spanLimits?.attributeCountLimit ?? userConfig.generalLimits?.attributeCountLimit ?? getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT") ?? getNumberFromEnv("OTEL_ATTRIBUTE_COUNT_LIMIT") ?? DEFAULT_ATTRIBUTE_COUNT_LIMIT;
+    spanLimits.attributeValueLengthLimit = userConfig.spanLimits?.attributeValueLengthLimit ?? userConfig.generalLimits?.attributeValueLengthLimit ?? getNumberFromEnv("OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? getNumberFromEnv("OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? DEFAULT_ATTRIBUTE_VALUE_LENGTH_LIMIT;
     return Object.assign({}, userConfig, { spanLimits });
   }
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/export/BatchSpanProcessorBase.js
-  var BatchSpanProcessorBase = (
-    /** @class */
-    function() {
-      function BatchSpanProcessorBase2(_exporter, config) {
-        this._exporter = _exporter;
-        this._isExporting = false;
-        this._finishedSpans = [];
-        this._droppedSpansCount = 0;
-        var env = getEnv();
-        this._maxExportBatchSize = typeof (config === null || config === void 0 ? void 0 : config.maxExportBatchSize) === "number" ? config.maxExportBatchSize : env.OTEL_BSP_MAX_EXPORT_BATCH_SIZE;
-        this._maxQueueSize = typeof (config === null || config === void 0 ? void 0 : config.maxQueueSize) === "number" ? config.maxQueueSize : env.OTEL_BSP_MAX_QUEUE_SIZE;
-        this._scheduledDelayMillis = typeof (config === null || config === void 0 ? void 0 : config.scheduledDelayMillis) === "number" ? config.scheduledDelayMillis : env.OTEL_BSP_SCHEDULE_DELAY;
-        this._exportTimeoutMillis = typeof (config === null || config === void 0 ? void 0 : config.exportTimeoutMillis) === "number" ? config.exportTimeoutMillis : env.OTEL_BSP_EXPORT_TIMEOUT;
-        this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
-        if (this._maxExportBatchSize > this._maxQueueSize) {
-          diag2.warn("BatchSpanProcessor: maxExportBatchSize must be smaller or equal to maxQueueSize, setting maxExportBatchSize to match maxQueueSize");
-          this._maxExportBatchSize = this._maxQueueSize;
-        }
+  var BatchSpanProcessorBase = class {
+    _exporter;
+    _maxExportBatchSize;
+    _maxQueueSize;
+    _scheduledDelayMillis;
+    _exportTimeoutMillis;
+    _isExporting = false;
+    _finishedSpans = [];
+    _timer;
+    _shutdownOnce;
+    _droppedSpansCount = 0;
+    constructor(_exporter, config) {
+      this._exporter = _exporter;
+      this._maxExportBatchSize = typeof config?.maxExportBatchSize === "number" ? config.maxExportBatchSize : getNumberFromEnv("OTEL_BSP_MAX_EXPORT_BATCH_SIZE") ?? 512;
+      this._maxQueueSize = typeof config?.maxQueueSize === "number" ? config.maxQueueSize : getNumberFromEnv("OTEL_BSP_MAX_QUEUE_SIZE") ?? 2048;
+      this._scheduledDelayMillis = typeof config?.scheduledDelayMillis === "number" ? config.scheduledDelayMillis : getNumberFromEnv("OTEL_BSP_SCHEDULE_DELAY") ?? 5e3;
+      this._exportTimeoutMillis = typeof config?.exportTimeoutMillis === "number" ? config.exportTimeoutMillis : getNumberFromEnv("OTEL_BSP_EXPORT_TIMEOUT") ?? 3e4;
+      this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
+      if (this._maxExportBatchSize > this._maxQueueSize) {
+        diag2.warn("BatchSpanProcessor: maxExportBatchSize must be smaller or equal to maxQueueSize, setting maxExportBatchSize to match maxQueueSize");
+        this._maxExportBatchSize = this._maxQueueSize;
       }
-      BatchSpanProcessorBase2.prototype.forceFlush = function() {
-        if (this._shutdownOnce.isCalled) {
-          return this._shutdownOnce.promise;
-        }
+    }
+    forceFlush() {
+      if (this._shutdownOnce.isCalled) {
+        return this._shutdownOnce.promise;
+      }
+      return this._flushAll();
+    }
+    // does nothing.
+    onStart(_span, _parentContext) {
+    }
+    onEnd(span) {
+      if (this._shutdownOnce.isCalled) {
+        return;
+      }
+      if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
+        return;
+      }
+      this._addToBuffer(span);
+    }
+    shutdown() {
+      return this._shutdownOnce.call();
+    }
+    _shutdown() {
+      return Promise.resolve().then(() => {
+        return this.onShutdown();
+      }).then(() => {
         return this._flushAll();
-      };
-      BatchSpanProcessorBase2.prototype.onStart = function(_span, _parentContext) {
-      };
-      BatchSpanProcessorBase2.prototype.onEnd = function(span) {
-        if (this._shutdownOnce.isCalled) {
-          return;
+      }).then(() => {
+        return this._exporter.shutdown();
+      });
+    }
+    /** Add a span in the buffer. */
+    _addToBuffer(span) {
+      if (this._finishedSpans.length >= this._maxQueueSize) {
+        if (this._droppedSpansCount === 0) {
+          diag2.debug("maxQueueSize reached, dropping spans");
         }
-        if ((span.spanContext().traceFlags & TraceFlags.SAMPLED) === 0) {
-          return;
+        this._droppedSpansCount++;
+        return;
+      }
+      if (this._droppedSpansCount > 0) {
+        diag2.warn(`Dropped ${this._droppedSpansCount} spans because maxQueueSize reached`);
+        this._droppedSpansCount = 0;
+      }
+      this._finishedSpans.push(span);
+      this._maybeStartTimer();
+    }
+    /**
+     * Send all spans to the exporter respecting the batch size limit
+     * This function is used only on forceFlush or shutdown,
+     * for all other cases _flush should be used
+     * */
+    _flushAll() {
+      return new Promise((resolve, reject) => {
+        const promises = [];
+        const count = Math.ceil(this._finishedSpans.length / this._maxExportBatchSize);
+        for (let i2 = 0, j2 = count; i2 < j2; i2++) {
+          promises.push(this._flushOneBatch());
         }
-        this._addToBuffer(span);
-      };
-      BatchSpanProcessorBase2.prototype.shutdown = function() {
-        return this._shutdownOnce.call();
-      };
-      BatchSpanProcessorBase2.prototype._shutdown = function() {
-        var _this = this;
-        return Promise.resolve().then(function() {
-          return _this.onShutdown();
-        }).then(function() {
-          return _this._flushAll();
-        }).then(function() {
-          return _this._exporter.shutdown();
-        });
-      };
-      BatchSpanProcessorBase2.prototype._addToBuffer = function(span) {
-        if (this._finishedSpans.length >= this._maxQueueSize) {
-          if (this._droppedSpansCount === 0) {
-            diag2.debug("maxQueueSize reached, dropping spans");
+        Promise.all(promises).then(() => {
+          resolve();
+        }).catch(reject);
+      });
+    }
+    _flushOneBatch() {
+      this._clearTimer();
+      if (this._finishedSpans.length === 0) {
+        return Promise.resolve();
+      }
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => {
+          reject(new Error("Timeout"));
+        }, this._exportTimeoutMillis);
+        context.with(suppressTracing(context.active()), () => {
+          let spans;
+          if (this._finishedSpans.length <= this._maxExportBatchSize) {
+            spans = this._finishedSpans;
+            this._finishedSpans = [];
+          } else {
+            spans = this._finishedSpans.splice(0, this._maxExportBatchSize);
           }
-          this._droppedSpansCount++;
-          return;
-        }
-        if (this._droppedSpansCount > 0) {
-          diag2.warn("Dropped " + this._droppedSpansCount + " spans because maxQueueSize reached");
-          this._droppedSpansCount = 0;
-        }
-        this._finishedSpans.push(span);
-        this._maybeStartTimer();
-      };
-      BatchSpanProcessorBase2.prototype._flushAll = function() {
-        var _this = this;
-        return new Promise(function(resolve, reject) {
-          var promises = [];
-          var count = Math.ceil(_this._finishedSpans.length / _this._maxExportBatchSize);
-          for (var i2 = 0, j2 = count; i2 < j2; i2++) {
-            promises.push(_this._flushOneBatch());
-          }
-          Promise.all(promises).then(function() {
-            resolve();
-          }).catch(reject);
-        });
-      };
-      BatchSpanProcessorBase2.prototype._flushOneBatch = function() {
-        var _this = this;
-        this._clearTimer();
-        if (this._finishedSpans.length === 0) {
-          return Promise.resolve();
-        }
-        return new Promise(function(resolve, reject) {
-          var timer = setTimeout(function() {
-            reject(new Error("Timeout"));
-          }, _this._exportTimeoutMillis);
-          context.with(suppressTracing(context.active()), function() {
-            var spans;
-            if (_this._finishedSpans.length <= _this._maxExportBatchSize) {
-              spans = _this._finishedSpans;
-              _this._finishedSpans = [];
+          const doExport = () => this._exporter.export(spans, (result) => {
+            clearTimeout(timer);
+            if (result.code === ExportResultCode.SUCCESS) {
+              resolve();
             } else {
-              spans = _this._finishedSpans.splice(0, _this._maxExportBatchSize);
-            }
-            var doExport = function() {
-              return _this._exporter.export(spans, function(result) {
-                var _a3;
-                clearTimeout(timer);
-                if (result.code === ExportResultCode.SUCCESS) {
-                  resolve();
-                } else {
-                  reject((_a3 = result.error) !== null && _a3 !== void 0 ? _a3 : new Error("BatchSpanProcessor: span export failed"));
-                }
-              });
-            };
-            var pendingResources = null;
-            for (var i2 = 0, len = spans.length; i2 < len; i2++) {
-              var span = spans[i2];
-              if (span.resource.asyncAttributesPending && span.resource.waitForAsyncAttributes) {
-                pendingResources !== null && pendingResources !== void 0 ? pendingResources : pendingResources = [];
-                pendingResources.push(span.resource.waitForAsyncAttributes());
-              }
-            }
-            if (pendingResources === null) {
-              doExport();
-            } else {
-              Promise.all(pendingResources).then(doExport, function(err) {
-                globalErrorHandler(err);
-                reject(err);
-              });
+              reject(result.error ?? new Error("BatchSpanProcessor: span export failed"));
             }
           });
+          let pendingResources = null;
+          for (let i2 = 0, len = spans.length; i2 < len; i2++) {
+            const span = spans[i2];
+            if (span.resource.asyncAttributesPending && span.resource.waitForAsyncAttributes) {
+              pendingResources ??= [];
+              pendingResources.push(span.resource.waitForAsyncAttributes());
+            }
+          }
+          if (pendingResources === null) {
+            doExport();
+          } else {
+            Promise.all(pendingResources).then(doExport, (err) => {
+              globalErrorHandler(err);
+              reject(err);
+            });
+          }
+        });
+      });
+    }
+    _maybeStartTimer() {
+      if (this._isExporting)
+        return;
+      const flush = () => {
+        this._isExporting = true;
+        this._flushOneBatch().finally(() => {
+          this._isExporting = false;
+          if (this._finishedSpans.length > 0) {
+            this._clearTimer();
+            this._maybeStartTimer();
+          }
+        }).catch((e2) => {
+          this._isExporting = false;
+          globalErrorHandler(e2);
         });
       };
-      BatchSpanProcessorBase2.prototype._maybeStartTimer = function() {
-        var _this = this;
-        if (this._isExporting)
-          return;
-        var flush = function() {
-          _this._isExporting = true;
-          _this._flushOneBatch().finally(function() {
-            _this._isExporting = false;
-            if (_this._finishedSpans.length > 0) {
-              _this._clearTimer();
-              _this._maybeStartTimer();
-            }
-          }).catch(function(e2) {
-            _this._isExporting = false;
-            globalErrorHandler(e2);
-          });
-        };
-        if (this._finishedSpans.length >= this._maxExportBatchSize) {
-          return flush();
-        }
-        if (this._timer !== void 0)
-          return;
-        this._timer = setTimeout(function() {
-          return flush();
-        }, this._scheduledDelayMillis);
-        unrefTimer(this._timer);
-      };
-      BatchSpanProcessorBase2.prototype._clearTimer = function() {
-        if (this._timer !== void 0) {
-          clearTimeout(this._timer);
-          this._timer = void 0;
-        }
-      };
-      return BatchSpanProcessorBase2;
-    }()
-  );
+      if (this._finishedSpans.length >= this._maxExportBatchSize) {
+        return flush();
+      }
+      if (this._timer !== void 0)
+        return;
+      this._timer = setTimeout(() => flush(), this._scheduledDelayMillis);
+      unrefTimer(this._timer);
+    }
+    _clearTimer() {
+      if (this._timer !== void 0) {
+        clearTimeout(this._timer);
+        this._timer = void 0;
+      }
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/browser/export/BatchSpanProcessor.js
-  var __extends3 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var BatchSpanProcessor = (
-    /** @class */
-    function(_super) {
-      __extends3(BatchSpanProcessor2, _super);
-      function BatchSpanProcessor2(_exporter, config) {
-        var _this = _super.call(this, _exporter, config) || this;
-        _this.onInit(config);
-        return _this;
-      }
-      BatchSpanProcessor2.prototype.onInit = function(config) {
-        var _this = this;
-        if ((config === null || config === void 0 ? void 0 : config.disableAutoFlushOnDocumentHide) !== true && typeof document !== "undefined") {
-          this._visibilityChangeListener = function() {
-            if (document.visibilityState === "hidden") {
-              _this.forceFlush().catch(function(error) {
-                globalErrorHandler(error);
-              });
-            }
-          };
-          this._pageHideListener = function() {
-            _this.forceFlush().catch(function(error) {
+  var BatchSpanProcessor = class extends BatchSpanProcessorBase {
+    _visibilityChangeListener;
+    _pageHideListener;
+    constructor(_exporter, config) {
+      super(_exporter, config);
+      this.onInit(config);
+    }
+    onInit(config) {
+      if (config?.disableAutoFlushOnDocumentHide !== true && typeof document !== "undefined") {
+        this._visibilityChangeListener = () => {
+          if (document.visibilityState === "hidden") {
+            this.forceFlush().catch((error) => {
               globalErrorHandler(error);
             });
-          };
-          document.addEventListener("visibilitychange", this._visibilityChangeListener);
-          document.addEventListener("pagehide", this._pageHideListener);
-        }
-      };
-      BatchSpanProcessor2.prototype.onShutdown = function() {
-        if (typeof document !== "undefined") {
-          if (this._visibilityChangeListener) {
-            document.removeEventListener("visibilitychange", this._visibilityChangeListener);
           }
-          if (this._pageHideListener) {
-            document.removeEventListener("pagehide", this._pageHideListener);
-          }
+        };
+        this._pageHideListener = () => {
+          this.forceFlush().catch((error) => {
+            globalErrorHandler(error);
+          });
+        };
+        document.addEventListener("visibilitychange", this._visibilityChangeListener);
+        document.addEventListener("pagehide", this._pageHideListener);
+      }
+    }
+    onShutdown() {
+      if (typeof document !== "undefined") {
+        if (this._visibilityChangeListener) {
+          document.removeEventListener("visibilitychange", this._visibilityChangeListener);
         }
-      };
-      return BatchSpanProcessor2;
-    }(BatchSpanProcessorBase)
-  );
+        if (this._pageHideListener) {
+          document.removeEventListener("pagehide", this._pageHideListener);
+        }
+      }
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/platform/browser/RandomIdGenerator.js
   var SPAN_ID_BYTES = 8;
   var TRACE_ID_BYTES = 16;
-  var RandomIdGenerator2 = (
-    /** @class */
-    /* @__PURE__ */ function() {
-      function RandomIdGenerator3() {
-        this.generateTraceId = getIdGenerator(TRACE_ID_BYTES);
-        this.generateSpanId = getIdGenerator(SPAN_ID_BYTES);
-      }
-      return RandomIdGenerator3;
-    }()
-  );
+  var RandomIdGenerator = class {
+    /**
+     * Returns a random 16-byte trace ID formatted/encoded as a 32 lowercase hex
+     * characters corresponding to 128 bits.
+     */
+    generateTraceId = getIdGenerator(TRACE_ID_BYTES);
+    /**
+     * Returns a random 8-byte span ID formatted/encoded as a 16 lowercase hex
+     * characters corresponding to 64 bits.
+     */
+    generateSpanId = getIdGenerator(SPAN_ID_BYTES);
+  };
   var SHARED_CHAR_CODES_ARRAY = Array(32);
   function getIdGenerator(bytes) {
     return function generateId() {
-      for (var i2 = 0; i2 < bytes * 2; i2++) {
+      for (let i2 = 0; i2 < bytes * 2; i2++) {
         SHARED_CHAR_CODES_ARRAY[i2] = Math.floor(Math.random() * 16) + 48;
         if (SHARED_CHAR_CODES_ARRAY[i2] >= 58) {
           SHARED_CHAR_CODES_ARRAY[i2] += 39;
@@ -6040,255 +5432,162 @@
   }
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/Tracer.js
-  var Tracer = (
-    /** @class */
-    function() {
-      function Tracer2(instrumentationLibrary, config, _tracerProvider) {
-        this._tracerProvider = _tracerProvider;
-        var localConfig = mergeConfig(config);
-        this._sampler = localConfig.sampler;
-        this._generalLimits = localConfig.generalLimits;
-        this._spanLimits = localConfig.spanLimits;
-        this._idGenerator = config.idGenerator || new RandomIdGenerator2();
-        this.resource = _tracerProvider.resource;
-        this.instrumentationLibrary = instrumentationLibrary;
+  var Tracer = class {
+    _sampler;
+    _generalLimits;
+    _spanLimits;
+    _idGenerator;
+    instrumentationScope;
+    _resource;
+    _spanProcessor;
+    /**
+     * Constructs a new Tracer instance.
+     */
+    constructor(instrumentationScope, config, resource, spanProcessor) {
+      const localConfig = mergeConfig(config);
+      this._sampler = localConfig.sampler;
+      this._generalLimits = localConfig.generalLimits;
+      this._spanLimits = localConfig.spanLimits;
+      this._idGenerator = config.idGenerator || new RandomIdGenerator();
+      this._resource = resource;
+      this._spanProcessor = spanProcessor;
+      this.instrumentationScope = instrumentationScope;
+    }
+    /**
+     * Starts a new Span or returns the default NoopSpan based on the sampling
+     * decision.
+     */
+    startSpan(name, options = {}, context2 = context.active()) {
+      if (options.root) {
+        context2 = trace.deleteSpan(context2);
       }
-      Tracer2.prototype.startSpan = function(name, options, context2) {
-        var _a3, _b, _c;
-        if (options === void 0) {
-          options = {};
-        }
-        if (context2 === void 0) {
-          context2 = context.active();
-        }
-        if (options.root) {
-          context2 = trace.deleteSpan(context2);
-        }
-        var parentSpan = trace.getSpan(context2);
-        if (isTracingSuppressed(context2)) {
-          diag2.debug("Instrumentation suppressed, returning Noop Span");
-          var nonRecordingSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
-          return nonRecordingSpan;
-        }
-        var parentSpanContext = parentSpan === null || parentSpan === void 0 ? void 0 : parentSpan.spanContext();
-        var spanId = this._idGenerator.generateSpanId();
-        var traceId;
-        var traceState;
-        var parentSpanId;
-        if (!parentSpanContext || !trace.isSpanContextValid(parentSpanContext)) {
-          traceId = this._idGenerator.generateTraceId();
-        } else {
-          traceId = parentSpanContext.traceId;
-          traceState = parentSpanContext.traceState;
-          parentSpanId = parentSpanContext.spanId;
-        }
-        var spanKind = (_a3 = options.kind) !== null && _a3 !== void 0 ? _a3 : SpanKind.INTERNAL;
-        var links = ((_b = options.links) !== null && _b !== void 0 ? _b : []).map(function(link) {
-          return {
-            context: link.context,
-            attributes: sanitizeAttributes(link.attributes)
-          };
-        });
-        var attributes = sanitizeAttributes(options.attributes);
-        var samplingResult = this._sampler.shouldSample(context2, traceId, name, spanKind, attributes, links);
-        traceState = (_c = samplingResult.traceState) !== null && _c !== void 0 ? _c : traceState;
-        var traceFlags = samplingResult.decision === SamplingDecision.RECORD_AND_SAMPLED ? TraceFlags.SAMPLED : TraceFlags.NONE;
-        var spanContext = { traceId, spanId, traceFlags, traceState };
-        if (samplingResult.decision === SamplingDecision.NOT_RECORD) {
-          diag2.debug("Recording is off, propagating context in a non-recording span");
-          var nonRecordingSpan = trace.wrapSpanContext(spanContext);
-          return nonRecordingSpan;
-        }
-        var initAttributes = sanitizeAttributes(Object.assign(attributes, samplingResult.attributes));
-        var span = new Span(this, context2, name, spanContext, spanKind, parentSpanId, links, options.startTime, void 0, initAttributes);
-        return span;
-      };
-      Tracer2.prototype.startActiveSpan = function(name, arg2, arg3, arg4) {
-        var opts;
-        var ctx;
-        var fn;
-        if (arguments.length < 2) {
-          return;
-        } else if (arguments.length === 2) {
-          fn = arg2;
-        } else if (arguments.length === 3) {
-          opts = arg2;
-          fn = arg3;
-        } else {
-          opts = arg2;
-          ctx = arg3;
-          fn = arg4;
-        }
-        var parentContext = ctx !== null && ctx !== void 0 ? ctx : context.active();
-        var span = this.startSpan(name, opts, parentContext);
-        var contextWithSpanSet = trace.setSpan(parentContext, span);
-        return context.with(contextWithSpanSet, fn, void 0, span);
-      };
-      Tracer2.prototype.getGeneralLimits = function() {
-        return this._generalLimits;
-      };
-      Tracer2.prototype.getSpanLimits = function() {
-        return this._spanLimits;
-      };
-      Tracer2.prototype.getActiveSpanProcessor = function() {
-        return this._tracerProvider.getActiveSpanProcessor();
-      };
-      return Tracer2;
-    }()
-  );
+      const parentSpan = trace.getSpan(context2);
+      if (isTracingSuppressed(context2)) {
+        diag2.debug("Instrumentation suppressed, returning Noop Span");
+        const nonRecordingSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
+        return nonRecordingSpan;
+      }
+      const parentSpanContext = parentSpan?.spanContext();
+      const spanId = this._idGenerator.generateSpanId();
+      let validParentSpanContext;
+      let traceId;
+      let traceState;
+      if (!parentSpanContext || !trace.isSpanContextValid(parentSpanContext)) {
+        traceId = this._idGenerator.generateTraceId();
+      } else {
+        traceId = parentSpanContext.traceId;
+        traceState = parentSpanContext.traceState;
+        validParentSpanContext = parentSpanContext;
+      }
+      const spanKind = options.kind ?? SpanKind.INTERNAL;
+      const links = (options.links ?? []).map((link) => {
+        return {
+          context: link.context,
+          attributes: sanitizeAttributes(link.attributes)
+        };
+      });
+      const attributes = sanitizeAttributes(options.attributes);
+      const samplingResult = this._sampler.shouldSample(context2, traceId, name, spanKind, attributes, links);
+      traceState = samplingResult.traceState ?? traceState;
+      const traceFlags = samplingResult.decision === SamplingDecision.RECORD_AND_SAMPLED ? TraceFlags.SAMPLED : TraceFlags.NONE;
+      const spanContext = { traceId, spanId, traceFlags, traceState };
+      if (samplingResult.decision === SamplingDecision.NOT_RECORD) {
+        diag2.debug("Recording is off, propagating context in a non-recording span");
+        const nonRecordingSpan = trace.wrapSpanContext(spanContext);
+        return nonRecordingSpan;
+      }
+      const initAttributes = sanitizeAttributes(Object.assign(attributes, samplingResult.attributes));
+      const span = new SpanImpl({
+        resource: this._resource,
+        scope: this.instrumentationScope,
+        context: context2,
+        spanContext,
+        name,
+        kind: spanKind,
+        links,
+        parentSpanContext: validParentSpanContext,
+        attributes: initAttributes,
+        startTime: options.startTime,
+        spanProcessor: this._spanProcessor,
+        spanLimits: this._spanLimits
+      });
+      return span;
+    }
+    startActiveSpan(name, arg2, arg3, arg4) {
+      let opts;
+      let ctx;
+      let fn;
+      if (arguments.length < 2) {
+        return;
+      } else if (arguments.length === 2) {
+        fn = arg2;
+      } else if (arguments.length === 3) {
+        opts = arg2;
+        fn = arg3;
+      } else {
+        opts = arg2;
+        ctx = arg3;
+        fn = arg4;
+      }
+      const parentContext = ctx ?? context.active();
+      const span = this.startSpan(name, opts, parentContext);
+      const contextWithSpanSet = trace.setSpan(parentContext, span);
+      return context.with(contextWithSpanSet, fn, void 0, span);
+    }
+    /** Returns the active {@link GeneralLimits}. */
+    getGeneralLimits() {
+      return this._generalLimits;
+    }
+    /** Returns the active {@link SpanLimits}. */
+    getSpanLimits() {
+      return this._spanLimits;
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/MultiSpanProcessor.js
-  var __values6 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
+  var MultiSpanProcessor = class {
+    _spanProcessors;
+    constructor(_spanProcessors) {
+      this._spanProcessors = _spanProcessors;
+    }
+    forceFlush() {
+      const promises = [];
+      for (const spanProcessor of this._spanProcessors) {
+        promises.push(spanProcessor.forceFlush());
       }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
+      return new Promise((resolve) => {
+        Promise.all(promises).then(() => {
+          resolve();
+        }).catch((error) => {
+          globalErrorHandler(error || new Error("MultiSpanProcessor: forceFlush failed"));
+          resolve();
+        });
+      });
+    }
+    onStart(span, context2) {
+      for (const spanProcessor of this._spanProcessors) {
+        spanProcessor.onStart(span, context2);
+      }
+    }
+    onEnd(span) {
+      for (const spanProcessor of this._spanProcessors) {
+        spanProcessor.onEnd(span);
+      }
+    }
+    shutdown() {
+      const promises = [];
+      for (const spanProcessor of this._spanProcessors) {
+        promises.push(spanProcessor.shutdown());
+      }
+      return new Promise((resolve, reject) => {
+        Promise.all(promises).then(() => {
+          resolve();
+        }, reject);
+      });
+    }
   };
-  var MultiSpanProcessor = (
-    /** @class */
-    function() {
-      function MultiSpanProcessor2(_spanProcessors) {
-        this._spanProcessors = _spanProcessors;
-      }
-      MultiSpanProcessor2.prototype.forceFlush = function() {
-        var e_1, _a3;
-        var promises = [];
-        try {
-          for (var _b = __values6(this._spanProcessors), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var spanProcessor = _c.value;
-            promises.push(spanProcessor.forceFlush());
-          }
-        } catch (e_1_1) {
-          e_1 = { error: e_1_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_1) throw e_1.error;
-          }
-        }
-        return new Promise(function(resolve) {
-          Promise.all(promises).then(function() {
-            resolve();
-          }).catch(function(error) {
-            globalErrorHandler(error || new Error("MultiSpanProcessor: forceFlush failed"));
-            resolve();
-          });
-        });
-      };
-      MultiSpanProcessor2.prototype.onStart = function(span, context2) {
-        var e_2, _a3;
-        try {
-          for (var _b = __values6(this._spanProcessors), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var spanProcessor = _c.value;
-            spanProcessor.onStart(span, context2);
-          }
-        } catch (e_2_1) {
-          e_2 = { error: e_2_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_2) throw e_2.error;
-          }
-        }
-      };
-      MultiSpanProcessor2.prototype.onEnd = function(span) {
-        var e_3, _a3;
-        try {
-          for (var _b = __values6(this._spanProcessors), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var spanProcessor = _c.value;
-            spanProcessor.onEnd(span);
-          }
-        } catch (e_3_1) {
-          e_3 = { error: e_3_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_3) throw e_3.error;
-          }
-        }
-      };
-      MultiSpanProcessor2.prototype.shutdown = function() {
-        var e_4, _a3;
-        var promises = [];
-        try {
-          for (var _b = __values6(this._spanProcessors), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var spanProcessor = _c.value;
-            promises.push(spanProcessor.shutdown());
-          }
-        } catch (e_4_1) {
-          e_4 = { error: e_4_1 };
-        } finally {
-          try {
-            if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-          } finally {
-            if (e_4) throw e_4.error;
-          }
-        }
-        return new Promise(function(resolve, reject) {
-          Promise.all(promises).then(function() {
-            resolve();
-          }, reject);
-        });
-      };
-      return MultiSpanProcessor2;
-    }()
-  );
-
-  // node_modules/@opentelemetry/sdk-trace-base/build/esm/export/NoopSpanProcessor.js
-  var NoopSpanProcessor = (
-    /** @class */
-    function() {
-      function NoopSpanProcessor2() {
-      }
-      NoopSpanProcessor2.prototype.onStart = function(_span, _context) {
-      };
-      NoopSpanProcessor2.prototype.onEnd = function(_span) {
-      };
-      NoopSpanProcessor2.prototype.shutdown = function() {
-        return Promise.resolve();
-      };
-      NoopSpanProcessor2.prototype.forceFlush = function() {
-        return Promise.resolve();
-      };
-      return NoopSpanProcessor2;
-    }()
-  );
 
   // node_modules/@opentelemetry/sdk-trace-base/build/esm/BasicTracerProvider.js
-  var __read11 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
-  var __spreadArray7 = function(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  };
   var ForceFlushState;
   (function(ForceFlushState2) {
     ForceFlushState2[ForceFlushState2["resolved"] = 0] = "resolved";
@@ -6296,319 +5595,206 @@
     ForceFlushState2[ForceFlushState2["error"] = 2] = "error";
     ForceFlushState2[ForceFlushState2["unresolved"] = 3] = "unresolved";
   })(ForceFlushState || (ForceFlushState = {}));
-  var BasicTracerProvider = (
-    /** @class */
-    function() {
-      function BasicTracerProvider2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        var _a3, _b;
-        this._registeredSpanProcessors = [];
-        this._tracers = /* @__PURE__ */ new Map();
-        var mergedConfig = merge({}, loadDefaultConfig(), reconfigureLimits(config));
-        this.resource = (_a3 = mergedConfig.resource) !== null && _a3 !== void 0 ? _a3 : Resource.empty();
-        if (mergedConfig.mergeResourceWithDefaults) {
-          this.resource = Resource.default().merge(this.resource);
-        }
-        this._config = Object.assign({}, mergedConfig, {
-          resource: this.resource
-        });
-        if ((_b = config.spanProcessors) === null || _b === void 0 ? void 0 : _b.length) {
-          this._registeredSpanProcessors = __spreadArray7([], __read11(config.spanProcessors), false);
-          this.activeSpanProcessor = new MultiSpanProcessor(this._registeredSpanProcessors);
-        } else {
-          var defaultExporter = this._buildExporterFromEnv();
-          if (defaultExporter !== void 0) {
-            var batchProcessor = new BatchSpanProcessor(defaultExporter);
-            this.activeSpanProcessor = batchProcessor;
-          } else {
-            this.activeSpanProcessor = new NoopSpanProcessor();
-          }
-        }
+  var BasicTracerProvider = class {
+    _config;
+    _tracers = /* @__PURE__ */ new Map();
+    _resource;
+    _activeSpanProcessor;
+    constructor(config = {}) {
+      const mergedConfig = merge({}, loadDefaultConfig(), reconfigureLimits(config));
+      this._resource = mergedConfig.resource ?? defaultResource();
+      this._config = Object.assign({}, mergedConfig, {
+        resource: this._resource
+      });
+      const spanProcessors = [];
+      if (config.spanProcessors?.length) {
+        spanProcessors.push(...config.spanProcessors);
       }
-      BasicTracerProvider2.prototype.getTracer = function(name, version, options) {
-        var key = name + "@" + (version || "") + ":" + ((options === null || options === void 0 ? void 0 : options.schemaUrl) || "");
-        if (!this._tracers.has(key)) {
-          this._tracers.set(key, new Tracer({ name, version, schemaUrl: options === null || options === void 0 ? void 0 : options.schemaUrl }, this._config, this));
-        }
-        return this._tracers.get(key);
-      };
-      BasicTracerProvider2.prototype.addSpanProcessor = function(spanProcessor) {
-        if (this._registeredSpanProcessors.length === 0) {
-          this.activeSpanProcessor.shutdown().catch(function(err) {
-            return diag2.error("Error while trying to shutdown current span processor", err);
-          });
-        }
-        this._registeredSpanProcessors.push(spanProcessor);
-        this.activeSpanProcessor = new MultiSpanProcessor(this._registeredSpanProcessors);
-      };
-      BasicTracerProvider2.prototype.getActiveSpanProcessor = function() {
-        return this.activeSpanProcessor;
-      };
-      BasicTracerProvider2.prototype.register = function(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        trace.setGlobalTracerProvider(this);
-        if (config.propagator === void 0) {
-          config.propagator = this._buildPropagatorFromEnv();
-        }
-        if (config.contextManager) {
-          context.setGlobalContextManager(config.contextManager);
-        }
-        if (config.propagator) {
-          propagation.setGlobalPropagator(config.propagator);
-        }
-      };
-      BasicTracerProvider2.prototype.forceFlush = function() {
-        var timeout = this._config.forceFlushTimeoutMillis;
-        var promises = this._registeredSpanProcessors.map(function(spanProcessor) {
-          return new Promise(function(resolve) {
-            var state;
-            var timeoutInterval = setTimeout(function() {
-              resolve(new Error("Span processor did not completed within timeout period of " + timeout + " ms"));
-              state = ForceFlushState.timeout;
-            }, timeout);
-            spanProcessor.forceFlush().then(function() {
-              clearTimeout(timeoutInterval);
-              if (state !== ForceFlushState.timeout) {
-                state = ForceFlushState.resolved;
-                resolve(state);
-              }
-            }).catch(function(error) {
-              clearTimeout(timeoutInterval);
-              state = ForceFlushState.error;
-              resolve(error);
-            });
-          });
-        });
-        return new Promise(function(resolve, reject) {
-          Promise.all(promises).then(function(results) {
-            var errors = results.filter(function(result) {
-              return result !== ForceFlushState.resolved;
-            });
-            if (errors.length > 0) {
-              reject(errors);
-            } else {
-              resolve();
+      this._activeSpanProcessor = new MultiSpanProcessor(spanProcessors);
+    }
+    getTracer(name, version, options) {
+      const key = `${name}@${version || ""}:${options?.schemaUrl || ""}`;
+      if (!this._tracers.has(key)) {
+        this._tracers.set(key, new Tracer({ name, version, schemaUrl: options?.schemaUrl }, this._config, this._resource, this._activeSpanProcessor));
+      }
+      return this._tracers.get(key);
+    }
+    forceFlush() {
+      const timeout = this._config.forceFlushTimeoutMillis;
+      const promises = this._activeSpanProcessor["_spanProcessors"].map((spanProcessor) => {
+        return new Promise((resolve) => {
+          let state;
+          const timeoutInterval = setTimeout(() => {
+            resolve(new Error(`Span processor did not completed within timeout period of ${timeout} ms`));
+            state = ForceFlushState.timeout;
+          }, timeout);
+          spanProcessor.forceFlush().then(() => {
+            clearTimeout(timeoutInterval);
+            if (state !== ForceFlushState.timeout) {
+              state = ForceFlushState.resolved;
+              resolve(state);
             }
-          }).catch(function(error) {
-            return reject([error]);
+          }).catch((error) => {
+            clearTimeout(timeoutInterval);
+            state = ForceFlushState.error;
+            resolve(error);
           });
         });
-      };
-      BasicTracerProvider2.prototype.shutdown = function() {
-        return this.activeSpanProcessor.shutdown();
-      };
-      BasicTracerProvider2.prototype._getPropagator = function(name) {
-        var _a3;
-        return (_a3 = this.constructor._registeredPropagators.get(name)) === null || _a3 === void 0 ? void 0 : _a3();
-      };
-      BasicTracerProvider2.prototype._getSpanExporter = function(name) {
-        var _a3;
-        return (_a3 = this.constructor._registeredExporters.get(name)) === null || _a3 === void 0 ? void 0 : _a3();
-      };
-      BasicTracerProvider2.prototype._buildPropagatorFromEnv = function() {
-        var _this = this;
-        var uniquePropagatorNames = Array.from(new Set(getEnv().OTEL_PROPAGATORS));
-        var propagators = uniquePropagatorNames.map(function(name) {
-          var propagator = _this._getPropagator(name);
-          if (!propagator) {
-            diag2.warn('Propagator "' + name + '" requested through environment variable is unavailable.');
+      });
+      return new Promise((resolve, reject) => {
+        Promise.all(promises).then((results) => {
+          const errors = results.filter((result) => result !== ForceFlushState.resolved);
+          if (errors.length > 0) {
+            reject(errors);
+          } else {
+            resolve();
           }
-          return propagator;
-        });
-        var validPropagators = propagators.reduce(function(list, item) {
-          if (item) {
-            list.push(item);
-          }
-          return list;
-        }, []);
-        if (validPropagators.length === 0) {
-          return;
-        } else if (uniquePropagatorNames.length === 1) {
-          return validPropagators[0];
-        } else {
-          return new CompositePropagator({
-            propagators: validPropagators
-          });
-        }
-      };
-      BasicTracerProvider2.prototype._buildExporterFromEnv = function() {
-        var exporterName = getEnv().OTEL_TRACES_EXPORTER;
-        if (exporterName === "none" || exporterName === "")
-          return;
-        var exporter = this._getSpanExporter(exporterName);
-        if (!exporter) {
-          diag2.error('Exporter "' + exporterName + '" requested through environment variable is unavailable.');
-        }
-        return exporter;
-      };
-      BasicTracerProvider2._registeredPropagators = /* @__PURE__ */ new Map([
-        ["tracecontext", function() {
-          return new W3CTraceContextPropagator();
-        }],
-        ["baggage", function() {
-          return new W3CBaggagePropagator();
-        }]
-      ]);
-      BasicTracerProvider2._registeredExporters = /* @__PURE__ */ new Map();
-      return BasicTracerProvider2;
-    }()
-  );
+        }).catch((error) => reject([error]));
+      });
+    }
+    shutdown() {
+      return this._activeSpanProcessor.shutdown();
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-web/build/esm/StackContextManager.js
-  var __read12 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
+  var StackContextManager = class {
+    /**
+     * whether the context manager is enabled or not
+     */
+    _enabled = false;
+    /**
+     * Keeps the reference to current context
+     */
+    _currentContext = ROOT_CONTEXT;
+    /**
+     *
+     * @param context
+     * @param target Function to be executed within the context
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+    _bindFunction(context2 = ROOT_CONTEXT, target) {
+      const manager = this;
+      const contextWrapper = function(...args) {
+        return manager.with(context2, () => target.apply(this, args));
+      };
+      Object.defineProperty(contextWrapper, "length", {
+        enumerable: false,
+        configurable: true,
+        writable: false,
+        value: target.length
+      });
+      return contextWrapper;
+    }
+    /**
+     * Returns the active context
+     */
+    active() {
+      return this._currentContext;
+    }
+    /**
+     * Binds a the certain context or the active one to the target function and then returns the target
+     * @param context A context (span) to be bind to target
+     * @param target a function or event emitter. When target or one of its callbacks is called,
+     *  the provided context will be used as the active context for the duration of the call.
+     */
+    bind(context2, target) {
+      if (context2 === void 0) {
+        context2 = this.active();
+      }
+      if (typeof target === "function") {
+        return this._bindFunction(context2, target);
+      }
+      return target;
+    }
+    /**
+     * Disable the context manager (clears the current context)
+     */
+    disable() {
+      this._currentContext = ROOT_CONTEXT;
+      this._enabled = false;
+      return this;
+    }
+    /**
+     * Enables the context manager and creates a default(root) context
+     */
+    enable() {
+      if (this._enabled) {
+        return this;
+      }
+      this._enabled = true;
+      this._currentContext = ROOT_CONTEXT;
+      return this;
+    }
+    /**
+     * Calls the callback function [fn] with the provided [context]. If [context] is undefined then it will use the window.
+     * The context will be set as active
+     * @param context
+     * @param fn Callback function
+     * @param thisArg optional receiver to be used for calling fn
+     * @param args optional arguments forwarded to fn
+     */
+    with(context2, fn, thisArg, ...args) {
+      const previousContext = this._currentContext;
+      this._currentContext = context2 || ROOT_CONTEXT;
       try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
+        return fn.call(thisArg, ...args);
       } finally {
-        if (e2) throw e2.error;
+        this._currentContext = previousContext;
       }
     }
-    return ar;
   };
-  var __spreadArray8 = function(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  };
-  var StackContextManager = (
-    /** @class */
-    function() {
-      function StackContextManager2() {
-        this._enabled = false;
-        this._currentContext = ROOT_CONTEXT;
-      }
-      StackContextManager2.prototype._bindFunction = function(context2, target) {
-        if (context2 === void 0) {
-          context2 = ROOT_CONTEXT;
-        }
-        var manager = this;
-        var contextWrapper = function() {
-          var _this = this;
-          var args = [];
-          for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-          }
-          return manager.with(context2, function() {
-            return target.apply(_this, args);
-          });
-        };
-        Object.defineProperty(contextWrapper, "length", {
-          enumerable: false,
-          configurable: true,
-          writable: false,
-          value: target.length
-        });
-        return contextWrapper;
-      };
-      StackContextManager2.prototype.active = function() {
-        return this._currentContext;
-      };
-      StackContextManager2.prototype.bind = function(context2, target) {
-        if (context2 === void 0) {
-          context2 = this.active();
-        }
-        if (typeof target === "function") {
-          return this._bindFunction(context2, target);
-        }
-        return target;
-      };
-      StackContextManager2.prototype.disable = function() {
-        this._currentContext = ROOT_CONTEXT;
-        this._enabled = false;
-        return this;
-      };
-      StackContextManager2.prototype.enable = function() {
-        if (this._enabled) {
-          return this;
-        }
-        this._enabled = true;
-        this._currentContext = ROOT_CONTEXT;
-        return this;
-      };
-      StackContextManager2.prototype.with = function(context2, fn, thisArg) {
-        var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
-          args[_i - 3] = arguments[_i];
-        }
-        var previousContext = this._currentContext;
-        this._currentContext = context2 || ROOT_CONTEXT;
-        try {
-          return fn.call.apply(fn, __spreadArray8([thisArg], __read12(args), false));
-        } finally {
-          this._currentContext = previousContext;
-        }
-      };
-      return StackContextManager2;
-    }()
-  );
 
   // node_modules/@opentelemetry/sdk-trace-web/build/esm/WebTracerProvider.js
-  var __extends4 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var WebTracerProvider = (
-    /** @class */
-    function(_super) {
-      __extends4(WebTracerProvider2, _super);
-      function WebTracerProvider2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        var _this = _super.call(this, config) || this;
-        if (config.contextManager) {
-          throw "contextManager should be defined in register method not in constructor";
-        }
-        if (config.propagator) {
-          throw "propagator should be defined in register method not in constructor";
-        }
-        return _this;
-      }
-      WebTracerProvider2.prototype.register = function(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        if (config.contextManager === void 0) {
-          config.contextManager = new StackContextManager();
-        }
-        if (config.contextManager) {
-          config.contextManager.enable();
-        }
-        _super.prototype.register.call(this, config);
-      };
-      return WebTracerProvider2;
-    }(BasicTracerProvider)
-  );
+  function setupContextManager(contextManager) {
+    if (contextManager === null) {
+      return;
+    }
+    if (contextManager === void 0) {
+      const defaultContextManager = new StackContextManager();
+      defaultContextManager.enable();
+      context.setGlobalContextManager(defaultContextManager);
+      return;
+    }
+    contextManager.enable();
+    context.setGlobalContextManager(contextManager);
+  }
+  function setupPropagator(propagator) {
+    if (propagator === null) {
+      return;
+    }
+    if (propagator === void 0) {
+      propagation.setGlobalPropagator(new CompositePropagator({
+        propagators: [
+          new W3CTraceContextPropagator(),
+          new W3CBaggagePropagator()
+        ]
+      }));
+      return;
+    }
+    propagation.setGlobalPropagator(propagator);
+  }
+  var WebTracerProvider = class extends BasicTracerProvider {
+    /**
+     * Constructs a new Tracer instance.
+     * @param config Web Tracer config
+     */
+    constructor(config = {}) {
+      super(config);
+    }
+    /**
+     * Register this TracerProvider for use with the OpenTelemetry API.
+     * Undefined values may be replaced with defaults, and
+     * null values will be skipped.
+     *
+     * @param config Configuration object for SDK registration
+     */
+    register(config = {}) {
+      trace.setGlobalTracerProvider(this);
+      setupPropagator(config.propagator);
+      setupContextManager(config.contextManager);
+    }
+  };
 
   // node_modules/@opentelemetry/sdk-trace-web/build/esm/enums/PerformanceTimingNames.js
   var PerformanceTimingNames;
@@ -6633,15 +5819,14 @@
     PerformanceTimingNames2["RESPONSE_END"] = "responseEnd";
     PerformanceTimingNames2["RESPONSE_START"] = "responseStart";
     PerformanceTimingNames2["SECURE_CONNECTION_START"] = "secureConnectionStart";
+    PerformanceTimingNames2["START_TIME"] = "startTime";
     PerformanceTimingNames2["UNLOAD_EVENT_END"] = "unloadEventEnd";
     PerformanceTimingNames2["UNLOAD_EVENT_START"] = "unloadEventStart";
   })(PerformanceTimingNames || (PerformanceTimingNames = {}));
 
-  // node_modules/@opentelemetry/sdk-trace-web/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_HTTP_RESPONSE_CONTENT_LENGTH = "http.response_content_length";
-  var TMP_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED = "http.response_content_length_uncompressed";
-  var SEMATTRS_HTTP_RESPONSE_CONTENT_LENGTH = TMP_HTTP_RESPONSE_CONTENT_LENGTH;
-  var SEMATTRS_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED = TMP_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED;
+  // node_modules/@opentelemetry/sdk-trace-web/build/esm/semconv.js
+  var ATTR_HTTP_RESPONSE_CONTENT_LENGTH = "http.response_content_length";
+  var ATTR_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED = "http.response_content_length_uncompressed";
 
   // node_modules/@opentelemetry/sdk-trace-web/build/esm/utils.js
   var urlNormalizingAnchor;
@@ -6654,52 +5839,42 @@
   function hasKey(obj, key) {
     return key in obj;
   }
-  function addSpanNetworkEvent(span, performanceName, entries, refPerfName) {
-    var perfTime = void 0;
-    var refTime = void 0;
-    if (hasKey(entries, performanceName) && typeof entries[performanceName] === "number") {
-      perfTime = entries[performanceName];
-    }
-    var refName = refPerfName || PerformanceTimingNames.FETCH_START;
-    if (hasKey(entries, refName) && typeof entries[refName] === "number") {
-      refTime = entries[refName];
-    }
-    if (perfTime !== void 0 && refTime !== void 0 && perfTime >= refTime) {
-      span.addEvent(performanceName, perfTime);
-      return span;
+  function addSpanNetworkEvent(span, performanceName, entries, ignoreZeros = true) {
+    if (hasKey(entries, performanceName) && typeof entries[performanceName] === "number" && !(ignoreZeros && entries[performanceName] === 0)) {
+      return span.addEvent(performanceName, entries[performanceName]);
     }
     return void 0;
   }
-  function addSpanNetworkEvents(span, resource, ignoreNetworkEvents) {
-    if (ignoreNetworkEvents === void 0) {
-      ignoreNetworkEvents = false;
+  function addSpanNetworkEvents(span, resource, ignoreNetworkEvents = false, ignoreZeros, skipOldSemconvContentLengthAttrs) {
+    if (ignoreZeros === void 0) {
+      ignoreZeros = resource[PerformanceTimingNames.START_TIME] !== 0;
     }
     if (!ignoreNetworkEvents) {
-      addSpanNetworkEvent(span, PerformanceTimingNames.FETCH_START, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.DOMAIN_LOOKUP_START, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.DOMAIN_LOOKUP_END, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.CONNECT_START, resource);
-      if (hasKey(resource, "name") && resource["name"].startsWith("https:")) {
-        addSpanNetworkEvent(span, PerformanceTimingNames.SECURE_CONNECTION_START, resource);
+      addSpanNetworkEvent(span, PerformanceTimingNames.FETCH_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.DOMAIN_LOOKUP_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.DOMAIN_LOOKUP_END, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.CONNECT_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.SECURE_CONNECTION_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.CONNECT_END, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.REQUEST_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.RESPONSE_START, resource, ignoreZeros);
+      addSpanNetworkEvent(span, PerformanceTimingNames.RESPONSE_END, resource, ignoreZeros);
+    }
+    if (!skipOldSemconvContentLengthAttrs) {
+      const encodedLength = resource[PerformanceTimingNames.ENCODED_BODY_SIZE];
+      if (encodedLength !== void 0) {
+        span.setAttribute(ATTR_HTTP_RESPONSE_CONTENT_LENGTH, encodedLength);
       }
-      addSpanNetworkEvent(span, PerformanceTimingNames.CONNECT_END, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.REQUEST_START, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.RESPONSE_START, resource);
-      addSpanNetworkEvent(span, PerformanceTimingNames.RESPONSE_END, resource);
-    }
-    var encodedLength = resource[PerformanceTimingNames.ENCODED_BODY_SIZE];
-    if (encodedLength !== void 0) {
-      span.setAttribute(SEMATTRS_HTTP_RESPONSE_CONTENT_LENGTH, encodedLength);
-    }
-    var decodedLength = resource[PerformanceTimingNames.DECODED_BODY_SIZE];
-    if (decodedLength !== void 0 && encodedLength !== decodedLength) {
-      span.setAttribute(SEMATTRS_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED, decodedLength);
+      const decodedLength = resource[PerformanceTimingNames.DECODED_BODY_SIZE];
+      if (decodedLength !== void 0 && encodedLength !== decodedLength) {
+        span.setAttribute(ATTR_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED, decodedLength);
+      }
     }
   }
   function sortResources(filteredResources) {
-    return filteredResources.slice().sort(function(a2, b2) {
-      var valueA = a2[PerformanceTimingNames.FETCH_START];
-      var valueB = b2[PerformanceTimingNames.FETCH_START];
+    return filteredResources.slice().sort((a2, b2) => {
+      const valueA = a2[PerformanceTimingNames.FETCH_START];
+      const valueB = b2[PerformanceTimingNames.FETCH_START];
       if (valueA > valueB) {
         return 1;
       } else if (valueA < valueB) {
@@ -6711,13 +5886,10 @@
   function getOrigin() {
     return typeof location !== "undefined" ? location.origin : void 0;
   }
-  function getResource(spanUrl, startTimeHR, endTimeHR, resources, ignoredResources, initiatorType) {
-    if (ignoredResources === void 0) {
-      ignoredResources = /* @__PURE__ */ new WeakSet();
-    }
-    var parsedSpanUrl = parseUrl(spanUrl);
+  function getResource(spanUrl, startTimeHR, endTimeHR, resources, ignoredResources = /* @__PURE__ */ new WeakSet(), initiatorType) {
+    const parsedSpanUrl = parseUrl(spanUrl);
     spanUrl = parsedSpanUrl.toString();
-    var filteredResources = filterResourcesForSpan(spanUrl, startTimeHR, endTimeHR, resources, ignoredResources, initiatorType);
+    const filteredResources = filterResourcesForSpan(spanUrl, startTimeHR, endTimeHR, resources, ignoredResources, initiatorType);
     if (filteredResources.length === 0) {
       return {
         mainRequest: void 0
@@ -6728,12 +5900,12 @@
         mainRequest: filteredResources[0]
       };
     }
-    var sorted = sortResources(filteredResources);
+    const sorted = sortResources(filteredResources);
     if (parsedSpanUrl.origin !== getOrigin() && sorted.length > 1) {
-      var corsPreFlightRequest = sorted[0];
-      var mainRequest = findMainRequest(sorted, corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END], endTimeHR);
-      var responseEnd = corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END];
-      var fetchStart = mainRequest[PerformanceTimingNames.FETCH_START];
+      let corsPreFlightRequest = sorted[0];
+      let mainRequest = findMainRequest(sorted, corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END], endTimeHR);
+      const responseEnd = corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END];
+      const fetchStart = mainRequest[PerformanceTimingNames.FETCH_START];
       if (fetchStart < responseEnd) {
         mainRequest = corsPreFlightRequest;
         corsPreFlightRequest = void 0;
@@ -6749,16 +5921,16 @@
     }
   }
   function findMainRequest(resources, corsPreFlightRequestEndTime, spanEndTimeHR) {
-    var spanEndTime = hrTimeToNanoseconds(spanEndTimeHR);
-    var minTime = hrTimeToNanoseconds(timeInputToHrTime(corsPreFlightRequestEndTime));
-    var mainRequest = resources[1];
-    var bestGap;
-    var length = resources.length;
-    for (var i2 = 1; i2 < length; i2++) {
-      var resource = resources[i2];
-      var resourceStartTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.FETCH_START]));
-      var resourceEndTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.RESPONSE_END]));
-      var currentGap = spanEndTime - resourceEndTime;
+    const spanEndTime = hrTimeToNanoseconds(spanEndTimeHR);
+    const minTime = hrTimeToNanoseconds(timeInputToHrTime(corsPreFlightRequestEndTime));
+    let mainRequest = resources[1];
+    let bestGap;
+    const length = resources.length;
+    for (let i2 = 1; i2 < length; i2++) {
+      const resource = resources[i2];
+      const resourceStartTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.FETCH_START]));
+      const resourceEndTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.RESPONSE_END]));
+      const currentGap = spanEndTime - resourceEndTime;
       if (resourceStartTime >= minTime && (!bestGap || currentGap < bestGap)) {
         bestGap = currentGap;
         mainRequest = resource;
@@ -6767,15 +5939,15 @@
     return mainRequest;
   }
   function filterResourcesForSpan(spanUrl, startTimeHR, endTimeHR, resources, ignoredResources, initiatorType) {
-    var startTime = hrTimeToNanoseconds(startTimeHR);
-    var endTime = hrTimeToNanoseconds(endTimeHR);
-    var filteredResources = resources.filter(function(resource) {
-      var resourceStartTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.FETCH_START]));
-      var resourceEndTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.RESPONSE_END]));
+    const startTime = hrTimeToNanoseconds(startTimeHR);
+    const endTime = hrTimeToNanoseconds(endTimeHR);
+    let filteredResources = resources.filter((resource) => {
+      const resourceStartTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.FETCH_START]));
+      const resourceEndTime = hrTimeToNanoseconds(timeInputToHrTime(resource[PerformanceTimingNames.RESPONSE_END]));
       return resource.initiatorType.toLowerCase() === (initiatorType || "xmlhttprequest") && resource.name === spanUrl && resourceStartTime >= startTime && resourceEndTime <= endTime;
     });
     if (filteredResources.length > 0) {
-      filteredResources = filteredResources.filter(function(resource) {
+      filteredResources = filteredResources.filter((resource) => {
         return !ignoredResources.has(resource);
       });
     }
@@ -6785,7 +5957,7 @@
     if (typeof URL === "function") {
       return new URL(url, typeof document !== "undefined" ? document.baseURI : typeof location !== "undefined" ? location.href : void 0);
     }
-    var element = getUrlNormalizingAnchor();
+    const element = getUrlNormalizingAnchor();
     element.href = url;
     return element;
   }
@@ -6793,11 +5965,11 @@
     if (target.nodeType === Node.DOCUMENT_NODE) {
       return "/";
     }
-    var targetValue = getNodeValue(target, optimised);
+    const targetValue = getNodeValue(target, optimised);
     if (optimised && targetValue.indexOf("@id") > 0) {
       return targetValue;
     }
-    var xpath = "";
+    let xpath = "";
     if (target.parentNode) {
       xpath += getElementXPath(target.parentNode, false);
     }
@@ -6808,13 +5980,13 @@
     if (!target.parentNode) {
       return 0;
     }
-    var allowedTypes = [target.nodeType];
+    const allowedTypes = [target.nodeType];
     if (target.nodeType === Node.CDATA_SECTION_NODE) {
       allowedTypes.push(Node.TEXT_NODE);
     }
-    var elements = Array.from(target.parentNode.childNodes);
-    elements = elements.filter(function(element) {
-      var localName = element.localName;
+    let elements = Array.from(target.parentNode.childNodes);
+    elements = elements.filter((element) => {
+      const localName = element.localName;
       return allowedTypes.indexOf(element.nodeType) >= 0 && localName === target.localName;
     });
     if (elements.length >= 1) {
@@ -6823,13 +5995,13 @@
     return 0;
   }
   function getNodeValue(target, optimised) {
-    var nodeType = target.nodeType;
-    var index = getNodeIndex(target);
-    var nodeValue = "";
+    const nodeType = target.nodeType;
+    const index = getNodeIndex(target);
+    let nodeValue = "";
     if (nodeType === Node.ELEMENT_NODE) {
-      var id = target.getAttribute("id");
+      const id = target.getAttribute("id");
       if (optimised && id) {
-        return '//*[@id="' + id + '"]';
+        return `//*[@id="${id}"]`;
       }
       nodeValue = target.localName;
     } else if (nodeType === Node.TEXT_NODE || nodeType === Node.CDATA_SECTION_NODE) {
@@ -6840,33 +6012,116 @@
       return "";
     }
     if (nodeValue && index > 1) {
-      return "/" + nodeValue + "[" + index + "]";
+      return `/${nodeValue}[${index}]`;
     }
-    return "/" + nodeValue;
+    return `/${nodeValue}`;
   }
   function shouldPropagateTraceHeaders(spanUrl, propagateTraceHeaderCorsUrls) {
-    var propagateTraceHeaderUrls = propagateTraceHeaderCorsUrls || [];
+    let propagateTraceHeaderUrls = propagateTraceHeaderCorsUrls || [];
     if (typeof propagateTraceHeaderUrls === "string" || propagateTraceHeaderUrls instanceof RegExp) {
       propagateTraceHeaderUrls = [propagateTraceHeaderUrls];
     }
-    var parsedSpanUrl = parseUrl(spanUrl);
+    const parsedSpanUrl = parseUrl(spanUrl);
     if (parsedSpanUrl.origin === getOrigin()) {
       return true;
     } else {
-      return propagateTraceHeaderUrls.some(function(propagateTraceHeaderUrl) {
-        return urlMatches(spanUrl, propagateTraceHeaderUrl);
-      });
+      return propagateTraceHeaderUrls.some((propagateTraceHeaderUrl) => urlMatches(spanUrl, propagateTraceHeaderUrl));
     }
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/semantic-conventions/build/esm/resource/SemanticResourceAttributes.js
-  var TMP_SERVICE_NAME2 = "service.name";
-  var SEMRESATTRS_SERVICE_NAME2 = TMP_SERVICE_NAME2;
+  // node_modules/@opentelemetry/opentelemetry-browser-detector/node_modules/@opentelemetry/resources/build/esm/utils.js
+  var isPromiseLike2 = (val) => {
+    return val !== null && typeof val === "object" && typeof val.then === "function";
+  };
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/semantic-conventions/build/esm/stable_attributes.js
-  var ATTR_EXCEPTION_MESSAGE = "exception.message";
-  var ATTR_EXCEPTION_STACKTRACE = "exception.stacktrace";
-  var ATTR_EXCEPTION_TYPE = "exception.type";
+  // node_modules/@opentelemetry/opentelemetry-browser-detector/node_modules/@opentelemetry/resources/build/esm/ResourceImpl.js
+  var ResourceImpl2 = class _ResourceImpl {
+    _rawAttributes;
+    _asyncAttributesPending = false;
+    _memoizedAttributes;
+    static FromAttributeList(attributes) {
+      const res = new _ResourceImpl({});
+      res._rawAttributes = guardedRawAttributes2(attributes);
+      res._asyncAttributesPending = attributes.filter(([_2, val]) => isPromiseLike2(val)).length > 0;
+      return res;
+    }
+    constructor(resource) {
+      const attributes = resource.attributes ?? {};
+      this._rawAttributes = Object.entries(attributes).map(([k2, v2]) => {
+        if (isPromiseLike2(v2)) {
+          this._asyncAttributesPending = true;
+        }
+        return [k2, v2];
+      });
+      this._rawAttributes = guardedRawAttributes2(this._rawAttributes);
+    }
+    get asyncAttributesPending() {
+      return this._asyncAttributesPending;
+    }
+    async waitForAsyncAttributes() {
+      if (!this.asyncAttributesPending) {
+        return;
+      }
+      for (let i2 = 0; i2 < this._rawAttributes.length; i2++) {
+        const [k2, v2] = this._rawAttributes[i2];
+        this._rawAttributes[i2] = [k2, isPromiseLike2(v2) ? await v2 : v2];
+      }
+      this._asyncAttributesPending = false;
+    }
+    get attributes() {
+      if (this.asyncAttributesPending) {
+        diag2.error("Accessing resource attributes before async attributes settled");
+      }
+      if (this._memoizedAttributes) {
+        return this._memoizedAttributes;
+      }
+      const attrs = {};
+      for (const [k2, v2] of this._rawAttributes) {
+        if (isPromiseLike2(v2)) {
+          diag2.debug(`Unsettled resource attribute ${k2} skipped`);
+          continue;
+        }
+        if (v2 != null) {
+          attrs[k2] ??= v2;
+        }
+      }
+      if (!this._asyncAttributesPending) {
+        this._memoizedAttributes = attrs;
+      }
+      return attrs;
+    }
+    getRawAttributes() {
+      return this._rawAttributes;
+    }
+    merge(resource) {
+      if (resource == null)
+        return this;
+      return _ResourceImpl.FromAttributeList([
+        ...resource.getRawAttributes(),
+        ...this.getRawAttributes()
+      ]);
+    }
+  };
+  function resourceFromAttributes2(attributes) {
+    return ResourceImpl2.FromAttributeList(Object.entries(attributes));
+  }
+  function emptyResource2() {
+    return resourceFromAttributes2({});
+  }
+  function guardedRawAttributes2(attributes) {
+    return attributes.map(([k2, v2]) => {
+      if (isPromiseLike2(v2)) {
+        return [
+          k2,
+          v2.catch((err) => {
+            diag2.debug("promise rejection for resource attribute: %s - %s", k2, err);
+            return void 0;
+          })
+        ];
+      }
+      return [k2, v2];
+    });
+  }
 
   // node_modules/@opentelemetry/opentelemetry-browser-detector/build/esm/types.js
   var BROWSER_ATTRIBUTES = {
@@ -6878,139 +6133,37 @@
   };
 
   // node_modules/@opentelemetry/opentelemetry-browser-detector/build/esm/BrowserDetector.js
-  var __awaiter3 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
+  var BrowserDetector = class {
+    detect(config) {
+      const isBrowser = typeof navigator !== "undefined";
+      if (!isBrowser) {
+        return emptyResource2();
+      }
+      const browserResource = getBrowserAttributes();
+      return this._getResourceAttributes(browserResource, config);
     }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
+    /**
+     * Validates browser resource attribute map from browser variables
+     *
+     * @param browserResource The un-sanitized resource attributes from browser as key/value pairs.
+     * @param config: Config
+     * @returns The sanitized resource attributes.
+     */
+    _getResourceAttributes(browserResource, _config) {
+      if (!browserResource[BROWSER_ATTRIBUTES.USER_AGENT] && !browserResource[BROWSER_ATTRIBUTES.PLATFORM]) {
+        diag2.debug("BrowserDetector failed: Unable to find required browser resources. ");
+        return emptyResource2();
+      } else {
+        return { attributes: browserResource };
       }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator3 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
     }
   };
-  var BrowserDetector = (
-    /** @class */
-    function() {
-      function BrowserDetector2() {
-      }
-      BrowserDetector2.prototype.detect = function(config) {
-        return __awaiter3(this, void 0, void 0, function() {
-          var isBrowser, browserResource;
-          return __generator3(this, function(_a3) {
-            isBrowser = typeof navigator !== "undefined";
-            if (!isBrowser) {
-              return [2, Resource.empty()];
-            }
-            browserResource = getBrowserAttributes();
-            return [2, this._getResourceAttributes(browserResource, config)];
-          });
-        });
-      };
-      BrowserDetector2.prototype._getResourceAttributes = function(browserResource, _config) {
-        if (!browserResource[BROWSER_ATTRIBUTES.USER_AGENT] && !browserResource[BROWSER_ATTRIBUTES.PLATFORM]) {
-          diag2.debug("BrowserDetector failed: Unable to find required browser resources. ");
-          return Resource.empty();
-        } else {
-          return new Resource(browserResource);
-        }
-      };
-      return BrowserDetector2;
-    }()
-  );
   function getBrowserAttributes() {
-    var browserAttribs = {};
-    var userAgentData = navigator.userAgentData;
+    const browserAttribs = {};
+    const userAgentData = navigator.userAgentData;
     if (userAgentData) {
       browserAttribs[BROWSER_ATTRIBUTES.PLATFORM] = userAgentData.platform;
-      browserAttribs[BROWSER_ATTRIBUTES.BRANDS] = userAgentData.brands.map(function(b2) {
-        return b2.brand + " " + b2.version;
-      });
+      browserAttribs[BROWSER_ATTRIBUTES.BRANDS] = userAgentData.brands.map((b2) => `${b2.brand} ${b2.version}`);
       browserAttribs[BROWSER_ATTRIBUTES.MOBILE] = userAgentData.mobile;
     } else {
       browserAttribs[BROWSER_ATTRIBUTES.USER_AGENT] = navigator.userAgent;
@@ -7020,23 +6173,23 @@
   }
   var browserDetector = new BrowserDetector();
 
-  // node_modules/@honeycombio/opentelemetry-web/dist/esm/user-interaction-instrumentation-C_cw3q1v.js
-  var VERSION4 = "0.13.0";
+  // node_modules/@honeycombio/opentelemetry-web/dist/esm/user-interaction-instrumentation-e2UGPk8b.js
+  var VERSION4 = "1.0.2";
   var INSTRUMENTATION_NAME = "@honeycombio/user-instrumentation";
   var DEFAULT_EVENT_NAMES = ["click"];
   var UserInteractionInstrumentation = class _UserInteractionInstrumentation extends InstrumentationBase {
     constructor(config = {}) {
-      var _a3, _b;
+      var _a, _b;
       super(INSTRUMENTATION_NAME, VERSION4, config);
       this._config = config;
-      this._isEnabled = (_a3 = this._config.enabled) !== null && _a3 !== void 0 ? _a3 : false;
+      this._isEnabled = (_a = this._config.enabled) !== null && _a !== void 0 ? _a : false;
       this._listeners = (_b = this._listeners) !== null && _b !== void 0 ? _b : [];
     }
     init() {
     }
     static handleEndSpan(ev) {
-      var _a3;
-      (_a3 = _UserInteractionInstrumentation._eventMap.get(ev)) === null || _a3 === void 0 ? void 0 : _a3.end();
+      var _a;
+      (_a = _UserInteractionInstrumentation._eventMap.get(ev)) === null || _a === void 0 ? void 0 : _a.end();
     }
     static createGlobalEventListener(eventName, rootNodeId, isInstrumentationEnabled) {
       return (event) => {
@@ -7063,13 +6216,13 @@
       };
     }
     enable() {
-      var _a3;
+      var _a;
       if (this._isEnabled) {
         return;
       }
       const rootNode = this.getRootNode();
       this._listeners = [];
-      const eventNames = (_a3 = this._config.eventNames) !== null && _a3 !== void 0 ? _a3 : DEFAULT_EVENT_NAMES;
+      const eventNames = (_a = this._config.eventNames) !== null && _a !== void 0 ? _a : DEFAULT_EVENT_NAMES;
       eventNames.forEach((eventName) => {
         const handler = _UserInteractionInstrumentation.createGlobalEventListener(eventName, this._config.rootNodeId, () => this._isEnabled);
         this._listeners.push({
@@ -7143,84 +6296,61 @@
   };
 
   // node_modules/@honeycombio/opentelemetry-web/dist/esm/index.js
-  var import_ua_parser_js = __toESM(require_ua_parser());
+  var shimmer2 = __toESM(require_shimmer());
+  var import_tracekit = __toESM(require_tracekit());
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/OTLPExporterBase.js
-  var OTLPExporterBase = (
-    /** @class */
-    function() {
-      function OTLPExporterBase2(_delegate) {
-        this._delegate = _delegate;
-      }
-      OTLPExporterBase2.prototype.export = function(items, resultCallback) {
-        this._delegate.export(items, resultCallback);
-      };
-      OTLPExporterBase2.prototype.forceFlush = function() {
-        return this._delegate.forceFlush();
-      };
-      OTLPExporterBase2.prototype.shutdown = function() {
-        return this._delegate.shutdown();
-      };
-      return OTLPExporterBase2;
-    }()
-  );
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/OTLPExporterBase.js
+  var OTLPExporterBase = class {
+    _delegate;
+    constructor(_delegate) {
+      this._delegate = _delegate;
+    }
+    /**
+     * Export items.
+     * @param items
+     * @param resultCallback
+     */
+    export(items, resultCallback) {
+      this._delegate.export(items, resultCallback);
+    }
+    forceFlush() {
+      return this._delegate.forceFlush();
+    }
+    shutdown() {
+      return this._delegate.shutdown();
+    }
+  };
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/types.js
-  var __extends5 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var OTLPExporterError = (
-    /** @class */
-    function(_super) {
-      __extends5(OTLPExporterError2, _super);
-      function OTLPExporterError2(message, code, data) {
-        var _this = _super.call(this, message) || this;
-        _this.name = "OTLPExporterError";
-        _this.data = data;
-        _this.code = code;
-        return _this;
-      }
-      return OTLPExporterError2;
-    }(Error)
-  );
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/types.js
+  var OTLPExporterError = class extends Error {
+    code;
+    name = "OTLPExporterError";
+    data;
+    constructor(message, code, data) {
+      super(message);
+      this.data = data;
+      this.code = code;
+    }
+  };
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/shared-configuration.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/shared-configuration.js
   function validateTimeoutMillis(timeoutMillis) {
-    if (!Number.isNaN(timeoutMillis) && Number.isFinite(timeoutMillis) && timeoutMillis > 0) {
+    if (Number.isFinite(timeoutMillis) && timeoutMillis > 0) {
       return timeoutMillis;
     }
-    throw new Error("Configuration: timeoutMillis is invalid, expected number greater than 0 (actual: '" + timeoutMillis + "')");
+    throw new Error(`Configuration: timeoutMillis is invalid, expected number greater than 0 (actual: '${timeoutMillis}')`);
   }
   function wrapStaticHeadersInFunction(headers) {
     if (headers == null) {
       return void 0;
     }
-    return function() {
-      return headers;
-    };
+    return () => headers;
   }
   function mergeOtlpSharedConfigurationWithDefaults(userProvidedConfiguration, fallbackConfiguration, defaultConfiguration) {
-    var _a3, _b, _c, _d, _e, _f;
     return {
-      timeoutMillis: validateTimeoutMillis((_b = (_a3 = userProvidedConfiguration.timeoutMillis) !== null && _a3 !== void 0 ? _a3 : fallbackConfiguration.timeoutMillis) !== null && _b !== void 0 ? _b : defaultConfiguration.timeoutMillis),
-      concurrencyLimit: (_d = (_c = userProvidedConfiguration.concurrencyLimit) !== null && _c !== void 0 ? _c : fallbackConfiguration.concurrencyLimit) !== null && _d !== void 0 ? _d : defaultConfiguration.concurrencyLimit,
-      compression: (_f = (_e = userProvidedConfiguration.compression) !== null && _e !== void 0 ? _e : fallbackConfiguration.compression) !== null && _f !== void 0 ? _f : defaultConfiguration.compression
+      timeoutMillis: validateTimeoutMillis(userProvidedConfiguration.timeoutMillis ?? fallbackConfiguration.timeoutMillis ?? defaultConfiguration.timeoutMillis),
+      concurrencyLimit: userProvidedConfiguration.concurrencyLimit ?? fallbackConfiguration.concurrencyLimit ?? defaultConfiguration.concurrencyLimit,
+      compression: userProvidedConfiguration.compression ?? fallbackConfiguration.compression ?? defaultConfiguration.compression
     };
   }
   function getSharedConfigurationDefaults() {
@@ -7231,155 +6361,52 @@
     };
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/bounded-queue-export-promise-handler.js
-  var __awaiter4 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/bounded-queue-export-promise-handler.js
+  var BoundedQueueExportPromiseHandler = class {
+    _concurrencyLimit;
+    _sendingPromises = [];
+    /**
+     * @param concurrencyLimit maximum promises allowed in a queue at the same time.
+     */
+    constructor(concurrencyLimit) {
+      this._concurrencyLimit = concurrencyLimit;
     }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
+    pushPromise(promise) {
+      if (this.hasReachedLimit()) {
+        throw new Error("Concurrency Limit reached");
       }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator4 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
+      this._sendingPromises.push(promise);
+      const popPromise = () => {
+        const index = this._sendingPromises.indexOf(promise);
+        void this._sendingPromises.splice(index, 1);
       };
+      promise.then(popPromise, popPromise);
     }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
+    hasReachedLimit() {
+      return this._sendingPromises.length >= this._concurrencyLimit;
+    }
+    async awaitAll() {
+      await Promise.all(this._sendingPromises);
     }
   };
-  var BoundedQueueExportPromiseHandler = (
-    /** @class */
-    function() {
-      function BoundedQueueExportPromiseHandler2(concurrencyLimit) {
-        this._sendingPromises = [];
-        this._concurrencyLimit = concurrencyLimit;
-      }
-      BoundedQueueExportPromiseHandler2.prototype.pushPromise = function(promise) {
-        var _this = this;
-        if (this.hasReachedLimit()) {
-          throw new Error("Concurrency Limit reached");
-        }
-        this._sendingPromises.push(promise);
-        var popPromise = function() {
-          var index = _this._sendingPromises.indexOf(promise);
-          _this._sendingPromises.splice(index, 1);
-        };
-        promise.then(popPromise, popPromise);
-      };
-      BoundedQueueExportPromiseHandler2.prototype.hasReachedLimit = function() {
-        return this._sendingPromises.length >= this._concurrencyLimit;
-      };
-      BoundedQueueExportPromiseHandler2.prototype.awaitAll = function() {
-        return __awaiter4(this, void 0, void 0, function() {
-          return __generator4(this, function(_a3) {
-            switch (_a3.label) {
-              case 0:
-                return [4, Promise.all(this._sendingPromises)];
-              case 1:
-                _a3.sent();
-                return [
-                  2
-                  /*return*/
-                ];
-            }
-          });
-        });
-      };
-      return BoundedQueueExportPromiseHandler2;
-    }()
-  );
   function createBoundedQueueExportPromiseHandler(options) {
     return new BoundedQueueExportPromiseHandler(options.concurrencyLimit);
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/logging-response-handler.js
+  // node_modules/@opentelemetry/otlp-exporter-base/node_modules/@opentelemetry/core/build/esm/ExportResult.js
+  var ExportResultCode2;
+  (function(ExportResultCode3) {
+    ExportResultCode3[ExportResultCode3["SUCCESS"] = 0] = "SUCCESS";
+    ExportResultCode3[ExportResultCode3["FAILED"] = 1] = "FAILED";
+  })(ExportResultCode2 || (ExportResultCode2 = {}));
+
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/logging-response-handler.js
   function isPartialSuccessResponse(response) {
     return Object.prototype.hasOwnProperty.call(response, "partialSuccess");
   }
   function createLoggingPartialSuccessResponseHandler() {
     return {
-      handleResponse: function(response) {
+      handleResponse(response) {
         if (response == null || !isPartialSuccessResponse(response) || response.partialSuccess == null || Object.keys(response.partialSuccess).length === 0) {
           return;
         }
@@ -7388,200 +6415,90 @@
     };
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-export-delegate.js
-  var __awaiter5 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-export-delegate.js
+  var OTLPExportDelegate = class {
+    _transport;
+    _serializer;
+    _responseHandler;
+    _promiseQueue;
+    _timeout;
+    _diagLogger;
+    constructor(_transport, _serializer, _responseHandler, _promiseQueue, _timeout) {
+      this._transport = _transport;
+      this._serializer = _serializer;
+      this._responseHandler = _responseHandler;
+      this._promiseQueue = _promiseQueue;
+      this._timeout = _timeout;
+      this._diagLogger = diag2.createComponentLogger({
+        namespace: "OTLPExportDelegate"
       });
     }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator5 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  };
-  var OTLPExportDelegate = (
-    /** @class */
-    function() {
-      function OTLPExportDelegate2(_transport, _serializer, _responseHandler, _promiseQueue, _timeout) {
-        this._transport = _transport;
-        this._serializer = _serializer;
-        this._responseHandler = _responseHandler;
-        this._promiseQueue = _promiseQueue;
-        this._timeout = _timeout;
-        this._diagLogger = diag2.createComponentLogger({
-          namespace: "OTLPExportDelegate"
+    export(internalRepresentation, resultCallback) {
+      this._diagLogger.debug("items to be sent", internalRepresentation);
+      if (this._promiseQueue.hasReachedLimit()) {
+        resultCallback({
+          code: ExportResultCode2.FAILED,
+          error: new Error("Concurrent export limit reached")
         });
+        return;
       }
-      OTLPExportDelegate2.prototype.export = function(internalRepresentation, resultCallback) {
-        var _this = this;
-        this._diagLogger.debug("items to be sent", internalRepresentation);
-        if (this._promiseQueue.hasReachedLimit()) {
-          resultCallback({
-            code: ExportResultCode.FAILED,
-            error: new Error("Concurrent export limit reached")
-          });
-          return;
-        }
-        var serializedRequest = this._serializer.serializeRequest(internalRepresentation);
-        if (serializedRequest == null) {
-          resultCallback({
-            code: ExportResultCode.FAILED,
-            error: new Error("Nothing to send")
-          });
-          return;
-        }
-        this._promiseQueue.pushPromise(this._transport.send(serializedRequest, this._timeout).then(function(response) {
-          if (response.status === "success") {
-            if (response.data != null) {
-              try {
-                _this._responseHandler.handleResponse(_this._serializer.deserializeResponse(response.data));
-              } catch (e2) {
-                _this._diagLogger.warn("Export succeeded but could not deserialize response - is the response specification compliant?", e2, response.data);
-              }
+      const serializedRequest = this._serializer.serializeRequest(internalRepresentation);
+      if (serializedRequest == null) {
+        resultCallback({
+          code: ExportResultCode2.FAILED,
+          error: new Error("Nothing to send")
+        });
+        return;
+      }
+      this._promiseQueue.pushPromise(this._transport.send(serializedRequest, this._timeout).then((response) => {
+        if (response.status === "success") {
+          if (response.data != null) {
+            try {
+              this._responseHandler.handleResponse(this._serializer.deserializeResponse(response.data));
+            } catch (e2) {
+              this._diagLogger.warn("Export succeeded but could not deserialize response - is the response specification compliant?", e2, response.data);
             }
-            resultCallback({
-              code: ExportResultCode.SUCCESS
-            });
-            return;
-          } else if (response.status === "failure" && response.error) {
-            resultCallback({
-              code: ExportResultCode.FAILED,
-              error: response.error
-            });
-            return;
-          } else if (response.status === "retryable") {
-            resultCallback({
-              code: ExportResultCode.FAILED,
-              error: new OTLPExporterError("Export failed with retryable status")
-            });
-          } else {
-            resultCallback({
-              code: ExportResultCode.FAILED,
-              error: new OTLPExporterError("Export failed with unknown error")
-            });
           }
-        }, function(reason) {
-          return resultCallback({
-            code: ExportResultCode.FAILED,
-            error: reason
+          resultCallback({
+            code: ExportResultCode2.SUCCESS
           });
-        }));
-      };
-      OTLPExportDelegate2.prototype.forceFlush = function() {
-        return this._promiseQueue.awaitAll();
-      };
-      OTLPExportDelegate2.prototype.shutdown = function() {
-        return __awaiter5(this, void 0, void 0, function() {
-          return __generator5(this, function(_a3) {
-            switch (_a3.label) {
-              case 0:
-                this._diagLogger.debug("shutdown started");
-                return [4, this.forceFlush()];
-              case 1:
-                _a3.sent();
-                this._transport.shutdown();
-                return [
-                  2
-                  /*return*/
-                ];
-            }
+          return;
+        } else if (response.status === "failure" && response.error) {
+          resultCallback({
+            code: ExportResultCode2.FAILED,
+            error: response.error
           });
-        });
-      };
-      return OTLPExportDelegate2;
-    }()
-  );
+          return;
+        } else if (response.status === "retryable") {
+          resultCallback({
+            code: ExportResultCode2.FAILED,
+            error: new OTLPExporterError("Export failed with retryable status")
+          });
+        } else {
+          resultCallback({
+            code: ExportResultCode2.FAILED,
+            error: new OTLPExporterError("Export failed with unknown error")
+          });
+        }
+      }, (reason) => resultCallback({
+        code: ExportResultCode2.FAILED,
+        error: reason
+      })));
+    }
+    forceFlush() {
+      return this._promiseQueue.awaitAll();
+    }
+    async shutdown() {
+      this._diagLogger.debug("shutdown started");
+      await this.forceFlush();
+      this._transport.shutdown();
+    }
+  };
   function createOtlpExportDelegate(components, settings) {
     return new OTLPExportDelegate(components.transport, components.serializer, createLoggingPartialSuccessResponseHandler(), components.promiseHandler, settings.timeout);
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-network-export-delegate.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-network-export-delegate.js
   function createOtlpNetworkExportDelegate(options, serializer, transport) {
     return createOtlpExportDelegate({
       transport,
@@ -7590,25 +6507,55 @@
     }, { timeout: options.timeoutMillis });
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-transformer/build/esm/common/utils.js
-  function hrTimeToNanos(hrTime2) {
-    var NANOSECONDS = BigInt(1e9);
-    return BigInt(hrTime2[0]) * NANOSECONDS + BigInt(hrTime2[1]);
+  // node_modules/@opentelemetry/otlp-transformer/node_modules/@opentelemetry/core/build/esm/common/time.js
+  var NANOSECOND_DIGITS2 = 9;
+  var NANOSECOND_DIGITS_IN_MILLIS2 = 6;
+  var MILLISECONDS_TO_NANOSECONDS2 = Math.pow(10, NANOSECOND_DIGITS_IN_MILLIS2);
+  var SECOND_TO_NANOSECONDS2 = Math.pow(10, NANOSECOND_DIGITS2);
+  function hrTimeToNanoseconds2(time) {
+    return time[0] * SECOND_TO_NANOSECONDS2 + time[1];
+  }
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/common/hex-to-binary.js
+  function intValue(charCode) {
+    if (charCode >= 48 && charCode <= 57) {
+      return charCode - 48;
+    }
+    if (charCode >= 97 && charCode <= 102) {
+      return charCode - 87;
+    }
+    return charCode - 55;
+  }
+  function hexToBinary(hexStr) {
+    const buf = new Uint8Array(hexStr.length / 2);
+    let offset = 0;
+    for (let i2 = 0; i2 < hexStr.length; i2 += 2) {
+      const hi = intValue(hexStr.charCodeAt(i2));
+      const lo = intValue(hexStr.charCodeAt(i2 + 1));
+      buf[offset++] = hi << 4 | lo;
+    }
+    return buf;
+  }
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/common/utils.js
+  function hrTimeToNanos(hrTime3) {
+    const NANOSECONDS = BigInt(1e9);
+    return BigInt(hrTime3[0]) * NANOSECONDS + BigInt(hrTime3[1]);
   }
   function toLongBits(value) {
-    var low = Number(BigInt.asUintN(32, value));
-    var high = Number(BigInt.asUintN(32, value >> BigInt(32)));
+    const low = Number(BigInt.asUintN(32, value));
+    const high = Number(BigInt.asUintN(32, value >> BigInt(32)));
     return { low, high };
   }
-  function encodeAsLongBits(hrTime2) {
-    var nanos = hrTimeToNanos(hrTime2);
+  function encodeAsLongBits(hrTime3) {
+    const nanos = hrTimeToNanos(hrTime3);
     return toLongBits(nanos);
   }
-  function encodeAsString(hrTime2) {
-    var nanos = hrTimeToNanos(hrTime2);
+  function encodeAsString(hrTime3) {
+    const nanos = hrTimeToNanos(hrTime3);
     return nanos.toString();
   }
-  var encodeTimestamp = typeof BigInt !== "undefined" ? encodeAsString : hrTimeToNanoseconds;
+  var encodeTimestamp = typeof BigInt !== "undefined" ? encodeAsString : hrTimeToNanoseconds2;
   function identity(value) {
     return value;
   }
@@ -7623,12 +6570,11 @@
     encodeOptionalSpanContext: optionalHexToBinary
   };
   function getOtlpEncoder(options) {
-    var _a3, _b;
     if (options === void 0) {
       return DEFAULT_ENCODER;
     }
-    var useLongBits = (_a3 = options.useLongBits) !== null && _a3 !== void 0 ? _a3 : true;
-    var useHex = (_b = options.useHex) !== null && _b !== void 0 ? _b : false;
+    const useLongBits = options.useLongBits ?? true;
+    const useHex = options.useHex ?? false;
     return {
       encodeHrTime: useLongBits ? encodeAsLongBits : encodeTimestamp,
       encodeSpanContext: useHex ? identity : hexToBinary,
@@ -7636,24 +6582,7 @@
     };
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-transformer/build/esm/common/internal.js
-  var __read13 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/common/internal.js
   function createResource(resource) {
     return {
       attributes: toAttributes(resource.attributes),
@@ -7667,9 +6596,7 @@
     };
   }
   function toAttributes(attributes) {
-    return Object.keys(attributes).map(function(key) {
-      return toKeyValue(key, attributes[key]);
-    });
+    return Object.keys(attributes).map((key) => toKeyValue(key, attributes[key]));
   }
   function toKeyValue(key, value) {
     return {
@@ -7678,70 +6605,272 @@
     };
   }
   function toAnyValue(value) {
-    var t3 = typeof value;
-    if (t3 === "string")
+    const t2 = typeof value;
+    if (t2 === "string")
       return { stringValue: value };
-    if (t3 === "number") {
+    if (t2 === "number") {
       if (!Number.isInteger(value))
         return { doubleValue: value };
       return { intValue: value };
     }
-    if (t3 === "boolean")
+    if (t2 === "boolean")
       return { boolValue: value };
     if (value instanceof Uint8Array)
       return { bytesValue: value };
     if (Array.isArray(value))
       return { arrayValue: { values: value.map(toAnyValue) } };
-    if (t3 === "object" && value != null)
+    if (t2 === "object" && value != null)
       return {
         kvlistValue: {
-          values: Object.entries(value).map(function(_a3) {
-            var _b = __read13(_a3, 2), k2 = _b[0], v2 = _b[1];
-            return toKeyValue(k2, v2);
-          })
+          values: Object.entries(value).map(([k2, v2]) => toKeyValue(k2, v2))
         }
       };
     return {};
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-transformer/build/esm/trace/internal.js
-  var __values7 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/logs/internal.js
+  function createExportLogsServiceRequest(logRecords, options) {
+    const encoder = getOtlpEncoder(options);
+    return {
+      resourceLogs: logRecordsToResourceLogs(logRecords, encoder)
     };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var __read14 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
+  }
+  function createResourceMap(logRecords) {
+    const resourceMap = /* @__PURE__ */ new Map();
+    for (const record of logRecords) {
+      const { resource, instrumentationScope: { name, version = "", schemaUrl = "" } } = record;
+      let ismMap = resourceMap.get(resource);
+      if (!ismMap) {
+        ismMap = /* @__PURE__ */ new Map();
+        resourceMap.set(resource, ismMap);
       }
+      const ismKey = `${name}@${version}:${schemaUrl}`;
+      let records = ismMap.get(ismKey);
+      if (!records) {
+        records = [];
+        ismMap.set(ismKey, records);
+      }
+      records.push(record);
     }
-    return ar;
-  };
+    return resourceMap;
+  }
+  function logRecordsToResourceLogs(logRecords, encoder) {
+    const resourceMap = createResourceMap(logRecords);
+    return Array.from(resourceMap, ([resource, ismMap]) => ({
+      resource: createResource(resource),
+      scopeLogs: Array.from(ismMap, ([, scopeLogs]) => {
+        return {
+          scope: createInstrumentationScope(scopeLogs[0].instrumentationScope),
+          logRecords: scopeLogs.map((log) => toLogRecord(log, encoder)),
+          schemaUrl: scopeLogs[0].instrumentationScope.schemaUrl
+        };
+      }),
+      schemaUrl: void 0
+    }));
+  }
+  function toLogRecord(log, encoder) {
+    return {
+      timeUnixNano: encoder.encodeHrTime(log.hrTime),
+      observedTimeUnixNano: encoder.encodeHrTime(log.hrTimeObserved),
+      severityNumber: toSeverityNumber(log.severityNumber),
+      severityText: log.severityText,
+      body: toAnyValue(log.body),
+      eventName: log.eventName,
+      attributes: toLogAttributes(log.attributes),
+      droppedAttributesCount: log.droppedAttributesCount,
+      flags: log.spanContext?.traceFlags,
+      traceId: encoder.encodeOptionalSpanContext(log.spanContext?.traceId),
+      spanId: encoder.encodeOptionalSpanContext(log.spanContext?.spanId)
+    };
+  }
+  function toSeverityNumber(severityNumber) {
+    return severityNumber;
+  }
+  function toLogAttributes(attributes) {
+    return Object.keys(attributes).map((key) => toKeyValue(key, attributes[key]));
+  }
+
+  // node_modules/@opentelemetry/sdk-metrics/build/esm/export/AggregationTemporality.js
+  var AggregationTemporality;
+  (function(AggregationTemporality3) {
+    AggregationTemporality3[AggregationTemporality3["DELTA"] = 0] = "DELTA";
+    AggregationTemporality3[AggregationTemporality3["CUMULATIVE"] = 1] = "CUMULATIVE";
+  })(AggregationTemporality || (AggregationTemporality = {}));
+
+  // node_modules/@opentelemetry/sdk-metrics/build/esm/export/MetricData.js
+  var InstrumentType;
+  (function(InstrumentType3) {
+    InstrumentType3["COUNTER"] = "COUNTER";
+    InstrumentType3["GAUGE"] = "GAUGE";
+    InstrumentType3["HISTOGRAM"] = "HISTOGRAM";
+    InstrumentType3["UP_DOWN_COUNTER"] = "UP_DOWN_COUNTER";
+    InstrumentType3["OBSERVABLE_COUNTER"] = "OBSERVABLE_COUNTER";
+    InstrumentType3["OBSERVABLE_GAUGE"] = "OBSERVABLE_GAUGE";
+    InstrumentType3["OBSERVABLE_UP_DOWN_COUNTER"] = "OBSERVABLE_UP_DOWN_COUNTER";
+  })(InstrumentType || (InstrumentType = {}));
+  var DataPointType;
+  (function(DataPointType3) {
+    DataPointType3[DataPointType3["HISTOGRAM"] = 0] = "HISTOGRAM";
+    DataPointType3[DataPointType3["EXPONENTIAL_HISTOGRAM"] = 1] = "EXPONENTIAL_HISTOGRAM";
+    DataPointType3[DataPointType3["GAUGE"] = 2] = "GAUGE";
+    DataPointType3[DataPointType3["SUM"] = 3] = "SUM";
+  })(DataPointType || (DataPointType = {}));
+
+  // node_modules/@opentelemetry/sdk-metrics/build/esm/view/AggregationOption.js
+  var AggregationType;
+  (function(AggregationType3) {
+    AggregationType3[AggregationType3["DEFAULT"] = 0] = "DEFAULT";
+    AggregationType3[AggregationType3["DROP"] = 1] = "DROP";
+    AggregationType3[AggregationType3["SUM"] = 2] = "SUM";
+    AggregationType3[AggregationType3["LAST_VALUE"] = 3] = "LAST_VALUE";
+    AggregationType3[AggregationType3["EXPLICIT_BUCKET_HISTOGRAM"] = 4] = "EXPLICIT_BUCKET_HISTOGRAM";
+    AggregationType3[AggregationType3["EXPONENTIAL_HISTOGRAM"] = 5] = "EXPONENTIAL_HISTOGRAM";
+  })(AggregationType || (AggregationType = {}));
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/metrics/internal-types.js
+  var EAggregationTemporality;
+  (function(EAggregationTemporality2) {
+    EAggregationTemporality2[EAggregationTemporality2["AGGREGATION_TEMPORALITY_UNSPECIFIED"] = 0] = "AGGREGATION_TEMPORALITY_UNSPECIFIED";
+    EAggregationTemporality2[EAggregationTemporality2["AGGREGATION_TEMPORALITY_DELTA"] = 1] = "AGGREGATION_TEMPORALITY_DELTA";
+    EAggregationTemporality2[EAggregationTemporality2["AGGREGATION_TEMPORALITY_CUMULATIVE"] = 2] = "AGGREGATION_TEMPORALITY_CUMULATIVE";
+  })(EAggregationTemporality || (EAggregationTemporality = {}));
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/metrics/internal.js
+  function toResourceMetrics(resourceMetrics, options) {
+    const encoder = getOtlpEncoder(options);
+    return {
+      resource: createResource(resourceMetrics.resource),
+      schemaUrl: void 0,
+      scopeMetrics: toScopeMetrics(resourceMetrics.scopeMetrics, encoder)
+    };
+  }
+  function toScopeMetrics(scopeMetrics, encoder) {
+    return Array.from(scopeMetrics.map((metrics2) => ({
+      scope: createInstrumentationScope(metrics2.scope),
+      metrics: metrics2.metrics.map((metricData) => toMetric(metricData, encoder)),
+      schemaUrl: metrics2.scope.schemaUrl
+    })));
+  }
+  function toMetric(metricData, encoder) {
+    const out = {
+      name: metricData.descriptor.name,
+      description: metricData.descriptor.description,
+      unit: metricData.descriptor.unit
+    };
+    const aggregationTemporality = toAggregationTemporality(metricData.aggregationTemporality);
+    switch (metricData.dataPointType) {
+      case DataPointType.SUM:
+        out.sum = {
+          aggregationTemporality,
+          isMonotonic: metricData.isMonotonic,
+          dataPoints: toSingularDataPoints(metricData, encoder)
+        };
+        break;
+      case DataPointType.GAUGE:
+        out.gauge = {
+          dataPoints: toSingularDataPoints(metricData, encoder)
+        };
+        break;
+      case DataPointType.HISTOGRAM:
+        out.histogram = {
+          aggregationTemporality,
+          dataPoints: toHistogramDataPoints(metricData, encoder)
+        };
+        break;
+      case DataPointType.EXPONENTIAL_HISTOGRAM:
+        out.exponentialHistogram = {
+          aggregationTemporality,
+          dataPoints: toExponentialHistogramDataPoints(metricData, encoder)
+        };
+        break;
+    }
+    return out;
+  }
+  function toSingularDataPoint(dataPoint, valueType, encoder) {
+    const out = {
+      attributes: toAttributes(dataPoint.attributes),
+      startTimeUnixNano: encoder.encodeHrTime(dataPoint.startTime),
+      timeUnixNano: encoder.encodeHrTime(dataPoint.endTime)
+    };
+    switch (valueType) {
+      case ValueType.INT:
+        out.asInt = dataPoint.value;
+        break;
+      case ValueType.DOUBLE:
+        out.asDouble = dataPoint.value;
+        break;
+    }
+    return out;
+  }
+  function toSingularDataPoints(metricData, encoder) {
+    return metricData.dataPoints.map((dataPoint) => {
+      return toSingularDataPoint(dataPoint, metricData.descriptor.valueType, encoder);
+    });
+  }
+  function toHistogramDataPoints(metricData, encoder) {
+    return metricData.dataPoints.map((dataPoint) => {
+      const histogram = dataPoint.value;
+      return {
+        attributes: toAttributes(dataPoint.attributes),
+        bucketCounts: histogram.buckets.counts,
+        explicitBounds: histogram.buckets.boundaries,
+        count: histogram.count,
+        sum: histogram.sum,
+        min: histogram.min,
+        max: histogram.max,
+        startTimeUnixNano: encoder.encodeHrTime(dataPoint.startTime),
+        timeUnixNano: encoder.encodeHrTime(dataPoint.endTime)
+      };
+    });
+  }
+  function toExponentialHistogramDataPoints(metricData, encoder) {
+    return metricData.dataPoints.map((dataPoint) => {
+      const histogram = dataPoint.value;
+      return {
+        attributes: toAttributes(dataPoint.attributes),
+        count: histogram.count,
+        min: histogram.min,
+        max: histogram.max,
+        sum: histogram.sum,
+        positive: {
+          offset: histogram.positive.offset,
+          bucketCounts: histogram.positive.bucketCounts
+        },
+        negative: {
+          offset: histogram.negative.offset,
+          bucketCounts: histogram.negative.bucketCounts
+        },
+        scale: histogram.scale,
+        zeroCount: histogram.zeroCount,
+        startTimeUnixNano: encoder.encodeHrTime(dataPoint.startTime),
+        timeUnixNano: encoder.encodeHrTime(dataPoint.endTime)
+      };
+    });
+  }
+  function toAggregationTemporality(temporality) {
+    switch (temporality) {
+      case AggregationTemporality.DELTA:
+        return EAggregationTemporality.AGGREGATION_TEMPORALITY_DELTA;
+      case AggregationTemporality.CUMULATIVE:
+        return EAggregationTemporality.AGGREGATION_TEMPORALITY_CUMULATIVE;
+    }
+  }
+  function createExportMetricsServiceRequest(resourceMetrics, options) {
+    return {
+      resourceMetrics: resourceMetrics.map((metrics2) => toResourceMetrics(metrics2, options))
+    };
+  }
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/trace/internal.js
   function sdkSpanToOtlpSpan(span, encoder) {
-    var _a3;
-    var ctx = span.spanContext();
-    var status = span.status;
+    const ctx = span.spanContext();
+    const status = span.status;
+    const parentSpanId = span.parentSpanContext?.spanId ? encoder.encodeSpanContext(span.parentSpanContext?.spanId) : void 0;
     return {
       traceId: encoder.encodeSpanContext(ctx.traceId),
       spanId: encoder.encodeSpanContext(ctx.spanId),
-      parentSpanId: encoder.encodeOptionalSpanContext(span.parentSpanId),
-      traceState: (_a3 = ctx.traceState) === null || _a3 === void 0 ? void 0 : _a3.serialize(),
+      parentSpanId,
+      traceState: ctx.traceState?.serialize(),
       name: span.name,
       // Span kind is offset by 1 because the API does not define a value for unset
       kind: span.kind == null ? 0 : span.kind + 1,
@@ -7749,28 +6878,23 @@
       endTimeUnixNano: encoder.encodeHrTime(span.endTime),
       attributes: toAttributes(span.attributes),
       droppedAttributesCount: span.droppedAttributesCount,
-      events: span.events.map(function(event) {
-        return toOtlpSpanEvent(event, encoder);
-      }),
+      events: span.events.map((event) => toOtlpSpanEvent(event, encoder)),
       droppedEventsCount: span.droppedEventsCount,
       status: {
         // API and proto enums share the same values
         code: status.code,
         message: status.message
       },
-      links: span.links.map(function(link) {
-        return toOtlpLink(link, encoder);
-      }),
+      links: span.links.map((link) => toOtlpLink(link, encoder)),
       droppedLinksCount: span.droppedLinksCount
     };
   }
   function toOtlpLink(link, encoder) {
-    var _a3;
     return {
       attributes: link.attributes ? toAttributes(link.attributes) : [],
       spanId: encoder.encodeSpanContext(link.context.spanId),
       traceId: encoder.encodeSpanContext(link.context.traceId),
-      traceState: (_a3 = link.context.traceState) === null || _a3 === void 0 ? void 0 : _a3.serialize(),
+      traceState: link.context.traceState?.serialize(),
       droppedAttributesCount: link.droppedAttributesCount || 0
     };
   }
@@ -7783,66 +6907,52 @@
     };
   }
   function createExportTraceServiceRequest(spans, options) {
-    var encoder = getOtlpEncoder(options);
+    const encoder = getOtlpEncoder(options);
     return {
       resourceSpans: spanRecordsToResourceSpans(spans, encoder)
     };
   }
-  function createResourceMap(readableSpans) {
-    var e_1, _a3;
-    var resourceMap = /* @__PURE__ */ new Map();
-    try {
-      for (var readableSpans_1 = __values7(readableSpans), readableSpans_1_1 = readableSpans_1.next(); !readableSpans_1_1.done; readableSpans_1_1 = readableSpans_1.next()) {
-        var record = readableSpans_1_1.value;
-        var ilmMap = resourceMap.get(record.resource);
-        if (!ilmMap) {
-          ilmMap = /* @__PURE__ */ new Map();
-          resourceMap.set(record.resource, ilmMap);
-        }
-        var instrumentationLibraryKey = record.instrumentationLibrary.name + "@" + (record.instrumentationLibrary.version || "") + ":" + (record.instrumentationLibrary.schemaUrl || "");
-        var records = ilmMap.get(instrumentationLibraryKey);
-        if (!records) {
-          records = [];
-          ilmMap.set(instrumentationLibraryKey, records);
-        }
-        records.push(record);
+  function createResourceMap2(readableSpans) {
+    const resourceMap = /* @__PURE__ */ new Map();
+    for (const record of readableSpans) {
+      let ilsMap = resourceMap.get(record.resource);
+      if (!ilsMap) {
+        ilsMap = /* @__PURE__ */ new Map();
+        resourceMap.set(record.resource, ilsMap);
       }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (readableSpans_1_1 && !readableSpans_1_1.done && (_a3 = readableSpans_1.return)) _a3.call(readableSpans_1);
-      } finally {
-        if (e_1) throw e_1.error;
+      const instrumentationScopeKey = `${record.instrumentationScope.name}@${record.instrumentationScope.version || ""}:${record.instrumentationScope.schemaUrl || ""}`;
+      let records = ilsMap.get(instrumentationScopeKey);
+      if (!records) {
+        records = [];
+        ilsMap.set(instrumentationScopeKey, records);
       }
+      records.push(record);
     }
     return resourceMap;
   }
   function spanRecordsToResourceSpans(readableSpans, encoder) {
-    var resourceMap = createResourceMap(readableSpans);
-    var out = [];
-    var entryIterator = resourceMap.entries();
-    var entry = entryIterator.next();
+    const resourceMap = createResourceMap2(readableSpans);
+    const out = [];
+    const entryIterator = resourceMap.entries();
+    let entry = entryIterator.next();
     while (!entry.done) {
-      var _a3 = __read14(entry.value, 2), resource = _a3[0], ilmMap = _a3[1];
-      var scopeResourceSpans = [];
-      var ilmIterator = ilmMap.values();
-      var ilmEntry = ilmIterator.next();
+      const [resource, ilmMap] = entry.value;
+      const scopeResourceSpans = [];
+      const ilmIterator = ilmMap.values();
+      let ilmEntry = ilmIterator.next();
       while (!ilmEntry.done) {
-        var scopeSpans = ilmEntry.value;
+        const scopeSpans = ilmEntry.value;
         if (scopeSpans.length > 0) {
-          var spans = scopeSpans.map(function(readableSpan) {
-            return sdkSpanToOtlpSpan(readableSpan, encoder);
-          });
+          const spans = scopeSpans.map((readableSpan) => sdkSpanToOtlpSpan(readableSpan, encoder));
           scopeResourceSpans.push({
-            scope: createInstrumentationScope(scopeSpans[0].instrumentationLibrary),
+            scope: createInstrumentationScope(scopeSpans[0].instrumentationScope),
             spans,
-            schemaUrl: scopeSpans[0].instrumentationLibrary.schemaUrl
+            schemaUrl: scopeSpans[0].instrumentationScope.schemaUrl
           });
         }
         ilmEntry = ilmIterator.next();
       }
-      var transformedSpans = {
+      const transformedSpans = {
         resource: createResource(resource),
         scopeSpans: scopeResourceSpans,
         schemaUrl: void 0
@@ -7853,119 +6963,63 @@
     return out;
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-transformer/build/esm/trace/json/trace.js
-  var JsonTraceSerializer = {
-    serializeRequest: function(arg) {
-      var request = createExportTraceServiceRequest(arg, {
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/logs/json/logs.js
+  var JsonLogsSerializer = {
+    serializeRequest: (arg) => {
+      const request = createExportLogsServiceRequest(arg, {
         useHex: true,
         useLongBits: false
       });
-      var encoder = new TextEncoder();
+      const encoder = new TextEncoder();
       return encoder.encode(JSON.stringify(request));
     },
-    deserializeResponse: function(arg) {
-      var decoder = new TextDecoder();
+    deserializeResponse: (arg) => {
+      if (arg.length === 0) {
+        return {};
+      }
+      const decoder = new TextDecoder();
       return JSON.parse(decoder.decode(arg));
     }
   };
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/retrying-transport.js
-  var __awaiter6 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/metrics/json/metrics.js
+  var JsonMetricsSerializer = {
+    serializeRequest: (arg) => {
+      const request = createExportMetricsServiceRequest([arg], {
+        useLongBits: false
       });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
+      const encoder = new TextEncoder();
+      return encoder.encode(JSON.stringify(request));
+    },
+    deserializeResponse: (arg) => {
+      if (arg.length === 0) {
+        return {};
       }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator6 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
+      const decoder = new TextDecoder();
+      return JSON.parse(decoder.decode(arg));
     }
   };
+
+  // node_modules/@opentelemetry/otlp-transformer/build/esm/trace/json/trace.js
+  var JsonTraceSerializer = {
+    serializeRequest: (arg) => {
+      const request = createExportTraceServiceRequest(arg, {
+        useHex: true,
+        useLongBits: false
+      });
+      const encoder = new TextEncoder();
+      return encoder.encode(JSON.stringify(request));
+    },
+    deserializeResponse: (arg) => {
+      if (arg.length === 0) {
+        return {};
+      }
+      const decoder = new TextDecoder();
+      return JSON.parse(decoder.decode(arg));
+    }
+  };
+
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/retrying-transport.js
   var MAX_ATTEMPTS = 5;
   var INITIAL_BACKOFF = 1e3;
   var MAX_BACKOFF = 5e3;
@@ -7974,200 +7028,154 @@
   function getJitter() {
     return Math.random() * (2 * JITTER) - JITTER;
   }
-  var RetryingTransport = (
-    /** @class */
-    function() {
-      function RetryingTransport2(_transport) {
-        this._transport = _transport;
+  var RetryingTransport = class {
+    _transport;
+    constructor(_transport) {
+      this._transport = _transport;
+    }
+    retry(data, timeoutMillis, inMillis) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          this._transport.send(data, timeoutMillis).then(resolve, reject);
+        }, inMillis);
+      });
+    }
+    async send(data, timeoutMillis) {
+      const deadline = Date.now() + timeoutMillis;
+      let result = await this._transport.send(data, timeoutMillis);
+      let attempts = MAX_ATTEMPTS;
+      let nextBackoff = INITIAL_BACKOFF;
+      while (result.status === "retryable" && attempts > 0) {
+        attempts--;
+        const backoff = Math.max(Math.min(nextBackoff, MAX_BACKOFF) + getJitter(), 0);
+        nextBackoff = nextBackoff * BACKOFF_MULTIPLIER;
+        const retryInMillis = result.retryInMillis ?? backoff;
+        const remainingTimeoutMillis = deadline - Date.now();
+        if (retryInMillis > remainingTimeoutMillis) {
+          return result;
+        }
+        result = await this.retry(data, remainingTimeoutMillis, retryInMillis);
       }
-      RetryingTransport2.prototype.retry = function(data, timeoutMillis, inMillis) {
-        var _this = this;
-        return new Promise(function(resolve, reject) {
-          setTimeout(function() {
-            _this._transport.send(data, timeoutMillis).then(resolve, reject);
-          }, inMillis);
-        });
-      };
-      RetryingTransport2.prototype.send = function(data, timeoutMillis) {
-        var _a3;
-        return __awaiter6(this, void 0, void 0, function() {
-          var deadline, result, attempts, nextBackoff, backoff, retryInMillis, remainingTimeoutMillis;
-          return __generator6(this, function(_b) {
-            switch (_b.label) {
-              case 0:
-                deadline = Date.now() + timeoutMillis;
-                return [4, this._transport.send(data, timeoutMillis)];
-              case 1:
-                result = _b.sent();
-                attempts = MAX_ATTEMPTS;
-                nextBackoff = INITIAL_BACKOFF;
-                _b.label = 2;
-              case 2:
-                if (!(result.status === "retryable" && attempts > 0)) return [3, 4];
-                attempts--;
-                backoff = Math.max(Math.min(nextBackoff, MAX_BACKOFF) + getJitter(), 0);
-                nextBackoff = nextBackoff * BACKOFF_MULTIPLIER;
-                retryInMillis = (_a3 = result.retryInMillis) !== null && _a3 !== void 0 ? _a3 : backoff;
-                remainingTimeoutMillis = deadline - Date.now();
-                if (retryInMillis > remainingTimeoutMillis) {
-                  return [2, result];
-                }
-                return [4, this.retry(data, remainingTimeoutMillis, retryInMillis)];
-              case 3:
-                result = _b.sent();
-                return [3, 2];
-              case 4:
-                return [2, result];
-            }
-          });
-        });
-      };
-      RetryingTransport2.prototype.shutdown = function() {
-        return this._transport.shutdown();
-      };
-      return RetryingTransport2;
-    }()
-  );
+      return result;
+    }
+    shutdown() {
+      return this._transport.shutdown();
+    }
+  };
   function createRetryingTransport(options) {
     return new RetryingTransport(options.transport);
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/is-export-retryable.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/is-export-retryable.js
   function isExportRetryable(statusCode) {
-    var retryCodes = [429, 502, 503, 504];
+    const retryCodes = [429, 502, 503, 504];
     return retryCodes.includes(statusCode);
   }
   function parseRetryAfterToMills(retryAfter) {
     if (retryAfter == null) {
       return void 0;
     }
-    var seconds = Number.parseInt(retryAfter, 10);
+    const seconds = Number.parseInt(retryAfter, 10);
     if (Number.isInteger(seconds)) {
       return seconds > 0 ? seconds * 1e3 : -1;
     }
-    var delay = new Date(retryAfter).getTime() - Date.now();
+    const delay = new Date(retryAfter).getTime() - Date.now();
     if (delay >= 0) {
       return delay;
     }
     return 0;
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/transport/xhr-transport.js
-  var __read15 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/transport/xhr-transport.js
+  var XhrTransport = class {
+    _parameters;
+    constructor(_parameters) {
+      this._parameters = _parameters;
     }
-    return ar;
-  };
-  var XhrTransport = (
-    /** @class */
-    function() {
-      function XhrTransport2(_parameters) {
-        this._parameters = _parameters;
-      }
-      XhrTransport2.prototype.send = function(data, timeoutMillis) {
-        var _this = this;
-        return new Promise(function(resolve) {
-          var xhr = new XMLHttpRequest();
-          xhr.timeout = timeoutMillis;
-          xhr.open("POST", _this._parameters.url);
-          var headers = _this._parameters.headers();
-          Object.entries(headers).forEach(function(_a3) {
-            var _b = __read15(_a3, 2), k2 = _b[0], v2 = _b[1];
-            xhr.setRequestHeader(k2, v2);
-          });
-          xhr.ontimeout = function(_2) {
-            resolve({
-              status: "failure",
-              error: new Error("XHR request timed out")
-            });
-          };
-          xhr.onreadystatechange = function() {
-            if (xhr.status >= 200 && xhr.status <= 299) {
-              diag2.debug("XHR success");
-              resolve({
-                status: "success"
-              });
-            } else if (xhr.status && isExportRetryable(xhr.status)) {
-              resolve({
-                status: "retryable",
-                retryInMillis: parseRetryAfterToMills(xhr.getResponseHeader("Retry-After"))
-              });
-            } else if (xhr.status !== 0) {
-              resolve({
-                status: "failure",
-                error: new Error("XHR request failed with non-retryable status")
-              });
-            }
-          };
-          xhr.onabort = function() {
-            resolve({
-              status: "failure",
-              error: new Error("XHR request aborted")
-            });
-          };
-          xhr.onerror = function() {
-            resolve({
-              status: "failure",
-              error: new Error("XHR request errored")
-            });
-          };
-          xhr.send(data);
+    send(data, timeoutMillis) {
+      return new Promise((resolve) => {
+        const xhr = new XMLHttpRequest();
+        xhr.timeout = timeoutMillis;
+        xhr.open("POST", this._parameters.url);
+        const headers = this._parameters.headers();
+        Object.entries(headers).forEach(([k2, v2]) => {
+          xhr.setRequestHeader(k2, v2);
         });
-      };
-      XhrTransport2.prototype.shutdown = function() {
-      };
-      return XhrTransport2;
-    }()
-  );
+        xhr.ontimeout = (_2) => {
+          resolve({
+            status: "failure",
+            error: new Error("XHR request timed out")
+          });
+        };
+        xhr.onreadystatechange = () => {
+          if (xhr.status >= 200 && xhr.status <= 299) {
+            diag2.debug("XHR success");
+            resolve({
+              status: "success"
+            });
+          } else if (xhr.status && isExportRetryable(xhr.status)) {
+            resolve({
+              status: "retryable",
+              retryInMillis: parseRetryAfterToMills(xhr.getResponseHeader("Retry-After"))
+            });
+          } else if (xhr.status !== 0) {
+            resolve({
+              status: "failure",
+              error: new Error("XHR request failed with non-retryable status")
+            });
+          }
+        };
+        xhr.onabort = () => {
+          resolve({
+            status: "failure",
+            error: new Error("XHR request aborted")
+          });
+        };
+        xhr.onerror = () => {
+          resolve({
+            status: "failure",
+            error: new Error("XHR request errored")
+          });
+        };
+        xhr.send(data);
+      });
+    }
+    shutdown() {
+    }
+  };
   function createXhrTransport(parameters) {
     return new XhrTransport(parameters);
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/transport/send-beacon-transport.js
-  var SendBeaconTransport = (
-    /** @class */
-    function() {
-      function SendBeaconTransport2(_params) {
-        this._params = _params;
-      }
-      SendBeaconTransport2.prototype.send = function(data) {
-        var _this = this;
-        return new Promise(function(resolve) {
-          if (navigator.sendBeacon(_this._params.url, new Blob([data], { type: _this._params.blobType }))) {
-            diag2.debug("SendBeacon success");
-            resolve({
-              status: "success"
-            });
-          } else {
-            resolve({
-              status: "failure",
-              error: new Error("SendBeacon failed")
-            });
-          }
-        });
-      };
-      SendBeaconTransport2.prototype.shutdown = function() {
-      };
-      return SendBeaconTransport2;
-    }()
-  );
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/transport/send-beacon-transport.js
+  var SendBeaconTransport = class {
+    _params;
+    constructor(_params) {
+      this._params = _params;
+    }
+    send(data) {
+      return new Promise((resolve) => {
+        if (navigator.sendBeacon(this._params.url, new Blob([data], { type: this._params.blobType }))) {
+          diag2.debug("SendBeacon success");
+          resolve({
+            status: "success"
+          });
+        } else {
+          resolve({
+            status: "failure",
+            error: new Error("SendBeacon failed")
+          });
+        }
+      });
+    }
+    shutdown() {
+    }
+  };
   function createSendBeaconTransport(parameters) {
     return new SendBeaconTransport(parameters);
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-browser-http-export-delegate.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/otlp-browser-http-export-delegate.js
   function createOtlpXhrExportDelegate(options, serializer) {
     return createOtlpNetworkExportDelegate(options, serializer, createRetryingTransport({
       transport: createXhrTransport(options)
@@ -8182,56 +7190,28 @@
     }));
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/util.js
-  var __read16 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/util.js
   function validateAndNormalizeHeaders(partialHeaders) {
-    return function() {
-      var _a3;
-      var headers = {};
-      Object.entries((_a3 = partialHeaders === null || partialHeaders === void 0 ? void 0 : partialHeaders()) !== null && _a3 !== void 0 ? _a3 : {}).forEach(function(_a4) {
-        var _b = __read16(_a4, 2), key = _b[0], value = _b[1];
+    return () => {
+      const headers = {};
+      Object.entries(partialHeaders?.() ?? {}).forEach(([key, value]) => {
         if (typeof value !== "undefined") {
           headers[key] = String(value);
         } else {
-          diag2.warn('Header "' + key + '" has invalid value (' + value + ") and will be ignored");
+          diag2.warn(`Header "${key}" has invalid value (${value}) and will be ignored`);
         }
       });
       return headers;
     };
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/otlp-http-configuration.js
-  var __assign4 = function() {
-    __assign4 = Object.assign || function(t3) {
-      for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t3[p2] = s2[p2];
-      }
-      return t3;
-    };
-    return __assign4.apply(this, arguments);
-  };
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/otlp-http-configuration.js
   function mergeHeaders(userProvidedHeaders, fallbackHeaders, defaultHeaders) {
-    var requiredHeaders = __assign4({}, defaultHeaders());
-    var headers = {};
-    return function() {
+    const requiredHeaders = {
+      ...defaultHeaders()
+    };
+    const headers = {};
+    return () => {
       if (fallbackHeaders != null) {
         Object.assign(headers, fallbackHeaders());
       }
@@ -8248,21 +7228,28 @@
     try {
       new URL(url);
       return url;
-    } catch (e2) {
-      throw new Error("Configuration: Could not parse user-provided export URL: '" + url + "'");
+    } catch {
+      throw new Error(`Configuration: Could not parse user-provided export URL: '${url}'`);
     }
   }
   function mergeOtlpHttpConfigurationWithDefaults(userProvidedConfiguration, fallbackConfiguration, defaultConfiguration) {
-    var _a3, _b, _c, _d;
-    return __assign4(__assign4({}, mergeOtlpSharedConfigurationWithDefaults(userProvidedConfiguration, fallbackConfiguration, defaultConfiguration)), { headers: mergeHeaders(validateAndNormalizeHeaders(userProvidedConfiguration.headers), fallbackConfiguration.headers, defaultConfiguration.headers), url: (_b = (_a3 = validateUserProvidedUrl(userProvidedConfiguration.url)) !== null && _a3 !== void 0 ? _a3 : fallbackConfiguration.url) !== null && _b !== void 0 ? _b : defaultConfiguration.url, agentOptions: (_d = (_c = userProvidedConfiguration.agentOptions) !== null && _c !== void 0 ? _c : fallbackConfiguration.agentOptions) !== null && _d !== void 0 ? _d : defaultConfiguration.agentOptions });
+    return {
+      ...mergeOtlpSharedConfigurationWithDefaults(userProvidedConfiguration, fallbackConfiguration, defaultConfiguration),
+      headers: mergeHeaders(validateAndNormalizeHeaders(userProvidedConfiguration.headers), fallbackConfiguration.headers, defaultConfiguration.headers),
+      url: validateUserProvidedUrl(userProvidedConfiguration.url) ?? fallbackConfiguration.url ?? defaultConfiguration.url,
+      agentOptions: userProvidedConfiguration.agentOptions ?? fallbackConfiguration.agentOptions ?? defaultConfiguration.agentOptions
+    };
   }
   function getHttpConfigurationDefaults(requiredHeaders, signalResourcePath) {
-    return __assign4(__assign4({}, getSharedConfigurationDefaults()), { headers: function() {
-      return requiredHeaders;
-    }, url: "http://localhost:4318/" + signalResourcePath, agentOptions: { keepAlive: true } });
+    return {
+      ...getSharedConfigurationDefaults(),
+      headers: () => requiredHeaders,
+      url: "http://localhost:4318/" + signalResourcePath,
+      agentOptions: { keepAlive: true }
+    };
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/convert-legacy-browser-http-options.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/convert-legacy-browser-http-options.js
   function convertLegacyBrowserHttpOptions(config, signalResourcePath, requiredHeaders) {
     return mergeOtlpHttpConfigurationWithDefaults(
       {
@@ -8277,10 +7264,10 @@
     );
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/create-legacy-browser-delegate.js
+  // node_modules/@opentelemetry/otlp-exporter-base/build/esm/configuration/create-legacy-browser-delegate.js
   function createLegacyOtlpBrowserExportDelegate(config, serializer, signalResourcePath, requiredHeaders) {
-    var useXhr = !!config.headers || typeof navigator.sendBeacon !== "function";
-    var options = convertLegacyBrowserHttpOptions(config, signalResourcePath, requiredHeaders);
+    const useXhr = !!config.headers || typeof navigator.sendBeacon !== "function";
+    const options = convertLegacyBrowserHttpOptions(config, signalResourcePath, requiredHeaders);
     if (useXhr) {
       return createOtlpXhrExportDelegate(options, serializer);
     } else {
@@ -8288,84 +7275,3583 @@
     }
   }
 
-  // node_modules/@honeycombio/opentelemetry-web/node_modules/@opentelemetry/exporter-trace-otlp-http/build/esm/platform/browser/OTLPTraceExporter.js
-  var __extends6 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
+  // node_modules/@opentelemetry/exporter-trace-otlp-http/build/esm/platform/browser/OTLPTraceExporter.js
+  var OTLPTraceExporter = class extends OTLPExporterBase {
+    constructor(config = {}) {
+      super(createLegacyOtlpBrowserExportDelegate(config, JsonTraceSerializer, "v1/traces", { "Content-Type": "application/json" }));
+    }
+  };
+
+  // node_modules/@opentelemetry/exporter-metrics-otlp-http/node_modules/@opentelemetry/core/build/esm/platform/browser/environment.js
+  function getStringFromEnv2(_2) {
+    return void 0;
+  }
+
+  // node_modules/@opentelemetry/exporter-metrics-otlp-http/build/esm/OTLPMetricExporterOptions.js
+  var AggregationTemporalityPreference;
+  (function(AggregationTemporalityPreference2) {
+    AggregationTemporalityPreference2[AggregationTemporalityPreference2["DELTA"] = 0] = "DELTA";
+    AggregationTemporalityPreference2[AggregationTemporalityPreference2["CUMULATIVE"] = 1] = "CUMULATIVE";
+    AggregationTemporalityPreference2[AggregationTemporalityPreference2["LOWMEMORY"] = 2] = "LOWMEMORY";
+  })(AggregationTemporalityPreference || (AggregationTemporalityPreference = {}));
+
+  // node_modules/@opentelemetry/exporter-metrics-otlp-http/build/esm/OTLPMetricExporterBase.js
+  var CumulativeTemporalitySelector = () => AggregationTemporality.CUMULATIVE;
+  var DeltaTemporalitySelector = (instrumentType) => {
+    switch (instrumentType) {
+      case InstrumentType.COUNTER:
+      case InstrumentType.OBSERVABLE_COUNTER:
+      case InstrumentType.GAUGE:
+      case InstrumentType.HISTOGRAM:
+      case InstrumentType.OBSERVABLE_GAUGE:
+        return AggregationTemporality.DELTA;
+      case InstrumentType.UP_DOWN_COUNTER:
+      case InstrumentType.OBSERVABLE_UP_DOWN_COUNTER:
+        return AggregationTemporality.CUMULATIVE;
+    }
+  };
+  var LowMemoryTemporalitySelector = (instrumentType) => {
+    switch (instrumentType) {
+      case InstrumentType.COUNTER:
+      case InstrumentType.HISTOGRAM:
+        return AggregationTemporality.DELTA;
+      case InstrumentType.GAUGE:
+      case InstrumentType.UP_DOWN_COUNTER:
+      case InstrumentType.OBSERVABLE_UP_DOWN_COUNTER:
+      case InstrumentType.OBSERVABLE_COUNTER:
+      case InstrumentType.OBSERVABLE_GAUGE:
+        return AggregationTemporality.CUMULATIVE;
+    }
+  };
+  function chooseTemporalitySelectorFromEnvironment() {
+    const configuredTemporality = (getStringFromEnv2("OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE") ?? "cumulative").toLowerCase();
+    if (configuredTemporality === "cumulative") {
+      return CumulativeTemporalitySelector;
+    }
+    if (configuredTemporality === "delta") {
+      return DeltaTemporalitySelector;
+    }
+    if (configuredTemporality === "lowmemory") {
+      return LowMemoryTemporalitySelector;
+    }
+    diag2.warn(`OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE is set to '${configuredTemporality}', but only 'cumulative' and 'delta' are allowed. Using default ('cumulative') instead.`);
+    return CumulativeTemporalitySelector;
+  }
+  function chooseTemporalitySelector(temporalityPreference) {
+    if (temporalityPreference != null) {
+      if (temporalityPreference === AggregationTemporalityPreference.DELTA) {
+        return DeltaTemporalitySelector;
+      } else if (temporalityPreference === AggregationTemporalityPreference.LOWMEMORY) {
+        return LowMemoryTemporalitySelector;
       }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var OTLPTraceExporter = (
-    /** @class */
-    function(_super) {
-      __extends6(OTLPTraceExporter2, _super);
-      function OTLPTraceExporter2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        return _super.call(this, createLegacyOtlpBrowserExportDelegate(config, JsonTraceSerializer, "v1/traces", { "Content-Type": "application/json" })) || this;
+      return CumulativeTemporalitySelector;
+    }
+    return chooseTemporalitySelectorFromEnvironment();
+  }
+  var DEFAULT_AGGREGATION = Object.freeze({
+    type: AggregationType.DEFAULT
+  });
+  function chooseAggregationSelector(config) {
+    return config?.aggregationPreference ?? (() => DEFAULT_AGGREGATION);
+  }
+  var OTLPMetricExporterBase = class extends OTLPExporterBase {
+    _aggregationTemporalitySelector;
+    _aggregationSelector;
+    constructor(delegate, config) {
+      super(delegate);
+      this._aggregationSelector = chooseAggregationSelector(config);
+      this._aggregationTemporalitySelector = chooseTemporalitySelector(config?.temporalityPreference);
+    }
+    selectAggregation(instrumentType) {
+      return this._aggregationSelector(instrumentType);
+    }
+    selectAggregationTemporality(instrumentType) {
+      return this._aggregationTemporalitySelector(instrumentType);
+    }
+  };
+
+  // node_modules/@opentelemetry/exporter-metrics-otlp-http/build/esm/platform/browser/OTLPMetricExporter.js
+  var OTLPMetricExporter = class extends OTLPMetricExporterBase {
+    constructor(config) {
+      super(createLegacyOtlpBrowserExportDelegate(config ?? {}, JsonMetricsSerializer, "v1/metrics", { "Content-Type": "application/json" }), config);
+    }
+  };
+
+  // node_modules/@opentelemetry/exporter-logs-otlp-http/build/esm/platform/browser/OTLPLogExporter.js
+  var OTLPLogExporter = class extends OTLPExporterBase {
+    constructor(config = {}) {
+      super(createLegacyOtlpBrowserExportDelegate(config, JsonLogsSerializer, "v1/logs", { "Content-Type": "application/json" }));
+    }
+  };
+
+  // node_modules/@opentelemetry/web-common/build/esm/semconv.js
+  var ATTR_SESSION_ID = "session.id";
+
+  // node_modules/@opentelemetry/web-common/build/esm/SessionSpanProcessor.js
+  var SessionSpanProcessor = class {
+    _sessionIdProvider;
+    constructor(sessionIdProvider) {
+      this._sessionIdProvider = sessionIdProvider;
+    }
+    /**
+     * Forces to export all finished spans
+     */
+    async forceFlush() {
+    }
+    /**
+     * Called when a {@link Span} is started, if the `span.isRecording()`
+     * returns true.
+     * @param span the Span that just started.
+     */
+    onStart(span, _parentContext) {
+      const sessionId2 = this._sessionIdProvider?.getSessionId();
+      if (sessionId2) {
+        span.setAttribute(ATTR_SESSION_ID, sessionId2);
       }
-      return OTLPTraceExporter2;
-    }(OTLPExporterBase)
-  );
+    }
+    /**
+     * Called when a {@link ReadableSpan} is ended, if the `span.isRecording()`
+     * returns true.
+     * @param span the Span that just ended.
+     */
+    onEnd(_2) {
+    }
+    /**
+     * Shuts down the processor. Called when SDK is shut down. This is an
+     * opportunity for processor to do any cleanup required.
+     */
+    async shutdown() {
+    }
+  };
+
+  // node_modules/@opentelemetry/web-common/build/esm/utils.js
+  function createSessionSpanProcessor(sessionProvider) {
+    return new SessionSpanProcessor(sessionProvider);
+  }
 
   // node_modules/@honeycombio/opentelemetry-web/dist/esm/index.js
-  var shimmer2 = __toESM(require_shimmer());
-  var import_tracekit = __toESM(require_tracekit());
-  var SESSION_ID_BYTES = 16;
-  var SHARED_CHAR_CODES_ARRAY2 = Array(32);
-  var SessionIdSpanProcessor = class {
-    constructor() {
-      this._idGenerator = getIdGenerator2(SESSION_ID_BYTES);
-      this._sessionId = this._idGenerator();
+  var import_ua_parser_js = __toESM(require_ua_parser());
+  var AggregationTemporality2;
+  (function(AggregationTemporality3) {
+    AggregationTemporality3[AggregationTemporality3["DELTA"] = 0] = "DELTA";
+    AggregationTemporality3[AggregationTemporality3["CUMULATIVE"] = 1] = "CUMULATIVE";
+  })(AggregationTemporality2 || (AggregationTemporality2 = {}));
+  var InstrumentType2;
+  (function(InstrumentType3) {
+    InstrumentType3["COUNTER"] = "COUNTER";
+    InstrumentType3["GAUGE"] = "GAUGE";
+    InstrumentType3["HISTOGRAM"] = "HISTOGRAM";
+    InstrumentType3["UP_DOWN_COUNTER"] = "UP_DOWN_COUNTER";
+    InstrumentType3["OBSERVABLE_COUNTER"] = "OBSERVABLE_COUNTER";
+    InstrumentType3["OBSERVABLE_GAUGE"] = "OBSERVABLE_GAUGE";
+    InstrumentType3["OBSERVABLE_UP_DOWN_COUNTER"] = "OBSERVABLE_UP_DOWN_COUNTER";
+  })(InstrumentType2 || (InstrumentType2 = {}));
+  var DataPointType2;
+  (function(DataPointType3) {
+    DataPointType3[DataPointType3["HISTOGRAM"] = 0] = "HISTOGRAM";
+    DataPointType3[DataPointType3["EXPONENTIAL_HISTOGRAM"] = 1] = "EXPONENTIAL_HISTOGRAM";
+    DataPointType3[DataPointType3["GAUGE"] = 2] = "GAUGE";
+    DataPointType3[DataPointType3["SUM"] = 3] = "SUM";
+  })(DataPointType2 || (DataPointType2 = {}));
+  function isNotNullish(item) {
+    return item !== void 0 && item !== null;
+  }
+  function hashAttributes(attributes) {
+    let keys = Object.keys(attributes);
+    if (keys.length === 0) return "";
+    keys = keys.sort();
+    return JSON.stringify(keys.map((key) => [key, attributes[key]]));
+  }
+  function instrumentationScopeId(instrumentationScope) {
+    return `${instrumentationScope.name}:${instrumentationScope.version ?? ""}:${instrumentationScope.schemaUrl ?? ""}`;
+  }
+  var TimeoutError2 = class _TimeoutError extends Error {
+    constructor(message) {
+      super(message);
+      Object.setPrototypeOf(this, _TimeoutError.prototype);
     }
-    onStart(span) {
-      span.setAttribute("session.id", this._sessionId);
+  };
+  function callWithTimeout2(promise, timeout) {
+    let timeoutHandle;
+    const timeoutPromise = new Promise(function timeoutFunction(_resolve, reject) {
+      timeoutHandle = setTimeout(function timeoutHandler() {
+        reject(new TimeoutError2("Operation timed out."));
+      }, timeout);
+    });
+    return Promise.race([promise, timeoutPromise]).then((result) => {
+      clearTimeout(timeoutHandle);
+      return result;
+    }, (reason) => {
+      clearTimeout(timeoutHandle);
+      throw reason;
+    });
+  }
+  async function PromiseAllSettled(promises) {
+    return Promise.all(promises.map(async (p2) => {
+      try {
+        const ret = await p2;
+        return {
+          status: "fulfilled",
+          value: ret
+        };
+      } catch (e2) {
+        return {
+          status: "rejected",
+          reason: e2
+        };
+      }
+    }));
+  }
+  function isPromiseAllSettledRejectionResult(it) {
+    return it.status === "rejected";
+  }
+  function FlatMap(arr, fn) {
+    const result = [];
+    arr.forEach((it) => {
+      result.push(...fn(it));
+    });
+    return result;
+  }
+  function setEquals(lhs, rhs) {
+    if (lhs.size !== rhs.size) {
+      return false;
     }
-    onEnd() {
+    for (const item of lhs) {
+      if (!rhs.has(item)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function binarySearchUB(arr, value) {
+    let lo = 0;
+    let hi = arr.length - 1;
+    let ret = arr.length;
+    while (hi >= lo) {
+      const mid = lo + Math.trunc((hi - lo) / 2);
+      if (arr[mid] < value) {
+        lo = mid + 1;
+      } else {
+        ret = mid;
+        hi = mid - 1;
+      }
+    }
+    return ret;
+  }
+  function equalsCaseInsensitive(lhs, rhs) {
+    return lhs.toLowerCase() === rhs.toLowerCase();
+  }
+  var AggregatorKind;
+  (function(AggregatorKind2) {
+    AggregatorKind2[AggregatorKind2["DROP"] = 0] = "DROP";
+    AggregatorKind2[AggregatorKind2["SUM"] = 1] = "SUM";
+    AggregatorKind2[AggregatorKind2["LAST_VALUE"] = 2] = "LAST_VALUE";
+    AggregatorKind2[AggregatorKind2["HISTOGRAM"] = 3] = "HISTOGRAM";
+    AggregatorKind2[AggregatorKind2["EXPONENTIAL_HISTOGRAM"] = 4] = "EXPONENTIAL_HISTOGRAM";
+  })(AggregatorKind || (AggregatorKind = {}));
+  var DropAggregator = class {
+    kind = AggregatorKind.DROP;
+    createAccumulation() {
+      return void 0;
+    }
+    merge(_previous, _delta) {
+      return void 0;
+    }
+    diff(_previous, _current) {
+      return void 0;
+    }
+    toMetricData(_descriptor, _aggregationTemporality, _accumulationByAttributes, _endTime) {
+      return void 0;
+    }
+  };
+  function createNewEmptyCheckpoint(boundaries) {
+    const counts = boundaries.map(() => 0);
+    counts.push(0);
+    return {
+      buckets: {
+        boundaries,
+        counts
+      },
+      sum: 0,
+      count: 0,
+      hasMinMax: false,
+      min: Infinity,
+      max: -Infinity
+    };
+  }
+  var HistogramAccumulation = class {
+    startTime;
+    _boundaries;
+    _recordMinMax;
+    _current;
+    constructor(startTime, _boundaries, _recordMinMax = true, _current = createNewEmptyCheckpoint(_boundaries)) {
+      this.startTime = startTime;
+      this._boundaries = _boundaries;
+      this._recordMinMax = _recordMinMax;
+      this._current = _current;
+    }
+    record(value) {
+      if (Number.isNaN(value)) {
+        return;
+      }
+      this._current.count += 1;
+      this._current.sum += value;
+      if (this._recordMinMax) {
+        this._current.min = Math.min(value, this._current.min);
+        this._current.max = Math.max(value, this._current.max);
+        this._current.hasMinMax = true;
+      }
+      const idx = binarySearchUB(this._boundaries, value);
+      this._current.buckets.counts[idx] += 1;
+    }
+    setStartTime(startTime) {
+      this.startTime = startTime;
+    }
+    toPointValue() {
+      return this._current;
+    }
+  };
+  var HistogramAggregator = class {
+    _boundaries;
+    _recordMinMax;
+    kind = AggregatorKind.HISTOGRAM;
+    /**
+     * @param _boundaries sorted upper bounds of recorded values.
+     * @param _recordMinMax If set to true, min and max will be recorded. Otherwise, min and max will not be recorded.
+     */
+    constructor(_boundaries, _recordMinMax) {
+      this._boundaries = _boundaries;
+      this._recordMinMax = _recordMinMax;
+    }
+    createAccumulation(startTime) {
+      return new HistogramAccumulation(startTime, this._boundaries, this._recordMinMax);
+    }
+    /**
+     * Return the result of the merge of two histogram accumulations. As long as one Aggregator
+     * instance produces all Accumulations with constant boundaries we don't need to worry about
+     * merging accumulations with different boundaries.
+     */
+    merge(previous, delta) {
+      const previousValue = previous.toPointValue();
+      const deltaValue = delta.toPointValue();
+      const previousCounts = previousValue.buckets.counts;
+      const deltaCounts = deltaValue.buckets.counts;
+      const mergedCounts = new Array(previousCounts.length);
+      for (let idx = 0; idx < previousCounts.length; idx++) {
+        mergedCounts[idx] = previousCounts[idx] + deltaCounts[idx];
+      }
+      let min = Infinity;
+      let max = -Infinity;
+      if (this._recordMinMax) {
+        if (previousValue.hasMinMax && deltaValue.hasMinMax) {
+          min = Math.min(previousValue.min, deltaValue.min);
+          max = Math.max(previousValue.max, deltaValue.max);
+        } else if (previousValue.hasMinMax) {
+          min = previousValue.min;
+          max = previousValue.max;
+        } else if (deltaValue.hasMinMax) {
+          min = deltaValue.min;
+          max = deltaValue.max;
+        }
+      }
+      return new HistogramAccumulation(previous.startTime, previousValue.buckets.boundaries, this._recordMinMax, {
+        buckets: {
+          boundaries: previousValue.buckets.boundaries,
+          counts: mergedCounts
+        },
+        count: previousValue.count + deltaValue.count,
+        sum: previousValue.sum + deltaValue.sum,
+        hasMinMax: this._recordMinMax && (previousValue.hasMinMax || deltaValue.hasMinMax),
+        min,
+        max
+      });
+    }
+    /**
+     * Returns a new DELTA aggregation by comparing two cumulative measurements.
+     */
+    diff(previous, current) {
+      const previousValue = previous.toPointValue();
+      const currentValue = current.toPointValue();
+      const previousCounts = previousValue.buckets.counts;
+      const currentCounts = currentValue.buckets.counts;
+      const diffedCounts = new Array(previousCounts.length);
+      for (let idx = 0; idx < previousCounts.length; idx++) {
+        diffedCounts[idx] = currentCounts[idx] - previousCounts[idx];
+      }
+      return new HistogramAccumulation(current.startTime, previousValue.buckets.boundaries, this._recordMinMax, {
+        buckets: {
+          boundaries: previousValue.buckets.boundaries,
+          counts: diffedCounts
+        },
+        count: currentValue.count - previousValue.count,
+        sum: currentValue.sum - previousValue.sum,
+        hasMinMax: false,
+        min: Infinity,
+        max: -Infinity
+      });
+    }
+    toMetricData(descriptor, aggregationTemporality, accumulationByAttributes, endTime) {
+      return {
+        descriptor,
+        aggregationTemporality,
+        dataPointType: DataPointType2.HISTOGRAM,
+        dataPoints: accumulationByAttributes.map(([attributes, accumulation]) => {
+          const pointValue = accumulation.toPointValue();
+          const allowsNegativeValues = descriptor.type === InstrumentType2.GAUGE || descriptor.type === InstrumentType2.UP_DOWN_COUNTER || descriptor.type === InstrumentType2.OBSERVABLE_GAUGE || descriptor.type === InstrumentType2.OBSERVABLE_UP_DOWN_COUNTER;
+          return {
+            attributes,
+            startTime: accumulation.startTime,
+            endTime,
+            value: {
+              min: pointValue.hasMinMax ? pointValue.min : void 0,
+              max: pointValue.hasMinMax ? pointValue.max : void 0,
+              sum: !allowsNegativeValues ? pointValue.sum : void 0,
+              buckets: pointValue.buckets,
+              count: pointValue.count
+            }
+          };
+        })
+      };
+    }
+  };
+  var Buckets = class _Buckets {
+    backing;
+    indexBase;
+    indexStart;
+    indexEnd;
+    /**
+     * The term index refers to the number of the exponential histogram bucket
+     * used to determine its boundaries. The lower boundary of a bucket is
+     * determined by base ** index and the upper boundary of a bucket is
+     * determined by base ** (index + 1). index values are signed to account
+     * for values less than or equal to 1.
+     *
+     * indexBase is the index of the 0th position in the
+     * backing array, i.e., backing[0] is the count
+     * in the bucket with index `indexBase`.
+     *
+     * indexStart is the smallest index value represented
+     * in the backing array.
+     *
+     * indexEnd is the largest index value represented in
+     * the backing array.
+     */
+    constructor(backing = new BucketsBacking(), indexBase = 0, indexStart = 0, indexEnd = 0) {
+      this.backing = backing;
+      this.indexBase = indexBase;
+      this.indexStart = indexStart;
+      this.indexEnd = indexEnd;
+    }
+    /**
+     * Offset is the bucket index of the smallest entry in the counts array
+     * @returns {number}
+     */
+    get offset() {
+      return this.indexStart;
+    }
+    /**
+     * Buckets is a view into the backing array.
+     * @returns {number}
+     */
+    get length() {
+      if (this.backing.length === 0) {
+        return 0;
+      }
+      if (this.indexEnd === this.indexStart && this.at(0) === 0) {
+        return 0;
+      }
+      return this.indexEnd - this.indexStart + 1;
+    }
+    /**
+     * An array of counts, where count[i] carries the count
+     * of the bucket at index (offset+i).  count[i] is the count of
+     * values greater than base^(offset+i) and less than or equal to
+     * base^(offset+i+1).
+     * @returns {number} The logical counts based on the backing array
+     */
+    counts() {
+      return Array.from({
+        length: this.length
+      }, (_2, i2) => this.at(i2));
+    }
+    /**
+     * At returns the count of the bucket at a position in the logical
+     * array of counts.
+     * @param position
+     * @returns {number}
+     */
+    at(position) {
+      const bias = this.indexBase - this.indexStart;
+      if (position < bias) {
+        position += this.backing.length;
+      }
+      position -= bias;
+      return this.backing.countAt(position);
+    }
+    /**
+     * incrementBucket increments the backing array index by `increment`
+     * @param bucketIndex
+     * @param increment
+     */
+    incrementBucket(bucketIndex, increment) {
+      this.backing.increment(bucketIndex, increment);
+    }
+    /**
+     * decrementBucket decrements the backing array index by `decrement`
+     * if decrement is greater than the current value, it's set to 0.
+     * @param bucketIndex
+     * @param decrement
+     */
+    decrementBucket(bucketIndex, decrement) {
+      this.backing.decrement(bucketIndex, decrement);
+    }
+    /**
+     * trim removes leading and / or trailing zero buckets (which can occur
+     * after diffing two histos) and rotates the backing array so that the
+     * smallest non-zero index is in the 0th position of the backing array
+     */
+    trim() {
+      for (let i2 = 0; i2 < this.length; i2++) {
+        if (this.at(i2) !== 0) {
+          this.indexStart += i2;
+          break;
+        } else if (i2 === this.length - 1) {
+          this.indexStart = this.indexEnd = this.indexBase = 0;
+          return;
+        }
+      }
+      for (let i2 = this.length - 1; i2 >= 0; i2--) {
+        if (this.at(i2) !== 0) {
+          this.indexEnd -= this.length - i2 - 1;
+          break;
+        }
+      }
+      this._rotate();
+    }
+    /**
+     * downscale first rotates, then collapses 2**`by`-to-1 buckets.
+     * @param by
+     */
+    downscale(by) {
+      this._rotate();
+      const size = 1 + this.indexEnd - this.indexStart;
+      const each = 1 << by;
+      let inpos = 0;
+      let outpos = 0;
+      for (let pos = this.indexStart; pos <= this.indexEnd; ) {
+        let mod = pos % each;
+        if (mod < 0) {
+          mod += each;
+        }
+        for (let i2 = mod; i2 < each && inpos < size; i2++) {
+          this._relocateBucket(outpos, inpos);
+          inpos++;
+          pos++;
+        }
+        outpos++;
+      }
+      this.indexStart >>= by;
+      this.indexEnd >>= by;
+      this.indexBase = this.indexStart;
+    }
+    /**
+     * Clone returns a deep copy of Buckets
+     * @returns {Buckets}
+     */
+    clone() {
+      return new _Buckets(this.backing.clone(), this.indexBase, this.indexStart, this.indexEnd);
+    }
+    /**
+     * _rotate shifts the backing array contents so that indexStart ==
+     * indexBase to simplify the downscale logic.
+     */
+    _rotate() {
+      const bias = this.indexBase - this.indexStart;
+      if (bias === 0) {
+        return;
+      } else if (bias > 0) {
+        this.backing.reverse(0, this.backing.length);
+        this.backing.reverse(0, bias);
+        this.backing.reverse(bias, this.backing.length);
+      } else {
+        this.backing.reverse(0, this.backing.length);
+        this.backing.reverse(0, this.backing.length + bias);
+      }
+      this.indexBase = this.indexStart;
+    }
+    /**
+     * _relocateBucket adds the count in counts[src] to counts[dest] and
+     * resets count[src] to zero.
+     */
+    _relocateBucket(dest, src) {
+      if (dest === src) {
+        return;
+      }
+      this.incrementBucket(dest, this.backing.emptyBucket(src));
+    }
+  };
+  var BucketsBacking = class _BucketsBacking {
+    _counts;
+    constructor(_counts = [0]) {
+      this._counts = _counts;
+    }
+    /**
+     * length returns the physical size of the backing array, which
+     * is >= buckets.length()
+     */
+    get length() {
+      return this._counts.length;
+    }
+    /**
+     * countAt returns the count in a specific bucket
+     */
+    countAt(pos) {
+      return this._counts[pos];
+    }
+    /**
+     * growTo grows a backing array and copies old entries
+     * into their correct new positions.
+     */
+    growTo(newSize, oldPositiveLimit, newPositiveLimit) {
+      const tmp = new Array(newSize).fill(0);
+      tmp.splice(newPositiveLimit, this._counts.length - oldPositiveLimit, ...this._counts.slice(oldPositiveLimit));
+      tmp.splice(0, oldPositiveLimit, ...this._counts.slice(0, oldPositiveLimit));
+      this._counts = tmp;
+    }
+    /**
+     * reverse the items in the backing array in the range [from, limit).
+     */
+    reverse(from, limit) {
+      const num = Math.floor((from + limit) / 2) - from;
+      for (let i2 = 0; i2 < num; i2++) {
+        const tmp = this._counts[from + i2];
+        this._counts[from + i2] = this._counts[limit - i2 - 1];
+        this._counts[limit - i2 - 1] = tmp;
+      }
+    }
+    /**
+     * emptyBucket empties the count from a bucket, for
+     * moving into another.
+     */
+    emptyBucket(src) {
+      const tmp = this._counts[src];
+      this._counts[src] = 0;
+      return tmp;
+    }
+    /**
+     * increments a bucket by `increment`
+     */
+    increment(bucketIndex, increment) {
+      this._counts[bucketIndex] += increment;
+    }
+    /**
+     * decrements a bucket by `decrement`
+     */
+    decrement(bucketIndex, decrement) {
+      if (this._counts[bucketIndex] >= decrement) {
+        this._counts[bucketIndex] -= decrement;
+      } else {
+        this._counts[bucketIndex] = 0;
+      }
+    }
+    /**
+     * clone returns a deep copy of BucketsBacking
+     */
+    clone() {
+      return new _BucketsBacking([...this._counts]);
+    }
+  };
+  var SIGNIFICAND_WIDTH = 52;
+  var EXPONENT_MASK = 2146435072;
+  var SIGNIFICAND_MASK = 1048575;
+  var EXPONENT_BIAS = 1023;
+  var MIN_NORMAL_EXPONENT = -EXPONENT_BIAS + 1;
+  var MAX_NORMAL_EXPONENT = EXPONENT_BIAS;
+  var MIN_VALUE = Math.pow(2, -1022);
+  function getNormalBase2(value) {
+    const dv = new DataView(new ArrayBuffer(8));
+    dv.setFloat64(0, value);
+    const hiBits = dv.getUint32(0);
+    const expBits = (hiBits & EXPONENT_MASK) >> 20;
+    return expBits - EXPONENT_BIAS;
+  }
+  function getSignificand(value) {
+    const dv = new DataView(new ArrayBuffer(8));
+    dv.setFloat64(0, value);
+    const hiBits = dv.getUint32(0);
+    const loBits = dv.getUint32(4);
+    const significandHiBits = (hiBits & SIGNIFICAND_MASK) * Math.pow(2, 32);
+    return significandHiBits + loBits;
+  }
+  function ldexp(frac, exp) {
+    if (frac === 0 || frac === Number.POSITIVE_INFINITY || frac === Number.NEGATIVE_INFINITY || Number.isNaN(frac)) {
+      return frac;
+    }
+    return frac * Math.pow(2, exp);
+  }
+  function nextGreaterSquare(v2) {
+    v2--;
+    v2 |= v2 >> 1;
+    v2 |= v2 >> 2;
+    v2 |= v2 >> 4;
+    v2 |= v2 >> 8;
+    v2 |= v2 >> 16;
+    v2++;
+    return v2;
+  }
+  var MappingError = class extends Error {
+  };
+  var ExponentMapping = class {
+    _shift;
+    constructor(scale) {
+      this._shift = -scale;
+    }
+    /**
+     * Maps positive floating point values to indexes corresponding to scale
+     * @param value
+     * @returns {number} index for provided value at the current scale
+     */
+    mapToIndex(value) {
+      if (value < MIN_VALUE) {
+        return this._minNormalLowerBoundaryIndex();
+      }
+      const exp = getNormalBase2(value);
+      const correction = this._rightShift(getSignificand(value) - 1, SIGNIFICAND_WIDTH);
+      return exp + correction >> this._shift;
+    }
+    /**
+     * Returns the lower bucket boundary for the given index for scale
+     *
+     * @param index
+     * @returns {number}
+     */
+    lowerBoundary(index) {
+      const minIndex = this._minNormalLowerBoundaryIndex();
+      if (index < minIndex) {
+        throw new MappingError(`underflow: ${index} is < minimum lower boundary: ${minIndex}`);
+      }
+      const maxIndex = this._maxNormalLowerBoundaryIndex();
+      if (index > maxIndex) {
+        throw new MappingError(`overflow: ${index} is > maximum lower boundary: ${maxIndex}`);
+      }
+      return ldexp(1, index << this._shift);
+    }
+    /**
+     * The scale used by this mapping
+     * @returns {number}
+     */
+    get scale() {
+      if (this._shift === 0) {
+        return 0;
+      }
+      return -this._shift;
+    }
+    _minNormalLowerBoundaryIndex() {
+      let index = MIN_NORMAL_EXPONENT >> this._shift;
+      if (this._shift < 2) {
+        index--;
+      }
+      return index;
+    }
+    _maxNormalLowerBoundaryIndex() {
+      return MAX_NORMAL_EXPONENT >> this._shift;
+    }
+    _rightShift(value, shift) {
+      return Math.floor(value * Math.pow(2, -shift));
+    }
+  };
+  var LogarithmMapping = class {
+    _scale;
+    _scaleFactor;
+    _inverseFactor;
+    constructor(scale) {
+      this._scale = scale;
+      this._scaleFactor = ldexp(Math.LOG2E, scale);
+      this._inverseFactor = ldexp(Math.LN2, -scale);
+    }
+    /**
+     * Maps positive floating point values to indexes corresponding to scale
+     * @param value
+     * @returns {number} index for provided value at the current scale
+     */
+    mapToIndex(value) {
+      if (value <= MIN_VALUE) {
+        return this._minNormalLowerBoundaryIndex() - 1;
+      }
+      if (getSignificand(value) === 0) {
+        const exp = getNormalBase2(value);
+        return (exp << this._scale) - 1;
+      }
+      const index = Math.floor(Math.log(value) * this._scaleFactor);
+      const maxIndex = this._maxNormalLowerBoundaryIndex();
+      if (index >= maxIndex) {
+        return maxIndex;
+      }
+      return index;
+    }
+    /**
+     * Returns the lower bucket boundary for the given index for scale
+     *
+     * @param index
+     * @returns {number}
+     */
+    lowerBoundary(index) {
+      const maxIndex = this._maxNormalLowerBoundaryIndex();
+      if (index >= maxIndex) {
+        if (index === maxIndex) {
+          return 2 * Math.exp((index - (1 << this._scale)) / this._scaleFactor);
+        }
+        throw new MappingError(`overflow: ${index} is > maximum lower boundary: ${maxIndex}`);
+      }
+      const minIndex = this._minNormalLowerBoundaryIndex();
+      if (index <= minIndex) {
+        if (index === minIndex) {
+          return MIN_VALUE;
+        } else if (index === minIndex - 1) {
+          return Math.exp((index + (1 << this._scale)) / this._scaleFactor) / 2;
+        }
+        throw new MappingError(`overflow: ${index} is < minimum lower boundary: ${minIndex}`);
+      }
+      return Math.exp(index * this._inverseFactor);
+    }
+    /**
+     * The scale used by this mapping
+     * @returns {number}
+     */
+    get scale() {
+      return this._scale;
+    }
+    _minNormalLowerBoundaryIndex() {
+      return MIN_NORMAL_EXPONENT << this._scale;
+    }
+    _maxNormalLowerBoundaryIndex() {
+      return (MAX_NORMAL_EXPONENT + 1 << this._scale) - 1;
+    }
+  };
+  var MIN_SCALE = -10;
+  var MAX_SCALE$1 = 20;
+  var PREBUILT_MAPPINGS = Array.from({
+    length: 31
+  }, (_2, i2) => {
+    if (i2 > 10) {
+      return new LogarithmMapping(i2 - 10);
+    }
+    return new ExponentMapping(i2 - 10);
+  });
+  function getMapping(scale) {
+    if (scale > MAX_SCALE$1 || scale < MIN_SCALE) {
+      throw new MappingError(`expected scale >= ${MIN_SCALE} && <= ${MAX_SCALE$1}, got: ${scale}`);
+    }
+    return PREBUILT_MAPPINGS[scale + 10];
+  }
+  var HighLow = class _HighLow {
+    low;
+    high;
+    static combine(h1, h2) {
+      return new _HighLow(Math.min(h1.low, h2.low), Math.max(h1.high, h2.high));
+    }
+    constructor(low, high) {
+      this.low = low;
+      this.high = high;
+    }
+  };
+  var MAX_SCALE = 20;
+  var DEFAULT_MAX_SIZE = 160;
+  var MIN_MAX_SIZE = 2;
+  var ExponentialHistogramAccumulation = class _ExponentialHistogramAccumulation {
+    startTime;
+    _maxSize;
+    _recordMinMax;
+    _sum;
+    _count;
+    _zeroCount;
+    _min;
+    _max;
+    _positive;
+    _negative;
+    _mapping;
+    constructor(startTime = startTime, _maxSize = DEFAULT_MAX_SIZE, _recordMinMax = true, _sum = 0, _count = 0, _zeroCount = 0, _min = Number.POSITIVE_INFINITY, _max = Number.NEGATIVE_INFINITY, _positive = new Buckets(), _negative = new Buckets(), _mapping = getMapping(MAX_SCALE)) {
+      this.startTime = startTime;
+      this._maxSize = _maxSize;
+      this._recordMinMax = _recordMinMax;
+      this._sum = _sum;
+      this._count = _count;
+      this._zeroCount = _zeroCount;
+      this._min = _min;
+      this._max = _max;
+      this._positive = _positive;
+      this._negative = _negative;
+      this._mapping = _mapping;
+      if (this._maxSize < MIN_MAX_SIZE) {
+        diag2.warn(`Exponential Histogram Max Size set to ${this._maxSize},                 changing to the minimum size of: ${MIN_MAX_SIZE}`);
+        this._maxSize = MIN_MAX_SIZE;
+      }
+    }
+    /**
+     * record updates a histogram with a single count
+     * @param {Number} value
+     */
+    record(value) {
+      this.updateByIncrement(value, 1);
+    }
+    /**
+     * Sets the start time for this accumulation
+     * @param {HrTime} startTime
+     */
+    setStartTime(startTime) {
+      this.startTime = startTime;
+    }
+    /**
+     * Returns the datapoint representation of this accumulation
+     * @param {HrTime} startTime
+     */
+    toPointValue() {
+      return {
+        hasMinMax: this._recordMinMax,
+        min: this.min,
+        max: this.max,
+        sum: this.sum,
+        positive: {
+          offset: this.positive.offset,
+          bucketCounts: this.positive.counts()
+        },
+        negative: {
+          offset: this.negative.offset,
+          bucketCounts: this.negative.counts()
+        },
+        count: this.count,
+        scale: this.scale,
+        zeroCount: this.zeroCount
+      };
+    }
+    /**
+     * @returns {Number} The sum of values recorded by this accumulation
+     */
+    get sum() {
+      return this._sum;
+    }
+    /**
+     * @returns {Number} The minimum value recorded by this accumulation
+     */
+    get min() {
+      return this._min;
+    }
+    /**
+     * @returns {Number} The maximum value recorded by this accumulation
+     */
+    get max() {
+      return this._max;
+    }
+    /**
+     * @returns {Number} The count of values recorded by this accumulation
+     */
+    get count() {
+      return this._count;
+    }
+    /**
+     * @returns {Number} The number of 0 values recorded by this accumulation
+     */
+    get zeroCount() {
+      return this._zeroCount;
+    }
+    /**
+     * @returns {Number} The scale used by this accumulation
+     */
+    get scale() {
+      if (this._count === this._zeroCount) {
+        return 0;
+      }
+      return this._mapping.scale;
+    }
+    /**
+     * positive holds the positive values
+     * @returns {Buckets}
+     */
+    get positive() {
+      return this._positive;
+    }
+    /**
+     * negative holds the negative values by their absolute value
+     * @returns {Buckets}
+     */
+    get negative() {
+      return this._negative;
+    }
+    /**
+     * updateByIncr supports updating a histogram with a non-negative
+     * increment.
+     * @param value
+     * @param increment
+     */
+    updateByIncrement(value, increment) {
+      if (Number.isNaN(value)) {
+        return;
+      }
+      if (value > this._max) {
+        this._max = value;
+      }
+      if (value < this._min) {
+        this._min = value;
+      }
+      this._count += increment;
+      if (value === 0) {
+        this._zeroCount += increment;
+        return;
+      }
+      this._sum += value * increment;
+      if (value > 0) {
+        this._updateBuckets(this._positive, value, increment);
+      } else {
+        this._updateBuckets(this._negative, -value, increment);
+      }
+    }
+    /**
+     * merge combines data from previous value into self
+     * @param {ExponentialHistogramAccumulation} previous
+     */
+    merge(previous) {
+      if (this._count === 0) {
+        this._min = previous.min;
+        this._max = previous.max;
+      } else if (previous.count !== 0) {
+        if (previous.min < this.min) {
+          this._min = previous.min;
+        }
+        if (previous.max > this.max) {
+          this._max = previous.max;
+        }
+      }
+      this.startTime = previous.startTime;
+      this._sum += previous.sum;
+      this._count += previous.count;
+      this._zeroCount += previous.zeroCount;
+      const minScale = this._minScale(previous);
+      this._downscale(this.scale - minScale);
+      this._mergeBuckets(this.positive, previous, previous.positive, minScale);
+      this._mergeBuckets(this.negative, previous, previous.negative, minScale);
+    }
+    /**
+     * diff subtracts other from self
+     * @param {ExponentialHistogramAccumulation} other
+     */
+    diff(other) {
+      this._min = Infinity;
+      this._max = -Infinity;
+      this._sum -= other.sum;
+      this._count -= other.count;
+      this._zeroCount -= other.zeroCount;
+      const minScale = this._minScale(other);
+      this._downscale(this.scale - minScale);
+      this._diffBuckets(this.positive, other, other.positive, minScale);
+      this._diffBuckets(this.negative, other, other.negative, minScale);
+    }
+    /**
+     * clone returns a deep copy of self
+     * @returns {ExponentialHistogramAccumulation}
+     */
+    clone() {
+      return new _ExponentialHistogramAccumulation(this.startTime, this._maxSize, this._recordMinMax, this._sum, this._count, this._zeroCount, this._min, this._max, this.positive.clone(), this.negative.clone(), this._mapping);
+    }
+    /**
+     * _updateBuckets maps the incoming value to a bucket index for the current
+     * scale. If the bucket index is outside of the range of the backing array,
+     * it will rescale the backing array and update the mapping for the new scale.
+     */
+    _updateBuckets(buckets, value, increment) {
+      let index = this._mapping.mapToIndex(value);
+      let rescalingNeeded = false;
+      let high = 0;
+      let low = 0;
+      if (buckets.length === 0) {
+        buckets.indexStart = index;
+        buckets.indexEnd = buckets.indexStart;
+        buckets.indexBase = buckets.indexStart;
+      } else if (index < buckets.indexStart && buckets.indexEnd - index >= this._maxSize) {
+        rescalingNeeded = true;
+        low = index;
+        high = buckets.indexEnd;
+      } else if (index > buckets.indexEnd && index - buckets.indexStart >= this._maxSize) {
+        rescalingNeeded = true;
+        low = buckets.indexStart;
+        high = index;
+      }
+      if (rescalingNeeded) {
+        const change = this._changeScale(high, low);
+        this._downscale(change);
+        index = this._mapping.mapToIndex(value);
+      }
+      this._incrementIndexBy(buckets, index, increment);
+    }
+    /**
+     * _incrementIndexBy increments the count of the bucket specified by `index`.
+     * If the index is outside of the range [buckets.indexStart, buckets.indexEnd]
+     * the boundaries of the backing array will be adjusted and more buckets will
+     * be added if needed.
+     */
+    _incrementIndexBy(buckets, index, increment) {
+      if (increment === 0) {
+        return;
+      }
+      if (buckets.length === 0) {
+        buckets.indexStart = buckets.indexEnd = buckets.indexBase = index;
+      }
+      if (index < buckets.indexStart) {
+        const span = buckets.indexEnd - index;
+        if (span >= buckets.backing.length) {
+          this._grow(buckets, span + 1);
+        }
+        buckets.indexStart = index;
+      } else if (index > buckets.indexEnd) {
+        const span = index - buckets.indexStart;
+        if (span >= buckets.backing.length) {
+          this._grow(buckets, span + 1);
+        }
+        buckets.indexEnd = index;
+      }
+      let bucketIndex = index - buckets.indexBase;
+      if (bucketIndex < 0) {
+        bucketIndex += buckets.backing.length;
+      }
+      buckets.incrementBucket(bucketIndex, increment);
+    }
+    /**
+     * grow resizes the backing array by doubling in size up to maxSize.
+     * This extends the array with a bunch of zeros and copies the
+     * existing counts to the same position.
+     */
+    _grow(buckets, needed) {
+      const size = buckets.backing.length;
+      const bias = buckets.indexBase - buckets.indexStart;
+      const oldPositiveLimit = size - bias;
+      let newSize = nextGreaterSquare(needed);
+      if (newSize > this._maxSize) {
+        newSize = this._maxSize;
+      }
+      const newPositiveLimit = newSize - bias;
+      buckets.backing.growTo(newSize, oldPositiveLimit, newPositiveLimit);
+    }
+    /**
+     * _changeScale computes how much downscaling is needed by shifting the
+     * high and low values until they are separated by no more than size.
+     */
+    _changeScale(high, low) {
+      let change = 0;
+      while (high - low >= this._maxSize) {
+        high >>= 1;
+        low >>= 1;
+        change++;
+      }
+      return change;
+    }
+    /**
+     * _downscale subtracts `change` from the current mapping scale.
+     */
+    _downscale(change) {
+      if (change === 0) {
+        return;
+      }
+      if (change < 0) {
+        throw new Error(`impossible change of scale: ${this.scale}`);
+      }
+      const newScale = this._mapping.scale - change;
+      this._positive.downscale(change);
+      this._negative.downscale(change);
+      this._mapping = getMapping(newScale);
+    }
+    /**
+     * _minScale is used by diff and merge to compute an ideal combined scale
+     */
+    _minScale(other) {
+      const minScale = Math.min(this.scale, other.scale);
+      const highLowPos = HighLow.combine(this._highLowAtScale(this.positive, this.scale, minScale), this._highLowAtScale(other.positive, other.scale, minScale));
+      const highLowNeg = HighLow.combine(this._highLowAtScale(this.negative, this.scale, minScale), this._highLowAtScale(other.negative, other.scale, minScale));
+      return Math.min(minScale - this._changeScale(highLowPos.high, highLowPos.low), minScale - this._changeScale(highLowNeg.high, highLowNeg.low));
+    }
+    /**
+     * _highLowAtScale is used by diff and merge to compute an ideal combined scale.
+     */
+    _highLowAtScale(buckets, currentScale, newScale) {
+      if (buckets.length === 0) {
+        return new HighLow(0, -1);
+      }
+      const shift = currentScale - newScale;
+      return new HighLow(buckets.indexStart >> shift, buckets.indexEnd >> shift);
+    }
+    /**
+     * _mergeBuckets translates index values from another histogram and
+     * adds the values into the corresponding buckets of this histogram.
+     */
+    _mergeBuckets(ours, other, theirs, scale) {
+      const theirOffset = theirs.offset;
+      const theirChange = other.scale - scale;
+      for (let i2 = 0; i2 < theirs.length; i2++) {
+        this._incrementIndexBy(ours, theirOffset + i2 >> theirChange, theirs.at(i2));
+      }
+    }
+    /**
+     * _diffBuckets translates index values from another histogram and
+     * subtracts the values in the corresponding buckets of this histogram.
+     */
+    _diffBuckets(ours, other, theirs, scale) {
+      const theirOffset = theirs.offset;
+      const theirChange = other.scale - scale;
+      for (let i2 = 0; i2 < theirs.length; i2++) {
+        const ourIndex = theirOffset + i2 >> theirChange;
+        let bucketIndex = ourIndex - ours.indexBase;
+        if (bucketIndex < 0) {
+          bucketIndex += ours.backing.length;
+        }
+        ours.decrementBucket(bucketIndex, theirs.at(i2));
+      }
+      ours.trim();
+    }
+  };
+  var ExponentialHistogramAggregator = class {
+    _maxSize;
+    _recordMinMax;
+    kind = AggregatorKind.EXPONENTIAL_HISTOGRAM;
+    /**
+     * @param _maxSize Maximum number of buckets for each of the positive
+     *    and negative ranges, exclusive of the zero-bucket.
+     * @param _recordMinMax If set to true, min and max will be recorded.
+     *    Otherwise, min and max will not be recorded.
+     */
+    constructor(_maxSize, _recordMinMax) {
+      this._maxSize = _maxSize;
+      this._recordMinMax = _recordMinMax;
+    }
+    createAccumulation(startTime) {
+      return new ExponentialHistogramAccumulation(startTime, this._maxSize, this._recordMinMax);
+    }
+    /**
+     * Return the result of the merge of two exponential histogram accumulations.
+     */
+    merge(previous, delta) {
+      const result = delta.clone();
+      result.merge(previous);
+      return result;
+    }
+    /**
+     * Returns a new DELTA aggregation by comparing two cumulative measurements.
+     */
+    diff(previous, current) {
+      const result = current.clone();
+      result.diff(previous);
+      return result;
+    }
+    toMetricData(descriptor, aggregationTemporality, accumulationByAttributes, endTime) {
+      return {
+        descriptor,
+        aggregationTemporality,
+        dataPointType: DataPointType2.EXPONENTIAL_HISTOGRAM,
+        dataPoints: accumulationByAttributes.map(([attributes, accumulation]) => {
+          const pointValue = accumulation.toPointValue();
+          const allowsNegativeValues = descriptor.type === InstrumentType2.GAUGE || descriptor.type === InstrumentType2.UP_DOWN_COUNTER || descriptor.type === InstrumentType2.OBSERVABLE_GAUGE || descriptor.type === InstrumentType2.OBSERVABLE_UP_DOWN_COUNTER;
+          return {
+            attributes,
+            startTime: accumulation.startTime,
+            endTime,
+            value: {
+              min: pointValue.hasMinMax ? pointValue.min : void 0,
+              max: pointValue.hasMinMax ? pointValue.max : void 0,
+              sum: !allowsNegativeValues ? pointValue.sum : void 0,
+              positive: {
+                offset: pointValue.positive.offset,
+                bucketCounts: pointValue.positive.bucketCounts
+              },
+              negative: {
+                offset: pointValue.negative.offset,
+                bucketCounts: pointValue.negative.bucketCounts
+              },
+              count: pointValue.count,
+              scale: pointValue.scale,
+              zeroCount: pointValue.zeroCount
+            }
+          };
+        })
+      };
+    }
+  };
+  var LastValueAccumulation = class {
+    startTime;
+    _current;
+    sampleTime;
+    constructor(startTime, _current = 0, sampleTime = [0, 0]) {
+      this.startTime = startTime;
+      this._current = _current;
+      this.sampleTime = sampleTime;
+    }
+    record(value) {
+      this._current = value;
+      this.sampleTime = millisToHrTime(Date.now());
+    }
+    setStartTime(startTime) {
+      this.startTime = startTime;
+    }
+    toPointValue() {
+      return this._current;
+    }
+  };
+  var LastValueAggregator = class {
+    kind = AggregatorKind.LAST_VALUE;
+    createAccumulation(startTime) {
+      return new LastValueAccumulation(startTime);
+    }
+    /**
+     * Returns the result of the merge of the given accumulations.
+     *
+     * Return the newly captured (delta) accumulation for LastValueAggregator.
+     */
+    merge(previous, delta) {
+      const latestAccumulation = hrTimeToMicroseconds(delta.sampleTime) >= hrTimeToMicroseconds(previous.sampleTime) ? delta : previous;
+      return new LastValueAccumulation(previous.startTime, latestAccumulation.toPointValue(), latestAccumulation.sampleTime);
+    }
+    /**
+     * Returns a new DELTA aggregation by comparing two cumulative measurements.
+     *
+     * A delta aggregation is not meaningful to LastValueAggregator, just return
+     * the newly captured (delta) accumulation for LastValueAggregator.
+     */
+    diff(previous, current) {
+      const latestAccumulation = hrTimeToMicroseconds(current.sampleTime) >= hrTimeToMicroseconds(previous.sampleTime) ? current : previous;
+      return new LastValueAccumulation(current.startTime, latestAccumulation.toPointValue(), latestAccumulation.sampleTime);
+    }
+    toMetricData(descriptor, aggregationTemporality, accumulationByAttributes, endTime) {
+      return {
+        descriptor,
+        aggregationTemporality,
+        dataPointType: DataPointType2.GAUGE,
+        dataPoints: accumulationByAttributes.map(([attributes, accumulation]) => {
+          return {
+            attributes,
+            startTime: accumulation.startTime,
+            endTime,
+            value: accumulation.toPointValue()
+          };
+        })
+      };
+    }
+  };
+  var SumAccumulation = class {
+    startTime;
+    monotonic;
+    _current;
+    reset;
+    constructor(startTime, monotonic, _current = 0, reset = false) {
+      this.startTime = startTime;
+      this.monotonic = monotonic;
+      this._current = _current;
+      this.reset = reset;
+    }
+    record(value) {
+      if (this.monotonic && value < 0) {
+        return;
+      }
+      this._current += value;
+    }
+    setStartTime(startTime) {
+      this.startTime = startTime;
+    }
+    toPointValue() {
+      return this._current;
+    }
+  };
+  var SumAggregator = class {
+    monotonic;
+    kind = AggregatorKind.SUM;
+    constructor(monotonic) {
+      this.monotonic = monotonic;
+    }
+    createAccumulation(startTime) {
+      return new SumAccumulation(startTime, this.monotonic);
+    }
+    /**
+     * Returns the result of the merge of the given accumulations.
+     */
+    merge(previous, delta) {
+      const prevPv = previous.toPointValue();
+      const deltaPv = delta.toPointValue();
+      if (delta.reset) {
+        return new SumAccumulation(delta.startTime, this.monotonic, deltaPv, delta.reset);
+      }
+      return new SumAccumulation(previous.startTime, this.monotonic, prevPv + deltaPv);
+    }
+    /**
+     * Returns a new DELTA aggregation by comparing two cumulative measurements.
+     */
+    diff(previous, current) {
+      const prevPv = previous.toPointValue();
+      const currPv = current.toPointValue();
+      if (this.monotonic && prevPv > currPv) {
+        return new SumAccumulation(current.startTime, this.monotonic, currPv, true);
+      }
+      return new SumAccumulation(current.startTime, this.monotonic, currPv - prevPv);
+    }
+    toMetricData(descriptor, aggregationTemporality, accumulationByAttributes, endTime) {
+      return {
+        descriptor,
+        aggregationTemporality,
+        dataPointType: DataPointType2.SUM,
+        dataPoints: accumulationByAttributes.map(([attributes, accumulation]) => {
+          return {
+            attributes,
+            startTime: accumulation.startTime,
+            endTime,
+            value: accumulation.toPointValue()
+          };
+        }),
+        isMonotonic: this.monotonic
+      };
+    }
+  };
+  var DropAggregation = class _DropAggregation {
+    static DEFAULT_INSTANCE = new DropAggregator();
+    createAggregator(_instrument) {
+      return _DropAggregation.DEFAULT_INSTANCE;
+    }
+  };
+  var SumAggregation = class _SumAggregation {
+    static MONOTONIC_INSTANCE = new SumAggregator(true);
+    static NON_MONOTONIC_INSTANCE = new SumAggregator(false);
+    createAggregator(instrument) {
+      switch (instrument.type) {
+        case InstrumentType2.COUNTER:
+        case InstrumentType2.OBSERVABLE_COUNTER:
+        case InstrumentType2.HISTOGRAM: {
+          return _SumAggregation.MONOTONIC_INSTANCE;
+        }
+        default: {
+          return _SumAggregation.NON_MONOTONIC_INSTANCE;
+        }
+      }
+    }
+  };
+  var LastValueAggregation = class _LastValueAggregation {
+    static DEFAULT_INSTANCE = new LastValueAggregator();
+    createAggregator(_instrument) {
+      return _LastValueAggregation.DEFAULT_INSTANCE;
+    }
+  };
+  var HistogramAggregation = class _HistogramAggregation {
+    static DEFAULT_INSTANCE = new HistogramAggregator([0, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1e3, 2500, 5e3, 7500, 1e4], true);
+    createAggregator(_instrument) {
+      return _HistogramAggregation.DEFAULT_INSTANCE;
+    }
+  };
+  var ExplicitBucketHistogramAggregation = class {
+    _recordMinMax;
+    _boundaries;
+    /**
+     * @param boundaries the bucket boundaries of the histogram aggregation
+     * @param _recordMinMax If set to true, min and max will be recorded. Otherwise, min and max will not be recorded.
+     */
+    constructor(boundaries, _recordMinMax = true) {
+      this._recordMinMax = _recordMinMax;
+      if (boundaries == null) {
+        throw new Error("ExplicitBucketHistogramAggregation should be created with explicit boundaries, if a single bucket histogram is required, please pass an empty array");
+      }
+      boundaries = boundaries.concat();
+      boundaries = boundaries.sort((a2, b2) => a2 - b2);
+      const minusInfinityIndex = boundaries.lastIndexOf(-Infinity);
+      let infinityIndex = boundaries.indexOf(Infinity);
+      if (infinityIndex === -1) {
+        infinityIndex = void 0;
+      }
+      this._boundaries = boundaries.slice(minusInfinityIndex + 1, infinityIndex);
+    }
+    createAggregator(_instrument) {
+      return new HistogramAggregator(this._boundaries, this._recordMinMax);
+    }
+  };
+  var ExponentialHistogramAggregation = class {
+    _maxSize;
+    _recordMinMax;
+    constructor(_maxSize = 160, _recordMinMax = true) {
+      this._maxSize = _maxSize;
+      this._recordMinMax = _recordMinMax;
+    }
+    createAggregator(_instrument) {
+      return new ExponentialHistogramAggregator(this._maxSize, this._recordMinMax);
+    }
+  };
+  var DefaultAggregation = class {
+    _resolve(instrument) {
+      switch (instrument.type) {
+        case InstrumentType2.COUNTER:
+        case InstrumentType2.UP_DOWN_COUNTER:
+        case InstrumentType2.OBSERVABLE_COUNTER:
+        case InstrumentType2.OBSERVABLE_UP_DOWN_COUNTER: {
+          return SUM_AGGREGATION;
+        }
+        case InstrumentType2.GAUGE:
+        case InstrumentType2.OBSERVABLE_GAUGE: {
+          return LAST_VALUE_AGGREGATION;
+        }
+        case InstrumentType2.HISTOGRAM: {
+          if (instrument.advice.explicitBucketBoundaries) {
+            return new ExplicitBucketHistogramAggregation(instrument.advice.explicitBucketBoundaries);
+          }
+          return HISTOGRAM_AGGREGATION;
+        }
+      }
+      diag2.warn(`Unable to recognize instrument type: ${instrument.type}`);
+      return DROP_AGGREGATION;
+    }
+    createAggregator(instrument) {
+      return this._resolve(instrument).createAggregator(instrument);
+    }
+  };
+  var DROP_AGGREGATION = new DropAggregation();
+  var SUM_AGGREGATION = new SumAggregation();
+  var LAST_VALUE_AGGREGATION = new LastValueAggregation();
+  var HISTOGRAM_AGGREGATION = new HistogramAggregation();
+  var DEFAULT_AGGREGATION2 = new DefaultAggregation();
+  var AggregationType2;
+  (function(AggregationType3) {
+    AggregationType3[AggregationType3["DEFAULT"] = 0] = "DEFAULT";
+    AggregationType3[AggregationType3["DROP"] = 1] = "DROP";
+    AggregationType3[AggregationType3["SUM"] = 2] = "SUM";
+    AggregationType3[AggregationType3["LAST_VALUE"] = 3] = "LAST_VALUE";
+    AggregationType3[AggregationType3["EXPLICIT_BUCKET_HISTOGRAM"] = 4] = "EXPLICIT_BUCKET_HISTOGRAM";
+    AggregationType3[AggregationType3["EXPONENTIAL_HISTOGRAM"] = 5] = "EXPONENTIAL_HISTOGRAM";
+  })(AggregationType2 || (AggregationType2 = {}));
+  function toAggregation(option) {
+    switch (option.type) {
+      case AggregationType2.DEFAULT:
+        return DEFAULT_AGGREGATION2;
+      case AggregationType2.DROP:
+        return DROP_AGGREGATION;
+      case AggregationType2.SUM:
+        return SUM_AGGREGATION;
+      case AggregationType2.LAST_VALUE:
+        return LAST_VALUE_AGGREGATION;
+      case AggregationType2.EXPONENTIAL_HISTOGRAM: {
+        const expOption = option;
+        return new ExponentialHistogramAggregation(expOption.options?.maxSize, expOption.options?.recordMinMax);
+      }
+      case AggregationType2.EXPLICIT_BUCKET_HISTOGRAM: {
+        const expOption = option;
+        if (expOption.options == null) {
+          return HISTOGRAM_AGGREGATION;
+        } else {
+          return new ExplicitBucketHistogramAggregation(expOption.options?.boundaries, expOption.options?.recordMinMax);
+        }
+      }
+      default:
+        throw new Error("Unsupported Aggregation");
+    }
+  }
+  var DEFAULT_AGGREGATION_SELECTOR = (_instrumentType) => {
+    return {
+      type: AggregationType2.DEFAULT
+    };
+  };
+  var DEFAULT_AGGREGATION_TEMPORALITY_SELECTOR = (_instrumentType) => AggregationTemporality2.CUMULATIVE;
+  var MetricReader = class {
+    // Tracks the shutdown state.
+    // TODO: use BindOncePromise here once a new version of @opentelemetry/core is available.
+    _shutdown = false;
+    // Additional MetricProducers which will be combined with the SDK's output
+    _metricProducers;
+    // MetricProducer used by this instance which produces metrics from the SDK
+    _sdkMetricProducer;
+    _aggregationTemporalitySelector;
+    _aggregationSelector;
+    _cardinalitySelector;
+    constructor(options) {
+      this._aggregationSelector = options?.aggregationSelector ?? DEFAULT_AGGREGATION_SELECTOR;
+      this._aggregationTemporalitySelector = options?.aggregationTemporalitySelector ?? DEFAULT_AGGREGATION_TEMPORALITY_SELECTOR;
+      this._metricProducers = options?.metricProducers ?? [];
+      this._cardinalitySelector = options?.cardinalitySelector;
+    }
+    setMetricProducer(metricProducer) {
+      if (this._sdkMetricProducer) {
+        throw new Error("MetricReader can not be bound to a MeterProvider again.");
+      }
+      this._sdkMetricProducer = metricProducer;
+      this.onInitialized();
+    }
+    selectAggregation(instrumentType) {
+      return this._aggregationSelector(instrumentType);
+    }
+    selectAggregationTemporality(instrumentType) {
+      return this._aggregationTemporalitySelector(instrumentType);
+    }
+    selectCardinalityLimit(instrumentType) {
+      return this._cardinalitySelector ? this._cardinalitySelector(instrumentType) : 2e3;
+    }
+    /**
+     * Handle once the SDK has initialized this {@link MetricReader}
+     * Overriding this method is optional.
+     */
+    onInitialized() {
+    }
+    async collect(options) {
+      if (this._sdkMetricProducer === void 0) {
+        throw new Error("MetricReader is not bound to a MetricProducer");
+      }
+      if (this._shutdown) {
+        throw new Error("MetricReader is shutdown");
+      }
+      const [sdkCollectionResults, ...additionalCollectionResults] = await Promise.all([this._sdkMetricProducer.collect({
+        timeoutMillis: options?.timeoutMillis
+      }), ...this._metricProducers.map((producer) => producer.collect({
+        timeoutMillis: options?.timeoutMillis
+      }))]);
+      const errors = sdkCollectionResults.errors.concat(FlatMap(additionalCollectionResults, (result) => result.errors));
+      const resource = sdkCollectionResults.resourceMetrics.resource;
+      const scopeMetrics = sdkCollectionResults.resourceMetrics.scopeMetrics.concat(FlatMap(additionalCollectionResults, (result) => result.resourceMetrics.scopeMetrics));
+      return {
+        resourceMetrics: {
+          resource,
+          scopeMetrics
+        },
+        errors
+      };
+    }
+    async shutdown(options) {
+      if (this._shutdown) {
+        diag2.error("Cannot call shutdown twice.");
+        return;
+      }
+      if (options?.timeoutMillis == null) {
+        await this.onShutdown();
+      } else {
+        await callWithTimeout2(this.onShutdown(), options.timeoutMillis);
+      }
+      this._shutdown = true;
+    }
+    async forceFlush(options) {
+      if (this._shutdown) {
+        diag2.warn("Cannot forceFlush on already shutdown MetricReader.");
+        return;
+      }
+      if (options?.timeoutMillis == null) {
+        await this.onForceFlush();
+        return;
+      }
+      await callWithTimeout2(this.onForceFlush(), options.timeoutMillis);
+    }
+  };
+  var PeriodicExportingMetricReader = class extends MetricReader {
+    _interval;
+    _exporter;
+    _exportInterval;
+    _exportTimeout;
+    constructor(options) {
+      super({
+        aggregationSelector: options.exporter.selectAggregation?.bind(options.exporter),
+        aggregationTemporalitySelector: options.exporter.selectAggregationTemporality?.bind(options.exporter),
+        metricProducers: options.metricProducers
+      });
+      if (options.exportIntervalMillis !== void 0 && options.exportIntervalMillis <= 0) {
+        throw Error("exportIntervalMillis must be greater than 0");
+      }
+      if (options.exportTimeoutMillis !== void 0 && options.exportTimeoutMillis <= 0) {
+        throw Error("exportTimeoutMillis must be greater than 0");
+      }
+      if (options.exportTimeoutMillis !== void 0 && options.exportIntervalMillis !== void 0 && options.exportIntervalMillis < options.exportTimeoutMillis) {
+        throw Error("exportIntervalMillis must be greater than or equal to exportTimeoutMillis");
+      }
+      this._exportInterval = options.exportIntervalMillis ?? 6e4;
+      this._exportTimeout = options.exportTimeoutMillis ?? 3e4;
+      this._exporter = options.exporter;
+    }
+    async _runOnce() {
+      try {
+        await callWithTimeout2(this._doRun(), this._exportTimeout);
+      } catch (err) {
+        if (err instanceof TimeoutError2) {
+          diag2.error("Export took longer than %s milliseconds and timed out.", this._exportTimeout);
+          return;
+        }
+        globalErrorHandler(err);
+      }
+    }
+    async _doRun() {
+      const {
+        resourceMetrics,
+        errors
+      } = await this.collect({
+        timeoutMillis: this._exportTimeout
+      });
+      if (errors.length > 0) {
+        diag2.error("PeriodicExportingMetricReader: metrics collection errors", ...errors);
+      }
+      if (resourceMetrics.resource.asyncAttributesPending) {
+        try {
+          await resourceMetrics.resource.waitForAsyncAttributes?.();
+        } catch (e2) {
+          diag2.debug("Error while resolving async portion of resource: ", e2);
+          globalErrorHandler(e2);
+        }
+      }
+      if (resourceMetrics.scopeMetrics.length === 0) {
+        return;
+      }
+      const result = await internal._export(this._exporter, resourceMetrics);
+      if (result.code !== ExportResultCode.SUCCESS) {
+        throw new Error(`PeriodicExportingMetricReader: metrics export failed (error ${result.error})`);
+      }
+    }
+    onInitialized() {
+      this._interval = setInterval(() => {
+        void this._runOnce();
+      }, this._exportInterval);
+      unrefTimer(this._interval);
+    }
+    async onForceFlush() {
+      await this._runOnce();
+      await this._exporter.forceFlush();
+    }
+    async onShutdown() {
+      if (this._interval) {
+        clearInterval(this._interval);
+      }
+      await this.onForceFlush();
+      await this._exporter.shutdown();
+    }
+  };
+  var ConsoleMetricExporter = class _ConsoleMetricExporter {
+    _shutdown = false;
+    _temporalitySelector;
+    constructor(options) {
+      this._temporalitySelector = options?.temporalitySelector ?? DEFAULT_AGGREGATION_TEMPORALITY_SELECTOR;
+    }
+    export(metrics2, resultCallback) {
+      if (this._shutdown) {
+        setImmediate(resultCallback, {
+          code: ExportResultCode.FAILED
+        });
+        return;
+      }
+      return _ConsoleMetricExporter._sendMetrics(metrics2, resultCallback);
     }
     forceFlush() {
       return Promise.resolve();
+    }
+    selectAggregationTemporality(_instrumentType) {
+      return this._temporalitySelector(_instrumentType);
+    }
+    shutdown() {
+      this._shutdown = true;
+      return Promise.resolve();
+    }
+    static _sendMetrics(metrics2, done) {
+      for (const scopeMetrics of metrics2.scopeMetrics) {
+        for (const metric of scopeMetrics.metrics) {
+          console.dir({
+            descriptor: metric.descriptor,
+            dataPointType: metric.dataPointType,
+            dataPoints: metric.dataPoints
+          }, {
+            depth: null
+          });
+        }
+      }
+      done({
+        code: ExportResultCode.SUCCESS
+      });
+    }
+  };
+  var ViewRegistry = class {
+    _registeredViews = [];
+    addView(view) {
+      this._registeredViews.push(view);
+    }
+    findViews(instrument, meter) {
+      const views = this._registeredViews.filter((registeredView) => {
+        return this._matchInstrument(registeredView.instrumentSelector, instrument) && this._matchMeter(registeredView.meterSelector, meter);
+      });
+      return views;
+    }
+    _matchInstrument(selector, instrument) {
+      return (selector.getType() === void 0 || instrument.type === selector.getType()) && selector.getNameFilter().match(instrument.name) && selector.getUnitFilter().match(instrument.unit);
+    }
+    _matchMeter(selector, meter) {
+      return selector.getNameFilter().match(meter.name) && (meter.version === void 0 || selector.getVersionFilter().match(meter.version)) && (meter.schemaUrl === void 0 || selector.getSchemaUrlFilter().match(meter.schemaUrl));
+    }
+  };
+  function createInstrumentDescriptor(name, type, options) {
+    if (!isValidName(name)) {
+      diag2.warn(`Invalid metric name: "${name}". The metric name should be a ASCII string with a length no greater than 255 characters.`);
+    }
+    return {
+      name,
+      type,
+      description: options?.description ?? "",
+      unit: options?.unit ?? "",
+      valueType: options?.valueType ?? ValueType.DOUBLE,
+      advice: options?.advice ?? {}
+    };
+  }
+  function createInstrumentDescriptorWithView(view, instrument) {
+    return {
+      name: view.name ?? instrument.name,
+      description: view.description ?? instrument.description,
+      type: instrument.type,
+      unit: instrument.unit,
+      valueType: instrument.valueType,
+      advice: instrument.advice
+    };
+  }
+  function isDescriptorCompatibleWith(descriptor, otherDescriptor) {
+    return equalsCaseInsensitive(descriptor.name, otherDescriptor.name) && descriptor.unit === otherDescriptor.unit && descriptor.type === otherDescriptor.type && descriptor.valueType === otherDescriptor.valueType;
+  }
+  var NAME_REGEXP = /^[a-z][a-z0-9_.\-/]{0,254}$/i;
+  function isValidName(name) {
+    return name.match(NAME_REGEXP) != null;
+  }
+  var SyncInstrument = class {
+    _writableMetricStorage;
+    _descriptor;
+    constructor(_writableMetricStorage, _descriptor) {
+      this._writableMetricStorage = _writableMetricStorage;
+      this._descriptor = _descriptor;
+    }
+    _record(value, attributes = {}, context$1 = context.active()) {
+      if (typeof value !== "number") {
+        diag2.warn(`non-number value provided to metric ${this._descriptor.name}: ${value}`);
+        return;
+      }
+      if (this._descriptor.valueType === ValueType.INT && !Number.isInteger(value)) {
+        diag2.warn(`INT value type cannot accept a floating-point value for ${this._descriptor.name}, ignoring the fractional digits.`);
+        value = Math.trunc(value);
+        if (!Number.isInteger(value)) {
+          return;
+        }
+      }
+      this._writableMetricStorage.record(value, attributes, context$1, millisToHrTime(Date.now()));
+    }
+  };
+  var UpDownCounterInstrument = class extends SyncInstrument {
+    /**
+     * Increment value of counter by the input. Inputs may be negative.
+     */
+    add(value, attributes, ctx) {
+      this._record(value, attributes, ctx);
+    }
+  };
+  var CounterInstrument = class extends SyncInstrument {
+    /**
+     * Increment value of counter by the input. Inputs may not be negative.
+     */
+    add(value, attributes, ctx) {
+      if (value < 0) {
+        diag2.warn(`negative value provided to counter ${this._descriptor.name}: ${value}`);
+        return;
+      }
+      this._record(value, attributes, ctx);
+    }
+  };
+  var GaugeInstrument = class extends SyncInstrument {
+    /**
+     * Records a measurement.
+     */
+    record(value, attributes, ctx) {
+      this._record(value, attributes, ctx);
+    }
+  };
+  var HistogramInstrument = class extends SyncInstrument {
+    /**
+     * Records a measurement. Value of the measurement must not be negative.
+     */
+    record(value, attributes, ctx) {
+      if (value < 0) {
+        diag2.warn(`negative value provided to histogram ${this._descriptor.name}: ${value}`);
+        return;
+      }
+      this._record(value, attributes, ctx);
+    }
+  };
+  var ObservableInstrument = class {
+    _observableRegistry;
+    /** @internal */
+    _metricStorages;
+    /** @internal */
+    _descriptor;
+    constructor(descriptor, metricStorages, _observableRegistry) {
+      this._observableRegistry = _observableRegistry;
+      this._descriptor = descriptor;
+      this._metricStorages = metricStorages;
+    }
+    /**
+     * @see {Observable.addCallback}
+     */
+    addCallback(callback) {
+      this._observableRegistry.addCallback(callback, this);
+    }
+    /**
+     * @see {Observable.removeCallback}
+     */
+    removeCallback(callback) {
+      this._observableRegistry.removeCallback(callback, this);
+    }
+  };
+  var ObservableCounterInstrument = class extends ObservableInstrument {
+  };
+  var ObservableGaugeInstrument = class extends ObservableInstrument {
+  };
+  var ObservableUpDownCounterInstrument = class extends ObservableInstrument {
+  };
+  function isObservableInstrument(it) {
+    return it instanceof ObservableInstrument;
+  }
+  var Meter = class {
+    _meterSharedState;
+    constructor(_meterSharedState) {
+      this._meterSharedState = _meterSharedState;
+    }
+    /**
+     * Create a {@link Gauge} instrument.
+     */
+    createGauge(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.GAUGE, options);
+      const storage = this._meterSharedState.registerMetricStorage(descriptor);
+      return new GaugeInstrument(storage, descriptor);
+    }
+    /**
+     * Create a {@link Histogram} instrument.
+     */
+    createHistogram(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.HISTOGRAM, options);
+      const storage = this._meterSharedState.registerMetricStorage(descriptor);
+      return new HistogramInstrument(storage, descriptor);
+    }
+    /**
+     * Create a {@link Counter} instrument.
+     */
+    createCounter(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.COUNTER, options);
+      const storage = this._meterSharedState.registerMetricStorage(descriptor);
+      return new CounterInstrument(storage, descriptor);
+    }
+    /**
+     * Create a {@link UpDownCounter} instrument.
+     */
+    createUpDownCounter(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.UP_DOWN_COUNTER, options);
+      const storage = this._meterSharedState.registerMetricStorage(descriptor);
+      return new UpDownCounterInstrument(storage, descriptor);
+    }
+    /**
+     * Create a {@link ObservableGauge} instrument.
+     */
+    createObservableGauge(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.OBSERVABLE_GAUGE, options);
+      const storages = this._meterSharedState.registerAsyncMetricStorage(descriptor);
+      return new ObservableGaugeInstrument(descriptor, storages, this._meterSharedState.observableRegistry);
+    }
+    /**
+     * Create a {@link ObservableCounter} instrument.
+     */
+    createObservableCounter(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.OBSERVABLE_COUNTER, options);
+      const storages = this._meterSharedState.registerAsyncMetricStorage(descriptor);
+      return new ObservableCounterInstrument(descriptor, storages, this._meterSharedState.observableRegistry);
+    }
+    /**
+     * Create a {@link ObservableUpDownCounter} instrument.
+     */
+    createObservableUpDownCounter(name, options) {
+      const descriptor = createInstrumentDescriptor(name, InstrumentType2.OBSERVABLE_UP_DOWN_COUNTER, options);
+      const storages = this._meterSharedState.registerAsyncMetricStorage(descriptor);
+      return new ObservableUpDownCounterInstrument(descriptor, storages, this._meterSharedState.observableRegistry);
+    }
+    /**
+     * @see {@link Meter.addBatchObservableCallback}
+     */
+    addBatchObservableCallback(callback, observables) {
+      this._meterSharedState.observableRegistry.addBatchCallback(callback, observables);
+    }
+    /**
+     * @see {@link Meter.removeBatchObservableCallback}
+     */
+    removeBatchObservableCallback(callback, observables) {
+      this._meterSharedState.observableRegistry.removeBatchCallback(callback, observables);
+    }
+  };
+  var MetricStorage = class {
+    _instrumentDescriptor;
+    constructor(_instrumentDescriptor) {
+      this._instrumentDescriptor = _instrumentDescriptor;
+    }
+    getInstrumentDescriptor() {
+      return this._instrumentDescriptor;
+    }
+    updateDescription(description) {
+      this._instrumentDescriptor = createInstrumentDescriptor(this._instrumentDescriptor.name, this._instrumentDescriptor.type, {
+        description,
+        valueType: this._instrumentDescriptor.valueType,
+        unit: this._instrumentDescriptor.unit,
+        advice: this._instrumentDescriptor.advice
+      });
+    }
+  };
+  var HashMap = class {
+    _hash;
+    _valueMap = /* @__PURE__ */ new Map();
+    _keyMap = /* @__PURE__ */ new Map();
+    constructor(_hash) {
+      this._hash = _hash;
+    }
+    get(key, hashCode) {
+      hashCode ??= this._hash(key);
+      return this._valueMap.get(hashCode);
+    }
+    getOrDefault(key, defaultFactory) {
+      const hash = this._hash(key);
+      if (this._valueMap.has(hash)) {
+        return this._valueMap.get(hash);
+      }
+      const val = defaultFactory();
+      if (!this._keyMap.has(hash)) {
+        this._keyMap.set(hash, key);
+      }
+      this._valueMap.set(hash, val);
+      return val;
+    }
+    set(key, value, hashCode) {
+      hashCode ??= this._hash(key);
+      if (!this._keyMap.has(hashCode)) {
+        this._keyMap.set(hashCode, key);
+      }
+      this._valueMap.set(hashCode, value);
+    }
+    has(key, hashCode) {
+      hashCode ??= this._hash(key);
+      return this._valueMap.has(hashCode);
+    }
+    *keys() {
+      const keyIterator = this._keyMap.entries();
+      let next = keyIterator.next();
+      while (next.done !== true) {
+        yield [next.value[1], next.value[0]];
+        next = keyIterator.next();
+      }
+    }
+    *entries() {
+      const valueIterator = this._valueMap.entries();
+      let next = valueIterator.next();
+      while (next.done !== true) {
+        yield [this._keyMap.get(next.value[0]), next.value[1], next.value[0]];
+        next = valueIterator.next();
+      }
+    }
+    get size() {
+      return this._valueMap.size;
+    }
+  };
+  var AttributeHashMap = class extends HashMap {
+    constructor() {
+      super(hashAttributes);
+    }
+  };
+  var DeltaMetricProcessor = class {
+    _aggregator;
+    _activeCollectionStorage = new AttributeHashMap();
+    // TODO: find a reasonable mean to clean the memo;
+    // https://github.com/open-telemetry/opentelemetry-specification/pull/2208
+    _cumulativeMemoStorage = new AttributeHashMap();
+    _cardinalityLimit;
+    _overflowAttributes = {
+      "otel.metric.overflow": true
+    };
+    _overflowHashCode;
+    constructor(_aggregator, aggregationCardinalityLimit) {
+      this._aggregator = _aggregator;
+      this._cardinalityLimit = (aggregationCardinalityLimit ?? 2e3) - 1;
+      this._overflowHashCode = hashAttributes(this._overflowAttributes);
+    }
+    record(value, attributes, _context, collectionTime) {
+      let accumulation = this._activeCollectionStorage.get(attributes);
+      if (!accumulation) {
+        if (this._activeCollectionStorage.size >= this._cardinalityLimit) {
+          const overflowAccumulation = this._activeCollectionStorage.getOrDefault(this._overflowAttributes, () => this._aggregator.createAccumulation(collectionTime));
+          overflowAccumulation?.record(value);
+          return;
+        }
+        accumulation = this._aggregator.createAccumulation(collectionTime);
+        this._activeCollectionStorage.set(attributes, accumulation);
+      }
+      accumulation?.record(value);
+    }
+    batchCumulate(measurements, collectionTime) {
+      Array.from(measurements.entries()).forEach(([attributes, value, hashCode]) => {
+        const accumulation = this._aggregator.createAccumulation(collectionTime);
+        accumulation?.record(value);
+        let delta = accumulation;
+        if (this._cumulativeMemoStorage.has(attributes, hashCode)) {
+          const previous = this._cumulativeMemoStorage.get(attributes, hashCode);
+          delta = this._aggregator.diff(previous, accumulation);
+        } else {
+          if (this._cumulativeMemoStorage.size >= this._cardinalityLimit) {
+            attributes = this._overflowAttributes;
+            hashCode = this._overflowHashCode;
+            if (this._cumulativeMemoStorage.has(attributes, hashCode)) {
+              const previous = this._cumulativeMemoStorage.get(attributes, hashCode);
+              delta = this._aggregator.diff(previous, accumulation);
+            }
+          }
+        }
+        if (this._activeCollectionStorage.has(attributes, hashCode)) {
+          const active = this._activeCollectionStorage.get(attributes, hashCode);
+          delta = this._aggregator.merge(active, delta);
+        }
+        this._cumulativeMemoStorage.set(attributes, accumulation, hashCode);
+        this._activeCollectionStorage.set(attributes, delta, hashCode);
+      });
+    }
+    /**
+     * Returns a collection of delta metrics. Start time is the when first
+     * time event collected.
+     */
+    collect() {
+      const unreportedDelta = this._activeCollectionStorage;
+      this._activeCollectionStorage = new AttributeHashMap();
+      return unreportedDelta;
+    }
+  };
+  var TemporalMetricProcessor = class _TemporalMetricProcessor {
+    _aggregator;
+    _unreportedAccumulations = /* @__PURE__ */ new Map();
+    _reportHistory = /* @__PURE__ */ new Map();
+    constructor(_aggregator, collectorHandles) {
+      this._aggregator = _aggregator;
+      collectorHandles.forEach((handle) => {
+        this._unreportedAccumulations.set(handle, []);
+      });
+    }
+    /**
+     * Builds the {@link MetricData} streams to report against a specific MetricCollector.
+     * @param collector The information of the MetricCollector.
+     * @param collectors The registered collectors.
+     * @param instrumentDescriptor The instrumentation descriptor that these metrics generated with.
+     * @param currentAccumulations The current accumulation of metric data from instruments.
+     * @param collectionTime The current collection timestamp.
+     * @returns The {@link MetricData} points or `null`.
+     */
+    buildMetrics(collector, instrumentDescriptor, currentAccumulations, collectionTime) {
+      this._stashAccumulations(currentAccumulations);
+      const unreportedAccumulations = this._getMergedUnreportedAccumulations(collector);
+      let result = unreportedAccumulations;
+      let aggregationTemporality;
+      if (this._reportHistory.has(collector)) {
+        const last = this._reportHistory.get(collector);
+        const lastCollectionTime = last.collectionTime;
+        aggregationTemporality = last.aggregationTemporality;
+        if (aggregationTemporality === AggregationTemporality2.CUMULATIVE) {
+          result = _TemporalMetricProcessor.merge(last.accumulations, unreportedAccumulations, this._aggregator);
+        } else {
+          result = _TemporalMetricProcessor.calibrateStartTime(last.accumulations, unreportedAccumulations, lastCollectionTime);
+        }
+      } else {
+        aggregationTemporality = collector.selectAggregationTemporality(instrumentDescriptor.type);
+      }
+      this._reportHistory.set(collector, {
+        accumulations: result,
+        collectionTime,
+        aggregationTemporality
+      });
+      const accumulationRecords = AttributesMapToAccumulationRecords(result);
+      if (accumulationRecords.length === 0) {
+        return void 0;
+      }
+      return this._aggregator.toMetricData(
+        instrumentDescriptor,
+        aggregationTemporality,
+        accumulationRecords,
+        /* endTime */
+        collectionTime
+      );
+    }
+    _stashAccumulations(currentAccumulation) {
+      const registeredCollectors = this._unreportedAccumulations.keys();
+      for (const collector of registeredCollectors) {
+        let stash = this._unreportedAccumulations.get(collector);
+        if (stash === void 0) {
+          stash = [];
+          this._unreportedAccumulations.set(collector, stash);
+        }
+        stash.push(currentAccumulation);
+      }
+    }
+    _getMergedUnreportedAccumulations(collector) {
+      let result = new AttributeHashMap();
+      const unreportedList = this._unreportedAccumulations.get(collector);
+      this._unreportedAccumulations.set(collector, []);
+      if (unreportedList === void 0) {
+        return result;
+      }
+      for (const it of unreportedList) {
+        result = _TemporalMetricProcessor.merge(result, it, this._aggregator);
+      }
+      return result;
+    }
+    static merge(last, current, aggregator) {
+      const result = last;
+      const iterator = current.entries();
+      let next = iterator.next();
+      while (next.done !== true) {
+        const [key, record, hash] = next.value;
+        if (last.has(key, hash)) {
+          const lastAccumulation = last.get(key, hash);
+          const accumulation = aggregator.merge(lastAccumulation, record);
+          result.set(key, accumulation, hash);
+        } else {
+          result.set(key, record, hash);
+        }
+        next = iterator.next();
+      }
+      return result;
+    }
+    /**
+     * Calibrate the reported metric streams' startTime to lastCollectionTime. Leaves
+     * the new stream to be the initial observation time unchanged.
+     */
+    static calibrateStartTime(last, current, lastCollectionTime) {
+      for (const [key, hash] of last.keys()) {
+        const currentAccumulation = current.get(key, hash);
+        currentAccumulation?.setStartTime(lastCollectionTime);
+      }
+      return current;
+    }
+  };
+  function AttributesMapToAccumulationRecords(map) {
+    return Array.from(map.entries());
+  }
+  var AsyncMetricStorage = class extends MetricStorage {
+    _attributesProcessor;
+    _aggregationCardinalityLimit;
+    _deltaMetricStorage;
+    _temporalMetricStorage;
+    constructor(_instrumentDescriptor, aggregator, _attributesProcessor, collectorHandles, _aggregationCardinalityLimit) {
+      super(_instrumentDescriptor);
+      this._attributesProcessor = _attributesProcessor;
+      this._aggregationCardinalityLimit = _aggregationCardinalityLimit;
+      this._deltaMetricStorage = new DeltaMetricProcessor(aggregator, this._aggregationCardinalityLimit);
+      this._temporalMetricStorage = new TemporalMetricProcessor(aggregator, collectorHandles);
+    }
+    record(measurements, observationTime) {
+      const processed = new AttributeHashMap();
+      Array.from(measurements.entries()).forEach(([attributes, value]) => {
+        processed.set(this._attributesProcessor.process(attributes), value);
+      });
+      this._deltaMetricStorage.batchCumulate(processed, observationTime);
+    }
+    /**
+     * Collects the metrics from this storage. The ObservableCallback is invoked
+     * during the collection.
+     *
+     * Note: This is a stateful operation and may reset any interval-related
+     * state for the MetricCollector.
+     */
+    collect(collector, collectionTime) {
+      const accumulations = this._deltaMetricStorage.collect();
+      return this._temporalMetricStorage.buildMetrics(collector, this._instrumentDescriptor, accumulations, collectionTime);
+    }
+  };
+  function getIncompatibilityDetails(existing, otherDescriptor) {
+    let incompatibility = "";
+    if (existing.unit !== otherDescriptor.unit) {
+      incompatibility += `	- Unit '${existing.unit}' does not match '${otherDescriptor.unit}'
+`;
+    }
+    if (existing.type !== otherDescriptor.type) {
+      incompatibility += `	- Type '${existing.type}' does not match '${otherDescriptor.type}'
+`;
+    }
+    if (existing.valueType !== otherDescriptor.valueType) {
+      incompatibility += `	- Value Type '${existing.valueType}' does not match '${otherDescriptor.valueType}'
+`;
+    }
+    if (existing.description !== otherDescriptor.description) {
+      incompatibility += `	- Description '${existing.description}' does not match '${otherDescriptor.description}'
+`;
+    }
+    return incompatibility;
+  }
+  function getValueTypeConflictResolutionRecipe(existing, otherDescriptor) {
+    return `	- use valueType '${existing.valueType}' on instrument creation or use an instrument name other than '${otherDescriptor.name}'`;
+  }
+  function getUnitConflictResolutionRecipe(existing, otherDescriptor) {
+    return `	- use unit '${existing.unit}' on instrument creation or use an instrument name other than '${otherDescriptor.name}'`;
+  }
+  function getTypeConflictResolutionRecipe(existing, otherDescriptor) {
+    const selector = {
+      name: otherDescriptor.name,
+      type: otherDescriptor.type,
+      unit: otherDescriptor.unit
+    };
+    const selectorString = JSON.stringify(selector);
+    return `	- create a new view with a name other than '${existing.name}' and InstrumentSelector '${selectorString}'`;
+  }
+  function getDescriptionResolutionRecipe(existing, otherDescriptor) {
+    const selector = {
+      name: otherDescriptor.name,
+      type: otherDescriptor.type,
+      unit: otherDescriptor.unit
+    };
+    const selectorString = JSON.stringify(selector);
+    return `	- create a new view with a name other than '${existing.name}' and InstrumentSelector '${selectorString}'
+    	- OR - create a new view with the name ${existing.name} and description '${existing.description}' and InstrumentSelector ${selectorString}
+    	- OR - create a new view with the name ${otherDescriptor.name} and description '${existing.description}' and InstrumentSelector ${selectorString}`;
+  }
+  function getConflictResolutionRecipe(existing, otherDescriptor) {
+    if (existing.valueType !== otherDescriptor.valueType) {
+      return getValueTypeConflictResolutionRecipe(existing, otherDescriptor);
+    }
+    if (existing.unit !== otherDescriptor.unit) {
+      return getUnitConflictResolutionRecipe(existing, otherDescriptor);
+    }
+    if (existing.type !== otherDescriptor.type) {
+      return getTypeConflictResolutionRecipe(existing, otherDescriptor);
+    }
+    if (existing.description !== otherDescriptor.description) {
+      return getDescriptionResolutionRecipe(existing, otherDescriptor);
+    }
+    return "";
+  }
+  var MetricStorageRegistry = class _MetricStorageRegistry {
+    _sharedRegistry = /* @__PURE__ */ new Map();
+    _perCollectorRegistry = /* @__PURE__ */ new Map();
+    static create() {
+      return new _MetricStorageRegistry();
+    }
+    getStorages(collector) {
+      let storages = [];
+      for (const metricStorages of this._sharedRegistry.values()) {
+        storages = storages.concat(metricStorages);
+      }
+      const perCollectorStorages = this._perCollectorRegistry.get(collector);
+      if (perCollectorStorages != null) {
+        for (const metricStorages of perCollectorStorages.values()) {
+          storages = storages.concat(metricStorages);
+        }
+      }
+      return storages;
+    }
+    register(storage) {
+      this._registerStorage(storage, this._sharedRegistry);
+    }
+    registerForCollector(collector, storage) {
+      let storageMap = this._perCollectorRegistry.get(collector);
+      if (storageMap == null) {
+        storageMap = /* @__PURE__ */ new Map();
+        this._perCollectorRegistry.set(collector, storageMap);
+      }
+      this._registerStorage(storage, storageMap);
+    }
+    findOrUpdateCompatibleStorage(expectedDescriptor) {
+      const storages = this._sharedRegistry.get(expectedDescriptor.name);
+      if (storages === void 0) {
+        return null;
+      }
+      return this._findOrUpdateCompatibleStorage(expectedDescriptor, storages);
+    }
+    findOrUpdateCompatibleCollectorStorage(collector, expectedDescriptor) {
+      const storageMap = this._perCollectorRegistry.get(collector);
+      if (storageMap === void 0) {
+        return null;
+      }
+      const storages = storageMap.get(expectedDescriptor.name);
+      if (storages === void 0) {
+        return null;
+      }
+      return this._findOrUpdateCompatibleStorage(expectedDescriptor, storages);
+    }
+    _registerStorage(storage, storageMap) {
+      const descriptor = storage.getInstrumentDescriptor();
+      const storages = storageMap.get(descriptor.name);
+      if (storages === void 0) {
+        storageMap.set(descriptor.name, [storage]);
+        return;
+      }
+      storages.push(storage);
+    }
+    _findOrUpdateCompatibleStorage(expectedDescriptor, existingStorages) {
+      let compatibleStorage = null;
+      for (const existingStorage of existingStorages) {
+        const existingDescriptor = existingStorage.getInstrumentDescriptor();
+        if (isDescriptorCompatibleWith(existingDescriptor, expectedDescriptor)) {
+          if (existingDescriptor.description !== expectedDescriptor.description) {
+            if (expectedDescriptor.description.length > existingDescriptor.description.length) {
+              existingStorage.updateDescription(expectedDescriptor.description);
+            }
+            diag2.warn("A view or instrument with the name ", expectedDescriptor.name, " has already been registered, but has a different description and is incompatible with another registered view.\n", "Details:\n", getIncompatibilityDetails(existingDescriptor, expectedDescriptor), "The longer description will be used.\nTo resolve the conflict:", getConflictResolutionRecipe(existingDescriptor, expectedDescriptor));
+          }
+          compatibleStorage = existingStorage;
+        } else {
+          diag2.warn("A view or instrument with the name ", expectedDescriptor.name, " has already been registered and is incompatible with another registered view.\n", "Details:\n", getIncompatibilityDetails(existingDescriptor, expectedDescriptor), "To resolve the conflict:\n", getConflictResolutionRecipe(existingDescriptor, expectedDescriptor));
+        }
+      }
+      return compatibleStorage;
+    }
+  };
+  var MultiMetricStorage = class {
+    _backingStorages;
+    constructor(_backingStorages) {
+      this._backingStorages = _backingStorages;
+    }
+    record(value, attributes, context2, recordTime) {
+      this._backingStorages.forEach((it) => {
+        it.record(value, attributes, context2, recordTime);
+      });
+    }
+  };
+  var ObservableResultImpl = class {
+    _instrumentName;
+    _valueType;
+    /**
+     * @internal
+     */
+    _buffer = new AttributeHashMap();
+    constructor(_instrumentName, _valueType) {
+      this._instrumentName = _instrumentName;
+      this._valueType = _valueType;
+    }
+    /**
+     * Observe a measurement of the value associated with the given attributes.
+     */
+    observe(value, attributes = {}) {
+      if (typeof value !== "number") {
+        diag2.warn(`non-number value provided to metric ${this._instrumentName}: ${value}`);
+        return;
+      }
+      if (this._valueType === ValueType.INT && !Number.isInteger(value)) {
+        diag2.warn(`INT value type cannot accept a floating-point value for ${this._instrumentName}, ignoring the fractional digits.`);
+        value = Math.trunc(value);
+        if (!Number.isInteger(value)) {
+          return;
+        }
+      }
+      this._buffer.set(attributes, value);
+    }
+  };
+  var BatchObservableResultImpl = class {
+    /**
+     * @internal
+     */
+    _buffer = /* @__PURE__ */ new Map();
+    /**
+     * Observe a measurement of the value associated with the given attributes.
+     */
+    observe(metric, value, attributes = {}) {
+      if (!isObservableInstrument(metric)) {
+        return;
+      }
+      let map = this._buffer.get(metric);
+      if (map == null) {
+        map = new AttributeHashMap();
+        this._buffer.set(metric, map);
+      }
+      if (typeof value !== "number") {
+        diag2.warn(`non-number value provided to metric ${metric._descriptor.name}: ${value}`);
+        return;
+      }
+      if (metric._descriptor.valueType === ValueType.INT && !Number.isInteger(value)) {
+        diag2.warn(`INT value type cannot accept a floating-point value for ${metric._descriptor.name}, ignoring the fractional digits.`);
+        value = Math.trunc(value);
+        if (!Number.isInteger(value)) {
+          return;
+        }
+      }
+      map.set(attributes, value);
+    }
+  };
+  var ObservableRegistry = class {
+    _callbacks = [];
+    _batchCallbacks = [];
+    addCallback(callback, instrument) {
+      const idx = this._findCallback(callback, instrument);
+      if (idx >= 0) {
+        return;
+      }
+      this._callbacks.push({
+        callback,
+        instrument
+      });
+    }
+    removeCallback(callback, instrument) {
+      const idx = this._findCallback(callback, instrument);
+      if (idx < 0) {
+        return;
+      }
+      this._callbacks.splice(idx, 1);
+    }
+    addBatchCallback(callback, instruments) {
+      const observableInstruments = new Set(instruments.filter(isObservableInstrument));
+      if (observableInstruments.size === 0) {
+        diag2.error("BatchObservableCallback is not associated with valid instruments", instruments);
+        return;
+      }
+      const idx = this._findBatchCallback(callback, observableInstruments);
+      if (idx >= 0) {
+        return;
+      }
+      this._batchCallbacks.push({
+        callback,
+        instruments: observableInstruments
+      });
+    }
+    removeBatchCallback(callback, instruments) {
+      const observableInstruments = new Set(instruments.filter(isObservableInstrument));
+      const idx = this._findBatchCallback(callback, observableInstruments);
+      if (idx < 0) {
+        return;
+      }
+      this._batchCallbacks.splice(idx, 1);
+    }
+    /**
+     * @returns a promise of rejected reasons for invoking callbacks.
+     */
+    async observe(collectionTime, timeoutMillis) {
+      const callbackFutures = this._observeCallbacks(collectionTime, timeoutMillis);
+      const batchCallbackFutures = this._observeBatchCallbacks(collectionTime, timeoutMillis);
+      const results = await PromiseAllSettled([...callbackFutures, ...batchCallbackFutures]);
+      const rejections = results.filter(isPromiseAllSettledRejectionResult).map((it) => it.reason);
+      return rejections;
+    }
+    _observeCallbacks(observationTime, timeoutMillis) {
+      return this._callbacks.map(async ({
+        callback,
+        instrument
+      }) => {
+        const observableResult = new ObservableResultImpl(instrument._descriptor.name, instrument._descriptor.valueType);
+        let callPromise = Promise.resolve(callback(observableResult));
+        if (timeoutMillis != null) {
+          callPromise = callWithTimeout2(callPromise, timeoutMillis);
+        }
+        await callPromise;
+        instrument._metricStorages.forEach((metricStorage) => {
+          metricStorage.record(observableResult._buffer, observationTime);
+        });
+      });
+    }
+    _observeBatchCallbacks(observationTime, timeoutMillis) {
+      return this._batchCallbacks.map(async ({
+        callback,
+        instruments
+      }) => {
+        const observableResult = new BatchObservableResultImpl();
+        let callPromise = Promise.resolve(callback(observableResult));
+        if (timeoutMillis != null) {
+          callPromise = callWithTimeout2(callPromise, timeoutMillis);
+        }
+        await callPromise;
+        instruments.forEach((instrument) => {
+          const buffer = observableResult._buffer.get(instrument);
+          if (buffer == null) {
+            return;
+          }
+          instrument._metricStorages.forEach((metricStorage) => {
+            metricStorage.record(buffer, observationTime);
+          });
+        });
+      });
+    }
+    _findCallback(callback, instrument) {
+      return this._callbacks.findIndex((record) => {
+        return record.callback === callback && record.instrument === instrument;
+      });
+    }
+    _findBatchCallback(callback, instruments) {
+      return this._batchCallbacks.findIndex((record) => {
+        return record.callback === callback && setEquals(record.instruments, instruments);
+      });
+    }
+  };
+  var SyncMetricStorage = class extends MetricStorage {
+    _attributesProcessor;
+    _aggregationCardinalityLimit;
+    _deltaMetricStorage;
+    _temporalMetricStorage;
+    constructor(instrumentDescriptor, aggregator, _attributesProcessor, collectorHandles, _aggregationCardinalityLimit) {
+      super(instrumentDescriptor);
+      this._attributesProcessor = _attributesProcessor;
+      this._aggregationCardinalityLimit = _aggregationCardinalityLimit;
+      this._deltaMetricStorage = new DeltaMetricProcessor(aggregator, this._aggregationCardinalityLimit);
+      this._temporalMetricStorage = new TemporalMetricProcessor(aggregator, collectorHandles);
+    }
+    record(value, attributes, context2, recordTime) {
+      attributes = this._attributesProcessor.process(attributes, context2);
+      this._deltaMetricStorage.record(value, attributes, context2, recordTime);
+    }
+    /**
+     * Collects the metrics from this storage.
+     *
+     * Note: This is a stateful operation and may reset any interval-related
+     * state for the MetricCollector.
+     */
+    collect(collector, collectionTime) {
+      const accumulations = this._deltaMetricStorage.collect();
+      return this._temporalMetricStorage.buildMetrics(collector, this._instrumentDescriptor, accumulations, collectionTime);
+    }
+  };
+  var NoopAttributesProcessor = class {
+    process(incoming, _context) {
+      return incoming;
+    }
+  };
+  var MultiAttributesProcessor = class {
+    _processors;
+    constructor(_processors) {
+      this._processors = _processors;
+    }
+    process(incoming, context2) {
+      let filteredAttributes = incoming;
+      for (const processor of this._processors) {
+        filteredAttributes = processor.process(filteredAttributes, context2);
+      }
+      return filteredAttributes;
+    }
+  };
+  function createNoopAttributesProcessor() {
+    return NOOP;
+  }
+  function createMultiAttributesProcessor(processors) {
+    return new MultiAttributesProcessor(processors);
+  }
+  var NOOP = new NoopAttributesProcessor();
+  var MeterSharedState = class {
+    _meterProviderSharedState;
+    _instrumentationScope;
+    metricStorageRegistry = new MetricStorageRegistry();
+    observableRegistry = new ObservableRegistry();
+    meter;
+    constructor(_meterProviderSharedState, _instrumentationScope) {
+      this._meterProviderSharedState = _meterProviderSharedState;
+      this._instrumentationScope = _instrumentationScope;
+      this.meter = new Meter(this);
+    }
+    registerMetricStorage(descriptor) {
+      const storages = this._registerMetricStorage(descriptor, SyncMetricStorage);
+      if (storages.length === 1) {
+        return storages[0];
+      }
+      return new MultiMetricStorage(storages);
+    }
+    registerAsyncMetricStorage(descriptor) {
+      const storages = this._registerMetricStorage(descriptor, AsyncMetricStorage);
+      return storages;
+    }
+    /**
+     * @param collector opaque handle of {@link MetricCollector} which initiated the collection.
+     * @param collectionTime the HrTime at which the collection was initiated.
+     * @param options options for collection.
+     * @returns the list of metric data collected.
+     */
+    async collect(collector, collectionTime, options) {
+      const errors = await this.observableRegistry.observe(collectionTime, options?.timeoutMillis);
+      const storages = this.metricStorageRegistry.getStorages(collector);
+      if (storages.length === 0) {
+        return null;
+      }
+      const metricDataList = storages.map((metricStorage) => {
+        return metricStorage.collect(collector, collectionTime);
+      }).filter(isNotNullish);
+      if (metricDataList.length === 0) {
+        return {
+          errors
+        };
+      }
+      return {
+        scopeMetrics: {
+          scope: this._instrumentationScope,
+          metrics: metricDataList
+        },
+        errors
+      };
+    }
+    _registerMetricStorage(descriptor, MetricStorageType) {
+      const views = this._meterProviderSharedState.viewRegistry.findViews(descriptor, this._instrumentationScope);
+      let storages = views.map((view) => {
+        const viewDescriptor = createInstrumentDescriptorWithView(view, descriptor);
+        const compatibleStorage = this.metricStorageRegistry.findOrUpdateCompatibleStorage(viewDescriptor);
+        if (compatibleStorage != null) {
+          return compatibleStorage;
+        }
+        const aggregator = view.aggregation.createAggregator(viewDescriptor);
+        const viewStorage = new MetricStorageType(viewDescriptor, aggregator, view.attributesProcessor, this._meterProviderSharedState.metricCollectors, view.aggregationCardinalityLimit);
+        this.metricStorageRegistry.register(viewStorage);
+        return viewStorage;
+      });
+      if (storages.length === 0) {
+        const perCollectorAggregations = this._meterProviderSharedState.selectAggregations(descriptor.type);
+        const collectorStorages = perCollectorAggregations.map(([collector, aggregation]) => {
+          const compatibleStorage = this.metricStorageRegistry.findOrUpdateCompatibleCollectorStorage(collector, descriptor);
+          if (compatibleStorage != null) {
+            return compatibleStorage;
+          }
+          const aggregator = aggregation.createAggregator(descriptor);
+          const cardinalityLimit = collector.selectCardinalityLimit(descriptor.type);
+          const storage = new MetricStorageType(descriptor, aggregator, createNoopAttributesProcessor(), [collector], cardinalityLimit);
+          this.metricStorageRegistry.registerForCollector(collector, storage);
+          return storage;
+        });
+        storages = storages.concat(collectorStorages);
+      }
+      return storages;
+    }
+  };
+  var MeterProviderSharedState = class {
+    resource;
+    viewRegistry = new ViewRegistry();
+    metricCollectors = [];
+    meterSharedStates = /* @__PURE__ */ new Map();
+    constructor(resource) {
+      this.resource = resource;
+    }
+    getMeterSharedState(instrumentationScope) {
+      const id = instrumentationScopeId(instrumentationScope);
+      let meterSharedState = this.meterSharedStates.get(id);
+      if (meterSharedState == null) {
+        meterSharedState = new MeterSharedState(this, instrumentationScope);
+        this.meterSharedStates.set(id, meterSharedState);
+      }
+      return meterSharedState;
+    }
+    selectAggregations(instrumentType) {
+      const result = [];
+      for (const collector of this.metricCollectors) {
+        result.push([collector, toAggregation(collector.selectAggregation(instrumentType))]);
+      }
+      return result;
+    }
+  };
+  var MetricCollector = class {
+    _sharedState;
+    _metricReader;
+    constructor(_sharedState, _metricReader) {
+      this._sharedState = _sharedState;
+      this._metricReader = _metricReader;
+    }
+    async collect(options) {
+      const collectionTime = millisToHrTime(Date.now());
+      const scopeMetrics = [];
+      const errors = [];
+      const meterCollectionPromises = Array.from(this._sharedState.meterSharedStates.values()).map(async (meterSharedState) => {
+        const current = await meterSharedState.collect(this, collectionTime, options);
+        if (current?.scopeMetrics != null) {
+          scopeMetrics.push(current.scopeMetrics);
+        }
+        if (current?.errors != null) {
+          errors.push(...current.errors);
+        }
+      });
+      await Promise.all(meterCollectionPromises);
+      return {
+        resourceMetrics: {
+          resource: this._sharedState.resource,
+          scopeMetrics
+        },
+        errors
+      };
+    }
+    /**
+     * Delegates for MetricReader.forceFlush.
+     */
+    async forceFlush(options) {
+      await this._metricReader.forceFlush(options);
+    }
+    /**
+     * Delegates for MetricReader.shutdown.
+     */
+    async shutdown(options) {
+      await this._metricReader.shutdown(options);
+    }
+    selectAggregationTemporality(instrumentType) {
+      return this._metricReader.selectAggregationTemporality(instrumentType);
+    }
+    selectAggregation(instrumentType) {
+      return this._metricReader.selectAggregation(instrumentType);
+    }
+    /**
+     * Select the cardinality limit for the given {@link InstrumentType} for this
+     * collector.
+     */
+    selectCardinalityLimit(instrumentType) {
+      return this._metricReader.selectCardinalityLimit?.(instrumentType) ?? 2e3;
+    }
+  };
+  var ESCAPE = /[\^$\\.+?()[\]{}|]/g;
+  var PatternPredicate = class _PatternPredicate {
+    _matchAll;
+    _regexp;
+    constructor(pattern) {
+      if (pattern === "*") {
+        this._matchAll = true;
+        this._regexp = /.*/;
+      } else {
+        this._matchAll = false;
+        this._regexp = new RegExp(_PatternPredicate.escapePattern(pattern));
+      }
+    }
+    match(str) {
+      if (this._matchAll) {
+        return true;
+      }
+      return this._regexp.test(str);
+    }
+    static escapePattern(pattern) {
+      return `^${pattern.replace(ESCAPE, "\\$&").replace("*", ".*")}$`;
+    }
+    static hasWildcard(pattern) {
+      return pattern.includes("*");
+    }
+  };
+  var ExactPredicate = class {
+    _matchAll;
+    _pattern;
+    constructor(pattern) {
+      this._matchAll = pattern === void 0;
+      this._pattern = pattern;
+    }
+    match(str) {
+      if (this._matchAll) {
+        return true;
+      }
+      if (str === this._pattern) {
+        return true;
+      }
+      return false;
+    }
+  };
+  var InstrumentSelector = class {
+    _nameFilter;
+    _type;
+    _unitFilter;
+    constructor(criteria) {
+      this._nameFilter = new PatternPredicate(criteria?.name ?? "*");
+      this._type = criteria?.type;
+      this._unitFilter = new ExactPredicate(criteria?.unit);
+    }
+    getType() {
+      return this._type;
+    }
+    getNameFilter() {
+      return this._nameFilter;
+    }
+    getUnitFilter() {
+      return this._unitFilter;
+    }
+  };
+  var MeterSelector = class {
+    _nameFilter;
+    _versionFilter;
+    _schemaUrlFilter;
+    constructor(criteria) {
+      this._nameFilter = new ExactPredicate(criteria?.name);
+      this._versionFilter = new ExactPredicate(criteria?.version);
+      this._schemaUrlFilter = new ExactPredicate(criteria?.schemaUrl);
+    }
+    getNameFilter() {
+      return this._nameFilter;
+    }
+    /**
+     * TODO: semver filter? no spec yet.
+     */
+    getVersionFilter() {
+      return this._versionFilter;
+    }
+    getSchemaUrlFilter() {
+      return this._schemaUrlFilter;
+    }
+  };
+  function isSelectorNotProvided(options) {
+    return options.instrumentName == null && options.instrumentType == null && options.instrumentUnit == null && options.meterName == null && options.meterVersion == null && options.meterSchemaUrl == null;
+  }
+  function validateViewOptions(viewOptions) {
+    if (isSelectorNotProvided(viewOptions)) {
+      throw new Error("Cannot create view with no selector arguments supplied");
+    }
+    if (viewOptions.name != null && (viewOptions?.instrumentName == null || PatternPredicate.hasWildcard(viewOptions.instrumentName))) {
+      throw new Error("Views with a specified name must be declared with an instrument selector that selects at most one instrument per meter.");
+    }
+  }
+  var View = class {
+    name;
+    description;
+    aggregation;
+    attributesProcessor;
+    instrumentSelector;
+    meterSelector;
+    aggregationCardinalityLimit;
+    /**
+     * Create a new {@link View} instance.
+     *
+     * Parameters can be categorized as two types:
+     *  Instrument selection criteria: Used to describe the instrument(s) this view will be applied to.
+     *  Will be treated as additive (the Instrument has to meet all the provided criteria to be selected).
+     *
+     *  Metric stream altering: Alter the metric stream of instruments selected by instrument selection criteria.
+     *
+     * @param viewOptions {@link ViewOptions} for altering the metric stream and instrument selection.
+     * @param viewOptions.name
+     * Alters the metric stream:
+     *  This will be used as the name of the metrics stream.
+     *  If not provided, the original Instrument name will be used.
+     * @param viewOptions.description
+     * Alters the metric stream:
+     *  This will be used as the description of the metrics stream.
+     *  If not provided, the original Instrument description will be used by default.
+     * @param viewOptions.attributesProcessors
+     * Alters the metric stream:
+     *  If provided, the attributes will be modified as defined by the added processors.
+     *  If not provided, all attribute keys will be used by default.
+     * @param viewOptions.aggregationCardinalityLimit
+     * Alters the metric stream:
+     *  Sets a limit on the number of unique attribute combinations (cardinality) that can be aggregated.
+     *  If not provided, the default limit of 2000 will be used.
+     * @param viewOptions.aggregation
+     * Alters the metric stream:
+     *  Alters the {@link Aggregation} of the metric stream.
+     * @param viewOptions.instrumentName
+     * Instrument selection criteria:
+     *  Original name of the Instrument(s) with wildcard support.
+     * @param viewOptions.instrumentType
+     * Instrument selection criteria:
+     *  The original type of the Instrument(s).
+     * @param viewOptions.instrumentUnit
+     * Instrument selection criteria:
+     *  The unit of the Instrument(s).
+     * @param viewOptions.meterName
+     * Instrument selection criteria:
+     *  The name of the Meter. No wildcard support, name must match the meter exactly.
+     * @param viewOptions.meterVersion
+     * Instrument selection criteria:
+     *  The version of the Meter. No wildcard support, version must match exactly.
+     * @param viewOptions.meterSchemaUrl
+     * Instrument selection criteria:
+     *  The schema URL of the Meter. No wildcard support, schema URL must match exactly.
+     *
+     * @example
+     * // Create a view that changes the Instrument 'my.instrument' to use to an
+     * // ExplicitBucketHistogramAggregation with the boundaries [20, 30, 40]
+     * new View({
+     *   aggregation: new ExplicitBucketHistogramAggregation([20, 30, 40]),
+     *   instrumentName: 'my.instrument'
+     * })
+     */
+    constructor(viewOptions) {
+      validateViewOptions(viewOptions);
+      if (viewOptions.attributesProcessors != null) {
+        this.attributesProcessor = createMultiAttributesProcessor(viewOptions.attributesProcessors);
+      } else {
+        this.attributesProcessor = createNoopAttributesProcessor();
+      }
+      this.name = viewOptions.name;
+      this.description = viewOptions.description;
+      this.aggregation = toAggregation(viewOptions.aggregation ?? {
+        type: AggregationType2.DEFAULT
+      });
+      this.instrumentSelector = new InstrumentSelector({
+        name: viewOptions.instrumentName,
+        type: viewOptions.instrumentType,
+        unit: viewOptions.instrumentUnit
+      });
+      this.meterSelector = new MeterSelector({
+        name: viewOptions.meterName,
+        version: viewOptions.meterVersion,
+        schemaUrl: viewOptions.meterSchemaUrl
+      });
+      this.aggregationCardinalityLimit = viewOptions.aggregationCardinalityLimit;
+    }
+  };
+  var MeterProvider = class {
+    _sharedState;
+    _shutdown = false;
+    constructor(options) {
+      this._sharedState = new MeterProviderSharedState(options?.resource ?? defaultResource());
+      if (options?.views != null && options.views.length > 0) {
+        for (const viewOption of options.views) {
+          this._sharedState.viewRegistry.addView(new View(viewOption));
+        }
+      }
+      if (options?.readers != null && options.readers.length > 0) {
+        for (const metricReader of options.readers) {
+          const collector = new MetricCollector(this._sharedState, metricReader);
+          metricReader.setMetricProducer(collector);
+          this._sharedState.metricCollectors.push(collector);
+        }
+      }
+    }
+    /**
+     * Get a meter with the configuration of the MeterProvider.
+     */
+    getMeter(name, version = "", options = {}) {
+      if (this._shutdown) {
+        diag2.warn("A shutdown MeterProvider cannot provide a Meter");
+        return createNoopMeter();
+      }
+      return this._sharedState.getMeterSharedState({
+        name,
+        version,
+        schemaUrl: options.schemaUrl
+      }).meter;
+    }
+    /**
+     * Shut down the MeterProvider and all registered
+     * MetricReaders.
+     *
+     * Returns a promise which is resolved when all flushes are complete.
+     */
+    async shutdown(options) {
+      if (this._shutdown) {
+        diag2.warn("shutdown may only be called once per MeterProvider");
+        return;
+      }
+      this._shutdown = true;
+      await Promise.all(this._sharedState.metricCollectors.map((collector) => {
+        return collector.shutdown(options);
+      }));
+    }
+    /**
+     * Notifies all registered MetricReaders to flush any buffered data.
+     *
+     * Returns a promise which is resolved when all flushes are complete.
+     */
+    async forceFlush(options) {
+      if (this._shutdown) {
+        diag2.warn("invalid attempt to force flush after MeterProvider shutdown");
+        return;
+      }
+      await Promise.all(this._sharedState.metricCollectors.map((collector) => {
+        return collector.forceFlush(options);
+      }));
+    }
+  };
+  var NoopLogger2 = class {
+    emit(_logRecord) {
+    }
+  };
+  var NOOP_LOGGER2 = new NoopLogger2();
+  var NoopLoggerProvider2 = class {
+    getLogger(_name, _version, _options) {
+      return new NoopLogger2();
+    }
+  };
+  var NOOP_LOGGER_PROVIDER2 = new NoopLoggerProvider2();
+  var ProxyLogger2 = class {
+    constructor(_provider, name, version, options) {
+      this._provider = _provider;
+      this.name = name;
+      this.version = version;
+      this.options = options;
+    }
+    /**
+     * Emit a log record. This method should only be used by log appenders.
+     *
+     * @param logRecord
+     */
+    emit(logRecord) {
+      this._getLogger().emit(logRecord);
+    }
+    /**
+     * Try to get a logger from the proxy logger provider.
+     * If the proxy logger provider has no delegate, return a noop logger.
+     */
+    _getLogger() {
+      if (this._delegate) {
+        return this._delegate;
+      }
+      const logger3 = this._provider.getDelegateLogger(this.name, this.version, this.options);
+      if (!logger3) {
+        return NOOP_LOGGER2;
+      }
+      this._delegate = logger3;
+      return this._delegate;
+    }
+  };
+  var ProxyLoggerProvider2 = class {
+    getLogger(name, version, options) {
+      var _a;
+      return (_a = this.getDelegateLogger(name, version, options)) !== null && _a !== void 0 ? _a : new ProxyLogger2(this, name, version, options);
+    }
+    getDelegate() {
+      var _a;
+      return (_a = this._delegate) !== null && _a !== void 0 ? _a : NOOP_LOGGER_PROVIDER2;
+    }
+    /**
+     * Set the delegate logger provider
+     */
+    setDelegate(delegate) {
+      this._delegate = delegate;
+    }
+    getDelegateLogger(name, version, options) {
+      var _a;
+      return (_a = this._delegate) === null || _a === void 0 ? void 0 : _a.getLogger(name, version, options);
+    }
+  };
+  var _globalThis5 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
+  var GLOBAL_LOGS_API_KEY2 = Symbol.for("io.opentelemetry.js.api.logs");
+  var _global3 = _globalThis5;
+  function makeGetter2(requiredVersion, instance, fallback) {
+    return (version) => version === requiredVersion ? instance : fallback;
+  }
+  var API_BACKWARDS_COMPATIBILITY_VERSION2 = 1;
+  var LogsAPI2 = class _LogsAPI {
+    constructor() {
+      this._proxyLoggerProvider = new ProxyLoggerProvider2();
+    }
+    static getInstance() {
+      if (!this._instance) {
+        this._instance = new _LogsAPI();
+      }
+      return this._instance;
+    }
+    setGlobalLoggerProvider(provider) {
+      if (_global3[GLOBAL_LOGS_API_KEY2]) {
+        return this.getLoggerProvider();
+      }
+      _global3[GLOBAL_LOGS_API_KEY2] = makeGetter2(API_BACKWARDS_COMPATIBILITY_VERSION2, provider, NOOP_LOGGER_PROVIDER2);
+      this._proxyLoggerProvider.setDelegate(provider);
+      return provider;
+    }
+    /**
+     * Returns the global logger provider.
+     *
+     * @returns LoggerProvider
+     */
+    getLoggerProvider() {
+      var _a, _b;
+      return (_b = (_a = _global3[GLOBAL_LOGS_API_KEY2]) === null || _a === void 0 ? void 0 : _a.call(_global3, API_BACKWARDS_COMPATIBILITY_VERSION2)) !== null && _b !== void 0 ? _b : this._proxyLoggerProvider;
+    }
+    /**
+     * Returns a logger from the global logger provider.
+     *
+     * @returns Logger
+     */
+    getLogger(name, version, options) {
+      return this.getLoggerProvider().getLogger(name, version, options);
+    }
+    /** Remove the global logger provider */
+    disable() {
+      delete _global3[GLOBAL_LOGS_API_KEY2];
+      this._proxyLoggerProvider = new ProxyLoggerProvider2();
+    }
+  };
+  var logs2 = LogsAPI2.getInstance();
+  var LogRecordImpl = class {
+    hrTime;
+    hrTimeObserved;
+    spanContext;
+    resource;
+    instrumentationScope;
+    attributes = {};
+    _severityText;
+    _severityNumber;
+    _body;
+    _eventName;
+    totalAttributesCount = 0;
+    _isReadonly = false;
+    _logRecordLimits;
+    set severityText(severityText) {
+      if (this._isLogRecordReadonly()) {
+        return;
+      }
+      this._severityText = severityText;
+    }
+    get severityText() {
+      return this._severityText;
+    }
+    set severityNumber(severityNumber) {
+      if (this._isLogRecordReadonly()) {
+        return;
+      }
+      this._severityNumber = severityNumber;
+    }
+    get severityNumber() {
+      return this._severityNumber;
+    }
+    set body(body) {
+      if (this._isLogRecordReadonly()) {
+        return;
+      }
+      this._body = body;
+    }
+    get body() {
+      return this._body;
+    }
+    get eventName() {
+      return this._eventName;
+    }
+    set eventName(eventName) {
+      if (this._isLogRecordReadonly()) {
+        return;
+      }
+      this._eventName = eventName;
+    }
+    get droppedAttributesCount() {
+      return this.totalAttributesCount - Object.keys(this.attributes).length;
+    }
+    constructor(_sharedState, instrumentationScope, logRecord) {
+      const {
+        timestamp,
+        observedTimestamp,
+        eventName,
+        severityNumber,
+        severityText,
+        body,
+        attributes = {},
+        context: context2
+      } = logRecord;
+      const now = Date.now();
+      this.hrTime = timeInputToHrTime(timestamp ?? now);
+      this.hrTimeObserved = timeInputToHrTime(observedTimestamp ?? now);
+      if (context2) {
+        const spanContext = trace.getSpanContext(context2);
+        if (spanContext && isSpanContextValid(spanContext)) {
+          this.spanContext = spanContext;
+        }
+      }
+      this.severityNumber = severityNumber;
+      this.severityText = severityText;
+      this.body = body;
+      this.resource = _sharedState.resource;
+      this.instrumentationScope = instrumentationScope;
+      this._logRecordLimits = _sharedState.logRecordLimits;
+      this._eventName = eventName;
+      this.setAttributes(attributes);
+    }
+    setAttribute(key, value) {
+      if (this._isLogRecordReadonly()) {
+        return this;
+      }
+      if (value === null) {
+        return this;
+      }
+      if (key.length === 0) {
+        diag2.warn(`Invalid attribute key: ${key}`);
+        return this;
+      }
+      if (!isAttributeValue(value) && !(typeof value === "object" && !Array.isArray(value) && Object.keys(value).length > 0)) {
+        diag2.warn(`Invalid attribute value set for key: ${key}`);
+        return this;
+      }
+      this.totalAttributesCount += 1;
+      if (Object.keys(this.attributes).length >= this._logRecordLimits.attributeCountLimit && !Object.prototype.hasOwnProperty.call(this.attributes, key)) {
+        if (this.droppedAttributesCount === 1) {
+          diag2.warn("Dropping extra attributes.");
+        }
+        return this;
+      }
+      if (isAttributeValue(value)) {
+        this.attributes[key] = this._truncateToSize(value);
+      } else {
+        this.attributes[key] = value;
+      }
+      return this;
+    }
+    setAttributes(attributes) {
+      for (const [k2, v2] of Object.entries(attributes)) {
+        this.setAttribute(k2, v2);
+      }
+      return this;
+    }
+    setBody(body) {
+      this.body = body;
+      return this;
+    }
+    setEventName(eventName) {
+      this.eventName = eventName;
+      return this;
+    }
+    setSeverityNumber(severityNumber) {
+      this.severityNumber = severityNumber;
+      return this;
+    }
+    setSeverityText(severityText) {
+      this.severityText = severityText;
+      return this;
+    }
+    /**
+     * @internal
+     * A LogRecordProcessor may freely modify logRecord for the duration of the OnEmit call.
+     * If logRecord is needed after OnEmit returns (i.e. for asynchronous processing) only reads are permitted.
+     */
+    _makeReadonly() {
+      this._isReadonly = true;
+    }
+    _truncateToSize(value) {
+      const limit = this._logRecordLimits.attributeValueLengthLimit;
+      if (limit <= 0) {
+        diag2.warn(`Attribute value limit must be positive, got ${limit}`);
+        return value;
+      }
+      if (typeof value === "string") {
+        return this._truncateToLimitUtil(value, limit);
+      }
+      if (Array.isArray(value)) {
+        return value.map((val) => typeof val === "string" ? this._truncateToLimitUtil(val, limit) : val);
+      }
+      return value;
+    }
+    _truncateToLimitUtil(value, limit) {
+      if (value.length <= limit) {
+        return value;
+      }
+      return value.substring(0, limit);
+    }
+    _isLogRecordReadonly() {
+      if (this._isReadonly) {
+        diag2.warn("Can not execute the operation on emitted log record");
+      }
+      return this._isReadonly;
+    }
+  };
+  var Logger = class {
+    instrumentationScope;
+    _sharedState;
+    constructor(instrumentationScope, _sharedState) {
+      this.instrumentationScope = instrumentationScope;
+      this._sharedState = _sharedState;
+    }
+    emit(logRecord) {
+      const currentContext = logRecord.context || context.active();
+      const logRecordInstance = new LogRecordImpl(this._sharedState, this.instrumentationScope, {
+        context: currentContext,
+        ...logRecord
+      });
+      this._sharedState.activeProcessor.onEmit(logRecordInstance, currentContext);
+      logRecordInstance._makeReadonly();
+    }
+  };
+  function loadDefaultConfig2() {
+    return {
+      forceFlushTimeoutMillis: 3e4,
+      logRecordLimits: {
+        attributeValueLengthLimit: getNumberFromEnv("OTEL_LOGRECORD_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? Infinity,
+        attributeCountLimit: getNumberFromEnv("OTEL_LOGRECORD_ATTRIBUTE_COUNT_LIMIT") ?? 128
+      },
+      includeTraceContext: true
+    };
+  }
+  function reconfigureLimits2(logRecordLimits) {
+    return {
+      /**
+       * Reassign log record attribute count limit to use first non null value defined by user or use default value
+       */
+      attributeCountLimit: logRecordLimits.attributeCountLimit ?? getNumberFromEnv("OTEL_LOGRECORD_ATTRIBUTE_COUNT_LIMIT") ?? getNumberFromEnv("OTEL_ATTRIBUTE_COUNT_LIMIT") ?? 128,
+      /**
+       * Reassign log record attribute value length limit to use first non null value defined by user or use default value
+       */
+      attributeValueLengthLimit: logRecordLimits.attributeValueLengthLimit ?? getNumberFromEnv("OTEL_LOGRECORD_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? getNumberFromEnv("OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT") ?? Infinity
+    };
+  }
+  var NoopLogRecordProcessor = class {
+    forceFlush() {
+      return Promise.resolve();
+    }
+    onEmit(_logRecord, _context) {
     }
     shutdown() {
       return Promise.resolve();
     }
   };
-  function getIdGenerator2(bytes) {
-    return function generateId() {
-      for (let i2 = 0; i2 < bytes * 2; i2++) {
-        SHARED_CHAR_CODES_ARRAY2[i2] = Math.floor(Math.random() * 16) + 48;
-        if (SHARED_CHAR_CODES_ARRAY2[i2] >= 58) {
-          SHARED_CHAR_CODES_ARRAY2[i2] += 39;
-        }
+  var MultiLogRecordProcessor = class {
+    processors;
+    forceFlushTimeoutMillis;
+    constructor(processors, forceFlushTimeoutMillis) {
+      this.processors = processors;
+      this.forceFlushTimeoutMillis = forceFlushTimeoutMillis;
+    }
+    async forceFlush() {
+      const timeout = this.forceFlushTimeoutMillis;
+      await Promise.all(this.processors.map((processor) => callWithTimeout(processor.forceFlush(), timeout)));
+    }
+    onEmit(logRecord, context2) {
+      this.processors.forEach((processors) => processors.onEmit(logRecord, context2));
+    }
+    async shutdown() {
+      await Promise.all(this.processors.map((processor) => processor.shutdown()));
+    }
+  };
+  var LoggerProviderSharedState = class {
+    resource;
+    forceFlushTimeoutMillis;
+    logRecordLimits;
+    processors;
+    loggers = /* @__PURE__ */ new Map();
+    activeProcessor;
+    registeredLogRecordProcessors = [];
+    constructor(resource, forceFlushTimeoutMillis, logRecordLimits, processors) {
+      this.resource = resource;
+      this.forceFlushTimeoutMillis = forceFlushTimeoutMillis;
+      this.logRecordLimits = logRecordLimits;
+      this.processors = processors;
+      if (processors.length > 0) {
+        this.registeredLogRecordProcessors = processors;
+        this.activeProcessor = new MultiLogRecordProcessor(this.registeredLogRecordProcessors, this.forceFlushTimeoutMillis);
+      } else {
+        this.activeProcessor = new NoopLogRecordProcessor();
       }
-      return String.fromCharCode.apply(null, SHARED_CHAR_CODES_ARRAY2.slice(0, bytes * 2));
-    };
-  }
+    }
+  };
+  var DEFAULT_LOGGER_NAME = "unknown";
+  var LoggerProvider = class {
+    _shutdownOnce;
+    _sharedState;
+    constructor(config = {}) {
+      const mergedConfig = merge({}, loadDefaultConfig2(), config);
+      const resource = config.resource ?? defaultResource();
+      this._sharedState = new LoggerProviderSharedState(resource, mergedConfig.forceFlushTimeoutMillis, reconfigureLimits2(mergedConfig.logRecordLimits), config?.processors ?? []);
+      this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
+    }
+    /**
+     * Get a logger with the configuration of the LoggerProvider.
+     */
+    getLogger(name, version, options) {
+      if (this._shutdownOnce.isCalled) {
+        diag2.warn("A shutdown LoggerProvider cannot provide a Logger");
+        return NOOP_LOGGER2;
+      }
+      if (!name) {
+        diag2.warn("Logger requested without instrumentation scope name.");
+      }
+      const loggerName = name || DEFAULT_LOGGER_NAME;
+      const key = `${loggerName}@${version || ""}:${options?.schemaUrl || ""}`;
+      if (!this._sharedState.loggers.has(key)) {
+        this._sharedState.loggers.set(key, new Logger({
+          name: loggerName,
+          version,
+          schemaUrl: options?.schemaUrl
+        }, this._sharedState));
+      }
+      return this._sharedState.loggers.get(key);
+    }
+    /**
+     * Notifies all registered LogRecordProcessor to flush any buffered data.
+     *
+     * Returns a promise which is resolved when all flushes are complete.
+     */
+    forceFlush() {
+      if (this._shutdownOnce.isCalled) {
+        diag2.warn("invalid attempt to force flush after LoggerProvider shutdown");
+        return this._shutdownOnce.promise;
+      }
+      return this._sharedState.activeProcessor.forceFlush();
+    }
+    /**
+     * Flush all buffered data and shut down the LoggerProvider and all registered
+     * LogRecordProcessor.
+     *
+     * Returns a promise which is resolved when all flushes are complete.
+     */
+    shutdown() {
+      if (this._shutdownOnce.isCalled) {
+        diag2.warn("shutdown may only be called once per LoggerProvider");
+        return this._shutdownOnce.promise;
+      }
+      return this._shutdownOnce.call();
+    }
+    _shutdown() {
+      return this._sharedState.activeProcessor.shutdown();
+    }
+  };
+  var ConsoleLogRecordExporter = class {
+    /**
+     * Export logs.
+     * @param logs
+     * @param resultCallback
+     */
+    export(logs4, resultCallback) {
+      this._sendLogRecords(logs4, resultCallback);
+    }
+    /**
+     * Shutdown the exporter.
+     */
+    shutdown() {
+      return Promise.resolve();
+    }
+    /**
+     * converts logRecord info into more readable format
+     * @param logRecord
+     */
+    _exportInfo(logRecord) {
+      return {
+        resource: {
+          attributes: logRecord.resource.attributes
+        },
+        instrumentationScope: logRecord.instrumentationScope,
+        timestamp: hrTimeToMicroseconds(logRecord.hrTime),
+        traceId: logRecord.spanContext?.traceId,
+        spanId: logRecord.spanContext?.spanId,
+        traceFlags: logRecord.spanContext?.traceFlags,
+        severityText: logRecord.severityText,
+        severityNumber: logRecord.severityNumber,
+        body: logRecord.body,
+        attributes: logRecord.attributes
+      };
+    }
+    /**
+     * Showing logs  in console
+     * @param logRecords
+     * @param done
+     */
+    _sendLogRecords(logRecords, done) {
+      for (const logRecord of logRecords) {
+        console.dir(this._exportInfo(logRecord), {
+          depth: 3
+        });
+      }
+      done?.({
+        code: ExportResultCode.SUCCESS
+      });
+    }
+  };
+  var SimpleLogRecordProcessor = class {
+    _exporter;
+    _shutdownOnce;
+    _unresolvedExports;
+    constructor(_exporter) {
+      this._exporter = _exporter;
+      this._shutdownOnce = new BindOnceFuture(this._shutdown, this);
+      this._unresolvedExports = /* @__PURE__ */ new Set();
+    }
+    onEmit(logRecord) {
+      if (this._shutdownOnce.isCalled) {
+        return;
+      }
+      const doExport = () => internal._export(this._exporter, [logRecord]).then((result) => {
+        if (result.code !== ExportResultCode.SUCCESS) {
+          globalErrorHandler(result.error ?? new Error(`SimpleLogRecordProcessor: log record export failed (status ${result})`));
+        }
+      }).catch(globalErrorHandler);
+      if (logRecord.resource.asyncAttributesPending) {
+        const exportPromise = logRecord.resource.waitForAsyncAttributes?.().then(() => {
+          this._unresolvedExports.delete(exportPromise);
+          return doExport();
+        }, globalErrorHandler);
+        if (exportPromise != null) {
+          this._unresolvedExports.add(exportPromise);
+        }
+      } else {
+        void doExport();
+      }
+    }
+    async forceFlush() {
+      await Promise.all(Array.from(this._unresolvedExports));
+    }
+    shutdown() {
+      return this._shutdownOnce.call();
+    }
+    _shutdown() {
+      return this._exporter.shutdown();
+    }
+  };
   var WebSDK = class {
     /**
      * Create a new Web SDK instance
      */
     constructor(configuration = {}) {
-      var _a3, _b, _c, _d;
-      this._resource = (_a3 = configuration.resource) !== null && _a3 !== void 0 ? _a3 : new Resource({});
+      var _a, _b, _c;
+      this._resource = defaultResource().merge((_a = configuration.resource) !== null && _a !== void 0 ? _a : resourceFromAttributes({}));
       this._resourceDetectors = (_b = configuration.resourceDetectors) !== null && _b !== void 0 ? _b : [browserDetector];
       this._serviceName = configuration.serviceName;
+      this._serviceVersion = configuration.serviceVersion;
       this._autoDetectResources = (_c = configuration.autoDetectResources) !== null && _c !== void 0 ? _c : true;
-      if (configuration.spanProcessor || configuration.traceExporter) {
+      if (configuration.spanProcessor || configuration.traceExporter || configuration.spanProcessors) {
         const tracerProviderConfig = {};
         if (configuration.sampler) {
           tracerProviderConfig.sampler = configuration.sampler;
@@ -8376,12 +10862,26 @@
         if (configuration.idGenerator) {
           tracerProviderConfig.idGenerator = configuration.idGenerator;
         }
-        const spanProcessor = (_d = configuration.spanProcessor) !== null && _d !== void 0 ? _d : new BatchSpanProcessor(configuration.traceExporter);
+        const spanProcessors = configuration.spanProcessors || [];
+        if (configuration.traceExporter) {
+          spanProcessors.push(new BatchSpanProcessor(configuration.traceExporter));
+        }
         this._tracerProviderConfig = {
           tracerConfig: tracerProviderConfig,
-          spanProcessor,
+          spanProcessor: configuration.spanProcessor,
+          spanProcessors,
           contextManager: configuration.contextManager,
           textMapPropagator: configuration.textMapPropagator
+        };
+      }
+      if (configuration.metricExporters) {
+        this._meterProviderConfig = {
+          metricExporters: configuration.metricExporters
+        };
+      }
+      if (configuration.logExporters) {
+        this._loggerProviderConfig = {
+          logExporters: configuration.logExporters
         };
       }
       let instrumentations = [];
@@ -8394,7 +10894,7 @@
      * Call this method to construct SDK components and register them with the OpenTelemetry API.
      */
     start() {
-      var _a3, _b, _c;
+      var _a, _b, _c, _d, _e;
       if (this._disabled) {
         return;
       }
@@ -8405,161 +10905,96 @@
         const internalConfig = {
           detectors: this._resourceDetectors
         };
-        this._resource = this._resource.merge(detectResourcesSync(internalConfig));
+        this._resource = this._resource.merge(detectResources(internalConfig));
       }
-      this._resource = this._serviceName === void 0 ? this._resource : this._resource.merge(new Resource({
-        [SEMRESATTRS_SERVICE_NAME2]: this._serviceName
+      this._resource = this._serviceName === void 0 ? this._resource : this._resource.merge(resourceFromAttributes({
+        [ATTR_SERVICE_NAME]: this._serviceName
       }));
-      const tracerProvider = new WebTracerProvider(Object.assign(Object.assign({}, (_a3 = this._tracerProviderConfig) === null || _a3 === void 0 ? void 0 : _a3.tracerConfig), {
-        resource: this._resource
+      if (this._serviceVersion !== void 0) {
+        this._resource = this._resource.merge(resourceFromAttributes({
+          [ATTR_SERVICE_VERSION]: this._serviceVersion
+        }));
+      }
+      const spanProcessors = [];
+      if ((_a = this._tracerProviderConfig) === null || _a === void 0 ? void 0 : _a.spanProcessor) {
+        spanProcessors.push(this._tracerProviderConfig.spanProcessor);
+      }
+      if ((_b = this._tracerProviderConfig) === null || _b === void 0 ? void 0 : _b.spanProcessors) {
+        spanProcessors.push(...this._tracerProviderConfig.spanProcessors);
+      }
+      const tracerProvider = new WebTracerProvider(Object.assign(Object.assign({}, (_c = this._tracerProviderConfig) === null || _c === void 0 ? void 0 : _c.tracerConfig), {
+        resource: this._resource,
+        spanProcessors
       }));
       this._tracerProvider = tracerProvider;
-      if (this._tracerProviderConfig) {
-        tracerProvider.addSpanProcessor(this._tracerProviderConfig.spanProcessor);
-      }
       tracerProvider.register({
-        contextManager: (_b = this._tracerProviderConfig) === null || _b === void 0 ? void 0 : _b.contextManager,
-        propagator: (_c = this._tracerProviderConfig) === null || _c === void 0 ? void 0 : _c.textMapPropagator
+        contextManager: (_d = this._tracerProviderConfig) === null || _d === void 0 ? void 0 : _d.contextManager,
+        propagator: (_e = this._tracerProviderConfig) === null || _e === void 0 ? void 0 : _e.textMapPropagator
       });
-      tracerProvider.addSpanProcessor(new SessionIdSpanProcessor());
+      if (this._meterProviderConfig) {
+        const readers = this._meterProviderConfig.metricExporters.map((exporter) => {
+          return new PeriodicExportingMetricReader({
+            exporter
+          });
+        });
+        this._meterProvider = new MeterProvider({
+          resource: this._resource,
+          readers
+        });
+        metrics.setGlobalMeterProvider(this._meterProvider);
+      }
+      if (this._loggerProviderConfig) {
+        const processors = this._loggerProviderConfig.logExporters.map((exporter) => {
+          return new SimpleLogRecordProcessor(exporter);
+        });
+        this._loggerProvider = new LoggerProvider({
+          resource: this._resource,
+          processors
+        });
+        logs2.setGlobalLoggerProvider(this._loggerProvider);
+      }
     }
     /* Experimental getter method: not currently part of the upstream
      * sdk's API */
     getResourceAttributes() {
       return this._resource.attributes;
     }
+    forceFlush() {
+      const promises = [];
+      if (this._tracerProvider) {
+        promises.push(this._tracerProvider.forceFlush());
+      }
+      if (this._meterProvider) {
+        promises.push(this._meterProvider.forceFlush());
+      }
+      if (this._loggerProvider) {
+        promises.push(this._loggerProvider.forceFlush());
+      }
+      return Promise.all(promises).then(() => {
+      });
+    }
     shutdown() {
       const promises = [];
       if (this._tracerProvider) {
         promises.push(this._tracerProvider.shutdown());
       }
+      if (this._meterProvider) {
+        promises.push(this._meterProvider.shutdown());
+      }
+      if (this._loggerProvider) {
+        promises.push(this._loggerProvider.shutdown());
+      }
       return Promise.all(promises).then(() => {
       });
     }
   };
-  function configureHoneycombResource() {
-    return new Resource({
-      "honeycomb.distro.version": VERSION4,
-      "honeycomb.distro.runtime_version": "browser"
-    });
-  }
-  var defaultConfig = {
-    path: true,
-    hash: true,
-    hostname: true,
-    referrer: true,
-    url: false,
-    search: false
-  };
-  function configureEntryPageResource(config) {
-    if (config === false || !(window === null || window === void 0 ? void 0 : window.location)) {
-      return new Resource({});
-    }
-    const options = getOptions(config);
-    const {
-      href,
-      pathname,
-      search,
-      hash,
-      hostname
-    } = window.location;
-    const attributes = {
-      "entry_page.url": optionalAttribute(options.url, href),
-      "entry_page.path": optionalAttribute(options.path, pathname),
-      "entry_page.search": optionalAttribute(options.search, search),
-      "entry_page.hash": optionalAttribute(options.hash, hash),
-      "entry_page.hostname": optionalAttribute(options.hostname, hostname),
-      "entry_page.referrer": optionalAttribute(options.referrer, document.referrer)
-    };
-    return new Resource(attributes);
-  }
-  function getOptions(config) {
-    if (!config) {
-      return defaultConfig;
-    }
-    return Object.assign(Object.assign({}, defaultConfig), config);
-  }
-  function optionalAttribute(shouldInclude, attribute) {
-    if (!shouldInclude) {
-      return void 0;
-    }
-    return attribute;
-  }
-  var computeScreenSize = (screenWidth) => {
-    if (screenWidth <= 768) return "small";
-    else if (screenWidth > 768 && screenWidth <= 1024) return "medium";
-    else if (screenWidth > 1024) return "large";
-    return "unknown";
-  };
-  var computeNetworkType = (networkInformation) => {
-    var _a3;
-    return (_a3 = networkInformation === null || networkInformation === void 0 ? void 0 : networkInformation.effectiveType) !== null && _a3 !== void 0 ? _a3 : "unknown";
-  };
-  var computeDeviceType = (detectedDeviceType, detectedBrowserName) => {
-    if (!detectedDeviceType && !detectedBrowserName) {
-      return "unknown";
-    }
-    if (!detectedDeviceType) {
-      return "desktop";
-    }
-    return detectedDeviceType;
-  };
-  var computeDeviceProperties = (userAgent) => {
-    const uaParser = new import_ua_parser_js.default(userAgent);
-    const {
-      name: browserName,
-      version: browserVersion
-    } = uaParser.getBrowser();
-    return {
-      browserName: browserName !== null && browserName !== void 0 ? browserName : "unknown",
-      browserVersion: browserVersion !== null && browserVersion !== void 0 ? browserVersion : "unknown",
-      deviceType: computeDeviceType(uaParser.getDevice().type, browserName)
-    };
-  };
-  function configureBrowserAttributesResource() {
-    const {
-      browserName,
-      browserVersion,
-      deviceType
-    } = computeDeviceProperties(navigator.userAgent);
-    return new Resource({
-      "user_agent.original": navigator.userAgent,
-      //https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#mobile_tablet_or_desktop
-      "browser.mobile": navigator.userAgent.includes("Mobi"),
-      "browser.touch_screen_enabled": navigator.maxTouchPoints > 0,
-      "browser.language": navigator.language,
-      "browser.name": browserName,
-      "browser.version": browserVersion,
-      "device.type": deviceType,
-      "network.effectiveType": computeNetworkType(navigator.connection),
-      "screen.width": window.screen.width,
-      "screen.height": window.screen.height,
-      "screen.size": computeScreenSize(window.screen.width)
-    });
-  }
-  function mergeResources(resources) {
-    let mergedResources = validateResource(resources[0]);
-    for (let i2 = 1; i2 < resources.length; i2++) {
-      if (!resources[i2]) {
-        continue;
-      }
-      const resource = validateResource(resources[i2]);
-      mergedResources = mergedResources.merge(resource);
-    }
-    return mergedResources;
-  }
-  function validateResource(resource) {
-    if (resource instanceof Resource) {
-      return resource;
-    }
-    if (resource) {
-      return new Resource(resource);
-    }
-    return new Resource({});
-  }
   var DEFAULT_API_ENDPOINT = "https://api.honeycomb.io";
   var TRACES_PATH = "v1/traces";
   var DEFAULT_TRACES_ENDPOINT = `${DEFAULT_API_ENDPOINT}/${TRACES_PATH}`;
+  var METRICS_PATH = "v1/metrics";
+  var DEFAULT_METRICS_ENDPOINT = `${DEFAULT_API_ENDPOINT}/${METRICS_PATH}`;
+  var LOGS_PATH = "v1/logs";
+  var DEFAULT_LOGS_ENDPOINT = `${DEFAULT_API_ENDPOINT}/${LOGS_PATH}`;
   var DEFAULT_SERVICE_NAME = "unknown_service";
   var DEFAULT_SAMPLE_RATE = 1;
   var defaultOptions = {
@@ -8589,23 +11024,47 @@
     }
     return false;
   }
-  function maybeAppendTracesPath(url) {
-    if (url.endsWith(TRACES_PATH) || url.endsWith(`${TRACES_PATH}/`)) {
+  function maybeAppendPath(url, path) {
+    if (url.endsWith(path) || url.endsWith(`${path}/`)) {
       return url;
     }
-    return url.endsWith("/") ? url + TRACES_PATH : url + "/" + TRACES_PATH;
+    return url.endsWith("/") ? url + path : url + "/" + path;
   }
   var getTracesEndpoint = (options) => {
     if (options === null || options === void 0 ? void 0 : options.tracesEndpoint) {
       return options.tracesEndpoint;
     }
     if (options === null || options === void 0 ? void 0 : options.endpoint) {
-      return maybeAppendTracesPath(options.endpoint);
+      return maybeAppendPath(options.endpoint, TRACES_PATH);
     }
     return DEFAULT_TRACES_ENDPOINT;
   };
+  var getMetricsEndpoint = (options) => {
+    if (options === null || options === void 0 ? void 0 : options.metricsEndpoint) {
+      return options.metricsEndpoint;
+    }
+    if (options === null || options === void 0 ? void 0 : options.endpoint) {
+      return maybeAppendPath(options.endpoint, METRICS_PATH);
+    }
+    return DEFAULT_METRICS_ENDPOINT;
+  };
+  var getLogsEndpoint = (options) => {
+    if (options === null || options === void 0 ? void 0 : options.logsEndpoint) {
+      return options.logsEndpoint;
+    }
+    if (options === null || options === void 0 ? void 0 : options.endpoint) {
+      return maybeAppendPath(options.endpoint, LOGS_PATH);
+    }
+    return DEFAULT_LOGS_ENDPOINT;
+  };
   var getTracesApiKey = (options) => {
     return (options === null || options === void 0 ? void 0 : options.tracesApiKey) || (options === null || options === void 0 ? void 0 : options.apiKey);
+  };
+  var getMetricsApiKey = (options) => {
+    return (options === null || options === void 0 ? void 0 : options.metricsApiKey) || (options === null || options === void 0 ? void 0 : options.apiKey);
+  };
+  var getLogsApiKey = (options) => {
+    return (options === null || options === void 0 ? void 0 : options.logsApiKey) || (options === null || options === void 0 ? void 0 : options.apiKey);
   };
   var getSampleRate = (options) => {
     if (
@@ -8621,17 +11080,33 @@
   var IGNORED_DATASET_ERROR = createHoneycombSDKLogMessage("\u{1F515} Dataset is ignored in favor of service name.");
   var MISSING_DATASET_ERROR = createHoneycombSDKLogMessage("\u274C Missing dataset. Specify either HONEYCOMB_DATASET environment variable or dataset in the options parameter.");
   var SKIPPING_OPTIONS_VALIDATION_MSG = createHoneycombSDKLogMessage("\u23ED\uFE0F Skipping options validation. To re-enable, set skipOptionsValidation option or HONEYCOMB_SKIP_OPTIONS_VALIDATION to false.");
+  var CUSTOM_COLLECTOR_VALIDATION_MSG = createHoneycombSDKLogMessage("\u23ED\uFE0F Skipping options validation, because a custom collector is being used.");
   var SAMPLER_OVERRIDE_WARNING = createHoneycombSDKLogMessage("\u{1F528} Default deterministic sampler has been overridden. Honeycomb requires a resource attribute called SampleRate to properly show weighted values. Non-deterministic sampleRate could lead to missing spans in Honeycomb. See our docs for more details. https://docs.honeycomb.io/getting-data-in/opentelemetry/node-distro/#sampling-without-the-honeycomb-sdk");
   var MISSING_FIELDS_FOR_LOCAL_VISUALIZATIONS = createHoneycombSDKLogMessage("\u{1F515} Disabling local visualizations - must have both service name and API key configured.");
   var MISSING_FIELDS_FOR_GENERATING_LINKS = createHoneycombSDKLogMessage("\u{1F515} Disabling local visualizations - cannot infer auth and ui url roots from endpoint url.");
   var FAILED_AUTH_FOR_LOCAL_VISUALIZATIONS = createHoneycombSDKLogMessage("\u{1F515} Failed to get proper auth response from Honeycomb. No local visualization available.");
   var NO_EXPORTERS_DISABLED_DEFAULT = createHoneycombSDKLogMessage("\u{1F515} Default honeycomb exporter disabled but no exporters provided");
+  var isCustomCollector = (endpoint) => {
+    try {
+      const url = new URL(endpoint);
+      return !url.hostname.endsWith(".honeycomb.io");
+    } catch (_a) {
+      return false;
+    }
+  };
   var validateOptionsWarnings = (options) => {
-    var _a3;
+    var _a, _b;
     const logLevel = (options === null || options === void 0 ? void 0 : options.logLevel) ? options.logLevel : DiagLogLevel.DEBUG;
     if (options === null || options === void 0 ? void 0 : options.skipOptionsValidation) {
       if (logLevel >= DiagLogLevel.DEBUG) {
         console.debug(SKIPPING_OPTIONS_VALIDATION_MSG);
+      }
+      return;
+    }
+    const endpoint = (_a = options === null || options === void 0 ? void 0 : options.tracesEndpoint) !== null && _a !== void 0 ? _a : options === null || options === void 0 ? void 0 : options.endpoint;
+    if (endpoint && isCustomCollector(endpoint)) {
+      if (logLevel >= DiagLogLevel.DEBUG) {
+        console.debug(CUSTOM_COLLECTOR_VALIDATION_MSG);
       }
       return;
     }
@@ -8650,7 +11125,7 @@
     if ((options === null || options === void 0 ? void 0 : options.sampler) && logLevel >= DiagLogLevel.DEBUG) {
       console.debug(SAMPLER_OVERRIDE_WARNING);
     }
-    if ((options === null || options === void 0 ? void 0 : options.disableDefaultTraceExporter) === true && !(options === null || options === void 0 ? void 0 : options.traceExporter) && !((_a3 = options === null || options === void 0 ? void 0 : options.traceExporters) === null || _a3 === void 0 ? void 0 : _a3.length)) {
+    if ((options === null || options === void 0 ? void 0 : options.disableDefaultTraceExporter) === true && !(options === null || options === void 0 ? void 0 : options.traceExporter) && !((_b = options === null || options === void 0 ? void 0 : options.traceExporters) === null || _b === void 0 ? void 0 : _b.length)) {
       console.warn(NO_EXPORTERS_DISABLED_DEFAULT);
     }
     return options;
@@ -8702,254 +11177,10 @@
     }
     diag2.debug(createHoneycombSDKLogMessage(`Sample Rate configured for traces: '${sampleRate}'`));
   }
-  var BaggageSpanProcessor = class {
-    constructor() {
+  var configureSampler = (options) => {
+    if (options === null || options === void 0 ? void 0 : options.sampler) {
+      return options.sampler;
     }
-    onStart(span, parentContext) {
-      var _a3, _b;
-      ((_b = (_a3 = propagation.getBaggage(parentContext)) === null || _a3 === void 0 ? void 0 : _a3.getAllEntries()) !== null && _b !== void 0 ? _b : []).forEach((entry) => {
-        span.setAttribute(entry[0], entry[1].value);
-        diag2.debug(`@honeycombio/opentelemetry-web: \u{1F6A8} Baggage in all outgoing headers: ${entry[0]}=${entry[1].value} `);
-      });
-    }
-    onEnd() {
-    }
-    forceFlush() {
-      return Promise.resolve();
-    }
-    shutdown() {
-      return Promise.resolve();
-    }
-  };
-  var BrowserAttributesSpanProcessor = class {
-    constructor() {
-    }
-    onStart(span) {
-      const {
-        href,
-        pathname,
-        search,
-        hash,
-        hostname
-      } = window.location;
-      span.setAttributes({
-        "browser.width": window.innerWidth,
-        "browser.height": window.innerHeight,
-        "page.hash": hash,
-        "page.url": href,
-        "page.route": pathname,
-        "page.hostname": hostname,
-        "page.search": search,
-        "url.path": pathname
-      });
-    }
-    onEnd() {
-    }
-    forceFlush() {
-      return Promise.resolve();
-    }
-    shutdown() {
-      return Promise.resolve();
-    }
-  };
-  var TEAM_HEADER_KEY = "x-honeycomb-team";
-  var DATASET_HEADER_KEY = "x-honeycomb-dataset";
-  function configureHoneycombHttpJsonTraceExporter(options) {
-    const apiKey = getTracesApiKey(options);
-    return new OTLPTraceExporter({
-      url: getTracesEndpoint(options),
-      headers: configureHeaders(options, apiKey)
-    });
-  }
-  function configureHeaders(options, apiKey) {
-    const headers = Object.assign({}, options === null || options === void 0 ? void 0 : options.headers);
-    if (apiKey && !headers[TEAM_HEADER_KEY]) {
-      headers[TEAM_HEADER_KEY] = apiKey;
-    }
-    if (isClassic(apiKey) && (options === null || options === void 0 ? void 0 : options.dataset)) {
-      headers[DATASET_HEADER_KEY] = options === null || options === void 0 ? void 0 : options.dataset;
-    }
-    return headers;
-  }
-  function configureCompositeExporter(exporters) {
-    return new CompositeSpanExporter(exporters);
-  }
-  var CompositeSpanExporter = class {
-    constructor(exporters) {
-      this._exporters = exporters;
-    }
-    export(spans, resultCallback) {
-      this._exporters.forEach((exporter) => exporter.export(spans, resultCallback));
-      resultCallback({
-        code: ExportResultCode.SUCCESS
-      });
-    }
-    async shutdown() {
-      const results = [];
-      this._exporters.forEach((exporter) => results.push(exporter.shutdown()));
-      await Promise.all(results);
-    }
-  };
-  function configureConsoleTraceLinkExporter(options) {
-    const apiKey = getTracesApiKey(options);
-    const {
-      authRoot,
-      uiRoot
-    } = getUrlRoots((options === null || options === void 0 ? void 0 : options.tracesEndpoint) || getTracesEndpoint(options));
-    return new ConsoleTraceLinkExporter(options === null || options === void 0 ? void 0 : options.serviceName, apiKey, options === null || options === void 0 ? void 0 : options.logLevel, authRoot, uiRoot);
-  }
-  var getUrlRoots = (endpoint = "") => {
-    const url = new URL(endpoint);
-    const subdomainRegex = /(api)([.|-])?(.*?)(\.?)(honeycomb\.io)(.*)/;
-    const matches = subdomainRegex.exec(url.host);
-    if (matches === null) {
-      return {
-        authRoot: void 0,
-        uiRoot: void 0
-      };
-    }
-    const isDashSubdomain = matches[2] === "-";
-    let apiSubdomain;
-    let uiSubdomain;
-    if (isDashSubdomain) {
-      apiSubdomain = `api-${matches[3]}`;
-      uiSubdomain = `ui-${matches[3]}`;
-    } else {
-      apiSubdomain = matches[3] ? `api.${matches[3]}` : "api";
-      uiSubdomain = matches[3] ? `ui.${matches[3]}` : "ui";
-    }
-    const authRoot = `${url.protocol}//${apiSubdomain}.honeycomb.io/1/auth`;
-    const uiRoot = `${url.protocol}//${uiSubdomain}.honeycomb.io`;
-    return {
-      authRoot,
-      uiRoot
-    };
-  };
-  var ConsoleTraceLinkExporter = class {
-    constructor(serviceName, apikey, logLevel, authRoot, uiRoot) {
-      this._traceUrl = "";
-      this._logLevel = DiagLogLevel.DEBUG;
-      if (logLevel) {
-        this._logLevel = logLevel;
-      }
-      if (!serviceName || !apikey) {
-        if (this._logLevel >= DiagLogLevel.DEBUG) {
-          console.debug(MISSING_FIELDS_FOR_LOCAL_VISUALIZATIONS);
-        }
-        return;
-      }
-      if (!authRoot || !uiRoot) {
-        if (this._logLevel >= DiagLogLevel.DEBUG) {
-          console.debug(MISSING_FIELDS_FOR_GENERATING_LINKS);
-        }
-        return;
-      }
-      const options = {
-        headers: {
-          "x-honeycomb-team": apikey
-        }
-      };
-      fetch(authRoot, options).then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        }
-        throw new Error();
-      }).then((data) => {
-        var _a3, _b, _c;
-        const respData = data;
-        if ((_a3 = respData.team) === null || _a3 === void 0 ? void 0 : _a3.slug) {
-          this._traceUrl = buildTraceUrl(apikey, serviceName, (_b = respData.team) === null || _b === void 0 ? void 0 : _b.slug, (_c = respData.environment) === null || _c === void 0 ? void 0 : _c.slug, uiRoot);
-        } else {
-          throw new Error();
-        }
-      }).catch(() => {
-        if (this._logLevel >= DiagLogLevel.INFO) {
-          console.log(FAILED_AUTH_FOR_LOCAL_VISUALIZATIONS);
-        }
-      });
-    }
-    export(spans, resultCallback) {
-      if (this._traceUrl) {
-        spans.forEach((span) => {
-          if (!span.parentSpanId && this._logLevel >= DiagLogLevel.INFO) {
-            console.log(createHoneycombSDKLogMessage(`Honeycomb link: ${this._traceUrl}=${span.spanContext().traceId}`));
-          }
-        });
-      }
-      resultCallback({
-        code: ExportResultCode.SUCCESS
-      });
-    }
-    shutdown() {
-      return Promise.resolve();
-    }
-  };
-  function buildTraceUrl(apikey, serviceName, team, environment, uiRoot) {
-    let url = `${uiRoot}/${team}`;
-    if (!isClassic(apikey) && environment) {
-      url += `/environments/${environment}`;
-    }
-    url += `/datasets/${serviceName}/trace?trace_id`;
-    return url;
-  }
-  var configureSpanProcessors = (options) => {
-    const honeycombSpanProcessor = new CompositeSpanProcessor();
-    const honeycombTraceExporters = [];
-    if (options === null || options === void 0 ? void 0 : options.localVisualizations) {
-      honeycombTraceExporters.push(configureConsoleTraceLinkExporter(options));
-    }
-    if (options === null || options === void 0 ? void 0 : options.traceExporter) {
-      honeycombTraceExporters.push(options === null || options === void 0 ? void 0 : options.traceExporter);
-    }
-    if (options === null || options === void 0 ? void 0 : options.traceExporters) {
-      honeycombTraceExporters.push(...options.traceExporters);
-    }
-    if ((options === null || options === void 0 ? void 0 : options.disableDefaultTraceExporter) !== true) {
-      honeycombTraceExporters.unshift(configureHoneycombHttpJsonTraceExporter(options));
-    }
-    honeycombSpanProcessor.addProcessor(new BatchSpanProcessor(configureCompositeExporter([...honeycombTraceExporters])));
-    honeycombSpanProcessor.addProcessor(new BaggageSpanProcessor());
-    honeycombSpanProcessor.addProcessor(new BrowserAttributesSpanProcessor());
-    if (options === null || options === void 0 ? void 0 : options.spanProcessor) {
-      honeycombSpanProcessor.addProcessor(options === null || options === void 0 ? void 0 : options.spanProcessor);
-    }
-    if (options === null || options === void 0 ? void 0 : options.spanProcessors) {
-      options.spanProcessors.forEach((processor) => {
-        honeycombSpanProcessor.addProcessor(processor);
-      });
-    }
-    return honeycombSpanProcessor;
-  };
-  var CompositeSpanProcessor = class {
-    constructor() {
-      this.spanProcessors = [];
-    }
-    addProcessor(processor) {
-      this.spanProcessors.push(processor);
-    }
-    getSpanProcessors() {
-      return this.spanProcessors;
-    }
-    onStart(span, parentContext) {
-      this.spanProcessors.forEach((processor) => {
-        processor.onStart(span, parentContext);
-      });
-    }
-    onEnd(span) {
-      this.spanProcessors.forEach((processor) => {
-        processor.onEnd(span);
-      });
-    }
-    forceFlush() {
-      return Promise.all(this.spanProcessors.map((processor) => processor.forceFlush())).then(() => {
-      });
-    }
-    shutdown() {
-      return Promise.all(this.spanProcessors.map((processor) => processor.forceFlush())).then(() => {
-      });
-    }
-  };
-  var configureDeterministicSampler = (options) => {
     const sampleRate = getSampleRate(options);
     return new DeterministicSampler(sampleRate);
   };
@@ -8984,580 +11215,616 @@
       return `DeterministicSampler(${this._sampler.toString()})`;
     }
   };
-  var t;
-  var e;
-  var n = function() {
-    var t3 = self.performance && performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
-    if (t3 && t3.responseStart > 0 && t3.responseStart < performance.now()) return t3;
+  var t = class {
+    t;
+    o = 0;
+    i = [];
+    u(t2) {
+      if (t2.hadRecentInput) return;
+      const e2 = this.i[0], n2 = this.i.at(-1);
+      this.o && e2 && n2 && t2.startTime - n2.startTime < 1e3 && t2.startTime - e2.startTime < 5e3 ? (this.o += t2.value, this.i.push(t2)) : (this.o = t2.value, this.i = [t2]), this.t?.(t2);
+    }
   };
-  var r = function(t3) {
+  var e = () => {
+    const t2 = performance.getEntriesByType("navigation")[0];
+    if (t2 && t2.responseStart > 0 && t2.responseStart < performance.now()) return t2;
+  };
+  var n = (t2) => {
     if ("loading" === document.readyState) return "loading";
-    var e2 = n();
-    if (e2) {
-      if (t3 < e2.domInteractive) return "loading";
-      if (0 === e2.domContentLoadedEventStart || t3 < e2.domContentLoadedEventStart) return "dom-interactive";
-      if (0 === e2.domComplete || t3 < e2.domComplete) return "dom-content-loaded";
+    {
+      const n2 = e();
+      if (n2) {
+        if (t2 < n2.domInteractive) return "loading";
+        if (0 === n2.domContentLoadedEventStart || t2 < n2.domContentLoadedEventStart) return "dom-interactive";
+        if (0 === n2.domComplete || t2 < n2.domComplete) return "dom-content-loaded";
+      }
     }
     return "complete";
   };
-  var i = function(t3) {
-    var e2 = t3.nodeName;
-    return 1 === t3.nodeType ? e2.toLowerCase() : e2.toUpperCase().replace(/^#/, "");
+  var o = (t2) => {
+    const e2 = t2.nodeName;
+    return 1 === t2.nodeType ? e2.toLowerCase() : e2.toUpperCase().replace(/^#/, "");
   };
-  var a = function(t3, e2) {
-    var n2 = "";
+  var i = (t2) => {
+    let e2 = "";
     try {
-      for (; t3 && 9 !== t3.nodeType; ) {
-        var r2 = t3, a2 = r2.id ? "#" + r2.id : i(r2) + (r2.classList && r2.classList.value && r2.classList.value.trim() && r2.classList.value.trim().length ? "." + r2.classList.value.trim().replace(/\s+/g, ".") : "");
-        if (n2.length + a2.length > (e2 || 100) - 1) return n2 || a2;
-        if (n2 = n2 ? a2 + ">" + n2 : a2, r2.id) break;
-        t3 = r2.parentNode;
+      for (; 9 !== t2?.nodeType; ) {
+        const n2 = t2, i2 = n2.id ? "#" + n2.id : [o(n2), ...Array.from(n2.classList).sort()].join(".");
+        if (e2.length + i2.length > 99) return e2 || i2;
+        if (e2 = e2 ? i2 + ">" + e2 : i2, n2.id) break;
+        t2 = n2.parentNode;
       }
-    } catch (t4) {
+    } catch {
     }
-    return n2;
+    return e2;
   };
-  var o = -1;
-  var c = function() {
-    return o;
-  };
-  var u = function(t3) {
-    addEventListener("pageshow", function(e2) {
-      e2.persisted && (o = e2.timeStamp, t3(e2));
+  var r = /* @__PURE__ */ new WeakMap();
+  function s(t2, e2) {
+    return r.get(t2) || r.set(t2, new e2()), r.get(t2);
+  }
+  var a = -1;
+  var c = () => a;
+  var u = (t2) => {
+    addEventListener("pageshow", (e2) => {
+      e2.persisted && (a = e2.timeStamp, t2(e2));
     }, true);
   };
-  var s = function() {
-    var t3 = n();
-    return t3 && t3.activationStart || 0;
+  var d = (t2, e2, n2, o2) => {
+    let i2, r2;
+    return (s2) => {
+      e2.value >= 0 && (s2 || o2) && (r2 = e2.value - (i2 ?? 0), (r2 || void 0 === i2) && (i2 = e2.value, e2.delta = r2, e2.rating = ((t3, e3) => t3 > e3[1] ? "poor" : t3 > e3[0] ? "needs-improvement" : "good")(e2.value, n2), t2(e2)));
+    };
   };
-  var f = function(t3, e2) {
-    var r2 = n(), i2 = "navigate";
-    c() >= 0 ? i2 = "back-forward-cache" : r2 && (document.prerendering || s() > 0 ? i2 = "prerender" : document.wasDiscarded ? i2 = "restore" : r2.type && (i2 = r2.type.replace(/_/g, "-")));
+  var f = (t2) => {
+    requestAnimationFrame(() => requestAnimationFrame(() => t2()));
+  };
+  var l = () => {
+    const t2 = e();
+    return t2?.activationStart ?? 0;
+  };
+  var h = (t2, n2 = -1) => {
+    const o2 = e();
+    let i2 = "navigate";
+    c() >= 0 ? i2 = "back-forward-cache" : o2 && (document.prerendering || l() > 0 ? i2 = "prerender" : document.wasDiscarded ? i2 = "restore" : o2.type && (i2 = o2.type.replace(/_/g, "-")));
     return {
-      name: t3,
-      value: void 0 === e2 ? -1 : e2,
+      name: t2,
+      value: n2,
       rating: "good",
       delta: 0,
       entries: [],
-      id: "v4-".concat(Date.now(), "-").concat(Math.floor(8999999999999 * Math.random()) + 1e12),
+      id: `v5-${Date.now()}-${Math.floor(8999999999999 * Math.random()) + 1e12}`,
       navigationType: i2
     };
   };
-  var d = function(t3, e2, n2) {
+  var m = (t2, e2, n2 = {}) => {
     try {
-      if (PerformanceObserver.supportedEntryTypes.includes(t3)) {
-        var r2 = new PerformanceObserver(function(t4) {
-          Promise.resolve().then(function() {
-            e2(t4.getEntries());
+      if (PerformanceObserver.supportedEntryTypes.includes(t2)) {
+        const o2 = new PerformanceObserver((t3) => {
+          Promise.resolve().then(() => {
+            e2(t3.getEntries());
           });
         });
-        return r2.observe(Object.assign({
-          type: t3,
-          buffered: true
-        }, n2 || {})), r2;
+        return o2.observe({
+          type: t2,
+          buffered: true,
+          ...n2
+        }), o2;
       }
-    } catch (t4) {
+    } catch {
     }
   };
-  var l = function(t3, e2, n2, r2) {
-    var i2, a2;
-    return function(o2) {
-      e2.value >= 0 && (o2 || r2) && ((a2 = e2.value - (i2 || 0)) || void 0 === i2) && (i2 = e2.value, e2.delta = a2, e2.rating = function(t4, e3) {
-        return t4 > e3[1] ? "poor" : t4 > e3[0] ? "needs-improvement" : "good";
-      }(e2.value, n2), t3(e2));
+  var g = (t2) => {
+    let e2 = false;
+    return () => {
+      e2 || (t2(), e2 = true);
     };
   };
-  var m = function(t3) {
-    requestAnimationFrame(function() {
-      return requestAnimationFrame(function() {
-        return t3();
+  var p = -1;
+  var y = () => "hidden" !== document.visibilityState || document.prerendering ? 1 / 0 : 0;
+  var v = (t2) => {
+    "hidden" === document.visibilityState && p > -1 && (p = "visibilitychange" === t2.type ? t2.timeStamp : 0, M());
+  };
+  var b = () => {
+    addEventListener("visibilitychange", v, true), addEventListener("prerenderingchange", v, true);
+  };
+  var M = () => {
+    removeEventListener("visibilitychange", v, true), removeEventListener("prerenderingchange", v, true);
+  };
+  var T = () => {
+    if (p < 0) {
+      const t2 = l(), e2 = document.prerendering ? void 0 : globalThis.performance.getEntriesByType("visibility-state").filter((e3) => "hidden" === e3.name && e3.startTime > t2)[0]?.startTime;
+      p = e2 ?? y(), b(), u(() => {
+        setTimeout(() => {
+          p = y(), b();
+        });
       });
-    });
-  };
-  var p = function(t3) {
-    document.addEventListener("visibilitychange", function() {
-      "hidden" === document.visibilityState && t3();
-    });
-  };
-  var v = function(t3) {
-    var e2 = false;
-    return function() {
-      e2 || (t3(), e2 = true);
-    };
-  };
-  var g = -1;
-  var h = function() {
-    return "hidden" !== document.visibilityState || document.prerendering ? 1 / 0 : 0;
-  };
-  var T = function(t3) {
-    "hidden" === document.visibilityState && g > -1 && (g = "visibilitychange" === t3.type ? t3.timeStamp : 0, E());
-  };
-  var y = function() {
-    addEventListener("visibilitychange", T, true), addEventListener("prerenderingchange", T, true);
-  };
-  var E = function() {
-    removeEventListener("visibilitychange", T, true), removeEventListener("prerenderingchange", T, true);
-  };
-  var S = function() {
-    return g < 0 && (g = h(), y(), u(function() {
-      setTimeout(function() {
-        g = h(), y();
-      }, 0);
-    })), {
+    }
+    return {
       get firstHiddenTime() {
-        return g;
+        return p;
       }
     };
   };
-  var b = function(t3) {
-    document.prerendering ? addEventListener("prerenderingchange", function() {
-      return t3();
-    }, true) : t3();
+  var D = (t2) => {
+    document.prerendering ? addEventListener("prerenderingchange", () => t2(), true) : t2();
   };
-  var L = [1800, 3e3];
-  var C = function(t3, e2) {
-    e2 = e2 || {}, b(function() {
-      var n2, r2 = S(), i2 = f("FCP"), a2 = d("paint", function(t4) {
-        t4.forEach(function(t5) {
-          "first-contentful-paint" === t5.name && (a2.disconnect(), t5.startTime < r2.firstHiddenTime && (i2.value = Math.max(t5.startTime - s(), 0), i2.entries.push(t5), n2(true)));
-        });
+  var E = [1800, 3e3];
+  var P = (t2, e2 = {}) => {
+    D(() => {
+      const n2 = T();
+      let o2, i2 = h("FCP");
+      const r2 = m("paint", (t3) => {
+        for (const e3 of t3) "first-contentful-paint" === e3.name && (r2.disconnect(), e3.startTime < n2.firstHiddenTime && (i2.value = Math.max(e3.startTime - l(), 0), i2.entries.push(e3), o2(true)));
       });
-      a2 && (n2 = l(t3, i2, L, e2.reportAllChanges), u(function(r3) {
-        i2 = f("FCP"), n2 = l(t3, i2, L, e2.reportAllChanges), m(function() {
-          i2.value = performance.now() - r3.timeStamp, n2(true);
+      r2 && (o2 = d(t2, i2, E, e2.reportAllChanges), u((n3) => {
+        i2 = h("FCP"), o2 = d(t2, i2, E, e2.reportAllChanges), f(() => {
+          i2.value = performance.now() - n3.timeStamp, o2(true);
         });
       }));
     });
   };
-  var M = [0.1, 0.25];
-  var D = function(t3, e2) {
-    !function(t4, e3) {
-      e3 = e3 || {}, C(v(function() {
-        var n2, r2 = f("CLS", 0), i2 = 0, a2 = [], o2 = function(t5) {
-          t5.forEach(function(t6) {
-            if (!t6.hadRecentInput) {
-              var e4 = a2[0], n3 = a2[a2.length - 1];
-              i2 && t6.startTime - n3.startTime < 1e3 && t6.startTime - e4.startTime < 5e3 ? (i2 += t6.value, a2.push(t6)) : (i2 = t6.value, a2 = [t6]);
-            }
-          }), i2 > r2.value && (r2.value = i2, r2.entries = a2, n2());
-        }, c2 = d("layout-shift", o2);
-        c2 && (n2 = l(t4, r2, M, e3.reportAllChanges), p(function() {
-          o2(c2.takeRecords()), n2(true);
-        }), u(function() {
-          i2 = 0, r2 = f("CLS", 0), n2 = l(t4, r2, M, e3.reportAllChanges), m(function() {
-            return n2();
-          });
-        }), setTimeout(n2, 0));
+  var L = [0.1, 0.25];
+  var S = (t2) => t2.find((t3) => 1 === t3.node?.nodeType) || t2[0];
+  var _ = (e2, o2 = {}) => {
+    const r2 = s(o2 = Object.assign({}, o2), t), a2 = /* @__PURE__ */ new WeakMap();
+    r2.t = (t2) => {
+      if (t2?.sources?.length) {
+        const e3 = S(t2.sources);
+        if (e3) {
+          const t3 = (o2.generateTarget ?? i)(e3.node);
+          a2.set(e3, t3);
+        }
+      }
+    };
+    ((e3, n2 = {}) => {
+      P(g(() => {
+        let o3, i2 = h("CLS", 0);
+        const r3 = s(n2, t), a3 = (t2) => {
+          for (const e4 of t2) r3.u(e4);
+          r3.o > i2.value && (i2.value = r3.o, i2.entries = r3.i, o3());
+        }, c2 = m("layout-shift", a3);
+        c2 && (o3 = d(e3, i2, L, n2.reportAllChanges), document.addEventListener("visibilitychange", () => {
+          "hidden" === document.visibilityState && (a3(c2.takeRecords()), o3(true));
+        }), u(() => {
+          r3.o = 0, i2 = h("CLS", 0), o3 = d(e3, i2, L, n2.reportAllChanges), f(() => o3());
+        }), setTimeout(o3));
       }));
-    }(function(e3) {
-      var n2 = function(t4) {
-        var e4, n3 = {};
-        if (t4.entries.length) {
-          var i2 = t4.entries.reduce(function(t5, e5) {
-            return t5 && t5.value > e5.value ? t5 : e5;
-          });
-          if (i2 && i2.sources && i2.sources.length) {
-            var o2 = (e4 = i2.sources).find(function(t5) {
-              return t5.node && 1 === t5.node.nodeType;
-            }) || e4[0];
-            o2 && (n3 = {
-              largestShiftTarget: a(o2.node),
-              largestShiftTime: i2.startTime,
-              largestShiftValue: i2.value,
-              largestShiftSource: o2,
-              largestShiftEntry: i2,
-              loadState: r(i2.startTime)
+    })((t2) => {
+      const o3 = ((t3) => {
+        let e3 = {};
+        if (t3.entries.length) {
+          const o4 = t3.entries.reduce((t4, e4) => t4.value > e4.value ? t4 : e4);
+          if (o4?.sources?.length) {
+            const t4 = S(o4.sources);
+            t4 && (e3 = {
+              largestShiftTarget: a2.get(t4),
+              largestShiftTime: o4.startTime,
+              largestShiftValue: o4.value,
+              largestShiftSource: t4,
+              largestShiftEntry: o4,
+              loadState: n(o4.startTime)
             });
           }
         }
-        return Object.assign(t4, {
-          attribution: n3
+        return Object.assign(t3, {
+          attribution: e3
         });
-      }(e3);
-      t3(n2);
-    }, e2);
+      })(t2);
+      e2(o3);
+    }, o2);
   };
-  var w = function(t3, e2) {
-    C(function(e3) {
-      var i2 = function(t4) {
-        var e4 = {
+  var w = (t2, o2 = {}) => {
+    P((o3) => {
+      const i2 = ((t3) => {
+        let o4 = {
           timeToFirstByte: 0,
-          firstByteToFCP: t4.value,
-          loadState: r(c())
+          firstByteToFCP: t3.value,
+          loadState: n(c())
         };
-        if (t4.entries.length) {
-          var i3 = n(), a2 = t4.entries[t4.entries.length - 1];
+        if (t3.entries.length) {
+          const i3 = e(), r2 = t3.entries.at(-1);
           if (i3) {
-            var o2 = i3.activationStart || 0, u2 = Math.max(0, i3.responseStart - o2);
-            e4 = {
-              timeToFirstByte: u2,
-              firstByteToFCP: t4.value - u2,
-              loadState: r(t4.entries[0].startTime),
+            const e2 = i3.activationStart || 0, s2 = Math.max(0, i3.responseStart - e2);
+            o4 = {
+              timeToFirstByte: s2,
+              firstByteToFCP: t3.value - s2,
+              loadState: n(t3.entries[0].startTime),
               navigationEntry: i3,
-              fcpEntry: a2
+              fcpEntry: r2
             };
           }
         }
-        return Object.assign(t4, {
-          attribution: e4
+        return Object.assign(t3, {
+          attribution: o4
         });
-      }(e3);
-      t3(i2);
-    }, e2);
+      })(o3);
+      t2(i2);
+    }, o2);
   };
-  var x = 0;
-  var I = 1 / 0;
   var k = 0;
-  var A = function(t3) {
-    t3.forEach(function(t4) {
-      t4.interactionId && (I = Math.min(I, t4.interactionId), k = Math.max(k, t4.interactionId), x = k ? (k - I) / 7 + 1 : 0);
-    });
+  var F = 1 / 0;
+  var B = 0;
+  var C = (t2) => {
+    for (const e2 of t2) e2.interactionId && (F = Math.min(F, e2.interactionId), B = Math.max(B, e2.interactionId), k = B ? (B - F) / 7 + 1 : 0);
   };
-  var F = function() {
-    return t ? x : performance.interactionCount || 0;
-  };
-  var P = function() {
-    "interactionCount" in performance || t || (t = d("event", A, {
+  var O;
+  var j = () => O ? k : performance.interactionCount ?? 0;
+  var I = () => {
+    "interactionCount" in performance || O || (O = m("event", C, {
       type: "event",
       buffered: true,
       durationThreshold: 0
     }));
   };
-  var B = [];
-  var O = /* @__PURE__ */ new Map();
-  var R = 0;
-  var j = function() {
-    var t3 = Math.min(B.length - 1, Math.floor((F() - R) / 50));
-    return B[t3];
-  };
-  var q = [];
-  var H = function(t3) {
-    if (q.forEach(function(e3) {
-      return e3(t3);
-    }), t3.interactionId || "first-input" === t3.entryType) {
-      var e2 = B[B.length - 1], n2 = O.get(t3.interactionId);
-      if (n2 || B.length < 10 || t3.duration > e2.latency) {
-        if (n2) t3.duration > n2.latency ? (n2.entries = [t3], n2.latency = t3.duration) : t3.duration === n2.latency && t3.startTime === n2.entries[0].startTime && n2.entries.push(t3);
-        else {
-          var r2 = {
-            id: t3.interactionId,
-            latency: t3.duration,
-            entries: [t3]
-          };
-          O.set(r2.id, r2), B.push(r2);
+  var A = 0;
+  var W = class {
+    l = [];
+    h = /* @__PURE__ */ new Map();
+    m;
+    p;
+    v() {
+      A = j(), this.l.length = 0, this.h.clear();
+    }
+    M() {
+      const t2 = Math.min(this.l.length - 1, Math.floor((j() - A) / 50));
+      return this.l[t2];
+    }
+    u(t2) {
+      if (this.m?.(t2), !t2.interactionId && "first-input" !== t2.entryType) return;
+      const e2 = this.l.at(-1);
+      let n2 = this.h.get(t2.interactionId);
+      if (n2 || this.l.length < 10 || t2.duration > e2.T) {
+        if (n2 ? t2.duration > n2.T ? (n2.entries = [t2], n2.T = t2.duration) : t2.duration === n2.T && t2.startTime === n2.entries[0].startTime && n2.entries.push(t2) : (n2 = {
+          id: t2.interactionId,
+          entries: [t2],
+          T: t2.duration
+        }, this.h.set(n2.id, n2), this.l.push(n2)), this.l.sort((t3, e3) => e3.T - t3.T), this.l.length > 10) {
+          const t3 = this.l.splice(10);
+          for (const e3 of t3) this.h.delete(e3.id);
         }
-        B.sort(function(t4, e3) {
-          return e3.latency - t4.latency;
-        }), B.length > 10 && B.splice(10).forEach(function(t4) {
-          return O.delete(t4.id);
-        });
+        this.p?.(n2);
       }
     }
   };
-  var N = function(t3) {
-    var e2 = self.requestIdleCallback || self.setTimeout, n2 = -1;
-    return t3 = v(t3), "hidden" === document.visibilityState ? t3() : (n2 = e2(t3), p(t3)), n2;
-  };
-  var W = [200, 500];
-  var z = function(t3, e2) {
-    "PerformanceEventTiming" in self && "interactionId" in PerformanceEventTiming.prototype && (e2 = e2 || {}, b(function() {
-      var n2;
-      P();
-      var r2, i2 = f("INP"), a2 = function(t4) {
-        N(function() {
-          t4.forEach(H);
-          var e3 = j();
-          e3 && e3.latency !== i2.value && (i2.value = e3.latency, i2.entries = e3.entries, r2());
-        });
-      }, o2 = d("event", a2, {
-        durationThreshold: null !== (n2 = e2.durationThreshold) && void 0 !== n2 ? n2 : 40
-      });
-      r2 = l(t3, i2, W, e2.reportAllChanges), o2 && (o2.observe({
-        type: "first-input",
-        buffered: true
-      }), p(function() {
-        a2(o2.takeRecords()), r2(true);
-      }), u(function() {
-        R = F(), B.length = 0, O.clear(), i2 = f("INP"), r2 = l(t3, i2, W, e2.reportAllChanges);
-      }));
+  var q = (t2) => {
+    const e2 = globalThis.requestIdleCallback || setTimeout;
+    "hidden" === document.visibilityState ? t2() : (t2 = g(t2), document.addEventListener("visibilitychange", t2, {
+      once: true
+    }), e2(() => {
+      t2(), document.removeEventListener("visibilitychange", t2);
     }));
   };
-  var U = [];
-  var V = [];
-  var _ = 0;
-  var G = /* @__PURE__ */ new WeakMap();
-  var J = /* @__PURE__ */ new Map();
-  var K = -1;
-  var Q = function(t3) {
-    U = U.concat(t3), X();
-  };
-  var X = function() {
-    K < 0 && (K = N(Y));
-  };
-  var Y = function() {
-    J.size > 10 && J.forEach(function(t4, e3) {
-      O.has(e3) || J.delete(e3);
-    });
-    var t3 = B.map(function(t4) {
-      return G.get(t4.entries[0]);
-    }), e2 = V.length - 50;
-    V = V.filter(function(n3, r3) {
-      return r3 >= e2 || t3.includes(n3);
-    });
-    for (var n2 = /* @__PURE__ */ new Set(), r2 = 0; r2 < V.length; r2++) {
-      var i2 = V[r2];
-      nt(i2.startTime, i2.processingEnd).forEach(function(t4) {
-        n2.add(t4);
-      });
-    }
-    var a2 = U.length - 1 - 50;
-    U = U.filter(function(t4, e3) {
-      return t4.startTime > _ && e3 > a2 || n2.has(t4);
-    }), K = -1;
-  };
-  q.push(function(t3) {
-    t3.interactionId && t3.target && !J.has(t3.interactionId) && J.set(t3.interactionId, t3.target);
-  }, function(t3) {
-    var e2, n2 = t3.startTime + t3.duration;
-    _ = Math.max(_, t3.processingEnd);
-    for (var r2 = V.length - 1; r2 >= 0; r2--) {
-      var i2 = V[r2];
-      if (Math.abs(n2 - i2.renderTime) <= 8) {
-        (e2 = i2).startTime = Math.min(t3.startTime, e2.startTime), e2.processingStart = Math.min(t3.processingStart, e2.processingStart), e2.processingEnd = Math.max(t3.processingEnd, e2.processingEnd), e2.entries.push(t3);
-        break;
+  var x = [200, 500];
+  var N = (t2, e2 = {}) => {
+    const o2 = s(e2 = Object.assign({}, e2), W);
+    let r2 = [], a2 = [], c2 = 0;
+    const f2 = /* @__PURE__ */ new WeakMap(), l2 = /* @__PURE__ */ new WeakMap();
+    let g2 = false;
+    const p2 = () => {
+      g2 || (q(y2), g2 = true);
+    }, y2 = () => {
+      const t3 = o2.l.map((t4) => f2.get(t4.entries[0])), e3 = a2.length - 50;
+      a2 = a2.filter((n3, o3) => o3 >= e3 || t3.includes(n3));
+      const n2 = /* @__PURE__ */ new Set();
+      for (const t4 of a2) {
+        const e4 = v2(t4.startTime, t4.processingEnd);
+        for (const t5 of e4) n2.add(t5);
       }
-    }
-    e2 || (e2 = {
-      startTime: t3.startTime,
-      processingStart: t3.processingStart,
-      processingEnd: t3.processingEnd,
-      renderTime: n2,
-      entries: [t3]
-    }, V.push(e2)), (t3.interactionId || "first-input" === t3.entryType) && G.set(t3, e2), X();
-  });
-  var Z;
-  var $;
-  var tt;
-  var et;
-  var nt = function(t3, e2) {
-    for (var n2, r2 = [], i2 = 0; n2 = U[i2]; i2++) if (!(n2.startTime + n2.duration < t3)) {
-      if (n2.startTime > e2) break;
-      r2.push(n2);
-    }
-    return r2;
-  };
-  var rt = function(t3, n2) {
-    e || (e = d("long-animation-frame", Q)), z(function(e2) {
-      var n3 = function(t4) {
-        var e3 = t4.entries[0], n4 = G.get(e3), i2 = e3.processingStart, o2 = n4.processingEnd, c2 = n4.entries.sort(function(t5, e4) {
-          return t5.processingStart - e4.processingStart;
-        }), u2 = nt(e3.startTime, o2), s2 = t4.entries.find(function(t5) {
-          return t5.target;
-        }), f2 = s2 && s2.target || J.get(e3.interactionId), d2 = [e3.startTime + e3.duration, o2].concat(u2.map(function(t5) {
-          return t5.startTime + t5.duration;
-        })), l2 = Math.max.apply(Math, d2), m2 = {
-          interactionTarget: a(f2),
-          interactionTargetElement: f2,
-          interactionType: e3.name.startsWith("key") ? "keyboard" : "pointer",
-          interactionTime: e3.startTime,
-          nextPaintTime: l2,
-          processedEventEntries: c2,
-          longAnimationFrameEntries: u2,
-          inputDelay: i2 - e3.startTime,
-          processingDuration: o2 - i2,
-          presentationDelay: Math.max(l2 - o2, 0),
-          loadState: r(e3.startTime)
-        };
-        return Object.assign(t4, {
-          attribution: m2
+      const i2 = r2.length - 1 - 50;
+      r2 = r2.filter((t4, e4) => t4.startTime > c2 && e4 > i2 || n2.has(t4)), g2 = false;
+    };
+    o2.m = (t3) => {
+      const e3 = t3.startTime + t3.duration;
+      let n2;
+      c2 = Math.max(c2, t3.processingEnd);
+      for (let o3 = a2.length - 1; o3 >= 0; o3--) {
+        const i2 = a2[o3];
+        if (Math.abs(e3 - i2.renderTime) <= 8) {
+          n2 = i2, n2.startTime = Math.min(t3.startTime, n2.startTime), n2.processingStart = Math.min(t3.processingStart, n2.processingStart), n2.processingEnd = Math.max(t3.processingEnd, n2.processingEnd), n2.entries.push(t3);
+          break;
+        }
+      }
+      n2 || (n2 = {
+        startTime: t3.startTime,
+        processingStart: t3.processingStart,
+        processingEnd: t3.processingEnd,
+        renderTime: e3,
+        entries: [t3]
+      }, a2.push(n2)), (t3.interactionId || "first-input" === t3.entryType) && f2.set(t3, n2), p2();
+    }, o2.p = (t3) => {
+      if (!l2.get(t3)) {
+        const n2 = (e2.generateTarget ?? i)(t3.entries[0].target);
+        l2.set(t3, n2);
+      }
+    };
+    const v2 = (t3, e3) => {
+      const n2 = [];
+      for (const o3 of r2) if (!(o3.startTime + o3.duration < t3)) {
+        if (o3.startTime > e3) break;
+        n2.push(o3);
+      }
+      return n2;
+    }, b2 = (t3) => {
+      const e3 = t3.entries[0], i2 = f2.get(e3), r3 = e3.processingStart, s2 = Math.max(e3.startTime + e3.duration, r3), a3 = Math.min(i2.processingEnd, s2), c3 = i2.entries.sort((t4, e4) => t4.processingStart - e4.processingStart), u2 = v2(e3.startTime, a3), d2 = o2.h.get(e3.interactionId), h2 = {
+        interactionTarget: l2.get(d2),
+        interactionType: e3.name.startsWith("key") ? "keyboard" : "pointer",
+        interactionTime: e3.startTime,
+        nextPaintTime: s2,
+        processedEventEntries: c3,
+        longAnimationFrameEntries: u2,
+        inputDelay: r3 - e3.startTime,
+        processingDuration: a3 - r3,
+        presentationDelay: s2 - a3,
+        loadState: n(e3.startTime),
+        longestScript: void 0,
+        totalScriptDuration: void 0,
+        totalStyleAndLayoutDuration: void 0,
+        totalPaintDuration: void 0,
+        totalUnattributedDuration: void 0
+      };
+      ((t4) => {
+        if (!t4.longAnimationFrameEntries?.length) return;
+        const e4 = t4.interactionTime, n2 = t4.inputDelay, o3 = t4.processingDuration;
+        let i3, r4, s3 = 0, a4 = 0, c4 = 0, u3 = 0;
+        for (const c5 of t4.longAnimationFrameEntries) {
+          a4 = a4 + c5.startTime + c5.duration - c5.styleAndLayoutStart;
+          for (const t5 of c5.scripts) {
+            const c6 = t5.startTime + t5.duration;
+            if (c6 < e4) continue;
+            const d4 = c6 - Math.max(e4, t5.startTime), f4 = t5.duration ? d4 / t5.duration * t5.forcedStyleAndLayoutDuration : 0;
+            s3 += d4 - f4, a4 += f4, d4 > u3 && (r4 = t5.startTime < e4 + n2 ? "input-delay" : t5.startTime >= e4 + n2 + o3 ? "presentation-delay" : "processing-duration", i3 = t5, u3 = d4);
+          }
+        }
+        const d3 = t4.longAnimationFrameEntries.at(-1), f3 = d3 ? d3.startTime + d3.duration : 0;
+        f3 >= e4 + n2 + o3 && (c4 = t4.nextPaintTime - f3), i3 && r4 && (t4.longestScript = {
+          entry: i3,
+          subpart: r4,
+          intersectingDuration: u3
+        }), t4.totalScriptDuration = s3, t4.totalStyleAndLayoutDuration = a4, t4.totalPaintDuration = c4, t4.totalUnattributedDuration = t4.nextPaintTime - e4 - s3 - a4 - c4;
+      })(h2);
+      return Object.assign(t3, {
+        attribution: h2
+      });
+    };
+    m("long-animation-frame", (t3) => {
+      r2 = r2.concat(t3), p2();
+    }), ((t3, e3 = {}) => {
+      globalThis.PerformanceEventTiming && "interactionId" in PerformanceEventTiming.prototype && D(() => {
+        I();
+        let n2, o3 = h("INP");
+        const i2 = s(e3, W), r3 = (t4) => {
+          q(() => {
+            for (const e5 of t4) i2.u(e5);
+            const e4 = i2.M();
+            e4 && e4.T !== o3.value && (o3.value = e4.T, o3.entries = e4.entries, n2());
+          });
+        }, a3 = m("event", r3, {
+          durationThreshold: e3.durationThreshold ?? 40
         });
-      }(e2);
-      t3(n3);
-    }, n2);
+        n2 = d(t3, o3, x, e3.reportAllChanges), a3 && (a3.observe({
+          type: "first-input",
+          buffered: true
+        }), document.addEventListener("visibilitychange", () => {
+          "hidden" === document.visibilityState && (r3(a3.takeRecords()), n2(true));
+        }), u(() => {
+          i2.v(), o3 = h("INP"), n2 = d(t3, o3, x, e3.reportAllChanges);
+        }));
+      });
+    })((e3) => {
+      const n2 = b2(e3);
+      t2(n2);
+    }, e2);
   };
-  var it = [2500, 4e3];
-  var at = {};
-  var ot = function(t3, e2) {
-    !function(t4, e3) {
-      e3 = e3 || {}, b(function() {
-        var n2, r2 = S(), i2 = f("LCP"), a2 = function(t5) {
-          e3.reportAllChanges || (t5 = t5.slice(-1)), t5.forEach(function(t6) {
-            t6.startTime < r2.firstHiddenTime && (i2.value = Math.max(t6.startTime - s(), 0), i2.entries = [t6], n2());
+  var R = class {
+    m;
+    u(t2) {
+      this.m?.(t2);
+    }
+  };
+  var U = [2500, 4e3];
+  var V = (t2, n2 = {}) => {
+    const o2 = s(n2 = Object.assign({}, n2), R), r2 = /* @__PURE__ */ new WeakMap();
+    o2.m = (t3) => {
+      if (t3.element) {
+        const e2 = (n2.generateTarget ?? i)(t3.element);
+        r2.set(t3, e2);
+      }
+    };
+    ((t3, e2 = {}) => {
+      D(() => {
+        const n3 = T();
+        let o3, i2 = h("LCP");
+        const r3 = s(e2, R), a2 = (t4) => {
+          e2.reportAllChanges || (t4 = t4.slice(-1));
+          for (const e3 of t4) r3.u(e3), e3.startTime < n3.firstHiddenTime && (i2.value = Math.max(e3.startTime - l(), 0), i2.entries = [e3], o3());
+        }, c2 = m("largest-contentful-paint", a2);
+        if (c2) {
+          o3 = d(t3, i2, U, e2.reportAllChanges);
+          const n4 = g(() => {
+            a2(c2.takeRecords()), c2.disconnect(), o3(true);
           });
-        }, o2 = d("largest-contentful-paint", a2);
-        if (o2) {
-          n2 = l(t4, i2, it, e3.reportAllChanges);
-          var c2 = v(function() {
-            at[i2.id] || (a2(o2.takeRecords()), o2.disconnect(), at[i2.id] = true, n2(true));
+          for (const t4 of ["keydown", "click", "visibilitychange"]) addEventListener(t4, () => q(n4), {
+            capture: true,
+            once: true
           });
-          ["keydown", "click"].forEach(function(t5) {
-            addEventListener(t5, function() {
-              return N(c2);
-            }, {
-              once: true,
-              capture: true
-            });
-          }), p(c2), u(function(r3) {
-            i2 = f("LCP"), n2 = l(t4, i2, it, e3.reportAllChanges), m(function() {
-              i2.value = performance.now() - r3.timeStamp, at[i2.id] = true, n2(true);
+          u((n5) => {
+            i2 = h("LCP"), o3 = d(t3, i2, U, e2.reportAllChanges), f(() => {
+              i2.value = performance.now() - n5.timeStamp, o3(true);
             });
           });
         }
       });
-    }(function(e3) {
-      var r2 = function(t4) {
-        var e4 = {
+    })((n3) => {
+      const o3 = ((t3) => {
+        let n4 = {
           timeToFirstByte: 0,
           resourceLoadDelay: 0,
           resourceLoadDuration: 0,
-          elementRenderDelay: t4.value
+          elementRenderDelay: t3.value
         };
-        if (t4.entries.length) {
-          var r3 = n();
-          if (r3) {
-            var i2 = r3.activationStart || 0, o2 = t4.entries[t4.entries.length - 1], c2 = o2.url && performance.getEntriesByType("resource").filter(function(t5) {
-              return t5.name === o2.url;
-            })[0], u2 = Math.max(0, r3.responseStart - i2), s2 = Math.max(u2, c2 ? (c2.requestStart || c2.startTime) - i2 : 0), f2 = Math.max(s2, c2 ? c2.responseEnd - i2 : 0), d2 = Math.max(f2, o2.startTime - i2);
-            e4 = {
-              element: a(o2.element),
-              timeToFirstByte: u2,
-              resourceLoadDelay: s2 - u2,
-              resourceLoadDuration: f2 - s2,
-              elementRenderDelay: d2 - f2,
-              navigationEntry: r3,
-              lcpEntry: o2
-            }, o2.url && (e4.url = o2.url), c2 && (e4.lcpResourceEntry = c2);
+        if (t3.entries.length) {
+          const o4 = e();
+          if (o4) {
+            const e2 = o4.activationStart || 0, i2 = t3.entries.at(-1), s2 = i2.url && performance.getEntriesByType("resource").filter((t4) => t4.name === i2.url)[0], a2 = Math.max(0, o4.responseStart - e2), c2 = Math.max(a2, s2 ? (s2.requestStart || s2.startTime) - e2 : 0), u2 = Math.min(t3.value, Math.max(c2, s2 ? s2.responseEnd - e2 : 0));
+            n4 = {
+              target: r2.get(i2),
+              timeToFirstByte: a2,
+              resourceLoadDelay: c2 - a2,
+              resourceLoadDuration: u2 - c2,
+              elementRenderDelay: t3.value - u2,
+              navigationEntry: o4,
+              lcpEntry: i2
+            }, i2.url && (n4.url = i2.url), s2 && (n4.lcpResourceEntry = s2);
           }
         }
-        return Object.assign(t4, {
-          attribution: e4
+        return Object.assign(t3, {
+          attribution: n4
         });
-      }(e3);
-      t3(r2);
-    }, e2);
+      })(n3);
+      t2(o3);
+    }, n2);
   };
-  var ct = [800, 1800];
-  var ut = function t2(e2) {
-    document.prerendering ? b(function() {
-      return t2(e2);
-    }) : "complete" !== document.readyState ? addEventListener("load", function() {
-      return t2(e2);
-    }, true) : setTimeout(e2, 0);
+  var $ = [800, 1800];
+  var H = (t2) => {
+    document.prerendering ? D(() => H(t2)) : "complete" !== document.readyState ? addEventListener("load", () => H(t2), true) : setTimeout(t2);
   };
-  var st = function(t3, e2) {
-    e2 = e2 || {};
-    var r2 = f("TTFB"), i2 = l(t3, r2, ct, e2.reportAllChanges);
-    ut(function() {
-      var a2 = n();
-      a2 && (r2.value = Math.max(a2.responseStart - s(), 0), r2.entries = [a2], i2(true), u(function() {
-        r2 = f("TTFB", 0), (i2 = l(t3, r2, ct, e2.reportAllChanges))(true);
-      }));
-    });
-  };
-  var ft = function(t3, e2) {
-    st(function(e3) {
-      var n2 = function(t4) {
-        var e4 = {
+  var z = (t2, n2 = {}) => {
+    ((t3, n3 = {}) => {
+      let o2 = h("TTFB"), i2 = d(t3, o2, $, n3.reportAllChanges);
+      H(() => {
+        const r2 = e();
+        r2 && (o2.value = Math.max(r2.responseStart - l(), 0), o2.entries = [r2], i2(true), u(() => {
+          o2 = h("TTFB", 0), i2 = d(t3, o2, $, n3.reportAllChanges), i2(true);
+        }));
+      });
+    })((e2) => {
+      const n3 = ((t3) => {
+        let e3 = {
           waitingDuration: 0,
           cacheDuration: 0,
           dnsDuration: 0,
           connectionDuration: 0,
           requestDuration: 0
         };
-        if (t4.entries.length) {
-          var n3 = t4.entries[0], r2 = n3.activationStart || 0, i2 = Math.max((n3.workerStart || n3.fetchStart) - r2, 0), a2 = Math.max(n3.domainLookupStart - r2, 0), o2 = Math.max(n3.connectStart - r2, 0), c2 = Math.max(n3.connectEnd - r2, 0);
-          e4 = {
+        if (t3.entries.length) {
+          const n4 = t3.entries[0], o2 = n4.activationStart || 0, i2 = Math.max((n4.workerStart || n4.fetchStart) - o2, 0), r2 = Math.max(n4.domainLookupStart - o2, 0), s2 = Math.max(n4.connectStart - o2, 0), a2 = Math.max(n4.connectEnd - o2, 0);
+          e3 = {
             waitingDuration: i2,
-            cacheDuration: a2 - i2,
-            dnsDuration: o2 - a2,
-            connectionDuration: c2 - o2,
-            requestDuration: t4.value - c2,
-            navigationEntry: n3
+            cacheDuration: r2 - i2,
+            dnsDuration: s2 - r2,
+            connectionDuration: a2 - s2,
+            requestDuration: t3.value - a2,
+            navigationEntry: n4
           };
         }
-        return Object.assign(t4, {
-          attribution: e4
+        return Object.assign(t3, {
+          attribution: e3
         });
-      }(e3);
-      t3(n2);
-    }, e2);
+      })(e2);
+      t2(n3);
+    }, n2);
   };
-  var dt = {
-    passive: true,
-    capture: true
-  };
-  var lt = /* @__PURE__ */ new Date();
-  var mt = function(t3, e2) {
-    Z || (Z = e2, $ = t3, tt = /* @__PURE__ */ new Date(), gt(removeEventListener), pt());
-  };
-  var pt = function() {
-    if ($ >= 0 && $ < tt - lt) {
-      var t3 = {
-        entryType: "first-input",
-        name: Z.type,
-        target: Z.target,
-        cancelable: Z.cancelable,
-        startTime: Z.timeStamp,
-        processingStart: Z.timeStamp + $
-      };
-      et.forEach(function(e2) {
-        e2(t3);
-      }), et = [];
-    }
-  };
-  var vt = function(t3) {
-    if (t3.cancelable) {
-      var e2 = (t3.timeStamp > 1e12 ? /* @__PURE__ */ new Date() : performance.now()) - t3.timeStamp;
-      "pointerdown" == t3.type ? function(t4, e3) {
-        var n2 = function() {
-          mt(t4, e3), i2();
-        }, r2 = function() {
-          i2();
-        }, i2 = function() {
-          removeEventListener("pointerup", n2, dt), removeEventListener("pointercancel", r2, dt);
-        };
-        addEventListener("pointerup", n2, dt), addEventListener("pointercancel", r2, dt);
-      }(e2, t3) : mt(e2, t3);
-    }
-  };
-  var gt = function(t3) {
-    ["mousedown", "keydown", "touchstart", "pointerdown"].forEach(function(e2) {
-      return t3(e2, vt, dt);
-    });
-  };
-  var ht = [100, 300];
-  var Tt = function(t3, e2) {
-    e2 = e2 || {}, b(function() {
-      var n2, r2 = S(), i2 = f("FID"), a2 = function(t4) {
-        t4.startTime < r2.firstHiddenTime && (i2.value = t4.processingStart - t4.startTime, i2.entries.push(t4), n2(true));
-      }, o2 = function(t4) {
-        t4.forEach(a2);
-      }, c2 = d("first-input", o2);
-      n2 = l(t3, i2, ht, e2.reportAllChanges), c2 && (p(v(function() {
-        o2(c2.takeRecords()), c2.disconnect();
-      })), u(function() {
-        var r3;
-        i2 = f("FID"), n2 = l(t3, i2, ht, e2.reportAllChanges), et = [], $ = -1, Z = null, gt(addEventListener), r3 = a2, et.push(r3), pt();
-      }));
-    });
-  };
-  var yt = function(t3, e2) {
-    Tt(function(e3) {
-      var n2 = function(t4) {
-        var e4 = t4.entries[0], n3 = {
-          eventTarget: a(e4.target),
-          eventType: e4.name,
-          eventTime: e4.startTime,
-          eventEntry: e4,
-          loadState: r(e4.startTime)
-        };
-        return Object.assign(t4, {
-          attribution: n3
-        });
-      }(e3);
-      t3(n2);
-    }, e2);
-  };
+  var ATTR_BROWSER_NAME = "browser.name";
+  var ATTR_BROWSER_VERSION = "browser.version";
+  var ATTR_BROWSER_TOUCH_SCREEN_ENABLED = "browser.touch_screen_enabled";
+  var ATTR_BROWSER_WIDTH = "browser.width";
+  var ATTR_BROWSER_HEIGHT = "browser.height";
+  var ATTR_DEVICE_TYPE = "device.type";
+  var ATTR_NETWORK_EFFECTIVE_TYPE = "network.effectiveType";
+  var ATTR_SCREEN_WIDTH = "screen.width";
+  var ATTR_SCREEN_HEIGHT = "screen.height";
+  var ATTR_SCREEN_SIZE = "screen.size";
+  var ATTR_PAGE_HASH = "page.hash";
+  var ATTR_PAGE_URL = "page.url";
+  var ATTR_PAGE_ROUTE = "page.route";
+  var ATTR_PAGE_HOSTNAME = "page.hostname";
+  var ATTR_PAGE_SEARCH = "page.search";
+  var ATTR_URL_PATH = "url.path";
+  var ATTR_ENTRY_PAGE_URL = "entry_page.url";
+  var ATTR_ENTRY_PAGE_PATH = "entry_page.path";
+  var ATTR_ENTRY_PAGE_SEARCH = "entry_page.search";
+  var ATTR_ENTRY_PAGE_HASH = "entry_page.hash";
+  var ATTR_ENTRY_PAGE_HOSTNAME = "entry_page.hostname";
+  var ATTR_ENTRY_PAGE_REFERRER = "entry_page.referrer";
+  var ATTR_HONEYCOMB_DISTRO_VERSION = "honeycomb.distro.version";
+  var ATTR_HONEYCOMB_DISTRO_RUNTIME_VERSION = "honeycomb.distro.runtime_version";
+  var ATTR_CLS_ID = "cls.id";
+  var ATTR_CLS_VALUE = "cls.value";
+  var ATTR_CLS_DELTA = "cls.delta";
+  var ATTR_CLS_RATING = "cls.rating";
+  var ATTR_CLS_NAVIGATION_TYPE = "cls.navigation_type";
+  var ATTR_LCP_ID = "lcp.id";
+  var ATTR_LCP_VALUE = "lcp.value";
+  var ATTR_LCP_DELTA = "lcp.delta";
+  var ATTR_LCP_RATING = "lcp.rating";
+  var ATTR_LCP_NAVIGATION_TYPE = "lcp.navigation_type";
+  var ATTR_INP_ID = "inp.id";
+  var ATTR_INP_VALUE = "inp.value";
+  var ATTR_INP_DELTA = "inp.delta";
+  var ATTR_INP_RATING = "inp.rating";
+  var ATTR_INP_NAVIGATION_TYPE = "inp.navigation_type";
+  var ATTR_FCP_ID = "fcp.id";
+  var ATTR_FCP_VALUE = "fcp.value";
+  var ATTR_FCP_DELTA = "fcp.delta";
+  var ATTR_FCP_RATING = "fcp.rating";
+  var ATTR_FCP_NAVIGATION_TYPE = "fcp.navigation_type";
+  var ATTR_TTFB_ID = "ttfb.id";
+  var ATTR_TTFB_VALUE = "ttfb.value";
+  var ATTR_TTFB_DELTA = "ttfb.delta";
+  var ATTR_TTFB_RATING = "ttfb.rating";
+  var ATTR_TTFB_NAVIGATION_TYPE = "ttfb.navigation_type";
+  var ATTR_CLS_LARGEST_SHIFT_TARGET = "cls.largest_shift_target";
+  var ATTR_CLS_ELEMENT = "cls.element";
+  var ATTR_CLS_LARGEST_SHIFT_TIME = "cls.largest_shift_time";
+  var ATTR_CLS_LARGEST_SHIFT_VALUE = "cls.largest_shift_value";
+  var ATTR_CLS_LOAD_STATE = "cls.load_state";
+  var ATTR_CLS_HAD_RECENT_INPUT = "cls.had_recent_input";
+  var ATTR_LCP_ELEMENT = "lcp.element";
+  var ATTR_LCP_URL = "lcp.url";
+  var ATTR_LCP_TIME_TO_FIRST_BYTE = "lcp.time_to_first_byte";
+  var ATTR_LCP_RESOURCE_LOAD_DELAY = "lcp.resource_load_delay";
+  var ATTR_LCP_RESOURCE_LOAD_DURATION = "lcp.resource_load_duration";
+  var ATTR_LCP_ELEMENT_RENDER_DELAY = "lcp.element_render_delay";
+  var ATTR_LCP_RESOURCE_LOAD_TIME = "lcp.resource_load_time";
+  var ATTR_INP_INPUT_DELAY = "inp.input_delay";
+  var ATTR_INP_INTERACTION_TARGET = "inp.interaction_target";
+  var ATTR_INP_INTERACTION_TIME = "inp.interaction_time";
+  var ATTR_INP_INTERACTION_TYPE = "inp.interaction_type";
+  var ATTR_INP_LOAD_STATE = "inp.load_state";
+  var ATTR_INP_NEXT_PAINT_TIME = "inp.next_paint_time";
+  var ATTR_INP_PRESENTATION_DELAY = "inp.presentation_delay";
+  var ATTR_INP_PROCESSING_DURATION = "inp.processing_duration";
+  var ATTR_INP_DURATION = "inp.duration";
+  var ATTR_INP_ELEMENT = "inp.element";
+  var ATTR_INP_EVENT_TYPE = "inp.event_type";
+  var ATTR_INP_SCRIPT_ENTRY_TYPE = "inp.timing.script.entry_type";
+  var ATTR_INP_SCRIPT_START_TIME = "inp.timing.script.start_time";
+  var ATTR_INP_SCRIPT_EXECUTION_START = "inp.timing.script.execution_start";
+  var ATTR_INP_SCRIPT_DURATION = "inp.timing.script.duration";
+  var ATTR_INP_SCRIPT_FORCED_STYLE_AND_LAYOUT_DURATION = "inp.timing.script.forced_style_and_layout_duration";
+  var ATTR_INP_SCRIPT_INVOKER = "inp.timing.script.invoker";
+  var ATTR_INP_SCRIPT_PAUSE_DURATION = "inp.timing.script.pause_duration";
+  var ATTR_INP_SCRIPT_SOURCE_URL = "inp.timing.script.source_url";
+  var ATTR_INP_SCRIPT_SOURCE_FUNCTION_NAME = "inp.timing.script.source_function_name";
+  var ATTR_INP_SCRIPT_SOURCE_CHAR_POSITION = "inp.timing.script.source_char_position";
+  var ATTR_INP_SCRIPT_WINDOW_ATTRIBUTION = "inp.timing.script.window_attribution";
+  var ATTR_INP_TIMING_DURATION = "inp.timing.duration";
+  var ATTR_INP_TIMING_ENTRY_TYPE = "inp.timing.entryType";
+  var ATTR_INP_TIMING_NAME = "inp.timing.name";
+  var ATTR_INP_TIMING_RENDER_START = "inp.timing.renderStart";
+  var ATTR_INP_TIMING_START_TIME = "inp.timing.startTime";
+  var ATTR_FCP_TIME_TO_FIRST_BYTE = "fcp.time_to_first_byte";
+  var ATTR_FCP_TIME_SINCE_FIRST_BYTE = "fcp.time_since_first_byte";
+  var ATTR_FCP_LOAD_STATE = "fcp.load_state";
+  var ATTR_TTFB_WAITING_DURATION = "ttfb.waiting_duration";
+  var ATTR_TTFB_DNS_DURATION = "ttfb.dns_duration";
+  var ATTR_TTFB_CONNECTION_DURATION = "ttfb.connection_duration";
+  var ATTR_TTFB_REQUEST_DURATION = "ttfb.request_duration";
+  var ATTR_TTFB_CACHE_DURATION = "ttfb.cache_duration";
+  var ATTR_TTFB_WAITING_TIME = "ttfb.waiting_time";
+  var ATTR_TTFB_DNS_TIME = "ttfb.dns_time";
+  var ATTR_TTFB_CONNECTION_TIME = "ttfb.connection_time";
+  var ATTR_TTFB_REQUEST_TIME = "ttfb.request_time";
   var InstrumentationAbstract2 = class {
     constructor(instrumentationName, instrumentationVersion, config = {}) {
       this.instrumentationName = instrumentationName;
@@ -9624,7 +11891,6 @@
       lcp,
       cls,
       inp,
-      fid,
       fcp,
       ttfb
     } = {}) {
@@ -9634,7 +11900,6 @@
         lcp,
         cls,
         inp,
-        fid,
         fcp,
         ttfb
       };
@@ -9655,16 +11920,20 @@
           loadState,
           largestShiftEntry
         } = attribution;
-        const attrPrefix = this.getAttrPrefix(name);
         const span = this.tracer.startSpan(name);
-        span.setAttributes(Object.assign(Object.assign({}, this.getSharedAttributes(cls2)), {
-          [`${attrPrefix}.largest_shift_target`]: largestShiftTarget,
-          [`${attrPrefix}.element`]: largestShiftTarget,
-          [`${attrPrefix}.largest_shift_time`]: largestShiftTime,
-          [`${attrPrefix}.largest_shift_value`]: largestShiftValue,
-          [`${attrPrefix}.load_state`]: loadState,
-          [`${attrPrefix}.had_recent_input`]: largestShiftEntry === null || largestShiftEntry === void 0 ? void 0 : largestShiftEntry.hadRecentInput
-        }));
+        span.setAttributes({
+          [ATTR_CLS_ID]: cls2.id,
+          [ATTR_CLS_DELTA]: cls2.delta,
+          [ATTR_CLS_VALUE]: cls2.value,
+          [ATTR_CLS_RATING]: cls2.rating,
+          [ATTR_CLS_NAVIGATION_TYPE]: cls2.navigationType,
+          [ATTR_CLS_LARGEST_SHIFT_TARGET]: largestShiftTarget,
+          [ATTR_CLS_ELEMENT]: largestShiftTarget,
+          [ATTR_CLS_LARGEST_SHIFT_TIME]: largestShiftTime,
+          [ATTR_CLS_LARGEST_SHIFT_VALUE]: largestShiftValue,
+          [ATTR_CLS_LOAD_STATE]: loadState,
+          [ATTR_CLS_HAD_RECENT_INPUT]: largestShiftEntry === null || largestShiftEntry === void 0 ? void 0 : largestShiftEntry.hadRecentInput
+        });
         if (applyCustomAttributes) {
           applyCustomAttributes(cls2, span);
         }
@@ -9681,7 +11950,7 @@
           attribution
         } = lcp2;
         const {
-          element,
+          target,
           url,
           timeToFirstByte,
           resourceLoadDelay,
@@ -9689,32 +11958,23 @@
           elementRenderDelay,
           lcpEntry
         } = attribution;
-        const attrPrefix = this.getAttrPrefix(name);
         const span = this.tracer.startSpan(name);
-        span.setAttributes(Object.assign(Object.assign({}, this.getSharedAttributes(lcp2)), {
-          [`${attrPrefix}.element`]: element,
-          [`${attrPrefix}.url`]: url,
-          [`${attrPrefix}.time_to_first_byte`]: timeToFirstByte,
-          [`${attrPrefix}.resource_load_delay`]: resourceLoadDelay,
-          [`${attrPrefix}.resource_load_duration`]: resourceLoadDuration,
-          [`${attrPrefix}.element_render_delay`]: elementRenderDelay,
+        span.setAttributes({
+          [ATTR_LCP_ID]: lcp2.id,
+          [ATTR_LCP_DELTA]: lcp2.delta,
+          [ATTR_LCP_VALUE]: lcp2.value,
+          [ATTR_LCP_RATING]: lcp2.rating,
+          [ATTR_LCP_NAVIGATION_TYPE]: lcp2.navigationType,
+          [ATTR_LCP_ELEMENT]: target,
+          [ATTR_LCP_URL]: url,
+          [ATTR_LCP_TIME_TO_FIRST_BYTE]: timeToFirstByte,
+          [ATTR_LCP_RESOURCE_LOAD_DELAY]: resourceLoadDelay,
+          [ATTR_LCP_RESOURCE_LOAD_DURATION]: resourceLoadDuration,
+          [ATTR_LCP_ELEMENT_RENDER_DELAY]: elementRenderDelay,
           // This will be deprecated in a future version
-          [`${attrPrefix}.resource_load_time`]: resourceLoadDuration
-        }));
-        const el = lcpEntry === null || lcpEntry === void 0 ? void 0 : lcpEntry.element;
-        if (el === null || el === void 0 ? void 0 : el.dataset) {
-          for (const attrName in el.dataset) {
-            const attrValue = el.dataset[attrName];
-            if (
-              // Value exists (including the empty string AND either
-              attrValue !== void 0 && // dataAttributes is undefined (i.e. send all values as span attributes) OR
-              (dataAttributes === void 0 || // dataAttributes is specified AND attrName is in dataAttributes (i.e attribute name is in the supplied allowList)
-              dataAttributes.includes(attrName))
-            ) {
-              span.setAttribute(`${attrPrefix}.element.data.${attrName}`, attrValue);
-            }
-          }
-        }
+          [ATTR_LCP_RESOURCE_LOAD_TIME]: resourceLoadDuration
+        });
+        this.addDataAttributes(lcpEntry === null || lcpEntry === void 0 ? void 0 : lcpEntry.element, span, dataAttributes, "lcp");
         if (applyCustomAttributes) {
           applyCustomAttributes(lcp2, span);
         }
@@ -9725,7 +11985,8 @@
       }) => {
         const {
           applyCustomAttributes,
-          includeTimingsAsSpans
+          includeTimingsAsSpans,
+          dataAttributes
         } = inpOpts;
         if (!this.isEnabled()) return;
         const {
@@ -9741,35 +12002,41 @@
           nextPaintTime,
           presentationDelay,
           processingDuration,
-          longAnimationFrameEntries: _loafEntries
+          longAnimationFrameEntries
         } = attribution;
-        const longAnimationFrameEntries = _loafEntries;
-        const attrPrefix = this.getAttrPrefix(name);
         const inpDuration = inputDelay + processingDuration + presentationDelay;
         this.tracer.startActiveSpan(name, {
           startTime: interactionTime
         }, (inpSpan) => {
-          const inpAttributes = Object.assign(Object.assign({}, this.getSharedAttributes(inp2)), {
-            [`${attrPrefix}.input_delay`]: inputDelay,
-            [`${attrPrefix}.interaction_target`]: interactionTarget,
-            [`${attrPrefix}.interaction_time`]: interactionTime,
-            [`${attrPrefix}.interaction_type`]: interactionType,
-            [`${attrPrefix}.load_state`]: loadState,
-            [`${attrPrefix}.next_paint_time`]: nextPaintTime,
-            [`${attrPrefix}.presentation_delay`]: presentationDelay,
-            [`${attrPrefix}.processing_duration`]: processingDuration,
-            [`${attrPrefix}.duration`]: inpDuration,
+          const inpAttributes = {
+            [ATTR_INP_ID]: inp2.id,
+            [ATTR_INP_DELTA]: inp2.delta,
+            [ATTR_INP_VALUE]: inp2.value,
+            [ATTR_INP_RATING]: inp2.rating,
+            [ATTR_INP_NAVIGATION_TYPE]: inp2.navigationType,
+            [ATTR_INP_INPUT_DELAY]: inputDelay,
+            [ATTR_INP_INTERACTION_TARGET]: interactionTarget,
+            [ATTR_INP_INTERACTION_TIME]: interactionTime,
+            [ATTR_INP_INTERACTION_TYPE]: interactionType,
+            [ATTR_INP_LOAD_STATE]: loadState,
+            [ATTR_INP_NEXT_PAINT_TIME]: nextPaintTime,
+            [ATTR_INP_PRESENTATION_DELAY]: presentationDelay,
+            [ATTR_INP_PROCESSING_DURATION]: processingDuration,
+            [ATTR_INP_DURATION]: inpDuration,
             // These will be deprecated in a future version
-            [`${attrPrefix}.element`]: interactionTarget,
-            [`${attrPrefix}.event_type`]: interactionType
-          });
+            [ATTR_INP_ELEMENT]: interactionTarget,
+            [ATTR_INP_EVENT_TYPE]: interactionType
+          };
           inpSpan.setAttributes(inpAttributes);
+          inp2.entries.forEach((inpEntry) => {
+            this.addDataAttributes(this.getElementFromNode(inpEntry.target), inpSpan, dataAttributes, "inp");
+          });
           if (applyCustomAttributes) {
             applyCustomAttributes(inp2, inpSpan);
           }
           if (includeTimingsAsSpans) {
             longAnimationFrameEntries.forEach((perfEntry) => {
-              this.processPerformanceLongAnimationFrameTimingSpans(attrPrefix, perfEntry);
+              this.processPerformanceLongAnimationFrameTimingSpans("inp", perfEntry);
             });
           }
           inpSpan.end(interactionTime + inpDuration);
@@ -9789,41 +12056,19 @@
           firstByteToFCP,
           loadState
         } = attribution;
-        const attrPrefix = this.getAttrPrefix(name);
         const span = this.tracer.startSpan(name);
-        span.setAttributes(Object.assign(Object.assign({}, this.getSharedAttributes(fcp2)), {
-          [`${attrPrefix}.time_to_first_byte`]: timeToFirstByte,
-          [`${attrPrefix}.time_since_first_byte`]: firstByteToFCP,
-          [`${attrPrefix}.load_state`]: loadState
-        }));
+        span.setAttributes({
+          [ATTR_FCP_ID]: fcp2.id,
+          [ATTR_FCP_DELTA]: fcp2.delta,
+          [ATTR_FCP_VALUE]: fcp2.value,
+          [ATTR_FCP_RATING]: fcp2.rating,
+          [ATTR_FCP_NAVIGATION_TYPE]: fcp2.navigationType,
+          [ATTR_FCP_TIME_TO_FIRST_BYTE]: timeToFirstByte,
+          [ATTR_FCP_TIME_SINCE_FIRST_BYTE]: firstByteToFCP,
+          [ATTR_FCP_LOAD_STATE]: loadState
+        });
         if (applyCustomAttributes) {
           applyCustomAttributes(fcp2, span);
-        }
-        span.end();
-      };
-      this.onReportFID = (fid2, fidOpts = {}) => {
-        const {
-          applyCustomAttributes
-        } = fidOpts;
-        if (!this.isEnabled()) return;
-        const {
-          name,
-          attribution
-        } = fid2;
-        const {
-          eventTarget,
-          eventType,
-          loadState
-        } = attribution;
-        const attrPrefix = this.getAttrPrefix(name);
-        const span = this.tracer.startSpan(name);
-        span.setAttributes(Object.assign(Object.assign({}, this.getSharedAttributes(fid2)), {
-          [`${attrPrefix}.element`]: eventTarget,
-          [`${attrPrefix}.event_type`]: eventType,
-          [`${attrPrefix}.load_state`]: loadState
-        }));
-        if (applyCustomAttributes) {
-          applyCustomAttributes(fid2, span);
         }
         span.end();
       };
@@ -9843,19 +12088,23 @@
           requestDuration,
           waitingDuration
         } = attribution;
-        const attrPrefix = this.getAttrPrefix(name);
-        const attributes = Object.assign(Object.assign({}, this.getSharedAttributes(ttfb2)), {
-          [`${attrPrefix}.waiting_duration`]: waitingDuration,
-          [`${attrPrefix}.dns_duration`]: dnsDuration,
-          [`${attrPrefix}.connection_duration`]: connectionDuration,
-          [`${attrPrefix}.request_duration`]: requestDuration,
-          [`${attrPrefix}.cache_duration`]: cacheDuration,
+        const attributes = {
+          [ATTR_TTFB_ID]: ttfb2.id,
+          [ATTR_TTFB_DELTA]: ttfb2.delta,
+          [ATTR_TTFB_VALUE]: ttfb2.value,
+          [ATTR_TTFB_RATING]: ttfb2.rating,
+          [ATTR_TTFB_NAVIGATION_TYPE]: ttfb2.navigationType,
+          [ATTR_TTFB_WAITING_DURATION]: waitingDuration,
+          [ATTR_TTFB_DNS_DURATION]: dnsDuration,
+          [ATTR_TTFB_CONNECTION_DURATION]: connectionDuration,
+          [ATTR_TTFB_REQUEST_DURATION]: requestDuration,
+          [ATTR_TTFB_CACHE_DURATION]: cacheDuration,
           // These will be deprecated ina future version
-          [`${attrPrefix}.waiting_time`]: waitingDuration,
-          [`${attrPrefix}.dns_time`]: dnsDuration,
-          [`${attrPrefix}.connection_time`]: connectionDuration,
-          [`${attrPrefix}.request_time`]: requestDuration
-        });
+          [ATTR_TTFB_WAITING_TIME]: waitingDuration,
+          [ATTR_TTFB_DNS_TIME]: dnsDuration,
+          [ATTR_TTFB_CONNECTION_TIME]: connectionDuration,
+          [ATTR_TTFB_REQUEST_TIME]: requestDuration
+        };
         const span = this.tracer.startSpan(name);
         span.setAttributes(attributes);
         if (applyCustomAttributes) {
@@ -9867,7 +12116,6 @@
       this.lcpOpts = lcp;
       this.clsOpts = cls;
       this.inpOpts = inp;
-      this.fidOpts = fid;
       this.fcpOpts = fcp;
       this.ttfbOpts = ttfb;
       this._isEnabled = enabled;
@@ -9877,27 +12125,22 @@
     }
     _setupWebVitalsCallbacks() {
       if (this.vitalsToTrack.includes("CLS")) {
-        D((vital) => {
+        _((vital) => {
           this.onReportCLS(vital, this.clsOpts);
         }, this.clsOpts);
       }
       if (this.vitalsToTrack.includes("LCP")) {
-        ot((vital) => {
+        V((vital) => {
           this.onReportLCP(vital, this.lcpOpts);
         }, this.lcpOpts);
       }
       if (this.vitalsToTrack.includes("INP")) {
-        rt((vital) => {
+        N((vital) => {
           this.onReportINP(vital, this.inpOpts);
         }, this.inpOpts);
       }
-      if (this.vitalsToTrack.includes("FID")) {
-        yt((vital) => {
-          this.onReportFID(vital, this.fidOpts);
-        }, this.fidOpts);
-      }
       if (this.vitalsToTrack.includes("TTFB")) {
-        ft((vital) => {
+        z((vital) => {
           this.onReportTTFB(vital, this.ttfbOpts);
         }, this.ttfbOpts);
       }
@@ -9910,75 +12153,77 @@
     getAttrPrefix(name) {
       return name.toLowerCase();
     }
-    getSharedAttributes(vital) {
-      const {
-        name,
-        id,
-        delta,
-        rating,
-        value,
-        navigationType
-      } = vital;
-      const attrPrefix = this.getAttrPrefix(name);
-      return {
-        [`${attrPrefix}.id`]: id,
-        [`${attrPrefix}.delta`]: delta,
-        [`${attrPrefix}.value`]: value,
-        [`${attrPrefix}.rating`]: rating,
-        [`${attrPrefix}.navigation_type`]: navigationType
-      };
-    }
-    getAttributesForPerformanceLongAnimationFrameTiming(prefix, perfEntry) {
+    getAttributesForPerformanceLongAnimationFrameTiming(perfEntry) {
       const loafAttributes = {
-        [`${prefix}.duration`]: perfEntry.duration,
-        [`${prefix}.entryType`]: perfEntry.entryType,
-        [`${prefix}.name`]: perfEntry.name,
-        [`${prefix}.renderStart`]: perfEntry.renderStart,
-        [`${prefix}.startTime`]: perfEntry.startTime
+        [ATTR_INP_TIMING_DURATION]: perfEntry.duration,
+        [ATTR_INP_TIMING_ENTRY_TYPE]: perfEntry.entryType,
+        [ATTR_INP_TIMING_NAME]: perfEntry.name,
+        [ATTR_INP_TIMING_RENDER_START]: perfEntry.renderStart,
+        [ATTR_INP_TIMING_START_TIME]: perfEntry.startTime
       };
       return loafAttributes;
     }
-    getAttributesForPerformanceScriptTiming(prefix, scriptPerfEntry) {
+    getAttributesForPerformanceScriptTiming(scriptPerfEntry) {
       const scriptAttributes = {
-        [`${prefix}.entry_type`]: scriptPerfEntry.entryType,
-        [`${prefix}.start_time`]: scriptPerfEntry.startTime,
-        [`${prefix}.execution_start`]: scriptPerfEntry.executionStart,
-        [`${prefix}.duration`]: scriptPerfEntry.duration,
-        [`${prefix}.forced_style_and_layout_duration`]: scriptPerfEntry.forcedStyleAndLayoutDuration,
-        [`${prefix}.invoker`]: scriptPerfEntry.invoker,
-        [`${prefix}.pause_duration`]: scriptPerfEntry.pauseDuration,
-        [`${prefix}.source_url`]: scriptPerfEntry.sourceURL,
-        [`${prefix}.source_function_name`]: scriptPerfEntry.sourceFunctionName,
-        [`${prefix}.source_char_position`]: scriptPerfEntry.sourceCharPosition,
-        [`${prefix}.window_attribution`]: scriptPerfEntry.windowAttribution
+        [ATTR_INP_SCRIPT_ENTRY_TYPE]: scriptPerfEntry.entryType,
+        [ATTR_INP_SCRIPT_START_TIME]: scriptPerfEntry.startTime,
+        [ATTR_INP_SCRIPT_EXECUTION_START]: scriptPerfEntry.executionStart,
+        [ATTR_INP_SCRIPT_DURATION]: scriptPerfEntry.duration,
+        [ATTR_INP_SCRIPT_FORCED_STYLE_AND_LAYOUT_DURATION]: scriptPerfEntry.forcedStyleAndLayoutDuration,
+        [ATTR_INP_SCRIPT_INVOKER]: scriptPerfEntry.invoker,
+        [ATTR_INP_SCRIPT_PAUSE_DURATION]: scriptPerfEntry.pauseDuration,
+        [ATTR_INP_SCRIPT_SOURCE_URL]: scriptPerfEntry.sourceURL,
+        [ATTR_INP_SCRIPT_SOURCE_FUNCTION_NAME]: scriptPerfEntry.sourceFunctionName,
+        [ATTR_INP_SCRIPT_SOURCE_CHAR_POSITION]: scriptPerfEntry.sourceCharPosition,
+        [ATTR_INP_SCRIPT_WINDOW_ATTRIBUTION]: scriptPerfEntry.windowAttribution
       };
       return scriptAttributes;
     }
     processPerformanceLongAnimationFrameTimingSpans(parentPrefix, perfEntry) {
       if (!perfEntry) return;
-      const prefix = `${parentPrefix}.timing`;
-      const loafAttributes = this.getAttributesForPerformanceLongAnimationFrameTiming(prefix, perfEntry);
+      const loafAttributes = this.getAttributesForPerformanceLongAnimationFrameTiming(perfEntry);
       this.tracer.startActiveSpan(perfEntry.name, {
         startTime: perfEntry.startTime
       }, (span) => {
         span.setAttributes(loafAttributes);
-        this.processPerformanceScriptTimingSpans(prefix, perfEntry.scripts);
+        this.processPerformanceScriptTimingSpans(parentPrefix, perfEntry.scripts);
         span.end(perfEntry.startTime + perfEntry.duration);
       });
     }
     processPerformanceScriptTimingSpans(parentPrefix, perfScriptEntries) {
       if (!perfScriptEntries) return;
       if (!(perfScriptEntries === null || perfScriptEntries === void 0 ? void 0 : perfScriptEntries.length)) return;
-      const prefix = `${parentPrefix}.script`;
       perfScriptEntries.map((scriptPerfEntry) => {
         this.tracer.startActiveSpan(scriptPerfEntry.name, {
           startTime: scriptPerfEntry.startTime
         }, (span) => {
-          const scriptAttributes = this.getAttributesForPerformanceScriptTiming(prefix, scriptPerfEntry);
+          const scriptAttributes = this.getAttributesForPerformanceScriptTiming(scriptPerfEntry);
           span.setAttributes(scriptAttributes);
           span.end(scriptPerfEntry.startTime + scriptPerfEntry.duration);
         });
       });
+    }
+    getElementFromNode(node) {
+      if ((node === null || node === void 0 ? void 0 : node.nodeType) === Node.ELEMENT_NODE) {
+        return node;
+      }
+      return void 0;
+    }
+    addDataAttributes(element, span, dataAttributes, attrPrefix) {
+      const el = element;
+      if (el === null || el === void 0 ? void 0 : el.dataset) {
+        for (const attrName in el.dataset) {
+          const attrValue = el.dataset[attrName];
+          if (
+            // Value exists (including the empty string AND either
+            attrValue !== void 0 && // dataAttributes is undefined (i.e. send all values as span attributes) OR
+            (dataAttributes === void 0 || // dataAttributes is specified AND attrName is in dataAttributes (i.e attribute name is in the supplied allowList)
+            dataAttributes.includes(attrName))
+          ) {
+            span.setAttribute(`${attrPrefix}.element.data.${attrName}`, attrValue);
+          }
+        }
+      }
     }
     disable() {
       if (!this.isEnabled()) {
@@ -10096,11 +12341,389 @@
       return this._isEnabled;
     }
   };
+  var TEAM_HEADER_KEY = "x-honeycomb-team";
+  var DATASET_HEADER_KEY = "x-honeycomb-dataset";
+  function configureHoneycombHttpJsonTraceExporter(options) {
+    const apiKey = getTracesApiKey(options);
+    return new OTLPTraceExporter({
+      url: getTracesEndpoint(options),
+      headers: configureHeaders(options, apiKey, options === null || options === void 0 ? void 0 : options.tracesHeaders),
+      timeoutMillis: (options === null || options === void 0 ? void 0 : options.tracesTimeout) || (options === null || options === void 0 ? void 0 : options.timeout) || 1e4
+    });
+  }
+  function configureHoneycombHttpJsonMetricExporter(options) {
+    const apiKey = getMetricsApiKey(options);
+    return new OTLPMetricExporter({
+      url: getMetricsEndpoint(options),
+      headers: configureHeaders(options, apiKey, options === null || options === void 0 ? void 0 : options.metricsHeaders, true),
+      timeoutMillis: (options === null || options === void 0 ? void 0 : options.metricsTimeout) || (options === null || options === void 0 ? void 0 : options.timeout) || 1e4
+    });
+  }
+  function configureHoneycombHttpJsonLogExporter(options) {
+    const apiKey = getLogsApiKey(options);
+    return new OTLPLogExporter({
+      url: getLogsEndpoint(options),
+      headers: configureHeaders(options, apiKey, options === null || options === void 0 ? void 0 : options.logsHeaders),
+      timeoutMillis: (options === null || options === void 0 ? void 0 : options.logsTimeout) || (options === null || options === void 0 ? void 0 : options.timeout) || 1e4
+    });
+  }
+  function configureHeaders(options, apiKey, signalHeaders, isMetrics = false) {
+    const headers = Object.assign(Object.assign({}, options === null || options === void 0 ? void 0 : options.headers), signalHeaders);
+    if (apiKey && !headers[TEAM_HEADER_KEY]) {
+      headers[TEAM_HEADER_KEY] = apiKey;
+    }
+    if (isClassic(apiKey)) {
+      if (isMetrics && (options === null || options === void 0 ? void 0 : options.metricsDataset)) {
+        headers[DATASET_HEADER_KEY] = options === null || options === void 0 ? void 0 : options.metricsDataset;
+      } else if (options === null || options === void 0 ? void 0 : options.dataset) {
+        headers[DATASET_HEADER_KEY] = options === null || options === void 0 ? void 0 : options.dataset;
+      }
+    }
+    return headers;
+  }
+  function configureConsoleTraceLinkExporter(options) {
+    const apiKey = getTracesApiKey(options);
+    const {
+      authRoot,
+      uiRoot
+    } = getUrlRoots((options === null || options === void 0 ? void 0 : options.tracesEndpoint) || getTracesEndpoint(options));
+    return new ConsoleTraceLinkExporter(options === null || options === void 0 ? void 0 : options.serviceName, apiKey, options === null || options === void 0 ? void 0 : options.logLevel, authRoot, uiRoot);
+  }
+  var getUrlRoots = (endpoint = "") => {
+    const url = new URL(endpoint);
+    const subdomainRegex = /(api)([.|-])?(.*?)(\.?)(honeycomb\.io)(.*)/;
+    const matches = subdomainRegex.exec(url.host);
+    if (matches === null) {
+      return {
+        authRoot: void 0,
+        uiRoot: void 0
+      };
+    }
+    const isDashSubdomain = matches[2] === "-";
+    let apiSubdomain;
+    let uiSubdomain;
+    if (isDashSubdomain) {
+      apiSubdomain = `api-${matches[3]}`;
+      uiSubdomain = `ui-${matches[3]}`;
+    } else {
+      apiSubdomain = matches[3] ? `api.${matches[3]}` : "api";
+      uiSubdomain = matches[3] ? `ui.${matches[3]}` : "ui";
+    }
+    const authRoot = `${url.protocol}//${apiSubdomain}.honeycomb.io/1/auth`;
+    const uiRoot = `${url.protocol}//${uiSubdomain}.honeycomb.io`;
+    return {
+      authRoot,
+      uiRoot
+    };
+  };
+  var ConsoleTraceLinkExporter = class {
+    constructor(serviceName, apikey, logLevel, authRoot, uiRoot) {
+      this._traceUrl = "";
+      this._logLevel = DiagLogLevel.DEBUG;
+      if (logLevel) {
+        this._logLevel = logLevel;
+      }
+      if (!serviceName || !apikey) {
+        if (this._logLevel >= DiagLogLevel.DEBUG) {
+          console.debug(MISSING_FIELDS_FOR_LOCAL_VISUALIZATIONS);
+        }
+        return;
+      }
+      if (!authRoot || !uiRoot) {
+        if (this._logLevel >= DiagLogLevel.DEBUG) {
+          console.debug(MISSING_FIELDS_FOR_GENERATING_LINKS);
+        }
+        return;
+      }
+      const options = {
+        headers: {
+          "x-honeycomb-team": apikey
+        }
+      };
+      fetch(authRoot, options).then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        throw new Error();
+      }).then((data) => {
+        var _a, _b, _c;
+        const respData = data;
+        if ((_a = respData.team) === null || _a === void 0 ? void 0 : _a.slug) {
+          this._traceUrl = buildTraceUrl(apikey, serviceName, (_b = respData.team) === null || _b === void 0 ? void 0 : _b.slug, (_c = respData.environment) === null || _c === void 0 ? void 0 : _c.slug, uiRoot);
+        } else {
+          throw new Error();
+        }
+      }).catch(() => {
+        if (this._logLevel >= DiagLogLevel.INFO) {
+          console.log(FAILED_AUTH_FOR_LOCAL_VISUALIZATIONS);
+        }
+      });
+    }
+    export(spans, resultCallback) {
+      if (this._traceUrl) {
+        spans.forEach((span) => {
+          var _a;
+          if (!((_a = span.parentSpanContext) === null || _a === void 0 ? void 0 : _a.spanId) && this._logLevel >= DiagLogLevel.INFO) {
+            console.log(createHoneycombSDKLogMessage(`Honeycomb link: ${this._traceUrl}=${span.spanContext().traceId}`));
+          }
+        });
+      }
+      resultCallback({
+        code: ExportResultCode.SUCCESS
+      });
+    }
+    shutdown() {
+      return Promise.resolve();
+    }
+  };
+  function buildTraceUrl(apikey, serviceName, team, environment, uiRoot) {
+    let url = `${uiRoot}/${team}`;
+    if (!isClassic(apikey) && environment) {
+      url += `/environments/${environment}`;
+    }
+    url += `/datasets/${serviceName}/trace?trace_id`;
+    return url;
+  }
+  function configureTraceExporters(options) {
+    const honeycombTraceExporters = [];
+    if (options === null || options === void 0 ? void 0 : options.localVisualizations) {
+      honeycombTraceExporters.push(configureConsoleTraceLinkExporter(options));
+    }
+    if (options === null || options === void 0 ? void 0 : options.traceExporter) {
+      honeycombTraceExporters.push(options === null || options === void 0 ? void 0 : options.traceExporter);
+    }
+    if (options === null || options === void 0 ? void 0 : options.traceExporters) {
+      honeycombTraceExporters.push(...options.traceExporters);
+    }
+    if ((options === null || options === void 0 ? void 0 : options.disableDefaultTraceExporter) !== true) {
+      honeycombTraceExporters.unshift(configureHoneycombHttpJsonTraceExporter(options));
+    }
+    return configureCompositeExporter([...honeycombTraceExporters]);
+  }
+  function configureMetricExporters(options) {
+    const exporters = [];
+    exporters.push(configureHoneycombHttpJsonMetricExporter(options));
+    if (options === null || options === void 0 ? void 0 : options.localVisualizations) {
+      exporters.push(new ConsoleMetricExporter());
+    }
+    return exporters;
+  }
+  function configureLogExporters(options) {
+    const exporters = [];
+    exporters.push(configureHoneycombHttpJsonLogExporter(options));
+    if (options === null || options === void 0 ? void 0 : options.localVisualizations) {
+      exporters.push(new ConsoleLogRecordExporter());
+    }
+    return exporters;
+  }
+  function configureCompositeExporter(exporters) {
+    return new CompositeSpanExporter(exporters);
+  }
+  var CompositeSpanExporter = class {
+    constructor(exporters) {
+      this._exporters = exporters;
+    }
+    export(spans, resultCallback) {
+      this._exporters.forEach((exporter) => exporter.export(spans, resultCallback));
+      resultCallback({
+        code: ExportResultCode.SUCCESS
+      });
+    }
+    async shutdown() {
+      const results = [];
+      this._exporters.forEach((exporter) => results.push(exporter.shutdown()));
+      await Promise.all(results);
+    }
+  };
+  var BaggageSpanProcessor = class {
+    constructor() {
+    }
+    onStart(span, parentContext) {
+      var _a, _b;
+      ((_b = (_a = propagation.getBaggage(parentContext)) === null || _a === void 0 ? void 0 : _a.getAllEntries()) !== null && _b !== void 0 ? _b : []).forEach((entry) => {
+        span.setAttribute(entry[0], entry[1].value);
+        diag2.debug(`@honeycombio/opentelemetry-web: \u{1F6A8} Baggage in all outgoing headers: ${entry[0]}=${entry[1].value} `);
+      });
+    }
+    onEnd() {
+    }
+    forceFlush() {
+      return Promise.resolve();
+    }
+    shutdown() {
+      return Promise.resolve();
+    }
+  };
+  var BrowserAttributesSpanProcessor = class {
+    constructor() {
+    }
+    onStart(span) {
+      const {
+        href,
+        pathname,
+        search,
+        hash,
+        hostname
+      } = window.location;
+      span.setAttributes({
+        [ATTR_BROWSER_WIDTH]: window.innerWidth,
+        [ATTR_BROWSER_HEIGHT]: window.innerHeight,
+        [ATTR_PAGE_HASH]: hash,
+        [ATTR_PAGE_URL]: href,
+        [ATTR_PAGE_ROUTE]: pathname,
+        [ATTR_PAGE_HOSTNAME]: hostname,
+        [ATTR_PAGE_SEARCH]: search,
+        [ATTR_URL_PATH]: pathname
+      });
+    }
+    onEnd() {
+    }
+    forceFlush() {
+      return Promise.resolve();
+    }
+    shutdown() {
+      return Promise.resolve();
+    }
+  };
+  var generator = new RandomIdGenerator();
+  var sessionId = generator.generateTraceId();
+  var defaultSessionProvider = {
+    getSessionId: () => sessionId
+  };
+  var configureSpanProcessors = (options) => {
+    const processors = [];
+    if (!(options === null || options === void 0 ? void 0 : options.disableBrowserAttributes)) {
+      processors.push(new BrowserAttributesSpanProcessor());
+    }
+    processors.push(new BaggageSpanProcessor(), createSessionSpanProcessor((options === null || options === void 0 ? void 0 : options.sessionProvider) || defaultSessionProvider), ...(options === null || options === void 0 ? void 0 : options.spanProcessors) || []);
+    return processors;
+  };
+  var ATTR_BROWSER_LANGUAGE = "browser.language";
+  var ATTR_BROWSER_MOBILE = "browser.mobile";
+  var ATTR_TELEMETRY_DISTRO_NAME = "telemetry.distro.name";
+  var ATTR_TELEMETRY_DISTRO_VERSION = "telemetry.distro.version";
+  function configureHoneycombResource() {
+    return resourceFromAttributes({
+      [ATTR_HONEYCOMB_DISTRO_VERSION]: VERSION4,
+      [ATTR_HONEYCOMB_DISTRO_RUNTIME_VERSION]: "browser",
+      [ATTR_TELEMETRY_DISTRO_NAME]: "@honeycombio/opentelemetry-web",
+      [ATTR_TELEMETRY_DISTRO_VERSION]: VERSION4
+    });
+  }
+  var defaultConfig = {
+    path: true,
+    hash: true,
+    hostname: true,
+    referrer: true,
+    url: false,
+    search: false
+  };
+  function configureEntryPageResource(config) {
+    if (config === false || !(window === null || window === void 0 ? void 0 : window.location)) {
+      return resourceFromAttributes({});
+    }
+    const options = getOptions(config);
+    const {
+      href,
+      pathname,
+      search,
+      hash,
+      hostname
+    } = window.location;
+    const attributes = {
+      [ATTR_ENTRY_PAGE_URL]: optionalAttribute(options.url, href),
+      [ATTR_ENTRY_PAGE_PATH]: optionalAttribute(options.path, pathname),
+      [ATTR_ENTRY_PAGE_SEARCH]: optionalAttribute(options.search, search),
+      [ATTR_ENTRY_PAGE_HASH]: optionalAttribute(options.hash, hash),
+      [ATTR_ENTRY_PAGE_HOSTNAME]: optionalAttribute(options.hostname, hostname),
+      [ATTR_ENTRY_PAGE_REFERRER]: optionalAttribute(options.referrer, document.referrer)
+    };
+    return resourceFromAttributes(attributes);
+  }
+  function getOptions(config) {
+    if (!config) {
+      return defaultConfig;
+    }
+    return Object.assign(Object.assign({}, defaultConfig), config);
+  }
+  function optionalAttribute(shouldInclude, attribute) {
+    if (!shouldInclude) {
+      return void 0;
+    }
+    return attribute;
+  }
+  var computeScreenSize = (screenWidth) => {
+    if (screenWidth <= 768) return "small";
+    else if (screenWidth > 768 && screenWidth <= 1024) return "medium";
+    else if (screenWidth > 1024) return "large";
+    return "unknown";
+  };
+  var computeNetworkType = (networkInformation) => {
+    var _a;
+    return (_a = networkInformation === null || networkInformation === void 0 ? void 0 : networkInformation.effectiveType) !== null && _a !== void 0 ? _a : "unknown";
+  };
+  var computeDeviceType = (detectedDeviceType, detectedBrowserName) => {
+    if (!detectedDeviceType && !detectedBrowserName) {
+      return "unknown";
+    }
+    if (!detectedDeviceType) {
+      return "desktop";
+    }
+    return detectedDeviceType;
+  };
+  var computeDeviceProperties = (userAgent) => {
+    const uaParser = new import_ua_parser_js.default(userAgent);
+    const {
+      name: browserName,
+      version: browserVersion
+    } = uaParser.getBrowser();
+    return {
+      browserName: browserName !== null && browserName !== void 0 ? browserName : "unknown",
+      browserVersion: browserVersion !== null && browserVersion !== void 0 ? browserVersion : "unknown",
+      deviceType: computeDeviceType(uaParser.getDevice().type, browserName)
+    };
+  };
+  function configureBrowserAttributesResource() {
+    const {
+      browserName,
+      browserVersion,
+      deviceType
+    } = computeDeviceProperties(navigator.userAgent);
+    const browserAttributes = {
+      [ATTR_USER_AGENT_ORIGINAL]: navigator.userAgent,
+      //https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#mobile_tablet_or_desktop
+      [ATTR_BROWSER_MOBILE]: navigator.userAgent.includes("Mobi"),
+      [ATTR_BROWSER_TOUCH_SCREEN_ENABLED]: navigator.maxTouchPoints > 0,
+      [ATTR_BROWSER_LANGUAGE]: navigator.language,
+      [ATTR_BROWSER_NAME]: browserName,
+      [ATTR_BROWSER_VERSION]: browserVersion,
+      [ATTR_DEVICE_TYPE]: deviceType,
+      [ATTR_NETWORK_EFFECTIVE_TYPE]: computeNetworkType(navigator.connection),
+      [ATTR_SCREEN_WIDTH]: window.screen.width,
+      [ATTR_SCREEN_HEIGHT]: window.screen.height,
+      [ATTR_SCREEN_SIZE]: computeScreenSize(window.screen.width)
+    };
+    return resourceFromAttributes(browserAttributes);
+  }
+  var configureResourceAttributes = (options) => {
+    let resource = resourceFromAttributes({});
+    if (!(options === null || options === void 0 ? void 0 : options.disableBrowserAttributes)) {
+      resource = resource.merge(configureEntryPageResource(options === null || options === void 0 ? void 0 : options.entryPageAttributes)).merge(configureBrowserAttributesResource());
+    }
+    resource = resource.merge(configureHoneycombResource());
+    if (options === null || options === void 0 ? void 0 : options.resource) {
+      resource = resource.merge(options.resource);
+    }
+    if (options === null || options === void 0 ? void 0 : options.resourceAttributes) {
+      resource = resource.merge(resourceFromAttributes(options.resourceAttributes));
+    }
+    return resource;
+  };
   var HoneycombWebSDK = class extends WebSDK {
     constructor(options) {
-      var _a3, _b;
+      var _a, _b;
       const instrumentations = [...(options === null || options === void 0 ? void 0 : options.instrumentations) || []];
-      if (((_a3 = options === null || options === void 0 ? void 0 : options.webVitalsInstrumentationConfig) === null || _a3 === void 0 ? void 0 : _a3.enabled) !== false) {
+      if (((_a = options === null || options === void 0 ? void 0 : options.webVitalsInstrumentationConfig) === null || _a === void 0 ? void 0 : _a.enabled) !== false) {
         instrumentations.push(new WebVitalsInstrumentation(options === null || options === void 0 ? void 0 : options.webVitalsInstrumentationConfig));
       }
       if (((_b = options === null || options === void 0 ? void 0 : options.globalErrorsInstrumentationConfig) === null || _b === void 0 ? void 0 : _b.enabled) !== false) {
@@ -10108,12 +12731,12 @@
       }
       super(Object.assign(Object.assign({}, options), {
         instrumentations,
-        resource: mergeResources([configureBrowserAttributesResource(), configureEntryPageResource(options === null || options === void 0 ? void 0 : options.entryPageAttributes), options === null || options === void 0 ? void 0 : options.resource, options === null || options === void 0 ? void 0 : options.resourceAttributes, configureHoneycombResource()]),
-        sampler: configureDeterministicSampler(options),
-        // Exporter is configured through the span processor because
-        // the base SDK does not allow having both a spanProcessor and a
-        // traceExporter configured at the same time.
-        spanProcessor: configureSpanProcessors(options)
+        resource: configureResourceAttributes(options),
+        sampler: configureSampler(options),
+        spanProcessors: configureSpanProcessors(options),
+        traceExporter: configureTraceExporters(options),
+        metricExporters: configureMetricExporters(options),
+        logExporters: configureLogExporters(options)
       }));
       validateOptionsWarnings(options);
       if (options === null || options === void 0 ? void 0 : options.debug) {
@@ -10121,6 +12744,412 @@
       }
     }
   };
+
+  // node_modules/@opentelemetry/api-logs/build/esm/NoopLogger.js
+  var NoopLogger3 = class {
+    emit(_logRecord) {
+    }
+  };
+  var NOOP_LOGGER3 = new NoopLogger3();
+
+  // node_modules/@opentelemetry/api-logs/build/esm/NoopLoggerProvider.js
+  var NoopLoggerProvider3 = class {
+    getLogger(_name, _version, _options) {
+      return new NoopLogger3();
+    }
+  };
+  var NOOP_LOGGER_PROVIDER3 = new NoopLoggerProvider3();
+
+  // node_modules/@opentelemetry/api-logs/build/esm/ProxyLogger.js
+  var ProxyLogger3 = class {
+    constructor(_provider, name, version, options) {
+      this._provider = _provider;
+      this.name = name;
+      this.version = version;
+      this.options = options;
+    }
+    /**
+     * Emit a log record. This method should only be used by log appenders.
+     *
+     * @param logRecord
+     */
+    emit(logRecord) {
+      this._getLogger().emit(logRecord);
+    }
+    /**
+     * Try to get a logger from the proxy logger provider.
+     * If the proxy logger provider has no delegate, return a noop logger.
+     */
+    _getLogger() {
+      if (this._delegate) {
+        return this._delegate;
+      }
+      const logger3 = this._provider._getDelegateLogger(this.name, this.version, this.options);
+      if (!logger3) {
+        return NOOP_LOGGER3;
+      }
+      this._delegate = logger3;
+      return this._delegate;
+    }
+  };
+
+  // node_modules/@opentelemetry/api-logs/build/esm/ProxyLoggerProvider.js
+  var ProxyLoggerProvider3 = class {
+    getLogger(name, version, options) {
+      var _a;
+      return (_a = this._getDelegateLogger(name, version, options)) !== null && _a !== void 0 ? _a : new ProxyLogger3(this, name, version, options);
+    }
+    /**
+     * Get the delegate logger provider.
+     * Used by tests only.
+     * @internal
+     */
+    _getDelegate() {
+      var _a;
+      return (_a = this._delegate) !== null && _a !== void 0 ? _a : NOOP_LOGGER_PROVIDER3;
+    }
+    /**
+     * Set the delegate logger provider
+     * @internal
+     */
+    _setDelegate(delegate) {
+      this._delegate = delegate;
+    }
+    /**
+     * @internal
+     */
+    _getDelegateLogger(name, version, options) {
+      var _a;
+      return (_a = this._delegate) === null || _a === void 0 ? void 0 : _a.getLogger(name, version, options);
+    }
+  };
+
+  // node_modules/@opentelemetry/api-logs/build/esm/platform/browser/globalThis.js
+  var _globalThis6 = typeof globalThis === "object" ? globalThis : typeof self === "object" ? self : typeof window === "object" ? window : typeof global === "object" ? global : {};
+
+  // node_modules/@opentelemetry/api-logs/build/esm/internal/global-utils.js
+  var GLOBAL_LOGS_API_KEY3 = Symbol.for("io.opentelemetry.js.api.logs");
+  var _global4 = _globalThis6;
+  function makeGetter3(requiredVersion, instance, fallback) {
+    return (version) => version === requiredVersion ? instance : fallback;
+  }
+  var API_BACKWARDS_COMPATIBILITY_VERSION3 = 1;
+
+  // node_modules/@opentelemetry/api-logs/build/esm/api/logs.js
+  var LogsAPI3 = class _LogsAPI {
+    constructor() {
+      this._proxyLoggerProvider = new ProxyLoggerProvider3();
+    }
+    static getInstance() {
+      if (!this._instance) {
+        this._instance = new _LogsAPI();
+      }
+      return this._instance;
+    }
+    setGlobalLoggerProvider(provider) {
+      if (_global4[GLOBAL_LOGS_API_KEY3]) {
+        return this.getLoggerProvider();
+      }
+      _global4[GLOBAL_LOGS_API_KEY3] = makeGetter3(API_BACKWARDS_COMPATIBILITY_VERSION3, provider, NOOP_LOGGER_PROVIDER3);
+      this._proxyLoggerProvider._setDelegate(provider);
+      return provider;
+    }
+    /**
+     * Returns the global logger provider.
+     *
+     * @returns LoggerProvider
+     */
+    getLoggerProvider() {
+      var _a, _b;
+      return (_b = (_a = _global4[GLOBAL_LOGS_API_KEY3]) === null || _a === void 0 ? void 0 : _a.call(_global4, API_BACKWARDS_COMPATIBILITY_VERSION3)) !== null && _b !== void 0 ? _b : this._proxyLoggerProvider;
+    }
+    /**
+     * Returns a logger from the global logger provider.
+     *
+     * @returns Logger
+     */
+    getLogger(name, version, options) {
+      return this.getLoggerProvider().getLogger(name, version, options);
+    }
+    /** Remove the global logger provider */
+    disable() {
+      delete _global4[GLOBAL_LOGS_API_KEY3];
+      this._proxyLoggerProvider = new ProxyLoggerProvider3();
+    }
+  };
+
+  // node_modules/@opentelemetry/api-logs/build/esm/index.js
+  var logs3 = LogsAPI3.getInstance();
+
+  // node_modules/@opentelemetry/instrumentation/build/esm/shimmer.js
+  var logger2 = console.error.bind(console);
+  function defineProperty2(obj, name, value) {
+    const enumerable = !!obj[name] && Object.prototype.propertyIsEnumerable.call(obj, name);
+    Object.defineProperty(obj, name, {
+      configurable: true,
+      enumerable,
+      writable: true,
+      value
+    });
+  }
+  var wrap3 = (nodule, name, wrapper) => {
+    if (!nodule || !nodule[name]) {
+      logger2("no original function " + String(name) + " to wrap");
+      return;
+    }
+    if (!wrapper) {
+      logger2("no wrapper function");
+      logger2(new Error().stack);
+      return;
+    }
+    const original = nodule[name];
+    if (typeof original !== "function" || typeof wrapper !== "function") {
+      logger2("original object and wrapper must be functions");
+      return;
+    }
+    const wrapped = wrapper(original, name);
+    defineProperty2(wrapped, "__original", original);
+    defineProperty2(wrapped, "__unwrap", () => {
+      if (nodule[name] === wrapped) {
+        defineProperty2(nodule, name, original);
+      }
+    });
+    defineProperty2(wrapped, "__wrapped", true);
+    defineProperty2(nodule, name, wrapped);
+    return wrapped;
+  };
+  var massWrap3 = (nodules, names, wrapper) => {
+    if (!nodules) {
+      logger2("must provide one or more modules to patch");
+      logger2(new Error().stack);
+      return;
+    } else if (!Array.isArray(nodules)) {
+      nodules = [nodules];
+    }
+    if (!(names && Array.isArray(names))) {
+      logger2("must provide one or more functions to wrap on modules");
+      return;
+    }
+    nodules.forEach((nodule) => {
+      names.forEach((name) => {
+        wrap3(nodule, name, wrapper);
+      });
+    });
+  };
+  var unwrap3 = (nodule, name) => {
+    if (!nodule || !nodule[name]) {
+      logger2("no function to unwrap.");
+      logger2(new Error().stack);
+      return;
+    }
+    const wrapped = nodule[name];
+    if (!wrapped.__unwrap) {
+      logger2("no original to unwrap to -- has " + String(name) + " already been unwrapped?");
+    } else {
+      wrapped.__unwrap();
+      return;
+    }
+  };
+  var massUnwrap3 = (nodules, names) => {
+    if (!nodules) {
+      logger2("must provide one or more modules to patch");
+      logger2(new Error().stack);
+      return;
+    } else if (!Array.isArray(nodules)) {
+      nodules = [nodules];
+    }
+    if (!(names && Array.isArray(names))) {
+      logger2("must provide one or more functions to unwrap on modules");
+      return;
+    }
+    nodules.forEach((nodule) => {
+      names.forEach((name) => {
+        unwrap3(nodule, name);
+      });
+    });
+  };
+  function shimmer3(options) {
+    if (options && options.logger) {
+      if (typeof options.logger !== "function") {
+        logger2("new logger isn't a function, not replacing");
+      } else {
+        logger2 = options.logger;
+      }
+    }
+  }
+  shimmer3.wrap = wrap3;
+  shimmer3.massWrap = massWrap3;
+  shimmer3.unwrap = unwrap3;
+  shimmer3.massUnwrap = massUnwrap3;
+
+  // node_modules/@opentelemetry/instrumentation/build/esm/instrumentation.js
+  var InstrumentationAbstract3 = class {
+    instrumentationName;
+    instrumentationVersion;
+    _config = {};
+    _tracer;
+    _meter;
+    _logger;
+    _diag;
+    constructor(instrumentationName, instrumentationVersion, config) {
+      this.instrumentationName = instrumentationName;
+      this.instrumentationVersion = instrumentationVersion;
+      this.setConfig(config);
+      this._diag = diag2.createComponentLogger({
+        namespace: instrumentationName
+      });
+      this._tracer = trace.getTracer(instrumentationName, instrumentationVersion);
+      this._meter = metrics.getMeter(instrumentationName, instrumentationVersion);
+      this._logger = logs3.getLogger(instrumentationName, instrumentationVersion);
+      this._updateMetricInstruments();
+    }
+    /* Api to wrap instrumented method */
+    _wrap = wrap3;
+    /* Api to unwrap instrumented methods */
+    _unwrap = unwrap3;
+    /* Api to mass wrap instrumented method */
+    _massWrap = massWrap3;
+    /* Api to mass unwrap instrumented methods */
+    _massUnwrap = massUnwrap3;
+    /* Returns meter */
+    get meter() {
+      return this._meter;
+    }
+    /**
+     * Sets MeterProvider to this plugin
+     * @param meterProvider
+     */
+    setMeterProvider(meterProvider) {
+      this._meter = meterProvider.getMeter(this.instrumentationName, this.instrumentationVersion);
+      this._updateMetricInstruments();
+    }
+    /* Returns logger */
+    get logger() {
+      return this._logger;
+    }
+    /**
+     * Sets LoggerProvider to this plugin
+     * @param loggerProvider
+     */
+    setLoggerProvider(loggerProvider) {
+      this._logger = loggerProvider.getLogger(this.instrumentationName, this.instrumentationVersion);
+    }
+    /**
+     * @experimental
+     *
+     * Get module definitions defined by {@link init}.
+     * This can be used for experimental compile-time instrumentation.
+     *
+     * @returns an array of {@link InstrumentationModuleDefinition}
+     */
+    getModuleDefinitions() {
+      const initResult = this.init() ?? [];
+      if (!Array.isArray(initResult)) {
+        return [initResult];
+      }
+      return initResult;
+    }
+    /**
+     * Sets the new metric instruments with the current Meter.
+     */
+    _updateMetricInstruments() {
+      return;
+    }
+    /* Returns InstrumentationConfig */
+    getConfig() {
+      return this._config;
+    }
+    /**
+     * Sets InstrumentationConfig to this plugin
+     * @param config
+     */
+    setConfig(config) {
+      this._config = {
+        enabled: true,
+        ...config
+      };
+    }
+    /**
+     * Sets TraceProvider to this plugin
+     * @param tracerProvider
+     */
+    setTracerProvider(tracerProvider) {
+      this._tracer = tracerProvider.getTracer(this.instrumentationName, this.instrumentationVersion);
+    }
+    /* Returns tracer */
+    get tracer() {
+      return this._tracer;
+    }
+    /**
+     * Execute span customization hook, if configured, and log any errors.
+     * Any semantics of the trigger and info are defined by the specific instrumentation.
+     * @param hookHandler The optional hook handler which the user has configured via instrumentation config
+     * @param triggerName The name of the trigger for executing the hook for logging purposes
+     * @param span The span to which the hook should be applied
+     * @param info The info object to be passed to the hook, with useful data the hook may use
+     */
+    _runSpanCustomizationHook(hookHandler, triggerName, span, info) {
+      if (!hookHandler) {
+        return;
+      }
+      try {
+        hookHandler(span, info);
+      } catch (e2) {
+        this._diag.error(`Error running span customization hook due to exception in handler`, { triggerName }, e2);
+      }
+    }
+  };
+
+  // node_modules/@opentelemetry/instrumentation/build/esm/platform/browser/instrumentation.js
+  var InstrumentationBase2 = class extends InstrumentationAbstract3 {
+    constructor(instrumentationName, instrumentationVersion, config) {
+      super(instrumentationName, instrumentationVersion, config);
+      if (this._config.enabled) {
+        this.enable();
+      }
+    }
+  };
+
+  // node_modules/@opentelemetry/instrumentation/build/esm/utils.js
+  function safeExecuteInTheMiddle(execute, onFinish, preventThrowingError) {
+    let error;
+    let result;
+    try {
+      result = execute();
+    } catch (e2) {
+      error = e2;
+    } finally {
+      onFinish(error, result);
+      if (error && !preventThrowingError) {
+        throw error;
+      }
+      return result;
+    }
+  }
+  function isWrapped(func) {
+    return typeof func === "function" && typeof func.__original === "function" && typeof func.__unwrap === "function" && func.__wrapped === true;
+  }
+
+  // node_modules/@opentelemetry/instrumentation/build/esm/semconvStability.js
+  var SemconvStability;
+  (function(SemconvStability2) {
+    SemconvStability2[SemconvStability2["STABLE"] = 1] = "STABLE";
+    SemconvStability2[SemconvStability2["OLD"] = 2] = "OLD";
+    SemconvStability2[SemconvStability2["DUPLICATE"] = 3] = "DUPLICATE";
+  })(SemconvStability || (SemconvStability = {}));
+  function semconvStabilityFromStr(namespace, str) {
+    let semconvStability = SemconvStability.OLD;
+    const entries = str?.split(",").map((v2) => v2.trim()).filter((s2) => s2 !== "");
+    for (const entry of entries ?? []) {
+      if (entry.toLowerCase() === namespace + "/dup") {
+        semconvStability = SemconvStability.DUPLICATE;
+        break;
+      } else if (entry.toLowerCase() === namespace) {
+        semconvStability = SemconvStability.STABLE;
+      }
+    }
+    return semconvStability;
+  }
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/enums/AttributeNames.js
   var AttributeNames;
@@ -10131,19 +13160,8 @@
   })(AttributeNames || (AttributeNames = {}));
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/version.js
-  var PACKAGE_VERSION = "0.44.0";
+  var PACKAGE_VERSION = "0.50.0";
   var PACKAGE_NAME = "@opentelemetry/instrumentation-document-load";
-
-  // node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_HTTP_URL = "http.url";
-  var TMP_HTTP_USER_AGENT = "http.user_agent";
-  var SEMATTRS_HTTP_URL = TMP_HTTP_URL;
-  var SEMATTRS_HTTP_USER_AGENT = TMP_HTTP_USER_AGENT;
-
-  // node_modules/@opentelemetry/semantic-conventions/build/esm/stable_attributes.js
-  var ATTR_EXCEPTION_MESSAGE2 = "exception.message";
-  var ATTR_EXCEPTION_STACKTRACE2 = "exception.stacktrace";
-  var ATTR_EXCEPTION_TYPE2 = "exception.type";
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/enums/EventNames.js
   var EventNames;
@@ -10153,28 +13171,27 @@
   })(EventNames || (EventNames = {}));
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/utils.js
-  var getPerformanceNavigationEntries = function() {
-    var _a3, _b;
-    var entries = {};
-    var performanceNavigationTiming = (_b = (_a3 = otperformance).getEntriesByType) === null || _b === void 0 ? void 0 : _b.call(_a3, "navigation")[0];
+  var getPerformanceNavigationEntries = () => {
+    const entries = {};
+    const performanceNavigationTiming = otperformance.getEntriesByType?.("navigation")[0];
     if (performanceNavigationTiming) {
-      var keys = Object.values(PerformanceTimingNames);
-      keys.forEach(function(key) {
+      const keys = Object.values(PerformanceTimingNames);
+      keys.forEach((key) => {
         if (hasKey(performanceNavigationTiming, key)) {
-          var value = performanceNavigationTiming[key];
+          const value = performanceNavigationTiming[key];
           if (typeof value === "number") {
             entries[key] = value;
           }
         }
       });
     } else {
-      var perf = otperformance;
-      var performanceTiming_1 = perf.timing;
-      if (performanceTiming_1) {
-        var keys = Object.values(PerformanceTimingNames);
-        keys.forEach(function(key) {
-          if (hasKey(performanceTiming_1, key)) {
-            var value = performanceTiming_1[key];
+      const perf = otperformance;
+      const performanceTiming = perf.timing;
+      if (performanceTiming) {
+        const keys = Object.values(PerformanceTimingNames);
+        keys.forEach((key) => {
+          if (hasKey(performanceTiming, key)) {
+            const value = performanceTiming[key];
             if (typeof value === "number") {
               entries[key] = value;
             }
@@ -10188,12 +13205,10 @@
     "first-paint": EventNames.FIRST_PAINT,
     "first-contentful-paint": EventNames.FIRST_CONTENTFUL_PAINT
   };
-  var addSpanPerformancePaintEvents = function(span) {
-    var _a3, _b;
-    var performancePaintTiming = (_b = (_a3 = otperformance).getEntriesByType) === null || _b === void 0 ? void 0 : _b.call(_a3, "paint");
+  var addSpanPerformancePaintEvents = (span) => {
+    const performancePaintTiming = otperformance.getEntriesByType?.("paint");
     if (performancePaintTiming) {
-      performancePaintTiming.forEach(function(_a4) {
-        var name = _a4.name, startTime = _a4.startTime;
+      performancePaintTiming.forEach(({ name, startTime }) => {
         if (hasKey(performancePaintNames, name)) {
           span.addEvent(performancePaintNames[name], startTime);
         }
@@ -10202,357 +13217,216 @@
   };
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/instrumentation.js
-  var __extends7 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var DocumentLoadInstrumentation = (
-    /** @class */
-    function(_super) {
-      __extends7(DocumentLoadInstrumentation2, _super);
-      function DocumentLoadInstrumentation2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        var _this = _super.call(this, PACKAGE_NAME, PACKAGE_VERSION, config) || this;
-        _this.component = "document-load";
-        _this.version = "1";
-        _this.moduleName = _this.component;
-        return _this;
-      }
-      DocumentLoadInstrumentation2.prototype.init = function() {
-      };
-      DocumentLoadInstrumentation2.prototype._onDocumentLoaded = function() {
-        var _this = this;
-        window.setTimeout(function() {
-          _this._collectPerformance();
+  var DocumentLoadInstrumentation = class extends InstrumentationBase2 {
+    component = "document-load";
+    version = "1";
+    moduleName = this.component;
+    constructor(config = {}) {
+      super(PACKAGE_NAME, PACKAGE_VERSION, config);
+    }
+    init() {
+    }
+    /**
+     * callback to be executed when page is loaded
+     */
+    _onDocumentLoaded() {
+      window.setTimeout(() => {
+        this._collectPerformance();
+      });
+    }
+    /**
+     * Adds spans for all resources
+     * @param rootSpan
+     */
+    _addResourcesSpans(rootSpan) {
+      const resources = otperformance.getEntriesByType?.("resource");
+      if (resources) {
+        resources.forEach((resource) => {
+          this._initResourceSpan(resource, rootSpan);
         });
-      };
-      DocumentLoadInstrumentation2.prototype._addResourcesSpans = function(rootSpan) {
-        var _this = this;
-        var _a3, _b;
-        var resources = (_b = (_a3 = otperformance).getEntriesByType) === null || _b === void 0 ? void 0 : _b.call(_a3, "resource");
-        if (resources) {
-          resources.forEach(function(resource) {
-            _this._initResourceSpan(resource, rootSpan);
-          });
+      }
+    }
+    /**
+     * Collects information about performance and creates appropriate spans
+     */
+    _collectPerformance() {
+      const metaElement = Array.from(document.getElementsByTagName("meta")).find((e2) => e2.getAttribute("name") === TRACE_PARENT_HEADER);
+      const entries = getPerformanceNavigationEntries();
+      const traceparent = metaElement && metaElement.content || "";
+      context.with(propagation.extract(ROOT_CONTEXT, { traceparent }), () => {
+        const rootSpan = this._startSpan(AttributeNames.DOCUMENT_LOAD, PerformanceTimingNames.FETCH_START, entries);
+        if (!rootSpan) {
+          return;
         }
-      };
-      DocumentLoadInstrumentation2.prototype._collectPerformance = function() {
-        var _this = this;
-        var metaElement = Array.from(document.getElementsByTagName("meta")).find(function(e2) {
-          return e2.getAttribute("name") === TRACE_PARENT_HEADER;
+        context.with(trace.setSpan(context.active(), rootSpan), () => {
+          const fetchSpan = this._startSpan(AttributeNames.DOCUMENT_FETCH, PerformanceTimingNames.FETCH_START, entries);
+          if (fetchSpan) {
+            fetchSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
+            context.with(trace.setSpan(context.active(), fetchSpan), () => {
+              addSpanNetworkEvents(fetchSpan, entries, this.getConfig().ignoreNetworkEvents);
+              this._addCustomAttributesOnSpan(fetchSpan, this.getConfig().applyCustomAttributesOnSpan?.documentFetch);
+              this._endSpan(fetchSpan, PerformanceTimingNames.RESPONSE_END, entries);
+            });
+          }
         });
-        var entries = getPerformanceNavigationEntries();
-        var traceparent = metaElement && metaElement.content || "";
-        context.with(propagation.extract(ROOT_CONTEXT, { traceparent }), function() {
-          var _a3;
-          var rootSpan = _this._startSpan(AttributeNames.DOCUMENT_LOAD, PerformanceTimingNames.FETCH_START, entries);
-          if (!rootSpan) {
+        rootSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
+        rootSpan.setAttribute(SEMATTRS_HTTP_USER_AGENT, navigator.userAgent);
+        this._addResourcesSpans(rootSpan);
+        if (!this.getConfig().ignoreNetworkEvents) {
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.FETCH_START, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.UNLOAD_EVENT_START, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.UNLOAD_EVENT_END, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_INTERACTIVE, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_CONTENT_LOADED_EVENT_START, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_CONTENT_LOADED_EVENT_END, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_COMPLETE, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.LOAD_EVENT_START, entries);
+          addSpanNetworkEvent(rootSpan, PerformanceTimingNames.LOAD_EVENT_END, entries);
+        }
+        if (!this.getConfig().ignorePerformancePaintEvents) {
+          addSpanPerformancePaintEvents(rootSpan);
+        }
+        this._addCustomAttributesOnSpan(rootSpan, this.getConfig().applyCustomAttributesOnSpan?.documentLoad);
+        this._endSpan(rootSpan, PerformanceTimingNames.LOAD_EVENT_END, entries);
+      });
+    }
+    /**
+     * Helper function for ending span
+     * @param span
+     * @param performanceName name of performance entry for time end
+     * @param entries
+     */
+    _endSpan(span, performanceName, entries) {
+      if (span) {
+        if (hasKey(entries, performanceName)) {
+          span.end(entries[performanceName]);
+        } else {
+          span.end();
+        }
+      }
+    }
+    /**
+     * Creates and ends a span with network information about resource added as timed events
+     * @param resource
+     * @param parentSpan
+     */
+    _initResourceSpan(resource, parentSpan) {
+      const span = this._startSpan(AttributeNames.RESOURCE_FETCH, PerformanceTimingNames.FETCH_START, resource, parentSpan);
+      if (span) {
+        span.setAttribute(SEMATTRS_HTTP_URL, resource.name);
+        addSpanNetworkEvents(span, resource, this.getConfig().ignoreNetworkEvents);
+        this._addCustomAttributesOnResourceSpan(span, resource, this.getConfig().applyCustomAttributesOnSpan?.resourceFetch);
+        this._endSpan(span, PerformanceTimingNames.RESPONSE_END, resource);
+      }
+    }
+    /**
+     * Helper function for starting a span
+     * @param spanName name of span
+     * @param performanceName name of performance entry for time start
+     * @param entries
+     * @param parentSpan
+     */
+    _startSpan(spanName, performanceName, entries, parentSpan) {
+      if (hasKey(entries, performanceName) && typeof entries[performanceName] === "number") {
+        const span = this.tracer.startSpan(spanName, {
+          startTime: entries[performanceName]
+        }, parentSpan ? trace.setSpan(context.active(), parentSpan) : void 0);
+        return span;
+      }
+      return void 0;
+    }
+    /**
+     * executes callback {_onDocumentLoaded} when the page is loaded
+     */
+    _waitForPageLoad() {
+      if (window.document.readyState === "complete") {
+        this._onDocumentLoaded();
+      } else {
+        this._onDocumentLoaded = this._onDocumentLoaded.bind(this);
+        window.addEventListener("load", this._onDocumentLoaded);
+      }
+    }
+    /**
+     * adds custom attributes to root span if configured
+     */
+    _addCustomAttributesOnSpan(span, applyCustomAttributesOnSpan) {
+      if (applyCustomAttributesOnSpan) {
+        safeExecuteInTheMiddle(() => applyCustomAttributesOnSpan(span), (error) => {
+          if (!error) {
             return;
           }
-          context.with(trace.setSpan(context.active(), rootSpan), function() {
-            var fetchSpan = _this._startSpan(AttributeNames.DOCUMENT_FETCH, PerformanceTimingNames.FETCH_START, entries);
-            if (fetchSpan) {
-              fetchSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
-              context.with(trace.setSpan(context.active(), fetchSpan), function() {
-                var _a4;
-                if (!_this.getConfig().ignoreNetworkEvents) {
-                  addSpanNetworkEvents(fetchSpan, entries);
-                }
-                _this._addCustomAttributesOnSpan(fetchSpan, (_a4 = _this.getConfig().applyCustomAttributesOnSpan) === null || _a4 === void 0 ? void 0 : _a4.documentFetch);
-                _this._endSpan(fetchSpan, PerformanceTimingNames.RESPONSE_END, entries);
-              });
-            }
-          });
-          rootSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
-          rootSpan.setAttribute(SEMATTRS_HTTP_USER_AGENT, navigator.userAgent);
-          _this._addResourcesSpans(rootSpan);
-          if (!_this.getConfig().ignoreNetworkEvents) {
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.FETCH_START, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.UNLOAD_EVENT_START, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.UNLOAD_EVENT_END, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_INTERACTIVE, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_CONTENT_LOADED_EVENT_START, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_CONTENT_LOADED_EVENT_END, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.DOM_COMPLETE, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.LOAD_EVENT_START, entries);
-            addSpanNetworkEvent(rootSpan, PerformanceTimingNames.LOAD_EVENT_END, entries);
+          this._diag.error("addCustomAttributesOnSpan", error);
+        }, true);
+      }
+    }
+    /**
+     * adds custom attributes to span if configured
+     */
+    _addCustomAttributesOnResourceSpan(span, resource, applyCustomAttributesOnSpan) {
+      if (applyCustomAttributesOnSpan) {
+        safeExecuteInTheMiddle(() => applyCustomAttributesOnSpan(span, resource), (error) => {
+          if (!error) {
+            return;
           }
-          if (!_this.getConfig().ignorePerformancePaintEvents) {
-            addSpanPerformancePaintEvents(rootSpan);
-          }
-          _this._addCustomAttributesOnSpan(rootSpan, (_a3 = _this.getConfig().applyCustomAttributesOnSpan) === null || _a3 === void 0 ? void 0 : _a3.documentLoad);
-          _this._endSpan(rootSpan, PerformanceTimingNames.LOAD_EVENT_END, entries);
-        });
-      };
-      DocumentLoadInstrumentation2.prototype._endSpan = function(span, performanceName, entries) {
-        if (span) {
-          if (hasKey(entries, performanceName)) {
-            span.end(entries[performanceName]);
-          } else {
-            span.end();
-          }
-        }
-      };
-      DocumentLoadInstrumentation2.prototype._initResourceSpan = function(resource, parentSpan) {
-        var _a3;
-        var span = this._startSpan(AttributeNames.RESOURCE_FETCH, PerformanceTimingNames.FETCH_START, resource, parentSpan);
-        if (span) {
-          span.setAttribute(SEMATTRS_HTTP_URL, resource.name);
-          if (!this.getConfig().ignoreNetworkEvents) {
-            addSpanNetworkEvents(span, resource);
-          }
-          this._addCustomAttributesOnResourceSpan(span, resource, (_a3 = this.getConfig().applyCustomAttributesOnSpan) === null || _a3 === void 0 ? void 0 : _a3.resourceFetch);
-          this._endSpan(span, PerformanceTimingNames.RESPONSE_END, resource);
-        }
-      };
-      DocumentLoadInstrumentation2.prototype._startSpan = function(spanName, performanceName, entries, parentSpan) {
-        if (hasKey(entries, performanceName) && typeof entries[performanceName] === "number") {
-          var span = this.tracer.startSpan(spanName, {
-            startTime: entries[performanceName]
-          }, parentSpan ? trace.setSpan(context.active(), parentSpan) : void 0);
-          return span;
-        }
-        return void 0;
-      };
-      DocumentLoadInstrumentation2.prototype._waitForPageLoad = function() {
-        if (window.document.readyState === "complete") {
-          this._onDocumentLoaded();
-        } else {
-          this._onDocumentLoaded = this._onDocumentLoaded.bind(this);
-          window.addEventListener("load", this._onDocumentLoaded);
-        }
-      };
-      DocumentLoadInstrumentation2.prototype._addCustomAttributesOnSpan = function(span, applyCustomAttributesOnSpan) {
-        var _this = this;
-        if (applyCustomAttributesOnSpan) {
-          safeExecuteInTheMiddle(function() {
-            return applyCustomAttributesOnSpan(span);
-          }, function(error) {
-            if (!error) {
-              return;
-            }
-            _this._diag.error("addCustomAttributesOnSpan", error);
-          }, true);
-        }
-      };
-      DocumentLoadInstrumentation2.prototype._addCustomAttributesOnResourceSpan = function(span, resource, applyCustomAttributesOnSpan) {
-        var _this = this;
-        if (applyCustomAttributesOnSpan) {
-          safeExecuteInTheMiddle(function() {
-            return applyCustomAttributesOnSpan(span, resource);
-          }, function(error) {
-            if (!error) {
-              return;
-            }
-            _this._diag.error("addCustomAttributesOnResourceSpan", error);
-          }, true);
-        }
-      };
-      DocumentLoadInstrumentation2.prototype.enable = function() {
-        window.removeEventListener("load", this._onDocumentLoaded);
-        this._waitForPageLoad();
-      };
-      DocumentLoadInstrumentation2.prototype.disable = function() {
-        window.removeEventListener("load", this._onDocumentLoaded);
-      };
-      return DocumentLoadInstrumentation2;
-    }(InstrumentationBase)
-  );
+          this._diag.error("addCustomAttributesOnResourceSpan", error);
+        }, true);
+      }
+    }
+    /**
+     * implements enable function
+     */
+    enable() {
+      window.removeEventListener("load", this._onDocumentLoaded);
+      this._waitForPageLoad();
+    }
+    /**
+     * implements disable function
+     */
+    disable() {
+      window.removeEventListener("load", this._onDocumentLoaded);
+    }
+  };
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/enums/AttributeNames.js
   var AttributeNames2;
   (function(AttributeNames5) {
     AttributeNames5["COMPONENT"] = "component";
-    AttributeNames5["HTTP_ERROR_NAME"] = "http.error_name";
     AttributeNames5["HTTP_STATUS_TEXT"] = "http.status_text";
   })(AttributeNames2 || (AttributeNames2 = {}));
 
-  // node_modules/@opentelemetry/instrumentation-fetch/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_HTTP_METHOD = "http.method";
-  var TMP_HTTP_URL2 = "http.url";
-  var TMP_HTTP_HOST = "http.host";
-  var TMP_HTTP_SCHEME = "http.scheme";
-  var TMP_HTTP_STATUS_CODE = "http.status_code";
-  var TMP_HTTP_USER_AGENT2 = "http.user_agent";
-  var TMP_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED = "http.request_content_length_uncompressed";
-  var SEMATTRS_HTTP_METHOD = TMP_HTTP_METHOD;
-  var SEMATTRS_HTTP_URL2 = TMP_HTTP_URL2;
-  var SEMATTRS_HTTP_HOST = TMP_HTTP_HOST;
-  var SEMATTRS_HTTP_SCHEME = TMP_HTTP_SCHEME;
-  var SEMATTRS_HTTP_STATUS_CODE = TMP_HTTP_STATUS_CODE;
-  var SEMATTRS_HTTP_USER_AGENT2 = TMP_HTTP_USER_AGENT2;
-  var SEMATTRS_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED = TMP_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED;
+  // node_modules/@opentelemetry/instrumentation-fetch/build/esm/semconv.js
+  var ATTR_HTTP_HOST = "http.host";
+  var ATTR_HTTP_METHOD = "http.method";
+  var ATTR_HTTP_REQUEST_BODY_SIZE = "http.request.body.size";
+  var ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED = "http.request_content_length_uncompressed";
+  var ATTR_HTTP_SCHEME = "http.scheme";
+  var ATTR_HTTP_STATUS_CODE = "http.status_code";
+  var ATTR_HTTP_URL = "http.url";
+  var ATTR_HTTP_USER_AGENT = "http.user_agent";
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/utils.js
-  var __awaiter7 = function(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-  var __generator7 = function(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t3[0] & 1) throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f2, y2, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n2) {
-      return function(v2) {
-        return step([n2, v2]);
-      };
-    }
-    function step(op) {
-      if (f2) throw new TypeError("Generator is already executing.");
-      while (_2) try {
-        if (f2 = 1, y2 && (t3 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t3 = y2["return"]) && t3.call(y2), 0) : y2.next) && !(t3 = t3.call(y2, op[1])).done) return t3;
-        if (y2 = 0, t3) op = [op[0] & 2, t3.value];
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t3 = op;
-            break;
-          case 4:
-            _2.label++;
-            return { value: op[1], done: false };
-          case 5:
-            _2.label++;
-            y2 = op[1];
-            op = [0];
-            continue;
-          case 7:
-            op = _2.ops.pop();
-            _2.trys.pop();
-            continue;
-          default:
-            if (!(t3 = _2.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _2 = 0;
-              continue;
-            }
-            if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-              _2.label = op[1];
-              break;
-            }
-            if (op[0] === 6 && _2.label < t3[1]) {
-              _2.label = t3[1];
-              t3 = op;
-              break;
-            }
-            if (t3 && _2.label < t3[2]) {
-              _2.label = t3[2];
-              _2.ops.push(op);
-              break;
-            }
-            if (t3[2]) _2.ops.pop();
-            _2.trys.pop();
-            continue;
-        }
-        op = body.call(thisArg, _2);
-      } catch (e2) {
-        op = [6, e2];
-        y2 = 0;
-      } finally {
-        f2 = t3 = 0;
-      }
-      if (op[0] & 5) throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  };
-  var __values8 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var __read17 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
   var DIAG_LOGGER = diag2.createComponentLogger({
     namespace: "@opentelemetry/opentelemetry-instrumentation-fetch/utils"
   });
-  function getFetchBodyLength() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-      args[_i] = arguments[_i];
-    }
+  function getFetchBodyLength(...args) {
     if (args[0] instanceof URL || typeof args[0] === "string") {
-      var requestInit = args[1];
-      if (!(requestInit === null || requestInit === void 0 ? void 0 : requestInit.body)) {
+      const requestInit = args[1];
+      if (!requestInit?.body) {
         return Promise.resolve();
       }
       if (requestInit.body instanceof ReadableStream) {
-        var _a3 = _getBodyNonDestructively(requestInit.body), body = _a3.body, length_1 = _a3.length;
+        const { body, length } = _getBodyNonDestructively(requestInit.body);
         requestInit.body = body;
-        return length_1;
+        return length;
       } else {
         return Promise.resolve(getXHRBodyLength(requestInit.body));
       }
     } else {
-      var info = args[0];
-      if (!(info === null || info === void 0 ? void 0 : info.body)) {
+      const info = args[0];
+      if (!info?.body) {
         return Promise.resolve();
       }
-      return info.clone().text().then(function(t3) {
-        return getByteLength(t3);
-      });
+      return info.clone().text().then((t2) => getByteLength(t2));
     }
   }
   function _getBodyNonDestructively(body) {
@@ -10563,34 +13437,20 @@
         length: Promise.resolve(void 0)
       };
     }
-    var length = 0;
-    var resolveLength;
-    var lengthPromise = new Promise(function(resolve) {
+    let length = 0;
+    let resolveLength;
+    const lengthPromise = new Promise((resolve) => {
       resolveLength = resolve;
     });
-    var transform = new TransformStream({
-      start: function() {
+    const transform = new TransformStream({
+      start() {
       },
-      transform: function(chunk, controller) {
-        return __awaiter7(this, void 0, void 0, function() {
-          var bytearray;
-          return __generator7(this, function(_a3) {
-            switch (_a3.label) {
-              case 0:
-                return [4, chunk];
-              case 1:
-                bytearray = _a3.sent();
-                length += bytearray.byteLength;
-                controller.enqueue(chunk);
-                return [
-                  2
-                  /*return*/
-                ];
-            }
-          });
-        });
+      async transform(chunk, controller) {
+        const bytearray = await chunk;
+        length += bytearray.byteLength;
+        controller.enqueue(chunk);
       },
-      flush: function() {
+      flush() {
         resolveLength(length);
       }
     });
@@ -10599,15 +13459,18 @@
       length: lengthPromise
     };
   }
+  function isDocument(value) {
+    return typeof Document !== "undefined" && value instanceof Document;
+  }
   function getXHRBodyLength(body) {
-    if (typeof Document !== "undefined" && body instanceof Document) {
+    if (isDocument(body)) {
       return new XMLSerializer().serializeToString(document).length;
+    }
+    if (typeof body === "string") {
+      return getByteLength(body);
     }
     if (body instanceof Blob) {
       return body.size;
-    }
-    if (body.byteLength !== void 0) {
-      return body.byteLength;
     }
     if (body instanceof FormData) {
       return getFormDataSize(body);
@@ -10615,8 +13478,8 @@
     if (body instanceof URLSearchParams) {
       return getByteLength(body.toString());
     }
-    if (typeof body === "string") {
-      return getByteLength(body);
+    if (body.byteLength !== void 0) {
+      return body.byteLength;
     }
     DIAG_LOGGER.warn("unknown body type");
     return void 0;
@@ -10626,355 +13489,427 @@
     return TEXT_ENCODER.encode(s2).byteLength;
   }
   function getFormDataSize(formData) {
-    var e_1, _a3;
-    var size = 0;
-    try {
-      for (var _b = __values8(formData.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var _d = __read17(_c.value, 2), key = _d[0], value = _d[1];
-        size += key.length;
-        if (value instanceof Blob) {
-          size += value.size;
-        } else {
-          size += value.length;
-        }
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-      } finally {
-        if (e_1) throw e_1.error;
+    let size = 0;
+    for (const [key, value] of formData.entries()) {
+      size += key.length;
+      if (value instanceof Blob) {
+        size += value.size;
+      } else {
+        size += value.length;
       }
     }
     return size;
   }
+  function normalizeHttpRequestMethod(method) {
+    const knownMethods3 = getKnownMethods();
+    const methUpper = method.toUpperCase();
+    if (methUpper in knownMethods3) {
+      return methUpper;
+    } else {
+      return "_OTHER";
+    }
+  }
+  var DEFAULT_KNOWN_METHODS = {
+    CONNECT: true,
+    DELETE: true,
+    GET: true,
+    HEAD: true,
+    OPTIONS: true,
+    PATCH: true,
+    POST: true,
+    PUT: true,
+    TRACE: true
+  };
+  var knownMethods;
+  function getKnownMethods() {
+    if (knownMethods === void 0) {
+      const cfgMethods = getStringListFromEnv("OTEL_INSTRUMENTATION_HTTP_KNOWN_METHODS");
+      if (cfgMethods && cfgMethods.length > 0) {
+        knownMethods = {};
+        cfgMethods.forEach((m2) => {
+          knownMethods[m2] = true;
+        });
+      } else {
+        knownMethods = DEFAULT_KNOWN_METHODS;
+      }
+    }
+    return knownMethods;
+  }
+  var HTTP_PORT_FROM_PROTOCOL = {
+    "https:": "443",
+    "http:": "80"
+  };
+  function serverPortFromUrl(url) {
+    const serverPort = Number(url.port || HTTP_PORT_FROM_PROTOCOL[url.protocol]);
+    if (serverPort && !isNaN(serverPort)) {
+      return serverPort;
+    } else {
+      return void 0;
+    }
+  }
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/version.js
-  var VERSION5 = "0.57.2";
+  var VERSION5 = "0.205.0";
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/fetch.js
-  var __extends8 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
-  var __read18 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
-  var __spreadArray9 = function(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  };
-  var _a2;
   var OBSERVER_WAIT_TIME_MS = 300;
-  var isNode = typeof process === "object" && ((_a2 = process.release) === null || _a2 === void 0 ? void 0 : _a2.name) === "node";
-  var FetchInstrumentation = (
-    /** @class */
-    function(_super) {
-      __extends8(FetchInstrumentation2, _super);
-      function FetchInstrumentation2(config) {
-        if (config === void 0) {
-          config = {};
-        }
-        var _this = _super.call(this, "@opentelemetry/instrumentation-fetch", VERSION5, config) || this;
-        _this.component = "fetch";
-        _this.version = VERSION5;
-        _this.moduleName = _this.component;
-        _this._usedResources = /* @__PURE__ */ new WeakSet();
-        _this._tasksCount = 0;
-        return _this;
-      }
-      FetchInstrumentation2.prototype.init = function() {
-      };
-      FetchInstrumentation2.prototype._addChildSpan = function(span, corsPreFlightRequest) {
-        var childSpan = this.tracer.startSpan("CORS Preflight", {
-          startTime: corsPreFlightRequest[PerformanceTimingNames.FETCH_START]
-        }, trace.setSpan(context.active(), span));
-        addSpanNetworkEvents(childSpan, corsPreFlightRequest, this.getConfig().ignoreNetworkEvents);
-        childSpan.end(corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END]);
-      };
-      FetchInstrumentation2.prototype._addFinalSpanAttributes = function(span, response) {
-        var parsedUrl = parseUrl(response.url);
-        span.setAttribute(SEMATTRS_HTTP_STATUS_CODE, response.status);
+  var isNode = typeof process === "object" && process.release?.name === "node";
+  var FetchInstrumentation = class extends InstrumentationBase2 {
+    component = "fetch";
+    version = VERSION5;
+    moduleName = this.component;
+    _usedResources = /* @__PURE__ */ new WeakSet();
+    _tasksCount = 0;
+    _semconvStability;
+    constructor(config = {}) {
+      super("@opentelemetry/instrumentation-fetch", VERSION5, config);
+      this._semconvStability = semconvStabilityFromStr("http", config?.semconvStabilityOptIn);
+    }
+    init() {
+    }
+    /**
+     * Add cors pre flight child span
+     * @param span
+     * @param corsPreFlightRequest
+     */
+    _addChildSpan(span, corsPreFlightRequest) {
+      const childSpan = this.tracer.startSpan("CORS Preflight", {
+        startTime: corsPreFlightRequest[PerformanceTimingNames.FETCH_START]
+      }, trace.setSpan(context.active(), span));
+      const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+      addSpanNetworkEvents(childSpan, corsPreFlightRequest, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
+      childSpan.end(corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END]);
+    }
+    /**
+     * Adds more attributes to span just before ending it
+     * @param span
+     * @param response
+     */
+    _addFinalSpanAttributes(span, response) {
+      const parsedUrl = parseUrl(response.url);
+      if (this._semconvStability & SemconvStability.OLD) {
+        span.setAttribute(ATTR_HTTP_STATUS_CODE, response.status);
         if (response.statusText != null) {
           span.setAttribute(AttributeNames2.HTTP_STATUS_TEXT, response.statusText);
         }
-        span.setAttribute(SEMATTRS_HTTP_HOST, parsedUrl.host);
-        span.setAttribute(SEMATTRS_HTTP_SCHEME, parsedUrl.protocol.replace(":", ""));
+        span.setAttribute(ATTR_HTTP_HOST, parsedUrl.host);
+        span.setAttribute(ATTR_HTTP_SCHEME, parsedUrl.protocol.replace(":", ""));
         if (typeof navigator !== "undefined") {
-          span.setAttribute(SEMATTRS_HTTP_USER_AGENT2, navigator.userAgent);
+          span.setAttribute(ATTR_HTTP_USER_AGENT, navigator.userAgent);
         }
-      };
-      FetchInstrumentation2.prototype._addHeaders = function(options, spanUrl) {
-        if (!shouldPropagateTraceHeaders(spanUrl, this.getConfig().propagateTraceHeaderCorsUrls)) {
-          var headers = {};
-          propagation.inject(context.active(), headers);
-          if (Object.keys(headers).length > 0) {
-            this._diag.debug("headers inject skipped due to CORS policy");
-          }
-          return;
+      }
+      if (this._semconvStability & SemconvStability.STABLE) {
+        span.setAttribute(ATTR_HTTP_RESPONSE_STATUS_CODE, response.status);
+        span.setAttribute(ATTR_SERVER_ADDRESS, parsedUrl.hostname);
+        const serverPort = serverPortFromUrl(parsedUrl);
+        if (serverPort) {
+          span.setAttribute(ATTR_SERVER_PORT, serverPort);
         }
-        if (options instanceof Request) {
-          propagation.inject(context.active(), options.headers, {
-            set: function(h2, k2, v2) {
-              return h2.set(k2, typeof v2 === "string" ? v2 : String(v2));
-            }
-          });
-        } else if (options.headers instanceof Headers) {
-          propagation.inject(context.active(), options.headers, {
-            set: function(h2, k2, v2) {
-              return h2.set(k2, typeof v2 === "string" ? v2 : String(v2));
-            }
-          });
-        } else if (options.headers instanceof Map) {
-          propagation.inject(context.active(), options.headers, {
-            set: function(h2, k2, v2) {
-              return h2.set(k2, typeof v2 === "string" ? v2 : String(v2));
-            }
-          });
-        } else {
-          var headers = {};
-          propagation.inject(context.active(), headers);
-          options.headers = Object.assign({}, headers, options.headers || {});
+      }
+    }
+    /**
+     * Add headers
+     * @param options
+     * @param spanUrl
+     */
+    _addHeaders(options, spanUrl) {
+      if (!shouldPropagateTraceHeaders(spanUrl, this.getConfig().propagateTraceHeaderCorsUrls)) {
+        const headers = {};
+        propagation.inject(context.active(), headers);
+        if (Object.keys(headers).length > 0) {
+          this._diag.debug("headers inject skipped due to CORS policy");
         }
-      };
-      FetchInstrumentation2.prototype._clearResources = function() {
-        if (this._tasksCount === 0 && this.getConfig().clearTimingResources) {
-          performance.clearResourceTimings();
-          this._usedResources = /* @__PURE__ */ new WeakSet();
-        }
-      };
-      FetchInstrumentation2.prototype._createSpan = function(url, options) {
-        var _a3;
-        if (options === void 0) {
-          options = {};
-        }
-        if (isUrlIgnored(url, this.getConfig().ignoreUrls)) {
-          this._diag.debug("ignoring span as url matches ignored url");
-          return;
-        }
-        var method = (options.method || "GET").toUpperCase();
-        var spanName = "HTTP " + method;
-        return this.tracer.startSpan(spanName, {
-          kind: SpanKind.CLIENT,
-          attributes: (_a3 = {}, _a3[AttributeNames2.COMPONENT] = this.moduleName, _a3[SEMATTRS_HTTP_METHOD] = method, _a3[SEMATTRS_HTTP_URL2] = url, _a3)
+        return;
+      }
+      if (options instanceof Request) {
+        propagation.inject(context.active(), options.headers, {
+          set: (h2, k2, v2) => h2.set(k2, typeof v2 === "string" ? v2 : String(v2))
         });
-      };
-      FetchInstrumentation2.prototype._findResourceAndAddNetworkEvents = function(span, resourcesObserver, endTime) {
-        var resources = resourcesObserver.entries;
-        if (!resources.length) {
-          if (!performance.getEntriesByType) {
-            return;
-          }
-          resources = performance.getEntriesByType("resource");
+      } else if (options.headers instanceof Headers) {
+        propagation.inject(context.active(), options.headers, {
+          set: (h2, k2, v2) => h2.set(k2, typeof v2 === "string" ? v2 : String(v2))
+        });
+      } else if (options.headers instanceof Map) {
+        propagation.inject(context.active(), options.headers, {
+          set: (h2, k2, v2) => h2.set(k2, typeof v2 === "string" ? v2 : String(v2))
+        });
+      } else {
+        const headers = {};
+        propagation.inject(context.active(), headers);
+        options.headers = Object.assign({}, headers, options.headers || {});
+      }
+    }
+    /**
+     * Clears the resource timings and all resources assigned with spans
+     *     when {@link FetchPluginConfig.clearTimingResources} is
+     *     set to true (default false)
+     * @private
+     */
+    _clearResources() {
+      if (this._tasksCount === 0 && this.getConfig().clearTimingResources) {
+        performance.clearResourceTimings();
+        this._usedResources = /* @__PURE__ */ new WeakSet();
+      }
+    }
+    /**
+     * Creates a new span
+     * @param url
+     * @param options
+     */
+    _createSpan(url, options = {}) {
+      if (isUrlIgnored(url, this.getConfig().ignoreUrls)) {
+        this._diag.debug("ignoring span as url matches ignored url");
+        return;
+      }
+      let name = "";
+      const attributes = {};
+      if (this._semconvStability & SemconvStability.OLD) {
+        const method = (options.method || "GET").toUpperCase();
+        name = `HTTP ${method}`;
+        attributes[AttributeNames2.COMPONENT] = this.moduleName;
+        attributes[ATTR_HTTP_METHOD] = method;
+        attributes[ATTR_HTTP_URL] = url;
+      }
+      if (this._semconvStability & SemconvStability.STABLE) {
+        const origMethod = options.method;
+        const normMethod = normalizeHttpRequestMethod(options.method || "GET");
+        if (!name) {
+          name = normMethod;
         }
-        var resource = getResource(resourcesObserver.spanUrl, resourcesObserver.startTime, endTime, resources, this._usedResources, "fetch");
-        if (resource.mainRequest) {
-          var mainRequest = resource.mainRequest;
-          this._markResourceAsUsed(mainRequest);
-          var corsPreFlightRequest = resource.corsPreFlightRequest;
-          if (corsPreFlightRequest) {
-            this._addChildSpan(span, corsPreFlightRequest);
-            this._markResourceAsUsed(corsPreFlightRequest);
-          }
-          addSpanNetworkEvents(span, mainRequest, this.getConfig().ignoreNetworkEvents);
+        attributes[ATTR_HTTP_REQUEST_METHOD] = normMethod;
+        if (normMethod !== origMethod) {
+          attributes[ATTR_HTTP_REQUEST_METHOD_ORIGINAL] = origMethod;
         }
-      };
-      FetchInstrumentation2.prototype._markResourceAsUsed = function(resource) {
-        this._usedResources.add(resource);
-      };
-      FetchInstrumentation2.prototype._endSpan = function(span, spanData, response) {
-        var _this = this;
-        var endTime = millisToHrTime(Date.now());
-        var performanceEndTime = hrTime();
-        this._addFinalSpanAttributes(span, response);
-        setTimeout(function() {
-          var _a3;
-          (_a3 = spanData.observer) === null || _a3 === void 0 ? void 0 : _a3.disconnect();
-          _this._findResourceAndAddNetworkEvents(span, spanData, performanceEndTime);
-          _this._tasksCount--;
-          _this._clearResources();
-          span.end(endTime);
-        }, OBSERVER_WAIT_TIME_MS);
-      };
-      FetchInstrumentation2.prototype._patchConstructor = function() {
-        var _this = this;
-        return function(original) {
-          var plugin = _this;
-          return function patchConstructor() {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-              args[_i] = arguments[_i];
-            }
-            var self2 = this;
-            var url = parseUrl(args[0] instanceof Request ? args[0].url : String(args[0])).href;
-            var options = args[0] instanceof Request ? args[0] : args[1] || {};
-            var createdSpan = plugin._createSpan(url, options);
-            if (!createdSpan) {
-              return original.apply(this, args);
-            }
-            var spanData = plugin._prepareSpanData(url);
-            if (plugin.getConfig().measureRequestSize) {
-              getFetchBodyLength.apply(void 0, __spreadArray9([], __read18(args), false)).then(function(length) {
-                if (!length)
-                  return;
-                createdSpan.setAttribute(SEMATTRS_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED, length);
-              }).catch(function(error) {
-                plugin._diag.warn("getFetchBodyLength", error);
-              });
-            }
-            function endSpanOnError(span, error) {
-              plugin._applyAttributesAfterFetch(span, options, error);
+        attributes[ATTR_URL_FULL] = url;
+      }
+      return this.tracer.startSpan(name, {
+        kind: SpanKind.CLIENT,
+        attributes
+      });
+    }
+    /**
+     * Finds appropriate resource and add network events to the span
+     * @param span
+     * @param resourcesObserver
+     * @param endTime
+     */
+    _findResourceAndAddNetworkEvents(span, resourcesObserver, endTime) {
+      let resources = resourcesObserver.entries;
+      if (!resources.length) {
+        if (!performance.getEntriesByType) {
+          return;
+        }
+        resources = performance.getEntriesByType("resource");
+      }
+      const resource = getResource(resourcesObserver.spanUrl, resourcesObserver.startTime, endTime, resources, this._usedResources, "fetch");
+      if (resource.mainRequest) {
+        const mainRequest = resource.mainRequest;
+        this._markResourceAsUsed(mainRequest);
+        const corsPreFlightRequest = resource.corsPreFlightRequest;
+        if (corsPreFlightRequest) {
+          this._addChildSpan(span, corsPreFlightRequest);
+          this._markResourceAsUsed(corsPreFlightRequest);
+        }
+        const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+        addSpanNetworkEvents(span, mainRequest, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
+      }
+    }
+    /**
+     * Marks certain [resource]{@link PerformanceResourceTiming} when information
+     * from this is used to add events to span.
+     * This is done to avoid reusing the same resource again for next span
+     * @param resource
+     */
+    _markResourceAsUsed(resource) {
+      this._usedResources.add(resource);
+    }
+    /**
+     * Finish span, add attributes, network events etc.
+     * @param span
+     * @param spanData
+     * @param response
+     */
+    _endSpan(span, spanData, response) {
+      const endTime = millisToHrTime(Date.now());
+      const performanceEndTime = hrTime();
+      this._addFinalSpanAttributes(span, response);
+      if (this._semconvStability & SemconvStability.STABLE) {
+        if (response.status >= 400) {
+          span.setStatus({ code: SpanStatusCode.ERROR });
+          span.setAttribute(ATTR_ERROR_TYPE, String(response.status));
+        }
+      }
+      setTimeout(() => {
+        spanData.observer?.disconnect();
+        this._findResourceAndAddNetworkEvents(span, spanData, performanceEndTime);
+        this._tasksCount--;
+        this._clearResources();
+        span.end(endTime);
+      }, OBSERVER_WAIT_TIME_MS);
+    }
+    /**
+     * Patches the constructor of fetch
+     */
+    _patchConstructor() {
+      return (original) => {
+        const plugin = this;
+        return function patchConstructor(...args) {
+          const self2 = this;
+          const url = parseUrl(args[0] instanceof Request ? args[0].url : String(args[0])).href;
+          const options = args[0] instanceof Request ? args[0] : args[1] || {};
+          const createdSpan = plugin._createSpan(url, options);
+          if (!createdSpan) {
+            return original.apply(this, args);
+          }
+          const spanData = plugin._prepareSpanData(url);
+          if (plugin.getConfig().measureRequestSize) {
+            getFetchBodyLength(...args).then((bodyLength) => {
+              if (!bodyLength)
+                return;
+              if (plugin._semconvStability & SemconvStability.OLD) {
+                createdSpan.setAttribute(ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED, bodyLength);
+              }
+              if (plugin._semconvStability & SemconvStability.STABLE) {
+                createdSpan.setAttribute(ATTR_HTTP_REQUEST_BODY_SIZE, bodyLength);
+              }
+            }).catch((error) => {
+              plugin._diag.warn("getFetchBodyLength", error);
+            });
+          }
+          function endSpanOnError(span, error) {
+            plugin._applyAttributesAfterFetch(span, options, error);
+            plugin._endSpan(span, spanData, {
+              status: error.status || 0,
+              statusText: error.message,
+              url
+            });
+          }
+          function endSpanOnSuccess(span, response) {
+            plugin._applyAttributesAfterFetch(span, options, response);
+            if (response.status >= 200 && response.status < 400) {
+              plugin._endSpan(span, spanData, response);
+            } else {
               plugin._endSpan(span, spanData, {
-                status: error.status || 0,
-                statusText: error.message,
+                status: response.status,
+                statusText: response.statusText,
                 url
               });
             }
-            function endSpanOnSuccess(span, response) {
-              plugin._applyAttributesAfterFetch(span, options, response);
-              if (response.status >= 200 && response.status < 400) {
-                plugin._endSpan(span, spanData, response);
+          }
+          function onSuccess(span, resolve, response) {
+            try {
+              const resClone = response.clone();
+              const body = resClone.body;
+              if (body) {
+                const reader = body.getReader();
+                const read = () => {
+                  reader.read().then(({ done }) => {
+                    if (done) {
+                      endSpanOnSuccess(span, response);
+                    } else {
+                      read();
+                    }
+                  }, (error) => {
+                    endSpanOnError(span, error);
+                  });
+                };
+                read();
               } else {
-                plugin._endSpan(span, spanData, {
-                  status: response.status,
-                  statusText: response.statusText,
-                  url
-                });
+                endSpanOnSuccess(span, response);
               }
+            } finally {
+              resolve(response);
             }
-            function onSuccess(span, resolve, response) {
-              try {
-                var resClone = response.clone();
-                var resClone4Hook_1 = response.clone();
-                var body = resClone.body;
-                if (body) {
-                  var reader_1 = body.getReader();
-                  var read_1 = function() {
-                    reader_1.read().then(function(_a3) {
-                      var done = _a3.done;
-                      if (done) {
-                        endSpanOnSuccess(span, resClone4Hook_1);
-                      } else {
-                        read_1();
-                      }
-                    }, function(error) {
-                      endSpanOnError(span, error);
-                    });
-                  };
-                  read_1();
-                } else {
-                  endSpanOnSuccess(span, response);
-                }
-              } finally {
-                resolve(response);
-              }
+          }
+          function onError(span, reject, error) {
+            try {
+              endSpanOnError(span, error);
+            } finally {
+              reject(error);
             }
-            function onError(span, reject, error) {
-              try {
-                endSpanOnError(span, error);
-              } finally {
-                reject(error);
-              }
-            }
-            return new Promise(function(resolve, reject) {
-              return context.with(trace.setSpan(context.active(), createdSpan), function() {
-                plugin._addHeaders(options, url);
-                plugin._tasksCount++;
-                return original.apply(self2, options instanceof Request ? [options] : [url, options]).then(onSuccess.bind(self2, createdSpan, resolve), onError.bind(self2, createdSpan, reject));
-              });
+          }
+          return new Promise((resolve, reject) => {
+            return context.with(trace.setSpan(context.active(), createdSpan), () => {
+              plugin._addHeaders(options, url);
+              plugin._callRequestHook(createdSpan, options);
+              plugin._tasksCount++;
+              return original.apply(self2, options instanceof Request ? [options] : [url, options]).then(onSuccess.bind(self2, createdSpan, resolve), onError.bind(self2, createdSpan, reject));
             });
-          };
+          });
         };
       };
-      FetchInstrumentation2.prototype._applyAttributesAfterFetch = function(span, request, result) {
-        var _this = this;
-        var applyCustomAttributesOnSpan = this.getConfig().applyCustomAttributesOnSpan;
-        if (applyCustomAttributesOnSpan) {
-          safeExecuteInTheMiddle(function() {
-            return applyCustomAttributesOnSpan(span, request, result);
-          }, function(error) {
-            if (!error) {
-              return;
-            }
-            _this._diag.error("applyCustomAttributesOnSpan", error);
-          }, true);
-        }
-      };
-      FetchInstrumentation2.prototype._prepareSpanData = function(spanUrl) {
-        var startTime = hrTime();
-        var entries = [];
-        if (typeof PerformanceObserver !== "function") {
-          return { entries, startTime, spanUrl };
-        }
-        var observer = new PerformanceObserver(function(list) {
-          var perfObsEntries = list.getEntries();
-          perfObsEntries.forEach(function(entry) {
-            if (entry.initiatorType === "fetch" && entry.name === spanUrl) {
-              entries.push(entry);
-            }
-          });
+    }
+    _applyAttributesAfterFetch(span, request, result) {
+      const applyCustomAttributesOnSpan = this.getConfig().applyCustomAttributesOnSpan;
+      if (applyCustomAttributesOnSpan) {
+        safeExecuteInTheMiddle(() => applyCustomAttributesOnSpan(span, request, result), (error) => {
+          if (!error) {
+            return;
+          }
+          this._diag.error("applyCustomAttributesOnSpan", error);
+        }, true);
+      }
+    }
+    _callRequestHook(span, request) {
+      const requestHook = this.getConfig().requestHook;
+      if (requestHook) {
+        safeExecuteInTheMiddle(() => requestHook(span, request), (error) => {
+          if (!error) {
+            return;
+          }
+          this._diag.error("requestHook", error);
+        }, true);
+      }
+    }
+    /**
+     * Prepares a span data - needed later for matching appropriate network
+     *     resources
+     * @param spanUrl
+     */
+    _prepareSpanData(spanUrl) {
+      const startTime = hrTime();
+      const entries = [];
+      if (typeof PerformanceObserver !== "function") {
+        return { entries, startTime, spanUrl };
+      }
+      const observer = new PerformanceObserver((list) => {
+        const perfObsEntries = list.getEntries();
+        perfObsEntries.forEach((entry) => {
+          if (entry.initiatorType === "fetch" && entry.name === spanUrl) {
+            entries.push(entry);
+          }
         });
-        observer.observe({
-          entryTypes: ["resource"]
-        });
-        return { entries, observer, startTime, spanUrl };
-      };
-      FetchInstrumentation2.prototype.enable = function() {
-        if (isNode) {
-          this._diag.warn("this instrumentation is intended for web usage only, it does not instrument Node.js's fetch()");
-          return;
-        }
-        if (isWrapped(fetch)) {
-          this._unwrap(_globalThis3, "fetch");
-          this._diag.debug("removing previous patch for constructor");
-        }
-        this._wrap(_globalThis3, "fetch", this._patchConstructor());
-      };
-      FetchInstrumentation2.prototype.disable = function() {
-        if (isNode) {
-          return;
-        }
+      });
+      observer.observe({
+        entryTypes: ["resource"]
+      });
+      return { entries, observer, startTime, spanUrl };
+    }
+    /**
+     * implements enable function
+     */
+    enable() {
+      if (isNode) {
+        this._diag.warn("this instrumentation is intended for web usage only, it does not instrument Node.js's fetch()");
+        return;
+      }
+      if (isWrapped(fetch)) {
         this._unwrap(_globalThis3, "fetch");
-        this._usedResources = /* @__PURE__ */ new WeakSet();
-      };
-      return FetchInstrumentation2;
-    }(InstrumentationBase)
-  );
+        this._diag.debug("removing previous patch for constructor");
+      }
+      this._wrap(_globalThis3, "fetch", this._patchConstructor());
+    }
+    /**
+     * implements unpatch function
+     */
+    disable() {
+      if (isNode) {
+        return;
+      }
+      this._unwrap(_globalThis3, "fetch");
+      this._usedResources = /* @__PURE__ */ new WeakSet();
+    }
+  };
 
   // node_modules/@opentelemetry/instrumentation-user-interaction/build/esm/enums/AttributeNames.js
   var AttributeNames3;
@@ -10986,448 +13921,520 @@
   })(AttributeNames3 || (AttributeNames3 = {}));
 
   // node_modules/@opentelemetry/instrumentation-user-interaction/build/esm/version.js
-  var PACKAGE_VERSION2 = "0.44.0";
+  var PACKAGE_VERSION2 = "0.50.0";
   var PACKAGE_NAME2 = "@opentelemetry/instrumentation-user-interaction";
 
   // node_modules/@opentelemetry/instrumentation-user-interaction/build/esm/instrumentation.js
-  var __extends9 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
   var ZONE_CONTEXT_KEY = "OT_ZONE_CONTEXT";
   var EVENT_NAVIGATION_NAME = "Navigation:";
   var DEFAULT_EVENT_NAMES2 = ["click"];
   function defaultShouldPreventSpanCreation() {
     return false;
   }
-  var UserInteractionInstrumentation2 = (
-    /** @class */
-    function(_super) {
-      __extends9(UserInteractionInstrumentation3, _super);
-      function UserInteractionInstrumentation3(config) {
-        if (config === void 0) {
-          config = {};
+  var UserInteractionInstrumentation2 = class extends InstrumentationBase2 {
+    version = PACKAGE_VERSION2;
+    moduleName = "user-interaction";
+    _spansData = /* @__PURE__ */ new WeakMap();
+    // for addEventListener/removeEventListener state
+    _wrappedListeners = /* @__PURE__ */ new WeakMap();
+    // for event bubbling
+    _eventsSpanMap = /* @__PURE__ */ new WeakMap();
+    _eventNames;
+    _shouldPreventSpanCreation;
+    constructor(config = {}) {
+      super(PACKAGE_NAME2, PACKAGE_VERSION2, config);
+      this._eventNames = new Set(config?.eventNames ?? DEFAULT_EVENT_NAMES2);
+      this._shouldPreventSpanCreation = typeof config?.shouldPreventSpanCreation === "function" ? config.shouldPreventSpanCreation : defaultShouldPreventSpanCreation;
+    }
+    init() {
+    }
+    /**
+     * This will check if last task was timeout and will save the time to
+     * fix the user interaction when nothing happens
+     * This timeout comes from xhr plugin which is needed to collect information
+     * about last xhr main request from observer
+     * @param task
+     * @param span
+     */
+    _checkForTimeout(task, span) {
+      const spanData = this._spansData.get(span);
+      if (spanData) {
+        if (task.source === "setTimeout") {
+          spanData.hrTimeLastTimeout = hrTime();
+        } else if (task.source !== "Promise.then" && task.source !== "setTimeout") {
+          spanData.hrTimeLastTimeout = void 0;
         }
-        var _a3;
-        var _this = _super.call(this, PACKAGE_NAME2, PACKAGE_VERSION2, config) || this;
-        _this.version = PACKAGE_VERSION2;
-        _this.moduleName = "user-interaction";
-        _this._spansData = /* @__PURE__ */ new WeakMap();
-        _this._wrappedListeners = /* @__PURE__ */ new WeakMap();
-        _this._eventsSpanMap = /* @__PURE__ */ new WeakMap();
-        _this._eventNames = new Set((_a3 = config === null || config === void 0 ? void 0 : config.eventNames) !== null && _a3 !== void 0 ? _a3 : DEFAULT_EVENT_NAMES2);
-        _this._shouldPreventSpanCreation = typeof (config === null || config === void 0 ? void 0 : config.shouldPreventSpanCreation) === "function" ? config.shouldPreventSpanCreation : defaultShouldPreventSpanCreation;
-        return _this;
       }
-      UserInteractionInstrumentation3.prototype.init = function() {
-      };
-      UserInteractionInstrumentation3.prototype._checkForTimeout = function(task, span) {
-        var spanData = this._spansData.get(span);
-        if (spanData) {
-          if (task.source === "setTimeout") {
-            spanData.hrTimeLastTimeout = hrTime();
-          } else if (task.source !== "Promise.then" && task.source !== "setTimeout") {
-            spanData.hrTimeLastTimeout = void 0;
-          }
-        }
-      };
-      UserInteractionInstrumentation3.prototype._allowEventName = function(eventName) {
-        return this._eventNames.has(eventName);
-      };
-      UserInteractionInstrumentation3.prototype._createSpan = function(element, eventName, parentSpan) {
-        var _a3;
-        if (!(element instanceof HTMLElement)) {
-          return void 0;
-        }
-        if (!element.getAttribute) {
-          return void 0;
-        }
-        if (element.hasAttribute("disabled")) {
-          return void 0;
-        }
-        if (!this._allowEventName(eventName)) {
-          return void 0;
-        }
-        var xpath = getElementXPath(element, true);
-        try {
-          var span = this.tracer.startSpan(eventName, {
-            attributes: (_a3 = {}, _a3[AttributeNames3.EVENT_TYPE] = eventName, _a3[AttributeNames3.TARGET_ELEMENT] = element.tagName, _a3[AttributeNames3.TARGET_XPATH] = xpath, _a3[AttributeNames3.HTTP_URL] = window.location.href, _a3)
-          }, parentSpan ? trace.setSpan(context.active(), parentSpan) : void 0);
-          if (this._shouldPreventSpanCreation(eventName, element, span) === true) {
-            return void 0;
-          }
-          this._spansData.set(span, {
-            taskCount: 0
-          });
-          return span;
-        } catch (e2) {
-          this._diag.error("failed to start create new user interaction span", e2);
-        }
+    }
+    /**
+     * Controls whether or not to create a span, based on the event type.
+     */
+    _allowEventName(eventName) {
+      return this._eventNames.has(eventName);
+    }
+    /**
+     * Creates a new span
+     * @param element
+     * @param eventName
+     * @param parentSpan
+     */
+    _createSpan(element, eventName, parentSpan) {
+      if (!(element instanceof HTMLElement)) {
         return void 0;
-      };
-      UserInteractionInstrumentation3.prototype._decrementTask = function(span) {
-        var spanData = this._spansData.get(span);
-        if (spanData) {
-          spanData.taskCount--;
-          if (spanData.taskCount === 0) {
-            this._tryToEndSpan(span, spanData.hrTimeLastTimeout);
+      }
+      if (!element.getAttribute) {
+        return void 0;
+      }
+      if (element.hasAttribute("disabled")) {
+        return void 0;
+      }
+      if (!this._allowEventName(eventName)) {
+        return void 0;
+      }
+      const xpath = getElementXPath(element, true);
+      try {
+        const span = this.tracer.startSpan(eventName, {
+          attributes: {
+            [AttributeNames3.EVENT_TYPE]: eventName,
+            [AttributeNames3.TARGET_ELEMENT]: element.tagName,
+            [AttributeNames3.TARGET_XPATH]: xpath,
+            [AttributeNames3.HTTP_URL]: window.location.href
           }
-        }
-      };
-      UserInteractionInstrumentation3.prototype._getCurrentSpan = function(zone) {
-        var context2 = zone.get(ZONE_CONTEXT_KEY);
-        if (context2) {
-          return trace.getSpan(context2);
-        }
-        return context2;
-      };
-      UserInteractionInstrumentation3.prototype._incrementTask = function(span) {
-        var spanData = this._spansData.get(span);
-        if (spanData) {
-          spanData.taskCount++;
-        }
-      };
-      UserInteractionInstrumentation3.prototype.addPatchedListener = function(on, type, listener, wrappedListener) {
-        var listener2Type = this._wrappedListeners.get(listener);
-        if (!listener2Type) {
-          listener2Type = /* @__PURE__ */ new Map();
-          this._wrappedListeners.set(listener, listener2Type);
-        }
-        var element2patched = listener2Type.get(type);
-        if (!element2patched) {
-          element2patched = /* @__PURE__ */ new Map();
-          listener2Type.set(type, element2patched);
-        }
-        if (element2patched.has(on)) {
-          return false;
-        }
-        element2patched.set(on, wrappedListener);
-        return true;
-      };
-      UserInteractionInstrumentation3.prototype.removePatchedListener = function(on, type, listener) {
-        var listener2Type = this._wrappedListeners.get(listener);
-        if (!listener2Type) {
+        }, parentSpan ? trace.setSpan(context.active(), parentSpan) : void 0);
+        if (this._shouldPreventSpanCreation(eventName, element, span) === true) {
           return void 0;
         }
-        var element2patched = listener2Type.get(type);
-        if (!element2patched) {
-          return void 0;
+        this._spansData.set(span, {
+          taskCount: 0
+        });
+        return span;
+      } catch (e2) {
+        this._diag.error("failed to start create new user interaction span", e2);
+      }
+      return void 0;
+    }
+    /**
+     * Decrement number of tasks that left in zone,
+     * This is needed to be able to end span when no more tasks left
+     * @param span
+     */
+    _decrementTask(span) {
+      const spanData = this._spansData.get(span);
+      if (spanData) {
+        spanData.taskCount--;
+        if (spanData.taskCount === 0) {
+          this._tryToEndSpan(span, spanData.hrTimeLastTimeout);
         }
-        var patched = element2patched.get(on);
-        if (patched) {
-          element2patched.delete(on);
-          if (element2patched.size === 0) {
-            listener2Type.delete(type);
-            if (listener2Type.size === 0) {
-              this._wrappedListeners.delete(listener);
-            }
+      }
+    }
+    /**
+     * Return the current span
+     * @param zone
+     * @private
+     */
+    _getCurrentSpan(zone) {
+      const context2 = zone.get(ZONE_CONTEXT_KEY);
+      if (context2) {
+        return trace.getSpan(context2);
+      }
+      return context2;
+    }
+    /**
+     * Increment number of tasks that are run within the same zone.
+     *     This is needed to be able to end span when no more tasks left
+     * @param span
+     */
+    _incrementTask(span) {
+      const spanData = this._spansData.get(span);
+      if (spanData) {
+        spanData.taskCount++;
+      }
+    }
+    /**
+     * Returns true iff we should use the patched callback; false if it's already been patched
+     */
+    addPatchedListener(on, type, listener, wrappedListener) {
+      let listener2Type = this._wrappedListeners.get(listener);
+      if (!listener2Type) {
+        listener2Type = /* @__PURE__ */ new Map();
+        this._wrappedListeners.set(listener, listener2Type);
+      }
+      let element2patched = listener2Type.get(type);
+      if (!element2patched) {
+        element2patched = /* @__PURE__ */ new Map();
+        listener2Type.set(type, element2patched);
+      }
+      if (element2patched.has(on)) {
+        return false;
+      }
+      element2patched.set(on, wrappedListener);
+      return true;
+    }
+    /**
+     * Returns the patched version of the callback (or undefined)
+     */
+    removePatchedListener(on, type, listener) {
+      const listener2Type = this._wrappedListeners.get(listener);
+      if (!listener2Type) {
+        return void 0;
+      }
+      const element2patched = listener2Type.get(type);
+      if (!element2patched) {
+        return void 0;
+      }
+      const patched = element2patched.get(on);
+      if (patched) {
+        element2patched.delete(on);
+        if (element2patched.size === 0) {
+          listener2Type.delete(type);
+          if (listener2Type.size === 0) {
+            this._wrappedListeners.delete(listener);
           }
         }
-        return patched;
-      };
-      UserInteractionInstrumentation3.prototype._invokeListener = function(listener, target, args) {
-        if (typeof listener === "function") {
-          return listener.apply(target, args);
-        } else {
-          return listener.handleEvent(args[0]);
-        }
-      };
-      UserInteractionInstrumentation3.prototype._patchAddEventListener = function() {
-        var plugin = this;
-        return function(original) {
-          return function addEventListenerPatched(type, listener, useCapture) {
-            if (!listener) {
-              return original.call(this, type, listener, useCapture);
+      }
+      return patched;
+    }
+    // utility method to deal with the Function|EventListener nature of addEventListener
+    _invokeListener(listener, target, args) {
+      if (typeof listener === "function") {
+        return listener.apply(target, args);
+      } else {
+        return listener.handleEvent(args[0]);
+      }
+    }
+    /**
+     * This patches the addEventListener of HTMLElement to be able to
+     * auto instrument the click events
+     * This is done when zone is not available
+     */
+    _patchAddEventListener() {
+      const plugin = this;
+      return (original) => {
+        return function addEventListenerPatched(type, listener, useCapture) {
+          if (!listener) {
+            return original.call(this, type, listener, useCapture);
+          }
+          const once = useCapture && typeof useCapture === "object" && useCapture.once;
+          const patchedListener = function(...args) {
+            let parentSpan;
+            const event = args[0];
+            const target = event?.target;
+            if (event) {
+              parentSpan = plugin._eventsSpanMap.get(event);
             }
-            var once = useCapture && typeof useCapture === "object" && useCapture.once;
-            var patchedListener = function() {
-              var _this = this;
-              var args = [];
-              for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-              }
-              var parentSpan;
-              var event = args[0];
-              var target = event === null || event === void 0 ? void 0 : event.target;
+            if (once) {
+              plugin.removePatchedListener(this, type, listener);
+            }
+            const span = plugin._createSpan(target, type, parentSpan);
+            if (span) {
               if (event) {
-                parentSpan = plugin._eventsSpanMap.get(event);
+                plugin._eventsSpanMap.set(event, span);
               }
-              if (once) {
-                plugin.removePatchedListener(this, type, listener);
-              }
-              var span = plugin._createSpan(target, type, parentSpan);
-              if (span) {
-                if (event) {
-                  plugin._eventsSpanMap.set(event, span);
+              return context.with(trace.setSpan(context.active(), span), () => {
+                const result = plugin._invokeListener(listener, this, args);
+                span.end();
+                return result;
+              });
+            } else {
+              return plugin._invokeListener(listener, this, args);
+            }
+          };
+          if (plugin.addPatchedListener(this, type, listener, patchedListener)) {
+            return original.call(this, type, patchedListener, useCapture);
+          }
+        };
+      };
+    }
+    /**
+     * This patches the removeEventListener of HTMLElement to handle the fact that
+     * we patched the original callbacks
+     * This is done when zone is not available
+     */
+    _patchRemoveEventListener() {
+      const plugin = this;
+      return (original) => {
+        return function removeEventListenerPatched(type, listener, useCapture) {
+          const wrappedListener = plugin.removePatchedListener(this, type, listener);
+          if (wrappedListener) {
+            return original.call(this, type, wrappedListener, useCapture);
+          } else {
+            return original.call(this, type, listener, useCapture);
+          }
+        };
+      };
+    }
+    /**
+     * Most browser provide event listener api via EventTarget in prototype chain.
+     * Exception to this is IE 11 which has it on the prototypes closest to EventTarget:
+     *
+     * * - has addEventListener in IE
+     * ** - has addEventListener in all other browsers
+     * ! - missing in IE
+     *
+     * HTMLElement -> Element -> Node * -> EventTarget **! -> Object
+     * Document -> Node * -> EventTarget **! -> Object
+     * Window * -> WindowProperties ! -> EventTarget **! -> Object
+     */
+    _getPatchableEventTargets() {
+      return window.EventTarget ? [EventTarget.prototype] : [Node.prototype, Window.prototype];
+    }
+    /**
+     * Patches the history api
+     */
+    _patchHistoryApi() {
+      this._unpatchHistoryApi();
+      this._wrap(history, "replaceState", this._patchHistoryMethod());
+      this._wrap(history, "pushState", this._patchHistoryMethod());
+      this._wrap(history, "back", this._patchHistoryMethod());
+      this._wrap(history, "forward", this._patchHistoryMethod());
+      this._wrap(history, "go", this._patchHistoryMethod());
+    }
+    /**
+     * Patches the certain history api method
+     */
+    _patchHistoryMethod() {
+      const plugin = this;
+      return (original) => {
+        return function patchHistoryMethod(...args) {
+          const url = `${location.pathname}${location.hash}${location.search}`;
+          const result = original.apply(this, args);
+          const urlAfter = `${location.pathname}${location.hash}${location.search}`;
+          if (url !== urlAfter) {
+            plugin._updateInteractionName(urlAfter);
+          }
+          return result;
+        };
+      };
+    }
+    /**
+     * unpatch the history api methods
+     */
+    _unpatchHistoryApi() {
+      if (isWrapped(history.replaceState))
+        this._unwrap(history, "replaceState");
+      if (isWrapped(history.pushState))
+        this._unwrap(history, "pushState");
+      if (isWrapped(history.back))
+        this._unwrap(history, "back");
+      if (isWrapped(history.forward))
+        this._unwrap(history, "forward");
+      if (isWrapped(history.go))
+        this._unwrap(history, "go");
+    }
+    /**
+     * Updates interaction span name
+     * @param url
+     */
+    _updateInteractionName(url) {
+      const span = trace.getSpan(context.active());
+      if (span && typeof span.updateName === "function") {
+        span.updateName(`${EVENT_NAVIGATION_NAME} ${url}`);
+      }
+    }
+    /**
+     * Patches zone cancel task - this is done to be able to correctly
+     * decrement the number of remaining tasks
+     */
+    _patchZoneCancelTask() {
+      const plugin = this;
+      return (original) => {
+        return function patchCancelTask(task) {
+          const currentZone = Zone.current;
+          const currentSpan = plugin._getCurrentSpan(currentZone);
+          if (currentSpan && plugin._shouldCountTask(task, currentZone)) {
+            plugin._decrementTask(currentSpan);
+          }
+          return original.call(this, task);
+        };
+      };
+    }
+    /**
+     * Patches zone schedule task - this is done to be able to correctly
+     * increment the number of tasks running within current zone but also to
+     * save time in case of timeout running from xhr plugin when waiting for
+     * main request from PerformanceResourceTiming
+     */
+    _patchZoneScheduleTask() {
+      const plugin = this;
+      return (original) => {
+        return function patchScheduleTask(task) {
+          const currentZone = Zone.current;
+          const currentSpan = plugin._getCurrentSpan(currentZone);
+          if (currentSpan && plugin._shouldCountTask(task, currentZone)) {
+            plugin._incrementTask(currentSpan);
+            plugin._checkForTimeout(task, currentSpan);
+          }
+          return original.call(this, task);
+        };
+      };
+    }
+    /**
+     * Patches zone run task - this is done to be able to create a span when
+     * user interaction starts
+     * @private
+     */
+    _patchZoneRunTask() {
+      const plugin = this;
+      return (original) => {
+        return function patchRunTask(task, applyThis, applyArgs) {
+          const event = Array.isArray(applyArgs) && applyArgs[0] instanceof Event ? applyArgs[0] : void 0;
+          const target = event?.target;
+          let span;
+          const activeZone = this;
+          if (target) {
+            span = plugin._createSpan(target, task.eventName);
+            if (span) {
+              plugin._incrementTask(span);
+              return activeZone.run(() => {
+                try {
+                  return context.with(trace.setSpan(context.active(), span), () => {
+                    const currentZone = Zone.current;
+                    task._zone = currentZone;
+                    return original.call(currentZone, task, applyThis, applyArgs);
+                  });
+                } finally {
+                  plugin._decrementTask(span);
                 }
-                return context.with(trace.setSpan(context.active(), span), function() {
-                  var result = plugin._invokeListener(listener, _this, args);
-                  span.end();
-                  return result;
-                });
-              } else {
-                return plugin._invokeListener(listener, this, args);
-              }
-            };
-            if (plugin.addPatchedListener(this, type, listener, patchedListener)) {
-              return original.call(this, type, patchedListener, useCapture);
+              });
             }
-          };
+          } else {
+            span = plugin._getCurrentSpan(activeZone);
+          }
+          try {
+            return original.call(activeZone, task, applyThis, applyArgs);
+          } finally {
+            if (span && plugin._shouldCountTask(task, activeZone)) {
+              plugin._decrementTask(span);
+            }
+          }
         };
       };
-      UserInteractionInstrumentation3.prototype._patchRemoveEventListener = function() {
-        var plugin = this;
-        return function(original) {
-          return function removeEventListenerPatched(type, listener, useCapture) {
-            var wrappedListener = plugin.removePatchedListener(this, type, listener);
-            if (wrappedListener) {
-              return original.call(this, type, wrappedListener, useCapture);
-            } else {
-              return original.call(this, type, listener, useCapture);
-            }
-          };
-        };
-      };
-      UserInteractionInstrumentation3.prototype._getPatchableEventTargets = function() {
-        return window.EventTarget ? [EventTarget.prototype] : [Node.prototype, Window.prototype];
-      };
-      UserInteractionInstrumentation3.prototype._patchHistoryApi = function() {
-        this._unpatchHistoryApi();
-        this._wrap(history, "replaceState", this._patchHistoryMethod());
-        this._wrap(history, "pushState", this._patchHistoryMethod());
-        this._wrap(history, "back", this._patchHistoryMethod());
-        this._wrap(history, "forward", this._patchHistoryMethod());
-        this._wrap(history, "go", this._patchHistoryMethod());
-      };
-      UserInteractionInstrumentation3.prototype._patchHistoryMethod = function() {
-        var plugin = this;
-        return function(original) {
-          return function patchHistoryMethod() {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-              args[_i] = arguments[_i];
-            }
-            var url = "" + location.pathname + location.hash + location.search;
-            var result = original.apply(this, args);
-            var urlAfter = "" + location.pathname + location.hash + location.search;
-            if (url !== urlAfter) {
-              plugin._updateInteractionName(urlAfter);
-            }
-            return result;
-          };
-        };
-      };
-      UserInteractionInstrumentation3.prototype._unpatchHistoryApi = function() {
-        if (isWrapped(history.replaceState))
-          this._unwrap(history, "replaceState");
-        if (isWrapped(history.pushState))
-          this._unwrap(history, "pushState");
-        if (isWrapped(history.back))
-          this._unwrap(history, "back");
-        if (isWrapped(history.forward))
-          this._unwrap(history, "forward");
-        if (isWrapped(history.go))
-          this._unwrap(history, "go");
-      };
-      UserInteractionInstrumentation3.prototype._updateInteractionName = function(url) {
-        var span = trace.getSpan(context.active());
-        if (span && typeof span.updateName === "function") {
-          span.updateName(EVENT_NAVIGATION_NAME + " " + url);
+    }
+    /**
+     * Decides if task should be counted.
+     * @param task
+     * @param currentZone
+     * @private
+     */
+    _shouldCountTask(task, currentZone) {
+      if (task._zone) {
+        currentZone = task._zone;
+      }
+      if (!currentZone || !task.data || task.data.isPeriodic) {
+        return false;
+      }
+      const currentSpan = this._getCurrentSpan(currentZone);
+      if (!currentSpan) {
+        return false;
+      }
+      if (!this._spansData.get(currentSpan)) {
+        return false;
+      }
+      return task.type === "macroTask" || task.type === "microTask";
+    }
+    /**
+     * Will try to end span when such span still exists.
+     * @param span
+     * @param endTime
+     * @private
+     */
+    _tryToEndSpan(span, endTime) {
+      if (span) {
+        const spanData = this._spansData.get(span);
+        if (spanData) {
+          span.end(endTime);
+          this._spansData.delete(span);
         }
-      };
-      UserInteractionInstrumentation3.prototype._patchZoneCancelTask = function() {
-        var plugin = this;
-        return function(original) {
-          return function patchCancelTask(task) {
-            var currentZone = Zone.current;
-            var currentSpan = plugin._getCurrentSpan(currentZone);
-            if (currentSpan && plugin._shouldCountTask(task, currentZone)) {
-              plugin._decrementTask(currentSpan);
-            }
-            return original.call(this, task);
-          };
-        };
-      };
-      UserInteractionInstrumentation3.prototype._patchZoneScheduleTask = function() {
-        var plugin = this;
-        return function(original) {
-          return function patchScheduleTask(task) {
-            var currentZone = Zone.current;
-            var currentSpan = plugin._getCurrentSpan(currentZone);
-            if (currentSpan && plugin._shouldCountTask(task, currentZone)) {
-              plugin._incrementTask(currentSpan);
-              plugin._checkForTimeout(task, currentSpan);
-            }
-            return original.call(this, task);
-          };
-        };
-      };
-      UserInteractionInstrumentation3.prototype._patchZoneRunTask = function() {
-        var plugin = this;
-        return function(original) {
-          return function patchRunTask(task, applyThis, applyArgs) {
-            var event = Array.isArray(applyArgs) && applyArgs[0] instanceof Event ? applyArgs[0] : void 0;
-            var target = event === null || event === void 0 ? void 0 : event.target;
-            var span;
-            var activeZone = this;
-            if (target) {
-              span = plugin._createSpan(target, task.eventName);
-              if (span) {
-                plugin._incrementTask(span);
-                return activeZone.run(function() {
-                  try {
-                    return context.with(trace.setSpan(context.active(), span), function() {
-                      var currentZone = Zone.current;
-                      task._zone = currentZone;
-                      return original.call(currentZone, task, applyThis, applyArgs);
-                    });
-                  } finally {
-                    plugin._decrementTask(span);
-                  }
-                });
-              }
-            } else {
-              span = plugin._getCurrentSpan(activeZone);
-            }
-            try {
-              return original.call(activeZone, task, applyThis, applyArgs);
-            } finally {
-              if (span && plugin._shouldCountTask(task, activeZone)) {
-                plugin._decrementTask(span);
-              }
-            }
-          };
-        };
-      };
-      UserInteractionInstrumentation3.prototype._shouldCountTask = function(task, currentZone) {
-        if (task._zone) {
-          currentZone = task._zone;
+      }
+    }
+    /**
+     * implements enable function
+     */
+    enable() {
+      const ZoneWithPrototype = this._getZoneWithPrototype();
+      this._diag.debug("applying patch to", this.moduleName, this.version, "zone:", !!ZoneWithPrototype);
+      if (ZoneWithPrototype) {
+        if (isWrapped(ZoneWithPrototype.prototype.runTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "runTask");
+          this._diag.debug("removing previous patch from method runTask");
         }
-        if (!currentZone || !task.data || task.data.isPeriodic) {
-          return false;
+        if (isWrapped(ZoneWithPrototype.prototype.scheduleTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "scheduleTask");
+          this._diag.debug("removing previous patch from method scheduleTask");
         }
-        var currentSpan = this._getCurrentSpan(currentZone);
-        if (!currentSpan) {
-          return false;
+        if (isWrapped(ZoneWithPrototype.prototype.cancelTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "cancelTask");
+          this._diag.debug("removing previous patch from method cancelTask");
         }
-        if (!this._spansData.get(currentSpan)) {
-          return false;
-        }
-        return task.type === "macroTask" || task.type === "microTask";
-      };
-      UserInteractionInstrumentation3.prototype._tryToEndSpan = function(span, endTime) {
-        if (span) {
-          var spanData = this._spansData.get(span);
-          if (spanData) {
-            span.end(endTime);
-            this._spansData.delete(span);
+        this._zonePatched = true;
+        this._wrap(ZoneWithPrototype.prototype, "runTask", this._patchZoneRunTask());
+        this._wrap(ZoneWithPrototype.prototype, "scheduleTask", this._patchZoneScheduleTask());
+        this._wrap(ZoneWithPrototype.prototype, "cancelTask", this._patchZoneCancelTask());
+      } else {
+        this._zonePatched = false;
+        const targets = this._getPatchableEventTargets();
+        targets.forEach((target) => {
+          if (isWrapped(target.addEventListener)) {
+            this._unwrap(target, "addEventListener");
+            this._diag.debug("removing previous patch from method addEventListener");
           }
+          if (isWrapped(target.removeEventListener)) {
+            this._unwrap(target, "removeEventListener");
+            this._diag.debug("removing previous patch from method removeEventListener");
+          }
+          this._wrap(target, "addEventListener", this._patchAddEventListener());
+          this._wrap(target, "removeEventListener", this._patchRemoveEventListener());
+        });
+      }
+      this._patchHistoryApi();
+    }
+    /**
+     * implements unpatch function
+     */
+    disable() {
+      const ZoneWithPrototype = this._getZoneWithPrototype();
+      this._diag.debug("removing patch from", this.moduleName, this.version, "zone:", !!ZoneWithPrototype);
+      if (ZoneWithPrototype && this._zonePatched) {
+        if (isWrapped(ZoneWithPrototype.prototype.runTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "runTask");
         }
-      };
-      UserInteractionInstrumentation3.prototype.enable = function() {
-        var _this = this;
-        var ZoneWithPrototype = this._getZoneWithPrototype();
-        this._diag.debug("applying patch to", this.moduleName, this.version, "zone:", !!ZoneWithPrototype);
-        if (ZoneWithPrototype) {
-          if (isWrapped(ZoneWithPrototype.prototype.runTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "runTask");
-            this._diag.debug("removing previous patch from method runTask");
-          }
-          if (isWrapped(ZoneWithPrototype.prototype.scheduleTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "scheduleTask");
-            this._diag.debug("removing previous patch from method scheduleTask");
-          }
-          if (isWrapped(ZoneWithPrototype.prototype.cancelTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "cancelTask");
-            this._diag.debug("removing previous patch from method cancelTask");
-          }
-          this._zonePatched = true;
-          this._wrap(ZoneWithPrototype.prototype, "runTask", this._patchZoneRunTask());
-          this._wrap(ZoneWithPrototype.prototype, "scheduleTask", this._patchZoneScheduleTask());
-          this._wrap(ZoneWithPrototype.prototype, "cancelTask", this._patchZoneCancelTask());
-        } else {
-          this._zonePatched = false;
-          var targets = this._getPatchableEventTargets();
-          targets.forEach(function(target) {
-            if (isWrapped(target.addEventListener)) {
-              _this._unwrap(target, "addEventListener");
-              _this._diag.debug("removing previous patch from method addEventListener");
-            }
-            if (isWrapped(target.removeEventListener)) {
-              _this._unwrap(target, "removeEventListener");
-              _this._diag.debug("removing previous patch from method removeEventListener");
-            }
-            _this._wrap(target, "addEventListener", _this._patchAddEventListener());
-            _this._wrap(target, "removeEventListener", _this._patchRemoveEventListener());
-          });
+        if (isWrapped(ZoneWithPrototype.prototype.scheduleTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "scheduleTask");
         }
-        this._patchHistoryApi();
-      };
-      UserInteractionInstrumentation3.prototype.disable = function() {
-        var _this = this;
-        var ZoneWithPrototype = this._getZoneWithPrototype();
-        this._diag.debug("removing patch from", this.moduleName, this.version, "zone:", !!ZoneWithPrototype);
-        if (ZoneWithPrototype && this._zonePatched) {
-          if (isWrapped(ZoneWithPrototype.prototype.runTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "runTask");
-          }
-          if (isWrapped(ZoneWithPrototype.prototype.scheduleTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "scheduleTask");
-          }
-          if (isWrapped(ZoneWithPrototype.prototype.cancelTask)) {
-            this._unwrap(ZoneWithPrototype.prototype, "cancelTask");
-          }
-        } else {
-          var targets = this._getPatchableEventTargets();
-          targets.forEach(function(target) {
-            if (isWrapped(target.addEventListener)) {
-              _this._unwrap(target, "addEventListener");
-            }
-            if (isWrapped(target.removeEventListener)) {
-              _this._unwrap(target, "removeEventListener");
-            }
-          });
+        if (isWrapped(ZoneWithPrototype.prototype.cancelTask)) {
+          this._unwrap(ZoneWithPrototype.prototype, "cancelTask");
         }
-        this._unpatchHistoryApi();
-      };
-      UserInteractionInstrumentation3.prototype._getZoneWithPrototype = function() {
-        var _window = window;
-        return _window.Zone;
-      };
-      return UserInteractionInstrumentation3;
-    }(InstrumentationBase)
-  );
+      } else {
+        const targets = this._getPatchableEventTargets();
+        targets.forEach((target) => {
+          if (isWrapped(target.addEventListener)) {
+            this._unwrap(target, "addEventListener");
+          }
+          if (isWrapped(target.removeEventListener)) {
+            this._unwrap(target, "removeEventListener");
+          }
+        });
+      }
+      this._unpatchHistoryApi();
+    }
+    /**
+     * returns Zone
+     */
+    _getZoneWithPrototype() {
+      const _window = window;
+      return _window.Zone;
+    }
+  };
 
-  // node_modules/@opentelemetry/instrumentation-xml-http-request/node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_HTTP_METHOD2 = "http.method";
-  var TMP_HTTP_URL3 = "http.url";
-  var TMP_HTTP_HOST2 = "http.host";
-  var TMP_HTTP_SCHEME2 = "http.scheme";
-  var TMP_HTTP_STATUS_CODE2 = "http.status_code";
-  var TMP_HTTP_USER_AGENT3 = "http.user_agent";
-  var TMP_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2 = "http.request_content_length_uncompressed";
-  var SEMATTRS_HTTP_METHOD2 = TMP_HTTP_METHOD2;
-  var SEMATTRS_HTTP_URL3 = TMP_HTTP_URL3;
-  var SEMATTRS_HTTP_HOST2 = TMP_HTTP_HOST2;
-  var SEMATTRS_HTTP_SCHEME2 = TMP_HTTP_SCHEME2;
-  var SEMATTRS_HTTP_STATUS_CODE2 = TMP_HTTP_STATUS_CODE2;
-  var SEMATTRS_HTTP_USER_AGENT3 = TMP_HTTP_USER_AGENT3;
-  var SEMATTRS_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2 = TMP_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2;
+  // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/semconv.js
+  var ATTR_HTTP_HOST2 = "http.host";
+  var ATTR_HTTP_METHOD2 = "http.method";
+  var ATTR_HTTP_REQUEST_BODY_SIZE2 = "http.request.body.size";
+  var ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2 = "http.request_content_length_uncompressed";
+  var ATTR_HTTP_SCHEME2 = "http.scheme";
+  var ATTR_HTTP_STATUS_CODE2 = "http.status_code";
+  var ATTR_HTTP_URL2 = "http.url";
+  var ATTR_HTTP_USER_AGENT2 = "http.user_agent";
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/enums/EventNames.js
   var EventNames2;
@@ -11441,46 +14448,21 @@
   })(EventNames2 || (EventNames2 = {}));
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/utils.js
-  var __values9 = function(o2) {
-    var s2 = typeof Symbol === "function" && Symbol.iterator, m2 = s2 && o2[s2], i2 = 0;
-    if (m2) return m2.call(o2);
-    if (o2 && typeof o2.length === "number") return {
-      next: function() {
-        if (o2 && i2 >= o2.length) o2 = void 0;
-        return { value: o2 && o2[i2++], done: !o2 };
-      }
-    };
-    throw new TypeError(s2 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  };
-  var __read19 = function(o2, n2) {
-    var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
-    if (!m2) return o2;
-    var i2 = m2.call(o2), r2, ar = [], e2;
-    try {
-      while ((n2 === void 0 || n2-- > 0) && !(r2 = i2.next()).done) ar.push(r2.value);
-    } catch (error) {
-      e2 = { error };
-    } finally {
-      try {
-        if (r2 && !r2.done && (m2 = i2["return"])) m2.call(i2);
-      } finally {
-        if (e2) throw e2.error;
-      }
-    }
-    return ar;
-  };
   var DIAG_LOGGER2 = diag2.createComponentLogger({
     namespace: "@opentelemetry/opentelemetry-instrumentation-xml-http-request/utils"
   });
+  function isDocument2(value) {
+    return typeof Document !== "undefined" && value instanceof Document;
+  }
   function getXHRBodyLength2(body) {
-    if (typeof Document !== "undefined" && body instanceof Document) {
+    if (isDocument2(body)) {
       return new XMLSerializer().serializeToString(document).length;
+    }
+    if (typeof body === "string") {
+      return getByteLength2(body);
     }
     if (body instanceof Blob) {
       return body.size;
-    }
-    if (body.byteLength !== void 0) {
-      return body.byteLength;
     }
     if (body instanceof FormData) {
       return getFormDataSize2(body);
@@ -11488,8 +14470,8 @@
     if (body instanceof URLSearchParams) {
       return getByteLength2(body.toString());
     }
-    if (typeof body === "string") {
-      return getByteLength2(body);
+    if (body.byteLength !== void 0) {
+      return body.byteLength;
     }
     DIAG_LOGGER2.warn("unknown body type");
     return void 0;
@@ -11499,32 +14481,67 @@
     return TEXT_ENCODER2.encode(s2).byteLength;
   }
   function getFormDataSize2(formData) {
-    var e_1, _a3;
-    var size = 0;
-    try {
-      for (var _b = __values9(formData.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
-        var _d = __read19(_c.value, 2), key = _d[0], value = _d[1];
-        size += key.length;
-        if (value instanceof Blob) {
-          size += value.size;
-        } else {
-          size += value.length;
-        }
-      }
-    } catch (e_1_1) {
-      e_1 = { error: e_1_1 };
-    } finally {
-      try {
-        if (_c && !_c.done && (_a3 = _b.return)) _a3.call(_b);
-      } finally {
-        if (e_1) throw e_1.error;
+    let size = 0;
+    for (const [key, value] of formData.entries()) {
+      size += key.length;
+      if (value instanceof Blob) {
+        size += value.size;
+      } else {
+        size += value.length;
       }
     }
     return size;
   }
+  function normalizeHttpRequestMethod2(method) {
+    const knownMethods3 = getKnownMethods2();
+    const methUpper = method.toUpperCase();
+    if (methUpper in knownMethods3) {
+      return methUpper;
+    } else {
+      return "_OTHER";
+    }
+  }
+  var DEFAULT_KNOWN_METHODS2 = {
+    CONNECT: true,
+    DELETE: true,
+    GET: true,
+    HEAD: true,
+    OPTIONS: true,
+    PATCH: true,
+    POST: true,
+    PUT: true,
+    TRACE: true
+  };
+  var knownMethods2;
+  function getKnownMethods2() {
+    if (knownMethods2 === void 0) {
+      const cfgMethods = getStringListFromEnv("OTEL_INSTRUMENTATION_HTTP_KNOWN_METHODS");
+      if (cfgMethods && cfgMethods.length > 0) {
+        knownMethods2 = {};
+        cfgMethods.forEach((m2) => {
+          knownMethods2[m2] = true;
+        });
+      } else {
+        knownMethods2 = DEFAULT_KNOWN_METHODS2;
+      }
+    }
+    return knownMethods2;
+  }
+  var HTTP_PORT_FROM_PROTOCOL2 = {
+    "https:": "443",
+    "http:": "80"
+  };
+  function serverPortFromUrl2(url) {
+    const serverPort = Number(url.port || HTTP_PORT_FROM_PROTOCOL2[url.protocol]);
+    if (serverPort && !isNaN(serverPort)) {
+      return serverPort;
+    } else {
+      return void 0;
+    }
+  }
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/version.js
-  var VERSION6 = "0.57.2";
+  var VERSION6 = "0.205.0";
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/enums/AttributeNames.js
   var AttributeNames4;
@@ -11533,324 +14550,406 @@
   })(AttributeNames4 || (AttributeNames4 = {}));
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/xhr.js
-  var __extends10 = /* @__PURE__ */ function() {
-    var extendStatics = function(d2, b2) {
-      extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-        d3.__proto__ = b3;
-      } || function(d3, b3) {
-        for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-      };
-      return extendStatics(d2, b2);
-    };
-    return function(d2, b2) {
-      if (typeof b2 !== "function" && b2 !== null)
-        throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-      extendStatics(d2, b2);
-      function __() {
-        this.constructor = d2;
-      }
-      d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
-    };
-  }();
   var OBSERVER_WAIT_TIME_MS2 = 300;
-  var XMLHttpRequestInstrumentation = (
-    /** @class */
-    function(_super) {
-      __extends10(XMLHttpRequestInstrumentation2, _super);
-      function XMLHttpRequestInstrumentation2(config) {
-        if (config === void 0) {
-          config = {};
+  var XMLHttpRequestInstrumentation = class extends InstrumentationBase2 {
+    component = "xml-http-request";
+    version = VERSION6;
+    moduleName = this.component;
+    _tasksCount = 0;
+    _xhrMem = /* @__PURE__ */ new WeakMap();
+    _usedResources = /* @__PURE__ */ new WeakSet();
+    _semconvStability;
+    constructor(config = {}) {
+      super("@opentelemetry/instrumentation-xml-http-request", VERSION6, config);
+      this._semconvStability = semconvStabilityFromStr("http", config?.semconvStabilityOptIn);
+    }
+    init() {
+    }
+    /**
+     * Adds custom headers to XMLHttpRequest
+     * @param xhr
+     * @param spanUrl
+     * @private
+     */
+    _addHeaders(xhr, spanUrl) {
+      const url = parseUrl(spanUrl).href;
+      if (!shouldPropagateTraceHeaders(url, this.getConfig().propagateTraceHeaderCorsUrls)) {
+        const headers2 = {};
+        propagation.inject(context.active(), headers2);
+        if (Object.keys(headers2).length > 0) {
+          this._diag.debug("headers inject skipped due to CORS policy");
         }
-        var _this = _super.call(this, "@opentelemetry/instrumentation-xml-http-request", VERSION6, config) || this;
-        _this.component = "xml-http-request";
-        _this.version = VERSION6;
-        _this.moduleName = _this.component;
-        _this._tasksCount = 0;
-        _this._xhrMem = /* @__PURE__ */ new WeakMap();
-        _this._usedResources = /* @__PURE__ */ new WeakSet();
-        return _this;
+        return;
       }
-      XMLHttpRequestInstrumentation2.prototype.init = function() {
-      };
-      XMLHttpRequestInstrumentation2.prototype._addHeaders = function(xhr, spanUrl) {
-        var url = parseUrl(spanUrl).href;
-        if (!shouldPropagateTraceHeaders(url, this.getConfig().propagateTraceHeaderCorsUrls)) {
-          var headers_1 = {};
-          propagation.inject(context.active(), headers_1);
-          if (Object.keys(headers_1).length > 0) {
-            this._diag.debug("headers inject skipped due to CORS policy");
-          }
-          return;
+      const headers = {};
+      propagation.inject(context.active(), headers);
+      Object.keys(headers).forEach((key) => {
+        xhr.setRequestHeader(key, String(headers[key]));
+      });
+    }
+    /**
+     * Add cors pre flight child span
+     * @param span
+     * @param corsPreFlightRequest
+     * @private
+     */
+    _addChildSpan(span, corsPreFlightRequest) {
+      context.with(trace.setSpan(context.active(), span), () => {
+        const childSpan = this.tracer.startSpan("CORS Preflight", {
+          startTime: corsPreFlightRequest[PerformanceTimingNames.FETCH_START]
+        });
+        const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+        addSpanNetworkEvents(childSpan, corsPreFlightRequest, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
+        childSpan.end(corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END]);
+      });
+    }
+    /**
+     * Add attributes when span is going to end
+     * @param span
+     * @param xhr
+     * @param spanUrl
+     * @private
+     */
+    _addFinalSpanAttributes(span, xhrMem, spanUrl) {
+      if (this._semconvStability & SemconvStability.OLD) {
+        if (xhrMem.status !== void 0) {
+          span.setAttribute(ATTR_HTTP_STATUS_CODE2, xhrMem.status);
         }
-        var headers = {};
-        propagation.inject(context.active(), headers);
-        Object.keys(headers).forEach(function(key) {
-          xhr.setRequestHeader(key, String(headers[key]));
-        });
-      };
-      XMLHttpRequestInstrumentation2.prototype._addChildSpan = function(span, corsPreFlightRequest) {
-        var _this = this;
-        context.with(trace.setSpan(context.active(), span), function() {
-          var childSpan = _this.tracer.startSpan("CORS Preflight", {
-            startTime: corsPreFlightRequest[PerformanceTimingNames.FETCH_START]
-          });
-          addSpanNetworkEvents(childSpan, corsPreFlightRequest, _this.getConfig().ignoreNetworkEvents);
-          childSpan.end(corsPreFlightRequest[PerformanceTimingNames.RESPONSE_END]);
-        });
-      };
-      XMLHttpRequestInstrumentation2.prototype._addFinalSpanAttributes = function(span, xhrMem, spanUrl) {
+        if (xhrMem.statusText !== void 0) {
+          span.setAttribute(AttributeNames4.HTTP_STATUS_TEXT, xhrMem.statusText);
+        }
         if (typeof spanUrl === "string") {
-          var parsedUrl = parseUrl(spanUrl);
-          if (xhrMem.status !== void 0) {
-            span.setAttribute(SEMATTRS_HTTP_STATUS_CODE2, xhrMem.status);
-          }
-          if (xhrMem.statusText !== void 0) {
-            span.setAttribute(AttributeNames4.HTTP_STATUS_TEXT, xhrMem.statusText);
-          }
-          span.setAttribute(SEMATTRS_HTTP_HOST2, parsedUrl.host);
-          span.setAttribute(SEMATTRS_HTTP_SCHEME2, parsedUrl.protocol.replace(":", ""));
-          span.setAttribute(SEMATTRS_HTTP_USER_AGENT3, navigator.userAgent);
+          const parsedUrl = parseUrl(spanUrl);
+          span.setAttribute(ATTR_HTTP_HOST2, parsedUrl.host);
+          span.setAttribute(ATTR_HTTP_SCHEME2, parsedUrl.protocol.replace(":", ""));
         }
-      };
-      XMLHttpRequestInstrumentation2.prototype._applyAttributesAfterXHR = function(span, xhr) {
-        var _this = this;
-        var applyCustomAttributesOnSpan = this.getConfig().applyCustomAttributesOnSpan;
-        if (typeof applyCustomAttributesOnSpan === "function") {
-          safeExecuteInTheMiddle(function() {
-            return applyCustomAttributesOnSpan(span, xhr);
-          }, function(error) {
-            if (!error) {
-              return;
-            }
-            _this._diag.error("applyCustomAttributesOnSpan", error);
-          }, true);
+        span.setAttribute(ATTR_HTTP_USER_AGENT2, navigator.userAgent);
+      }
+      if (this._semconvStability & SemconvStability.STABLE) {
+        if (xhrMem.status) {
+          span.setAttribute(ATTR_HTTP_RESPONSE_STATUS_CODE, xhrMem.status);
         }
-      };
-      XMLHttpRequestInstrumentation2.prototype._addResourceObserver = function(xhr, spanUrl) {
-        var xhrMem = this._xhrMem.get(xhr);
-        if (!xhrMem || typeof PerformanceObserver !== "function" || typeof PerformanceResourceTiming !== "function") {
-          return;
-        }
-        xhrMem.createdResources = {
-          observer: new PerformanceObserver(function(list) {
-            var entries = list.getEntries();
-            var parsedUrl = parseUrl(spanUrl);
-            entries.forEach(function(entry) {
-              if (entry.initiatorType === "xmlhttprequest" && entry.name === parsedUrl.href) {
-                if (xhrMem.createdResources) {
-                  xhrMem.createdResources.entries.push(entry);
-                }
-              }
-            });
-          }),
-          entries: []
-        };
-        xhrMem.createdResources.observer.observe({
-          entryTypes: ["resource"]
-        });
-      };
-      XMLHttpRequestInstrumentation2.prototype._clearResources = function() {
-        if (this._tasksCount === 0 && this.getConfig().clearTimingResources) {
-          otperformance.clearResourceTimings();
-          this._xhrMem = /* @__PURE__ */ new WeakMap();
-          this._usedResources = /* @__PURE__ */ new WeakSet();
-        }
-      };
-      XMLHttpRequestInstrumentation2.prototype._findResourceAndAddNetworkEvents = function(xhrMem, span, spanUrl, startTime, endTime) {
-        if (!spanUrl || !startTime || !endTime || !xhrMem.createdResources) {
-          return;
-        }
-        var resources = xhrMem.createdResources.entries;
-        if (!resources || !resources.length) {
-          resources = otperformance.getEntriesByType("resource");
-        }
-        var resource = getResource(parseUrl(spanUrl).href, startTime, endTime, resources, this._usedResources);
-        if (resource.mainRequest) {
-          var mainRequest = resource.mainRequest;
-          this._markResourceAsUsed(mainRequest);
-          var corsPreFlightRequest = resource.corsPreFlightRequest;
-          if (corsPreFlightRequest) {
-            this._addChildSpan(span, corsPreFlightRequest);
-            this._markResourceAsUsed(corsPreFlightRequest);
-          }
-          addSpanNetworkEvents(span, mainRequest, this.getConfig().ignoreNetworkEvents);
-        }
-      };
-      XMLHttpRequestInstrumentation2.prototype._cleanPreviousSpanInformation = function(xhr) {
-        var xhrMem = this._xhrMem.get(xhr);
-        if (xhrMem) {
-          var callbackToRemoveEvents = xhrMem.callbackToRemoveEvents;
-          if (callbackToRemoveEvents) {
-            callbackToRemoveEvents();
-          }
-          this._xhrMem.delete(xhr);
-        }
-      };
-      XMLHttpRequestInstrumentation2.prototype._createSpan = function(xhr, url, method) {
-        var _a3;
-        if (isUrlIgnored(url, this.getConfig().ignoreUrls)) {
-          this._diag.debug("ignoring span as url matches ignored url");
-          return;
-        }
-        var spanName = method.toUpperCase();
-        var currentSpan = this.tracer.startSpan(spanName, {
-          kind: SpanKind.CLIENT,
-          attributes: (_a3 = {}, _a3[SEMATTRS_HTTP_METHOD2] = method, _a3[SEMATTRS_HTTP_URL3] = parseUrl(url).toString(), _a3)
-        });
-        currentSpan.addEvent(EventNames2.METHOD_OPEN);
-        this._cleanPreviousSpanInformation(xhr);
-        this._xhrMem.set(xhr, {
-          span: currentSpan,
-          spanUrl: url
-        });
-        return currentSpan;
-      };
-      XMLHttpRequestInstrumentation2.prototype._markResourceAsUsed = function(resource) {
-        this._usedResources.add(resource);
-      };
-      XMLHttpRequestInstrumentation2.prototype._patchOpen = function() {
-        var _this = this;
-        return function(original) {
-          var plugin = _this;
-          return function patchOpen() {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-              args[_i] = arguments[_i];
-            }
-            var method = args[0];
-            var url = args[1];
-            plugin._createSpan(this, url, method);
-            return original.apply(this, args);
-          };
-        };
-      };
-      XMLHttpRequestInstrumentation2.prototype._patchSend = function() {
-        var plugin = this;
-        function endSpanTimeout(eventName, xhrMem, performanceEndTime, endTime) {
-          var callbackToRemoveEvents = xhrMem.callbackToRemoveEvents;
-          if (typeof callbackToRemoveEvents === "function") {
-            callbackToRemoveEvents();
-          }
-          var span = xhrMem.span, spanUrl = xhrMem.spanUrl, sendStartTime = xhrMem.sendStartTime;
-          if (span) {
-            plugin._findResourceAndAddNetworkEvents(xhrMem, span, spanUrl, sendStartTime, performanceEndTime);
-            span.addEvent(eventName, endTime);
-            plugin._addFinalSpanAttributes(span, xhrMem, spanUrl);
-            span.end(endTime);
-            plugin._tasksCount--;
-          }
-          plugin._clearResources();
-        }
-        function endSpan(eventName, xhr) {
-          var xhrMem = plugin._xhrMem.get(xhr);
-          if (!xhrMem) {
+      }
+    }
+    _applyAttributesAfterXHR(span, xhr) {
+      const applyCustomAttributesOnSpan = this.getConfig().applyCustomAttributesOnSpan;
+      if (typeof applyCustomAttributesOnSpan === "function") {
+        safeExecuteInTheMiddle(() => applyCustomAttributesOnSpan(span, xhr), (error) => {
+          if (!error) {
             return;
           }
-          xhrMem.status = xhr.status;
-          xhrMem.statusText = xhr.statusText;
-          plugin._xhrMem.delete(xhr);
-          if (xhrMem.span) {
-            plugin._applyAttributesAfterXHR(xhrMem.span, xhr);
-          }
-          var performanceEndTime = hrTime();
-          var endTime = Date.now();
-          setTimeout(function() {
-            endSpanTimeout(eventName, xhrMem, performanceEndTime, endTime);
-          }, OBSERVER_WAIT_TIME_MS2);
-        }
-        function onError() {
-          endSpan(EventNames2.EVENT_ERROR, this);
-        }
-        function onAbort() {
-          endSpan(EventNames2.EVENT_ABORT, this);
-        }
-        function onTimeout() {
-          endSpan(EventNames2.EVENT_TIMEOUT, this);
-        }
-        function onLoad() {
-          if (this.status < 299) {
-            endSpan(EventNames2.EVENT_LOAD, this);
-          } else {
-            endSpan(EventNames2.EVENT_ERROR, this);
-          }
-        }
-        function unregister(xhr) {
-          xhr.removeEventListener("abort", onAbort);
-          xhr.removeEventListener("error", onError);
-          xhr.removeEventListener("load", onLoad);
-          xhr.removeEventListener("timeout", onTimeout);
-          var xhrMem = plugin._xhrMem.get(xhr);
-          if (xhrMem) {
-            xhrMem.callbackToRemoveEvents = void 0;
-          }
-        }
-        return function(original) {
-          return function patchSend() {
-            var _this = this;
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-              args[_i] = arguments[_i];
-            }
-            var xhrMem = plugin._xhrMem.get(this);
-            if (!xhrMem) {
-              return original.apply(this, args);
-            }
-            var currentSpan = xhrMem.span;
-            var spanUrl = xhrMem.spanUrl;
-            if (currentSpan && spanUrl) {
-              if (plugin.getConfig().measureRequestSize && (args === null || args === void 0 ? void 0 : args[0])) {
-                var body = args[0];
-                var bodyLength = getXHRBodyLength2(body);
-                if (bodyLength !== void 0) {
-                  currentSpan.setAttribute(SEMATTRS_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2, bodyLength);
-                }
+          this._diag.error("applyCustomAttributesOnSpan", error);
+        }, true);
+      }
+    }
+    /**
+     * will collect information about all resources created
+     * between "send" and "end" with additional waiting for main resource
+     * @param xhr
+     * @param spanUrl
+     * @private
+     */
+    _addResourceObserver(xhr, spanUrl) {
+      const xhrMem = this._xhrMem.get(xhr);
+      if (!xhrMem || typeof PerformanceObserver !== "function" || typeof PerformanceResourceTiming !== "function") {
+        return;
+      }
+      xhrMem.createdResources = {
+        observer: new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const parsedUrl = parseUrl(spanUrl);
+          entries.forEach((entry) => {
+            if (entry.initiatorType === "xmlhttprequest" && entry.name === parsedUrl.href) {
+              if (xhrMem.createdResources) {
+                xhrMem.createdResources.entries.push(entry);
               }
-              context.with(trace.setSpan(context.active(), currentSpan), function() {
-                plugin._tasksCount++;
-                xhrMem.sendStartTime = hrTime();
-                currentSpan.addEvent(EventNames2.METHOD_SEND);
-                _this.addEventListener("abort", onAbort);
-                _this.addEventListener("error", onError);
-                _this.addEventListener("load", onLoad);
-                _this.addEventListener("timeout", onTimeout);
-                xhrMem.callbackToRemoveEvents = function() {
-                  unregister(_this);
-                  if (xhrMem.createdResources) {
-                    xhrMem.createdResources.observer.disconnect();
-                  }
-                };
-                plugin._addHeaders(_this, spanUrl);
-                plugin._addResourceObserver(_this, spanUrl);
-              });
             }
-            return original.apply(this, args);
-          };
-        };
+          });
+        }),
+        entries: []
       };
-      XMLHttpRequestInstrumentation2.prototype.enable = function() {
-        this._diag.debug("applying patch to", this.moduleName, this.version);
-        if (isWrapped(XMLHttpRequest.prototype.open)) {
-          this._unwrap(XMLHttpRequest.prototype, "open");
-          this._diag.debug("removing previous patch from method open");
-        }
-        if (isWrapped(XMLHttpRequest.prototype.send)) {
-          this._unwrap(XMLHttpRequest.prototype, "send");
-          this._diag.debug("removing previous patch from method send");
-        }
-        this._wrap(XMLHttpRequest.prototype, "open", this._patchOpen());
-        this._wrap(XMLHttpRequest.prototype, "send", this._patchSend());
-      };
-      XMLHttpRequestInstrumentation2.prototype.disable = function() {
-        this._diag.debug("removing patch from", this.moduleName, this.version);
-        this._unwrap(XMLHttpRequest.prototype, "open");
-        this._unwrap(XMLHttpRequest.prototype, "send");
-        this._tasksCount = 0;
+      xhrMem.createdResources.observer.observe({
+        entryTypes: ["resource"]
+      });
+    }
+    /**
+     * Clears the resource timings and all resources assigned with spans
+     *     when {@link XMLHttpRequestInstrumentationConfig.clearTimingResources} is
+     *     set to true (default false)
+     * @private
+     */
+    _clearResources() {
+      if (this._tasksCount === 0 && this.getConfig().clearTimingResources) {
+        otperformance.clearResourceTimings();
         this._xhrMem = /* @__PURE__ */ new WeakMap();
         this._usedResources = /* @__PURE__ */ new WeakSet();
+      }
+    }
+    /**
+     * Finds appropriate resource and add network events to the span
+     * @param span
+     */
+    _findResourceAndAddNetworkEvents(xhrMem, span, spanUrl, startTime, endTime) {
+      if (!spanUrl || !startTime || !endTime || !xhrMem.createdResources) {
+        return;
+      }
+      let resources = xhrMem.createdResources.entries;
+      if (!resources || !resources.length) {
+        resources = otperformance.getEntriesByType("resource");
+      }
+      const resource = getResource(parseUrl(spanUrl).href, startTime, endTime, resources, this._usedResources);
+      if (resource.mainRequest) {
+        const mainRequest = resource.mainRequest;
+        this._markResourceAsUsed(mainRequest);
+        const corsPreFlightRequest = resource.corsPreFlightRequest;
+        if (corsPreFlightRequest) {
+          this._addChildSpan(span, corsPreFlightRequest);
+          this._markResourceAsUsed(corsPreFlightRequest);
+        }
+        const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+        addSpanNetworkEvents(span, mainRequest, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
+      }
+    }
+    /**
+     * Removes the previous information about span.
+     * This might happened when the same xhr is used again.
+     * @param xhr
+     * @private
+     */
+    _cleanPreviousSpanInformation(xhr) {
+      const xhrMem = this._xhrMem.get(xhr);
+      if (xhrMem) {
+        const callbackToRemoveEvents = xhrMem.callbackToRemoveEvents;
+        if (callbackToRemoveEvents) {
+          callbackToRemoveEvents();
+        }
+        this._xhrMem.delete(xhr);
+      }
+    }
+    /**
+     * Creates a new span when method "open" is called
+     * @param xhr
+     * @param url
+     * @param method
+     * @private
+     */
+    _createSpan(xhr, url, method) {
+      if (isUrlIgnored(url, this.getConfig().ignoreUrls)) {
+        this._diag.debug("ignoring span as url matches ignored url");
+        return;
+      }
+      let name = "";
+      const parsedUrl = parseUrl(url);
+      const attributes = {};
+      if (this._semconvStability & SemconvStability.OLD) {
+        name = method.toUpperCase();
+        attributes[ATTR_HTTP_METHOD2] = method;
+        attributes[ATTR_HTTP_URL2] = parsedUrl.toString();
+      }
+      if (this._semconvStability & SemconvStability.STABLE) {
+        const origMethod = method;
+        const normMethod = normalizeHttpRequestMethod2(method);
+        if (!name) {
+          name = normMethod;
+        }
+        attributes[ATTR_HTTP_REQUEST_METHOD] = normMethod;
+        if (normMethod !== origMethod) {
+          attributes[ATTR_HTTP_REQUEST_METHOD_ORIGINAL] = origMethod;
+        }
+        attributes[ATTR_URL_FULL] = parsedUrl.toString();
+        attributes[ATTR_SERVER_ADDRESS] = parsedUrl.hostname;
+        const serverPort = serverPortFromUrl2(parsedUrl);
+        if (serverPort) {
+          attributes[ATTR_SERVER_PORT] = serverPort;
+        }
+      }
+      const currentSpan = this.tracer.startSpan(name, {
+        kind: SpanKind.CLIENT,
+        attributes
+      });
+      currentSpan.addEvent(EventNames2.METHOD_OPEN);
+      this._cleanPreviousSpanInformation(xhr);
+      this._xhrMem.set(xhr, {
+        span: currentSpan,
+        spanUrl: url
+      });
+      return currentSpan;
+    }
+    /**
+     * Marks certain [resource]{@link PerformanceResourceTiming} when information
+     * from this is used to add events to span.
+     * This is done to avoid reusing the same resource again for next span
+     * @param resource
+     * @private
+     */
+    _markResourceAsUsed(resource) {
+      this._usedResources.add(resource);
+    }
+    /**
+     * Patches the method open
+     * @private
+     */
+    _patchOpen() {
+      return (original) => {
+        const plugin = this;
+        return function patchOpen(...args) {
+          const method = args[0];
+          const url = args[1];
+          plugin._createSpan(this, url, method);
+          return original.apply(this, args);
+        };
       };
-      return XMLHttpRequestInstrumentation2;
-    }(InstrumentationBase)
-  );
+    }
+    /**
+     * Patches the method send
+     * @private
+     */
+    _patchSend() {
+      const plugin = this;
+      function endSpanTimeout(eventName, xhrMem, performanceEndTime, endTime) {
+        const callbackToRemoveEvents = xhrMem.callbackToRemoveEvents;
+        if (typeof callbackToRemoveEvents === "function") {
+          callbackToRemoveEvents();
+        }
+        const { span, spanUrl, sendStartTime } = xhrMem;
+        if (span) {
+          plugin._findResourceAndAddNetworkEvents(xhrMem, span, spanUrl, sendStartTime, performanceEndTime);
+          span.addEvent(eventName, endTime);
+          plugin._addFinalSpanAttributes(span, xhrMem, spanUrl);
+          span.end(endTime);
+          plugin._tasksCount--;
+        }
+        plugin._clearResources();
+      }
+      function endSpan(eventName, xhr, isError, errorType) {
+        const xhrMem = plugin._xhrMem.get(xhr);
+        if (!xhrMem) {
+          return;
+        }
+        xhrMem.status = xhr.status;
+        xhrMem.statusText = xhr.statusText;
+        plugin._xhrMem.delete(xhr);
+        if (xhrMem.span) {
+          const span = xhrMem.span;
+          plugin._applyAttributesAfterXHR(span, xhr);
+          if (plugin._semconvStability & SemconvStability.STABLE) {
+            if (isError) {
+              if (errorType) {
+                span.setStatus({
+                  code: SpanStatusCode.ERROR,
+                  message: errorType
+                });
+                span.setAttribute(ATTR_ERROR_TYPE, errorType);
+              }
+            } else if (xhrMem.status && xhrMem.status >= 400) {
+              span.setStatus({ code: SpanStatusCode.ERROR });
+              span.setAttribute(ATTR_ERROR_TYPE, String(xhrMem.status));
+            }
+          }
+        }
+        const performanceEndTime = hrTime();
+        const endTime = Date.now();
+        setTimeout(() => {
+          endSpanTimeout(eventName, xhrMem, performanceEndTime, endTime);
+        }, OBSERVER_WAIT_TIME_MS2);
+      }
+      function onError() {
+        endSpan(EventNames2.EVENT_ERROR, this, true, "error");
+      }
+      function onAbort() {
+        endSpan(EventNames2.EVENT_ABORT, this, false);
+      }
+      function onTimeout() {
+        endSpan(EventNames2.EVENT_TIMEOUT, this, true, "timeout");
+      }
+      function onLoad() {
+        if (this.status < 299) {
+          endSpan(EventNames2.EVENT_LOAD, this, false);
+        } else {
+          endSpan(EventNames2.EVENT_ERROR, this, false);
+        }
+      }
+      function unregister(xhr) {
+        xhr.removeEventListener("abort", onAbort);
+        xhr.removeEventListener("error", onError);
+        xhr.removeEventListener("load", onLoad);
+        xhr.removeEventListener("timeout", onTimeout);
+        const xhrMem = plugin._xhrMem.get(xhr);
+        if (xhrMem) {
+          xhrMem.callbackToRemoveEvents = void 0;
+        }
+      }
+      return (original) => {
+        return function patchSend(...args) {
+          const xhrMem = plugin._xhrMem.get(this);
+          if (!xhrMem) {
+            return original.apply(this, args);
+          }
+          const currentSpan = xhrMem.span;
+          const spanUrl = xhrMem.spanUrl;
+          if (currentSpan && spanUrl) {
+            if (plugin.getConfig().measureRequestSize && args?.[0]) {
+              const body = args[0];
+              const bodyLength = getXHRBodyLength2(body);
+              if (bodyLength !== void 0) {
+                if (plugin._semconvStability & SemconvStability.OLD) {
+                  currentSpan.setAttribute(ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2, bodyLength);
+                }
+                if (plugin._semconvStability & SemconvStability.STABLE) {
+                  currentSpan.setAttribute(ATTR_HTTP_REQUEST_BODY_SIZE2, bodyLength);
+                }
+              }
+            }
+            context.with(trace.setSpan(context.active(), currentSpan), () => {
+              plugin._tasksCount++;
+              xhrMem.sendStartTime = hrTime();
+              currentSpan.addEvent(EventNames2.METHOD_SEND);
+              this.addEventListener("abort", onAbort);
+              this.addEventListener("error", onError);
+              this.addEventListener("load", onLoad);
+              this.addEventListener("timeout", onTimeout);
+              xhrMem.callbackToRemoveEvents = () => {
+                unregister(this);
+                if (xhrMem.createdResources) {
+                  xhrMem.createdResources.observer.disconnect();
+                }
+              };
+              plugin._addHeaders(this, spanUrl);
+              plugin._addResourceObserver(this, spanUrl);
+            });
+          }
+          return original.apply(this, args);
+        };
+      };
+    }
+    /**
+     * implements enable function
+     */
+    enable() {
+      this._diag.debug("applying patch to", this.moduleName, this.version);
+      if (isWrapped(XMLHttpRequest.prototype.open)) {
+        this._unwrap(XMLHttpRequest.prototype, "open");
+        this._diag.debug("removing previous patch from method open");
+      }
+      if (isWrapped(XMLHttpRequest.prototype.send)) {
+        this._unwrap(XMLHttpRequest.prototype, "send");
+        this._diag.debug("removing previous patch from method send");
+      }
+      this._wrap(XMLHttpRequest.prototype, "open", this._patchOpen());
+      this._wrap(XMLHttpRequest.prototype, "send", this._patchSend());
+    }
+    /**
+     * implements disable function
+     */
+    disable() {
+      this._diag.debug("removing patch from", this.moduleName, this.version);
+      this._unwrap(XMLHttpRequest.prototype, "open");
+      this._unwrap(XMLHttpRequest.prototype, "send");
+      this._tasksCount = 0;
+      this._xhrMem = /* @__PURE__ */ new WeakMap();
+      this._usedResources = /* @__PURE__ */ new WeakSet();
+    }
+  };
 
   // node_modules/@opentelemetry/auto-instrumentations-web/build/esm/utils.js
   var InstrumentationMap = {
@@ -11859,29 +14958,23 @@
     "@opentelemetry/instrumentation-user-interaction": UserInteractionInstrumentation2,
     "@opentelemetry/instrumentation-xml-http-request": XMLHttpRequestInstrumentation
   };
-  function getWebAutoInstrumentations(inputConfigs) {
-    var _a3;
-    if (inputConfigs === void 0) {
-      inputConfigs = {};
-    }
-    for (var _i = 0, _b = Object.keys(inputConfigs); _i < _b.length; _i++) {
-      var name_1 = _b[_i];
-      if (!Object.prototype.hasOwnProperty.call(InstrumentationMap, name_1)) {
-        diag2.error('Provided instrumentation name "' + name_1 + '" not found');
+  function getWebAutoInstrumentations(inputConfigs = {}) {
+    for (const name of Object.keys(inputConfigs)) {
+      if (!Object.prototype.hasOwnProperty.call(InstrumentationMap, name)) {
+        diag2.error(`Provided instrumentation name "${name}" not found`);
         continue;
       }
     }
-    var instrumentations = [];
-    for (var _c = 0, _d = Object.keys(InstrumentationMap); _c < _d.length; _c++) {
-      var name_2 = _d[_c];
-      var Instance = InstrumentationMap[name_2];
-      var userConfig = (_a3 = inputConfigs[name_2]) !== null && _a3 !== void 0 ? _a3 : {};
+    const instrumentations = [];
+    for (const name of Object.keys(InstrumentationMap)) {
+      const Instance = InstrumentationMap[name];
+      const userConfig = inputConfigs[name] ?? {};
       if (userConfig.enabled === false) {
-        diag2.debug("Disabling instrumentation for " + name_2);
+        diag2.debug(`Disabling instrumentation for ${name}`);
         continue;
       }
       try {
-        diag2.debug("Loading instrumentation for " + name_2);
+        diag2.debug(`Loading instrumentation for ${name}`);
         instrumentations.push(new Instance(userConfig));
       } catch (e2) {
         diag2.error(e2);
@@ -11891,20 +14984,16 @@
   }
 
   // src/hny.js
-  var MY_VERSION = "0.10.36";
+  var MY_VERSION = "0.10.40";
   function initializeTracing(params) {
     if (!params) {
       params = {};
     }
     if (!params.apiKey) {
-      throw new Error(
-        "Usage: initializeTracing({ apiKey: 'honeycomb api key', serviceName: 'name of this service' })"
-      );
+      throw new Error("Usage: initializeTracing({ apiKey: 'honeycomb api key', serviceName: 'name of this service' })");
     }
     if (!params.serviceName) {
-      console.log(
-        "No service name provided to initializeTracing. Defaulting to unknown_service"
-      );
+      console.log("No service name provided to initializeTracing. Defaulting to unknown_service");
       params.serviceName = "unknown_service";
     }
     function addContentLengthToSpan(span, resource) {
@@ -11922,10 +15011,8 @@
       }
     }
     const configDefaults = {
-      ignoreNetworkEvents: true
-      // propagateTraceHeaderCorsUrls: [
-      // /.+/g, // Regex to match your backend URLs. Update to the domains you wish to include.
-      // ]
+      ignoreNetworkEvents: true,
+      propagateTraceHeaderCorsUrls: [/localhost/g, /jessitron/g, /127\.0\.0\.1/]
     };
     const sdk = new HoneycombWebSDK({
       // endpoint: "https://api.eu1.honeycomb.io/v1/traces", // Send to EU instance of Honeycomb. Defaults to sending to US instance.
@@ -11960,9 +15047,7 @@
         console.log(`Query your traces: ${datasetQueryUrl}`);
       });
     }
-    console.log(
-      `Hny-otel-web tracing initialized, ${MY_VERSION} at last update of this message`
-    );
+    console.log(`Hny-otel-web tracing initialized, ${MY_VERSION} at last update of this message`);
   }
   function sendTestSpan() {
     const span = getTracer({
@@ -11993,53 +15078,41 @@
     if (fn === void 0 || typeof fn !== "function") {
       throw new Error("USAGE: inSpan(tracerName, spanName, () => { ... })");
     }
-    return getTracer(inputTracer).startActiveSpan(
-      spanName,
-      {},
-      context2 || null,
-      (span) => {
-        try {
-          return fn(span);
-        } catch (err) {
-          span.setStatus({
-            code: 2,
-            //SpanStatusCode.ERROR,
-            message: err.message
-          });
-          span.recordException(err);
-          throw err;
-        } finally {
-          span.end();
-        }
+    return getTracer(inputTracer).startActiveSpan(spanName, {}, context2 || null, (span) => {
+      try {
+        return fn(span);
+      } catch (err) {
+        span.setStatus({
+          code: 2,
+          //SpanStatusCode.ERROR,
+          message: err.message
+        });
+        span.recordException(err);
+        throw err;
+      } finally {
+        span.end();
       }
-    );
+    });
   }
   async function inSpanAsync(inputTracer, spanName, fn, context2) {
     if (fn === void 0) {
-      console.log(
-        "USAGE: inSpanAsync(tracerName, spanName, async () => { ... })"
-      );
+      console.log("USAGE: inSpanAsync(tracerName, spanName, async () => { ... })");
     }
-    return getTracer(inputTracer).startActiveSpan(
-      spanName,
-      {},
-      context2,
-      async (span) => {
-        try {
-          return await fn(span);
-        } catch (err) {
-          span.setStatus({
-            code: 2,
-            // trace.SpanStatusCode.ERROR,
-            message: err.message
-          });
-          span.recordException(err);
-          throw err;
-        } finally {
-          span.end();
-        }
+    return getTracer(inputTracer).startActiveSpan(spanName, {}, context2, async (span) => {
+      try {
+        return await fn(span);
+      } catch (err) {
+        span.setStatus({
+          code: 2,
+          // trace.SpanStatusCode.ERROR,
+          message: err.message
+        });
+        span.recordException(err);
+        throw err;
+      } finally {
+        span.end();
       }
-    );
+    });
   }
   function recordException2(exception, additionalAttributes) {
     const span = trace.getActiveSpan();
@@ -12048,18 +15121,18 @@
     }
     const attributes = {};
     if (typeof exception === "string") {
-      attributes[ATTR_EXCEPTION_MESSAGE2] = exception;
+      attributes[ATTR_EXCEPTION_MESSAGE] = exception;
     } else if (exception) {
       if (exception.code) {
-        attributes[ATTR_EXCEPTION_TYPE2] = exception.code.toString();
+        attributes[ATTR_EXCEPTION_TYPE] = exception.code.toString();
       } else if (exception.name) {
-        attributes[ATTR_EXCEPTION_TYPE2] = exception.name;
+        attributes[ATTR_EXCEPTION_TYPE] = exception.name;
       }
       if (exception.message) {
-        attributes[ATTR_EXCEPTION_MESSAGE2] = exception.message;
+        attributes[ATTR_EXCEPTION_MESSAGE] = exception.message;
       }
       if (exception.stack) {
-        attributes[ATTR_EXCEPTION_STACKTRACE2] = exception.stack;
+        attributes[ATTR_EXCEPTION_STACKTRACE] = exception.stack;
       }
     }
     const allAttributes = { ...attributes, ...additionalAttributes };
@@ -12067,7 +15140,7 @@
     span.setStatus({
       code: 2,
       // SpanStatusCode.ERROR,
-      message: attributes[ATTR_EXCEPTION_MESSAGE2]
+      message: attributes[ATTR_EXCEPTION_MESSAGE]
     });
   }
   function addSpanEvent(message, attributes) {
@@ -12075,10 +15148,10 @@
     span?.addEvent(message, attributes);
   }
   function inChildSpan(inputTracer, spanName, spanContext, fn) {
-    if (!!spanContext && (!spanContext.spanId || !spanContext.traceId || spanContext.traceFlags === void 0)) {
-      console.log(
-        "inChildSpan: the third argument should be a spanContext (or undefined to use the active context)"
-      );
+    if (!!spanContext && (!spanContext.spanId || !spanContext.traceId)) {
+      console.log("inChildSpan: the third argument should be a spanContext (or undefined to use the active context)");
+      fn = spanContext;
+      spanContext = fn;
     }
     const usefulContext = !!spanContext ? trace.setSpanContext(context.active(), spanContext) : context.active();
     return inSpan(inputTracer, spanName, fn, usefulContext);
