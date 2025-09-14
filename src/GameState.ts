@@ -175,10 +175,7 @@ export class GameState {
       toLocation: { type: "Library", position: index },
     }));
 
-    // Update positions after shuffle - top card is position 0
-    libraryCards.forEach((gameCard, index) => {
-      (gameCard.location as LibraryLocation).position = index;
-    });
+    moves.forEach((move) => this.executeMove(move, false));
 
     this.validateInvariants();
 
@@ -198,7 +195,12 @@ export class GameState {
     return this;
   }
 
-  private executeMove(move: CardMove) {
+  /**
+   * Grouch if the card isn't where it's supposed to be, then move it. Record the event.
+   * @param move
+   * @param recording - Shuffling or un-shuffling sets it to false, since that's recorded in its own way.
+   */
+  private executeMove(move: CardMove, recording: boolean = true) {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
@@ -213,7 +215,9 @@ export class GameState {
     const gameCard = this.gameCards[move.gameCardIndex];
     verifyLocationsAreIdentical(move.fromLocation, gameCard.location);
     gameCard.location = move.toLocation;
-    this.eventLog.record({ eventName: "move card", move });
+    if (recording) {
+      this.eventLog.record({ eventName: "move card", move });
+    }
   }
 
   private moveCard(gameCard: GameCard, toLocation: CardLocation) {
@@ -402,7 +406,7 @@ export class GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
     const moves = applyToState.eventName === "shuffle library" ? applyToState.moves : [applyToState.move];
-    moves.forEach((move) => this.executeMove(move));
+    moves.forEach((move) => this.executeMove(move, false));
     this.eventLog.recordUndo(event);
     return this;
   }
