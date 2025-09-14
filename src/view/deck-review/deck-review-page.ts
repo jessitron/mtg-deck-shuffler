@@ -1,7 +1,6 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, formatCardNameAsGathererLink } from "../common/shared-components.js";
+import { CARD_BACK, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatCommanderImage } from "./commander-display.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
 
 type CardAction = {
@@ -49,16 +48,6 @@ function formatLibraryCardActions(game: GameState, gameCard: any): string {
   </div>`;
 }
 
-function formatGameHeader(game: GameState): string {
-  const commanderImageHtml = formatCommanderImage(game.commanders);
-  const gameDetailsHtml = formatGameDetails(game);
-
-  return `<div id="command-zone">
-        ${commanderImageHtml}
-      </div>
-      ${gameDetailsHtml}`;
-}
-
 function formatLibraryStack(): string {
   return `<div class="library-stack" data-testid="library-stack">
           <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
@@ -104,11 +93,13 @@ export function formatLibraryModalHtml(game: GameState): string {
 }
 
 function formatDeckReviewHtmlSection(game: GameState): string {
-  const gameHeaderHtml = formatGameHeader(game);
+  const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
+  const gameDetailsHtml = formatGameDetails(game);
   const libraryStackHtml = formatLibraryStack();
 
   return `<div id="game-container">
-      ${gameHeaderHtml}
+      ${commanderImageHtml}
+      ${gameDetailsHtml}
 
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>

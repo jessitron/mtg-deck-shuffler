@@ -1,19 +1,14 @@
-import { CardDefinition, getCardImageUrl, WhatHappened } from "../../types.js";
-import { GameCard, GameState } from "../../GameState.js";
+import { getCardImageUrl, WhatHappened } from "../../types.js";
+import { GameState } from "../../GameState.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatHandSectionHtmlFragment } from "./hand-components.js";
 import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatTableModalHtmlFragment } from "./game-modals.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
+import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
 
-function formatCommanderImageHtmlFragment(commanders: any[]): string {
-  return commanders.length > 0
-    ? commanders
-        .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
-        .join("")
-    : `<div class="commander-placeholder">No Commander</div>`;
-}
+
 
 function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
@@ -26,27 +21,13 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
         <p><strong>Game ID:</strong> ${game.gameId}</p>
         <p><strong>Status:</strong> ${game.gameStatus()}</p>
         <div class="history">
-          ${mostRecentEvent
-            ? `<p>Last action: ${formatGameEventHtmlFragment(mostRecentEvent, game)}</p>`
-            : '<p>No actions taken yet</p>'
-          }
+          ${mostRecentEvent ? `<p>Last action: ${formatGameEventHtmlFragment(mostRecentEvent, game)}</p>` : "<p>No actions taken yet</p>"}
           <button class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">View History (${events.length})</button>
         </div>
       </div>`;
-}
-
-
-function formatGameHeaderHtmlFragment(game: GameState): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
-  const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
-
-  return `<div id="command-zone">
-        ${commanderImageHtml}
-      </div>
-      ${gameDetailsHtml}`;
 }
 
 function formatGameActionsHtmlFragment(game: GameState): string {
@@ -68,7 +49,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
-  const gameHeaderHtml = formatGameHeaderHtmlFragment(game);
+  const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
+  const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
@@ -76,9 +58,10 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const gameActionsHtml = formatGameActionsHtmlFragment(game);
 
   return `<div id="game-container">
-      ${gameHeaderHtml}
+        ${commanderImageHtml}
+      ${gameDetailsHtml}
 
-      <div id="mid-game-buttons">
+      <div id="table-section" class="table-section">
         <img src="/table.png" alt="Table" class="table-image" />
         <button class="table-cards-button"
                 hx-get="/table-modal/${game.gameId}"

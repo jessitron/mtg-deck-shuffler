@@ -50,7 +50,7 @@ The entry point where users choose which deck to load for their game session.
 
 Endpoints:
 
-- GET / (loads index.html)
+- GET / (loads the deck selection page)
 
 **Actions:**
 

@@ -1,16 +1,7 @@
 import { AvailableDecks } from "../../port-deck-retrieval/types.js";
-import { Deck, getCardImageUrl } from "../../types.js";
+import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-
-function formatCommanderImageHtmlFragment(commanders: any[]): string {
-  return commanders.length > 0
-    ? commanders
-        .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
-        .join("")
-    : `<div class="commander-placeholder">No Commander</div>`;
-}
-
-
+import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
 
 export function formatChooseDeckHtmlSection(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInputHtmlFragment();
@@ -51,7 +42,7 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
 
 export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
   const deckSelectionHtml = formatChooseDeckHtmlSection(availableDecks);
-  
+
   const content = `
     ${deckSelectionHtml}
     <div class="expository-text">
@@ -94,9 +85,7 @@ export function formatDeckHtmlSection(deck: Deck): string {
 
   return `<div id="deck-info">
         <div class="deck-details-layout">
-          <div class="commander-section">
             ${commanderImageHtml}
-          </div>
           <div class="deck-info-section">
             <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
             <p>${cardCountInfo}</p>
