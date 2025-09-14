@@ -79,6 +79,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
       ${gameHeaderHtml}
 
       <div id="mid-game-buttons">
+        <img src="/table.png" alt="Table" class="table-image" />
         <button class="table-cards-button"
                 hx-get="/table-modal/${game.gameId}"
                 hx-target="#modal-container"
