@@ -4,7 +4,7 @@ import path from "node:path";
 import { formatGameHtmlSection } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../../src/port-persist-state/types.js";
+import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
 import { StartGameEvent } from "../../src/GameEvents.js";
 import { formatDeckReviewHtmlPage } from "../../src/view/deck-review/deck-review-page.js";
 
@@ -70,7 +70,7 @@ describe("Game HTML Snapshot Tests", () => {
     ];
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 123,
       status: GameStatus.Active,
       deckProvenance: {
@@ -158,7 +158,7 @@ describe("Game HTML Snapshot Tests", () => {
     }));
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 456,
       status: GameStatus.NotStarted,
       deckProvenance: {
@@ -171,7 +171,7 @@ describe("Game HTML Snapshot Tests", () => {
       deckId: 12345,
       totalCards: cards.length,
       gameCards,
-      events: [StartGameEvent],
+      events: [{ ...StartGameEvent, gameEventIndex: 0 }],
     };
 
     const notStartedGameState = GameState.fromPersistedGameState(persistedState);

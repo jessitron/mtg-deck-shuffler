@@ -4,7 +4,7 @@ import path from "node:path";
 import { formatHistoryModalHtmlFragment } from "../../src/view/play-game/history-components.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, TableLocation } from "../../src/port-persist-state/types.js";
+import { GameCard, GameStatus, LibraryLocation, PERSISTED_GAME_STATE_VERSION, TableLocation } from "../../src/port-persist-state/types.js";
 import { GameEvent, MoveCardEvent, ShuffleEvent, StartEvent } from "../../src/GameEvents.js";
 
 describe("History Modal HTML Snapshot Tests", () => {
@@ -35,7 +35,7 @@ describe("History Modal HTML Snapshot Tests", () => {
     }));
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 123,
       status: GameStatus.Active,
       deckProvenance: {
@@ -79,17 +79,19 @@ describe("History Modal HTML Snapshot Tests", () => {
     const snapshotFile = "history-modal-multiple-events.html";
 
     const events: GameEvent[] = [
-      { eventName: "start game" } as StartEvent,
+      { eventName: "start game", gameEventIndex: 0 },
       {
         eventName: "move card",
+        gameEventIndex: 1,
         move: {
           gameCardIndex: 0,
           fromLocation: { type: "Library", position: 0 } as LibraryLocation,
           toLocation: { type: "Table" } as TableLocation,
         }
-      } as MoveCardEvent,
+      },
       {
         eventName: "shuffle library",
+        gameEventIndex: 2,
         moves: [
           {
             gameCardIndex: 1,
@@ -102,7 +104,7 @@ describe("History Modal HTML Snapshot Tests", () => {
             toLocation: { type: "Library", position: 1 } as LibraryLocation,
           }
         ]
-      } as ShuffleEvent,
+      },
     ];
 
     const gameState = createFakeGameStateWithEvents(events);
@@ -139,7 +141,7 @@ describe("History Modal HTML Snapshot Tests", () => {
     const snapshotFile = "history-modal-single-event.html";
 
     const events: GameEvent[] = [
-      { eventName: "start game" } as StartEvent,
+      { eventName: "start game", gameEventIndex: 0 },
     ];
 
     const gameState = createFakeGameStateWithEvents(events);

@@ -46,10 +46,12 @@ function formatHistoryListHtmlFragment(game: GameState): string {
   const events = game.gameEvents();
 
   return events
+    .map((event, index) => ({ event, originalIndex: index + 1 }))
+    .reverse()
     .map(
-      (event, index) =>
+      ({ event, originalIndex }) =>
         `<li class="history-item">
-        <span class="event-number">${index + 1}.</span>
+        <span class="event-number">${originalIndex}.</span>
         <span class="event-description">${formatGameEventHtmlFragment(event, game)}</span>
       </li>`
     )

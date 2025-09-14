@@ -4,7 +4,7 @@ import path from "node:path";
 import { formatLibraryModalHtml } from "../../src/view/deck-review/deck-review-page.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation } from "../../src/port-persist-state/types.js";
+import { GameCard, GameStatus, LibraryLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
 
 describe("Library Modal HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
@@ -32,7 +32,7 @@ describe("Library Modal HTML Snapshot Tests", () => {
     }));
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 123,
       status: GameStatus.Active,
       deckProvenance: {

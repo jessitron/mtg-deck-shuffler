@@ -4,7 +4,7 @@ import path from "node:path";
 import { formatGamePageHtmlPage } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
 import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, HandLocation, TableLocation } from "../../src/port-persist-state/types.js";
+import { GameCard, GameStatus, LibraryLocation, HandLocation, TableLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
 
 describe("Game Page HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
@@ -56,7 +56,7 @@ describe("Game Page HTML Snapshot Tests", () => {
     ];
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 789,
       status: GameStatus.Active,
       deckProvenance: {
@@ -142,7 +142,7 @@ describe("Game Page HTML Snapshot Tests", () => {
     }));
 
     const persistedState = {
-      version: 2 as const,
+      version: PERSISTED_GAME_STATE_VERSION,
       gameId: 456,
       status: GameStatus.NotStarted,
       deckProvenance: {
