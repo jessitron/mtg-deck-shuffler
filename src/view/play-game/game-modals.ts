@@ -59,24 +59,103 @@ export function formatTableModalHtmlFragment(game: GameState): string {
   return formatModalHtmlFragment("Cards on Table", bodyContent);
 }
 
+function formatCollapsibleJson(obj: any, level: number = 0): string {
+  const indent = '  '.repeat(level);
+
+  if (obj === null) return '<span class="json-null">null</span>';
+  if (typeof obj === 'string') return `<span class="json-string">"${obj}"</span>`;
+  if (typeof obj === 'number') return `<span class="json-number">${obj}</span>`;
+  if (typeof obj === 'boolean') return `<span class="json-boolean">${obj}</span>`;
+
+  if (Array.isArray(obj)) {
+    if (obj.length === 0) return '<span class="json-bracket">[]</span>';
+
+    const items = obj.map((item, index) =>
+      `${indent}  ${formatCollapsibleJson(item, level + 1)}${index < obj.length - 1 ? ',' : ''}`
+    ).join('\n');
+
+    return `<details open>
+      <summary class="json-summary"><span class="json-bracket">[</span> <span class="json-count">${obj.length} items</span></summary>
+      <div class="json-content">
+${items}
+      </div>
+    </details>${indent}<span class="json-bracket">]</span>`;
+  }
+
+  if (typeof obj === 'object') {
+    const keys = Object.keys(obj);
+    if (keys.length === 0) return '<span class="json-bracket">{}</span>';
+
+    const items = keys.map((key, index) =>
+      `${indent}  <span class="json-key">"${key}"</span>: ${formatCollapsibleJson(obj[key], level + 1)}${index < keys.length - 1 ? ',' : ''}`
+    ).join('\n');
+
+    return `<details open>
+      <summary class="json-summary"><span class="json-bracket">{</span> <span class="json-count">${keys.length} keys</span></summary>
+      <div class="json-content">
+${items}
+      </div>
+    </details>${indent}<span class="json-bracket">}</span>`;
+  }
+
+  return String(obj);
+}
+
 export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedGameState): string {
   const formattedJson = JSON.stringify(persistedGameState, null, 2);
+  const collapsibleHtml = formatCollapsibleJson(persistedGameState);
 
   const bodyContent = `<div style="position: relative; background-color: #f5f5f5; padding: 16px; border-radius: 4px; max-height: 60vh; overflow-y: auto;">
           <button onclick="copyDebugJson(this)"
                   style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; background-color: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; z-index: 1;">
             Copy JSON
           </button>
-          <pre style="margin: 0; font-family: monospace; font-size: 12px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; padding-top: 30px;">${formattedJson}</pre>
+          <div class="collapsible-json" style="font-family: monospace; font-size: 12px; line-height: 1.4; padding-top: 30px;">
+            ${collapsibleHtml}
+          </div>
+          <pre style="display: none;">${formattedJson}</pre>
         </div>
         <div style="margin-top: 16px; padding: 12px; background-color: #e8f4f8; border-radius: 4px; font-size: 0.9rem;">
           <strong>Game ID:</strong> ${persistedGameState.gameId} |
           <strong>Status:</strong> ${persistedGameState.status} |
           <strong>Version:</strong> ${persistedGameState.version}
         </div>
+        <style>
+          .collapsible-json details {
+            margin-left: 16px;
+          }
+          .json-summary {
+            cursor: pointer;
+            list-style: none;
+            outline: none;
+          }
+          .json-summary::-webkit-details-marker {
+            display: none;
+          }
+          .json-summary::before {
+            content: '▼ ';
+            margin-right: 4px;
+            font-size: 10px;
+          }
+          .collapsible-json details:not([open]) .json-summary::before {
+            content: '▶ ';
+          }
+          .json-content {
+            margin-left: 12px;
+            border-left: 1px solid #ddd;
+            padding-left: 8px;
+          }
+          .json-key { color: #0451a5; font-weight: bold; }
+          .json-string { color: #d14; }
+          .json-number { color: #098658; }
+          .json-boolean { color: #0000ff; }
+          .json-null { color: #999; }
+          .json-bracket { color: #333; font-weight: bold; }
+          .json-count { color: #999; font-size: 11px; font-style: italic; }
+        </style>
         <script>
           function copyDebugJson(button) {
-            const jsonElement = button.nextElementSibling;
+            const jsonElement = button.nextElementSibling.nextElementSibling;
             const text = jsonElement.textContent;
             navigator.clipboard.writeText(text).then(function() {
               const originalText = button.textContent;
