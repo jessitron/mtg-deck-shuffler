@@ -29,7 +29,7 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
         <div class="history">
           ${
             mostRecentUndoableEvent
-              ? `<div class="undo-controls">
+              ? `<div class="undo-controls"> Last action:
               ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}
               <button class="undo-button"
                       hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
