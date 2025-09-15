@@ -34,3 +34,10 @@ export interface RetrieveDeckPort {
   canHandle(request: DeckRetrievalRequest): boolean;
   retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
 }
+
+export class DeckVersionMismatchError extends Error {
+  constructor(expectedVersion: number, actualVersion: number | undefined, filePath: string) {
+    super(`Deck version mismatch in ${filePath}. Expected version ${expectedVersion}, but got ${actualVersion}`);
+    this.name = "DeckVersionMismatchError";
+  }
+}

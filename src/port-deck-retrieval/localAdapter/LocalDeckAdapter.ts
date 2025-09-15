@@ -1,13 +1,6 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, LOCAL_DECK_RELATIVE_PATH, AvailableDecks, AvailableDeck } from "../types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, LOCAL_DECK_RELATIVE_PATH, AvailableDecks, AvailableDeck, DeckVersionMismatchError } from "../types.js";
 import { Deck, PERSISTED_DECK_VERSION } from "../../types.js";
 import fs from "fs";
-
-export class DeckVersionMismatchError extends Error {
-  constructor(expectedVersion: number, actualVersion: number | undefined, filePath: string) {
-    super(`Deck version mismatch in ${filePath}. Expected version ${expectedVersion}, but got ${actualVersion}`);
-    this.name = 'DeckVersionMismatchError';
-  }
-}
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
   private readonly Directory = LOCAL_DECK_RELATIVE_PATH;
