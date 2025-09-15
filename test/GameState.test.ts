@@ -255,42 +255,53 @@ describe("GameState", () => {
   });
 
   test("multiple draws position cards correctly in Hand", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        // Skip test if deck has no cards
+        if (deck.cards.length === 0) return;
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
+        const initialLibrarySize = deck.cards.length;
 
-    // Draw first card
-    gameState.draw();
-    let hand = gameState.listHand();
-    expect(hand.length).toBe(1);
-    expect(hand[0].card.name).toBe("Ancestral Recall");
-    expect((hand[0].location as HandLocation).position).toBe(0);
+        // Track the original order of cards in library before drawing
+        const originalLibraryOrder = gameState.listLibrary().map(gc => gc.card.name);
 
-    // Draw second card
-    gameState.draw();
-    hand = gameState.listHand();
-    expect(hand.length).toBe(2);
-    expect(hand[0].card.name).toBe("Ancestral Recall"); // position 0
-    expect(hand[1].card.name).toBe("Black Lotus"); // position 1
-    expect((hand[1].location as HandLocation).position).toBe(1);
+        // Draw all cards one by one and verify positioning
+        for (let i = 0; i < initialLibrarySize; i++) {
+          const expectedTopCard = originalLibraryOrder[i];
 
-    // Draw third card
-    gameState.draw();
-    hand = gameState.listHand();
-    expect(hand.length).toBe(3);
-    expect(hand[2].card.name).toBe("Lightning Bolt"); // position 2
-    expect((hand[2].location as HandLocation).position).toBe(2);
+          gameState.draw();
 
-    // Library should be empty
-    const library = gameState.listLibrary();
-    expect(library.length).toBe(0);
+          const hand = gameState.listHand();
+          const library = gameState.listLibrary();
+
+          // Verify hand has correct number of cards
+          expect(hand.length).toBe(i + 1);
+
+          // Verify library has correct number of remaining cards
+          expect(library.length).toBe(initialLibrarySize - (i + 1));
+
+          // Verify the newly drawn card is at the correct position in hand
+          expect((hand[i].location as HandLocation).position).toBe(i);
+
+          // Verify the newly drawn card is the expected one (top of library)
+          expect(hand[i].card.name).toBe(expectedTopCard);
+
+          // Verify all previous cards in hand maintain their positions
+          for (let j = 0; j < i; j++) {
+            expect((hand[j].location as HandLocation).position).toBe(j);
+          }
+        }
+
+        // After drawing all cards, library should be empty
+        const finalLibrary = gameState.listLibrary();
+        expect(finalLibrary.length).toBe(0);
+
+        // Hand should contain all original deck cards
+        const finalHand = gameState.listHand();
+        expect(finalHand.length).toBe(initialLibrarySize);
+      })
+    );
   });
 
   test("draw works correctly after shuffle", () => {
