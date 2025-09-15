@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209083,
+  "name": "Arcane Maelstrom - Commander 2020",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Kalamax, the Stormsire",
+      "scryfallId": "f990cd78-2165-446f-a116-ae55d7a0f00d",
+      "multiverseid": 484716
+    }
+  ],
+  "cards": [
+    {
+      "name": "Charmbreaker Devils",
+      "scryfallId": "38e17f4b-b5a8-468c-8cca-6e722cccdf6b",
+      "multiverseid": 482775
+    },
+    {
+      "name": "Crackling Drake",
+      "scryfallId": "ae3f925c-1906-430e-8991-133d1d1458a3",
+      "multiverseid": 482834
+    },
+    {
+      "name": "Djinn Illuminatus",
+      "scryfallId": "7c784b00-dcef-4640-a305-5ff1baf2e6fd",
+      "multiverseid": 482838
+    },
+    {
+      "name": "Dualcaster Mage",
+      "scryfallId": "a3508f2a-a800-4e55-8f65-29bd2f0aefb4",
+      "multiverseid": 482778
+    },
+    {
+      "name": "Eon Frolicker",
+      "scryfallId": "acaec4bf-69c8-43c1-960f-cb5b5bff660a",
+      "multiverseid": 484880
+    },
+    {
+      "name": "Etali, Primal Storm",
+      "scryfallId": "504ad2a4-fb3e-46c4-9b7f-f05c80891cd3",
+      "multiverseid": 482779
+    },
+    {
+      "name": "Glademuse",
+      "scryfallId": "89a40dc1-3bd8-4c7e-9446-5abc8c1f6995",
+      "multiverseid": 484907
+    },
+    {
+      "name": "Goblin Dark-Dwellers",
+      "scryfallId": "3bb7be0d-1937-4b30-909c-df2b31a921e3",
+      "multiverseid": 482781
+    },
+    {
+      "name": "Haldan, Avid Arcanist",
+      "scryfallId": "16a86a35-f7e5-434d-bf44-61ae7cb0f98b",
+      "multiverseid": 484709
+    },
+    {
+      "name": "Lunar Mystic",
+      "scryfallId": "c8a32b4b-4b8d-40e0-9166-06a678fd6e06",
+      "multiverseid": 482743
+    },
+    {
+      "name": "Melek, Izzet Paragon",
+      "scryfallId": "5489d43c-2034-421d-80e8-96a7377795c8",
+      "multiverseid": 482848
+    },
+    {
+      "name": "Murmuring Mystic",
+      "scryfallId": "ab25853c-29d3-4244-88db-813300a262a5",
+      "multiverseid": 482746
+    },
+    {
+      "name": "Nascent Metamorph",
+      "scryfallId": "61e7984b-8c20-4867-8045-4fb52cd6e2d4",
+      "multiverseid": 484883
+    },
+    {
+      "name": "Niblis of Frost",
+      "scryfallId": "f4a3d06c-8059-4f73-8f7e-29aa004cd3d5",
+      "multiverseid": 482748
+    },
+    {
+      "name": "Pako, Arcane Retriever",
+      "scryfallId": "066c8f63-52e6-475e-8d27-6ee37e92fc05",
+      "multiverseid": 484720
+    },
+    {
+      "name": "Rashmi, Eternities Crafter",
+      "scryfallId": "70288968-7bfd-44e2-a2b3-0b6639ef7e0a",
+      "multiverseid": 482857
+    },
+    {
+      "name": "Ravenous Gigantotherium",
+      "scryfallId": "ca260253-40b8-4846-9e41-4e9cfc56d691",
+      "multiverseid": 484910
+    },
+    {
+      "name": "Solemn Simulacrum",
+      "scryfallId": "9cf94894-1dbb-4ef6-a3c2-388b3ee20225",
+      "multiverseid": 482881
+    },
+    {
+      "name": "Talrand, Sky Summoner",
+      "scryfallId": "5478952b-128f-4ca8-83e6-bcf07848307f",
+      "multiverseid": 482753
+    },
+    {
+      "name": "Wort, the Raidmother",
+      "scryfallId": "9b46b4ee-263a-4a4b-8fbc-3ea6fa9ba56b",
+      "multiverseid": 482862
+    },
+    {
+      "name": "Xyris, the Writhing Storm",
+      "scryfallId": "447db519-7825-4330-99e7-a2429e1f6b2e",
+      "multiverseid": 484725
+    },
+    {
+      "name": "Jace, Architect of Thought",
+      "scryfallId": "736b07e8-4eb4-492d-a323-3125823ae090",
+      "multiverseid": 482742
+    },
+    {
+      "name": "Artifact Mutation",
+      "scryfallId": "b3bbecfc-0983-4ade-b00a-2bac2cad8d2f",
+      "multiverseid": 482831
+    },
+    {
+      "name": "Channeled Force",
+      "scryfallId": "8918d24e-8ae8-4028-9f06-ba6fafcc717e",
+      "multiverseid": 479700
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "c144b325-53a3-4590-beb1-2a39cbced47e",
+      "multiverseid": 482774
+    },
+    {
+      "name": "Chemister's Insight",
+      "scryfallId": "089720bb-f4ce-422f-bb28-6a7a71c32223",
+      "multiverseid": 482736
+    },
+    {
+      "name": "Clash of Titans",
+      "scryfallId": "ca10e2b8-a317-4c98-a866-43bf274e82cb",
+      "multiverseid": 479631
+    },
+    {
+      "name": "Comet Storm",
+      "scryfallId": "066383e2-55c2-433f-8665-f0fd22dfa3f0",
+      "multiverseid": 482776
+    },
+    {
+      "name": "Commune with Lava",
+      "scryfallId": "1ef4c8b0-6da7-443d-9c1f-6e83e6831f43",
+      "multiverseid": 482777
+    },
+    {
+      "name": "Crop Rotation",
+      "scryfallId": "4a61749d-a2e5-4da4-96db-e49cbac05d73",
+      "multiverseid": 482797
+    },
+    {
+      "name": "Curious Herd",
+      "scryfallId": "5a20acbc-6ca8-4b0c-ab7e-4bb8d429336b",
+      "multiverseid": 484906
+    },
+    {
+      "name": "Decoy Gambit",
+      "scryfallId": "39671ac5-c730-4ba2-a2d9-23d5ac13f12b",
+      "multiverseid": 484879
+    },
+    {
+      "name": "Deflecting Swat",
+      "scryfallId": "84f035e1-6c89-457b-b05f-85680a50ed91",
+      "multiverseid": 484897
+    },
+    {
+      "name": "Evolution Charm",
+      "scryfallId": "19c01269-faf0-4c29-bdc4-17f0ba3ee7c8",
+      "multiverseid": 482799
+    },
+    {
+      "name": "Frantic Search",
+      "scryfallId": "5b87a025-ab29-4375-9338-536636051640",
+      "multiverseid": 482739
+    },
+    {
+      "name": "Growth Spiral",
+      "scryfallId": "69625c5a-cf13-4c5d-816c-fd1670685587",
+      "multiverseid": 482844
+    },
+    {
+      "name": "Harrow",
+      "scryfallId": "a325da33-dd35-4136-9c69-73df82c56fd1",
+      "multiverseid": 482802
+    },
+    {
+      "name": "Hunter's Insight",
+      "scryfallId": "a85d0ca4-551c-4e23-b35b-e49b89ce86bd",
+      "multiverseid": 482806
+    },
+    {
+      "name": "Hunting Pack",
+      "scryfallId": "c716dcce-9a5f-4d67-9799-4020a9308e4f",
+      "multiverseid": 482807
+    },
+    {
+      "name": "Natural Connection",
+      "scryfallId": "b8614b00-bf12-464e-8d13-61310e265ccb",
+      "multiverseid": 482812
+    },
+    {
+      "name": "Prophetic Bolt",
+      "scryfallId": "5159d2a6-2021-4a2a-b0b0-f679957e9279",
+      "multiverseid": 482855
+    },
+    {
+      "name": "Slice in Twain",
+      "scryfallId": "244831cc-6383-4daf-aeee-ea4893fdb4c2",
+      "multiverseid": 482818
+    },
+    {
+      "name": "Starstorm",
+      "scryfallId": "18e20113-6ba1-474b-bfed-1fa462fc63e2",
+      "multiverseid": 482788
+    },
+    {
+      "name": "Strength of the Tajuru",
+      "scryfallId": "1f123e02-eb74-4cc1-bc06-54989aeab784",
+      "multiverseid": 482820
+    },
+    {
+      "name": "Temur Charm",
+      "scryfallId": "009c5aac-194f-4b95-8f69-cc74aa15c3a5",
+      "multiverseid": 482858
+    },
+    {
+      "name": "Tribute to the Wild",
+      "scryfallId": "54945049-b5ae-444a-bec0-0bdeb9d075a1",
+      "multiverseid": 482821
+    },
+    {
+      "name": "Whiplash Trap",
+      "scryfallId": "0d828c7c-4e55-40be-a96f-48101e407aef",
+      "multiverseid": 482755
+    },
+    {
+      "name": "Surreal Memoir",
+      "scryfallId": "29ff3c49-1ecc-4d38-8b61-44ef615ceffb",
+      "multiverseid": 482789
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "1486170d-4ad3-4318-bf72-f948617d567f",
+      "multiverseid": 482865
+    },
+    {
+      "name": "Bonder's Ornament",
+      "scryfallId": "5afe425c-50a7-4d29-ac14-0edb094fc770",
+      "multiverseid": 484914
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "89c29c9c-9d4b-4809-9a95-796adfbce22a",
+      "multiverseid": 482868
+    },
+    {
+      "name": "Lavabrink Floodgates",
+      "scryfallId": "d2f9a9bf-edd2-4448-bace-8bfba3ba529a",
+      "multiverseid": 484900
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "cc025f33-1b1a-428f-be28-02d7580a0a8a",
+      "multiverseid": 482873
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "286bea73-8ad8-4423-8a7c-8497420fdb54",
+      "multiverseid": 482880
+    },
+    {
+      "name": "Twinning Staff",
+      "scryfallId": "e7971306-700e-4677-bf52-83e4f9ac04c1",
+      "multiverseid": 484917
+    },
+    {
+      "name": "Predatory Impetus",
+      "scryfallId": "13c29179-99f4-4e02-bc04-2ffe6ca4a7c3",
+      "multiverseid": 484909
+    },
+    {
+      "name": "Psychic Impetus",
+      "scryfallId": "9440d3f3-f4f4-450b-ab88-0acbaeec972b",
+      "multiverseid": 484884
+    },
+    {
+      "name": "Shiny Impetus",
+      "scryfallId": "0aa80931-0501-4712-a11b-563a3cd1e1c9",
+      "multiverseid": 484902
+    },
+    {
+      "name": "Swarm Intelligence",
+      "scryfallId": "ce13b558-2bf4-4134-80d1-59858076fb44",
+      "multiverseid": 482752
+    },
+    {
+      "name": "Wilderness Reclamation",
+      "scryfallId": "94a28102-dfbe-49e9-b64f-52b552afac1b",
+      "multiverseid": 482824
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "5a9db48e-9231-4692-9cee-77f2141c63ff",
+      "multiverseid": 482891
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "37691c08-7763-42bd-b882-3cb0624a2098",
+      "multiverseid": 482892
+    },
+    {
+      "name": "Desolate Lighthouse",
+      "scryfallId": "8cd0f1da-8100-4bed-8bfc-947c0705c7ce",
+      "multiverseid": 482897
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "f623a2c3-ebe5-4f43-8b87-59b4d6991ff0",
+      "multiverseid": 482901
+    },
+    {
+      "name": "Frontier Bivouac",
+      "scryfallId": "b5aaaca9-0729-4bb5-96ec-0a1f52e9d90d",
+      "multiverseid": 482903
+    },
+    {
+      "name": "Gruul Turf",
+      "scryfallId": "f15671c2-d9a3-459c-9f1e-d110062b2e53",
+      "multiverseid": 482907
+    },
+    {
+      "name": "Halimar Depths",
+      "scryfallId": "85d0220f-585d-4066-9faa-ec5b520542e1",
+      "multiverseid": 482908
+    },
+    {
+      "name": "Izzet Boilerworks",
+      "scryfallId": "2d96b00c-8b73-4b4a-b784-4c7e779f8fd7",
+      "multiverseid": 482911
+    },
+    {
+      "name": "Kessig Wolf Run",
+      "scryfallId": "b1140b05-49cf-49d5-a9a6-dfb2f0d1ec55",
+      "multiverseid": 482912
+    },
+    {
+      "name": "Mossfire Valley",
+      "scryfallId": "a27b5904-f605-4b4a-b814-8936fb42e22d",
+      "multiverseid": 482918
+    },
+    {
+      "name": "Mosswort Bridge",
+      "scryfallId": "7f3a9d35-39c9-4f9d-adab-2291db1a3b40",
+      "multiverseid": 482919
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "42bb5732-5c17-447f-9fcd-dc12136fa145",
+      "multiverseid": 482920
+    },
+    {
+      "name": "Oran-Rief, the Vastwood",
+      "scryfallId": "b94c9237-dd43-411a-8231-6338ab08c192",
+      "multiverseid": 482924
+    },
+    {
+      "name": "Rupture Spire",
+      "scryfallId": "1b8b7d75-00c5-483c-8b1a-858c121dc203",
+      "multiverseid": 482932
+    },
+    {
+      "name": "Scavenger Grounds",
+      "scryfallId": "f070bcc2-d764-44da-91ab-f2af23aa42e6",
+      "multiverseid": 482934
+    },
+    {
+      "name": "Simic Growth Chamber",
+      "scryfallId": "f9b24ba7-2578-411c-b0bd-f8e919ca0a6e",
+      "multiverseid": 482939
+    },
+    {
+      "name": "Yavimaya Coast",
+      "scryfallId": "35cd7440-247c-4878-9a0d-9b9bc1feb847",
+      "multiverseid": 482950
+    },
+    {
+      "name": "Primal Empathy",
+      "scryfallId": "034e0afb-7787-4cb8-8bb4-cf6997dbf7e4",
+      "multiverseid": 479720
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
+      "multiverseid": 482546
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
+      "multiverseid": 482546
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
+      "multiverseid": 482546
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
+      "multiverseid": 482546
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
+      "multiverseid": 482546
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "f7cf3bbf-acc0-4fe7-a631-aca698190ce2",
+      "multiverseid": 482549
+    },
+    {
+      "name": "Island",
+      "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
+      "multiverseid": 482540
+    },
+    {
+      "name": "Island",
+      "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
+      "multiverseid": 482540
+    },
+    {
+      "name": "Island",
+      "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
+      "multiverseid": 482540
+    },
+    {
+      "name": "Island",
+      "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
+      "multiverseid": 482540
+    },
+    {
+      "name": "Island",
+      "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
+      "multiverseid": 482540
+    },
+    {
+      "name": "Swiftwater Cliffs",
+      "scryfallId": "7108c071-5f1c-4cf5-90c6-530cee3f7685",
+      "multiverseid": 479775
+    },
+    {
+      "name": "Thornwood Falls",
+      "scryfallId": "8d011b0f-1681-4a51-9f5d-47ad135d03fe",
+      "multiverseid": 479776
+    },
+    {
+      "name": "Rugged Highlands",
+      "scryfallId": "9a69fa8f-1c2b-453d-8d54-2748890ce925",
+      "multiverseid": 479772
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:43.702Z",
+    "sourceUrl": "https://archidekt.com/decks/2209083",
+    "deckSource": "archidekt"
+  }
+}

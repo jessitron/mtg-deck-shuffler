@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209043,
+  "name": "Undead Unleashed - Midnight Hunt Commander",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Wilhelt, the Rotcleaver",
+      "scryfallId": "2501a911-d072-436d-ae3b-a5164e3b30aa",
+      "multiverseid": 540729
+    }
+  ],
+  "cards": [
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Island",
+      "scryfallId": "60e6b919-e7c0-4844-a65c-d8b83b3e5287",
+      "multiverseid": 538338
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "2f4b9030-f04a-4f42-8dd8-2eae0ce7e420",
+      "multiverseid": 538339
+    },
+    {
+      "name": "Butcher of Malakir",
+      "scryfallId": "4b8aa7e9-cf39-427e-bbef-9dd6104d8578",
+      "multiverseid": 539368
+    },
+    {
+      "name": "Cemetery Reaper",
+      "scryfallId": "9008e94a-cfec-473f-ae75-57586e45098d",
+      "multiverseid": 539369
+    },
+    {
+      "name": "Cleaver Skaab",
+      "scryfallId": "30498d6c-29e2-4d05-a5bc-e2e623c5704d",
+      "multiverseid": 540454
+    },
+    {
+      "name": "Corpse Augur",
+      "scryfallId": "1fc6a2f2-42d9-4d2a-aa3b-f6ce973cd409",
+      "multiverseid": 539370
+    },
+    {
+      "name": "Death Baron",
+      "scryfallId": "11641a17-e979-4edb-adba-789f21fd017d",
+      "multiverseid": 539372
+    },
+    {
+      "name": "Diregraf Captain",
+      "scryfallId": "158407ad-35a9-40e1-9762-1c0572b56ecb",
+      "multiverseid": 539409
+    },
+    {
+      "name": "Diregraf Colossus",
+      "scryfallId": "02351d67-2d73-43e3-82f7-5277c532d7ac",
+      "multiverseid": 539373
+    },
+    {
+      "name": "Eater of Hope",
+      "scryfallId": "a7c62113-48c1-47ae-8ede-c05c1c914c3b",
+      "multiverseid": 539376
+    },
+    {
+      "name": "Eloise, Nephalia Sleuth",
+      "scryfallId": "bf81da34-4c2b-4e54-a60b-46ab41f72431",
+      "multiverseid": 540708
+    },
+    {
+      "name": "Eternal Skylord",
+      "scryfallId": "d48d37d2-d776-41b4-9d20-7d2f5c51f814",
+      "multiverseid": 539360
+    },
+    {
+      "name": "Fleshbag Marauder",
+      "scryfallId": "a03c738c-88d9-4cf6-a650-20ce6e5565bc",
+      "multiverseid": 539379
+    },
+    {
+      "name": "Forgotten Creation",
+      "scryfallId": "46dd9e0d-1961-4998-95d6-3f54b30b79b4",
+      "multiverseid": 539361
+    },
+    {
+      "name": "Gisa and Geralf",
+      "scryfallId": "377a5f75-222b-43e1-8998-18c6cfa44b24",
+      "multiverseid": 539411
+    },
+    {
+      "name": "Gleaming Overseer",
+      "scryfallId": "94fa19ef-3e27-43a6-ac19-c4f532dfac8d",
+      "multiverseid": 539412
+    },
+    {
+      "name": "Gorex, the Tombshell",
+      "scryfallId": "398ecf98-b36b-45e1-8ac1-9d364e12d79e",
+      "multiverseid": 540463
+    },
+    {
+      "name": "Gravespawn Sovereign",
+      "scryfallId": "58d36326-882e-46bb-a00c-5ea0f6515f65",
+      "multiverseid": 539381
+    },
+    {
+      "name": "Havengul Runebinder",
+      "scryfallId": "cbd27e6f-24e5-4e90-9612-27d8dcd29325",
+      "multiverseid": 539362
+    },
+    {
+      "name": "Hordewing Skaab",
+      "scryfallId": "6e67802e-e0d9-4989-b1c2-77ef2ff69796",
+      "multiverseid": 540458
+    },
+    {
+      "name": "Liliana's Devotee",
+      "scryfallId": "6cffbebb-db4c-4bbd-aa4d-9ddae4c88a44",
+      "multiverseid": 539383
+    },
+    {
+      "name": "Lord of the Accursed",
+      "scryfallId": "20bfecb3-2dc8-4549-9297-413131de8fdc",
+      "multiverseid": 539385
+    },
+    {
+      "name": "Midnight Reaper",
+      "scryfallId": "ce14d37a-1f25-44e6-a6e5-c91851c887c5",
+      "multiverseid": 539386
+    },
+    {
+      "name": "Overseer of the Damned",
+      "scryfallId": "908e0ae3-6ef2-4110-9674-eb6c7eef0fa8",
+      "multiverseid": 539388
+    },
+    {
+      "name": "Prowling Geistcatcher",
+      "scryfallId": "84ed5b16-273a-432b-895b-791ffaa5148d",
+      "multiverseid": 540464
+    },
+    {
+      "name": "Ravenous Rotbelly",
+      "scryfallId": "d58d8968-825b-453d-b109-8f975cd99322",
+      "multiverseid": 540465
+    },
+    {
+      "name": "Ruthless Deathfang",
+      "scryfallId": "f9e22bb7-eb50-434e-a0d0-2151bb9eb5a7",
+      "multiverseid": 539415
+    },
+    {
+      "name": "Shadow Kin",
+      "scryfallId": "00ca621f-c409-4255-828b-c9957e82c06f",
+      "multiverseid": 540459
+    },
+    {
+      "name": "Spark Reaper",
+      "scryfallId": "73f0eaab-fd0b-419b-bbf4-9028e965f5fb",
+      "multiverseid": 539389
+    },
+    {
+      "name": "Stitcher Geralf",
+      "scryfallId": "b7a1dc81-6bfd-4919-8d30-ec47ba7dd51d",
+      "multiverseid": 539365
+    },
+    {
+      "name": "Tomb Tyrant",
+      "scryfallId": "73315f75-252e-4db2-b48c-a60eafaf25e3",
+      "multiverseid": 540466
+    },
+    {
+      "name": "Undead Alchemist",
+      "scryfallId": "b7231a1c-f3aa-4346-9eb1-63e35ab3001c",
+      "multiverseid": 539366
+    },
+    {
+      "name": "Undead Augur",
+      "scryfallId": "9c3baad6-d087-436f-a9f4-c138639e3422",
+      "multiverseid": 539391
+    },
+    {
+      "name": "Liliana, Death's Majesty",
+      "scryfallId": "b63ae119-f91e-4d0d-8bbd-65350a4d47c4",
+      "multiverseid": 539382
+    },
+    {
+      "name": "Aetherspouts",
+      "scryfallId": "b5cb6da6-d43b-4ad1-bb77-9eeb6d15240c",
+      "multiverseid": 539358
+    },
+    {
+      "name": "Drown in Dreams",
+      "scryfallId": "af4d5acb-12d6-46d7-aaf9-3ace1520825a",
+      "multiverseid": 540456
+    },
+    {
+      "name": "Go for the Throat",
+      "scryfallId": "a1f4bde9-5ce9-42ca-8052-57da311f0688",
+      "multiverseid": 539380
+    },
+    {
+      "name": "Army of the Damned",
+      "scryfallId": "787503ed-ebf5-4309-8dc6-3de925ea28a6",
+      "multiverseid": 539367
+    },
+    {
+      "name": "Dark Salvation",
+      "scryfallId": "1fc4eec7-ce6c-4b63-aca8-fa409cc5ee5a",
+      "multiverseid": 539371
+    },
+    {
+      "name": "Distant Melody",
+      "scryfallId": "5f7f84a2-bfc9-4f29-85e8-089dcd97fdc4",
+      "multiverseid": 539359
+    },
+    {
+      "name": "Dread Summons",
+      "scryfallId": "85dd3f34-56c6-4499-9661-8cbadb09c7fc",
+      "multiverseid": 539374
+    },
+    {
+      "name": "Empty the Laboratory",
+      "scryfallId": "191f6693-32d9-448d-8889-f98cf13c2277",
+      "multiverseid": 540457
+    },
+    {
+      "name": "Feed the Swarm",
+      "scryfallId": "ee24a696-77ce-41d7-86cd-5999f879134b",
+      "multiverseid": 539378
+    },
+    {
+      "name": "Ghouls' Night Out",
+      "scryfallId": "f532dce5-66b7-4f42-87c3-c7cb8d47d10e",
+      "multiverseid": 540462
+    },
+    {
+      "name": "Hour of Eternity",
+      "scryfallId": "ca15361f-6bf7-46e7-b83c-308c55fc393f",
+      "multiverseid": 539363
+    },
+    {
+      "name": "Syphon Flesh",
+      "scryfallId": "63124d37-d16c-48d6-b1a2-a1a3834b3dc1",
+      "multiverseid": 539390
+    },
+    {
+      "name": "Zombie Apocalypse",
+      "scryfallId": "854ae40d-ee52-434e-8fe0-1b5a0d4ea58b",
+      "multiverseid": 539392
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "993dfead-1c44-47a7-bd37-f57e47bc1203",
+      "multiverseid": 539418
+    },
+    {
+      "name": "Charcoal Diamond",
+      "scryfallId": "587a881f-cec1-4d36-9db1-614bec439167",
+      "multiverseid": 539419
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "38551b28-bdbe-4177-9dcb-8d2da2879115",
+      "multiverseid": 539420
+    },
+    {
+      "name": "Crowded Crypt",
+      "scryfallId": "3d6114bd-d5d3-441a-80a5-67eb7a355506",
+      "multiverseid": 540460
+    },
+    {
+      "name": "Sky Diamond",
+      "scryfallId": "e18a2b70-4090-42b5-9351-2140e9eae10b",
+      "multiverseid": 539422
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "c46138f0-224a-4ca9-bf03-badb2ae5ee21",
+      "multiverseid": 539423
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "56f62d84-f62f-4363-a99e-fe5387c3d77e",
+      "multiverseid": 539425
+    },
+    {
+      "name": "Curse of Unbinding",
+      "scryfallId": "6b56ccbc-efc7-4c5c-84be-b63f8c4cd63c",
+      "multiverseid": 540455
+    },
+    {
+      "name": "Curse of the Restless Dead",
+      "scryfallId": "cdde244a-d2f4-44b3-badd-d6142785e25c",
+      "multiverseid": 540461
+    },
+    {
+      "name": "Dreadhorde Invasion",
+      "scryfallId": "4b24194c-d312-45d6-ae02-e15fd2025682",
+      "multiverseid": 539375
+    },
+    {
+      "name": "Endless Ranks of the Dead",
+      "scryfallId": "155ae16c-f32b-421d-a92a-bf13d9f32891",
+      "multiverseid": 539377
+    },
+    {
+      "name": "Liliana's Mastery",
+      "scryfallId": "a92ee6ec-eebf-40b4-9dd9-c0551e33f5ff",
+      "multiverseid": 539384
+    },
+    {
+      "name": "Open the Graves",
+      "scryfallId": "130978d1-0b20-4dfa-85f5-3ff2bc2cfda3",
+      "multiverseid": 539387
+    },
+    {
+      "name": "Rooftop Storm",
+      "scryfallId": "80cdee59-0ead-4b95-a348-c1e360d781ab",
+      "multiverseid": 539364
+    },
+    {
+      "name": "Bojuka Bog",
+      "scryfallId": "b23d6629-8fd9-4b1a-b45e-289b8d1c06e8",
+      "multiverseid": 539428
+    },
+    {
+      "name": "Choked Estuary",
+      "scryfallId": "843c932a-e91c-49f2-bbd2-3a1ff4faa0f8",
+      "multiverseid": 539430
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "0caa7e29-b8c5-41d3-bc0f-7f1ad1d6e674",
+      "multiverseid": 539431
+    },
+    {
+      "name": "Darkwater Catacombs",
+      "scryfallId": "28dfe97d-76d5-4c61-9b83-fdd780fbe4c6",
+      "multiverseid": 539432
+    },
+    {
+      "name": "Dimir Aqueduct",
+      "scryfallId": "93b04b69-817a-4567-98b3-d188b36a59ea",
+      "multiverseid": 539433
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "ac8f8625-3f15-42c8-96da-24528dc4355b",
+      "multiverseid": 539434
+    },
+    {
+      "name": "Mortuary Mire",
+      "scryfallId": "9aeb664d-ce81-4b4e-949e-c118869319ad",
+      "multiverseid": 539437
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "0b5656ed-19a1-40be-a057-b8d90665582a",
+      "multiverseid": 539438
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "2a8b1ff6-7d01-46b1-aaf0-2f2271fdeb5a",
+      "multiverseid": 539439
+    },
+    {
+      "name": "Sunken Hollow",
+      "scryfallId": "0cda97ff-ddf3-4fe4-af23-6b0eb20a153a",
+      "multiverseid": 539443
+    },
+    {
+      "name": "Tainted Isle",
+      "scryfallId": "c4a3bcf6-4495-4b12-940a-f7703d8646d3",
+      "multiverseid": 539444
+    },
+    {
+      "name": "Temple of Deceit",
+      "scryfallId": "efd72676-0e8f-4213-8f1f-8c193f28b620",
+      "multiverseid": 539445
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "053ce80a-1f32-4982-8d23-d1e313e925a4",
+      "multiverseid": 539448
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:38.355Z",
+    "sourceUrl": "https://archidekt.com/decks/2209043",
+    "deckSource": "archidekt"
+  }
+}

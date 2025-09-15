@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209090,
+  "name": "Symbiotic Swarm - Commander 2020",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Kathril, Aspect Warper",
+      "scryfallId": "ebc57f73-a517-463e-8d55-56aa996d091e",
+      "multiverseid": 484717
+    }
+  ],
+  "cards": [
+    {
+      "name": "Acidic Slime",
+      "scryfallId": "a8a1d9db-0da2-4b9d-ba3b-d647deab6754",
+      "multiverseid": 482793
+    },
+    {
+      "name": "Aerial Responder",
+      "scryfallId": "8833065e-5022-4f48-b2fd-6fe5647c0a07",
+      "multiverseid": 482700
+    },
+    {
+      "name": "Akroma, Angel of Wrath",
+      "scryfallId": "bf1ef8ec-d915-41f2-b087-3d6d82e3db85",
+      "multiverseid": 482701
+    },
+    {
+      "name": "Angel of Finality",
+      "scryfallId": "5e199cea-ab34-4eca-9d52-56959d648a16",
+      "multiverseid": 482703
+    },
+    {
+      "name": "Archon of Valor's Reach",
+      "scryfallId": "7f51e677-1278-401e-a892-33cd8ffed6fe",
+      "multiverseid": 482830
+    },
+    {
+      "name": "Avenging Huntbonder",
+      "scryfallId": "24ad6b07-3487-4e19-b554-196697a413df",
+      "multiverseid": 484869
+    },
+    {
+      "name": "Cairn Wanderer",
+      "scryfallId": "f84b53c7-10db-40f6-a1d4-0baab88355e5",
+      "multiverseid": 482758
+    },
+    {
+      "name": "Cartographer's Hawk",
+      "scryfallId": "1b1d26c3-ce06-4d46-87fc-7623edae85b2",
+      "multiverseid": 484871
+    },
+    {
+      "name": "Cataclysmic Gearhulk",
+      "scryfallId": "4d1d09e1-ed55-4f13-8e80-4d2b4b162ca0",
+      "multiverseid": 482708
+    },
+    {
+      "name": "Daring Fiendbonder",
+      "scryfallId": "27dd910a-a3ca-46ac-9350-f2a22496f4e6",
+      "multiverseid": 484888
+    },
+    {
+      "name": "Hornet Queen",
+      "scryfallId": "b7f7d1e1-9472-4aba-915c-a2de499f23df",
+      "multiverseid": 482804
+    },
+    {
+      "name": "Kalemne's Captain",
+      "scryfallId": "8c6fd0bf-25de-422b-b042-121460b01b17",
+      "multiverseid": 482720
+    },
+    {
+      "name": "Karametra, God of Harvests",
+      "scryfallId": "2bd9d26e-984c-4cf8-8c46-447f9776668f",
+      "multiverseid": 482846
+    },
+    {
+      "name": "Majestic Myriarch",
+      "scryfallId": "457d66b3-f059-4b2f-91b0-96568e1b17f5",
+      "multiverseid": 482810
+    },
+    {
+      "name": "Nikara, Lair Scavenger",
+      "scryfallId": "00b9ac91-51e4-4653-ac2a-da166a894f2a",
+      "multiverseid": 484710
+    },
+    {
+      "name": "Nyx Weaver",
+      "scryfallId": "de71b145-6db9-490c-9e86-b441fcb107c8",
+      "multiverseid": 482854
+    },
+    {
+      "name": "Odric, Lunarch Marshal",
+      "scryfallId": "78f86da3-6caa-4507-882f-3d0476b79bc9",
+      "multiverseid": 482723
+    },
+    {
+      "name": "Reveillark",
+      "scryfallId": "7db7e70c-ce79-4a52-b97b-f1bd46e0768c",
+      "multiverseid": 482725
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "c83be2b7-0373-4389-9aa0-523db58f4d2a",
+      "multiverseid": 482815
+    },
+    {
+      "name": "Satyr Wayfinder",
+      "scryfallId": "aa090955-59dd-4145-a148-7d0f64722f7e",
+      "multiverseid": 482816
+    },
+    {
+      "name": "Skullwinder",
+      "scryfallId": "6133735c-37ea-4c91-a848-59bc47dcb0b7",
+      "multiverseid": 482817
+    },
+    {
+      "name": "Slippery Bogbonder",
+      "scryfallId": "c2f9c4a7-ea53-4da0-9746-2195579f98f6",
+      "multiverseid": 484913
+    },
+    {
+      "name": "Solemn Recruit",
+      "scryfallId": "f42e1e2e-6559-42c1-bab4-e2e868723b43",
+      "multiverseid": 482727
+    },
+    {
+      "name": "Soul of Innistrad",
+      "scryfallId": "31155467-5444-4a9b-a602-ec7cdad89e8b",
+      "multiverseid": 482765
+    },
+    {
+      "name": "Soulflayer",
+      "scryfallId": "e249a406-6783-4502-952a-27ec744a38b3",
+      "multiverseid": 482766
+    },
+    {
+      "name": "Splinterfright",
+      "scryfallId": "686e97c2-24a8-42ac-9b96-8e152ab0dc89",
+      "multiverseid": 482819
+    },
+    {
+      "name": "Sunblast Angel",
+      "scryfallId": "b879f5fa-7e1f-444a-bc28-dc9f6313842c",
+      "multiverseid": 482730
+    },
+    {
+      "name": "Tayam, Luminous Enigma",
+      "scryfallId": "05b837a2-5773-4340-87f9-b4d6a43deb27",
+      "multiverseid": 484723
+    },
+    {
+      "name": "Titanoth Rex",
+      "scryfallId": "9d02e1e8-b85b-4e26-8ab8-ca2f49d05b88",
+      "multiverseid": 479694
+    },
+    {
+      "name": "Vampire Nighthawk",
+      "scryfallId": "5832552d-fa6e-40c2-9a0e-ac8c9ba57a2d",
+      "multiverseid": 482768
+    },
+    {
+      "name": "Vitality Hunter",
+      "scryfallId": "2bec0d43-f321-49eb-9402-83632d00d4be",
+      "multiverseid": 484877
+    },
+    {
+      "name": "Void Beckoner",
+      "scryfallId": "a1523cda-c47d-4419-a5d3-fd6ed9867c56",
+      "multiverseid": 479624
+    },
+    {
+      "name": "Yannik, Scavenging Sentinel",
+      "scryfallId": "11c0e89b-ab29-4739-a88e-1e7966d87d25",
+      "multiverseid": 484726
+    },
+    {
+      "name": "Zetalpa, Primal Dawn",
+      "scryfallId": "8d5b29be-2b1a-4ba5-8958-60eee4e3bac1",
+      "multiverseid": 482735
+    },
+    {
+      "name": "Ajani Unyielding",
+      "scryfallId": "9675ba74-3e3c-4570-bdc0-44b90de7953b",
+      "multiverseid": 482829
+    },
+    {
+      "name": "Abzan Charm",
+      "scryfallId": "8a3bd3e8-a408-4d64-9cb5-d5053fae1e64",
+      "multiverseid": 482827
+    },
+    {
+      "name": "Blood Curdle",
+      "scryfallId": "4184c851-1419-476c-ba9c-9f0cb1137114",
+      "multiverseid": 479595
+    },
+    {
+      "name": "Deathsprout",
+      "scryfallId": "26a0ae4f-a48c-4333-a53f-70702b5b4c9e",
+      "multiverseid": 482836
+    },
+    {
+      "name": "Despark",
+      "scryfallId": "4a8bb7d9-14d3-41e3-8721-4a9036468dfc",
+      "multiverseid": 482837
+    },
+    {
+      "name": "Grisly Salvage",
+      "scryfallId": "d5b4768f-fe15-4632-8bc5-bac35dc0e9e8",
+      "multiverseid": 482843
+    },
+    {
+      "name": "Obscuring Haze",
+      "scryfallId": "c1ae35e6-5401-481a-8104-24f53e3d160f",
+      "multiverseid": 484908
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "69c90a17-42ad-4f27-ab1b-3790bc0813b3",
+      "multiverseid": 482798
+    },
+    {
+      "name": "Duneblast",
+      "scryfallId": "9623959c-c20d-409b-b172-fe00e68e8c55",
+      "multiverseid": 482839
+    },
+    {
+      "name": "Ever After",
+      "scryfallId": "a4e6a08b-e0d6-4d41-b143-e09ac53b6249",
+      "multiverseid": 482761
+    },
+    {
+      "name": "Harmonize",
+      "scryfallId": "0015ef55-4b85-4147-9974-b3ff4a1487c3",
+      "multiverseid": 482801
+    },
+    {
+      "name": "Selective Adaptation",
+      "scryfallId": "adbd8ffa-c7d3-4ef6-b3a7-8a967b50ce49",
+      "multiverseid": 484912
+    },
+    {
+      "name": "Unbreakable Bond",
+      "scryfallId": "c9da02a1-7b39-4a0e-8466-6512a02f3e3b",
+      "multiverseid": 479621
+    },
+    {
+      "name": "Unburial Rites",
+      "scryfallId": "e639e1cc-9d6d-4c96-95a5-6ab8554889ce",
+      "multiverseid": 482767
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "1486170d-4ad3-4318-bf72-f948617d567f",
+      "multiverseid": 482865
+    },
+    {
+      "name": "Bonder's Ornament",
+      "scryfallId": "5afe425c-50a7-4d29-ac14-0edb094fc770",
+      "multiverseid": 484914
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "89c29c9c-9d4b-4809-9a95-796adfbce22a",
+      "multiverseid": 482868
+    },
+    {
+      "name": "Mimic Vat",
+      "scryfallId": "f99c44c1-daff-43a2-9a8e-ec4be217a81a",
+      "multiverseid": 482874
+    },
+    {
+      "name": "Netherborn Altar",
+      "scryfallId": "541151af-f1a3-494f-858e-2c3fe447e036",
+      "multiverseid": 484892
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "286bea73-8ad8-4423-8a7c-8497420fdb54",
+      "multiverseid": 482880
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "5819a8bc-1e4f-4274-b1ee-e583337acdf8",
+      "multiverseid": 482882
+    },
+    {
+      "name": "Abzan Ascendancy",
+      "scryfallId": "63e735b1-7643-48db-9731-aea0212d0e2b",
+      "multiverseid": 482826
+    },
+    {
+      "name": "Deadbridge Chant",
+      "scryfallId": "21d6eb98-d716-4908-8d95-06f1fbbd2086",
+      "multiverseid": 482835
+    },
+    {
+      "name": "Martial Impetus",
+      "scryfallId": "25656d3d-dc5a-4085-8461-cab11b96e70a",
+      "multiverseid": 484875
+    },
+    {
+      "name": "Parasitic Impetus",
+      "scryfallId": "b51e0d11-e970-4535-87ac-49ae8ad594df",
+      "multiverseid": 484893
+    },
+    {
+      "name": "Predatory Impetus",
+      "scryfallId": "13c29179-99f4-4e02-bc04-2ffe6ca4a7c3",
+      "multiverseid": 484909
+    },
+    {
+      "name": "Together Forever",
+      "scryfallId": "8abdea02-8d56-488d-b042-f25d1ba523f5",
+      "multiverseid": 482733
+    },
+    {
+      "name": "Blighted Woodland",
+      "scryfallId": "b4073c69-fce0-4755-97f2-0a10fabed3e4",
+      "multiverseid": 482886
+    },
+    {
+      "name": "Canopy Vista",
+      "scryfallId": "d625f96a-6d61-4fe8-8fe3-6205c86b6846",
+      "multiverseid": 482889
+    },
+    {
+      "name": "Caves of Koilos",
+      "scryfallId": "6358592c-b6e8-4263-b96b-c548fdac5193",
+      "multiverseid": 482890
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "37691c08-7763-42bd-b882-3cb0624a2098",
+      "multiverseid": 482892
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "f623a2c3-ebe5-4f43-8b87-59b4d6991ff0",
+      "multiverseid": 482901
+    },
+    {
+      "name": "Gavony Township",
+      "scryfallId": "74d53774-f654-4c86-9261-b676d332e41e",
+      "multiverseid": 482904
+    },
+    {
+      "name": "Golgari Rot Farm",
+      "scryfallId": "4c9d6ad5-fa8a-46a4-87a7-51f2ccb2062c",
+      "multiverseid": 482905
+    },
+    {
+      "name": "Grim Backwoods",
+      "scryfallId": "2b4517f7-1479-4cdb-8b7e-c27eef6c4659",
+      "multiverseid": 482906
+    },
+    {
+      "name": "Krosan Verge",
+      "scryfallId": "f0c6047f-c246-4c9c-bee0-de2d5f13d475",
+      "multiverseid": 482913
+    },
+    {
+      "name": "Memorial to Folly",
+      "scryfallId": "df6d131e-785c-4609-af11-bdc535641a7b",
+      "multiverseid": 482916
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "42bb5732-5c17-447f-9fcd-dc12136fa145",
+      "multiverseid": 482920
+    },
+    {
+      "name": "Nesting Grounds",
+      "scryfallId": "cf559d4e-07a7-4ca4-b76a-d0615222cb60",
+      "multiverseid": 484918
+    },
+    {
+      "name": "Orzhov Basilica",
+      "scryfallId": "a732e2cc-325f-429b-a933-fc4cbcc395c9",
+      "multiverseid": 482925
+    },
+    {
+      "name": "Sandsteppe Citadel",
+      "scryfallId": "76357d95-9c86-411b-a115-36de5c2f123a",
+      "multiverseid": 482933
+    },
+    {
+      "name": "Selesnya Sanctuary",
+      "scryfallId": "b082e600-4cfe-44ce-aeb2-b0c22c3482c1",
+      "multiverseid": 482936
+    },
+    {
+      "name": "Sungrass Prairie",
+      "scryfallId": "cf6e4f8e-5c02-4aa4-b065-4fe0b0ed2772",
+      "multiverseid": 482945
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "eb61e54a-646b-4c0a-88fe-f55d514202aa",
+      "multiverseid": 482548
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "eb61e54a-646b-4c0a-88fe-f55d514202aa",
+      "multiverseid": 482548
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "eb61e54a-646b-4c0a-88fe-f55d514202aa",
+      "multiverseid": 482548
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "eb61e54a-646b-4c0a-88fe-f55d514202aa",
+      "multiverseid": 482548
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "6c8c3f0e-7af4-410b-a675-9ea84f51e812",
+      "multiverseid": 482541
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
+      "multiverseid": 482536
+    },
+    {
+      "name": "Scoured Barrens",
+      "scryfallId": "2282018a-46c8-41ca-ab93-f7dbf32cd295",
+      "multiverseid": 479774
+    },
+    {
+      "name": "Jungle Hollow",
+      "scryfallId": "01926862-bf2d-4a2b-af94-1ea5e4dd7444",
+      "multiverseid": 479769
+    },
+    {
+      "name": "Blossoming Sands",
+      "scryfallId": "828044d6-0f53-4caf-a581-d71919df4175",
+      "multiverseid": 479764
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "e80fe230-745d-42ae-a1f5-a8cc950783d0",
+      "multiverseid": 541139
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:44.714Z",
+    "sourceUrl": "https://archidekt.com/decks/2209090",
+    "deckSource": "archidekt"
+  }
+}

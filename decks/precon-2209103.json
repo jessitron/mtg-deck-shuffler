@@ -1,0 +1,315 @@
+{
+  "version": 1,
+  "id": 2209103,
+  "name": "Savage Hunter - Throne of Eldraine",
+  "totalCards": 60,
+  "commanders": [
+    {
+      "name": "Korvold, Fae-Cursed King",
+      "scryfallId": "92ea1575-eb64-43b5-b604-c6e23054f228",
+      "multiverseid": 476047
+    }
+  ],
+  "cards": [
+    {
+      "name": "Chittering Witch",
+      "scryfallId": "8c298940-4277-4145-9f2f-a284fd2e1a9d",
+      "multiverseid": 476037
+    },
+    {
+      "name": "Gluttonous Troll",
+      "scryfallId": "867e245b-6153-479c-9e09-682afb017ff3",
+      "multiverseid": 476045
+    },
+    {
+      "name": "Goblin Cratermaker",
+      "scryfallId": "86ecaedc-08f1-4de7-aae8-056df57940e0",
+      "multiverseid": 452853
+    },
+    {
+      "name": "Judith, the Scourge Diva",
+      "scryfallId": "0a742125-730d-4082-bfd8-5feb7733def4",
+      "multiverseid": 457329
+    },
+    {
+      "name": "Keeper of Fables",
+      "scryfallId": "6754d6cf-3506-48b5-a0ef-8a90b8dd2701",
+      "multiverseid": 473125
+    },
+    {
+      "name": "Krenko, Tin Street Kingpin",
+      "scryfallId": "37ed04d3-cfa1-4778-aea6-b4c2c29e6e0a",
+      "multiverseid": 461064
+    },
+    {
+      "name": "Mayhem Devil",
+      "scryfallId": "17416926-168b-49b3-9231-acbb8f8a1d13",
+      "multiverseid": 461131
+    },
+    {
+      "name": "Orzhov Enforcer",
+      "scryfallId": "6a72b49e-be14-485b-a467-31cbac9aa1c5",
+      "multiverseid": 457223
+    },
+    {
+      "name": "Pollenbright Druid",
+      "scryfallId": "4b0f478c-54f8-4087-ad52-d089e2049dda",
+      "multiverseid": 461100
+    },
+    {
+      "name": "Priest of Forgotten Gods",
+      "scryfallId": "e3378fe8-3355-48aa-90d4-9cb739200160",
+      "multiverseid": 457227
+    },
+    {
+      "name": "Savvy Hunter",
+      "scryfallId": "15c98441-2b31-4e48-a399-f36dffcfa41d",
+      "multiverseid": 473162
+    },
+    {
+      "name": "Syr Konrad, the Grim",
+      "scryfallId": "a808868f-aea8-4651-9357-85a4d7b4f290",
+      "multiverseid": 473069
+    },
+    {
+      "name": "Thorn Mammoth",
+      "scryfallId": "80138656-b2e2-43bf-9fe6-7a852f53f9e9",
+      "multiverseid": 476041
+    },
+    {
+      "name": "Vindictive Vampire",
+      "scryfallId": "7c0bfb47-c753-42fa-969b-7b10b87b0462",
+      "multiverseid": 457234
+    },
+    {
+      "name": "Angrath, Captain of Chaos",
+      "scryfallId": "d4d21c37-c468-4501-8d75-e8a7ad85153b",
+      "multiverseid": 0
+    },
+    {
+      "name": "Bake into a Pie",
+      "scryfallId": "42a4d090-1bb7-4334-ab22-e2527391e79b",
+      "multiverseid": 473038
+    },
+    {
+      "name": "Taste of Death",
+      "scryfallId": "851066e5-d5f2-4e53-8b88-487441a77548",
+      "multiverseid": 476038
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "84128e98-87d6-4c2f-909b-9435a7833e63",
+      "multiverseid": 476049
+    },
+    {
+      "name": "Bloodsoaked Altar",
+      "scryfallId": "b9169431-a5b1-42ea-bcf4-6c750d2a2dbb",
+      "multiverseid": 466844
+    },
+    {
+      "name": "Golden Egg",
+      "scryfallId": "525142c3-f17c-4e02-a02d-fa385215aa12",
+      "multiverseid": 473182
+    },
+    {
+      "name": "Witch's Oven",
+      "scryfallId": "04ef8493-d986-45f8-a718-617b028f7ad4",
+      "multiverseid": 473199
+    },
+    {
+      "name": "Rhythm of the Wild",
+      "scryfallId": "84062ce2-fea2-4e06-b83b-7cc597fb2a1b",
+      "multiverseid": 457345
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "ec1f1041-f667-4b73-b1f2-e5bcae84095e",
+      "multiverseid": 476051
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
+      "multiverseid": 473220
+    },
+    {
+      "name": "Golgari Guildgate",
+      "scryfallId": "86706d8e-de08-4778-94ba-ae75ed522472",
+      "multiverseid": 452998
+    },
+    {
+      "name": "Find // Finality",
+      "scryfallId": "1e4e9e35-6cbc-4997-beff-d1a22d87545e",
+      "multiverseid": 452975
+    },
+    {
+      "name": "Golgari Findbroker",
+      "scryfallId": "e12bd0e5-db96-4340-9b04-6855fd0fd8b9",
+      "multiverseid": 452925
+    },
+    {
+      "name": "Plaguecrafter",
+      "scryfallId": "8682fb87-df14-4277-aaa0-0d53d766c406",
+      "multiverseid": 452832
+    },
+    {
+      "name": "Stomping Ground",
+      "scryfallId": "dcaa1ff6-304e-4660-9df3-36de8e89592e",
+      "multiverseid": 457403
+    },
+    {
+      "name": "Rakdos Guildgate",
+      "scryfallId": "26f7e55d-d4c9-4755-ab87-a592ba3fb64f",
+      "multiverseid": 457399
+    },
+    {
+      "name": "Gruul Guildgate",
+      "scryfallId": "8fffd445-de4f-45de-95b9-6e0855926a6a",
+      "multiverseid": 457394
+    },
+    {
+      "name": "Paradise Druid",
+      "scryfallId": "6ed8d9e7-cdad-450d-8329-fa653d387a63",
+      "multiverseid": 461098
+    },
+    {
+      "name": "Dreadhorde Invasion",
+      "scryfallId": "04c6e42d-991d-4e6b-a900-38480931f79e",
+      "multiverseid": 461013
+    },
+    {
+      "name": "Leyline Prowler",
+      "scryfallId": "c56b4e8f-d48e-4bb0-883d-29f978033f65",
+      "multiverseid": 461129
+    },
+    {
+      "name": "Deathsprout",
+      "scryfallId": "6d615557-aea8-4057-9fbd-d62dd98edc13",
+      "multiverseid": 461116
+    },
+    {
+      "name": "Evolution Sage",
+      "scryfallId": "b4042db8-6032-49a2-bc96-ad15f55db6c3",
+      "multiverseid": 461086
+    },
+    {
+      "name": "Cryptic Caves",
+      "scryfallId": "fde9e9cb-68ab-4856-8ad6-30f66666dd93",
+      "multiverseid": 466998
+    },
+    {
+      "name": "Thrashing Brontodon",
+      "scryfallId": "b7367813-8be3-44a2-9a75-5f4e48cf34b1",
+      "multiverseid": 466951
+    },
+    {
+      "name": "Temple of Malady",
+      "scryfallId": "6e327d94-5540-49f0-b1a2-a3fb614c9651",
+      "multiverseid": 467008
+    },
+    {
+      "name": "Moldervine Reclamation",
+      "scryfallId": "618d21fe-8e3d-4887-b2e4-b92194ba1902",
+      "multiverseid": 466968
+    },
+    {
+      "name": "Woodland Champion",
+      "scryfallId": "250f5303-428a-478c-9bd5-2410f7fcc4dd",
+      "multiverseid": 466959
+    },
+    {
+      "name": "Rapacious Dragon",
+      "scryfallId": "2c9bf6d8-ebf6-40ff-858a-3483d19bb584",
+      "multiverseid": 466907
+    },
+    {
+      "name": "Rugged Highlands",
+      "scryfallId": "f05dd57c-91ca-4c79-b6da-1e504d806f28",
+      "multiverseid": 467004
+    },
+    {
+      "name": "Jungle Hollow",
+      "scryfallId": "9b6b7a1d-943b-43f8-a70b-1a3a205476cf",
+      "multiverseid": 467002
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "ad0fa2fb-6770-4a81-b830-4acfa957655a",
+      "multiverseid": 467000
+    },
+    {
+      "name": "Bloodfell Caves",
+      "scryfallId": "9b7ec5a3-3c40-4090-b9e3-11fb5b06fb8f",
+      "multiverseid": 466996
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "4fd257a5-439d-4ef8-9cc9-9741e99a04e3",
+      "multiverseid": 473231
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
+      "multiverseid": 473224
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
+      "multiverseid": 473224
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:46.031Z",
+    "sourceUrl": "https://archidekt.com/decks/2209103",
+    "deckSource": "archidekt"
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209130,
+  "name": "Evasive Maneuvers - Commander Anthology",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Derevi, Empyrial Tactician",
+      "scryfallId": "3a1d0dad-18a8-489e-ac11-08f64b72fda4",
+      "multiverseid": 430395
+    }
+  ],
+  "cards": [
+    {
+      "name": "Acidic Slime",
+      "scryfallId": "54f0b514-a85d-4e0c-b331-1dbaa316842d",
+      "multiverseid": 430309
+    },
+    {
+      "name": "Aerie Mystics",
+      "scryfallId": "ac774ed1-75f0-4c22-adf7-73a64183981a",
+      "multiverseid": 430220
+    },
+    {
+      "name": "Angel of Finality",
+      "scryfallId": "ba8741f5-f512-4c31-b4ba-3f2ef00b0102",
+      "multiverseid": 430222
+    },
+    {
+      "name": "Azami, Lady of Scrolls",
+      "scryfallId": "fa574ca0-a5a2-4f3d-b95f-5888391d4530",
+      "multiverseid": 430250
+    },
+    {
+      "name": "Bane of Progress",
+      "scryfallId": "66a23edd-96ad-4870-907f-2c332bc2e53b",
+      "multiverseid": 430310
+    },
+    {
+      "name": "Deceiver Exarch",
+      "scryfallId": "35437d86-6f92-480a-aa0c-c17c3943c00c",
+      "multiverseid": 430255
+    },
+    {
+      "name": "Diviner Spirit",
+      "scryfallId": "e86df81e-83d6-4522-82ad-2b1f2d8de623",
+      "multiverseid": 430256
+    },
+    {
+      "name": "Djinn of Infinite Deceits",
+      "scryfallId": "8f0f3643-a355-4132-bce8-c306df3cf830",
+      "multiverseid": 430257
+    },
+    {
+      "name": "Dungeon Geists",
+      "scryfallId": "072ca247-85e8-4414-96e5-736261516c20",
+      "multiverseid": 430258
+    },
+    {
+      "name": "Farhaven Elf",
+      "scryfallId": "86f8c26d-0752-444f-adfa-1bebcc15f493",
+      "multiverseid": 430328
+    },
+    {
+      "name": "Fiend Hunter",
+      "scryfallId": "646bf107-326a-4297-8c2f-ff1c4ff85c2e",
+      "multiverseid": 430229
+    },
+    {
+      "name": "Flickerwisp",
+      "scryfallId": "e89b5a38-e43a-4a3a-ad9d-e2c55d2126f4",
+      "multiverseid": 430231
+    },
+    {
+      "name": "Hada Spy Patrol",
+      "scryfallId": "905f1b28-8d53-4163-9118-414dad789509",
+      "multiverseid": 430259
+    },
+    {
+      "name": "Karmic Guide",
+      "scryfallId": "b0768971-88ed-4166-aede-209654878e53",
+      "multiverseid": 430232
+    },
+    {
+      "name": "Kazandu Tuskcaller",
+      "scryfallId": "aec3ad60-dc8a-42ba-bfee-3b9008b0c91d",
+      "multiverseid": 430340
+    },
+    {
+      "name": "Lu Xun, Scholar General",
+      "scryfallId": "3e16e5b7-d130-4e52-b002-5f3d986e3e82",
+      "multiverseid": 430260
+    },
+    {
+      "name": "Mirror Entity",
+      "scryfallId": "bf67358d-e26d-461c-ab12-9626e311c5b1",
+      "multiverseid": 430235
+    },
+    {
+      "name": "Mistmeadow Witch",
+      "scryfallId": "01b1cd72-f8e8-4030-9449-7e0c978a1e82",
+      "multiverseid": 430422
+    },
+    {
+      "name": "Murkfiend Liege",
+      "scryfallId": "b85d2921-16ee-48bf-abd3-f49fae163855",
+      "multiverseid": 430423
+    },
+    {
+      "name": "Phantom Nantuko",
+      "scryfallId": "2fd65594-cf66-4dd4-8d7b-b565756f2f86",
+      "multiverseid": 430352
+    },
+    {
+      "name": "Pilgrim's Eye",
+      "scryfallId": "c7e66dfd-f989-4695-ba09-48868c58e5d5",
+      "multiverseid": 430443
+    },
+    {
+      "name": "Roon of the Hidden Realm",
+      "scryfallId": "f8ff4b08-fa1a-4564-b427-ea89e54a0e7b",
+      "multiverseid": 430409
+    },
+    {
+      "name": "Rubinia Soulsinger",
+      "scryfallId": "ce216785-aa81-44b4-9562-9b7eca743a0c",
+      "multiverseid": 430410
+    },
+    {
+      "name": "Selesnya Guildmage",
+      "scryfallId": "5f4ba951-644c-42f4-8c16-22df26cdd86f",
+      "multiverseid": 430425
+    },
+    {
+      "name": "Skyward Eye Prophets",
+      "scryfallId": "056f9887-3ab0-486a-b859-5999d39f9ec2",
+      "multiverseid": 430412
+    },
+    {
+      "name": "Stonecloaker",
+      "scryfallId": "c5a41a4f-aa85-44cd-8238-02894ff83223",
+      "multiverseid": 430244
+    },
+    {
+      "name": "Thornwind Faeries",
+      "scryfallId": "d2f6a604-1a00-41c4-afe1-e80371c7596a",
+      "multiverseid": 430261
+    },
+    {
+      "name": "Winged Coatl",
+      "scryfallId": "bc4be69d-68e7-4e56-8c32-b252a40f0ca3",
+      "multiverseid": 430416
+    },
+    {
+      "name": "Wonder",
+      "scryfallId": "c7c29f93-e7c0-4dd9-88f2-2e4e1a37db56",
+      "multiverseid": 430263
+    },
+    {
+      "name": "Aethermage's Touch",
+      "scryfallId": "81a67f10-9b7d-47ba-bcd8-d969e631833e",
+      "multiverseid": 430391
+    },
+    {
+      "name": "Arcane Denial",
+      "scryfallId": "2a648138-8be1-4c33-b53c-b95037c6cb4a",
+      "multiverseid": 430249
+    },
+    {
+      "name": "Blue Sun's Zenith",
+      "scryfallId": "9d3f1b57-3353-4b88-abe9-98a3234a25f3",
+      "multiverseid": 430251
+    },
+    {
+      "name": "Krosan Grip",
+      "scryfallId": "3f47b0c5-f1d9-46a6-8fc5-c12db4fb1c88",
+      "multiverseid": 430342
+    },
+    {
+      "name": "Selesnya Charm",
+      "scryfallId": "6e52d1a2-064f-4dcb-983d-322aec1776f8",
+      "multiverseid": 430411
+    },
+    {
+      "name": "Unexpectedly Absent",
+      "scryfallId": "04bf7e2b-a05f-4ce6-b64c-809b74790b59",
+      "multiverseid": 430246
+    },
+    {
+      "name": "Borrowing 100,000 Arrows",
+      "scryfallId": "4d614db0-3b66-4984-9b21-5e4e6d0d12a0",
+      "multiverseid": 430252
+    },
+    {
+      "name": "Kirtar's Wrath",
+      "scryfallId": "6c2a6a24-e896-4191-bd67-9ae8d781e089",
+      "multiverseid": 430233
+    },
+    {
+      "name": "Restore",
+      "scryfallId": "0c0ae36e-19c8-4e05-8c02-cc7fb5da5a39",
+      "multiverseid": 430360
+    },
+    {
+      "name": "Tempt with Glory",
+      "scryfallId": "90e17fdd-c14f-413d-8119-d18cc8e58670",
+      "multiverseid": 430245
+    },
+    {
+      "name": "Wash Out",
+      "scryfallId": "039dc236-10f6-4bfd-ad2a-2925c554c19f",
+      "multiverseid": 430262
+    },
+    {
+      "name": "Azorius Keyrune",
+      "scryfallId": "a8755662-b329-4c5b-8bf7-c9e1702e5979",
+      "multiverseid": 430428
+    },
+    {
+      "name": "Basalt Monolith",
+      "scryfallId": "b90331d4-74f0-43bf-8ed2-f8616d782859",
+      "multiverseid": 430429
+    },
+    {
+      "name": "Conjurer's Closet",
+      "scryfallId": "7bfc7d30-2c7c-496b-98b0-b8a166c7348a",
+      "multiverseid": 430433
+    },
+    {
+      "name": "Darksteel Ingot",
+      "scryfallId": "9285e6d5-39cc-4750-96cc-98830d11ed10",
+      "multiverseid": 430434
+    },
+    {
+      "name": "Leonin Bladetrap",
+      "scryfallId": "de829013-dd6a-47a7-afd4-a2bda0da6ac5",
+      "multiverseid": 430438
+    },
+    {
+      "name": "Selesnya Signet",
+      "scryfallId": "2fd90c6e-1cdc-4e53-b81e-7a095a63bb34",
+      "multiverseid": 430447
+    },
+    {
+      "name": "Simic Signet",
+      "scryfallId": "357cbbf6-a59a-4bbd-bcbd-0a61f9d5fdb2",
+      "multiverseid": 430448
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "f48f7190-9ee3-477f-8b25-91e8c2916624",
+      "multiverseid": 430450
+    },
+    {
+      "name": "Surveyor's Scope",
+      "scryfallId": "885aaf8f-648c-4709-ae63-714113ec2c8d",
+      "multiverseid": 430451
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "87a24550-e25d-47ec-9165-17ed8d15c923",
+      "multiverseid": 430452
+    },
+    {
+      "name": "Sword of the Paruns",
+      "scryfallId": "d21d7452-b49e-499e-9cf3-4a883e5e9e57",
+      "multiverseid": 430453
+    },
+    {
+      "name": "Thousand-Year Elixir",
+      "scryfallId": "b2c448f0-776b-4aa9-8b6d-af35b118625f",
+      "multiverseid": 430455
+    },
+    {
+      "name": "Thunderstaff",
+      "scryfallId": "3d73681d-189f-4331-ac4b-e7e1541023ee",
+      "multiverseid": 430456
+    },
+    {
+      "name": "Control Magic",
+      "scryfallId": "84992800-9bad-4598-afd4-f1e59d2e0956",
+      "multiverseid": 430253
+    },
+    {
+      "name": "Curse of Inertia",
+      "scryfallId": "32d0c2a7-4277-43eb-bb09-5ca0c27edee4",
+      "multiverseid": 430254
+    },
+    {
+      "name": "Curse of Predation",
+      "scryfallId": "d7fcfc0b-4674-4cd1-85de-823f4ca8c6c5",
+      "multiverseid": 430318
+    },
+    {
+      "name": "Curse of the Forsaken",
+      "scryfallId": "9af69b5e-f713-4af6-9990-f99be7801f73",
+      "multiverseid": 430227
+    },
+    {
+      "name": "Darksteel Mutation",
+      "scryfallId": "7f11af1f-6402-47a9-a515-06aad9c497fd",
+      "multiverseid": 430228
+    },
+    {
+      "name": "Flickerform",
+      "scryfallId": "64266c41-b123-41e1-8006-07f2037bba72",
+      "multiverseid": 430230
+    },
+    {
+      "name": "Leafdrake Roost",
+      "scryfallId": "5f74cf11-8deb-4623-9c1e-1e86e98bd831",
+      "multiverseid": 430401
+    },
+    {
+      "name": "Presence of Gond",
+      "scryfallId": "57c95805-54c5-47af-9d7f-21dd8f970aac",
+      "multiverseid": 430354
+    },
+    {
+      "name": "Azorius Chancery",
+      "scryfallId": "4ccd100d-3a53-4cfe-8d38-639573547f54",
+      "multiverseid": 430458
+    },
+    {
+      "name": "Azorius Guildgate",
+      "scryfallId": "37f0d5e4-ab57-4ba3-ad89-c4c2ac88e35e",
+      "multiverseid": 430459
+    },
+    {
+      "name": "Bant Panorama",
+      "scryfallId": "a5ded71e-0e8e-49c6-80d8-ce31cb95e0fa",
+      "multiverseid": 430460
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "5f66d99c-7c2d-40b9-ae07-c3a84f018a0d",
+      "multiverseid": 430464
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "a0061e91-c980-4ce2-a25a-340899e05049",
+      "multiverseid": 430466
+    },
+    {
+      "name": "Faerie Conclave",
+      "scryfallId": "8f4ab639-b439-462e-acc3-69b5d6bb29da",
+      "multiverseid": 430467
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Island",
+      "scryfallId": "0677e507-f690-44a1-8ed1-6808cbcd4e7c",
+      "multiverseid": 430513
+    },
+    {
+      "name": "Opal Palace",
+      "scryfallId": "6e4a569b-4cb6-4a7a-a9f7-0f1413486f71",
+      "multiverseid": 430481
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "db9ab619-6a22-4b26-a8ab-48a6aef0aaa2",
+      "multiverseid": 430507
+    },
+    {
+      "name": "Rupture Spire",
+      "scryfallId": "168bfec4-ef2a-48b5-b78a-487703cbdae5",
+      "multiverseid": 430486
+    },
+    {
+      "name": "Saltcrusted Steppe",
+      "scryfallId": "ccbe1cae-6c5a-499d-8565-d7ce23b012fa",
+      "multiverseid": 430487
+    },
+    {
+      "name": "Seaside Citadel",
+      "scryfallId": "827165f0-cbf3-4cc3-84bd-7b709eadc645",
+      "multiverseid": 430488
+    },
+    {
+      "name": "Secluded Steppe",
+      "scryfallId": "7c4e375f-6f9b-4e9f-82f8-dca303f659f8",
+      "multiverseid": 430489
+    },
+    {
+      "name": "Sejiri Refuge",
+      "scryfallId": "d3748ecd-d341-43d3-8e0f-478a3c055a0b",
+      "multiverseid": 430490
+    },
+    {
+      "name": "Selesnya Guildgate",
+      "scryfallId": "bd753820-0a53-402d-bffe-11d94d054e3c",
+      "multiverseid": 430491
+    },
+    {
+      "name": "Selesnya Sanctuary",
+      "scryfallId": "607eb5a0-9e44-473e-8433-9ceae9e4c7ce",
+      "multiverseid": 430492
+    },
+    {
+      "name": "Simic Guildgate",
+      "scryfallId": "479042a1-b380-447d-937a-10364db9f7d3",
+      "multiverseid": 430493
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "49948be8-62af-4434-a941-11e8f2a11899",
+      "multiverseid": 430496
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "f8651259-cc23-4089-96f7-d706ab87c8bb",
+      "multiverseid": 430497
+    },
+    {
+      "name": "Transguild Promenade",
+      "scryfallId": "c0a80176-b2fe-42c4-8a90-caff00e28f6b",
+      "multiverseid": 430499
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:52.098Z",
+    "sourceUrl": "https://archidekt.com/decks/2209130",
+    "deckSource": "archidekt"
+  }
+}

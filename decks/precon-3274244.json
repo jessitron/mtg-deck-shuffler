@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 3274244,
+  "name": "Necron Dynasties - Warhammer 40,000 Commander",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Szarekh, the Silent King",
+      "scryfallId": "e11174b2-2423-4a6e-9dcf-ff550eee7e5a",
+      "multiverseid": 0
+    }
+  ],
+  "cards": [
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "8191befc-dcf7-4cb8-89ca-3461d55e4682",
+      "multiverseid": 582478
+    },
+    {
+      "name": "Barren Moor",
+      "scryfallId": "22a7ef45-0fa0-4924-955c-27da5f6d0098",
+      "multiverseid": 582515
+    },
+    {
+      "name": "Biotransference",
+      "scryfallId": "75a787a3-5838-4121-bbaf-745d22c4b0bc",
+      "multiverseid": 580852
+    },
+    {
+      "name": "Caged Sun",
+      "scryfallId": "e828d87a-f2c7-475b-8c8f-b36474c50cf9",
+      "multiverseid": 582480
+    },
+    {
+      "name": "Canoptek Scarab Swarm",
+      "scryfallId": "3ce2021c-1422-4901-a554-2d4fab72c8e4",
+      "multiverseid": 580972
+    },
+    {
+      "name": "Canoptek Spyder",
+      "scryfallId": "56ae1e4b-b620-480b-b6fc-66f2137d7d89",
+      "multiverseid": 580973
+    },
+    {
+      "name": "Canoptek Tomb Sentinel",
+      "scryfallId": "aec9ba42-4c58-4e40-a8c5-63da81c44616",
+      "multiverseid": 580974
+    },
+    {
+      "name": "Canoptek Wraith",
+      "scryfallId": "06199f88-720f-484a-953e-9189bafbe173",
+      "multiverseid": 580975
+    },
+    {
+      "name": "Chronomancer",
+      "scryfallId": "a960acea-3404-4834-9296-d6715add49af",
+      "multiverseid": 580854
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "7b7fae6e-f83e-480f-b5fd-57b503b4afe4",
+      "multiverseid": 582484
+    },
+    {
+      "name": "Convergence of Dominion",
+      "scryfallId": "e03d8676-f693-4155-b75f-dcbe2890ccb0",
+      "multiverseid": 580976
+    },
+    {
+      "name": "Cranial Plating",
+      "scryfallId": "53a7cccd-b445-46e3-b70c-afc3bb2de85d",
+      "multiverseid": 582485
+    },
+    {
+      "name": "Cryptek",
+      "scryfallId": "ea8483a2-9135-48d1-994d-9525d5ffcabb",
+      "multiverseid": 580855
+    },
+    {
+      "name": "Cryptothrall",
+      "scryfallId": "086d94a0-763e-495e-b952-5c13383657c9",
+      "multiverseid": 580977
+    },
+    {
+      "name": "Darkness",
+      "scryfallId": "ed94c73e-25d3-43bb-bdaa-b05f9b972216",
+      "multiverseid": 582446
+    },
+    {
+      "name": "Defile",
+      "scryfallId": "ae79f72a-0f44-4a79-a640-582282706a1b",
+      "multiverseid": 582448
+    },
+    {
+      "name": "Dread Return",
+      "scryfallId": "6a73b481-8e62-4742-bbd0-33b8048602d7",
+      "multiverseid": 582449
+    },
+    {
+      "name": "Desert of the Glorified",
+      "scryfallId": "f9161bb7-07db-468f-b944-37a90fa0e4d9",
+      "multiverseid": 582524
+    },
+    {
+      "name": "Beacon of Unrest",
+      "scryfallId": "e313ae8b-f77b-47a4-9202-305bf6deb3dc",
+      "multiverseid": 582443
+    },
+    {
+      "name": "Endless Atlas",
+      "scryfallId": "c8b2fcc3-5c39-403b-8311-5760190388b2",
+      "multiverseid": 582486
+    },
+    {
+      "name": "Flayed One",
+      "scryfallId": "b0ab96a5-0bcc-4732-8936-9522f3de3962",
+      "multiverseid": 580856
+    },
+    {
+      "name": "Ghost Ark",
+      "scryfallId": "2c6865c1-8144-4b06-a599-a62382fe1124",
+      "multiverseid": 580978
+    },
+    {
+      "name": "Gilded Lotus",
+      "scryfallId": "4991e495-9b6d-4f52-aada-3187fd44b945",
+      "multiverseid": 582488
+    },
+    {
+      "name": "Hexmark Destroyer",
+      "scryfallId": "66a4e78b-9600-4fec-94f0-65cf8ffce2dc",
+      "multiverseid": 580858
+    },
+    {
+      "name": "Illuminor Szeras",
+      "scryfallId": "d161a190-3c85-4207-9d88-7ff9213efea8",
+      "multiverseid": 580859
+    },
+    {
+      "name": "Imotekh the Stormlord",
+      "scryfallId": "286ff901-1faf-4a02-a37a-fa165989112f",
+      "multiverseid": 0
+    },
+    {
+      "name": "Living Death",
+      "scryfallId": "9e03a4fe-6ee5-423b-bc05-452e8d14507b",
+      "multiverseid": 582451
+    },
+    {
+      "name": "Lokhust Heavy Destroyer",
+      "scryfallId": "4665fa5d-37ea-4898-a4a4-7bc5311075de",
+      "multiverseid": 580860
+    },
+    {
+      "name": "Lychguard",
+      "scryfallId": "6737a276-b5e9-4c55-b995-ada96eca4e6e",
+      "multiverseid": 580861
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "3e2550d5-ba6a-4cab-908a-b537973800c1",
+      "multiverseid": 582494
+    },
+    {
+      "name": "Mutilate",
+      "scryfallId": "b931c7cb-ef83-440c-9195-ace311f4a601",
+      "multiverseid": 582452
+    },
+    {
+      "name": "Mystic Forge",
+      "scryfallId": "cf56bef3-7f0e-47b4-96f5-325722f7708a",
+      "multiverseid": 582495
+    },
+    {
+      "name": "Necron Deathmark",
+      "scryfallId": "4129cb0d-eefe-4971-9db8-1196201ef353",
+      "multiverseid": 580864
+    },
+    {
+      "name": "Necron Monolith",
+      "scryfallId": "9b1ecad3-8cec-4a18-9401-6eebc7feeacc",
+      "multiverseid": 580983
+    },
+    {
+      "name": "Necron Overlord",
+      "scryfallId": "62d70fd2-de4e-41c6-b3e5-147fffca8a20",
+      "multiverseid": 580865
+    },
+    {
+      "name": "Night Scythe",
+      "scryfallId": "9a71531f-d4b6-4cc7-8193-b2f5bce33b21",
+      "multiverseid": 580984
+    },
+    {
+      "name": "Out of the Tombs",
+      "scryfallId": "f1170bfa-9623-44c3-a15e-bd8c2627fe6e",
+      "multiverseid": 580868
+    },
+    {
+      "name": "Plasmancer",
+      "scryfallId": "8deb5d3a-0762-4c4f-afef-fd86728914b4",
+      "multiverseid": 580870
+    },
+    {
+      "name": "Psychomancer",
+      "scryfallId": "780743bf-e1a0-4114-9474-319632e0c775",
+      "multiverseid": 580873
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "fc07ad3a-982a-4bfc-b2e7-8e6e340ed32c",
+      "multiverseid": 582540
+    },
+    {
+      "name": "Resurrection Orb",
+      "scryfallId": "2d6209c8-9fa1-4f0a-ab65-ac2fedfcd09b",
+      "multiverseid": 580987
+    },
+    {
+      "name": "Royal Warden",
+      "scryfallId": "0a968eac-2840-41ba-b7de-3182964d4913",
+      "multiverseid": 580874
+    },
+    {
+      "name": "Sautekh Immortal",
+      "scryfallId": "c57778d7-fbd7-482f-b895-c033592f7af6",
+      "multiverseid": 580876
+    },
+    {
+      "name": "Sceptre of Eternal Glory",
+      "scryfallId": "bc7f3009-c852-41e7-8e62-d2ee637b3998",
+      "multiverseid": 580988
+    },
+    {
+      "name": "Shard of the Nightbringer",
+      "scryfallId": "21e4140e-22b3-479f-a259-0f56ed02b8ad",
+      "multiverseid": 580877
+    },
+    {
+      "name": "Shard of the Void Dragon",
+      "scryfallId": "41dd0b55-3dbb-4b65-a949-20c2a12f7edd",
+      "multiverseid": 580878
+    },
+    {
+      "name": "Skorpekh Destroyer",
+      "scryfallId": "b8c69031-588d-44a2-89b3-972a335541e5",
+      "multiverseid": 580879
+    },
+    {
+      "name": "Skorpekh Lord",
+      "scryfallId": "b768ec5f-771a-4acd-b3dd-85dea914689e",
+      "multiverseid": 580880
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "e3450882-d791-4172-b02a-ee7fdb36acfc",
+      "multiverseid": 582501
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "53002007-21ee-4953-9832-157968881b9e",
+      "multiverseid": 582562
+    },
+    {
+      "name": "Go for the Throat",
+      "scryfallId": "e915e66d-4531-41f0-bc4f-ad9cd8851a05",
+      "multiverseid": 582450
+    },
+    {
+      "name": "Polluted Mire",
+      "scryfallId": "2862c204-3e32-4ff5-b767-e1af0f37b96a",
+      "multiverseid": 582537
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "a3a12e0f-85de-440f-8a7d-230bf8c415c1",
+      "multiverseid": 582534
+    },
+    {
+      "name": "Sculpting Steel",
+      "scryfallId": "5cfa5564-47d8-48e7-a815-2a6cff683a52",
+      "multiverseid": 582496
+    },
+    {
+      "name": "Mask of Memory",
+      "scryfallId": "30acbb34-3ff5-4d38-b349-f108351f94f8",
+      "multiverseid": 582492
+    },
+    {
+      "name": "Hedron Archive",
+      "scryfallId": "2feb16d2-7406-45ab-9595-e6c48fc47bf5",
+      "multiverseid": 582489
+    },
+    {
+      "name": "Technomancer",
+      "scryfallId": "c160c1f7-714e-444a-ab74-c64c3a099a48",
+      "multiverseid": 580883
+    },
+    {
+      "name": "Their Name Is Death",
+      "scryfallId": "ea5ddc28-dfc1-4b96-b6e2-590fcb1f83ef",
+      "multiverseid": 580884
+    },
+    {
+      "name": "Their Number Is Legion",
+      "scryfallId": "f03c1eb4-1f47-4b65-8d8d-4057fb6997e1",
+      "multiverseid": 580885
+    },
+    {
+      "name": "Thought Vessel",
+      "scryfallId": "ebf52151-9b4b-40c3-945b-8c32d13e1ad3",
+      "multiverseid": 582508
+    },
+    {
+      "name": "Tomb Blade",
+      "scryfallId": "2f5f2e19-41ce-40c6-9732-d0f88ad6735f",
+      "multiverseid": 580886
+    },
+    {
+      "name": "Tomb Fortress",
+      "scryfallId": "5ffd1a43-5613-4058-9e51-fd3cc1585651",
+      "multiverseid": 580990
+    },
+    {
+      "name": "Triarch Praetorian",
+      "scryfallId": "5ad67a79-cb13-44b8-adac-36cfd211f2d3",
+      "multiverseid": 580888
+    },
+    {
+      "name": "Triarch Stalker",
+      "scryfallId": "fbe75aae-727b-4cb0-967c-477d5a08b8f7",
+      "multiverseid": 580889
+    },
+    {
+      "name": "Wayfarer's Bauble",
+      "scryfallId": "57ead261-d358-419e-b832-086439c5e793",
+      "multiverseid": 582510
+    },
+    {
+      "name": "Vault of Whispers",
+      "scryfallId": "4dca7b45-164d-4181-9585-5d0f3b6a6927",
+      "multiverseid": 582554
+    },
+    {
+      "name": "Unstable Obelisk",
+      "scryfallId": "f79d90f8-fb86-4846-833a-63c0496221e0",
+      "multiverseid": 582509
+    },
+    {
+      "name": "Trazyn the Infinite",
+      "scryfallId": "1ae95cfb-1c3e-43cc-acfa-68f25b0f6e52",
+      "multiverseid": 580887
+    },
+    {
+      "name": "Anrakyr the Traveller",
+      "scryfallId": "6ea09406-c65e-4ee4-9c74-0553e5110837",
+      "multiverseid": 580850
+    },
+    {
+      "name": "The War in Heaven",
+      "scryfallId": "cd556cd1-e33a-433d-ac18-4a4fd195c3ab",
+      "multiverseid": 580891
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:13:07.296Z",
+    "sourceUrl": "https://archidekt.com/decks/3274244",
+    "deckSource": "archidekt"
+  }
+}

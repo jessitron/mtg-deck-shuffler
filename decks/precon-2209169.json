@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209169,
+  "name": "Power Hungry - Commander 2013",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Prossh, Skyraider of Kher",
+      "scryfallId": "fc411c52-3ee2-4fe4-983d-3fa43b516237",
+      "multiverseid": 376461
+    }
+  ],
+  "cards": [
+    {
+      "name": "Capricious Efreet",
+      "scryfallId": "48d3c44d-1a2f-4e2a-8d5a-592719cb92f4",
+      "multiverseid": 376276
+    },
+    {
+      "name": "Charnelhoard Wurm",
+      "scryfallId": "1c0ec55e-88df-40f8-b08d-6185cdb4a3cc",
+      "multiverseid": 376279
+    },
+    {
+      "name": "Deathbringer Thoctar",
+      "scryfallId": "fdffa46e-8802-4479-a669-d33618f75d4f",
+      "multiverseid": 376300
+    },
+    {
+      "name": "Deepfire Elemental",
+      "scryfallId": "d81fc89c-6eb8-4b75-bbaf-a7eb9679bab2",
+      "multiverseid": 376304
+    },
+    {
+      "name": "Elvish Skysweeper",
+      "scryfallId": "ff4b950c-bd01-45e0-bd60-5b55640a50a8",
+      "multiverseid": 376319
+    },
+    {
+      "name": "Endless Cockroaches",
+      "scryfallId": "de7f26a4-da23-4508-b8b4-817a66d7852a",
+      "multiverseid": 376320
+    },
+    {
+      "name": "Endrek Sahr, Master Breeder",
+      "scryfallId": "48eac047-f888-49c7-aa7e-339f900f558f",
+      "multiverseid": 376321
+    },
+    {
+      "name": "Fell Shepherd",
+      "scryfallId": "afd27b8d-3c1f-401b-aad1-268a7aa79f0f",
+      "multiverseid": 376330
+    },
+    {
+      "name": "Goblin Sharpshooter",
+      "scryfallId": "4f72e9e2-ed47-40ff-bc2e-8446ef545022",
+      "multiverseid": 376350
+    },
+    {
+      "name": "Golgari Guildmage",
+      "scryfallId": "890faae2-cf6a-400a-9f17-8772991b0eef",
+      "multiverseid": 376352
+    },
+    {
+      "name": "Hooded Horror",
+      "scryfallId": "15414338-506b-458f-a067-1a2053373594",
+      "multiverseid": 376365
+    },
+    {
+      "name": "Hua Tuo, Honored Physician",
+      "scryfallId": "8bbdc7c5-71a1-4db8-98b2-8883bf648dca",
+      "multiverseid": 376366
+    },
+    {
+      "name": "Hunted Troll",
+      "scryfallId": "cfe19e16-33f6-4594-9dd3-2699a66ba0e8",
+      "multiverseid": 376368
+    },
+    {
+      "name": "Inferno Titan",
+      "scryfallId": "446a99f8-29e9-41c8-bf68-c50a2c21e056",
+      "multiverseid": 376371
+    },
+    {
+      "name": "Jade Mage",
+      "scryfallId": "3d57bc86-7625-4669-9d33-b662263bd5bf",
+      "multiverseid": 376380
+    },
+    {
+      "name": "Ophiomancer",
+      "scryfallId": "66d80dd1-b944-4cb2-8578-b4dbcabbbc1e",
+      "multiverseid": 376439
+    },
+    {
+      "name": "Quagmire Druid",
+      "scryfallId": "ccb57a8b-1b2e-4119-a90e-b2b3de79e791",
+      "multiverseid": 376462
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "662af92a-d931-4028-8a80-3ae21e137647",
+      "multiverseid": 376478
+    },
+    {
+      "name": "Scarland Thrinax",
+      "scryfallId": "8fb20f32-cdfa-43e3-8dbe-339bb03c0a00",
+      "multiverseid": 376483
+    },
+    {
+      "name": "Sek'Kuar, Deathkeeper",
+      "scryfallId": "0a521587-8304-45da-9b65-6b4e2e29e5c2",
+      "multiverseid": 376488
+    },
+    {
+      "name": "Shattergang Brothers",
+      "scryfallId": "a1b922ce-c398-43d4-9f79-2d15f28eae2f",
+      "multiverseid": 376498
+    },
+    {
+      "name": "Silklash Spider",
+      "scryfallId": "f15c3d37-82e2-461a-8a1f-d92854e3bf3a",
+      "multiverseid": 376499
+    },
+    {
+      "name": "Sprouting Thrinax",
+      "scryfallId": "f9a7cf01-23d1-4006-8a71-e1e8e57e20bf",
+      "multiverseid": 376519
+    },
+    {
+      "name": "Stalking Vengeance",
+      "scryfallId": "ad0a5f5b-14c8-4c72-a521-7d015b060ca4",
+      "multiverseid": 376521
+    },
+    {
+      "name": "Stronghold Assassin",
+      "scryfallId": "1de806b5-2263-42b4-a187-0cf8c9e15072",
+      "multiverseid": 376527
+    },
+    {
+      "name": "Terra Ravager",
+      "scryfallId": "124dd668-ad84-45b9-9e04-1ea7cd2d7024",
+      "multiverseid": 376547
+    },
+    {
+      "name": "Viscera Seer",
+      "scryfallId": "535d8c19-c108-4fca-9918-2fcfc32e673d",
+      "multiverseid": 376569
+    },
+    {
+      "name": "Walker of the Grove",
+      "scryfallId": "3a4e30fa-c49a-4992-b029-5234a3063aee",
+      "multiverseid": 376578
+    },
+    {
+      "name": "Wight of Precinct Six",
+      "scryfallId": "bdec147c-7b46-40d6-9269-528b4cc8f643",
+      "multiverseid": 376587
+    },
+    {
+      "name": "Jund Charm",
+      "scryfallId": "df91979c-fb60-433b-8780-366ce1effd9c",
+      "multiverseid": 376383
+    },
+    {
+      "name": "Reincarnation",
+      "scryfallId": "7ee379cd-b3fb-487b-846c-eab02902de79",
+      "multiverseid": 376472
+    },
+    {
+      "name": "Dirge of Dread",
+      "scryfallId": "a938b00e-a829-4860-a53a-83110493d0bd",
+      "multiverseid": 376307
+    },
+    {
+      "name": "Mass Mutiny",
+      "scryfallId": "9607cb06-e788-4480-ba42-088beb19ad3b",
+      "multiverseid": 376406
+    },
+    {
+      "name": "Restore",
+      "scryfallId": "a8664e35-a0bf-4df7-8530-91d2f7dfcc0a",
+      "multiverseid": 376473
+    },
+    {
+      "name": "Rough // Tumble",
+      "scryfallId": "86ffb576-e33a-40c5-b83e-602cf62a2311",
+      "multiverseid": 376475
+    },
+    {
+      "name": "Spoils of Victory",
+      "scryfallId": "8a7ee186-b25f-4185-830d-e8e7cf23d4e5",
+      "multiverseid": 376517
+    },
+    {
+      "name": "Sudden Demise",
+      "scryfallId": "7217afaa-00e1-45a7-bb7f-66a770487b77",
+      "multiverseid": 376528
+    },
+    {
+      "name": "Tempt with Vengeance",
+      "scryfallId": "48ad7c26-edb5-4354-9872-87c667183be7",
+      "multiverseid": 376546
+    },
+    {
+      "name": "Armillary Sphere",
+      "scryfallId": "a87dd615-565d-4b79-a346-f8c6bb0a8340",
+      "multiverseid": 376249
+    },
+    {
+      "name": "Carnage Altar",
+      "scryfallId": "c08486d3-3d94-49c7-b8c9-61eb8a3e6428",
+      "multiverseid": 376277
+    },
+    {
+      "name": "Jar of Eyeballs",
+      "scryfallId": "72da56bd-dd1c-4b3c-a655-afa31e9adca0",
+      "multiverseid": 376381
+    },
+    {
+      "name": "Obelisk of Jund",
+      "scryfallId": "1fe43306-f48f-4812-8d40-1903cc6f19d2",
+      "multiverseid": 376435
+    },
+    {
+      "name": "Plague Boiler",
+      "scryfallId": "869e27e3-1707-4e1d-b04a-8309da2e41b4",
+      "multiverseid": 376450
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "1b59533a-3e38-495d-873e-2f89fbd08494",
+      "multiverseid": 376508
+    },
+    {
+      "name": "Spine of Ish Sah",
+      "scryfallId": "86cd428e-b60e-481c-8cdb-8e57f8cc59e3",
+      "multiverseid": 376514
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "da8ac93d-3377-4768-8152-d988a090de2a",
+      "multiverseid": 376537
+    },
+    {
+      "name": "Blood Rites",
+      "scryfallId": "89d77b63-eeee-4d8a-9622-b1ea36dc70de",
+      "multiverseid": 376267
+    },
+    {
+      "name": "Curse of Chaos",
+      "scryfallId": "fd95b9aa-1abb-4a10-a622-51a2bb578d17",
+      "multiverseid": 376291
+    },
+    {
+      "name": "Curse of Predation",
+      "scryfallId": "d28f824e-8cd4-4915-a46f-6e3c646c6378",
+      "multiverseid": 376293
+    },
+    {
+      "name": "Curse of Shallow Graves",
+      "scryfallId": "849996e2-fb62-428f-88f1-4ac419617395",
+      "multiverseid": 376294
+    },
+    {
+      "name": "Fecundity",
+      "scryfallId": "4b67a55e-58fe-4ebe-abed-027bb523a280",
+      "multiverseid": 376329
+    },
+    {
+      "name": "Foster",
+      "scryfallId": "00f86a0b-0f46-4ce1-bbeb-7f46881e1627",
+      "multiverseid": 376345
+    },
+    {
+      "name": "Furnace Celebration",
+      "scryfallId": "9d90b132-f668-47e1-b89c-7aa569525117",
+      "multiverseid": 376347
+    },
+    {
+      "name": "Goblin Bombardment",
+      "scryfallId": "cef7d5ac-d7a4-45a8-b780-6f19e2adc4c6",
+      "multiverseid": 376349
+    },
+    {
+      "name": "Night Soil",
+      "scryfallId": "52a0eca1-f936-4f5a-820b-fa12542c593d",
+      "multiverseid": 376429
+    },
+    {
+      "name": "Primal Vigor",
+      "scryfallId": "dafea0d1-6986-46b3-affc-1337ef564947",
+      "multiverseid": 376457
+    },
+    {
+      "name": "Tooth and Claw",
+      "scryfallId": "ca3d7a67-5652-4811-a2f8-0dd82c1d56e8",
+      "multiverseid": 376556
+    },
+    {
+      "name": "Vile Requiem",
+      "scryfallId": "923972d3-d838-43f8-800a-904489c5791a",
+      "multiverseid": 376568
+    },
+    {
+      "name": "Widespread Panic",
+      "scryfallId": "d9e1b37f-8168-4dc0-858f-434ee96ff748",
+      "multiverseid": 376586
+    },
+    {
+      "name": "Akoum Refuge",
+      "scryfallId": "0b32023d-454a-456c-92fa-ebd591d2b854",
+      "multiverseid": 376242
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "7b2de1d7-0b13-423b-b0ca-31eb38b5b81f",
+      "multiverseid": 376280
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "f0244872-9cd7-4a23-87a5-7658fd4a8c2e",
+      "multiverseid": 376324
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "da47f722-61dd-4120-b14e-f88b2e601f1f",
+      "multiverseid": 376341
+    },
+    {
+      "name": "Golgari Guildgate",
+      "scryfallId": "80658042-3998-49ca-88ef-f87320a5bd43",
+      "multiverseid": 376351
+    },
+    {
+      "name": "Golgari Rot Farm",
+      "scryfallId": "5cd0bb20-669a-47ad-9fd7-f44aa48c8ce2",
+      "multiverseid": 376353
+    },
+    {
+      "name": "Grim Backwoods",
+      "scryfallId": "7586de16-1341-4c6c-a30c-a3a8f4655411",
+      "multiverseid": 376356
+    },
+    {
+      "name": "Gruul Guildgate",
+      "scryfallId": "d5d7efbc-0863-4993-a6e9-58818378e8af",
+      "multiverseid": 376359
+    },
+    {
+      "name": "Jund Panorama",
+      "scryfallId": "d4219a68-9962-43d7-a12b-be6f09deb03a",
+      "multiverseid": 376384
+    },
+    {
+      "name": "Kazandu Refuge",
+      "scryfallId": "94d5eb61-4f38-42a0-92b2-1f25019bd436",
+      "multiverseid": 376388
+    },
+    {
+      "name": "Khalni Garden",
+      "scryfallId": "55d17634-db36-47e3-855f-7c3a8419cce7",
+      "multiverseid": 376390
+    },
+    {
+      "name": "Kher Keep",
+      "scryfallId": "ee9b8031-3681-46ba-955a-ae54fc0bbe8b",
+      "multiverseid": 376391
+    },
+    {
+      "name": "Llanowar Reborn",
+      "scryfallId": "20311caa-0ab7-4273-98a6-5e7dd1b7ab38",
+      "multiverseid": 376400
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "66377ecf-30f2-44a4-a10e-1a6b7cf6e541",
+      "multiverseid": 376416
+    },
+    {
+      "name": "Opal Palace",
+      "scryfallId": "e8b912d9-5682-4462-954a-b4c2eb1aebbb",
+      "multiverseid": 376438
+    },
+    {
+      "name": "Rakdos Guildgate",
+      "scryfallId": "e7c71a39-42a5-4a77-99fa-b7b59339818a",
+      "multiverseid": 376465
+    },
+    {
+      "name": "Rupture Spire",
+      "scryfallId": "622087fc-4e34-43cd-a46f-fd2c339b3905",
+      "multiverseid": 376477
+    },
+    {
+      "name": "Savage Lands",
+      "scryfallId": "34138230-30f6-4a5b-9ef6-16e51b8374f6",
+      "multiverseid": 376481
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9b566c-afaa-45ae-bca8-d39b642ea4d9",
+      "multiverseid": 376534
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "5b25c648-34a7-4293-8f91-1295bcdeceb0",
+      "multiverseid": 376541
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "d90bcb66-4c48-4bec-a55c-30e243872903",
+      "multiverseid": 376548
+    },
+    {
+      "name": "Vivid Grove",
+      "scryfallId": "d5ffbf08-d9b4-4087-83ea-f50ac3385065",
+      "multiverseid": 376575
+    },
+    {
+      "name": "Brooding Saurian",
+      "scryfallId": "b3ec586d-14c7-4d3a-9bb5-f6afdf87657c",
+      "multiverseid": 376275
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:12:59.452Z",
+    "sourceUrl": "https://archidekt.com/decks/2209169",
+    "deckSource": "archidekt"
+  }
+}

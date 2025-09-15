@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "id": 2209171,
+  "name": "Devour for Power - Commander 2011",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "The Mimeoplasm",
+      "scryfallId": "20ffedd2-0575-4050-b687-fa1212966c46",
+      "multiverseid": 228232
+    }
+  ],
+  "cards": [
+    {
+      "name": "Acidic Slime",
+      "scryfallId": "2c5b2de9-ba83-4cae-9088-25268b7a8e13",
+      "multiverseid": 247317
+    },
+    {
+      "name": "Artisan of Kozilek",
+      "scryfallId": "e0d37261-b0a4-49be-b682-3b6d5e8e6bb7",
+      "multiverseid": 247392
+    },
+    {
+      "name": "Avatar of Woe",
+      "scryfallId": "1af79737-46ff-48f2-a270-21bd6a05d17e",
+      "multiverseid": 247520
+    },
+    {
+      "name": "Brawn",
+      "scryfallId": "6c97324b-7403-4efa-85ab-6e6779f6f2b9",
+      "multiverseid": 247290
+    },
+    {
+      "name": "Butcher of Malakir",
+      "scryfallId": "ac1d9632-11f5-4c86-88a9-a3a59664027f",
+      "multiverseid": 247537
+    },
+    {
+      "name": "Damia, Sage of Stone",
+      "scryfallId": "9ecadcd7-f40d-4c4e-b897-366c7bcae5f1",
+      "multiverseid": 236479
+    },
+    {
+      "name": "Dark Hatchling",
+      "scryfallId": "cdc354b3-3ffa-4901-95b6-2e76c4d100b4",
+      "multiverseid": 247527
+    },
+    {
+      "name": "Desecrator Hag",
+      "scryfallId": "cb431f20-8cfc-487b-a8c6-b004bdeb22d1",
+      "multiverseid": 247203
+    },
+    {
+      "name": "Dreamborn Muse",
+      "scryfallId": "2daf8f6a-431d-45dc-8e47-ad554ff76e3e",
+      "multiverseid": 247140
+    },
+    {
+      "name": "Eternal Witness",
+      "scryfallId": "101cccfb-17c3-4b11-8a3e-c382ec7143c3",
+      "multiverseid": 247148
+    },
+    {
+      "name": "Extractor Demon",
+      "scryfallId": "decdbe5f-a223-402d-933b-0cfd4c738218",
+      "multiverseid": 247178
+    },
+    {
+      "name": "Fleshbag Marauder",
+      "scryfallId": "7cccf5f9-ec1a-4207-aaa1-69c9429ca4d3",
+      "multiverseid": 247153
+    },
+    {
+      "name": "Gravedigger",
+      "scryfallId": "87643683-c47a-427c-b949-cde7d3f484e0",
+      "multiverseid": 247324
+    },
+    {
+      "name": "Lhurgoyf",
+      "scryfallId": "0dccff7f-f4e4-4477-aa60-515110ade549",
+      "multiverseid": 247151
+    },
+    {
+      "name": "Mortivore",
+      "scryfallId": "6f4b3f12-ed9e-4802-9446-9aeb5cdbe11f",
+      "multiverseid": 247143
+    },
+    {
+      "name": "Mulldrifter",
+      "scryfallId": "d8e4b31d-2efa-4c5c-a84b-6aac3ec475f6",
+      "multiverseid": 247302
+    },
+    {
+      "name": "Nezumi Graverobber // Nighteyes the Desecrator",
+      "scryfallId": "fd9920a0-78c2-4cc8-82e6-ea3a1e23b314",
+      "multiverseid": 247175
+    },
+    {
+      "name": "Patron of the Nezumi",
+      "scryfallId": "b0e6847b-38fa-400a-b4aa-8861d18e5c8e",
+      "multiverseid": 247171
+    },
+    {
+      "name": "Riddlekeeper",
+      "scryfallId": "949bcd1d-5987-4819-b2c4-fa80aa65079f",
+      "multiverseid": 238138
+    },
+    {
+      "name": "Scythe Specter",
+      "scryfallId": "bf9643cb-de43-4382-a4d7-26561d4dff00",
+      "multiverseid": 236500
+    },
+    {
+      "name": "Sewer Nemesis",
+      "scryfallId": "8b2aaca2-2aed-49a7-b001-cd603ac81fc0",
+      "multiverseid": 236482
+    },
+    {
+      "name": "Skullbriar, the Walking Grave",
+      "scryfallId": "6724ff50-717c-4334-8014-0ee897d7735a",
+      "multiverseid": 236485
+    },
+    {
+      "name": "Slipstream Eel",
+      "scryfallId": "0424af24-f9f7-48d4-8481-bd1d983e1ece",
+      "multiverseid": 247353
+    },
+    {
+      "name": "Solemn Simulacrum",
+      "scryfallId": "26ef685f-29e9-4814-b4e7-5649bb0b487d",
+      "multiverseid": 247340
+    },
+    {
+      "name": "Szadek, Lord of Secrets",
+      "scryfallId": "bf914fa2-b33a-4568-87a8-8bec1d223757",
+      "multiverseid": 247390
+    },
+    {
+      "name": "Triskelavus",
+      "scryfallId": "6d82c4c7-7ed4-4a8d-9ab8-7a9dd43b8970",
+      "multiverseid": 247519
+    },
+    {
+      "name": "Troll Ascetic",
+      "scryfallId": "3e7758f0-cae6-46e7-8613-687b7b316603",
+      "multiverseid": 247145
+    },
+    {
+      "name": "Vorosh, the Hunter",
+      "scryfallId": "94fc1361-bcd9-4521-a58c-ee2db2f82b10",
+      "multiverseid": 247366
+    },
+    {
+      "name": "Vulturous Zombie",
+      "scryfallId": "48fc8519-e145-410a-9c1b-717f2ad3e5f6",
+      "multiverseid": 247391
+    },
+    {
+      "name": "Wonder",
+      "scryfallId": "d84e5840-e8f7-4fe9-96ee-17a67cfc2a1c",
+      "multiverseid": 247293
+    },
+    {
+      "name": "Wrexial, the Risen Deep",
+      "scryfallId": "b783ac32-f9f0-45e1-9632-547392bc7a11",
+      "multiverseid": 247542
+    },
+    {
+      "name": "Yavimaya Elder",
+      "scryfallId": "8f023d51-c364-4a52-a016-e9060488675b",
+      "multiverseid": 247524
+    },
+    {
+      "name": "Fact or Fiction",
+      "scryfallId": "966344d2-1f55-44fb-8e78-72225b96c759",
+      "multiverseid": 247186
+    },
+    {
+      "name": "Relic Crush",
+      "scryfallId": "ed4ed122-c1da-4440-8c2d-7bd079682f90",
+      "multiverseid": 247551
+    },
+    {
+      "name": "Spell Crumple",
+      "scryfallId": "2247df4a-c5d8-4b34-b3a6-3c958eb65f94",
+      "multiverseid": 237005
+    },
+    {
+      "name": "Tribute to the Wild",
+      "scryfallId": "eca64cae-3aab-48bf-9d92-e42f05cf9017",
+      "multiverseid": 236998
+    },
+    {
+      "name": "Buried Alive",
+      "scryfallId": "1f82e318-ed20-40a1-b9b6-2aad10751e19",
+      "multiverseid": 247342
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "f824aae9-220d-4046-94f8-80e4436b0319",
+      "multiverseid": 247320
+    },
+    {
+      "name": "Living Death",
+      "scryfallId": "3f5685e1-a709-422d-8da7-434c87df37a3",
+      "multiverseid": 247416
+    },
+    {
+      "name": "Minds Aglow",
+      "scryfallId": "b58800f9-e81a-4564-9668-56f9cd7367f1",
+      "multiverseid": 241853
+    },
+    {
+      "name": "Rise from the Grave",
+      "scryfallId": "279d2471-1ce3-4ff3-ae33-784475edf80c",
+      "multiverseid": 247325
+    },
+    {
+      "name": "Shared Trauma",
+      "scryfallId": "8441e4e9-9be4-4f08-8a83-823cef64170a",
+      "multiverseid": 228259
+    },
+    {
+      "name": "Sign in Blood",
+      "scryfallId": "cb9ae213-3b8a-499c-acaa-4cb33af9bbd6",
+      "multiverseid": 247327
+    },
+    {
+      "name": "Stitch Together",
+      "scryfallId": "554c18fd-683e-4697-980c-2ba5a908972b",
+      "multiverseid": 247292
+    },
+    {
+      "name": "Syphon Flesh",
+      "scryfallId": "45b24d47-633b-405d-935e-57ecb5b4fd35",
+      "multiverseid": 233218
+    },
+    {
+      "name": "Syphon Mind",
+      "scryfallId": "53a224be-4365-46da-9ff2-a04ea16e5154",
+      "multiverseid": 247355
+    },
+    {
+      "name": "Unnerve",
+      "scryfallId": "c60593d9-f0d6-47d5-8c22-edf528a221ef",
+      "multiverseid": 247531
+    },
+    {
+      "name": "Windfall",
+      "scryfallId": "8d815e5f-ea9b-4926-b38a-ad2112fef1dd",
+      "multiverseid": 247532
+    },
+    {
+      "name": "Dimir Signet",
+      "scryfallId": "bb9d1f0a-b206-4f35-bc0f-6c055c8231f4",
+      "multiverseid": 247377
+    },
+    {
+      "name": "Golgari Signet",
+      "scryfallId": "49b3ce74-40d2-4e97-aa40-a4b6419e10ba",
+      "multiverseid": 247381
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "41cbc4be-6412-41a0-b526-f62aeefbbf18",
+      "multiverseid": 247337
+    },
+    {
+      "name": "Oblivion Stone",
+      "scryfallId": "d5894997-030f-4c8a-b294-f08f0819f754",
+      "multiverseid": 247338
+    },
+    {
+      "name": "Simic Signet",
+      "scryfallId": "18f9275b-5014-4531-956d-294ad0085b11",
+      "multiverseid": 247195
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "71357a3d-9a9f-4ec6-8e01-1966b220206c",
+      "multiverseid": 247533
+    },
+    {
+      "name": "Grave Pact",
+      "scryfallId": "0fe474af-55bb-4732-abaa-350984d5d7e5",
+      "multiverseid": 247142
+    },
+    {
+      "name": "Memory Erosion",
+      "scryfallId": "79defdbc-fd05-46e2-8340-5c3e75b21545",
+      "multiverseid": 247154
+    },
+    {
+      "name": "Vow of Flight",
+      "scryfallId": "bdc5ce91-1fe3-49b8-afb4-0337ce9bafa3",
+      "multiverseid": 238144
+    },
+    {
+      "name": "Vow of Malice",
+      "scryfallId": "4d56090e-afae-4d5a-9213-186d0e867bd0",
+      "multiverseid": 238145
+    },
+    {
+      "name": "Vow of Wildness",
+      "scryfallId": "c5138692-4308-431d-8700-e256886fc03e",
+      "multiverseid": 238135
+    },
+    {
+      "name": "Barren Moor",
+      "scryfallId": "b5549d92-f27a-4914-a903-e4f452e4e485",
+      "multiverseid": 247344
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "46982091-cc78-4171-8b3d-d07592684728",
+      "multiverseid": 237004
+    },
+    {
+      "name": "Dimir Aqueduct",
+      "scryfallId": "bc6ff991-0a6f-4a7d-9281-6c1b80bbaa6b",
+      "multiverseid": 247376
+    },
+    {
+      "name": "Dreadship Reef",
+      "scryfallId": "52137ce1-ebaf-4ffb-a18c-69e47736624b",
+      "multiverseid": 247513
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c1bb9d81-80a9-433a-bd22-133d431f77b7",
+      "multiverseid": 249801
+    },
+    {
+      "name": "Golgari Rot Farm",
+      "scryfallId": "43a1fc69-8305-466c-94f3-ec95244cdcb9",
+      "multiverseid": 247380
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ffa66453-5b58-4190-93ff-c28d85c2b216",
+      "multiverseid": 249805
+    },
+    {
+      "name": "Jwar Isle Refuge",
+      "scryfallId": "b997a8e1-814b-4780-ade8-bdcfc0021adf",
+      "multiverseid": 247548
+    },
+    {
+      "name": "Lonely Sandbar",
+      "scryfallId": "a8cb1fe2-f5ae-42f3-8e9f-f9d75d940b3c",
+      "multiverseid": 247349
+    },
+    {
+      "name": "Rupture Spire",
+      "scryfallId": "4b5ad3d0-a3a1-44cb-ba36-82f88d3808e4",
+      "multiverseid": 247181
+    },
+    {
+      "name": "Simic Growth Chamber",
+      "scryfallId": "f5d23429-37c3-4990-9f5c-822fb12c76ce",
+      "multiverseid": 247194
+    },
+    {
+      "name": "Svogthos, the Restless Tomb",
+      "scryfallId": "67259116-7b5e-4340-858f-9905a479084d",
+      "multiverseid": 247389
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "138a04f4-29b2-4c56-b420-cf834505a4e8",
+      "multiverseid": 249819
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "e1c82d3e-4d4a-4ed2-a4aa-3825e2ec91c3",
+      "multiverseid": 247406
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "f55ee198-6863-4b67-8631-eb5c3ae399e6",
+      "multiverseid": 247328
+    },
+    {
+      "name": "Tranquil Thicket",
+      "scryfallId": "02b285d4-d21c-4835-ae0d-90bcc792c3bd",
+      "multiverseid": 247357
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-09-15T20:13:00.125Z",
+    "sourceUrl": "https://archidekt.com/decks/2209171",
+    "deckSource": "archidekt"
+  }
+}
