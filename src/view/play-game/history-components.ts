@@ -77,10 +77,10 @@ function formatHistoryListHtmlFragment(game: GameState): string {
 export function formatHistoryModalHtmlFragment(game: GameState): string {
   const historyList = formatHistoryListHtmlFragment(game);
 
-  const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+  const bodyContent = `<p class="modal-subtitle">
           ${game.getEventLog().getEvents().length} actions taken
         </p>
-        <ol class="history-list" style="list-style: none; padding: 0;">
+        <ol class="history-list history-list-unstyled">
           ${historyList}
         </ol>`;
 

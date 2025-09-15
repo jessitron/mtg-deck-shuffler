@@ -95,7 +95,7 @@ export function formatDeckHtmlSection(deck: Deck): string {
         <div class="deck-actions">
           <input type="hidden" name="deck-id" value="${deck.id}" />
           <button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
-          <form method="post" action="/" style="display: inline;">
+          <form method="post" action="/" class="inline-form">
             <button type="submit">Choose Another Deck</button>
           </form>
         </div>

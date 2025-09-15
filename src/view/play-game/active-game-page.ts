@@ -28,13 +28,13 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
         <div class="history">
           ${
             mostRecentUndoableEvent
-              ? `<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              ? `<div class="undo-controls">
               ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}
               <button class="undo-button"
                       hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
                       hx-target="#game-container"
                       hx-swap="outerHTML"
-                      style="padding: 4px 8px; font-size: 0.8rem;">Undo</button>
+                      class="undo-button">Undo</button>
             </div>`
               : "<p>No actions to undo</p>"
           }
@@ -48,11 +48,11 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
 
 function formatGameActionsHtmlFragment(game: GameState): string {
   return `<div id="end-game-actions" class="game-actions">
-        <form method="post" action="/restart-game" style="display: inline;">
+        <form method="post" action="/restart-game" class="inline-form">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Restart Game</button>
         </form>
-        <form method="post" action="/end-game" style="display: inline;">
+        <form method="post" action="/end-game" class="inline-form">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
         </form>
@@ -60,7 +60,7 @@ function formatGameActionsHtmlFragment(game: GameState): string {
                 hx-get="/debug-state/${game.gameId}"
                 hx-target="#modal-container"
                 hx-swap="innerHTML"
-                style="margin-left: 10px;">Debug State</button>
+                class="debug-button">Debug State</button>
       </div>`;
 }
 

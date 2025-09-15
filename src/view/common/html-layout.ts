@@ -46,13 +46,13 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
   const { icon, title, message, details } = options;
 
   const content = `<div class="deck-input-section">
-      <div style="text-align: center; color: #f44336; margin-bottom: 20px;">
+      <div class="error-message">
         <h2>${icon} ${title}</h2>
         <p>${message}</p>
-        ${details ? `<p style="color: #666; font-size: 0.9rem;">${details}</p>` : ''}
+        ${details ? `<p class="error-details">${details}</p>` : ''}
       </div>
       <div class="deck-actions">
-        <form method="get" action="/" style="display: inline;">
+        <form method="get" action="/" class="inline-form">
           <button type="submit" class="lets-play-button">Start a New Game</button>
         </form>
       </div>

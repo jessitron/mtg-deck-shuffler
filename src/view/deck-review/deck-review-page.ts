@@ -82,7 +82,7 @@ export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
   const libraryCardList = formatLibraryCardList(game);
 
-  const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+  const bodyContent = `<p class="modal-subtitle">
           ${libraryCards.length} cards in library, ordered by position
         </p>
         <ul class="library-search-list">
@@ -118,7 +118,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       <div id="start-game-buttons" class="deck-actions">
         <input type="hidden" name="game-id" value="${game.gameId}" />
         <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
-        <form method="post" action="/end-game" style="display: inline;">
+        <form method="post" action="/end-game" class="inline-form">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
         </form>

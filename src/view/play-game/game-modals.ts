@@ -49,7 +49,7 @@ export function formatTableModalHtmlFragment(game: GameState): string {
   const tableCards = game.listTable();
   const tableCardList = formatTableCardListHtmlFragment(game);
 
-  const bodyContent = `<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+  const bodyContent = `<p class="modal-subtitle">
           ${tableCards.length} cards on table
         </p>
         <ul class="table-search-list">
@@ -105,17 +105,17 @@ export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedG
   const formattedJson = JSON.stringify(persistedGameState, null, 2);
   const collapsibleHtml = formatCollapsibleJson(persistedGameState);
 
-  const bodyContent = `<div style="position: relative; background-color: #f5f5f5; padding: 16px; border-radius: 4px; max-height: 60vh; overflow-y: auto;">
+  const bodyContent = `<div class="debug-container">
           <button onclick="copyDebugJson(this)"
-                  style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; background-color: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; z-index: 1;">
+                  class="copy-button">
             Copy JSON
           </button>
-          <div class="collapsible-json" style="font-family: monospace; font-size: 12px; line-height: 1.4; padding-top: 30px;">
+          <div class="collapsible-json">
             ${collapsibleHtml}
           </div>
-          <pre style="display: none;">${formattedJson}</pre>
+          <pre class="hidden">${formattedJson}</pre>
         </div>
-        <div style="margin-top: 16px; padding: 12px; background-color: #e8f4f8; border-radius: 4px; font-size: 0.9rem;">
+        <div class="debug-note">
           <strong>Game ID:</strong> ${persistedGameState.gameId} |
           <strong>Status:</strong> ${persistedGameState.status} |
           <strong>Version:</strong> ${persistedGameState.version}
