@@ -11,7 +11,7 @@ export function formatCommanderImageHtmlFragment(commanders: any[]): string {
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
           ${commanders
-            .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId)}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
+            .map((commander) => `<img src="${getCardImageUrl(commander.scryfallId, "small")}" alt="${commander.name}" class="mtg-card-image commander-image" />`)
             .join("")}
         </div>`;
 }

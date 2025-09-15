@@ -47,7 +47,7 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
 }
 
 function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = ""): string {
-  const imageUrl = getCardImageUrl(gameCard.card.scryfallId);
+  const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "small");
   const cardClass = containerType === "revealed" ? "revealed-card" : "hand-card";
 
   return `<div id="card-container-${gameCard.gameCardIndex}" class="${containerType}-card-container">
