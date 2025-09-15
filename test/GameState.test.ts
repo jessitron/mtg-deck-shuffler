@@ -1,124 +1,70 @@
 import { describe, test, expect } from "@jest/globals";
+import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
 import { GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/port-persist-state/types.js";
 import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
+import {
+  lightningBolt,
+  ancestralRecall,
+  blackLotus,
+  atraxa,
+  testProvenance,
+  minimalDeck,
+  deckWithOneCommander,
+  deckWithTwoCommanders
+} from "./generators.js";
 
 describe("GameState", () => {
-  const fakeProvenance: DeckProvenance = {
-    retrievedDate: new Date("2023-01-01"),
-    sourceUrl: "https://example.com/deck/123",
-    deckSource: "test",
-  };
-
-  const fakeCard1: CardDefinition = {
-    name: "Lightning Bolt",
-    scryfallId: "abc123",
-    multiverseid: 12345,
-  };
-
-  const fakeCard2: CardDefinition = {
-    name: "Ancestral Recall",
-    scryfallId: "def456",
-    multiverseid: 67890,
-  };
-
-  const fakeCard3: CardDefinition = {
-    name: "Black Lotus",
-    scryfallId: "ghi789",
-    multiverseid: 11111,
-  };
-
-  const fakeCommander: CardDefinition = {
-    name: "Atraxa, Praetors' Voice",
-    scryfallId: "cmd001",
-    multiverseid: 22222,
-  };
 
   test("stores game status correctly", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.gameStatus()).toBe(GameStatus.NotStarted);
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.gameStatus()).toBe(GameStatus.NotStarted);
+    }));
   });
 
   test("stores deck provenance correctly", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.deckProvenance).toEqual(fakeProvenance);
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.deckProvenance).toEqual(deck.provenance);
+    }));
   });
 
   test("allows zero commanders", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.commanders.length).toBe(0);
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.commanders.length).toBe(0);
+    }));
   });
 
   test("allows one commander", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [fakeCommander],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.commanders.length).toBe(1);
-    expect(state.commanders[0]).toEqual(fakeCommander);
+    fc.assert(fc.property(deckWithOneCommander, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.commanders.length).toBe(1);
+      expect(state.commanders[0]).toEqual(deck.commanders[0]);
+    }));
   });
 
   test("allows two commanders", () => {
-    const commander2: CardDefinition = { name: "Partner Commander", scryfallId: "cmd002", multiverseid: 33333 };
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [fakeCommander, commander2],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.commanders.length).toBe(2);
-    expect(state.commanders[0]).toEqual(fakeCommander);
-    expect(state.commanders[1]).toEqual(commander2);
+    fc.assert(fc.property(deckWithTwoCommanders, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.commanders.length).toBe(2);
+      expect(state.commanders[0]).toEqual(deck.commanders[0]);
+      expect(state.commanders[1]).toEqual(deck.commanders[1]);
+    }));
   });
 
   test("sorts cards by display name", () => {
-    const fakeDeck: Deck = {
+    const deck: Deck = {
       id: 1,
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: testProvenance,
     };
 
-    const state = GameState.newGame(1, fakeDeck);
+    const state = GameState.newGame(1, deck);
     const cards = state.getCards();
 
     // Should be sorted: Ancestral Recall, Black Lotus, Lightning Bolt
@@ -128,57 +74,33 @@ describe("GameState", () => {
   });
 
   test("constructor creates correct number of cards", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3],
-      provenance: fakeProvenance,
-    };
-
-    const state = GameState.newGame(1, fakeDeck);
-    expect(state.getCards().length).toBe(3);
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const state = GameState.newGame(1, deck);
+      expect(state.getCards().length).toBe(deck.cards.length);
+    }));
   });
 
   test("constructor uses provided gameId", () => {
-    const fakeDeck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const state1 = GameState.newGame(42, fakeDeck);
-    const state2 = GameState.newGame(100, fakeDeck);
-
-    expect(state1.gameId).toBe(42);
-    expect(state2.gameId).toBe(100);
+    fc.assert(fc.property(minimalDeck, fc.integer({ min: 1, max: 999999 }), (deck, gameId) => {
+      const state = GameState.newGame(gameId, deck);
+      expect(state.gameId).toBe(gameId);
+    }));
   });
 
   test("initializes cards in sequential positions in Library", () => {
-    const deck: Deck = {
-      id: 123,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [fakeCommander],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
-    };
+    fc.assert(fc.property(deckWithOneCommander, (deck) => {
+      const gameState = GameState.newGame(1, deck);
 
-    const gameState = GameState.newGame(1, deck);
+      const cards = gameState.getCards();
+      expect(cards.length).toBe(deck.cards.length);
 
-    const cards = gameState.getCards();
-    expect(cards.length).toBe(3);
-
-    // All cards should be in library with sequential positions
-    cards.forEach((gameCard, index) => {
-      expect(gameCard.location.type).toBe("Library");
-      const libLocation = gameCard.location as LibraryLocation;
-      expect(libLocation.position === index).toBe(true);
-    });
+      // All cards should be in library with sequential positions
+      cards.forEach((gameCard, index) => {
+        expect(gameCard.location.type).toBe("Library");
+        const libLocation = gameCard.location as LibraryLocation;
+        expect(libLocation.position === index).toBe(true);
+      });
+    }));
   });
 
   test("shuffle randomizes Library positions but preserves card count", () => {
@@ -187,8 +109,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -218,8 +140,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -243,46 +165,33 @@ describe("GameState", () => {
   });
 
   test("startGame changes status to Active and shuffles", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 2,
-      commanders: [],
-      cards: [fakeCard1, fakeCard2],
-      provenance: fakeProvenance,
-    };
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const gameState = GameState.newGame(1, deck);
+      expect(gameState.gameStatus()).toBe(GameStatus.NotStarted);
 
-    const gameState = GameState.newGame(1, deck);
-    expect(gameState.gameStatus()).toBe(GameStatus.NotStarted);
+      gameState.startGame();
 
-    gameState.startGame();
+      expect(gameState.gameStatus()).toBe(GameStatus.Active);
 
-    expect(gameState.gameStatus()).toBe(GameStatus.Active);
+      // Verify shuffle happened - cards should still be in library with valid positions
+      const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
+      expect(libraryCards.length).toBe(deck.cards.length);
 
-    // Verify shuffle happened - cards should still be in library with valid positions
-    const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
-    expect(libraryCards.length).toBe(2);
-
-    const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
-    expect(positions).toEqual([0, 1]);
+      const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
+      const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
+      expect(positions).toEqual(expectedPositions);
+    }));
   });
 
   test("startGame throws error if game already started", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
-    };
-
-    const gameState = GameState.newGame(1, deck);
-    gameState.startGame();
-
-    expect(() => {
+    fc.assert(fc.property(minimalDeck, (deck) => {
+      const gameState = GameState.newGame(1, deck);
       gameState.startGame();
-    }).toThrow(/Cannot start game: current status is Active/);
+
+      expect(() => {
+        gameState.startGame();
+      }).toThrow(/Cannot start game: current status is Active/);
+    }));
   });
 
   test("draw moves top card from Library to Hand", () => {
@@ -291,8 +200,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -327,8 +236,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 1,
       commanders: [],
-      cards: [fakeCard1],
-      provenance: fakeProvenance,
+      cards: [lightningBolt],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -348,8 +257,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -387,8 +296,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -415,8 +324,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -450,8 +359,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 2,
       commanders: [],
-      cards: [fakeCard1, fakeCard2],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -467,8 +376,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -500,8 +409,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 3,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -533,8 +442,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 4,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -580,8 +489,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 4,
       commanders: [],
-      cards: [fakeCard1, fakeCard2, fakeCard3, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall, blackLotus, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);
@@ -629,8 +538,8 @@ describe("GameState", () => {
       name: "Test Deck",
       totalCards: 2,
       commanders: [],
-      cards: [fakeCard1, fakeCard2],
-      provenance: fakeProvenance,
+      cards: [lightningBolt, ancestralRecall],
+      provenance: testProvenance,
     };
 
     const gameState = GameState.newGame(1, deck);

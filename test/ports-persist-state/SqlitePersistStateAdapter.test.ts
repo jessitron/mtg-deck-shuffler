@@ -3,6 +3,8 @@ import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "../../src/port
 import { GameStatus } from "../../src/GameState.js";
 import fs from "node:fs";
 import path from "node:path";
+import * as fc from "fast-check";
+import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 
 describe("SqlitePersistStateAdapter", () => {
   let adapter: SqlitePersistStateAdapter;
@@ -14,39 +16,10 @@ describe("SqlitePersistStateAdapter", () => {
     testDbPath = path.join(process.cwd(), `test-${Date.now()}-${Math.random()}.db`);
     adapter = new SqlitePersistStateAdapter(testDbPath);
     await adapter.waitForInitialization();
-    
-    testGameState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 1,
-      status: GameStatus.NotStarted,
-      deckProvenance: {
-        retrievedDate: new Date("2023-01-01"),
-        sourceUrl: "https://test.com",
-        deckSource: "test",
-      },
-      commanders: [
-        {
-          name: "Test Commander",
-          scryfallId: "test-uid",
-          multiverseid: 12345,
-        },
-      ],
-      deckName: "Test Deck",
-      deckId: 123,
-      totalCards: 100,
-      gameCards: [
-        {
-          card: {
-            name: "Test Card",
-            scryfallId: "card-uid",
-            multiverseid: 67890,
-          },
-          location: { type: "Library", position: 0 },
-          gameCardIndex: 0,
-        },
-      ],
-      events: [],
-    };
+
+    // Use generator to create test deck, then convert to PersistedGameState
+    const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+    testGameState = createTestPersistedGameState(1, testDeck, GameStatus.NotStarted);
   });
 
   afterEach(async () => {
@@ -97,7 +70,7 @@ describe("SqlitePersistStateAdapter", () => {
     const retrieved1 = await adapter.retrieve(1);
     const retrieved2 = await adapter.retrieve(2);
 
-    expect(retrieved1?.deckName).toEqual("Test Deck");
+    expect(retrieved1?.deckName).toEqual(testGameState.deckName);
     expect(retrieved2?.deckName).toEqual("Second Deck");
   });
 
