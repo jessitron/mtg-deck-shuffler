@@ -1,10 +1,10 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
-import { ArchidektGateway } from "./ArchidektGateway.js";
+import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
 import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
-  constructor(private gateway: ArchidektGateway) {}
+  constructor(private gateway: ArchidektGatewayInterface) {}
 
   listAvailableDecks() {
     return [];

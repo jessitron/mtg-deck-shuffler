@@ -1,19 +1,19 @@
 import fs from "node:fs";
 import { Deck } from "../../src/types.js";
-import { ArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
+import { ArchidektGateway, FilesystemArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektGatewayInterface } from "../../src/port-deck-retrieval/implementations.js";
 import { ArchidektDeck } from "../../src/port-deck-retrieval/archidektAdapter/archidektTypes.js";
 import { ArchidektDeckRetrievalRequest } from "../../src/port-deck-retrieval/types.js";
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: ArchidektDeckToDeckAdapter;
-  let mockGateway: ArchidektGateway;
+  let mockGateway: ArchidektGatewayInterface;
 
   beforeEach(() => {
     mockGateway = {
       fetchDeck: async (deckId: string): Promise<ArchidektDeck> => {
         throw new Error("Mock not configured for this test");
       },
-    } as ArchidektGateway;
+    } as ArchidektGatewayInterface;
     adapter = new ArchidektDeckToDeckAdapter(mockGateway);
   });
 
@@ -443,5 +443,20 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.totalCards).toBe(24); // All cards included when categories is null
     expect(result.commanders).toEqual([]);
     expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/555");
+  });
+
+  it("converts real Ygra deck data using FilesystemArchidektGateway", async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "14669648" };
+    const result = await adapter.retrieveDeck(request);
+
+    expect(result.id).toBe(14669648);
+    expect(result.name).toBe("Ygra EATS IT ALL");
+    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
+    expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
+    expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/14669648");
+    expect(result.provenance.deckSource).toBe("archidekt");
   });
 });

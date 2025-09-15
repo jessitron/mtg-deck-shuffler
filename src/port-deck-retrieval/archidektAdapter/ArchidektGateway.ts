@@ -1,7 +1,8 @@
 import { ArchidektDeck } from "./archidektTypes.js";
+import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes } from "../../tracing_util.js";
 
-export class ArchidektGateway {
+export class ArchidektGateway implements ArchidektGatewayInterface {
   async fetchDeck(deckId: string): Promise<ArchidektDeck> {
     setCommonSpanAttributes({ archidektDeckId: deckId || "missing" });
     const response = await fetch(`https://archidekt.com/api/decks/${deckId}/`);
