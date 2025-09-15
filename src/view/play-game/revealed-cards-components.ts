@@ -1,5 +1,6 @@
 import { GameState, GameCard } from "../../GameState.js";
-import { getCardImageUrl, WhatHappened } from "../../types.js";
+import { WhatHappened } from "../../types.js";
+import { formatCardContainerHtmlFragment } from "../common/shared-components.js";
 
 type CardAction = {
   action: string;
@@ -46,18 +47,6 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
   </div>`;
 }
 
-function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = ""): string {
-  const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "small");
-  const cardClass = containerType === "revealed" ? "revealed-card" : "hand-card";
-
-  return `<div id="card-container-${gameCard.gameCardIndex}" class="${containerType}-card-container">
-    <img src="${imageUrl}"
-         alt="${gameCard.card.name}"
-         class="mtg-card-image ${cardClass}${animationClass}"
-         title="${gameCard.card.name}" />
-    ${actions}
-  </div>`;
-}
 
 function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
   if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
