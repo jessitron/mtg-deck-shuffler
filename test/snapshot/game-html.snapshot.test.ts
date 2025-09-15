@@ -3,90 +3,50 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { formatGameHtmlSection } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
-import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, HandLocation, RevealedLocation, TableLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
-import { StartGameEvent } from "../../src/GameEvents.js";
+import { Deck } from "../../src/types.js";
+import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
 import { formatDeckReviewHtmlPage } from "../../src/view/deck-review/deck-review-page.js";
 
 describe("Game HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
 
-  // Create fake card data for testing
-  const createFakeCard = (name: string, index: number): CardDefinition => ({
-    name,
-    scryfallId: `fake-scryfall-id-${index.toString().padStart(3, "0")}`,
-    multiverseid: 1000 + index,
+  // Load real deck data for testing
+  let testDeck: Deck;
+
+  beforeAll(async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
   });
 
-  const createFakeGameState = (): GameState => {
-    // Cards must be sorted by name for GameState validation
-    const cards = [
-      createFakeCard("Command Tower", 103), // C
-      createFakeCard("Counterspell", 101), // C
-      createFakeCard("Island", 104), // I
-      createFakeCard("Lightning Bolt", 100), // L
-      createFakeCard("Mountain", 105), // M
-      createFakeCard("Sol Ring", 102), // S
-    ];
+  const createActiveGameState = (): GameState => {
+    const gameState = GameState.newGame(123, testDeck);
 
-    const commanders = [createFakeCard("Atraxa, Praetors' Voice", 1)];
+    // Start the game and shuffle
+    gameState.startGame();
 
-    // Create game cards in different locations
-    const gameCards: GameCard[] = [
-      // Cards in library
-      {
-        card: cards[0], // Command Tower
-        location: { type: "Library", position: 0 } as LibraryLocation,
-        gameCardIndex: 0,
-      },
-      {
-        card: cards[1], // Counterspell
-        location: { type: "Library", position: 1 } as LibraryLocation,
-        gameCardIndex: 1,
-      },
-      // Cards in hand
-      {
-        card: cards[2], // Island
-        location: { type: "Hand", position: 0 } as HandLocation,
-        gameCardIndex: 2,
-      },
-      {
-        card: cards[3], // Lightning Bolt
-        location: { type: "Hand", position: 1 } as HandLocation,
-        gameCardIndex: 3,
-      },
-      // Cards revealed
-      {
-        card: cards[4], // Mountain
-        location: { type: "Revealed", position: 0 } as RevealedLocation,
-        gameCardIndex: 4,
-      },
-      // Cards on table
-      {
-        card: cards[5], // Sol Ring
-        location: { type: "Table" } as TableLocation,
-        gameCardIndex: 5,
-      },
-    ];
+    // Draw some cards to hand
+    gameState.draw();
+    gameState.draw();
+    gameState.draw();
 
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 123,
-      status: GameStatus.Active,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game",
-        deckSource: "test" as const,
-      },
-      commanders,
-      deckName: "Test Game Deck",
-      deckId: 12345,
-      totalCards: cards.length,
-      gameCards,
-      events: [],
-    };
+    // Reveal a card from the library (find the first available card)
+    const libraryCards = gameState.listLibrary();
+    if (libraryCards.length > 0) {
+      gameState.reveal(libraryCards[0].location.position);
+    }
 
-    return GameState.fromPersistedGameState(persistedState);
+    // Play one card from hand to table
+    const handCards = gameState.listHand();
+    if (handCards.length > 0) {
+      gameState.playCard(handCards[0].gameCardIndex);
+    }
+
+    return gameState;
+  };
+
+  const createNotStartedGameState = (): GameState => {
+    return GameState.newGame(456, testDeck);
   };
 
   async function ensureSnapshotDir() {
@@ -112,7 +72,7 @@ describe("Game HTML Snapshot Tests", () => {
 
   it("formatGameHtml with cards in hand, revealed, and on table", async () => {
     const snapshotFile = "game-active-state.html";
-    const gameState = createFakeGameState();
+    const gameState = createActiveGameState();
     const actualHtml = formatGameHtmlSection(gameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
@@ -147,34 +107,7 @@ describe("Game HTML Snapshot Tests", () => {
 
   it("formatGameHtml with not started game state", async () => {
     const snapshotFile = "game-not-started-state.html";
-
-    // Change status to NotStarted by creating a fresh persisted state
-    const cards = [createFakeCard("Lightning Bolt", 100), createFakeCard("Sol Ring", 102)].sort((a, b) => a.name.localeCompare(b.name));
-
-    const gameCards: GameCard[] = cards.map((card, index) => ({
-      card,
-      location: { type: "Library", position: index } as LibraryLocation,
-      gameCardIndex: index,
-    }));
-
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 456,
-      status: GameStatus.NotStarted,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game",
-        deckSource: "test" as const,
-      },
-      commanders: [createFakeCard("Atraxa, Praetors' Voice", 1)],
-      deckName: "Test Not Started Game",
-      deckId: 12345,
-      totalCards: cards.length,
-      gameCards,
-      events: [{ ...StartGameEvent, gameEventIndex: 0 }],
-    };
-
-    const notStartedGameState = GameState.fromPersistedGameState(persistedState);
+    const notStartedGameState = createNotStartedGameState();
     const actualHtml = formatDeckReviewHtmlPage(notStartedGameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
