@@ -57,4 +57,20 @@ We will eventually deploy to a toy EKS cluster.
 This will download the deck from archidekt and save it to the decks directory.
 You need to redo this every time the Deck structure changes!
 
-##
+## Downloading the database of cards
+
+Note: we aren't using this yet but I gotta document it while it's here.
+This is how to update the card database:
+
+```
+cd mtgjson
+
+wget https://mtgjson.com/api/v5/AllPrintings.json.gz
+
+gunzip AllPrintings.json.gz
+```
+
+These files are ignored in git because they are big, and they are reproducible.
+
+When we use them, they'll need to go into the Docker image I guess? That's gonna take some uploading.
+We could put them on a persistent volume instead. Right now, they're not deployed, just hanging out until I need them.
