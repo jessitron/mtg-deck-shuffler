@@ -824,6 +824,7 @@ h1 {
   font-size: 12px;
   line-height: 1.4;
   padding-top: 30px;
+  text-align: left;
 }
 
 .debug-note {
