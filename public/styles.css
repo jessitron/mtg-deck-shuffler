@@ -229,10 +229,6 @@ h1 {
 
 #table-section {
   grid-area: table-section;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px;
 }
 
 .table-image {
@@ -248,6 +244,7 @@ h1 {
   align-items: center;
   justify-content: end;
   gap: 10px;
+  padding: 20px;
 }
 
 .table-cards-button {
