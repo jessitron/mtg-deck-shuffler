@@ -8,6 +8,8 @@
 
 ## More Things to change
 
+- the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
+
 - let people pick a playmat
 
 - let people pick sleeves
