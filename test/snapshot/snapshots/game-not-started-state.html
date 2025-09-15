@@ -21,8 +21,9 @@ provideOneLinkToHoneycomb: true,
 <h1>*Woohoo it's Magic time!*</h1>
 <div id="game-container">
 <div id="command-zone">
-<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" /></div>
-<div id="game-details">
+<img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
+</div>
+<div id="game-details" class="game-details game-not-started">
 <h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Not Started Game</a></h2>
 <p>2 cards</p>
 <p><strong>Game ID:</strong> 456</p>
@@ -46,7 +47,7 @@ hx-swap="innerHTML">Search</button>
 <div id="start-game-buttons" class="deck-actions">
 <input type="hidden" name="game-id" value="456" />
 <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
-<form method="post" action="/end-game" style="display: inline;">
+<form method="post" action="/end-game" class="inline-form">
 <input type="hidden" name="game-id" value="456" />
 <button type="submit">Choose Another Deck</button>
 </form>

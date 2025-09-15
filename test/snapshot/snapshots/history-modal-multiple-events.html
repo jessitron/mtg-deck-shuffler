@@ -13,19 +13,19 @@ hx-target="#modal-container"
 hx-swap="innerHTML">&times;</button>
 </div>
 <div class="modal-body">
-<p style="margin-bottom: 16px; color: #666; font-size: 0.9rem;">
+<p class="modal-subtitle">
 3 actions taken
 </p>
-<ol class="history-list" style="list-style: none; padding: 0;">
-<li class="history-item">
+<ol class="history-list history-list-unstyled">
+<li class="history-item" id="event-2">
 <span class="event-number">3.</span>
-<span class="event-description">Shuffle 2 cards in library</span>
-</li><li class="history-item">
+<span class="event-description  event-shuffle-library">Shuffle 2 cards in library</span>
+</li><li class="history-item" id="event-1">
 <span class="event-number">2.</span>
-<span class="event-description">Move <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1000" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Lightning Bolt</a> from Library(0) to Table</span>
-</li><li class="history-item">
+<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1000" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Lightning Bolt</a></span>
+</li><li class="history-item" id="event-0">
 <span class="event-number">1.</span>
-<span class="event-description">Start game</span>
+<span class="event-description  event-start-game">Start game</span>
 </li>
 </ol>
 </div>

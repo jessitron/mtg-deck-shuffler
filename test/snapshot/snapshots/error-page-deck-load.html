@@ -20,13 +20,13 @@ provideOneLinkToHoneycomb: true,
 <body>
 <h1>*Woohoo it's Magic time!*</h1>
 <div class="deck-input-section">
-<div style="text-align: center; color: #f44336; margin-bottom: 20px;">
+<div class="error-message">
 <h2>🚫 Deck Load Error</h2>
 <p>Could not fetch deck <strong>12345</strong> from <strong>archidekt</strong>.</p>
-<p style="color: #666; font-size: 0.9rem;">The deck may not exist, be private, or there may be a network issue.</p>
+<p class="error-details">The deck may not exist, be private, or there may be a network issue.</p>
 </div>
 <div class="deck-actions">
-<form method="get" action="/" style="display: inline;">
+<form method="get" action="/" class="inline-form">
 <button type="submit" class="lets-play-button">Start a New Game</button>
 </form>
 </div>

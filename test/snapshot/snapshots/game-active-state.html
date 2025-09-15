@@ -2,13 +2,14 @@
 <div id="command-zone">
 <img src="https://cards.scryfall.io/png/front/f/a/fake-scryfall-id-001.png" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
 </div>
-<div id="game-details">
+<div id="game-details" class="game-details game-active">
 <h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Game Deck</a></h2>
-<p>6 cards</p>
+<div><p>6 cards</p>
 <p><strong>Game ID:</strong> 123</p>
 <p><strong>Status:</strong> Active</p>
+</div>
 <div class="history">
-<p>No actions taken yet</p>
+<p>No actions to undo</p>
 <button class="history-button"
 hx-get="/history-modal/123"
 hx-target="#modal-container"
@@ -145,13 +146,18 @@ Put down
 <!-- Modal Container -->
 <div id="modal-container"></div>
 <div id="end-game-actions" class="game-actions">
-<form method="post" action="/restart-game" style="display: inline;">
+<form method="post" action="/restart-game" class="inline-form">
 <input type="hidden" name="game-id" value="123" />
 <button type="submit">Restart Game</button>
 </form>
-<form method="post" action="/end-game" style="display: inline;">
+<form method="post" action="/end-game" class="inline-form">
 <input type="hidden" name="game-id" value="123" />
 <button type="submit">Choose Another Deck</button>
 </form>
+<button class="debug-button"
+hx-get="/debug-state/123"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+class="debug-button">Debug State</button>
 </div>
 </div>
