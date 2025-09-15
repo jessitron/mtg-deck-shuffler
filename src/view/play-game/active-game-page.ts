@@ -7,6 +7,7 @@ import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js"
 import { formatTableModalHtmlFragment } from "./game-modals.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
+import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
 
 function formatGameDetailsHtmlFragment(game: GameState): string {
   const cardCountInfo = `${game.totalCards} cards`;
@@ -56,11 +57,7 @@ function formatGameActionsHtmlFragment(game: GameState): string {
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>
         </form>
-        <button class="debug-button"
-                hx-get="/debug-state/${game.gameId}"
-                hx-target="#modal-container"
-                hx-swap="innerHTML"
-                class="debug-button">Debug State</button>
+        ${formatDebugButtonHtmlFragment(game.gameId)}
       </div>`;
 }
 
