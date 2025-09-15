@@ -6,12 +6,13 @@ import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
-import { formatDebugStateModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
+import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
 import { formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
-import { PersistStatePort } from "./port-persist-state/types.js";
+import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
 import { trace } from "@opentelemetry/api";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -256,6 +257,61 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   // Returns empty response - closes modal
   app.get("/close-modal", (req, res) => {
     res.send("");
+  });
+
+  // Returns modal for loading game state
+  app.get("/load-state-modal", (req, res) => {
+    const modalHtml = formatLoadStateModalHtmlFragment();
+    res.send(modalHtml);
+  });
+
+  // Creates a new game from JSON state
+  app.post("/create-game-from-state", async (req, res) => {
+    const { "state-json": stateJsonString } = req.body;
+
+    try {
+      const stateData = JSON.parse(stateJsonString);
+
+      // Validate version
+      if (stateData.version !== PERSISTED_GAME_STATE_VERSION) {
+        const errorMessage = `Invalid state version. Expected version ${PERSISTED_GAME_STATE_VERSION}, but got ${stateData.version}`;
+        res.status(400).send(`<div class="error-message">
+          <h3>⚠️ Version Mismatch</h3>
+          <p>${errorMessage}</p>
+          <button hx-get="/" hx-target="body" hx-swap="outerHTML">Back to Home</button>
+        </div>`);
+        return;
+      }
+
+      // Create new game with fresh ID
+      const newGameId = persistStatePort.newGameId();
+      const newPersistedState: PersistedGameState = {
+        ...stateData,
+        gameId: newGameId
+      };
+
+      // Save the new game
+      await persistStatePort.save(newPersistedState);
+
+      // Redirect to the new game
+      res.send(`<div>
+        <p>Game created successfully! Redirecting...</p>
+        <script>window.location.href = '/game/${newGameId}';</script>
+      </div>`);
+
+    } catch (error) {
+      console.error("Error creating game from state:", error);
+      let errorMessage = "Failed to parse JSON or create game";
+      if (error instanceof SyntaxError) {
+        errorMessage = "Invalid JSON format";
+      }
+      res.status(400).send(`<div class="error-message">
+        <h3>⚠️ Error</h3>
+        <p>${errorMessage}</p>
+        <button hx-get="/load-state-modal" hx-target="#modal-container" hx-swap="innerHTML">Try Again</button>
+        <button hx-get="/close-modal" hx-target="#modal-container" hx-swap="innerHTML">Cancel</button>
+      </div>`);
+    }
   });
 
   app.get("/history-modal/:gameId", async (req, res) => {

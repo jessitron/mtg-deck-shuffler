@@ -7,9 +7,11 @@ export function formatChooseDeckHtmlSection(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInputHtmlFragment();
 
   const localSelectionHtml = formatLocalDeckInputHtmlFragment(availableDecks);
+  const loadStateHtml = formatLoadStateHtmlFragment();
   return `<div id="deck-input">
       ${archidektSelectionHtml}
       ${localSelectionHtml}
+      ${loadStateHtml}
     </div>`;
 }
 
@@ -32,11 +34,20 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
   const options = availableDecks.filter((o) => o.deckSource === "local").map((o) => `<option value="${o.localFile}">${o.description}</option>`);
   return `<div class="deck-input-section">
       <form method="POST" action="/deck">
-        <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label> 
+        <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label>
         <input type="hidden" name="deck-source" value="local" />
         <select id="local-deck" name="local-deck" class="deck-select">${options}</select>
         <button type="submit" class="lets-play-button">Let's Play</button>
       </form>
+    </div>`;
+}
+
+function formatLoadStateHtmlFragment() {
+  return `<div class="deck-input-section">
+      <button class="load-state-button"
+              hx-get="/load-state-modal"
+              hx-target="#modal-container"
+              hx-swap="innerHTML">Load Game State</button>
     </div>`;
 }
 
@@ -45,10 +56,11 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
 
   const content = `
     ${deckSelectionHtml}
+    <div id="modal-container"></div>
     <div class="expository-text">
       <h3>How to use MTG Deck Shuffler</h3>
       <p>
-        Want to play Magic with people who aren't in the room with you? You can play remotely using an online white board like Mural or Miro. Paste the cards in and move them around, like you would on a table. 
+        Want to play Magic with people who aren't in the room with you? You can play remotely using an online white board like Mural or Miro. Paste the cards in and move them around, like you would on a table.
       </p>
       <p>
         My sister and I play that way, and our board winds up looking like this:

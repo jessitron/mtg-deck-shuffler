@@ -1,5 +1,5 @@
-import { PersistedGameState } from "../../port-persist-state/types";
-import { formatModalHtmlFragment } from "../play-game/game-modals";
+import { PersistedGameState } from "../../port-persist-state/types.js";
+import { formatModalHtmlFragment } from "../play-game/game-modals.js";
 
 export function formatDebugButtonHtmlFragment(gameId: number): string {
   return `<button class="debug-button"
