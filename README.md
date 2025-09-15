@@ -63,6 +63,10 @@ You need to redo this every time the Deck structure changes!
 
 This will download all Archidekt precon decks to the decks directory.
 
+`npm run precons:fetch -- --download --force`
+
+Use the `--force` flag to overwrite existing decks (useful when the Deck structure changes).
+
 ## Downloading the database of cards
 
 Note: we aren't using this yet but I gotta document it while it's here.

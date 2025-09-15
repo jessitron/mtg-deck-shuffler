@@ -85,6 +85,7 @@ async function downloadDeck(deckId: string, gateway: ArchidektGateway, adapter: 
 
 async function main(): Promise<void> {
   const shouldDownload = process.argv.includes('--download');
+  const shouldForce = process.argv.includes('--force');
   const url = process.argv.find(arg => !arg.startsWith('--') && arg !== process.argv[0] && arg !== process.argv[1]);
 
   try {
@@ -111,18 +112,20 @@ async function main(): Promise<void> {
         const filepath = join(process.cwd(), "decks", filename);
         const errorFilepath = join(process.cwd(), "decks", errorFilename);
         
-        // Skip if already downloaded or already has error file
-        try {
-          await fs.access(filepath);
-          console.log(`⏭️  Skipping ${deckIdStr} - already downloaded`);
-          continue;
-        } catch {}
-        
-        try {
-          await fs.access(errorFilepath);
-          console.log(`⏭️  Skipping ${deckIdStr} - error file exists`);
-          continue;
-        } catch {}
+        // Skip if already downloaded or already has error file (unless --force flag is used)
+        if (!shouldForce) {
+          try {
+            await fs.access(filepath);
+            console.log(`⏭️  Skipping ${deckIdStr} - already downloaded`);
+            continue;
+          } catch {}
+
+          try {
+            await fs.access(errorFilepath);
+            console.log(`⏭️  Skipping ${deckIdStr} - error file exists`);
+            continue;
+          } catch {}
+        }
         
         await downloadDeck(deckIdStr, gateway, adapter);
         // Small delay between requests to be respectful to the API
@@ -132,6 +135,7 @@ async function main(): Promise<void> {
       console.log(`\n✅ Download complete! Downloaded ${deckNumbers.length} precon decks to ./decks/`);
     } else {
       console.log("\n💡 Add --download flag to download all precon decks to ./decks/");
+      console.log("💡 Add --force flag to overwrite existing decks");
     }
   } catch (error) {
     process.exit(1);
