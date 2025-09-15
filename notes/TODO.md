@@ -1,6 +1,6 @@
 # Things to change
 
-- cards with two faces! we need a way to flip them
+- cards with two faces! we need a way to flip them. The image links are the same except 'back' instead of 'front'. To know whether a card has two faces, in the archidekt data, I need to check whether card.oracleCard.faces.length == 2 (usually it's empty)
 
 ## Bugs to fix
 

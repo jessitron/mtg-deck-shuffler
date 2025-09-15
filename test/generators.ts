@@ -170,7 +170,7 @@ export const minimalDeck: fc.Arbitrary<Deck> = fc
     commanders: [],
     cards,
     provenance,
-  }));
+  }));  
 
 // Generator for a deck with exactly one commander
 export const deckWithOneCommander: fc.Arbitrary<Deck> = fc

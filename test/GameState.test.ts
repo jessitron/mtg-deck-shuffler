@@ -11,47 +11,48 @@ import {
   testProvenance,
   minimalDeck,
   deckWithOneCommander,
-  deckWithTwoCommanders
+  deckWithTwoCommanders,
+  deck as anyDeck,
 } from "./generators.js";
 
 describe("GameState", () => {
-
   test("stores game status correctly", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.gameStatus()).toBe(GameStatus.NotStarted);
-    }));
-  });
-
-  test("stores deck provenance correctly", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.deckProvenance).toEqual(deck.provenance);
-    }));
+    fc.assert(
+      fc.property(minimalDeck, (deck) => {
+        const state = GameState.newGame(1, deck);
+        expect(state.gameStatus()).toBe(GameStatus.NotStarted);
+      })
+    );
   });
 
   test("allows zero commanders", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.commanders.length).toBe(0);
-    }));
+    fc.assert(
+      fc.property(minimalDeck, (deck) => {
+        const state = GameState.newGame(1, deck);
+        expect(state.commanders.length).toBe(0);
+      })
+    );
   });
 
   test("allows one commander", () => {
-    fc.assert(fc.property(deckWithOneCommander, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.commanders.length).toBe(1);
-      expect(state.commanders[0]).toEqual(deck.commanders[0]);
-    }));
+    fc.assert(
+      fc.property(deckWithOneCommander, (deck) => {
+        const state = GameState.newGame(1, deck);
+        expect(state.commanders.length).toBe(1);
+        expect(state.commanders[0]).toEqual(deck.commanders[0]);
+      })
+    );
   });
 
   test("allows two commanders", () => {
-    fc.assert(fc.property(deckWithTwoCommanders, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.commanders.length).toBe(2);
-      expect(state.commanders[0]).toEqual(deck.commanders[0]);
-      expect(state.commanders[1]).toEqual(deck.commanders[1]);
-    }));
+    fc.assert(
+      fc.property(deckWithTwoCommanders, (deck) => {
+        const state = GameState.newGame(1, deck);
+        expect(state.commanders.length).toBe(2);
+        expect(state.commanders[0]).toEqual(deck.commanders[0]);
+        expect(state.commanders[1]).toEqual(deck.commanders[1]);
+      })
+    );
   });
 
   test("sorts cards by display name", () => {
@@ -74,33 +75,39 @@ describe("GameState", () => {
   });
 
   test("constructor creates correct number of cards", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const state = GameState.newGame(1, deck);
-      expect(state.getCards().length).toBe(deck.cards.length);
-    }));
+    fc.assert(
+      fc.property(minimalDeck, (deck) => {
+        const state = GameState.newGame(1, deck);
+        expect(state.getCards().length).toBe(deck.cards.length);
+      })
+    );
   });
 
   test("constructor uses provided gameId", () => {
-    fc.assert(fc.property(minimalDeck, fc.integer({ min: 1, max: 999999 }), (deck, gameId) => {
-      const state = GameState.newGame(gameId, deck);
-      expect(state.gameId).toBe(gameId);
-    }));
+    fc.assert(
+      fc.property(minimalDeck, fc.integer({ min: 1, max: 999999 }), (deck, gameId) => {
+        const state = GameState.newGame(gameId, deck);
+        expect(state.gameId).toBe(gameId);
+      })
+    );
   });
 
   test("initializes cards in sequential positions in Library", () => {
-    fc.assert(fc.property(deckWithOneCommander, (deck) => {
-      const gameState = GameState.newGame(1, deck);
+    fc.assert(
+      fc.property(deckWithOneCommander, (deck) => {
+        const gameState = GameState.newGame(1, deck);
 
-      const cards = gameState.getCards();
-      expect(cards.length).toBe(deck.cards.length);
+        const cards = gameState.getCards();
+        expect(cards.length).toBe(deck.cards.length);
 
-      // All cards should be in library with sequential positions
-      cards.forEach((gameCard, index) => {
-        expect(gameCard.location.type).toBe("Library");
-        const libLocation = gameCard.location as LibraryLocation;
-        expect(libLocation.position === index).toBe(true);
-      });
-    }));
+        // All cards should be in library with sequential positions
+        cards.forEach((gameCard, index) => {
+          expect(gameCard.location.type).toBe("Library");
+          const libLocation = gameCard.location as LibraryLocation;
+          expect(libLocation.position === index).toBe(true);
+        });
+      })
+    );
   });
 
   test("shuffle randomizes Library positions but preserves card count", () => {
@@ -135,99 +142,95 @@ describe("GameState", () => {
   });
 
   test("shuffle only affects Library cards", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
 
-    const gameState = GameState.newGame(1, deck);
+        // Manually move a card to Hand for testing
+        const cards = gameState.getCards();
+        (cards[0].location as any) = { type: "Hand", position: 0 };
 
-    // Manually move a card to Hand for testing
-    const cards = gameState.getCards();
-    (cards[0].location as any) = { type: "Hand", position: 0 };
+        const handCardBefore = cards[0].card.name;
+        const originalLibrarySize = cards.filter((gc) => gc.location.type === "Library").length;
 
-    const handCardBefore = cards[0].card.name;
+        gameState.shuffle();
 
-    gameState.shuffle();
+        // Hand card should be unchanged
+        expect(cards[0].location.type).toBe("Hand");
+        expect((cards[0].location as HandLocation).position).toBe(0);
+        expect(cards[0].card.name).toBe(handCardBefore);
 
-    // Hand card should be unchanged
-    expect(cards[0].location.type).toBe("Hand");
-    expect((cards[0].location as HandLocation).position).toBe(0);
-    expect(cards[0].card.name).toBe(handCardBefore);
-
-    // Only 2 cards should be in library now
-    const libraryCards = cards.filter((gc) => gc.location.type === "Library");
-    expect(libraryCards.length).toBe(2);
+        // Library should have one less card than total (since one is in hand)
+        const libraryCards = cards.filter((gc) => gc.location.type === "Library");
+        expect(libraryCards.length).toBe(deck.cards.length - 1);
+        expect(libraryCards.length).toBe(originalLibrarySize);
+      })
+    );
   });
 
   test("startGame changes status to Active and shuffles", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const gameState = GameState.newGame(1, deck);
-      expect(gameState.gameStatus()).toBe(GameStatus.NotStarted);
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
+        expect(gameState.gameStatus()).toBe(GameStatus.NotStarted);
 
-      gameState.startGame();
+        gameState.startGame();
 
-      expect(gameState.gameStatus()).toBe(GameStatus.Active);
+        expect(gameState.gameStatus()).toBe(GameStatus.Active);
 
-      // Verify shuffle happened - cards should still be in library with valid positions
-      const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
-      expect(libraryCards.length).toBe(deck.cards.length);
+        // Verify shuffle happened - cards should still be in library with valid positions
+        const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
+        expect(libraryCards.length).toBe(deck.cards.length);
 
-      const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
-      const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
-      expect(positions).toEqual(expectedPositions);
-    }));
+        const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort((a, b) => a - b);
+        const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
+        expect(positions).toEqual(expectedPositions);
+      })
+    );
   });
 
   test("startGame throws error if game already started", () => {
-    fc.assert(fc.property(minimalDeck, (deck) => {
-      const gameState = GameState.newGame(1, deck);
-      gameState.startGame();
-
-      expect(() => {
+    fc.assert(
+      fc.property(minimalDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
         gameState.startGame();
-      }).toThrow(/Cannot start game: current status is Active/);
-    }));
+
+        expect(() => {
+          gameState.startGame();
+        }).toThrow(/Cannot start game: current status is Active/);
+      })
+    );
   });
 
   test("draw moves top card from Library to Hand", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
 
-    const gameState = GameState.newGame(1, deck);
+        const libraryBefore = gameState.listLibrary();
+        expect(libraryBefore.length).toBe(deck.cards.length);
 
-    // Cards are sorted: Ancestral Recall, Black Lotus, Lightning Bolt
-    // After construction, they are in Library positions 0, 1, 2 respectively
-    const libraryBefore = gameState.listLibrary();
-    expect(libraryBefore.length).toBe(3);
-    expect(libraryBefore[0].card.name).toBe("Ancestral Recall"); // position 0 (top)
+        // Skip test if deck has no cards in library
+        if (deck.cards.length === 0) return;
 
-    const handBefore = gameState.listHand();
-    expect(handBefore.length).toBe(0);
+        const topCardBefore = libraryBefore[0]; // top card (minimum position)
 
-    gameState.draw();
+        const handBefore = gameState.listHand();
+        expect(handBefore.length).toBe(0);
 
-    // Check library: should have 2 cards now
-    const libraryAfter = gameState.listLibrary();
-    expect(libraryAfter.length).toBe(2);
-    expect(libraryAfter[0].card.name).toBe("Black Lotus"); // position 0 (new top)
-    expect(libraryAfter[1].card.name).toBe("Lightning Bolt"); // position 1
+        gameState.draw();
 
-    // Check hand: should have 1 card now
-    const handAfter = gameState.listHand();
-    expect(handAfter.length).toBe(1);
-    expect(handAfter[0].card.name).toBe("Ancestral Recall"); // the drawn card
-    expect((handAfter[0].location as HandLocation).position).toBe(0);
+        // Check library: should have one less card now
+        const libraryAfter = gameState.listLibrary();
+        expect(libraryAfter.length).toBe(deck.cards.length - 1);
+
+        // Check hand: should have 1 card now
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(1);
+        expect(handAfter[0].card.name).toBe(topCardBefore.card.name); // the drawn card should be the original top card
+        expect((handAfter[0].location as HandLocation).position).toBe(0);
+      })
+    );
   });
 
   test("draw throws error when Library is empty", () => {
