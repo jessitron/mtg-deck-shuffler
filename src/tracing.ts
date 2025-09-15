@@ -8,7 +8,8 @@ import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
 // Custom sampler that heavily samples down kube-probe requests to /
 class KubeProbeAwareSampler implements Sampler {
   private defaultSampler = new TraceIdRatioBasedSampler(1.0); // 100% sampling by default
-  private kubeProbeRootSampler = new TraceIdRatioBasedSampler(0.001); // 0.1% sampling for kube-probe to /
+  private kubeProbeRootSampler = new TraceIdRatioBasedSampler(0.001); // 0.1% sampling for kube-probe
+  private elbHealthcheckerRootSampler = new TraceIdRatioBasedSampler(0.01); // 1% sampling for ELB healthchecker
 
   shouldSample(context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes, links: Link[]): SamplingResult {
     // Check if this is an HTTP span for the root path with kube-probe user agent
@@ -16,6 +17,10 @@ class KubeProbeAwareSampler implements Sampler {
 
     if (userAgent.toLowerCase().includes("kube-probe")) {
       return this.kubeProbeRootSampler.shouldSample(context, traceId);
+    }
+
+    if (userAgent.toLowerCase().includes("ELB-HealthChecker")) {
+      return this.elbHealthcheckerRootSampler.shouldSample(context, traceId);
     }
 
     return this.defaultSampler.shouldSample(context, traceId);
