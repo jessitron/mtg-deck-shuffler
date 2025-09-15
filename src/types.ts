@@ -10,17 +10,7 @@ export interface DeckProvenance {
   deckSource: "archidekt" | "local" | "test";
 }
 
-export const PERSISTED_DECK_VERSION: 1 = 1;
-
-export class DeckVersionMismatchError extends Error {
-  constructor(expectedVersion: number, actualVersion: number, filePath: string) {
-    super(`Invalid deck version in ${filePath}. Expected version ${expectedVersion}, but got ${actualVersion}`);
-    this.name = 'DeckVersionMismatchError';
-  }
-}
-
 export interface Deck {
-  version: typeof PERSISTED_DECK_VERSION;
   id: number;
   name: string;
   totalCards: number;

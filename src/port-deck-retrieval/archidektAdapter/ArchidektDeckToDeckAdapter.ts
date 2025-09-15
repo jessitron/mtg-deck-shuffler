@@ -1,6 +1,6 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGateway } from "./ArchidektGateway.js";
-import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
+import { Deck, CardDefinition } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
@@ -57,7 +57,6 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
     const now = new Date();
     return {
-      version: PERSISTED_DECK_VERSION,
       id: archidektDeck.id,
       name: archidektDeck.name,
       totalCards: includedCards.length + commanderCards.length,

@@ -1,5 +1,5 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, LOCAL_DECK_RELATIVE_PATH, AvailableDecks, AvailableDeck } from "../types.js";
-import { Deck, PERSISTED_DECK_VERSION, DeckVersionMismatchError } from "../../types.js";
+import { Deck } from "../../types.js";
 import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
@@ -38,12 +38,6 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
       const fileContent = fs.readFileSync(pathToLocalFile, "utf8");
       const deck: Deck = JSON.parse(fileContent);
 
-      // Check version compatibility - treat missing version as version 0
-      const deckVersion = deck.version ?? 0;
-      if (deckVersion !== PERSISTED_DECK_VERSION) {
-        throw new DeckVersionMismatchError(PERSISTED_DECK_VERSION, deckVersion, pathToLocalFile);
-      }
-
       const now = new Date();
       deck.provenance = {
         retrievedDate: now,
@@ -52,9 +46,6 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
       };
       return deck;
     } catch (error) {
-      if (error instanceof DeckVersionMismatchError) {
-        throw error;
-      }
       throw new Error(`Failed to read local deck file: ${pathToLocalFile}`);
     }
   }
