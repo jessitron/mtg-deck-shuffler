@@ -6,27 +6,59 @@ import { promises as fs } from "fs";
 import { join } from "path";
 
 async function fetchPreconDeckNumbers(url?: string): Promise<number[]> {
-  // Default to the Archidekt precons page if no URL provided
-  const targetUrl = url || "https://archidekt.com/commander-precons";
+  // Default to the Archidekt search page for all precons if no URL provided
+  const baseUrl = url || "https://archidekt.com/search/decks?orderBy=-updatedAt&ownerUsername=Archidekt_Precons";
 
-  console.log(`Fetching precon deck numbers from: ${targetUrl}`);
+  console.log(`Fetching precon deck numbers from: ${baseUrl}`);
 
   try {
-    const response = await fetch(targetUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    const allDeckNumbers = new Set<number>();
+    let page = 1;
+    let hasMorePages = true;
+
+    while (hasMorePages) {
+      const pageUrl = `${baseUrl}&page=${page}`;
+      console.log(`Fetching page ${page}...`);
+
+      const response = await fetch(pageUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const html = await response.text();
+
+      // Find all links matching /decks/{number} pattern
+      const deckLinkPattern = /\/decks\/(\d+)/g;
+      const matches = [...html.matchAll(deckLinkPattern)];
+
+      if (matches.length === 0) {
+        // No more deck links found, we've reached the end
+        hasMorePages = false;
+        break;
+      }
+
+      // Extract deck numbers from this page
+      const pageDeckNumbers = matches.map((match) => parseInt(match[1], 10));
+      const uniquePageDeckNumbers = [...new Set(pageDeckNumbers)];
+
+      console.log(`Page ${page}: Found ${uniquePageDeckNumbers.length} unique deck numbers`);
+
+      // Add to our set of all deck numbers
+      uniquePageDeckNumbers.forEach(num => allDeckNumbers.add(num));
+
+      // Check if there's likely a next page by looking for pagination elements
+      // If we got fewer than expected results, we might be at the end
+      if (uniquePageDeckNumbers.length < 10) {
+        hasMorePages = false;
+      } else {
+        page++;
+        // Small delay to be respectful to the server
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
     }
 
-    const html = await response.text();
-
-    // Find all links matching /decks/{number} pattern
-    const deckLinkPattern = /\/decks\/(\d+)/g;
-    const matches = [...html.matchAll(deckLinkPattern)];
-
-    // Extract unique deck numbers
-    const deckNumbers = [...new Set(matches.map((match) => parseInt(match[1], 10)))];
-
-    console.log(`Found ${deckNumbers.length} unique precon deck numbers:`);
+    const deckNumbers = Array.from(allDeckNumbers);
+    console.log(`Found ${deckNumbers.length} total unique precon deck numbers across ${page} pages:`);
     deckNumbers.sort((a, b) => a - b); // Sort numerically
 
     return deckNumbers;
