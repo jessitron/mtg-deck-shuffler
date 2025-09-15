@@ -126,7 +126,15 @@ async function main(): Promise<void> {
             continue;
           } catch {}
         }
-        
+
+        // If using --force, clean up existing error file before attempting download
+        if (shouldForce) {
+          try {
+            await fs.unlink(errorFilepath);
+            console.log(`🗑️  Removed existing error file for ${deckIdStr}`);
+          } catch {}
+        }
+
         await downloadDeck(deckIdStr, gateway, adapter);
         // Small delay between requests to be respectful to the API
         await new Promise(resolve => setTimeout(resolve, 250));
