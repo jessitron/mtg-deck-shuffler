@@ -1,19 +1,26 @@
 <div id="game-container">
 <div id="command-zone">
-<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-001.jpg" alt="Atraxa, Praetors' Voice" class="mtg-card-image commander-image" />
+<img src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image commander-image" />
 </div>
 <div id="game-details" class="game-details game-active">
-<h2><a href="https://archidekt.com/decks/12345/test-game" target="_blank">Test Game Deck</a></h2>
-<div><p>6 cards</p>
+<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<div><p>7 cards</p>
 <p><strong>Game ID:</strong> 123</p>
 <p><strong>Status:</strong> Active</p>
 </div>
 <div class="history">
-<p>No actions to undo</p>
+<div class="undo-controls"> Last action:
+<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=571406" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Damnation</a></span>
+<button class="undo-button"
+hx-post="/undo/123/6"
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">Undo</button>
+</div>
 <button class="history-button"
 hx-get="/history-modal/123"
 hx-target="#modal-container"
-hx-swap="innerHTML">View History (0)</button>
+hx-swap="innerHTML">View History (7)</button>
 </div>
 </div>
 <div id="table-section" class="table-section">
@@ -24,7 +31,7 @@ hx-target="#modal-container"
 hx-swap="innerHTML">1 Cards on table</button>
 </div>
 <div id="library-section" data-testid="library-section">
-<h3>Library (2)</h3>
+<h3>Library (3)</h3>
 <div class="library-stack" data-testid="library-stack">
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
@@ -44,7 +51,7 @@ hx-post="/draw/123"
 hx-target="#game-container"
 hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
-hx-post="/reveal-card/123/0"
+hx-post="/reveal-card/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML">Reveal</button>
 </div>
@@ -52,33 +59,33 @@ hx-swap="outerHTML">Reveal</button>
 <div id="revealed-cards-section" class="revealed-cards-section">
 <h3>Revealed Cards (1)</h3>
 <div id="revealed-cards-area" class="revealed-cards-area">
-<div id="card-container-4" class="revealed-card-container">
-<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-105.jpg"
-alt="Mountain"
+<div id="card-container-0" class="revealed-card-container">
+<img src="https://cards.scryfall.io/normal/front/e/0/e09e9b65-ff0e-4efe-b96a-ede69c96e2ea.jpg"
+alt="Carth the Lion"
 class="mtg-card-image revealed-card"
-title="Mountain" />
+title="Carth the Lion" />
 <div class="card-buttons">
 <button class="play-button"
-hx-post="/play-card/123/4"
+hx-post="/play-card/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-105"
+data-card-id="e09e9b65-ff0e-4efe-b96a-ede69c96e2ea"
 title="Copy image and remove from revealed">
 Play
 </button><button class="put-in-hand-button"
-hx-post="/put-in-hand/123/4"
+hx-post="/put-in-hand/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to hand">
 Put in Hand
 </button><button class="put-on-top-button"
-hx-post="/put-on-top/123/4"
+hx-post="/put-on-top/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to top of library">
 Put on Top
 </button><button class="put-on-bottom-button"
-hx-post="/put-on-bottom/123/4"
+hx-post="/put-on-bottom/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to bottom of library">
@@ -91,21 +98,21 @@ Put on Bottom
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (2)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-container-2" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-104.jpg"
-alt="Island"
+<div id="card-container-1" class="hand-card-container">
+<img src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg"
+alt="Dakkon, Shadow Slayer"
 class="mtg-card-image hand-card"
-title="Island" />
+title="Dakkon, Shadow Slayer" />
 <div class="hand-card-buttons">
 <button class="play-button"
-hx-post="/play-card/123/2"
+hx-post="/play-card/123/1"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-104"
+data-card-id="0013a9c4-77a1-418d-85c2-bd68b65cd3d4"
 title="Copy image and remove from hand">
 Play
 </button><button class="put-down-button"
-hx-post="/put-down/123/2"
+hx-post="/put-down/123/1"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to revealed">
@@ -119,21 +126,21 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-container-3" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-100.jpg"
-alt="Lightning Bolt"
+</div><div id="card-container-6" class="hand-card-container">
+<img src="https://cards.scryfall.io/normal/front/7/b/7b215968-93a6-4278-ac61-4e3e8c3c3943.jpg"
+alt="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen"
 class="mtg-card-image hand-card"
-title="Lightning Bolt" />
+title="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen" />
 <div class="hand-card-buttons">
 <button class="play-button"
-hx-post="/play-card/123/3"
+hx-post="/play-card/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-100"
+data-card-id="7b215968-93a6-4278-ac61-4e3e8c3c3943"
 title="Copy image and remove from hand">
 Play
 </button><button class="put-down-button"
-hx-post="/put-down/123/3"
+hx-post="/put-down/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to revealed">
