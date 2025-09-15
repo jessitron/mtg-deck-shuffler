@@ -24,12 +24,10 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   }
 
   private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {
-    const categoryInclusionMap = new Map(
-      (archidektDeck.categories || []).map((cat) => [cat.name, cat.includedInDeck])
-    );
+    const categoryInclusionMap = new Map((archidektDeck.categories || []).map((cat) => [cat.name, cat.includedInDeck]));
 
     const isCardIncluded = (card: ArchidektCard) => {
-      const primaryCategory = card.categories[0];
+      const primaryCategory = (card.categories || [])[0];
 
       if (primaryCategory === "Sideboard") {
         return false;
@@ -40,7 +38,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
     const includedCards: CardDefinition[] = [];
     for (const archidektCard of archidektDeck.cards) {
-      if (isCardIncluded(archidektCard) && !archidektCard.categories.includes("Commander")) {
+      if (isCardIncluded(archidektCard) && !(archidektCard.categories || []).includes("Commander")) {
         const card = this.convertArchidektToCard(archidektCard);
         if (card) {
           for (let i = 0; i < archidektCard.quantity; i++) {
@@ -51,7 +49,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     }
 
     const commanderCards = archidektDeck.cards
-      .filter((card) => card.categories.includes("Commander"))
+      .filter((card) => (card.categories || []).includes("Commander"))
       .map((card) => this.convertArchidektToCard(card))
       .filter((card): card is CardDefinition => card !== undefined);
 

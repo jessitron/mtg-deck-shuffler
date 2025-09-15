@@ -1,4 +1,5 @@
 {
+  "version": 1,
   "id": 5273567,
   "name": "Heads I Win, Tails You Lose - Secret Lair Drop",
   "totalCards": 100,
@@ -507,7 +508,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-03T16:48:52.762Z",
+    "retrievedDate": "2025-09-15T20:05:43.550Z",
     "sourceUrl": "https://archidekt.com/decks/5273567",
     "deckSource": "archidekt"
   }
