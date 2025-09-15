@@ -21,7 +21,8 @@ const __dirname = path.dirname(__filename);
 export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort): express.Application {
   const app = express();
 
-  app.use(express.urlencoded({ extended: true }));
+  app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+  app.use(express.json({ limit: '10mb' }));
 
   // Returns whole page - homepage with deck selection
   app.get("/", async (req, res) => {
