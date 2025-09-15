@@ -172,7 +172,7 @@ export const minimalDeck: fc.Arbitrary<Deck> = fc
     commanders: [],
     cards,
     provenance,
-  }));  
+  }));
 
 // Generator for a deck with exactly one commander
 export const deckWithOneCommander: fc.Arbitrary<Deck> = fc
@@ -188,21 +188,20 @@ export const deckWithOneCommander: fc.Arbitrary<Deck> = fc
   }));
 
 // Generator for a deck with exactly two commanders
-export const deckWithTwoCommanders: fc.Arbitrary<Deck> = fc
-  .tuple(deckId, deckName, uniqueCards(1, 10), deckProvenance)
-  .chain(([id, name, cards, provenance]) =>
-    fc.tuple(commanderCard, commanderCard)
-      .filter(([cmd1, cmd2]) => cmd1.name !== cmd2.name) // Ensure different commanders
-      .map(([cmd1, cmd2]) => ({
-        version: PERSISTED_DECK_VERSION,
-        id,
-        name,
-        totalCards: cards.length,
-        commanders: [cmd1, cmd2],
-        cards,
-        provenance,
-      }))
-  );
+export const deckWithTwoCommanders: fc.Arbitrary<Deck> = fc.tuple(deckId, deckName, uniqueCards(1, 10), deckProvenance).chain(([id, name, cards, provenance]) =>
+  fc
+    .tuple(commanderCard, commanderCard)
+    .filter(([cmd1, cmd2]) => cmd1.name !== cmd2.name) // Ensure different commanders
+    .map(([cmd1, cmd2]) => ({
+      version: PERSISTED_DECK_VERSION,
+      id,
+      name,
+      totalCards: cards.length,
+      commanders: [cmd1, cmd2],
+      cards,
+      provenance,
+    }))
+);
 
 // Convenience exports for common card patterns from existing tests
 export const lightningBolt: CardDefinition = {
@@ -235,20 +234,35 @@ export const testProvenance: DeckProvenance = {
   deckSource: "test",
 };
 
-// Simple helper for creating test PersistedGameState - to be used in specific tests
-export const createTestPersistedGameState = (gameId: number, deck: Deck, status: any = 0) => ({
-  version: 3 as const, // PERSISTED_GAME_STATE_VERSION
-  gameId,
-  status,
-  deckProvenance: deck.provenance,
-  commanders: deck.commanders,
-  deckName: deck.name,
-  deckId: deck.id,
-  totalCards: deck.totalCards,
-  gameCards: deck.cards.map((card, index) => ({
-    card,
-    location: { type: "Library" as const, position: index },
+// Simple helper for creating test PersistedGameState - to be used in PersistStateAdapter tests
+export const createTestPersistedGameState = (gameId: number, deck: Deck, status: any = 0) => {
+  // Combine all cards and sort alphabetically (maintaining existing invariant)
+  const allCards = [
+    ...deck.commanders.map(card => ({ card, isCommander: true })),
+    ...deck.cards.map(card => ({ card, isCommander: false }))
+  ].sort((a, b) => a.card.name.localeCompare(b.card.name));
+
+  let commanderPositionCounter = 0;
+  let libraryPositionCounter = 0;
+
+  const gameCards = allCards.map((item, index) => ({
+    card: item.card,
+    isCommander: item.isCommander,
+    location: item.isCommander
+      ? { type: "CommandZone" as const, position: commanderPositionCounter++ }
+      : { type: "Library" as const, position: libraryPositionCounter++ },
     gameCardIndex: index,
-  })),
-  events: [],
-});
+  }));
+
+  return {
+    version: 4 as const, // PERSISTED_GAME_STATE_VERSION
+    gameId,
+    status,
+    deckProvenance: deck.provenance,
+    deckName: deck.name,
+    deckId: deck.id,
+    totalCards: deck.totalCards,
+    gameCards,
+    events: [],
+  };
+};

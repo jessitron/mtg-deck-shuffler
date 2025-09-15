@@ -28,13 +28,19 @@ export interface TableLocation {
   type: "Table";
 }
 
-export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation;
+export interface CommandZoneLocation {
+  type: "CommandZone";
+  position: number;
+}
+
+export type CardLocation = LibraryLocation | HandLocation | RevealedLocation | TableLocation | CommandZoneLocation;
 
 export function printLocation(l: CardLocation) {
   switch (l.type) {
     case "Hand":
     case "Revealed":
     case "Library":
+    case "CommandZone":
       return `${l.type}(${l.position})`;
     case "Table":
       return l.type;
@@ -45,16 +51,16 @@ export interface GameCard {
   card: CardDefinition;
   location: CardLocation;
   gameCardIndex: number;
+  isCommander: boolean;
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 3 = 3;
+export const PERSISTED_GAME_STATE_VERSION: 4 = 4;
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;
   gameId: GameId;
   status: GameStatus;
   deckProvenance: DeckProvenance;
-  commanders: CardDefinition[];
   deckName: string;
   deckId: number;
   totalCards: number;

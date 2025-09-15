@@ -9,12 +9,13 @@ import {
   HandLocation,
   RevealedLocation,
   TableLocation,
+  CommandZoneLocation,
   PERSISTED_GAME_STATE_VERSION,
   printLocation,
 } from "./port-persist-state/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
 
-export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation };
+export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
 // Type guard functions for GameCard location filtering
 export function isInLibrary(gameCard: GameCard): gameCard is GameCard & { location: LibraryLocation } {
@@ -33,11 +34,14 @@ export function isOnTable(gameCard: GameCard): gameCard is GameCard & { location
   return gameCard.location.type === "Table";
 }
 
+export function isInCommandZone(gameCard: GameCard): gameCard is GameCard & { location: CommandZoneLocation } {
+  return gameCard.location.type === "CommandZone";
+}
+
 export class GameState {
   public readonly gameId: GameId;
   private status: GameStatus;
   public readonly deckProvenance: DeckProvenance;
-  public readonly commanders: CardDefinition[];
   public readonly deckName: string;
   public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
   public readonly totalCards: number;
@@ -50,13 +54,23 @@ export class GameState {
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
     }
 
-    const gameCards: GameCard[] = [...deck.cards]
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map((card, index) => ({
-        card,
-        location: { type: "Library", position: index } as LibraryLocation,
-        gameCardIndex: index,
-      }));
+    // Combine all cards and sort alphabetically (maintaining existing invariant)
+    const allCards = [
+      ...deck.commanders.map(card => ({ card, isCommander: true })),
+      ...deck.cards.map(card => ({ card, isCommander: false }))
+    ].sort((a, b) => a.card.name.localeCompare(b.card.name));
+
+    let commanderPositionCounter = 0;
+    let libraryPositionCounter = 0;
+
+    const gameCards: GameCard[] = allCards.map((item, index) => ({
+      card: item.card,
+      isCommander: item.isCommander,
+      location: item.isCommander
+        ? { type: "CommandZone", position: commanderPositionCounter++ } as CommandZoneLocation
+        : { type: "Library", position: libraryPositionCounter++ } as LibraryLocation,
+      gameCardIndex: index,
+    }));
 
     return new GameState({
       gameId,
@@ -64,7 +78,6 @@ export class GameState {
       deckId: deck.id,
       deckName: deck.name,
       deckProvenance: deck.provenance,
-      commanders: [...deck.commanders],
       cards: gameCards,
       events: [],
     });
@@ -76,14 +89,12 @@ export class GameState {
     deckId: number;
     deckName: string;
     deckProvenance: DeckProvenance;
-    commanders: CardDefinition[];
     cards: GameCard[];
     events: GameEvent[];
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
     this.deckProvenance = params.deckProvenance;
-    this.commanders = params.commanders;
     this.deckName = params.deckName;
     this.deckId = params.deckId;
     this.totalCards = params.cards.length;
@@ -91,7 +102,45 @@ export class GameState {
     this.eventLog = GameEventLog.fromPersisted(params.events);
   }
 
-  static fromPersistedGameState(psg: PersistedGameState): GameState {
+  static fromPersistedGameState(psg: PersistedGameState | any): GameState {
+    // Handle migration from version 3 to version 4
+    if (psg.version === 3) {
+      const legacyPsg = psg; // Legacy format with commanders property
+      const commanders: CardDefinition[] = legacyPsg.commanders || [];
+
+      // Add isCommander flag to existing game cards
+      const migratedGameCards: GameCard[] = legacyPsg.gameCards.map((gc: any) => ({
+        ...gc,
+        isCommander: false
+      }));
+
+      // Add commanders as game cards in command zone
+      const commanderCards: GameCard[] = commanders.map((commander, index) => {
+        const gameCardIndex = migratedGameCards.length + index;
+        return {
+          card: commander,
+          location: { type: "CommandZone", position: index } as CommandZoneLocation,
+          gameCardIndex,
+          isCommander: true,
+        };
+      });
+
+      // Combine and re-sort to maintain alphabetical invariant
+      const allCards = [...migratedGameCards, ...commanderCards]
+        .sort((a, b) => a.card.name.localeCompare(b.card.name))
+        .map((card, index) => ({ ...card, gameCardIndex: index }));
+
+      return new GameState({
+        gameId: psg.gameId,
+        gameStatus: psg.status,
+        deckId: legacyPsg.deckId,
+        deckName: psg.deckName,
+        deckProvenance: psg.deckProvenance,
+        cards: allCards,
+        events: psg.events || [],
+      });
+    }
+
     return new GameState({
       ...psg,
       gameStatus: psg.status, // todo: use gameStatus in both places
@@ -158,6 +207,14 @@ export class GameState {
 
   public listTable(): readonly (GameCard & { location: TableLocation })[] {
     return this.gameCards.filter(isOnTable);
+  }
+
+  public listCommandZone(): readonly (GameCard & { location: CommandZoneLocation })[] {
+    return this.gameCards.filter(isInCommandZone).sort((a, b) => a.location.position - b.location.position);
+  }
+
+  public listCommanders(): readonly GameCard[] {
+    return this.gameCards.filter(gc => gc.isCommander);
   }
 
   public shuffle(): WhatHappened {
@@ -425,7 +482,6 @@ export class GameState {
       gameId: this.gameId,
       status: this.status,
       deckProvenance: this.deckProvenance,
-      commanders: [...this.commanders],
       deckName: this.deckName,
       deckId: this.deckId,
       totalCards: this.totalCards,

@@ -67,7 +67,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(game.commanders);
+  const commanderImageHtml = formatCommanderImageHtmlFragment(game.listCommanders().map(gc => gc.card));
   const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);

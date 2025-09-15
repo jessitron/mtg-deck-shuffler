@@ -29,7 +29,7 @@ describe("GameState", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
         const state = GameState.newGame(1, deck);
-        expect(state.commanders.length).toBe(0);
+        expect(state.listCommanders().length).toBe(0);
       })
     );
   });
@@ -38,8 +38,10 @@ describe("GameState", () => {
     fc.assert(
       fc.property(deckWithOneCommander, (deck) => {
         const state = GameState.newGame(1, deck);
-        expect(state.commanders.length).toBe(1);
-        expect(state.commanders[0]).toEqual(deck.commanders[0]);
+        const commanders = state.listCommanders();
+        expect(commanders.length).toBe(1);
+        expect(commanders[0].card).toEqual(deck.commanders[0]);
+        expect(commanders[0].isCommander).toBe(true);
       })
     );
   });
@@ -48,9 +50,13 @@ describe("GameState", () => {
     fc.assert(
       fc.property(deckWithTwoCommanders, (deck) => {
         const state = GameState.newGame(1, deck);
-        expect(state.commanders.length).toBe(2);
-        expect(state.commanders[0]).toEqual(deck.commanders[0]);
-        expect(state.commanders[1]).toEqual(deck.commanders[1]);
+        const commanders = state.listCommanders();
+        expect(commanders.length).toBe(2);
+        const commanderCards = commanders.map(gc => gc.card).sort((a, b) => a.name.localeCompare(b.name));
+        const deckCommanders = [...deck.commanders].sort((a, b) => a.name.localeCompare(b.name));
+        expect(commanderCards[0]).toEqual(deckCommanders[0]);
+        expect(commanderCards[1]).toEqual(deckCommanders[1]);
+        expect(commanders.every(gc => gc.isCommander)).toBe(true);
       })
     );
   });
@@ -93,14 +99,20 @@ describe("GameState", () => {
         const gameState = GameState.newGame(1, deck);
 
         const cards = gameState.getCards();
-        expect(cards.length).toBe(deck.cards.length);
+        expect(cards.length).toBe(deck.cards.length + deck.commanders.length);
 
-        // All cards should be in library with sequential positions
-        cards.forEach((gameCard, index) => {
-          expect(gameCard.location.type).toBe("Library");
-          const libLocation = gameCard.location as LibraryLocation;
-          expect(libLocation.position === index).toBe(true);
+        // Library cards should be in sequential positions
+        const libraryCards = gameState.listLibrary();
+        expect(libraryCards.length).toBe(deck.cards.length);
+        libraryCards.forEach((gameCard, index) => {
+          expect(gameCard.location.position).toBe(index);
+          expect(gameCard.isCommander).toBe(false);
         });
+
+        // Commander should be in command zone
+        const commanderCards = gameState.listCommandZone();
+        expect(commanderCards.length).toBe(1);
+        expect(commanderCards[0].isCommander).toBe(true);
       })
     );
   });
@@ -137,23 +149,27 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         const gameState = GameState.newGame(1, deck);
 
-        // Manually move a card to Hand for testing
+        // Manually move a non-commander card to Hand for testing
         const cards = gameState.getCards();
-        (cards[0].location as any) = { type: "Hand", position: 0 };
+        const nonCommanderCard = cards.find(gc => !gc.isCommander);
+        if (nonCommanderCard) {
+          (nonCommanderCard.location as any) = { type: "Hand", position: 0 };
+        }
 
-        const handCardBefore = cards[0].card.name;
+        const handCardBefore = nonCommanderCard?.card.name;
         const originalLibrarySize = cards.filter((gc) => gc.location.type === "Library").length;
 
         gameState.shuffle();
 
-        // Hand card should be unchanged
-        expect(cards[0].location.type).toBe("Hand");
-        expect((cards[0].location as HandLocation).position).toBe(0);
-        expect(cards[0].card.name).toBe(handCardBefore);
+        if (nonCommanderCard) {
+          // Hand card should be unchanged
+          expect(nonCommanderCard.location.type).toBe("Hand");
+          expect((nonCommanderCard.location as HandLocation).position).toBe(0);
+          expect(nonCommanderCard.card.name).toBe(handCardBefore);
+        }
 
-        // Library should have one less card than total (since one is in hand)
+        // Library should have same number of cards as before
         const libraryCards = cards.filter((gc) => gc.location.type === "Library");
-        expect(libraryCards.length).toBe(deck.cards.length - 1);
         expect(libraryCards.length).toBe(originalLibrarySize);
       })
     );
