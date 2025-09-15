@@ -56,22 +56,17 @@ describe("GameState", () => {
   });
 
   test("sorts cards by display name", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const state = GameState.newGame(1, deck);
+        const cards = state.getCards();
 
-    const state = GameState.newGame(1, deck);
-    const cards = state.getCards();
-
-    // Should be sorted: Ancestral Recall, Black Lotus, Lightning Bolt
-    expect(cards[0].card.name).toBe("Ancestral Recall");
-    expect(cards[1].card.name).toBe("Black Lotus");
-    expect(cards[2].card.name).toBe("Lightning Bolt");
+        // Verify cards are sorted by display name
+        for (let i = 1; i < cards.length; i++) {
+          expect(cards[i-1].card.name.localeCompare(cards[i].card.name)).toBeLessThanOrEqual(0);
+        }
+      })
+    );
   });
 
   test("constructor creates correct number of cards", () => {
@@ -111,34 +106,30 @@ describe("GameState", () => {
   });
 
   test("shuffle randomizes Library positions but preserves card count", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
+        const originalOrder = gameState.getCards().map((gc) => gc.card.name);
 
-    const gameState = GameState.newGame(1, deck);
-    const originalOrder = gameState.getCards().map((gc) => gc.card.name);
+        gameState.shuffle();
 
-    gameState.shuffle();
+        const cards = gameState.getCards();
+        const libraryCards = cards.filter((gc) => gc.location.type === "Library");
 
-    const cards = gameState.getCards();
-    const libraryCards = cards.filter((gc) => gc.location.type === "Library");
+        // Same number of cards in library
+        expect(libraryCards.length).toBe(deck.cards.length);
 
-    // Same number of cards in library
-    expect(libraryCards.length).toBe(3);
+        // Positions should still be sequential from 0
+        const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
+        const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
+        expect(positions).toEqual(expectedPositions);
 
-    // Positions should still be sequential from 0
-    const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
-    expect(positions).toEqual([0, 1, 2]);
-
-    // Cards should still exist (order might be different)
-    const shuffledNames = cards.map((gc) => gc.card.name).sort();
-    const originalNames = originalOrder.sort();
-    expect(shuffledNames).toEqual(originalNames);
+        // Cards should still exist (order might be different)
+        const shuffledNames = cards.map((gc) => gc.card.name).sort();
+        const originalNames = originalOrder.sort();
+        expect(shuffledNames).toEqual(originalNames);
+      })
+    );
   });
 
   test("shuffle only affects Library cards", () => {
@@ -234,24 +225,23 @@ describe("GameState", () => {
   });
 
   test("draw throws error when Library is empty", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 1,
-      commanders: [],
-      cards: [lightningBolt],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length > 0);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Move the only card out of library manually
-    const cards = gameState.getCards();
-    (cards[0].location as any) = { type: "Hand", position: 0 };
+        // Move all cards out of library manually
+        const cards = gameState.getCards();
+        cards.forEach((card, index) => {
+          (card.location as any) = { type: "Hand", position: index };
+        });
 
-    expect(() => {
-      gameState.draw();
-    }).toThrow(/Cannot draw: Library is empty/);
+        expect(() => {
+          gameState.draw();
+        }).toThrow(/Cannot draw: Library is empty/);
+      })
+    );
   });
 
   test("multiple draws position cards correctly in Hand", () => {
@@ -305,265 +295,239 @@ describe("GameState", () => {
   });
 
   test("draw works correctly after shuffle", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length > 0);
 
-    const gameState = GameState.newGame(1, deck);
-    gameState.shuffle();
+        const gameState = GameState.newGame(1, deck);
+        gameState.shuffle();
 
-    const libraryBefore = gameState.listLibrary();
-    expect(libraryBefore.length).toBe(3);
+        const libraryBefore = gameState.listLibrary();
+        expect(libraryBefore.length).toBe(deck.cards.length);
 
-    const topCardBefore = libraryBefore[0]; // position 0 after shuffle
+        const topCardBefore = libraryBefore[0]; // position 0 after shuffle
 
-    gameState.draw();
+        gameState.draw();
 
-    const libraryAfter = gameState.listLibrary();
-    const handAfter = gameState.listHand();
+        const libraryAfter = gameState.listLibrary();
+        const handAfter = gameState.listHand();
 
-    expect(libraryAfter.length).toBe(2);
-    expect(handAfter.length).toBe(1);
-    expect(handAfter[0].card.name).toBe(topCardBefore.card.name);
+        expect(libraryAfter.length).toBe(deck.cards.length - 1);
+        expect(handAfter.length).toBe(1);
+        expect(handAfter[0].card.name).toBe(topCardBefore.card.name);
+      })
+    );
   });
 
   test("reveal moves card from Library to Revealed", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length > 0);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Cards are sorted: Ancestral Recall (pos 0), Black Lotus (pos 1), Lightning Bolt (pos 2)
-    const libraryBefore = gameState.listLibrary();
-    expect(libraryBefore.length).toBe(3);
-    expect(libraryBefore[1].card.name).toBe("Black Lotus"); // position 1
+        const libraryBefore = gameState.listLibrary();
+        expect(libraryBefore.length).toBe(deck.cards.length);
 
-    const revealedBefore = gameState.listRevealed();
-    expect(revealedBefore.length).toBe(0);
+        const revealedBefore = gameState.listRevealed();
+        expect(revealedBefore.length).toBe(0);
 
-    gameState.reveal(1); // reveal Black Lotus
+        // Pick a random valid position to reveal
+        const positionToReveal = deck.cards.length > 1
+          ? Math.floor(Math.random() * deck.cards.length)
+          : 0;
+        const cardToReveal = libraryBefore[positionToReveal];
 
-    // Check library: should have 2 cards now
-    const libraryAfter = gameState.listLibrary();
-    expect(libraryAfter.length).toBe(2);
-    expect(libraryAfter[0].card.name).toBe("Ancestral Recall"); // position 0
-    expect(libraryAfter[1].card.name).toBe("Lightning Bolt"); // position 2
+        gameState.reveal(positionToReveal);
 
-    // Check revealed: should have 1 card now
-    const revealedAfter = gameState.listRevealed();
-    expect(revealedAfter.length).toBe(1);
-    expect(revealedAfter[0].card.name).toBe("Black Lotus");
-    expect((revealedAfter[0].location as RevealedLocation).position).toBe(0);
+        // Check library: should have one less card now
+        const libraryAfter = gameState.listLibrary();
+        expect(libraryAfter.length).toBe(deck.cards.length - 1);
+
+        // Check revealed: should have 1 card now
+        const revealedAfter = gameState.listRevealed();
+        expect(revealedAfter.length).toBe(1);
+        expect(revealedAfter[0].card.name).toBe(cardToReveal.card.name);
+        expect((revealedAfter[0].location as RevealedLocation).position).toBe(0);
+      })
+    );
   });
 
   test("reveal throws error when position does not exist in Library", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 2,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        const gameState = GameState.newGame(1, deck);
 
-    const gameState = GameState.newGame(1, deck);
+        // Try to reveal a position that doesn't exist
+        const invalidPosition = deck.cards.length + 5;
 
-    expect(() => {
-      gameState.reveal(5); // position 5 doesn't exist
-    }).toThrow(/No card found at library position 5/);
+        expect(() => {
+          gameState.reveal(invalidPosition);
+        }).toThrow(new RegExp(`No card found at library position ${invalidPosition}`));
+      })
+    );
   });
 
   test("multiple reveals position cards correctly in Revealed", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus], // Lightning Bolt, Ancestral Recall, Black Lotus
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 3);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Reveal first card (position 0: Ancestral Recall)
-    gameState.reveal(0);
-    let revealed = gameState.listRevealed();
-    expect(revealed.length).toBe(1);
-    expect(revealed[0].card.name).toBe("Ancestral Recall");
-    expect((revealed[0].location as RevealedLocation).position).toBe(0);
+        const libraryBefore = gameState.listLibrary();
 
-    // Reveal second card (position 1: Black Lotus)
-    gameState.reveal(1);
-    revealed = gameState.listRevealed();
-    expect(revealed.length).toBe(2);
-    expect(revealed[0].card.name).toBe("Ancestral Recall"); // position 0
-    expect(revealed[1].card.name).toBe("Black Lotus"); // position 1
-    expect((revealed[1].location as RevealedLocation).position).toBe(1);
+        // Reveal first card (position 0)
+        const firstCardToReveal = libraryBefore[0];
+        gameState.reveal(0);
+        let revealed = gameState.listRevealed();
+        expect(revealed.length).toBe(1);
+        expect(revealed[0].card.name).toBe(firstCardToReveal.card.name);
+        expect((revealed[0].location as RevealedLocation).position).toBe(0);
 
-    // Library should have 1 card remaining
-    const library = gameState.listLibrary();
-    expect(library.length).toBe(1);
-    expect(library[0].card.name).toBe("Lightning Bolt");
+        // Reveal second card (now at position 1 since first was removed)
+        const secondCardToReveal = libraryBefore[1];
+        gameState.reveal(1);
+        revealed = gameState.listRevealed();
+        expect(revealed.length).toBe(2);
+        expect(revealed[0].card.name).toBe(firstCardToReveal.card.name); // position 0
+        expect(revealed[1].card.name).toBe(secondCardToReveal.card.name); // position 1
+        expect((revealed[1].location as RevealedLocation).position).toBe(1);
+
+        // Library should have 2 less cards
+        const library = gameState.listLibrary();
+        expect(library.length).toBe(deck.cards.length - 2);
+      })
+    );
   });
 
   test("reveal works with any library position", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 3,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 3);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
+        const libraryBefore = gameState.listLibrary();
 
-    // Reveal the last card first
-    gameState.reveal(2); // Lightning Bolt at position 2
+        // Reveal the last card first
+        const lastPosition = deck.cards.length - 1;
+        const lastCard = libraryBefore[lastPosition];
+        gameState.reveal(lastPosition);
 
-    let revealed = gameState.listRevealed();
-    expect(revealed.length).toBe(1);
-    expect(revealed[0].card.name).toBe("Lightning Bolt");
+        let revealed = gameState.listRevealed();
+        expect(revealed.length).toBe(1);
+        expect(revealed[0].card.name).toBe(lastCard.card.name);
 
-    // Then reveal the first card
-    gameState.reveal(0); // Ancestral Recall at position 0
+        // Then reveal the first card
+        const firstCard = libraryBefore[0];
+        gameState.reveal(0);
 
-    revealed = gameState.listRevealed();
-    expect(revealed.length).toBe(2);
-    expect(revealed[0].card.name).toBe("Lightning Bolt"); // position 0 in revealed
-    expect(revealed[1].card.name).toBe("Ancestral Recall"); // position 1 in revealed
+        revealed = gameState.listRevealed();
+        expect(revealed.length).toBe(2);
+        expect(revealed[0].card.name).toBe(lastCard.card.name); // position 0 in revealed
+        expect(revealed[1].card.name).toBe(firstCard.card.name); // position 1 in revealed
 
-    // Library should have 1 card remaining
-    const library = gameState.listLibrary();
-    expect(library.length).toBe(1);
-    expect(library[0].card.name).toBe("Black Lotus"); // position 1 originally
+        // Library should have 2 less cards
+        const library = gameState.listLibrary();
+        expect(library.length).toBe(deck.cards.length - 2);
+      })
+    );
   });
 
   test("playCard moves card from hand to table and shifts remaining cards left", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 4,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 4);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Draw cards to populate hand naturally
-    gameState.draw(); // Ancestral Recall to position 0
-    gameState.draw(); // Black Lotus to position 1
-    gameState.draw(); // Counterspell to position 2
-    gameState.draw(); // Lightning Bolt to position 3
+        // Draw cards to populate hand naturally
+        for (let i = 0; i < 4; i++) {
+          gameState.draw();
+        }
 
-    const handBefore = gameState.listHand();
-    expect(handBefore.length).toBe(4);
-    expect(handBefore[0].card.name).toBe("Ancestral Recall");
-    expect(handBefore[1].card.name).toBe("Black Lotus");
-    expect(handBefore[2].card.name).toBe("Counterspell");
-    expect(handBefore[3].card.name).toBe("Lightning Bolt");
+        const handBefore = gameState.listHand();
+        expect(handBefore.length).toBe(4);
 
-    // Play the second card (Black Lotus at position 1)
-    const blackLotusGameCardIndex = handBefore[1].gameCardIndex;
-    const whatHappened = gameState.playCard(blackLotusGameCardIndex);
+        // Play the second card (position 1)
+        const cardToPlay = handBefore[1];
+        const whatHappened = gameState.playCard(cardToPlay.gameCardIndex);
 
-    // Check that the card moved to table
-    const tableCards = gameState.listTable();
-    expect(tableCards.length).toBe(1);
-    expect(tableCards[0].card.name).toBe("Black Lotus");
+        // Check that the card moved to table
+        const tableCards = gameState.listTable();
+        expect(tableCards.length).toBe(1);
+        expect(tableCards[0].card.name).toBe(cardToPlay.card.name);
 
-    // Check that remaining hand cards shifted left
-    const handAfter = gameState.listHand();
-    expect(handAfter.length).toBe(3);
-    expect(handAfter[0].card.name).toBe("Ancestral Recall"); // position 0 unchanged
-    expect(handAfter[1].card.name).toBe("Counterspell"); // moved from position 2 to 1
-    expect(handAfter[2].card.name).toBe("Lightning Bolt"); // moved from position 3 to 2
+        // Check that remaining hand cards shifted left
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(3);
+        expect(handAfter[0].card.name).toBe(handBefore[0].card.name); // position 0 unchanged
+        expect(handAfter[1].card.name).toBe(handBefore[2].card.name); // moved from position 2 to 1
+        expect(handAfter[2].card.name).toBe(handBefore[3].card.name); // moved from position 3 to 2
 
-    // Check WhatHappened contains the cards that moved left
-    expect(whatHappened.movedLeft?.length).toBe(2);
-    expect(whatHappened.movedLeft?.[0]?.card.name).toBe("Counterspell");
-    expect(whatHappened.movedLeft?.[1]?.card.name).toBe("Lightning Bolt");
+        // Check WhatHappened contains the cards that moved left
+        expect(whatHappened.movedLeft?.length).toBe(2);
+        expect(whatHappened.movedLeft?.[0]?.card.name).toBe(handBefore[2].card.name);
+        expect(whatHappened.movedLeft?.[1]?.card.name).toBe(handBefore[3].card.name);
+      })
+    );
   });
 
   test("playCard moves card from revealed to table and shifts remaining cards left", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 4,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall, blackLotus, { name: "Counterspell", scryfallId: "xyz999", multiverseid: 33333 }],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 4);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Reveal cards to populate revealed zone using revealByGameCardIndex
-    const libraryCards = gameState.listLibrary();
-    gameState.revealByGameCardIndex(libraryCards[0].gameCardIndex); // Ancestral Recall to revealed position 0
-    gameState.revealByGameCardIndex(libraryCards[1].gameCardIndex); // Black Lotus to revealed position 1
-    gameState.revealByGameCardIndex(libraryCards[2].gameCardIndex); // Counterspell to revealed position 2
-    gameState.revealByGameCardIndex(libraryCards[3].gameCardIndex); // Lightning Bolt to revealed position 3
+        // Reveal cards to populate revealed zone using revealByGameCardIndex
+        const libraryCards = gameState.listLibrary();
+        for (let i = 0; i < 4; i++) {
+          gameState.revealByGameCardIndex(libraryCards[i].gameCardIndex);
+        }
 
-    const revealedBefore = gameState.listRevealed();
-    expect(revealedBefore.length).toBe(4);
-    // Cards are revealed in order they were revealed
-    expect(revealedBefore[0].card.name).toBe("Ancestral Recall");
-    expect(revealedBefore[1].card.name).toBe("Black Lotus");
-    expect(revealedBefore[2].card.name).toBe("Counterspell");
-    expect(revealedBefore[3].card.name).toBe("Lightning Bolt");
+        const revealedBefore = gameState.listRevealed();
+        expect(revealedBefore.length).toBe(4);
 
-    // Play the second card (Black Lotus at position 1)
-    const blackLotusGameCardIndex = revealedBefore[1].gameCardIndex;
-    const whatHappened = gameState.playCard(blackLotusGameCardIndex);
+        // Play the second card (position 1)
+        const cardToPlay = revealedBefore[1];
+        const whatHappened = gameState.playCard(cardToPlay.gameCardIndex);
 
-    // Check that the card moved to table
-    const tableCards = gameState.listTable();
-    expect(tableCards.length).toBe(1);
-    expect(tableCards[0].card.name).toBe("Black Lotus");
+        // Check that the card moved to table
+        const tableCards = gameState.listTable();
+        expect(tableCards.length).toBe(1);
+        expect(tableCards[0].card.name).toBe(cardToPlay.card.name);
 
-    // Check that remaining revealed cards shifted left
-    const revealedAfter = gameState.listRevealed();
-    expect(revealedAfter.length).toBe(3);
-    expect(revealedAfter[0].card.name).toBe("Ancestral Recall"); // position 0 unchanged
-    expect(revealedAfter[1].card.name).toBe("Counterspell"); // moved from position 2 to 1
-    expect(revealedAfter[2].card.name).toBe("Lightning Bolt"); // moved from position 3 to 2
+        // Check that remaining revealed cards shifted left
+        const revealedAfter = gameState.listRevealed();
+        expect(revealedAfter.length).toBe(3);
+        expect(revealedAfter[0].card.name).toBe(revealedBefore[0].card.name); // position 0 unchanged
+        expect(revealedAfter[1].card.name).toBe(revealedBefore[2].card.name); // moved from position 2 to 1
+        expect(revealedAfter[2].card.name).toBe(revealedBefore[3].card.name); // moved from position 3 to 2
 
-    // Check WhatHappened contains the cards that moved left
-    expect(whatHappened.movedLeft?.length).toBe(2);
-    expect(whatHappened.movedLeft?.[0]?.card.name).toBe("Counterspell");
-    expect(whatHappened.movedLeft?.[1]?.card.name).toBe("Lightning Bolt");
+        // Check WhatHappened contains the cards that moved left
+        expect(whatHappened.movedLeft?.length).toBe(2);
+        expect(whatHappened.movedLeft?.[0]?.card.name).toBe(revealedBefore[2].card.name);
+        expect(whatHappened.movedLeft?.[1]?.card.name).toBe(revealedBefore[3].card.name);
+      })
+    );
   });
 
   test("playCard throws error when card is not in hand or revealed", () => {
-    const deck: Deck = {
-      id: 1,
-      name: "Test Deck",
-      totalCards: 2,
-      commanders: [],
-      cards: [lightningBolt, ancestralRecall],
-      provenance: testProvenance,
-    };
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length > 0);
 
-    const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-    // Try to play a card that's still in library
-    const libraryCards = gameState.listLibrary();
-    const libraryCardIndex = libraryCards[0].gameCardIndex;
+        // Try to play a card that's still in library
+        const libraryCards = gameState.listLibrary();
+        const libraryCardIndex = libraryCards[0].gameCardIndex;
 
-    expect(() => {
-      gameState.playCard(libraryCardIndex);
-    }).toThrow(/Card at gameCardIndex \d+ is not in hand or revealed/);
+        expect(() => {
+          gameState.playCard(libraryCardIndex);
+        }).toThrow(/Card at gameCardIndex \d+ is not in hand or revealed/);
+      })
+    );
   });
 });
