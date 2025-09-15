@@ -57,6 +57,12 @@ We will eventually deploy to a toy EKS cluster.
 This will download the deck from archidekt and save it to the decks directory.
 You need to redo this every time the Deck structure changes!
 
+## Downloading all precon decks
+
+`npm run precons:fetch -- --download`
+
+This will download all Archidekt precon decks to the decks directory.
+
 ## Downloading the database of cards
 
 Note: we aren't using this yet but I gotta document it while it's here.
