@@ -1,9 +1,13 @@
-import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, LOCAL_DECK_RELATIVE_PATH, AvailableDecks, AvailableDeck, DeckVersionMismatchError } from "../types.js";
+import { RetrieveDeckPort, DeckRetrievalRequest, isLocalDeckRetrievalRequest, AvailableDecks, AvailableDeck, DeckVersionMismatchError } from "../types.js";
 import { Deck, PERSISTED_DECK_VERSION } from "../../types.js";
 import fs from "fs";
 
 export class LocalDeckAdapter implements RetrieveDeckPort {
-  private readonly Directory = LOCAL_DECK_RELATIVE_PATH;
+  private readonly Directory: string;
+
+  constructor(deckPath: string) {
+    this.Directory = deckPath;
+  }
 
   listAvailableDecks(): AvailableDecks {
     const ls = fs.readdirSync(this.Directory);
