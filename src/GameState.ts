@@ -17,6 +17,19 @@ import { CardMove, GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
+class SeededRandom {
+  private seed: number;
+
+  constructor(seed: number) {
+    this.seed = seed;
+  }
+
+  next(): number {
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    return this.seed / 233280;
+  }
+}
+
 // Type guard functions for GameCard location filtering
 export function isInLibrary(gameCard: GameCard): gameCard is GameCard & { location: LibraryLocation } {
   return gameCard.location.type === "Library";
@@ -47,8 +60,9 @@ export class GameState {
   public readonly totalCards: number;
   private readonly gameCards: GameCard[];
   private readonly eventLog: GameEventLog;
+  private readonly randomSeed?: number;
 
-  static newGame(gameId: GameId, deck: Deck) {
+  static newGame(gameId: GameId, deck: Deck, randomSeed?: number) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -80,6 +94,7 @@ export class GameState {
       deckProvenance: deck.provenance,
       cards: gameCards,
       events: [],
+      randomSeed,
     });
   }
 
@@ -91,6 +106,7 @@ export class GameState {
     deckProvenance: DeckProvenance;
     cards: GameCard[];
     events: GameEvent[];
+    randomSeed?: number;
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
@@ -100,6 +116,7 @@ export class GameState {
     this.totalCards = params.cards.length;
     this.gameCards = params.cards;
     this.eventLog = GameEventLog.fromPersisted(params.events);
+    this.randomSeed = params.randomSeed;
   }
 
   static fromPersistedGameState(psg: PersistedGameState | any): GameState {
@@ -220,9 +237,13 @@ export class GameState {
   public shuffle(): WhatHappened {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
+    // Create random number generator (seeded if randomSeed is provided)
+    const random = this.randomSeed !== undefined ? new SeededRandom(this.randomSeed) : null;
+    const getRandom = () => random ? random.next() : Math.random();
+
     // Fisher-Yates shuffle for the library cards array
     for (let i = libraryCards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(getRandom() * (i + 1));
       [libraryCards[i], libraryCards[j]] = [libraryCards[j], libraryCards[i]];
     }
 
