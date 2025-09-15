@@ -120,7 +120,7 @@ describe("GameState", () => {
         expect(libraryCards.length).toBe(deck.cards.length);
 
         // Positions should still be sequential from 0
-        const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort();
+        const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort((a, b) => a - b);
         const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
         expect(positions).toEqual(expectedPositions);
 
