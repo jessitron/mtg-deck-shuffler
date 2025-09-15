@@ -62,14 +62,37 @@ export function formatTableModalHtmlFragment(game: GameState): string {
 export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedGameState): string {
   const formattedJson = JSON.stringify(persistedGameState, null, 2);
 
-  const bodyContent = `<div style="background-color: #f5f5f5; padding: 16px; border-radius: 4px; max-height: 60vh; overflow-y: auto;">
-          <pre style="margin: 0; font-family: monospace; font-size: 12px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word;">${formattedJson}</pre>
+  const bodyContent = `<div style="position: relative; background-color: #f5f5f5; padding: 16px; border-radius: 4px; max-height: 60vh; overflow-y: auto;">
+          <button onclick="copyToClipboard('${persistedGameState.gameId}')"
+                  style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; background-color: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; z-index: 1;">
+            Copy JSON
+          </button>
+          <pre id="debug-json-${persistedGameState.gameId}" style="margin: 0; font-family: monospace; font-size: 12px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; padding-top: 30px;">${formattedJson}</pre>
         </div>
         <div style="margin-top: 16px; padding: 12px; background-color: #e8f4f8; border-radius: 4px; font-size: 0.9rem;">
           <strong>Game ID:</strong> ${persistedGameState.gameId} |
           <strong>Status:</strong> ${persistedGameState.status} |
           <strong>Version:</strong> ${persistedGameState.version}
-        </div>`;
+        </div>
+        <script>
+          function copyToClipboard(gameId) {
+            const jsonElement = document.getElementById('debug-json-' + gameId);
+            const text = jsonElement.textContent;
+            navigator.clipboard.writeText(text).then(function() {
+              const button = event.target;
+              const originalText = button.textContent;
+              button.textContent = 'Copied!';
+              button.style.backgroundColor = '#28a745';
+              setTimeout(function() {
+                button.textContent = originalText;
+                button.style.backgroundColor = '#007acc';
+              }, 2000);
+            }).catch(function(err) {
+              console.error('Failed to copy text: ', err);
+              alert('Failed to copy to clipboard');
+            });
+          }
+        </script>`;
 
   return formatModalHtmlFragment("Debug: Game State (PersistedGameState)", bodyContent);
 }
