@@ -10,7 +10,10 @@ export interface DeckProvenance {
   deckSource: "archidekt" | "local" | "test";
 }
 
+export const PERSISTED_DECK_VERSION: 1 = 1;
+
 export interface Deck {
+  version: typeof PERSISTED_DECK_VERSION;
   id: number;
   name: string;
   totalCards: number;

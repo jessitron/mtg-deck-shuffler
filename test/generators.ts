@@ -1,5 +1,5 @@
 import * as fc from "fast-check";
-import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
+import { CardDefinition, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
 
 // Generator for card names using common MTG card patterns
 export const cardName = fc.oneof(
@@ -145,6 +145,7 @@ export const deck: fc.Arbitrary<Deck> = fc
     deckProvenance
   )
   .map(([id, name, cmdrs, cards, provenance]) => ({
+    version: PERSISTED_DECK_VERSION,
     id,
     name,
     totalCards: cards.length,
@@ -164,6 +165,7 @@ export const minimalDeck: fc.Arbitrary<Deck> = fc
     deckProvenance
   )
   .map(([id, name, cards, provenance]) => ({
+    version: PERSISTED_DECK_VERSION,
     id,
     name,
     totalCards: cards.length,
@@ -176,6 +178,7 @@ export const minimalDeck: fc.Arbitrary<Deck> = fc
 export const deckWithOneCommander: fc.Arbitrary<Deck> = fc
   .tuple(deckId, deckName, commanderCard, uniqueCards(1, 10), deckProvenance)
   .map(([id, name, commander, cards, provenance]) => ({
+    version: PERSISTED_DECK_VERSION,
     id,
     name,
     totalCards: cards.length,
@@ -191,6 +194,7 @@ export const deckWithTwoCommanders: fc.Arbitrary<Deck> = fc
     fc.tuple(commanderCard, commanderCard)
       .filter(([cmd1, cmd2]) => cmd1.name !== cmd2.name) // Ensure different commanders
       .map(([cmd1, cmd2]) => ({
+        version: PERSISTED_DECK_VERSION,
         id,
         name,
         totalCards: cards.length,

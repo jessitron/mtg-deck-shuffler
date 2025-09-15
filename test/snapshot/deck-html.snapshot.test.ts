@@ -2,7 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { formatDeckHtmlSection } from "../../src/view/deck-selection/deck-selection-page.js";
-import { Deck, CardDefinition } from "../../src/types.js";
+import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../src/types.js";
 
 describe("Deck HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
@@ -30,6 +30,7 @@ describe("Deck HTML Snapshot Tests", () => {
     ];
 
     return {
+      version: PERSISTED_DECK_VERSION,
       id: 12345,
       name: `Test Deck with ${commanderCount} Commander${commanderCount !== 1 ? 's' : ''}`,
       totalCards: cards.length,
