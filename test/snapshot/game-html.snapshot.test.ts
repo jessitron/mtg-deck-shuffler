@@ -15,7 +15,8 @@ describe("Game HTML Snapshot Tests", () => {
 
   beforeAll(async () => {
     const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
-    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    const deterministicDate = new Date('2024-01-01T12:00:00Z');
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway, deterministicDate);
     testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
   });
 

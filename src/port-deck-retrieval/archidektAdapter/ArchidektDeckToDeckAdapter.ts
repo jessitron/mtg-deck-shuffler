@@ -4,7 +4,7 @@ import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
-  constructor(private gateway: ArchidektGatewayInterface) {}
+  constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date) {}
 
   listAvailableDecks() {
     return [];
@@ -53,7 +53,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       .map((card) => this.convertArchidektToCard(card))
       .filter((card): card is CardDefinition => card !== undefined);
 
-    const now = new Date();
+    const now = this.retrievedDate ?? new Date();
     return {
       version: PERSISTED_DECK_VERSION,
       id: archidektDeck.id,

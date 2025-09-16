@@ -1,0 +1,44 @@
+<div class="modal-overlay"
+hx-get="/close-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+tabindex="0">
+<div class="modal-dialog">
+<div class="modal-header">
+<h2 class="modal-title">Library Contents</h2>
+<button class="modal-close"
+hx-get="/close-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML">&times;</button>
+</div>
+<div class="modal-body">
+<p class="modal-subtitle">
+1 cards in library, ordered by position
+</p>
+<ul class="library-search-list">
+<li class="library-card-item">
+<span class="card-position">7</span>
+<div class="card-info">
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a>
+</div>
+<div class="card-actions">
+<button class="card-action-button"
+hx-post="/reveal-card/456/7"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Reveal">
+Reveal
+</button><button class="card-action-button secondary"
+hx-post="/put-in-hand/456/7"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Put in Hand">
+Put in Hand
+</button>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>

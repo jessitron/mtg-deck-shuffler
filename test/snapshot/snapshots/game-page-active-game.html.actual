@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MTG Game - Jaceteous League</title>
+<link rel="stylesheet" href="/styles.css" />
+<script src="/hny.js"></script>
+<script>
+Hny.initializeTracing({
+apiKey: "TEST_API_KEY",
+serviceName: "mtg-deck-shuffler-web",
+debug: false,
+provideOneLinkToHoneycomb: true,
+});
+</script>
+<script src="/htmx.js"></script>
+<script src="/game.js"></script>
+</head>
+<body>
+<h1>*Woohoo it's Magic time!*</h1>
+<div id="game-container">
+<div id="command-zone">
+<div class="commander-container">
+<img src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image commander-image" />
+<button class="flip-button" hx-post="/flip-commander/789/3" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>
+</div>
+</div>
+<div id="game-details" class="game-details game-active">
+<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<div><p>8 cards</p>
+<p><strong>Game ID:</strong> 789</p>
+<p><strong>Status:</strong> Active</p>
+</div>
+<div class="history">
+<div class="undo-controls"> Last action:
+<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a></span>
+<button class="undo-button"
+hx-post="/undo/789/4"
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">Undo</button>
+</div>
+<button class="history-button"
+hx-get="/history-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">View History (5)</button>
+</div>
+</div>
+<div id="table-section" class="table-section">
+<img src="/table.png" alt="Table" class="table-image" />
+<button class="table-cards-button"
+hx-get="/table-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">1 Cards on table</button>
+</div>
+<div id="library-section" data-testid="library-section">
+<h3>Library (5)</h3>
+<div class="library-stack" data-testid="library-stack">
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+</div>
+<div class="library-buttons">
+<button class="search-button"
+hx-get="/library-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">Search</button>
+<button class="shuffle-button"
+hx-post="/shuffle/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Shuffle</button>
+<button class="draw-button"
+hx-post="/draw/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Draw</button>
+<button class="reveal-button"
+hx-post="/reveal-card/789/1"
+hx-target="#game-container"
+hx-swap="outerHTML">Reveal</button>
+</div>
+</div>
+<div id="hand-section" data-testid="hand-section">
+<h3>Hand (1)</h3>
+<div id="hand-cards" class="hand-cards">
+<div id="card-container-2" class="hand-card-container">
+<img src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg"
+alt="Damnation"
+class="mtg-card-image hand-card"
+title="Damnation" />
+<div class="hand-card-buttons">
+<button class="play-button"
+hx-post="/play-card/789/2"
+hx-target="#game-container"
+hx-swap="outerHTML swap:1.5s"
+data-card-id="d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f"
+title="Copy image and remove from hand">
+Play
+</button><button class="put-down-button"
+hx-post="/put-down/789/2"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Move card to revealed">
+Put down
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Container -->
+<div id="modal-container"></div>
+<div id="end-game-actions" class="game-actions">
+<form method="post" action="/restart-game" class="inline-form">
+<input type="hidden" name="game-id" value="789" />
+<button type="submit">Restart Game</button>
+</form>
+<form method="post" action="/end-game" class="inline-form">
+<input type="hidden" name="game-id" value="789" />
+<button type="submit">Choose Another Deck</button>
+</form>
+<button class="debug-button"
+hx-get="/debug-state/789"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+class="debug-button">Debug State</button>
+</div>
+</div>
+<footer>
+<p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+</footer>
+</body>
+</html>
