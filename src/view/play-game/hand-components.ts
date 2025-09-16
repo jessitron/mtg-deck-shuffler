@@ -1,6 +1,6 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { WhatHappened } from "../../types.js";
-import { formatCardContainerHtmlFragment } from "../common/shared-components.js";
+import { formatCardContainerHtmlFragment, getAnimationClassHelper } from "../common/shared-components.js";
 
 type CardAction = {
   action: string;
@@ -59,14 +59,6 @@ function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, 
 }
 
 
-function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
-  if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
-    return " card-moved-left";
-  } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCardIndex)) {
-    return " card-moved-right";
-  }
-  return "";
-}
 
 export function formatHandSectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const handCards = game

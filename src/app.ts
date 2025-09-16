@@ -643,7 +643,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      game.flipCard(gameCardIndex);
+      const whatHappened = game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -682,11 +682,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      game.flipCard(gameCardIndex);
+      const whatHappened = game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatGameHtmlSection(game, whatHappened);
       res.send(html);
 
     } catch (error) {
