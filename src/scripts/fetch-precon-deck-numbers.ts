@@ -5,6 +5,24 @@ import { ArchidektDeckToDeckAdapter } from "../port-deck-retrieval/archidektAdap
 import { promises as fs } from "fs";
 import { join } from "path";
 
+async function fetchWithRetry(url: string, maxRetries: number = 3): Promise<Response> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const response = await fetch(url);
+
+    if (response.status === 429) {
+      if (attempt < maxRetries) {
+        console.log(`Rate limited (429). Waiting 30 seconds before retry ${attempt + 1}/${maxRetries}...`);
+        await new Promise(resolve => setTimeout(resolve, 30000));
+        continue;
+      }
+    }
+
+    return response;
+  }
+
+  throw new Error(`Failed after ${maxRetries} attempts`);
+}
+
 async function fetchPreconDeckNumbers(url?: string): Promise<number[]> {
   // Default to the Archidekt search page for all precons if no URL provided
   const baseUrl = url || "https://archidekt.com/search/decks?orderBy=-updatedAt&ownerUsername=Archidekt_Precons";
@@ -20,7 +38,7 @@ async function fetchPreconDeckNumbers(url?: string): Promise<number[]> {
       const pageUrl = `${baseUrl}&page=${page}`;
       console.log(`Fetching page ${page}...`);
 
-      const response = await fetch(pageUrl);
+      const response = await fetchWithRetry(pageUrl);
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
@@ -89,7 +107,7 @@ async function downloadDeck(deckId: string, gateway: ArchidektGateway, adapter: 
       // Try to fetch the raw JSON to include in error file
       let rawJson = null;
       try {
-        const response = await fetch(url);
+        const response = await fetchWithRetry(url);
         rawJson = await response.text();
       } catch (fetchError) {
         rawJson = `Failed to fetch raw data: ${fetchError}`;
