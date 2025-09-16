@@ -63,9 +63,8 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
   const handCards = game
     .listHand()
     .map((gameCard: GameCard, index: number) => {
-      const animationClass = getAnimationClassHelper(whatHappened, gameCard.gameCardIndex);
       const actions = formatHandCardActionsHtmlFragment(game, gameCard, index);
-      return formatCardContainerHtmlFragment(gameCard, "hand", actions, animationClass, game.gameId);
+      return formatCardContainerHtmlFragment(gameCard, "hand", actions, game.gameId);
     })
     .join("");
 

@@ -55,9 +55,8 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
 
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
-      const animationClass = getAnimationClassHelper(whatHappened, gameCard.gameCardIndex);
       const actions = formatRevealedCardActionsHtmlFragment(game, gameCard);
-      return formatCardContainerHtmlFragment(gameCard, "revealed", actions, animationClass, game.gameId);
+      return formatCardContainerHtmlFragment(gameCard, "revealed", actions, game.gameId);
     })
     .join("");
 

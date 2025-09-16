@@ -14,53 +14,42 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
 
 type CardRenderOptions = {
   gameCard: GameCard;
-  containerType: "commander" | "revealed" | "hand";
+  containerType: "commander" | "revealed" | "hand"; // TODO: remove this, always reload card container
   gameId?: number;
   actions?: string;
-  animationClass?: string;
   whatHappened?: WhatHappened;
 };
 
-function formatCardContainer({ gameCard, containerType, gameId, actions = "", animationClass = "", whatHappened }: CardRenderOptions): string {
-  const finalAnimationClass = animationClass || (whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "");
+function formatCardContainer({ gameCard, containerType, gameId, actions = "", whatHappened }: CardRenderOptions): string {
+  const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
-  const flipButton = gameCard.card.twoFaced && gameId
-    ? containerType === "commander"
-      ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>`
-      : `<button class="flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#game-container">Flip</button>`
-    : '';
+  const cardId = `card-${gameCard.gameCardIndex}`;
 
-  const containerClass = containerType === "commander"
-    ? "commander-container"
-    : `${containerType}-card-container`;
-
-  const cardClass = containerType === "commander"
-    ? "commander-image"
-    : containerType === "revealed"
-      ? "revealed-card"
-      : "hand-card";
-
-  const containerId = containerType === "commander"
-    ? ""
-    : ` id="card-container-${gameCard.gameCardIndex}"`;
+  const flipButton =
+    containerType === "commander"
+      ? `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .card-container">Flip</button>`
+      : `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#game-container">Flip</button>`;
+  // TODO: always reload only the card container
 
   if (gameCard.card.twoFaced) {
     const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
     const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
-    const currentImageUrl = gameCard.currentFace === "front" ? frontImageUrl : backImageUrl;
-    const hiddenImageUrl = gameCard.currentFace === "front" ? backImageUrl : frontImageUrl;
+    const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
 
-    return `<div${containerId} class="${containerClass} two-faced-card-container">
-      <img src="${hiddenImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image ${cardClass} card-face-hidden${finalAnimationClass}" />
-      <img src="${currentImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${cardClass} card-face-current${finalAnimationClass}"${containerType !== "commander" ? ` title="${gameCard.card.name}"` : ""} />
+    return `<div id="${cardId}-container" class="card-container" >
+      <div id="${cardId}-outer-flip-container" class=" flip-container-outer${flippedClass}">
+        <div id="${cardId}-inner-flip-container" class="flip-container-inner">
+          <img id="${cardId}-back-face" src="${backImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image two-sided-back${flippedClass}" />
+          <img id="${cardId}-front-face" src="${frontImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image two-sided-front" title="${gameCard.card.name}" />
+        </div>
+      </div>
       ${flipButton}
       ${actions}
     </div>`;
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
-    return `<div${containerId} class="${containerClass}">
-      <img src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${cardClass}${finalAnimationClass}"${containerType !== "commander" ? ` title="${gameCard.card.name}"` : ""} />
-      ${flipButton}
+    return `<div id="${cardId}-container" class="$card-container">
+      <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />
       ${actions}
     </div>`;
   }
@@ -75,9 +64,7 @@ export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[]
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-          ${commanders
-            .map((gameCard) => formatSingleCommanderContainer(gameCard, gameId))
-            .join("")}
+          ${commanders.map((gameCard) => formatSingleCommanderContainer(gameCard, gameId)).join("")}
         </div>`;
 }
 
@@ -94,7 +81,7 @@ export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): st
                 location: { type: "CommandZone" as const, position: 0 },
                 gameCardIndex: 0, // Not used for preview
                 isCommander: true,
-                currentFace: "front" as const
+                currentFace: "front" as const,
               };
               return formatCardContainer({ gameCard, containerType: "commander" });
             })
@@ -102,8 +89,8 @@ export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): st
         </div>`;
 }
 
-export function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = "", gameId?: number): string {
-  return formatCardContainer({ gameCard, containerType, gameId, actions, animationClass });
+export function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, gameId?: number): string {
+  return formatCardContainer({ gameCard, containerType, gameId, actions });
 }
 
 export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId: number, whatHappened?: WhatHappened): string {
