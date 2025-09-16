@@ -37,7 +37,7 @@ function formatCardContainer({ gameCard, gameId, actions = "", whatHappened }: C
     </div>`;
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
-    return `<div id="${cardId}-container" class="$card-container">
+    return `<div id="${cardId}-container" class="card-container">
       <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />
       ${actions}
     </div>`;

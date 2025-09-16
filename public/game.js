@@ -2,31 +2,31 @@
 let handScrollPosition = 0;
 let revealedCardsScrollPosition = 0;
 
-document.addEventListener('htmx:beforeSwap', function(evt) {
+document.addEventListener("htmx:beforeSwap", function (evt) {
   // Store the current scroll position of the hand section
-  const handSection = document.querySelector('#hand-section .hand-cards');
+  const handSection = document.querySelector("#hand-section .hand-cards");
   if (handSection) {
     handScrollPosition = handSection.scrollLeft;
   }
-  
+
   // Store the current scroll position of the revealed cards section
-  const revealedCardsSection = document.querySelector('#revealed-cards-area');
+  const revealedCardsSection = document.querySelector("#revealed-cards-area");
   if (revealedCardsSection) {
     revealedCardsScrollPosition = revealedCardsSection.scrollLeft;
   }
 });
 
-document.addEventListener('htmx:afterSwap', function(evt) {
+document.addEventListener("htmx:afterSwap", function (evt) {
   // Restore the scroll position of the hand section
-  const handSection = document.querySelector('#hand-section .hand-cards');
+  const handSection = document.querySelector("#hand-section .hand-cards");
   if (handSection && handScrollPosition > 0) {
     // Only restore if the scroll position is still valid (not beyond the new scroll width)
     const maxScrollLeft = handSection.scrollWidth - handSection.clientWidth;
     handSection.scrollLeft = Math.min(handScrollPosition, Math.max(0, maxScrollLeft));
   }
-  
+
   // Restore the scroll position of the revealed cards section
-  const revealedCardsSection = document.querySelector('#revealed-cards-area');
+  const revealedCardsSection = document.querySelector("#revealed-cards-area");
   if (revealedCardsSection && revealedCardsScrollPosition > 0) {
     // Only restore if the scroll position is still valid (not beyond the new scroll width)
     const maxScrollLeft = revealedCardsSection.scrollWidth - revealedCardsSection.clientWidth;
@@ -35,8 +35,8 @@ document.addEventListener('htmx:afterSwap', function(evt) {
 });
 
 // Handle clipboard copying when HTMX is about to make the request
-document.addEventListener('htmx:beforeRequest', async function(evt) {
-  if (evt.detail.elt.classList.contains('play-button')) {
+document.addEventListener("htmx:beforeRequest", async function (evt) {
+  if (evt.detail.elt.classList.contains("play-button")) {
     const button = evt.detail.elt;
     const cardId = button.dataset.cardId;
 
@@ -49,23 +49,23 @@ document.addEventListener('htmx:beforeRequest', async function(evt) {
         const blob = await response.blob();
         await navigator.clipboard.write([
           new ClipboardItem({
-            [blob.type]: blob
-          })
+            [blob.type]: blob,
+          }),
         ]);
-        button.textContent = 'Copied!';
+        button.textContent = "Copied!";
       }
     } catch (clipboardErr) {
-      console.warn('Failed to copy image to clipboard:', clipboardErr);
-      button.textContent = 'Copy failed 😨';
+      console.warn("Failed to copy image to clipboard:", clipboardErr);
+      button.textContent = "Copy failed 😨";
     }
 
     button.disabled = true;
 
     // Find the card container and add "being-played" class
-    const cardContainer = button.closest('.revealed-card-container, .hand-card-container');
-    console.log('cardContainer', cardContainer);
+    const cardContainer = button.closest(".card-container");
+    console.log("cardContainer", cardContainer);
     if (cardContainer) {
-      cardContainer.classList.add('being-played');
+      cardContainer.classList.add("being-played");
     }
   }
 });
