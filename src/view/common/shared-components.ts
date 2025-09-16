@@ -1,5 +1,5 @@
-import { getCardImageUrl, WhatHappened } from "../../types.js";
-import { GameCard } from "../../GameState.js";
+import { getCardImageUrl } from "../../types.js";
+import { GameCard, WhatHappened } from "../../GameState.js";
 
 export const CARD_BACK = "/mtg-card-back.jpg";
 
@@ -12,31 +12,62 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
   return `<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${card.name}</a>`;
 }
 
-// Function for generating a single commander container (shared logic)
-function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number): string {
+type CardRenderOptions = {
+  gameCard: GameCard;
+  containerType: "commander" | "revealed" | "hand";
+  gameId?: number;
+  actions?: string;
+  animationClass?: string;
+  whatHappened?: WhatHappened;
+};
+
+function formatCardContainer({ gameCard, containerType, gameId, actions = "", animationClass = "", whatHappened }: CardRenderOptions): string {
+  const finalAnimationClass = animationClass || (whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "");
+
   const flipButton = gameCard.card.twoFaced && gameId
-    ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>`
+    ? containerType === "commander"
+      ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>`
+      : `<button class="flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#game-container">Flip</button>`
     : '';
 
-  // For two-faced commanders, show both faces with the non-current face behind and reversed
+  const containerClass = containerType === "commander"
+    ? "commander-container"
+    : `${containerType}-card-container`;
+
+  const cardClass = containerType === "commander"
+    ? "commander-image"
+    : containerType === "revealed"
+      ? "revealed-card"
+      : "hand-card";
+
+  const containerId = containerType === "commander"
+    ? ""
+    : ` id="card-container-${gameCard.gameCardIndex}"`;
+
   if (gameCard.card.twoFaced) {
     const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
     const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
     const currentImageUrl = gameCard.currentFace === "front" ? frontImageUrl : backImageUrl;
     const hiddenImageUrl = gameCard.currentFace === "front" ? backImageUrl : frontImageUrl;
 
-    return `<div class="commander-container two-faced-card-container">
-      <img src="${hiddenImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image commander-image card-face-hidden" />
-      <img src="${currentImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image commander-image card-face-current" />
+    return `<div${containerId} class="${containerClass} two-faced-card-container">
+      <img src="${hiddenImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image ${cardClass} card-face-hidden${finalAnimationClass}" />
+      <img src="${currentImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${cardClass} card-face-current${finalAnimationClass}"${containerType !== "commander" ? ` title="${gameCard.card.name}"` : ""} />
       ${flipButton}
+      ${actions}
     </div>`;
   } else {
-    // Single-faced commanders work as before
-    return `<div class="commander-container">
-      <img src="${getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace)}" alt="${gameCard.card.name}" class="mtg-card-image commander-image" />
+    const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
+    return `<div${containerId} class="${containerClass}">
+      <img src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${cardClass}${finalAnimationClass}"${containerType !== "commander" ? ` title="${gameCard.card.name}"` : ""} />
       ${flipButton}
+      ${actions}
     </div>`;
   }
+}
+
+function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number): string {
+  return formatCardContainer({ gameCard, containerType: "commander", gameId });
 }
 
 // Function for displaying commanders when we have GameCard objects (in active game)
@@ -66,72 +97,11 @@ export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): st
 }
 
 export function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, animationClass = "", gameId?: number): string {
-  const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
-  const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
-  const cardClass = containerType === "revealed" ? "revealed-card" : "hand-card";
-
-  const flipButton = gameCard.card.twoFaced && gameId
-    ? `<button class="flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#game-container">Flip</button>`
-    : '';
-
-  // For two-faced cards, show both faces with the non-current face behind and reversed
-  if (gameCard.card.twoFaced) {
-    const currentImageUrl = gameCard.currentFace === "front" ? frontImageUrl : backImageUrl;
-    const hiddenImageUrl = gameCard.currentFace === "front" ? backImageUrl : frontImageUrl;
-
-    return `<div id="card-container-${gameCard.gameCardIndex}" class="${containerType}-card-container two-faced-card-container">
-      <img src="${hiddenImageUrl}"
-           alt="${gameCard.card.name} (back face)"
-           class="mtg-card-image ${cardClass} card-face-hidden${animationClass}"
-           title="${gameCard.card.name}" />
-      <img src="${currentImageUrl}"
-           alt="${gameCard.card.name}"
-           class="mtg-card-image ${cardClass} card-face-current${animationClass}"
-           title="${gameCard.card.name}" />
-      ${flipButton}
-      ${actions}
-    </div>`;
-  } else {
-    // Single-faced cards work as before
-    const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
-    return `<div id="card-container-${gameCard.gameCardIndex}" class="${containerType}-card-container">
-      <img src="${imageUrl}"
-           alt="${gameCard.card.name}"
-           class="mtg-card-image ${cardClass}${animationClass}"
-           title="${gameCard.card.name}" />
-      ${flipButton}
-      ${actions}
-    </div>`;
-  }
+  return formatCardContainer({ gameCard, containerType, gameId, actions, animationClass });
 }
 
-// Function for generating a single commander container after a flip
 export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId: number, whatHappened?: WhatHappened): string {
-  const animationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
-
-  const flipButton = gameCard.card.twoFaced && gameId
-    ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>`
-    : '';
-
-  // For two-faced commanders, show both faces with the non-current face behind and reversed
-  if (gameCard.card.twoFaced) {
-    const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
-    const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
-    const currentImageUrl = gameCard.currentFace === "front" ? frontImageUrl : backImageUrl;
-    const hiddenImageUrl = gameCard.currentFace === "front" ? backImageUrl : frontImageUrl;
-
-    return `<div class="commander-container two-faced-card-container">
-      <img src="${hiddenImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image commander-image card-face-hidden${animationClass}" />
-      <img src="${currentImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image commander-image card-face-current${animationClass}" />
-      ${flipButton}
-    </div>`;
-  } else {
-    // Single-faced commanders work as before
-    return `<div class="commander-container">
-      <img src="${getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace)}" alt="${gameCard.card.name}" class="mtg-card-image commander-image${animationClass}" />
-      ${flipButton}
-    </div>`;
-  }
+  return formatCardContainer({ gameCard, containerType: "commander", gameId, whatHappened });
 }
 
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {

@@ -1,3 +1,4 @@
+
 export interface CardDefinition {
   name: string;
   scryfallId: string;
@@ -34,13 +35,6 @@ export function getCardImageUrl(scryfallId: string, format: "small" | "normal" |
   const firstTwo = scryfallId.substring(0, 1);
   const nextTwo = scryfallId.substring(1, 2);
   return `https://cards.scryfall.io/${format}/${face}/${firstTwo}/${nextTwo}/${scryfallId}.${extension}`;
-}
-
-export interface WhatHappened {
-  shuffling?: boolean;
-  movedRight?: import("./port-persist-state/types.js").GameCard[];
-  movedLeft?: import("./port-persist-state/types.js").GameCard[];
-  flipped?: import("./port-persist-state/types.js").GameCard[];
 }
 
 export function shuffleDeck(deck: Deck): Library {

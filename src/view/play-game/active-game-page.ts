@@ -1,5 +1,4 @@
-import { getCardImageUrl, WhatHappened } from "../../types.js";
-import { GameState } from "../../GameState.js";
+import { GameState, WhatHappened } from "../../GameState.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatHandSectionHtmlFragment } from "./hand-components.js";
 import { formatLibrarySectionHtmlFragment } from "./library-components.js";

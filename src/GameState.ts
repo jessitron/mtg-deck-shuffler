@@ -1,4 +1,4 @@
-import { CardDefinition, DeckProvenance, Deck, WhatHappened } from "./types.js";
+import { CardDefinition, DeckProvenance, Deck } from "./types.js";
 import {
   PersistedGameState,
   GameId,
@@ -51,6 +51,13 @@ export function isInCommandZone(gameCard: GameCard): gameCard is GameCard & { lo
   return gameCard.location.type === "CommandZone";
 }
 
+export interface WhatHappened {
+  shuffling?: boolean;
+  movedRight?: GameCard[];
+  movedLeft?: GameCard[];
+  flipped?: GameCard[];
+}
+
 export class GameState {
   public readonly gameId: GameId;
   private status: GameStatus;
@@ -69,10 +76,9 @@ export class GameState {
     }
 
     // Combine all cards and sort alphabetically (maintaining existing invariant)
-    const allCards = [
-      ...deck.commanders.map(card => ({ card, isCommander: true })),
-      ...deck.cards.map(card => ({ card, isCommander: false }))
-    ].sort((a, b) => a.card.name.localeCompare(b.card.name));
+    const allCards = [...deck.commanders.map((card) => ({ card, isCommander: true })), ...deck.cards.map((card) => ({ card, isCommander: false }))].sort(
+      (a, b) => a.card.name.localeCompare(b.card.name)
+    );
 
     let commanderPositionCounter = 0;
     let libraryPositionCounter = 0;
@@ -81,8 +87,8 @@ export class GameState {
       card: item.card,
       isCommander: item.isCommander,
       location: item.isCommander
-        ? { type: "CommandZone", position: commanderPositionCounter++ } as CommandZoneLocation
-        : { type: "Library", position: libraryPositionCounter++ } as LibraryLocation,
+        ? ({ type: "CommandZone", position: commanderPositionCounter++ } as CommandZoneLocation)
+        : ({ type: "Library", position: libraryPositionCounter++ } as LibraryLocation),
       gameCardIndex: index,
       currentFace: "front" as const,
     }));
@@ -130,7 +136,7 @@ export class GameState {
       const migratedGameCards: GameCard[] = legacyPsg.gameCards.map((gc: any) => ({
         ...gc,
         isCommander: false,
-        currentFace: gc.currentFace || "front" as const
+        currentFace: gc.currentFace || ("front" as const),
       }));
 
       // Add commanders as game cards in command zone
@@ -234,7 +240,7 @@ export class GameState {
   }
 
   public listCommanders(): readonly GameCard[] {
-    return this.gameCards.filter(gc => gc.isCommander);
+    return this.gameCards.filter((gc) => gc.isCommander);
   }
 
   public shuffle(): WhatHappened {
@@ -242,7 +248,7 @@ export class GameState {
 
     // Create random number generator (seeded if randomSeed is provided)
     const random = this.randomSeed !== undefined ? new SeededRandom(this.randomSeed) : null;
-    const getRandom = () => random ? random.next() : Math.random();
+    const getRandom = () => (random ? random.next() : Math.random());
 
     // Fisher-Yates shuffle for the library cards array
     for (let i = libraryCards.length - 1; i > 0; i--) {

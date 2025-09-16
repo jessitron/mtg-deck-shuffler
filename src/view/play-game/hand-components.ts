@@ -1,5 +1,4 @@
-import { GameState, GameCard } from "../../GameState.js";
-import { WhatHappened } from "../../types.js";
+import { GameState, GameCard, WhatHappened } from "../../GameState.js";
 import { formatCardContainerHtmlFragment, getAnimationClassHelper } from "../common/shared-components.js";
 
 type CardAction = {

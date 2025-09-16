@@ -1,5 +1,4 @@
-import { GameState } from "../../GameState.js";
-import { WhatHappened } from "../../types.js";
+import { GameState, WhatHappened } from "../../GameState.js";
 import { CARD_BACK } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
