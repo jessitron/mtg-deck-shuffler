@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { GameEventLog, GameStartedEvent, StartGameEvent, FlipCardEvent } from "../src/GameEvents.js";
+import { GameEventLog, GameStartedEvent, StartGameEvent } from "../src/GameEvents.js";
 import { CardLocation } from "../src/port-persist-state/types.js";
 
 describe("GameEventLog", () => {
@@ -120,16 +120,6 @@ describe("GameEventLog", () => {
       expect(log.canBeUndone(shuffleEvent.gameEventIndex)).toBe(true);
     });
 
-    test("returns true for flip card events", () => {
-      const log = GameEventLog.newLog();
-      const flipEvent = log.record({
-        eventName: "flip card",
-        gameCardIndex: 1,
-        newFace: "back",
-      });
-
-      expect(log.canBeUndone(flipEvent.gameEventIndex)).toBe(true);
-    });
 
     test("returns false for start game events", () => {
       const log = GameEventLog.newLog();
@@ -195,38 +185,5 @@ describe("GameEventLog", () => {
   });
 
   describe("reverse", () => {
-    test("reverses flip card events", () => {
-      const log = GameEventLog.newLog();
-      const flipEvent: FlipCardEvent = {
-        eventName: "flip card",
-        gameCardIndex: 1,
-        newFace: "back",
-      };
-
-      const reversed = log.reverse(flipEvent);
-
-      expect(reversed).toEqual({
-        eventName: "flip card",
-        gameCardIndex: 1,
-        newFace: "front",
-      });
-    });
-
-    test("reverses flip card events from back to front", () => {
-      const log = GameEventLog.newLog();
-      const flipEvent: FlipCardEvent = {
-        eventName: "flip card",
-        gameCardIndex: 1,
-        newFace: "front",
-      };
-
-      const reversed = log.reverse(flipEvent);
-
-      expect(reversed).toEqual({
-        eventName: "flip card",
-        gameCardIndex: 1,
-        newFace: "back",
-      });
-    });
   });
 });

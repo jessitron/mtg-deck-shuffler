@@ -547,7 +547,7 @@ describe("GameState", () => {
     );
   });
 
-  test("flipCard flips a two-faced card and records event", () => {
+  test("flipCard flips a two-faced card", () => {
     fc.assert(
       fc.property(fc.record({
         name: fc.string(),
@@ -582,16 +582,6 @@ describe("GameState", () => {
         // Verify the card was flipped
         const updatedCard = gameState.listLibrary().find(gc => gc.gameCardIndex === gameCardIndex);
         expect(updatedCard?.currentFace).toBe("back");
-
-        // Verify the event was recorded
-        const events = gameState.getEventLog().getEvents();
-        const flipEvents = events.filter(e => e.eventName === "flip card");
-        expect(flipEvents).toHaveLength(1);
-        expect(flipEvents[0]).toMatchObject({
-          eventName: "flip card",
-          gameCardIndex,
-          newFace: "back",
-        });
       })
     );
   });
@@ -641,52 +631,4 @@ describe("GameState", () => {
     );
   });
 
-  test("flipCard can be undone", () => {
-    fc.assert(
-      fc.property(fc.record({
-        name: fc.string(),
-        scryfallId: fc.uuid(),
-        multiverseid: fc.integer({ min: 1, max: 999999 }),
-        twoFaced: fc.constant(true),
-      }), (twoFacedCard) => {
-        const deck: Deck = {
-          version: 1,
-          name: "Test Deck",
-          commanders: [],
-          cards: [twoFacedCard],
-          id: 1,
-          totalCards: 1,
-          provenance: {
-            retrievedDate: new Date(),
-            sourceUrl: "test://deck",
-            deckSource: "test" as const,
-          },
-        };
-
-        const gameState = GameState.newGame(1, deck);
-        const gameCards = gameState.listLibrary();
-        const gameCardIndex = gameCards[0].gameCardIndex;
-
-        // Initial state: front face
-        expect(gameCards[0].currentFace).toBe("front");
-
-        // Flip to back
-        gameState.flipCard(gameCardIndex);
-        let updatedCard = gameState.listLibrary().find(gc => gc.gameCardIndex === gameCardIndex);
-        expect(updatedCard?.currentFace).toBe("back");
-
-        // Get the flip event for undo
-        const events = gameState.getEventLog().getEvents();
-        const flipEvent = events.find(e => e.eventName === "flip card");
-        expect(flipEvent).toBeDefined();
-
-        // Undo the flip
-        gameState.undo(flipEvent!.gameEventIndex);
-
-        // Verify the card is back to front face
-        updatedCard = gameState.listLibrary().find(gc => gc.gameCardIndex === gameCardIndex);
-        expect(updatedCard?.currentFace).toBe("front");
-      })
-    );
-  });
 });

@@ -32,11 +32,6 @@ export type MoveCardEvent = {
   move: CardMove;
 };
 
-export type FlipCardEvent = {
-  eventName: "flip card";
-  gameCardIndex: number;
-  newFace: "front" | "back";
-};
 
 export type UndoEvent = {
   eventName: "undo";
@@ -95,7 +90,7 @@ export function nameMove(move: CardMove): string {
   return `Move from ${move.fromLocation.type} to ${move.toLocation.type}`;
 }
 
-export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent | FlipCardEvent | UndoEvent;
+export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent;
 
 export type GameEvent = GameEventDefinition & GameEventIdentifier;
 
@@ -145,10 +140,10 @@ export class GameEventLog {
     return this.record(undoEvent);
   }
 
-  public reverse(event: GameEventDefinition): MoveCardEvent | ShuffleEvent | FlipCardEvent {
+  public reverse(event: GameEventDefinition): MoveCardEvent | ShuffleEvent {
     switch (event.eventName) {
       case "undo":
-        return this.events[event.originalEventIndex] as MoveCardEvent | ShuffleEvent | FlipCardEvent;
+        return this.events[event.originalEventIndex] as MoveCardEvent | ShuffleEvent;
       case "move card":
         return {
           eventName: "move card",
@@ -157,12 +152,6 @@ export class GameEventLog {
             fromLocation: event.move.toLocation,
             toLocation: event.move.fromLocation,
           },
-        };
-      case "flip card":
-        return {
-          eventName: "flip card",
-          gameCardIndex: event.gameCardIndex,
-          newFace: event.newFace === "front" ? "back" : "front",
         };
       case "shuffle library":
         // Use compact moves if available, otherwise fall back to full moves

@@ -51,10 +51,6 @@ function describeEvent(event: GameEvent, game: GameState): string {
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
       const cardNameLink = formatCardNameAsGathererLink(card);
       return `${description}: ${cardNameLink}`;
-    case "flip card":
-      const flipCard = cardIndexToDefinition(game, event.gameCardIndex);
-      const flipCardNameLink = formatCardNameAsGathererLink(flipCard);
-      return `Flip to ${event.newFace}: ${flipCardNameLink}`;
     case "shuffle library":
       return `Shuffle ${event.compactMoves.length} cards in library`;
     case "start game":

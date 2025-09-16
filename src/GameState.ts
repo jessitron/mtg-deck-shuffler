@@ -13,7 +13,7 @@ import {
   PERSISTED_GAME_STATE_VERSION,
   printLocation,
 } from "./port-persist-state/types.js";
-import { CardMove, GameEvent, GameEventLog, StartGameEvent, FlipCardEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
+import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
@@ -505,37 +505,19 @@ export class GameState {
     if (!gameCard) {
       throw new Error(`Game card with index ${gameCardIndex} not found`);
     }
-    this.executeFlip({
-      eventName: "flip card",
-      gameCardIndex,
-      newFace: gameCard.currentFace === "front" ? "back" : "front",
-    });
-    return {};
-  }
-
-  private executeFlip(flipEvent: FlipCardEvent, recording: boolean = true): this {
-    const { gameCardIndex, newFace } = flipEvent;
-    const gameCard = this.gameCards[gameCardIndex];
-    if (!gameCard) {
-      throw new Error(`Game card with index ${gameCardIndex} not found`);
-    }
 
     if (!gameCard.card.twoFaced) {
       throw new Error(`Card ${gameCard.card.name} is not a two-faced card`);
     }
 
+    const newFace = gameCard.currentFace === "front" ? "back" : "front";
     if (gameCard.currentFace === newFace) {
       warn(`Card ${gameCard.card.name} is already on face ${newFace}`);
     }
 
-    // Here's the exciting update
+    // Update the current face without recording an event
     gameCard.currentFace = newFace;
-
-    // Record the event
-    if (recording) {
-      this.eventLog.record(flipEvent);
-    }
-    return this;
+    return {};
   }
 
   public undo(gameEventIndex: number): GameState {
@@ -547,8 +529,6 @@ export class GameState {
       moves.forEach((move) => this.executeMove(move, false));
     } else if (applyToState.eventName === "move card") {
       this.executeMove(applyToState.move, false);
-    } else if (applyToState.eventName === "flip card") {
-      this.executeFlip(applyToState, false);
     } else {
       throw new Error(`Cannot undo event ${event.eventName}`);
     }
