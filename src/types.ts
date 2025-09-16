@@ -3,6 +3,7 @@ export interface CardDefinition {
   scryfallId: string;
   multiverseid: number;
   twoFaced: boolean;
+  oracleCardName?: string;
 }
 
 export interface DeckProvenance {

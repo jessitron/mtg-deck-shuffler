@@ -3,7 +3,12 @@ import { GameCard } from "../../GameState.js";
 
 export const CARD_BACK = "/mtg-card-back.jpg";
 
-export function formatCardNameAsGathererLink(card: { name: string; multiverseid: number }): string {
+export function formatCardNameAsGathererLink(card: { name: string; multiverseid: number; oracleCardName?: string }): string {
+  if (card.multiverseid === 0) {
+    const searchName = card.oracleCardName || card.name;
+    const encodedSearchName = encodeURIComponent(`"${searchName}"`);
+    return `<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodedSearchName}" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${card.name}</a>`;
+  }
   return `<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${card.name}</a>`;
 }
 

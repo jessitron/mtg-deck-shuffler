@@ -339,7 +339,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false });
+    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false, oracleCardName: "Oracle Name" });
   });
 
   it("converts deck with multiple commanders", async () => {
