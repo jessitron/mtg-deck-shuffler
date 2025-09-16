@@ -29,7 +29,7 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
     return isLocalDeckRetrievalRequest(request);
   }
 
-  async retrieveDeck(request: DeckRetrievalRequest, retrievedDate?: Date): Promise<Deck> {
+  async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
     if (!isLocalDeckRetrievalRequest(request)) {
       throw new Error("Cannot handle this request type");
     }
@@ -49,9 +49,9 @@ export class LocalDeckAdapter implements RetrieveDeckPort {
 
       const deck: Deck = parsedData;
 
-      const dateToUse = retrievedDate || new Date();
+      const now = new Date();
       deck.provenance = {
-        retrievedDate: dateToUse,
+        retrievedDate: now,
         sourceUrl: `/${pathToLocalFile}`,
         deckSource: "local",
       };

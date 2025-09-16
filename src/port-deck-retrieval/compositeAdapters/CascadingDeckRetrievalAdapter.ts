@@ -15,10 +15,10 @@ export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
     return this.adapters.some((adapter) => adapter.canHandle(request));
   }
 
-  async retrieveDeck(request: DeckRetrievalRequest, retrievedDate?: Date): Promise<Deck> {
+  async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
     for (const adapter of this.adapters) {
       if (adapter.canHandle(request)) {
-        return adapter.retrieveDeck(request, retrievedDate);
+        return adapter.retrieveDeck(request);
       }
     }
 

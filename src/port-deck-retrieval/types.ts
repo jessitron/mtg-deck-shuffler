@@ -32,7 +32,7 @@ export type AvailableDecks = AvailableDeck[];
 export interface RetrieveDeckPort {
   listAvailableDecks(): AvailableDecks;
   canHandle(request: DeckRetrievalRequest): boolean;
-  retrieveDeck(request: DeckRetrievalRequest, retrievedDate?: Date): Promise<Deck>;
+  retrieveDeck(request: DeckRetrievalRequest): Promise<Deck>;
 }
 
 export class DeckVersionMismatchError extends Error {
