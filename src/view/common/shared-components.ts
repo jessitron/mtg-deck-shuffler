@@ -13,9 +13,9 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
 }
 
 // Function for generating a single commander container (shared logic)
-function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number): string {
+function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number, animationClass = ""): string {
   return `<div class="commander-container">
-    <img src="${getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace)}" alt="${gameCard.card.name}" class="mtg-card-image commander-image" />
+    <img src="${getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace)}" alt="${gameCard.card.name}" class="mtg-card-image commander-image${animationClass}" />
     ${gameCard.card.twoFaced && gameId ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
   </div>`;
 }
@@ -65,6 +65,7 @@ export function formatCardContainerHtmlFragment(gameCard: GameCard, containerTyp
 }
 
 // Function for generating a single commander container after a flip
-export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId: number): string {
-  return formatSingleCommanderContainer(gameCard, gameId);
+export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId: number, flipped = false): string {
+  const animationClass = flipped ? " flipping" : "";
+  return formatSingleCommanderContainer(gameCard, gameId, animationClass);
 }
