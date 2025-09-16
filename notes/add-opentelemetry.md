@@ -20,11 +20,14 @@ This instruction is applicable only to a Node.js project written in TypeScript. 
 
 ## Dependencies
 
-1. Install the latest version of the required OpenTelemetry packages:
-   - `@opentelemetry/auto-instrumentations-node` - for automatic instrumentation
-   - `@opentelemetry/sdk-node` - core SDK
-   - `@opentelemetry/exporter-trace-otlp-http` - HTTP trace exporter
-   - `@opentelemetry/api` - for custom instrumentation
+Use whatever tool this project uses for dependency management, such as yarn or npm.
+
+Install the latest version of the required OpenTelemetry packages:
+
+- `@opentelemetry/auto-instrumentations-node` - for automatic instrumentation
+- `@opentelemetry/sdk-node` - core SDK
+- `@opentelemetry/exporter-trace-otlp-http` - HTTP trace exporter
+- `@opentelemetry/api` - for custom instrumentation
 
 ## Environment Variables
 
@@ -77,7 +80,7 @@ There are two options for this. Which can you make work?
 
 ### Option 1: Ideally, load tracing.ts before startup:
 
-[] In a subagent, locate all places that this service is started up. For instance: README instructions, package.json, scripts, Dockerfiles, makefiles.
+[] Here is a task: locate all places that this service is started up. For instance: README instructions, package.json, scripts, Dockerfiles, makefiles.
 
 [] In each of those places, make sure that tracing.ts is loaded before the main entry point.
 
@@ -91,7 +94,9 @@ For example, if the service is started with `ts-node src/index.ts`, change it to
 
 ## Verify
 
-Start a subagent for this section. Tell it to do the following things:
+Here is a task, with this todo list as an input and either a trace link or a failure description as the output.
+Do the following things:
+
 [] Run the application.
 [] Make a request to the service.
 [] Wait a few seconds.
@@ -101,7 +106,7 @@ Start a subagent for this section. Tell it to do the following things:
 [] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
 [] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/trace?trace_id=39ae994d9ea02cda9a4dfe279bfae59b`
 
-When the subagent returns, if there was an error, proceed to Troubleshooting.
+After the task is complete, if there was an error, proceed to Troubleshooting.
 
 ## Report your experience
 
