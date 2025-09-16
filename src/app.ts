@@ -5,7 +5,7 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
-import { formatCommanderContainerHtmlFragment } from "./view/common/shared-components.js";
+import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
@@ -22,8 +22,8 @@ const __dirname = path.dirname(__filename);
 export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort): express.Application {
   const app = express();
 
-  app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-  app.use(express.json({ limit: '10mb' }));
+  app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+  app.use(express.json({ limit: "10mb" }));
 
   // Returns whole page - homepage with deck selection
   app.get("/", async (req, res) => {
@@ -289,7 +289,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const newGameId = persistStatePort.newGameId();
       const newPersistedState: PersistedGameState = {
         ...stateData,
-        gameId: newGameId
+        gameId: newGameId,
       };
 
       // Save the new game
@@ -300,7 +300,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         <p>Game created successfully! Redirecting...</p>
         <script>window.location.href = '/game/${newGameId}';</script>
       </div>`);
-
     } catch (error) {
       console.error("Error creating game from state:", error);
       let errorMessage = "Failed to parse JSON or create game";
@@ -631,50 +630,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Flip a commander card - Returns only the commander container
-  app.post("/flip-commander/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const gameCardIndex = parseInt(req.params.gameCardIndex);
-    try {
-
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-      const whatHappened = game.flipCard(gameCardIndex);
-
-      await persistStatePort.save(game.toPersistedGameState());
-
-      // Get the flipped card and verify it's a commander
-      const flippedCard = game.getCards().find(gc => gc.gameCardIndex === gameCardIndex);
-      if (!flippedCard) {
-        res.status(404).send(`<div>Card not found</div>`);
-        return;
-      }
-
-      if (flippedCard.location.type !== "CommandZone") {
-        res.status(400).send(`<div>Card is not a commander</div>`);
-        return;
-      }
-
-      // Return the commander container
-      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId, whatHappened);
-      res.send(html);
-
-    } catch (error) {
-      console.error("Error flipping commander:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip commander"}</div>`);
-    }
-  });
-
-  // Flip a regular card - Returns updated game board
   app.post("/flip-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     try {
-
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
@@ -682,13 +641,21 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const whatHappened = game.flipCard(gameCardIndex);
+      game.flipCard(gameCardIndex); // TODO: I don't need whatHappened, it's in the card state
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game, whatHappened);
-      res.send(html);
+      // Get the flipped card
+      const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex);
+      console.log("current face: ", flippedCard?.currentFace);
+      if (!flippedCard) {
+        res.status(404).send(`<div>Card ${gameCardIndex} not found</div>`);
+        return;
+      }
 
+      // Return the commander container
+      const html = formatFlippingContainer(flippedCard, gameId);
+      res.send(html);
     } catch (error) {
       console.error("Error flipping card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);

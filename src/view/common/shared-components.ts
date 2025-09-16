@@ -14,36 +14,25 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
 
 type CardRenderOptions = {
   gameCard: GameCard;
-  containerType: "commander" | "revealed" | "hand"; // TODO: remove this, always reload card container
-  gameId?: number;
+  containerType?: "commander" | "revealed" | "hand"; // TODO: remove this, always reload card container
+  gameId?: number; // TODO: not optional (although it's only used for two-faced cards)
   actions?: string;
   whatHappened?: WhatHappened;
 };
 
-function formatCardContainer({ gameCard, containerType, gameId, actions = "", whatHappened }: CardRenderOptions): string {
+function formatCardContainer({ gameCard, gameId, actions = "", whatHappened }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
-
-  const flipButton =
-    containerType === "commander"
-      ? `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .card-container">Flip</button>`
-      : `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#game-container">Flip</button>`;
   // TODO: always reload only the card container
 
   if (gameCard.card.twoFaced) {
-    const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
-    const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
-    const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
-
+    if (gameId === undefined) {
+      // TODO: make required everywhere
+      throw new Error("Game ID is required for two-faced cards");
+    }
     return `<div id="${cardId}-container" class="card-container" >
-      <div id="${cardId}-outer-flip-container" class=" flip-container-outer${flippedClass}">
-        <div id="${cardId}-inner-flip-container" class="flip-container-inner">
-          <img id="${cardId}-back-face" src="${backImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image two-sided-back${flippedClass}" />
-          <img id="${cardId}-front-face" src="${frontImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image two-sided-front" title="${gameCard.card.name}" />
-        </div>
-      </div>
-      ${flipButton}
+      ${formatFlippingContainer(gameCard, gameId)}
       ${actions}
     </div>`;
   } else {
@@ -53,6 +42,27 @@ function formatCardContainer({ gameCard, containerType, gameId, actions = "", wh
       ${actions}
     </div>`;
   }
+}
+
+export function formatFlippingContainer(gameCard: GameCard, gameId: number): string {
+  const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
+  const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
+  const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
+
+  const cardId = `card-${gameCard.gameCardIndex}`;
+  const flipContainerId = `${cardId}-outer-flip-container`;
+
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button">Flip</button>`;
+
+  return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
+            <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
+              <div id="${cardId}-inner-flip-container" class="flip-container-inner">
+                <img id="${cardId}-back-face" src="${backImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image two-sided-back${flippedClass}" />
+                <img id="${cardId}-front-face" src="${frontImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image two-sided-front" title="${gameCard.card.name}" />
+             </div>
+            </div>
+           ${flipButton}
+          </div>`;
 }
 
 function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number): string {

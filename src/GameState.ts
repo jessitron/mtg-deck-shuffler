@@ -55,7 +55,7 @@ export interface WhatHappened {
   shuffling?: boolean;
   movedRight?: GameCard[];
   movedLeft?: GameCard[];
-  flipped?: GameCard[];
+  flipped?: GameCard[]; // TODO: remove
 }
 
 export class GameState {
