@@ -4,15 +4,15 @@
 
 - 'Play' doesn't work for two-faced cards. The animation doesn't work, and it is always gonna copy the front.
 
-## More Things to change  
+## More Things to change
 
 - can I make Play make an animation of moving the card to the table?
 
-- Flip Card should be an event
+[x] Flip Card should be an event
 
 - If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
 
-- the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
+[x] the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
 
 - let people pick a playmat
 
@@ -22,25 +22,24 @@
 
 - I want a log of what happened! Today I clicked some stuff in my hand too fast and wondered whether I put too many cards on the table. I need that list of actions.
 
-- make a save/load game feature so I can move game states from prod to local for testing
+[x] make a save/load game feature so I can move game states from prod to local for testing
 
-- undo button will drive the implementation of state history tracking, with events.
+- do we want redo?
 
-- Change the Honeycomb environment to mtg-deck-shuffler for prod.
+[x] undo button will drive the implementation of state history tracking, with events.
 
+[x] Change the Honeycomb environment to mtg-deck-shuffler for prod.
 
 - I need tracing in Honeycomb of what is happening. THe trick is that I want to do this by creating generic instructions and using them.
   [x] initialize tracing, get autoinstrumentation
   [ ] identify crucial fields to add as attributes
   [ ] create a library of utility functions specific to this project
 
-- I also want tracing of pageloads, a frontend dataset. I have this now but it's super basic; the library needs upgraded
+[x] I also want tracing of pageloads, a frontend dataset. I have this now but it's super basic; the library needs upgraded
 
 - handle empty library
 
 - after draw, make sure the drawn card is visible: scroll hand section to the right
-
-- bug: scroll the page until the hand is just visible, and the buttons on the bottom are not. Scroll the hand to the right. Click swap. The page scrolls down! that's ridiculous, we shouldn't change scroll on the page. Hmm, it doesn't happen in Chrome, only Firefox. Fuck it
 
 - game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty
 
@@ -53,12 +52,3 @@
 ## UI Changes
 
 I want to change the UI, target documented in notes/DESIGN-interface.md
-
-Before that, I need to rearrange the view methods, they're a mess. Target documented in notes/STRUCTURE-view-organization.md
-
-Before that, I need snapshot tests. It made a plan in notes/STRUCTURE-snapshot-tests.md but I don't like it. I think I'll have it implement one snapshot test, and then see what else I want.
-The first test can be for the / endpoint. That calls formatChooseDeckHtml, so we can test it at that level. It makes an htmx call ... but does it have to? It doesn't, if I generate the / endpoint dynamically. Which would be a UI refactor. Which wants snapshot tests!
-
-Hmm, that might be a change it can make without screwing it up, though. The structure of the view functions won't affect that as much maybe?
-
-It would be nicer with templates. Templates come after snapshot tests though.
