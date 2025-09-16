@@ -1,8 +1,15 @@
 <div id="game-container">
 <div id="command-zone">
-<div class="commander-container">
-<img src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image commander-image" />
-<button class="flip-button" hx-post="/flip-commander/123/3" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>
+<div id="card-3-container" class="card-container" >
+<div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
+<div id="card-3-outer-flip-container" class=" flip-container-outer">
+<div id="card-3-inner-flip-container" class="flip-container-inner">
+<img id="card-3-back-face" src="https://cards.scryfall.io/normal/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge (back face)" class="mtg-card-image two-sided-back" />
+<img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
+</div>
+</div>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/123/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button">Flip</button>
+</div>
 </div>
 </div>
 <div id="game-details" class="game-details game-active">
@@ -62,11 +69,8 @@ hx-swap="outerHTML">Reveal</button>
 <div id="revealed-cards-section" class="revealed-cards-section">
 <h3>Revealed Cards (1)</h3>
 <div id="revealed-cards-area" class="revealed-cards-area">
-<div id="card-container-4" class="revealed-card-container">
-<img src="https://cards.scryfall.io/normal/front/5/4/54734347-eee7-4c52-b514-7342afeccabd.jpg"
-alt="Homeward Path"
-class="mtg-card-image revealed-card"
-title="Homeward Path" />
+<div id="card-4-container" class="card-container">
+<img id="card-4-face" src="https://cards.scryfall.io/normal/front/5/4/54734347-eee7-4c52-b514-7342afeccabd.jpg" alt="Homeward Path" class="mtg-card-image " title="Homeward Path" />
 <div class="card-buttons">
 <button class="play-button"
 hx-post="/play-card/123/4"
@@ -101,11 +105,8 @@ Put on Bottom
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (2)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-container-2" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg"
-alt="Damnation"
-class="mtg-card-image hand-card"
-title="Damnation" />
+<div id="card-2-container" class="card-container">
+<img id="card-2-face" src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg" alt="Damnation" class="mtg-card-image " title="Damnation" />
 <div class="hand-card-buttons">
 <button class="play-button"
 hx-post="/play-card/123/2"
@@ -129,11 +130,8 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-container-1" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg"
-alt="Dakkon, Shadow Slayer"
-class="mtg-card-image hand-card"
-title="Dakkon, Shadow Slayer" />
+</div><div id="card-1-container" class="card-container">
+<img id="card-1-face" src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg" alt="Dakkon, Shadow Slayer" class="mtg-card-image " title="Dakkon, Shadow Slayer" />
 <div class="hand-card-buttons">
 <button class="play-button"
 hx-post="/play-card/123/1"
