@@ -4,13 +4,13 @@
 </div>
 <div id="game-details" class="game-details game-active">
 <h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
-<div><p>7 cards</p>
+<div><p>8 cards</p>
 <p><strong>Game ID:</strong> 123</p>
 <p><strong>Status:</strong> Active</p>
 </div>
 <div class="history">
 <div class="undo-controls"> Last action:
-<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=571406" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Damnation</a></span>
+<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a></span>
 <button class="undo-button"
 hx-post="/undo/123/6"
 hx-target="#game-container"
@@ -51,7 +51,7 @@ hx-post="/draw/123"
 hx-target="#game-container"
 hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
-hx-post="/reveal-card/123/4"
+hx-post="/reveal-card/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML">Reveal</button>
 </div>
@@ -59,33 +59,33 @@ hx-swap="outerHTML">Reveal</button>
 <div id="revealed-cards-section" class="revealed-cards-section">
 <h3>Revealed Cards (1)</h3>
 <div id="revealed-cards-area" class="revealed-cards-area">
-<div id="card-container-0" class="revealed-card-container">
-<img src="https://cards.scryfall.io/normal/front/e/0/e09e9b65-ff0e-4efe-b96a-ede69c96e2ea.jpg"
-alt="Carth the Lion"
+<div id="card-container-4" class="revealed-card-container">
+<img src="https://cards.scryfall.io/normal/front/f/3/f3537373-ef54-4578-9d05-6216420ee349.jpg"
+alt="Esper Sentinel"
 class="mtg-card-image revealed-card"
-title="Carth the Lion" />
+title="Esper Sentinel" />
 <div class="card-buttons">
 <button class="play-button"
-hx-post="/play-card/123/0"
+hx-post="/play-card/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="e09e9b65-ff0e-4efe-b96a-ede69c96e2ea"
+data-card-id="f3537373-ef54-4578-9d05-6216420ee349"
 title="Copy image and remove from revealed">
 Play
 </button><button class="put-in-hand-button"
-hx-post="/put-in-hand/123/0"
+hx-post="/put-in-hand/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to hand">
 Put in Hand
 </button><button class="put-on-top-button"
-hx-post="/put-on-top/123/0"
+hx-post="/put-on-top/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to top of library">
 Put on Top
 </button><button class="put-on-bottom-button"
-hx-post="/put-on-bottom/123/0"
+hx-post="/put-on-bottom/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to bottom of library">
@@ -98,7 +98,35 @@ Put on Bottom
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (2)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-container-1" class="hand-card-container">
+<div id="card-container-2" class="hand-card-container">
+<img src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg"
+alt="Damnation"
+class="mtg-card-image hand-card"
+title="Damnation" />
+<div class="hand-card-buttons">
+<button class="play-button"
+hx-post="/play-card/123/2"
+hx-target="#game-container"
+hx-swap="outerHTML swap:1.5s"
+data-card-id="d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f"
+title="Copy image and remove from hand">
+Play
+</button><button class="put-down-button"
+hx-post="/put-down/123/2"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Move card to revealed">
+Put down
+</button>
+<button class="swap-button"
+hx-post="/swap-with-next/123/0"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Swap with next card">
+↔
+</button>
+</div>
+</div><div id="card-container-1" class="hand-card-container">
 <img src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg"
 alt="Dakkon, Shadow Slayer"
 class="mtg-card-image hand-card"
@@ -113,34 +141,6 @@ title="Copy image and remove from hand">
 Play
 </button><button class="put-down-button"
 hx-post="/put-down/123/1"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Move card to revealed">
-Put down
-</button>
-<button class="swap-button"
-hx-post="/swap-with-next/123/0"
-hx-target="#game-container"
-hx-swap="outerHTML"
-title="Swap with next card">
-↔
-</button>
-</div>
-</div><div id="card-container-6" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/7/b/7b215968-93a6-4278-ac61-4e3e8c3c3943.jpg"
-alt="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen"
-class="mtg-card-image hand-card"
-title="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen" />
-<div class="hand-card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/6"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="7b215968-93a6-4278-ac61-4e3e8c3c3943"
-title="Copy image and remove from hand">
-Play
-</button><button class="put-down-button"
-hx-post="/put-down/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML"
 title="Move card to revealed">

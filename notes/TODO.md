@@ -4,7 +4,7 @@
 
 - this was super messy while commanders are not in the gameCards array. I think it's fixed now. See @notes/STRUCTURE-commanders-are-cards.md
 
-- and changing that is a freaking mess because of all the hard-coded GameState construction in tests.
+[x] and changing that is a freaking mess because of all the hard-coded GameState construction in tests. OK, I changed the snapshot tests, they were the biggest problem.
 
 ## Bugs to fix
 

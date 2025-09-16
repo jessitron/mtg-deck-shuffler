@@ -2,7 +2,6 @@ import { test, expect } from "@jest/globals";
 import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
 import { GameStatus, PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
-import { Deck } from "../src/types.js";
 import { deckWithOneCommander } from "./generators.js";
 
 test("should convert GameState to PersistedGameState and back", () => {
