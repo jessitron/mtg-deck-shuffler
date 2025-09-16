@@ -2,47 +2,22 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { formatDeckHtmlSection } from "../../src/view/deck-selection/deck-selection-page.js";
-import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../src/types.js";
+import { Deck } from "../../src/types.js";
+import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
 
 describe("Deck HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
-  
-  // Create fake card data for testing
-  const createFakeCard = (name: string, index: number): CardDefinition => ({
-    name,
-    scryfallId: `fake-scryfall-id-${index.toString().padStart(3, '0')}`,
-    multiverseid: 1000 + index
+
+  // Load real deck data for testing
+  let testDeck1: Deck;
+  let testDeck2: Deck;
+
+  beforeAll(async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    testDeck1 = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
+    testDeck2 = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "14669648" });
   });
-
-  const createFakeDeck = (commanderCount: number): Deck => {
-    const commanders: CardDefinition[] = [];
-    if (commanderCount >= 1) {
-      commanders.push(createFakeCard("Atraxa, Praetors' Voice", 1));
-    }
-    if (commanderCount >= 2) {
-      commanders.push(createFakeCard("Breya, Etherium Shaper", 2));
-    }
-
-    const cards = [
-      createFakeCard("Lightning Bolt", 100),
-      createFakeCard("Counterspell", 101),
-      createFakeCard("Sol Ring", 102)
-    ];
-
-    return {
-      version: PERSISTED_DECK_VERSION,
-      id: 12345,
-      name: `Test Deck with ${commanderCount} Commander${commanderCount !== 1 ? 's' : ''}`,
-      totalCards: cards.length,
-      commanders,
-      cards,
-      provenance: {
-        retrievedDate: new Date('2024-01-01T12:00:00Z'),
-        sourceUrl: "https://archidekt.com/decks/12345/test-deck",
-        deckSource: "test"
-      }
-    };
-  };
 
   async function ensureSnapshotDir() {
     try {
@@ -65,10 +40,9 @@ describe("Deck HTML Snapshot Tests", () => {
     await fs.writeFile(path.join(snapshotDir, filename), content, "utf-8");
   }
 
-  it("formatDeckHtml with zero commanders", async () => {
-    const snapshotFile = "deck-zero-commanders.html";
-    const deck = createFakeDeck(0);
-    const actualHtml = formatDeckHtmlSection(deck);
+  it("formatDeckHtml with first test deck", async () => {
+    const snapshotFile = "deck-test-1.html";
+    const actualHtml = formatDeckHtmlSection(testDeck1);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -97,10 +71,9 @@ describe("Deck HTML Snapshot Tests", () => {
     }
   });
 
-  it("formatDeckHtml with one commander", async () => {
-    const snapshotFile = "deck-one-commander.html";
-    const deck = createFakeDeck(1);
-    const actualHtml = formatDeckHtmlSection(deck);
+  it("formatDeckHtml with second test deck", async () => {
+    const snapshotFile = "deck-test-2.html";
+    const actualHtml = formatDeckHtmlSection(testDeck2);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -129,10 +102,16 @@ describe("Deck HTML Snapshot Tests", () => {
     }
   });
 
-  it("formatDeckHtml with two commanders", async () => {
-    const snapshotFile = "deck-two-commanders.html";
-    const deck = createFakeDeck(2);
-    const actualHtml = formatDeckHtmlSection(deck);
+  it("formatDeckHtml with deck subset", async () => {
+    const snapshotFile = "deck-subset.html";
+    // Create a subset of testDeck1 with fewer cards for different test case
+    const subsetDeck = {
+      ...testDeck1,
+      name: testDeck1.name + " (Subset)",
+      cards: testDeck1.cards.slice(0, 5), // Just first 5 cards
+      totalCards: 5
+    };
+    const actualHtml = formatDeckHtmlSection(subsetDeck);
     
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml

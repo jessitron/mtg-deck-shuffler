@@ -3,80 +3,42 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { formatGamePageHtmlPage } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
-import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, HandLocation, TableLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
+import { Deck } from "../../src/types.js";
+import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
 
 describe("Game Page HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
 
-  // Create fake card data for testing
-  const createFakeCard = (name: string, index: number): CardDefinition => ({
-    name,
-    scryfallId: `fake-scryfall-id-${index.toString().padStart(3, "0")}`,
-    multiverseid: 1000 + index,
+  // Load real deck data for testing
+  let testDeck: Deck;
+
+  beforeAll(async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
   });
 
-  const createFakeGameState = (): GameState => {
-    // Cards must be sorted by name for GameState validation
-    const cards = [
-      createFakeCard("Card A", 100),
-      createFakeCard("Card B", 101),
-      createFakeCard("Card C", 102),
-      createFakeCard("Card D", 103),
-      createFakeCard("Card E", 104),
-    ];
+  const createActiveGameState = (): GameState => {
+    const gameState = GameState.newGame(789, testDeck, 42);
+    gameState.startGame();
 
-    const commanders = [createFakeCard("Test Commander", 1)];
+    // Draw some cards to hand
+    gameState.draw();
+    gameState.draw();
 
-    // Create game cards in different locations
-    const gameCards: GameCard[] = [
-      // Cards in library
-      {
-        card: cards[0],
-        location: { type: "Library", position: 0 } as LibraryLocation,
-        gameCardIndex: 0,
-        isCommander: false,
-      },
-      {
-        card: cards[1],
-        location: { type: "Library", position: 1 } as LibraryLocation,
-        gameCardIndex: 1,
-        isCommander: false,
-      },
-      // Cards in hand
-      {
-        card: cards[2],
-        location: { type: "Hand", position: 0 } as HandLocation,
-        gameCardIndex: 2,
-        isCommander: false,
-      },
-      // Cards on table
-      {
-        card: cards[3],
-        location: { type: "Table" } as TableLocation,
-        gameCardIndex: 3,
-        isCommander: false,
-      },
-    ];
+    // Play a card to table
+    const handCards = gameState.listHand();
+    if (handCards.length > 0) {
+      gameState.playCard(handCards[0].gameCardIndex);
+    }
 
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 789,
-      status: GameStatus.Active,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game-page",
-        deckSource: "test" as const,
-      },
-      commanders,
-      deckName: "Test Game Page Deck",
-      deckId: 12345,
-      totalCards: cards.length,
-      gameCards,
-      events: [],
-    };
+    return gameState;
+  };
 
-    return GameState.fromPersistedGameState(persistedState);
+  const createNotStartedGameState = (): GameState => {
+    const gameState = GameState.newGame(456, testDeck);
+    // Don't start the game
+    return gameState;
   };
 
   async function ensureSnapshotDir() {
@@ -102,7 +64,7 @@ describe("Game Page HTML Snapshot Tests", () => {
 
   it("formatGamePageHtml with active game state", async () => {
     const snapshotFile = "game-page-active-game.html";
-    const gameState = createFakeGameState();
+    const gameState = createActiveGameState();
     const actualHtml = formatGamePageHtmlPage(gameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
@@ -135,35 +97,7 @@ describe("Game Page HTML Snapshot Tests", () => {
 
   it("formatGamePageHtml with not started game state", async () => {
     const snapshotFile = "game-page-not-started.html";
-
-    // Create a game state that hasn't started yet
-    const cards = [createFakeCard("Card A", 100), createFakeCard("Card B", 101)].sort((a, b) => a.name.localeCompare(b.name));
-
-    const gameCards: GameCard[] = cards.map((card, index) => ({
-      card,
-      location: { type: "Library", position: index } as LibraryLocation,
-      gameCardIndex: index,
-      isCommander: false,
-    }));
-
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 456,
-      status: GameStatus.NotStarted,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game-page-not-started",
-        deckSource: "test" as const,
-      },
-      commanders: [createFakeCard("Test Commander", 1)],
-      deckName: "Test Not Started Game Page",
-      deckId: 12345,
-      totalCards: cards.length,
-      gameCards,
-      events: [],
-    };
-
-    const notStartedGameState = GameState.fromPersistedGameState(persistedState);
+    const notStartedGameState = createNotStartedGameState();
     const actualHtml = formatGamePageHtmlPage(notStartedGameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)

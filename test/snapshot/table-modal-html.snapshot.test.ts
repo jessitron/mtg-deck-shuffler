@@ -3,53 +3,61 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { formatTableModalHtmlFragment } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
-import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, TableLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
+import { Deck } from "../../src/types.js";
+import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
 
 describe("Table Modal HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
 
-  // Create fake card data for testing
-  const createFakeCard = (name: string, index: number): CardDefinition => ({
-    name,
-    scryfallId: `fake-scryfall-id-${index.toString().padStart(3, "0")}`,
-    multiverseid: 1000 + index,
+  // Load real deck data for testing
+  let testDeck: Deck;
+
+  beforeAll(async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
   });
 
-  const createFakeGameState = (tableCardCount: number): GameState => {
-    // Cards must be sorted by name for GameState validation
-    const tableCards = Array.from({ length: tableCardCount }, (_, i) =>
-      createFakeCard(`Table Card ${String.fromCharCode(65 + i)}`, i)
-    ).sort((a, b) => a.name.localeCompare(b.name));
+  const createGameStateWithMultipleTableCards = (): GameState => {
+    const gameState = GameState.newGame(456, testDeck, 42);
+    gameState.startGame();
 
-    const commanders = [createFakeCard("Test Commander", 100)];
+    // Draw some cards and play them to the table
+    gameState.draw();
+    gameState.draw();
+    gameState.draw();
+    const handCards = gameState.listHand();
 
-    // Create game cards on table
-    const gameCards: GameCard[] = tableCards.map((card, index) => ({
-      card,
-      location: { type: "Table" } as TableLocation,
-      gameCardIndex: index,
-      isCommander: false,
-    }));
+    // Play multiple cards to table
+    for (let i = 0; i < Math.min(3, handCards.length); i++) {
+      const currentHand = gameState.listHand();
+      if (currentHand.length > 0) {
+        gameState.playCard(currentHand[0].gameCardIndex);
+      }
+    }
 
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 456,
-      status: GameStatus.Active,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game",
-        deckSource: "test" as const,
-      },
-      commanders,
-      deckName: "Test Table Modal Deck",
-      deckId: 12345,
-      totalCards: tableCards.length,
-      gameCards,
-      events: [],
-    };
+    return gameState;
+  };
 
-    return GameState.fromPersistedGameState(persistedState);
+  const createGameStateWithSingleTableCard = (): GameState => {
+    const gameState = GameState.newGame(789, testDeck, 42);
+    gameState.startGame();
+
+    // Draw a card and play it to the table
+    gameState.draw();
+    const handCards = gameState.listHand();
+    if (handCards.length > 0) {
+      gameState.playCard(handCards[0].gameCardIndex);
+    }
+
+    return gameState;
+  };
+
+  const createGameStateWithEmptyTable = (): GameState => {
+    const gameState = GameState.newGame(123, testDeck, 42);
+    gameState.startGame();
+    // Don't play any cards, table remains empty
+    return gameState;
   };
 
   async function ensureSnapshotDir() {
@@ -75,7 +83,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
 
   it("formatTableModalHtml with multiple table cards", async () => {
     const snapshotFile = "table-modal-multiple-cards.html";
-    const gameState = createFakeGameState(3);
+    const gameState = createGameStateWithMultipleTableCards();
     const actualHtml = formatTableModalHtmlFragment(gameState);
 
     // Normalize HTML for consistent comparison
@@ -107,7 +115,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
 
   it("formatTableModalHtml with single table card", async () => {
     const snapshotFile = "table-modal-single-card.html";
-    const gameState = createFakeGameState(1);
+    const gameState = createGameStateWithSingleTableCard();
     const actualHtml = formatTableModalHtmlFragment(gameState);
 
     // Normalize HTML for consistent comparison
@@ -139,7 +147,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
 
   it("formatTableModalHtml with empty table", async () => {
     const snapshotFile = "table-modal-empty.html";
-    const gameState = createFakeGameState(0);
+    const gameState = createGameStateWithEmptyTable();
     const actualHtml = formatTableModalHtmlFragment(gameState);
 
     // Normalize HTML for consistent comparison
