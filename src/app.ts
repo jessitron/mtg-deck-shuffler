@@ -660,7 +660,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       // Return the commander container
-      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId);
+      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId, whatHappened);
       res.send(html);
 
     } catch (error) {
