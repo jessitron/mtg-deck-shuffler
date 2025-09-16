@@ -29,6 +29,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
       card,
       location: { type: "Table" } as TableLocation,
       gameCardIndex: index,
+      isCommander: false,
     }));
 
     const persistedState = {

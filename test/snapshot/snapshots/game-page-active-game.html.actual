@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MTG Game - Test Game Page Deck</title>
+<link rel="stylesheet" href="/styles.css" />
+<script src="/hny.js"></script>
+<script>
+Hny.initializeTracing({
+apiKey: "TEST_API_KEY",
+serviceName: "mtg-deck-shuffler-web",
+debug: false,
+provideOneLinkToHoneycomb: true,
+});
+</script>
+<script src="/htmx.js"></script>
+<script src="/game.js"></script>
+</head>
+<body>
+<h1>*Woohoo it's Magic time!*</h1>
+<div id="game-container">
+<div class="commander-placeholder">No Commander</div>
+<div id="game-details" class="game-details game-active">
+<h2><a href="https://archidekt.com/decks/12345/test-game-page" target="_blank">Test Game Page Deck</a></h2>
+<div><p>4 cards</p>
+<p><strong>Game ID:</strong> 789</p>
+<p><strong>Status:</strong> Active</p>
+</div>
+<div class="history">
+<p>No actions to undo</p>
+<button class="history-button"
+hx-get="/history-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">View History (0)</button>
+</div>
+</div>
+<div id="table-section" class="table-section">
+<img src="/table.png" alt="Table" class="table-image" />
+<button class="table-cards-button"
+hx-get="/table-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">1 Cards on table</button>
+</div>
+<div id="library-section" data-testid="library-section">
+<h3>Library (2)</h3>
+<div class="library-stack" data-testid="library-stack">
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+</div>
+<div class="library-buttons">
+<button class="search-button"
+hx-get="/library-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">Search</button>
+<button class="shuffle-button"
+hx-post="/shuffle/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Shuffle</button>
+<button class="draw-button"
+hx-post="/draw/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Draw</button>
+<button class="reveal-button"
+hx-post="/reveal-card/789/0"
+hx-target="#game-container"
+hx-swap="outerHTML">Reveal</button>
+</div>
+</div>
+<div id="hand-section" data-testid="hand-section">
+<h3>Hand (1)</h3>
+<div id="hand-cards" class="hand-cards">
+<div id="card-container-2" class="hand-card-container">
+<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-102.jpg"
+alt="Card C"
+class="mtg-card-image hand-card"
+title="Card C" />
+<div class="hand-card-buttons">
+<button class="play-button"
+hx-post="/play-card/789/2"
+hx-target="#game-container"
+hx-swap="outerHTML swap:1.5s"
+data-card-id="fake-scryfall-id-102"
+title="Copy image and remove from hand">
+Play
+</button><button class="put-down-button"
+hx-post="/put-down/789/2"
+hx-target="#game-container"
+hx-swap="outerHTML"
+title="Move card to revealed">
+Put down
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Container -->
+<div id="modal-container"></div>
+<div id="end-game-actions" class="game-actions">
+<form method="post" action="/restart-game" class="inline-form">
+<input type="hidden" name="game-id" value="789" />
+<button type="submit">Restart Game</button>
+</form>
+<form method="post" action="/end-game" class="inline-form">
+<input type="hidden" name="game-id" value="789" />
+<button type="submit">Choose Another Deck</button>
+</form>
+<button class="debug-button"
+hx-get="/debug-state/789"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+class="debug-button">Debug State</button>
+</div>
+</div>
+<footer>
+<p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+</footer>
+</body>
+</html>

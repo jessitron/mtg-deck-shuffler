@@ -32,6 +32,7 @@ describe("History Modal HTML Snapshot Tests", () => {
       card,
       location: { type: "Library", position: index } as LibraryLocation,
       gameCardIndex: index,
+      isCommander: false,
     }));
 
     const persistedState = {

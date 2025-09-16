@@ -35,23 +35,27 @@ describe("Game Page HTML Snapshot Tests", () => {
         card: cards[0],
         location: { type: "Library", position: 0 } as LibraryLocation,
         gameCardIndex: 0,
+        isCommander: false,
       },
       {
         card: cards[1],
         location: { type: "Library", position: 1 } as LibraryLocation,
         gameCardIndex: 1,
+        isCommander: false,
       },
       // Cards in hand
       {
         card: cards[2],
         location: { type: "Hand", position: 0 } as HandLocation,
         gameCardIndex: 2,
+        isCommander: false,
       },
       // Cards on table
       {
         card: cards[3],
         location: { type: "Table" } as TableLocation,
         gameCardIndex: 3,
+        isCommander: false,
       },
     ];
 
@@ -139,6 +143,7 @@ describe("Game Page HTML Snapshot Tests", () => {
       card,
       location: { type: "Library", position: index } as LibraryLocation,
       gameCardIndex: index,
+      isCommander: false,
     }));
 
     const persistedState = {

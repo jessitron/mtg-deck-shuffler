@@ -20,7 +20,7 @@ describe("Game HTML Snapshot Tests", () => {
   });
 
   const createActiveGameState = (): GameState => {
-    const gameState = GameState.newGame(123, testDeck);
+    const gameState = GameState.newGame(123, testDeck, 42);
 
     // Start the game and shuffle
     gameState.startGame();
