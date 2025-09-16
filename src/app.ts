@@ -5,6 +5,7 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
+import { formatCommanderContainerHtmlFragment } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
@@ -659,11 +660,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       // Return the commander container
-      const { getCardImageUrl } = await import("./types.js");
-      const html = `<div class="commander-container">
-        <img src="${getCardImageUrl(flippedCard.card.scryfallId, "normal", flippedCard.currentFace)}" alt="${flippedCard.card.name}" class="mtg-card-image commander-image" />
-        ${flippedCard.card.twoFaced ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${flippedCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
-      </div>`;
+      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId);
       res.send(html);
 
     } catch (error) {
