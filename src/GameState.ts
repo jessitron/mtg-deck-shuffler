@@ -491,7 +491,7 @@ export class GameState {
     };
   }
 
-  public flipCard(gameCardIndex: number): WhatHappened {
+  public flipCard(gameCardIndex: number): this {
     const gameCard = this.gameCards[gameCardIndex];
     if (!gameCard) {
       throw new Error(`Game card with index ${gameCardIndex} not found`);
@@ -504,9 +504,7 @@ export class GameState {
     // Toggle the face
     gameCard.currentFace = gameCard.currentFace === "front" ? "back" : "front";
 
-    return {
-      flipped: [gameCard]
-    };
+    return this;
   }
 
   public undo(gameEventIndex: number): GameState {

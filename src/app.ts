@@ -643,7 +643,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const whatHappened = game.flipCard(gameCardIndex);
+      game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -659,8 +659,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Return the commander container with flip animation
-      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId, true);
+      // Return the commander container
+      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId);
       res.send(html);
 
     } catch (error) {
@@ -682,11 +682,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const whatHappened = game.flipCard(gameCardIndex);
+      game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game, whatHappened);
+      const html = formatGameHtmlSection(game);
       res.send(html);
 
     } catch (error) {

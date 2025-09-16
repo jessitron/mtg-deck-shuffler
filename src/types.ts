@@ -40,7 +40,6 @@ export interface WhatHappened {
   shuffling?: boolean;
   movedRight?: import("./port-persist-state/types.js").GameCard[];
   movedLeft?: import("./port-persist-state/types.js").GameCard[];
-  flipped?: import("./port-persist-state/types.js").GameCard[];
 }
 
 export function shuffleDeck(deck: Deck): Library {
