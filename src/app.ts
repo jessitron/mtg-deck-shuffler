@@ -659,8 +659,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Return the commander container
-      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId);
+      // Return the commander container with flip animation
+      const html = formatCommanderContainerHtmlFragment(flippedCard, gameId, true);
       res.send(html);
 
     } catch (error) {
