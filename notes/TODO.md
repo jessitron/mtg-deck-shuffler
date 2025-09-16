@@ -1,16 +1,10 @@
 # Things to change
 
-- cards with two faces! we need a way to flip them. The image links are the same except 'back' instead of 'front'. To know whether a card has two faces, in the archidekt data, I need to check whether card.oracleCard.faces.length == 2 (usually it's empty) See @notes/FEATURE-flip-card.md
-
-[x] this was super messy while commanders are not in the gameCards array. I think it's fixed now. See @notes/STRUCTURE-commanders-are-cards.md
-
-[x] and changing that is a freaking mess because of all the hard-coded GameState construction in tests. OK, I changed the snapshot tests, they were the biggest problem.
-
 ## Bugs to fix
 
-- Nature's Lore from Dogs & Cats Deck had no multiverse ID. Gatherer link didn't work. ... nothing in that deck has a multiverseid
+- 'Play' doesn't work for two-faced cards. The animation doesn't work, and it is always gonna copy the front.
 
-## More Things to change
+## More Things to change  
 
 - the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
 
