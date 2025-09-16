@@ -3,53 +3,51 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { formatLibraryModalHtml } from "../../src/view/deck-review/deck-review-page.js";
 import { GameState } from "../../src/GameState.js";
-import { CardDefinition } from "../../src/types.js";
-import { GameCard, GameStatus, LibraryLocation, PERSISTED_GAME_STATE_VERSION } from "../../src/port-persist-state/types.js";
+import { Deck } from "../../src/types.js";
+import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
 
 describe("Library Modal HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
 
-  // Create fake card data for testing
-  const createFakeCard = (name: string, index: number): CardDefinition => ({
-    name,
-    scryfallId: `fake-scryfall-id-${index.toString().padStart(3, "0")}`,
-    multiverseid: 1000 + index,
+  // Load real deck data for testing
+  let testDeck: Deck;
+
+  beforeAll(async () => {
+    const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
+    const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
+    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
   });
 
-  const createFakeGameState = (cardCount: number): GameState => {
-    // Cards must be sorted by name for GameState validation
-    const cards = Array.from({ length: cardCount }, (_, i) =>
-      createFakeCard(`Card ${String.fromCharCode(65 + i)}`, i)
-    ).sort((a, b) => a.name.localeCompare(b.name));
+  const createGameStateWithMultipleLibraryCards = (): GameState => {
+    const gameState = GameState.newGame(123, testDeck, 42);
+    gameState.startGame();
+    return gameState;
+  };
 
-    const commanders = [createFakeCard("Test Commander", 1)];
+  const createGameStateWithSingleLibraryCard = (): GameState => {
+    const gameState = GameState.newGame(456, testDeck, 42);
+    gameState.startGame();
 
-    // Create game cards in library
-    const gameCards: GameCard[] = cards.map((card, index) => ({
-      card,
-      location: { type: "Library", position: index } as LibraryLocation,
-      gameCardIndex: index,
-      isCommander: false,
-    }));
+    // Draw all but one card to leave just one in library
+    const libraryCards = gameState.listLibrary();
+    for (let i = 0; i < libraryCards.length - 1; i++) {
+      gameState.draw();
+    }
 
-    const persistedState = {
-      version: PERSISTED_GAME_STATE_VERSION,
-      gameId: 123,
-      status: GameStatus.Active,
-      deckProvenance: {
-        retrievedDate: new Date("2024-01-01T12:00:00Z"),
-        sourceUrl: "https://archidekt.com/decks/12345/test-game",
-        deckSource: "test" as const,
-      },
-      commanders,
-      deckName: "Test Library Modal Deck",
-      deckId: 12345,
-      totalCards: cards.length,
-      gameCards,
-      events: [],
-    };
+    return gameState;
+  };
 
-    return GameState.fromPersistedGameState(persistedState);
+  const createGameStateWithEmptyLibrary = (): GameState => {
+    const gameState = GameState.newGame(789, testDeck, 42);
+    gameState.startGame();
+
+    // Draw all cards to empty the library
+    const libraryCards = gameState.listLibrary();
+    for (let i = 0; i < libraryCards.length; i++) {
+      gameState.draw();
+    }
+
+    return gameState;
   };
 
   async function ensureSnapshotDir() {
@@ -75,7 +73,7 @@ describe("Library Modal HTML Snapshot Tests", () => {
 
   it("formatLibraryModalHtml with multiple library cards", async () => {
     const snapshotFile = "library-modal-multiple-cards.html";
-    const gameState = createFakeGameState(5);
+    const gameState = createGameStateWithMultipleLibraryCards();
     const actualHtml = formatLibraryModalHtml(gameState);
 
     // Normalize HTML for consistent comparison
@@ -107,7 +105,7 @@ describe("Library Modal HTML Snapshot Tests", () => {
 
   it("formatLibraryModalHtml with single library card", async () => {
     const snapshotFile = "library-modal-single-card.html";
-    const gameState = createFakeGameState(1);
+    const gameState = createGameStateWithSingleLibraryCard();
     const actualHtml = formatLibraryModalHtml(gameState);
 
     // Normalize HTML for consistent comparison
@@ -139,7 +137,7 @@ describe("Library Modal HTML Snapshot Tests", () => {
 
   it("formatLibraryModalHtml with empty library", async () => {
     const snapshotFile = "library-modal-empty.html";
-    const gameState = createFakeGameState(0);
+    const gameState = createGameStateWithEmptyLibrary();
     const actualHtml = formatLibraryModalHtml(gameState);
 
     // Normalize HTML for consistent comparison
