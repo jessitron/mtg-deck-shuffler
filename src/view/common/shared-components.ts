@@ -16,7 +16,7 @@ export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[]
             .map(
               (gameCard) => `<div class="commander-container">
                 <img src="${getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace)}" alt="${gameCard.card.name}" class="mtg-card-image commander-image" />
-                ${gameCard.card.twoFaced && gameId ? `<button class="flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
+                ${gameCard.card.twoFaced && gameId ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
               </div>`
             )
             .join("")}

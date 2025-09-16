@@ -629,7 +629,50 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Flip a two-faced card - Returns only the card container being flipped
+  // Flip a commander card - Returns only the commander container
+  app.post("/flip-commander/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const gameCardIndex = parseInt(req.params.gameCardIndex);
+    try {
+
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      const game = GameState.fromPersistedGameState(persistedGame);
+      game.flipCard(gameCardIndex);
+
+      await persistStatePort.save(game.toPersistedGameState());
+
+      // Get the flipped card and verify it's a commander
+      const flippedCard = game.getCards().find(gc => gc.gameCardIndex === gameCardIndex);
+      if (!flippedCard) {
+        res.status(404).send(`<div>Card not found</div>`);
+        return;
+      }
+
+      if (flippedCard.location.type !== "CommandZone") {
+        res.status(400).send(`<div>Card is not a commander</div>`);
+        return;
+      }
+
+      // Return the commander container
+      const { getCardImageUrl } = await import("./types.js");
+      const html = `<div class="commander-container">
+        <img src="${getCardImageUrl(flippedCard.card.scryfallId, "normal", flippedCard.currentFace)}" alt="${flippedCard.card.name}" class="mtg-card-image commander-image" />
+        ${flippedCard.card.twoFaced ? `<button class="flip-button" hx-post="/flip-commander/${gameId}/${flippedCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
+      </div>`;
+      res.send(html);
+
+    } catch (error) {
+      console.error("Error flipping commander:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip commander"}</div>`);
+    }
+  });
+
+  // Flip a regular card - Returns updated game board
   app.post("/flip-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
@@ -646,28 +689,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      // Get the flipped card and determine its location to return the proper HTML
-      const flippedCard = game.getCards().find(gc => gc.gameCardIndex === gameCardIndex);
-      if (!flippedCard) {
-        res.status(404).send(`<div>Card not found</div>`);
-        return;
-      }
-
-      // Return the updated card container based on its location
-      if (flippedCard.location.type === "CommandZone") {
-        // Return the commander container
-        const { getCardImageUrl } = await import("./types.js");
-        const html = `<div class="commander-container">
-          <img src="${getCardImageUrl(flippedCard.card.scryfallId, "normal", flippedCard.currentFace)}" alt="${flippedCard.card.name}" class="mtg-card-image commander-image" />
-          ${flippedCard.card.twoFaced ? `<button class="flip-button" hx-post="/flip-card/${gameId}/${flippedCard.gameCardIndex}" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>` : ''}
-        </div>`;
-        res.send(html);
-      } else {
-        // For non-commander cards, we need to return the full card container with all actions
-        // Just return the entire game section to be safe
-        const html = formatGameHtmlSection(game);
-        res.send(html);
-      }
+      const html = formatGameHtmlSection(game);
+      res.send(html);
 
     } catch (error) {
       console.error("Error flipping card:", error);
