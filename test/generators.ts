@@ -243,10 +243,9 @@ export const testProvenance: DeckProvenance = {
 // Simple helper for creating test PersistedGameState - to be used in PersistStateAdapter tests
 export const createTestPersistedGameState = (gameId: number, deck: Deck, status: any = 0) => {
   // Combine all cards and sort alphabetically (maintaining existing invariant)
-  const allCards = [
-    ...deck.commanders.map(card => ({ card, isCommander: true })),
-    ...deck.cards.map(card => ({ card, isCommander: false }))
-  ].sort((a, b) => a.card.name.localeCompare(b.card.name));
+  const allCards = [...deck.commanders.map((card) => ({ card, isCommander: true })), ...deck.cards.map((card) => ({ card, isCommander: false }))].sort((a, b) =>
+    a.card.name.localeCompare(b.card.name)
+  );
 
   let commanderPositionCounter = 0;
   let libraryPositionCounter = 0;
@@ -262,7 +261,7 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
   }));
 
   return {
-    version: 5 as const, // PERSISTED_GAME_STATE_VERSION
+    version: 6 as const, // PERSISTED_GAME_STATE_VERSION
     gameId,
     status,
     deckProvenance: deck.provenance,

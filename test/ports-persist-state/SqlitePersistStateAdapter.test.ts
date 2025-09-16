@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import * as fc from "fast-check";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
+import { ShuffleEvent } from "../../src/GameEvents.js";
 
 describe("SqlitePersistStateAdapter", () => {
   let adapter: SqlitePersistStateAdapter;
@@ -105,9 +106,7 @@ describe("SqlitePersistStateAdapter", () => {
     const retrieved = await adapter.retrieve(gameStateWithDate.gameId);
 
     expect(retrieved).not.toBe(null);
-    expect(
-      new Date(retrieved!.deckProvenance.retrievedDate)
-    ).toEqual(testDate);
+    expect(new Date(retrieved!.deckProvenance.retrievedDate)).toEqual(testDate);
   });
 
   it("should persist data across adapter instances", async () => {
@@ -137,8 +136,11 @@ describe("SqlitePersistStateAdapter", () => {
         },
         {
           eventName: "shuffle library",
-          moves: [],
           gameEventIndex: 1,
+          compactMoves: [
+            [1, 0, 1],
+            [2, 1, 0],
+          ],
         },
       ],
     };
@@ -149,5 +151,6 @@ describe("SqlitePersistStateAdapter", () => {
     expect(retrieved?.events).toHaveLength(2);
     expect(retrieved?.events[0].gameEventIndex).toBe(0);
     expect(retrieved?.events[1].gameEventIndex).toBe(1);
+    expect((retrieved?.events[1] as ShuffleEvent).compactMoves).toEqual((gameStateWithEvents.events[1] as ShuffleEvent).compactMoves);
   });
 });

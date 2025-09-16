@@ -55,7 +55,7 @@ export interface GameCard {
   currentFace: "front" | "back";
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 5 = 5;
+export const PERSISTED_GAME_STATE_VERSION: 6 = 6;
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;

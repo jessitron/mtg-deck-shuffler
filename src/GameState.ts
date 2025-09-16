@@ -13,7 +13,7 @@ import {
   PERSISTED_GAME_STATE_VERSION,
   printLocation,
 } from "./port-persist-state/types.js";
-import { CardMove, GameEvent, GameEventLog, StartGameEvent } from "./GameEvents.js";
+import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
@@ -265,7 +265,10 @@ export class GameState {
 
     this.validateInvariants();
 
-    this.eventLog.record({ eventName: "shuffle library", moves });
+    this.eventLog.record({
+      eventName: "shuffle library",
+      compactMoves: compactShuffleMoves(moves),
+    });
     return { shuffling: true };
   }
 
@@ -515,7 +518,7 @@ export class GameState {
   public undo(gameEventIndex: number): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
-    const moves = applyToState.eventName === "shuffle library" ? applyToState.moves : [applyToState.move];
+    const moves = applyToState.eventName === "shuffle library" ? expandCompactShuffleMoves(applyToState.compactMoves) : [applyToState.move];
     moves.forEach((move) => this.executeMove(move, false));
     this.eventLog.recordUndo(event);
     return this;

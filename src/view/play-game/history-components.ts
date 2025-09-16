@@ -51,7 +51,7 @@ function describeEvent(event: GameEvent, game: GameState): string {
       const cardNameLink = formatCardNameAsGathererLink(card);
       return `${description}: ${cardNameLink}`;
     case "shuffle library":
-      return `Shuffle ${event.moves.length} cards in library`;
+      return `Shuffle ${event.compactMoves.length} cards in library`;
     case "start game":
       return "Start game";
     case "undo":

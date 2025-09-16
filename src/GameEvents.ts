@@ -12,7 +12,8 @@ export type CardMove = {
 
 export type ShuffleEvent = {
   eventName: "shuffle library";
-  moves: CardMove[];
+  // Compact representation: [cardIndex, fromPosition, toPosition] for cards that actually moved
+  compactMoves: [number, number, number][];
 };
 
 export type StartEvent = {
@@ -35,6 +36,30 @@ export type UndoEvent = {
   eventName: "undo";
   originalEventIndex: number;
 };
+
+/**
+ * Convert compact shuffle moves to full CardMove array
+ */
+export function expandCompactShuffleMoves(compactMoves: [number, number, number][]): CardMove[] {
+  return compactMoves.map(([gameCardIndex, fromPosition, toPosition]) => ({
+    gameCardIndex,
+    fromLocation: { type: "Library" as const, position: fromPosition },
+    toLocation: { type: "Library" as const, position: toPosition },
+  }));
+}
+
+/**
+ * Convert full CardMove array to compact shuffle moves (only for Library-to-Library moves)
+ */
+export function compactShuffleMoves(moves: CardMove[]): [number, number, number][] {
+  return moves
+    .filter((move) => move.fromLocation.type === "Library" && move.toLocation.type === "Library" && move.fromLocation.position !== move.toLocation.position)
+    .map((move) => [
+      move.gameCardIndex,
+      (move.fromLocation as { type: "Library"; position: number }).position,
+      (move.toLocation as { type: "Library"; position: number }).position,
+    ]);
+}
 
 export function nameMove(move: CardMove): string {
   // from library to hand is "Draw"
@@ -128,13 +153,18 @@ export class GameEventLog {
           },
         };
       case "shuffle library":
+        // Use compact moves if available, otherwise fall back to full moves
+        const movesToReverse = expandCompactShuffleMoves(event.compactMoves);
+
         return {
           eventName: "shuffle library",
-          moves: event.moves.map((move) => ({
-            gameCardIndex: move.gameCardIndex,
-            fromLocation: move.toLocation,
-            toLocation: move.fromLocation,
-          })),
+          compactMoves: compactShuffleMoves(
+            movesToReverse.map((move) => ({
+              gameCardIndex: move.gameCardIndex,
+              fromLocation: move.toLocation,
+              toLocation: move.fromLocation,
+            }))
+          ),
         };
       case "start game":
         throw new Error("there isn't an event for reversing start game");
