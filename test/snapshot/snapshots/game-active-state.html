@@ -1,6 +1,9 @@
 <div id="game-container">
 <div id="command-zone">
+<div class="commander-container">
 <img src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image commander-image" />
+<button class="flip-button" hx-post="/flip-commander/123/3" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>
+</div>
 </div>
 <div id="game-details" class="game-details game-active">
 <h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
@@ -60,16 +63,16 @@ hx-swap="outerHTML">Reveal</button>
 <h3>Revealed Cards (1)</h3>
 <div id="revealed-cards-area" class="revealed-cards-area">
 <div id="card-container-4" class="revealed-card-container">
-<img src="https://cards.scryfall.io/normal/front/f/3/f3537373-ef54-4578-9d05-6216420ee349.jpg"
-alt="Esper Sentinel"
+<img src="https://cards.scryfall.io/normal/front/5/4/54734347-eee7-4c52-b514-7342afeccabd.jpg"
+alt="Homeward Path"
 class="mtg-card-image revealed-card"
-title="Esper Sentinel" />
+title="Homeward Path" />
 <div class="card-buttons">
 <button class="play-button"
 hx-post="/play-card/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="f3537373-ef54-4578-9d05-6216420ee349"
+data-card-id="54734347-eee7-4c52-b514-7342afeccabd"
 title="Copy image and remove from revealed">
 Play
 </button><button class="put-in-hand-button"
