@@ -7,508 +7,608 @@
     {
       "name": "Faldorn, Dread Wolf Herald",
       "scryfallId": "213e530e-33a9-4358-b43b-4a276a7e7190",
-      "multiverseid": 567104
+      "multiverseid": 567104,
+      "twoFaced": false
     }
   ],
   "cards": [
     {
       "name": "Arcane Signet",
       "scryfallId": "5b245a5b-5a99-4d22-99ef-3f5bf49c3262",
-      "multiverseid": 563181
+      "multiverseid": 563181,
+      "twoFaced": false
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "fb71aebf-f5d3-45ee-91a4-51088f7141ec",
-      "multiverseid": 567697
+      "multiverseid": 567697,
+      "twoFaced": false
     },
     {
       "name": "Aurora Phoenix",
       "scryfallId": "f9a9e74f-8090-4314-9361-97777fb7b63a",
-      "multiverseid": 567595
+      "multiverseid": 567595,
+      "twoFaced": false
     },
     {
       "name": "Battle Mammoth",
       "scryfallId": "df70dc42-a28c-41f3-8d3b-5a0375aab326",
-      "multiverseid": 567635
+      "multiverseid": 567635,
+      "twoFaced": false
     },
     {
       "name": "Beanstalk Giant // Fertile Footsteps",
       "scryfallId": "47ceeea0-dd47-4c5c-a713-f100571107b9",
-      "multiverseid": 567636
+      "multiverseid": 567636,
+      "twoFaced": true
     },
     {
       "name": "Beast Within",
       "scryfallId": "1eb2fba2-fa50-4e69-aadb-d28479f821b9",
-      "multiverseid": 567637
+      "multiverseid": 567637,
+      "twoFaced": false
     },
     {
       "name": "Blighted Woodland",
       "scryfallId": "94e0ad38-31b3-46ba-9999-9b6ff57906ae",
-      "multiverseid": 567698
+      "multiverseid": 567698,
+      "twoFaced": false
     },
     {
       "name": "Bloodbraid Elf",
       "scryfallId": "8174d8dc-ae0f-469f-a773-cb294540ea25",
-      "multiverseid": 567656
+      "multiverseid": 567656,
+      "twoFaced": false
     },
     {
       "name": "Bonecrusher Giant // Stomp",
       "scryfallId": "b5b71cd2-de35-451f-b16e-2e3936169407",
-      "multiverseid": 567598
+      "multiverseid": 567598,
+      "twoFaced": true
     },
     {
       "name": "Castle Embereth",
       "scryfallId": "eb4126a6-5f79-4dad-8d18-e279ca19d2b2",
-      "multiverseid": 567700
+      "multiverseid": 567700,
+      "twoFaced": false
     },
     {
       "name": "Chaos Wand",
       "scryfallId": "e065e040-80c1-47d3-a425-28381e5a29f2",
-      "multiverseid": 567672
+      "multiverseid": 567672,
+      "twoFaced": false
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "801b5a17-491e-416f-990d-187fce6c4ce4",
-      "multiverseid": 567704
+      "multiverseid": 567704,
+      "twoFaced": false
     },
     {
       "name": "Command Tower",
       "scryfallId": "7eafe88e-ab38-442c-b147-bb01cc81178d",
-      "multiverseid": 563234
+      "multiverseid": 563234,
+      "twoFaced": false
     },
     {
       "name": "Cultivate",
       "scryfallId": "8960ee5f-1109-4569-9191-be68a2c0f7d5",
-      "multiverseid": 567638
+      "multiverseid": 567638,
+      "twoFaced": false
     },
     {
       "name": "Delayed Blast Fireball",
       "scryfallId": "e59903e3-a344-4218-9d41-8b19a9bc8311",
-      "multiverseid": 567241
+      "multiverseid": 567241,
+      "twoFaced": false
     },
     {
       "name": "Demon Bolt",
       "scryfallId": "3c43bf24-399e-407a-a563-bb04f93a0497",
-      "multiverseid": 567604
+      "multiverseid": 567604,
+      "twoFaced": false
     },
     {
       "name": "Dire Fleet Daredevil",
       "scryfallId": "3bfc626c-1a03-4346-ba07-e26385ec0fd8",
-      "multiverseid": 567605
+      "multiverseid": 567605,
+      "twoFaced": false
     },
     {
       "name": "Dream Pillager",
       "scryfallId": "68c8d00f-23f3-429a-a99a-a6f3ec21c137",
-      "multiverseid": 567608
+      "multiverseid": 567608,
+      "twoFaced": false
     },
     {
       "name": "Durnan of the Yawning Portal",
       "scryfallId": "53f287c1-bd17-43fd-b0e3-b52472b0aa70",
-      "multiverseid": 567150
+      "multiverseid": 567150,
+      "twoFaced": false
     },
     {
       "name": "Embereth Shieldbreaker // Battle Display",
       "scryfallId": "e2f789b3-3274-4a93-b44b-fabc44c1833c",
-      "multiverseid": 567609
+      "multiverseid": 567609,
+      "twoFaced": true
     },
     {
       "name": "End-Raze Forerunners",
       "scryfallId": "47a74813-6d8b-4b11-8a5e-5b83d2d98c34",
-      "multiverseid": 567639
+      "multiverseid": 567639,
+      "twoFaced": false
     },
     {
       "name": "Escape to the Wilds",
       "scryfallId": "b8d58c2d-2bff-4d25-a023-0a6342167f5f",
-      "multiverseid": 567660
+      "multiverseid": 567660,
+      "twoFaced": false
     },
     {
       "name": "Etali, Primal Storm",
       "scryfallId": "fc068c30-d677-4a7d-815f-f976e4787f4b",
-      "multiverseid": 567610
+      "multiverseid": 567610,
+      "twoFaced": false
     },
     {
       "name": "Explore",
       "scryfallId": "f7a70945-8f8b-4dc7-a78b-d285694f9f50",
-      "multiverseid": 567640
+      "multiverseid": 567640,
+      "twoFaced": false
     },
     {
       "name": "Ezuri's Predation",
       "scryfallId": "39dbfc25-f06e-4b5f-848f-6dd4cb72079e",
-      "multiverseid": 567641
+      "multiverseid": 567641,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Forest",
       "scryfallId": "3812e162-3511-4988-b2a1-3bc6945ac45b",
-      "multiverseid": 571103
+      "multiverseid": 571103,
+      "twoFaced": false
     },
     {
       "name": "Game Trail",
       "scryfallId": "104635cd-b75f-4111-a948-50740f9cfff8",
-      "multiverseid": 567711
+      "multiverseid": 567711,
+      "twoFaced": false
     },
     {
       "name": "Greater Gargadon",
       "scryfallId": "574fd1ec-fb73-4bf1-b3e4-5f976bf40a62",
-      "multiverseid": 567613
+      "multiverseid": 567613,
+      "twoFaced": false
     },
     {
       "name": "Green Slime",
       "scryfallId": "b1beaaae-9406-4beb-8e74-d278822434c7",
-      "multiverseid": 567245
+      "multiverseid": 567245,
+      "twoFaced": false
     },
     {
       "name": "Grumgully, the Generous",
       "scryfallId": "3aa40ce2-76df-43bd-a59e-7cf6e4f46a1d",
-      "multiverseid": 567664
+      "multiverseid": 567664,
+      "twoFaced": false
     },
     {
       "name": "Gruul Turf",
       "scryfallId": "104961dc-6684-474e-b126-4fcd95849f98",
-      "multiverseid": 567712
+      "multiverseid": 567712,
+      "twoFaced": false
     },
     {
       "name": "Highland Forest",
       "scryfallId": "59f64a32-c364-4750-94ed-d4d71c1a3511",
-      "multiverseid": 567713
+      "multiverseid": 567713,
+      "twoFaced": false
     },
     {
       "name": "Hornet Queen",
       "scryfallId": "6ef7c1a5-eb4e-4f75-ad41-1b84741ecab1",
-      "multiverseid": 567642
+      "multiverseid": 567642,
+      "twoFaced": false
     },
     {
       "name": "Ignite the Future",
       "scryfallId": "58e82d3c-a7ec-4e0d-a17e-51ebd2f3f331",
-      "multiverseid": 567614
+      "multiverseid": 567614,
+      "twoFaced": false
     },
     {
       "name": "Izzet Chemister",
       "scryfallId": "2970c679-562b-48ee-b631-2e3016f4f37c",
-      "multiverseid": 567615
+      "multiverseid": 567615,
+      "twoFaced": false
     },
     {
       "name": "Jeska's Will",
       "scryfallId": "3308993d-8bfb-477a-887a-89ed35577f57",
-      "multiverseid": 567616
+      "multiverseid": 567616,
+      "twoFaced": false
     },
     {
       "name": "Journey to the Lost City",
       "scryfallId": "967b19ce-062d-470c-8716-425a8dec0e18",
-      "multiverseid": 567246
+      "multiverseid": 567246,
+      "twoFaced": false
     },
     {
       "name": "Kessig Wolf Run",
       "scryfallId": "814e1393-34e1-4a31-98c5-97a3290a105b",
-      "multiverseid": 567715
+      "multiverseid": 567715,
+      "twoFaced": false
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "979741db-e720-4efd-bc8e-2bf47e777ab3",
-      "multiverseid": 567643
+      "multiverseid": 567643,
+      "twoFaced": false
     },
     {
       "name": "Laelia, the Blade Reforged",
       "scryfallId": "2e90b9b2-8e8e-4b00-b3a0-b26dd4551550",
-      "multiverseid": 567618
+      "multiverseid": 567618,
+      "twoFaced": false
     },
     {
       "name": "Light Up the Stage",
       "scryfallId": "7034ff11-f7c7-4f33-be89-491ffec84833",
-      "multiverseid": 567619
+      "multiverseid": 567619,
+      "twoFaced": false
     },
     {
       "name": "Lovestruck Beast // Heart's Desire",
       "scryfallId": "4f80af9c-07a1-46f1-b869-146fda5922f4",
-      "multiverseid": 567644
+      "multiverseid": 567644,
+      "twoFaced": true
     },
     {
       "name": "Managorger Hydra",
       "scryfallId": "330aefb9-629f-4d07-94d4-7252f17f85ba",
-      "multiverseid": 567645
+      "multiverseid": 567645,
+      "twoFaced": false
     },
     {
       "name": "Mizzium Mortars",
       "scryfallId": "544b2931-0af1-4743-b7c1-91e1dc9294d5",
-      "multiverseid": 567620
+      "multiverseid": 567620,
+      "twoFaced": false
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "5ec4581f-382c-420b-a2aa-bc8010b48c7d",
-      "multiverseid": 567718
+      "multiverseid": 567718,
+      "twoFaced": false
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "1a9d3a6d-4e6a-42ac-84de-3a3868ca026d",
-      "multiverseid": 567719
+      "multiverseid": 567719,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
-      "multiverseid": 571098
+      "multiverseid": 571098,
+      "twoFaced": false
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "276f49f9-019b-44cb-a551-0fba9851ecc7",
-      "multiverseid": 567721
+      "multiverseid": 567721,
+      "twoFaced": false
     },
     {
       "name": "Nalfeshnee",
       "scryfallId": "b7717617-706a-4338-a207-dd8c08feb1c3",
-      "multiverseid": 567243
+      "multiverseid": 567243,
+      "twoFaced": false
     },
     {
       "name": "Natural Reclamation",
       "scryfallId": "70c4fc42-e5c6-438b-a4b7-1f77e818597f",
-      "multiverseid": 567646
+      "multiverseid": 567646,
+      "twoFaced": false
     },
     {
       "name": "Nature's Lore",
       "scryfallId": "543d1e79-cac6-455c-9fda-f13c849579d6",
-      "multiverseid": 563127
+      "multiverseid": 563127,
+      "twoFaced": false
     },
     {
       "name": "Outpost Siege",
       "scryfallId": "a9f75fce-f0a1-4dec-982d-a86925c6e9d4",
-      "multiverseid": 567621
+      "multiverseid": 567621,
+      "twoFaced": false
     },
     {
       "name": "Passionate Archaeologist",
       "scryfallId": "bd5bbfa6-e5f4-413d-b132-ebae32d38657",
-      "multiverseid": 567149
+      "multiverseid": 567149,
+      "twoFaced": false
     },
     {
       "name": "Primeval Bounty",
       "scryfallId": "03b9e943-9650-434c-a540-35ca7c96365b",
-      "multiverseid": 567647
+      "multiverseid": 567647,
+      "twoFaced": false
     },
     {
       "name": "Raging Ravine",
       "scryfallId": "a1c981c0-3e40-4339-a4c8-ad96c7fb68d2",
-      "multiverseid": 567727
+      "multiverseid": 567727,
+      "twoFaced": false
     },
     {
       "name": "Return of the Wildspeaker",
       "scryfallId": "863e0861-7934-4141-9ef5-120339ac83a5",
-      "multiverseid": 567648
+      "multiverseid": 567648,
+      "twoFaced": false
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "ec23f98d-1bfd-4957-92b6-0a1da823db0f",
-      "multiverseid": 567649
+      "multiverseid": 567649,
+      "twoFaced": false
     },
     {
       "name": "Sandwurm Convergence",
       "scryfallId": "94d2a7e4-acc9-4236-a78f-c3171fd0c9ec",
-      "multiverseid": 567650
+      "multiverseid": 567650,
+      "twoFaced": false
     },
     {
       "name": "Sarevok's Tome",
       "scryfallId": "5a470690-a05d-4311-963c-50cbf779846d",
-      "multiverseid": 567250
+      "multiverseid": 567250,
+      "twoFaced": false
     },
     {
       "name": "Search for Tomorrow",
       "scryfallId": "4c5e2fbf-87fe-48cd-aeca-e37f0a388a30",
-      "multiverseid": 567651
+      "multiverseid": 567651,
+      "twoFaced": false
     },
     {
       "name": "Sol Ring",
       "scryfallId": "199cde21-5bc3-49cd-acd4-bae3af6e5881",
-      "multiverseid": 567688
+      "multiverseid": 567688,
+      "twoFaced": false
     },
     {
       "name": "Spinerock Knoll",
       "scryfallId": "1e5d990f-0eb4-4634-a446-7783915e8eec",
-      "multiverseid": 567733
+      "multiverseid": 567733,
+      "twoFaced": false
     },
     {
       "name": "Stolen Strategy",
       "scryfallId": "6e37dde2-2ad4-46c6-ab69-8487f8a2bdb6",
-      "multiverseid": 567624
+      "multiverseid": 567624,
+      "twoFaced": false
     },
     {
       "name": "Sweet-Gum Recluse",
       "scryfallId": "2d3c6325-450d-47f3-a69b-cdfc25ae65e6",
-      "multiverseid": 567652
+      "multiverseid": 567652,
+      "twoFaced": false
     },
     {
       "name": "Tectonic Giant",
       "scryfallId": "a90ec9d7-9784-481d-91d9-3dd1f666f7d1",
-      "multiverseid": 567625
+      "multiverseid": 567625,
+      "twoFaced": false
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "e544fd20-019a-4f96-891a-6eab4d6a01d7",
-      "multiverseid": 567738
+      "multiverseid": 567738,
+      "twoFaced": false
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "1a8b9fd8-ece4-45ba-9fdf-4cb715bcd843",
-      "multiverseid": 567742
+      "multiverseid": 567742,
+      "twoFaced": false
     },
     {
       "name": "Terramorph",
       "scryfallId": "47c7b2ac-1263-402a-b2a0-bc31f61e66b5",
-      "multiverseid": 567653
+      "multiverseid": 567653,
+      "twoFaced": false
     },
     {
       "name": "Three Visits",
       "scryfallId": "cad698c3-687e-4b73-88d2-fd0ac7d755c5",
-      "multiverseid": 567654
+      "multiverseid": 567654,
+      "twoFaced": false
     },
     {
       "name": "Tlincalli Hunter // Retrieve Prey",
       "scryfallId": "45b5d677-ff77-47ce-8612-bae70c326e4e",
-      "multiverseid": 567247
+      "multiverseid": 567247,
+      "twoFaced": true
     },
     {
       "name": "Urabrask the Hidden",
       "scryfallId": "93970fae-19f7-41dd-9750-ca428ae1de7a",
-      "multiverseid": 567628
+      "multiverseid": 567628,
+      "twoFaced": false
     },
     {
       "name": "Venture Forth",
       "scryfallId": "bb4db814-3821-47ea-9e33-0e9f49128a36",
-      "multiverseid": 567248
+      "multiverseid": 567248,
+      "twoFaced": false
     },
     {
       "name": "Vivien, Champion of the Wilds",
       "scryfallId": "e11dc967-ae38-4c19-bf54-b3209e203b39",
-      "multiverseid": 567655
+      "multiverseid": 567655,
+      "twoFaced": false
     },
     {
       "name": "Volcanic Torrent",
       "scryfallId": "b7fb4747-6734-4fbf-ab45-6d6e67f41be7",
-      "multiverseid": 567630
+      "multiverseid": 567630,
+      "twoFaced": false
     },
     {
       "name": "Warstorm Surge",
       "scryfallId": "dbe1bfe0-0be7-496d-94db-e8028d4d9493",
-      "multiverseid": 567632
+      "multiverseid": 567632,
+      "twoFaced": false
     },
     {
       "name": "Wild-Magic Sorcerer",
       "scryfallId": "b5de7331-d0c6-46a5-b08d-0e032db63223",
-      "multiverseid": 567633
+      "multiverseid": 567633,
+      "twoFaced": false
     },
     {
       "name": "Xenagos, the Reveler",
       "scryfallId": "edfd90ee-a142-4a80-b383-802bbee2cef1",
-      "multiverseid": 567670
+      "multiverseid": 567670,
+      "twoFaced": false
     },
     {
       "name": "Arasta of the Endless Web",
       "scryfallId": "558b6db8-4a54-4d25-98e7-e27efc1cab38",
-      "multiverseid": 567634
+      "multiverseid": 567634,
+      "twoFaced": false
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:13:05.226Z",
+    "retrievedDate": "2025-09-16T02:17:37.426Z",
     "sourceUrl": "https://archidekt.com/decks/2788675",
     "deckSource": "archidekt"
   }

@@ -7,508 +7,608 @@
     {
       "name": "Caesar, Legion's Emperor",
       "scryfallId": "246a7176-98bc-4f54-aa61-38747420f178",
-      "multiverseid": 652040
+      "multiverseid": 652040,
+      "twoFaced": false
     }
   ],
   "cards": [
     {
       "name": "Ash Barrens",
       "scryfallId": "78a90148-5ed9-42db-a64f-4735676d82e3",
-      "multiverseid": 653216
+      "multiverseid": 653216,
+      "twoFaced": false
     },
     {
       "name": "Bastion of Remembrance",
       "scryfallId": "a2e2c839-4f55-482c-baaa-aa8f7c8e9b7d",
-      "multiverseid": 653145
+      "multiverseid": 653145,
+      "twoFaced": false
     },
     {
       "name": "Battle of Hoover Dam",
       "scryfallId": "59c0f13a-4e83-4e0b-a790-1f78b5ee6a64",
-      "multiverseid": 652098
+      "multiverseid": 652098,
+      "twoFaced": false
     },
     {
       "name": "Canyon Slough",
       "scryfallId": "2e8c66f9-64af-48aa-b24b-3ef76596378a",
-      "multiverseid": 653219
+      "multiverseid": 653219,
+      "twoFaced": false
     },
     {
       "name": "Clifftop Retreat",
       "scryfallId": "e6454d4c-5820-4cb8-b625-3d9a09778513",
-      "multiverseid": 653221
+      "multiverseid": 653221,
+      "twoFaced": false
     },
     {
       "name": "Command Tower",
       "scryfallId": "952cb8cb-633c-468f-8ef5-54ff91ddfb22",
-      "multiverseid": 653222
+      "multiverseid": 653222,
+      "twoFaced": false
     },
     {
       "name": "Deadly Dispute",
       "scryfallId": "f1ee1e37-bde7-4208-8851-718f2ae1c540",
-      "multiverseid": 653147
+      "multiverseid": 653147,
+      "twoFaced": false
     },
     {
       "name": "Desdemona, Freedom's Edge",
       "scryfallId": "cc38d445-1752-4921-bb83-5afcdf655015",
-      "multiverseid": 652188
+      "multiverseid": 652188,
+      "twoFaced": false
     },
     {
       "name": "Diamond City",
       "scryfallId": "3e9bd49a-e9f1-4543-b04a-777a9e5a55ec",
-      "multiverseid": 652234
+      "multiverseid": 652234,
+      "twoFaced": false
     },
     {
       "name": "Dragonskull Summit",
       "scryfallId": "09ed078f-74b4-4ae8-9b2f-6b7b629fff1f",
-      "multiverseid": 653224
+      "multiverseid": 653224,
+      "twoFaced": false
     },
     {
       "name": "ED-E, Lonesome Eyebot",
       "scryfallId": "b319f0e1-6f18-4fea-9f72-a21da5513aa4",
-      "multiverseid": 652218
+      "multiverseid": 652218,
+      "twoFaced": false
     },
     {
       "name": "Elder Arthur Maxson",
       "scryfallId": "049771b0-69ad-4f2d-8567-47e8a87b4496",
-      "multiverseid": 652189
+      "multiverseid": 652189,
+      "twoFaced": false
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "8bafeaa8-5e77-4303-b30a-23fd137b7c35",
-      "multiverseid": 653187
+      "multiverseid": 653187,
+      "twoFaced": false
     },
     {
       "name": "Boomer Scrapper",
       "scryfallId": "193d0316-9b94-4ccb-9103-509e6a0963a1",
-      "multiverseid": 652182
+      "multiverseid": 652182,
+      "twoFaced": false
     },
     {
       "name": "Captain of the Watch",
       "scryfallId": "936e77d4-ab74-4123-9225-879493e5ad79",
-      "multiverseid": 653120
+      "multiverseid": 653120,
+      "twoFaced": false
     },
     {
       "name": "Assemble the Legion",
       "scryfallId": "95c04498-91cf-42d2-a349-44df4d022746",
-      "multiverseid": 653173
+      "multiverseid": 653173,
+      "twoFaced": false
     },
     {
       "name": "Black Market",
       "scryfallId": "275b4c56-e17e-49ec-8946-0e95a4bfa1ae",
-      "multiverseid": 653146
+      "multiverseid": 653146,
+      "twoFaced": false
     },
     {
       "name": "Desolate Mire",
       "scryfallId": "05f38637-8cdc-42bb-b164-85596b6b14b9",
-      "multiverseid": 652233
+      "multiverseid": 652233,
+      "twoFaced": false
     },
     {
       "name": "Aradesh, the Founder",
       "scryfallId": "6701dae4-348e-40f6-9db4-d6f0039be831",
-      "multiverseid": 652096
+      "multiverseid": 652096,
+      "twoFaced": false
     },
     {
       "name": "Butch DeLoria, Tunnel Snake",
       "scryfallId": "d6ed508c-ff2c-444c-8149-34b29e2fbebe",
-      "multiverseid": 652130
+      "multiverseid": 652130,
+      "twoFaced": false
     },
     {
       "name": "Colonel Autumn",
       "scryfallId": "ca0c3e5a-64f3-40b5-8080-1c53be45aa40",
-      "multiverseid": 652185
+      "multiverseid": 652185,
+      "twoFaced": false
     },
     {
       "name": "Craig Boone, Novac Guard",
       "scryfallId": "63d83dad-21c3-4777-84b0-3c775585b5fd",
-      "multiverseid": 652187
+      "multiverseid": 652187,
+      "twoFaced": false
     },
     {
       "name": "Rose, Cutthroat Raider",
       "scryfallId": "f803a510-99fe-467a-be3b-9301497ec7ec",
-      "multiverseid": 652153
+      "multiverseid": 652153,
+      "twoFaced": false
     },
     {
       "name": "Mr. House, President and CEO",
       "scryfallId": "23eb3cf7-c90d-4bfa-b125-4fbcb5614468",
-      "multiverseid": 652070
+      "multiverseid": 652070,
+      "twoFaced": false
     },
     {
       "name": "Mysterious Stranger",
       "scryfallId": "063ca0fa-1947-48da-86f9-76dd00dfb550",
-      "multiverseid": 652150
+      "multiverseid": 652150,
+      "twoFaced": false
     },
     {
       "name": "Ruthless Radrat",
       "scryfallId": "a4542e34-2905-41ce-9182-a432c8f2c451",
-      "multiverseid": 652135
+      "multiverseid": 652135,
+      "twoFaced": false
     },
     {
       "name": "Survivor's Med Kit",
       "scryfallId": "a2f30a39-aad3-45da-8f03-50b1d1806b00",
-      "multiverseid": 652231
+      "multiverseid": 652231,
+      "twoFaced": false
     },
     {
       "name": "Wasteland Raider",
       "scryfallId": "9eae2596-013a-4e9b-982b-e0fc8d1e78bf",
-      "multiverseid": 652139
+      "multiverseid": 652139,
+      "twoFaced": false
     },
     {
       "name": "Talisman of Conviction",
       "scryfallId": "dec517e7-bc4d-4986-ba3c-89866a29991d",
-      "multiverseid": 653206
+      "multiverseid": 653206,
+      "twoFaced": false
     },
     {
       "name": "Wear // Tear",
       "scryfallId": "427d7eab-24e3-41de-8444-d9a2c96f526f",
-      "multiverseid": 653185
+      "multiverseid": 653185,
+      "twoFaced": true
     },
     {
       "name": "Yes Man, Personal Securitron",
       "scryfallId": "8e2fac8c-a574-4414-ac68-632fc822ddbb",
-      "multiverseid": 652116
+      "multiverseid": 652116,
+      "twoFaced": false
     },
     {
       "name": "Tainted Peak",
       "scryfallId": "d1374839-bdef-4e55-a7bc-906340439605",
-      "multiverseid": 653263
+      "multiverseid": 653263,
+      "twoFaced": false
     },
     {
       "name": "Temple of Malice",
       "scryfallId": "6ccf18ae-ca47-46b0-85c2-235e75d5b42b",
-      "multiverseid": 653270
+      "multiverseid": 653270,
+      "twoFaced": false
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "9e014eb8-e325-40f7-9ac8-d53508c88925",
-      "multiverseid": 653273
+      "multiverseid": 653273,
+      "twoFaced": false
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "76721cda-494e-4c77-8b0f-43238a35c040",
-      "multiverseid": 653275
+      "multiverseid": 653275,
+      "twoFaced": false
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "548805de-3e2e-4f1f-aafc-d89fddf8288a",
-      "multiverseid": 653276
+      "multiverseid": 653276,
+      "twoFaced": false
     },
     {
       "name": "Tainted Field",
       "scryfallId": "2c46db1a-7066-47bd-a033-cc55f9b4004e",
-      "multiverseid": 653261
+      "multiverseid": 653261,
+      "twoFaced": false
     },
     {
       "name": "Windbrisk Heights",
       "scryfallId": "22b7b9f1-8428-4c04-a918-7c0e1d3906ed",
-      "multiverseid": 653278
+      "multiverseid": 653278,
+      "twoFaced": false
     },
     {
       "name": "Talisman of Hierarchy",
       "scryfallId": "9b55b6cb-820c-4782-9f63-e04fe46e02d2",
-      "multiverseid": 653210
+      "multiverseid": 653210,
+      "twoFaced": false
     },
     {
       "name": "Talisman of Indulgence",
       "scryfallId": "113410ff-d25e-4f25-a6c2-236bcf4c8486",
-      "multiverseid": 653211
+      "multiverseid": 653211,
+      "twoFaced": false
     },
     {
       "name": "The Nipton Lottery",
       "scryfallId": "a0abd847-1c9d-45cd-a6d1-3a0cda3687cb",
-      "multiverseid": 652200
+      "multiverseid": 652200,
+      "twoFaced": false
     },
     {
       "name": "Thrill-Kill Disciple",
       "scryfallId": "5628e781-9f12-49ed-a575-6b467d39510b",
-      "multiverseid": 652155
+      "multiverseid": 652155,
+      "twoFaced": false
     },
     {
       "name": "Vault 75: Middle School",
       "scryfallId": "3992e262-0491-4379-b74b-13cc8b63065e",
-      "multiverseid": 652114
+      "multiverseid": 652114,
+      "twoFaced": false
     },
     {
       "name": "White Glove Gourmand",
       "scryfallId": "c5bf1f6c-4653-4734-9bd7-af689a1b679d",
-      "multiverseid": 652211
+      "multiverseid": 652211,
+      "twoFaced": false
     },
     {
       "name": "Wild Wasteland",
       "scryfallId": "ca1024d6-c5f1-48f5-9081-fb90d0c46fdb",
-      "multiverseid": 652158
+      "multiverseid": 652158,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "237204ad-ab8a-496f-a093-48d00417350b",
-      "multiverseid": 654256
+      "multiverseid": 654256,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "237204ad-ab8a-496f-a093-48d00417350b",
-      "multiverseid": 654256
+      "multiverseid": 654256,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "237204ad-ab8a-496f-a093-48d00417350b",
-      "multiverseid": 654256
+      "multiverseid": 654256,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "237204ad-ab8a-496f-a093-48d00417350b",
-      "multiverseid": 654256
+      "multiverseid": 654256,
+      "twoFaced": false
     },
     {
       "name": "Vault 11: Voter's Dilemma",
       "scryfallId": "4bafcd4e-5693-4c23-be79-75653fcd214c",
-      "multiverseid": 652208
+      "multiverseid": 652208,
+      "twoFaced": false
     },
     {
       "name": "V.A.T.S.",
       "scryfallId": "512df222-0db0-4b24-9372-d0c01b181b91",
-      "multiverseid": 652137
+      "multiverseid": 652137,
+      "twoFaced": false
     },
     {
       "name": "Fervent Charge",
       "scryfallId": "dd2a0286-a16d-4e48-a295-da8232ddc9c7",
-      "multiverseid": 653178
+      "multiverseid": 653178,
+      "twoFaced": false
     },
     {
       "name": "General's Enforcer",
       "scryfallId": "682373ca-d358-4a21-8cbe-4a41d8636b42",
-      "multiverseid": 653180
+      "multiverseid": 653180,
+      "twoFaced": false
     },
     {
       "name": "Heroic Reinforcements",
       "scryfallId": "912a87f7-208d-4312-ba37-7a844b9c89ab",
-      "multiverseid": 653181
+      "multiverseid": 653181,
+      "twoFaced": false
     },
     {
       "name": "Hour of Reckoning",
       "scryfallId": "ca614808-4e09-4839-ae80-7c3ea6cf61fd",
-      "multiverseid": 653124
+      "multiverseid": 653124,
+      "twoFaced": false
     },
     {
       "name": "Impassioned Orator",
       "scryfallId": "574c3028-c942-4257-a825-c25318915593",
-      "multiverseid": 653125
+      "multiverseid": 653125,
+      "twoFaced": false
     },
     {
       "name": "Intangible Virtue",
       "scryfallId": "805c99f1-ab4d-4072-a8b7-7e2818adbc97",
-      "multiverseid": 653126
+      "multiverseid": 653126,
+      "twoFaced": false
     },
     {
       "name": "Isolated Chapel",
       "scryfallId": "377487dd-d72a-4169-bfe1-29e36c3e3d1f",
-      "multiverseid": 653232
+      "multiverseid": 653232,
+      "twoFaced": false
     },
     {
       "name": "Kellogg, Dangerous Mind",
       "scryfallId": "f2b22b32-be24-48e3-aa81-9256190df02c",
-      "multiverseid": 652193
+      "multiverseid": 652193,
+      "twoFaced": false
     },
     {
       "name": "Lethal Scheme",
       "scryfallId": "1b2c44f7-7b54-4cdf-8f53-ab78c515795b",
-      "multiverseid": 653148
+      "multiverseid": 653148,
+      "twoFaced": false
     },
     {
       "name": "MacCready, Lamplight Mayor",
       "scryfallId": "0d2251ce-2d5b-4d0d-8dc9-44f6b40aa7cf",
-      "multiverseid": 652195
+      "multiverseid": 652195,
+      "twoFaced": false
     },
     {
       "name": "Marshal's Anthem",
       "scryfallId": "98cea75f-f2b0-47f3-a40b-ee43a6132ead",
-      "multiverseid": 653129
+      "multiverseid": 653129,
+      "twoFaced": false
     },
     {
       "name": "Martial Coup",
       "scryfallId": "7a3f7f71-625a-46ec-bce8-6bd934f2a275",
-      "multiverseid": 653130
+      "multiverseid": 653130,
+      "twoFaced": false
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "4afe6542-9f4b-4afa-8568-272916125b4a",
-      "multiverseid": 653237
+      "multiverseid": 653237,
+      "twoFaced": false
     },
     {
       "name": "Overseer of Vault 76",
       "scryfallId": "35848917-d658-4c3b-b675-4f0185f76dc4",
-      "multiverseid": 652106
+      "multiverseid": 652106,
+      "twoFaced": false
     },
     {
       "name": "Powder Ganger",
       "scryfallId": "7bb57c73-a454-450d-9db9-67501bf4559d",
-      "multiverseid": 652152
+      "multiverseid": 652152,
+      "twoFaced": false
     },
     {
       "name": "Ruinous Ultimatum",
       "scryfallId": "8fe3d5d4-7fa3-47ba-9963-23814bce063d",
-      "multiverseid": 653183
+      "multiverseid": 653183,
+      "twoFaced": false
     },
     {
       "name": "Securitron Squadron",
       "scryfallId": "b689a206-aec3-4a31-95cf-3d4b840db04c",
-      "multiverseid": 652110
+      "multiverseid": 652110,
+      "twoFaced": false
     },
     {
       "name": "Shadowblood Ridge",
       "scryfallId": "ff02d5d2-2f71-4b93-a0c5-5964ec08524f",
-      "multiverseid": 653251
+      "multiverseid": 653251,
+      "twoFaced": false
     },
     {
       "name": "Skullclamp",
       "scryfallId": "7160f5f0-8ab8-4ec1-a84c-cfe49cb43b8d",
-      "multiverseid": 653201
+      "multiverseid": 653201,
+      "twoFaced": false
     },
     {
       "name": "Smoldering Marsh",
       "scryfallId": "567e219b-2961-4f02-9be0-7776210b62b0",
-      "multiverseid": 653255
+      "multiverseid": 653255,
+      "twoFaced": false
     },
     {
       "name": "Sol Ring",
       "scryfallId": "e675f7e2-5c9f-4912-8fdd-daaeda284a3d",
-      "multiverseid": 653202
+      "multiverseid": 653202,
+      "twoFaced": false
     },
     {
       "name": "Stolen Strategy",
       "scryfallId": "40f0adad-207a-4504-9636-75f7ccb5b60c",
-      "multiverseid": 653155
+      "multiverseid": 653155,
+      "twoFaced": false
     },
     {
       "name": "Luck Bobblehead",
       "scryfallId": "13281945-47ff-464d-96ef-9b26ef6783fa",
-      "multiverseid": 652222
+      "multiverseid": 652222,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
-      "multiverseid": 654258
+      "multiverseid": 654258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
-      "multiverseid": 654258
+      "multiverseid": 654258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
-      "multiverseid": 654258
+      "multiverseid": 654258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
-      "multiverseid": 654258
+      "multiverseid": 654258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
-      "multiverseid": 654258
+      "multiverseid": 654258,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
-      "multiverseid": 654252
+      "multiverseid": 654252,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
-      "multiverseid": 654252
+      "multiverseid": 654252,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
-      "multiverseid": 654252
+      "multiverseid": 654252,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
-      "multiverseid": 654252
+      "multiverseid": 654252,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
-      "multiverseid": 654252
+      "multiverseid": 654252,
+      "twoFaced": false
     },
     {
       "name": "Charisma Bobblehead",
       "scryfallId": "35f61330-869f-448c-8374-1cbac7c23454",
-      "multiverseid": 652217
+      "multiverseid": 652217,
+      "twoFaced": false
     },
     {
       "name": "Gary Clone",
       "scryfallId": "a45346ac-54a9-4fda-bde7-92ff75ac34f7",
-      "multiverseid": 652103
+      "multiverseid": 652103,
+      "twoFaced": false
     },
     {
       "name": "Keeper of the Accord",
       "scryfallId": "367dad7f-774a-47c2-892b-b3952dbed683",
-      "multiverseid": 653127
+      "multiverseid": 653127,
+      "twoFaced": false
     },
     {
       "name": "Legate Lanius, Caesar's Ace",
       "scryfallId": "f14eb369-b8e3-4abf-9e77-79d1fe5b426f",
-      "multiverseid": 652194
+      "multiverseid": 652194,
+      "twoFaced": false
     },
     {
       "name": "Morbid Opportunist",
       "scryfallId": "7357386d-7ede-449f-bd30-b19a08921d86",
-      "multiverseid": 653149
+      "multiverseid": 653149,
+      "twoFaced": false
     },
     {
       "name": "Paladin Elizabeth Taggerdy",
       "scryfallId": "a24fd14b-cfd1-43db-b155-3187a1063d92",
-      "multiverseid": 652201
+      "multiverseid": 652201,
+      "twoFaced": false
     },
     {
       "name": "Pitiless Plunderer",
       "scryfallId": "47255b76-2c77-4e94-938d-b9d3497798ec",
-      "multiverseid": 653150
+      "multiverseid": 653150,
+      "twoFaced": false
     },
     {
       "name": "Sierra, Nuka's Biggest Fan",
       "scryfallId": "641dd97c-6577-4cab-8672-56f870477961",
-      "multiverseid": 652112
+      "multiverseid": 652112,
+      "twoFaced": false
     },
     {
       "name": "Entrapment Maneuver",
       "scryfallId": "2707cc0c-20ea-4241-b0b0-7000a713fb63",
-      "multiverseid": 653123
+      "multiverseid": 653123,
+      "twoFaced": false
     },
     {
       "name": "Secure the Wastes",
       "scryfallId": "97649f03-262c-485d-8cb4-75cc4f65ec53",
-      "multiverseid": 653134
+      "multiverseid": 653134,
+      "twoFaced": false
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "912837ca-054a-49a8-a5c5-5e65631b0575",
-      "multiverseid": 653226
+      "multiverseid": 653226,
+      "twoFaced": false
     },
     {
       "name": "Memorial to Glory",
       "scryfallId": "fb3cc476-3d5b-42d3-afe2-54c639770181",
-      "multiverseid": 653234
+      "multiverseid": 653234,
+      "twoFaced": false
     },
     {
       "name": "Nomad Outpost",
       "scryfallId": "ad17aa04-dbd8-4d49-898c-bf0a64cdb827",
-      "multiverseid": 653240
+      "multiverseid": 653240,
+      "twoFaced": false
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "ff6415d9-14fb-4a58-aa86-bf2063037684",
-      "multiverseid": 653242
+      "multiverseid": 653242,
+      "twoFaced": false
     },
     {
       "name": "Anguished Unmaking",
       "scryfallId": "272e0f42-a881-4ee2-94a5-2c740863aa74",
-      "multiverseid": 653172
+      "multiverseid": 653172,
+      "twoFaced": false
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:05:49.434Z",
+    "retrievedDate": "2025-09-16T02:17:54.177Z",
     "sourceUrl": "https://archidekt.com/decks/6821707",
     "deckSource": "archidekt"
   }

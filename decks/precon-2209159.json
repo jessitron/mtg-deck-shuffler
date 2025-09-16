@@ -7,508 +7,608 @@
     {
       "name": "Teferi, Temporal Archmage",
       "scryfallId": "80eec0bd-9eb4-4360-b97b-9c7985a63343",
-      "multiverseid": 389712
+      "multiverseid": 389712,
+      "twoFaced": false
     }
   ],
   "cards": [
     {
       "name": "Artisan of Kozilek",
       "scryfallId": "8aa2bcb6-f6c5-42a5-a436-b75b2be76225",
-      "multiverseid": 389433
+      "multiverseid": 389433,
+      "twoFaced": false
     },
     {
       "name": "Azure Mage",
       "scryfallId": "fbcc8a09-3437-4737-98f5-229d7c64dedc",
-      "multiverseid": 389435
+      "multiverseid": 389435,
+      "twoFaced": false
     },
     {
       "name": "Breaching Leviathan",
       "scryfallId": "e02e3d91-7723-46b8-a393-855b6e89d877",
-      "multiverseid": 389451
+      "multiverseid": 389451,
+      "twoFaced": false
     },
     {
       "name": "Brine Elemental",
       "scryfallId": "0b93a80e-7b93-4ea8-96b7-f48d5159360f",
-      "multiverseid": 389452
+      "multiverseid": 389452,
+      "twoFaced": false
     },
     {
       "name": "Deep-Sea Kraken",
       "scryfallId": "f08d001b-de70-4f9f-8a3a-f16327ddddc0",
-      "multiverseid": 389481
+      "multiverseid": 389481,
+      "twoFaced": false
     },
     {
       "name": "Dulcet Sirens",
       "scryfallId": "045e15fd-6e2b-40a9-89ba-2f4c9e445416",
-      "multiverseid": 389497
+      "multiverseid": 389497,
+      "twoFaced": false
     },
     {
       "name": "Fathom Seer",
       "scryfallId": "a80b0701-2f79-4c94-9796-01fb9f5422b9",
-      "multiverseid": 389514
+      "multiverseid": 389514,
+      "twoFaced": false
     },
     {
       "name": "Fog Bank",
       "scryfallId": "7600b28a-6ea3-46d1-9cb3-2b031aa872ba",
-      "multiverseid": 389522
+      "multiverseid": 389522,
+      "twoFaced": false
     },
     {
       "name": "Frost Titan",
       "scryfallId": "bb9eec79-1926-46eb-b9e0-6ba12a441495",
-      "multiverseid": 389531
+      "multiverseid": 389531,
+      "twoFaced": false
     },
     {
       "name": "Hoverguard Sweepers",
       "scryfallId": "0e2ec92b-dab0-4c9e-af7d-0041b22e852f",
-      "multiverseid": 389549
+      "multiverseid": 389549,
+      "twoFaced": false
     },
     {
       "name": "Ixidron",
       "scryfallId": "adb5abf8-ee5a-449f-86e9-f826db3c2ff7",
-      "multiverseid": 389565
+      "multiverseid": 389565,
+      "twoFaced": false
     },
     {
       "name": "Lorthos, the Tidemaker",
       "scryfallId": "f32bd753-1677-49ef-8717-27276bd44f38",
-      "multiverseid": 389582
+      "multiverseid": 389582,
+      "twoFaced": false
     },
     {
       "name": "Mulldrifter",
       "scryfallId": "4f3deefe-28bc-4e45-a0a0-ab03167e2e81",
-      "multiverseid": 389605
+      "multiverseid": 389605,
+      "twoFaced": false
     },
     {
       "name": "Phyrexian Ingester",
       "scryfallId": "c633c12c-0f47-4212-bf87-4e444da0bf52",
-      "multiverseid": 389631
+      "multiverseid": 389631,
+      "twoFaced": false
     },
     {
       "name": "Reef Worm",
       "scryfallId": "b35e03a9-73e7-4577-a544-d39470678c76",
-      "multiverseid": 389652
+      "multiverseid": 389652,
+      "twoFaced": false
     },
     {
       "name": "Riptide Survivor",
       "scryfallId": "cedabc94-2ed9-4a1e-a4d3-d004da959380",
-      "multiverseid": 389657
+      "multiverseid": 389657,
+      "twoFaced": false
     },
     {
       "name": "Sea Gate Oracle",
       "scryfallId": "84290bc3-a157-41ba-911a-a480a760632c",
-      "multiverseid": 389664
+      "multiverseid": 389664,
+      "twoFaced": false
     },
     {
       "name": "Shaper Parasite",
       "scryfallId": "60c6d339-6a2b-41d1-b534-0e7daa3738df",
-      "multiverseid": 389668
+      "multiverseid": 389668,
+      "twoFaced": false
     },
     {
       "name": "Sphinx of Jwar Isle",
       "scryfallId": "1304a4e9-fd62-4b97-b652-b4ebc0f6ebe8",
-      "multiverseid": 389686
+      "multiverseid": 389686,
+      "twoFaced": false
     },
     {
       "name": "Sphinx of Magosi",
       "scryfallId": "1b92959c-0995-4bcc-b937-fc272c4540e9",
-      "multiverseid": 389687
+      "multiverseid": 389687,
+      "twoFaced": false
     },
     {
       "name": "Sphinx of Uthuun",
       "scryfallId": "77a77dbb-4737-44dc-aa78-2df77ba53a57",
-      "multiverseid": 389688
+      "multiverseid": 389688,
+      "twoFaced": false
     },
     {
       "name": "Steel Hellkite",
       "scryfallId": "bac51f10-77e4-49ee-a817-c8e56c48198a",
-      "multiverseid": 389693
+      "multiverseid": 389693,
+      "twoFaced": false
     },
     {
       "name": "Stitcher Geralf",
       "scryfallId": "156945db-4575-48ae-b9c9-e3b341353cd7",
-      "multiverseid": 389694
+      "multiverseid": 389694,
+      "twoFaced": false
     },
     {
       "name": "Stormsurge Kraken",
       "scryfallId": "ed1c1121-593d-4780-a1d0-5fbd2c09a9f2",
-      "multiverseid": 389695
+      "multiverseid": 389695,
+      "twoFaced": false
     },
     {
       "name": "Willbender",
       "scryfallId": "4101979b-852e-432d-bf45-cddbaa0d86ea",
-      "multiverseid": 389748
+      "multiverseid": 389748,
+      "twoFaced": false
     },
     {
       "name": "Cackling Counterpart",
       "scryfallId": "5a040326-2412-4d7b-b96d-07047c3433c8",
-      "multiverseid": 389456
+      "multiverseid": 389456,
+      "twoFaced": false
     },
     {
       "name": "Cyclonic Rift",
       "scryfallId": "1fadf1e3-4f4f-4f58-b8a9-11e14bb550f8",
-      "multiverseid": 389477
+      "multiverseid": 389477,
+      "twoFaced": false
     },
     {
       "name": "Dismiss",
       "scryfallId": "3ad95896-897a-460b-9356-8f2bf6cc4994",
-      "multiverseid": 389486
+      "multiverseid": 389486,
+      "twoFaced": false
     },
     {
       "name": "Domineering Will",
       "scryfallId": "daec34ec-964f-456b-b1af-4eb4fb41c968",
-      "multiverseid": 389488
+      "multiverseid": 389488,
+      "twoFaced": false
     },
     {
       "name": "Exclude",
       "scryfallId": "970864e0-5488-4b6f-9316-3e3b4098770e",
-      "multiverseid": 389510
+      "multiverseid": 389510,
+      "twoFaced": false
     },
     {
       "name": "Intellectual Offering",
       "scryfallId": "63de9e39-3c16-452f-9f06-4c1298752f57",
-      "multiverseid": 389559
+      "multiverseid": 389559,
+      "twoFaced": false
     },
     {
       "name": "Into the Roil",
       "scryfallId": "8637eef0-f5a8-41ce-b885-7d4b26e417d3",
-      "multiverseid": 389560
+      "multiverseid": 389560,
+      "twoFaced": false
     },
     {
       "name": "Pongify",
       "scryfallId": "726b3de5-f2c1-4a92-9039-f61ae9575839",
-      "multiverseid": 389638
+      "multiverseid": 389638,
+      "twoFaced": false
     },
     {
       "name": "Stroke of Genius",
       "scryfallId": "cb387039-8451-4dd8-84e9-6eacda25be89",
-      "multiverseid": 389697
+      "multiverseid": 389697,
+      "twoFaced": false
     },
     {
       "name": "Turn to Frog",
       "scryfallId": "3df2fb18-f029-4126-b7b4-10ad2d156520",
-      "multiverseid": 389730
+      "multiverseid": 389730,
+      "twoFaced": false
     },
     {
       "name": "Aether Gale",
       "scryfallId": "d1ae3672-8361-4bdb-979a-75dd909d77ba",
-      "multiverseid": 389424
+      "multiverseid": 389424,
+      "twoFaced": false
     },
     {
       "name": "Call to Mind",
       "scryfallId": "9218f8f4-89fd-46a1-928b-2e0e8e2b4458",
-      "multiverseid": 389458
+      "multiverseid": 389458,
+      "twoFaced": false
     },
     {
       "name": "Compulsive Research",
       "scryfallId": "d983c51e-b35a-49ba-a1f5-4319a79fa089",
-      "multiverseid": 389467
+      "multiverseid": 389467,
+      "twoFaced": false
     },
     {
       "name": "Concentrate",
       "scryfallId": "83d15e43-1c51-47f1-aebf-1adf65e9fef7",
-      "multiverseid": 389468
+      "multiverseid": 389468,
+      "twoFaced": false
     },
     {
       "name": "Distorting Wake",
       "scryfallId": "77e28743-3694-48ef-9f16-0a3a4ff7e934",
-      "multiverseid": 389487
+      "multiverseid": 389487,
+      "twoFaced": false
     },
     {
       "name": "Rite of Replication",
       "scryfallId": "863c3968-d23d-4bf3-97ab-fbf2f6015a70",
-      "multiverseid": 389658
+      "multiverseid": 389658,
+      "twoFaced": false
     },
     {
       "name": "Rush of Knowledge",
       "scryfallId": "a77a20a0-257c-4c58-9761-9d39e7a1bce0",
-      "multiverseid": 389660
+      "multiverseid": 389660,
+      "twoFaced": false
     },
     {
       "name": "Assault Suit",
       "scryfallId": "5074e318-ef4e-4779-988c-d2e043c41cfb",
-      "multiverseid": 389434
+      "multiverseid": 389434,
+      "twoFaced": false
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "61e0a922-1689-484f-abb3-902ce1c964ca",
-      "multiverseid": 389466
+      "multiverseid": 389466,
+      "twoFaced": false
     },
     {
       "name": "Crown of Doom",
       "scryfallId": "201a7054-e4e8-4e5a-a002-319fcd210994",
-      "multiverseid": 389473
+      "multiverseid": 389473,
+      "twoFaced": false
     },
     {
       "name": "Dreamstone Hedron",
       "scryfallId": "873354bb-f13f-4bf7-a699-20cea5cdf641",
-      "multiverseid": 389492
+      "multiverseid": 389492,
+      "twoFaced": false
     },
     {
       "name": "Everflowing Chalice",
       "scryfallId": "2dd9f287-fc13-4bb1-851f-8d76c5cc12d8",
-      "multiverseid": 389506
+      "multiverseid": 389506,
+      "twoFaced": false
     },
     {
       "name": "Mind Stone",
       "scryfallId": "b793a8e9-5870-4190-a204-c241b0e67f97",
-      "multiverseid": 389596
+      "multiverseid": 389596,
+      "twoFaced": false
     },
     {
       "name": "Nevinyrral's Disk",
       "scryfallId": "f68f0da7-133e-474f-9db9-b576bbaf9511",
-      "multiverseid": 389616
+      "multiverseid": 389616,
+      "twoFaced": false
     },
     {
       "name": "Sapphire Medallion",
       "scryfallId": "afdbb860-2bea-4cf6-8959-6a19ba1de56c",
-      "multiverseid": 389662
+      "multiverseid": 389662,
+      "twoFaced": false
     },
     {
       "name": "Sky Diamond",
       "scryfallId": "61d27478-5a03-47a8-a185-8a0c9b4e0474",
-      "multiverseid": 389677
+      "multiverseid": 389677,
+      "twoFaced": false
     },
     {
       "name": "Sol Ring",
       "scryfallId": "b79cb394-eb91-4b3b-91d4-c6a0f723feb1",
-      "multiverseid": 389681
+      "multiverseid": 389681,
+      "twoFaced": false
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "4b224614-6374-4c42-8715-daa0b73ca05c",
-      "multiverseid": 389705
+      "multiverseid": 389705,
+      "twoFaced": false
     },
     {
       "name": "Thran Dynamo",
       "scryfallId": "66820678-d3f0-44c2-9820-438f85a224e2",
-      "multiverseid": 389718
+      "multiverseid": 389718,
+      "twoFaced": false
     },
     {
       "name": "Tormod's Crypt",
       "scryfallId": "930d2796-9766-4d15-8999-26b668fe2cf6",
-      "multiverseid": 389723
+      "multiverseid": 389723,
+      "twoFaced": false
     },
     {
       "name": "Unstable Obelisk",
       "scryfallId": "b331b231-f31f-479f-80a9-f32c64d35096",
-      "multiverseid": 389733
+      "multiverseid": 389733,
+      "twoFaced": false
     },
     {
       "name": "Ur-Golem's Eye",
       "scryfallId": "7a2ea921-8ef9-4a31-b484-73375e828d34",
-      "multiverseid": 389734
+      "multiverseid": 389734,
+      "twoFaced": false
     },
     {
       "name": "Worn Powerstone",
       "scryfallId": "f2372952-fe79-4301-916b-e7332ab45794",
-      "multiverseid": 389754
+      "multiverseid": 389754,
+      "twoFaced": false
     },
     {
       "name": "Fool's Demise",
       "scryfallId": "3ed39bd7-d059-4a44-9f03-0f628dcdb119",
-      "multiverseid": 389523
+      "multiverseid": 389523,
+      "twoFaced": false
     },
     {
       "name": "Infinite Reflection",
       "scryfallId": "bb6c9287-7af5-4741-9555-c256b82c5b76",
-      "multiverseid": 389557
+      "multiverseid": 389557,
+      "twoFaced": false
     },
     {
       "name": "Well of Ideas",
       "scryfallId": "54227dc5-ca00-4b23-9fb0-f1dd7ff5691a",
-      "multiverseid": 389742
+      "multiverseid": 389742,
+      "twoFaced": false
     },
     {
       "name": "Coral Atoll",
       "scryfallId": "b92121b6-b12e-4fe3-9afb-f2c77c2796ac",
-      "multiverseid": 389471
+      "multiverseid": 389471,
+      "twoFaced": false
     },
     {
       "name": "Ghost Quarter",
       "scryfallId": "ccc1c460-64c5-47be-a633-439863baa6a1",
-      "multiverseid": 389534
+      "multiverseid": 389534,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "0d0f2d84-bf11-4d39-8510-84a14e9f0c23",
-      "multiverseid": 389561
+      "multiverseid": 389561,
+      "twoFaced": false
     },
     {
       "name": "Lonely Sandbar",
       "scryfallId": "f4060ed0-127c-46af-85b1-a76e89d4b7d5",
-      "multiverseid": 389580
+      "multiverseid": 389580,
+      "twoFaced": false
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "8aef73ec-5c98-4ac5-82a7-8e838cd36562",
-      "multiverseid": 389611
+      "multiverseid": 389611,
+      "twoFaced": false
     },
     {
       "name": "Remote Isle",
       "scryfallId": "34aa8ed8-1790-4fd3-9fe4-bef7b2884739",
-      "multiverseid": 389654
+      "multiverseid": 389654,
+      "twoFaced": false
     },
     {
       "name": "Tectonic Edge",
       "scryfallId": "94b9d7af-3e6f-4227-bb7d-a17d6f250535",
-      "multiverseid": 389711
+      "multiverseid": 389711,
+      "twoFaced": false
     },
     {
       "name": "Zoetic Cavern",
       "scryfallId": "efe046b5-50dd-46ce-acad-d14c18cca0fd",
-      "multiverseid": 389758
+      "multiverseid": 389758,
+      "twoFaced": false
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:12:57.464Z",
+    "retrievedDate": "2025-09-16T02:17:29.639Z",
     "sourceUrl": "https://archidekt.com/decks/2209159",
     "deckSource": "archidekt"
   }

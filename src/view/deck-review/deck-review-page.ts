@@ -93,7 +93,7 @@ export function formatLibraryModalHtml(game: GameState): string {
 }
 
 function formatDeckReviewHtmlSection(game: GameState): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(game.listCommanders());
+  const commanderImageHtml = formatCommanderImageHtmlFragment(game.listCommanders(), game.gameId);
   const gameDetailsHtml = formatGameDetails(game);
   const libraryStackHtml = formatLibraryStack();
 

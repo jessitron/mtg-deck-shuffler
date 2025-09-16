@@ -7,508 +7,608 @@
     {
       "name": "Saheeli, the Gifted",
       "scryfallId": "ca095559-ac77-4186-8d9b-b75ce0607582",
-      "multiverseid": 450645
+      "multiverseid": 450645,
+      "twoFaced": false
     }
   ],
   "cards": [
     {
       "name": "Ancient Stone Idol",
       "scryfallId": "d3975f5c-5dcd-40b8-9311-01a173c40381",
-      "multiverseid": 450654
+      "multiverseid": 450654,
+      "twoFaced": false
     },
     {
       "name": "Bosh, Iron Golem",
       "scryfallId": "fb87532e-9d81-444d-b3ef-69b2528b6311",
-      "multiverseid": 451153
+      "multiverseid": 451153,
+      "twoFaced": false
     },
     {
       "name": "Brudiclad, Telchor Engineer",
       "scryfallId": "c8f6fd4d-7761-482c-a641-97eab1553e6a",
-      "multiverseid": 450640
+      "multiverseid": 450640,
+      "twoFaced": false
     },
     {
       "name": "Chief of the Foundry",
       "scryfallId": "145ae70d-8d0d-4bf2-b50c-af75b6874899",
-      "multiverseid": 451154
+      "multiverseid": 451154,
+      "twoFaced": false
     },
     {
       "name": "Darksteel Juggernaut",
       "scryfallId": "22c4148a-477d-419e-8d6b-5d558048e0db",
-      "multiverseid": 451157
+      "multiverseid": 451157,
+      "twoFaced": false
     },
     {
       "name": "Duplicant",
       "scryfallId": "ea87504f-b373-448b-8444-46fdc3d93250",
-      "multiverseid": 451160
+      "multiverseid": 451160,
+      "twoFaced": false
     },
     {
       "name": "Etherium Sculptor",
       "scryfallId": "3d800fe1-4b53-4002-9a0a-1f0b2461b800",
-      "multiverseid": 451045
+      "multiverseid": 451045,
+      "twoFaced": false
     },
     {
       "name": "Geode Golem",
       "scryfallId": "05faf1a6-df6b-49fa-bbba-aaf52c39643f",
-      "multiverseid": 450657
+      "multiverseid": 450657,
+      "twoFaced": false
     },
     {
       "name": "Hellkite Igniter",
       "scryfallId": "01d74967-10b2-424b-a0d6-8b35bf99a2a0",
-      "multiverseid": 451079
+      "multiverseid": 451079,
+      "twoFaced": false
     },
     {
       "name": "Inkwell Leviathan",
       "scryfallId": "06ae6a96-b01a-4ba3-b8c1-87ef56ace103",
-      "multiverseid": 451046
+      "multiverseid": 451046,
+      "twoFaced": false
     },
     {
       "name": "Loyal Apprentice",
       "scryfallId": "b5fef5fe-3e59-4fd6-8a88-7c1cee56892f",
-      "multiverseid": 450624
+      "multiverseid": 450624,
+      "twoFaced": false
     },
     {
       "name": "Loyal Drake",
       "scryfallId": "1c719b37-6508-45bc-8cda-36aa85561e3b",
-      "multiverseid": 450611
+      "multiverseid": 450611,
+      "twoFaced": false
     },
     {
       "name": "Maverick Thopterist",
       "scryfallId": "28eb8ef1-5feb-4af1-bc39-dda5ba69546d",
-      "multiverseid": 451140
+      "multiverseid": 451140,
+      "twoFaced": false
     },
     {
       "name": "Myr Battlesphere",
       "scryfallId": "88d33b63-9a49-4c67-9932-270997f6625b",
-      "multiverseid": 451167
+      "multiverseid": 451167,
+      "twoFaced": false
     },
     {
       "name": "Pilgrim's Eye",
       "scryfallId": "9726a45e-9860-4d6a-b017-061f99ae09d5",
-      "multiverseid": 451169
+      "multiverseid": 451169,
+      "twoFaced": false
     },
     {
       "name": "Psychosis Crawler",
       "scryfallId": "7ae86ac9-23fd-4585-a65e-8248428362f4",
-      "multiverseid": 451172
+      "multiverseid": 451172,
+      "twoFaced": false
     },
     {
       "name": "Scuttling Doom Engine",
       "scryfallId": "7ad0dfdd-2075-4a42-976b-e493246bc61c",
-      "multiverseid": 451174
+      "multiverseid": 451174,
+      "twoFaced": false
     },
     {
       "name": "Sharding Sphinx",
       "scryfallId": "7367a533-0555-4b5d-b07d-aa58d37894dd",
-      "multiverseid": 451056
+      "multiverseid": 451056,
+      "twoFaced": false
     },
     {
       "name": "Soul of New Phyrexia",
       "scryfallId": "bb5adf9b-7344-4410-87d5-e425b4b1023f",
-      "multiverseid": 451178
+      "multiverseid": 451178,
+      "twoFaced": false
     },
     {
       "name": "Steel Hellkite",
       "scryfallId": "559d3dfb-b5c0-4f1b-880d-4182028fe97c",
-      "multiverseid": 451179
+      "multiverseid": 451179,
+      "twoFaced": false
     },
     {
       "name": "Tawnos, Urza's Apprentice",
       "scryfallId": "a031a6c1-d7d1-4980-ac8e-30440ff4408f",
-      "multiverseid": 450646
+      "multiverseid": 450646,
+      "twoFaced": false
     },
     {
       "name": "Thopter Assembly",
       "scryfallId": "b743c4d6-8bf6-4250-a9c0-d85b0d38572d",
-      "multiverseid": 451181
+      "multiverseid": 451181,
+      "twoFaced": false
     },
     {
       "name": "Thopter Engineer",
       "scryfallId": "77b83dbe-77de-4446-96a5-6b4c4b6e8a27",
-      "multiverseid": 451081
+      "multiverseid": 451081,
+      "twoFaced": false
     },
     {
       "name": "Treasure Nabber",
       "scryfallId": "6c6049a0-2c13-41ae-8c73-978be8b13031",
-      "multiverseid": 450628
+      "multiverseid": 450628,
+      "twoFaced": false
     },
     {
       "name": "Varchild, Betrayer of Kjeldor",
       "scryfallId": "7849b360-afad-4f50-b455-3d118f7bfcd0",
-      "multiverseid": 450629
+      "multiverseid": 450629,
+      "twoFaced": false
     },
     {
       "name": "Vedalken Humiliator",
       "scryfallId": "039dff9a-881f-4a3d-8680-7f560ef0ea7e",
-      "multiverseid": 450614
+      "multiverseid": 450614,
+      "twoFaced": false
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "73b9b5ce-5687-4c3a-ac33-189badf8b98d",
-      "multiverseid": 451066
+      "multiverseid": 451066,
+      "twoFaced": false
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "80cb5b8e-e410-42e0-813e-c54903130cf5",
-      "multiverseid": 451077
+      "multiverseid": 451077,
+      "twoFaced": false
     },
     {
       "name": "Into the Roil",
       "scryfallId": "8186440f-c56c-4f82-b7a7-1dcf0b62545e",
-      "multiverseid": 451047
+      "multiverseid": 451047,
+      "twoFaced": false
     },
     {
       "name": "Magmaquake",
       "scryfallId": "90dcbc8e-e013-4501-a89b-0e5d5dc1298b",
-      "multiverseid": 451080
+      "multiverseid": 451080,
+      "twoFaced": false
     },
     {
       "name": "Thirst for Knowledge",
       "scryfallId": "fb15affd-e407-4358-a3c2-8770d8d74726",
-      "multiverseid": 451061
+      "multiverseid": 451061,
+      "twoFaced": false
     },
     {
       "name": "Aether Gale",
       "scryfallId": "e89f2a37-9e8e-4291-9595-3c20b00444b0",
-      "multiverseid": 451035
+      "multiverseid": 451035,
+      "twoFaced": false
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "a09bb94a-1e47-43e7-a7e8-627c10cf8c1f",
-      "multiverseid": 451075
+      "multiverseid": 451075,
+      "twoFaced": false
     },
     {
       "name": "Echo Storm",
       "scryfallId": "546da0df-db26-4f50-8b5e-eb09782dd1d1",
-      "multiverseid": 450608
+      "multiverseid": 450608,
+      "twoFaced": false
     },
     {
       "name": "Reverse Engineer",
       "scryfallId": "be8495b2-0fe8-4644-89c9-62a3f07bd7d0",
-      "multiverseid": 451054
+      "multiverseid": 451054,
+      "twoFaced": false
     },
     {
       "name": "Saheeli's Artistry",
       "scryfallId": "02e746ba-953b-417c-85fa-cd301bc05205",
-      "multiverseid": 451055
+      "multiverseid": 451055,
+      "twoFaced": false
     },
     {
       "name": "Saheeli's Directive",
       "scryfallId": "494c32ef-6fce-4330-9e34-a68497ae865e",
-      "multiverseid": 450627
+      "multiverseid": 450627,
+      "twoFaced": false
     },
     {
       "name": "Tidings",
       "scryfallId": "6a123f44-0a72-46d0-a73d-b4ab01b6c2df",
-      "multiverseid": 451063
+      "multiverseid": 451063,
+      "twoFaced": false
     },
     {
       "name": "Blinkmoth Urn",
       "scryfallId": "3879faf0-6e39-4275-82f6-7fb5c70fc6ce",
-      "multiverseid": 451152
+      "multiverseid": 451152,
+      "twoFaced": false
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "8b991b05-60e4-49a6-9024-3465082d4932",
-      "multiverseid": 451155
+      "multiverseid": 451155,
+      "twoFaced": false
     },
     {
       "name": "Coveted Jewel",
       "scryfallId": "f83ed433-fae3-4fa5-acad-bb8a5b535ce3",
-      "multiverseid": 450655
+      "multiverseid": 450655,
+      "twoFaced": false
     },
     {
       "name": "Dreamstone Hedron",
       "scryfallId": "df32fd76-5f14-4000-beb1-4933d0675fbc",
-      "multiverseid": 451159
+      "multiverseid": 451159,
+      "twoFaced": false
     },
     {
       "name": "Endless Atlas",
       "scryfallId": "d2547a42-b2b9-4887-8671-4cf63a7b0eff",
-      "multiverseid": 450656
+      "multiverseid": 450656,
+      "twoFaced": false
     },
     {
       "name": "Hedron Archive",
       "scryfallId": "64bff432-b85c-4764-82a7-6ae93c8bed45",
-      "multiverseid": 451161
+      "multiverseid": 451161,
+      "twoFaced": false
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "c0d08c40-5c25-47c2-b39d-90f52ba0f6f0",
-      "multiverseid": 451162
+      "multiverseid": 451162,
+      "twoFaced": false
     },
     {
       "name": "Magnifying Glass",
       "scryfallId": "20995638-e217-49f1-bccc-d1a344694fd8",
-      "multiverseid": 451163
+      "multiverseid": 451163,
+      "twoFaced": false
     },
     {
       "name": "Mimic Vat",
       "scryfallId": "d10802a6-f6dc-4b05-9c07-00a71891c608",
-      "multiverseid": 451164
+      "multiverseid": 451164,
+      "twoFaced": false
     },
     {
       "name": "Mind Stone",
       "scryfallId": "42bd038d-1005-4095-9310-108caa56465f",
-      "multiverseid": 451165
+      "multiverseid": 451165,
+      "twoFaced": false
     },
     {
       "name": "Mirrorworks",
       "scryfallId": "99fff4f2-1a12-4bb5-9904-6c058e5ed595",
-      "multiverseid": 451166
+      "multiverseid": 451166,
+      "twoFaced": false
     },
     {
       "name": "Prismatic Lens",
       "scryfallId": "c135e598-61a2-4f38-b8ba-8d89cfa7b201",
-      "multiverseid": 451170
+      "multiverseid": 451170,
+      "twoFaced": false
     },
     {
       "name": "Prototype Portal",
       "scryfallId": "e2ccdd3b-9c39-4785-99b9-64b5de1177be",
-      "multiverseid": 451171
+      "multiverseid": 451171,
+      "twoFaced": false
     },
     {
       "name": "Retrofitter Foundry",
       "scryfallId": "5da578b8-19e6-4068-9336-e7cd33c585f1",
-      "multiverseid": 450658
+      "multiverseid": 450658,
+      "twoFaced": false
     },
     {
       "name": "Scrabbling Claws",
       "scryfallId": "a16a52ac-29e6-449c-bb26-5946b1932b1b",
-      "multiverseid": 451173
+      "multiverseid": 451173,
+      "twoFaced": false
     },
     {
       "name": "Sol Ring",
       "scryfallId": "83a0f2eb-2f6d-4aaa-b7a9-ea06d5de7eca",
-      "multiverseid": 451177
+      "multiverseid": 451177,
+      "twoFaced": false
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "1ae84b5c-d3ad-48a3-9ccc-1dd76cee392c",
-      "multiverseid": 451180
+      "multiverseid": 451180,
+      "twoFaced": false
     },
     {
       "name": "Unstable Obelisk",
       "scryfallId": "7d259416-d652-434c-85c2-ab6d0858e07f",
-      "multiverseid": 451182
+      "multiverseid": 451182,
+      "twoFaced": false
     },
     {
       "name": "Unwinding Clock",
       "scryfallId": "c3fd1a59-4ade-459f-90d2-1fc67d6d1384",
-      "multiverseid": 451183
+      "multiverseid": 451183,
+      "twoFaced": false
     },
     {
       "name": "Vessel of Endless Rest",
       "scryfallId": "b91f48c6-62ad-4a9f-b896-839dea2e56f3",
-      "multiverseid": 451184
+      "multiverseid": 451184,
+      "twoFaced": false
     },
     {
       "name": "Worn Powerstone",
       "scryfallId": "05812009-d1b8-4775-8188-f05cfdb4feed",
-      "multiverseid": 451185
+      "multiverseid": 451185,
+      "twoFaced": false
     },
     {
       "name": "Enchanter's Bane",
       "scryfallId": "bd5663b1-aa19-44d5-9f8d-fd174954889d",
-      "multiverseid": 450622
+      "multiverseid": 450622,
+      "twoFaced": false
     },
     {
       "name": "Thopter Spy Network",
       "scryfallId": "edee5a68-21c3-47a6-84b7-a12748760943",
-      "multiverseid": 451062
+      "multiverseid": 451062,
+      "twoFaced": false
     },
     {
       "name": "Buried Ruin",
       "scryfallId": "fdad59a0-9743-4164-b9ed-bf3df70f0c68",
-      "multiverseid": 451194
+      "multiverseid": 451194,
+      "twoFaced": false
     },
     {
       "name": "Command Tower",
       "scryfallId": "6d28946e-a478-4e0b-b39b-ec0236ddc9a5",
-      "multiverseid": 451195
+      "multiverseid": 451195,
+      "twoFaced": false
     },
     {
       "name": "Darksteel Citadel",
       "scryfallId": "d61ecc3f-8c76-43e6-8f16-4863b2ea25fb",
-      "multiverseid": 451196
+      "multiverseid": 451196,
+      "twoFaced": false
     },
     {
       "name": "Forge of Heroes",
       "scryfallId": "826ff8c2-8a1d-45f5-a7e2-d8bf826fcadc",
-      "multiverseid": 450659
+      "multiverseid": 450659,
+      "twoFaced": false
     },
     {
       "name": "Foundry of the Consuls",
       "scryfallId": "09d83c1d-6916-48e7-8a0d-b5abadc34b2a",
-      "multiverseid": 451203
+      "multiverseid": 451203,
+      "twoFaced": false
     },
     {
       "name": "Great Furnace",
       "scryfallId": "ce29187f-6c0b-4a38-a3f3-b152c1fa6613",
-      "multiverseid": 451205
+      "multiverseid": 451205,
+      "twoFaced": false
     },
     {
       "name": "Highland Lake",
       "scryfallId": "d0e10439-1421-4c06-9aab-f6f6fec7ad02",
-      "multiverseid": 451210
+      "multiverseid": 451210,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Island",
       "scryfallId": "28347f33-bfd5-48fd-ab10-228dfad1669d",
-      "multiverseid": 451251
+      "multiverseid": 451251,
+      "twoFaced": false
     },
     {
       "name": "Izzet Boilerworks",
       "scryfallId": "173cf321-4d5b-4b02-ad52-c7fc78b1afc9",
-      "multiverseid": 451211
+      "multiverseid": 451211,
+      "twoFaced": false
     },
     {
       "name": "Izzet Guildgate",
       "scryfallId": "771ddb6f-607c-487e-b64b-5c9ff0579183",
-      "multiverseid": 451212
+      "multiverseid": 451212,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Mountain",
       "scryfallId": "98c45686-6c6a-43de-abab-d0af9ef0e7e0",
-      "multiverseid": 451258
+      "multiverseid": 451258,
+      "twoFaced": false
     },
     {
       "name": "Seat of the Synod",
       "scryfallId": "1fedc183-2d95-471c-ba78-2169e4df13f8",
-      "multiverseid": 451233
+      "multiverseid": 451233,
+      "twoFaced": false
     },
     {
       "name": "Swiftwater Cliffs",
       "scryfallId": "f040df34-f613-43f2-aaec-522d83b1ddb0",
-      "multiverseid": 451239
+      "multiverseid": 451239,
+      "twoFaced": false
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:12:48.395Z",
+    "retrievedDate": "2025-09-16T02:17:20.378Z",
     "sourceUrl": "https://archidekt.com/decks/2209113",
     "deckSource": "archidekt"
   }

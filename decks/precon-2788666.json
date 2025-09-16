@@ -7,508 +7,608 @@
     {
       "name": "Nalia de'Arnise",
       "scryfallId": "7a1294fd-9885-4dfd-8192-0ca074fc83f7",
-      "multiverseid": 567106
+      "multiverseid": 567106,
+      "twoFaced": false
     }
   ],
   "cards": [
     {
       "name": "Mikaeus, the Lunarch",
       "scryfallId": "6f18de2a-4aab-47a1-b162-6b8cf18e7bbf",
-      "multiverseid": 567517
+      "multiverseid": 567517,
+      "twoFaced": false
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "5b245a5b-5a99-4d22-99ef-3f5bf49c3262",
-      "multiverseid": 563181
+      "multiverseid": 563181,
+      "twoFaced": false
     },
     {
       "name": "Archpriest of Iona",
       "scryfallId": "0b0b1acd-68e5-4922-8b51-06fa7eda984c",
-      "multiverseid": 567503
+      "multiverseid": 567503,
+      "twoFaced": false
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "fb71aebf-f5d3-45ee-91a4-51088f7141ec",
-      "multiverseid": 567697
+      "multiverseid": 567697,
+      "twoFaced": false
     },
     {
       "name": "Austere Command",
       "scryfallId": "3d24036e-075f-4991-a740-a9d943722ad2",
-      "multiverseid": 567504
+      "multiverseid": 567504,
+      "twoFaced": false
     },
     {
       "name": "Aven Mindcensor",
       "scryfallId": "d4cf468f-4e9d-4551-a0ed-10bd6a2316ad",
-      "multiverseid": 567505
+      "multiverseid": 567505,
+      "twoFaced": false
     },
     {
       "name": "Black Market Connections",
       "scryfallId": "d13cb0d3-3452-4c1f-81ec-024b4c45bbad",
-      "multiverseid": 567234
+      "multiverseid": 567234,
+      "twoFaced": false
     },
     {
       "name": "Bloodsoaked Champion",
       "scryfallId": "275d6137-5eff-4e82-8232-64e8679bc11c",
-      "multiverseid": 567557
+      "multiverseid": 567557,
+      "twoFaced": false
     },
     {
       "name": "Bojuka Bog",
       "scryfallId": "f8f1c157-cebc-45fe-9caa-1ea4b305ccfc",
-      "multiverseid": 567699
+      "multiverseid": 567699,
+      "twoFaced": false
     },
     {
       "name": "Burakos, Party Leader",
       "scryfallId": "899e278d-5d4e-461a-9878-2b85de16b38d",
-      "multiverseid": 567146
+      "multiverseid": 567146,
+      "twoFaced": false
     },
     {
       "name": "Butcher of Malakir",
       "scryfallId": "b23c18f8-a19f-406a-ad60-491087f9d660",
-      "multiverseid": 567558
+      "multiverseid": 567558,
+      "twoFaced": false
     },
     {
       "name": "Bygone Bishop",
       "scryfallId": "cf879fc7-9f84-40a7-a7be-9cc98a720af5",
-      "multiverseid": 567506
+      "multiverseid": 567506,
+      "twoFaced": false
     },
     {
       "name": "Calculating Lich",
       "scryfallId": "a5dccdab-9dda-4964-9b1a-eec6d31c7995",
-      "multiverseid": 567559
+      "multiverseid": 567559,
+      "twoFaced": false
     },
     {
       "name": "Castle Locthwain",
       "scryfallId": "19336e3a-2242-4a30-a563-32f2e4fc18e9",
-      "multiverseid": 567701
+      "multiverseid": 567701,
+      "twoFaced": false
     },
     {
       "name": "Changeling Outcast",
       "scryfallId": "0d2c053f-0ef8-45f2-b2af-24cbb9a7fec4",
-      "multiverseid": 567560
+      "multiverseid": 567560,
+      "twoFaced": false
     },
     {
       "name": "Command Tower",
       "scryfallId": "7eafe88e-ab38-442c-b147-bb01cc81178d",
-      "multiverseid": 563234
+      "multiverseid": 563234,
+      "twoFaced": false
     },
     {
       "name": "Corpse Augur",
       "scryfallId": "600eaa36-5497-42dc-8d21-a5fcdd01fa79",
-      "multiverseid": 567561
+      "multiverseid": 567561,
+      "twoFaced": false
     },
     {
       "name": "Crib Swap",
       "scryfallId": "e13559d7-f86c-4958-a649-7f81bfb154a0",
-      "multiverseid": 567507
+      "multiverseid": 567507,
+      "twoFaced": false
     },
     {
       "name": "Deep Gnome Terramancer",
       "scryfallId": "cc75f9f1-5873-450f-a0b2-871b55036954",
-      "multiverseid": 567223
+      "multiverseid": 567223,
+      "twoFaced": false
     },
     {
       "name": "Despark",
       "scryfallId": "83902f7a-b675-45a6-8d03-a4e82335547a",
-      "multiverseid": 567658
+      "multiverseid": 567658,
+      "twoFaced": false
     },
     {
       "name": "Dire Fleet Ravager",
       "scryfallId": "887384de-403c-4cca-b542-ce0303100d42",
-      "multiverseid": 567566
+      "multiverseid": 567566,
+      "twoFaced": false
     },
     {
       "name": "Eight-and-a-Half-Tails",
       "scryfallId": "ef722374-0305-4c30-ab45-cb772b252faf",
-      "multiverseid": 567509
+      "multiverseid": 567509,
+      "twoFaced": false
     },
     {
       "name": "Felisa, Fang of Silverquill",
       "scryfallId": "18b8abf0-e8c3-4c19-bdf1-18aabe75a3de",
-      "multiverseid": 567662
+      "multiverseid": 567662,
+      "twoFaced": false
     },
     {
       "name": "Firja's Retribution",
       "scryfallId": "e7d1bbe5-c63e-4a8d-b79a-0dcca221a726",
-      "multiverseid": 567663
+      "multiverseid": 567663,
+      "twoFaced": false
     },
     {
       "name": "Folk Hero",
       "scryfallId": "a8b3aae8-fc36-45ed-84ed-efb8f543cada",
-      "multiverseid": 567143
+      "multiverseid": 567143,
+      "twoFaced": false
     },
     {
       "name": "Frontline Medic",
       "scryfallId": "3e9ad9ce-f862-4663-9a36-caf0844eb416",
-      "multiverseid": 567510
+      "multiverseid": 567510,
+      "twoFaced": false
     },
     {
       "name": "Galepowder Mage",
       "scryfallId": "222b4c5a-2cd0-4851-9f2f-8685a658ebb4",
-      "multiverseid": 567511
+      "multiverseid": 567511,
+      "twoFaced": false
     },
     {
       "name": "Glorious Protector",
       "scryfallId": "3e63385a-e32f-4abc-aff6-bb022b2f56f7",
-      "multiverseid": 567512
+      "multiverseid": 567512,
+      "twoFaced": false
     },
     {
       "name": "Gonti, Lord of Luxury",
       "scryfallId": "4cedbfd3-907f-4042-98c1-6fe3fb8cbc01",
-      "multiverseid": 567570
+      "multiverseid": 567570,
+      "twoFaced": false
     },
     {
       "name": "Grim Haruspex",
       "scryfallId": "f5c19b87-e114-46d4-9f6c-c02e838a08dd",
-      "multiverseid": 567571
+      "multiverseid": 567571,
+      "twoFaced": false
     },
     {
       "name": "Grim Hireling",
       "scryfallId": "38326f48-548c-4b18-9ad2-0b7c23385deb",
-      "multiverseid": 567572
+      "multiverseid": 567572,
+      "twoFaced": false
     },
     {
       "name": "Harper Recruiter",
       "scryfallId": "6bb131fd-d96f-43e0-a40d-fa6394a4b75c",
-      "multiverseid": 567224
+      "multiverseid": 567224,
+      "twoFaced": false
     },
     {
       "name": "High Priest of Penance",
       "scryfallId": "fc264fad-c541-4cc6-8b56-44abf3f1e8a0",
-      "multiverseid": 567665
+      "multiverseid": 567665,
+      "twoFaced": false
     },
     {
       "name": "Irregular Cohort",
       "scryfallId": "61775227-34ad-469a-a4d4-ee8ce69dd10f",
-      "multiverseid": 567513
+      "multiverseid": 567513,
+      "twoFaced": false
     },
     {
       "name": "Jazal Goldmane",
       "scryfallId": "9d17b05a-7753-451b-a7b4-ee1fe3b51110",
-      "multiverseid": 567514
+      "multiverseid": 567514,
+      "twoFaced": false
     },
     {
       "name": "Mage's Attendant",
       "scryfallId": "e7039d47-276b-4c7c-acc3-94a9baae97e5",
-      "multiverseid": 567515
+      "multiverseid": 567515,
+      "twoFaced": false
     },
     {
       "name": "Magus of the Balance",
       "scryfallId": "e63074e4-2c4c-411c-b320-c90d3a4a96d0",
-      "multiverseid": 567516
+      "multiverseid": 567516,
+      "twoFaced": false
     },
     {
       "name": "Malakir Blood-Priest",
       "scryfallId": "bbbd64da-6071-49f4-87aa-066209ec1ae9",
-      "multiverseid": 567577
+      "multiverseid": 567577,
+      "twoFaced": false
     },
     {
       "name": "Mardu Strike Leader",
       "scryfallId": "626ed059-9bd1-4a18-ac85-7b00b8057426",
-      "multiverseid": 567578
+      "multiverseid": 567578,
+      "twoFaced": false
     },
     {
       "name": "Maskwood Nexus",
       "scryfallId": "1246c42d-57c0-4cba-959a-15ad89d8a50b",
-      "multiverseid": 567682
+      "multiverseid": 567682,
+      "twoFaced": false
     },
     {
       "name": "Mindblade Render",
       "scryfallId": "459c5f18-13a3-42c9-b9d7-bf789eefe249",
-      "multiverseid": 567579
+      "multiverseid": 567579,
+      "twoFaced": false
     },
     {
       "name": "Mirror Entity",
       "scryfallId": "3d9149ed-0e59-48b3-b48c-d5ea77b7239e",
-      "multiverseid": 567518
+      "multiverseid": 567518,
+      "twoFaced": false
     },
     {
       "name": "Mortuary Mire",
       "scryfallId": "058f30e5-64a9-4d6b-b7a6-0fd95d460cae",
-      "multiverseid": 567717
+      "multiverseid": 567717,
+      "twoFaced": false
     },
     {
       "name": "Mother of Runes",
       "scryfallId": "a5e19147-e459-43a6-8ef0-e37968a462e3",
-      "multiverseid": 567519
+      "multiverseid": 567519,
+      "twoFaced": false
     },
     {
       "name": "Multiclass Baldric",
       "scryfallId": "dbb7927d-c3c4-4464-8ada-bcd8466b2012",
-      "multiverseid": 567249
+      "multiverseid": 567249,
+      "twoFaced": false
     },
     {
       "name": "Mutavault",
       "scryfallId": "52cc2f10-142d-4e6a-984e-b25f566cc960",
-      "multiverseid": 567720
+      "multiverseid": 567720,
+      "twoFaced": false
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "276f49f9-019b-44cb-a551-0fba9851ecc7",
-      "multiverseid": 567721
+      "multiverseid": 567721,
+      "twoFaced": false
     },
     {
       "name": "Nighthawk Scavenger",
       "scryfallId": "63cf5e98-9d40-4cb0-83de-043751b1382f",
-      "multiverseid": 567580
+      "multiverseid": 567580,
+      "twoFaced": false
     },
     {
       "name": "Order of Whiteclay",
       "scryfallId": "0caaa62f-4959-4321-a2d5-dc255f1e5eaf",
-      "multiverseid": 567520
+      "multiverseid": 567520,
+      "twoFaced": false
     },
     {
       "name": "Orzhov Signet",
       "scryfallId": "ddb325f3-3c39-410b-b7a6-1615a7c4fe54",
-      "multiverseid": 567684
+      "multiverseid": 567684,
+      "twoFaced": false
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "43710f35-c43f-48bf-82e1-64ba5c3fa03e",
-      "multiverseid": 567724
+      "multiverseid": 567724,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Plains",
       "scryfallId": "14f5f561-39fd-4cdf-b22e-40cfd6a19d12",
-      "multiverseid": 571084
+      "multiverseid": 571084,
+      "twoFaced": false
     },
     {
       "name": "Pontiff of Blight",
       "scryfallId": "fa04c8f5-e174-4055-a98c-efec2f064d69",
-      "multiverseid": 567585
+      "multiverseid": 567585,
+      "twoFaced": false
     },
     {
       "name": "Priest of Ancient Lore",
       "scryfallId": "8b6f7b89-1648-4c2b-8d68-88ad43267c6f",
-      "multiverseid": 567521
+      "multiverseid": 567521,
+      "twoFaced": false
     },
     {
       "name": "Puppeteer Clique",
       "scryfallId": "65fd8dba-0aca-4b47-9b4b-19d5c77cf8f3",
-      "multiverseid": 567586
+      "multiverseid": 567586,
+      "twoFaced": false
     },
     {
       "name": "Rumor Gatherer",
       "scryfallId": "a7782044-616e-4d4f-b38f-93320ba19797",
-      "multiverseid": 567522
+      "multiverseid": 567522,
+      "twoFaced": false
     },
     {
       "name": "Seasoned Dungeoneer",
       "scryfallId": "7fee3f76-20a8-4621-84fb-ddf79c955532",
-      "multiverseid": 567225
+      "multiverseid": 567225,
+      "twoFaced": false
     },
     {
       "name": "Selfless Spirit",
       "scryfallId": "ef8d8d0c-cb0e-4745-a0fb-d556c9324428",
-      "multiverseid": 567523
+      "multiverseid": 567523,
+      "twoFaced": false
     },
     {
       "name": "Sevinne's Reclamation",
       "scryfallId": "458db878-07ba-42cc-9bee-910957685596",
-      "multiverseid": 567524
+      "multiverseid": 567524,
+      "twoFaced": false
     },
     {
       "name": "Shambling Vent",
       "scryfallId": "1f5bf05a-04a1-4dde-845b-eced21a785fa",
-      "multiverseid": 567731
+      "multiverseid": 567731,
+      "twoFaced": false
     },
     {
       "name": "Skullclamp",
       "scryfallId": "d1877be5-fb98-4bd2-a754-dda1132ef8a0",
-      "multiverseid": 567687
+      "multiverseid": 567687,
+      "twoFaced": false
     },
     {
       "name": "Snowfield Sinkhole",
       "scryfallId": "3c6e17f2-b1e4-4189-a02f-92fa4b13a1ed",
-      "multiverseid": 567732
+      "multiverseid": 567732,
+      "twoFaced": false
     },
     {
       "name": "Sol Ring",
       "scryfallId": "199cde21-5bc3-49cd-acd4-bae3af6e5881",
-      "multiverseid": 567688
+      "multiverseid": 567688,
+      "twoFaced": false
     },
     {
       "name": "Solemn Doomguide",
       "scryfallId": "b467929d-5fc3-4104-8a29-a8157835f274",
-      "multiverseid": 567237
+      "multiverseid": 567237,
+      "twoFaced": false
     },
     {
       "name": "Solemn Recruit",
       "scryfallId": "4b93ee66-bc1d-42ad-8839-d77ab5992f14",
-      "multiverseid": 567525
+      "multiverseid": 567525,
+      "twoFaced": false
     },
     {
       "name": "Squad Commander",
       "scryfallId": "5390bbf3-9906-46a9-81d3-60e23eb89ca1",
-      "multiverseid": 567526
+      "multiverseid": 567526,
+      "twoFaced": false
     },
     {
       "name": "Starlit Sanctum",
       "scryfallId": "f5774836-0140-420a-9a0f-8ba291cc5ca8",
-      "multiverseid": 567734
+      "multiverseid": 567734,
+      "twoFaced": false
     },
     {
       "name": "Stick Together",
       "scryfallId": "8d77a57a-e30b-46d7-acb8-1d164c7dff78",
-      "multiverseid": 567226
+      "multiverseid": 567226,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Swamp",
       "scryfallId": "19c03592-debd-4b4f-a5ea-a31ce63f5d23",
-      "multiverseid": 571095
+      "multiverseid": 571095,
+      "twoFaced": false
     },
     {
       "name": "Tainted Field",
       "scryfallId": "67f04e85-1b2b-4eb6-8332-4c13c2149d39",
-      "multiverseid": 567736
+      "multiverseid": 567736,
+      "twoFaced": false
     },
     {
       "name": "Talisman of Hierarchy",
       "scryfallId": "2299c93e-f3a6-4b41-857b-e3d1aff0f622",
-      "multiverseid": 567695
+      "multiverseid": 567695,
+      "twoFaced": false
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "2a3288ba-038c-4d8e-939d-c513a76fbfbf",
-      "multiverseid": 567741
+      "multiverseid": 567741,
+      "twoFaced": false
     },
     {
       "name": "Thwart the Grave",
       "scryfallId": "cc339d3b-9c89-4679-bc83-8399d9a864c7",
-      "multiverseid": 567590
+      "multiverseid": 567590,
+      "twoFaced": false
     },
     {
       "name": "Unbreakable Formation",
       "scryfallId": "123ae9bd-896c-4f50-afe3-880cea85eee0",
-      "multiverseid": 567527
+      "multiverseid": 567527,
+      "twoFaced": false
     },
     {
       "name": "Valiant Changeling",
       "scryfallId": "014fbb81-5d54-4f8f-8c91-071521b9cd33",
-      "multiverseid": 567528
+      "multiverseid": 567528,
+      "twoFaced": false
     },
     {
       "name": "Vault of the Archangel",
       "scryfallId": "e1004cea-51d4-4d69-ad98-37a2e02492e0",
-      "multiverseid": 567744
+      "multiverseid": 567744,
+      "twoFaced": false
     },
     {
       "name": "War Room",
       "scryfallId": "ed5cebc0-6a58-468d-a75e-46087ea2eb46",
-      "multiverseid": 567746
+      "multiverseid": 567746,
+      "twoFaced": false
     },
     {
       "name": "Windbrisk Heights",
       "scryfallId": "cc4aa7d1-e168-4fa0-baf0-1102086dc717",
-      "multiverseid": 567747
+      "multiverseid": 567747,
+      "twoFaced": false
     },
     {
       "name": "Zulaport Cutthroat",
       "scryfallId": "52ef00c1-613a-4cbd-8972-77c41f649431",
-      "multiverseid": 567592
+      "multiverseid": 567592,
+      "twoFaced": false
     },
     {
       "name": "Dusk // Dawn",
       "scryfallId": "f295b713-1d6a-43fd-910d-fb35414bf58a",
-      "multiverseid": 567508
+      "multiverseid": 567508,
+      "twoFaced": true
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "61ed0bb4-91b8-4144-b3d6-f92d6821d979",
-      "multiverseid": 567723
+      "multiverseid": 567723,
+      "twoFaced": false
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:13:04.547Z",
+    "retrievedDate": "2025-09-16T02:17:36.623Z",
     "sourceUrl": "https://archidekt.com/decks/2788666",
     "deckSource": "archidekt"
   }
