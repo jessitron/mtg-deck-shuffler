@@ -108,9 +108,7 @@ export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId:
 }
 
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
-  if (whatHappened.flipped && whatHappened.flipped.some((card) => card.gameCardIndex === gameCardIndex)) {
-    return " card-flipped";
-  } else if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
+  if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-left";
   } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-right";

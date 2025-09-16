@@ -55,7 +55,6 @@ export interface WhatHappened {
   shuffling?: boolean;
   movedRight?: GameCard[];
   movedLeft?: GameCard[];
-  flipped?: GameCard[]; // TODO: remove
 }
 
 export class GameState {
@@ -510,9 +509,7 @@ export class GameState {
     // Toggle the face
     gameCard.currentFace = gameCard.currentFace === "front" ? "back" : "front";
 
-    return {
-      flipped: [gameCard],
-    };
+    return {};
   }
 
   public undo(gameEventIndex: number): GameState {
