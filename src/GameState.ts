@@ -294,7 +294,7 @@ export class GameState {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
       if (!identical) {
-        console.log(
+        warn(
           `Warning! I'm supposed to move card ${move.gameCardIndex} (${gameCard.card.name}) from ${printLocation(
             move.toLocation
           )} but I found it in ${printLocation(gameCard.location)} `
@@ -505,41 +505,52 @@ export class GameState {
     if (!gameCard) {
       throw new Error(`Game card with index ${gameCardIndex} not found`);
     }
+    this.executeFlip({
+      eventName: "flip card",
+      gameCardIndex,
+      newFace: gameCard.currentFace === "front" ? "back" : "front",
+    });
+    return {};
+  }
+
+  private executeFlip(flipEvent: FlipCardEvent, recording: boolean = true): this {
+    const { gameCardIndex, newFace } = flipEvent;
+    const gameCard = this.gameCards[gameCardIndex];
+    if (!gameCard) {
+      throw new Error(`Game card with index ${gameCardIndex} not found`);
+    }
 
     if (!gameCard.card.twoFaced) {
       throw new Error(`Card ${gameCard.card.name} is not a two-faced card`);
     }
 
-    // Toggle the face
-    const newFace = gameCard.currentFace === "front" ? "back" : "front";
+    if (gameCard.currentFace === newFace) {
+      warn(`Card ${gameCard.card.name} is already on face ${newFace}`);
+    }
+
+    // Here's the exciting update
     gameCard.currentFace = newFace;
 
     // Record the event
-    const flipEvent: FlipCardEvent = {
-      eventName: "flip card",
-      gameCardIndex,
-      newFace,
-    };
-    this.eventLog.record(flipEvent);
-
-    return {};
+    if (recording) {
+      this.eventLog.record(flipEvent);
+    }
+    return this;
   }
 
   public undo(gameEventIndex: number): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
 
-    if (applyToState.eventName === "flip card") {
-      // Execute the flip
-      const gameCard = this.gameCards[applyToState.gameCardIndex];
-      if (gameCard) {
-        gameCard.currentFace = applyToState.newFace;
-      }
-    } else if (applyToState.eventName === "shuffle library") {
+    if (applyToState.eventName === "shuffle library") {
       const moves = expandCompactShuffleMoves(applyToState.compactMoves);
       moves.forEach((move) => this.executeMove(move, false));
-    } else {
+    } else if (applyToState.eventName === "move card") {
       this.executeMove(applyToState.move, false);
+    } else if (applyToState.eventName === "flip card") {
+      this.executeFlip(applyToState, false);
+    } else {
+      throw new Error(`Cannot undo event ${event.eventName}`);
     }
 
     this.eventLog.recordUndo(event);
@@ -559,4 +570,7 @@ export class GameState {
       events: this.eventLog.getEvents(),
     };
   }
+}
+function warn(message: string) {
+  console.log(message);
 }

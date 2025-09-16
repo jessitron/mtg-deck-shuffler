@@ -6,6 +6,12 @@
 
 ## More Things to change  
 
+- can I make Play make an animation of moving the card to the table?
+
+- Flip Card should be an event
+
+- If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
+
 - the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
 
 - let people pick a playmat
@@ -22,7 +28,6 @@
 
 - Change the Honeycomb environment to mtg-deck-shuffler for prod.
 
-- Once events are implemented: If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
 
 - I need tracing in Honeycomb of what is happening. THe trick is that I want to do this by creating generic instructions and using them.
   [x] initialize tracing, get autoinstrumentation
