@@ -15,7 +15,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
   beforeAll(async () => {
     const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
     const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway);
-    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
+    testDeck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" }, new Date("2024-01-01T00:00:00.000Z"));
   });
 
   const createGameStateWithMultipleTableCards = (): GameState => {

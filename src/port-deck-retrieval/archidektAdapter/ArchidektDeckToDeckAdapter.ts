@@ -13,17 +13,17 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     return isArchidektDeckRetrievalRequest(request);
   }
 
-  async retrieveDeck(request: DeckRetrievalRequest): Promise<Deck> {
+  async retrieveDeck(request: DeckRetrievalRequest, retrievedDate?: Date): Promise<Deck> {
     if (!isArchidektDeckRetrievalRequest(request)) {
       throw new Error("Cannot handle this request type");
     }
 
     // TypeScript now knows request is ArchidektDeckRetrievalRequest
     const archidektDeck = await this.gateway.fetchDeck(request.archidektDeckId);
-    return this.convertArchidektToDeck(archidektDeck, request.archidektDeckId);
+    return this.convertArchidektToDeck(archidektDeck, request.archidektDeckId, retrievedDate);
   }
 
-  private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {
+  private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string, retrievedDate?: Date): Deck {
     const categoryInclusionMap = new Map((archidektDeck.categories || []).map((cat) => [cat.name, cat.includedInDeck]));
 
     const isCardIncluded = (card: ArchidektCard) => {
@@ -53,7 +53,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       .map((card) => this.convertArchidektToCard(card))
       .filter((card): card is CardDefinition => card !== undefined);
 
-    const now = new Date();
+    const dateToUse = retrievedDate || new Date();
     return {
       version: PERSISTED_DECK_VERSION,
       id: archidektDeck.id,
@@ -62,7 +62,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       commanders: commanderCards,
       cards: includedCards,
       provenance: {
-        retrievedDate: now,
+        retrievedDate: dateToUse,
         sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`,
         deckSource: "archidekt",
       },

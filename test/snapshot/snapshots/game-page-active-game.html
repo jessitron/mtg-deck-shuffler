@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MTG Game - Test Game Page Deck</title>
+<title>MTG Game - Jaceteous League</title>
 <link rel="stylesheet" href="/styles.css" />
 <script src="/hny.js"></script>
 <script>
@@ -20,19 +20,31 @@ provideOneLinkToHoneycomb: true,
 <body>
 <h1>*Woohoo it's Magic time!*</h1>
 <div id="game-container">
-<div class="commander-placeholder">No Commander</div>
+<div id="command-zone">
+<div class="commander-container">
+<img src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image commander-image" />
+<button class="flip-button" hx-post="/flip-commander/789/3" hx-swap="outerHTML" hx-target="closest .commander-container">Flip</button>
+</div>
+</div>
 <div id="game-details" class="game-details game-active">
-<h2><a href="https://archidekt.com/decks/12345/test-game-page" target="_blank">Test Game Page Deck</a></h2>
-<div><p>4 cards</p>
+<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<div><p>8 cards</p>
 <p><strong>Game ID:</strong> 789</p>
 <p><strong>Status:</strong> Active</p>
 </div>
 <div class="history">
-<p>No actions to undo</p>
+<div class="undo-controls"> Last action:
+<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a></span>
+<button class="undo-button"
+hx-post="/undo/789/4"
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">Undo</button>
+</div>
 <button class="history-button"
 hx-get="/history-modal/789"
 hx-target="#modal-container"
-hx-swap="innerHTML">View History (0)</button>
+hx-swap="innerHTML">View History (5)</button>
 </div>
 </div>
 <div id="table-section" class="table-section">
@@ -43,7 +55,7 @@ hx-target="#modal-container"
 hx-swap="innerHTML">1 Cards on table</button>
 </div>
 <div id="library-section" data-testid="library-section">
-<h3>Library (2)</h3>
+<h3>Library (5)</h3>
 <div class="library-stack" data-testid="library-stack">
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
@@ -63,7 +75,7 @@ hx-post="/draw/789"
 hx-target="#game-container"
 hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
-hx-post="/reveal-card/789/0"
+hx-post="/reveal-card/789/1"
 hx-target="#game-container"
 hx-swap="outerHTML">Reveal</button>
 </div>
@@ -72,16 +84,16 @@ hx-swap="outerHTML">Reveal</button>
 <h3>Hand (1)</h3>
 <div id="hand-cards" class="hand-cards">
 <div id="card-container-2" class="hand-card-container">
-<img src="https://cards.scryfall.io/normal/front/f/a/fake-scryfall-id-102.jpg"
-alt="Card C"
+<img src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg"
+alt="Damnation"
 class="mtg-card-image hand-card"
-title="Card C" />
+title="Damnation" />
 <div class="hand-card-buttons">
 <button class="play-button"
 hx-post="/play-card/789/2"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
-data-card-id="fake-scryfall-id-102"
+data-card-id="d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f"
 title="Copy image and remove from hand">
 Play
 </button><button class="put-down-button"
