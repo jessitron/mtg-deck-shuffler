@@ -87,11 +87,17 @@ export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): st
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
           ${commanders
-            .map(
-              (commander) => `<div class="commander-container">
-                <img src="${getCardImageUrl(commander.scryfallId, "normal")}" alt="${commander.name}" class="mtg-card-image commander-image" />
-              </div>`
-            )
+            .map((commander) => {
+              // Convert CardDefinition to GameCard format for consistent rendering
+              const gameCard = {
+                card: commander,
+                location: { type: "CommandZone" as const, position: 0 },
+                gameCardIndex: 0, // Not used for preview
+                isCommander: true,
+                currentFace: "front" as const
+              };
+              return formatCardContainer({ gameCard, containerType: "commander" });
+            })
             .join("")}
         </div>`;
 }
