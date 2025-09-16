@@ -13,7 +13,7 @@ import {
   PERSISTED_GAME_STATE_VERSION,
   printLocation,
 } from "./port-persist-state/types.js";
-import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
+import { CardMove, GameEvent, GameEventLog, StartGameEvent, FlipCardEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
@@ -308,6 +308,7 @@ export class GameState {
       this.eventLog.record({ eventName: "move card", move });
     }
   }
+  // TODO: parallel moveCard for flipCard
 
   private moveCard(gameCard: GameCard, toLocation: CardLocation) {
     const move = {
@@ -510,7 +511,16 @@ export class GameState {
     }
 
     // Toggle the face
-    gameCard.currentFace = gameCard.currentFace === "front" ? "back" : "front";
+    const newFace = gameCard.currentFace === "front" ? "back" : "front";
+    gameCard.currentFace = newFace;
+
+    // Record the event
+    const flipEvent: FlipCardEvent = {
+      eventName: "flip card",
+      gameCardIndex,
+      newFace,
+    };
+    this.eventLog.record(flipEvent);
 
     return {};
   }
@@ -518,8 +528,20 @@ export class GameState {
   public undo(gameEventIndex: number): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
-    const moves = applyToState.eventName === "shuffle library" ? expandCompactShuffleMoves(applyToState.compactMoves) : [applyToState.move];
-    moves.forEach((move) => this.executeMove(move, false));
+
+    if (applyToState.eventName === "flip card") {
+      // Execute the flip
+      const gameCard = this.gameCards[applyToState.gameCardIndex];
+      if (gameCard) {
+        gameCard.currentFace = applyToState.newFace;
+      }
+    } else if (applyToState.eventName === "shuffle library") {
+      const moves = expandCompactShuffleMoves(applyToState.compactMoves);
+      moves.forEach((move) => this.executeMove(move, false));
+    } else {
+      this.executeMove(applyToState.move, false);
+    }
+
     this.eventLog.recordUndo(event);
     return this;
   }

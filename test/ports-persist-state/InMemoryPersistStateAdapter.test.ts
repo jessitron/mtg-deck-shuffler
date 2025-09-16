@@ -87,7 +87,7 @@ describe("InMemoryPersistStateAdapter", () => {
         },
         {
           eventName: "shuffle library",
-          moves: [],
+          compactMoves: [],
           gameEventIndex: 1,
         },
       ],
