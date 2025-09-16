@@ -1,5 +1,5 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
-import { formatCardContainerHtmlFragment, getAnimationClassHelper } from "../common/shared-components.js";
+import { formatCardContainer } from "../common/shared-components.js";
 
 type CardAction = {
   action: string;
@@ -30,7 +30,9 @@ function formatCardActionButtonHtmlFragment(
 }
 
 function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string): string {
-  return actions.map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId)).join("");
+  return actions
+    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId))
+    .join("");
 }
 
 function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, index: number): string {
@@ -57,14 +59,12 @@ function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, 
   </div>`;
 }
 
-
-
 export function formatHandSectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const handCards = game
     .listHand()
     .map((gameCard: GameCard, index: number) => {
       const actions = formatHandCardActionsHtmlFragment(game, gameCard, index);
-      return formatCardContainerHtmlFragment(gameCard, "hand", actions, game.gameId);
+      return formatCardContainer({ gameCard, actions, gameId: game.gameId, whatHappened });
     })
     .join("");
 

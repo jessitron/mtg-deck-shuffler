@@ -90,8 +90,8 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
   return formatPageWrapper("MTG Deck Shuffler", content);
 }
 
-export function formatDeckHtmlSection(deck: Deck): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragmentFromCards(deck.commanders);
+export function formatDeckHtmlSection(deck: Deck, gameId: number): string {
+  const commanderImageHtml = formatCommanderImageHtmlFragmentFromCards(deck.commanders, gameId);
   const cardCountInfo = `${deck.totalCards} cards`;
   const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
 

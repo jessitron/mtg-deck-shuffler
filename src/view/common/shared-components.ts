@@ -14,13 +14,12 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
 
 type CardRenderOptions = {
   gameCard: GameCard;
-  containerType?: "commander" | "revealed" | "hand"; // TODO: remove this, always reload card container
-  gameId?: number; // TODO: not optional (although it's only used for two-faced cards)
+  gameId: number; // TODO: not optional (although it's only used for two-faced cards)
   actions?: string;
   whatHappened?: WhatHappened;
 };
 
-function formatCardContainer({ gameCard, gameId, actions = "", whatHappened }: CardRenderOptions): string {
+export function formatCardContainer({ gameCard, gameId, actions = "", whatHappened }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
@@ -65,12 +64,12 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
           </div>`;
 }
 
-function formatSingleCommanderContainer(gameCard: GameCard, gameId?: number): string {
-  return formatCardContainer({ gameCard, containerType: "commander", gameId });
+function formatSingleCommanderContainer(gameCard: GameCard, gameId: number): string {
+  return formatCardContainer({ gameCard, gameId });
 }
 
 // Function for displaying commanders when we have GameCard objects (in active game)
-export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[], gameId?: number): string {
+export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
@@ -79,7 +78,7 @@ export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[]
 }
 
 // Function for displaying commanders when we only have CardDefinition objects (deck preview)
-export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): string {
+export function formatCommanderImageHtmlFragmentFromCards(commanders: any[], gameId: number): string {
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
@@ -93,18 +92,10 @@ export function formatCommanderImageHtmlFragmentFromCards(commanders: any[]): st
                 isCommander: true,
                 currentFace: "front" as const,
               };
-              return formatCardContainer({ gameCard, containerType: "commander" });
+              return formatCardContainer({ gameCard, gameId });
             })
             .join("")}
         </div>`;
-}
-
-export function formatCardContainerHtmlFragment(gameCard: GameCard, containerType: "revealed" | "hand", actions: string, gameId?: number): string {
-  return formatCardContainer({ gameCard, containerType, gameId, actions });
-}
-
-export function formatCommanderContainerHtmlFragment(gameCard: GameCard, gameId: number, whatHappened?: WhatHappened): string {
-  return formatCardContainer({ gameCard, containerType: "commander", gameId, whatHappened });
 }
 
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {

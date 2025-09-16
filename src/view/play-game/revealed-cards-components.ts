@@ -1,5 +1,5 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
-import { formatCardContainerHtmlFragment, getAnimationClassHelper } from "../common/shared-components.js";
+import { formatCardContainer } from "../common/shared-components.js";
 
 type CardAction = {
   action: string;
@@ -56,7 +56,7 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
       const actions = formatRevealedCardActionsHtmlFragment(game, gameCard);
-      return formatCardContainerHtmlFragment(gameCard, "revealed", actions, game.gameId);
+      return formatCardContainer({gameCard, gameId: game.gameId, actions, whatHappened});
     })
     .join("");
 

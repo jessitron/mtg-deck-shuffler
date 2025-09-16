@@ -14,7 +14,7 @@ describe("Deck HTML Snapshot Tests", () => {
 
   beforeAll(async () => {
     const filesystemGateway = new FilesystemArchidektGateway("./test/decks");
-    const deterministicDate = new Date('2024-01-01T12:00:00Z');
+    const deterministicDate = new Date("2024-01-01T12:00:00Z");
     const adapter = new ArchidektDeckToDeckAdapter(filesystemGateway, deterministicDate);
     testDeck1 = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "75009" });
     testDeck2 = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "14669648" });
@@ -43,12 +43,10 @@ describe("Deck HTML Snapshot Tests", () => {
 
   it("formatDeckHtml with first test deck", async () => {
     const snapshotFile = "deck-test-1.html";
-    const actualHtml = formatDeckHtmlSection(testDeck1);
-    
+    const actualHtml = formatDeckHtmlSection(testDeck1, 8);
+
     // Normalize HTML for consistent comparison
-    const normalizedHtml = actualHtml
-      .replace(/\n\s*/g, '\n')
-      .trim();
+    const normalizedHtml = actualHtml.replace(/\n\s*/g, "\n").trim();
 
     const existingSnapshot = await readSnapshot(snapshotFile);
 
@@ -59,27 +57,27 @@ describe("Deck HTML Snapshot Tests", () => {
     } else {
       // Compare with existing snapshot
       const normalizedSnapshot = existingSnapshot.trim();
-      
+
       if (normalizedHtml !== normalizedSnapshot) {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
-        
-        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
-          `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
-          `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
-          `Run snapshot tests to update if changes are expected.`);
+
+        throw new Error(
+          `Snapshot mismatch for ${snapshotFile}.\n` +
+            `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
+            `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
+            `Run snapshot tests to update if changes are expected.`
+        );
       }
     }
   });
 
   it("formatDeckHtml with second test deck", async () => {
     const snapshotFile = "deck-test-2.html";
-    const actualHtml = formatDeckHtmlSection(testDeck2);
-    
+    const actualHtml = formatDeckHtmlSection(testDeck2, 6);
+
     // Normalize HTML for consistent comparison
-    const normalizedHtml = actualHtml
-      .replace(/\n\s*/g, '\n')
-      .trim();
+    const normalizedHtml = actualHtml.replace(/\n\s*/g, "\n").trim();
 
     const existingSnapshot = await readSnapshot(snapshotFile);
 
@@ -90,15 +88,17 @@ describe("Deck HTML Snapshot Tests", () => {
     } else {
       // Compare with existing snapshot
       const normalizedSnapshot = existingSnapshot.trim();
-      
+
       if (normalizedHtml !== normalizedSnapshot) {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
-        
-        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
-          `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
-          `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
-          `Run snapshot tests to update if changes are expected.`);
+
+        throw new Error(
+          `Snapshot mismatch for ${snapshotFile}.\n` +
+            `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
+            `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
+            `Run snapshot tests to update if changes are expected.`
+        );
       }
     }
   });
@@ -110,14 +110,12 @@ describe("Deck HTML Snapshot Tests", () => {
       ...testDeck1,
       name: testDeck1.name + " (Subset)",
       cards: testDeck1.cards.slice(0, 5), // Just first 5 cards
-      totalCards: 5
+      totalCards: 5,
     };
-    const actualHtml = formatDeckHtmlSection(subsetDeck);
-    
+    const actualHtml = formatDeckHtmlSection(subsetDeck, 4);
+
     // Normalize HTML for consistent comparison
-    const normalizedHtml = actualHtml
-      .replace(/\n\s*/g, '\n')
-      .trim();
+    const normalizedHtml = actualHtml.replace(/\n\s*/g, "\n").trim();
 
     const existingSnapshot = await readSnapshot(snapshotFile);
 
@@ -128,15 +126,17 @@ describe("Deck HTML Snapshot Tests", () => {
     } else {
       // Compare with existing snapshot
       const normalizedSnapshot = existingSnapshot.trim();
-      
+
       if (normalizedHtml !== normalizedSnapshot) {
         // Write the actual output for comparison
         await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
-        
-        throw new Error(`Snapshot mismatch for ${snapshotFile}.\n` +
-          `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
-          `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
-          `Run snapshot tests to update if changes are expected.`);
+
+        throw new Error(
+          `Snapshot mismatch for ${snapshotFile}.\n` +
+            `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
+            `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
+            `Run snapshot tests to update if changes are expected.`
+        );
       }
     }
   });
