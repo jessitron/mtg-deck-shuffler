@@ -43,6 +43,7 @@ export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   name: cardName,
   scryfallId: scryfallId,
   multiverseid: multiverseId,
+  twoFaced: fc.boolean(),
 });
 
 // Generator for commander names (legendary creatures)
@@ -72,6 +73,7 @@ export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   name: commanderName,
   scryfallId: scryfallId,
   multiverseid: multiverseId,
+  twoFaced: fc.boolean(),
 });
 
 // Generator for deck names
@@ -208,24 +210,28 @@ export const lightningBolt: CardDefinition = {
   name: "Lightning Bolt",
   scryfallId: "abc123",
   multiverseid: 12345,
+  twoFaced: false,
 };
 
 export const ancestralRecall: CardDefinition = {
   name: "Ancestral Recall",
   scryfallId: "def456",
   multiverseid: 67890,
+  twoFaced: false,
 };
 
 export const blackLotus: CardDefinition = {
   name: "Black Lotus",
   scryfallId: "ghi789",
   multiverseid: 11111,
+  twoFaced: false,
 };
 
 export const atraxa: CardDefinition = {
   name: "Atraxa, Praetors' Voice",
   scryfallId: "cmd001",
   multiverseid: 22222,
+  twoFaced: false,
 };
 
 export const testProvenance: DeckProvenance = {
@@ -252,10 +258,11 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
       ? { type: "CommandZone" as const, position: commanderPositionCounter++ }
       : { type: "Library" as const, position: libraryPositionCounter++ },
     gameCardIndex: index,
+    currentFace: "front" as const,
   }));
 
   return {
-    version: 4 as const, // PERSISTED_GAME_STATE_VERSION
+    version: 5 as const, // PERSISTED_GAME_STATE_VERSION
     gameId,
     status,
     deckProvenance: deck.provenance,

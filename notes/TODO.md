@@ -2,7 +2,7 @@
 
 - cards with two faces! we need a way to flip them. The image links are the same except 'back' instead of 'front'. To know whether a card has two faces, in the archidekt data, I need to check whether card.oracleCard.faces.length == 2 (usually it's empty) See @notes/FEATURE-flip-card.md
 
-- this was super messy while commanders are not in the gameCards array. I think it's fixed now. See @notes/STRUCTURE-commanders-are-cards.md
+[x] this was super messy while commanders are not in the gameCards array. I think it's fixed now. See @notes/STRUCTURE-commanders-are-cards.md
 
 [x] and changing that is a freaking mess because of all the hard-coded GameState construction in tests. OK, I changed the snapshot tests, they were the biggest problem.
 

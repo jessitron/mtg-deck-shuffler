@@ -84,6 +84,7 @@ export class GameState {
         ? { type: "CommandZone", position: commanderPositionCounter++ } as CommandZoneLocation
         : { type: "Library", position: libraryPositionCounter++ } as LibraryLocation,
       gameCardIndex: index,
+      currentFace: "front" as const,
     }));
 
     return new GameState({
@@ -128,7 +129,8 @@ export class GameState {
       // Add isCommander flag to existing game cards
       const migratedGameCards: GameCard[] = legacyPsg.gameCards.map((gc: any) => ({
         ...gc,
-        isCommander: false
+        isCommander: false,
+        currentFace: gc.currentFace || "front" as const
       }));
 
       // Add commanders as game cards in command zone
@@ -139,6 +141,7 @@ export class GameState {
           location: { type: "CommandZone", position: index } as CommandZoneLocation,
           gameCardIndex,
           isCommander: true,
+          currentFace: "front" as const,
         };
       });
 
@@ -486,6 +489,22 @@ export class GameState {
       movedRight: [cardToSwap],
       movedLeft: [cardToRight],
     };
+  }
+
+  public flipCard(gameCardIndex: number): this {
+    const gameCard = this.gameCards[gameCardIndex];
+    if (!gameCard) {
+      throw new Error(`Game card with index ${gameCardIndex} not found`);
+    }
+
+    if (!gameCard.card.twoFaced) {
+      throw new Error(`Card ${gameCard.card.name} is not a two-faced card`);
+    }
+
+    // Toggle the face
+    gameCard.currentFace = gameCard.currentFace === "front" ? "back" : "front";
+
+    return this;
   }
 
   public undo(gameEventIndex: number): GameState {

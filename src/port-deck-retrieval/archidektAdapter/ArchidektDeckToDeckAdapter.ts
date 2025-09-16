@@ -74,6 +74,12 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
      * The Oracle Card is the canonical card, like you can't have two of the same in a Commander deck,
      * while certain fancy cards get a vanity name. On the printed card, the Oracle Name shows up as a subtitle */
     const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
-    return { name: cardName, scryfallId: archidektCard.card.uid, multiverseid: archidektCard.card.multiverseid };
+    const twoFaced = (archidektCard.card.oracleCard.faces || []).length === 2;
+    return {
+      name: cardName,
+      scryfallId: archidektCard.card.uid,
+      multiverseid: archidektCard.card.multiverseid,
+      twoFaced
+    };
   }
 }

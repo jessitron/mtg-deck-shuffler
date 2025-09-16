@@ -6,11 +6,11 @@ describe("GameState seeded random shuffling", () => {
 
   beforeEach(() => {
     const cards: CardDefinition[] = [
-      { name: "Card A", scryfallId: "a1", multiverseid: 1 },
-      { name: "Card B", scryfallId: "b1", multiverseid: 2 },
-      { name: "Card C", scryfallId: "c1", multiverseid: 3 },
-      { name: "Card D", scryfallId: "d1", multiverseid: 4 },
-      { name: "Card E", scryfallId: "e1", multiverseid: 5 },
+      { name: "Card A", scryfallId: "a1", multiverseid: 1, twoFaced: false },
+      { name: "Card B", scryfallId: "b1", multiverseid: 2, twoFaced: false },
+      { name: "Card C", scryfallId: "c1", multiverseid: 3, twoFaced: false },
+      { name: "Card D", scryfallId: "d1", multiverseid: 4, twoFaced: false },
+      { name: "Card E", scryfallId: "e1", multiverseid: 5, twoFaced: false },
     ];
 
     const testProvenance: DeckProvenance = {

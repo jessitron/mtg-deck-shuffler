@@ -5,6 +5,7 @@ export interface ArchidektCard {
     multiverseid: number;
     oracleCard: {
       name: string;
+      faces: any[];
     };
   };
   quantity: number;

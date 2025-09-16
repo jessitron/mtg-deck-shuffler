@@ -1,7 +1,7 @@
 import { AvailableDecks } from "../../port-deck-retrieval/types.js";
 import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
+import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
 
 export function formatChooseDeckHtmlSection(availableDecks: AvailableDecks) {
   const archidektSelectionHtml = formatArchidektInputHtmlFragment();
@@ -91,7 +91,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
 }
 
 export function formatDeckHtmlSection(deck: Deck): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(deck.commanders);
+  const commanderImageHtml = formatCommanderImageHtmlFragmentFromCards(deck.commanders);
   const cardCountInfo = `${deck.totalCards} cards`;
   const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
 

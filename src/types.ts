@@ -2,6 +2,7 @@ export interface CardDefinition {
   name: string;
   scryfallId: string;
   multiverseid: number;
+  twoFaced: boolean;
 }
 
 export interface DeckProvenance {
@@ -27,11 +28,11 @@ export interface Library {
   count: number;
 }
 
-export function getCardImageUrl(scryfallId: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png"): string {
+export function getCardImageUrl(scryfallId: string, format: "small" | "normal" | "large" | "png" | "art_crop" | "border_crop" = "png", face: "front" | "back" = "front"): string {
   const extension = format === "png" ? "png" : "jpg";
   const firstTwo = scryfallId.substring(0, 1);
   const nextTwo = scryfallId.substring(1, 2);
-  return `https://cards.scryfall.io/${format}/front/${firstTwo}/${nextTwo}/${scryfallId}.${extension}`;
+  return `https://cards.scryfall.io/${format}/${face}/${firstTwo}/${nextTwo}/${scryfallId}.${extension}`;
 }
 
 export interface WhatHappened {

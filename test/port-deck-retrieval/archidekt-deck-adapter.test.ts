@@ -42,7 +42,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Lightning Bolt" },
+            oracleCard: { name: "Lightning Bolt", faces: [] },
           },
           quantity: 4,
           categories: ["Instant"],
@@ -51,7 +51,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Mountain" },
+            oracleCard: { name: "Mountain", faces: [] },
           },
           quantity: 20,
           categories: ["Land"],
@@ -106,7 +106,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "urza-uid",
             multiverseid: 333333,
-            oracleCard: { name: "Urza, Lord High Artificer" },
+            oracleCard: { name: "Urza, Lord High Artificer", faces: [] },
           },
           quantity: 1,
           categories: ["Commander"],
@@ -115,7 +115,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "island-uid",
             multiverseid: 444444,
-            oracleCard: { name: "Island" },
+            oracleCard: { name: "Island", faces: [] },
           },
           quantity: 30,
           categories: ["Land"],
@@ -124,7 +124,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "counterspell-uid",
             multiverseid: 555555,
-            oracleCard: { name: "Counterspell" },
+            oracleCard: { name: "Counterspell", faces: [] },
           },
           quantity: 1,
           categories: ["Instant"],
@@ -141,7 +141,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.id).toBe(456);
     expect(result.name).toBe("Commander Deck");
     expect(result.totalCards).toBe(32); // 31 non-commander cards + 1 commander
-    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333 }]);
+    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333, twoFaced: false }]);
   });
 
   it("handles empty deck", async () => {
@@ -203,7 +203,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid-2",
             multiverseid: 666666,
-            oracleCard: { name: "Lightning Bolt" },
+            oracleCard: { name: "Lightning Bolt", faces: [] },
           },
           quantity: 4,
           categories: ["Instant"],
@@ -212,7 +212,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid-2",
             multiverseid: 777777,
-            oracleCard: { name: "Mountain" },
+            oracleCard: { name: "Mountain", faces: [] },
           },
           quantity: 20,
           categories: ["Land"],
@@ -221,7 +221,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "maybe-card-uid",
             multiverseid: 888888,
-            oracleCard: { name: "Maybe Card" },
+            oracleCard: { name: "Maybe Card", faces: [] },
           },
           quantity: 2,
           categories: ["Maybeboard", "Creature"],
@@ -230,7 +230,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "sideboard-card-uid",
             multiverseid: 999999,
-            oracleCard: { name: "Sideboard Card" },
+            oracleCard: { name: "Sideboard Card", faces: [] },
           },
           quantity: 1,
           categories: ["Sideboard", "Instant"],
@@ -261,7 +261,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     expect(result.id).toBe(14669648);
     expect(result.name).toBe("Ygra EATS IT ALL");
-    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
+    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false }]);
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
   });
 
@@ -285,6 +285,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
             multiverseid: 123456,
             oracleCard: {
               name: "Oracle Name",
+              faces: [],
             },
           },
           quantity: 1,
@@ -299,7 +300,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456 });
+    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456, twoFaced: false });
   });
 
   it("converts cards with display name correctly", async () => {
@@ -323,6 +324,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
             multiverseid: 789012,
             oracleCard: {
               name: "Oracle Name",
+              faces: [],
             },
           },
           quantity: 1,
@@ -337,7 +339,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012 });
+    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false });
   });
 
   it("converts deck with multiple commanders", async () => {
@@ -365,7 +367,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "jaheira-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Jaheira, Friend of the Forest" },
+            oracleCard: { name: "Jaheira, Friend of the Forest", faces: [] },
           },
           quantity: 1,
           categories: ["Commander"],
@@ -374,7 +376,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "agent-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Agent of the Iron Throne" },
+            oracleCard: { name: "Agent of the Iron Throne", faces: [] },
           },
           quantity: 1,
           categories: ["Commander"],
@@ -383,7 +385,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "forest-uid",
             multiverseid: 333333,
-            oracleCard: { name: "Forest" },
+            oracleCard: { name: "Forest", faces: [] },
           },
           quantity: 20,
           categories: ["Land"],
@@ -401,8 +403,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.name).toBe("Dual Commander Deck");
     expect(result.totalCards).toBe(22); // 20 non-commander cards + 2 commanders
     expect(result.commanders.length).toBe(2);
-    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111 });
-    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222 });
+    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111, twoFaced: false });
+    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222, twoFaced: false });
   });
 
   it("handles deck with null categories", async () => {
@@ -415,7 +417,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Lightning Bolt" },
+            oracleCard: { name: "Lightning Bolt", faces: [] },
           },
           quantity: 4,
           categories: ["Instant"],
@@ -424,7 +426,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Mountain" },
+            oracleCard: { name: "Mountain", faces: [] },
           },
           quantity: 20,
           categories: ["Land"],
@@ -454,7 +456,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     expect(result.id).toBe(14669648);
     expect(result.name).toBe("Ygra EATS IT ALL");
-    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155 }]);
+    expect(result.commanders).toEqual([{ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false }]);
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
     expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/14669648");
     expect(result.provenance.deckSource).toBe("archidekt");

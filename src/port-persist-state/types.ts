@@ -52,9 +52,10 @@ export interface GameCard {
   location: CardLocation;
   gameCardIndex: number;
   isCommander: boolean;
+  currentFace: "front" | "back";
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 4 = 4;
+export const PERSISTED_GAME_STATE_VERSION: 5 = 5;
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;
