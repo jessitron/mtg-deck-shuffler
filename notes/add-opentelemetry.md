@@ -97,14 +97,14 @@ For example, if the service is started with `ts-node src/index.ts`, change it to
 Here is a task, with this todo list as an input and either a trace link or a failure description as the output.
 Do the following things:
 
-[] Run the application.
-[] Make a request to the service.
-[] Wait a few seconds.
-[] Read the service's logs. Are there any warnings or errors from OpenTelemetry? If so, proceed to 'Troubleshooting' below.
-[] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, Check whether this service's dataset exists in that environment. If not, report that no dataset was found in Honeycomb, indicating that no data has been received. Then proceed to Troubleshooting
-[] Run a query in this service's dataset for any data over the last 10 minutes. If there is nothing, report that no data was found in Honeycomb. Then proceed to Troubleshooting
-[] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
-[] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/trace?trace_id=39ae994d9ea02cda9a4dfe279bfae59b`
+- [] Run the application. 
+- [] Make a request to the service.
+- [] Wait a few seconds.
+- [] Read the service's logs. Are there any warnings or errors from OpenTelemetry? If so, proceed to 'Troubleshooting' below.
+- [] Recall the Honeycomb environment you found earlier in these instructions. Using the Honeycomb MCP, Check whether this service's dataset exists in that environment. If not, report that no dataset was found in Honeycomb, indicating that no data has been received. Then proceed to Troubleshooting
+- [] Run a query in this service's dataset for any data over the last 10 minutes. If there is nothing, report that no data was found in Honeycomb. Then proceed to Troubleshooting
+- [] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
+- [] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/trace?trace_id=39ae994d9ea02cda9a4dfe279bfae59b`
 
 After the task is complete, if there was an error, proceed to Troubleshooting.
 
