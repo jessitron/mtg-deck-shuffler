@@ -1,41 +1,5 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
-import { formatCardContainer } from "../common/shared-components.js";
-
-type CardAction = {
-  action: string;
-  endpoint: string;
-  title: string;
-  cssClass?: string;
-};
-
-function formatCardActionButtonHtmlFragment(
-  action: string,
-  endpoint: string,
-  gameId: number,
-  cardIndex: number,
-  title: string,
-  cssClass = "card-action-button",
-  cardId?: string,
-  currentFace?: "front" | "back"
-): string {
-  const cardIdAttr = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
-  const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
-  const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
-  const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
-  return `<button class="${cssClass}"
-                    hx-post="${endpoint}/${gameId}/${cardIndex}"
-                    hx-target="#game-container"
-                    ${swapAttr}
-                    ${extraAttrs}
-                    onclick="event.stopPropagation()"
-                    title="${title}">
-                 ${action}
-               </button>`;
-}
-
-function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string, currentFace?: "front" | "back"): string {
-  return actions.map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId, currentFace)).join("");
-}
+import { CardAction, formatCardActionsGroupHtmlFragment, formatCardContainer } from "../common/shared-components.js";
 
 function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCard): string {
   const actions: CardAction[] = [
@@ -50,8 +14,6 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
   </div>`;
 }
 
-
-
 export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
 
@@ -60,7 +22,7 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
       const actions = formatRevealedCardActionsHtmlFragment(game, gameCard);
-      return formatCardContainer({gameCard, gameId: game.gameId, actions, whatHappened});
+      return formatCardContainer({ gameCard, gameId: game.gameId, actions, whatHappened });
     })
     .join("");
 

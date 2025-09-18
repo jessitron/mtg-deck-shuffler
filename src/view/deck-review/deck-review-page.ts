@@ -1,14 +1,7 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
+import { CARD_BACK, CardAction, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
-
-type CardAction = {
-  action: string;
-  endpoint: string;
-  title: string;
-  cssClass?: string;
-};
 
 function formatCardActionButton(
   action: string,
