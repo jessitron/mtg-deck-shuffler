@@ -74,7 +74,7 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number):
   if (gameCard.card.twoFaced) {
     actionButtons += `
     <button class="modal-action-button flip-button"
-            hx-post="/flip-card-modal/${gameId}/${gameCard.gameCardIndex}"
+            hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}"
             hx-target="#modal-container"
             hx-swap="innerHTML">Flip</button>`;
   }
