@@ -17,7 +17,7 @@ The deck number defaults to my favorite deck.
 
 ```
         *Woohoo it's Magic time!*
-  Enter Archidekt Deck Number: [__14669648_______] [Let's Play]
+  Enter Archidekt Deck Number: [__16038812_______] [Let's Play]
 ```
 
 The 'Let's Play' button brings out the deck details.
