@@ -4,6 +4,8 @@
 
 - 'Play' doesn't work for two-faced cards. The animation doesn't work, and it is always gonna copy the front.
 
+- When two-sided cards are played, the player is going to need access to both sides of the card. Copying 2 images is not well supported. So, let's copy the current face. To give people access to the other face, let's put the two-sided card at the top of the list of played cards. ... and then we need the card modal, with a copy button always.
+
 ## More Things to change
 
 - can I make Play make an animation of moving the card to the table?

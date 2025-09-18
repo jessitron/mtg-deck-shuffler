@@ -15,6 +15,7 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
 import { trace } from "@opentelemetry/api";
+import { getCardImageUrl } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -676,7 +677,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
     try {
       // Import getCardImageUrl function
-      const { getCardImageUrl } = await import("./types.js");
       const imageUrl = getCardImageUrl(cardId, "png", cardFace);
 
       const response = await fetch(imageUrl);
