@@ -691,6 +691,38 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Flip a card in modal - Returns the updated modal HTML
+  app.post("/flip-card-modal/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const gameCardIndex = parseInt(req.params.gameCardIndex);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      const game = GameState.fromPersistedGameState(persistedGame);
+      game.flipCard(gameCardIndex);
+
+      await persistStatePort.save(game.toPersistedGameState());
+
+      // Get the flipped card
+      const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex);
+      if (!flippedCard) {
+        res.status(404).send(`<div>Card ${gameCardIndex} not found</div>`);
+        return;
+      }
+
+      // Return the updated modal HTML
+      const html = formatCardModalHtmlFragment(flippedCard, gameId);
+      res.send(html);
+    } catch (error) {
+      console.error("Error flipping card in modal:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
+    }
+  });
+
   // Proxy endpoint for card images to avoid CORS issues
   app.get("/proxy-image", async (req, res) => {
     const cardId = req.query.cardId as string;
