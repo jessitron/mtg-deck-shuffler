@@ -10,7 +10,7 @@ Remember to use HTMX for the implementation, no custom JS.
 
 # Phase 1
 
-- make the Commander cards clickable.
+- make the cards clickable.
 - When clicked, a full-screen modal displays the card much bigger, along with a "See on Gatherer" button and a "Copy" button.
 - close the modal on clicking X or Escape.
 - to show people that the cards are clickable, make them react to hover by looking clickable. Like, add a raised border on hover or something.

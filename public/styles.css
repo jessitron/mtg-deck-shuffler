@@ -567,11 +567,6 @@ h1 {
   animation: cardPlayExit 1.5s ease-in-out forwards;
 }
 
-/* Animation for two-faced cards - target both front and back faces */
-.being-played .flip-container-inner .mtg-card-image {
-  animation: cardPlayExit 1.5s ease-in-out forwards;
-}
-
 @keyframes cardPlayExit {
   0% {
     opacity: 0.7;
