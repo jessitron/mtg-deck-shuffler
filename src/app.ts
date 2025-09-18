@@ -290,25 +290,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     res.send("");
   });
 
-  // Returns updated game view - used to refresh after modal flip
-  app.get("/refresh-game/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-      const html = formatGameHtmlSection(game);
-      res.send(html);
-    } catch (error) {
-      console.error("Error refreshing game view:", error);
-      res.status(500).send(`<div>Error refreshing game view</div>`);
-    }
-  });
-
   // Returns modal for loading game state
   app.get("/load-state-modal", (req, res) => {
     const modalHtml = formatLoadStateModalHtmlFragment();
@@ -733,9 +714,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Return the updated modal HTML and trigger game refresh event
+      // Return the updated modal HTML
       const html = formatCardModalHtmlFragment(flippedCard, gameId);
-      res.set('HX-Trigger', 'cardFlipped');
       res.send(html);
     } catch (error) {
       console.error("Error flipping card in modal:", error);

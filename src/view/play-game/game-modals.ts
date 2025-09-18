@@ -91,10 +91,10 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number):
     </div>
   </div>`;
 
-  return formatFullScreenCardModalHtmlFragment(bodyContent, gameId);
+  return formatFullScreenCardModalHtmlFragment(bodyContent);
 }
 
-function formatFullScreenCardModalHtmlFragment(bodyContent: string, gameId: number): string {
+function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
   return `<div class="card-modal-overlay"
                hx-get="/close-modal"
                hx-target="#modal-container"
