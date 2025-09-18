@@ -1,16 +1,10 @@
 import { GameState, WhatHappened } from "../../GameState.js";
-import { CARD_BACK } from "../common/shared-components.js";
+import { CARD_BACK, formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
-  const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
-
   return `<div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        <div class="library-stack${shufflingClass}" data-testid="library-stack">
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
-        </div>
+        ${formatLibraryStack(whatHappened)}
         <div class="library-buttons">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
@@ -31,3 +25,4 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
         </div>
       </div>`;
 }
+

@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment } from "../common/shared-components.js";
+import { CARD_BACK, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
 
@@ -46,14 +46,6 @@ function formatLibraryCardActions(game: GameState, gameCard: any): string {
   return `<div class="card-actions">
     ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex)}
   </div>`;
-}
-
-function formatLibraryStack(): string {
-  return `<div class="library-stack" data-testid="library-stack">
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
-        </div>`;
 }
 
 function formatLibraryCardList(game: GameState): string {
@@ -125,3 +117,4 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </div>
     </div>`;
 }
+
