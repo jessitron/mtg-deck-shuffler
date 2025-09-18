@@ -70,3 +70,54 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
     }
   }
 });
+
+// Function to copy card image to clipboard from modal
+window.copyCardImageToClipboard = async function(imageUrl, cardName) {
+  try {
+    // Extract card ID and face from the image URL
+    // URL format: https://cards.scryfall.io/large/front/{first}/{second}/{cardId}.jpg
+    const urlParts = imageUrl.split('/');
+    const filename = urlParts[urlParts.length - 1];
+    const cardId = filename.split('.')[0];
+    const face = urlParts.includes('/back/') ? 'back' : 'front';
+
+    // Use proxy endpoint to avoid CORS issues
+    const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
+    const response = await fetch(proxyUrl);
+
+    if (response.ok) {
+      const blob = await response.blob();
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]);
+
+      // Show feedback to user
+      const copyButton = event.target;
+      const originalText = copyButton.textContent;
+      copyButton.textContent = "Copied!";
+      copyButton.disabled = true;
+
+      setTimeout(() => {
+        copyButton.textContent = originalText;
+        copyButton.disabled = false;
+      }, 2000);
+    } else {
+      throw new Error('Failed to fetch image');
+    }
+  } catch (error) {
+    console.warn("Failed to copy image to clipboard:", error);
+
+    // Show error feedback
+    const copyButton = event.target;
+    const originalText = copyButton.textContent;
+    copyButton.textContent = "Copy failed 😨";
+    copyButton.disabled = true;
+
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+      copyButton.disabled = false;
+    }, 2000);
+  }
+};

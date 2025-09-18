@@ -1,0 +1,33 @@
+<div id="deck-info">
+<div class="deck-details-layout">
+<div id="command-zone">
+<div id="card-0-container" class="card-container clickable-card"
+hx-get="/card-modal/4/0"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">
+<div id="card-0-outer-flip-container-with-button" class="flip-container-with-button">
+<div id="card-0-outer-flip-container" class=" flip-container-outer">
+<div id="card-0-inner-flip-container" class="flip-container-inner">
+<img id="card-0-back-face" src="https://cards.scryfall.io/normal/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge (back face)" class="mtg-card-image two-sided-back" />
+<img id="card-0-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
+</div>
+</div>
+<button class="flip-button" id="card-0-flip-button" hx-post="/flip-card/4/0" hx-swap="outerHTML" hx-target="#card-0-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+</div>
+</div>
+</div>
+<div class="deck-info-section">
+<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League (Subset)</a></h2>
+<p>5 cards</p>
+<p><small>Retrieved: 1/1/2024, 6:00:00 AM</small></p>
+</div>
+</div>
+<div class="deck-actions">
+<input type="hidden" name="deck-id" value="75009" />
+<button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
+<form method="post" action="/" class="inline-form">
+<button type="submit">Choose Another Deck</button>
+</form>
+</div>
+</div>
