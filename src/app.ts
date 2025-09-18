@@ -143,30 +143,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Returns active game section fragment - for HTMX refresh
-  app.get("/game-section/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-      if (game.gameStatus() === "Active") {
-        const html = formatGameHtmlSection(game);
-        res.send(html);
-      } else {
-        res.status(400).send(`<div>Game is not active</div>`);
-      }
-    } catch (error) {
-      console.error("Error loading game section:", error);
-      res.status(500).send(`<div>Error loading game section</div>`);
-    }
-  });
-
   // Redirects to new game page
   app.post("/restart-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
@@ -711,39 +687,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.send(html);
     } catch (error) {
       console.error("Error flipping card:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
-    }
-  });
-
-  // Flip a card from within modal - Returns modal HTML with flipped card and emits game state update event
-  app.post("/flip-card-modal/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const gameCardIndex = parseInt(req.params.gameCardIndex);
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-      game.flipCard(gameCardIndex);
-
-      await persistStatePort.save(game.toPersistedGameState());
-
-      // Get the flipped card
-      const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex);
-      if (!flippedCard) {
-        res.status(404).send(`<div>Card ${gameCardIndex} not found</div>`);
-        return;
-      }
-
-      // Return the updated modal HTML and emit game state update event
-      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId);
-      res.set('HX-Trigger', 'gameStateUpdated');
-      res.send(modalHtml);
-    } catch (error) {
-      console.error("Error flipping card in modal:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
     }
   });
