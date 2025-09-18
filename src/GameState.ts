@@ -520,6 +520,13 @@ export class GameState {
     return {};
   }
 
+  public findCardByIndex(gameCardIndex: number): GameCard | null {
+    if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
+      return null;
+    }
+    return this.gameCards[gameCardIndex];
+  }
+
   public undo(gameEventIndex: number): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);

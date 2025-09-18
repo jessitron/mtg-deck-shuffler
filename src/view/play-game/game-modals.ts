@@ -1,6 +1,7 @@
-import { GameState } from "../../GameState.js";
+import { GameState, GameCard } from "../../GameState.js";
 import { PersistedGameState } from "../../port-persist-state/types.js";
 import { formatCardNameAsGathererLink } from "../common/shared-components.js";
+import { getCardImageUrl } from "../../types.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -57,5 +58,43 @@ export function formatTableModalHtmlFragment(game: GameState): string {
         </ul>`;
 
   return formatModalHtmlFragment("Cards on Table", bodyContent);
+}
+
+export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number): string {
+  const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
+  const gathererUrl = gameCard.card.multiverseid === 0
+    ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
+    : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
+
+  let actionButtons = `<div class="card-modal-actions">
+    <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
+    <button class="modal-action-button copy-button"
+            hx-post="/play-card/${gameId}/${gameCard.gameCardIndex}"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            data-card-id="${gameCard.card.scryfallId}"
+            data-current-face="${gameCard.currentFace}">Copy</button>`;
+
+  if (gameCard.card.twoFaced) {
+    actionButtons += `
+    <button class="modal-action-button flip-button"
+            hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}"
+            hx-target="#modal-container"
+            hx-swap="innerHTML">Flip</button>`;
+  }
+
+  actionButtons += `</div>`;
+
+  const bodyContent = `<div class="card-modal-content">
+    <div class="card-modal-image">
+      <img src="${imageUrl}" alt="${gameCard.card.name}" class="modal-card-image" />
+    </div>
+    <div class="card-modal-info">
+      <h3 class="card-modal-title">${gameCard.card.name}</h3>
+      ${actionButtons}
+    </div>
+  </div>`;
+
+  return formatModalHtmlFragment(`${gameCard.card.name}`, bodyContent);
 }
 

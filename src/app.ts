@@ -5,6 +5,7 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
+import { formatCardModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -254,6 +255,33 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error loading table modal:", error);
       res.status(500).send(`<div>Error loading table contents</div>`);
+    }
+  });
+
+  // Returns modal fragment - individual card modal
+  app.get("/card-modal/:gameId/:cardIndex", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const cardIndex = parseInt(req.params.cardIndex);
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      const game = GameState.fromPersistedGameState(persistedGame);
+      const gameCard = game.findCardByIndex(cardIndex);
+      if (!gameCard) {
+        res.status(404).send(`<div>Card ${cardIndex} not found</div>`);
+        return;
+      }
+
+      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId);
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading card modal:", error);
+      res.status(500).send(`<div>Error loading card details</div>`);
     }
   });
 

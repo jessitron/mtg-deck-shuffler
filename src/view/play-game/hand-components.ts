@@ -27,6 +27,7 @@ function formatCardActionButtonHtmlFragment(
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
+                    onclick="event.stopPropagation()"
                     title="${title}">
                  ${action}
                </button>`;
@@ -46,6 +47,7 @@ function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, 
              hx-post="/swap-with-next/${game.gameId}/${index}"
              hx-target="#game-container"
              hx-swap="outerHTML"
+             onclick="event.stopPropagation()"
              title="Swap with next card">
        ↔
      </button>`

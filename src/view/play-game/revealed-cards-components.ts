@@ -27,6 +27,7 @@ function formatCardActionButtonHtmlFragment(
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
+                    onclick="event.stopPropagation()"
                     title="${title}">
                  ${action}
                </button>`;

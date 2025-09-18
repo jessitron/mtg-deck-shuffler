@@ -30,13 +30,21 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
       // TODO: make required everywhere
       throw new Error("Game ID is required for two-faced cards");
     }
-    return `<div id="${cardId}-container" class="card-container" >
+    return `<div id="${cardId}-container" class="card-container clickable-card"
+                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
+                 hx-target="#modal-container"
+                 hx-swap="innerHTML"
+                 style="cursor: pointer;">
       ${formatFlippingContainer(gameCard, gameId)}
       ${actions}
     </div>`;
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
-    return `<div id="${cardId}-container" class="card-container">
+    return `<div id="${cardId}-container" class="card-container clickable-card"
+                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
+                 hx-target="#modal-container"
+                 hx-swap="innerHTML"
+                 style="cursor: pointer;">
       <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />
       ${actions}
     </div>`;
@@ -51,7 +59,7 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
   const cardId = `card-${gameCard.gameCardIndex}`;
   const flipContainerId = `${cardId}-outer-flip-container`;
 
-  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button">Flip</button>`;
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
 
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
             <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
