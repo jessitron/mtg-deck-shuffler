@@ -39,11 +39,12 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
   if (evt.detail.elt.classList.contains("play-button")) {
     const button = evt.detail.elt;
     const cardId = button.dataset.cardId;
+    const currentFace = button.dataset.currentFace || "front";
 
     // Try to copy to clipboard first
     try {
       // Use proxy endpoint to avoid CORS issues
-      const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}`;
+      const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(currentFace)}`;
       const response = await fetch(proxyUrl);
       if (response.ok) {
         const blob = await response.blob();

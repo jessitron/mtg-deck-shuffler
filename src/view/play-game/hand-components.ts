@@ -15,9 +15,12 @@ function formatCardActionButtonHtmlFragment(
   cardIndex: number,
   title: string,
   cssClass = "card-action-button",
-  cardId?: string
+  cardId?: string,
+  currentFace?: "front" | "back"
 ): string {
-  const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
+  const cardIdAttr = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
+  const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
+  const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
@@ -29,9 +32,9 @@ function formatCardActionButtonHtmlFragment(
                </button>`;
 }
 
-function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string): string {
+function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string, currentFace?: "front" | "back"): string {
   return actions
-    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId))
+    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId, currentFace))
     .join("");
 }
 
@@ -54,7 +57,7 @@ function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, 
   ];
 
   return `<div class="hand-card-buttons">
-    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId)}
+    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId, gameCard.currentFace)}
     ${swapButton}
   </div>`;
 }

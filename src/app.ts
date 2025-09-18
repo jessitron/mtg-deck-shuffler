@@ -665,15 +665,19 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   // Proxy endpoint for card images to avoid CORS issues
   app.get("/proxy-image", async (req, res) => {
     const cardId = req.query.cardId as string;
+    const face = req.query.face as string;
 
     if (!cardId || typeof cardId !== "string" || cardId.length !== 36) {
       return res.status(400).send("Invalid card ID");
     }
 
+    // Validate face parameter
+    const cardFace: "front" | "back" = (face === "front" || face === "back") ? face : "front";
+
     try {
       // Import getCardImageUrl function
       const { getCardImageUrl } = await import("./types.js");
-      const imageUrl = getCardImageUrl(cardId);
+      const imageUrl = getCardImageUrl(cardId, "png", cardFace);
 
       const response = await fetch(imageUrl);
       if (!response.ok) {
