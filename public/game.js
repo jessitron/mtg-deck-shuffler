@@ -72,7 +72,7 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
 });
 
 // Function to copy card image to clipboard from modal
-window.copyCardImageToClipboard = async function(imageUrl, cardName) {
+window.copyCardImageToClipboard = async function(event, imageUrl, cardName) {
   try {
     // Extract card ID and face from the image URL
     // URL format: https://cards.scryfall.io/large/front/{first}/{second}/{cardId}.jpg

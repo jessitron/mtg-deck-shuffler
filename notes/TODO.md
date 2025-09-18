@@ -6,6 +6,24 @@
 
 ## More Things to change
 
+### animations
+
+- animations. I have a good idea.
+
+The htmx requests can include the current position of the card. It can also calculate the destination position, like where the table is! The server can then style the card with a transition that moves it from the current position to the destination position!
+
+an example from claude desktop:
+<img id="image" 
+     data-current-x="100" 
+     data-current-y="50"
+     hx-post="/update-position"
+     hx-vals="js:{currentX: document.getElementById('image').dataset.currentX, 
+                  currentY: document.getElementById('image').dataset.currentY}">
+
+### other
+
+- when we draw a card, get an htmx event to scroll the hand to the right (in case you can't see the new card)
+
 - When two-sided cards are played, the player is going to need access to both sides of the card. Copying 2 images is not well supported. So, let's copy the current face. To give people access to the other face, let's put the two-sided card at the top of the list of played cards. ... and then we need the card modal, with a copy button and a flip button.
 
 - can I make Play make an animation of moving the card to the table?

@@ -69,7 +69,7 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number):
   let actionButtons = `<div class="card-modal-actions">
     <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
     <button class="modal-action-button copy-button"
-            onclick="copyCardImageToClipboard('${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
+            onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
 
   if (gameCard.card.twoFaced) {
     actionButtons += `
