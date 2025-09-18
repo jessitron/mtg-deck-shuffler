@@ -34,6 +34,22 @@ document.addEventListener("htmx:afterSwap", function (evt) {
   }
 });
 
+// Function to copy card image to clipboard using proxy URL
+async function copyCardToClipboard(cardId, face) {
+  const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
+  const response = await fetch(proxyUrl);
+  if (response.ok) {
+    const blob = await response.blob();
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        [blob.type]: blob,
+      }),
+    ]);
+    return true;
+  }
+  return false;
+}
+
 // Handle clipboard copying when HTMX is about to make the request
 document.addEventListener("htmx:beforeRequest", async function (evt) {
   if (evt.detail.elt.classList.contains("play-button")) {
@@ -43,17 +59,11 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
 
     // Try to copy to clipboard first
     try {
-      // Use proxy endpoint to avoid CORS issues
-      const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(currentFace)}`;
-      const response = await fetch(proxyUrl);
-      if (response.ok) {
-        const blob = await response.blob();
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            [blob.type]: blob,
-          }),
-        ]);
+      const success = await copyCardToClipboard(cardId, currentFace);
+      if (success) {
         button.textContent = "Copied!";
+      } else {
+        button.textContent = "Copy failed 😨";
       }
     } catch (clipboardErr) {
       console.warn("Failed to copy image to clipboard:", clipboardErr);
@@ -81,31 +91,23 @@ window.copyCardImageToClipboard = async function(event, imageUrl, cardName) {
     const cardId = filename.split('.')[0];
     const face = urlParts.includes('/back/') ? 'back' : 'front';
 
-    // Use proxy endpoint to avoid CORS issues
-    const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
-    const response = await fetch(proxyUrl);
+    const success = await copyCardToClipboard(cardId, face);
 
-    if (response.ok) {
-      const blob = await response.blob();
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob,
-        }),
-      ]);
+    // Show feedback to user
+    const copyButton = event.target;
+    const originalText = copyButton.textContent;
 
-      // Show feedback to user
-      const copyButton = event.target;
-      const originalText = copyButton.textContent;
+    if (success) {
       copyButton.textContent = "Copied!";
-      copyButton.disabled = true;
-
-      setTimeout(() => {
-        copyButton.textContent = originalText;
-        copyButton.disabled = false;
-      }, 2000);
     } else {
-      throw new Error('Failed to fetch image');
+      copyButton.textContent = "Copy failed 😨";
     }
+    copyButton.disabled = true;
+
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+      copyButton.disabled = false;
+    }, 2000);
   } catch (error) {
     console.warn("Failed to copy image to clipboard:", error);
 
