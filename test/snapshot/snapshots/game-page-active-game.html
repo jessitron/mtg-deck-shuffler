@@ -21,7 +21,11 @@ provideOneLinkToHoneycomb: true,
 <h1>*Woohoo it's Magic time!*</h1>
 <div id="game-container">
 <div id="command-zone">
-<div id="card-3-container" class="card-container" >
+<div id="card-3-container" class="card-container clickable-card"
+hx-get="/card-modal/789/3"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">
 <div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
 <div id="card-3-outer-flip-container" class=" flip-container-outer">
 <div id="card-3-inner-flip-container" class="flip-container-inner">
@@ -29,7 +33,7 @@ provideOneLinkToHoneycomb: true,
 <img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
 </div>
 </div>
-<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button">Flip</button>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
 </div>
 </div>
 </div>
@@ -90,7 +94,11 @@ hx-swap="outerHTML">Reveal</button>
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (1)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-2-container" class="card-container">
+<div id="card-2-container" class="card-container clickable-card"
+hx-get="/card-modal/789/2"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">
 <img id="card-2-face" src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg" alt="Damnation" class="mtg-card-image " title="Damnation" />
 <div class="hand-card-buttons">
 <button class="play-button"
@@ -98,12 +106,14 @@ hx-post="/play-card/789/2"
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
 data-card-id="d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f" data-current-face="front"
+onclick="event.stopPropagation()"
 title="Copy image and remove from hand">
 Play
 </button><button class="put-down-button"
 hx-post="/put-down/789/2"
 hx-target="#game-container"
 hx-swap="outerHTML"
+onclick="event.stopPropagation()"
 title="Move card to revealed">
 Put down
 </button>

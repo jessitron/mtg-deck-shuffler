@@ -29,8 +29,8 @@ The game detail section needs to listen for that event and refresh itself.
 
 - the card is bigger than the screen sometimes?
 - fix the width of the title. I want the card to be in the same place, for each card you click.
-
-## Phase 2
+    
+## Phase 2 - not implemented
 
 - all action buttons that appear below the cards should be in the modal.
 - when an action button is clicked, the modal will close.
