@@ -95,6 +95,25 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number):
     </div>
   </div>`;
 
-  return formatModalHtmlFragment(`${gameCard.card.name}`, bodyContent);
+  return formatFullScreenCardModalHtmlFragment(bodyContent);
+}
+
+function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
+  return `<div class="card-modal-overlay"
+               hx-get="/close-modal"
+               hx-target="#modal-container"
+               hx-swap="innerHTML"
+               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+               tabindex="0">
+    <div class="card-modal-dialog">
+      <button class="card-modal-close"
+              hx-get="/close-modal"
+              hx-target="#modal-container"
+              hx-swap="innerHTML">&times;</button>
+      <div class="card-modal-body">
+        ${bodyContent}
+      </div>
+    </div>
+  </div>`;
 }
 
