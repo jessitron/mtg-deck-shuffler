@@ -4,7 +4,7 @@
 // See https://aka.ms/devcontainer.json for more information.
 {
 	"name": "Ona",
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
 	// instead of the build to use a pre-built image.
 	// Features add additional features to your environment. See https://containers.dev/features
 	// Beware: features are not supported on all platforms and may have unintended side-effects.
