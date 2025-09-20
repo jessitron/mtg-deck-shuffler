@@ -841,29 +841,29 @@ h1 {
 }
 
 .modal-action-button.copy-button {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
 .modal-action-button.copy-button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
 }
 
 .modal-action-button.flip-button {
-  background-color: #FF9800;
+  background-color: #ff9800;
   color: white;
 }
 
 .modal-action-button.flip-button:hover {
-  background-color: #F57C00;
+  background-color: #f57c00;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
 }
 
 /* Responsive adjustments for smaller screens */
-@media (max-width: 1024px) {
+@media (max-width: 768) {
   .card-modal-content {
     flex-direction: column;
     gap: 20px;
@@ -876,9 +876,7 @@ h1 {
   .card-modal-info {
     min-width: auto;
   }
-}
 
-@media (max-width: 768px) {
   .card-modal-dialog {
     padding: 20px;
   }
