@@ -15,7 +15,7 @@ export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedG
 
   const bodyContent = `<div class="debug-container">
           <button onclick="copyDebugJson(this)"
-                  class="copy-button">
+                  class="debug-copy-button">
             Copy JSON
           </button>
           <div class="collapsible-json">

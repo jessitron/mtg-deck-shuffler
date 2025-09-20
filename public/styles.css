@@ -1034,7 +1034,7 @@ h1 {
   overflow-y: auto;
 }
 
-.copy-button {
+.debug-copy-button {
   position: absolute;
   top: 8px;
   right: 8px;
