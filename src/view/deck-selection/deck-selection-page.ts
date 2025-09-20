@@ -3,18 +3,6 @@ import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
 
-export function formatChooseDeckHtmlSection(availableDecks: AvailableDecks) {
-  const archidektSelectionHtml = formatArchidektInputHtmlFragment();
-
-  const localSelectionHtml = formatLocalDeckInputHtmlFragment(availableDecks);
-  const loadStateHtml = formatLoadStateHtmlFragment();
-  return `<div id="deck-input">
-      ${archidektSelectionHtml}
-      ${localSelectionHtml}
-      ${loadStateHtml}
-    </div>`;
-}
-
 function formatArchidektInputHtmlFragment() {
   return `<div class="deck-input-section">
       <form method="POST" action="/deck">
@@ -43,8 +31,9 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
 }
 
 function formatLoadStateHtmlFragment() {
-  return `<div class="deck-input-section">
-      <button class="load-state-button"
+  // TODO: make this a small link in the footer instead of a whole button
+  return `<div class="deck-input-section"><label for="load-state-button">Debugging: </label>
+      <button id="load-state-button" class="load-state-button"
               hx-get="/load-state-modal"
               hx-target="#modal-container"
               hx-swap="innerHTML">Load Game State</button>
@@ -52,7 +41,14 @@ function formatLoadStateHtmlFragment() {
 }
 
 export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
-  const deckSelectionHtml = formatChooseDeckHtmlSection(availableDecks);
+  const archidektSelectionHtml = formatArchidektInputHtmlFragment();
+
+  const localSelectionHtml = formatLocalDeckInputHtmlFragment(availableDecks);
+  const loadStateHtml = formatLoadStateHtmlFragment();
+  const deckSelectionHtml = `<div id="deck-input">
+      ${archidektSelectionHtml}
+      ${localSelectionHtml}
+    </div>`;
 
   const content = `
     ${deckSelectionHtml}
@@ -85,6 +81,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
         </ul>
         We can play any deck, anywhere, with our favorite people.
       </p>
+      ${loadStateHtml}
     </div>`;
 
   return formatPageWrapper("MTG Deck Shuffler", content);
