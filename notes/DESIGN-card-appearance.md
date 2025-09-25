@@ -18,16 +18,11 @@ Remember to use HTMX for the implementation, no custom JS.
 - close the modal on clicking X or Escape.
 - do not close the modal on 'flip'
 
-### Bug: a card flipped in the modal should be flipped when the modal closes
+### Phase 1A: a card flipped in the modal should be flipped when the modal closes
 
-The flip-card-modal endpoint should trigger a "game state updated" HTMX event.
+The flip-card-modal endpoint should trigger a "game-updated" HTMX event.
 
-The game detail section needs to listen for that event and refresh itself.
-
-### Formatting
-
-- the card is bigger than the screen sometimes?
-- fix the width of the title. I want the card to be in the same place, for each card you click.
+The game-container needs to listen for that event and refresh itself with an hx-get.
 
 ## Phase 2 - not implemented
 
