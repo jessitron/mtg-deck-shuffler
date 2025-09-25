@@ -16,12 +16,11 @@ Remember to use HTMX for the implementation, no custom JS.
 - and a "Copy" button (copies the image, does not close the modal).
 - If it's a two-faced card, there's a "Flip" button. This does not affect game state.
 - close the modal on clicking X or Escape.
+- do not close the modal on 'flip'
 
-### Bug: flip closes the modal
+### Bug: a card flipped in the modal should be flipped when the modal closes
 
-The 'flip' button is harder than we thought.
-
-'flip' should not close the modal. Instead, give it its own endpoint that flips & then returns the modal HTML again. It should _also_ return a "game state updated" HTMX event.
+The flip-card-modal endpoint should trigger a "game state updated" HTMX event.
 
 The game detail section needs to listen for that event and refresh itself.
 
@@ -29,7 +28,7 @@ The game detail section needs to listen for that event and refresh itself.
 
 - the card is bigger than the screen sometimes?
 - fix the width of the title. I want the card to be in the same place, for each card you click.
-    
+
 ## Phase 2 - not implemented
 
 - all action buttons that appear below the cards should be in the modal.

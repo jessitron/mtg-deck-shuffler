@@ -787,7 +787,7 @@ h1 {
 
 .modal-card-image {
   height: 100%;
-  border-radius: 15px;
+  border-radius: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   object-fit: contain;
 }
