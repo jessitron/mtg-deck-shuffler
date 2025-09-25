@@ -787,14 +787,12 @@ h1 {
 
 .modal-card-image {
   height: 100%;
-  height: auto;
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   object-fit: contain;
 }
 
 .card-modal-info {
-  flex: 0 0 auto;
   color: white;
   text-align: center;
   min-width: 200px;
