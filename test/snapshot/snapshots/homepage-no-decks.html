@@ -28,12 +28,6 @@ provideOneLinkToHoneycomb: true,
 <button type="submit" class="lets-play-button">Let's Play (from Archidekt)</button>
 </form>
 </div>
-<div class="deck-input-section">
-<button class="load-state-button"
-hx-get="/load-state-modal"
-hx-target="#modal-container"
-hx-swap="innerHTML">Load Game State</button>
-</div>
 </div>
 <div id="modal-container"></div>
 <div class="expository-text">
@@ -64,6 +58,12 @@ With a combination of
 </ul>
 We can play any deck, anywhere, with our favorite people.
 </p>
+<div class="deck-input-section"><label for="load-state-button">Debugging: </label>
+<button id="load-state-button" class="load-state-button"
+hx-get="/load-state-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML">Load Game State</button>
+</div>
 </div>
 <footer>
 <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
