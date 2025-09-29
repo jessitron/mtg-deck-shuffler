@@ -74,7 +74,11 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
   const gameActionsHtml = formatGameActionsHtmlFragment(game);
 
-  return `<div id="game-container">
+  return `<div id="game-container"
+           hx-trigger="game-state-updated from:body"
+           hx-get="/game-section/${game.gameId}"
+           hx-target="#game-container"
+           hx-swap="outerHTML">
         ${commanderImageHtml}
       ${gameDetailsHtml}
 

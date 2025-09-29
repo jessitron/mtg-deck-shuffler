@@ -377,6 +377,24 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns game section fragment - for HTMX updates
+  app.get("/game-section/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+      const game = GameState.fromPersistedGameState(persistedGame);
+      const html = formatGameHtmlSection(game);
+      res.send(html);
+    } catch (error) {
+      console.error("Error loading game section:", error);
+      res.status(500).send(`<div>Error loading game section</div>`);
+    }
+  });
+
   // Card action endpoints
   // Returns active game fragment - updated game board
   app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
