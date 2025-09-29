@@ -60,7 +60,7 @@ function formatLibraryCardList(game: GameState): string {
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent, false);
 }
 
 export function formatLibraryModalHtml(game: GameState): string {

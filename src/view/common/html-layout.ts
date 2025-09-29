@@ -18,14 +18,15 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string): string {
+function formatPageWrapper(title: string, content: string, showHeader: boolean = true): string {
   const headHtml = formatHtmlHead(title);
+  const headerHtml = showHeader ? '<h1>*Woohoo it\'s Magic time!*</h1>' : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
   <body>
-    <h1>*Woohoo it's Magic time!*</h1>
+    ${headerHtml}
     ${content}
 
     <footer>

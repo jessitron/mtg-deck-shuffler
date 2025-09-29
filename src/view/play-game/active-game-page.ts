@@ -62,7 +62,7 @@ function formatGameActionsHtmlFragment(game: GameState): string {
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent, false);
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
