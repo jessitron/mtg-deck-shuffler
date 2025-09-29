@@ -714,6 +714,9 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      // Set HTMX event header to notify that game state has been updated
+      res.set("HX-Trigger", "game-state-updated");
+
       // Return the updated modal HTML
       const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId);
       res.send(modalHtml);
