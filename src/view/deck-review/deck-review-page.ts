@@ -60,7 +60,10 @@ function formatLibraryCardList(game: GameState): string {
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent, false);
+  const contentWithModal = `${gameContent}
+    <!-- Modal Container -->
+    <div id="modal-container"></div>`;
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
 }
 
 export function formatLibraryModalHtml(game: GameState): string {
@@ -96,9 +99,6 @@ function formatDeckReviewHtmlSection(game: GameState): string {
                   hx-swap="innerHTML">Search</button>
         </div>
       </div>
-
-      <!-- Modal Container -->
-      <div id="modal-container"></div>
 
       <div id="start-game-buttons" class="deck-actions">
         <input type="hidden" name="game-id" value="${game.gameId}" />

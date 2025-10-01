@@ -62,7 +62,10 @@ function formatGameActionsHtmlFragment(game: GameState): string {
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, gameContent, false);
+  const contentWithModal = `${gameContent}
+    <!-- Modal Container -->
+    <div id="modal-container"></div>`;
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
@@ -95,9 +98,6 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
       ${revealedCardsHtml}
 
       ${handSectionHtml}
-
-      <!-- Modal Container -->
-      <div id="modal-container"></div>
 
       ${gameActionsHtml}
     </div>`;
