@@ -39,7 +39,8 @@ function formatTableCardListHtmlFragment(game: GameState): string {
               <button class="card-action-button"
                       hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
                       hx-target="#game-container"
-                      hx-swap="outerHTML">Return</button>
+                      hx-swap="outerHTML"
+                      hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})">Return</button>
           </div>
         </li>`
     )

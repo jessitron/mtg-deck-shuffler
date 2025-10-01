@@ -732,9 +732,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Note: We don't set HX-Trigger for game-state-updated here because
-      // flipping a card in the modal doesn't require reloading the entire game view
-      // and we want to keep the modal open
+      // Trigger game-state-updated event to refresh the game container
+      res.setHeader("HX-Trigger", "game-state-updated");
 
       // Return the updated modal HTML
       const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId);

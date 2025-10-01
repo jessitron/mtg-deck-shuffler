@@ -14,10 +14,12 @@ function formatCardActionButton(
 ): string {
   const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
+  const closeModalAttr = `hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"`;
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
                     hx-target="#game-container"
                     ${swapAttr}
+                    ${closeModalAttr}
                     ${extraAttrs}
                     title="${title}">
                  ${action}

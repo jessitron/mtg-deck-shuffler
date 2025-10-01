@@ -27,12 +27,14 @@ hx-swap="innerHTML">&times;</button>
 hx-post="/reveal-card/456/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
+hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/456/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
+hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
