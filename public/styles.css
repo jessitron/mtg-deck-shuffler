@@ -716,7 +716,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
   padding: 0;
   margin: 0;
 }
@@ -748,7 +748,7 @@ h1 {
   justify-content: center;
   align-items: center;
   transition: background-color 0.2s;
-  z-index: 1001;
+  z-index: 2001;
 }
 
 .card-modal-close:hover {
@@ -858,6 +858,84 @@ h1 {
   background-color: #f57c00;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+/* Card modal button groups */
+.card-modal-utility-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.card-modal-location-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Location-specific action button styles */
+.modal-action-button.play-button {
+  background-color: #e91e63;
+  color: white;
+}
+
+.modal-action-button.play-button:hover {
+  background-color: #c2185b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+}
+
+.modal-action-button.put-down-button,
+.modal-action-button.put-in-hand-button {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.modal-action-button.put-down-button:hover,
+.modal-action-button.put-in-hand-button:hover {
+  background-color: #7b1fa2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+}
+
+.modal-action-button.put-on-top-button {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.modal-action-button.put-on-top-button:hover {
+  background-color: #303f9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+}
+
+.modal-action-button.put-on-bottom-button {
+  background-color: #673ab7;
+  color: white;
+}
+
+.modal-action-button.put-on-bottom-button:hover {
+  background-color: #512da8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(103, 58, 183, 0.4);
+}
+
+.modal-action-button.secondary {
+  background-color: #607d8b;
+  color: white;
+}
+
+.modal-action-button.secondary:hover {
+  background-color: #455a64;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(96, 125, 139, 0.4);
 }
 
 /* Responsive adjustments for smaller screens */

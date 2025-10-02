@@ -290,6 +290,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     res.send("");
   });
 
+  // Returns empty response - closes card modal
+  app.get("/close-card-modal", (req, res) => {
+    res.send("");
+  });
+
   // Returns modal for loading game state
   app.get("/load-state-modal", (req, res) => {
     const modalHtml = formatLoadStateModalHtmlFragment();

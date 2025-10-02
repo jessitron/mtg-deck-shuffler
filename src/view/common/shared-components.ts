@@ -12,6 +12,14 @@ export function formatCardNameAsGathererLink(card: { name: string; multiverseid:
   return `<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}" target="_blank" class="card-name-link" onclick="event.stopPropagation()">${card.name}</a>`;
 }
 
+export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number): string {
+  return `<span class="card-name-link clickable-card-name"
+               hx-get="/card-modal/${gameId}/${cardIndex}"
+               hx-target="#card-modal-container"
+               hx-swap="innerHTML"
+               style="cursor: pointer;">${cardName}</span>`;
+}
+
 type CardRenderOptions = {
   gameCard: GameCard;
   gameId: number; // TODO: not optional (although it's only used for two-faced cards)
@@ -32,7 +40,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
     }
     return `<div id="${cardId}-container" class="card-container clickable-card"
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
-                 hx-target="#modal-container"
+                 hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
       ${formatFlippingContainer(gameCard, gameId)}
@@ -42,7 +50,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
     return `<div id="${cardId}-container" class="card-container clickable-card"
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
-                 hx-target="#modal-container"
+                 hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
       <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />

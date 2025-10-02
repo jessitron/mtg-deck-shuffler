@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, CardAction, formatCardNameAsGathererLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
+import { CARD_BACK, CardAction, formatCardNameAsGathererLink, formatCardNameAsModalLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
 
@@ -52,7 +52,7 @@ function formatLibraryCardList(game: GameState): string {
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
-            ${formatCardNameAsGathererLink(gameCard.card)}
+            ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex)}
           </div>
           ${cardActions}
         </li>`;
@@ -64,7 +64,9 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
   const contentWithModal = `${gameContent}
     <!-- Modal Container -->
-    <div id="modal-container"></div>`;
+    <div id="modal-container"></div>
+    <!-- Separate Modal Container for card modals (higher z-index) -->
+    <div id="card-modal-container"></div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
 }
 

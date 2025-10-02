@@ -63,8 +63,10 @@ function formatGameActionsHtmlFragment(game: GameState): string {
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
   const contentWithModal = `${gameContent}
-    <!-- Modal Container -->
-    <div id="modal-container"></div>`;
+    <!-- Modal Container for library/table modals -->
+    <div id="modal-container"></div>
+    <!-- Separate Modal Container for card modals (higher z-index) -->
+    <div id="card-modal-container"></div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
 }
 
