@@ -26,7 +26,7 @@ hx-swap="outerHTML">
 <div id="command-zone">
 <div id="card-3-container" class="card-container clickable-card"
 hx-get="/card-modal/789/3"
-hx-target="#modal-container"
+hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
@@ -99,7 +99,7 @@ hx-swap="outerHTML">Reveal</button>
 <div id="hand-cards" class="hand-cards">
 <div id="card-2-container" class="card-container clickable-card"
 hx-get="/card-modal/789/2"
-hx-target="#modal-container"
+hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-2-face" src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg" alt="Damnation" class="mtg-card-image " title="Damnation" />
@@ -140,8 +140,10 @@ hx-swap="innerHTML"
 class="debug-button">Debug State</button>
 </div>
 </div>
-<!-- Modal Container -->
+<!-- Modal Container for library/table modals -->
 <div id="modal-container"></div>
+<!-- Separate Modal Container for card modals (higher z-index) -->
+<div id="card-modal-container"></div>
 <footer>
 <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
 </footer>

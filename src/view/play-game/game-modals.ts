@@ -82,7 +82,7 @@ function formatModalActionButton(
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
-                    hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'})"
+                    hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
                     title="${title}">
                  ${action}
                </button>`;
