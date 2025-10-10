@@ -18,12 +18,11 @@ provideOneLinkToHoneycomb: true,
 <script src="/game.js"></script>
 </head>
 <body>
-<h1>*Woohoo it's Magic time!*</h1>
 <div id="game-container">
 <div id="command-zone">
 <div id="card-3-container" class="card-container clickable-card"
 hx-get="/card-modal/456/3"
-hx-target="#modal-container"
+hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
@@ -56,8 +55,6 @@ hx-target="#modal-container"
 hx-swap="innerHTML">Search</button>
 </div>
 </div>
-<!-- Modal Container -->
-<div id="modal-container"></div>
 <div id="start-game-buttons" class="deck-actions">
 <input type="hidden" name="game-id" value="456" />
 <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
@@ -67,6 +64,10 @@ hx-swap="innerHTML">Search</button>
 </form>
 </div>
 </div>
+<!-- Modal Container -->
+<div id="modal-container"></div>
+<!-- Separate Modal Container for card modals (higher z-index) -->
+<div id="card-modal-container"></div>
 <footer>
 <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
 </footer>
