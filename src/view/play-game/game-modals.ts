@@ -1,6 +1,6 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { PersistedGameState } from "../../port-persist-state/types.js";
-import { formatCardNameAsGathererLink, CardAction, formatCardActionsGroupHtmlFragment } from "../common/shared-components.js";
+import { formatCardNameAsGathererLink, formatCardNameAsModalLink, CardAction, formatCardActionsGroupHtmlFragment } from "../common/shared-components.js";
 import { getCardImageUrl } from "../../types.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
@@ -33,14 +33,7 @@ function formatTableCardListHtmlFragment(game: GameState): string {
       (gameCard: any, index: number) =>
         `<li class="table-card-item">
           <div class="card-info">
-            ${formatCardNameAsGathererLink(gameCard.card)}
-          </div>
-          <div class="card-actions">
-              <button class="card-action-button"
-                      hx-post="/reveal-card/${game.gameId}/${gameCard.gameCardIndex}"
-                      hx-target="#game-container"
-                      hx-swap="outerHTML"
-                      hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})">Return</button>
+            ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex)}
           </div>
         </li>`
     )
