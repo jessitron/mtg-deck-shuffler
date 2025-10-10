@@ -6,6 +6,10 @@
 
 ## More Things to change
 
+- the Table modal needs to pop open on link click
+
+- remove buttons where they can be found in the modals
+
 ### animations
 
 - animations. I have a good idea.
