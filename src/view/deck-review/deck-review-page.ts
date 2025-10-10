@@ -1,60 +1,18 @@
 import { GameState } from "../../GameState.js";
-import { CARD_BACK, CardAction, formatCardNameAsGathererLink, formatCardNameAsModalLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
+import { formatCardNameAsModalLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatGameDetails, formatModal } from "./deck-info-components.js";
-
-function formatCardActionButton(
-  action: string,
-  endpoint: string,
-  gameId: number,
-  cardIndex: number,
-  title: string,
-  cssClass = "card-action-button",
-  cardId?: string
-): string {
-  const extraAttrs = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
-  const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
-  const closeModalAttr = `hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"`;
-  return `<button class="${cssClass}"
-                    hx-post="${endpoint}/${gameId}/${cardIndex}"
-                    hx-target="#game-container"
-                    ${swapAttr}
-                    ${closeModalAttr}
-                    ${extraAttrs}
-                    title="${title}">
-                 ${action}
-               </button>`;
-}
-
-function formatCardActionsGroup(actions: CardAction[], gameId: number, cardIndex: number, imageUrl?: string): string {
-  return actions.map((action) => formatCardActionButton(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, imageUrl)).join("");
-}
-
-function formatLibraryCardActions(game: GameState, gameCard: any): string {
-  if (game.gameStatus() !== "Active") return "";
-
-  const actions: CardAction[] = [
-    { action: "Reveal", endpoint: "/reveal-card", title: "Reveal" },
-    { action: "Put in Hand", endpoint: "/put-in-hand", title: "Put in Hand", cssClass: "card-action-button secondary" },
-  ];
-
-  return `<div class="card-actions">
-    ${formatCardActionsGroup(actions, game.gameId, gameCard.gameCardIndex)}
-  </div>`;
-}
 
 function formatLibraryCardList(game: GameState): string {
   const libraryCards = game.listLibrary();
 
   return libraryCards
     .map((gameCard: any) => {
-      const cardActions = formatLibraryCardActions(game, gameCard);
       return `<li class="library-card-item">
           <span class="card-position">${gameCard.location.position + 1}</span>
           <div class="card-info">
             ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex)}
           </div>
-          ${cardActions}
         </li>`;
     })
     .join("");
