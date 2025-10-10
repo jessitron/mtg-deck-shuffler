@@ -1,5 +1,5 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
-import { CardAction, formatCardActionsGroupHtmlFragment, formatCardContainer } from "../common/shared-components.js";
+import { formatCardContainer } from "../common/shared-components.js";
 
 function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, index: number): string {
   const handSize = game.listHand().length;
@@ -15,13 +15,7 @@ function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, 
      </button>`
       : "";
 
-  const actions: CardAction[] = [
-    { action: "Play", endpoint: "/play-card", title: "Copy image and remove from hand", cssClass: "play-button" },
-    { action: "Put down", endpoint: "/put-down", title: "Move card to revealed", cssClass: "put-down-button" },
-  ];
-
   return `<div class="hand-card-buttons">
-    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId, gameCard.currentFace)}
     ${swapButton}
   </div>`;
 }
