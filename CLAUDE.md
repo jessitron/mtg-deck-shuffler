@@ -18,10 +18,14 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 ## Development Guidelines
 
-- Testing: the user hates mocks. Use only fakes.
-- Testing: Never hard-code Deck objects; use the generators in `test/generators.ts`.
-- Testing: Never hard-code PersistedGameState objects (except when testing PersistStatePort implementations); instantiate a GameState with a generated Deck, then call its methods to change it.
-- Cleanup: after each change, ask, is there some newly-unused code that I can delete?
+- **Workflow**: Use subagents for most work:
+  - Start with a research agent to understand the codebase and locate relevant code
+  - Use separate code-change agents for each conceptual change
+  - This allows for better parallelization and more focused changes
+- **Testing**: the user hates mocks. Use only fakes.
+- **Testing**: Never hard-code Deck objects; use the generators in `test/generators.ts`.
+- **Testing**: Never hard-code PersistedGameState objects (except when testing PersistStatePort implementations); instantiate a GameState with a generated Deck, then call its methods to change it.
+- **Cleanup**: after each change, ask, is there some newly-unused code that I can delete?
 
 ## Key Files
 
