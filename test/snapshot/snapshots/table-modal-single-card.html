@@ -19,14 +19,11 @@ hx-swap="innerHTML">&times;</button>
 <ul class="table-search-list">
 <li class="table-card-item">
 <div class="card-info">
-<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a>
-</div>
-<div class="card-actions">
-<button class="card-action-button"
-hx-post="/reveal-card/789/0"
-hx-target="#game-container"
-hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})">Return</button>
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/789/0"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Carth the Lion</span>
 </div>
 </li>
 </ul>
