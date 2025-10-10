@@ -20,25 +20,19 @@ hx-swap="innerHTML">&times;</button>
 <li class="library-card-item">
 <span class="card-position">7</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/456/7"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/456/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/456/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>

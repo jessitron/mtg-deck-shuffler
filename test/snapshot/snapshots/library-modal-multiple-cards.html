@@ -20,25 +20,19 @@ hx-swap="innerHTML">&times;</button>
 <li class="library-card-item">
 <span class="card-position">1</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/0"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Carth the Lion</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/0"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -46,25 +40,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">2</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/2"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Damnation</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=571406" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Damnation</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/2"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/2"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -72,25 +60,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">3</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/1"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Dakkon, Shadow Slayer</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522268" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Dakkon, Shadow Slayer</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/1"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/1"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -98,25 +80,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">4</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/4"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Homeward Path</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=420918" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Homeward Path</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -124,25 +100,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">5</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/6"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Miku, the Renowned</span>
+<a href="https://gatherer.wizards.com/Pages/Search/Default.aspx?name=%22Feather%2C%20the%20Redeemed%22" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Miku, the Renowned</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/6"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -150,25 +120,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">6</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/5"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Lae'zel, Vlaakith's Champion</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=562912" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Lae'zel, Vlaakith's Champion</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/5"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/5"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>
@@ -176,25 +140,19 @@ Put in Hand
 </li><li class="library-card-item">
 <span class="card-position">7</span>
 <div class="card-info">
-<span class="card-name-link clickable-card-name"
-hx-get="/card-modal/123/7"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</span>
+<a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a>
 </div>
 <div class="card-actions">
 <button class="card-action-button"
 hx-post="/reveal-card/123/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Reveal">
 Reveal
 </button><button class="card-action-button secondary"
 hx-post="/put-in-hand/123/7"
 hx-target="#game-container"
 hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
 title="Put in Hand">
 Put in Hand
 </button>

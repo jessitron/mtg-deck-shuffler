@@ -1,12 +1,8 @@
-<div id="game-container"
-hx-trigger="game-state-updated from:body"
-hx-get="/game-section/123"
-hx-target="#game-container"
-hx-swap="outerHTML">
+<div id="game-container">
 <div id="command-zone">
 <div id="card-3-container" class="card-container clickable-card"
 hx-get="/card-modal/123/3"
-hx-target="#card-modal-container"
+hx-target="#modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
@@ -79,7 +75,7 @@ hx-swap="outerHTML">Reveal</button>
 <div id="revealed-cards-area" class="revealed-cards-area">
 <div id="card-4-container" class="card-container clickable-card"
 hx-get="/card-modal/123/4"
-hx-target="#card-modal-container"
+hx-target="#modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-4-face" src="https://cards.scryfall.io/normal/front/5/4/54734347-eee7-4c52-b514-7342afeccabd.jpg" alt="Homeward Path" class="mtg-card-image " title="Homeward Path" />
@@ -123,7 +119,7 @@ Put on Bottom
 <div id="hand-cards" class="hand-cards">
 <div id="card-2-container" class="card-container clickable-card"
 hx-get="/card-modal/123/2"
-hx-target="#card-modal-container"
+hx-target="#modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-2-face" src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg" alt="Damnation" class="mtg-card-image " title="Damnation" />
@@ -155,7 +151,7 @@ title="Swap with next card">
 </div>
 </div><div id="card-1-container" class="card-container clickable-card"
 hx-get="/card-modal/123/1"
-hx-target="#card-modal-container"
+hx-target="#modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-1-face" src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg" alt="Dakkon, Shadow Slayer" class="mtg-card-image " title="Dakkon, Shadow Slayer" />
@@ -180,6 +176,8 @@ Put down
 </div>
 </div>
 </div>
+<!-- Modal Container -->
+<div id="modal-container"></div>
 <div id="end-game-actions" class="game-actions">
 <form method="post" action="/restart-game" class="inline-form">
 <input type="hidden" name="game-id" value="123" />

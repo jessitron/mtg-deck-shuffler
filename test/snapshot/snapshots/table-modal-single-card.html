@@ -25,8 +25,7 @@ hx-swap="innerHTML">&times;</button>
 <button class="card-action-button"
 hx-post="/reveal-card/789/0"
 hx-target="#game-container"
-hx-swap="outerHTML"
-hx-on::after-request="htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})">Return</button>
+hx-swap="outerHTML">Return</button>
 </div>
 </li>
 </ul>
