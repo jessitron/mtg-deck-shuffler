@@ -1,6 +1,6 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { PersistedGameState } from "../../port-persist-state/types.js";
-import { formatCardNameAsGathererLink, formatCardNameAsModalLink, CardAction, formatCardActionsGroupHtmlFragment } from "../common/shared-components.js";
+import { formatCardNameAsGathererLink, formatCardNameAsModalLink, CardAction } from "../common/shared-components.js";
 import { getCardImageUrl } from "../../types.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
