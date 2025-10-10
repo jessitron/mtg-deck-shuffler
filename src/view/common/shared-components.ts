@@ -139,3 +139,40 @@ export type CardAction = {
   title: string;
   cssClass?: string;
 };
+
+function formatCardActionButtonHtmlFragment(
+  action: string,
+  endpoint: string,
+  gameId: number,
+  cardIndex: number,
+  title: string,
+  cssClass = "card-action-button",
+  cardId?: string,
+  currentFace?: "front" | "back"
+): string {
+  const cardIdAttr = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
+  const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
+  const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
+  const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
+  return `<button class="${cssClass}"
+                    hx-post="${endpoint}/${gameId}/${cardIndex}"
+                    hx-target="#game-container"
+                    ${swapAttr}
+                    ${extraAttrs}
+                    onclick="event.stopPropagation()"
+                    title="${title}">
+            ${action}
+          </button>`;
+}
+
+export function formatCardActionsGroupHtmlFragment(
+  actions: CardAction[],
+  gameId: number,
+  cardIndex: number,
+  cardId?: string,
+  currentFace?: "front" | "back"
+): string {
+  return actions
+    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId, currentFace))
+    .join("");
+}
