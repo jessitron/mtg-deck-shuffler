@@ -219,8 +219,8 @@ h1 {
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto auto auto auto;
   grid-template-areas:
-    "command-zone game-details table-section"
-    "library-section revealed-cards revealed-cards"
+    "command-zone game-details game-details"
+    "library-section revealed-cards table-section"
     "hand-section hand-section hand-section"
     "end-game-actions end-game-actions end-game-actions";
   gap: 20px;
