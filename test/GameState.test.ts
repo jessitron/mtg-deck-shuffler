@@ -631,4 +631,27 @@ describe("GameState", () => {
     );
   });
 
+  test("swapHandCardWithNext throws error when handPosition is out of bounds", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 3);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 3 cards to populate hand
+        for (let i = 0; i < 3; i++) {
+          gameState.draw();
+        }
+
+        const hand = gameState.listHand();
+        expect(hand.length).toBe(3);
+
+        // Try to swap with an invalid handPosition (>= hand length)
+        expect(() => {
+          gameState.swapHandCardWithNext(3);
+        }).toThrow();
+      })
+    );
+  });
+
 });
