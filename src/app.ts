@@ -5,7 +5,7 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage, formatLibraryModalHtml } from "./view/deck-review/deck-review-page.js";
 import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
-import { formatCardModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatCardModalHtmlFragment, formatLossModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -551,20 +551,32 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      game.draw();
-      const persistedGameState = game.toPersistedGameState();
-      trace.getActiveSpan()?.setAttributes({
-        "game.gameStatus()": game.gameStatus(),
-        "game.cardsInLibrary": game.listLibrary().length,
-        "game.cardsInHand": game.listHand().length,
-        "game.full_json": JSON.stringify(persistedGameState),
-      });
-      await persistStatePort.save(persistedGameState);
+      try {
+        game.draw();
+        const persistedGameState = game.toPersistedGameState();
+        trace.getActiveSpan()?.setAttributes({
+          "game.gameStatus()": game.gameStatus(),
+          "game.cardsInLibrary": game.listLibrary().length,
+          "game.cardsInHand": game.listHand().length,
+          "game.full_json": JSON.stringify(persistedGameState),
+        });
+        await persistStatePort.save(persistedGameState);
 
-      const html = formatGameHtmlSection(game);
-      res.send(html);
+        const html = formatGameHtmlSection(game);
+        res.send(html);
+      } catch (error) {
+        if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
+          const lossModal = formatLossModalHtmlFragment();
+          res.setHeader('HX-Retarget', '#modal-container');
+          res.setHeader('HX-Reswap', 'innerHTML');
+          res.send(lossModal);
+        } else {
+          console.error("Error drawing card:", error);
+          res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
+        }
+      }
     } catch (error) {
-      console.error("Error drawing card:", error);
+      console.error("Error retrieving game:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
     }
   });

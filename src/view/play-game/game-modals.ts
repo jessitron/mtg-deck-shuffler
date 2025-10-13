@@ -244,3 +244,10 @@ function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
   </div>`;
 }
 
+export function formatLossModalHtmlFragment(): string {
+  return formatModalHtmlFragment(
+    "☠️ You Lose! ☠️",
+    `<p class="modal-message">You tried to draw from an empty library!</p>`
+  );
+}
+

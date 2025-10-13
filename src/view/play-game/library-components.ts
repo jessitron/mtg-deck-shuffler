@@ -19,9 +19,12 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
                   hx-target="#game-container"
                   hx-swap="outerHTML">Draw</button>
           <button class="reveal-button"
-                  hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"
-                  hx-target="#game-container"
-                  hx-swap="outerHTML">Reveal</button>
+                  ${game.listLibrary().length > 0
+                    ? `hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"`
+                    : 'disabled'}
+                  >Reveal</button>
         </div>
       </div>`;
 }
