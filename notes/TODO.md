@@ -6,9 +6,18 @@
 
 ## More Things to change
 
-- the Table modal needs to pop open on link click
+- hand cards should have all the buttons that revealed cards have.
 
-- remove buttons where they can be found in the modals
+- the Table modal needs to pop open the card modal on card name click
+
+- make the library card modal have up/down! I want to look through it!
+
+- feature: draw hand button, which draws 10 cards and then orders by: Land, Creature, Artifact, Enchantment, Sorcery, Instant ... actually do this as part of Shuffle Up!
+- mulligan button which puts them all back and reshuffles
+
+- handle empty library
+
+- make cmd-Z undo
 
 ### animations
 

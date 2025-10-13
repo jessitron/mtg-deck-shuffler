@@ -14,6 +14,10 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
   </div>`;
 }
 
+const magicCardWidth = 200;
+const revealCardsGap = 10;
+const cardWidth = magicCardWidth + revealCardsGap;
+
 export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
 
@@ -26,7 +30,9 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
     })
     .join("");
 
-  return `<div id="revealed-cards-section" class="revealed-cards-section">
+  const widthToShowAllCards = revealedCards.length * cardWidth;
+
+  return `<div id="revealed-cards-section" class="revealed-cards-section" style="min-width: ${widthToShowAllCards}px;">
       <h3>Revealed Cards (${revealedCards.length})</h3>
       <div id="revealed-cards-area" class="revealed-cards-area">
         ${revealedCardsArea}

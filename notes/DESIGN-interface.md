@@ -128,66 +128,24 @@ The Search button opens a modal dialog that displays the library contents in a u
 ### Modal Structure
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────────────────┐
 │                          Dark Overlay (60% opacity)                        │
-│                                                                             │
+│                                                                            │
 │    ┌─────────────────────────────────────────────────────────────────┐     │
 │    │                    Library Contents                         ×   │     │
 │    ├─────────────────────────────────────────────────────────────────┤     │
-│    │                                                             │     │
-│    │  99 cards in library, ordered by position                 │     │
-│    │                                                             │     │
-│    │  1  Academy Manufactor                    [Reveal] [Put in Hand] │     │
-│    │  2  Adventurous Impulse                   [Reveal] [Put in Hand] │     │
-│    │  3  Aggressive Mammoth                    [Reveal] [Put in Hand] │     │
-│    │  4  Arcane Signet                         [Reveal] [Put in Hand] │     │
-│    │  ...                                                        │     │
-│    │  (scrollable list continues)                                │     │
-│    │                                                             │     │
+│    │                                                                 │     │
+│    │  99 cards in library, ordered by position                       │     │
+│    │                                                                 │     │
+│    │  1  Academy Manufactor                                          │     │
+│    │  2  Adventurous Impulse                                         │     │
+│    │  3  Aggressive Mammoth                                          │     │
+│    │  4  Arcane Signet                                               │     │
+│    │  ...                                                            │     │
+│    │  (scrollable list continues)                                    │     │
+│    │                                                                 │     │
 │    └─────────────────────────────────────────────────────────────────┘     │
-└─────────────────────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Modal Features
-
-**Visual Design:**
-
-- Centered modal dialog with rounded corners and shadow
-- Dark semi-transparent overlay behind modal
-- Maximum width of 800px, 90% of viewport width
-- Maximum height of 80% of viewport height
-- Scrollable content area for large libraries
-
-**Header:**
-
-- "Library Contents" title
-- Close button (×) in top-right corner
-
-**Content:**
-
-- Card count summary (e.g., "100 cards in library, ordered by position")
-- Scrollable list of all cards in library order
-
-**Card List Items:**
-Each card displays:
-
-- Position number (1, 2, 3, etc.)
-- Card name as clickable link to Gatherer
-- Action buttons (when game is active):
-  - **Reveal** button (green, primary styling)
-  - **Put in Hand** button (gray, secondary styling)
-
-**Interaction:**
-
-- Click "Search Library" button to open modal
-- Close modal by:
-  - Clicking the × button
-  - Pressing Escape key
-  - Clicking outside the modal dialog
-- Card names link to Gatherer for card details
-- Action buttons show placeholder alerts (functionality to be implemented)
-
-**Game State Behavior:**
-
-- **Before game starts (Deck Review)**: Shows card list without action buttons
-- **During active game**: Shows card list with Reveal and Put in Hand buttons for each card
+Clicking a card name brings up the card modal, with action buttons Reveal and Put in Hand.
