@@ -642,35 +642,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.post("/swap-with-next/:gameId/:handPosition", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const handPosition = parseInt(req.params.handPosition);
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot swap card: Game is not active</div>`);
-        return;
-      }
-
-      const whatHappened = game.swapHandCardWithNext(handPosition);
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatGameHtmlSection(game, whatHappened);
-      res.send(html);
-    } catch (error) {
-      console.error("Error swapping card with next:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not swap card with next"}</div>`);
-    }
-  });
-
   app.post("/undo/:gameId/:gameEventIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameEventIndex = parseInt(req.params.gameEventIndex);

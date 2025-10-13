@@ -469,34 +469,81 @@ export class GameState {
     return this;
   }
 
-  public swapHandCardWithNext(handPosition: number): WhatHappened {
+  public moveHandCard(from: number, to: number): WhatHappened {
     const handCards = this.listHand();
 
-    const cardToSwap = handCards[handPosition];
-    const cardToRight = handCards[handPosition + 1];
-    if (!cardToRight) {
-      throw new Error(`No card to right of ${cardToSwap.card.name}`);
+    // Validate positions
+    if (from < 0 || from >= handCards.length) {
+      throw new Error(`Invalid from position: ${from}. Hand has ${handCards.length} cards.`);
     }
-    var nextPosition = cardToRight.location.position + 1;
+    if (to < 0 || to >= handCards.length) {
+      throw new Error(`Invalid to position: ${to}. Hand has ${handCards.length} cards.`);
+    }
 
-    const cardPastThat = handCards[handPosition + 2];
-    if (cardPastThat && cardPastThat.location.position <= nextPosition) {
-      // stick this one right in between them. Fractions are numbers!
-      nextPosition = (cardPastThat.location.position - cardToRight.location.position) / 2 + cardToRight.location.position;
+    // No-op if moving to same position
+    if (from === to) {
+      return {};
+    }
+
+    const cardToMove = handCards[from];
+
+    // Determine new position value based on where we're inserting
+    let newPosition: number;
+
+    if (to === 0) {
+      // Moving to the beginning - position before first card
+      const firstCard = handCards[0];
+      newPosition = firstCard.location.position - 1;
+    } else if (to === handCards.length - 1) {
+      // Moving to the end - position after last card
+      const lastCard = handCards[handCards.length - 1];
+      newPosition = lastCard.location.position + 1;
+    } else {
+      // Moving between cards - use fractional positioning
+      if (from < to) {
+        // Moving forward: insert between cards at positions [to] and [to+1]
+        const leftCard = handCards[to];
+        const rightCard = handCards[to + 1];
+        newPosition = (leftCard.location.position + rightCard.location.position) / 2;
+      } else {
+        // Moving backward: insert between cards at positions [to-1] and [to]
+        const leftCard = handCards[to - 1];
+        const rightCard = handCards[to];
+        newPosition = (leftCard.location.position + rightCard.location.position) / 2;
+      }
     }
 
     const move: CardMove = {
-      gameCardIndex: cardToSwap.gameCardIndex,
-      fromLocation: cardToSwap.location,
-      toLocation: { type: "Hand", position: nextPosition },
+      gameCardIndex: cardToMove.gameCardIndex,
+      fromLocation: cardToMove.location,
+      toLocation: { type: "Hand", position: newPosition },
     };
     this.executeMove(move);
 
     this.validateInvariants();
 
+    // Track which cards moved in the visual representation
+    const movedCard = cardToMove;
+    const movedRight: GameCard[] = [];
+    const movedLeft: GameCard[] = [];
+
+    if (from < to) {
+      // Moving forward: cards between from and to shift left
+      movedRight.push(movedCard);
+      for (let i = from + 1; i <= to; i++) {
+        movedLeft.push(handCards[i]);
+      }
+    } else {
+      // Moving backward: cards between to and from shift right
+      movedLeft.push(movedCard);
+      for (let i = to; i < from; i++) {
+        movedRight.push(handCards[i]);
+      }
+    }
+
     return {
-      movedRight: [cardToSwap],
-      movedLeft: [cardToRight],
+      movedRight: movedRight.length > 0 ? movedRight : undefined,
+      movedLeft: movedLeft.length > 0 ? movedLeft : undefined,
     };
   }
 
