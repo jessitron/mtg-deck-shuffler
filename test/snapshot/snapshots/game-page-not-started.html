@@ -54,13 +54,6 @@ hx-target="#modal-container"
 hx-swap="innerHTML">View History (0)</button>
 </div>
 </div>
-<div id="table-section" class="table-section">
-<img src="/table.png" alt="Table" class="table-image" />
-<button class="table-cards-button"
-hx-get="/table-modal/456"
-hx-target="#modal-container"
-hx-swap="innerHTML">0 Cards on table</button>
-</div>
 <div id="library-section" data-testid="library-section">
 <h3>Library (7)</h3>
 <div class="library-stack" data-testid="library-stack">
@@ -84,8 +77,16 @@ hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
 hx-post="/reveal-card/456/0"
 hx-target="#game-container"
-hx-swap="outerHTML">Reveal</button>
+hx-swap="outerHTML"
+>Reveal</button>
 </div>
+</div>
+<div id="table-section" class="table-section">
+<button class="table-cards-button"
+hx-get="/table-modal/456"
+hx-target="#modal-container"
+hx-swap="innerHTML">0 Cards on table</button>
+<img src="/table.png" alt="Table" class="table-image" />
 </div>
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (0)</h3>

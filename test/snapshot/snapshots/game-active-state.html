@@ -41,13 +41,6 @@ hx-target="#modal-container"
 hx-swap="innerHTML">View History (7)</button>
 </div>
 </div>
-<div id="table-section" class="table-section">
-<img src="/table.png" alt="Table" class="table-image" />
-<button class="table-cards-button"
-hx-get="/table-modal/123"
-hx-target="#modal-container"
-hx-swap="innerHTML">1 Cards on table</button>
-</div>
 <div id="library-section" data-testid="library-section">
 <h3>Library (3)</h3>
 <div class="library-stack" data-testid="library-stack">
@@ -71,10 +64,11 @@ hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
 hx-post="/reveal-card/123/6"
 hx-target="#game-container"
-hx-swap="outerHTML">Reveal</button>
+hx-swap="outerHTML"
+>Reveal</button>
 </div>
 </div>
-<div id="revealed-cards-section" class="revealed-cards-section">
+<div id="revealed-cards-section" class="revealed-cards-section" style="min-width: 210px;">
 <h3>Revealed Cards (1)</h3>
 <div id="revealed-cards-area" class="revealed-cards-area">
 <div id="card-4-container" class="card-container clickable-card"
@@ -118,6 +112,13 @@ Put on Bottom
 </div>
 </div>
 </div>
+<div id="table-section" class="table-section">
+<button class="table-cards-button"
+hx-get="/table-modal/123"
+hx-target="#modal-container"
+hx-swap="innerHTML">1 Cards on table</button>
+<img src="/table.png" alt="Table" class="table-image" />
+</div>
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (2)</h3>
 <div id="hand-cards" class="hand-cards">
@@ -128,22 +129,6 @@ hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-2-face" src="https://cards.scryfall.io/normal/front/d/3/d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f.jpg" alt="Damnation" class="mtg-card-image " title="Damnation" />
 <div class="hand-card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/2"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="d3c0aac5-b9f1-4446-bfea-3e1dd1cf1f2f" data-current-face="front"
-onclick="event.stopPropagation()"
-title="Copy image and remove from hand">
-Play
-</button><button class="put-down-button"
-hx-post="/put-down/123/2"
-hx-target="#game-container"
-hx-swap="outerHTML"
-onclick="event.stopPropagation()"
-title="Move card to revealed">
-Put down
-</button>
 <button class="swap-button"
 hx-post="/swap-with-next/123/0"
 hx-target="#game-container"
@@ -160,22 +145,6 @@ hx-swap="innerHTML"
 style="cursor: pointer;">
 <img id="card-1-face" src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg" alt="Dakkon, Shadow Slayer" class="mtg-card-image " title="Dakkon, Shadow Slayer" />
 <div class="hand-card-buttons">
-<button class="play-button"
-hx-post="/play-card/123/1"
-hx-target="#game-container"
-hx-swap="outerHTML swap:1.5s"
-data-card-id="0013a9c4-77a1-418d-85c2-bd68b65cd3d4" data-current-face="front"
-onclick="event.stopPropagation()"
-title="Copy image and remove from hand">
-Play
-</button><button class="put-down-button"
-hx-post="/put-down/123/1"
-hx-target="#game-container"
-hx-swap="outerHTML"
-onclick="event.stopPropagation()"
-title="Move card to revealed">
-Put down
-</button>
 </div>
 </div>
 </div>
