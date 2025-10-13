@@ -2,7 +2,21 @@ import { GameState, GameCard, WhatHappened } from "../../GameState.js";
 import { formatCardContainer } from "../common/shared-components.js";
 
 function formatHandCardActionsHtmlFragment(game: GameState, gameCard: GameCard, index: number): string {
+  const handSize = game.listHand().length;
+  const swapButton =
+    index < handSize - 1
+      ? `<button class="swap-button"
+             hx-post="/swap-with-next/${game.gameId}/${index}"
+             hx-target="#game-container"
+             hx-swap="outerHTML"
+             onclick="event.stopPropagation()"
+             title="Swap with next card">
+       ↔
+     </button>`
+      : "";
+
   return `<div class="hand-card-buttons">
+    ${swapButton}
   </div>`;
 }
 
