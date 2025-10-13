@@ -3,10 +3,9 @@ import { CARD_BACK, formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const isEmpty = game.listLibrary().length === 0;
-  const emptyClass = isEmpty ? ' library-empty' : '';
-  return `<div id="library-section" data-testid="library-section" class="${emptyClass}">
+  return `<div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        ${formatLibraryStack(whatHappened)}
+        ${formatLibraryStack(whatHappened, isEmpty)}
         <div class="library-buttons">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"

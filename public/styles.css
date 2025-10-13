@@ -339,11 +339,11 @@ h1 {
   align-items: center;
   gap: 10px;
   padding: 20px;
-  transition: opacity 0.3s ease;
 }
 
-#library-section.library-empty {
+.library-stack-empty {
   opacity: 0.4;
+  transition: opacity 0.3s ease;
 }
 
 .library-buttons {
