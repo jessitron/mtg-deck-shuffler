@@ -414,6 +414,14 @@ h1 {
   background-color: #214273;
 }
 
+.reveal-button:disabled {
+  background-color: #ccc;
+  border-color: #999;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .revealed-cards-section {
   padding: 20px;
   min-width: 300px;
