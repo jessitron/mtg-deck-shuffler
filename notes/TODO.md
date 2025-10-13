@@ -35,7 +35,11 @@ an example from claude desktop:
 
 ### other
 
-- when we draw a card, get an htmx event to scroll the hand to the right (in case you can't see the new card)
+- in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table.
+
+- 
+
+- when we draw a card, get an htmx event to scroll the hand to the right (in case you can't see the new card) ... or put it on the left and animate all cards right.
 
 - When two-sided cards are played, the player is going to need access to both sides of the card. Copying 2 images is not well supported. So, let's copy the current face. To give people access to the other face, let's put the two-sided card at the top of the list of played cards. ... and then we need the card modal, with a copy button and a flip button.
 

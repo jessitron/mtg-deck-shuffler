@@ -92,11 +92,11 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
       ${revealedCardsHtml}
 
       <div id="table-section" class="table-section">
-        <img src="/table.png" alt="Table" class="table-image" />
         <button class="table-cards-button"
-                hx-get="/table-modal/${game.gameId}"
-                hx-target="#modal-container"
-                hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+          hx-get="/table-modal/${game.gameId}"
+          hx-target="#modal-container"
+          hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+        <img src="/table.png" alt="Table" class="table-image" />
       </div>
 
       ${handSectionHtml}
