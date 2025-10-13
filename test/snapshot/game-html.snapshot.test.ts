@@ -50,6 +50,19 @@ describe("Game HTML Snapshot Tests", () => {
     return GameState.newGame(456, testDeck);
   };
 
+  const createEmptyLibraryGameState = (): GameState => {
+    const gameState = GameState.newGame(789, testDeck, 42);
+    gameState.startGame();
+
+    // Draw all cards to empty the library
+    const libraryCards = gameState.listLibrary();
+    for (let i = 0; i < libraryCards.length; i++) {
+      gameState.draw();
+    }
+
+    return gameState;
+  };
+
   async function ensureSnapshotDir() {
     try {
       await fs.mkdir(snapshotDir, { recursive: true });
@@ -110,6 +123,41 @@ describe("Game HTML Snapshot Tests", () => {
     const snapshotFile = "game-not-started-state.html";
     const notStartedGameState = createNotStartedGameState();
     const actualHtml = formatDeckReviewHtmlPage(notStartedGameState);
+
+    // Normalize HTML for consistent comparison (remove env-dependent values)
+    const normalizedHtml = actualHtml
+      .replace(/apiKey: ".*?"/, 'apiKey: "TEST_API_KEY"')
+      .replace(/\n\s*/g, "\n")
+      .trim();
+
+    const existingSnapshot = await readSnapshot(snapshotFile);
+
+    if (existingSnapshot === null) {
+      // No snapshot exists, create it
+      await writeSnapshot(snapshotFile, normalizedHtml);
+      console.log(`Created new snapshot: ${snapshotFile}`);
+    } else {
+      // Compare with existing snapshot
+      const normalizedSnapshot = existingSnapshot.trim();
+
+      if (normalizedHtml !== normalizedSnapshot) {
+        // Write the actual output for comparison
+        await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
+
+        throw new Error(
+          `Snapshot mismatch for ${snapshotFile}.\n` +
+            `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
+            `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
+            `Run snapshot tests to update if changes are expected.`
+        );
+      }
+    }
+  });
+
+  it("formatGameHtml with empty library", async () => {
+    const snapshotFile = "game-empty-library.html";
+    const gameState = createEmptyLibraryGameState();
+    const actualHtml = formatGameHtmlSection(gameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml
