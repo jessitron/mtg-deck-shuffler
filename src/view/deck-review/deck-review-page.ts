@@ -71,8 +71,10 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </div>
 
       <div id="start-game-buttons" class="deck-actions">
-        <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
+        <form method="post" action="/start-game" class="inline-form">
+          <input type="hidden" name="game-id" value="${game.gameId}" />
+          <button type="submit" class="start-game-button">Shuffle Up</button>
+        </form>
         <form method="post" action="/end-game" class="inline-form">
           <input type="hidden" name="game-id" value="${game.gameId}" />
           <button type="submit">Choose Another Deck</button>

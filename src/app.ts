@@ -75,17 +75,21 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Returns active game fragment - game board
+  // Redirects to active game page
   app.post("/start-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
-        res.status(404).send(`<div>
-          <p>Game ${gameId} not found</p>
-          <a href="/">Start a new game</a>
-      </div>`);
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Game Not Found",
+            message: `Game <strong>${gameId}</strong> could not be found.`,
+            details: "It may have expired or the ID might be incorrect.",
+          })
+        );
         return;
       }
 
@@ -93,14 +97,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       game.startGame();
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game, { shuffling: true });
-      res.send(html);
+      res.redirect(`/game/${gameId}`);
     } catch (error) {
       console.error("Error starting game:", error);
-      res.send(`<div>
-        <p>Error: Could not start game ${gameId}</p>
-        <a href="/">Try starting a new game</a>
-    </div>`);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "🎲",
+          title: "Game Start Error",
+          message: `Could not start game <strong>${gameId}</strong>.`,
+          details: "There may be a technical issue with the game data.",
+        })
+      );
     }
   });
 
@@ -567,8 +574,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       } catch (error) {
         if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
           const lossModal = formatLossModalHtmlFragment();
-          res.setHeader('HX-Retarget', '#modal-container');
-          res.setHeader('HX-Reswap', 'innerHTML');
+          res.setHeader("HX-Retarget", "#modal-container");
+          res.setHeader("HX-Reswap", "innerHTML");
           res.send(lossModal);
         } else {
           console.error("Error drawing card:", error);
@@ -801,7 +808,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
 
     // Validate face parameter
-    const cardFace: "front" | "back" = (face === "front" || face === "back") ? face : "front";
+    const cardFace: "front" | "back" = face === "front" || face === "back" ? face : "front";
 
     try {
       // Import getCardImageUrl function
