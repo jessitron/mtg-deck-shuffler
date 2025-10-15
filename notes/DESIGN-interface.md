@@ -32,25 +32,18 @@ The Search button is available even before the game is started. It makes visible
 
 ```
 div: deck-summary
-  div: command-zone       div: game-details
-   ┌───────────────┐
-   │               │        Deck Name
-   │               │
-   │  Command zone │        other details
-   │               │
-   │               │        Game ID
-   │               │
-   └───────────────┘
+  div: game-details
+     Deck Name. other details.           Game ID
 
-div: library-section       div: start-game-buttons
-      ┌───────────┐
-     ┌───────────┐│
-    ┌───────────┐││
-    │           │││
-    │           │││         [Shuffle Up]
-    │           │││
-    │           │││         [Choose Another Deck]
-    │Library (n)│││
+div: library-section       div: command-zone         div: start-game-buttons
+      ┌───────────┐        ┌───────────────┐
+     ┌───────────┐│        │               │
+    ┌───────────┐││        │               │         [Shuffle Up]
+    │           │││        │  Command zone │
+    │           │││        │               │         [Choose Another Deck]
+    │           │││        │               │
+    │           │││        │               │
+    │Library (n)│││        └───────────────┘
     │           │││
     │           ││┘
     │           │┘

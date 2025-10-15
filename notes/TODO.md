@@ -1,5 +1,7 @@
 # Things to change
 
+- 
+
 ## Bugs to fix
 
 - I managed to get it to play the same card twice. This will be fixed by ignoring actions with the wrong previous event ID and making people reload the game.

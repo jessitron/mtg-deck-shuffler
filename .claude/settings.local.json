@@ -53,7 +53,8 @@
       "mcp__honeycomb__get_dataset_columns",
       "Bash(pkill:*)",
       "Bash(npx tsc:*)",
-      "Bash(jq:*)"
+      "Bash(jq:*)",
+      "Bash(PORT=3001 timeout 5 ./run)"
     ],
     "deny": []
   },
