@@ -243,13 +243,29 @@ h1 {
 }
 
 .deck-review-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "game-header game-header"
+    "command-zone start-game-buttons"
+    "library-section library-section";
+  justify-content: space-between;
+  gap: 10px;
 }
+
+.deck-review-container #game-header {
+  grid-area: game-header;
+}
+
+.deck-review-container #command-zone {
+  grid-area: command-zone;
+}
+
+.deck-review-container #start-game-buttons {
+  grid-area: start-game-buttons;
+}
+
 .game-details {
   display: flex;
   flex-direction: column;

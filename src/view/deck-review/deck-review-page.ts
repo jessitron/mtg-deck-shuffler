@@ -53,12 +53,23 @@ function formatDeckReviewHtmlSection(game: GameState): string {
   const libraryStackHtml = formatLibraryStack();
 
   return `
+  <div id="deck-review-container" class="deck-review-container">
   <div id="game-header" class="game-header">
      <h2>${game.deckName}</h2>
      <p>from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a></p>
     <p class="game-id">Game ID: ${game.gameId}</p>
     </div>
     ${commanderImageHtml}
+    <div id="start-game-buttons" class="deck-actions">
+        <form method="post" action="/start-game" class="inline-form">
+          <input type="hidden" name="game-id" value="${game.gameId}" />
+          <button type="submit" class="start-game-button">Shuffle Up</button>
+        </form>
+        <form method="post" action="/end-game" class="inline-form">
+          <input type="hidden" name="game-id" value="${game.gameId}" />
+          <button type="submit">Choose Another Deck</button>
+        </form>
+      </div>
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
         ${libraryStackHtml}
@@ -70,15 +81,6 @@ function formatDeckReviewHtmlSection(game: GameState): string {
         </div>
       </div>
 
-      <div id="start-game-buttons" class="deck-actions">
-        <form method="post" action="/start-game" class="inline-form">
-          <input type="hidden" name="game-id" value="${game.gameId}" />
-          <button type="submit" class="start-game-button">Shuffle Up</button>
-        </form>
-        <form method="post" action="/end-game" class="inline-form">
-          <input type="hidden" name="game-id" value="${game.gameId}" />
-          <button type="submit">Choose Another Deck</button>
-        </form>
       </div>
     </div>`;
 }
