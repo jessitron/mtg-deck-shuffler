@@ -500,6 +500,89 @@ export class GameState {
     };
   }
 
+  public moveHandCard(fromHandPosition: number, toHandPosition: number): WhatHappened {
+    const handCards = this.listHand();
+
+    if (fromHandPosition < 0 || fromHandPosition >= handCards.length) {
+      throw new Error(`Invalid fromHandPosition: ${fromHandPosition}`);
+    }
+    if (toHandPosition < 0 || toHandPosition >= handCards.length) {
+      throw new Error(`Invalid toHandPosition: ${toHandPosition}`);
+    }
+    if (fromHandPosition === toHandPosition) {
+      throw new Error(`Cannot move card to same position: ${fromHandPosition}`);
+    }
+
+    const cardToMove = handCards[fromHandPosition];
+    let newPosition: number;
+
+    // Calculate new fractional position
+    if (toHandPosition === 0) {
+      // Moving to start
+      newPosition = handCards[0].location.position - 1;
+    } else if (toHandPosition === handCards.length - 1) {
+      // Moving to end
+      newPosition = handCards[handCards.length - 1].location.position + 1;
+    } else {
+      // Moving between cards
+      // When moving right, insert after toHandPosition
+      // When moving left, insert before toHandPosition
+      if (fromHandPosition < toHandPosition) {
+        // Moving right: insert after toHandPosition
+        const leftCard = handCards[toHandPosition];
+        const rightCard = handCards[toHandPosition + 1];
+        if (rightCard) {
+          newPosition = (leftCard.location.position + rightCard.location.position) / 2;
+        } else {
+          newPosition = leftCard.location.position + 1;
+        }
+      } else {
+        // Moving left: insert before toHandPosition
+        const rightCard = handCards[toHandPosition];
+        const leftCard = handCards[toHandPosition - 1];
+        newPosition = (leftCard.location.position + rightCard.location.position) / 2;
+      }
+    }
+
+    const move: CardMove = {
+      gameCardIndex: cardToMove.gameCardIndex,
+      fromLocation: cardToMove.location,
+      toLocation: { type: "Hand", position: newPosition },
+    };
+    this.executeMove(move);
+
+    this.validateInvariants();
+
+    // Determine which cards shifted for animation
+    const updatedHandCards = this.listHand();
+    const movedLeft: GameCard[] = [];
+    const movedRight: GameCard[] = [];
+
+    // Cards that shifted depend on direction of move
+    if (fromHandPosition < toHandPosition) {
+      // Moved right: cards between old and new position moved left
+      for (let i = fromHandPosition; i < toHandPosition; i++) {
+        if (handCards[i].gameCardIndex !== cardToMove.gameCardIndex) {
+          movedLeft.push(handCards[i]);
+        }
+      }
+      movedRight.push(cardToMove);
+    } else {
+      // Moved left: cards between new and old position moved right
+      for (let i = toHandPosition + 1; i <= fromHandPosition; i++) {
+        if (handCards[i].gameCardIndex !== cardToMove.gameCardIndex) {
+          movedRight.push(handCards[i]);
+        }
+      }
+      movedLeft.push(cardToMove);
+    }
+
+    return {
+      movedLeft: movedLeft.length > 0 ? movedLeft : undefined,
+      movedRight: movedRight.length > 0 ? movedRight : undefined,
+    };
+  }
+
   public flipCard(gameCardIndex: number): WhatHappened {
     const gameCard = this.gameCards[gameCardIndex];
     if (!gameCard) {

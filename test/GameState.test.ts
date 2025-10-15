@@ -631,4 +631,200 @@ describe("GameState", () => {
     );
   });
 
+  test("moveHandCard moves card to start of hand", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 3);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 3 cards to populate hand
+        for (let i = 0; i < 3; i++) {
+          gameState.draw();
+        }
+
+        const handBefore = gameState.listHand();
+        expect(handBefore.length).toBe(3);
+
+        // Move the last card (position 2) to the start (position 0)
+        const cardToMove = handBefore[2];
+        const whatHappened = gameState.moveHandCard(2, 0);
+
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(3);
+        expect(handAfter[0].card.name).toBe(cardToMove.card.name);
+        expect(handAfter[1].card.name).toBe(handBefore[0].card.name);
+        expect(handAfter[2].card.name).toBe(handBefore[1].card.name);
+
+        // Check WhatHappened - card moved left, others shifted right
+        expect(whatHappened.movedLeft?.length).toBe(1);
+        expect(whatHappened.movedLeft?.[0]?.card.name).toBe(cardToMove.card.name);
+        // Only cards that were between positions 0 and 2 shift right (positions 0 and 1, not position 2)
+        expect(whatHappened.movedRight?.length).toBeGreaterThan(0);
+      })
+    );
+  });
+
+  test("moveHandCard moves card to end of hand", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 3);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 3 cards to populate hand
+        for (let i = 0; i < 3; i++) {
+          gameState.draw();
+        }
+
+        const handBefore = gameState.listHand();
+        expect(handBefore.length).toBe(3);
+
+        // Move the first card (position 0) to the end (position 2)
+        const cardToMove = handBefore[0];
+        const whatHappened = gameState.moveHandCard(0, 2);
+
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(3);
+        expect(handAfter[0].card.name).toBe(handBefore[1].card.name);
+        expect(handAfter[1].card.name).toBe(handBefore[2].card.name);
+        expect(handAfter[2].card.name).toBe(cardToMove.card.name);
+
+        // Check WhatHappened - card moved right, others shifted left
+        expect(whatHappened.movedRight?.length).toBe(1);
+        expect(whatHappened.movedRight?.[0]?.card.name).toBe(cardToMove.card.name);
+        // Only cards that were between positions 0 and 2 shift left (positions 1 and 2, not position 0)
+        expect(whatHappened.movedLeft?.length).toBeGreaterThan(0);
+      })
+    );
+  });
+
+  test("moveHandCard moves card between other cards", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 4);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 4 cards to populate hand
+        for (let i = 0; i < 4; i++) {
+          gameState.draw();
+        }
+
+        const handBefore = gameState.listHand();
+        expect(handBefore.length).toBe(4);
+
+        // Move card from position 0 to position 2
+        const cardToMove = handBefore[0];
+        const whatHappened = gameState.moveHandCard(0, 2);
+
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(4);
+        expect(handAfter[0].card.name).toBe(handBefore[1].card.name);
+        expect(handAfter[1].card.name).toBe(handBefore[2].card.name);
+        expect(handAfter[2].card.name).toBe(cardToMove.card.name);
+        expect(handAfter[3].card.name).toBe(handBefore[3].card.name);
+
+        // Check fractional position - should be between positions 2 and 3
+        const movedCard = handAfter[2];
+        expect(movedCard.location.position).toBeGreaterThan(handAfter[1].location.position);
+        expect(movedCard.location.position).toBeLessThan(handAfter[3].location.position);
+      })
+    );
+  });
+
+  test("moveHandCard throws error for invalid fromHandPosition", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 2);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 2 cards
+        for (let i = 0; i < 2; i++) {
+          gameState.draw();
+        }
+
+        expect(() => {
+          gameState.moveHandCard(-1, 1);
+        }).toThrow(/Invalid fromHandPosition: -1/);
+
+        expect(() => {
+          gameState.moveHandCard(5, 1);
+        }).toThrow(/Invalid fromHandPosition: 5/);
+      })
+    );
+  });
+
+  test("moveHandCard throws error for invalid toHandPosition", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 2);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 2 cards
+        for (let i = 0; i < 2; i++) {
+          gameState.draw();
+        }
+
+        expect(() => {
+          gameState.moveHandCard(0, -1);
+        }).toThrow(/Invalid toHandPosition: -1/);
+
+        expect(() => {
+          gameState.moveHandCard(0, 5);
+        }).toThrow(/Invalid toHandPosition: 5/);
+      })
+    );
+  });
+
+  test("moveHandCard throws error when moving to same position", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 2);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 2 cards
+        for (let i = 0; i < 2; i++) {
+          gameState.draw();
+        }
+
+        expect(() => {
+          gameState.moveHandCard(0, 0);
+        }).toThrow(/Cannot move card to same position: 0/);
+      })
+    );
+  });
+
+  test("moveHandCard preserves fractional positions without renormalization", () => {
+    fc.assert(
+      fc.property(anyDeck, (deck) => {
+        fc.pre(deck.cards.length >= 5);
+
+        const gameState = GameState.newGame(1, deck);
+
+        // Draw 5 cards to populate hand
+        for (let i = 0; i < 5; i++) {
+          gameState.draw();
+        }
+
+        // Perform several moves
+        gameState.moveHandCard(0, 2);
+        gameState.moveHandCard(1, 3);
+        gameState.moveHandCard(0, 4);
+
+        // Verify hand still has correct number of cards
+        const handAfter = gameState.listHand();
+        expect(handAfter.length).toBe(5);
+
+        // Verify positions are still sorted correctly
+        for (let i = 1; i < handAfter.length; i++) {
+          expect(handAfter[i].location.position).toBeGreaterThan(handAfter[i-1].location.position);
+        }
+      })
+    );
+  });
+
 });
