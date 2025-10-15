@@ -1,20 +1,6 @@
 # Things to change
 
-Right now I have a mess. I'm changing the Deck Review page.
-Finish that part:
-
-- move the buttons up next to the commanders
-- instead of drawing a library with a search button, put the library list below the commanders+buttons
-
-Then make everything not broken:
-
-- make "Let's Play" on the home page load the deck but NOT start a game
-  - there's more to the definition here than a deck. This is where I'll want to add card backs and a playmat. Make a GamePrep type.
-- make "Shuffle Up" on Deck Review do a full page load, which starts a game.
-
-This GamePrep object will need to be persisted. We are getting into sessions. But it is still not necessary to store sessions... it is necessary to store a GamePrep object. It can be updated when people pick a different card back or playmat.
-
-Jess, you could skip a bunch of this if you let it start a game still. Start a game, but display it totally differently. huh.
+- move items around on the game page to match the design.
 
 ## Bugs to fix
 

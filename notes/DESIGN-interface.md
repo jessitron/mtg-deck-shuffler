@@ -31,24 +31,26 @@ Here, we have a game in status Not Started.
 The Search button is available even before the game is started. It makes visible a list of all cards in the library, ordered by position.
 
 ```
-div: deck-summary
-  div: game-details
+ div: game-header
      Deck Name. other details.           Game ID
 
-div: library-section       div: command-zone         div: start-game-buttons
-      ┌───────────┐        ┌───────────────┐
-     ┌───────────┐│        │               │
-    ┌───────────┐││        │               │         [Shuffle Up]
-    │           │││        │  Command zone │
-    │           │││        │               │         [Choose Another Deck]
-    │           │││        │               │
-    │           │││        │               │
-    │Library (n)│││        └───────────────┘
-    │           │││
-    │           ││┘
-    │           │┘
-    └───────────┘
-      [Search]
+ div: command-zone         div: start-game-buttons
+ ┌───────────────┐
+ │               │
+ │               │         [Shuffle Up]
+ │  Command zone │
+ │               │         [Choose Another Deck]
+ │               │
+ │               │
+ └───────────────┘
+
+ div: library section
+
+99 cards in library
+1. Card Name
+2. Card Name
+3. Card Name
+...
 
 ```
 
@@ -67,34 +69,29 @@ Revealed Cards and Haxnd sections scroll horizontally if there are enough cards 
 The library displays the back of a magic card: https://backs.scryfall.io/normal/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg -> public/mtg-card-back.jpg
 
 ```
-div: game-summary
-  div: command-zone       div: game-details
-   ┌───────────────┐
-   │               │        MTG Deck Shuffler
-   │               │
-   │  Command zone │        Game {Game ID} in progress. Player: you. Deck: {Deck Name}
-   │               │
-   │               │        [History]
-   └───────────────┘
+div: game-header (full width)
+  Deck Name. other details.           Game ID
+
 div: game-container
-  div: library-section          div: revealed-cards-section (width 2)          div: mid-game-buttons
+  div: library-section   div: revealed-cards-section (width auto)          div: command zone and table
 
-      ┌───────────┐     ┌────────────────────────────────┐
-     ┌───────────┐│     │        Revealed (n)            │                         Table (n)
-    ┌───────────┐││     │                                │
-    │Library (n)│││     │   ┌────────┐   ┌───────┐       │
+      ┌───────────┐     ┌────────────────────────────────┐                   ┌───────────────┐
+     ┌───────────┐│     │        Revealed (n)            │                   │               │
+    ┌───────────┐││     │                                │                   │               │
+    │Library (n)│││     │   ┌────────┐   ┌───────┐       │                   │  Command zone │
+    │           │││     │   │        │   │       │       │                   │               │
+    │           │││     │   │        │   │       │       │                   └───────────────┘
     │           │││     │   │        │   │       │       │
+    │           │││     │   │        │   │       │       │                      table.png
     │           │││     │   │        │   │       │       │
-    │           │││     │   │        │   │       │       │                         table.png
-    │           │││     │   │        │   │       │       │
-    │           │││     │   │        │   │       │       │
-    │           ││┘     │   └────────┘   └───────┘       │                          [Search]
-    │           │┘      │                                │
+    │           ││┘     │   └────────┘   └───────┘       │
+    │           │┘      │    [] [] []     [] [] []       │
     └───────────┘       └────────────────────────────────┘
+    [   Draw    ]
+    [Mill] [Reveal]
     [Search] [Shuffle]
-     [Draw] [Reveal]
 
-  div: hand-section (width 4)
+  div: hand-section (full width)
       ┌────────────────────────────────────────────────────────────┐
       │                    Hand (n)                                │
       │     ┌─────────┐   ┌─────────┐   ┌──────────┐               │
@@ -105,11 +102,11 @@ div: game-container
       │     │         │   │         │   │          │               │
       │     │         │   │         │   │          │               │
       │     └─────────┘   └─────────┘   └──────────┘               │
-      │        [Play]        [Play]         [Play]                 │
+      │                      [flip]                                │
       └────────────────────────────────────────────────────────────┘
 
   div: end-game-actions
-                   [Restart Game] [Choose Another Deck]
+        Last action [undo] [show history]           [Restart Game] [Choose Another Deck]
 ```
 
 ## Layout
