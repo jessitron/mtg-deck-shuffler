@@ -32,9 +32,12 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - `src/app.ts` - Core application logic with Express routes and middleware (main application file)
 - `src/server.ts` - Server initialization, dependency creation, and startup
 - `src/view/` - HTML formatting functions organized by screen:
-  - `load-deck-view.ts` - Deck loading/selection screen (first screen)
-  - `review-deck-view.ts` - Deck review screen before game starts
-  - `active-game-view.ts` - Active game screen with cards in play
+  - `deck-selection/` - Deck loading/selection screen (first screen)
+  - `deck-review/` - Deck review screen before game starts
+  - `play-game/` - Active game screen with cards in play
+  - `common/` - Shared components and HTML layout
+  - `debug/` - Debug utilities for state inspection
+  - `error-view.ts` - Error page formatting
 - `run` - Shell script that sources `.env` and runs the app
 - `package.json` - Node.js project configuration
 - `tsconfig.json` - TypeScript configuration targeting ES2022
