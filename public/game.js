@@ -207,12 +207,16 @@ function handleDrop(e) {
 
   const dropPosition = parseInt(dropZone.dataset.handPosition);
 
-  if (draggedCard && draggedFromPosition !== null && draggedFromPosition !== dropPosition) {
+  if (draggedCard && draggedFromPosition !== null) {
     // Calculate the target position
     // If dropping after the dragged card's current position, adjust by -1 (why?)
     let targetPosition = dropPosition;
     if (dropPosition > draggedFromPosition) {
       targetPosition = dropPosition - 1;
+    }
+
+    if (draggedFromPosition === targetPosition) {
+      return false;
     }
 
     // Get the game ID from the page
