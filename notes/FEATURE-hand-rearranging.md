@@ -30,6 +30,7 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
      - Moving between cards: Average of adjacent positions
    - Return `WhatHappened` with animation data for cards that shifted
    - add tests for each valid case.
+   - as a task, implement a property-based test for a series of moveHandCard operations, so you can test more complicated states.
 
 2. **Add `/move-hand-card/:gameId/:from/:to` endpoint** to `app.ts`
    - Call `game.moveHandCard(from, to)`
@@ -41,7 +42,8 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
 3. **Update hand card HTML** in `hand-components.ts`
 
    - Add `draggable="true"` to `.card-container` elements
-   - Add `data-hand-position="{index}"` attribute for tracking position
+   - Add drop zones between each two cards
+   - Add `data-hand-position="{index}"` attributes to the drop zone for tracking position
    - Keep existing swap buttons during this phase
 
 4. **Implement drag-and-drop handlers** in `public/game.js`
@@ -50,11 +52,10 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
    - `dragover`: Prevent default, add `.drag-over` class to drop target
    - `drop`: Calculate target position, send HTMX POST to `/move-hand-card` endpoint
    - `dragend`: Remove `.dragging` class, clean up state
-   - Calculate drop target based on mouse position relative to card centers
 
 5. **Add drag styling** to `public/styles.css`
    - `.dragging`: Reduce opacity (0.5), add transform effect
-   - `.drag-over`: Add border or background color to show drop target
+   - `.drag-over`: get wider, have an outline and a light fill
    - Ensure dragged card ghost image looks reasonable
 
 ### Phase 2: Remove Swap Buttons - NOT YET
