@@ -827,4 +827,65 @@ describe("GameState", () => {
     );
   });
 
+  test("moveHandCard handles series of random moves correctly", () => {
+    fc.assert(
+      fc.property(
+        anyDeck,
+        fc.array(fc.tuple(fc.nat(), fc.nat()), { minLength: 3, maxLength: 20 }),
+        (deck, moves) => {
+          fc.pre(deck.cards.length >= 5);
+
+          const gameState = GameState.newGame(1, deck);
+
+          // Draw 5 cards to populate hand
+          for (let i = 0; i < 5; i++) {
+            gameState.draw();
+          }
+
+          const initialHand = gameState.listHand();
+          const cardNames = initialHand.map(c => c.card.name);
+
+          // Perform series of moves
+          for (const [from, to] of moves) {
+            const handSize = gameState.listHand().length;
+            if (handSize === 0) break;
+
+            const fromPos = from % handSize;
+            const toPos = to % handSize;
+
+            // Skip if from and to are the same
+            if (fromPos === toPos) continue;
+
+            try {
+              gameState.moveHandCard(fromPos, toPos);
+            } catch (e) {
+              // If move fails, that's okay - just skip it
+              continue;
+            }
+          }
+
+          // Verify invariants after all moves
+          const finalHand = gameState.listHand();
+
+          // Should still have same number of cards
+          expect(finalHand.length).toBe(5);
+
+          // Should still have same cards (just reordered)
+          const finalCardNames = finalHand.map(c => c.card.name).sort();
+          expect(finalCardNames).toEqual([...cardNames].sort());
+
+          // Positions should be strictly increasing
+          for (let i = 1; i < finalHand.length; i++) {
+            expect(finalHand[i].location.position).toBeGreaterThan(finalHand[i-1].location.position);
+          }
+
+          // All cards should be in hand
+          finalHand.forEach(card => {
+            expect(card.location.type).toBe("Hand");
+          });
+        }
+      )
+    );
+  });
+
 });
