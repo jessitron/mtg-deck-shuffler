@@ -20,9 +20,11 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
   return `<div id="game-details" class="game-details game-active">
-        <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
+        <div class="game-header">
+          <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
+          <p class="game-id"><strong>Game ID:</strong> ${game.gameId}</p>
+        </div>
         <div><p>${cardCountInfo}</p>
-        <p><strong>Game ID:</strong> ${game.gameId}</p>
         <p><strong>Status:</strong> ${game.gameStatus()}</p>
         </div>
         <div class="history">

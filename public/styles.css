@@ -258,6 +258,27 @@ h1 {
 .game-details.game-not-started {
   justify-content: flex-start;
 }
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.game-header h2 {
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.game-header .game-id {
+  margin: 0;
+  white-space: nowrap;
+  text-align: right;
+}
+
 .game-details h2 {
   margin-top: 0;
   margin-bottom: 5px;
