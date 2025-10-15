@@ -47,7 +47,12 @@ function formatDeckReviewHtmlSection(game: GameState): string {
   const gameDetailsHtml = formatGameDetails(game);
   const libraryStackHtml = formatLibraryStack();
 
-  return `<div id="game-container">
+  return `<div id="game-header" class="game-header">
+     <h2>${game.deckName}</h2>
+     <p>from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a></p>
+    <p class="game-id">Game ID: ${game.gameId}</p>
+  </div>
+  <div id="game-container">
       ${commanderImageHtml}
       ${gameDetailsHtml}
 
@@ -72,4 +77,3 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </div>
     </div>`;
 }
-
