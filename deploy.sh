@@ -94,6 +94,12 @@ echo "🌐 App will be available at: http://${ALB_URL}"
 echo "   (ALB may take a few minutes to provision and configure)"
 
 echo ""
+echo "🏷️  Creating git tag..."
+DEPLOY_TAG="deploy-$(date +%Y%m%d-%H%M%S)"
+git tag "$DEPLOY_TAG"
+echo "   Tagged as: $DEPLOY_TAG"
+
+echo ""
 echo "🔍 Useful commands:"
 echo "   View logs: kubectl logs -f deployment/mtg-deck-shuffler"
 echo "   Scale app: kubectl scale deployment/mtg-deck-shuffler --replicas=2"
