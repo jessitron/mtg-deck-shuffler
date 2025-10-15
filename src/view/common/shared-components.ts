@@ -44,29 +44,31 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
       throw new Error("Game ID is required for two-faced cards");
     }
     return `<div id="${cardId}-container" class="card-container clickable-card"
+                 ${draggableAttr}
                  ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      ${formatFlippingContainer(gameCard, gameId, draggable)}
+      ${formatFlippingContainer(gameCard, gameId)}
       ${actions}
     </div>`;
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
     return `<div id="${cardId}-container" class="card-container clickable-card"
+                 ${draggableAttr}
                  ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" ${draggableAttr} />
+      <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />
       ${actions}
     </div>`;
   }
 }
 
-export function formatFlippingContainer(gameCard: GameCard, gameId: number, draggable: boolean = false): string {
+export function formatFlippingContainer(gameCard: GameCard, gameId: number): string {
   const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
   const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
   const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
@@ -76,10 +78,8 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number, drag
 
   const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
 
-  const draggableAttr = draggable ? 'draggable="true"' : "";
-
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
-            <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}" ${draggableAttr}>
+            <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
               <div id="${cardId}-inner-flip-container" class="flip-container-inner">
                 <img id="${cardId}-back-face" src="${backImageUrl}" alt="${gameCard.card.name} (back face)" class="mtg-card-image two-sided-back${flippedClass}" />
                 <img id="${cardId}-front-face" src="${frontImageUrl}" alt="${gameCard.card.name}" class="mtg-card-image two-sided-front" title="${gameCard.card.name}" />

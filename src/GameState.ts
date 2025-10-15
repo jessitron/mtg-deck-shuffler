@@ -533,22 +533,18 @@ export class GameState {
 
     this.validateInvariants();
 
-    // Determine which cards moved for animation
+    // Determine which cards shifted for animation
     const movedLeft: GameCard[] = [];
     const movedRight: GameCard[] = [];
 
-    // Cards that moved depend on direction of move
+    // Cards that shifted depend on direction of move
     if (fromHandPosition < toHandPosition) {
-      // Card moved right
-      movedRight.push(cardToMove);
-      // Cards between old and new position moved left
+      // Moved right: cards between old and new position moved left
       for (let i = fromHandPosition + 1; i <= toHandPosition; i++) {
         movedLeft.push(handCards[i]);
       }
     } else {
-      // Card moved left
-      movedLeft.push(cardToMove);
-      // Cards between new and old position moved right
+      // Moved left: cards between new and old position moved right
       for (let i = toHandPosition; i < fromHandPosition; i++) {
         movedRight.push(handCards[i]);
       }
