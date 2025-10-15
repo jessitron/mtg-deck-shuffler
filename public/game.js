@@ -88,14 +88,14 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
 });
 
 // Function to copy card image to clipboard from modal
-window.copyCardImageToClipboard = async function(event, imageUrl, cardName) {
+window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
   try {
     // Extract card ID and face from the image URL
     // URL format: https://cards.scryfall.io/large/front/{first}/{second}/{cardId}.jpg
-    const urlParts = imageUrl.split('/');
+    const urlParts = imageUrl.split("/");
     const filename = urlParts[urlParts.length - 1];
-    const cardId = filename.split('.')[0];
-    const face = urlParts.includes('/back/') ? 'back' : 'front';
+    const cardId = filename.split(".")[0];
+    const face = urlParts.includes("/back/") ? "back" : "front";
 
     const success = await copyCardToClipboard(cardId, face);
 
@@ -167,6 +167,12 @@ function handleDragStart(e) {
   draggedCard = e.currentTarget;
   draggedFromPosition = parseInt(draggedCard.dataset.handPosition);
   draggedCard.classList.add("dragging");
+
+  draggedCard.classList.remove("card-moved-left"); // if it has these it flickers when dropped
+  draggedCard.classList.remove("card-moved-right");
+  draggedCard.classList.remove("dropped-from-left");
+  draggedCard.classList.remove("dropped-from-right");
+
   e.dataTransfer.effectAllowed = "move";
   e.dataTransfer.setData("text/html", draggedCard.innerHTML);
 }
