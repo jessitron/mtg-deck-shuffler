@@ -1,4 +1,5 @@
 <div id="game-container"
+data-game-id="123"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/123"
 hx-target="#game-container"
@@ -21,9 +22,11 @@ style="cursor: pointer;">
 </div>
 </div>
 <div id="game-details" class="game-details game-active">
+<div class="game-header">
 <h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<p class="game-id"><strong>Game ID:</strong> 123</p>
+</div>
 <div><p>8 cards</p>
-<p><strong>Game ID:</strong> 123</p>
 <p><strong>Status:</strong> Active</p>
 </div>
 <div class="history">
@@ -122,7 +125,9 @@ hx-swap="innerHTML">1 Cards on table</button>
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (2)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-2-container" class="card-container clickable-card"
+<div class="hand-drop-zone" data-hand-position="0"></div><div id="card-2-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="0"
 hx-get="/card-modal/123/2"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -138,7 +143,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-1-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="1"></div><div id="card-1-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="1"
 hx-get="/card-modal/123/1"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -146,7 +153,7 @@ style="cursor: pointer;">
 <img id="card-1-face" src="https://cards.scryfall.io/normal/front/0/0/0013a9c4-77a1-418d-85c2-bd68b65cd3d4.jpg" alt="Dakkon, Shadow Slayer" class="mtg-card-image " title="Dakkon, Shadow Slayer" />
 <div class="hand-card-buttons">
 </div>
-</div>
+</div><div class="hand-drop-zone" data-hand-position="2"></div>
 </div>
 </div>
 <div id="end-game-actions" class="game-actions">

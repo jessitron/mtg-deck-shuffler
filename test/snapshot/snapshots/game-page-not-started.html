@@ -19,6 +19,7 @@ provideOneLinkToHoneycomb: true,
 </head>
 <body>
 <div id="game-container"
+data-game-id="456"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/456"
 hx-target="#game-container"
@@ -41,9 +42,11 @@ style="cursor: pointer;">
 </div>
 </div>
 <div id="game-details" class="game-details game-active">
+<div class="game-header">
 <h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<p class="game-id"><strong>Game ID:</strong> 456</p>
+</div>
 <div><p>8 cards</p>
-<p><strong>Game ID:</strong> 456</p>
 <p><strong>Status:</strong> NotStarted</p>
 </div>
 <div class="history">

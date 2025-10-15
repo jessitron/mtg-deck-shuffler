@@ -18,7 +18,12 @@ provideOneLinkToHoneycomb: true,
 <script src="/game.js"></script>
 </head>
 <body>
-<div id="game-container">
+<div id="deck-review-container" class="deck-review-container">
+<div id="game-header" class="game-header">
+<h2>Jaceteous League</h2>
+<p>from <a href="https://archidekt.com/decks/75009" target="_blank">archidekt</a></p>
+<p class="game-id">Game ID: 456</p>
+</div>
 <div id="command-zone">
 <div id="card-3-container" class="card-container clickable-card"
 hx-get="/card-modal/456/3"
@@ -36,36 +41,90 @@ style="cursor: pointer;">
 </div>
 </div>
 </div>
-<div id="game-details" class="game-details game-not-started">
-<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
-<p>8 cards</p>
-<p><strong>Game ID:</strong> 456</p>
-</div>
-<div id="library-section" data-testid="library-section">
-<h3>Library (7)</h3>
-<div class="library-stack" data-testid="library-stack">
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
-</div>
-<div class="library-buttons-single">
-<button class="search-button"
-hx-get="/library-modal/456"
-hx-target="#modal-container"
-hx-swap="innerHTML">Search</button>
-</div>
-</div>
 <div id="start-game-buttons" class="deck-actions">
+<form method="post" action="/start-game" class="inline-form">
 <input type="hidden" name="game-id" value="456" />
-<button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
+<button type="submit" class="start-game-button">Shuffle Up</button>
+</form>
 <form method="post" action="/end-game" class="inline-form">
 <input type="hidden" name="game-id" value="456" />
 <button type="submit">Choose Another Deck</button>
 </form>
 </div>
+<div id="library-section" data-testid="library-section">
+<h3>Library (7)</h3>
+<p class="modal-subtitle">
+7 cards in library, ordered by position
+</p>
+<ul class="library-search-list">
+<li class="library-card-item">
+<span class="card-position">1</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/0"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Carth the Lion</span>
 </div>
-<!-- Modal Container -->
-<div id="modal-container"></div>
+</li><li class="library-card-item">
+<span class="card-position">2</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/1"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Dakkon, Shadow Slayer</span>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">3</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/2"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Damnation</span>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">4</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/4"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Homeward Path</span>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">5</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/5"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Lae'zel, Vlaakith's Champion</span>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">6</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/6"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Miku, the Renowned</span>
+</div>
+</li><li class="library-card-item">
+<span class="card-position">7</span>
+<div class="card-info">
+<span class="card-name-link clickable-card-name"
+hx-get="/card-modal/456/7"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <!-- Separate Modal Container for card modals (higher z-index) -->
 <div id="card-modal-container"></div>
 <footer>

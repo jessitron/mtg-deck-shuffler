@@ -1,4 +1,5 @@
 <div id="game-container"
+data-game-id="789"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/789"
 hx-target="#game-container"
@@ -21,9 +22,11 @@ style="cursor: pointer;">
 </div>
 </div>
 <div id="game-details" class="game-details game-active">
+<div class="game-header">
 <h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
+<p class="game-id"><strong>Game ID:</strong> 789</p>
+</div>
 <div><p>8 cards</p>
-<p><strong>Game ID:</strong> 789</p>
 <p><strong>Status:</strong> Active</p>
 </div>
 <div class="history">
@@ -76,7 +79,9 @@ hx-swap="innerHTML">0 Cards on table</button>
 <div id="hand-section" data-testid="hand-section">
 <h3>Hand (7)</h3>
 <div id="hand-cards" class="hand-cards">
-<div id="card-0-container" class="card-container clickable-card"
+<div class="hand-drop-zone" data-hand-position="0"></div><div id="card-0-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="0"
 hx-get="/card-modal/789/0"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -92,7 +97,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-2-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="1"></div><div id="card-2-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="1"
 hx-get="/card-modal/789/2"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -108,7 +115,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-1-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="2"></div><div id="card-1-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="2"
 hx-get="/card-modal/789/1"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -124,7 +133,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-4-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="3"></div><div id="card-4-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="3"
 hx-get="/card-modal/789/4"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -140,7 +151,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-6-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="4"></div><div id="card-6-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="4"
 hx-get="/card-modal/789/6"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -156,7 +169,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-5-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="5"></div><div id="card-5-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="5"
 hx-get="/card-modal/789/5"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -172,7 +187,9 @@ title="Swap with next card">
 ↔
 </button>
 </div>
-</div><div id="card-7-container" class="card-container clickable-card"
+</div><div class="hand-drop-zone" data-hand-position="6"></div><div id="card-7-container" class="card-container clickable-card"
+draggable="true"
+data-hand-position="6"
 hx-get="/card-modal/789/7"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
@@ -188,7 +205,7 @@ style="cursor: pointer;">
 </div>
 <div class="hand-card-buttons">
 </div>
-</div>
+</div><div class="hand-drop-zone" data-hand-position="7"></div>
 </div>
 </div>
 <div id="end-game-actions" class="game-actions">
