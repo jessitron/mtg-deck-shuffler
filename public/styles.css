@@ -110,6 +110,36 @@ h1 {
   }
 }
 
+.dropped-from-right {
+  animation: growFromRight 0.5s ease-out;
+}
+
+@keyframes growFromRight {
+  0% {
+    transform: translateX(115px) scale(0.3);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.dropped-from-left {
+  animation: growFromLeft 0.5s ease-out;
+}
+
+@keyframes growFromLeft {
+  0% {
+    transform: translateX(-115px) scale(0.3);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* flip */
 
 .flip-container-outer {
@@ -567,16 +597,14 @@ h1 {
   border-radius: 5px;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  z-index: 10;
 }
 
 .hand-drop-zone.drag-over {
-  width: 60px;
-  min-width: 60px;
   background-color: rgba(76, 175, 80, 0.2);
   border: 2px dashed #4caf50;
   outline: 2px solid #4caf50;
 }
-
 
 .play-button {
   padding: 8px 16px;

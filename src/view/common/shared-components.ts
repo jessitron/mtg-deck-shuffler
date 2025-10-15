@@ -55,7 +55,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
     </div>`;
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
-    return `<div id="${cardId}-container" class="card-container clickable-card"
+    return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
@@ -124,6 +124,11 @@ export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardInde
     return " card-moved-left";
   } else if (whatHappened.movedRight && whatHappened.movedRight.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-right";
+  }
+  if (whatHappened.dropppedFromLeft && whatHappened.dropppedFromLeft.gameCardIndex === gameCardIndex) {
+    return " dropped-from-left";
+  } else if (whatHappened.dropppedFromRight && whatHappened.dropppedFromRight.gameCardIndex === gameCardIndex) {
+    return " dropped-from-right";
   }
   return "";
 }

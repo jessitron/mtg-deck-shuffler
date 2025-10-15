@@ -56,6 +56,8 @@ export interface WhatHappened {
   shuffling?: boolean;
   movedRight?: GameCard[];
   movedLeft?: GameCard[];
+  dropppedFromLeft?: GameCard;
+  dropppedFromRight?: GameCard;
 }
 
 export class GameState {
@@ -470,7 +472,6 @@ export class GameState {
     return this;
   }
 
-
   public moveHandCard(fromHandPosition: number, toHandPosition: number): WhatHappened {
     function nameAndPosition(gameCard: GameCard) {
       return `${gameCard.card.name} (${(gameCard.location as HandLocation).position})`;
@@ -553,6 +554,8 @@ export class GameState {
     const whatHappened = {
       movedLeft: movedLeft.length > 0 ? movedLeft : undefined,
       movedRight: movedRight.length > 0 ? movedRight : undefined,
+      dropppedFromLeft: fromHandPosition > toHandPosition ? cardToMove : undefined,
+      dropppedFromRight: fromHandPosition < toHandPosition ? cardToMove : undefined,
     };
     span?.setAttributes({
       "game.whatHappened": JSON.stringify(whatHappened, null, 2),

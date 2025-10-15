@@ -2,6 +2,9 @@
 let handScrollPosition = 0;
 let revealedCardsScrollPosition = 0;
 
+/**
+ * Retain scroll position of hand
+ */
 document.addEventListener("htmx:beforeSwap", function (evt) {
   // Store the current scroll position of the hand section
   const handSection = document.querySelector("#hand-section .hand-cards");
@@ -34,6 +37,9 @@ document.addEventListener("htmx:afterSwap", function (evt) {
   }
 });
 
+/**
+ * Copy card image to clipboard
+ */
 // Function to copy card image to clipboard using proxy URL
 async function copyCardToClipboard(cardId, face) {
   const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
@@ -124,6 +130,9 @@ window.copyCardImageToClipboard = async function(event, imageUrl, cardName) {
   }
 };
 
+/**
+ * Drag/drop for hand card rearranging
+ */
 // Drag-and-drop state
 let draggedCard = null;
 let draggedFromPosition = null;
@@ -194,7 +203,7 @@ function handleDrop(e) {
 
   if (draggedCard && draggedFromPosition !== null && draggedFromPosition !== dropPosition) {
     // Calculate the target position
-    // If dropping after the dragged card's current position, adjust by -1
+    // If dropping after the dragged card's current position, adjust by -1 (why?)
     let targetPosition = dropPosition;
     if (dropPosition > draggedFromPosition) {
       targetPosition = dropPosition - 1;
