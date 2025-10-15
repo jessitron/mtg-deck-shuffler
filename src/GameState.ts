@@ -14,6 +14,7 @@ import {
   printLocation,
 } from "./port-persist-state/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
+import { trace } from "@opentelemetry/api";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
@@ -501,7 +502,16 @@ export class GameState {
   }
 
   public moveHandCard(fromHandPosition: number, toHandPosition: number): WhatHappened {
+    function nameAndPosition(gameCard: GameCard) {
+      return `${gameCard.card.name} (${(gameCard.location as HandLocation).position})`;
+    }
+    const span = trace.getActiveSpan();
     const handCards = this.listHand();
+    span?.setAttributes({
+      "game.hand_position.from": fromHandPosition,
+      "game.hand_position.to": toHandPosition,
+      "game.hand.begin": JSON.stringify(handCards.map(nameAndPosition), null, 2),
+    });
 
     if (fromHandPosition < 0 || fromHandPosition >= handCards.length) {
       throw new Error(`Invalid fromHandPosition: ${fromHandPosition}`);
@@ -554,33 +564,31 @@ export class GameState {
     this.validateInvariants();
 
     // Determine which cards shifted for animation
-    const updatedHandCards = this.listHand();
     const movedLeft: GameCard[] = [];
     const movedRight: GameCard[] = [];
 
     // Cards that shifted depend on direction of move
     if (fromHandPosition < toHandPosition) {
       // Moved right: cards between old and new position moved left
-      for (let i = fromHandPosition; i < toHandPosition; i++) {
-        if (handCards[i].gameCardIndex !== cardToMove.gameCardIndex) {
-          movedLeft.push(handCards[i]);
-        }
+      for (let i = fromHandPosition + 1; i <= toHandPosition; i++) {
+        movedLeft.push(handCards[i]);
       }
-      movedRight.push(cardToMove);
     } else {
       // Moved left: cards between new and old position moved right
-      for (let i = toHandPosition + 1; i <= fromHandPosition; i++) {
-        if (handCards[i].gameCardIndex !== cardToMove.gameCardIndex) {
-          movedRight.push(handCards[i]);
-        }
+      for (let i = toHandPosition; i < fromHandPosition; i++) {
+        movedRight.push(handCards[i]);
       }
-      movedLeft.push(cardToMove);
     }
 
-    return {
+    const whatHappened = {
       movedLeft: movedLeft.length > 0 ? movedLeft : undefined,
       movedRight: movedRight.length > 0 ? movedRight : undefined,
     };
+    span?.setAttributes({
+      "game.whatHappened": JSON.stringify(whatHappened, null, 2),
+      "game.hand.end": JSON.stringify(this.listHand().map(nameAndPosition), null, 2),
+    });
+    return whatHappened;
   }
 
   public flipCard(gameCardIndex: number): WhatHappened {
