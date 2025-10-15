@@ -1,5 +1,5 @@
 import { GameCard, GameState } from "../../GameState.js";
-import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
+import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatModal } from "./deck-info-components.js";
 
@@ -50,7 +50,7 @@ export function formatCommandersHtmlFragment(commanders: readonly GameCard[], ga
 
 function formatDeckReviewHtmlSection(game: GameState): string {
   const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
-  const libraryStackHtml = formatLibraryStack();
+  const libraryCardList = formatLibraryCardList(game);
 
   return `
   <div id="deck-review-container" class="deck-review-container">
@@ -72,13 +72,12 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </div>
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
-        ${libraryStackHtml}
-        <div class="library-buttons-single">
-          <button class="search-button"
-                  hx-get="/library-modal/${game.gameId}"
-                  hx-target="#modal-container"
-                  hx-swap="innerHTML">Search</button>
-        </div>
+        <p class="modal-subtitle">
+          ${game.listLibrary().length} cards in library, ordered by position
+        </p>
+        <ul class="library-search-list">
+          ${libraryCardList}
+        </ul>
       </div>
 
       </div>
