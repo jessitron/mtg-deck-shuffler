@@ -577,14 +577,6 @@ h1 {
   outline: 2px solid #4caf50;
 }
 
-.hand-card-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
-}
 
 .play-button {
   padding: 8px 16px;

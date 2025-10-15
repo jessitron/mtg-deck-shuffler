@@ -470,36 +470,6 @@ export class GameState {
     return this;
   }
 
-  public swapHandCardWithNext(handPosition: number): WhatHappened {
-    const handCards = this.listHand();
-
-    const cardToSwap = handCards[handPosition];
-    const cardToRight = handCards[handPosition + 1];
-    if (!cardToRight) {
-      throw new Error(`No card to right of ${cardToSwap.card.name}`);
-    }
-    var nextPosition = cardToRight.location.position + 1;
-
-    const cardPastThat = handCards[handPosition + 2];
-    if (cardPastThat && cardPastThat.location.position <= nextPosition) {
-      // stick this one right in between them. Fractions are numbers!
-      nextPosition = (cardPastThat.location.position - cardToRight.location.position) / 2 + cardToRight.location.position;
-    }
-
-    const move: CardMove = {
-      gameCardIndex: cardToSwap.gameCardIndex,
-      fromLocation: cardToSwap.location,
-      toLocation: { type: "Hand", position: nextPosition },
-    };
-    this.executeMove(move);
-
-    this.validateInvariants();
-
-    return {
-      movedRight: [cardToSwap],
-      movedLeft: [cardToRight],
-    };
-  }
 
   public moveHandCard(fromHandPosition: number, toHandPosition: number): WhatHappened {
     function nameAndPosition(gameCard: GameCard) {
