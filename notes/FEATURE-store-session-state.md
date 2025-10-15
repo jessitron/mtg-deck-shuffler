@@ -1,6 +1,6 @@
 # Tracking the Game State
 
-Status: not yet specified.
+Status: implemented with SQLite as default and in-memory as optional.
 
 Before we can manipulate the library, we have to save the game state.
 

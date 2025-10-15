@@ -36,7 +36,8 @@ So, given a deck in archidekt.com, this web app will
 - **For HTML changes that are NOT intended**: Run `npm run test:snapshot` to verify no changes occurred
 - **For HTML changes that ARE intended**: Only run snapshot tests manually to review and approve changes by inspecting the generated `.actual` files
 
-`???` - Update snapshots
+`npm run test:snapshot:update` - Update snapshots (moves .actual files to replace snapshots)
+`npm run test:snapshot:diff` - View differences between snapshots and actual output
 
 ## Technical notes
 
