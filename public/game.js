@@ -139,12 +139,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function setupHandCardDragAndDrop() {
-  const handCards = document.querySelectorAll("#hand-cards .card-container[draggable='true']");
+  const draggableImages = document.querySelectorAll("#hand-cards .mtg-card-image[draggable='true'], #hand-cards .flip-container-outer[draggable='true']");
   const dropZones = document.querySelectorAll("#hand-cards .hand-drop-zone");
 
-  handCards.forEach((card) => {
-    card.addEventListener("dragstart", handleDragStart);
-    card.addEventListener("dragend", handleDragEnd);
+  draggableImages.forEach((img) => {
+    img.addEventListener("dragstart", handleDragStart);
+    img.addEventListener("dragend", handleDragEnd);
   });
 
   dropZones.forEach((zone) => {
@@ -155,15 +155,19 @@ function setupHandCardDragAndDrop() {
 }
 
 function handleDragStart(e) {
-  draggedCard = e.currentTarget;
-  draggedFromPosition = parseInt(draggedCard.dataset.handPosition);
-  draggedCard.classList.add("dragging");
+  // Find the card container parent to get the hand position
+  const cardContainer = e.currentTarget.closest(".card-container");
+  draggedCard = cardContainer;
+  draggedFromPosition = parseInt(cardContainer.dataset.handPosition);
+  cardContainer.classList.add("dragging");
   e.dataTransfer.effectAllowed = "move";
-  e.dataTransfer.setData("text/html", draggedCard.innerHTML);
+  e.dataTransfer.setData("text/html", cardContainer.innerHTML);
 }
 
 function handleDragEnd(e) {
-  draggedCard.classList.remove("dragging");
+  if (draggedCard) {
+    draggedCard.classList.remove("dragging");
+  }
   draggedCard = null;
   draggedFromPosition = null;
 }
