@@ -12,6 +12,10 @@ Then make everything not broken:
   - there's more to the definition here than a deck. This is where I'll want to add card backs and a playmat. Make a GamePrep type.
 - make "Shuffle Up" on Deck Review do a full page load, which starts a game.
 
+This GamePrep object will need to be persisted. We are getting into sessions. But it is still not necessary to store sessions... it is necessary to store a GamePrep object. It can be updated when people pick a different card back or playmat.
+
+Jess, you could skip a bunch of this if you let it start a game still. Start a game, but display it totally differently. huh.
+
 ## Bugs to fix
 
 - I managed to get it to play the same card twice. This will be fixed by ignoring actions with the wrong previous event ID and making people reload the game.
