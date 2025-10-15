@@ -243,6 +243,8 @@ h1 {
 }
 
 .deck-review-container {
+  max-width: 800px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto;
