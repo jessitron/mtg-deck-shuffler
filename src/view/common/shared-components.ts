@@ -25,13 +25,18 @@ type CardRenderOptions = {
   gameId: number; // TODO: not optional (although it's only used for two-faced cards)
   actions?: string;
   whatHappened?: WhatHappened;
+  draggable?: boolean;
+  handPosition?: number;
 };
 
-export function formatCardContainer({ gameCard, gameId, actions = "", whatHappened }: CardRenderOptions): string {
+export function formatCardContainer({ gameCard, gameId, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
   // TODO: always reload only the card container
+
+  const draggableAttr = draggable ? 'draggable="true"' : '';
+  const handPositionAttr = handPosition !== undefined ? `data-hand-position="${handPosition}"` : '';
 
   if (gameCard.card.twoFaced) {
     if (gameId === undefined) {
@@ -39,6 +44,8 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
       throw new Error("Game ID is required for two-faced cards");
     }
     return `<div id="${cardId}-container" class="card-container clickable-card"
+                 ${draggableAttr}
+                 ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
@@ -49,6 +56,8 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
   } else {
     const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
     return `<div id="${cardId}-container" class="card-container clickable-card"
+                 ${draggableAttr}
+                 ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
