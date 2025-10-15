@@ -43,7 +43,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
       // TODO: make required everywhere
       throw new Error("Game ID is required for two-faced cards");
     }
-    return `<div id="${cardId}-container" class="card-container clickable-card"
+    return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
                  hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
@@ -62,7 +62,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image ${finalAnimationClass}" title="${gameCard.card.name}" />
+      <img id="${cardId}-face" src="${imageUrl}" alt="${gameCard.card.name}" class="mtg-card-image" title="${gameCard.card.name}" />
       ${actions}
     </div>`;
   }
@@ -94,7 +94,7 @@ export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], g
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-          ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId} )).join("")}
+          ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
         </div>`;
 }
 
