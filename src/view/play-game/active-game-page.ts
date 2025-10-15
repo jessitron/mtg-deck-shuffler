@@ -82,6 +82,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const gameActionsHtml = formatGameActionsHtmlFragment(game);
 
   return `<div id="game-container"
+           data-game-id="${game.gameId}"
            hx-trigger="game-state-updated from:body"
            hx-get="/game-section/${game.gameId}"
            hx-target="#game-container"

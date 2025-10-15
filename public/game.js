@@ -123,3 +123,95 @@ window.copyCardImageToClipboard = async function(event, imageUrl, cardName) {
     }, 2000);
   }
 };
+
+// Drag-and-drop state
+let draggedCard = null;
+let draggedFromPosition = null;
+
+// Set up drag-and-drop handlers after HTMX swaps
+document.addEventListener("htmx:afterSwap", function (evt) {
+  setupHandCardDragAndDrop();
+});
+
+// Also set up on initial page load
+document.addEventListener("DOMContentLoaded", function () {
+  setupHandCardDragAndDrop();
+});
+
+function setupHandCardDragAndDrop() {
+  const handCards = document.querySelectorAll("#hand-cards .card-container[draggable='true']");
+  const dropZones = document.querySelectorAll("#hand-cards .hand-drop-zone");
+
+  handCards.forEach((card) => {
+    card.addEventListener("dragstart", handleDragStart);
+    card.addEventListener("dragend", handleDragEnd);
+  });
+
+  dropZones.forEach((zone) => {
+    zone.addEventListener("dragover", handleDragOver);
+    zone.addEventListener("dragleave", handleDragLeave);
+    zone.addEventListener("drop", handleDrop);
+  });
+}
+
+function handleDragStart(e) {
+  draggedCard = e.currentTarget;
+  draggedFromPosition = parseInt(draggedCard.dataset.handPosition);
+  draggedCard.classList.add("dragging");
+  e.dataTransfer.effectAllowed = "move";
+  e.dataTransfer.setData("text/html", draggedCard.innerHTML);
+}
+
+function handleDragEnd(e) {
+  draggedCard.classList.remove("dragging");
+  draggedCard = null;
+  draggedFromPosition = null;
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+  e.dataTransfer.dropEffect = "move";
+  e.currentTarget.classList.add("drag-over");
+  return false;
+}
+
+function handleDragLeave(e) {
+  e.currentTarget.classList.remove("drag-over");
+}
+
+function handleDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation();
+  }
+  e.preventDefault();
+
+  const dropZone = e.currentTarget;
+  dropZone.classList.remove("drag-over");
+
+  const dropPosition = parseInt(dropZone.dataset.handPosition);
+
+  if (draggedCard && draggedFromPosition !== null && draggedFromPosition !== dropPosition) {
+    // Calculate the target position
+    // If dropping after the dragged card's current position, adjust by -1
+    let targetPosition = dropPosition;
+    if (dropPosition > draggedFromPosition) {
+      targetPosition = dropPosition - 1;
+    }
+
+    // Get the game ID from the page
+    const gameContainer = document.querySelector("#game-container");
+    const gameId = gameContainer?.dataset.gameId;
+
+    if (gameId) {
+      // Use HTMX to make the POST request
+      htmx.ajax("POST", `/move-hand-card/${gameId}/${draggedFromPosition}/${targetPosition}`, {
+        target: "#game-container",
+        swap: "outerHTML",
+      });
+    }
+  }
+
+  return false;
+}
