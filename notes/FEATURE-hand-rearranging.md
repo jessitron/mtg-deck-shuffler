@@ -17,7 +17,7 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
 
 ## Implementation Plan
 
-### Phase 1: Add Drag-and-Drop (Keep Swap Buttons)
+### Phase 1: Add Drag-and-Drop (Keep Swap Buttons) - implemented
 
 #### Backend Changes
 
@@ -58,7 +58,7 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
    - `.drag-over`: get wider, have an outline and a light fill
    - Ensure dragged card ghost image looks reasonable
 
-### Phase 2: Remove Swap Buttons - NOT YET
+### Phase 2: Remove Swap Buttons
 
 6. **Remove swap button code** from `hand-components.ts`
 
@@ -75,7 +75,6 @@ Hand cards are displayed in a horizontal flexbox with swap buttons (`↔`) that 
 9. **Remove swap button styling** from `public/styles.css`
 
    - Delete `.hand-card-buttons` and `.swap-button` CSS rules
-   - Remove `.card-moved-left` and `.card-moved-right` animation classes if no longer used
 
 10. **Update tests**
     - Remove tests for `swapHandCardWithNext()` method

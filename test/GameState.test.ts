@@ -52,11 +52,11 @@ describe("GameState", () => {
         const state = GameState.newGame(1, deck);
         const commanders = state.listCommanders();
         expect(commanders.length).toBe(2);
-        const commanderCards = commanders.map(gc => gc.card).sort((a, b) => a.name.localeCompare(b.name));
+        const commanderCards = commanders.map((gc) => gc.card).sort((a, b) => a.name.localeCompare(b.name));
         const deckCommanders = [...deck.commanders].sort((a, b) => a.name.localeCompare(b.name));
         expect(commanderCards[0]).toEqual(deckCommanders[0]);
         expect(commanderCards[1]).toEqual(deckCommanders[1]);
-        expect(commanders.every(gc => gc.isCommander)).toBe(true);
+        expect(commanders.every((gc) => gc.isCommander)).toBe(true);
       })
     );
   });
@@ -69,7 +69,7 @@ describe("GameState", () => {
 
         // Verify cards are sorted by display name
         for (let i = 1; i < cards.length; i++) {
-          expect(cards[i-1].card.name.localeCompare(cards[i].card.name)).toBeLessThanOrEqual(0);
+          expect(cards[i - 1].card.name.localeCompare(cards[i].card.name)).toBeLessThanOrEqual(0);
         }
       })
     );
@@ -151,7 +151,7 @@ describe("GameState", () => {
 
         // Manually move a non-commander card to Hand for testing
         const cards = gameState.getCards();
-        const nonCommanderCard = cards.find(gc => !gc.isCommander);
+        const nonCommanderCard = cards.find((gc) => !gc.isCommander);
         if (nonCommanderCard) {
           (nonCommanderCard.location as any) = { type: "Hand", position: 0 };
         }
@@ -270,7 +270,7 @@ describe("GameState", () => {
         const initialLibrarySize = deck.cards.length;
 
         // Track the original order of cards in library before drawing
-        const originalLibraryOrder = gameState.listLibrary().map(gc => gc.card.name);
+        const originalLibraryOrder = gameState.listLibrary().map((gc) => gc.card.name);
 
         // Draw all cards one by one and verify positioning
         for (let i = 0; i < initialLibrarySize; i++) {
@@ -349,9 +349,7 @@ describe("GameState", () => {
         expect(revealedBefore.length).toBe(0);
 
         // Pick a random valid position to reveal
-        const positionToReveal = deck.cards.length > 1
-          ? Math.floor(Math.random() * deck.cards.length)
-          : 0;
+        const positionToReveal = deck.cards.length > 1 ? Math.floor(Math.random() * deck.cards.length) : 0;
         const cardToReveal = libraryBefore[positionToReveal];
 
         gameState.reveal(positionToReveal);
@@ -549,40 +547,43 @@ describe("GameState", () => {
 
   test("flipCard flips a two-faced card", () => {
     fc.assert(
-      fc.property(fc.record({
-        name: fc.string(),
-        scryfallId: fc.uuid(),
-        multiverseid: fc.integer({ min: 1, max: 999999 }),
-        twoFaced: fc.constant(true),
-      }), (twoFacedCard) => {
-        const deck: Deck = {
-          version: 1,
-          name: "Test Deck",
-          commanders: [],
-          cards: [twoFacedCard],
-          id: 1,
-          totalCards: 1,
-          provenance: {
-            retrievedDate: new Date(),
-            sourceUrl: "test://deck",
-            deckSource: "test" as const,
-          },
-        };
+      fc.property(
+        fc.record({
+          name: fc.string(),
+          scryfallId: fc.uuid(),
+          multiverseid: fc.integer({ min: 1, max: 999999 }),
+          twoFaced: fc.constant(true),
+        }),
+        (twoFacedCard) => {
+          const deck: Deck = {
+            version: 1,
+            name: "Test Deck",
+            commanders: [],
+            cards: [twoFacedCard],
+            id: 1,
+            totalCards: 1,
+            provenance: {
+              retrievedDate: new Date(),
+              sourceUrl: "test://deck",
+              deckSource: "test" as const,
+            },
+          };
 
-        const gameState = GameState.newGame(1, deck);
-        const gameCards = gameState.listLibrary();
-        const gameCardIndex = gameCards[0].gameCardIndex;
+          const gameState = GameState.newGame(1, deck);
+          const gameCards = gameState.listLibrary();
+          const gameCardIndex = gameCards[0].gameCardIndex;
 
-        // Verify initial state
-        expect(gameCards[0].currentFace).toBe("front");
+          // Verify initial state
+          expect(gameCards[0].currentFace).toBe("front");
 
-        // Flip the card
-        gameState.flipCard(gameCardIndex);
+          // Flip the card
+          gameState.flipCard(gameCardIndex);
 
-        // Verify the card was flipped
-        const updatedCard = gameState.listLibrary().find(gc => gc.gameCardIndex === gameCardIndex);
-        expect(updatedCard?.currentFace).toBe("back");
-      })
+          // Verify the card was flipped
+          const updatedCard = gameState.listLibrary().find((gc) => gc.gameCardIndex === gameCardIndex);
+          expect(updatedCard?.currentFace).toBe("back");
+        }
+      )
     );
   });
 
@@ -600,34 +601,37 @@ describe("GameState", () => {
 
   test("flipCard throws error when card is not two-faced", () => {
     fc.assert(
-      fc.property(fc.record({
-        name: fc.string(),
-        scryfallId: fc.uuid(),
-        multiverseid: fc.integer({ min: 1, max: 999999 }),
-        twoFaced: fc.constant(false),
-      }), (singleFacedCard) => {
-        const deck: Deck = {
-          version: 1,
-          name: "Test Deck",
-          commanders: [],
-          cards: [singleFacedCard],
-          id: 1,
-          totalCards: 1,
-          provenance: {
-            retrievedDate: new Date(),
-            sourceUrl: "test://deck",
-            deckSource: "test" as const,
-          },
-        };
+      fc.property(
+        fc.record({
+          name: fc.string(),
+          scryfallId: fc.uuid(),
+          multiverseid: fc.integer({ min: 1, max: 999999 }),
+          twoFaced: fc.constant(false),
+        }),
+        (singleFacedCard) => {
+          const deck: Deck = {
+            version: 1,
+            name: "Test Deck",
+            commanders: [],
+            cards: [singleFacedCard],
+            id: 1,
+            totalCards: 1,
+            provenance: {
+              retrievedDate: new Date(),
+              sourceUrl: "test://deck",
+              deckSource: "test" as const,
+            },
+          };
 
-        const gameState = GameState.newGame(1, deck);
-        const gameCards = gameState.listLibrary();
-        const gameCardIndex = gameCards[0].gameCardIndex;
+          const gameState = GameState.newGame(1, deck);
+          const gameCards = gameState.listLibrary();
+          const gameCardIndex = gameCards[0].gameCardIndex;
 
-        expect(() => {
-          gameState.flipCard(gameCardIndex);
-        }).toThrow(new RegExp(`Card ${singleFacedCard.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} is not a two-faced card`));
-      })
+          expect(() => {
+            gameState.flipCard(gameCardIndex);
+          }).toThrow(new RegExp(`Card ${singleFacedCard.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} is not a two-faced card`));
+        }
+      )
     );
   });
 
@@ -656,11 +660,9 @@ describe("GameState", () => {
         expect(handAfter[1].card.name).toBe(handBefore[0].card.name);
         expect(handAfter[2].card.name).toBe(handBefore[1].card.name);
 
-        // Check WhatHappened - card moved left, others shifted right
-        expect(whatHappened.movedLeft?.length).toBe(1);
-        expect(whatHappened.movedLeft?.[0]?.card.name).toBe(cardToMove.card.name);
+        // Check WhatHappened - others shifted right
         // Only cards that were between positions 0 and 2 shift right (positions 0 and 1, not position 2)
-        expect(whatHappened.movedRight?.length).toBeGreaterThan(0);
+        expect(whatHappened.movedRight?.length).toBe(2);
       })
     );
   });
@@ -681,20 +683,17 @@ describe("GameState", () => {
         expect(handBefore.length).toBe(3);
 
         // Move the first card (position 0) to the end (position 2)
-        const cardToMove = handBefore[0];
         const whatHappened = gameState.moveHandCard(0, 2);
 
         const handAfter = gameState.listHand();
         expect(handAfter.length).toBe(3);
         expect(handAfter[0].card.name).toBe(handBefore[1].card.name);
         expect(handAfter[1].card.name).toBe(handBefore[2].card.name);
-        expect(handAfter[2].card.name).toBe(cardToMove.card.name);
+        expect(handAfter[2].card.name).toBe(handBefore[0].card.name);
 
-        // Check WhatHappened - card moved right, others shifted left
-        expect(whatHappened.movedRight?.length).toBe(1);
-        expect(whatHappened.movedRight?.[0]?.card.name).toBe(cardToMove.card.name);
+        // Check WhatHappened - others shifted left
         // Only cards that were between positions 0 and 2 shift left (positions 1 and 2, not position 0)
-        expect(whatHappened.movedLeft?.length).toBeGreaterThan(0);
+        expect(whatHappened.movedLeft?.length).toBe(2);
       })
     );
   });
@@ -821,7 +820,7 @@ describe("GameState", () => {
 
         // Verify positions are still sorted correctly
         for (let i = 1; i < handAfter.length; i++) {
-          expect(handAfter[i].location.position).toBeGreaterThan(handAfter[i-1].location.position);
+          expect(handAfter[i].location.position).toBeGreaterThan(handAfter[i - 1].location.position);
         }
       })
     );
@@ -829,63 +828,58 @@ describe("GameState", () => {
 
   test("moveHandCard handles series of random moves correctly", () => {
     fc.assert(
-      fc.property(
-        anyDeck,
-        fc.array(fc.tuple(fc.nat(), fc.nat()), { minLength: 3, maxLength: 20 }),
-        (deck, moves) => {
-          fc.pre(deck.cards.length >= 5);
+      fc.property(anyDeck, fc.array(fc.tuple(fc.nat(), fc.nat()), { minLength: 3, maxLength: 20 }), (deck, moves) => {
+        fc.pre(deck.cards.length >= 5);
 
-          const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, deck);
 
-          // Draw 5 cards to populate hand
-          for (let i = 0; i < 5; i++) {
-            gameState.draw();
-          }
-
-          const initialHand = gameState.listHand();
-          const cardNames = initialHand.map(c => c.card.name);
-
-          // Perform series of moves
-          for (const [from, to] of moves) {
-            const handSize = gameState.listHand().length;
-            if (handSize === 0) break;
-
-            const fromPos = from % handSize;
-            const toPos = to % handSize;
-
-            // Skip if from and to are the same
-            if (fromPos === toPos) continue;
-
-            try {
-              gameState.moveHandCard(fromPos, toPos);
-            } catch (e) {
-              // If move fails, that's okay - just skip it
-              continue;
-            }
-          }
-
-          // Verify invariants after all moves
-          const finalHand = gameState.listHand();
-
-          // Should still have same number of cards
-          expect(finalHand.length).toBe(5);
-
-          // Should still have same cards (just reordered)
-          const finalCardNames = finalHand.map(c => c.card.name).sort();
-          expect(finalCardNames).toEqual([...cardNames].sort());
-
-          // Positions should be strictly increasing
-          for (let i = 1; i < finalHand.length; i++) {
-            expect(finalHand[i].location.position).toBeGreaterThan(finalHand[i-1].location.position);
-          }
-
-          // All cards should be in hand
-          finalHand.forEach(card => {
-            expect(card.location.type).toBe("Hand");
-          });
+        // Draw 5 cards to populate hand
+        for (let i = 0; i < 5; i++) {
+          gameState.draw();
         }
-      )
+
+        const initialHand = gameState.listHand();
+        const cardNames = initialHand.map((c) => c.card.name);
+
+        // Perform series of moves
+        for (const [from, to] of moves) {
+          const handSize = gameState.listHand().length;
+          if (handSize === 0) break;
+
+          const fromPos = from % handSize;
+          const toPos = to % handSize;
+
+          // Skip if from and to are the same
+          if (fromPos === toPos) continue;
+
+          try {
+            gameState.moveHandCard(fromPos, toPos);
+          } catch (e) {
+            // If move fails, that's okay - just skip it
+            continue;
+          }
+        }
+
+        // Verify invariants after all moves
+        const finalHand = gameState.listHand();
+
+        // Should still have same number of cards
+        expect(finalHand.length).toBe(5);
+
+        // Should still have same cards (just reordered)
+        const finalCardNames = finalHand.map((c) => c.card.name).sort();
+        expect(finalCardNames).toEqual([...cardNames].sort());
+
+        // Positions should be strictly increasing
+        for (let i = 1; i < finalHand.length; i++) {
+          expect(finalHand[i].location.position).toBeGreaterThan(finalHand[i - 1].location.position);
+        }
+
+        // All cards should be in hand
+        finalHand.forEach((card) => {
+          expect(card.location.type).toBe("Hand");
+        });
+      })
     );
   });
-
 });
