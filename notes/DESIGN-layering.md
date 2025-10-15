@@ -6,7 +6,7 @@ status: current
 
 See notes/PATTERN-port-adapter-gateway.md
 
-For a good example of this in the code, see @src/deck-retrieval/index.ts and the files it references.
+For a good example of this in the code, see @src/port-deck-retrieval/index.ts and the files it references.
 
 The port is an interface, RetrieveDeckPort.
 
@@ -16,4 +16,4 @@ There is one gateway, ArchidektGateway. LocalDeckAdapter is too simple to need a
 
 The adapter is initialized in @src/server.ts
 
-The tests in @test/ports-deck-retrieval/ test each of the adapters. Gateways do not get automated tests.
+The tests in @test/port-deck-retrieval/ test each of the adapters. Gateways do not get automated tests.

@@ -46,7 +46,6 @@ Multi-stage Docker build that compiles TypeScript and creates a minimal runtime 
 
 ### 2. `k8s/` Directory
 Contains all Kubernetes manifests:
-- `namespace.yaml` - Creates the mtg-deck-shuffler namespace
 - `configmap.yaml` - Environment variables for the app
 - `pvc.yaml` - PersistentVolumeClaim for SQLite database storage
 - `deployment.yaml` - Main application deployment with health checks
@@ -123,15 +122,3 @@ kubectl delete namespace mtg-deck-shuffler
 - Redis for session data
 
 Change `PORT_PERSIST_STATE=in-memory` and add database connection configuration.
-
-## Security Notes
-
-- LoadBalancer creates public endpoint - consider adding ingress controller with SSL
-- Secrets are base64 encoded (not encrypted) - consider AWS Secrets Manager integration
-- Database is file-based - consider encryption at rest for sensitive data
-
-## Cost Optimization
-
-- **Development**: Use `t3.small` nodes, single replica
-- **Production**: Use spot instances, horizontal pod autoscaler
-- **Storage**: 1GB PVC should be sufficient for game state data

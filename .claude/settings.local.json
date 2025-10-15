@@ -54,7 +54,8 @@
       "Bash(pkill:*)",
       "Bash(npx tsc:*)",
       "Bash(jq:*)",
-      "Bash(PORT=3001 timeout 5 ./run)"
+      "Bash(PORT=3001 timeout 5 ./run)",
+      "Bash(test:*)"
     ],
     "deny": []
   },
