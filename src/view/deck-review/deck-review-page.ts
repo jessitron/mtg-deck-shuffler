@@ -48,27 +48,32 @@ function formatDeckReviewHtmlSection(game: GameState): string {
   const libraryStackHtml = formatLibraryStack();
 
   return `<div id="game-container">
-      ${commanderImageHtml}
-      ${gameDetailsHtml}
-
-      <div id="library-section" data-testid="library-section">
-        <h3>Library (${game.listLibrary().length})</h3>
-        ${libraryStackHtml}
-        <div class="library-buttons-single">
-          <button class="search-button"
-                  hx-get="/library-modal/${game.gameId}"
-                  hx-target="#modal-container"
-                  hx-swap="innerHTML">Search</button>
-        </div>
+      <div id="deck-summary">
+        ${gameDetailsHtml}
       </div>
 
-      <div id="start-game-buttons" class="deck-actions">
-        <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
-        <form method="post" action="/end-game" class="inline-form">
+      <div id="deck-review-layout">
+        <div id="library-section" data-testid="library-section">
+          <h3>Library (${game.listLibrary().length})</h3>
+          ${libraryStackHtml}
+          <div class="library-buttons-single">
+            <button class="search-button"
+                    hx-get="/library-modal/${game.gameId}"
+                    hx-target="#modal-container"
+                    hx-swap="innerHTML">Search</button>
+          </div>
+        </div>
+
+        ${commanderImageHtml}
+
+        <div id="start-game-buttons" class="deck-actions">
           <input type="hidden" name="game-id" value="${game.gameId}" />
-          <button type="submit">Choose Another Deck</button>
-        </form>
+          <button hx-post="/start-game" hx-include="closest div" hx-target="#game-container"    hx-swap="outerHTML" class="start-game-button">Shuffle Up</button>
+          <form method="post" action="/end-game" class="inline-form">
+            <input type="hidden" name="game-id" value="${game.gameId}" />
+            <button type="submit">Choose Another Deck</button>
+          </form>
+        </div>
       </div>
     </div>`;
 }

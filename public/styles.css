@@ -228,6 +228,22 @@ h1 {
   min-height: 600px;
 }
 
+/* Deck Review Layout - Before Game Starts */
+#deck-summary {
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+#deck-review-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 30px auto;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
 #command-zone {
   grid-area: command-zone;
   display: flex;
