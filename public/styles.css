@@ -243,6 +243,14 @@ h1 {
   grid-area: game-details;
 }
 
+.deck-review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
+}
 .game-details {
   display: flex;
   flex-direction: column;
@@ -252,6 +260,7 @@ h1 {
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #f9f9f9;
+  width: 100%;
 }
 
 .game-details.game-not-started {

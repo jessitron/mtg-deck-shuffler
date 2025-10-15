@@ -1,12 +1,3 @@
-import { GameState } from "../../GameState.js";
-
-export function formatGameDetails(game: GameState): string {
-  const cardCountInfo = `${game.totalCards} cards`;
-  return `<div id="game-details" class="game-details game-not-started">
-       
-        ${game.gameStatus() !== "NotStarted" ? `<p><strong>Status:</strong> ${game.gameStatus()}</p>` : ""}
-      </div>`;
-}
 
 export function formatModal(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"

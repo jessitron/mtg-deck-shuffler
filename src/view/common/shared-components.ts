@@ -35,8 +35,8 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
   const cardId = `card-${gameCard.gameCardIndex}`;
   // TODO: always reload only the card container
 
-  const draggableAttr = draggable ? 'draggable="true"' : '';
-  const handPositionAttr = handPosition !== undefined ? `data-hand-position="${handPosition}"` : '';
+  const draggableAttr = draggable ? 'draggable="true"' : "";
+  const handPositionAttr = handPosition !== undefined ? `data-hand-position="${handPosition}"` : "";
 
   if (gameCard.card.twoFaced) {
     if (gameId === undefined) {
@@ -89,16 +89,12 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
           </div>`;
 }
 
-function formatSingleCommanderContainer(gameCard: GameCard, gameId: number): string {
-  return formatCardContainer({ gameCard, gameId });
-}
-
 // Function for displaying commanders when we have GameCard objects (in active game)
-export function formatCommanderImageHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
+export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-          ${commanders.map((gameCard) => formatSingleCommanderContainer(gameCard, gameId)).join("")}
+          ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId} )).join("")}
         </div>`;
 }
 

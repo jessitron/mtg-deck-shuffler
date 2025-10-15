@@ -5,7 +5,7 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatTableModalHtmlFragment } from "./game-modals.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
-import { formatCommanderImageHtmlFragment } from "../common/shared-components.js";
+import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
 
 function formatGameDetailsHtmlFragment(game: GameState): string {
@@ -73,7 +73,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(game.listCommanders(), game.gameId);
+  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
   const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);

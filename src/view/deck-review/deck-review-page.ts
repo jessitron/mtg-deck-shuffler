@@ -1,7 +1,7 @@
-import { GameState } from "../../GameState.js";
-import { formatCardNameAsModalLink, formatCommanderImageHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
+import { GameCard, GameState } from "../../GameState.js";
+import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatLibraryStack } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatGameDetails, formatModal } from "./deck-info-components.js";
+import { formatModal } from "./deck-info-components.js";
 
 function formatLibraryCardList(game: GameState): string {
   const libraryCards = game.listLibrary();
@@ -21,8 +21,6 @@ function formatLibraryCardList(game: GameState): string {
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
   const contentWithModal = `${gameContent}
-    <!-- Modal Container -->
-    <div id="modal-container"></div>
     <!-- Separate Modal Container for card modals (higher z-index) -->
     <div id="card-modal-container"></div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
@@ -42,20 +40,25 @@ export function formatLibraryModalHtml(game: GameState): string {
   return formatModal("Library Contents", bodyContent);
 }
 
+export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
+  return commanders.length == 0
+    ? `<div class="commander-placeholder">No Commander</div>`
+    : `<div id="command-zone">
+          ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
+        </div>`;
+}
+
 function formatDeckReviewHtmlSection(game: GameState): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragment(game.listCommanders(), game.gameId);
-  const gameDetailsHtml = formatGameDetails(game);
+  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
   const libraryStackHtml = formatLibraryStack();
 
-  return `<div id="game-header" class="game-header">
+  return `
+  <div id="game-header" class="game-header">
      <h2>${game.deckName}</h2>
      <p>from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a></p>
     <p class="game-id">Game ID: ${game.gameId}</p>
-  </div>
-  <div id="game-container">
-      ${commanderImageHtml}
-      ${gameDetailsHtml}
-
+    </div>
+    ${commanderImageHtml}
       <div id="library-section" data-testid="library-section">
         <h3>Library (${game.listLibrary().length})</h3>
         ${libraryStackHtml}
