@@ -1,6 +1,16 @@
 # Things to change
 
-- 
+Right now I have a mess. I'm changing the Deck Review page.
+Finish that part:
+
+- move the buttons up next to the commanders
+- instead of drawing a library with a search button, put the library list below the commanders+buttons
+
+Then make everything not broken:
+
+- make "Let's Play" on the home page load the deck but NOT start a game
+  - there's more to the definition here than a deck. This is where I'll want to add card backs and a playmat. Make a GamePrep type.
+- make "Shuffle Up" on Deck Review do a full page load, which starts a game.
 
 ## Bugs to fix
 
@@ -39,7 +49,7 @@ an example from claude desktop:
 
 - in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table.
 
-- 
+-
 
 - when we draw a card, get an htmx event to scroll the hand to the right (in case you can't see the new card) ... or put it on the left and animate all cards right.
 
