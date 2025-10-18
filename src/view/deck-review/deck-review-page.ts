@@ -23,7 +23,7 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
   const contentWithModal = `${gameContent}
     <!-- Separate Modal Container for card modals (higher z-index) -->
     <div id="card-modal-container"></div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
 
 export function formatLibraryModalHtml(game: GameState): string {

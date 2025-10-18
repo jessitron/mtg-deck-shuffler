@@ -69,7 +69,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
     <div id="modal-container"></div>
     <!-- Separate Modal Container for card modals (higher z-index) -->
     <div id="card-modal-container"></div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, false);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {

@@ -18,15 +18,13 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string, showHeader: boolean = true): string {
+function formatPageWrapper(title: string, content: string): string {
   const headHtml = formatHtmlHead(title);
-  const headerHtml = showHeader ? '<h1>*Woohoo it\'s Magic time!*</h1>' : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
   <body>
-    ${headerHtml}
     ${content}
 
     <footer>
@@ -50,7 +48,7 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
       <div class="error-message">
         <h2>${icon} ${title}</h2>
         <p>${message}</p>
-        ${details ? `<p class="error-details">${details}</p>` : ''}
+        ${details ? `<p class="error-details">${details}</p>` : ""}
       </div>
       <div class="deck-actions">
         <form method="get" action="/" class="inline-form">
