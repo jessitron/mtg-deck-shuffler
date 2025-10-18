@@ -11,6 +11,13 @@ h1 {
   margin-bottom: 50px;
 }
 
+.homepage-title {
+  font-family: "Bitcount Grid Double Ink", monospace;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 50px;
+}
+
 .how-to-mural {
   max-width: 600px;
   height: auto;
