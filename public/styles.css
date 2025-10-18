@@ -18,6 +18,11 @@ body {
   --cute-heading-color: #9134d2;
 }
 
+footer {
+  text-align: right;
+  margin-right: 20px;
+}
+
 h1 {
   color: #333;
   font-size: 2rem;

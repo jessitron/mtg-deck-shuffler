@@ -31,7 +31,7 @@ function formatPageWrapper(title: string, content: string): string {
     ${content}
 
     <footer>
-      <p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+      <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
     </footer>
   </body>
 </html>`;
