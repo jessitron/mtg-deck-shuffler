@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MTG Deck Shuffler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bitcount+Grid+Double+Ink&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css" />
+<script src="/hny.js"></script>
+<script>
+Hny.initializeTracing({
+apiKey: "TEST_API_KEY",
+serviceName: "mtg-deck-shuffler-web",
+debug: false,
+provideOneLinkToHoneycomb: true,
+});
+</script>
+<script src="/htmx.js"></script>
+<script src="/game.js"></script>
+</head>
+<body>
+<div id="homepage-content">
+<h1 class="homepage-title">MTG Deck Shuffler</h1>
+<div id="deck-inputs">
+<form method="POST" action="/deck" class="deck-input-section">
+<label for="local-deck" class="deck-label">Choose a deck to play</label>
+<input type="hidden" name="deck-source" value="local" />
+<select id="local-deck" name="local-deck"><option value="test-commander.json">Test Commander Deck</option>,<option value="aggro-example.json">Example Aggro Deck</option>,<option value="control-sample.json">Control Deck Sample</option></select>
+<button type="submit" class="lets-play-button">Play</button>
+</form>
+<form class="deck-input-section" method="POST" action="/deck">
+<label for="deck-number" class="deck-label">Play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
+<input type="text" id="deck-number" name="deck-number"placeholder="deck number" />
+<input type="hidden" name="deck-source" value="archidekt" />
+<button type="submit" class="lets-play-button">Load Deck</button>
+</form>
+</div>
+<div id="modal-container"></div>
+<div class="expository-text">
+<h3>What does this do?</h3>
+<p> Play Magic, The Gathering remotely with friends -- using any deck!
+</p>
+<h5>You need</h5>
+<ul>
+<li>A friend (or two or three) to play with</li>
+<li>A shared voice chat, like Discord</li></li>
+<li>A shared online white board, like <a href="https://www.mural.co/" target="_blank">Mural</a>, which serves as the table</li>
+<li>Decks defined in Archidekt (or use the preconstructed decks we've downloaded)
+<li>This app for each of you to manage your library and hand
+</ul>
+<p>Each of you can choose a deck in this app, then shuffle up. Draw cards to your hand, then click on them to do more. When you play a card in MTG Deck Shuffler, it gets copied to your clipboard. Then paste it into Mural!</p>
+<p>
+My sister and I play this way, and our board winds up looking like this:
+</p>
+<img src="mural-board.png" class="how-to-mural" alt="a bunch of Magic cards scattered across a white board" />
+<p>
+That picture won't tell you much. We're on voice chat when we play, so we talk through what we're doing. It's fun, because we use fancy lands and tokens. We make little notes on top of the cards as counters or to track effects.
+</p> <p>
+Play any deck, anywhere, with your favorite people!
+</p>
+<div class="debug-section">
+<button id="load-state-button" class="debug-button"
+hx-get="/load-state-modal"
+hx-target="#modal-container"
+hx-swap="innerHTML">Load Game State</button>
+</div>
+</div>
+</div>
+<footer>
+<p>MTG Deck Shuffler | <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">GitHub</a></p>
+</footer>
+</body>
+</html>

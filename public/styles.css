@@ -8,13 +8,14 @@ body {
   font-family: "Inter", Arial, sans-serif;
   text-align: left;
   margin: 0;
-  background-color: var(--dark-background-color);
+  background-color: var(--background-color);
 }
 
 :root {
   --dark-background-color: #e0e0e0;
   --background-color: #f0f0f0;
   --cta-button-color: #269329;
+  --cute-heading-color: #9134d2;
 }
 
 h1 {
@@ -25,20 +26,20 @@ h1 {
 .homepage-title {
   font-family: "Bitcount Grid Double Ink", monospace;
   font-size: clamp(1.5rem, 6vw, 4rem);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #homepage-content {
   max-width: 1200px;
   margin: 0 auto;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   background-color: var(--background-color);
   padding-left: 2rem;
 }
 
-.how-to-mural {
-  max-width: 600px;
-  height: auto;
+#homepage-content h3 {
+  font-family: "Bitcount Grid Double Ink", monospace;
+  font-size: clamp(1rem, 4vw, 3rem);
+  font-weight: 400;
 }
 
 #deck-inputs {
@@ -89,8 +90,26 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.lets-play-button:hover {
+.deck-input-section button:hover {
   background-color: #45a049;
+}
+
+h5 {
+  font-weight: bold;
+  color: var(--cute-heading-color);
+  margin-bottom: 0;
+  margin-top: 20px;
+  padding-bottom: 0;
+}
+
+p {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.how-to-mural {
+  max-width: 600px;
+  height: auto;
 }
 
 /* Common card image styling - all MTG card images should use this class */
@@ -1214,8 +1233,18 @@ h1 {
   font-size: 0.8rem;
 }
 
+.debug-section {
+  text-align: right;
+  width: 100%;
+}
+
 .debug-button {
-  margin-left: 10px;
+  border: none;
+  display: inline;
+}
+
+.debug-button:hover {
+  text-decoration: underline;
 }
 
 .debug-container {
