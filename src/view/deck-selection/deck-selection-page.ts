@@ -3,7 +3,7 @@ import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
 
-const homepage_title = "Woohoo it's Magic time!";
+const homepage_title = "MTG Deck Shuffler";
 
 function formatArchidektInputHtmlFragment() {
   return `
