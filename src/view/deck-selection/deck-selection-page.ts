@@ -41,16 +41,16 @@ function formatLoadStateHtmlFragment() {
 }
 
 export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
-  const archidektSelectionHtml = formatArchidektInputHtmlFragment();
 
-  const localSelectionHtml = formatLocalDeckInputHtmlFragment(availableDecks);
   const loadStateHtml = formatLoadStateHtmlFragment();
   const deckSelectionHtml = `<div id="deck-input">
-      ${archidektSelectionHtml}
-      ${localSelectionHtml}
+      ${formatArchidektInputHtmlFragment()}
+      ${formatLocalDeckInputHtmlFragment(availableDecks)}
     </div>`;
 
+  const title = `<h1 class="homepage-title">Woohoo it's Magic time!</h1>`;
   const content = `
+    ${title}
     ${deckSelectionHtml}
     <div id="modal-container"></div>
     <div class="expository-text">
