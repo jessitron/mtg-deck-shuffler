@@ -24,7 +24,7 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
   const options = availableDecks.filter((o) => o.deckSource === "local").map((o) => `<option value="${o.localFile}">${o.description}</option>`);
   return `
       <form method="POST" action="/deck" class="deck-input-section">
-        <label for="local-deck" class="deck-label">Choose a deck to play</label>
+        <label for="local-deck" class="deck-label">Choose a preconstructed deck to play</label>
         <input type="hidden" name="deck-source" value="local" />
         <select id="local-deck" name="local-deck">${options}</select>
         <button type="submit" class="lets-play-button">Play</button>
