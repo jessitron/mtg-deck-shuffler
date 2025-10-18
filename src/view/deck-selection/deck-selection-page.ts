@@ -4,14 +4,14 @@ import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
 
 function formatArchidektInputHtmlFragment() {
-  return `<div class="deck-input-section">
-      <form method="POST" action="/deck">
-        <label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
-        <input type="text" id="deck-number" name="deck-number" value="16038812" placeholder="16038812" class="deck-input" />
+  return `
+      <form class="deck-input-section" method="POST" action="/deck">
+        <label for="deck-number" class="deck-label">Play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
+        <input type="text" id="deck-number" name="deck-number"placeholder="deck number" />
         <input type="hidden" name="deck-source" value="archidekt" />
-        <button type="submit" class="lets-play-button">Let's Play (from Archidekt)</button>
+        <button type="submit" class="lets-play-button">Load Deck</button>
       </form>
-   </div>`;
+`;
 }
 
 function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
@@ -20,14 +20,13 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
   }
 
   const options = availableDecks.filter((o) => o.deckSource === "local").map((o) => `<option value="${o.localFile}">${o.description}</option>`);
-  return `<div class="deck-input-section">
-      <form method="POST" action="/deck">
-        <label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label>
+  return `
+      <form method="POST" action="/deck" class="deck-input-section">
+        <label for="local-deck" class="deck-label">Choose a deck to play</label>
         <input type="hidden" name="deck-source" value="local" />
-        <select id="local-deck" name="local-deck" class="deck-select">${options}</select>
-        <button type="submit" class="lets-play-button">Let's Play</button>
-      </form>
-    </div>`;
+        <select id="local-deck" name="local-deck">${options}</select>
+        <button type="submit" class="lets-play-button">Play</button>
+      </form>`;
 }
 
 function formatLoadStateHtmlFragment() {
@@ -41,15 +40,15 @@ function formatLoadStateHtmlFragment() {
 }
 
 export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
-
   const loadStateHtml = formatLoadStateHtmlFragment();
-  const deckSelectionHtml = `<div id="deck-input">
-      ${formatArchidektInputHtmlFragment()}
-      ${formatLocalDeckInputHtmlFragment(availableDecks)}
+  const deckSelectionHtml = `<div id="deck-inputs">
+  ${formatLocalDeckInputHtmlFragment(availableDecks)}
+  ${formatArchidektInputHtmlFragment()}
     </div>`;
 
   const title = `<h1 class="homepage-title">Woohoo it's Magic time!</h1>`;
   const content = `
+  <div id="homepage-content">
     ${title}
     ${deckSelectionHtml}
     <div id="modal-container"></div>
@@ -82,6 +81,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
         We can play any deck, anywhere, with our favorite people.
       </p>
       ${loadStateHtml}
+    </div>
     </div>`;
 
   return formatPageWrapper("MTG Deck Shuffler", content);

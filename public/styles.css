@@ -1,21 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Inter", Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-  background-color: #f0f0f0;
+  text-align: left;
+  margin: 0;
+  background-color: var(--dark-background-color);
+}
+
+:root {
+  --dark-background-color: #e0e0e0;
+  --background-color: #f0f0f0;
+  --cta-button-color: #269329;
 }
 
 h1 {
   color: #333;
   font-size: 2rem;
-  margin-bottom: 50px;
 }
 
 .homepage-title {
   font-family: "Bitcount Grid Double Ink", monospace;
-  color: #333;
-  font-size: 2rem;
-  margin-bottom: 50px;
+  font-size: clamp(1.5rem, 6vw, 4rem);
+  font-weight: 400;
+}
+
+#homepage-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  background-color: var(--background-color);
+  padding-left: 2rem;
 }
 
 .how-to-mural {
@@ -23,52 +41,50 @@ h1 {
   height: auto;
 }
 
-.deck-input-section {
-  margin: 30px 0;
-  padding: 25px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+#deck-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 50px;
+  margin-top: 40px;
 }
 
-.deck-label {
+.deck-input-section {
+  margin: 5px 0;
+}
+
+.deck-input-section label {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: bold;
   color: #333;
   font-size: 1.1rem;
 }
 
-.deck-input,
-.deck-select {
-  width: 100%;
+.deck-input-section input,
+.deck-input-section select {
   padding: 12px;
   border: 2px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
   margin-bottom: 20px;
-  box-sizing: border-box;
 }
 
-.deck-input:focus,
-.deck-select:focus {
+.deck-input-section input:focus,
+.deck-input-section select:focus {
   border-color: #4caf50;
   outline: none;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
-.lets-play-button {
-  width: 100%;
-  padding: 15px;
+.deck-input-section button {
+  padding: 12px;
   font-size: 1.1rem;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #4caf50;
+  background-color: var(--cta-button-color);
   color: white;
   transition: background-color 0.3s ease;
 }
