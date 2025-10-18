@@ -34,7 +34,7 @@ h1 {
   font-weight: 500;
 }
 
-#homepage-content {
+.page-with-title-container{
   max-width: 1200px;
   margin: 0 auto;
   background-color: var(--background-color);
@@ -320,7 +320,7 @@ p {
 }
 
 .deck-review-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr;

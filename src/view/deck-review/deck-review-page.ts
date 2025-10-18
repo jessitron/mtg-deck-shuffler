@@ -1,8 +1,16 @@
 import { GameCard, GameState } from "../../GameState.js";
-import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment } from "../common/shared-components.js";
+import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatTitleHtmlFragment } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatModal } from "./deck-info-components.js";
 
+export function formatDeckReviewHtmlPage(game: GameState): string {
+  const gameContent = formatDeckReviewHtmlSection(game);
+  const contentWithModal = `<div class="page-with-title-container">
+    ${formatTitleHtmlFragment()}
+    ${gameContent}
+    <div id="card-modal-container"></div>`;
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
+}
 function formatLibraryCardList(game: GameState): string {
   const libraryCards = game.listLibrary();
 
@@ -16,14 +24,6 @@ function formatLibraryCardList(game: GameState): string {
         </li>`;
     })
     .join("");
-}
-
-export function formatDeckReviewHtmlPage(game: GameState): string {
-  const gameContent = formatDeckReviewHtmlSection(game);
-  const contentWithModal = `${gameContent}
-    <!-- Separate Modal Container for card modals (higher z-index) -->
-    <div id="card-modal-container"></div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
 
 export function formatLibraryModalHtml(game: GameState): string {

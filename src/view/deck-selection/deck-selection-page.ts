@@ -1,9 +1,7 @@
 import { AvailableDecks } from "../../port-deck-retrieval/types.js";
 import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
-
-const homepage_title = "MTG Deck Shuffler";
+import { formatCommanderImageHtmlFragmentFromCards, formatTitleHtmlFragment } from "../common/shared-components.js";
 
 function formatArchidektInputHtmlFragment() {
   return `
@@ -48,9 +46,9 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
   ${formatArchidektInputHtmlFragment()}
     </div>`;
 
-  const title = `<h1 class="homepage-title">${homepage_title}</h1>`;
+  const title = formatTitleHtmlFragment();
   const content = `
-  <div id="homepage-content">
+  <div id="homepage-content" class="page-with-title-container" >
     ${title}
     ${deckSelectionHtml}
     <div id="modal-container"></div>

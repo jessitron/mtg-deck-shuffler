@@ -3,6 +3,12 @@ import { GameCard, WhatHappened } from "../../GameState.js";
 
 export const CARD_BACK = "/mtg-card-back.jpg";
 
+const app_title = "MTG Deck Shuffler";
+
+export function formatTitleHtmlFragment(): string {
+  return `<h1 class="homepage-title">${app_title}</h1>`;
+}
+
 export function formatCardNameAsGathererLink(card: { name: string; multiverseid: number; oracleCardName?: string }): string {
   if (card.multiverseid === 0) {
     const searchName = card.oracleCardName || card.name;
