@@ -3,6 +3,8 @@ import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatCommanderImageHtmlFragmentFromCards } from "../common/shared-components.js";
 
+const homepage_title = "Woohoo it's Magic time!";
+
 function formatArchidektInputHtmlFragment() {
   return `
       <form class="deck-input-section" method="POST" action="/deck">
@@ -46,7 +48,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
   ${formatArchidektInputHtmlFragment()}
     </div>`;
 
-  const title = `<h1 class="homepage-title">Woohoo it's Magic time!</h1>`;
+  const title = `<h1 class="homepage-title">${homepage_title}</h1>`;
   const content = `
   <div id="homepage-content">
     ${title}
