@@ -21,24 +21,21 @@ provideOneLinkToHoneycomb: true,
 <script src="/game.js"></script>
 </head>
 <body>
+<div id="homepage-content">
 <h1 class="homepage-title">Woohoo it's Magic time!</h1>
-<div id="deck-input">
-<div class="deck-input-section">
-<form method="POST" action="/deck">
-<label for="deck-number" class="deck-label">Enter <a href="https://archidekt.com/" target="_blank">Archidekt</a> Deck Number:</label>
-<input type="text" id="deck-number" name="deck-number" value="16038812" placeholder="16038812" class="deck-input" />
-<input type="hidden" name="deck-source" value="archidekt" />
-<button type="submit" class="lets-play-button">Let's Play (from Archidekt)</button>
-</form>
-</div>
-<div class="deck-input-section">
-<form method="POST" action="/deck">
-<label for="local-deck" class="deck-label">Or choose a pre-loaded deck:</label>
+<div id="deck-inputs">
+<form method="POST" action="/deck" class="deck-input-section">
+<label for="local-deck" class="deck-label">Choose a deck to play</label>
 <input type="hidden" name="deck-source" value="local" />
-<select id="local-deck" name="local-deck" class="deck-select"><option value="test-commander.json">Test Commander Deck</option>,<option value="aggro-example.json">Example Aggro Deck</option>,<option value="control-sample.json">Control Deck Sample</option></select>
-<button type="submit" class="lets-play-button">Let's Play</button>
+<select id="local-deck" name="local-deck"><option value="test-commander.json">Test Commander Deck</option>,<option value="aggro-example.json">Example Aggro Deck</option>,<option value="control-sample.json">Control Deck Sample</option></select>
+<button type="submit" class="lets-play-button">Play</button>
 </form>
-</div>
+<form class="deck-input-section" method="POST" action="/deck">
+<label for="deck-number" class="deck-label">Play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
+<input type="text" id="deck-number" name="deck-number"placeholder="deck number" />
+<input type="hidden" name="deck-source" value="archidekt" />
+<button type="submit" class="lets-play-button">Load Deck</button>
+</form>
 </div>
 <div id="modal-container"></div>
 <div class="expository-text">
@@ -74,6 +71,7 @@ We can play any deck, anywhere, with our favorite people.
 hx-get="/load-state-modal"
 hx-target="#modal-container"
 hx-swap="innerHTML">Load Game State</button>
+</div>
 </div>
 </div>
 <footer>
