@@ -357,12 +357,6 @@ p {
     "end-game-actions end-game-actions end-game-actions";
   gap: 20px;
   min-height: 600px;
-
-  /* Playmat background */
-  background-image: url('https://ultrapro.com/cdn/shop/files/38748_Mat_MTG_FIN_F_Front-min.png?v=1749178080&width=1500');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 #command-zone,
@@ -373,7 +367,7 @@ p {
   transform: translateX(-20px);
   border: 1px solid #ddd;
   border-radius: 15px;
-  background-color: rgba(249, 249, 249, 0.85);
+  background-color: #f9f9f9;
   margin-top: 20px;
   min-height: 278px;
 }
