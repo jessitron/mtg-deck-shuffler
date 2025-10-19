@@ -1,23 +1,19 @@
 # Things to change
 
-- move items around on the game page to match the design.
+- make the Load Deck button not work if I haven't entered a deck number.
 
 ## Bugs to fix
 
 - I managed to get it to play the same card twice. This will be fixed by ignoring actions with the wrong previous event ID and making people reload the game.
 
+- the Play animation doesn't work anymore on hand cards. It does on Revealed
+
 ## More Things to change
-
-- hand cards should have all the buttons that revealed cards have.
-
-- the Table modal needs to pop open the card modal on card name click
 
 - make the library card modal have up/down! I want to look through it!
 
 - feature: draw hand button, which draws 10 cards and then orders by: Land, Creature, Artifact, Enchantment, Sorcery, Instant ... actually do this as part of Shuffle Up!
 - mulligan button which puts them all back and reshuffles
-
-- handle empty library
 
 - make cmd-Z undo
 
@@ -39,29 +35,13 @@ an example from claude desktop:
 
 - in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table.
 
--
-
 - when we draw a card, get an htmx event to scroll the hand to the right (in case you can't see the new card) ... or put it on the left and animate all cards right.
 
-- When two-sided cards are played, the player is going to need access to both sides of the card. Copying 2 images is not well supported. So, let's copy the current face. To give people access to the other face, let's put the two-sided card at the top of the list of played cards. ... and then we need the card modal, with a copy button and a flip button.
-
-- can I make Play make an animation of moving the card to the table?
-
-[x] Flip Card should be an event
-
 - If people load the game in multiple windows, interact with one, and then interact with another: it needs to throw an error in the second one and ask them to refresh the page.
-
-[x] the shuffle event is ridiculously large. Have it store arrays of numbers, not a shitton of json.
 
 - let people pick a playmat
 
 - let people pick sleeves
-
-- The game events would be easier to undo if they included their description.
-
-- I want a log of what happened! Today I clicked some stuff in my hand too fast and wondered whether I put too many cards on the table. I need that list of actions.
-
-[x] make a save/load game feature so I can move game states from prod to local for testing
 
 - do we want redo?
 
@@ -76,8 +56,6 @@ an example from claude desktop:
 
 [x] I also want tracing of pageloads, a frontend dataset. I have this now but it's super basic; the library needs upgraded
 
-- handle empty library
-
 - after draw, make sure the drawn card is visible: scroll hand section to the right
 
 - game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty
@@ -87,7 +65,3 @@ an example from claude desktop:
 - it is physically possible for your commander to be in your library or hand. shit.
 
 - give the commander a play button; make it translucent in the command zone when it's also on the table. Count the number of times it's been played, that's handy to track.
-
-## UI Changes
-
-I want to change the UI, target documented in notes/DESIGN-interface.md

@@ -1,7 +1,6 @@
 import { AvailableDecks } from "../../port-deck-retrieval/types.js";
-import { Deck } from "../../types.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatCommanderImageHtmlFragmentFromCards, formatTitleHtmlFragment } from "../common/shared-components.js";
+import { formatTitleHtmlFragment } from "../common/shared-components.js";
 
 function formatArchidektInputHtmlFragment() {
   return `
@@ -79,28 +78,4 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
     </div>`;
 
   return formatPageWrapper("MTG Deck Shuffler", content);
-}
-
-export function formatDeckHtmlSection(deck: Deck, gameId: number): string {
-  const commanderImageHtml = formatCommanderImageHtmlFragmentFromCards(deck.commanders, gameId);
-  const cardCountInfo = `${deck.totalCards} cards`;
-  const retrievedInfo = `Retrieved: ${deck.provenance.retrievedDate.toLocaleString()}`;
-
-  return `<div id="deck-info">
-        <div class="deck-details-layout">
-            ${commanderImageHtml}
-          <div class="deck-info-section">
-            <h2><a href="https://archidekt.com/decks/${deck.id}" target="_blank">${deck.name}</a></h2>
-            <p>${cardCountInfo}</p>
-            <p><small>${retrievedInfo}</small></p>
-          </div>
-        </div>
-        <div class="deck-actions">
-          <input type="hidden" name="deck-id" value="${deck.id}" />
-          <button hx-post="/start-game" class="start-game-button" hx-include="closest div" hx-target="#deck-input">Start Game</button>
-          <form method="post" action="/" class="inline-form">
-            <button type="submit">Choose Another Deck</button>
-          </form>
-        </div>
-    </div>`;
 }

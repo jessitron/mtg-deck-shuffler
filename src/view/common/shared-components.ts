@@ -116,28 +116,6 @@ export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], g
           </div>
         </div>`;
 }
-
-// Function for displaying commanders when we only have CardDefinition objects (deck preview)
-export function formatCommanderImageHtmlFragmentFromCards(commanders: any[], gameId: number): string {
-  return commanders.length == 0
-    ? `<div class="commander-placeholder">No Commander</div>`
-    : `<div id="command-zone">
-          ${commanders
-            .map((commander) => {
-              // Convert CardDefinition to GameCard format for consistent rendering
-              const gameCard = {
-                card: commander,
-                location: { type: "CommandZone" as const, position: 0 },
-                gameCardIndex: 0, // Not used for preview
-                isCommander: true,
-                currentFace: "front" as const,
-              };
-              return formatCardContainer({ gameCard, gameId });
-            })
-            .join("")}
-        </div>`;
-}
-
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
   if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-left";
@@ -170,39 +148,3 @@ export type CardAction = {
   cssClass?: string;
 };
 
-function formatCardActionButtonHtmlFragment(
-  action: string,
-  endpoint: string,
-  gameId: number,
-  cardIndex: number,
-  title: string,
-  cssClass = "card-action-button",
-  cardId?: string,
-  currentFace?: "front" | "back"
-): string {
-  const cardIdAttr = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
-  const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
-  const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
-  const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
-  return `<button class="${cssClass}"
-                    hx-post="${endpoint}/${gameId}/${cardIndex}"
-                    hx-target="#game-container"
-                    ${swapAttr}
-                    ${extraAttrs}
-                    onclick="event.stopPropagation()"
-                    title="${title}">
-            ${action}
-          </button>`;
-}
-
-export function formatCardActionsGroupHtmlFragment(
-  actions: CardAction[],
-  gameId: number,
-  cardIndex: number,
-  cardId?: string,
-  currentFace?: "front" | "back"
-): string {
-  return actions
-    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId, currentFace))
-    .join("");
-}
