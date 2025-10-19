@@ -1,5 +1,11 @@
 import { GameCard, GameState } from "../../GameState.js";
-import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatLibraryCardList, formatTitleHtmlFragment } from "../common/shared-components.js";
+import {
+  formatCardContainer,
+  formatCardNameAsModalLink,
+  formatCommandZoneHtmlFragment,
+  formatLibraryCardList,
+  formatTitleHtmlFragment,
+} from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
@@ -15,7 +21,6 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
   </div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
-
 
 export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
   return commanders.length == 0
@@ -47,9 +52,9 @@ function formatDeckReviewHtmlSection(game: GameState): string {
     </div>
     <div id="library-section" data-testid="library-section">
       <h4 class="cute-header">Library</h4>
-      <p class="modal-subtitle">
+      <div class="cute-header-subtitle">
       ${game.listLibrary().length} cards in library, ordered by position
-      </p>
+      </div>
       <ul class="library-search-list">
         ${libraryCardList}
       </ul>

@@ -58,9 +58,9 @@ export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
   const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId);
 
-  const bodyContent = `<div class="modal-subtitle">
+  const bodyContent = `<p class="modal-subtitle">
           ${libraryCards.length} cards, alphabetical
-        </div>
+        </p>
         <ul class="library-search-list">
           ${libraryCardList}
         </ul>`;
