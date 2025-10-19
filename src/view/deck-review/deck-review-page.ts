@@ -60,8 +60,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
   return `
   <div id="deck-review-container" class="deck-review-container">
     <div id="game-header" class="game-header">
-      <h2>${game.deckName}</h2>
-      <p>from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a></p>
+      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
     </div>
     ${commanderImageHtml}
     <div id="start-game-buttons" class="deck-actions">
