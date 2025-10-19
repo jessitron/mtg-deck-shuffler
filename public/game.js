@@ -42,18 +42,30 @@ document.addEventListener("htmx:afterSwap", function (evt) {
  */
 // Function to copy card image to clipboard using proxy URL
 async function copyCardToClipboard(cardId, face) {
-  const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
-  const response = await fetch(proxyUrl);
-  if (response.ok) {
-    const blob = await response.blob();
-    await navigator.clipboard.write([
-      new ClipboardItem({
-        [blob.type]: blob,
-      }),
-    ]);
-    return true;
-  }
-  return false;
+  // make sure tracing exists
+  Hny = Hny || {
+    inSpanAsync: (a, b, fn, c) => {
+      console.log("warning: no tracing");
+      return fn();
+    },
+  };
+  return Hny.inSpanAsync("mtg-deck-shuffler-web", "copy card to clipboard", async (span) => {
+    const proxyUrl = `/proxy-image?cardId=${encodeURIComponent(cardId)}&face=${encodeURIComponent(face)}`;
+    const response = await fetch(proxyUrl);
+    span?.setAttribute("app.response.ok", response.ok);
+    if (response.ok) {
+      const blob = await response.blob();
+      span?.setAttribute("app.blob.type", blob.type);
+      span?.setAttribute("app.blob.size", blob.size);
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]);
+      return true;
+    }
+    return false;
+  });
 }
 
 // Handle clipboard copying when HTMX is about to make the request
