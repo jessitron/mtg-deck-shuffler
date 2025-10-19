@@ -1,55 +1,25 @@
 # Feature: Dynamic Playmat Background
 
 ## Goal
+
 Simulate the physical MTG playmat experience by allowing players to select and display different background images during gameplay.
 
-## Implementation Tasks
+Example playmat images:
 
-### 1. Playmat Selection UI (Deck Review Screen)
-- Add playmat selector to deck review screen
-- Display available playmat options (thumbnails or names)
-- Store selection in GameState
-- Persist playmat choice with game state
+[Jumbo Cactuar](https://ultrapro.com/cdn/shop/files/38748_Mat_MTG_FIN_F_Front-min.png?v=1749178080&width=1500) - this one is best scaled to fit
 
-### 2. Background Application (Play Game Screen)
-- Load selected playmat from GameState
-- Apply as CSS background to game container
-- Ensure cards remain readable against background
-- Handle default (no playmat selected) state
+[Roller Rink Carpet](https://www.omegapatternworks.com/replace_colors/3054/) - this one is best tiled
 
-### 3. Visual Design Considerations
-- Card contrast: ensure text/images remain legible on various backgrounds
-- Consider semi-transparent overlay on playmat for better card visibility
-- Zone definitions: play area boundaries should be clear
-- Responsive behavior: background should scale/position appropriately
+## Implementation
 
-## Recommendations
+1. Store playmat URL in game state. It is optional.
 
-### Playmat Storage
-- Store playmat URL as string in GameState
-- Initial dropdown will offer 3-5 curated image URLs
-- Future: allow custom URL input field
+2. Hard-code it to Jumbo Cactuar for now.
 
-### State Management
-- Add `playmatUrl?: string` to GameState
-- Default to null/undefined (no custom background)
-- Include in PersistedGameState schema
+3. Make the Deck Review page use this background, dynamically from the code. Don't add the background in styles.css, because the point is for it to be different every game, and styles.css is static.
 
-### CSS Approach
-- Apply background to `.game-container` or main play area
-- Use `background-size: cover` for full coverage
-- Consider `background-attachment: fixed` for stability during scrolling
-- Add semi-transparent overlay div for contrast: `background: rgba(255,255,255,0.1)`
+4. Make the Active Game page use this background, dynamically from the code.
 
-### Initial Playmat Set
-Start with 3-5 curated options:
-- Plain felt/cloth textures (classic playmat feel)
-- MTG-themed landscapes (forest, island, mountain, etc.)
-- Neutral patterns (geometric, subtle textures)
-- "None" option for default white/clean background
+## Stuff to do later
 
-### Future Enhancements
-- Custom URL input field (allow users to specify their own image URL)
-- Preview before selection
-- Per-zone backgrounds (battlefield, graveyard, exile)
-- Validation/error handling for invalid URLs
+Add a selection option to Deck Review for choosing a playmat. It is a dropdown with a few options.
