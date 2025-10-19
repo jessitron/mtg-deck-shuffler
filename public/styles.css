@@ -34,17 +34,27 @@ h1 {
   font-weight: 500;
 }
 
-.page-with-title-container{
+.page-with-title-container {
   max-width: 1200px;
   margin: 0 auto;
   background-color: var(--background-color);
-  padding-left: 2rem;
+  padding-left: 0rem;
+}
+
+.page-with-title-container > * {
+  margin-left: 2rem;
 }
 
 #homepage-content h3 {
   font-family: "Bitcount Grid Double Ink", monospace;
   font-size: clamp(1rem, 4vw, 3rem);
   font-weight: 400;
+}
+
+h4.cute-header {
+  font-family: "Bitcount Grid Double Ink", monospace;
+  font-size: 2rem;
+  font-weight: 300;
 }
 
 #deck-inputs {
@@ -305,14 +315,17 @@ p {
 }
 
 #command-zone {
+  padding: 5px 20px 15px 20px;
+  transform: translateX(-20px);
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+}
+
+.multiple-cards {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  padding: 20px;
-  gap: 10px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+  gap: 20px;
 }
 
 #game-details {
@@ -321,7 +334,6 @@ p {
 
 .deck-review-container {
   max-width: 1200px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto;
@@ -1241,6 +1253,7 @@ p {
 .debug-section {
   text-align: right;
   width: 100%;
+  color: #666;
 }
 
 .debug-button {

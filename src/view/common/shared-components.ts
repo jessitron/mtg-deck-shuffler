@@ -100,7 +100,10 @@ export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], g
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
+          <h4 class="cute-header">Command Zone</h4>
+          <div class="multiple-cards">
           ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
+          </div>
         </div>`;
 }
 
