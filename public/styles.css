@@ -351,10 +351,9 @@ p {
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto auto auto auto;
   grid-template-areas:
-    "command-zone game-details game-details"
-    "library-section revealed-cards table-section"
-    "hand-section hand-section hand-section"
-    "end-game-actions end-game-actions end-game-actions";
+    "library-section revealed-cards table-section command-zone"
+    "hand-section hand-section hand-section hand-section"
+    "end-game-actions end-game-actions end-game-actions end-game-actions";
   gap: 20px;
   min-height: 600px;
 }

@@ -21,7 +21,9 @@ const cardWidth = magicCardWidth + revealCardsGap;
 export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const revealedCards = game.listRevealed();
 
-  if (revealedCards.length === 0) return "";
+  if (revealedCards.length === 0) {
+    return `<div id="revealed-cards-section" class="revealed-cards-section" ></div>`;
+  }
 
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
