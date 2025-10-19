@@ -369,6 +369,7 @@ p {
   border-radius: 15px;
   background-color: #f9f9f9;
   margin-top: 20px;
+  min-height: 278px;
 }
 
 #revealed-cards-section {
@@ -394,7 +395,7 @@ p {
   grid-template-areas:
     "game-header game-header"
     "command-zone start-game-buttons"
-    "library-section library-section";
+    "library-list library-list";
   justify-content: space-between;
   gap: 10px;
 }
@@ -409,6 +410,10 @@ p {
 
 .deck-review-container #start-game-buttons {
   grid-area: start-game-buttons;
+}
+
+.deck-review-container #library-list {
+  grid-area: library-list;
 }
 
 .game-details {

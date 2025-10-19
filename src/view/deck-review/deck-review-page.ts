@@ -50,7 +50,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
         <button type="submit" class="back-button">Choose Another Deck</button>
       </form>
     </div>
-    <div id="library-section" data-testid="library-section">
+    <div id="library-list" data-testid="library-section">
       <h4 class="cute-header">Library</h4>
       <div class="cute-header-subtitle">
       ${game.listLibrary().length} cards in library, ordered by position
