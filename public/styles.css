@@ -456,9 +456,7 @@ p {
 
 #library-section {
   grid-area: library-section;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-top: 20px;
 }
 
 .library-stack-empty {
@@ -1135,12 +1133,6 @@ p {
 }
 
 .library-card-item {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
-  gap: 16px;
 }
 
 .table-card-item {
@@ -1222,7 +1214,6 @@ p {
 }
 
 .modal-subtitle {
-  margin-bottom: 16px;
   color: #666;
   font-size: 0.9rem;
 }

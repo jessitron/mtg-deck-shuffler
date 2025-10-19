@@ -1,7 +1,6 @@
 import { GameCard, GameState } from "../../GameState.js";
-import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatTitleHtmlFragment } from "../common/shared-components.js";
+import { formatCardContainer, formatCardNameAsModalLink, formatCommandZoneHtmlFragment, formatLibraryCardList, formatTitleHtmlFragment } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
-import { formatModal } from "./deck-info-components.js";
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
@@ -16,34 +15,7 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
   </div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
-function formatLibraryCardList(game: GameState): string {
-  const libraryCards = game.listLibrary();
 
-  return libraryCards
-    .map((gameCard: any) => {
-      return `<li class="library-card-item">
-          <span class="card-position">${gameCard.location.position + 1}</span>
-          <div class="card-info">
-            ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex)}
-          </div>
-        </li>`;
-    })
-    .join("");
-}
-
-export function formatLibraryModalHtml(game: GameState): string {
-  const libraryCards = game.listLibrary();
-  const libraryCardList = formatLibraryCardList(game);
-
-  const bodyContent = `<p class="modal-subtitle">
-          ${libraryCards.length} cards in library, ordered by position
-        </p>
-        <ul class="library-search-list">
-          ${libraryCardList}
-        </ul>`;
-
-  return formatModal("Library Contents", bodyContent);
-}
 
 export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
   return commanders.length == 0
@@ -55,7 +27,7 @@ export function formatCommandersHtmlFragment(commanders: readonly GameCard[], ga
 
 function formatDeckReviewHtmlSection(game: GameState): string {
   const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
-  const libraryCardList = formatLibraryCardList(game);
+  const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId);
 
   return `
   <div id="deck-review-container" class="deck-review-container">
@@ -74,7 +46,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </form>
     </div>
     <div id="library-section" data-testid="library-section">
-      <h3>Library (${game.listLibrary().length})</h3>
+      <h4 class="cute-header">Library</h4>
       <p class="modal-subtitle">
       ${game.listLibrary().length} cards in library, ordered by position
       </p>

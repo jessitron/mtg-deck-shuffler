@@ -95,6 +95,16 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
           </div>`;
 }
 
+export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId: number): string {
+  return libraryCards
+    .map((gameCard: any) => {
+      return `<li class="library-card-item">  
+            ${formatCardNameAsModalLink(gameCard.card.name, gameId, gameCard.gameCardIndex)}
+        </li>`;
+    })
+    .join("");
+}
+
 // Function for displaying commanders when we have GameCard objects (in active game)
 export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
   return commanders.length == 0

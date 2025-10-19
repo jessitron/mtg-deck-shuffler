@@ -1,6 +1,6 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { PersistedGameState } from "../../port-persist-state/types.js";
-import { formatCardNameAsGathererLink, formatCardNameAsModalLink, CardAction } from "../common/shared-components.js";
+import { formatCardNameAsGathererLink, formatCardNameAsModalLink, CardAction, formatLibraryCardList } from "../common/shared-components.js";
 import { getCardImageUrl } from "../../types.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
@@ -54,6 +54,20 @@ export function formatTableModalHtmlFragment(game: GameState): string {
   return formatModalHtmlFragment("Cards on Table", bodyContent);
 }
 
+export function formatLibraryModalHtml(game: GameState): string {
+  const libraryCards = game.listLibrary();
+  const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId);
+
+  const bodyContent = `<div class="modal-subtitle">
+          ${libraryCards.length} cards, alphabetical
+        </div>
+        <ul class="library-search-list">
+          ${libraryCardList}
+        </ul>`;
+
+  return formatModalHtmlFragment("Library Contents", bodyContent);
+}
+
 // Helper function to create modal action button with auto-close
 function formatModalActionButton(
   action: string,
@@ -69,7 +83,7 @@ function formatModalActionButton(
   const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
-  
+
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
                     hx-target="#game-container"
@@ -89,16 +103,18 @@ function formatModalCardActionsForHand(gameId: number, gameCard: GameCard): stri
   ];
 
   return actions
-    .map((action) => formatModalActionButton(
-      action.action,
-      action.endpoint,
-      gameId,
-      gameCard.gameCardIndex,
-      action.title,
-      action.cssClass,
-      gameCard.card.scryfallId,
-      gameCard.currentFace
-    ))
+    .map((action) =>
+      formatModalActionButton(
+        action.action,
+        action.endpoint,
+        gameId,
+        gameCard.gameCardIndex,
+        action.title,
+        action.cssClass,
+        gameCard.card.scryfallId,
+        gameCard.currentFace
+      )
+    )
     .join("");
 }
 
@@ -112,16 +128,18 @@ function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard): 
   ];
 
   return actions
-    .map((action) => formatModalActionButton(
-      action.action,
-      action.endpoint,
-      gameId,
-      gameCard.gameCardIndex,
-      action.title,
-      action.cssClass,
-      gameCard.card.scryfallId,
-      gameCard.currentFace
-    ))
+    .map((action) =>
+      formatModalActionButton(
+        action.action,
+        action.endpoint,
+        gameId,
+        gameCard.gameCardIndex,
+        action.title,
+        action.cssClass,
+        gameCard.card.scryfallId,
+        gameCard.currentFace
+      )
+    )
     .join("");
 }
 
@@ -133,16 +151,18 @@ function formatModalCardActionsForLibrary(gameId: number, gameCard: GameCard): s
   ];
 
   return actions
-    .map((action) => formatModalActionButton(
-      action.action,
-      action.endpoint,
-      gameId,
-      gameCard.gameCardIndex,
-      action.title,
-      action.cssClass,
-      gameCard.card.scryfallId,
-      gameCard.currentFace
-    ))
+    .map((action) =>
+      formatModalActionButton(
+        action.action,
+        action.endpoint,
+        gameId,
+        gameCard.gameCardIndex,
+        action.title,
+        action.cssClass,
+        gameCard.card.scryfallId,
+        gameCard.currentFace
+      )
+    )
     .join("");
 }
 
@@ -180,9 +200,10 @@ function getModalCardActionsByLocation(gameCard: GameCard, gameId: number): stri
 
 export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number): string {
   const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
-  const gathererUrl = gameCard.card.multiverseid === 0
-    ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
-    : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
+  const gathererUrl =
+    gameCard.card.multiverseid === 0
+      ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
+      : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
 
   // Utility buttons (Gatherer, Copy, Flip)
   let utilityButtons = `<div class="card-modal-utility-buttons">
@@ -203,9 +224,7 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number):
 
   // Location-specific action buttons
   const locationActions = getModalCardActionsByLocation(gameCard, gameId);
-  const locationActionsHtml = locationActions 
-    ? `<div class="card-modal-location-actions">${locationActions}</div>` 
-    : "";
+  const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
   const actionButtons = `<div class="card-modal-actions">
     ${utilityButtons}
@@ -245,9 +264,5 @@ function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
 }
 
 export function formatLossModalHtmlFragment(): string {
-  return formatModalHtmlFragment(
-    "☠️ You Lose! ☠️",
-    `<p class="modal-message">You tried to draw from an empty library!</p>`
-  );
+  return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);
 }
-
