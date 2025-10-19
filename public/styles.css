@@ -808,6 +808,7 @@ p {
 #end-game-actions {
   display: flex;
   gap: 20px;
+  padding-right: 20px;
 }
 
 .game-actions button {
