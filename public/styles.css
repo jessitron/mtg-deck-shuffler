@@ -469,21 +469,6 @@ p {
   background-color: #5a6268;
 }
 
-.history-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: 1px solid #6c757d;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #6c757d;
-  color: white;
-  transition: background-color 0.2s;
-}
-
-.history-button:hover {
-  background-color: #5a6268;
-}
-
 .event-undo {
   color: #6c757d;
 }
@@ -814,14 +799,11 @@ p {
 
 #end-game-actions {
   grid-area: end-game-actions;
-  text-align: center;
-  padding: 20px;
 }
 
 #end-game-actions {
   display: flex;
   gap: 20px;
-  justify-content: center;
 }
 
 .game-actions button {
@@ -832,6 +814,10 @@ p {
   cursor: pointer;
   background-color: #6c757d;
   color: white;
+}
+
+.game-actions button:hover {
+  background-color: #5a6268;
 }
 
 /* Modal Styles */
@@ -1274,6 +1260,7 @@ p {
   align-items: center;
   gap: 12px;
   margin-bottom: 8px;
+  flex-grow: 1;
 }
 
 .undo-button {

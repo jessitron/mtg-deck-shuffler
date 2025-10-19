@@ -18,25 +18,24 @@ function formatGameHistoryFragment(game: GameState): string {
     .reverse()
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
-  return `
-        <div class="history">
-          ${
-            mostRecentUndoableEvent
-              ? `<div class="undo-controls"> Last action:
-              ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}
-              <button class="undo-button"
-                      hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
-                      hx-target="#game-container"
-                      hx-swap="outerHTML"
-                      class="undo-button">Undo</button>
-            </div>`
-              : "<p>No actions to undo</p>"
-          }
-          <button class="history-button"
+  const historyButton = ` <button class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
-                  hx-swap="innerHTML">View History (${eventLog.getEvents().length})</button>
-      </div>`;
+                  hx-swap="innerHTML">View History (${eventLog.getEvents().length})</button>`;
+
+  if (!mostRecentUndoableEvent) {
+    return historyButton;
+  }
+
+  return `<div class="undo-controls">
+            ${historyButton}
+            <button class="undo-button"
+              hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
+              hx-target="#game-container"
+              hx-swap="outerHTML"
+              class="undo-button">Undo</button>
+            <span class="event-description">Last action: ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</span>
+          </div>`;
 }
 
 function formatGameActionsHtmlFragment(game: GameState): string {
@@ -53,12 +52,15 @@ function formatGameActionsHtmlFragment(game: GameState): string {
       <input type="hidden" name="game-id" value="${game.gameId}" />
       <button type="submit">Choose Another Deck</button>
     </form>
-    ${formatDebugButtonHtmlFragment(game.gameId)}
   </div>`;
 }
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
+  const debugSection = `<div class="debug-section">
+      ${formatDebugButtonHtmlFragment(game.gameId)}
+      <p class="game-id">Game ID: ${game.gameId}</p>
+    </div>`;
   const gameHeader = `<div id="game-header" class="game-header">
       <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
     </div>`;
@@ -68,9 +70,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       ${gameContent}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>
-      <div class="debug-section">
-      <p class="game-id">Game ID: ${game.gameId}</p>
-    </div>
+      ${debugSection}
     </div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
