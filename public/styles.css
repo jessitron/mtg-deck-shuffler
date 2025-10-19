@@ -45,6 +45,7 @@ h1 {
 .page-with-title-container > *,
 .page-container > * {
   margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .page-container {
@@ -348,23 +349,31 @@ p {
 /* Game Layout Styles - Grid Layout */
 #game-container {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 230px auto fit-content(33%);
   grid-template-areas:
-    "library-section revealed-cards table-section command-zone"
-    "hand-section hand-section hand-section hand-section"
-    "end-game-actions end-game-actions end-game-actions end-game-actions";
+    "library-section revealed-cards command-zone"
+    "library-section revealed-cards table-section"
+    "hand-section hand-section hand-section"
+    "end-game-actions end-game-actions end-game-actions";
   gap: 20px;
   min-height: 600px;
 }
 
-#command-zone {
+#command-zone,
+#library-section,
+#revealed-cards-section,
+#hand-section {
   padding: 5px 20px 15px 20px;
   transform: translateX(-20px);
   border: 1px solid #ddd;
   border-radius: 15px;
   background-color: #f9f9f9;
   margin-top: 20px;
+}
+
+#revealed-cards-section {
+  background-color: inherit;
+  border: none;
 }
 
 .multiple-cards {
@@ -486,7 +495,7 @@ p {
 
 #library-section {
   grid-area: library-section;
-  margin-top: 20px;
+  width: 250px;
 }
 
 .library-stack-empty {
@@ -498,14 +507,11 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  justify-items: center;
-  margin-top: 20px;
   max-width: 200px;
 }
 
 .library-buttons-single {
   display: flex;
-  justify-content: center;
   gap: 10px;
   margin-top: 20px;
   max-width: 200px;
@@ -572,9 +578,8 @@ p {
 
 .revealed-cards-section {
   padding: 20px;
-  min-width: 300px;
-  min-height: 200px;
   display: flex;
+  min-width: 300px;
   flex-direction: column;
   grid-area: revealed-cards;
 }
@@ -582,8 +587,7 @@ p {
 .revealed-cards-area {
   display: flex;
   gap: 10px;
-  direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin-top: 10px;
   overflow: scroll;
 }
@@ -646,22 +650,16 @@ p {
 
 #hand-section {
   grid-area: hand-section;
-  border: 2px solid #333;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: white;
-  min-height: 320px;
-  overflow-x: auto;
+  overflow-x: visible;
+  padding-left: 30px;
 }
 
 .hand-cards {
   display: flex;
-  gap: 15px;
+  gap: 0px;
   justify-content: flex-start;
-  margin-top: 15px;
   flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  overflow-x: visible;
 }
 
 /* Drag-and-drop styling */
@@ -672,13 +670,15 @@ p {
 }
 
 .hand-drop-zone {
-  width: 20px;
+  width: 80px;
+  margin: 0 -35px;
   min-width: 20px;
   height: 278px;
   border-radius: 5px;
   transition: all 0.2s ease;
   flex-shrink: 0;
   z-index: 10;
+  overflow: visible;
 }
 
 .hand-drop-zone.drag-over {
@@ -1161,6 +1161,8 @@ p {
   list-style: none;
   padding: 0;
   margin: 0;
+  columns: auto;
+  column-width: 300px;
 }
 
 .library-card-item {
@@ -1269,7 +1271,6 @@ p {
 
 .debug-section {
   text-align: right;
-  width: 100%;
   color: #666;
 }
 
@@ -1340,6 +1341,8 @@ p {
   height: 280px;
   perspective: 1000px;
   text-align: left;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .library-card-back {

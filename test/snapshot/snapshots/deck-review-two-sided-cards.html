@@ -25,11 +25,11 @@ provideOneLinkToHoneycomb: true,
 <h1 class="homepage-title">MTG Deck Shuffler</h1>
 <div id="deck-review-container" class="deck-review-container">
 <div id="game-header" class="game-header">
-<h2>Jaceteous League</h2>
-<p>from <a href="https://archidekt.com/decks/75009" target="_blank">archidekt</a></p>
-<p class="game-id">Game ID: 789</p>
+<span class="game-name">Jaceteous League</span> from <a href="https://archidekt.com/decks/75009" target="_blank">archidekt</a>
 </div>
 <div id="command-zone">
+<h4 class="cute-header">Command Zone</h4>
+<div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
 hx-get="/card-modal/789/3"
 hx-target="#card-modal-container"
@@ -46,6 +46,7 @@ style="cursor: pointer;">
 </div>
 </div>
 </div>
+</div>
 <div id="start-game-buttons" class="deck-actions">
 <form method="post" action="/start-game" class="inline-form">
 <input type="hidden" name="game-id" value="789" />
@@ -53,84 +54,66 @@ style="cursor: pointer;">
 </form>
 <form method="post" action="/end-game" class="inline-form">
 <input type="hidden" name="game-id" value="789" />
-<button type="submit">Choose Another Deck</button>
+<button type="submit" class="back-button">Choose Another Deck</button>
 </form>
 </div>
 <div id="library-section" data-testid="library-section">
-<h3>Library (7)</h3>
-<p class="modal-subtitle">
+<h4 class="cute-header">Library</h4>
+<div class="cute-header-subtitle">
 7 cards in library, ordered by position
-</p>
+</div>
 <ul class="library-search-list">
-<li class="library-card-item">
-<span class="card-position">1</span>
-<div class="card-info">
+<li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/0"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Carth the Lion</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">2</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/1"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Dakkon, Shadow Slayer</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">3</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/2"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Damnation</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">4</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/4"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Homeward Path</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">5</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/5"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Lae'zel, Vlaakith's Champion</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">6</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/6"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Miku, the Renowned</span>
-</div>
-</li><li class="library-card-item">
-<span class="card-position">7</span>
-<div class="card-info">
+</li><li class="library-card-item">  
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/7"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</span>
-</div>
 </li>
 </ul>
 </div>
 </div>
+<div class="debug-section">
+<p class="game-id">Game ID: 789</p>
 </div>
 <div id="card-modal-container"></div>
+</div>
 <footer>
 <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
 </footer>

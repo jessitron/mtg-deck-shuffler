@@ -5,6 +5,8 @@ hx-get="/game-section/789"
 hx-target="#game-container"
 hx-swap="outerHTML">
 <div id="command-zone">
+<h4 class="cute-header">Command Zone</h4>
+<div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
 hx-get="/card-modal/789/3"
 hx-target="#card-modal-container"
@@ -21,35 +23,13 @@ style="cursor: pointer;">
 </div>
 </div>
 </div>
-<div id="game-details" class="game-details game-active">
-<div class="game-header">
-<h2><a href="https://archidekt.com/decks/75009" target="_blank">Jaceteous League</a></h2>
-<p class="game-id"><strong>Game ID:</strong> 789</p>
-</div>
-<div><p>8 cards</p>
-<p><strong>Status:</strong> Active</p>
-</div>
-<div class="history">
-<div class="undo-controls"> Last action:
-<span class="event-description  event-move-card">Draw: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a></span>
-<button class="undo-button"
-hx-post="/undo/789/8"
-hx-target="#game-container"
-hx-swap="outerHTML"
-class="undo-button">Undo</button>
-</div>
-<button class="history-button"
-hx-get="/history-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">View History (9)</button>
-</div>
 </div>
 <div id="library-section" data-testid="library-section">
-<h3>Library (0)</h3>
+<h4 class="cute-header">Library</h4>
 <div class="library-stack library-stack-empty" data-testid="library-stack">
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="0 cards"/>
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
 </div>
 <div class="library-buttons">
 <button class="search-button"
@@ -69,15 +49,15 @@ disabled
 >Reveal</button>
 </div>
 </div>
+<div id="revealed-cards-section" class="revealed-cards-section" ></div>
 <div id="table-section" class="table-section">
 <button class="table-cards-button"
 hx-get="/table-modal/789"
 hx-target="#modal-container"
 hx-swap="innerHTML">0 Cards on table</button>
-<img src="/table.png" alt="Table" class="table-image" />
 </div>
 <div id="hand-section" data-testid="hand-section">
-<h3>Hand (7)</h3>
+<h4 class="cute-header">Hand</h4>
 <div id="hand-cards" class="hand-cards">
 <div class="hand-drop-zone" data-hand-position="0"></div><div id="card-0-container" class="card-container clickable-card "
 draggable="true"
@@ -147,6 +127,19 @@ style="cursor: pointer;">
 </div>
 </div>
 <div id="end-game-actions" class="game-actions">
+<div class="undo-controls">
+<button class="history-button"
+hx-get="/history-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">View History (9)</button>
+<button class="undo-button"
+hx-post="/undo/789/8"
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">Undo</button>
+<span class="event-description">Last action: 
+<span class="event-description  event-move-card">Draw: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a></span></span>
+</div>
 <form method="post" action="/restart-game" class="inline-form">
 <input type="hidden" name="game-id" value="789" />
 <button type="submit">Restart Game</button>
@@ -155,10 +148,5 @@ style="cursor: pointer;">
 <input type="hidden" name="game-id" value="789" />
 <button type="submit">Choose Another Deck</button>
 </form>
-<button class="debug-button"
-hx-get="/debug-state/789"
-hx-target="#modal-container"
-hx-swap="innerHTML"
-class="debug-button">Debug State</button>
 </div>
 </div>

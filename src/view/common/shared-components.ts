@@ -152,14 +152,14 @@ export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardInde
   return "";
 }
 
-export function formatLibraryStack(whatHappened: WhatHappened = {}, isEmpty: boolean = false): string {
+export function formatLibraryStack(whatHappened: WhatHappened = {}, cardCount: number): string {
   const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
-  const emptyClass = isEmpty ? " library-stack-empty" : "";
+  const emptyClass = cardCount === 0 ? " library-stack-empty" : "";
 
   return `<div class="library-stack${shufflingClass}${emptyClass}" data-testid="library-stack">
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="${cardCount} cards"/>
           <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
         </div>`;
 }
 

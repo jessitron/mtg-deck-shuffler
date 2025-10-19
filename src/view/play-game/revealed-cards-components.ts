@@ -32,10 +32,8 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
     })
     .join("");
 
-  const widthToShowAllCards = revealedCards.length * cardWidth;
-
-  return `<div id="revealed-cards-section" class="revealed-cards-section" style="min-width: ${widthToShowAllCards}px;">
-      <h3>Revealed Cards (${revealedCards.length})</h3>
+  return `<div id="revealed-cards-section" class="revealed-cards-section" >
+      <h4 class="cute-header">Revealed</h4>
       <div id="revealed-cards-area" class="revealed-cards-area">
         ${revealedCardsArea}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}

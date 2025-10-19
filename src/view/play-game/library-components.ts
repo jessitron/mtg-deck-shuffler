@@ -1,11 +1,10 @@
 import { GameState, WhatHappened } from "../../GameState.js";
-import { CARD_BACK, formatLibraryStack } from "../common/shared-components.js";
+import { formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
-  const isEmpty = game.listLibrary().length === 0;
   return `<div id="library-section" data-testid="library-section">
-        <h3>Library (${game.listLibrary().length})</h3>
-        ${formatLibraryStack(whatHappened, isEmpty)}
+        <h4 class="cute-header">Library</h4>
+        ${formatLibraryStack(whatHappened, game.listLibrary().length)}
         <div class="library-buttons">
           <button class="search-button"
                   hx-get="/library-modal/${game.gameId}"
@@ -20,13 +19,14 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
                   hx-target="#game-container"
                   hx-swap="outerHTML">Draw</button>
           <button class="reveal-button"
-                  ${game.listLibrary().length > 0
-                    ? `hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"
+                  ${
+                    game.listLibrary().length > 0
+                      ? `hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"
                        hx-target="#game-container"
                        hx-swap="outerHTML"`
-                    : 'disabled'}
+                      : "disabled"
+                  }
                   >Reveal</button>
         </div>
       </div>`;
 }
-

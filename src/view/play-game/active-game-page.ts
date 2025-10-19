@@ -100,7 +100,6 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
           hx-get="/table-modal/${game.gameId}"
           hx-target="#modal-container"
           hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
-        <img src="/table.png" alt="Table" class="table-image" />
       </div>
 
       ${handSectionHtml}
