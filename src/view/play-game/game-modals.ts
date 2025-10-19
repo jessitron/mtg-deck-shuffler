@@ -99,7 +99,6 @@ function formatModalActionButton(
 function formatModalCardActionsForHand(gameId: number, gameCard: GameCard): string {
   const actions: CardAction[] = [
     { action: "Play", endpoint: "/play-card", title: "Copy image and remove from hand", cssClass: "modal-action-button play-button" },
-    { action: "Put down", endpoint: "/put-down", title: "Move card to revealed", cssClass: "modal-action-button put-down-button" },
     { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "modal-action-button put-on-top-button" },
     { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "modal-action-button put-on-bottom-button" },
   ];
