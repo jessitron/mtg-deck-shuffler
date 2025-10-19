@@ -16,6 +16,7 @@ body {
   --background-color: #f0f0f0;
   --cta-button-color: #269329;
   --cute-heading-color: #9134d2;
+  --back-button-color: #6c757d;
 }
 
 footer {
@@ -281,20 +282,18 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 20px;
 }
 
 .deck-actions button {
   padding: 10px 20px;
   font-size: 1rem;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .deck-actions button.start-game-button {
-  background-color: #4caf50;
+  background-color: var(--cta-button-color);
   color: white;
   padding: 20px;
   font-weight: bold;
@@ -302,9 +301,41 @@ p {
   border: 2px solid #075b0a;
 }
 
-.deck-actions button {
-  background-color: #f44336;
+.deck-actions button.start-game-button:hover {
+  outline: 4px solid rgba(231, 121, 206, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-actions button.start-game-button:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transform: skewX(45deg);
+  background: linear-gradient(90deg, transparent, rgba(231, 121, 206, 0.5), transparent);
+  animation: shimmer 0.8s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.deck-actions button.back-button {
+  background-color: var(--back-button-color);
   color: white;
+  border: none;
+}
+
+.deck-actions button.back-button:hover {
+  background-color: #5a6268;
 }
 
 /* Game Layout Styles - Grid Layout */

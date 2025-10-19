@@ -47,7 +47,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
       </form>
       <form method="post" action="/end-game" class="inline-form">
         <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button type="submit">Choose Another Deck</button>
+        <button type="submit" class="back-button">Choose Another Deck</button>
       </form>
     </div>
     <div id="library-section" data-testid="library-section">
