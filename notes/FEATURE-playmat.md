@@ -26,12 +26,12 @@ Simulate the physical MTG playmat experience by allowing players to select and d
 ## Recommendations
 
 ### Playmat Storage
-- Store playmat images in `public/images/playmats/`
-- Use descriptive filenames (e.g., `forest-landscape.jpg`, `starfield.jpg`)
-- Consider multiple resolutions or SVG for scalability
+- Store playmat URL as string in GameState
+- Initial dropdown will offer 3-5 curated image URLs
+- Future: allow custom URL input field
 
 ### State Management
-- Add `playmathId?: string` to GameState
+- Add `playmatUrl?: string` to GameState
 - Default to null/undefined (no custom background)
 - Include in PersistedGameState schema
 
@@ -49,7 +49,7 @@ Start with 3-5 curated options:
 - "None" option for default white/clean background
 
 ### Future Enhancements
-- Custom image upload
+- Custom URL input field (allow users to specify their own image URL)
 - Preview before selection
 - Per-zone backgrounds (battlefield, graveyard, exile)
-- Community playmat sharing
+- Validation/error handling for invalid URLs
