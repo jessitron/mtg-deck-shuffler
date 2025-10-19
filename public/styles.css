@@ -42,8 +42,15 @@ h1 {
   padding-left: 0rem;
 }
 
-.page-with-title-container > * {
+.page-with-title-container > *,
+.page-container > * {
   margin-left: 2rem;
+}
+
+.page-container {
+  max-width: 1800px;
+  margin: 0 auto;
+  background-color: var(--background-color);
 }
 
 #homepage-content h3 {
@@ -358,6 +365,7 @@ p {
   border: 1px solid #ddd;
   border-radius: 15px;
   background-color: #f9f9f9;
+  margin-top: 20px;
 }
 
 .multiple-cards {

@@ -8,8 +8,7 @@ import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
 
-function formatGameDetailsHtmlFragment(game: GameState): string {
-  const cardCountInfo = `${game.totalCards} cards`;
+function formatGameHistoryFragment(game: GameState): string {
   const eventLog = game.getEventLog();
 
   // Find the most recent undoable event
@@ -19,14 +18,7 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
     .reverse()
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
-  return `<div id="game-details" class="game-details game-active">
-        <div class="game-header">
-          <h2><a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckName}</a></h2>
-          <p class="game-id"><strong>Game ID:</strong> ${game.gameId}</p>
-        </div>
-        <div><p>${cardCountInfo}</p>
-        <p><strong>Status:</strong> ${game.gameStatus()}</p>
-        </div>
+  return `
         <div class="history">
           ${
             mostRecentUndoableEvent
@@ -44,37 +36,47 @@ function formatGameDetailsHtmlFragment(game: GameState): string {
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">View History (${eventLog.getEvents().length})</button>
-        </div>
       </div>`;
 }
 
 function formatGameActionsHtmlFragment(game: GameState): string {
-  return `<div id="end-game-actions" class="game-actions">
-        <form method="post" action="/restart-game" class="inline-form">
-          <input type="hidden" name="game-id" value="${game.gameId}" />
-          <button type="submit">Restart Game</button>
-        </form>
-        <form method="post" action="/end-game" class="inline-form">
-          <input type="hidden" name="game-id" value="${game.gameId}" />
-          <button type="submit">Choose Another Deck</button>
-        </form>
-        ${formatDebugButtonHtmlFragment(game.gameId)}
-      </div>`;
+  const history = formatGameHistoryFragment(game);
+
+  return `
+  <div id="end-game-actions" class="game-actions">
+    ${history}
+    <form method="post" action="/restart-game" class="inline-form">
+      <input type="hidden" name="game-id" value="${game.gameId}" />
+      <button type="submit">Restart Game</button>
+    </form>
+    <form method="post" action="/end-game" class="inline-form">
+      <input type="hidden" name="game-id" value="${game.gameId}" />
+      <button type="submit">Choose Another Deck</button>
+    </form>
+    ${formatDebugButtonHtmlFragment(game.gameId)}
+  </div>`;
 }
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  const contentWithModal = `${gameContent}
-    <!-- Modal Container for library/table modals -->
-    <div id="modal-container"></div>
-    <!-- Separate Modal Container for card modals (higher z-index) -->
-    <div id="card-modal-container"></div>`;
+  const gameHeader = `<div id="game-header" class="game-header">
+      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
+    </div>`;
+  const contentWithModal = `
+    <div class="page-container">
+      ${gameHeader}
+      ${gameContent}
+      <div id="modal-container"></div>
+      <div id="card-modal-container"></div>
+      <div class="debug-section">
+      <p class="game-id">Game ID: ${game.gameId}</p>
+    </div>
+    </div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened): string {
   const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
-  const gameDetailsHtml = formatGameDetailsHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
@@ -88,7 +90,6 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-target="#game-container"
            hx-swap="outerHTML">
         ${commanderImageHtml}
-      ${gameDetailsHtml}
 
       ${librarySectionHtml}
 
