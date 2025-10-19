@@ -28,7 +28,7 @@ export function formatCardNameAsModalLink(cardName: string, gameId: number, card
 
 type CardRenderOptions = {
   gameCard: GameCard;
-  gameId: number; // TODO: not optional (although it's only used for two-faced cards)
+  gameId: number;
   actions?: string;
   whatHappened?: WhatHappened;
   draggable?: boolean;

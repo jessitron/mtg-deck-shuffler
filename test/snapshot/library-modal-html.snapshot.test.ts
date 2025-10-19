@@ -1,10 +1,10 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatLibraryModalHtml } from "../../src/view/deck-review/deck-review-page.js";
 import { GameState } from "../../src/GameState.js";
 import { Deck } from "../../src/types.js";
 import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
+import { formatLibraryModalHtml } from "../../src/view/play-game/game-modals.js";
 
 describe("Library Modal HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
