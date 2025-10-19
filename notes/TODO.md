@@ -63,5 +63,5 @@ an example from claude desktop:
 - local deck retrieved: the JSON of the local deck is not what I want to link to. Make a link separate from the name, and note the retrieved date next to it, but point it to the deck definition in Archidekt if that's where it came from. There's a deck source inside the local deck that it reads in... it's like a source of the source, oh dear
 
 - it is physically possible for your commander to be in your library or hand. shit.
-
+    
 - give the commander a play button; make it translucent in the command zone when it's also on the table. Count the number of times it's been played, that's handy to track.
