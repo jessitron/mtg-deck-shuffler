@@ -8,7 +8,7 @@ function formatArchidektInputHtmlFragment() {
         <label for="deck-number" class="deck-label">Or play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
         <input type="text" id="deck-number" name="deck-number"placeholder="deck number" />
         <input type="hidden" name="deck-source" value="archidekt" />
-        <button type="submit" class="lets-play-button">Load Deck</button>
+        <button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
       </form>
 `;
 }

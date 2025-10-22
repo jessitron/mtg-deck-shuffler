@@ -157,6 +157,7 @@ document.addEventListener("htmx:afterSwap", function (evt) {
 // Also set up on initial page load
 document.addEventListener("DOMContentLoaded", function () {
   setupHandCardDragAndDrop();
+  setupDeckNumberValidation();
 });
 
 function setupHandCardDragAndDrop() {
@@ -245,4 +246,30 @@ function handleDrop(e) {
   }
 
   return false;
+}
+
+/**
+ * Deck number validation for Load Deck button
+ */
+function setupDeckNumberValidation() {
+  const deckNumberInput = document.getElementById("deck-number");
+  const loadDeckButton = document.getElementById("load-deck-button");
+
+  if (deckNumberInput && loadDeckButton) {
+    // Function to check if input has value and enable/disable button
+    function validateDeckNumber() {
+      const hasValue = deckNumberInput.value.trim().length > 0;
+      loadDeckButton.disabled = !hasValue;
+    }
+
+    // Check on input events
+    deckNumberInput.addEventListener("input", validateDeckNumber);
+    deckNumberInput.addEventListener("paste", function () {
+      // Use setTimeout to check after paste content is processed
+      setTimeout(validateDeckNumber, 0);
+    });
+
+    // Initial check
+    validateDeckNumber();
+  }
 }
