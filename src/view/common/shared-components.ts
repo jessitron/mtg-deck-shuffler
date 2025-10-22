@@ -6,7 +6,9 @@ export const CARD_BACK = "/mtg-card-back.jpg";
 const app_title = "MTG Deck Shuffler";
 
 export function formatTitleHtmlFragment(): string {
-  return `<h1 class="homepage-title">${app_title}</h1>`;
+  return `<div class="title-container">
+      <h1 class="homepage-title">${app_title}</h1>
+      </div>`;
 }
 
 export function formatCardNameAsGathererLink(card: { name: string; multiverseid: number; oracleCardName?: string }): string {
@@ -147,4 +149,3 @@ export type CardAction = {
   title: string;
   cssClass?: string;
 };
-

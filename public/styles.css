@@ -14,9 +14,11 @@ body {
 :root {
   --dark-background-color: #e0e0e0;
   --background-color: #f0f0f0;
+  --contrasting-color: #690a7a;
   --cta-button-color: #269329;
   --cute-heading-color: #9134d2;
   --back-button-color: #6c757d;
+  --fancy-title-font: "Rampart One", monospace;
 }
 
 footer {
@@ -25,12 +27,21 @@ footer {
 }
 
 h1 {
-  color: #333;
   font-size: 2rem;
 }
 
+.page-with-title-container .title-container {
+  background-color: var(--contrasting-color);
+  color: white;
+  margin-left: -100rem;
+  padding-left: 102rem;
+  margin-right: -100rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .homepage-title {
-  font-family: "Bitcount Grid Double Ink", monospace;
+  font-family: var(--fancy-title-font);
   font-size: clamp(1.5rem, 6vw, 4rem);
   font-weight: 500;
 }
@@ -54,14 +65,46 @@ h1 {
   background-color: var(--background-color);
 }
 
-#homepage-content h3 {
-  font-family: "Bitcount Grid Double Ink", monospace;
+.expository-text-container {
+  background-color: var(--contrasting-color);
+  color: white;
+  margin: 0;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-right: 2rem;
+}
+
+.expository-text {
+  max-width: 600px;
+}
+
+.expository-text p {
+  text-align: justify;
+}
+
+.expository-text h3 {
+  font-family: var(--fancy-title-font);
   font-size: clamp(1rem, 4vw, 3rem);
   font-weight: 400;
+  padding-bottom: 1rem;
+}
+
+.expository-text p:last-child {
+  margin-bottom: 0;
+}
+
+.slogan h1 {
+  font-family: var(--fancy-title-font);
+  text-align: justify;
+  font-weight: 500;
+  color: var(--contrasting-color);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 h4.cute-header {
-  font-family: "Bitcount Grid Double Ink", monospace;
+  font-family: var(--fancy-title-font);
   font-size: 2rem;
   font-weight: 300;
 }
@@ -77,7 +120,7 @@ h4.cute-header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   margin-top: 40px;
 }
 
@@ -100,6 +143,7 @@ h4.cute-header {
   border-radius: 5px;
   font-size: 1rem;
   margin-bottom: 20px;
+  background: white;
 }
 
 .deck-input-section input:focus,
