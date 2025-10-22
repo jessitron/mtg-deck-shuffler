@@ -6,7 +6,7 @@
 <title>MTG Deck Shuffler</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bitcount+Grid+Double+Ink&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rampart+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css" />
 <script src="/hny.js"></script>
 <script>
@@ -22,7 +22,9 @@ provideOneLinkToHoneycomb: true,
 </head>
 <body>
 <div id="homepage-content" class="page-with-title-container" >
+<div class="title-container">
 <h1 class="homepage-title">MTG Deck Shuffler</h1>
+</div>
 <div id="deck-inputs">
 <form method="POST" action="/deck" class="deck-input-section">
 <label for="local-deck" class="deck-label">Choose a preconstructed deck to play</label>
@@ -31,13 +33,14 @@ provideOneLinkToHoneycomb: true,
 <button type="submit" class="lets-play-button">Play</button>
 </form>
 <form class="deck-input-section" method="POST" action="/deck">
-<label for="deck-number" class="deck-label">Play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
+<label for="deck-number" class="deck-label">Or play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
 <input type="text" id="deck-number" name="deck-number"placeholder="deck number" />
 <input type="hidden" name="deck-source" value="archidekt" />
-<button type="submit" class="lets-play-button">Load Deck</button>
+<button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
 </form>
 </div>
 <div id="modal-container"></div>
+<div class="expository-text-container">
 <div class="expository-text">
 <h3>What does this do?</h3>
 <p> Play Magic, The Gathering remotely with friends -- using any deck!
@@ -57,15 +60,17 @@ My sister and I play this way, and our board winds up looking like this:
 <img src="mural-board.png" class="how-to-mural" alt="a bunch of Magic cards scattered across a white board" />
 <p>
 That picture won't tell you much. We're on voice chat when we play, so we talk through what we're doing. It's fun, because we use fancy lands and tokens. We make little notes on top of the cards as counters or to track effects.
-</p> <p>
-Play any deck, anywhere, with your favorite people!
-</p>
+</p> 
+</div>
+</div>
+<div class="slogan">
+<h1>Play any deck, anywhere, with your favorite people!</h1>
+</div>
 <div class="debug-section">
 <button id="load-state-button" class="debug-button"
 hx-get="/load-state-modal"
 hx-target="#modal-container"
 hx-swap="innerHTML">Load Game State</button>
-</div>
 </div>
 </div>
 <footer>
