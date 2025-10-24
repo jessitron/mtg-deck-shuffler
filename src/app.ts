@@ -4,13 +4,12 @@ import { fileURLToPath } from "url";
 import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage } from "./view/deck-review/deck-review-page.js";
-import { formatGameHtmlSection, formatTableModalHtmlFragment } from "./view/play-game/active-game-page.js";
-import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
-import { formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
+import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -399,7 +398,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
       const game = GameState.fromPersistedGameState(persistedGame);
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error loading game section:", error);
@@ -426,7 +425,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error revealing card:", error);
@@ -451,7 +450,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card in hand:", error);
@@ -482,7 +481,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         "game.cardsRevealed": game.listRevealed().length,
       });
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card down:", error);
@@ -507,7 +506,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card on top:", error);
@@ -532,7 +531,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error putting card on bottom:", error);
@@ -569,7 +568,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         });
         await persistStatePort.save(persistedGameState);
 
-        const html = formatGameHtmlSection(game);
+        const html = formatActiveGameHtmlSection(game);
         res.send(html);
       } catch (error) {
         if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
@@ -618,7 +617,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       await persistStatePort.save(persistedGameState);
 
-      const html = formatGameHtmlSection(game, whatHappened);
+      const html = formatActiveGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error playing card:", error);
@@ -641,7 +640,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const whatHappened = game.shuffle();
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game, whatHappened);
+      const html = formatActiveGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error shuffling library:", error);
@@ -671,7 +670,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const whatHappened = game.moveHandCard(from, to);
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game, whatHappened);
+      const html = formatActiveGameHtmlSection(game, whatHappened);
       res.send(html);
     } catch (error) {
       console.error("Error moving hand card:", error);
@@ -693,7 +692,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       game = game.undo(gameEventIndex);
       await persistStatePort.save(game.toPersistedGameState());
 
-      const html = formatGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
       console.error("Error undoing event:", error);
