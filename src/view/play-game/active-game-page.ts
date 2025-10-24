@@ -18,6 +18,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
     </div>`;
   const contentWithModal = `
+  <div class="playmat"><img src="https://cards.scryfall.io/large/front/3/3/33ea0047-bb86-4908-bb73-902d8db3b6de.jpg?1753551819" alt="MTG Playmat" class="playmat-image" /></div>
     <div class="page-container">
       ${gameHeader}
       ${gameContent}
