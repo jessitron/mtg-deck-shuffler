@@ -42,22 +42,26 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-get="/game-section/${game.gameId}"
            hx-target="#game-container"
            hx-swap="outerHTML">
+
+      <div class="game-top-row">
+        ${librarySectionHtml}
+        ${revealedCardsHtml}
         ${commanderImageHtml}
-
-      ${librarySectionHtml}
-
-      ${revealedCardsHtml}
-
-      <div id="table-section" class="table-section">
-        <button class="table-cards-button"
-          hx-get="/table-modal/${game.gameId}"
-          hx-target="#modal-container"
-          hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+        <div id="table-section" class="table-section">
+          <button class="table-cards-button"
+            hx-get="/table-modal/${game.gameId}"
+            hx-target="#modal-container"
+            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+        </div>
       </div>
 
-      ${handSectionHtml}
+      <div class="game-hand-row">
+        ${handSectionHtml}
+      </div>
 
-      ${gameActionsHtml}
+      <div class="game-actions-row">
+        ${gameActionsHtml}
+      </div>
     </div>`;
 }
 

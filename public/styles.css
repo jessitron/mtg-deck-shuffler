@@ -400,17 +400,29 @@ p {
   background-color: #5a6268;
 }
 
-/* Game Layout Styles - Grid Layout */
+/* Game Layout Styles - Flex Layout */
 #game-container {
-  display: grid;
-  grid-template-columns: 230px auto fit-content(33%);
-  grid-template-areas:
-    "library-section revealed-cards command-zone"
-    "library-section revealed-cards table-section"
-    "hand-section hand-section hand-section"
-    "end-game-actions end-game-actions end-game-actions";
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   min-height: 600px;
+}
+
+/* Top row: library, revealed cards, command zone, and table */
+.game-top-row {
+  display: flex;
+  gap: 20px;
+  min-height: 300px;
+}
+
+/* Hand section as its own row */
+.game-hand-row {
+  display: flex;
+}
+
+/* End game actions as its own row */
+.game-actions-row {
+  display: flex;
 }
 
 #command-zone,
@@ -424,6 +436,11 @@ p {
   background-color: #f9f9f9;
   margin-top: 20px;
   min-height: 278px;
+}
+
+#command-zone {
+  flex-shrink: 0;
+  width: 250px;
 }
 
 #revealed-cards-section {
@@ -502,7 +519,8 @@ p {
 }
 
 #table-section {
-  grid-area: table-section;
+  flex-shrink: 0;
+  width: 33%;
 }
 
 .table-image {
@@ -553,8 +571,8 @@ p {
 }
 
 #library-section {
-  grid-area: library-section;
   width: 250px;
+  flex-shrink: 0;
 }
 
 .library-stack-empty {
@@ -640,7 +658,7 @@ p {
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  grid-area: revealed-cards;
+  flex: 1;
 }
 
 .revealed-cards-area {
@@ -708,7 +726,6 @@ p {
 }
 
 #hand-section {
-  grid-area: hand-section;
   overflow-x: visible;
   padding-left: 30px;
 }
@@ -853,10 +870,6 @@ p {
   overflow-y: auto;
   text-align: left;
   padding-left: 20px;
-}
-
-#end-game-actions {
-  grid-area: end-game-actions;
 }
 
 #end-game-actions {
@@ -1223,9 +1236,6 @@ p {
   margin: 0;
   columns: auto;
   column-width: 300px;
-}
-
-.library-card-item {
 }
 
 .table-card-item {
