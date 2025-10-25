@@ -440,6 +440,7 @@ p {
 
 .cool-command-zone-surround {
   border: 5px outset #4d9f0c;
+  border-radius: 2px;
   padding: 10px;
   min-height: 400px;
   width: 400px;
@@ -453,6 +454,7 @@ p {
 .cool-command-zone-surround .card-container {
   border-color: #9198e5;
   border-width: 7px;
+  border-radius: 2px;
   border-style: inset;
   background-color: #9198e5;
 }
@@ -614,74 +616,10 @@ p {
 .library-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 200px;
-}
-
-.library-buttons-single {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  max-width: 200px;
-}
-
-.library-buttons button,
-.library-buttons-single button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.2s;
-  width: 100%;
-  min-width: 80px;
-}
-
-.search-button {
-  border: 1px solid #007bff;
-  background-color: #007bff;
-  color: white;
-}
-
-.search-button:hover {
-  background-color: #0056b3;
-}
-.draw-button {
-  border: 1px solid #28a745;
-  background-color: #28a745;
-  color: white;
-}
-
-.draw-button:hover {
-  background-color: #218838;
-}
-
-.shuffle-button {
-  border: 1px solid #4b0145;
-  background-color: #b75ac2;
-  color: white;
-}
-
-.shuffle-button:hover {
-  background-color: #a74ac2;
-}
-
-.reveal-button {
-  border: 1px solid #163b97;
-  background-color: #7b74de;
-  color: white;
-}
-
-.reveal-button:hover {
-  background-color: #214273;
-}
-
-.reveal-button:disabled {
-  background-color: #ccc;
-  border-color: #999;
-  color: #666;
-  cursor: not-allowed;
-  opacity: 0.6;
+  gap: 8px;
+  max-width: 216px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .revealed-cards-section {
@@ -706,9 +644,11 @@ p {
   grid-template-rows: 1fr 1fr;
   gap: 8px;
   width: 200px;
+  margin-top: 8px;
 }
 
-.card-buttons button {
+.card-buttons button,
+.library-buttons button {
   padding: 6px 6px;
   font-size: 0.8rem;
   border: 2px outset gray;
@@ -720,7 +660,8 @@ p {
   width: 100%;
 }
 
-.card-buttons button:active {
+.card-buttons button:active,
+.library-buttons button:active {
   border: 2px inset gray;
   transform: translateY(1px);
   background-color: #333;
