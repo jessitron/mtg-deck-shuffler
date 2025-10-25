@@ -16,6 +16,8 @@
 
 - make the command zone colors match the sleeves inner and outer colors
 
+- default colors based on commander image: https://lokeshdhakar.com/projects/color-thief/#api
+
 ## Bugs to fix
 
 - I managed to get it to play the same card twice. This will be fixed by ignoring actions with the wrong previous event ID and making people reload the game.

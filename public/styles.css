@@ -65,6 +65,9 @@ h1 {
   margin: 0 auto;
   background-image: url(https://cards.scryfall.io/png/front/3/3/33ea0047-bb86-4908-bb73-902d8db3b6de.png);
   background-size: cover;
+  border: 5px black solid;
+  box-shadow: 5px 5px black;
+  border-radius: 80px;
 }
 
 .expository-text-container {
@@ -703,11 +706,10 @@ p {
   grid-template-rows: 1fr 1fr;
   gap: 8px;
   width: 200px;
-  justify-items: center;
 }
 
 .card-buttons button {
-  padding: 6px 12px;
+  padding: 6px 6px;
   font-size: 0.8rem;
   border: 2px outset gray;
   border-radius: 4px;
@@ -715,35 +717,12 @@ p {
   color: white;
   background-color: black;
   transition: all 0.2s ease;
-  white-space: nowrap;
-  min-width: 80px;
+  width: 100%;
 }
 
 .put-in-hand-button {
   background-color: #28a745;
   border: 1px solid #28a745;
-}
-
-.put-in-hand-button:hover {
-  background-color: #218838;
-}
-
-.put-on-top-button {
-  background-color: #007bff;
-  border: 1px solid #007bff;
-}
-
-.put-on-top-button:hover {
-  background-color: #0056b3;
-}
-
-.put-on-bottom-button {
-  background-color: #6c757d;
-  border: 1px solid #6c757d;
-}
-
-.put-on-bottom-button:hover {
-  background-color: #5a6268;
 }
 
 #hand-section {
