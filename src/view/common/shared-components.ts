@@ -113,12 +113,12 @@ export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], t
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
     <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
-          <div class="game-title">${title}</div>
-          <div class="multiple-cards">
-          ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
-          </div>
-          </div>
-        </div>`;
+        <div class="game-title"><p>${title}</p></div>
+      <div class="multiple-cards">
+        ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
+      </div>
+      </div>
+    </div>`;
 }
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
   if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {

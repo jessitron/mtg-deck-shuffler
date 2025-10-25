@@ -6,7 +6,6 @@ import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js"
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
-import { getCardImageUrl } from "../../types.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
@@ -28,7 +27,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const title = `
       <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
 `;
-  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), title, game.gameId);
+  const commandZoneHtml = formatCommandZoneHtmlFragment(game.listCommanders(), title, game.gameId);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
@@ -48,13 +47,11 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-target="#game-container"
            hx-swap="outerHTML">
 
+           ${tableSectionHtml}
       <div class="game-top-row">
         ${librarySectionHtml}
-        <div class="revealed-and-table">
-        ${tableSectionHtml}
         ${revealedCardsHtml}
-        </div>
-        ${commanderImageHtml}
+        ${commandZoneHtml}
        
       </div>
 

@@ -448,18 +448,20 @@ p {
   min-height: 400px;
   width: 400px;
   background: repeating-linear-gradient(30deg, var(--playmat-one), var(--playmat-two), var(--playmat-one) 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .cool-commander-zone-surround.two-commanders {
   width: 700px;
 }
 
-.cool-command-zone-surround .card-container {
-  border-color: var(--playmat-two);
-  border-width: 7px;
-  border-radius: 2px;
-  border-style: inset;
-  background-color: var(--playmat-two);
+.cool-command-zone-surround .game-title {
+  background-color: #9198e5;
+  border: 3px groove #9198e5;
+  padding: 3px 5px 3px 5px;
+  min-height: 4rem;
 }
 
 .cool-command-zone-surround .multiple-cards {
@@ -470,11 +472,12 @@ p {
   gap: 20px;
 }
 
-.cool-command-zone-surround .game-title {
-  background-color: #9198e5;
-  border: 3px groove #9198e5;
-  margin-bottom: 5px;
-  padding: 3px 5px 3px 5px;
+.cool-command-zone-surround .card-container {
+  border-color: var(--playmat-two);
+  border-width: 7px;
+  border-radius: 2px;
+  border-style: inset;
+  background-color: var(--playmat-two);
 }
 
 #command-zone {
@@ -548,15 +551,6 @@ p {
   margin: 0;
   text-align: right;
   flex: 1;
-}
-
-.revealed-and-table {
-  flex-shrink: 0;
-  flex-grow: 1;
-  width: 33%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .table-image {
@@ -679,7 +673,7 @@ p {
   display: flex;
   gap: 0px;
   justify-content: flex-start;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   overflow-x: visible;
 }
 
