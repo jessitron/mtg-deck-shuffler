@@ -14,8 +14,6 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       ${formatDebugButtonHtmlFragment(game.gameId)}
       <p class="game-id">Game ID: ${game.gameId}</p>
     </div>`;
-  const playmatImage = getCardImageUrl("33ea0047-bb86-4908-bb73-902d8db3b6de", "png", "front");
-  const playmatDivAttempt = `<div class="playmat"><img src="${playmatImage}" alt="MTG Playmat" class="playmat-image" /></div>`;
   const gameHeader = `<div id="game-header" class="game-header">
       <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
     </div>`;

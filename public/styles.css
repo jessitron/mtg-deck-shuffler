@@ -1499,27 +1499,3 @@ p {
 .library-stack.shuffling .library-card-back:nth-child(3) {
   animation: shuffle-card-3 1.5s ease-in-out;
 }
-
-.playmat {
-  position: absolute;
-  x: 0;
-  y: 0;
-  background-size: cover;
-  border-radius: 30px;
-  box-shadow: 5px 5px black;
-  border: 5px black solid;
-  z-index: 0;
-  overflow: clip;
-  min-width: 99vh;
-  min-height: 99vw;
-  aspect-ratio: 1.4 / 1;
-}
-
-.playmat img {
-  width: 100%;
-  transform-origin: top left;
-  transform: rotate(90deg) translateX(100%);
-  aspect-ratio: 1 / 1.4;
-  min-width: 99vh;
-  min-height: 99vw;
-}
