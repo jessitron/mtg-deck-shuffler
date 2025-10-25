@@ -1,6 +1,22 @@
 # Things to change
 
-- make the Load Deck button not work if I haven't entered a deck number.
+## Design of the game page.
+
+- make the command zone hold still??
+
+- move the Cards on Table to the center. Make Revealed cards move that up or something
+
+- make the command zone look like it has one of those etsy command zone things around it
+
+- take away the library and hand boxes
+
+- make the hand drop zones into circles or something else nicer
+
+- put the title somewhere else. In the command zone?
+
+- move the 'restart' and 'choose another deck' buttons out of the playmat
+
+- move the debug stuff out of the playmat
 
 ## Bugs to fix
 
