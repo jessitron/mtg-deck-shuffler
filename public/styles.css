@@ -441,22 +441,6 @@ p {
 #command-zone {
   flex-shrink: 0;
   width: 250px;
-  /* Raised platform effect */
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid #d0d0d0;
-  position: relative;
-  transform: translateX(-20px) translateY(-5px);
-}
-
-/* Enhanced elevation for cards in command zone */
-#command-zone .card-container {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-#command-zone .mtg-card-image {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 #revealed-cards-section {
@@ -534,6 +518,8 @@ p {
   flex: 1;
 }
 
+#table-section {
+}
 .revealed-and-table {
   flex-shrink: 0;
   flex-grow: 1;
