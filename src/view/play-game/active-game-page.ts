@@ -14,12 +14,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       ${formatDebugButtonHtmlFragment(game.gameId)}
       <p class="game-id">Game ID: ${game.gameId}</p>
     </div>`;
-  const gameHeader = `<div id="game-header" class="game-header">
-      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
-    </div>`;
   const contentWithModal = `
     <div class="page-container">
-      ${gameHeader}
       ${gameContent}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>
@@ -29,7 +25,10 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
-  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), game.gameId);
+  const title = `
+      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
+`;
+  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), title, game.gameId);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);

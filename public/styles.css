@@ -431,27 +431,51 @@ p {
 #hand-section {
   padding: 5px 20px 15px 20px;
   transform: translateX(-20px);
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  background-color: #f9f9f9;
   margin-top: 20px;
   min-height: 278px;
 }
 
+.cool-command-zone-surround {
+  border: 5px outset #4d9f0c;
+  padding: 10px;
+  min-height: 400px;
+  width: 400px;
+  background: repeating-linear-gradient(30deg, #4d9f0c, #9198e5, #4d9f0c 20px);
+}
+
+.cool-commander-zone-surround.two-commanders {
+  width: 700px;
+}
+
+.cool-command-zone-surround .card-container {
+  border-color: #9198e5;
+  border-width: 7px;
+  border-style: inset;
+  background-color: #9198e5;
+}
+
+.cool-command-zone-surround .multiple-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.cool-command-zone-surround .game-title {
+  background-color: #9198e5;
+  border: 3px groove #9198e5;
+  margin-bottom: 5px;
+  padding: 3px 5px 3px 5px;
+}
+
 #command-zone {
   flex-shrink: 0;
-  width: 250px;
 }
 
 #revealed-cards-section {
   background-color: inherit;
   border: none;
-}
-
-.multiple-cards {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
 }
 
 #game-details {
@@ -518,8 +542,6 @@ p {
   flex: 1;
 }
 
-#table-section {
-}
 .revealed-and-table {
   flex-shrink: 0;
   flex-grow: 1;
@@ -675,14 +697,6 @@ p {
   overflow: scroll;
 }
 
-.card-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
 .card-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -695,10 +709,11 @@ p {
 .card-buttons button {
   padding: 6px 12px;
   font-size: 0.8rem;
-  border: none;
+  border: 2px outset gray;
   border-radius: 4px;
   cursor: pointer;
   color: white;
+  background-color: black;
   transition: all 0.2s ease;
   white-space: nowrap;
   min-width: 80px;
@@ -744,6 +759,9 @@ p {
   overflow-x: visible;
 }
 
+.card-container {
+}
+
 /* Drag-and-drop styling */
 .card-container.dragging {
   opacity: 0.5;
@@ -767,19 +785,6 @@ p {
   background-color: rgba(76, 175, 80, 0.2);
   border: 2px dashed #4caf50;
   outline: 2px solid #4caf50;
-}
-
-.play-button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #ff6b35;
-  color: white;
-  transition: all 0.3s ease;
-  white-space: nowrap;
 }
 
 .play-button:hover:not(:disabled) {

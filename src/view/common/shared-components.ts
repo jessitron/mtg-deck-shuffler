@@ -108,13 +108,15 @@ export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId:
 }
 
 // Function for displaying commanders when we have GameCard objects (in active game)
-export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
+export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], title: string, gameId: number): string {
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-          <h4 class="cute-header">Command Zone</h4>
+    <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
+          <div class="game-title">${title}</div>
           <div class="multiple-cards">
           ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
+          </div>
           </div>
         </div>`;
 }

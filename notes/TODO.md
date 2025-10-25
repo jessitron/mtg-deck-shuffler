@@ -2,17 +2,19 @@
 
 ## Design of the game page.
 
-- make the command zone look like it has one of those etsy command zone things around it
+- align the library and revealed cards
 
-- take away the library and hand boxes
+- fix the button colors
 
 - make the hand drop zones into circles or something else nicer
-
-- put the title somewhere else. In the command zone?
 
 - move the 'restart' and 'choose another deck' buttons out of the playmat
 
 - move the debug stuff out of the playmat
+
+## Add card sleeves
+
+- make the command zone colors match the sleeves inner and outer colors
 
 ## Bugs to fix
 
@@ -23,6 +25,10 @@
 - the error page needs work again
 
 ## More Things to change
+
+- make a revealed card appear to hover
+
+- add a play counter to the command zone
 
 - make the library card modal have up/down! I want to look through it!
 
