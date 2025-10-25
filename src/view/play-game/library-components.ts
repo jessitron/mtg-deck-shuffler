@@ -2,8 +2,7 @@ import { GameState, WhatHappened } from "../../GameState.js";
 import { formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
-  return `<div id="library-section" data-testid="library-section">
-        <h4 class="cute-header">Library</h4>
+  return `<div id="library-section" class="library-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
         ${formatLibraryStack(whatHappened, game.listLibrary().length)}
         <div class="library-buttons">
           <button class="search-button"
