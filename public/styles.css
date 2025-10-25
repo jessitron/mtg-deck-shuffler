@@ -579,12 +579,13 @@ p {
 .table-cards-button {
   padding: 10px 20px;
   font-size: 1rem;
-  border: 1px solid #4084c0;
-  border-radius: 5px;
+  border: 1px solid gray;
+  border-radius: 2px;
   cursor: pointer;
-  background-color: #124e82;
+  background-color: black;
   color: white;
   transition: background-color 0.2s;
+  width: 70%;
 }
 
 .table-cards-button:hover {
