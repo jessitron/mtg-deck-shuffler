@@ -20,6 +20,9 @@ body {
   --cute-heading-color: #9134d2;
   --back-button-color: #6c757d;
   --fancy-title-font: "Rampart One", monospace;
+
+  --playmat-one: #f5dc8b;
+  --playmat-two: #4b7bba;
 }
 
 footer {
@@ -439,12 +442,12 @@ p {
 }
 
 .cool-command-zone-surround {
-  border: 5px outset #4d9f0c;
+  border: 5px outset var(--playmat-one);
   border-radius: 2px;
   padding: 10px;
   min-height: 400px;
   width: 400px;
-  background: repeating-linear-gradient(30deg, #4d9f0c, #9198e5, #4d9f0c 20px);
+  background: repeating-linear-gradient(30deg, var(--playmat-one), var(--playmat-two), var(--playmat-one) 20px);
 }
 
 .cool-commander-zone-surround.two-commanders {
@@ -452,11 +455,11 @@ p {
 }
 
 .cool-command-zone-surround .card-container {
-  border-color: #9198e5;
+  border-color: var(--playmat-two);
   border-width: 7px;
   border-radius: 2px;
   border-style: inset;
-  background-color: #9198e5;
+  background-color: var(--playmat-two);
 }
 
 .cool-command-zone-surround .multiple-cards {
