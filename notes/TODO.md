@@ -2,8 +2,6 @@
 
 ## Design of the game page.
 
-- move the Cards on Table to the center. Make Revealed cards move that up or something
-
 - make the command zone look like it has one of those etsy command zone things around it
 
 - take away the library and hand boxes

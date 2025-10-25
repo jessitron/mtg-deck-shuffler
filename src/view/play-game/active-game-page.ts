@@ -35,6 +35,12 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
   const gameActionsHtml = formatGameActionsHtmlFragment(game);
+  const tableSectionHtml = ` <div id="table-section" class="table-section">
+          <button class="table-cards-button"
+            hx-get="/table-modal/${game.gameId}"
+            hx-target="#modal-container"
+            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+        </div>`;
 
   return `<div id="game-container"
            data-game-id="${game.gameId}"
@@ -45,14 +51,12 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
 
       <div class="game-top-row">
         ${librarySectionHtml}
+        <div class="revealed-and-table">
+        ${tableSectionHtml}
         ${revealedCardsHtml}
-        ${commanderImageHtml}
-        <div id="table-section" class="table-section">
-          <button class="table-cards-button"
-            hx-get="/table-modal/${game.gameId}"
-            hx-target="#modal-container"
-            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
         </div>
+        ${commanderImageHtml}
+       
       </div>
 
       <div class="game-hand-row">
