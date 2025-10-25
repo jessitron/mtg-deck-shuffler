@@ -720,9 +720,10 @@ p {
   width: 100%;
 }
 
-.put-in-hand-button {
-  background-color: #28a745;
-  border: 1px solid #28a745;
+.card-buttons button:active {
+  border: 2px inset gray;
+  transform: translateY(1px);
+  background-color: #333;
 }
 
 #hand-section {
@@ -762,16 +763,13 @@ p {
 
 .hand-drop-zone.drag-over {
   background-color: rgba(76, 175, 80, 0.2);
-  border: 2px dashed #4caf50;
-  outline: 2px solid #4caf50;
-}
-
-.play-button:hover:not(:disabled) {
-  background-color: #e55a2b;
-  transform: translateY(-2px);
+  border-radius: 20px;
+  border: 2px dashed white;
+  outline: 2px solid gray;
 }
 
 .play-button:disabled {
+  /* this happens during copy */
   opacity: 0.6;
   cursor: not-allowed;
 }
