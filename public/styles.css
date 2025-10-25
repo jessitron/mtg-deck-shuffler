@@ -435,7 +435,8 @@ p {
 #library-section,
 #revealed-cards-section,
 #hand-section {
-  padding: 0px 20px 15px 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   transform: translateX(-20px);
   min-height: 278px;
 }
@@ -456,8 +457,8 @@ p {
   gap: 10px;
 }
 
-.cool-commander-zone-surround.two-commanders {
-  width: 700px;
+.cool-command-zone-surround.two-commanders {
+  width: 600px;
 }
 
 .cool-command-zone-surround .game-title {
@@ -472,10 +473,11 @@ p {
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  gap: 20px;
+  width: fit-content;
+  margin-left: auto;
 }
 
-.cool-command-zone-surround .card-container {
+.cool-command-zone-surround .multiple-cards {
   border-color: var(--playmat-two);
   border-width: 7px;
   border-radius: 2px;
@@ -483,7 +485,7 @@ p {
   background-color: var(--playmat-two);
 }
 
-#library-section.library-that-is-horizontally-aligned-with-command-zone {
+.section-that-is-horizontally-aligned-with-command-zone {
   padding-top: calc(32px + var(--min-title-slab-height));
 }
 
@@ -620,6 +622,7 @@ p {
 
 .library-buttons {
   display: grid;
+  grid-template-areas: "draw draw" "shuffle shuffle" "search reveal";
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   max-width: 216px;
@@ -627,8 +630,23 @@ p {
   margin-right: 2px;
 }
 
+.library-buttons .draw-button {
+  grid-area: draw;
+}
+
+.library-buttons .shuffle-button {
+  grid-area: shuffle;
+}
+
+.library-buttons .search-button {
+  grid-area: search;
+}
+
+.library-buttons .reveal-button {
+  grid-area: reveal;
+}
+
 .revealed-cards-section {
-  padding: 20px;
   display: flex;
   min-width: 300px;
   flex-direction: column;
@@ -639,8 +657,14 @@ p {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 10px;
-  overflow: scroll;
+}
+
+.revealed-cards-area .card-buttons {
+  margin-top: 18px;
+}
+
+.revealed-cards-area .mtg-card-image {
+  box-shadow: 5px 5px 10px rgba(200, 200, 200, 0.9);
 }
 
 .card-buttons {

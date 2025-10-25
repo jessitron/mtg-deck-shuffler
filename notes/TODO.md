@@ -28,6 +28,8 @@
 
 ## More Things to change
 
+- put the drawn card at the beginning of the hand, so you can always see it. Have all others move right
+
 - make a revealed card appear to hover
 
 - add a play counter to the command zone
