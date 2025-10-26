@@ -727,6 +727,7 @@ p {
 .hand-count {
   font-family: var(--fancy-title-font);
   font-size: 1.5rem;
+  text-shadow: 0px 0px 8px white;
 }
 
 /* Drag-and-drop styling */
