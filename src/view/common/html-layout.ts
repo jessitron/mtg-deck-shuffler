@@ -21,7 +21,7 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string): string {
+function formatPageWrapper(title: string, content: string, debugContent?: string): string {
   const headHtml = formatHtmlHead(title);
 
   return `<!DOCTYPE html>
@@ -29,7 +29,10 @@ function formatPageWrapper(title: string, content: string): string {
   ${headHtml}
   <body>
     ${content}
-
+${debugContent ? `
+    <div class="debug-section">
+      ${debugContent}
+    </div>` : ""}
     <footer>
       <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
     </footer>
