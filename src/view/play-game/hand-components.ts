@@ -15,8 +15,11 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
     .join("");
 
   return `<div id="hand-section" data-testid="hand-section">
-        <h4 class="cute-header">Hand</h4>
         <div id="hand-cards" class="hand-cards">
+          <div class="hand-symbol">
+            <div class="hand-count">${handCardsList.length}</div>
+            <img src="/hand.png" alt="Hand" />
+          </div>
           ${handCardsWithDropZones}
         </div>
       </div>`;

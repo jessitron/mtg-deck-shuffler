@@ -698,17 +698,35 @@ p {
 #hand-section {
   overflow-x: visible;
   padding-left: 30px;
+  padding-top: 10px;
 }
 
 .hand-cards {
   display: flex;
   gap: 0px;
+  row-gap: 5px;
   justify-content: flex-start;
   flex-wrap: wrap;
   overflow-x: visible;
 }
 
-.card-container {
+.hand-symbol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  align-items: center;
+  position: relative;
+}
+
+.hand-symbol img {
+  max-height: 278px;
+  width: 100px;
+}
+
+.hand-count {
+  font-family: var(--fancy-title-font);
+  font-size: 1.5rem;
 }
 
 /* Drag-and-drop styling */
