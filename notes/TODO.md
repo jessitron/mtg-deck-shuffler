@@ -2,11 +2,8 @@
 
 ## Design of the game page.
 
-- align the library and revealed cards
-
-- fix the button colors
-
-- make the hand drop zones into circles or something else nicer
+- replace the word 'Hand' with some other indicator. You should know when it's empty? and maybe how many cards are in it.
+  https://www.pexels.com/photo/3d-emoji-render-of-a-waving-hand-8832738/ cottonbro CG studio
 
 - move the 'restart' and 'choose another deck' buttons out of the playmat
 
@@ -29,6 +26,8 @@
 ## More Things to change
 
 - put the drawn card at the beginning of the hand, so you can always see it. Have all others move right
+
+- replace the little ↗ link with a real 'see in new tab' image
 
 - make a revealed card appear to hover
 

@@ -25,7 +25,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
   const title = `
-      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
+      <span class="game-name">${game.deckName}</span> <a href="${game.deckProvenance.sourceUrl}" target="_blank">↗</a>
 `;
   const commandZoneHtml = formatCommandZoneHtmlFragment(game.listCommanders(), title, game.gameId);
   const tableCardsCount = game.listTable().length;

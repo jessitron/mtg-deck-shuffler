@@ -412,12 +412,12 @@ p {
   flex-direction: column;
   gap: 20px;
   min-height: 600px;
+  padding-top: 20px;
 }
 
 /* Top row: library, revealed cards, command zone, and table */
 .game-top-row {
   display: flex;
-  gap: 20px;
   min-height: 300px;
 }
 
@@ -575,7 +575,6 @@ p {
   align-items: center;
   justify-content: end;
   gap: 10px;
-  padding: 20px;
 }
 
 .table-cards-button {
