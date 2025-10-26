@@ -70,6 +70,7 @@ h1 {
   background-size: cover;
   border: 5px black solid;
   box-shadow: 5px 5px black;
+  margin-bottom: 5px; /* have to account for the shadow */
   border-radius: 80px;
 }
 
@@ -1313,6 +1314,12 @@ p {
 .undo-button {
   padding: 4px 8px;
   font-size: 0.8rem;
+}
+
+footer {
+  display: flex;
+  direction: row;
+  justify-content: flex-end;
 }
 
 .debug-section {
