@@ -23,24 +23,9 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, gameEndActions + debugSection);
 }
 
-function formatGameEndActionsHtmlFragment(game: GameState): string {
-  return `<div class="end-game-actions">
-      <form method="post" action="/restart-game" class="inline-form">
-        <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button type="submit">Restart Game</button>
-      </form>
-      <form method="post" action="/end-game" class="inline-form">
-        <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button type="submit">Choose Another Deck</button>
-      </form>
-    </div>`;
-}
-
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
-  const title = `
-      <span class="game-name">${game.deckName}</span> <a href="${game.deckProvenance.sourceUrl}" target="_blank">↗</a>
-`;
-  const commandZoneHtml = formatCommandZoneHtmlFragment(game.listCommanders(), title, game.gameId);
+
+  const commandZoneHtml = formatCommandZoneHtmlFragment(game);
   const tableCardsCount = game.listTable().length;
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
@@ -75,6 +60,19 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
       <div class="history-actions-row">
         ${historyActionsHtml}
       </div>
+    </div>`;
+}
+
+function formatGameEndActionsHtmlFragment(game: GameState): string {
+  return `<div class="end-game-actions">
+      <form method="post" action="/restart-game" class="inline-form">
+        <input type="hidden" name="game-id" value="${game.gameId}" />
+        <button type="submit">Restart Game</button>
+      </form>
+      <form method="post" action="/end-game" class="inline-form">
+        <input type="hidden" name="game-id" value="${game.gameId}" />
+        <button type="submit">Choose Another Deck</button>
+      </form>
     </div>`;
 }
 

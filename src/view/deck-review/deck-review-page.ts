@@ -31,14 +31,11 @@ export function formatCommandersHtmlFragment(commanders: readonly GameCard[], ga
 }
 
 function formatDeckReviewHtmlSection(game: GameState): string {
-  const commanderImageHtml = formatCommandZoneHtmlFragment(game.listCommanders(), "<h4>Command Zone</h4>", game.gameId);
+  const commanderImageHtml = formatCommandZoneHtmlFragment(game);
   const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId);
 
   return `
   <div id="deck-review-container" class="deck-review-container">
-    <div id="game-header" class="game-header">
-      <span class="game-name">${game.deckName}</span> from <a href="${game.deckProvenance.sourceUrl}" target="_blank">${game.deckProvenance.deckSource}</a>
-    </div>
     ${commanderImageHtml}
     <div id="start-game-buttons" class="deck-actions">
       <form method="post" action="/start-game" class="inline-form">

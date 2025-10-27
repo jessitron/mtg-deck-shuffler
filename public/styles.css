@@ -510,15 +510,11 @@ p {
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto;
   grid-template-areas:
-    "game-header game-header"
     "command-zone start-game-buttons"
     "library-list library-list";
   justify-content: space-between;
   gap: 10px;
-}
-
-.deck-review-container #game-header {
-  grid-area: game-header;
+  margin-top: 20px;
 }
 
 .deck-review-container #command-zone {
@@ -549,19 +545,9 @@ p {
   justify-content: flex-start;
 }
 
-.game-header {
-  margin-top: 20px;
-}
-
 .game-name {
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-.game-header .game-id {
-  margin: 0;
-  text-align: right;
-  flex: 1;
 }
 
 .table-image {

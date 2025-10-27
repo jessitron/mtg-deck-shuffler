@@ -1,5 +1,5 @@
 import { getCardImageUrl } from "../../types.js";
-import { GameCard, WhatHappened } from "../../GameState.js";
+import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 
 export const CARD_BACK = "/mtg-card-back.jpg";
 
@@ -99,7 +99,12 @@ export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId:
 }
 
 // Function for displaying commanders when we have GameCard objects (in active game)
-export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], title: string, gameId: number): string {
+export function formatCommandZoneHtmlFragment(game: GameState): string {
+  const title = `
+      <span class="game-name">${game.deckName}</span> <a href="${game.deckProvenance.sourceUrl}" target="_blank">↗</a>
+`;
+  const commanders = game.listCommanders();
+  const gameId = game.gameId;
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
@@ -111,6 +116,7 @@ export function formatCommandZoneHtmlFragment(commanders: readonly GameCard[], t
       </div>
     </div>`;
 }
+
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
   if (whatHappened.movedLeft && whatHappened.movedLeft.some((card) => card.gameCardIndex === gameCardIndex)) {
     return " card-moved-left";
