@@ -77,6 +77,7 @@ h1 {
 
 .expository-text-container {
   background-color: var(--contrasting-color);
+  border-radius: 2px;
   color: white;
   margin: 0;
   padding-left: 2rem;
@@ -87,6 +88,11 @@ h1 {
 
 .expository-text {
   max-width: 600px;
+}
+
+.expository-text a {
+  color: white;
+  text-decoration: underline;
 }
 
 .expository-text p {
@@ -1132,7 +1138,6 @@ p {
   background-color: #673ab7;
   color: white;
 }
-
 
 .modal-action-button.secondary {
   background-color: #607d8b;

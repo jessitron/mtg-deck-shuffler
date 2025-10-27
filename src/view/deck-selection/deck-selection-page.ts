@@ -29,7 +29,6 @@ function formatLocalDeckInputHtmlFragment(availableDecks: AvailableDecks) {
 }
 
 function formatLoadStateHtmlFragment() {
-  // TODO: make this a small link in the footer instead of a whole button
   return `<div class="debug-section">
       <button id="load-state-button" class="debug-button"
               hx-get="/load-state-modal"
@@ -39,16 +38,14 @@ function formatLoadStateHtmlFragment() {
 }
 
 export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
-  const loadStateHtml = formatLoadStateHtmlFragment();
   const deckSelectionHtml = `<div id="deck-inputs">
   ${formatLocalDeckInputHtmlFragment(availableDecks)}
   ${formatArchidektInputHtmlFragment()}
     </div>`;
 
-  const title = formatTitleHtmlFragment();
   const content = `
   <div id="homepage-content" class="page-with-title-container" >
-    ${title}
+    ${formatTitleHtmlFragment()}
     ${deckSelectionHtml}
     <div id="modal-container"></div>
     <div class="expository-text-container">
@@ -56,7 +53,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
         <h3>What does this do?</h3>
         <p> Play Magic, The Gathering remotely with friends -- using any deck!
         </p>
-        <h5>You need</h5>
+        <p>You need:
         <ul>
           <li>A friend (or two or three) to play with</li>
           <li>A shared voice chat, like Discord</li></li>
@@ -64,6 +61,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
           <li>Decks defined in Archidekt (or use the preconstructed decks we've downloaded)
           <li>This app for each of you to manage your library and hand
         </ul>
+        </p>
         <p>Each of you can choose a deck in this app, then shuffle up. Draw cards to your hand, then click on them to do more. When you play a card in MTG Deck Shuffler, it gets copied to your clipboard. Then paste it into Mural!</p>
         <p>
           My sister and I play this way, and our board winds up looking like this:
@@ -77,8 +75,7 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
       <div class="slogan">
         <h1>Play any deck, anywhere, with your favorite people!</h1>
       </div>
-      ${loadStateHtml}
     </div>`;
 
-  return formatPageWrapper("MTG Deck Shuffler", content);
+  return formatPageWrapper("MTG Deck Shuffler", content, formatLoadStateHtmlFragment());
 }
