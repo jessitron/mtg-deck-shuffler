@@ -1,7 +1,5 @@
 import { GameState } from "../../GameState.js";
 import { GameEvent, nameMove } from "../../GameEvents.js";
-import { printLocation } from "../../port-persist-state/types.js";
-import { formatCardNameAsGathererLink } from "../common/shared-components.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -49,8 +47,7 @@ function describeEvent(event: GameEvent, game: GameState): string {
     case "move card":
       const description = nameMove(event.move);
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
-      const cardNameLink = formatCardNameAsGathererLink(card);
-      return `${description}: ${cardNameLink}`;
+      return `${description}: ${card.name}`;
     case "shuffle library":
       return `Shuffle ${event.compactMoves.length} cards in library`;
     case "start game":

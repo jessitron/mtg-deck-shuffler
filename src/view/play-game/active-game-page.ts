@@ -9,9 +9,10 @@ import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
+  const gameEndActions = formatGameEndActionsHtmlFragment(game);
   const debugSection = `<div class="debug-section">
-      ${formatDebugButtonHtmlFragment(game.gameId)}
-      <p class="game-id">Game ID: ${game.gameId}</p>
+  <p class="game-id">Game ID: ${game.gameId}</p>
+  ${formatDebugButtonHtmlFragment(game.gameId)}
     </div>`;
   const contentWithModal = `
     <div class="page-container">
@@ -19,7 +20,20 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>
     </div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, debugSection);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, gameEndActions + debugSection);
+}
+
+function formatGameEndActionsHtmlFragment(game: GameState): string {
+  return `<div class="end-game-actions">
+      <form method="post" action="/restart-game" class="inline-form">
+        <input type="hidden" name="game-id" value="${game.gameId}" />
+        <button type="submit">Restart Game</button>
+      </form>
+      <form method="post" action="/end-game" class="inline-form">
+        <input type="hidden" name="game-id" value="${game.gameId}" />
+        <button type="submit">Choose Another Deck</button>
+      </form>
+    </div>`;
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
@@ -31,7 +45,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const librarySectionHtml = formatLibrarySectionHtmlFragment(game, whatHappened);
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
-  const gameActionsHtml = formatGameActionsHtmlFragment(game);
+  const historyActionsHtml = formatGameHistoryFragment(game);
   const tableSectionHtml = ` <div id="table-section" class="table-section">
           <button class="table-cards-button"
             hx-get="/table-modal/${game.gameId}"
@@ -58,8 +72,8 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
         ${handSectionHtml}
       </div>
 
-      <div class="game-actions-row">
-        ${gameActionsHtml}
+      <div class="history-actions-row">
+        ${historyActionsHtml}
       </div>
     </div>`;
 }
@@ -77,36 +91,18 @@ function formatGameHistoryFragment(game: GameState): string {
   const historyButton = ` <button class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
-                  hx-swap="innerHTML">View History (${eventLog.getEvents().length})</button>`;
+                  hx-swap="innerHTML">Action History (${eventLog.getEvents().length})</button>`;
 
   if (!mostRecentUndoableEvent) {
     return historyButton;
   }
 
-  return `<div class="undo-controls">
-            ${historyButton}
-            <button class="undo-button"
-              hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
-              hx-target="#game-container"
-              hx-swap="outerHTML"
-              class="undo-button">Undo</button>
-            <span class="event-description">Last action: ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</span>
-          </div>`;
-}
-
-function formatGameActionsHtmlFragment(game: GameState): string {
-  const history = formatGameHistoryFragment(game);
-
-  return `
-  <div id="end-game-actions" class="game-actions">
-    ${history}
-    <form method="post" action="/restart-game" class="inline-form">
-      <input type="hidden" name="game-id" value="${game.gameId}" />
-      <button type="submit">Restart Game</button>
-    </form>
-    <form method="post" action="/end-game" class="inline-form">
-      <input type="hidden" name="game-id" value="${game.gameId}" />
-      <button type="submit">Choose Another Deck</button>
-    </form>
+  return `<div class="history-actions">
+  <button class="undo-button"
+  hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
+  hx-target="#game-container"
+  hx-swap="outerHTML"
+  class="undo-button">UNDO ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</button>
+  ${historyButton}
   </div>`;
 }

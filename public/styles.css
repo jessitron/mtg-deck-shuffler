@@ -72,6 +72,7 @@ h1 {
   box-shadow: 5px 5px black;
   margin-bottom: 5px; /* have to account for the shadow */
   border-radius: 80px;
+  padding-bottom: 20px;
 }
 
 .expository-text-container {
@@ -849,13 +850,38 @@ p {
   padding-left: 20px;
 }
 
-#end-game-actions {
+.history-actions {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-right: 50px;
+  margin-top: 40px;
+}
+
+.history-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--playmat-two);
+  color: white;
+}
+
+.history-actions button:hover {
+  background-color: var(--playmat-one);
+  color: black;
+}
+
+.end-game-actions {
+  display: flex;
+  align-items: center;
   gap: 20px;
   padding-right: 20px;
 }
 
-.game-actions button {
+.end-game-actions button {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
@@ -865,7 +891,7 @@ p {
   color: white;
 }
 
-.game-actions button:hover {
+.end-game-actions button:hover {
   background-color: #5a6268;
 }
 
@@ -1320,11 +1346,20 @@ footer {
   display: flex;
   direction: row;
   justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .debug-section {
-  text-align: right;
   color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-right: 10px;
+  justify-content: center;
+}
+
+.debug-section p {
+  margin: 0;
 }
 
 .debug-button {
@@ -1338,7 +1373,6 @@ footer {
 
 .debug-container {
   position: relative;
-  background-color: #f5f5f5;
   padding: 16px;
   border-radius: 4px;
   max-height: 60vh;
