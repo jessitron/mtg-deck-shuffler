@@ -10,16 +10,17 @@ import { formatPageWrapper } from "../common/html-layout.js";
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
+  const debugSection = `<div class="debug-section">
+      <p class="game-id">Game ID: ${game.gameId}</p>
+    </div>`;
   const contentWithModal = `
   <div class="page-with-title-container">
     ${formatTitleHtmlFragment()}
     ${gameContent}
-    <div class="debug-section">
-      <p class="game-id">Game ID: ${game.gameId}</p>
-    </div>
+    
     <div id="card-modal-container"></div>
   </div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal);
+  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, debugSection);
 }
 
 export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
