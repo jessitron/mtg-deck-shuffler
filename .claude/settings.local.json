@@ -59,6 +59,10 @@
     ],
     "deny": []
   },
+  "enabledMcpjsonServers": [
+    "honeycomb"
+  ],
   "hooks": {},
-  "mcp": {}
+  "mcp": {},
+  "enableAllProjectMcpServers": true
 }

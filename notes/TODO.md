@@ -1,15 +1,12 @@
 # Things to change
 
-## Design of the game page.
-
-- replace the word 'Hand' with some other indicator. You should know when it's empty? and maybe how many cards are in it.
-  https://www.pexels.com/photo/3d-emoji-render-of-a-waving-hand-8832738/ cottonbro CG studio
-
-- move the 'restart' and 'choose another deck' buttons out of the playmat
-
-- move the debug stuff out of the playmat
-
 ## Add card sleeves
+
+- on the deck preview page, choose inner and outer sleeve colors
+
+- the outer color could be an art card image
+
+- display the library as the back of the sleeves
 
 - make the command zone colors match the sleeves inner and outer colors
 
