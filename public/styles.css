@@ -53,7 +53,13 @@ h1 {
 .page-with-title-container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: var(--background-color);
+  background-image: url(https://cards.scryfall.io/png/front/3/3/33ea0047-bb86-4908-bb73-902d8db3b6de.png);
+  background-size: cover;
+  border: 5px black solid;
+  box-shadow: 5px 5px black;
+  margin-bottom: 5px;
+  border-radius: 80px;
+  padding-bottom: 20px;
   padding-left: 0rem;
 }
 
