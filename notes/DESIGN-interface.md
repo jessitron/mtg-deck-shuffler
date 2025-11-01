@@ -73,16 +73,17 @@ div: game-header (full width)
   Deck Name. other details.           Game ID
 
 div: game-container
-  div: library-section   div: revealed-cards-section (width auto)          div: command zone and table
+                                             table button
+  div: library-section   div: revealed-cards-section        div: command zone and table
 
       ┌───────────┐     ┌────────────────────────────────┐                   ┌───────────────┐
-     ┌───────────┐│     │        Revealed (n)            │                   │               │
+     ┌───────────┐│     │        Revealed (n)            │                   │    deck name  │
     ┌───────────┐││     │                                │                   │               │
     │Library (n)│││     │   ┌────────┐   ┌───────┐       │                   │  Command zone │
     │           │││     │   │        │   │       │       │                   │               │
     │           │││     │   │        │   │       │       │                   └───────────────┘
     │           │││     │   │        │   │       │       │
-    │           │││     │   │        │   │       │       │                      table.png
+    │           │││     │   │        │   │       │       │                  
     │           │││     │   │        │   │       │       │
     │           ││┘     │   └────────┘   └───────┘       │
     │           │┘      │    [] [] []     [] [] []       │
