@@ -26,11 +26,11 @@ provideOneLinkToHoneycomb: true,
 <h1 class="homepage-title">MTG Deck Shuffler</h1>
 </div>
 <div id="deck-review-container" class="deck-review-container">
-<div id="game-header" class="game-header">
-<span class="game-name">Jaceteous League</span> from <a href="https://archidekt.com/decks/75009" target="_blank">archidekt</a>
-</div>
 <div id="command-zone">
-<h4 class="cute-header">Command Zone</h4>
+<div class="cool-command-zone-surround ">
+<div class="game-title"><p>
+<span class="game-name">Jaceteous League</span> <a href="https://archidekt.com/decks/75009" target="_blank">↗</a>
+</p></div>
 <div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
 hx-get="/card-modal/789/3"
@@ -45,6 +45,7 @@ style="cursor: pointer;">
 </div>
 </div>
 <button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+</div>
 </div>
 </div>
 </div>
@@ -111,12 +112,12 @@ style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</sp
 </ul>
 </div>
 </div>
-<div class="debug-section">
-<p class="game-id">Game ID: 789</p>
-</div>
 <div id="card-modal-container"></div>
 </div>
 <footer>
+<div class="debug-section">
+<p class="game-id">Game ID: 789</p>
+</div>
 <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
 </footer>
 </body>

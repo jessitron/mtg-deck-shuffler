@@ -22,17 +22,51 @@ provideOneLinkToHoneycomb: true,
 </head>
 <body>
 <div class="page-container">
-<div id="game-header" class="game-header">
-<span class="game-name">Jaceteous League</span> from <a href="https://archidekt.com/decks/75009" target="_blank">archidekt</a>
-</div>
 <div id="game-container"
 data-game-id="789"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/789"
 hx-target="#game-container"
 hx-swap="outerHTML">
+<div id="table-section" class="table-section">
+<button class="table-cards-button"
+hx-get="/table-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">1 Cards on table</button>
+</div>
+<div class="game-top-row">
+<div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
+<div class="library-stack" data-testid="library-stack">
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="5 cards"/>
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
+</div>
+<div class="library-buttons">
+<button class="draw-button"
+hx-post="/draw/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Draw</button>
+<button class="shuffle-button"
+hx-post="/shuffle/789"
+hx-target="#game-container"
+hx-swap="outerHTML">Shuffle</button>
+<button class="search-button"
+hx-get="/library-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">Search</button>
+<button class="reveal-button"
+hx-post="/reveal-card/789/1"
+hx-target="#game-container"
+hx-swap="outerHTML"
+>Reveal</button>
+</div>
+</div>
+<div id="revealed-cards-section" class="revealed-cards-section" ></div>
 <div id="command-zone">
-<h4 class="cute-header">Command Zone</h4>
+<div class="cool-command-zone-surround ">
+<div class="game-title"><p>
+<span class="game-name">Jaceteous League</span> <a href="https://archidekt.com/decks/75009" target="_blank">↗</a>
+</p></div>
 <div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
 hx-get="/card-modal/789/3"
@@ -51,43 +85,15 @@ style="cursor: pointer;">
 </div>
 </div>
 </div>
-<div id="library-section" data-testid="library-section">
-<h4 class="cute-header">Library</h4>
-<div class="library-stack" data-testid="library-stack">
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="5 cards"/>
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
-</div>
-<div class="library-buttons">
-<button class="search-button"
-hx-get="/library-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">Search</button>
-<button class="shuffle-button"
-hx-post="/shuffle/789"
-hx-target="#game-container"
-hx-swap="outerHTML">Shuffle</button>
-<button class="draw-button"
-hx-post="/draw/789"
-hx-target="#game-container"
-hx-swap="outerHTML">Draw</button>
-<button class="reveal-button"
-hx-post="/reveal-card/789/1"
-hx-target="#game-container"
-hx-swap="outerHTML"
->Reveal</button>
 </div>
 </div>
-<div id="revealed-cards-section" class="revealed-cards-section" ></div>
-<div id="table-section" class="table-section">
-<button class="table-cards-button"
-hx-get="/table-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">1 Cards on table</button>
-</div>
+<div class="game-hand-row">
 <div id="hand-section" data-testid="hand-section">
-<h4 class="cute-header">Hand</h4>
 <div id="hand-cards" class="hand-cards">
+<div class="hand-symbol">
+<div class="hand-count">1</div>
+<img src="/hand.png" alt="Hand" />
+</div>
 <div class="hand-drop-zone" data-hand-position="0"></div><div id="card-2-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="0"
@@ -99,20 +105,27 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="1"></div>
 </div>
 </div>
-<div id="end-game-actions" class="game-actions">
-<div class="undo-controls">
-<button class="history-button"
-hx-get="/history-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">View History (5)</button>
+</div>
+<div class="history-actions-row">
+<div class="history-actions">
 <button class="undo-button"
 hx-post="/undo/789/4"
 hx-target="#game-container"
 hx-swap="outerHTML"
-class="undo-button">Undo</button>
-<span class="event-description">Last action: 
-<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a></span></span>
+class="undo-button">UNDO 
+<span class="event-description  event-move-card">Play: Carth the Lion</span></button>
+<button class="history-button"
+hx-get="/history-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">Action History (5)</button>
 </div>
+</div>
+</div>
+<div id="modal-container"></div>
+<div id="card-modal-container"></div>
+</div>
+<footer>
+<div class="end-game-actions">
 <form method="post" action="/restart-game" class="inline-form">
 <input type="hidden" name="game-id" value="789" />
 <button type="submit">Restart Game</button>
@@ -121,20 +134,14 @@ class="undo-button">Undo</button>
 <input type="hidden" name="game-id" value="789" />
 <button type="submit">Choose Another Deck</button>
 </form>
-</div>
-</div>
-<div id="modal-container"></div>
-<div id="card-modal-container"></div>
-<div class="debug-section">
+</div><div class="debug-section">
+<p class="game-id">Game ID: 789</p>
 <button class="debug-button"
 hx-get="/debug-state/789"
 hx-target="#modal-container"
 hx-swap="innerHTML"
 class="debug-button">Debug State</button>
-<p class="game-id">Game ID: 789</p>
 </div>
-</div>
-<footer>
 <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
 </footer>
 </body>
