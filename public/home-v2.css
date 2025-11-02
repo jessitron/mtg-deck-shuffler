@@ -3,7 +3,7 @@
 /* color variable */
 :root {
   --playmat-map-dark: #30506b;
-  --playmat-map-accent: #c188a7;
+  --playmat-map-accent: #c18ba9;
   --playmat-map-light: #e0d1ad;
 }
 
@@ -24,13 +24,27 @@
   justify-content: center;
   gap: 20px;
   padding: 20px 0px 40px 40px;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--playmat-map-accent), white, var(--playmat-map-accent));
+  overflow: hidden;
 }
 
 .hero-title {
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
   text-align: right;
   padding-left: 20px;
   padding-top: 20px;
+  min-width: calc(3rem * 6);
 }
 
 h1 {
