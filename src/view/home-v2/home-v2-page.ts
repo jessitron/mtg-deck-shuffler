@@ -7,5 +7,5 @@ export function formatHomeV2HtmlPage(): string {
     <p>This is the new homepage design - coming soon!</p>
   </div>`;
 
-  return formatPageWrapper("MTG Deck Shuffler - Home v2", content);
+  return formatPageWrapper("MTG Deck Shuffler - Home v2", content, "", ["/home-v2.css"]);
 }

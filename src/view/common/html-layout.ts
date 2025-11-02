@@ -1,4 +1,6 @@
-function formatHtmlHead(title: string): string {
+function formatHtmlHead(title: string, additionalStylesheets: string[] = []): string {
+  const additionalStylesheetsHtml = additionalStylesheets.map(href => `    <link rel="stylesheet" href="${href}" />`).join('\n');
+
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +9,7 @@ function formatHtmlHead(title: string): string {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css" />
+${additionalStylesheetsHtml}
     <script src="/hny.js"></script>
     <script>
       Hny.initializeTracing({
@@ -21,8 +24,8 @@ function formatHtmlHead(title: string): string {
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string, footerContent: string = ``): string {
-  const headHtml = formatHtmlHead(title);
+function formatPageWrapper(title: string, content: string, footerContent: string = ``, additionalStylesheets: string[] = []): string {
+  const headHtml = formatHtmlHead(title, additionalStylesheets);
 
   return `<!DOCTYPE html>
 <html lang="en">
