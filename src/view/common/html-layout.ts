@@ -24,18 +24,25 @@ ${additionalStylesheetsHtml}
   </head>`;
 }
 
-function formatPageWrapper(title: string, content: string, footerContent: string = ``, additionalStylesheets: string[] = []): string {
+function formatPageWrapper(
+  title: string,
+  content: string,
+  footerContent: string = ``,
+  additionalStylesheets: string[] = [],
+  includeFooter: boolean = true
+): string {
   const headHtml = formatHtmlHead(title, additionalStylesheets);
+  const footerHtml = includeFooter ? `
+    <footer>
+      ${footerContent}
+      <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
+    </footer>` : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
   <body>
-    ${content}
-    <footer>
-      ${footerContent}
-      <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
-    </footer>
+    ${content}${footerHtml}
   </body>
 </html>`;
 }
