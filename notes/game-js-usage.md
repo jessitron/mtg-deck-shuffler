@@ -83,14 +83,17 @@ All functions depend on:
 
 ## Recommendations for Splitting
 
+**IMPORTANT:** Before adding any JavaScript for the Deck Review page, split game.js into separate files. This makes debugging easier.
+
 Based on this analysis, `game.js` could be split into:
 
 1. **deck-selection.js** - Only `setupDeckNumberValidation()`
 2. **active-game.js** - Scroll restoration, drag-and-drop, card clipboard operations
 3. **card-modal.js** - `copyCardImageToClipboard()` for modals
 
-Alternatively, keep as one file since:
+Current status: Keep as one file for now since:
 - Functions are relatively small (~276 lines total)
 - Most complexity is in the active game page
 - Event listeners check for element existence before attaching
 - No performance issues with loading all functions on all pages
+- Deck Review page currently has no JavaScript
