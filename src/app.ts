@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
+import { formatHomeV2HtmlPage } from "./view/home-v2/home-v2-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage } from "./view/deck-review/deck-review-page.js";
 import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
@@ -35,6 +36,20 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.send(html);
     } catch (error) {
       console.error("Error loading homepage:", error);
+      res.status(500).send(`<div>
+        <p>Error: Could not load the homepage</p>
+        <p>Please try refreshing the page</p>
+    </div>`);
+    }
+  });
+
+  // Returns whole page - new homepage design
+  app.get("/home-v2", async (req, res) => {
+    try {
+      const html = formatHomeV2HtmlPage();
+      res.send(html);
+    } catch (error) {
+      console.error("Error loading home-v2:", error);
       res.status(500).send(`<div>
         <p>Error: Could not load the homepage</p>
         <p>Please try refreshing the page</p>
