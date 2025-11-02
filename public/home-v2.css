@@ -1,3 +1,58 @@
 /* Home V2 Page Styles */
 
-/* Add your custom styles for the new homepage here */
+/* color variable */
+:root {
+  --playmat-map-dark: #30506b;
+  --playmat-map-accent: #c188a7;
+  --playmat-map-light: #e0d1ad;
+}
+
+.home-container {
+  background-color: var(--playmat-map-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.hero {
+  background-color: var(--playmat-map-dark);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px 40px 40px;
+}
+
+.hero-title {
+  flex: 1;
+  text-align: right;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+h1 {
+  font-size: clamp(3rem, calc((33vw - 30px) / 5), 8rem);
+}
+
+.hero-playmat-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: clip;
+}
+
+.hero-playmat {
+  height: 745px;
+  width: 1040px;
+  background-image: url("/playmat-map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 10px black solid;
+  box-sizing: content-box;
+  border-radius: 50px;
+}

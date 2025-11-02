@@ -5,7 +5,9 @@ export function formatHomeV2HtmlPage(): string {
   <div id="home-v2-content" class="home-container">
     <div class="hero">
       <div class="hero-title"><h1>MTG<br>Deck<br>Shuffler</h1></div>
-      <div class="hero-playmat"></div>
+      <div class="hero-playmat-container">
+        <div class="hero-playmat"></div>
+      </div>
     </div>
     <div class="deck-selection">
       <h2>Choose a Deck</h2>
