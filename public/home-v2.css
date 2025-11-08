@@ -44,7 +44,7 @@
   text-align: right;
   padding-left: 20px;
   padding-top: 20px;
-  min-width: calc(3rem * 6);
+  min-width: calc(3rem * 4);
 }
 
 h1 {
@@ -52,11 +52,11 @@ h1 {
 }
 
 .hero-playmat-container {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
   overflow: clip;
+  min-width: 0; /* Allow container to shrink below content width */
 }
 
 .hero-playmat {
@@ -65,8 +65,8 @@ h1 {
   background-image: url("/playmat-map.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
   border: 10px black solid;
   box-sizing: content-box;
   border-radius: 50px;
+  box-shadow: 5px 5px 4px 10px rgba(0, 0, 0, 0.5);
 }
