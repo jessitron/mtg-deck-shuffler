@@ -74,8 +74,10 @@ body {
 
 /* Hero Section */
 .hero {
-  position: relative;
-  width: 1176px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  max-width: 1040px;
   height: 484px;
   margin: 0 auto;
   margin-top: 0;
@@ -83,7 +85,7 @@ body {
   background-image: url("/images/aeoe-43-cascading-cataracts.png");
   background-size: cover;
   background-position: center;
-  text-align: center;
+  padding: 0 12px;
 }
 
 .hero-title {
@@ -93,6 +95,8 @@ body {
   color: white;
   margin: 0;
   margin-top: -80px;
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 .hero-subtitle {
@@ -102,6 +106,8 @@ body {
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
   margin-top: -120px;
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 /* Slogan Section */
@@ -125,7 +131,7 @@ body {
 
 /* Divider */
 .divider {
-  width: 1176px;
+  max-width: 1040px;
   height: 12px;
   margin: 0 auto;
   background-image: url("https://www.figma.com/api/mcp/asset/18023d07-537f-4f7c-ab93-9a26ad64a1f5");
@@ -135,11 +141,14 @@ body {
 
 /* Step Sections */
 .step {
-  position: relative;
-  width: 1176px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  max-width: 1040px;
   height: 484px;
   margin: 0 auto;
   overflow: hidden;
+  padding: 0 12px;
 }
 
 .step-1 {
@@ -168,7 +177,6 @@ body {
   text-shadow: 0px 4px 4px #e1c2d2;
   margin: 0;
   line-height: 1;
-  position: absolute;
 }
 
 .step-object {
@@ -177,7 +185,6 @@ body {
   color: white;
   margin: 0;
   line-height: 1;
-  position: absolute;
 }
 
 .step-description {
@@ -187,72 +194,65 @@ body {
   color: white;
   margin: 0;
   line-height: 1.2;
-  width: 395px;
-  position: absolute;
 }
 
 /* Step 1 - Right Aligned */
 .step-1 .step-action {
-  right: 50%;
-  transform: translateX(64px);
-  top: 25px;
+  grid-column: 1 / 6;
+  margin-top: 25px;
   text-align: right;
 }
 
 .step-1 .step-object {
   font-size: 80px;
-  right: 50%;
-  transform: translateX(64px);
-  top: 170px;
+  grid-column: 1 / 6;
+  margin-top: -75px;
   text-align: right;
 }
 
 .step-1 .step-description {
-  left: 50%;
-  transform: translateX(-511px);
-  top: 287px;
+  grid-column: 1 / 5;
+  margin-top: -25px;
   text-align: right;
 }
 
 /* Step 2 - Left Aligned */
 .step-2 .step-action {
-  left: 50%;
-  transform: translateX(-55px);
-  top: 25px;
+  grid-column: 5 / -1;
+  margin-top: 25px;
+  text-align: left;
 }
 
 .step-2 .step-object {
   font-size: 80px;
-  left: 50%;
-  transform: translateX(-55px);
-  top: 170px;
+  grid-column: 5 / -1;
+  margin-top: -75px;
+  text-align: left;
 }
 
 .step-2 .step-description {
-  left: 533px;
-  top: 281px;
+  grid-column: 5 / -1;
+  margin-top: -30px;
+  text-align: left;
 }
 
 /* Step 3 - Right Aligned */
 .step-3 .step-action {
-  right: 50%;
-  transform: translateX(60px);
-  top: 72px;
+  grid-column: 1 / 6;
+  margin-top: 72px;
   text-align: right;
 }
 
 .step-3 .step-object {
   font-size: 96px;
-  right: 50%;
-  transform: translateX(60px);
-  top: 205px;
+  grid-column: 1 / 6;
+  margin-top: -47px;
   text-align: right;
 }
 
 .step-3 .step-description {
-  left: 50%;
-  transform: translateX(-648px);
-  top: 325px;
+  grid-column: 1 / 5;
+  margin-top: -15px;
   text-align: right;
 }
 
