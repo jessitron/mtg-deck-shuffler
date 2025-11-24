@@ -145,7 +145,7 @@ The page features:
 
 ### Background Images
 
-All images are MTG cards from Aether Revolt set:
+All images are MTG cards from Edge of Eternities set:
 
 | Section | Card | File |
 |---------|------|------|
