@@ -20,7 +20,8 @@ body {
   background-color: var(--deep-space);
   border: 5px solid var(--light-pink);
   min-height: 100vh;
-  width: 1512px;
+  max-width: 1512px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 }
@@ -49,27 +50,27 @@ body {
 
 .header-title span {
   font-family: "Orbitron", sans-serif;
-  font-size: 24px;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   font-weight: 400;
   color: white;
 }
 
 .right-nav {
   display: flex;
-  gap: 30px;
+  gap: clamp(1rem, 2vw, 30px);
   align-items: center;
 }
 
 .right-nav span {
   font-family: "Orbitron", sans-serif;
-  font-size: 24px;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   font-weight: 400;
   color: white;
 }
 
 .github-logo {
-  width: 67px;
-  height: 66px;
+  width: clamp(40px, 4vw, 67px);
+  height: clamp(39px, 4vw, 66px);
 }
 
 /* Hero Section */
@@ -78,34 +79,35 @@ body {
   grid-template-columns: repeat(9, 1fr);
   gap: 12px;
   max-width: 1040px;
-  height: 484px;
+  width: 100%;
+  min-height: 484px;
   margin: 0 auto;
   margin-top: 0;
   overflow: hidden;
   background-image: url("/images/aeoe-43-cascading-cataracts.png");
   background-size: cover;
   background-position: center;
-  padding: 0 12px;
+  padding: 1rem;
 }
 
 .hero-title {
   font-family: "Risque", cursive;
-  font-size: 440px;
+  font-size: clamp(80px, 25vw, 440px);
   font-weight: 400;
   color: white;
   margin: 0;
-  margin-top: -80px;
+  margin-top: clamp(-20px, -5vw, -80px);
   grid-column: 1 / -1;
   text-align: center;
 }
 
 .hero-subtitle {
   font-family: "Orbitron", sans-serif;
-  font-size: 96px;
+  font-size: clamp(2rem, 6vw, 96px);
   font-weight: 700;
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
-  margin-top: -120px;
+  margin-top: clamp(-2rem, -7vw, -120px);
   grid-column: 1 / -1;
   text-align: center;
 }
@@ -122,7 +124,7 @@ body {
 
 .slogan p {
   font-family: "Risque", cursive;
-  font-size: 48px;
+  font-size: clamp(1.5rem, 3vw, 48px);
   font-weight: 400;
   color: white;
   margin: 0;
@@ -132,6 +134,7 @@ body {
 /* Divider */
 .divider {
   max-width: 1040px;
+  width: 100%;
   height: 12px;
   margin: 0 auto;
   background-image: url("https://www.figma.com/api/mcp/asset/18023d07-537f-4f7c-ab93-9a26ad64a1f5");
@@ -145,10 +148,11 @@ body {
   grid-template-columns: repeat(9, 1fr);
   gap: 12px;
   max-width: 1040px;
-  height: 484px;
+  width: 100%;
+  min-height: 484px;
   margin: 0 auto;
   overflow: hidden;
-  padding: 0 12px;
+  padding: 1rem;
 }
 
 .step-1 {
@@ -171,7 +175,7 @@ body {
 
 .step-action {
   font-family: "Risque", cursive;
-  font-size: 160px;
+  font-size: clamp(3rem, 10vw, 160px);
   font-weight: 400;
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
@@ -189,7 +193,7 @@ body {
 
 .step-description {
   font-family: "Orbitron", sans-serif;
-  font-size: 24px;
+  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -204,9 +208,9 @@ body {
 }
 
 .step-1 .step-object {
-  font-size: 80px;
+  font-size: clamp(2rem, 5vw, 80px);
   grid-column: 1 / 6;
-  margin-top: -75px;
+  margin-top: clamp(-2rem, -4vw, -75px);
   text-align: right;
 }
 
@@ -224,9 +228,9 @@ body {
 }
 
 .step-2 .step-object {
-  font-size: 80px;
+  font-size: clamp(2rem, 5vw, 80px);
   grid-column: 5 / -1;
-  margin-top: -75px;
+  margin-top: clamp(-2rem, -4vw, -75px);
   text-align: left;
 }
 
@@ -244,9 +248,9 @@ body {
 }
 
 .step-3 .step-object {
-  font-size: 96px;
+  font-size: clamp(2.5rem, 6vw, 96px);
   grid-column: 1 / 6;
-  margin-top: -47px;
+  margin-top: clamp(-1.5rem, -3vw, -47px);
   text-align: right;
 }
 
@@ -260,14 +264,14 @@ body {
 .begin-button {
   background-color: white;
   border: 3px solid #92496c;
-  width: 232px;
-  height: 116px;
+  width: clamp(180px, 15vw, 232px);
+  height: clamp(80px, 7vw, 116px);
   position: relative;
   margin: 0 auto;
-  margin-top: 148px;
+  margin-top: clamp(2rem, 9vw, 148px);
   cursor: pointer;
   font-family: "Orbitron", sans-serif;
-  font-size: 36px;
+  font-size: clamp(1.5rem, 2.25vw, 2.25rem);
   font-weight: 700;
   color: black;
   display: flex;
@@ -298,9 +302,100 @@ body {
 
 .main-footer p {
   font-family: "Orbitron", sans-serif;
-  font-size: 24px;
+  font-size: clamp(0.75rem, 1.5vw, 1.5rem);
   font-weight: 400;
   color: white;
   margin: 0;
   line-height: 1.2;
+}
+
+/* Media Queries for Responsive Layout */
+
+/* Tablet: Reduce grid to 6 columns */
+@media (max-width: 768px) {
+  .hero,
+  .step {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    padding: 0.75rem;
+  }
+
+  /* Adjust text positioning for 6-column grid */
+  .step-1 .step-action,
+  .step-1 .step-object {
+    grid-column: 1 / 4;
+  }
+
+  .step-1 .step-description {
+    grid-column: 1 / 4;
+  }
+
+  .step-2 .step-action,
+  .step-2 .step-object,
+  .step-2 .step-description {
+    grid-column: 4 / -1;
+  }
+
+  .step-3 .step-action,
+  .step-3 .step-object {
+    grid-column: 1 / 4;
+  }
+
+  .step-3 .step-description {
+    grid-column: 1 / 4;
+  }
+}
+
+/* Mobile: Simplify to 3 columns or single column layout */
+@media (max-width: 480px) {
+  .hero,
+  .step {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+
+  /* Stack all text in single column */
+  .step-1 .step-action,
+  .step-1 .step-object,
+  .step-1 .step-description,
+  .step-2 .step-action,
+  .step-2 .step-object,
+  .step-2 .step-description,
+  .step-3 .step-action,
+  .step-3 .step-object,
+  .step-3 .step-description {
+    grid-column: 1;
+    text-align: center !important;
+  }
+
+  /* Adjust margins for stacked layout */
+  .step-1 .step-object,
+  .step-2 .step-object {
+    margin-top: 0.5rem;
+  }
+
+  .step-3 .step-object {
+    margin-top: 0.5rem;
+  }
+
+  .step-1 .step-description,
+  .step-2 .step-description,
+  .step-3 .step-description {
+    margin-top: 1rem;
+  }
+
+  /* Reduce section heights on mobile */
+  .hero,
+  .step {
+    min-height: 300px;
+  }
+
+  .slogan {
+    padding: 0 1rem;
+  }
+
+  .main-footer {
+    padding: 0 1rem;
+  }
 }
