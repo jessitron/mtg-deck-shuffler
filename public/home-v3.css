@@ -80,7 +80,7 @@ body {
   margin: 0 auto;
   margin-top: 0;
   overflow: hidden;
-  background-image: url('https://www.figma.com/api/mcp/asset/daa072d0-45f0-4a5f-826b-3a2cd0b74dd7');
+  background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
 }
@@ -151,19 +151,19 @@ body {
 }
 
 .step-1 {
-  background-image: url('https://www.figma.com/api/mcp/asset/ac4ef3e5-c6e9-44b6-9aac-96f71453d8c8');
+  background-image: url('/images/aeoe-3-exalted-sunborn.png');
   background-size: cover;
   background-position: center;
 }
 
 .step-2 {
-  background-image: url('https://www.figma.com/api/mcp/asset/7037694e-371a-45e4-a4d8-94b8d88ebd4d');
+  background-image: url('/images/aeoe-41-terrasymbiosis.png');
   background-size: cover;
   background-position: center;
 }
 
 .step-3 {
-  background-image: url('https://www.figma.com/api/mcp/asset/0a7f5a0a-fd1d-4d99-9228-43e7eda6d36a');
+  background-image: url('/images/aeoe-49-bonders-enclave.png');
   background-size: cover;
   background-position: center;
 }
