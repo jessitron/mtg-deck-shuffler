@@ -48,7 +48,7 @@ body {
 }
 
 .header-title span {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: white;
@@ -61,7 +61,7 @@ body {
 }
 
 .right-nav span {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: white;
@@ -80,36 +80,28 @@ body {
   margin: 0 auto;
   margin-top: 0;
   overflow: hidden;
-  background-image: url('/images/aeoe-43-cascading-cataracts.png');
+  background-image: url("/images/aeoe-43-cascading-cataracts.png");
   background-size: cover;
   background-position: center;
+  text-align: center;
 }
 
 .hero-title {
-  font-family: 'Risque', cursive;
+  font-family: "Risque", cursive;
   font-size: 440px;
   font-weight: 400;
   color: white;
   margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-442px);
-  top: -79px;
-  line-height: 1;
+  margin-top: -80px;
 }
 
 .hero-subtitle {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 96px;
   font-weight: 700;
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-370px);
-  top: 242px;
-  line-height: 1;
+  margin-top: -120px;
 }
 
 /* Slogan Section */
@@ -123,7 +115,7 @@ body {
 }
 
 .slogan p {
-  font-family: 'Risque', cursive;
+  font-family: "Risque", cursive;
   font-size: 48px;
   font-weight: 400;
   color: white;
@@ -136,7 +128,7 @@ body {
   width: 1176px;
   height: 12px;
   margin: 0 auto;
-  background-image: url('https://www.figma.com/api/mcp/asset/18023d07-537f-4f7c-ab93-9a26ad64a1f5');
+  background-image: url("https://www.figma.com/api/mcp/asset/18023d07-537f-4f7c-ab93-9a26ad64a1f5");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -151,25 +143,25 @@ body {
 }
 
 .step-1 {
-  background-image: url('/images/aeoe-3-exalted-sunborn.png');
+  background-image: url("/images/aeoe-3-exalted-sunborn.png");
   background-size: cover;
   background-position: center;
 }
 
 .step-2 {
-  background-image: url('/images/aeoe-41-terrasymbiosis.png');
+  background-image: url("/images/aeoe-41-terrasymbiosis.png");
   background-size: cover;
   background-position: center;
 }
 
 .step-3 {
-  background-image: url('/images/aeoe-49-bonders-enclave.png');
+  background-image: url("/images/aeoe-49-bonders-enclave.png");
   background-size: cover;
   background-position: center;
 }
 
 .step-action {
-  font-family: 'Risque', cursive;
+  font-family: "Risque", cursive;
   font-size: 160px;
   font-weight: 400;
   color: var(--deep-space);
@@ -180,7 +172,7 @@ body {
 }
 
 .step-object {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-weight: 700;
   color: white;
   margin: 0;
@@ -189,7 +181,7 @@ body {
 }
 
 .step-description {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 24px;
   font-weight: 600;
   color: white;
@@ -274,7 +266,7 @@ body {
   margin: 0 auto;
   margin-top: 148px;
   cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 36px;
   font-weight: 700;
   color: black;
@@ -284,7 +276,7 @@ body {
 }
 
 .begin-button::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 10px;
   top: 9px;
@@ -305,7 +297,7 @@ body {
 }
 
 .main-footer p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: white;
