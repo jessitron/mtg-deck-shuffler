@@ -55,14 +55,18 @@
       "Bash(npx tsc:*)",
       "Bash(jq:*)",
       "Bash(PORT=3001 timeout 5 ./run)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "mcp__figma__whoami",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_screenshot"
     ],
     "deny": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "honeycomb"
   ],
   "hooks": {},
-  "mcp": {},
-  "enableAllProjectMcpServers": true
+  "mcp": {}
 }

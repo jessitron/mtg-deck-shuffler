@@ -1,0 +1,37 @@
+:root {
+  --dark-pink: #bb5277;
+  --light-pink: #ddc7dd;
+  --deep-space: #221534;
+
+  --narrow-border: 3px;
+}
+
+body {
+  background-color: var(--deep-space);
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+}
+
+header {
+  border-bottom: var(--narrow-border) solid var(--dark-pink);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+}
+
+header > div {
+  padding: 10px;
+}
+
+header .right-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+}
+
+img.github-logo {
+  height: 30px;
+}
