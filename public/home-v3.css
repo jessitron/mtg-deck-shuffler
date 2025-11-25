@@ -80,7 +80,7 @@ body {
   gap: 12px;
   max-width: 1040px;
   width: 100%;
-  min-height: 484px;
+  aspect-ratio: 1040 / 484;
   margin: 0 auto;
   margin-top: 0;
   overflow: hidden;
@@ -386,7 +386,6 @@ body {
   }
 
   /* Reduce section heights on mobile */
-  .hero,
   .step {
     min-height: 300px;
   }
