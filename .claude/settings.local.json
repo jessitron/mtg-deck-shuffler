@@ -59,7 +59,8 @@
       "mcp__figma__whoami",
       "mcp__figma__get_design_context",
       "mcp__figma__get_metadata",
-      "mcp__figma__get_screenshot"
+      "mcp__figma__get_screenshot",
+      "Bash(ls:*)"
     ],
     "deny": []
   },
