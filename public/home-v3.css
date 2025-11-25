@@ -107,7 +107,7 @@ body {
   font-weight: 700;
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
-  margin-top: clamp(-120px, -11.54vw, -30px); /* Scaled from Figma positioning */
+  margin-top: max(-18vw, -170px);
   grid-column: 1 / -1;
   text-align: center;
 }
@@ -124,8 +124,8 @@ body {
 
 .slogan p {
   font-family: "Risque", cursive;
-  font-size: clamp(1.5rem, 3vw, 48px);
-  font-weight: 400;
+  font-size: 2rem;
+  font-weight: 300;
   color: white;
   margin: 0;
   line-height: 1;
@@ -215,7 +215,7 @@ body {
 }
 
 .step-1 .step-description {
-  grid-column: 1 / 5;
+  grid-column: 1 / 6;
   margin-top: -25px;
   text-align: right;
 }
