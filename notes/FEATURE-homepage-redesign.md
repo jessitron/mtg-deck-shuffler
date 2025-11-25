@@ -164,9 +164,18 @@ Defined in CSS variables:
 ### Layout
 
 - Fixed width: 1512px
-- Centered sections: 1176px wide
+- Centered sections: 1040px wide (see Deviations from Figma below)
 - Large typography with absolute positioning overlays on card art
 - Alternating text alignment (right/left/right) for visual interest
+
+### Deviations from Figma
+
+**Section Width: 1040px instead of 1176px**
+- **Figma design**: Hero and step sections are 1176px wide × 484px tall
+- **Implementation**: Sections are 1040px wide × 428px tall
+- **Reason**: Background images were cropped to 1040px width to focus on the most interesting parts of the card art
+- **Aspect ratio preserved**: Both use ~2.43:1 aspect ratio (Figma: 1176÷484=2.429, Implementation: 1040÷428=2.430)
+- **Date**: 2025-11-24
 
 ### Current Status
 
