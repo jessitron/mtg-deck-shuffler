@@ -71,12 +71,16 @@ This is a static prototype/landing page separate from the main application flow.
 
 ### TODO
 
-- [] make the BEGIN buttons look like buttons (10px outset light-pink border, no rectangle)
-- [] NOW: position the first BEGIN button correctly. On larger screens, it should be over the Step 1: Choose section.
-- [] make 3 width-based media type. Over 1040px width, sizes etc should be fixed. Below 768, no grids, just single columns. In between, different grids, with less empty space.
-- [] get the linear gradient background overlays that I have in Figma onto the sections
-- [] the sections are too tall on narrower screens. They should keep their width/height proportion.
-- [] on smaller screens, the text in the steps should reflow to a single column instead of a grid.
+- [x] NOW: get the linear gradient background overlays that I have in Figma onto the sections
 - [] make the pictures move a little as you scroll, like they're way in the background and your perspective shifts as you scroll.
 - [] create the 'docs' page
 - [] create the 'about' page
+
+### Gradient Overlays Implementation
+
+Each step section now has a gradient overlay applied via CSS `::before` pseudo-elements:
+- **Step 1 (Choose)**: Dark to transparent gradient (left to right) - matches text positioning on the left
+- **Step 2 (Prepare)**: Transparent to dark gradient (right to left) - matches text positioning on the right
+- **Step 3 (Enter)**: Dark to transparent gradient (left to right) - matches text positioning on the left
+
+The gradients use `rgba(34, 21, 52, 0.75)` (deep-space color with 75% opacity) to improve text readability while maintaining visual interest from the background card art.
