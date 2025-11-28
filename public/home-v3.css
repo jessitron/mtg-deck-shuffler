@@ -170,7 +170,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(34, 21, 52, 0.75), transparent);
+  background: linear-gradient(256deg, rgba(0, 0, 0, 0.00) 50.21%, rgba(0, 0, 0, 0.60) 69.45%);
   pointer-events: none;
 }
 
@@ -185,7 +185,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to left, rgba(34, 21, 52, 0.75), transparent);
+  background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) 54.8%, rgba(255, 255, 255, 0.40) 70.53%);
   pointer-events: none;
 }
 
@@ -200,7 +200,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(34, 21, 52, 0.75), transparent);
+  background: linear-gradient(252deg, rgba(0, 0, 0, 0.00) 53.12%, rgba(187, 82, 119, 0.40) 69.36%);
   pointer-events: none;
 }
 
