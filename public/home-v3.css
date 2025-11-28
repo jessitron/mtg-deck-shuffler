@@ -262,6 +262,7 @@ body {
 
 /* BEGIN Buttons */
 .begin-button {
+  display: block;
   background-color: white;
   border: 10px outset var(--light-pink);
   width: clamp(180px, 22.3077vw, 232px);
