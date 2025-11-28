@@ -91,16 +91,19 @@ body {
 
 .hero-title {
   font-family: "Risque", cursive;
-  font-size: min(42.31vw, 440px); /* 440px ÷ 1040px = 42.31% of container width */
+  font-size: min(42.31vw, 440px);
+  /* 440px ÷ 1040px = 42.31% of container width */
   font-weight: 400;
   color: white;
   margin: 0;
-  margin-top: clamp(-79px, -7.6vw, -20px); /* -79px ÷ 1040px = -7.6% */
+  margin-top: clamp(-79px, -7.6vw, -20px);
+  /* -79px ÷ 1040px = -7.6% */
 }
 
 .hero-subtitle {
   font-family: "Orbitron", sans-serif;
-  font-size: min(9.23vw, 96px); /* 96px ÷ 1040px = 9.23% of container width */
+  font-size: min(9.23vw, 96px);
+  /* 96px ÷ 1040px = 9.23% of container width */
   font-weight: 700;
   color: var(--deep-space);
   text-shadow: 0px 4px 4px #e1c2d2;
@@ -141,19 +144,26 @@ body {
 .step {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 12px;
+  grid-template-rows: clamp(3rem, 10vw, 160px) clamp(2rem, 5vw, 80px) auto;
+  gap: 0 12px;
   max-width: 1040px;
   width: 100%;
   min-height: 484px;
   margin: 0 auto;
   overflow: hidden;
-  padding: 1rem;
+  align-content: start;
+}
+
+.step>* {
+  border: 0px solid red;
+  /* for debugging */
 }
 
 .step-1 {
   background-image: url("/images/aeoe-3-exalted-sunborn.png");
   background-size: cover;
   background-position: center;
+  position: relative;
 }
 
 .step-2 {
@@ -173,9 +183,12 @@ body {
   font-size: clamp(3rem, 10vw, 160px);
   font-weight: 400;
   color: var(--deep-space);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--light-pink, #DDC7DD);
   text-shadow: 0px 4px 4px #e1c2d2;
   margin: 0;
   line-height: 1;
+  align-self: end;
 }
 
 .step-object {
@@ -184,11 +197,12 @@ body {
   color: white;
   margin: 0;
   line-height: 1;
+  transform: translateY(-65%);
 }
 
 .step-description {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -197,61 +211,52 @@ body {
 
 /* Step 1 - Right Aligned */
 .step-1 .step-action {
-  grid-column: 1 / 6;
-  margin-top: 25px;
+  grid-column: 1 / 5;
   text-align: right;
 }
 
 .step-1 .step-object {
   font-size: clamp(2rem, 5vw, 80px);
-  grid-column: 1 / 6;
-  margin-top: clamp(-2rem, -4vw, -75px);
+  grid-column: 1 / 5;
   text-align: right;
 }
 
 .step-1 .step-description {
-  grid-column: 1 / 6;
-  margin-top: -25px;
+  grid-column: 1 / 5;
   text-align: right;
 }
 
 /* Step 2 - Left Aligned */
 .step-2 .step-action {
   grid-column: 5 / -1;
-  margin-top: 25px;
   text-align: left;
 }
 
 .step-2 .step-object {
   font-size: clamp(2rem, 5vw, 80px);
   grid-column: 5 / -1;
-  margin-top: clamp(-2rem, -4vw, -75px);
   text-align: left;
 }
 
 .step-2 .step-description {
   grid-column: 5 / -1;
-  margin-top: -30px;
   text-align: left;
 }
 
 /* Step 3 - Right Aligned */
 .step-3 .step-action {
   grid-column: 1 / 6;
-  margin-top: 72px;
   text-align: right;
 }
 
 .step-3 .step-object {
   font-size: clamp(2.5rem, 6vw, 96px);
   grid-column: 1 / 6;
-  margin-top: clamp(-1.5rem, -3vw, -47px);
   text-align: right;
 }
 
 .step-3 .step-description {
-  grid-column: 1 / 5;
-  margin-top: -15px;
+  grid-column: 1 / 6;
   text-align: right;
 }
 
@@ -285,6 +290,14 @@ body {
   pointer-events: none;
 }
 
+/* First BEGIN button - positioned over Step 1 on large screens */
+.button-1 {
+  position: absolute;
+  right: clamp(40px, 5vw, 80px);
+  bottom: clamp(40px, 5vw, 80px);
+  margin: 0;
+}
+
 /* Footer */
 .main-footer {
   border-top: var(--narrow-border) solid var(--dark-pink);
@@ -308,11 +321,11 @@ body {
 
 /* Tablet: Reduce grid to 6 columns */
 @media (max-width: 768px) {
+
   .hero,
   .step {
     grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    padding: 0.75rem;
+    gap: 0 10px;
   }
 
   /* Adjust text positioning for 6-column grid */
@@ -323,6 +336,15 @@ body {
 
   .step-1 .step-description {
     grid-column: 1 / 4;
+  }
+
+  /* Reset button positioning for smaller screens */
+  .button-1 {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 0 auto;
+    margin-top: clamp(2rem, 9vw, 148px);
   }
 
   .step-2 .step-action,
@@ -343,11 +365,11 @@ body {
 
 /* Mobile: Simplify to 3 columns or single column layout */
 @media (max-width: 480px) {
+
   .hero,
   .step {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 1rem 0.5rem;
+    gap: 0;
   }
 
   /* Stack all text in single column */
@@ -362,6 +384,15 @@ body {
   .step-3 .step-description {
     grid-column: 1;
     text-align: center !important;
+  }
+
+  /* Reset button positioning for mobile */
+  .button-1 {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 0 auto;
+    margin-top: clamp(2rem, 9vw, 148px);
   }
 
   /* Adjust margins for stacked layout */
