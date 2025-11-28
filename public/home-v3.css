@@ -71,6 +71,7 @@ body {
 .github-logo {
   width: clamp(40px, 4vw, 67px);
   height: clamp(39px, 4vw, 66px);
+  filter: brightness(0) invert(1);
 }
 
 /* Hero Section */
