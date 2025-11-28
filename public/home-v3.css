@@ -166,16 +166,42 @@ body {
   position: relative;
 }
 
+.step-1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(34, 21, 52, 0.75), transparent);
+  pointer-events: none;
+}
+
 .step-2 {
   background-image: url("/images/aeoe-41-terrasymbiosis.png");
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+.step-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(34, 21, 52, 0.75), transparent);
+  pointer-events: none;
 }
 
 .step-3 {
   background-image: url("/images/aeoe-49-bonders-enclave.png");
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+.step-3::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(34, 21, 52, 0.75), transparent);
+  pointer-events: none;
 }
 
 .step-action {
