@@ -266,7 +266,6 @@ body {
   border: 10px outset var(--light-pink);
   width: clamp(180px, 15vw, 232px);
   height: clamp(80px, 7vw, 116px);
-  position: relative;
   margin: 0 auto;
   margin-top: clamp(2rem, 9vw, 148px);
   cursor: pointer;
