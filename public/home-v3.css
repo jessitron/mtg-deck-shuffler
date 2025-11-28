@@ -324,7 +324,6 @@ body {
   .step-3 .step-object,
   .step-3 .step-description {
     grid-column: 1;
-    text-align: center !important;
   }
 
   /* Reset button positioning for smaller screens */
