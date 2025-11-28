@@ -263,7 +263,7 @@ body {
 /* BEGIN Buttons */
 .begin-button {
   background-color: white;
-  border: 3px solid #92496c;
+  border: 10px outset var(--light-pink);
   width: clamp(180px, 15vw, 232px);
   height: clamp(80px, 7vw, 116px);
   position: relative;
@@ -277,17 +277,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.begin-button::before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  top: 9px;
-  width: 212px;
-  height: 97px;
-  border: 1px solid var(--dark-pink);
-  pointer-events: none;
 }
 
 /* First BEGIN button - positioned over Step 1 on large screens */
