@@ -304,52 +304,8 @@ body {
 
 /* Media Queries for Responsive Layout */
 
-/* Tablet: Reduce grid to 6 columns */
+/* Tablet and Mobile: Single column layout */
 @media (max-width: 768px) {
-
-  .hero,
-  .step {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0 10px;
-  }
-
-  /* Adjust text positioning for 6-column grid */
-  .step-1 .step-action,
-  .step-1 .step-object {
-    grid-column: 1 / 4;
-  }
-
-  .step-1 .step-description {
-    grid-column: 1 / 4;
-  }
-
-  /* Reset button positioning for smaller screens */
-  .button-1 {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin: 0 auto;
-    margin-top: clamp(2rem, 9vw, 148px);
-  }
-
-  .step-2 .step-action,
-  .step-2 .step-object,
-  .step-2 .step-description {
-    grid-column: 4 / -1;
-  }
-
-  .step-3 .step-action,
-  .step-3 .step-object {
-    grid-column: 1 / 4;
-  }
-
-  .step-3 .step-description {
-    grid-column: 1 / 4;
-  }
-}
-
-/* Mobile: Simplify to 3 columns or single column layout */
-@media (max-width: 480px) {
 
   .hero,
   .step {
@@ -371,7 +327,7 @@ body {
     text-align: center !important;
   }
 
-  /* Reset button positioning for mobile */
+  /* Reset button positioning for smaller screens */
   .button-1 {
     position: relative;
     right: auto;
