@@ -50,27 +50,27 @@ body {
 
 .header-title span {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
 }
 
 .right-nav {
   display: flex;
-  gap: clamp(1rem, 2vw, 30px);
+  gap: clamp(1rem, 2.8846vw, 30px);
   align-items: center;
 }
 
 .right-nav span {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
 }
 
 .github-logo {
-  width: clamp(40px, 4vw, 67px);
-  height: clamp(39px, 4vw, 66px);
+  width: clamp(40px, 6.4423vw, 67px);
+  height: clamp(39px, 6.3462vw, 66px);
   filter: brightness(0) invert(1);
 }
 
@@ -144,7 +144,7 @@ body {
 .step {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: clamp(3rem, 10vw, 160px) clamp(2rem, 5vw, 80px) auto;
+  grid-template-rows: clamp(3rem, 15.3846vw, 160px) clamp(2rem, 7.6923vw, 80px) auto;
   gap: 0 12px;
   max-width: 1040px;
   width: 100%;
@@ -180,7 +180,7 @@ body {
 
 .step-action {
   font-family: "Risque", cursive;
-  font-size: clamp(3rem, 10vw, 160px);
+  font-size: clamp(3rem, 15.3846vw, 160px);
   font-weight: 400;
   color: var(--deep-space);
   -webkit-text-stroke-width: 1px;
@@ -202,7 +202,7 @@ body {
 
 .step-description {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -216,7 +216,7 @@ body {
 }
 
 .step-1 .step-object {
-  font-size: clamp(2rem, 5vw, 80px);
+  font-size: clamp(2rem, 7.6923vw, 80px);
   grid-column: 1 / 5;
   text-align: right;
 }
@@ -233,7 +233,7 @@ body {
 }
 
 .step-2 .step-object {
-  font-size: clamp(2rem, 5vw, 80px);
+  font-size: clamp(2rem, 7.6923vw, 80px);
   grid-column: 5 / -1;
   text-align: left;
 }
@@ -250,7 +250,7 @@ body {
 }
 
 .step-3 .step-object {
-  font-size: clamp(2.5rem, 6vw, 96px);
+  font-size: clamp(2.5rem, 9.2308vw, 96px);
   grid-column: 1 / 6;
   text-align: right;
 }
@@ -264,13 +264,13 @@ body {
 .begin-button {
   background-color: white;
   border: 10px outset var(--light-pink);
-  width: clamp(180px, 15vw, 232px);
-  height: clamp(80px, 7vw, 116px);
+  width: clamp(180px, 22.3077vw, 232px);
+  height: clamp(80px, 11.1538vw, 116px);
   margin: 0 auto;
-  margin-top: clamp(2rem, 9vw, 148px);
+  margin-top: clamp(2rem, 14.2308vw, 148px);
   cursor: pointer;
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(1.5rem, 2.25vw, 2.25rem);
+  font-size: clamp(1.5rem, 3.4615vw, 2.25rem);
   font-weight: 700;
   color: black;
 }
@@ -278,8 +278,8 @@ body {
 /* First BEGIN button - positioned over Step 1 on large screens */
 .button-1 {
   position: absolute;
-  right: clamp(40px, 5vw, 80px);
-  bottom: clamp(40px, 5vw, 80px);
+  right: clamp(40px, 7.6923vw, 80px);
+  bottom: clamp(40px, 7.6923vw, 80px);
   margin: 0;
 }
 
@@ -295,7 +295,7 @@ body {
 
 .main-footer p {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.75rem, 1.5vw, 1.5rem);
+  font-size: clamp(0.75rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
   margin: 0;
