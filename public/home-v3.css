@@ -172,6 +172,7 @@ body {
   inset: 0;
   background: linear-gradient(256deg, rgba(0, 0, 0, 0.00) 50.21%, rgba(0, 0, 0, 0.60) 69.45%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .step-2 {
@@ -187,6 +188,7 @@ body {
   inset: 0;
   background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) 54.8%, rgba(255, 255, 255, 0.40) 70.53%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .step-3 {
@@ -202,6 +204,7 @@ body {
   inset: 0;
   background: linear-gradient(252deg, rgba(0, 0, 0, 0.00) 53.12%, rgba(187, 82, 119, 0.40) 69.36%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .step-action {
@@ -215,6 +218,8 @@ body {
   margin: 0;
   line-height: 1;
   align-self: end;
+  position: relative;
+  z-index: 2;
 }
 
 .step-object {
@@ -224,6 +229,8 @@ body {
   margin: 0;
   line-height: 1;
   transform: translateY(-65%);
+  position: relative;
+  z-index: 3;
 }
 
 .step-description {
@@ -233,6 +240,8 @@ body {
   color: white;
   margin: 0;
   line-height: 1.2;
+  position: relative;
+  z-index: 3;
 }
 
 /* Step 1 - Right Aligned */
@@ -308,6 +317,7 @@ body {
   right: clamp(40px, 7.6923vw, 80px);
   bottom: clamp(40px, 7.6923vw, 80px);
   margin: 0;
+  z-index: 3;
 }
 
 /* Footer */
