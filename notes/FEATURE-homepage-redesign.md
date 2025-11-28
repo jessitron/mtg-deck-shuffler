@@ -16,7 +16,8 @@ A new landing page design was created from Figma designs and implemented as `pub
 
 - **HTML**: `public/home-v3.html` - Standalone HTML file with complete page structure
 - **CSS**: `public/home-v3.css` - Dedicated styles for the home-v3 page
-- **Images**: `public/images/` - Local    copies of MTG card art
+- **JavaScript**: `public/home-v3-parallax.js` - Parallax scrolling effect for depth illusion
+- **Images**: `public/images/` - Local copies of MTG card art
 
 ### Design Elements
 
@@ -72,7 +73,7 @@ This is a static prototype/landing page separate from the main application flow.
 ### TODO
 
 - [x] NOW: get the linear gradient background overlays that I have in Figma onto the sections
-- [] make the pictures move a little as you scroll, like they're way in the background and your perspective shifts as you scroll.
+- [x] make the pictures move a little as you scroll, like they're way in the background and your perspective shifts as you scroll.
 - [] create the 'docs' page
 - [] create the 'about' page
 
@@ -84,3 +85,11 @@ Each step section now has a gradient overlay applied via CSS `::before` pseudo-e
 - **Step 3 (Enter)**: Dark to transparent gradient (left to right) - matches text positioning on the left
 
 The gradients use `rgba(34, 21, 52, 0.75)` (deep-space color with 75% opacity) to improve text readability while maintaining visual interest from the background card art.
+
+### Parallax Scrolling Effect
+
+Background images in the hero and step sections use a parallax scrolling effect that creates a sense of depth:
+- Images move at 35% of the scroll speed (PARALLAX_FACTOR = 0.35)
+- Creates the illusion that backgrounds are far away behind a "window" of foreground content
+- Implemented using `requestAnimationFrame` for smooth, performant animation
+- Adjusts `background-position` based on scroll position relative to viewport center
