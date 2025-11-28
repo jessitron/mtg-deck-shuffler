@@ -311,6 +311,7 @@ body {
   .step {
     grid-template-columns: 1fr;
     gap: 0;
+    padding: 1rem 2rem;
   }
 
   /* Stack all text in single column */
