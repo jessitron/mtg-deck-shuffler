@@ -273,9 +273,6 @@ body {
   font-size: clamp(1.5rem, 2.25vw, 2.25rem);
   font-weight: 700;
   color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* First BEGIN button - positioned over Step 1 on large screens */
