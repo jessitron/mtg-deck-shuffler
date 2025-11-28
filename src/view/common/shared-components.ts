@@ -7,7 +7,7 @@ const app_title = "MTG Deck Shuffler";
 
 export function formatTitleHtmlFragment(): string {
   return `<div class="title-container">
-      <h1 class="homepage-title">${app_title}</h1>
+      <a href="/"><h1 class="homepage-title">${app_title}</h1></a>
       </div>`;
 }
 
