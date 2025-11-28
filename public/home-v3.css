@@ -290,6 +290,7 @@ body {
   height: 79px;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 20px;
   margin-top: 148px;
 }
@@ -301,6 +302,7 @@ body {
   color: white;
   margin: 0;
   line-height: 1.2;
+  text-align: center;
 }
 
 /* Media Queries for Responsive Layout */
