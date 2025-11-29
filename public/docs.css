@@ -1,0 +1,255 @@
+/* Docs Page Styles */
+
+:root {
+  --deep-space: #221534;
+  --dark-pink: #bb5277;
+  --light-pink: #ddc7dd;
+  --text-light: #e8e8e8;
+  --link-color: #dda0c5;
+  --link-hover: #f0c0dd;
+}
+
+.docs-page {
+  background-color: var(--deep-space);
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+.docs-page h1,
+.docs-page h2,
+.docs-page h3,
+.docs-page h4,
+.docs-page h5,
+.docs-page h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+.docs-page p,
+.docs-page li,
+.docs-page a {
+  font-family: 'Ovo', serif;
+}
+
+/* Container Layout */
+.docs-container {
+  display: flex;
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Sidebar Navigation */
+.docs-sidebar {
+  width: 250px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  flex-shrink: 0;
+}
+
+.docs-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-sidebar > ul {
+  border-left: 2px solid var(--dark-pink);
+}
+
+.docs-sidebar li {
+  margin: 0;
+}
+
+.docs-sidebar > ul > li {
+  margin-bottom: 1rem;
+}
+
+.docs-sidebar a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.docs-sidebar > ul > li > a {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.docs-sidebar a:hover {
+  color: var(--link-hover);
+  background-color: rgba(187, 82, 119, 0.1);
+}
+
+.docs-sidebar a.active {
+  color: var(--link-hover);
+  border-left: 3px solid var(--dark-pink);
+  margin-left: -2px;
+}
+
+/* Nested navigation */
+.docs-sidebar ul ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.docs-sidebar ul ul a {
+  padding-left: 2rem;
+  font-size: 0.9rem;
+  color: var(--light-pink);
+}
+
+.docs-sidebar ul ul a:hover {
+  color: var(--link-hover);
+}
+
+/* Main Content Area */
+.docs-content {
+  flex: 1;
+  max-width: 800px;
+  min-width: 0;
+}
+
+.docs-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--light-pink);
+}
+
+.docs-content h2 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--link-hover);
+  border-bottom: 2px solid var(--dark-pink);
+  padding-bottom: 0.5rem;
+}
+
+.docs-content h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--link-color);
+}
+
+.docs-section {
+  margin-bottom: 3rem;
+}
+
+.docs-subsection {
+  margin-bottom: 2rem;
+}
+
+.docs-content p {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.docs-content ul,
+.docs-content ol {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.docs-content li {
+  margin-bottom: 0.5rem;
+}
+
+.docs-content a {
+  color: var(--link-color);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.docs-content a:hover {
+  color: var(--link-hover);
+}
+
+.docs-content strong {
+  color: var(--light-pink);
+  font-weight: 600;
+}
+
+/* Header adjustments for docs page */
+.docs-page .main-header {
+  position: static;
+  margin-bottom: 0;
+}
+
+.docs-page .right-nav .nav-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.docs-page .right-nav .nav-link:hover {
+  opacity: 0.7;
+}
+
+.docs-page .right-nav .nav-link.active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .docs-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .docs-sidebar {
+    width: 100%;
+    position: static;
+    border-left: none;
+    border-top: 2px solid var(--dark-pink);
+    padding-top: 1rem;
+  }
+
+  .docs-sidebar > ul {
+    border-left: none;
+    border-top: 2px solid var(--dark-pink);
+    padding-top: 1rem;
+  }
+
+  .docs-content {
+    max-width: 100%;
+  }
+
+  .docs-content h1 {
+    font-size: 2rem;
+  }
+
+  .docs-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .docs-content h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchor targets (accounts for sticky header) */
+.docs-section,
+.docs-subsection {
+  scroll-margin-top: 2rem;
+}

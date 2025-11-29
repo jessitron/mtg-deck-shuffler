@@ -57,6 +57,19 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns whole page - documentation page
+  app.get("/docs", async (req, res) => {
+    try {
+      res.sendFile(path.join(__dirname, "..", "public", "docs.html"));
+    } catch (error) {
+      console.error("Error loading docs page:", error);
+      res.status(500).send(`<div>
+        <p>Error: Could not load the documentation page</p>
+        <p>Please try refreshing the page</p>
+    </div>`);
+    }
+  });
+
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
