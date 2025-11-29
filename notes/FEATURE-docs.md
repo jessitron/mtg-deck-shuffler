@@ -43,229 +43,71 @@ Create a comprehensive documentation page accessible at `/docs` that helps users
   - `--dark-pink`: #bb5277 (accents)
   - `--light-pink`: #ddc7dd (borders)
 
-## Content Outline
+## Content
 
-### Section 1: Playing MTG Remotely
-**Sidebar link**: "Playing Remotely"
+Content is maintained in **`notes/docs-content.md`** in markdown format.
 
-This section explains the complete setup for remote MTG play using this tool.
-
-#### When to use this app
-
-If you already know how to play Magic the Gathering, and you and your friends want to play on the computer but you don't want the computer running the game for you, MTG Deck Shuffler is part of the solution.
-
-Use an online whiteboard as a table, use any voice chat to talk to each other, and use MTG Deck Shuffler to manage your library. 
-
-This way of playing leaves all the rules enforcement to you. Use house rules, let each other change your minds or trigger effects late. Forget to trigger effects, this is normal. This way of playing is closer to the tabletop experience than to MTG Online or Arena.
-
-// right here we need a video of how it works.
-
-Alternative: shuffle your own physical cards, look up the card image on Scryfall each time you play one, and then you don't need MTG Deck Shuffler.
-
-#### 1.1 What You Need
-- This deck shuffler (MTG Deck Shuffler)
-- A shared visual board (Mural or Miro)
-- Experience playing the game
-- Voice/video chat (like Discord)
-- Your friends!
-
-#### What you don't need
-- Physical cards
-- A webcam
-- To follow the official rules
-
-#### 1.2 Setting Up the Table
-- **Visual Board**: Create a board in Mural or Miro
-  - Each player gets their own area
-  - Shared space for the battlefield/table
-  - How to use: drag card images from MTG Deck Shuffler to Mural/Miro
-- **Discord**: Voice channel for gameplay
-  - Announcing plays
-  - Discussing strategy
-  - Social interaction that makes MTG fun
-
-#### 1.3 During Gameplay
-- Use MTG Deck Shuffler to:
-  - Shuffle and draw cards
-  - Look at top cards of library
-  - Manage your hand
-  - Track which cards you've played
-- Use Mural/Miro to:
-  - Show the battlefield state
-  - Display permanents in play
-  - Track life totals (with sticky notes/shapes)
-- Use Discord to:
-  - Announce your plays
-  - Respond to opponent actions
-  - Use the stack correctly
-  - Have fun!
-
-
-### Section 2: Using the App
-**Sidebar link**: "Using the App"
-
-This section documents the three-screen workflow of the application.
-
-#### 2.1 Overview: Three Screens
-Brief description of the linear progression:
-- Deck Selection (entry point)
-- Deck Review (prepare before playing)
-- Play Game (active gameplay)
-
-#### 2.2 Deck Selection
-**What it does**: Choose which deck to play
-
-**Options**:
-- Enter an Archidekt deck ID/URL
-- Choose a preconstructed Commander deck
-- (Future: Moxfield support)
-
-**Actions**:
-- "Let's Play" button loads the deck and proceeds to Deck Review
-
-**Notes**:
-- Decks are fetched from Archidekt API
-- Card images come from Scryfall
-- Deck is immutable once loaded (snapshot from source)
-
-#### 2.3 Deck Review
-**What it does**: Review your deck before starting the game
-
-**What you see**:
-- Commander card(s) in the command zone
-- Library (unshuffled, face-down)
-- Deck provenance information (source, URL, date)
-
-**Actions**:
-- "Shuffle Up" - shuffles library and starts the game
-- "Choose Another Deck" - returns to Deck Selection
-- "Search" - reveals the full card list in the library
-
-**Game State**:
-- Game exists but is "Not Started"
-- Library is not shuffled
-- Game ID is in the URL
-
-#### 2.4 Play Game
-**What it does**: Active game screen for playing
-
-**What you see**:
-- **Command Zone**: Commander card(s) (always visible)
-- **Library**: Your shuffled deck (face-down)
-- **Hand**: Cards you've drawn (ordered, draggable)
-- **Revealed Cards**: Cards you're looking at from library actions
-
-**Actions on Library**:
-- "Draw" - move top card to hand
-- "Reveal" - look at top N cards
-- "Search" - look at entire library
-- "Shuffle" - randomize library order
-
-**Actions on Hand**:
-- Drag to reorder cards
-- "Play" button - move card to table (removes from tracking)
-
-**Actions on Revealed Cards**:
-- "To Hand" - move to hand
-- "To Top" - return to top of library
-- "To Bottom" - move to bottom of library
-- "Play" - move to table
-
-**Actions on Table Cards**:
-- "Return to Hand" - retrieve a played card
-- "Return to Library" - put a played card back in library
-
-**Game Management**:
-- "Restart Game" - reset game state, reshuffle
-- "Quit" - return to Deck Selection
-
-**Game State**:
-- Game is active
-- Library is shuffled
-- Game ID persists in URL (bookmark to resume)
-
-**Persistence**:
-- Game state is automatically saved
-- Can return to game via URL
-- Survives server restarts (SQLite storage)
-
-### Section 3: Keyboard Shortcuts
-**Sidebar link**: "Keyboard Shortcuts"
-
-(To be documented based on existing functionality)
-
-### Section 4: Tips & Tricks
-**Sidebar link**: "Tips & Tricks"
-
-- Copy card image URLs (right-click) for pasting into Mural/Miro
-- Bookmark game URL to return later
-- Use "Search Library" to find specific cards
-- Reorder hand before playing to group lands/spells
-- Use revealed cards area for tutoring/scry-like effects
-
-### Section 5: Troubleshooting
-**Sidebar link**: "Troubleshooting"
-
-Common issues and solutions:
-- Deck won't load from Archidekt
-- Card images not showing
-- Game state lost
-- Browser compatibility
-
-### Section 6: Support
-**Sidebar link**: "Support"
-
-This is a free toy project, built for fun and shared with the community. There's no official support, but if you run into issues or have ideas for improvements:
-
-- **Report bugs or request features**: [Open an issue on GitHub](https://github.com/jessitron/mtg-deck-shuffler/issues)
-- **Check existing issues**: Someone might have already reported the same problem or suggested the same feature
-- **Contribute**: Pull requests are welcome if you want to help improve the tool!
-
-No promises on response times or fixes—this is a hobby project maintained in spare time. But feedback is always appreciated!
+The content includes:
+- **Playing MTG Remotely**: Complete setup guide for remote play with Mural/Miro and Discord
+- **Using the App**: Documentation of the three-screen workflow (Deck Selection → Deck Review → Play Game)
+- **Keyboard Shortcuts**: (To be documented)
+- **Tips & Tricks**: Helpful usage tips
+- **Troubleshooting**: Common issues and solutions
+- **Support**: How to get help and contribute
 
 ## Implementation Plan
 
-### Phase 1: Create Static HTML Structure
-1. Create `public/docs.html` with header, sidebar, content area, footer
-2. Create placeholder content sections with anchor IDs
-3. Implement sidebar navigation with internal links
+### Phase 1: Set Up Infrastructure
+1. ✅ Extract content to `notes/docs-content.md` markdown file
+2. Install `marked` library for markdown rendering
+3. Create shared header/footer functions in `src/view/common/html-layout.ts`:
+   - `formatHomeStyleHeader(currentPage)` - matches index.html header style
+   - `formatHomeStyleFooter()` - matches index.html footer style
 
-### Phase 2: Create Styles
-1. Create `public/docs.css`
-2. Two-column layout (sidebar + content)
-3. Sidebar navigation styling (active states, hover effects)
-4. Content typography and spacing
-5. Responsive design for mobile (sidebar collapses/overlays)
+### Phase 2: Create TypeScript View
+1. Create `src/view/docs/docs-view.ts`:
+   - Read and parse `notes/docs-content.md`
+   - Render markdown to HTML using `marked`
+   - Generate full page with shared header/footer
+   - Include sidebar navigation with section anchors
+2. Create `public/docs.css` for docs-specific styles:
+   - Two-column layout (sidebar + content)
+   - Sidebar navigation styling
+   - Content typography and spacing
+   - Responsive design for mobile
 
-### Phase 3: Write Content
-1. Research existing app functionality by reading code and testing
-2. Write Section 1 (Playing Remotely) - user-facing, conceptual
-3. Write Section 2 (Using the App) - step-by-step, practical
-4. Write remaining sections (shortcuts, tips, troubleshooting)
-5. Add screenshots/examples where helpful
+### Phase 3: Connect to App
+1. Add route in `src/app.ts` to serve generated docs page at `/docs`
+2. Test navigation between home and docs pages
+3. Verify all anchor links work
 
-### Phase 4: Connect to App
-1. Update `src/app.ts` to serve docs page at `/docs` route
-2. Make "docs" link in header functional (update `index.html`)
-3. Test navigation between home and docs pages
+### Phase 4: Content Development
+1. Expand content in `notes/docs-content.md` as needed
+2. Add any missing sections
+3. Proofread all content
 
 ### Phase 5: Polish
-1. Smooth scroll to anchors
-2. Highlight current section in sidebar (scroll spy)
-3. Test all links and navigation
-4. Proofread all content
-5. Mobile responsive testing
+1. Smooth scroll to anchors (CSS)
+2. Test all links and navigation
+3. Mobile responsive testing
+4. Consider: Highlight current section in sidebar (scroll spy - optional)
 
 ## Technical Details
 
 ### File Structure
 ```
-public/
-  docs.html          # Main documentation page
-  docs.css           # Docs-specific styles
+notes/
+  docs-content.md         # Documentation content in markdown
 
 src/view/docs/
-  (if we decide to generate the page in TypeScript instead)
+  docs-view.ts            # TypeScript view function that renders docs page
+
+src/view/common/
+  html-layout.ts          # Shared header/footer functions (including home style)
+
+public/
+  docs.css                # Docs-specific styles
+  docs.html               # (deprecated - will be replaced by generated page)
 ```
 
 ### Sidebar Navigation Structure
@@ -296,7 +138,7 @@ src/view/docs/
 </nav>
 ```
 
-### Key CSS Classes (to be created)
+### Key CSS Classes
 - `.docs-container` - main flex container
 - `.docs-sidebar` - left navigation
 - `.docs-content` - right content area
@@ -306,7 +148,7 @@ src/view/docs/
 ## Design Considerations
 
 ### Typography Hierarchy
-- Page title "Documentation" (Orbitron)
+- Page title "Docs - MTG Deck Shuffler"
 - H2: Major sections (Playing Remotely, Using the App, etc.) (Orbitron)
 - H3: Subsections within major sections (Orbitron)
 - Body: 16-18px for readability (Ovo)
@@ -322,21 +164,22 @@ src/view/docs/
 - Sidebar: ~250px fixed width
 - Responsive breakpoint: ~900px (collapse sidebar)
 
-## Open Questions
+## Design Decisions
 
-1. Should we generate the docs page in TypeScript (like other pages) or keep it as static HTML? static HTML for now.
+1. **Generate docs page in TypeScript**: ✅ Using TypeScript view functions with `marked` for markdown rendering
+   - Consistent with existing architecture
+   - Easy to maintain content in markdown
+   - Can reuse header/footer components
 
-2. Should we include screenshots of each screen? not yet, because the screens aren't stable. We can, however, include images of the same art cards that are used on the home page.
+2. **Screenshots**: Not yet, because the screens aren't stable. We can, however, include images of the same art cards that are used on the home page.
 
-3. Do we need a search function for docs? no, Ctrl-F is fine.
+3. **Search function**: No, Ctrl-F is fine.
 
-4. Should keyboard shortcuts be documented? not until they exist, they don't now
+4. **Keyboard shortcuts**: Not until they exist (they don't currently)
 
 ## Success Criteria
 
 - [ ] Docs page is accessible at `/docs`
-- [ ] Header "docs" link navigates to docs page
-- [ ] Sidebar navigation works (all links jump to correct sections)
 - [ ] Content comprehensively covers remote play setup
 - [ ] Content comprehensively covers app usage (all three screens)
 - [ ] Page is responsive on mobile
