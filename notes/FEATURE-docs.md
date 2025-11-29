@@ -6,7 +6,7 @@ Create a comprehensive documentation page accessible at `/docs` that helps users
 
 ## Goals
 
-1. Provide clear instructions for remote MTG play setup
+1. Provide some instructions for remote MTG play setup
 2. Document the app's three-screen workflow (deck selection → deck review → play)
 3. Create a professional docs-style page with sidebar navigation
 4. Maintain visual consistency with the home page (index.html)
@@ -35,8 +35,10 @@ Create a comprehensive documentation page accessible at `/docs` that helps users
 
 ### Styling
 - Create new `docs.css` for docs-specific styles
-- Reuse typography from home page (Orbitron font family)
-- Reuse color palette:
+- Typography:
+  - **Orbitron** - for headings (h1, h2, h3, etc.)
+  - **Ovo** - for body text (paragraphs, lists, etc.)
+- Reuse color palette from home page:
   - `--deep-space`: #221534 (background)
   - `--dark-pink`: #bb5277 (accents)
   - `--light-pink`: #ddc7dd (borders)
@@ -280,10 +282,10 @@ src/view/docs/
 ## Design Considerations
 
 ### Typography Hierarchy
-- H1: Page title "Documentation"
-- H2: Major sections (Playing Remotely, Using the App, etc.)
-- H3: Subsections within major sections
-- Body: 16-18px for readability
+- H1: Page title "Documentation" (Orbitron)
+- H2: Major sections (Playing Remotely, Using the App, etc.) (Orbitron)
+- H3: Subsections within major sections (Orbitron)
+- Body: 16-18px for readability (Ovo)
 
 ### Sidebar Behavior
 - Fixed position (scrolls independently of content)
