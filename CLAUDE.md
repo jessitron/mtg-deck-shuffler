@@ -8,7 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an MTG deck shuffler web app designed for remote Magic: The Gathering play. The app fetches deck information from Archidekt.com and displays card information to help players set up remote games using tools like Mural.
+This is an MTG deck shuffler web app designed for remote Magic: The Gathering play. The app has a landing page that introduces the tool and explains how to use it with Mural/Miro and Discord for remote gameplay. The app fetches deck information from Archidekt.com and displays card information to help players set up remote games.
+
+**Application Flow**: Home → Deck Selection → Deck Review → Play Game
 
 ## Architecture
 
@@ -31,8 +33,11 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 - `src/app.ts` - Core application logic with Express routes and middleware (main application file)
 - `src/server.ts` - Server initialization, dependency creation, and startup
+- `public/index.html` - Home page (static HTML, not generated from TypeScript)
+- `public/home-v3.css` - Home page styles
+- `public/home-v3-parallax.js` - Home page parallax scrolling effect
 - `src/view/` - HTML formatting functions organized by screen:
-  - `deck-selection/` - Deck loading/selection screen (first screen)
+  - `deck-selection/` - Deck loading/selection screen
   - `deck-review/` - Deck review screen before game starts
   - `play-game/` - Active game screen with cards in play
   - `common/` - Shared components and HTML layout
