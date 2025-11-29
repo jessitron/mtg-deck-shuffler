@@ -29,6 +29,11 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - **Testing**: Never hard-code PersistedGameState objects (except when testing PersistStatePort implementations); instantiate a GameState with a generated Deck, then call its methods to change it.
 - **Cleanup**: after each change, as a task, look for newly-unused code to delete.
 
+## UI Style guidelines
+
+- Corners are square, except where they're physically round like on Magic cards or playmats.
+- the latest styling is in public/home-v3.css
+
 ## Key Files
 
 - `src/app.ts` - Core application logic with Express routes and middleware (main application file)

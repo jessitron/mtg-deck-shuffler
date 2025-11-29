@@ -306,7 +306,7 @@ src/view/docs/
 ## Design Considerations
 
 ### Typography Hierarchy
-- H1: Page title "Documentation" (Orbitron)
+- Page title "Documentation" (Orbitron)
 - H2: Major sections (Playing Remotely, Using the App, etc.) (Orbitron)
 - H3: Subsections within major sections (Orbitron)
 - Body: 16-18px for readability (Ovo)
