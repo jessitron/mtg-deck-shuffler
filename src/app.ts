@@ -27,17 +27,22 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
-  // Returns whole page - homepage with deck selection
+  // Returns whole page - new homepage (home-v3)
   app.get("/", async (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "public", "home-v3.html"));
+  });
+
+  // Returns whole page - deck selection page
+  app.get("/choose-any-deck", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
       const html = formatHomepageHtmlPage(availableDecks);
 
       res.send(html);
     } catch (error) {
-      console.error("Error loading homepage:", error);
+      console.error("Error loading deck selection page:", error);
       res.status(500).send(`<div>
-        <p>Error: Could not load the homepage</p>
+        <p>Error: Could not load the deck selection page</p>
         <p>Please try refreshing the page</p>
     </div>`);
     }
