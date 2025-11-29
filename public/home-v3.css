@@ -48,6 +48,10 @@ body {
   padding: 0 6px;
 }
 
+.header-title a {
+  text-decoration: none;
+}
+
 .header-title span {
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
