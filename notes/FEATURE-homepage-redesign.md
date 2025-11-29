@@ -2,7 +2,7 @@
 
 ## Home-v3: Figma-Based Landing Page
 
-A new landing page design was created from Figma designs and implemented as `public/home-v3.html`.
+A new landing page design was created from Figma designs and is now the main homepage, served at `/` (root path).
 
 ### Figma Design Source
 
@@ -14,7 +14,7 @@ A new landing page design was created from Figma designs and implemented as `pub
 
 ### File Structure
 
-- **HTML**: `public/home-v3.html` - Standalone HTML file with complete page structure
+- **HTML**: `public/index.html` - Main homepage, static HTML file with complete page structure
 - **CSS**: `public/home-v3.css` - Dedicated styles for the home-v3 page
 - **JavaScript**: `public/home-v3-parallax.js` - Parallax scrolling effect for depth illusion
 - **Images**: `public/images/` - Local copies of MTG card art
@@ -86,10 +86,10 @@ Background images in the hero and step sections use a parallax scrolling effect 
 
 ### Current Status
 
-This is a static prototype/landing page separate from the main application flow. It does not connect to the rest of the app yet. Once it looks good enough, it will become the homepage for the app, and the 'Begin' buttons will navigate to the deck selection page.
+This is now the main homepage of the application, served at `/` (`public/index.html`). The BEGIN buttons link to `/choose-any-deck` for deck selection.
 
 ### TODO
 
-- [] make the BEGIN buttons navigate to the deck selection page
+- [x] make the BEGIN buttons navigate to the deck selection page
 - [] create the 'docs' page
 - [] create the 'about' page
