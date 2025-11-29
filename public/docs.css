@@ -118,19 +118,23 @@
   flex: 1;
   max-width: 800px;
   min-width: 0;
+  background-color: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 8px;
 }
 
 .docs-content h1 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: var(--light-pink);
+  color: #6b2e4a;
 }
 
 .docs-content h2 {
   font-size: 2rem;
   margin-top: 3rem;
   margin-bottom: 1.5rem;
-  color: var(--link-hover);
+  color: #8b3d5f;
   border-bottom: 2px solid var(--dark-pink);
   padding-bottom: 0.5rem;
 }
@@ -139,7 +143,7 @@
   font-size: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: var(--link-color);
+  color: #9d4d70;
 }
 
 .docs-section {
@@ -169,17 +173,17 @@
 }
 
 .docs-content a {
-  color: var(--link-color);
+  color: #a05580;
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .docs-content a:hover {
-  color: var(--link-hover);
+  color: #bb5277;
 }
 
 .docs-content strong {
-  color: var(--light-pink);
+  color: #7d3a5a;
   font-weight: 600;
 }
 
