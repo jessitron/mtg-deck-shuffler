@@ -63,11 +63,13 @@ body {
   align-items: center;
 }
 
-.right-nav span {
+.right-nav span,
+.right-nav a {
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
+  text-decoration: none;
 }
 
 .github-logo {
