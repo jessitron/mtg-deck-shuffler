@@ -3,11 +3,11 @@
  * Makes background images appear far away by moving them slower than scroll speed
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Parallax factor: lower = slower background movement = appears farther away
-  const PARALLAX_FACTOR = 0.35;
+  const PARALLAX_FACTOR = 0.15;
 
   // Get all sections with background images
   const hero = document.querySelector('.hero');

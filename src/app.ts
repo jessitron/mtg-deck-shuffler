@@ -27,11 +27,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
-  // Returns whole page - new homepage (home-v3)
-  app.get("/", async (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "public", "home-v3.html"));
-  });
-
   // Returns whole page - deck selection page
   app.get("/choose-any-deck", async (req, res) => {
     try {

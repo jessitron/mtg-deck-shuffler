@@ -66,16 +66,6 @@ Defined in CSS variables:
 - **Reason**: Background images are 1040px wide
 - **Aspect ratio preserved**: Both use ~2.43:1 aspect ratio
 
-### Current Status
-
-This is a static prototype/landing page separate from the main application flow. It does not connect to the rest of the app yet. Once it looks good enough, it will become the homepage for the app, and the 'Begin' buttons will navigate to the deck selection page.
-
-### TODO
-
-- [x] NOW: get the linear gradient background overlays that I have in Figma onto the sections
-- [x] make the pictures move a little as you scroll, like they're way in the background and your perspective shifts as you scroll.
-- [] create the 'docs' page
-- [] create the 'about' page
 
 ### Gradient Overlays Implementation
 
@@ -93,3 +83,13 @@ Background images in the hero and step sections use a parallax scrolling effect 
 - Creates the illusion that backgrounds are far away behind a "window" of foreground content
 - Implemented using `requestAnimationFrame` for smooth, performant animation
 - Adjusts `background-position` based on scroll position relative to viewport center
+
+### Current Status
+
+This is a static prototype/landing page separate from the main application flow. It does not connect to the rest of the app yet. Once it looks good enough, it will become the homepage for the app, and the 'Begin' buttons will navigate to the deck selection page.
+
+### TODO
+
+- [] make the BEGIN buttons navigate to the deck selection page
+- [] create the 'docs' page
+- [] create the 'about' page
