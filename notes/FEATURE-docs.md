@@ -45,7 +45,7 @@ Create a comprehensive documentation page accessible at `/docs` that helps users
 
 ## Content
 
-Content is maintained in **`notes/docs-content.md`** in markdown format.
+Content is maintained in **`src/view/docs/content.md`** in markdown format.
 
 The content includes:
 - **Playing MTG Remotely**: Complete setup guide for remote play with Mural/Miro and Discord
@@ -58,7 +58,7 @@ The content includes:
 ## Implementation Plan
 
 ### Phase 1: Set Up Infrastructure
-1. ✅ Extract content to `notes/docs-content.md` markdown file
+1. ✅ Extract content to `src/view/docs/content.md` markdown file
 2. Install `marked` library for markdown rendering
 3. Create shared header/footer functions in `src/view/common/html-layout.ts`:
    - `formatHomeStyleHeader(currentPage)` - matches index.html header style
@@ -66,7 +66,7 @@ The content includes:
 
 ### Phase 2: Create TypeScript View
 1. Create `src/view/docs/docs-view.ts`:
-   - Read and parse `notes/docs-content.md`
+   - Read and parse `src/view/docs/content.md`
    - Render markdown to HTML using `marked`
    - Generate full page with shared header/footer
    - Include sidebar navigation with section anchors
@@ -82,7 +82,7 @@ The content includes:
 3. Verify all anchor links work
 
 ### Phase 4: Content Development
-1. Expand content in `notes/docs-content.md` as needed
+1. Expand content in `src/view/docs/content.md` as needed
 2. Add any missing sections
 3. Proofread all content
 
@@ -96,10 +96,8 @@ The content includes:
 
 ### File Structure
 ```
-notes/
-  docs-content.md         # Documentation content in markdown
-
 src/view/docs/
+  content.md              # Documentation content in markdown
   docs-view.ts            # TypeScript view function that renders docs page
 
 src/view/common/
