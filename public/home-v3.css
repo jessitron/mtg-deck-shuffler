@@ -48,17 +48,13 @@ body {
   padding: 0 6px;
 }
 
+.header-title span,
 .header-title a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
-.header-title span {
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
+  text-decoration: none;
 }
 
 .right-nav {
