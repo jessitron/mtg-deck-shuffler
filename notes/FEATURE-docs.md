@@ -324,17 +324,13 @@ src/view/docs/
 
 ## Open Questions
 
-1. Should we generate the docs page in TypeScript (like other pages) or keep it as static HTML?
-   - **Recommendation**: Start with static HTML for easy editing, migrate to TypeScript if dynamic content is needed
+1. Should we generate the docs page in TypeScript (like other pages) or keep it as static HTML? static HTML for now.
 
-2. Should we include screenshots of each screen?
-   - **Recommendation**: Yes, at least one per major screen (deck selection, deck review, play game)
+2. Should we include screenshots of each screen? not yet, because the screens aren't stable. We can, however, include images of the same art cards that are used on the home page.
 
-3. Do we need a search function for docs?
-   - **Recommendation**: Not for v1, add later if docs grow large
+3. Do we need a search function for docs? no, Ctrl-F is fine.
 
-4. Should keyboard shortcuts be documented?
-   - **Recommendation**: Yes, if they exist; research what's currently implemented
+4. Should keyboard shortcuts be documented? not until they exist, they don't now
 
 ## Success Criteria
 
@@ -346,15 +342,8 @@ src/view/docs/
 - [ ] Page is responsive on mobile
 - [ ] Visual consistency with home page maintained
 - [ ] Footer disclaimer present
-- [ ] All sections have clear, helpful content
-- [ ] No spelling/grammar errors
+- [ ] Tone of content expresses the playful purpose of this tool
 
 ## Future Enhancements
 
-- Search functionality
 - Video tutorials embedded
-- Interactive demos/examples
-- FAQ section
-- Changelog/version history
-- API documentation (if we expose one)
-- Keyboard shortcuts reference card (printable)
