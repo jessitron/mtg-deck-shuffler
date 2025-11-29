@@ -50,11 +50,29 @@ Create a comprehensive documentation page accessible at `/docs` that helps users
 
 This section explains the complete setup for remote MTG play using this tool.
 
+#### When to use this app
+
+If you already know how to play Magic the Gathering, and you and your friends want to play on the computer but you don't want the computer running the game for you, MTG Deck Shuffler is part of the solution.
+
+Use an online whiteboard as a table, use any voice chat to talk to each other, and use MTG Deck Shuffler to manage your library. 
+
+This way of playing leaves all the rules enforcement to you. Use house rules, let each other change your minds or trigger effects late. Forget to trigger effects, this is normal. This way of playing is closer to the tabletop experience than to MTG Online or Arena.
+
+// right here we need a video of how it works.
+
+Alternative: shuffle your own physical cards, look up the card image on Scryfall each time you play one, and then you don't need MTG Deck Shuffler.
+
 #### 1.1 What You Need
 - This deck shuffler (MTG Deck Shuffler)
 - A shared visual board (Mural or Miro)
-- Voice/video chat (Discord recommended)
+- Experience playing the game
+- Voice/video chat (like Discord)
 - Your friends!
+
+#### What you don't need
+- Physical cards
+- A webcam
+- To follow the official rules
 
 #### 1.2 Setting Up the Table
 - **Visual Board**: Create a board in Mural or Miro
@@ -82,12 +100,6 @@ This section explains the complete setup for remote MTG play using this tool.
   - Use the stack correctly
   - Have fun!
 
-#### 1.4 What This Tool Does NOT Do
-- Does not enforce game rules
-- Does not track opponent information
-- Does not manage the battlefield/table state
-- Does not calculate combat or track life totals
-- Does not shuffle opponents' decks
 
 ### Section 2: Using the App
 **Sidebar link**: "Using the App"
@@ -200,6 +212,17 @@ Common issues and solutions:
 - Game state lost
 - Browser compatibility
 
+### Section 6: Support
+**Sidebar link**: "Support"
+
+This is a free toy project, built for fun and shared with the community. There's no official support, but if you run into issues or have ideas for improvements:
+
+- **Report bugs or request features**: [Open an issue on GitHub](https://github.com/jessitron/mtg-deck-shuffler/issues)
+- **Check existing issues**: Someone might have already reported the same problem or suggested the same feature
+- **Contribute**: Pull requests are welcome if you want to help improve the tool!
+
+No promises on response times or fixes—this is a hobby project maintained in spare time. But feedback is always appreciated!
+
 ## Implementation Plan
 
 ### Phase 1: Create Static HTML Structure
@@ -268,6 +291,7 @@ src/view/docs/
     <li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
     <li><a href="#tips-tricks">Tips & Tricks</a></li>
     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    <li><a href="#support">Support</a></li>
   </ul>
 </nav>
 ```
