@@ -18,7 +18,6 @@ body {
 /* Home Page Container */
 .home-page {
   background-color: var(--deep-space);
-  border: 5px solid var(--light-pink);
   min-height: 100vh;
   max-width: 1512px;
   width: 100%;
