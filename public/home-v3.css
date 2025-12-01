@@ -19,7 +19,6 @@ body {
 .home-page {
   background-color: var(--deep-space);
   min-height: 100vh;
-  max-width: 1512px;
   width: 100%;
   margin: 0 auto;
   position: relative;
