@@ -86,3 +86,5 @@ an example from claude desktop:
 
 - it is physically possible for your commander to be in your library or hand. shit.
 - give the commander a play button; make it translucent in the command zone when it's also on the table. Count the number of times it's been played, that's handy to track.
+
+- keyboard shortcuts
