@@ -1,5 +1,7 @@
 # Things to change
 
+- home page, do I want the border back between the steps?
+
 ## Add card sleeves
 
 - on the deck preview page, choose inner and outer sleeve colors
