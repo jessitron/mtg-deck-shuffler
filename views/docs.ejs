@@ -1,33 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>Documentation - MTG Deck Shuffler</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/home-v3.css" />
-  <link rel="stylesheet" href="/docs.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Ovo&display=swap"
-    rel="stylesheet" />
-</head>
+<%- include('partials/head', {
+  pageTitle: 'Documentation - MTG Deck Shuffler',
+  fontFamily: 'Ovo',
+  additionalStyles: ['/docs.css']
+}) %>
 
 <body>
   <div class="docs-page">
-    <header class="main-header">
-      <div class="header-content">
-        <div class="header-title">
-          <a href="/">MTG Deck Shuffler</a>
-        </div>
-        <div class="right-nav">
-          <a href="/docs" class="nav-link active">docs</a>
-          <span>about</span>
-          <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">
-            <img class="github-logo" src="github-mark.svg" alt="GitHub" />
-          </a>
-        </div>
-      </div>
-    </header>
+    <%- include('partials/header', { activePage: 'docs' }) %>
 
     <div class="docs-container">
       <nav class="docs-sidebar">
@@ -138,9 +120,7 @@
       </main>
     </div>
 
-    <footer class="main-footer">
-      <p>MTG Deck Shuffler is a toy. This site is not affiliated with Wizards of the Coast. For entertainment only.</p>
-    </footer>
+    <%- include('partials/footer') %>
   </div>
 </body>
 

@@ -24,8 +24,17 @@ const __dirname = path.dirname(__filename);
 export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort): express.Application {
   const app = express();
 
+  // Configure EJS view engine
+  app.set("view engine", "ejs");
+  app.set("views", path.join(__dirname, "..", "views"));
+
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
+
+  // Returns whole page - home page
+  app.get("/", (req, res) => {
+    res.render("index");
+  });
 
   // Returns whole page - deck selection page
   app.get("/choose-any-deck", async (req, res) => {
@@ -58,16 +67,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns whole page - documentation page
-  app.get("/docs", async (req, res) => {
-    try {
-      res.sendFile(path.join(__dirname, "..", "public", "docs.html"));
-    } catch (error) {
-      console.error("Error loading docs page:", error);
-      res.status(500).send(`<div>
-        <p>Error: Could not load the documentation page</p>
-        <p>Please try refreshing the page</p>
-    </div>`);
-    }
+  app.get("/docs", (req, res) => {
+    res.render("docs");
   });
 
   app.use(express.static(path.join(__dirname, "..", "public")));

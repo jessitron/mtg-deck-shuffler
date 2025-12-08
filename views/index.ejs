@@ -7,33 +7,15 @@
 -->
 <html>
 
-<head>
-  <title>MTG Deck Shuffler</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/home-v3.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Risque&display=swap"
-    rel="stylesheet" />
-  <script src="/home-v3-parallax.js" defer></script>
-</head>
+<%- include('partials/head', {
+  pageTitle: 'MTG Deck Shuffler',
+  fontFamily: 'Risque',
+  script: '/home-v3-parallax.js'
+}) %>
 
 <body>
   <div class="home-page">
-    <header class="main-header">
-      <div class="header-content">
-        <div class="header-title">
-          <a href="/">MTG Deck Shuffler</a>
-        </div>
-        <div class="right-nav">
-          <a href="/docs">docs</a>
-          <span>about</span>
-          <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank">
-            <img class="github-logo" src="github-mark.svg" alt="GitHub" />
-          </a>
-        </div>
-      </div>
-    </header>
+    <%- include('partials/header') %>
 
     <section class="hero">
       <h1 class="hero-title">MTG</h1>
@@ -72,9 +54,7 @@
       <a href="/choose-any-deck" class="begin-button button-2">BEGIN</a>
     </div>
 
-    <footer class="main-footer">
-      <p>MTG Deck Shuffler is a toy. This site is not affiliated with Wizards of the Coast. For entertainment only.</p>
-    </footer>
+    <%- include('partials/footer') %>
   </div>
 </body>
 

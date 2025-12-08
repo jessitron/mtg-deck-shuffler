@@ -15,6 +15,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 ## Architecture
 
 - **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks. There is some custom JS in the header for tracing; and there is some custom JS for interactivity that can't be implemented with HTMX. Where possible, the JS triggers on HTMX events.
+- **Templating**: EJS for homepage and docs pages, allowing shared header/footer components
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
 
@@ -38,7 +39,9 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 - `src/app.ts` - Core application logic with Express routes and middleware (main application file)
 - `src/server.ts` - Server initialization, dependency creation, and startup
-- `public/index.html` - Home page (static HTML, not generated from TypeScript)
+- `views/index.ejs` - Home page template (uses EJS templating)
+- `views/docs.ejs` - Documentation page template (uses EJS templating)
+- `views/partials/` - Shared EJS components (header, footer, head)
 - `public/home-v3.css` - Home page styles
 - `public/home-v3-parallax.js` - Home page parallax scrolling effect
 - `src/view/` - HTML formatting functions organized by screen:
