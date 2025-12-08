@@ -5,14 +5,17 @@ import { Attributes, SpanStatusCode, trace } from "@opentelemetry/api";
  * CommonAttributes field | span attribute name   | description
  * ---------------------- | --------------------- | -----------
  * archidektDeckNumber    | archidekt.deck_number | deck number from Archidekt
+ * browserTabId           | browser.tab_id        | unique ID for the browser tab
  *
  */
 const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
 const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
+const SPAN_ATTRIBUTE_BROWSER_TAB_ID = "browser.tab_id";
 
 export type CommonAttributes = Partial<{
   archidektDeckId: string; // TODO: should be sourceUrl from DeckProvenance
   deckSource: string;
+  browserTabId: string;
 }>;
 
 function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attributes {
@@ -20,6 +23,7 @@ function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attribu
   return {
     [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckId,
     [SPAN_ATTRIBUTE_DECK_SOURCE]: attributes.deckSource,
+    [SPAN_ATTRIBUTE_BROWSER_TAB_ID]: attributes.browserTabId,
   };
 }
 

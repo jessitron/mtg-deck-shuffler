@@ -31,10 +31,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
-  // ============================================================================
-  // STATIC PAGES (about the game) - Use EJS templates from views/
-  // These are informational pages that describe what the app does and how to use it
-  // ============================================================================
+  // Middleware to extract browserTabId from request headers and add to tracing
+  app.use((req, res, next) => {
+    const browserTabId = req.headers["x-browser-tab-id"];
+    if (browserTabId && typeof browserTabId === "string") {
+      setCommonSpanAttributes({ browserTabId });
+    }
+    next();
+  });
 
   // Returns whole page - home page
   app.get("/", (req, res) => {
