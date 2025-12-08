@@ -10,6 +10,7 @@ function formatHtmlHead(title: string, additionalStylesheets: string[] = []): st
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css" />
 ${additionalStylesheetsHtml}
+    <script src="/browser-tab-id.js"></script>
     <script src="/hny.js"></script>
     <script>
       Hny.initializeTracing({
