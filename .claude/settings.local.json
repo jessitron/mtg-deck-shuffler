@@ -61,7 +61,11 @@
       "mcp__figma__get_metadata",
       "mcp__figma__get_screenshot",
       "Bash(ls:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(aws configure get:*)",
+      "Bash(aws eks list-clusters:*)",
+      "Bash(kubectl cluster-info:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   },

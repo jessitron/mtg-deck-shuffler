@@ -2,14 +2,7 @@
 
 ## Overview
 
-Create a comprehensive documentation page accessible at `/docs` that helps users understand both how to play MTG remotely using this tool and how to use the app itself.
-
-## Goals
-
-1. Provide some instructions for remote MTG play setup
-2. Document the app's three-screen workflow (deck selection → deck review → play)
-3. Create a professional docs-style page with sidebar navigation
-4. Maintain visual consistency with the home page (index.html)
+Make a docs page that's easy for me to maintain.
 
 ## Page Structure
 
