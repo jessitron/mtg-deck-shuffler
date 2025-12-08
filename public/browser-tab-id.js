@@ -2,8 +2,8 @@
  * Manages a unique browser tab ID stored in session storage.
  * This ID persists across page reloads but is unique per browser tab.
  */
-(function() {
-  const SESSION_STORAGE_KEY = 'browserTabId';
+(function () {
+  const SESSION_STORAGE_KEY = "browserTabId";
 
   /**
    * Get or create a browserTabId for this tab
@@ -26,11 +26,8 @@
   window.browserTabId = getBrowserTabId();
 
   // Configure HTMX to include browserTabId in all requests
-  document.addEventListener('DOMContentLoaded', function() {
-    // Ensure HTMX config object exists
-    if (typeof htmx !== 'undefined') {
-      htmx.config.defaultHeaders = htmx.config.defaultHeaders || {};
-      htmx.config.defaultHeaders['X-Browser-Tab-Id'] = window.browserTabId;
-    }
+  // Use htmx:configRequest event to add the header to each request
+  document.addEventListener("htmx:configRequest", function (event) {
+    event.detail.headers["X-Browser-Tab-Id"] = window.browserTabId;
   });
 })();
