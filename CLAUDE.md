@@ -15,7 +15,10 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 ## Architecture
 
 - **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks. There is some custom JS in the header for tracing; and there is some custom JS for interactivity that can't be implemented with HTMX. Where possible, the JS triggers on HTMX events.
-- **Templating**: EJS for homepage and docs pages, allowing shared header/footer components
+- **Templating - Two Systems**:
+  - **Static pages (about the game)**: EJS templates in `views/` for informational pages like home and docs. These pages describe what the app does and how to use it. Use `res.render("template-name")` to serve them.
+  - **Dynamic pages (in the game)**: TypeScript functions in `src/view/` that return HTML strings via template literals. These pages display and manipulate game state (deck selection, deck review, active gameplay, modals). Use `res.send(formatSomethingHtmlPage(...))` to serve them.
+  - **Why the split?**: Separates concerns between informational content (EJS for standard templating) and gameplay pages (TypeScript for type safety and composition when working with game state).
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
 

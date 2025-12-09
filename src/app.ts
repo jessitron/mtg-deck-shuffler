@@ -31,10 +31,30 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
+  // ============================================================================
+  // STATIC PAGES (about the game) - Use EJS templates from views/
+  // These are informational pages that describe what the app does and how to use it
+  // ============================================================================
+
   // Returns whole page - home page
   app.get("/", (req, res) => {
     res.render("index");
   });
+
+  // Returns whole page - documentation page
+  app.get("/docs", (req, res) => {
+    res.render("docs");
+  });
+
+  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
+
+  // ============================================================================
+  // DYNAMIC PAGES (in the game) - Use TypeScript functions from src/view/
+  // These pages display and manipulate game state: deck selection, deck review,
+  // active gameplay, modals, and card actions. They use TypeScript template
+  // literals for type safety and composition with game state.
+  // ============================================================================
 
   // Returns whole page - deck selection page
   app.get("/choose-any-deck", async (req, res) => {
@@ -65,14 +85,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     </div>`);
     }
   });
-
-  // Returns whole page - documentation page
-  app.get("/docs", (req, res) => {
-    res.render("docs");
-  });
-
-  app.use(express.static(path.join(__dirname, "..", "public")));
-  app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
   // Redirects to game page on success, returns whole error page on failure
   app.post("/deck", async (req, res) => {
