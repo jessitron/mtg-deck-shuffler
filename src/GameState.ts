@@ -189,6 +189,14 @@ export class GameState {
     return this.eventLog.getEvents()[gameEventIndex];
   }
 
+  /**
+   * Returns the current state version, which increments on every mutation.
+   * Used for optimistic concurrency control to detect stale state.
+   */
+  public getStateVersion(): number {
+    return this.eventLog.getEvents().length;
+  }
+
   private validateInvariants(): void {
     const positionMap = new Map<string, Set<number>>();
 
