@@ -40,6 +40,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
 
   return `<div id="game-container"
            data-game-id="${game.gameId}"
+           data-expected-version="${game.getStateVersion()}"
            hx-trigger="game-state-updated from:body"
            hx-get="/game-section/${game.gameId}"
            hx-target="#game-container"
@@ -98,6 +99,7 @@ function formatGameHistoryFragment(game: GameState): string {
   return `<div class="history-actions">
   <button class="undo-button"
   hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
+  hx-vals='{"expected-version": ${game.getStateVersion()}}'
   hx-target="#game-container"
   hx-swap="outerHTML"
   class="undo-button">UNDO ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</button>

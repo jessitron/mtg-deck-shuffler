@@ -10,7 +10,7 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
   ];
 
   return `<div class="card-buttons">
-    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, gameCard.card.scryfallId, gameCard.currentFace)}
+    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, game.getStateVersion(), gameCard.card.scryfallId, gameCard.currentFace)}
   </div>`;
 }
 
@@ -28,7 +28,7 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
   const revealedCardsArea = revealedCards
     .map((gameCard: any) => {
       const actions = formatRevealedCardActionsHtmlFragment(game, gameCard);
-      return formatCardContainer({ gameCard, gameId: game.gameId, actions, whatHappened });
+      return formatCardContainer({ gameCard, gameId: game.gameId, expectedVersion: game.getStateVersion(), actions, whatHappened });
     })
     .join("");
 
@@ -45,6 +45,7 @@ function formatCardActionButtonHtmlFragment(
   endpoint: string,
   gameId: number,
   cardIndex: number,
+  expectedVersion: number,
   title: string,
   cssClass = "card-action-button",
   cardId?: string,
@@ -56,6 +57,7 @@ function formatCardActionButtonHtmlFragment(
   const swapAttr = action === "Play" ? `hx-swap="outerHTML swap:1.5s"` : `hx-swap="outerHTML"`;
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
+                    hx-vals='{"expected-version": ${expectedVersion}}'
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
@@ -65,8 +67,8 @@ function formatCardActionButtonHtmlFragment(
           </button>`;
 }
 
-function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, cardId?: string, currentFace?: "front" | "back"): string {
+function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, expectedVersion: number, cardId?: string, currentFace?: "front" | "back"): string {
   return actions
-    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, action.title, action.cssClass, cardId, currentFace))
+    .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, expectedVersion, action.title, action.cssClass, cardId, currentFace))
     .join("");
 }
