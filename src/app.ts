@@ -31,6 +31,33 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
+  // Helper function to validate state version for optimistic concurrency control
+  function validateStateVersion(
+    req: express.Request,
+    game: GameState
+  ): { valid: true } | { valid: false; errorHtml: string } {
+    const expectedVersionStr = req.body["expected-version"];
+    if (expectedVersionStr === undefined) {
+      // No version provided - allow the operation (backward compatibility)
+      return { valid: true };
+    }
+
+    const expectedVersion = parseInt(expectedVersionStr);
+    const currentVersion = game.getStateVersion();
+
+    if (expectedVersion !== currentVersion) {
+      const errorHtml = `<div class="stale-state-error">
+        <h3>⚠️ Please Refresh</h3>
+        <p>The game state has changed since you loaded this page.</p>
+        <p>Expected version: ${expectedVersion}, Current version: ${currentVersion}</p>
+        <button onclick="location.reload()" class="refresh-button">Refresh Page</button>
+      </div>`;
+      return { valid: false, errorHtml };
+    }
+
+    return { valid: true };
+  }
+
   // ============================================================================
   // STATIC PAGES (about the game) - Use EJS templates from views/
   // These are informational pages that describe what the app does and how to use it
@@ -134,6 +161,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.startGame();
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -324,7 +359,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId);
+      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId, game.getStateVersion());
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading card modal:", error);
@@ -461,6 +496,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
@@ -487,6 +530,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.putInHandByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -512,6 +563,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
@@ -543,6 +602,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.putOnTopByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -568,6 +635,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.putOnBottomByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -595,6 +670,13 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       if (game.gameStatus() !== "Active") {
         res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
+        return;
+      }
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
         return;
       }
 
@@ -647,6 +729,13 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       const whatHappened = game.playCard(gameCardIndex);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
@@ -678,6 +767,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       const whatHappened = game.shuffle();
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -708,6 +805,13 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       const whatHappened = game.moveHandCard(from, to);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -730,6 +834,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       var game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game = game.undo(gameEventIndex);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -753,6 +865,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.flipCard(gameCardIndex); // TODO: I don't need whatHappened, it's in the card state
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -786,6 +906,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409).send(versionCheck.errorHtml);
+        return;
+      }
+
       game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -801,7 +929,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.setHeader("HX-Trigger", "game-state-updated");
 
       // Return the updated modal HTML
-      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId);
+      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId, game.getStateVersion());
       res.send(modalHtml);
     } catch (error) {
       console.error("Error flipping card in modal:", error);
