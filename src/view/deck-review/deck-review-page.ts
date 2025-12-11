@@ -41,6 +41,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
     <div id="start-game-buttons" class="deck-actions">
       <form method="post" action="/start-game" class="inline-form">
         <input type="hidden" name="game-id" value="${game.gameId}" />
+        <input type="hidden" name="expected-version" value="${game.getStateVersion()}" />
         <button type="submit" class="start-game-button">Shuffle Up</button>
       </form>
       <form method="post" action="/end-game" class="inline-form">

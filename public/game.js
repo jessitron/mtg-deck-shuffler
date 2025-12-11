@@ -232,15 +232,17 @@ function handleDrop(e) {
       return false;
     }
 
-    // Get the game ID from the page
+    // Get the game ID and expected version from the page
     const gameContainer = document.querySelector("#game-container");
     const gameId = gameContainer?.dataset.gameId;
+    const expectedVersion = gameContainer?.dataset.expectedVersion;
 
     if (gameId) {
       // Use HTMX to make the POST request
       htmx.ajax("POST", `/move-hand-card/${gameId}/${draggedFromPosition}/${targetPosition}`, {
         target: "#game-container",
         swap: "outerHTML",
+        values: { "expected-version": expectedVersion },
       });
     }
   }

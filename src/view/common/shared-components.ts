@@ -22,13 +22,14 @@ export function formatCardNameAsModalLink(cardName: string, gameId: number, card
 type CardRenderOptions = {
   gameCard: GameCard;
   gameId: number;
+  expectedVersion?: number;
   actions?: string;
   whatHappened?: WhatHappened;
   draggable?: boolean;
   handPosition?: number;
 };
 
-export function formatCardContainer({ gameCard, gameId, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
+export function formatCardContainer({ gameCard, gameId, expectedVersion, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
@@ -49,7 +50,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      ${formatFlippingContainer(gameCard, gameId)}
+      ${formatFlippingContainer(gameCard, gameId, expectedVersion)}
       ${actions}
     </div>`;
   } else {
@@ -67,7 +68,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
   }
 }
 
-export function formatFlippingContainer(gameCard: GameCard, gameId: number): string {
+export function formatFlippingContainer(gameCard: GameCard, gameId: number, expectedVersion?: number): string {
   const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
   const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
   const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
@@ -75,7 +76,8 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
   const cardId = `card-${gameCard.gameCardIndex}`;
   const flipContainerId = `${cardId}-outer-flip-container`;
 
-  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
+  const valsAttr = expectedVersion !== undefined ? `hx-vals='{"expected-version": ${expectedVersion}}'` : "";
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" ${valsAttr} hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
 
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
             <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
