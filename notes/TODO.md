@@ -1,6 +1,21 @@
 # Things to change
 
-- home page, do I want the border back between the steps?
+- migrate the deck selection and active game pages to use ejs templates
+  - make the head.ejs take a list of extra .js, so we don't load game.js on the homepage for instance
+
+## Spectator mode
+
+It would be cool if Charlotte could see our hands without worrying about messing up our game state.
+
+- spectator mode
+
+which requires
+
+- getting errors when the server state isn't what the UI had loaded, when I clicked something
+
+which needs
+
+- a session ID on the telemetry.  ... well it did this. It put it in a header, so it's _only_ on the telemetry, on the server's entry span. I wanted it on the state too, but maybe later.
 
 ## Add card sleeves
 
