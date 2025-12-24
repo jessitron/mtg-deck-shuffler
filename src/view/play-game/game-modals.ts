@@ -1,6 +1,8 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { formatCardNameAsModalLink, CardAction, formatLibraryCardList } from "../common/shared-components.js";
 import { getCardImageUrl } from "../../types.js";
+import { GameEvent } from "../../GameEvents.js";
+import { formatGameEventHtmlFragment } from "./history-components.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -274,13 +276,33 @@ export function formatLossModalHtmlFragment(): string {
   return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);
 }
 
-export function formatStaleStateErrorModal(expectedVersion: number, currentVersion: number): string {
+export function formatStaleStateErrorModal(
+  expectedVersion: number,
+  currentVersion: number,
+  missedEvents: GameEvent[],
+  game: GameState
+): string {
+  const missedEventsHtml = missedEvents.length > 0
+    ? `<div style="margin: 1.5rem 0; text-align: left;">
+         <h4 style="margin-bottom: 0.5rem; color: #333;">What happened while you were away:</h4>
+         <ol class="history-list" style="padding-left: 2rem;">
+           ${missedEvents.map((event, index) => `
+             <li class="history-item" style="margin-bottom: 0.5rem;">
+               <span class="event-number">${expectedVersion + index + 1}.</span>
+               ${formatGameEventHtmlFragment(event, game)}
+             </li>
+           `).join('')}
+         </ol>
+       </div>`
+    : '';
+
   const bodyContent = `
     <div style="text-align: center; padding: 20px;">
       <p style="font-size: 1.2rem; margin-bottom: 1rem;">
         The game state has changed since you loaded this page.
       </p>
-      <p style="color: #666; margin-bottom: 1.5rem;">
+      ${missedEventsHtml}
+      <p style="color: #666; margin: 1.5rem 0;">
         Expected version: ${expectedVersion}, Current version: ${currentVersion}
       </p>
       <button onclick="location.reload()"

@@ -46,7 +46,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const currentVersion = game.getStateVersion();
 
     if (expectedVersion !== currentVersion) {
-      const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion);
+      // Extract the events that happened since the client's version
+      const allEvents = game.getEventLog().getEvents();
+      const missedEvents = allEvents.slice(expectedVersion, currentVersion);
+
+      const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion, missedEvents, game);
       return { valid: false, errorHtml };
     }
 
