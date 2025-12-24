@@ -38,8 +38,11 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   };
 
   const description = describeEvent(event, game);
+  const tabIdDisplay = event.browserTabId
+    ? ` <span class="event-tab-id" title="${event.browserTabId}">(${event.browserTabId.slice(0, 8)})</span>`
+    : '';
   return `
-  <span class="event-description ${isUndone ? "undone" : ""} ${eventNameToCssClass[event.eventName]}">${description}</span>`;
+  <span class="event-description ${isUndone ? "undone" : ""} ${eventNameToCssClass[event.eventName]}">${description}${tabIdDisplay}</span>`;
 }
 
 function describeEvent(event: GameEvent, game: GameState): string {
