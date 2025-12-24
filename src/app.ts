@@ -32,11 +32,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
 
-  // Middleware to extract browserTabId from request headers and add to tracing
+  // Middleware to extract browserTabId from request headers and add to tracing and locals
   app.use((req, res, next) => {
     const browserTabId = req.headers["x-browser-tab-id"];
     if (browserTabId && typeof browserTabId === "string") {
       setCommonSpanAttributes({ browserTabId });
+      res.locals.browserTabId = browserTabId;
     }
     next();
   });
@@ -225,9 +226,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.post("/start-game", loadGameFromBody, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.startGame();
+      game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
       res.redirect(`/game/${gameId}`);
@@ -573,9 +575,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.revealByGameCardIndex(gameCardIndex);
+      game.revealByGameCardIndex(gameCardIndex, browserTabId);
 
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
@@ -594,9 +597,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putInHandByGameCardIndex(gameCardIndex);
+      game.putInHandByGameCardIndex(gameCardIndex, browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -614,9 +618,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.revealByGameCardIndex(gameCardIndex);
+      game.revealByGameCardIndex(gameCardIndex, browserTabId);
 
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
@@ -640,9 +645,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putOnTopByGameCardIndex(gameCardIndex);
+      game.putOnTopByGameCardIndex(gameCardIndex, browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -660,9 +666,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putOnBottomByGameCardIndex(gameCardIndex);
+      game.putOnBottomByGameCardIndex(gameCardIndex, browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -679,6 +686,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.post("/draw/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     if (game.gameStatus() !== "Active") {
       res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
@@ -686,7 +694,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
 
     try {
-      game.draw();
+      game.draw(browserTabId);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
         "game.gameStatus()": game.gameStatus(),
@@ -716,6 +724,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
@@ -741,7 +750,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const whatHappened = game.playCard(gameCardIndex);
+      const whatHappened = game.playCard(gameCardIndex, browserTabId);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
         "game.gameStatus()": game.gameStatus(),
@@ -765,9 +774,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.post("/shuffle/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const whatHappened = game.shuffle();
+      const whatHappened = game.shuffle(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
@@ -784,6 +794,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const gameId = res.locals.gameId as number;
     const from = parseInt(req.params.from);
     const to = parseInt(req.params.to);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     if (game.gameStatus() !== "Active") {
       res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
@@ -791,7 +802,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
 
     try {
-      const whatHappened = game.moveHandCard(from, to);
+      const whatHappened = game.moveHandCard(from, to, browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
@@ -807,9 +818,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameEventIndex = parseInt(req.params.gameEventIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const updatedGame = game.undo(gameEventIndex);
+      const updatedGame = game.undo(gameEventIndex, browserTabId);
       await persistStatePort.save(updatedGame.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(updatedGame);
@@ -826,9 +838,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.flipCard(gameCardIndex); // TODO: I don't need whatHappened, it's in the card state
+      game.flipCard(gameCardIndex, browserTabId); // TODO: I don't need whatHappened, it's in the card state
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -855,9 +868,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.flipCard(gameCardIndex);
+      game.flipCard(gameCardIndex, browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
