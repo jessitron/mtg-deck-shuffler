@@ -401,6 +401,27 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const expectedVersionStr = req.query["expected-version"];
+      if (expectedVersionStr) {
+        const expectedVersion = parseInt(expectedVersionStr as string);
+        const currentVersion = game.getStateVersion();
+
+        if (expectedVersion !== currentVersion) {
+          // Extract the events that happened since the client's version
+          const allEvents = game.getEventLog().getEvents();
+          const missedEvents = allEvents.slice(expectedVersion, currentVersion);
+
+          const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion, missedEvents, game);
+          res.status(409)
+             .setHeader('HX-Retarget', '#modal-container')
+             .setHeader('HX-Reswap', 'innerHTML')
+             .send(errorHtml);
+          return;
+        }
+      }
+
       const gameCard = game.findCardByIndex(cardIndex);
       if (!gameCard) {
         res.status(404).send(`<div>Card ${cardIndex} not found</div>`);

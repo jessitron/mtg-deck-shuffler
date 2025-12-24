@@ -78,7 +78,7 @@ export function formatHistoryModalHtmlFragment(game: GameState): string {
   const bodyContent = `<p class="modal-subtitle">
           ${game.getEventLog().getEvents().length} actions taken
         </p>
-        <ol class="history-list history-list-unstyled">
+        <ol class="history-list ">
           ${historyList}
         </ol>`;
 

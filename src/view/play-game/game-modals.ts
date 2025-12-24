@@ -28,13 +28,14 @@ export function formatModalHtmlFragment(title: string, bodyContent: string): str
 
 function formatTableCardListHtmlFragment(game: GameState): string {
   const tableCards = game.listTable();
+  const expectedVersion = game.getStateVersion();
 
   return tableCards
     .map(
       (gameCard: any, index: number) =>
         `<li class="table-card-item">
           <div class="card-info">
-            ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex)}
+            ${formatCardNameAsModalLink(gameCard.card.name, game.gameId, gameCard.gameCardIndex, expectedVersion)}
           </div>
         </li>`
     )
@@ -57,7 +58,7 @@ export function formatTableModalHtmlFragment(game: GameState): string {
 
 export function formatLibraryModalHtml(game: GameState): string {
   const libraryCards = game.listLibrary();
-  const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId);
+  const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId, game.getStateVersion());
 
   const bodyContent = `<p class="modal-subtitle">
           ${libraryCards.length} cards
@@ -297,21 +298,17 @@ export function formatStaleStateErrorModal(
     : '';
 
   const bodyContent = `
-    <div style="text-align: center; padding: 20px;">
-      <p style="font-size: 1.2rem; margin-bottom: 1rem;">
-        The game state has changed since you loaded this page.
-      </p>
-      ${missedEventsHtml}
-      <p style="color: #666; margin: 1.5rem 0;">
-        Expected version: ${expectedVersion}, Current version: ${currentVersion}
-      </p>
+    <div class="missed-events-modal-content">
+    <p>
+    Expected version: ${expectedVersion}, Current version: ${currentVersion}
+    </p>
+    ${missedEventsHtml}
       <button onclick="location.reload()"
-              class="modal-action-button"
-              style="background-color: #2196f3; color: white; font-size: 1.1rem;">
+              class="modal-action-button recover-button">
         Refresh Page
       </button>
     </div>
   `;
 
-  return formatModalHtmlFragment("⚠️ Please Refresh", bodyContent);
+  return formatModalHtmlFragment("⚠️ Game State Changed", bodyContent);
 }

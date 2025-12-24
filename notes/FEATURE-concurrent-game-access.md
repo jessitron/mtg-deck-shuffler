@@ -96,7 +96,7 @@ function validateStateVersion(
   if (expectedVersion !== currentVersion) {
     // Version mismatch - return error HTML
     const errorHtml = `<div class="stale-state-error">
-      <h3>⚠️ Please Refresh</h3>
+      <h3>⚠️ Game State Changed</h3>
       <p>The game state has changed since you loaded this page.</p>
       <p>Expected version: ${expectedVersion}, Current version: ${currentVersion}</p>
       <button onclick="location.reload()" class="refresh-button">Refresh Page</button>

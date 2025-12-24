@@ -1103,6 +1103,11 @@ p {
   text-align: center;
 }
 
+.modal-action-button.recover-button {
+  background-color: #2196f3;
+  color: white;
+}
+
 .modal-action-button.gatherer-button {
   background-color: #4caf50;
   color: white;
@@ -1304,7 +1309,7 @@ p {
   font-size: 0.9rem;
 }
 
-.history-list-unstyled {
+.history-list {
   list-style: none;
   padding: 0;
 }
