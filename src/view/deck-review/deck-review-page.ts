@@ -1,7 +1,6 @@
 import { GameCard, GameState } from "../../GameState.js";
 import {
   formatCardContainer,
-  formatCardNameAsModalLink,
   formatCommandZoneHtmlFragment,
   formatLibraryCardList,
   formatTitleHtmlFragment,
@@ -16,7 +15,7 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
      hx-get="/debug-section/${game.gameId}"
      hx-trigger="game-state-updated from:body"
      hx-swap="innerHTML">
-      ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), false)}
+      ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion())}
     </div>`;
   const contentWithModal = `
   <div class="page-with-title-container">

@@ -15,7 +15,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
      hx-get="/debug-section/${game.gameId}"
      hx-trigger="game-state-updated from:body"
      hx-swap="innerHTML">
-  ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), true)}
+  ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion())}
     </div>`;
   const contentWithModal = `
     <div class="page-container">

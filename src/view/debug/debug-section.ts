@@ -1,8 +1,9 @@
-import { formatDebugButtonHtmlFragment } from "./state-copy.js";
 
-export function formatDebugSectionHtmlFragment(gameId: number, stateVersion: number, includeDebugButton: boolean = false): string {
-  const debugButton = includeDebugButton ? formatDebugButtonHtmlFragment(gameId) : '';
-
+export function formatDebugSectionHtmlFragment(gameId: number, stateVersion: number): string {
   return `<p class="game-id">Game ID: ${gameId} | State Version: ${stateVersion}</p>
-  ${debugButton}`;
+  <button class="debug-button"
+                  hx-get="/debug-state/${gameId}"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML"
+                  class="debug-button">Debug State</button>`;
 }

@@ -534,22 +534,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.get("/debug-section/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-      const game = GameState.fromPersistedGameState(persistedGame);
-      const isActiveGame = game.gameStatus() === "Active";
-      const html = formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), isActiveGame);
-      res.send(html);
-    } catch (error) {
-      console.error("Error loading debug section:", error);
-      res.status(500).send(`<div>Error loading debug section</div>`);
-    }
+  app.get("/debug-section/:gameId", loadGameFromParams, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const html = formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion());
+    res.send(html);
   });
 
   // Returns game section fragment - for HTMX updates
