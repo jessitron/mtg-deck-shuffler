@@ -57,6 +57,76 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     return { valid: true };
   }
 
+  // Middleware: Load game from route params (:gameId)
+  async function loadGameFromParams(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const gameId = parseInt(req.params.gameId);
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.gameId = gameId;
+      next();
+    } catch (error) {
+      console.error("Error loading game:", error);
+      res.status(500).send(`<div>Error loading game ${gameId}</div>`);
+    }
+  }
+
+  // Middleware: Load game from request body (game-id)
+  async function loadGameFromBody(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const gameId = parseInt(req.body["game-id"]);
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Game Not Found",
+            message: `Game <strong>${gameId}</strong> could not be found.`,
+            details: "It may have expired or the ID might be incorrect.",
+          })
+        );
+        return;
+      }
+
+      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.gameId = gameId;
+      next();
+    } catch (error) {
+      console.error("Error loading game:", error);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "⚠️",
+          title: "Error Loading Game",
+          message: `Could not load game <strong>${gameId}</strong>.`,
+          details: "There may be a technical issue.",
+        })
+      );
+    }
+  }
+
+  // Middleware: Require valid version for optimistic concurrency control
+  function requireValidVersion(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const game = res.locals.game as GameState;
+    const versionCheck = validateStateVersion(req, game);
+
+    if (!versionCheck.valid) {
+      res.status(409)
+         .setHeader('HX-Retarget', '#modal-container')
+         .setHeader('HX-Reswap', 'innerHTML')
+         .send(versionCheck.errorHtml);
+      return;
+    }
+
+    next();
+  }
+
   // ============================================================================
   // STATIC PAGES (about the game) - Use EJS templates from views/
   // These are informational pages that describe what the app does and how to use it
@@ -142,35 +212,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Redirects to active game page
-  app.post("/start-game", async (req, res) => {
-    const gameId: number = parseInt(req.body["game-id"]);
+  app.post("/start-game", loadGameFromBody, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(
-          formatErrorPageHtmlPage({
-            icon: "🎯",
-            title: "Game Not Found",
-            message: `Game <strong>${gameId}</strong> could not be found.`,
-            details: "It may have expired or the ID might be incorrect.",
-          })
-        );
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.startGame();
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -486,29 +532,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
   // Card action endpoints
   // Returns active game fragment - updated game board
-  app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/reveal-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
@@ -523,29 +552,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-in-hand/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.putInHandByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -559,29 +571,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-down/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-down/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
@@ -601,29 +596,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-on-top/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-on-top/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.putOnTopByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -637,29 +615,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-on-bottom/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-on-bottom/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.putOnBottomByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -673,60 +634,38 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/draw/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/draw/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
+
+    if (game.gameStatus() !== "Active") {
+      res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
+      return;
+    }
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
+      game.draw();
+      const persistedGameState = game.toPersistedGameState();
+      trace.getActiveSpan()?.setAttributes({
+        "game.gameStatus()": game.gameStatus(),
+        "game.cardsInLibrary": game.listLibrary().length,
+        "game.cardsInHand": game.listHand().length,
+        "game.full_json": JSON.stringify(persistedGameState),
+      });
+      await persistStatePort.save(persistedGameState);
 
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
-        return;
-      }
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
-      try {
-        game.draw();
-        const persistedGameState = game.toPersistedGameState();
-        trace.getActiveSpan()?.setAttributes({
-          "game.gameStatus()": game.gameStatus(),
-          "game.cardsInLibrary": game.listLibrary().length,
-          "game.cardsInHand": game.listHand().length,
-          "game.full_json": JSON.stringify(persistedGameState),
-        });
-        await persistStatePort.save(persistedGameState);
-
-        const html = formatActiveGameHtmlSection(game);
-        res.send(html);
-      } catch (error) {
-        if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
-          const lossModal = formatLossModalHtmlFragment();
-          res.setHeader("HX-Retarget", "#modal-container");
-          res.setHeader("HX-Reswap", "innerHTML");
-          res.send(lossModal);
-        } else {
-          console.error("Error drawing card:", error);
-          res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
-        }
-      }
+      const html = formatActiveGameHtmlSection(game);
+      res.send(html);
     } catch (error) {
-      console.error("Error retrieving game:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
+      if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
+        const lossModal = formatLossModalHtmlFragment();
+        res.setHeader("HX-Retarget", "#modal-container");
+        res.setHeader("HX-Reswap", "innerHTML");
+        res.send(lossModal);
+      } else {
+        console.error("Error drawing card:", error);
+        res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
+      }
     }
   });
 
@@ -779,28 +718,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/shuffle/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/shuffle/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       const whatHappened = game.shuffle();
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -812,35 +734,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.post("/move-hand-card/:gameId/:from/:to", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/move-hand-card/:gameId/:from/:to", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const from = parseInt(req.params.from);
     const to = parseInt(req.params.to);
 
+    if (game.gameStatus() !== "Active") {
+      res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
+      return;
+    }
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
-        return;
-      }
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       const whatHappened = game.moveHandCard(from, to);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -852,32 +757,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.post("/undo/:gameId/:gameEventIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/undo/:gameId/:gameEventIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameEventIndex = parseInt(req.params.gameEventIndex);
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
+      const updatedGame = game.undo(gameEventIndex);
+      await persistStatePort.save(updatedGame.toPersistedGameState());
 
-      var game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
-      game = game.undo(gameEventIndex);
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatActiveGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(updatedGame);
       res.send(html);
     } catch (error) {
       console.error("Error undoing event:", error);
@@ -886,28 +775,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Flip a commander card - Returns only the commander container
-  app.post("/flip-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/flip-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.flipCard(gameCardIndex); // TODO: I don't need whatHappened, it's in the card state
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -930,28 +803,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Flip a card and return updated modal HTML
-  app.post("/flip-card-modal/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/flip-card-modal/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
       game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
