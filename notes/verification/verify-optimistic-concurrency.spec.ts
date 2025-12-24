@@ -175,8 +175,9 @@ test.describe('Optimistic Concurrency Control', () => {
       const responseBody = await drawResponseB.text();
       console.log('Browser B response body:', responseBody);
 
-      expect(responseBody).toContain('stale-state-error');
+      expect(responseBody).toContain('modal-overlay');
       expect(responseBody).toContain('Please Refresh');
+      expect(responseBody).toContain('What happened while you were away');
 
       // ========================================
       // STEP 5: Verify the game state was NOT modified by B's request
