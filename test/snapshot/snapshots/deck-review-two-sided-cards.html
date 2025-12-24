@@ -18,6 +18,14 @@ provideOneLinkToHoneycomb: true,
 });
 </script>
 <script src="/htmx.js"></script>
+<script>
+// Configure HTMX to swap on 409 Conflict responses
+htmx.config.responseHandling = [
+{code: "204", swap: false},  // No Content
+{code: "2..", swap: true},   // All other 2xx
+{code: "409", swap: true},   // Conflict (stale state)
+];
+</script>
 <script src="/game.js"></script>
 </head>
 <body>
@@ -33,7 +41,7 @@ provideOneLinkToHoneycomb: true,
 </p></div>
 <div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
-hx-get="/card-modal/789/3"
+hx-get="/card-modal/789/3?expected-version=0"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -44,7 +52,7 @@ style="cursor: pointer;">
 <img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
 </div>
 </div>
-<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-vals='{"expected-version": 0}' hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
 </div>
 </div>
 </div>
@@ -53,6 +61,7 @@ style="cursor: pointer;">
 <div id="start-game-buttons" class="deck-actions">
 <form method="post" action="/start-game" class="inline-form">
 <input type="hidden" name="game-id" value="789" />
+<input type="hidden" name="expected-version" value="0" />
 <button type="submit" class="start-game-button">Shuffle Up</button>
 </form>
 <form method="post" action="/end-game" class="inline-form">
@@ -66,43 +75,43 @@ style="cursor: pointer;">
 7 cards in library, ordered by position
 </div>
 <ul class="library-search-list">
-<li class="library-card-item">  
+<li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/0"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Carth the Lion</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/1"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Dakkon, Shadow Slayer</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/2"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Damnation</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/4"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Homeward Path</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/5"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Lae'zel, Vlaakith's Champion</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/6"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">Miku, the Renowned</span>
-</li><li class="library-card-item">  
+</li><li class="library-card-item">
 <span class="card-name-link clickable-card-name"
 hx-get="/card-modal/789/7"
 hx-target="#card-modal-container"
@@ -112,11 +121,21 @@ style="cursor: pointer;">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</sp
 </ul>
 </div>
 </div>
+<div id="modal-container"></div>
 <div id="card-modal-container"></div>
 </div>
 <footer>
-<div class="debug-section">
-<p class="game-id">Game ID: 789</p>
+<div class="debug-section"
+id="debug-section"
+hx-get="/debug-section/789"
+hx-trigger="game-state-updated from:body"
+hx-swap="innerHTML">
+<p class="game-id">Game ID: 789 | State Version: 0</p>
+<button class="debug-button"
+hx-get="/debug-state/789"
+hx-target="#modal-container"
+hx-swap="innerHTML"
+class="debug-button">Debug State</button>
 </div>
 <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
 </footer>

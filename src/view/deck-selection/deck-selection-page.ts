@@ -77,5 +77,9 @@ export function formatHomepageHtmlPage(availableDecks: AvailableDecks): string {
       </div>
     </div>`;
 
-  return formatPageWrapper("MTG Deck Shuffler", content, formatLoadStateHtmlFragment());
+  return formatPageWrapper({
+    title: "MTG Deck Shuffler",
+    content,
+    footerContent: formatLoadStateHtmlFragment()
+  });
 }

@@ -5,11 +5,12 @@ import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-pag
 import { formatHomeV2HtmlPage } from "./view/home-v2/home-v2-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage } from "./view/deck-review/deck-review-page.js";
-import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
+import { formatDebugSectionHtmlFragment } from "./view/debug/debug-section.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
@@ -39,6 +40,107 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
     next();
   });
+  
+  // Helper function to validate state version for optimistic concurrency control
+  function validateStateVersion(
+    req: express.Request,
+    game: GameState
+  ): { valid: true } | { valid: false; errorHtml: string } {
+    const expectedVersionStr = req.body["expected-version"];
+    if (expectedVersionStr === undefined) {
+      // No version provided - allow the operation (backward compatibility)
+      return { valid: true };
+    }
+
+    const expectedVersion = parseInt(expectedVersionStr);
+    const currentVersion = game.getStateVersion();
+
+    if (expectedVersion !== currentVersion) {
+      // Extract the events that happened since the client's version
+      const allEvents = game.getEventLog().getEvents();
+      const missedEvents = allEvents.slice(expectedVersion, currentVersion);
+
+      const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion, missedEvents, game);
+      return { valid: false, errorHtml };
+    }
+
+    return { valid: true };
+  }
+
+  // Middleware: Load game from route params (:gameId)
+  async function loadGameFromParams(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const gameId = parseInt(req.params.gameId);
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.gameId = gameId;
+      next();
+    } catch (error) {
+      console.error("Error loading game:", error);
+      res.status(500).send(`<div>Error loading game ${gameId}</div>`);
+    }
+  }
+
+  // Middleware: Load game from request body (game-id)
+  async function loadGameFromBody(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const gameId = parseInt(req.body["game-id"]);
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Game Not Found",
+            message: `Game <strong>${gameId}</strong> could not be found.`,
+            details: "It may have expired or the ID might be incorrect.",
+          })
+        );
+        return;
+      }
+
+      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.gameId = gameId;
+      next();
+    } catch (error) {
+      console.error("Error loading game:", error);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "⚠️",
+          title: "Error Loading Game",
+          message: `Could not load game <strong>${gameId}</strong>.`,
+          details: "There may be a technical issue.",
+        })
+      );
+    }
+  }
+
+  // Middleware: Require valid version for optimistic concurrency control
+  function requireValidVersion(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const game = res.locals.game as GameState;
+    const versionCheck = validateStateVersion(req, game);
+
+    if (!versionCheck.valid) {
+      res.status(409)
+         .setHeader('HX-Retarget', '#modal-container')
+         .setHeader('HX-Reswap', 'innerHTML')
+         .send(versionCheck.errorHtml);
+      return;
+    }
+
+    next();
+  }
+
+  // ============================================================================
+  // STATIC PAGES (about the game) - Use EJS templates from views/
+  // These are informational pages that describe what the app does and how to use it
+  // ============================================================================
 
   // Returns whole page - home page
   app.get("/", (req, res) => {
@@ -120,24 +222,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Redirects to active game page
-  app.post("/start-game", async (req, res) => {
-    const gameId: number = parseInt(req.body["game-id"]);
+  app.post("/start-game", loadGameFromBody, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(
-          formatErrorPageHtmlPage({
-            icon: "🎯",
-            title: "Game Not Found",
-            message: `Game <strong>${gameId}</strong> could not be found.`,
-            details: "It may have expired or the ID might be incorrect.",
-          })
-        );
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.startGame();
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -322,13 +411,34 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
+
+      // Validate state version for optimistic concurrency control
+      const expectedVersionStr = req.query["expected-version"];
+      if (expectedVersionStr) {
+        const expectedVersion = parseInt(expectedVersionStr as string);
+        const currentVersion = game.getStateVersion();
+
+        if (expectedVersion !== currentVersion) {
+          // Extract the events that happened since the client's version
+          const allEvents = game.getEventLog().getEvents();
+          const missedEvents = allEvents.slice(expectedVersion, currentVersion);
+
+          const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion, missedEvents, game);
+          res.status(409)
+             .setHeader('HX-Retarget', '#modal-container')
+             .setHeader('HX-Reswap', 'innerHTML')
+             .send(errorHtml);
+          return;
+        }
+      }
+
       const gameCard = game.findCardByIndex(cardIndex);
       if (!gameCard) {
         res.status(404).send(`<div>Card ${cardIndex} not found</div>`);
         return;
       }
 
-      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId);
+      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId, game.getStateVersion());
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading card modal:", error);
@@ -433,6 +543,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  app.get("/debug-section/:gameId", loadGameFromParams, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const html = formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion());
+    res.send(html);
+  });
+
   // Returns game section fragment - for HTMX updates
   app.get("/game-section/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
@@ -453,24 +569,19 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
   // Card action endpoints
   // Returns active game fragment - updated game board
-  app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/reveal-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error revealing card:", error);
@@ -479,23 +590,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-in-hand/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.putInHandByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card in hand:", error);
@@ -504,18 +610,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-down/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-down/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.revealByGameCardIndex(gameCardIndex);
 
       // Persist the updated state
@@ -527,6 +627,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       });
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card down:", error);
@@ -535,23 +636,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-on-top/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-on-top/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.putOnTopByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card on top:", error);
@@ -560,23 +656,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-on-bottom/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/put-on-bottom/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       game.putOnBottomByGameCardIndex(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card on bottom:", error);
@@ -585,50 +676,39 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/draw/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/draw/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
+
+    if (game.gameStatus() !== "Active") {
+      res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
+      return;
+    }
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
+      game.draw();
+      const persistedGameState = game.toPersistedGameState();
+      trace.getActiveSpan()?.setAttributes({
+        "game.gameStatus()": game.gameStatus(),
+        "game.cardsInLibrary": game.listLibrary().length,
+        "game.cardsInHand": game.listHand().length,
+        "game.full_json": JSON.stringify(persistedGameState),
+      });
+      await persistStatePort.save(persistedGameState);
 
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
-        return;
-      }
-
-      try {
-        game.draw();
-        const persistedGameState = game.toPersistedGameState();
-        trace.getActiveSpan()?.setAttributes({
-          "game.gameStatus()": game.gameStatus(),
-          "game.cardsInLibrary": game.listLibrary().length,
-          "game.cardsInHand": game.listHand().length,
-          "game.full_json": JSON.stringify(persistedGameState),
-        });
-        await persistStatePort.save(persistedGameState);
-
-        const html = formatActiveGameHtmlSection(game);
-        res.send(html);
-      } catch (error) {
-        if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
-          const lossModal = formatLossModalHtmlFragment();
-          res.setHeader("HX-Retarget", "#modal-container");
-          res.setHeader("HX-Reswap", "innerHTML");
-          res.send(lossModal);
-        } else {
-          console.error("Error drawing card:", error);
-          res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
-        }
-      }
+      const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
+      res.send(html);
     } catch (error) {
-      console.error("Error retrieving game:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
+      if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
+        const lossModal = formatLossModalHtmlFragment();
+        res.setHeader("HX-Retarget", "#modal-container");
+        res.setHeader("HX-Reswap", "innerHTML");
+        res.send(lossModal);
+      } else {
+        console.error("Error drawing card:", error);
+        res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
+      }
     }
   });
 
@@ -651,6 +731,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      // Validate state version for optimistic concurrency control
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
+        return;
+      }
+
       const whatHappened = game.playCard(gameCardIndex);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
@@ -663,6 +753,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(persistedGameState);
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error playing card:", error);
@@ -671,21 +762,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Returns active game fragment - updated game board
-  app.post("/shuffle/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/shuffle/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
       const whatHappened = game.shuffle();
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error shuffling library:", error);
@@ -693,29 +779,23 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.post("/move-hand-card/:gameId/:from/:to", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/move-hand-card/:gameId/:from/:to", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const from = parseInt(req.params.from);
     const to = parseInt(req.params.to);
 
+    if (game.gameStatus() !== "Active") {
+      res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
+      return;
+    }
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = GameState.fromPersistedGameState(persistedGame);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
-        return;
-      }
-
       const whatHappened = game.moveHandCard(from, to);
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error moving hand card:", error);
@@ -723,21 +803,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  app.post("/undo/:gameId/:gameEventIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/undo/:gameId/:gameEventIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameEventIndex = parseInt(req.params.gameEventIndex);
+
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
+      const updatedGame = game.undo(gameEventIndex);
+      await persistStatePort.save(updatedGame.toPersistedGameState());
 
-      var game = GameState.fromPersistedGameState(persistedGame);
-      game = game.undo(gameEventIndex);
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatActiveGameHtmlSection(game);
+      const html = formatActiveGameHtmlSection(updatedGame);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error undoing event:", error);
@@ -746,17 +822,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Flip a commander card - Returns only the commander container
-  app.post("/flip-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/flip-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+    try {
       game.flipCard(gameCardIndex); // TODO: I don't need whatHappened, it's in the card state
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -771,6 +842,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       // Return the commander container
       const html = formatFlippingContainer(flippedCard, gameId);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error flipping card:", error);
@@ -779,17 +851,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Flip a card and return updated modal HTML
-  app.post("/flip-card-modal/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+  app.post("/flip-card-modal/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const gameId = res.locals.gameId as number;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+    try {
       game.flipCard(gameCardIndex);
 
       await persistStatePort.save(game.toPersistedGameState());
@@ -805,7 +872,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.setHeader("HX-Trigger", "game-state-updated");
 
       // Return the updated modal HTML
-      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId);
+      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId, game.getStateVersion());
       res.send(modalHtml);
     } catch (error) {
       console.error("Error flipping card in modal:", error);

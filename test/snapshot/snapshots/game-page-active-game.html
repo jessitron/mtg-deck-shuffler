@@ -18,12 +18,21 @@ provideOneLinkToHoneycomb: true,
 });
 </script>
 <script src="/htmx.js"></script>
+<script>
+// Configure HTMX to swap on 409 Conflict responses
+htmx.config.responseHandling = [
+{code: "204", swap: false},  // No Content
+{code: "2..", swap: true},   // All other 2xx
+{code: "409", swap: true},   // Conflict (stale state)
+];
+</script>
 <script src="/game.js"></script>
 </head>
 <body>
 <div class="page-container">
 <div id="game-container"
 data-game-id="789"
+data-expected-version="5"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/789"
 hx-target="#game-container"
@@ -44,10 +53,12 @@ hx-swap="innerHTML">1 Cards on table</button>
 <div class="library-buttons">
 <button class="draw-button"
 hx-post="/draw/789"
+hx-vals='{"expected-version": 5}'
 hx-target="#game-container"
 hx-swap="outerHTML">Draw</button>
 <button class="shuffle-button"
 hx-post="/shuffle/789"
+hx-vals='{"expected-version": 5}'
 hx-target="#game-container"
 hx-swap="outerHTML">Shuffle</button>
 <button class="search-button"
@@ -56,6 +67,7 @@ hx-target="#modal-container"
 hx-swap="innerHTML">Search</button>
 <button class="reveal-button"
 hx-post="/reveal-card/789/1"
+hx-vals='{"expected-version": 5}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 >Reveal</button>
@@ -69,7 +81,7 @@ hx-swap="outerHTML"
 </p></div>
 <div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
-hx-get="/card-modal/789/3"
+hx-get="/card-modal/789/3?expected-version=5"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -80,7 +92,7 @@ style="cursor: pointer;">
 <img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
 </div>
 </div>
-<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-vals='{"expected-version": 5}' hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
 </div>
 </div>
 </div>
@@ -97,7 +109,7 @@ style="cursor: pointer;">
 <div class="hand-drop-zone" data-hand-position="0"></div><div id="card-2-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="0"
-hx-get="/card-modal/789/2"
+hx-get="/card-modal/789/2?expected-version=5"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -110,6 +122,7 @@ style="cursor: pointer;">
 <div class="history-actions">
 <button class="undo-button"
 hx-post="/undo/789/4"
+hx-vals='{"expected-version": 5}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 class="undo-button">UNDO 
@@ -134,8 +147,12 @@ hx-swap="innerHTML">Action History (5)</button>
 <input type="hidden" name="game-id" value="789" />
 <button type="submit">Choose Another Deck</button>
 </form>
-</div><div class="debug-section">
-<p class="game-id">Game ID: 789</p>
+</div><div class="debug-section"
+id="debug-section"
+hx-get="/debug-section/789"
+hx-trigger="game-state-updated from:body"
+hx-swap="innerHTML">
+<p class="game-id">Game ID: 789 | State Version: 5</p>
 <button class="debug-button"
 hx-get="/debug-state/789"
 hx-target="#modal-container"

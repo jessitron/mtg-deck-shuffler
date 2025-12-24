@@ -19,5 +19,11 @@ export function formatHomeV2HtmlPage(): string {
     </div>
   </div>`;
 
-  return formatPageWrapper("MTG Deck Shuffler - Home v2", content, "", ["/home-v2.css"], false);
+  return formatPageWrapper({
+    title: "MTG Deck Shuffler - Home v2",
+    content,
+    footerContent: "",
+    additionalStylesheets: ["/home-v2.css"],
+    includeFooter: false
+  });
 }

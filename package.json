@@ -31,9 +31,10 @@
     "sqlite3": "^5.1.7"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.2.1",

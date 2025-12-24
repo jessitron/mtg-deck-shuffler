@@ -5,7 +5,7 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
   const handCardsList = game.listHand();
   const handCardsWithDropZones = handCardsList
     .map((gameCard: GameCard, index: number) => {
-      const cardHtml = formatCardContainer({ gameCard, actions: "", gameId: game.gameId, whatHappened, draggable: true, handPosition: index });
+      const cardHtml = formatCardContainer({ gameCard, actions: "", gameId: game.gameId, expectedVersion: game.getStateVersion(), whatHappened, draggable: true, handPosition: index });
       // Add a drop zone before the first card
       const dropZoneBefore = index === 0 ? `<div class="hand-drop-zone" data-hand-position="${index}"></div>` : "";
       // Add a drop zone after each card

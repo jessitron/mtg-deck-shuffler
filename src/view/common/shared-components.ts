@@ -11,9 +11,10 @@ export function formatTitleHtmlFragment(): string {
       </div>`;
 }
 
-export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number): string {
+export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number, expectedVersion?: number): string {
+  const versionParam = expectedVersion !== undefined ? `?expected-version=${expectedVersion}` : '';
   return `<span class="card-name-link clickable-card-name"
-               hx-get="/card-modal/${gameId}/${cardIndex}"
+               hx-get="/card-modal/${gameId}/${cardIndex}${versionParam}"
                hx-target="#card-modal-container"
                hx-swap="innerHTML"
                style="cursor: pointer;">${cardName}</span>`;
@@ -22,13 +23,14 @@ export function formatCardNameAsModalLink(cardName: string, gameId: number, card
 type CardRenderOptions = {
   gameCard: GameCard;
   gameId: number;
+  expectedVersion?: number;
   actions?: string;
   whatHappened?: WhatHappened;
   draggable?: boolean;
   handPosition?: number;
 };
 
-export function formatCardContainer({ gameCard, gameId, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
+export function formatCardContainer({ gameCard, gameId, expectedVersion, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
@@ -36,6 +38,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
 
   const draggableAttr = draggable ? 'draggable="true"' : "";
   const handPositionAttr = handPosition !== undefined ? `data-hand-position="${handPosition}"` : "";
+  const versionParam = expectedVersion !== undefined ? `?expected-version=${expectedVersion}` : '';
 
   if (gameCard.card.twoFaced) {
     if (gameId === undefined) {
@@ -45,11 +48,11 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
     return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
-                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
+                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}${versionParam}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      ${formatFlippingContainer(gameCard, gameId)}
+      ${formatFlippingContainer(gameCard, gameId, expectedVersion)}
       ${actions}
     </div>`;
   } else {
@@ -57,7 +60,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
     return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
-                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}"
+                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}${versionParam}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
@@ -67,7 +70,7 @@ export function formatCardContainer({ gameCard, gameId, actions = "", whatHappen
   }
 }
 
-export function formatFlippingContainer(gameCard: GameCard, gameId: number): string {
+export function formatFlippingContainer(gameCard: GameCard, gameId: number, expectedVersion?: number): string {
   const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
   const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
   const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
@@ -75,7 +78,8 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
   const cardId = `card-${gameCard.gameCardIndex}`;
   const flipContainerId = `${cardId}-outer-flip-container`;
 
-  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
+  const valsAttr = expectedVersion !== undefined ? `hx-vals='{"expected-version": ${expectedVersion}}'` : "";
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" ${valsAttr} hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
 
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
             <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
@@ -88,11 +92,11 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number): str
           </div>`;
 }
 
-export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId: number): string {
+export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId: number, expectedVersion?: number): string {
   return libraryCards
     .map((gameCard: any) => {
-      return `<li class="library-card-item">  
-            ${formatCardNameAsModalLink(gameCard.card.name, gameId, gameCard.gameCardIndex)}
+      return `<li class="library-card-item">
+            ${formatCardNameAsModalLink(gameCard.card.name, gameId, gameCard.gameCardIndex, expectedVersion)}
         </li>`;
     })
     .join("");
@@ -105,13 +109,14 @@ export function formatCommandZoneHtmlFragment(game: GameState): string {
 `;
   const commanders = game.listCommanders();
   const gameId = game.gameId;
+  const expectedVersion = game.getStateVersion();
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
     <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
         <div class="game-title"><p>${title}</p></div>
       <div class="multiple-cards">
-        ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId })).join("")}
+        ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId, expectedVersion })).join("")}
       </div>
       </div>
     </div>`;

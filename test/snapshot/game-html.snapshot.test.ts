@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatGameHtmlSection } from "../../src/view/play-game/active-game-page.js";
+import { formatActiveGameHtmlSection } from "../../src/view/play-game/active-game-page.js";
 import { GameState } from "../../src/GameState.js";
 import { Deck } from "../../src/types.js";
 import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
@@ -87,7 +87,7 @@ describe("Game HTML Snapshot Tests", () => {
   it("formatGameHtml with cards in hand, revealed, and on table", async () => {
     const snapshotFile = "game-active-state.html";
     const gameState = createActiveGameState();
-    const actualHtml = formatGameHtmlSection(gameState, {});
+    const actualHtml = formatActiveGameHtmlSection(gameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml
@@ -157,7 +157,7 @@ describe("Game HTML Snapshot Tests", () => {
   it("formatGameHtml with empty library", async () => {
     const snapshotFile = "game-empty-library.html";
     const gameState = createEmptyLibraryGameState();
-    const actualHtml = formatGameHtmlSection(gameState, {});
+    const actualHtml = formatActiveGameHtmlSection(gameState, {});
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml

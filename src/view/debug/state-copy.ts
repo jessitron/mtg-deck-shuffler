@@ -1,14 +1,6 @@
 import { PersistedGameState } from "../../port-persist-state/types.js";
 import { formatModalHtmlFragment } from "../play-game/game-modals.js";
 
-export function formatDebugButtonHtmlFragment(gameId: number): string {
-  return `<button class="debug-button"
-                  hx-get="/debug-state/${gameId}"
-                  hx-target="#modal-container"
-                  hx-swap="innerHTML"
-                  class="debug-button">Debug State</button>`;
-}
-
 export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedGameState): string {
   const formattedJson = JSON.stringify(persistedGameState, null, 2);
   const collapsibleHtml = formatCollapsibleJson(persistedGameState);

@@ -21,17 +21,35 @@ ${additionalStylesheetsHtml}
     </script>
     <script src="/htmx.js"></script>
     <script src="/browser-tab-id.js"></script>
+    <script>
+      // Configure HTMX to swap on 409 Conflict responses
+      htmx.config.responseHandling = [
+        {code: "204", swap: false},  // No Content
+        {code: "2..", swap: true},   // All other 2xx
+        {code: "409", swap: true},   // Conflict (stale state)
+      ];
+    </script>
     <script src="/game.js"></script>
   </head>`;
 }
 
-function formatPageWrapper(
-  title: string,
-  content: string,
-  footerContent: string = ``,
-  additionalStylesheets: string[] = [],
-  includeFooter: boolean = true
-): string {
+interface PageWrapperOptions {
+  title: string;
+  content: string;
+  footerContent?: string;
+  additionalStylesheets?: string[];
+  includeFooter?: boolean;
+}
+
+function formatPageWrapper(options: PageWrapperOptions): string {
+  const {
+    title,
+    content,
+    footerContent = ``,
+    additionalStylesheets = [],
+    includeFooter = true
+  } = options;
+
   const headHtml = formatHtmlHead(title, additionalStylesheets);
   const footerHtml = includeFooter ? `
     <footer>
@@ -71,7 +89,10 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
       </div>
     </div>`;
 
-  return formatPageWrapper(`${title} - MTG Deck Shuffler`, content);
+  return formatPageWrapper({
+    title: `${title} - MTG Deck Shuffler`,
+    content
+  });
 }
 
 export { formatHtmlHead, formatPageWrapper };

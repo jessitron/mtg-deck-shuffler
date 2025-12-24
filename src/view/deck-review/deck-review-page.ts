@@ -1,26 +1,35 @@
 import { GameCard, GameState } from "../../GameState.js";
 import {
   formatCardContainer,
-  formatCardNameAsModalLink,
   formatCommandZoneHtmlFragment,
   formatLibraryCardList,
   formatTitleHtmlFragment,
 } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
+import { formatDebugSectionHtmlFragment } from "../debug/debug-section.js";
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
-  const debugSection = `<div class="debug-section">
-      <p class="game-id">Game ID: ${game.gameId}</p>
+  const debugSection = `<div class="debug-section"
+     id="debug-section"
+     hx-get="/debug-section/${game.gameId}"
+     hx-trigger="game-state-updated from:body"
+     hx-swap="innerHTML">
+      ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion())}
     </div>`;
   const contentWithModal = `
   <div class="page-with-title-container">
     ${formatTitleHtmlFragment()}
     ${gameContent}
-    
+
+    <div id="modal-container"></div>
     <div id="card-modal-container"></div>
   </div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, debugSection);
+  return formatPageWrapper({
+    title: `MTG Game - ${game.deckName}`,
+    content: contentWithModal,
+    footerContent: debugSection
+  });
 }
 
 export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {
@@ -41,6 +50,7 @@ function formatDeckReviewHtmlSection(game: GameState): string {
     <div id="start-game-buttons" class="deck-actions">
       <form method="post" action="/start-game" class="inline-form">
         <input type="hidden" name="game-id" value="${game.gameId}" />
+        <input type="hidden" name="expected-version" value="${game.getStateVersion()}" />
         <button type="submit" class="start-game-button">Shuffle Up</button>
       </form>
       <form method="post" action="/end-game" class="inline-form">

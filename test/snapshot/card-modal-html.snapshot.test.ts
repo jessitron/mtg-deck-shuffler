@@ -48,7 +48,7 @@ describe("Card Modal HTML Snapshot Tests", () => {
     const libraryCards = gameState.listLibrary();
     const firstCard = libraryCards[0];
     
-    const actualHtml = formatCardModalHtmlFragment(firstCard, gameState.gameId);
+    const actualHtml = formatCardModalHtmlFragment(firstCard, gameState.gameId, gameState.getStateVersion());
 
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -103,7 +103,7 @@ describe("Card Modal HTML Snapshot Tests", () => {
     const revealedCards = gameState.listRevealed();
     const revealedCard = revealedCards[0];
     
-    const actualHtml = formatCardModalHtmlFragment(revealedCard, gameState.gameId);
+    const actualHtml = formatCardModalHtmlFragment(revealedCard, gameState.gameId, gameState.getStateVersion());
 
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
