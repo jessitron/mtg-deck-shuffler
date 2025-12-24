@@ -65,7 +65,14 @@
       "Bash(aws configure get:*)",
       "Bash(aws eks list-clusters:*)",
       "Bash(kubectl cluster-info:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(npx playwright:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "WebSearch",
+      "Bash(asdf current:*)",
+      "Bash(asdf install:*)"
     ],
     "deny": []
   },

@@ -20,6 +20,14 @@ ${additionalStylesheetsHtml}
       });
     </script>
     <script src="/htmx.js"></script>
+    <script>
+      // Configure HTMX to swap on 409 Conflict responses
+      htmx.config.responseHandling = [
+        {code: "204", swap: false},  // No Content
+        {code: "2..", swap: true},   // All other 2xx
+        {code: "409", swap: true},   // Conflict (stale state)
+      ];
+    </script>
     <script src="/game.js"></script>
   </head>`;
 }

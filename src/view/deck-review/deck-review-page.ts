@@ -17,7 +17,8 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
   <div class="page-with-title-container">
     ${formatTitleHtmlFragment()}
     ${gameContent}
-    
+
+    <div id="modal-container"></div>
     <div id="card-modal-container"></div>
   </div>`;
   return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, debugSection);

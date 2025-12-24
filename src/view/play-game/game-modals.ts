@@ -273,3 +273,23 @@ function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
 export function formatLossModalHtmlFragment(): string {
   return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);
 }
+
+export function formatStaleStateErrorModal(expectedVersion: number, currentVersion: number): string {
+  const bodyContent = `
+    <div style="text-align: center; padding: 20px;">
+      <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+        The game state has changed since you loaded this page.
+      </p>
+      <p style="color: #666; margin-bottom: 1.5rem;">
+        Expected version: ${expectedVersion}, Current version: ${currentVersion}
+      </p>
+      <button onclick="location.reload()"
+              class="modal-action-button"
+              style="background-color: #2196f3; color: white; font-size: 1.1rem;">
+        Refresh Page
+      </button>
+    </div>
+  `;
+
+  return formatModalHtmlFragment("⚠️ Please Refresh", bodyContent);
+}
