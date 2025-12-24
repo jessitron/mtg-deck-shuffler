@@ -11,7 +11,7 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
   const gameEndActions = formatGameEndActionsHtmlFragment(game);
   const debugSection = `<div class="debug-section">
-  <p class="game-id">Game ID: ${game.gameId}</p>
+  <p class="game-id">Game ID: ${game.gameId} | State Version: ${game.getStateVersion()}</p>
   ${formatDebugButtonHtmlFragment(game.gameId)}
     </div>`;
   const contentWithModal = `
