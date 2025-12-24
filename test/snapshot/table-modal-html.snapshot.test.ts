@@ -1,7 +1,7 @@
 // Jest globals are available without imports
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatTableModalHtmlFragment } from "../../src/view/play-game/active-game-page.js";
+import { formatTableModalHtmlFragment } from "../../src/view/play-game/game-modals.js";
 import { GameState } from "../../src/GameState.js";
 import { Deck } from "../../src/types.js";
 import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
