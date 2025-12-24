@@ -10,6 +10,16 @@ function formatHtmlHead(title: string, additionalStylesheets: string[] = []): st
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css" />
 ${additionalStylesheetsHtml}
+    <script>
+      // Generate browserTabId first, before tracing initialization
+      const SESSION_STORAGE_KEY = "browserTabId";
+      let browserTabId = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      if (!browserTabId) {
+        browserTabId = crypto.randomUUID();
+        sessionStorage.setItem(SESSION_STORAGE_KEY, browserTabId);
+      }
+      window.browserTabId = browserTabId;
+    </script>
     <script src="/hny.js"></script>
     <script>
       Hny.initializeTracing({
@@ -17,11 +27,18 @@ ${additionalStylesheetsHtml}
         serviceName: "mtg-deck-shuffler-web",
         debug: false,
         provideOneLinkToHoneycomb: true,
+        resourceAttributes: {
+          "browser.tab_id": window.browserTabId
+        }
       });
     </script>
     <script src="/htmx.js"></script>
-    <script src="/browser-tab-id.js"></script>
     <script>
+      // Configure HTMX to include browserTabId in all requests
+      document.addEventListener("htmx:configRequest", function (event) {
+        event.detail.headers["X-Browser-Tab-Id"] = window.browserTabId;
+      });
+
       // Configure HTMX to swap on 409 Conflict responses
       htmx.config.responseHandling = [
         {code: "204", swap: false},  // No Content
