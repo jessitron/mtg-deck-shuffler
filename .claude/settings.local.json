@@ -72,7 +72,9 @@
       "Bash(gh pr create:*)",
       "WebSearch",
       "Bash(asdf current:*)",
-      "Bash(asdf install:*)"
+      "Bash(asdf install:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)"
     ],
     "deny": []
   },

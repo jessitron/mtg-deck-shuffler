@@ -2,15 +2,15 @@ import { Attributes, SpanStatusCode, trace } from "@opentelemetry/api";
 
 /** Common Span Attributes **
  *
- * CommonAttributes field | span attribute name   | description
- * ---------------------- | --------------------- | -----------
- * archidektDeckNumber    | archidekt.deck_number | deck number from Archidekt
- * browserTabId           | browser.tab_id        | unique ID for the browser tab
+ * CommonAttributes field | span attribute name      | description
+ * ---------------------- | ------------------------ | -----------
+ * archidektDeckNumber    | archidekt.deck_number    | deck number from Archidekt
+ * browserTabId           | game.browser_tab_id      | unique ID for the browser tab
  *
  */
 const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
 const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
-const SPAN_ATTRIBUTE_BROWSER_TAB_ID = "browser.tab_id";
+const SPAN_ATTRIBUTE_BROWSER_TAB_ID = "game.browser_tab_id";
 
 export type CommonAttributes = Partial<{
   archidektDeckId: string; // TODO: should be sourceUrl from DeckProvenance

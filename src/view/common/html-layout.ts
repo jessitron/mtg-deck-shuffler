@@ -28,7 +28,7 @@ ${additionalStylesheetsHtml}
         debug: false,
         provideOneLinkToHoneycomb: true,
         resourceAttributes: {
-          "browser.tab_id": window.browserTabId
+          "game.browser_tab_id": window.browserTabId
         }
       });
     </script>
