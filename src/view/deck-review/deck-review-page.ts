@@ -7,11 +7,16 @@ import {
   formatTitleHtmlFragment,
 } from "../common/shared-components.js";
 import { formatPageWrapper } from "../common/html-layout.js";
+import { formatDebugSectionHtmlFragment } from "../debug/debug-section.js";
 
 export function formatDeckReviewHtmlPage(game: GameState): string {
   const gameContent = formatDeckReviewHtmlSection(game);
-  const debugSection = `<div class="debug-section">
-      <p class="game-id">Game ID: ${game.gameId} | State Version: ${game.getStateVersion()}</p>
+  const debugSection = `<div class="debug-section"
+     id="debug-section"
+     hx-get="/debug-section/${game.gameId}"
+     hx-trigger="game-state-updated from:body"
+     hx-swap="innerHTML">
+      ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), false)}
     </div>`;
   const contentWithModal = `
   <div class="page-with-title-container">

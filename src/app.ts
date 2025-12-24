@@ -10,6 +10,7 @@ import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
+import { formatDebugSectionHtmlFragment } from "./view/debug/debug-section.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
@@ -533,6 +534,24 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  app.get("/debug-section/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+      const game = GameState.fromPersistedGameState(persistedGame);
+      const isActiveGame = game.gameStatus() === "Active";
+      const html = formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), isActiveGame);
+      res.send(html);
+    } catch (error) {
+      console.error("Error loading debug section:", error);
+      res.status(500).send(`<div>Error loading debug section</div>`);
+    }
+  });
+
   // Returns game section fragment - for HTMX updates
   app.get("/game-section/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
@@ -565,6 +584,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error revealing card:", error);
@@ -584,6 +604,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card in hand:", error);
@@ -609,6 +630,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       });
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card down:", error);
@@ -628,6 +650,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card on top:", error);
@@ -647,6 +670,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error putting card on bottom:", error);
@@ -676,6 +700,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(persistedGameState);
 
       const html = formatActiveGameHtmlSection(game);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
@@ -731,6 +756,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(persistedGameState);
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error playing card:", error);
@@ -748,6 +774,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error shuffling library:", error);
@@ -771,6 +798,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(game.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error moving hand card:", error);
@@ -788,6 +816,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       await persistStatePort.save(updatedGame.toPersistedGameState());
 
       const html = formatActiveGameHtmlSection(updatedGame);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error undoing event:", error);
@@ -816,6 +845,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       // Return the commander container
       const html = formatFlippingContainer(flippedCard, gameId);
+      res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
       console.error("Error flipping card:", error);

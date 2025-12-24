@@ -5,14 +5,17 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
-import { formatDebugButtonHtmlFragment } from "../debug/state-copy.js";
+import { formatDebugSectionHtmlFragment } from "../debug/debug-section.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
   const gameEndActions = formatGameEndActionsHtmlFragment(game);
-  const debugSection = `<div class="debug-section">
-  <p class="game-id">Game ID: ${game.gameId} | State Version: ${game.getStateVersion()}</p>
-  ${formatDebugButtonHtmlFragment(game.gameId)}
+  const debugSection = `<div class="debug-section"
+     id="debug-section"
+     hx-get="/debug-section/${game.gameId}"
+     hx-trigger="game-state-updated from:body"
+     hx-swap="innerHTML">
+  ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion(), true)}
     </div>`;
   const contentWithModal = `
     <div class="page-container">
