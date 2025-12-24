@@ -4,6 +4,10 @@ type GameEventIdentifier = {
   gameEventIndex: number;
 };
 
+type EventProvenance = {
+  browserTabId?: string;
+};
+
 export type CardMove = {
   gameCardIndex: number;
   fromLocation: CardLocation;
@@ -90,7 +94,7 @@ export function nameMove(move: CardMove): string {
   return `Move from ${move.fromLocation.type} to ${move.toLocation.type}`;
 }
 
-export type GameEventDefinition = ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent;
+export type GameEventDefinition = (ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent) & EventProvenance;
 
 export type GameEvent = GameEventDefinition & GameEventIdentifier;
 
@@ -125,7 +129,7 @@ export class GameEventLog {
     return [...this.events];
   }
 
-  public recordUndo(event: GameEvent): GameEvent {
+  public recordUndo(event: GameEvent, browserTabId?: string): GameEvent {
     if (event.eventName === "undo") {
       throw new Error("Cannot undo an undo, use redo instead");
     }
@@ -133,9 +137,10 @@ export class GameEventLog {
       throw new Error("Cannot undo start game");
     }
 
-    const undoEvent: UndoEvent = {
+    const undoEvent: UndoEvent & EventProvenance = {
       eventName: "undo",
       originalEventIndex: event.gameEventIndex,
+      browserTabId,
     };
     return this.record(undoEvent);
   }

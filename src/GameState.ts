@@ -253,7 +253,7 @@ export class GameState {
     return this.gameCards.filter((gc) => gc.isCommander);
   }
 
-  public shuffle(): WhatHappened {
+  public shuffle(browserTabId?: string): WhatHappened {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
     // Create random number generator (seeded if randomSeed is provided)
@@ -279,18 +279,19 @@ export class GameState {
     this.eventLog.record({
       eventName: "shuffle library",
       compactMoves: compactShuffleMoves(moves),
+      browserTabId,
     });
     return { shuffling: true };
   }
 
-  public startGame(): this {
+  public startGame(browserTabId?: string): this {
     if (this.status !== GameStatus.NotStarted) {
       throw new Error(`Cannot start game: current status is ${this.status}`);
     }
 
     this.status = GameStatus.Active;
-    this.eventLog.record(StartGameEvent);
-    this.shuffle(); // We don't need the return value here, just the side effect
+    this.eventLog.record({ ...StartGameEvent, browserTabId });
+    this.shuffle(browserTabId); // We don't need the return value here, just the side effect
 
     return this;
   }
@@ -299,8 +300,9 @@ export class GameState {
    * Grouch if the card isn't where it's supposed to be, then move it. Record the event.
    * @param move
    * @param recording - Shuffling or un-shuffling sets it to false, since that's recorded in its own way.
+   * @param browserTabId - Optional browser tab identifier for event tracking
    */
-  private executeMove(move: CardMove, recording: boolean = true) {
+  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string) {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
@@ -316,37 +318,37 @@ export class GameState {
     verifyLocationsAreIdentical(move.fromLocation, gameCard.location);
     gameCard.location = move.toLocation;
     if (recording) {
-      this.eventLog.record({ eventName: "move card", move });
+      this.eventLog.record({ eventName: "move card", move, browserTabId });
     }
   }
   // TODO: parallel moveCard for flipCard
 
-  private moveCard(gameCard: GameCard, toLocation: CardLocation) {
+  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string) {
     const move = {
       gameCardIndex: gameCard.gameCardIndex,
       fromLocation: gameCard.location,
       toLocation,
     };
-    return this.executeMove(move);
+    return this.executeMove(move, true, browserTabId);
   }
 
-  private addToRevealed(gameCard: GameCard): this {
+  private addToRevealed(gameCard: GameCard, browserTabId?: string): this {
     const revealedCards = this.listRevealed();
     const maxPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
     const nextPosition = maxPosition + 1;
-    this.moveCard(gameCard, { type: "Revealed", position: nextPosition });
+    this.moveCard(gameCard, { type: "Revealed", position: nextPosition }, browserTabId);
     return this;
   }
 
-  private addToHand(gameCard: GameCard): this {
+  private addToHand(gameCard: GameCard, browserTabId?: string): this {
     const handCards = this.listHand();
     const maxHandPosition = handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) : -1;
     const nextHandPosition = maxHandPosition + 1;
-    this.moveCard(gameCard, { type: "Hand", position: nextHandPosition });
+    this.moveCard(gameCard, { type: "Hand", position: nextHandPosition }, browserTabId);
     return this;
   }
 
-  private addToTopOfLibrary(gameCard: GameCard): this {
+  private addToTopOfLibrary(gameCard: GameCard, browserTabId?: string): this {
     const libraryCards = this.listLibrary();
 
     // Shift all existing library cards down by 1 position
@@ -355,19 +357,19 @@ export class GameState {
     });
 
     // Put the new card at position 0 (top of library)
-    this.moveCard(gameCard, { type: "Library", position: 0 });
+    this.moveCard(gameCard, { type: "Library", position: 0 }, browserTabId);
     return this;
   }
 
-  private addToBottomOfLibrary(gameCard: GameCard): this {
+  private addToBottomOfLibrary(gameCard: GameCard, browserTabId?: string): this {
     const libraryCards = this.listLibrary();
     const maxLibraryPosition = libraryCards.length > 0 ? Math.max(...libraryCards.map((gc) => gc.location.position)) : -1;
     const nextLibraryPosition = maxLibraryPosition + 1;
-    this.moveCard(gameCard, { type: "Library", position: nextLibraryPosition });
+    this.moveCard(gameCard, { type: "Library", position: nextLibraryPosition }, browserTabId);
     return this;
   }
 
-  public draw(): this {
+  public draw(browserTabId?: string): this {
     const libraryCards = this.listLibrary();
 
     if (libraryCards.length === 0) {
@@ -378,13 +380,13 @@ export class GameState {
     const topCard = libraryCards[0];
 
     // Find the next available hand position
-    this.addToHand(topCard);
+    this.addToHand(topCard, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public playCard(gameCardIndex: number): WhatHappened {
+  public playCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
     }
@@ -401,7 +403,7 @@ export class GameState {
       .filter((gc) => gc.location.position > cardToPlay.location.position);
 
     // Move card to table
-    this.moveCard(cardToPlay, { type: "Table" });
+    this.moveCard(cardToPlay, { type: "Table" }, browserTabId);
 
     this.validateInvariants();
 
@@ -410,7 +412,7 @@ export class GameState {
     };
   }
 
-  public reveal(position: number): this {
+  public reveal(position: number, browserTabId?: string): this {
     const libraryCards = this.listLibrary();
     const cardToReveal = libraryCards.find((gc) => (gc.location as LibraryLocation).position === position);
 
@@ -418,13 +420,13 @@ export class GameState {
       throw new Error(`No card found at library position ${position}`);
     }
 
-    this.addToRevealed(cardToReveal);
+    this.addToRevealed(cardToReveal, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public revealByGameCardIndex(gameCardIndex: number): this {
+  public revealByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -432,13 +434,13 @@ export class GameState {
 
     const cardToReveal = allCards[gameCardIndex];
 
-    this.addToRevealed(cardToReveal);
+    this.addToRevealed(cardToReveal, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public putInHandByGameCardIndex(gameCardIndex: number): this {
+  public putInHandByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -446,13 +448,13 @@ export class GameState {
 
     const cardToPutInHand = allCards[gameCardIndex];
 
-    this.addToHand(cardToPutInHand);
+    this.addToHand(cardToPutInHand, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public putOnTopByGameCardIndex(gameCardIndex: number): this {
+  public putOnTopByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -460,13 +462,13 @@ export class GameState {
 
     const cardToPutOnTop = allCards[gameCardIndex];
 
-    this.addToTopOfLibrary(cardToPutOnTop);
+    this.addToTopOfLibrary(cardToPutOnTop, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public putOnBottomByGameCardIndex(gameCardIndex: number): this {
+  public putOnBottomByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -474,13 +476,13 @@ export class GameState {
 
     const cardToPutOnBottom = allCards[gameCardIndex];
 
-    this.addToBottomOfLibrary(cardToPutOnBottom);
+    this.addToBottomOfLibrary(cardToPutOnBottom, browserTabId);
 
     this.validateInvariants();
     return this;
   }
 
-  public moveHandCard(fromHandPosition: number, toHandPosition: number): WhatHappened {
+  public moveHandCard(fromHandPosition: number, toHandPosition: number, browserTabId?: string): WhatHappened {
     function nameAndPosition(gameCard: GameCard) {
       return `${gameCard.card.name} (${(gameCard.location as HandLocation).position})`;
     }
@@ -538,7 +540,7 @@ export class GameState {
       fromLocation: cardToMove.location,
       toLocation: { type: "Hand", position: newPosition },
     };
-    this.executeMove(move);
+    this.executeMove(move, true, browserTabId);
 
     this.validateInvariants();
 
@@ -572,7 +574,7 @@ export class GameState {
     return whatHappened;
   }
 
-  public flipCard(gameCardIndex: number): WhatHappened {
+  public flipCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
     const gameCard = this.gameCards[gameCardIndex];
     if (!gameCard) {
       throw new Error(`Game card with index ${gameCardIndex} not found`);
@@ -599,7 +601,7 @@ export class GameState {
     return this.gameCards[gameCardIndex];
   }
 
-  public undo(gameEventIndex: number): GameState {
+  public undo(gameEventIndex: number, browserTabId?: string): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
 
@@ -612,7 +614,7 @@ export class GameState {
       throw new Error(`Cannot undo event ${event.eventName}`);
     }
 
-    this.eventLog.recordUndo(event);
+    this.eventLog.recordUndo(event, browserTabId);
     return this;
   }
 
