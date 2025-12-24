@@ -1,61 +1,50 @@
 <div id="game-container"
 data-game-id="123"
+data-expected-version="7"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/123"
 hx-target="#game-container"
 hx-swap="outerHTML">
-<div id="command-zone">
-<h4 class="cute-header">Command Zone</h4>
-<div class="multiple-cards">
-<div id="card-3-container" class="card-container clickable-card "
-hx-get="/card-modal/123/3"
-hx-target="#card-modal-container"
-hx-swap="innerHTML"
-style="cursor: pointer;">
-<div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
-<div id="card-3-outer-flip-container" class=" flip-container-outer">
-<div id="card-3-inner-flip-container" class="flip-container-inner">
-<img id="card-3-back-face" src="https://cards.scryfall.io/normal/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge (back face)" class="mtg-card-image two-sided-back" />
-<img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
+<div id="table-section" class="table-section">
+<button class="table-cards-button"
+hx-get="/table-modal/123"
+hx-target="#modal-container"
+hx-swap="innerHTML">1 Cards on table</button>
 </div>
-</div>
-<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/123/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
-</div>
-</div>
-</div>
-</div>
-<div id="library-section" data-testid="library-section">
-<h4 class="cute-header">Library</h4>
+<div class="game-top-row">
+<div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
 <div class="library-stack" data-testid="library-stack">
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="3 cards"/>
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
 <img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
 </div>
 <div class="library-buttons">
+<button class="draw-button"
+hx-post="/draw/123"
+hx-vals='{"expected-version": 7}'
+hx-target="#game-container"
+hx-swap="outerHTML">Draw</button>
+<button class="shuffle-button"
+hx-post="/shuffle/123"
+hx-vals='{"expected-version": 7}'
+hx-target="#game-container"
+hx-swap="outerHTML">Shuffle</button>
 <button class="search-button"
 hx-get="/library-modal/123"
 hx-target="#modal-container"
 hx-swap="innerHTML">Search</button>
-<button class="shuffle-button"
-hx-post="/shuffle/123"
-hx-target="#game-container"
-hx-swap="outerHTML">Shuffle</button>
-<button class="draw-button"
-hx-post="/draw/123"
-hx-target="#game-container"
-hx-swap="outerHTML">Draw</button>
 <button class="reveal-button"
 hx-post="/reveal-card/123/6"
+hx-vals='{"expected-version": 7}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 >Reveal</button>
 </div>
 </div>
-<div id="revealed-cards-section" class="revealed-cards-section" >
-<h4 class="cute-header">Revealed</h4>
+<div id="revealed-cards-section" class="revealed-cards-section section-that-is-horizontally-aligned-with-command-zone" >
 <div id="revealed-cards-area" class="revealed-cards-area">
 <div id="card-4-container" class="card-container clickable-card "
-hx-get="/card-modal/123/4"
+hx-get="/card-modal/123/4?expected-version=7"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -63,6 +52,7 @@ style="cursor: pointer;">
 <div class="card-buttons">
 <button class="play-button"
 hx-post="/play-card/123/4"
+hx-vals='{"expected-version": 7}'
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
 data-card-id="54734347-eee7-4c52-b514-7342afeccabd" data-current-face="front"
@@ -71,6 +61,7 @@ title="Copy image and remove from revealed">
 Play
 </button><button class="put-in-hand-button"
 hx-post="/put-in-hand/123/4"
+hx-vals='{"expected-version": 7}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 onclick="event.stopPropagation()"
@@ -78,6 +69,7 @@ title="Move card to hand">
 Put in Hand
 </button><button class="put-on-top-button"
 hx-post="/put-on-top/123/4"
+hx-vals='{"expected-version": 7}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 onclick="event.stopPropagation()"
@@ -85,6 +77,7 @@ title="Move card to top of library">
 Put on Top
 </button><button class="put-on-bottom-button"
 hx-post="/put-on-bottom/123/4"
+hx-vals='{"expected-version": 7}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 onclick="event.stopPropagation()"
@@ -95,19 +88,42 @@ Put on Bottom
 </div>
 </div>
 </div>
-<div id="table-section" class="table-section">
-<button class="table-cards-button"
-hx-get="/table-modal/123"
-hx-target="#modal-container"
-hx-swap="innerHTML">1 Cards on table</button>
+<div id="command-zone">
+<div class="cool-command-zone-surround ">
+<div class="game-title"><p>
+<span class="game-name">Jaceteous League</span> <a href="https://archidekt.com/decks/75009" target="_blank">↗</a>
+</p></div>
+<div class="multiple-cards">
+<div id="card-3-container" class="card-container clickable-card "
+hx-get="/card-modal/123/3?expected-version=7"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+style="cursor: pointer;">
+<div id="card-3-outer-flip-container-with-button" class="flip-container-with-button">
+<div id="card-3-outer-flip-container" class=" flip-container-outer">
+<div id="card-3-inner-flip-container" class="flip-container-inner">
+<img id="card-3-back-face" src="https://cards.scryfall.io/normal/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge (back face)" class="mtg-card-image two-sided-back" />
+<img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
 </div>
+</div>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/123/3" hx-vals='{"expected-version": 7}' hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="game-hand-row">
 <div id="hand-section" data-testid="hand-section">
-<h4 class="cute-header">Hand</h4>
 <div id="hand-cards" class="hand-cards">
+<div class="hand-symbol">
+<div class="hand-count">2</div>
+<img src="/hand.png" alt="Hand" />
+</div>
 <div class="hand-drop-zone" data-hand-position="0"></div><div id="card-2-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="0"
-hx-get="/card-modal/123/2"
+hx-get="/card-modal/123/2?expected-version=7"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -115,7 +131,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="1"></div><div id="card-1-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="1"
-hx-get="/card-modal/123/1"
+hx-get="/card-modal/123/1?expected-version=7"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -123,27 +139,20 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="2"></div>
 </div>
 </div>
-<div id="end-game-actions" class="game-actions">
-<div class="undo-controls">
+</div>
+<div class="history-actions-row">
+<div class="history-actions">
+<button class="undo-button"
+hx-post="/undo/123/6"
+hx-vals='{"expected-version": 7}'
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">UNDO 
+<span class="event-description  event-move-card">Play: Carth the Lion</span></button>
 <button class="history-button"
 hx-get="/history-modal/123"
 hx-target="#modal-container"
-hx-swap="innerHTML">View History (7)</button>
-<button class="undo-button"
-hx-post="/undo/123/6"
-hx-target="#game-container"
-hx-swap="outerHTML"
-class="undo-button">Undo</button>
-<span class="event-description">Last action: 
-<span class="event-description  event-move-card">Play: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522265" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Carth the Lion</a></span></span>
+hx-swap="innerHTML">Action History (7)</button>
 </div>
-<form method="post" action="/restart-game" class="inline-form">
-<input type="hidden" name="game-id" value="123" />
-<button type="submit">Restart Game</button>
-</form>
-<form method="post" action="/end-game" class="inline-form">
-<input type="hidden" name="game-id" value="123" />
-<button type="submit">Choose Another Deck</button>
-</form>
 </div>
 </div>

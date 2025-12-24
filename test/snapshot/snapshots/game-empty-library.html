@@ -1,14 +1,52 @@
 <div id="game-container"
 data-game-id="789"
+data-expected-version="9"
 hx-trigger="game-state-updated from:body"
 hx-get="/game-section/789"
 hx-target="#game-container"
 hx-swap="outerHTML">
+<div id="table-section" class="table-section">
+<button class="table-cards-button"
+hx-get="/table-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">0 Cards on table</button>
+</div>
+<div class="game-top-row">
+<div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
+<div class="library-stack library-stack-empty" data-testid="library-stack">
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="0 cards"/>
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
+</div>
+<div class="library-buttons">
+<button class="draw-button"
+hx-post="/draw/789"
+hx-vals='{"expected-version": 9}'
+hx-target="#game-container"
+hx-swap="outerHTML">Draw</button>
+<button class="shuffle-button"
+hx-post="/shuffle/789"
+hx-vals='{"expected-version": 9}'
+hx-target="#game-container"
+hx-swap="outerHTML">Shuffle</button>
+<button class="search-button"
+hx-get="/library-modal/789"
+hx-target="#modal-container"
+hx-swap="innerHTML">Search</button>
+<button class="reveal-button"
+disabled
+>Reveal</button>
+</div>
+</div>
+<div id="revealed-cards-section" class="revealed-cards-section" ></div>
 <div id="command-zone">
-<h4 class="cute-header">Command Zone</h4>
+<div class="cool-command-zone-surround ">
+<div class="game-title"><p>
+<span class="game-name">Jaceteous League</span> <a href="https://archidekt.com/decks/75009" target="_blank">↗</a>
+</p></div>
 <div class="multiple-cards">
 <div id="card-3-container" class="card-container clickable-card "
-hx-get="/card-modal/789/3"
+hx-get="/card-modal/789/3?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -19,50 +57,24 @@ style="cursor: pointer;">
 <img id="card-3-front-face" src="https://cards.scryfall.io/normal/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg" alt="Esika, God of the Tree // The Prismatic Bridge" class="mtg-card-image two-sided-front" title="Esika, God of the Tree // The Prismatic Bridge" />
 </div>
 </div>
-<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+<button class="flip-button" id="card-3-flip-button" hx-post="/flip-card/789/3" hx-vals='{"expected-version": 9}' hx-swap="outerHTML" hx-target="#card-3-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
 </div>
 </div>
 </div>
 </div>
-<div id="library-section" data-testid="library-section">
-<h4 class="cute-header">Library</h4>
-<div class="library-stack library-stack-empty" data-testid="library-stack">
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="0 cards"/>
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-<img src="/mtg-card-back.jpg" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
-</div>
-<div class="library-buttons">
-<button class="search-button"
-hx-get="/library-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">Search</button>
-<button class="shuffle-button"
-hx-post="/shuffle/789"
-hx-target="#game-container"
-hx-swap="outerHTML">Shuffle</button>
-<button class="draw-button"
-hx-post="/draw/789"
-hx-target="#game-container"
-hx-swap="outerHTML">Draw</button>
-<button class="reveal-button"
-disabled
->Reveal</button>
 </div>
 </div>
-<div id="revealed-cards-section" class="revealed-cards-section" ></div>
-<div id="table-section" class="table-section">
-<button class="table-cards-button"
-hx-get="/table-modal/789"
-hx-target="#modal-container"
-hx-swap="innerHTML">0 Cards on table</button>
-</div>
+<div class="game-hand-row">
 <div id="hand-section" data-testid="hand-section">
-<h4 class="cute-header">Hand</h4>
 <div id="hand-cards" class="hand-cards">
+<div class="hand-symbol">
+<div class="hand-count">7</div>
+<img src="/hand.png" alt="Hand" />
+</div>
 <div class="hand-drop-zone" data-hand-position="0"></div><div id="card-0-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="0"
-hx-get="/card-modal/789/0"
+hx-get="/card-modal/789/0?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -70,7 +82,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="1"></div><div id="card-2-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="1"
-hx-get="/card-modal/789/2"
+hx-get="/card-modal/789/2?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -78,7 +90,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="2"></div><div id="card-1-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="2"
-hx-get="/card-modal/789/1"
+hx-get="/card-modal/789/1?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -86,7 +98,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="3"></div><div id="card-4-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="3"
-hx-get="/card-modal/789/4"
+hx-get="/card-modal/789/4?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -94,7 +106,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="4"></div><div id="card-6-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="4"
-hx-get="/card-modal/789/6"
+hx-get="/card-modal/789/6?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -102,7 +114,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="5"></div><div id="card-5-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="5"
-hx-get="/card-modal/789/5"
+hx-get="/card-modal/789/5?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -110,7 +122,7 @@ style="cursor: pointer;">
 </div><div class="hand-drop-zone" data-hand-position="6"></div><div id="card-7-container" class="card-container clickable-card "
 draggable="true"
 data-hand-position="6"
-hx-get="/card-modal/789/7"
+hx-get="/card-modal/789/7?expected-version=9"
 hx-target="#card-modal-container"
 hx-swap="innerHTML"
 style="cursor: pointer;">
@@ -121,32 +133,25 @@ style="cursor: pointer;">
 <img id="card-7-front-face" src="https://cards.scryfall.io/normal/front/7/b/7b215968-93a6-4278-ac61-4e3e8c3c3943.jpg" alt="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen" class="mtg-card-image two-sided-front" title="Nicol Bolas, the Ravager // Nicol Bolas, the Arisen" />
 </div>
 </div>
-<button class="flip-button" id="card-7-flip-button" hx-post="/flip-card/789/7" hx-swap="outerHTML" hx-target="#card-7-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
+<button class="flip-button" id="card-7-flip-button" hx-post="/flip-card/789/7" hx-vals='{"expected-version": 9}' hx-swap="outerHTML" hx-target="#card-7-outer-flip-container-with-button" onclick="event.stopPropagation()">Flip</button>
 </div>
 </div><div class="hand-drop-zone" data-hand-position="7"></div>
 </div>
 </div>
-<div id="end-game-actions" class="game-actions">
-<div class="undo-controls">
+</div>
+<div class="history-actions-row">
+<div class="history-actions">
+<button class="undo-button"
+hx-post="/undo/789/8"
+hx-vals='{"expected-version": 9}'
+hx-target="#game-container"
+hx-swap="outerHTML"
+class="undo-button">UNDO 
+<span class="event-description  event-move-card">Draw: Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</span></button>
 <button class="history-button"
 hx-get="/history-modal/789"
 hx-target="#modal-container"
-hx-swap="innerHTML">View History (9)</button>
-<button class="undo-button"
-hx-post="/undo/789/8"
-hx-target="#game-container"
-hx-swap="outerHTML"
-class="undo-button">Undo</button>
-<span class="event-description">Last action: 
-<span class="event-description  event-move-card">Draw: <a href="https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447354" target="_blank" class="card-name-link" onclick="event.stopPropagation()">Nicol Bolas, the Ravager // Nicol Bolas, the Arisen</a></span></span>
+hx-swap="innerHTML">Action History (9)</button>
 </div>
-<form method="post" action="/restart-game" class="inline-form">
-<input type="hidden" name="game-id" value="789" />
-<button type="submit">Restart Game</button>
-</form>
-<form method="post" action="/end-game" class="inline-form">
-<input type="hidden" name="game-id" value="789" />
-<button type="submit">Choose Another Deck</button>
-</form>
 </div>
 </div>

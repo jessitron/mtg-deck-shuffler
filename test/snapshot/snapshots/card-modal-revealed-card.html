@@ -23,6 +23,7 @@ hx-swap="innerHTML">&times;</button>
 onclick="copyCardImageToClipboard(event, 'https://cards.scryfall.io/large/front/e/0/e09e9b65-ff0e-4efe-b96a-ede69c96e2ea.jpg', 'Carth the Lion')">Copy</button></div>
 <div class="card-modal-location-actions"><button class="modal-action-button play-button"
 hx-post="/play-card/456/0"
+hx-vals='{"expected-version": 3}'
 hx-target="#game-container"
 hx-swap="outerHTML swap:1.5s"
 data-card-id="e09e9b65-ff0e-4efe-b96a-ede69c96e2ea" data-current-face="front"
@@ -31,6 +32,7 @@ title="Copy image and remove from revealed">
 Play
 </button><button class="modal-action-button put-in-hand-button"
 hx-post="/put-in-hand/456/0"
+hx-vals='{"expected-version": 3}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
@@ -38,6 +40,7 @@ title="Move card to hand">
 Put in Hand
 </button><button class="modal-action-button put-on-top-button"
 hx-post="/put-on-top/456/0"
+hx-vals='{"expected-version": 3}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
@@ -45,6 +48,7 @@ title="Move card to top of library">
 Put on Top
 </button><button class="modal-action-button put-on-bottom-button"
 hx-post="/put-on-bottom/456/0"
+hx-vals='{"expected-version": 3}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"

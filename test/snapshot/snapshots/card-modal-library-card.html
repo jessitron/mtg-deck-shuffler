@@ -23,6 +23,7 @@ hx-swap="innerHTML">&times;</button>
 onclick="copyCardImageToClipboard(event, 'https://cards.scryfall.io/large/front/e/0/e09e9b65-ff0e-4efe-b96a-ede69c96e2ea.jpg', 'Carth the Lion')">Copy</button></div>
 <div class="card-modal-location-actions"><button class="modal-action-button"
 hx-post="/reveal-card/123/0"
+hx-vals='{"expected-version": 2}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
@@ -30,6 +31,7 @@ title="Reveal">
 Reveal
 </button><button class="modal-action-button secondary"
 hx-post="/put-in-hand/123/0"
+hx-vals='{"expected-version": 2}'
 hx-target="#game-container"
 hx-swap="outerHTML"
 hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
