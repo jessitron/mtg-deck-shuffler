@@ -164,7 +164,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -499,7 +502,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -533,7 +539,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -566,7 +575,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -605,7 +617,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -638,7 +653,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -675,7 +693,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -731,7 +752,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -770,7 +794,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -807,7 +834,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -837,7 +867,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -868,7 +901,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
@@ -909,7 +945,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Validate state version for optimistic concurrency control
       const versionCheck = validateStateVersion(req, game);
       if (!versionCheck.valid) {
-        res.status(409).setHeader('HX-Retarget', '#modal-container').send(versionCheck.errorHtml);
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
         return;
       }
 
