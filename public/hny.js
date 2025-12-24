@@ -3897,11 +3897,15 @@
     if (typeof attributes !== "object" || attributes == null) {
       return out;
     }
-    for (const [key, val] of Object.entries(attributes)) {
+    for (const key in attributes) {
+      if (!Object.prototype.hasOwnProperty.call(attributes, key)) {
+        continue;
+      }
       if (!isAttributeKey(key)) {
         diag2.warn(`Invalid attribute key: ${key}`);
         continue;
       }
+      const val = attributes[key];
       if (!isAttributeValue(val)) {
         diag2.warn(`Invalid attribute value set for key: ${key}`);
         continue;
@@ -3915,7 +3919,7 @@
     return out;
   }
   function isAttributeKey(key) {
-    return typeof key === "string" && key.length > 0;
+    return typeof key === "string" && key !== "";
   }
   function isAttributeValue(val) {
     if (val == null) {
@@ -3924,29 +3928,30 @@
     if (Array.isArray(val)) {
       return isHomogeneousAttributeValueArray(val);
     }
-    return isValidPrimitiveAttributeValue(val);
+    return isValidPrimitiveAttributeValueType(typeof val);
   }
   function isHomogeneousAttributeValueArray(arr) {
     let type;
     for (const element of arr) {
       if (element == null)
         continue;
+      const elementType = typeof element;
+      if (elementType === type) {
+        continue;
+      }
       if (!type) {
-        if (isValidPrimitiveAttributeValue(element)) {
-          type = typeof element;
+        if (isValidPrimitiveAttributeValueType(elementType)) {
+          type = elementType;
           continue;
         }
         return false;
-      }
-      if (typeof element === type) {
-        continue;
       }
       return false;
     }
     return true;
   }
-  function isValidPrimitiveAttributeValue(val) {
-    switch (typeof val) {
+  function isValidPrimitiveAttributeValueType(valType) {
+    switch (valType) {
       case "number":
       case "boolean":
       case "string":
@@ -4012,13 +4017,7 @@
   var otperformance = performance;
 
   // node_modules/@opentelemetry/core/build/esm/version.js
-  var VERSION2 = "2.1.0";
-
-  // node_modules/@opentelemetry/semantic-conventions/build/esm/trace/SemanticAttributes.js
-  var TMP_HTTP_URL = "http.url";
-  var TMP_HTTP_USER_AGENT = "http.user_agent";
-  var SEMATTRS_HTTP_URL = TMP_HTTP_URL;
-  var SEMATTRS_HTTP_USER_AGENT = TMP_HTTP_USER_AGENT;
+  var VERSION2 = "2.2.0";
 
   // node_modules/@opentelemetry/semantic-conventions/build/esm/stable_attributes.js
   var ATTR_ERROR_TYPE = "error.type";
@@ -4049,10 +4048,6 @@
     [ATTR_TELEMETRY_SDK_LANGUAGE]: TELEMETRY_SDK_LANGUAGE_VALUE_WEBJS,
     [ATTR_TELEMETRY_SDK_VERSION]: VERSION2
   };
-
-  // node_modules/@opentelemetry/core/build/esm/platform/browser/timer-util.js
-  function unrefTimer(_timer) {
-  }
 
   // node_modules/@opentelemetry/core/build/esm/common/time.js
   var NANOSECOND_DIGITS = 9;
@@ -4121,6 +4116,13 @@
       out[0] += 1;
     }
     return out;
+  }
+
+  // node_modules/@opentelemetry/core/build/esm/common/timer-util.js
+  function unrefTimer(timer) {
+    if (typeof timer !== "number") {
+      timer.unref();
+    }
   }
 
   // node_modules/@opentelemetry/core/build/esm/ExportResult.js
@@ -5355,7 +5357,9 @@
       if (this._timer !== void 0)
         return;
       this._timer = setTimeout(() => flush(), this._scheduledDelayMillis);
-      unrefTimer(this._timer);
+      if (typeof this._timer !== "number") {
+        this._timer.unref();
+      }
     }
     _clearTimer() {
       if (this._timer !== void 0) {
@@ -6173,8 +6177,8 @@
   }
   var browserDetector = new BrowserDetector();
 
-  // node_modules/@honeycombio/opentelemetry-web/dist/esm/user-interaction-instrumentation-e2UGPk8b.js
-  var VERSION4 = "1.0.2";
+  // node_modules/@honeycombio/opentelemetry-web/dist/esm/user-interaction-instrumentation-be50HE5P.js
+  var VERSION4 = "1.2.0";
   var INSTRUMENTATION_NAME = "@honeycombio/user-instrumentation";
   var DEFAULT_EVENT_NAMES = ["click"];
   var UserInteractionInstrumentation = class _UserInteractionInstrumentation extends InstrumentationBase {
@@ -10898,9 +10902,6 @@
       if (this._disabled) {
         return;
       }
-      registerInstrumentations({
-        instrumentations: this._instrumentations
-      });
       if (this._autoDetectResources) {
         const internalConfig = {
           detectors: this._resourceDetectors
@@ -10953,6 +10954,9 @@
         });
         logs2.setGlobalLoggerProvider(this._loggerProvider);
       }
+      registerInstrumentations({
+        instrumentations: this._instrumentations
+      });
     }
     /* Experimental getter method: not currently part of the upstream
      * sdk's API */
@@ -11264,18 +11268,18 @@
   }
   var a = -1;
   var c = () => a;
-  var u = (t2) => {
+  var f = (t2) => {
     addEventListener("pageshow", (e2) => {
       e2.persisted && (a = e2.timeStamp, t2(e2));
     }, true);
   };
-  var d = (t2, e2, n2, o2) => {
+  var u = (t2, e2, n2, o2) => {
     let i2, r2;
     return (s2) => {
       e2.value >= 0 && (s2 || o2) && (r2 = e2.value - (i2 ?? 0), (r2 || void 0 === i2) && (i2 = e2.value, e2.delta = r2, e2.rating = ((t3, e3) => t3 > e3[1] ? "poor" : t3 > e3[0] ? "needs-improvement" : "good")(e2.value, n2), t2(e2)));
     };
   };
-  var f = (t2) => {
+  var d = (t2) => {
     requestAnimationFrame(() => requestAnimationFrame(() => t2()));
   };
   var l = () => {
@@ -11313,81 +11317,83 @@
     } catch {
     }
   };
-  var g = (t2) => {
+  var p = (t2) => {
     let e2 = false;
     return () => {
       e2 || (t2(), e2 = true);
     };
   };
-  var p = -1;
-  var y = () => "hidden" !== document.visibilityState || document.prerendering ? 1 / 0 : 0;
-  var v = (t2) => {
-    "hidden" === document.visibilityState && p > -1 && (p = "visibilitychange" === t2.type ? t2.timeStamp : 0, M());
-  };
-  var b = () => {
-    addEventListener("visibilitychange", v, true), addEventListener("prerenderingchange", v, true);
+  var g = -1;
+  var y = /* @__PURE__ */ new Set();
+  var v = () => "hidden" !== document.visibilityState || document.prerendering ? 1 / 0 : 0;
+  var b = (t2) => {
+    if ("hidden" === document.visibilityState) {
+      if ("visibilitychange" === t2.type) for (const t3 of y) t3();
+      isFinite(g) || (g = "visibilitychange" === t2.type ? t2.timeStamp : 0, removeEventListener("prerenderingchange", b, true));
+    }
   };
   var M = () => {
-    removeEventListener("visibilitychange", v, true), removeEventListener("prerenderingchange", v, true);
-  };
-  var T = () => {
-    if (p < 0) {
+    if (g < 0) {
       const t2 = l(), e2 = document.prerendering ? void 0 : globalThis.performance.getEntriesByType("visibility-state").filter((e3) => "hidden" === e3.name && e3.startTime > t2)[0]?.startTime;
-      p = e2 ?? y(), b(), u(() => {
+      g = e2 ?? v(), addEventListener("visibilitychange", b, true), addEventListener("prerenderingchange", b, true), f(() => {
         setTimeout(() => {
-          p = y(), b();
+          g = v();
         });
       });
     }
     return {
       get firstHiddenTime() {
-        return p;
+        return g;
+      },
+      onHidden(t2) {
+        y.add(t2);
       }
     };
   };
-  var D = (t2) => {
+  var T = (t2) => {
     document.prerendering ? addEventListener("prerenderingchange", () => t2(), true) : t2();
   };
   var E = [1800, 3e3];
-  var P = (t2, e2 = {}) => {
-    D(() => {
-      const n2 = T();
+  var D = (t2, e2 = {}) => {
+    T(() => {
+      const n2 = M();
       let o2, i2 = h("FCP");
       const r2 = m("paint", (t3) => {
         for (const e3 of t3) "first-contentful-paint" === e3.name && (r2.disconnect(), e3.startTime < n2.firstHiddenTime && (i2.value = Math.max(e3.startTime - l(), 0), i2.entries.push(e3), o2(true)));
       });
-      r2 && (o2 = d(t2, i2, E, e2.reportAllChanges), u((n3) => {
-        i2 = h("FCP"), o2 = d(t2, i2, E, e2.reportAllChanges), f(() => {
+      r2 && (o2 = u(t2, i2, E, e2.reportAllChanges), f((n3) => {
+        i2 = h("FCP"), o2 = u(t2, i2, E, e2.reportAllChanges), d(() => {
           i2.value = performance.now() - n3.timeStamp, o2(true);
         });
       }));
     });
   };
   var L = [0.1, 0.25];
-  var S = (t2) => t2.find((t3) => 1 === t3.node?.nodeType) || t2[0];
-  var _ = (e2, o2 = {}) => {
+  var P = (t2) => t2.find((t3) => 1 === t3.node?.nodeType) || t2[0];
+  var S = (e2, o2 = {}) => {
     const r2 = s(o2 = Object.assign({}, o2), t), a2 = /* @__PURE__ */ new WeakMap();
     r2.t = (t2) => {
       if (t2?.sources?.length) {
-        const e3 = S(t2.sources);
-        if (e3) {
-          const t3 = (o2.generateTarget ?? i)(e3.node);
+        const e3 = P(t2.sources), n2 = e3?.node;
+        if (n2) {
+          const t3 = o2.generateTarget?.(n2) ?? i(n2);
           a2.set(e3, t3);
         }
       }
     };
     ((e3, n2 = {}) => {
-      P(g(() => {
-        let o3, i2 = h("CLS", 0);
-        const r3 = s(n2, t), a3 = (t2) => {
-          for (const e4 of t2) r3.u(e4);
-          r3.o > i2.value && (i2.value = r3.o, i2.entries = r3.i, o3());
-        }, c2 = m("layout-shift", a3);
-        c2 && (o3 = d(e3, i2, L, n2.reportAllChanges), document.addEventListener("visibilitychange", () => {
-          "hidden" === document.visibilityState && (a3(c2.takeRecords()), o3(true));
-        }), u(() => {
-          r3.o = 0, i2 = h("CLS", 0), o3 = d(e3, i2, L, n2.reportAllChanges), f(() => o3());
-        }), setTimeout(o3));
+      const o3 = M();
+      D(p(() => {
+        let i2, r3 = h("CLS", 0);
+        const a3 = s(n2, t), c2 = (t2) => {
+          for (const e4 of t2) a3.u(e4);
+          a3.o > r3.value && (r3.value = a3.o, r3.entries = a3.i, i2());
+        }, l2 = m("layout-shift", c2);
+        l2 && (i2 = u(e3, r3, L, n2.reportAllChanges), o3.onHidden(() => {
+          c2(l2.takeRecords()), i2(true);
+        }), f(() => {
+          a3.o = 0, r3 = h("CLS", 0), i2 = u(e3, r3, L, n2.reportAllChanges), d(() => i2());
+        }), setTimeout(i2));
       }));
     })((t2) => {
       const o3 = ((t3) => {
@@ -11395,7 +11401,7 @@
         if (t3.entries.length) {
           const o4 = t3.entries.reduce((t4, e4) => t4.value > e4.value ? t4 : e4);
           if (o4?.sources?.length) {
-            const t4 = S(o4.sources);
+            const t4 = P(o4.sources);
             t4 && (e3 = {
               largestShiftTarget: a2.get(t4),
               largestShiftTime: o4.startTime,
@@ -11414,7 +11420,7 @@
     }, o2);
   };
   var w = (t2, o2 = {}) => {
-    P((o3) => {
+    D((o3) => {
       const i2 = ((t3) => {
         let o4 = {
           timeToFirstByte: 0,
@@ -11441,32 +11447,32 @@
       t2(i2);
     }, o2);
   };
-  var k = 0;
+  var _ = 0;
   var F = 1 / 0;
-  var B = 0;
-  var C = (t2) => {
-    for (const e2 of t2) e2.interactionId && (F = Math.min(F, e2.interactionId), B = Math.max(B, e2.interactionId), k = B ? (B - F) / 7 + 1 : 0);
+  var k = 0;
+  var B = (t2) => {
+    for (const e2 of t2) e2.interactionId && (F = Math.min(F, e2.interactionId), k = Math.max(k, e2.interactionId), _ = k ? (k - F) / 7 + 1 : 0);
   };
-  var O;
-  var j = () => O ? k : performance.interactionCount ?? 0;
-  var I = () => {
-    "interactionCount" in performance || O || (O = m("event", C, {
+  var C;
+  var O = () => C ? _ : performance.interactionCount ?? 0;
+  var j = () => {
+    "interactionCount" in performance || C || (C = m("event", B, {
       type: "event",
       buffered: true,
       durationThreshold: 0
     }));
   };
-  var A = 0;
-  var W = class {
+  var I = 0;
+  var A = class {
     l = [];
     h = /* @__PURE__ */ new Map();
     m;
     p;
     v() {
-      A = j(), this.l.length = 0, this.h.clear();
+      I = O(), this.l.length = 0, this.h.clear();
     }
     M() {
-      const t2 = Math.min(this.l.length - 1, Math.floor((j() - A) / 50));
+      const t2 = Math.min(this.l.length - 1, Math.floor((O() - I) / 50));
       return this.l[t2];
     }
     u(t2) {
@@ -11486,24 +11492,27 @@
       }
     }
   };
-  var q = (t2) => {
+  var W = (t2) => {
     const e2 = globalThis.requestIdleCallback || setTimeout;
-    "hidden" === document.visibilityState ? t2() : (t2 = g(t2), document.addEventListener("visibilitychange", t2, {
-      once: true
+    "hidden" === document.visibilityState ? t2() : (t2 = p(t2), addEventListener("visibilitychange", t2, {
+      once: true,
+      capture: true
     }), e2(() => {
-      t2(), document.removeEventListener("visibilitychange", t2);
+      t2(), removeEventListener("visibilitychange", t2, {
+        capture: true
+      });
     }));
   };
-  var x = [200, 500];
-  var N = (t2, e2 = {}) => {
-    const o2 = s(e2 = Object.assign({}, e2), W);
+  var q = [200, 500];
+  var x = (t2, e2 = {}) => {
+    const o2 = s(e2 = Object.assign({}, e2), A);
     let r2 = [], a2 = [], c2 = 0;
-    const f2 = /* @__PURE__ */ new WeakMap(), l2 = /* @__PURE__ */ new WeakMap();
-    let g2 = false;
-    const p2 = () => {
-      g2 || (q(y2), g2 = true);
+    const d2 = /* @__PURE__ */ new WeakMap(), l2 = /* @__PURE__ */ new WeakMap();
+    let p2 = false;
+    const g2 = () => {
+      p2 || (W(y2), p2 = true);
     }, y2 = () => {
-      const t3 = o2.l.map((t4) => f2.get(t4.entries[0])), e3 = a2.length - 50;
+      const t3 = o2.l.map((t4) => d2.get(t4.entries[0])), e3 = a2.length - 50;
       a2 = a2.filter((n3, o3) => o3 >= e3 || t3.includes(n3));
       const n2 = /* @__PURE__ */ new Set();
       for (const t4 of a2) {
@@ -11511,7 +11520,7 @@
         for (const t5 of e4) n2.add(t5);
       }
       const i2 = r2.length - 1 - 50;
-      r2 = r2.filter((t4, e4) => t4.startTime > c2 && e4 > i2 || n2.has(t4)), g2 = false;
+      r2 = r2.filter((t4, e4) => t4.startTime > c2 && e4 > i2 || n2.has(t4)), p2 = false;
     };
     o2.m = (t3) => {
       const e3 = t3.startTime + t3.duration;
@@ -11530,11 +11539,14 @@
         processingEnd: t3.processingEnd,
         renderTime: e3,
         entries: [t3]
-      }, a2.push(n2)), (t3.interactionId || "first-input" === t3.entryType) && f2.set(t3, n2), p2();
+      }, a2.push(n2)), (t3.interactionId || "first-input" === t3.entryType) && d2.set(t3, n2), g2();
     }, o2.p = (t3) => {
       if (!l2.get(t3)) {
-        const n2 = (e2.generateTarget ?? i)(t3.entries[0].target);
-        l2.set(t3, n2);
+        const n2 = t3.entries[0].target;
+        if (n2) {
+          const o3 = e2.generateTarget?.(n2) ?? i(n2);
+          l2.set(t3, o3);
+        }
       }
     };
     const v2 = (t3, e3) => {
@@ -11545,13 +11557,13 @@
       }
       return n2;
     }, b2 = (t3) => {
-      const e3 = t3.entries[0], i2 = f2.get(e3), r3 = e3.processingStart, s2 = Math.max(e3.startTime + e3.duration, r3), a3 = Math.min(i2.processingEnd, s2), c3 = i2.entries.sort((t4, e4) => t4.processingStart - e4.processingStart), u2 = v2(e3.startTime, a3), d2 = o2.h.get(e3.interactionId), h2 = {
-        interactionTarget: l2.get(d2),
+      const e3 = t3.entries[0], i2 = d2.get(e3), r3 = e3.processingStart, s2 = Math.max(e3.startTime + e3.duration, r3), a3 = Math.min(i2.processingEnd, s2), c3 = i2.entries.sort((t4, e4) => t4.processingStart - e4.processingStart), f2 = v2(e3.startTime, a3), u2 = o2.h.get(e3.interactionId), h2 = {
+        interactionTarget: l2.get(u2),
         interactionType: e3.name.startsWith("key") ? "keyboard" : "pointer",
         interactionTime: e3.startTime,
         nextPaintTime: s2,
         processedEventEntries: c3,
-        longAnimationFrameEntries: u2,
+        longAnimationFrameEntries: f2,
         inputDelay: r3 - e3.startTime,
         processingDuration: a3 - r3,
         presentationDelay: s2 - a3,
@@ -11565,21 +11577,21 @@
       ((t4) => {
         if (!t4.longAnimationFrameEntries?.length) return;
         const e4 = t4.interactionTime, n2 = t4.inputDelay, o3 = t4.processingDuration;
-        let i3, r4, s3 = 0, a4 = 0, c4 = 0, u3 = 0;
+        let i3, r4, s3 = 0, a4 = 0, c4 = 0, f3 = 0;
         for (const c5 of t4.longAnimationFrameEntries) {
           a4 = a4 + c5.startTime + c5.duration - c5.styleAndLayoutStart;
           for (const t5 of c5.scripts) {
             const c6 = t5.startTime + t5.duration;
             if (c6 < e4) continue;
-            const d4 = c6 - Math.max(e4, t5.startTime), f4 = t5.duration ? d4 / t5.duration * t5.forcedStyleAndLayoutDuration : 0;
-            s3 += d4 - f4, a4 += f4, d4 > u3 && (r4 = t5.startTime < e4 + n2 ? "input-delay" : t5.startTime >= e4 + n2 + o3 ? "presentation-delay" : "processing-duration", i3 = t5, u3 = d4);
+            const u4 = c6 - Math.max(e4, t5.startTime), d4 = t5.duration ? u4 / t5.duration * t5.forcedStyleAndLayoutDuration : 0;
+            s3 += u4 - d4, a4 += d4, u4 > f3 && (r4 = t5.startTime < e4 + n2 ? "input-delay" : t5.startTime >= e4 + n2 + o3 ? "presentation-delay" : "processing-duration", i3 = t5, f3 = u4);
           }
         }
-        const d3 = t4.longAnimationFrameEntries.at(-1), f3 = d3 ? d3.startTime + d3.duration : 0;
-        f3 >= e4 + n2 + o3 && (c4 = t4.nextPaintTime - f3), i3 && r4 && (t4.longestScript = {
+        const u3 = t4.longAnimationFrameEntries.at(-1), d3 = u3 ? u3.startTime + u3.duration : 0;
+        d3 >= e4 + n2 + o3 && (c4 = t4.nextPaintTime - d3), i3 && r4 && (t4.longestScript = {
           entry: i3,
           subpart: r4,
-          intersectingDuration: u3
+          intersectingDuration: f3
         }), t4.totalScriptDuration = s3, t4.totalStyleAndLayoutDuration = a4, t4.totalPaintDuration = c4, t4.totalUnattributedDuration = t4.nextPaintTime - e4 - s3 - a4 - c4;
       })(h2);
       return Object.assign(t3, {
@@ -11587,27 +11599,29 @@
       });
     };
     m("long-animation-frame", (t3) => {
-      r2 = r2.concat(t3), p2();
+      r2 = r2.concat(t3), g2();
     }), ((t3, e3 = {}) => {
-      globalThis.PerformanceEventTiming && "interactionId" in PerformanceEventTiming.prototype && D(() => {
-        I();
-        let n2, o3 = h("INP");
-        const i2 = s(e3, W), r3 = (t4) => {
-          q(() => {
-            for (const e5 of t4) i2.u(e5);
-            const e4 = i2.M();
-            e4 && e4.T !== o3.value && (o3.value = e4.T, o3.entries = e4.entries, n2());
+      if (!globalThis.PerformanceEventTiming || !("interactionId" in PerformanceEventTiming.prototype)) return;
+      const n2 = M();
+      T(() => {
+        j();
+        let o3, i2 = h("INP");
+        const r3 = s(e3, A), a3 = (t4) => {
+          W(() => {
+            for (const e5 of t4) r3.u(e5);
+            const e4 = r3.M();
+            e4 && e4.T !== i2.value && (i2.value = e4.T, i2.entries = e4.entries, o3());
           });
-        }, a3 = m("event", r3, {
+        }, c3 = m("event", a3, {
           durationThreshold: e3.durationThreshold ?? 40
         });
-        n2 = d(t3, o3, x, e3.reportAllChanges), a3 && (a3.observe({
+        o3 = u(t3, i2, q, e3.reportAllChanges), c3 && (c3.observe({
           type: "first-input",
           buffered: true
-        }), document.addEventListener("visibilitychange", () => {
-          "hidden" === document.visibilityState && (r3(a3.takeRecords()), n2(true));
-        }), u(() => {
-          i2.v(), o3 = h("INP"), n2 = d(t3, o3, x, e3.reportAllChanges);
+        }), n2.onHidden(() => {
+          a3(c3.takeRecords()), o3(true);
+        }), f(() => {
+          r3.v(), i2 = h("INP"), o3 = u(t3, i2, q, e3.reportAllChanges);
         }));
       });
     })((e3) => {
@@ -11615,40 +11629,44 @@
       t2(n2);
     }, e2);
   };
-  var R = class {
+  var N = class {
     m;
     u(t2) {
       this.m?.(t2);
     }
   };
-  var U = [2500, 4e3];
-  var V = (t2, n2 = {}) => {
-    const o2 = s(n2 = Object.assign({}, n2), R), r2 = /* @__PURE__ */ new WeakMap();
+  var H = [2500, 4e3];
+  var R = (t2, n2 = {}) => {
+    const o2 = s(n2 = Object.assign({}, n2), N), r2 = /* @__PURE__ */ new WeakMap();
     o2.m = (t3) => {
-      if (t3.element) {
-        const e2 = (n2.generateTarget ?? i)(t3.element);
-        r2.set(t3, e2);
+      const e2 = t3.element;
+      if (e2) {
+        const o3 = n2.generateTarget?.(e2) ?? i(e2);
+        r2.set(t3, o3);
       }
     };
     ((t3, e2 = {}) => {
-      D(() => {
-        const n3 = T();
+      T(() => {
+        const n3 = M();
         let o3, i2 = h("LCP");
-        const r3 = s(e2, R), a2 = (t4) => {
+        const r3 = s(e2, N), a2 = (t4) => {
           e2.reportAllChanges || (t4 = t4.slice(-1));
           for (const e3 of t4) r3.u(e3), e3.startTime < n3.firstHiddenTime && (i2.value = Math.max(e3.startTime - l(), 0), i2.entries = [e3], o3());
         }, c2 = m("largest-contentful-paint", a2);
         if (c2) {
-          o3 = d(t3, i2, U, e2.reportAllChanges);
-          const n4 = g(() => {
+          o3 = u(t3, i2, H, e2.reportAllChanges);
+          const n4 = p(() => {
             a2(c2.takeRecords()), c2.disconnect(), o3(true);
+          }), r4 = (t4) => {
+            t4.isTrusted && (W(n4), removeEventListener(t4.type, r4, {
+              capture: true
+            }));
+          };
+          for (const t4 of ["keydown", "click", "visibilitychange"]) addEventListener(t4, r4, {
+            capture: true
           });
-          for (const t4 of ["keydown", "click", "visibilitychange"]) addEventListener(t4, () => q(n4), {
-            capture: true,
-            once: true
-          });
-          u((n5) => {
-            i2 = h("LCP"), o3 = d(t3, i2, U, e2.reportAllChanges), f(() => {
+          f((n5) => {
+            i2 = h("LCP"), o3 = u(t3, i2, H, e2.reportAllChanges), d(() => {
               i2.value = performance.now() - n5.timeStamp, o3(true);
             });
           });
@@ -11665,13 +11683,13 @@
         if (t3.entries.length) {
           const o4 = e();
           if (o4) {
-            const e2 = o4.activationStart || 0, i2 = t3.entries.at(-1), s2 = i2.url && performance.getEntriesByType("resource").filter((t4) => t4.name === i2.url)[0], a2 = Math.max(0, o4.responseStart - e2), c2 = Math.max(a2, s2 ? (s2.requestStart || s2.startTime) - e2 : 0), u2 = Math.min(t3.value, Math.max(c2, s2 ? s2.responseEnd - e2 : 0));
+            const e2 = o4.activationStart || 0, i2 = t3.entries.at(-1), s2 = i2.url && performance.getEntriesByType("resource").filter((t4) => t4.name === i2.url)[0], a2 = Math.max(0, o4.responseStart - e2), c2 = Math.max(a2, s2 ? (s2.requestStart || s2.startTime) - e2 : 0), f2 = Math.min(t3.value, Math.max(c2, s2 ? s2.responseEnd - e2 : 0));
             n4 = {
               target: r2.get(i2),
               timeToFirstByte: a2,
               resourceLoadDelay: c2 - a2,
-              resourceLoadDuration: u2 - c2,
-              elementRenderDelay: t3.value - u2,
+              resourceLoadDuration: f2 - c2,
+              elementRenderDelay: t3.value - f2,
               navigationEntry: o4,
               lcpEntry: i2
             }, i2.url && (n4.url = i2.url), s2 && (n4.lcpResourceEntry = s2);
@@ -11684,17 +11702,17 @@
       t2(o3);
     }, n2);
   };
-  var $ = [800, 1800];
-  var H = (t2) => {
-    document.prerendering ? D(() => H(t2)) : "complete" !== document.readyState ? addEventListener("load", () => H(t2), true) : setTimeout(t2);
+  var U = [800, 1800];
+  var V = (t2) => {
+    document.prerendering ? T(() => V(t2)) : "complete" !== document.readyState ? addEventListener("load", () => V(t2), true) : setTimeout(t2);
   };
-  var z = (t2, n2 = {}) => {
+  var $ = (t2, n2 = {}) => {
     ((t3, n3 = {}) => {
-      let o2 = h("TTFB"), i2 = d(t3, o2, $, n3.reportAllChanges);
-      H(() => {
+      let o2 = h("TTFB"), i2 = u(t3, o2, U, n3.reportAllChanges);
+      V(() => {
         const r2 = e();
-        r2 && (o2.value = Math.max(r2.responseStart - l(), 0), o2.entries = [r2], i2(true), u(() => {
-          o2 = h("TTFB", 0), i2 = d(t3, o2, $, n3.reportAllChanges), i2(true);
+        r2 && (o2.value = Math.max(r2.responseStart - l(), 0), o2.entries = [r2], i2(true), f(() => {
+          o2 = h("TTFB", 0), i2 = u(t3, o2, U, n3.reportAllChanges), i2(true);
         }));
       });
     })((e2) => {
@@ -11729,6 +11747,7 @@
   var ATTR_BROWSER_TOUCH_SCREEN_ENABLED = "browser.touch_screen_enabled";
   var ATTR_BROWSER_WIDTH = "browser.width";
   var ATTR_BROWSER_HEIGHT = "browser.height";
+  var ATTR_BROWSER_PAGE_VISIBILITY = "browser.page.visibility";
   var ATTR_DEVICE_TYPE = "device.type";
   var ATTR_NETWORK_EFFECTIVE_TYPE = "network.effectiveType";
   var ATTR_SCREEN_WIDTH = "screen.width";
@@ -12125,22 +12144,22 @@
     }
     _setupWebVitalsCallbacks() {
       if (this.vitalsToTrack.includes("CLS")) {
-        _((vital) => {
+        S((vital) => {
           this.onReportCLS(vital, this.clsOpts);
         }, this.clsOpts);
       }
       if (this.vitalsToTrack.includes("LCP")) {
-        V((vital) => {
+        R((vital) => {
           this.onReportLCP(vital, this.lcpOpts);
         }, this.lcpOpts);
       }
       if (this.vitalsToTrack.includes("INP")) {
-        N((vital) => {
+        x((vital) => {
           this.onReportINP(vital, this.inpOpts);
         }, this.inpOpts);
       }
       if (this.vitalsToTrack.includes("TTFB")) {
-        z((vital) => {
+        $((vital) => {
           this.onReportTTFB(vital, this.ttfbOpts);
         }, this.ttfbOpts);
       }
@@ -12304,7 +12323,6 @@
       super(LIBRARY_NAME, VERSION4, config);
       this.onError = (event) => {
         const error = "reason" in event ? event.reason : event.error;
-        console.log(this.applyCustomAttributesOnSpan);
         if (error) {
           recordException(error, {}, this.tracer, this.applyCustomAttributesOnSpan);
         }
@@ -12502,7 +12520,12 @@
   }
   function configureMetricExporters(options) {
     const exporters = [];
-    exporters.push(configureHoneycombHttpJsonMetricExporter(options));
+    if (options === null || options === void 0 ? void 0 : options.metricExporters) {
+      exporters.push(...options.metricExporters);
+    }
+    if ((options === null || options === void 0 ? void 0 : options.disableDefaultMetricExporter) !== true) {
+      exporters.unshift(configureHoneycombHttpJsonMetricExporter(options));
+    }
     if (options === null || options === void 0 ? void 0 : options.localVisualizations) {
       exporters.push(new ConsoleMetricExporter());
     }
@@ -12573,7 +12596,8 @@
         [ATTR_PAGE_ROUTE]: pathname,
         [ATTR_PAGE_HOSTNAME]: hostname,
         [ATTR_PAGE_SEARCH]: search,
-        [ATTR_URL_PATH]: pathname
+        [ATTR_URL_PATH]: pathname,
+        [ATTR_BROWSER_PAGE_VISIBILITY]: document.visibilityState
       });
     }
     onEnd() {
@@ -13160,8 +13184,12 @@
   })(AttributeNames || (AttributeNames = {}));
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/version.js
-  var PACKAGE_VERSION = "0.50.0";
+  var PACKAGE_VERSION = "0.54.0";
   var PACKAGE_NAME = "@opentelemetry/instrumentation-document-load";
+
+  // node_modules/@opentelemetry/instrumentation-document-load/build/esm/semconv.js
+  var ATTR_HTTP_URL = "http.url";
+  var ATTR_HTTP_USER_AGENT = "http.user_agent";
 
   // node_modules/@opentelemetry/instrumentation-document-load/build/esm/enums/EventNames.js
   var EventNames;
@@ -13221,8 +13249,10 @@
     component = "document-load";
     version = "1";
     moduleName = this.component;
+    _semconvStability;
     constructor(config = {}) {
       super(PACKAGE_NAME, PACKAGE_VERSION, config);
+      this._semconvStability = semconvStabilityFromStr("http", config?.semconvStabilityOptIn);
     }
     init() {
     }
@@ -13261,16 +13291,28 @@
         context.with(trace.setSpan(context.active(), rootSpan), () => {
           const fetchSpan = this._startSpan(AttributeNames.DOCUMENT_FETCH, PerformanceTimingNames.FETCH_START, entries);
           if (fetchSpan) {
-            fetchSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
+            if (this._semconvStability & SemconvStability.OLD) {
+              fetchSpan.setAttribute(ATTR_HTTP_URL, location.href);
+            }
+            if (this._semconvStability & SemconvStability.STABLE) {
+              fetchSpan.setAttribute(ATTR_URL_FULL, location.href);
+            }
             context.with(trace.setSpan(context.active(), fetchSpan), () => {
-              addSpanNetworkEvents(fetchSpan, entries, this.getConfig().ignoreNetworkEvents);
+              const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+              addSpanNetworkEvents(fetchSpan, entries, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
               this._addCustomAttributesOnSpan(fetchSpan, this.getConfig().applyCustomAttributesOnSpan?.documentFetch);
               this._endSpan(fetchSpan, PerformanceTimingNames.RESPONSE_END, entries);
             });
           }
         });
-        rootSpan.setAttribute(SEMATTRS_HTTP_URL, location.href);
-        rootSpan.setAttribute(SEMATTRS_HTTP_USER_AGENT, navigator.userAgent);
+        if (this._semconvStability & SemconvStability.OLD) {
+          rootSpan.setAttribute(ATTR_HTTP_URL, location.href);
+          rootSpan.setAttribute(ATTR_HTTP_USER_AGENT, navigator.userAgent);
+        }
+        if (this._semconvStability & SemconvStability.STABLE) {
+          rootSpan.setAttribute(ATTR_URL_FULL, location.href);
+          rootSpan.setAttribute(ATTR_USER_AGENT_ORIGINAL, navigator.userAgent);
+        }
         this._addResourcesSpans(rootSpan);
         if (!this.getConfig().ignoreNetworkEvents) {
           addSpanNetworkEvent(rootSpan, PerformanceTimingNames.FETCH_START, entries);
@@ -13313,8 +13355,14 @@
     _initResourceSpan(resource, parentSpan) {
       const span = this._startSpan(AttributeNames.RESOURCE_FETCH, PerformanceTimingNames.FETCH_START, resource, parentSpan);
       if (span) {
-        span.setAttribute(SEMATTRS_HTTP_URL, resource.name);
-        addSpanNetworkEvents(span, resource, this.getConfig().ignoreNetworkEvents);
+        if (this._semconvStability & SemconvStability.OLD) {
+          span.setAttribute(ATTR_HTTP_URL, resource.name);
+        }
+        if (this._semconvStability & SemconvStability.STABLE) {
+          span.setAttribute(ATTR_URL_FULL, resource.name);
+        }
+        const skipOldSemconvContentLengthAttrs = !(this._semconvStability & SemconvStability.OLD);
+        addSpanNetworkEvents(span, resource, this.getConfig().ignoreNetworkEvents, void 0, skipOldSemconvContentLengthAttrs);
         this._addCustomAttributesOnResourceSpan(span, resource, this.getConfig().applyCustomAttributesOnSpan?.resourceFetch);
         this._endSpan(span, PerformanceTimingNames.RESPONSE_END, resource);
       }
@@ -13401,8 +13449,8 @@
   var ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED = "http.request_content_length_uncompressed";
   var ATTR_HTTP_SCHEME = "http.scheme";
   var ATTR_HTTP_STATUS_CODE = "http.status_code";
-  var ATTR_HTTP_URL = "http.url";
-  var ATTR_HTTP_USER_AGENT = "http.user_agent";
+  var ATTR_HTTP_URL2 = "http.url";
+  var ATTR_HTTP_USER_AGENT2 = "http.user_agent";
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/utils.js
   var DIAG_LOGGER = diag2.createComponentLogger({
@@ -13549,7 +13597,7 @@
   }
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/version.js
-  var VERSION5 = "0.205.0";
+  var VERSION5 = "0.208.0";
 
   // node_modules/@opentelemetry/instrumentation-fetch/build/esm/fetch.js
   var OBSERVER_WAIT_TIME_MS = 300;
@@ -13595,7 +13643,7 @@
         span.setAttribute(ATTR_HTTP_HOST, parsedUrl.host);
         span.setAttribute(ATTR_HTTP_SCHEME, parsedUrl.protocol.replace(":", ""));
         if (typeof navigator !== "undefined") {
-          span.setAttribute(ATTR_HTTP_USER_AGENT, navigator.userAgent);
+          span.setAttribute(ATTR_HTTP_USER_AGENT2, navigator.userAgent);
         }
       }
       if (this._semconvStability & SemconvStability.STABLE) {
@@ -13668,7 +13716,7 @@
         name = `HTTP ${method}`;
         attributes[AttributeNames2.COMPONENT] = this.moduleName;
         attributes[ATTR_HTTP_METHOD] = method;
-        attributes[ATTR_HTTP_URL] = url;
+        attributes[ATTR_HTTP_URL2] = url;
       }
       if (this._semconvStability & SemconvStability.STABLE) {
         const origMethod = options.method;
@@ -13796,12 +13844,54 @@
               });
             }
           }
+          function withCancelPropagation(body, readerClone) {
+            if (!body)
+              return null;
+            const reader = body.getReader();
+            return new ReadableStream({
+              async pull(controller) {
+                try {
+                  const { value, done } = await reader.read();
+                  if (done) {
+                    reader.releaseLock();
+                    controller.close();
+                  } else {
+                    controller.enqueue(value);
+                  }
+                } catch (err) {
+                  controller.error(err);
+                  reader.cancel(err).catch((_2) => {
+                  });
+                  try {
+                    reader.releaseLock();
+                  } catch {
+                  }
+                }
+              },
+              cancel(reason) {
+                readerClone.cancel(reason).catch((_2) => {
+                });
+                return reader.cancel(reason);
+              }
+            });
+          }
           function onSuccess(span, resolve, response) {
+            let proxiedResponse = null;
             try {
               const resClone = response.clone();
               const body = resClone.body;
               if (body) {
                 const reader = body.getReader();
+                const isNullBodyStatus = (
+                  // 101 responses and protocol upgrading is handled internally by the browser
+                  response.status === 204 || response.status === 205 || response.status === 304
+                );
+                const wrappedBody = isNullBodyStatus ? null : withCancelPropagation(response.body, reader);
+                proxiedResponse = new Response(wrappedBody, {
+                  status: response.status,
+                  statusText: response.statusText,
+                  headers: response.headers
+                });
                 const read = () => {
                   reader.read().then(({ done }) => {
                     if (done) {
@@ -13818,7 +13908,7 @@
                 endSpanOnSuccess(span, response);
               }
             } finally {
-              resolve(response);
+              resolve(proxiedResponse ?? response);
             }
           }
           function onError(span, reject, error) {
@@ -13921,7 +14011,7 @@
   })(AttributeNames3 || (AttributeNames3 = {}));
 
   // node_modules/@opentelemetry/instrumentation-user-interaction/build/esm/version.js
-  var PACKAGE_VERSION2 = "0.50.0";
+  var PACKAGE_VERSION2 = "0.53.0";
   var PACKAGE_NAME2 = "@opentelemetry/instrumentation-user-interaction";
 
   // node_modules/@opentelemetry/instrumentation-user-interaction/build/esm/instrumentation.js
@@ -14433,8 +14523,8 @@
   var ATTR_HTTP_REQUEST_CONTENT_LENGTH_UNCOMPRESSED2 = "http.request_content_length_uncompressed";
   var ATTR_HTTP_SCHEME2 = "http.scheme";
   var ATTR_HTTP_STATUS_CODE2 = "http.status_code";
-  var ATTR_HTTP_URL2 = "http.url";
-  var ATTR_HTTP_USER_AGENT2 = "http.user_agent";
+  var ATTR_HTTP_URL3 = "http.url";
+  var ATTR_HTTP_USER_AGENT3 = "http.user_agent";
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/enums/EventNames.js
   var EventNames2;
@@ -14541,7 +14631,7 @@
   }
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/version.js
-  var VERSION6 = "0.205.0";
+  var VERSION6 = "0.208.0";
 
   // node_modules/@opentelemetry/instrumentation-xml-http-request/build/esm/enums/AttributeNames.js
   var AttributeNames4;
@@ -14623,7 +14713,7 @@
           span.setAttribute(ATTR_HTTP_HOST2, parsedUrl.host);
           span.setAttribute(ATTR_HTTP_SCHEME2, parsedUrl.protocol.replace(":", ""));
         }
-        span.setAttribute(ATTR_HTTP_USER_AGENT2, navigator.userAgent);
+        span.setAttribute(ATTR_HTTP_USER_AGENT3, navigator.userAgent);
       }
       if (this._semconvStability & SemconvStability.STABLE) {
         if (xhrMem.status) {
@@ -14744,7 +14834,7 @@
       if (this._semconvStability & SemconvStability.OLD) {
         name = method.toUpperCase();
         attributes[ATTR_HTTP_METHOD2] = method;
-        attributes[ATTR_HTTP_URL2] = parsedUrl.toString();
+        attributes[ATTR_HTTP_URL3] = parsedUrl.toString();
       }
       if (this._semconvStability & SemconvStability.STABLE) {
         const origMethod = method;
@@ -14984,7 +15074,7 @@
   }
 
   // src/hny.js
-  var MY_VERSION = "0.10.40";
+  var MY_VERSION = "0.12.0";
   function initializeTracing(params) {
     if (!params) {
       params = {};
@@ -14996,23 +15086,9 @@
       console.log("No service name provided to initializeTracing. Defaulting to unknown_service");
       params.serviceName = "unknown_service";
     }
-    function addContentLengthToSpan(span, resource) {
-      const encodedLength = resource.encodedBodySize;
-      if (encodedLength !== void 0) {
-        span.setAttribute("http.request_content_length", encodedLength);
-      }
-      const decodedLength = resource.decodedBodySize;
-      if (decodedLength !== void 0 && encodedLength !== decodedLength) {
-        span.setAttribute(
-          "http.response_content_length_uncompressed",
-          //SEMATTRS_HTTP_RESPONSE_CONTENT_LENGTH_UNCOMPRESSED,
-          decodedLength
-        );
-      }
-    }
     const configDefaults = {
       ignoreNetworkEvents: true,
-      propagateTraceHeaderCorsUrls: [/localhost/g, /jessitron/g, /127\.0\.0\.1/]
+      propagateTraceHeaderCorsUrls: [/localhost/, /jessitron/, /127\.0\.0\.1/]
     };
     const sdk = new HoneycombWebSDK({
       // endpoint: "https://api.eu1.honeycomb.io/v1/traces", // Send to EU instance of Honeycomb. Defaults to sending to US instance.
@@ -15022,13 +15098,10 @@
           // Loads custom configuration for xml-http-request instrumentation.
           "@opentelemetry/instrumentation-xml-http-request": configDefaults,
           "@opentelemetry/instrumentation-fetch": configDefaults,
-          "@opentelemetry/instrumentation-document-load": {
-            applyCustomAttributesOnSpan: {
-              resourceFetch: addContentLengthToSpan
-            },
-            ...configDefaults
-          }
-        })
+          "@opentelemetry/instrumentation-document-load": configDefaults
+        }),
+        new WebVitalsInstrumentation()
+        // Explicitly add Web Vitals as recommended in Honeycomb docs
       ],
       ...params
     });
@@ -15074,11 +15147,11 @@
     }
     return trace.getTracer(tracerName, tracerVersion);
   }
-  function inSpan(inputTracer, spanName, fn, context2) {
+  function inSpan(inputTracerName, spanName, fn, context2) {
     if (fn === void 0 || typeof fn !== "function") {
       throw new Error("USAGE: inSpan(tracerName, spanName, () => { ... })");
     }
-    return getTracer(inputTracer).startActiveSpan(spanName, {}, context2 || null, (span) => {
+    return getTracer(inputTracerName).startActiveSpan(spanName, {}, context2 || null, (span) => {
       try {
         return fn(span);
       } catch (err) {
@@ -15094,11 +15167,11 @@
       }
     });
   }
-  async function inSpanAsync(inputTracer, spanName, fn, context2) {
+  async function inSpanAsync(inputTracerName, spanName, fn, context2) {
     if (fn === void 0) {
       console.log("USAGE: inSpanAsync(tracerName, spanName, async () => { ... })");
     }
-    return getTracer(inputTracer).startActiveSpan(spanName, {}, context2, async (span) => {
+    return getTracer(inputTracerName).startActiveSpan(spanName, {}, context2, async (span) => {
       try {
         return await fn(span);
       } catch (err) {
@@ -15147,14 +15220,14 @@
     const span = trace.getActiveSpan();
     span?.addEvent(message, attributes);
   }
-  function inChildSpan(inputTracer, spanName, spanContext, fn) {
+  function inChildSpan(inputTracerName, spanName, spanContext, fn) {
     if (!!spanContext && (!spanContext.spanId || !spanContext.traceId)) {
       console.log("inChildSpan: the third argument should be a spanContext (or undefined to use the active context)");
       fn = spanContext;
       spanContext = fn;
     }
     const usefulContext = !!spanContext ? trace.setSpanContext(context.active(), spanContext) : context.active();
-    return inSpan(inputTracer, spanName, fn, usefulContext);
+    return inSpan(inputTracerName, spanName, fn, usefulContext);
   }
   var Hny = {
     initializeTracing,
