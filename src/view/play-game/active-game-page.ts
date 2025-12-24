@@ -23,7 +23,11 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>
     </div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, gameEndActions + debugSection);
+  return formatPageWrapper({
+    title: `MTG Game - ${game.deckName}`,
+    content: contentWithModal,
+    footerContent: gameEndActions + debugSection
+  });
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {

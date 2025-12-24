@@ -25,7 +25,11 @@ export function formatDeckReviewHtmlPage(game: GameState): string {
     <div id="modal-container"></div>
     <div id="card-modal-container"></div>
   </div>`;
-  return formatPageWrapper(`MTG Game - ${game.deckName}`, contentWithModal, debugSection);
+  return formatPageWrapper({
+    title: `MTG Game - ${game.deckName}`,
+    content: contentWithModal,
+    footerContent: debugSection
+  });
 }
 
 export function formatCommandersHtmlFragment(commanders: readonly GameCard[], gameId: number): string {

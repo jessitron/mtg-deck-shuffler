@@ -32,13 +32,23 @@ ${additionalStylesheetsHtml}
   </head>`;
 }
 
-function formatPageWrapper(
-  title: string,
-  content: string,
-  footerContent: string = ``,
-  additionalStylesheets: string[] = [],
-  includeFooter: boolean = true
-): string {
+interface PageWrapperOptions {
+  title: string;
+  content: string;
+  footerContent?: string;
+  additionalStylesheets?: string[];
+  includeFooter?: boolean;
+}
+
+function formatPageWrapper(options: PageWrapperOptions): string {
+  const {
+    title,
+    content,
+    footerContent = ``,
+    additionalStylesheets = [],
+    includeFooter = true
+  } = options;
+
   const headHtml = formatHtmlHead(title, additionalStylesheets);
   const footerHtml = includeFooter ? `
     <footer>
@@ -78,7 +88,10 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
       </div>
     </div>`;
 
-  return formatPageWrapper(`${title} - MTG Deck Shuffler`, content);
+  return formatPageWrapper({
+    title: `${title} - MTG Deck Shuffler`,
+    content
+  });
 }
 
 export { formatHtmlHead, formatPageWrapper };
