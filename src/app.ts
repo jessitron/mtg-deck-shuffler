@@ -8,7 +8,7 @@ import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtm
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
-import { formatLoadStateModalHtmlFragment } from "./view/debug/load-state.js";
+import { formatLoadStateModalHtmlFragment, formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatDebugSectionHtmlFragment } from "./view/debug/debug-section.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState } from "./GameState.js";
@@ -464,6 +464,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.get("/load-state-modal", (req, res) => {
     const modalHtml = formatLoadStateModalHtmlFragment();
     res.send(modalHtml);
+  });
+
+  // Returns full page for loading game state
+  app.get("/load-game-state", (req, res) => {
+    const pageHtml = formatLoadStateHtmlPage();
+    res.send(pageHtml);
   });
 
   // Creates a new game from JSON state
