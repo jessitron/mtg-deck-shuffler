@@ -336,7 +336,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Redirects to home page
+  // Redirects to Choose Deck
   app.post("/end-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
 
@@ -349,7 +349,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         await persistStatePort.save(game.toPersistedGameState());
       }
 
-      res.redirect("/");
+      res.redirect("/choose-any-deck");
     } catch (error) {
       console.error("Error ending game:", error);
       res.redirect("/");
