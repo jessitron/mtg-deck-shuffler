@@ -25,11 +25,6 @@ body {
   --playmat-two: #4b7bba;
 }
 
-footer {
-  text-align: right;
-  margin-right: 20px;
-}
-
 h1 {
   font-size: 2rem;
 }
@@ -1322,13 +1317,6 @@ p {
 .undo-button {
   padding: 4px 8px;
   font-size: 0.8rem;
-}
-
-footer {
-  display: flex;
-  direction: row;
-  justify-content: flex-end;
-  margin-top: 10px;
 }
 
 .debug-section {

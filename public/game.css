@@ -1,0 +1,8 @@
+/* Game-specific styles that should only be applied to game pages */
+
+footer {
+  display: flex;
+  direction: row;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
