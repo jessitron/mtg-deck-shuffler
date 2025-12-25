@@ -355,13 +355,11 @@ body {
 .button-wrapper {
   padding-top: clamp(2rem, 14.2308vw, 148px);
   padding-bottom: clamp(2rem, 14.2308vw, 148px);
-  border-top: var(--narrow-border) solid var(--dark-pink);
-  border-bottom: var(--narrow-border) solid var(--dark-pink);
-  background-color: var(--deep-space);
 }
 
 /* Footer */
 .main-footer {
+  background-color: var(--deep-space);
   outline: var(--narrow-border) solid var(--dark-pink);
   height: 79px;
   display: flex;
