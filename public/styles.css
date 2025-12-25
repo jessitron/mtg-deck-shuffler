@@ -118,15 +118,6 @@ h1 {
   margin-bottom: 0;
 }
 
-.slogan h1 {
-  font-family: var(--fancy-title-font);
-  text-align: justify;
-  font-weight: 500;
-  color: var(--contrasting-color);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
 h4.cute-header {
   font-family: var(--fancy-title-font);
   font-size: 2rem;

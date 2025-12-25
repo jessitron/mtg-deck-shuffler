@@ -120,13 +120,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-color: var(--deep-space);
 }
 
 .slogan p {
   font-family: "Risque", cursive;
   font-size: 2rem;
   font-weight: 300;
-  color: white;
   margin: 0;
   line-height: 1;
 }
@@ -305,8 +306,6 @@ body {
   border: 10px outset var(--light-pink);
   width: clamp(180px, 22.3077vw, 232px);
   height: clamp(80px, 11.1538vw, 116px);
-  margin: 0 auto;
-  margin-top: clamp(2rem, 14.2308vw, 148px);
   cursor: pointer;
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1.5rem, 3.4615vw, 2.25rem);
@@ -314,6 +313,7 @@ body {
   color: black;
   text-decoration: none;
   transition: all 0.1s ease;
+  margin: auto;
 }
 
 .begin-button:hover {
@@ -339,8 +339,11 @@ body {
 
 /* Second BEGIN button wrapper */
 .button-wrapper {
-  margin-top: clamp(2rem, 14.2308vw, 148px);
-  margin-bottom: clamp(2rem, 14.2308vw, 148px);
+  padding-top: clamp(2rem, 14.2308vw, 148px);
+  padding-bottom: clamp(2rem, 14.2308vw, 148px);
+  border-top: var(--narrow-border) solid var(--dark-pink);
+  border-bottom: var(--narrow-border) solid var(--dark-pink);
+  background-color: var(--deep-space);
 }
 
 /* Footer */
