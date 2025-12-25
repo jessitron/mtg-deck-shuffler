@@ -72,9 +72,6 @@ body {
 }
 
 .right-nav .nav-link {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
   transition: opacity 0.2s ease;
 }
 
