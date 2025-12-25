@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { formatHomepageHtmlPage } from "./view/deck-selection/deck-selection-page.js";
 import { formatHomeV2HtmlPage } from "./view/home-v2/home-v2-page.js";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage } from "./view/deck-review/deck-review-page.js";
@@ -167,9 +166,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.get("/choose-any-deck", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
-      const html = formatHomepageHtmlPage(availableDecks);
-
-      res.send(html);
+      res.render("choose-any-deck", { availableDecks });
     } catch (error) {
       console.error("Error loading deck selection page:", error);
       res.status(500).send(`<div>
