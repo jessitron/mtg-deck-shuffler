@@ -7,10 +7,9 @@ This document maps which endpoints call which view functions, and tracks snapsho
 ### GET Endpoints (Rendering Pages/Fragments)
 
 #### GET / (Homepage)
-- **View Function**: `formatHomepageHtmlPage()`
-- **Location**: `src/view/deck-selection/deck-selection-page.ts`
-- **Snapshot Test**: `test/snapshot/homepage-html.snapshot.test.ts`
-  - Tests: with multiple decks, with no decks
+- **View Function**: EJS template `views/index.ejs`
+- **Snapshot Test**: None (EJS template - manual testing only)
+  - Note: Previously used `formatHomepageHtmlPage()` but migrated to EJS
 
 #### GET /game/:gameId (Active Game Page)
 - **View Function**: `formatGamePageHtmlPage()`
