@@ -17,7 +17,8 @@ body {
 
 /* Home Page Container */
 .home-page {
-  background-color: var(--deep-space);
+  background: linear-gradient(90deg, #43276C 1.92%, #221534 65.38%, #3B1855 100%);
+  background-blend-mode: plus-darker;
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
@@ -348,7 +349,7 @@ body {
 
 /* Footer */
 .main-footer {
-  border-top: var(--narrow-border) solid var(--dark-pink);
+  outline: var(--narrow-border) solid var(--dark-pink);
   height: 79px;
   display: flex;
   align-items: center;
