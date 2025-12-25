@@ -152,6 +152,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     res.render("docs");
   });
 
+  // Returns whole page - about page
+  app.get("/about", (req, res) => {
+    res.render("about");
+  });
+
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
