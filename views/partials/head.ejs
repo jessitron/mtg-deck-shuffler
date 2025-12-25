@@ -12,6 +12,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=<%= fontFamily %>&display=swap"
     rel="stylesheet" />
   <script src="/browser-tab-id.js"></script>
+  <script src="/hny.js"></script>
+  <script>
+    // Initialize Honeycomb tracing for frontend
+    if (window.Hny && window.browserTabId) {
+      Hny.initializeTracing({
+        apiKey: "<%= process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY %>",
+        serviceName: "mtg-deck-shuffler-web",
+        debug: false,
+        provideOneLinkToHoneycomb: true,
+        resourceAttributes: {
+          "game.browser_tab_id": window.browserTabId
+        }
+      });
+    }
+  </script>
   <% if (locals.script) { %>
     <script src="<%= script %>" defer></script>
   <% } %>
