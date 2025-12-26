@@ -176,7 +176,7 @@ test.describe('Optimistic Concurrency Control', () => {
       console.log('Browser B response body:', responseBody);
 
       expect(responseBody).toContain('modal-overlay');
-      expect(responseBody).toContain('Please Refresh');
+      expect(responseBody).toContain('Game State Changed');
       expect(responseBody).toContain('What happened while you were away');
 
       // ========================================
