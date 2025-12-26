@@ -1,6 +1,6 @@
 # Things to change
 
-- migrate the deck selection and active game pages to use ejs templates
+- migrate the deck review and active game pages to use ejs templates
   - make the head.ejs take a list of extra .js, so we don't load game.js on the homepage for instance
 
 ## Spectator mode
@@ -16,6 +16,10 @@ which requires
 which needs
 
 - a session ID on the telemetry.  ... well it did this. It put it in a header, so it's _only_ on the telemetry, on the server's entry span. I wanted it on the state too, but maybe later.
+
+## Deck Selection joy
+
+Show graphics for the commander precons
 
 ## Add card sleeves
 
