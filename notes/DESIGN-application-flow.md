@@ -50,7 +50,7 @@ The entry point where users choose which deck to load for their game session.
 
 Endpoints:
 
-- GET / (loads the deck selection page)
+- GET /choose-any-deck (loads the deck selection page)
 
 **Actions:**
 
@@ -66,8 +66,7 @@ Shows deck information and allows final preparation before starting the game.
 
 Endpoints:
 
-- GET /deck (loads deck-review.html)
-- GET /game/:gameId (redirects to /deck if game is Not Started)
+- GET /game/:gameId
 
 **State:**
 
@@ -79,7 +78,7 @@ Endpoints:
 
 - Deck information
 - Commander card(s)
-- Library with Search button (reveals full card list)
+- card list
 
 **Actions:**
 
