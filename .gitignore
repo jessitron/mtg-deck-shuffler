@@ -3,3 +3,4 @@ dist/
 .playwright-mcp
 data.db
 mtgjson/
+test-results/
