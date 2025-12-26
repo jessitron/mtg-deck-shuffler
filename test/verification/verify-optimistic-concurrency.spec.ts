@@ -14,9 +14,9 @@
  * - Error message contains "Please Refresh"
  * - After refresh, Browser B can successfully perform actions
  *
- * RUN: npx playwright test notes/verification/verify-optimistic-concurrency.spec.ts
+ * RUN: npm run test:verify
  *
- * REQUIRES: App running on port 3001 (use PORT=3001 ./run)
+ * The test script automatically starts and stops the server on port 3001.
  */
 
 import { test, expect, Page, BrowserContext } from '@playwright/test';

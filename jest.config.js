@@ -5,7 +5,8 @@ export default {
     '**/*.test.ts'
   ],
   testPathIgnorePatterns: [
-    'test/snapshot'
+    'test/snapshot',
+    'test/verification'
   ],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'

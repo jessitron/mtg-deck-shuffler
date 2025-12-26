@@ -4,13 +4,12 @@ import { defineConfig, devices } from '@playwright/test';
  * Playwright configuration for end-to-end verification tests.
  *
  * These tests verify app features through real browser interactions.
- * Run with: npx playwright test
+ * Run with: npm run test:verify
  *
- * Make sure the app is running on port 3001 before running tests:
- * PORT=3001 ./run
+ * The test script will automatically start and stop the server.
  */
 export default defineConfig({
-  testDir: './notes/verification',
+  testDir: './test/verification',
   fullyParallel: false, // Run tests sequentially - we're testing concurrent state
   forbidOnly: !!process.env.CI,
   retries: 0, // No retries - we want to see failures clearly
