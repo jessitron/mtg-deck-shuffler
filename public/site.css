@@ -169,6 +169,10 @@ body {
   align-content: start;
 }
 
+.step.not-crowded {
+  align-content: space-around;
+}
+
 .step>* {
   border: 0px solid red;
   /* for debugging */
@@ -348,23 +352,25 @@ body {
 /* Hero Button - buttons in hero sections */
 .hero-button {
   transition: all 0.1s ease;
+  background-color: var(--light-pink);
 }
 
 .hero-button:hover {
-  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.hero-button.active:hover {
+  transform: none;
 }
 
 .hero-button:active {
   border-style: inset;
-  transform: translateY(2px);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero-button.active {
   border-style: inset;
-  background-color: var(--light-pink);
-  transform: translateY(2px);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f0f0f0;
 }
 
 /* Hero buttons container - for multiple buttons side by side */
