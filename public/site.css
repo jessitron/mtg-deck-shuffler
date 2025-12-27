@@ -472,7 +472,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .deck-input-section .deck-label {
@@ -482,4 +482,8 @@ body {
 .deck-input-section #deck-number {
   flex: 1;
   min-width: 0;
+}
+
+.deck-input-section .lets-play-button {
+  align-self: flex-start;
 }
