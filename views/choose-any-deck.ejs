@@ -40,10 +40,10 @@
 
         <form class="deck-input-section" method="POST" action="/deck">
           <label for="deck-number" class="deck-label">Or play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
-          <input type="text" id="deck-number" name="deck-number" placeholder="deck number or Archidekt URL" />
+          <input type="text" id="deck-number" name="deck-number" placeholder="Archidekt URL" />
+          <button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
           <div id="deck-number-error" class="error-message" style="display: none;"></div>
           <input type="hidden" name="deck-source" value="archidekt" />
-          <button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
         </form>
       </div>
 
