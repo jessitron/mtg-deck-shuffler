@@ -325,7 +325,7 @@ body {
   font-weight: 700;
   color: black;
   text-decoration: none;
-  margin: auto;
+  text-align: center;
 }
 
 /* BEGIN Button - original button with 3D press behavior */
