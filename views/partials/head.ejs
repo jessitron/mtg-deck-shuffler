@@ -10,12 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <%
-    // Handle fontFamily as either string or array
-    const fontFamilyParam = Array.isArray(fontFamily)
-      ? fontFamily.join('&family=')
-      : fontFamily;
+    // fontFamily is always an array; build the font URL
+    const fontFamilyParam = fontFamily.length > 0
+      ? '&family=' + fontFamily.join('&family=')
+      : '';
   %>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=<%= fontFamilyParam %>&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900<%= fontFamilyParam %>&display=swap"
     rel="stylesheet" />
   <script src="/browser-tab-id.js"></script>
   <script src="/hny.js"></script>
