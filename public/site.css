@@ -350,6 +350,24 @@ body {
   transition: all 0.1s ease;
 }
 
+.hero-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button:active {
+  border-style: inset;
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button.active {
+  border-style: inset;
+  background-color: var(--light-pink);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Hero buttons container - for multiple buttons side by side */
 .hero-buttons {
   display: flex;

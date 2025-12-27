@@ -1,7 +1,20 @@
 /**
  * Deck Selection Page JavaScript
- * Handles validation for the deck input field on the deck selection page
+ * Handles validation for the deck input field and tab switching on the deck selection page
  */
+
+/**
+ * Set the active tab button state
+ * Removes 'active' class from all tab buttons and adds it to the clicked button
+ */
+function setActiveTab(clickedButton) {
+  // Remove active class from all hero buttons
+  const allButtons = document.querySelectorAll('.hero-button');
+  allButtons.forEach(button => button.classList.remove('active'));
+
+  // Add active class to clicked button
+  clickedButton.classList.add('active');
+}
 
 /**
  * Deck number validation for Load Deck button
@@ -64,4 +77,12 @@ function setupDeckNumberValidation() {
 // Set up validation on page load
 document.addEventListener("DOMContentLoaded", function () {
   setupDeckNumberValidation();
+});
+
+// Re-run validation setup when HTMX loads new content (for tab switching)
+document.addEventListener("htmx:afterSwap", function (event) {
+  // Only run if the swap happened in the deck-inputs container
+  if (event.detail.target.id === "deck-inputs") {
+    setupDeckNumberValidation();
+  }
 });

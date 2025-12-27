@@ -180,6 +180,28 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns HTML fragment - local deck selection tab
+  app.get("/deck-selection-tabs/local", async (req, res) => {
+    try {
+      const availableDecks = deckRetriever.listAvailableDecks();
+      res.render("partials/deck-selection-local", { availableDecks });
+    } catch (error) {
+      console.error("Error loading local deck tab:", error);
+      res.status(500).send(`<div>Error: Could not load local deck selection</div>`);
+    }
+  });
+
+  // Returns HTML fragment - Archidekt deck selection tab
+  app.get("/deck-selection-tabs/archidekt", async (req, res) => {
+    try {
+      const availableDecks = deckRetriever.listAvailableDecks();
+      res.render("partials/deck-selection-archidekt", { availableDecks });
+    } catch (error) {
+      console.error("Error loading Archidekt tab:", error);
+      res.status(500).send(`<div>Error: Could not load Archidekt deck selection</div>`);
+    }
+  });
+
   // Redirects to game page on success, returns whole error page on failure
   app.post("/deck", async (req, res) => {
     const deckNumberInput: string = req.body["deck-number"];

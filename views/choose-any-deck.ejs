@@ -15,36 +15,32 @@
       <h2 class="step-action">Choose</h2>
       <p class="step-object">any deck</p>
       <div class="hero-buttons">
-        <a href="#" class="button-base hero-button">Local Deck</a>
-        <a href="#" class="button-base hero-button">Archidekt</a>
+        <button
+          class="button-base hero-button active"
+          hx-get="/deck-selection-tabs/local"
+          hx-target="#deck-inputs"
+          hx-swap="innerHTML"
+          onclick="setActiveTab(this)">
+          Local Deck
+        </button>
+        <button
+          class="button-base hero-button"
+          hx-get="/deck-selection-tabs/archidekt"
+          hx-target="#deck-inputs"
+          hx-swap="innerHTML"
+          onclick="setActiveTab(this)">
+          Archidekt
+        </button>
       </div>
     </section>
 
     <div class="deck-selection-container">
-      <div id="deck-inputs">
-        <% if (availableDecks && availableDecks.length > 0) { %>
-          <% const localDecks = availableDecks.filter(deck => deck.deckSource === 'local'); %>
-          <% if (localDecks.length > 0) { %>
-            <form method="POST" action="/deck" class="deck-input-section">
-              <label for="local-deck" class="deck-label">Choose a preconstructed deck to play</label>
-              <input type="hidden" name="deck-source" value="local" />
-              <select id="local-deck" name="local-deck">
-                <% localDecks.forEach(function(deck) { %>
-                  <option value="<%= deck.localFile %>"><%= deck.description %></option>
-                <% }); %>
-              </select>
-              <button type="submit" class="lets-play-button">Play</button>
-            </form>
-          <% } %>
-        <% } %>
-
-        <form class="deck-input-section" method="POST" action="/deck">
-          <label for="deck-number" class="deck-label">Or play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
-          <input type="text" id="deck-number" name="deck-number" placeholder="Archidekt URL" />
-          <button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
-          <div id="deck-number-error" class="error-message" style="display: none;"></div>
-          <input type="hidden" name="deck-source" value="archidekt" />
-        </form>
+      <div
+        id="deck-inputs"
+        hx-get="/deck-selection-tabs/local"
+        hx-trigger="load"
+        hx-swap="innerHTML">
+        <!-- Tab content will be loaded here -->
       </div>
 
       <div id="modal-container"></div>
