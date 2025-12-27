@@ -276,6 +276,12 @@ body {
   text-align: right;
 }
 
+.step-1 .hero-buttons {
+  grid-column: 1 / 5;
+  grid-row: 3;
+  justify-content: flex-end;
+}
+
 /* Step 2 - Left Aligned */
 .step-2 .step-action {
   grid-column: 5 / -1;
