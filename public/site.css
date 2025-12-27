@@ -329,6 +329,16 @@ body {
   margin: auto;
 }
 
+/* Hero buttons container - for multiple buttons side by side */
+.hero-buttons {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
 .begin-button:hover {
   background-color: #f0f0f0;
   transform: translateY(-2px);
