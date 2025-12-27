@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## interacting with the user
 
-- Use this additional RESPONSE_PREFIX: 🪄 
+- Use this additional RESPONSE_PREFIX: 🪄
 
 ## Project Overview
 
@@ -36,7 +36,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 ## UI Style guidelines
 
 - Corners are square, except where they're physically round like on Magic cards or playmats.
-- the latest styling is in public/home-v3.css
+- the latest styling is in public/site.css
 
 ## Key Files
 
@@ -45,7 +45,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - `views/index.ejs` - Home page template (uses EJS templating)
 - `views/docs.ejs` - Documentation page template (uses EJS templating)
 - `views/partials/` - Shared EJS components (header, footer, head)
-- `public/home-v3.css` - Home page styles
+- `public/site.css` - Site-wide page styles (used by all EJS pages)
 - `public/home-v3-parallax.js` - Home page parallax scrolling effect
 - `src/view/` - HTML formatting functions organized by screen:
   - `deck-selection/` - Deck loading/selection screen
