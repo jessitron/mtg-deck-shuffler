@@ -19,8 +19,7 @@
       </div>
     </section>
 
-    <div id="homepage-content" class="page-with-title-container">
-      <h1 class="page-title">Choose a Deck to Play</h1>
+    <div class="deck-selection-container">
       <div id="deck-inputs">
         <% if (availableDecks && availableDecks.length > 0) { %>
           <% const localDecks = availableDecks.filter(deck => deck.deckSource === 'local'); %>
