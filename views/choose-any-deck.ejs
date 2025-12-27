@@ -39,7 +39,8 @@
 
         <form class="deck-input-section" method="POST" action="/deck">
           <label for="deck-number" class="deck-label">Or play any deck on <a href="https://archidekt.com/" target="_blank">Archidekt</a></label>
-          <input type="text" id="deck-number" name="deck-number" placeholder="deck number" />
+          <input type="text" id="deck-number" name="deck-number" placeholder="deck number or Archidekt URL" />
+          <div id="deck-number-error" class="error-message" style="display: none;"></div>
           <input type="hidden" name="deck-source" value="archidekt" />
           <button type="submit" id="load-deck-button" class="lets-play-button" disabled>Load Deck</button>
         </form>
@@ -52,17 +53,6 @@
   </div>
 
   <script src="/htmx.js"></script>
-  <script>
-    // Enable/disable the Load Deck button based on input
-    const deckNumberInput = document.getElementById('deck-number');
-    const loadDeckButton = document.getElementById('load-deck-button');
-
-    if (deckNumberInput && loadDeckButton) {
-      deckNumberInput.addEventListener('input', function() {
-        loadDeckButton.disabled = !this.value.trim();
-      });
-    }
-  </script>
 </body>
 
 </html>

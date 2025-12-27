@@ -182,9 +182,19 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
   // Redirects to game page on success, returns whole error page on failure
   app.post("/deck", async (req, res) => {
-    const deckNumber: string = req.body["deck-number"];
+    const deckNumberInput: string = req.body["deck-number"];
     const deckSource: string = req.body["deck-source"];
     const localFile: string = req.body["local-deck"];
+
+    // Parse deck ID from URL if it's an Archidekt URL, otherwise use as-is
+    let deckNumber = deckNumberInput;
+    if (deckSource === "archidekt" && deckNumberInput) {
+      const urlMatch = deckNumberInput.match(/\/decks\/(\d+)/);
+      if (urlMatch) {
+        deckNumber = urlMatch[1];
+      }
+    }
+
     setCommonSpanAttributes({ archidektDeckId: deckNumber, deckSource });
     const deckRequest: DeckRetrievalRequest =
       deckSource === "archidekt" ? { deckSource: "archidekt", archidektDeckId: deckNumber } : { deckSource: "local", localFile };
