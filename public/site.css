@@ -467,3 +467,19 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   border: var(--narrow-border) solid var(--dark-pink);
 }
+
+.deck-input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.deck-input-section .deck-label {
+  width: 100%;
+}
+
+.deck-input-section #deck-number {
+  flex: 1;
+  min-width: 0;
+}
