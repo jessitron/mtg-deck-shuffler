@@ -482,8 +482,13 @@ body {
 .deck-input-section #deck-number {
   flex: 1;
   min-width: 0;
+  height: 3rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
 .deck-input-section .lets-play-button {
   align-self: flex-start;
+  height: 3rem;
+  box-sizing: border-box;
 }
