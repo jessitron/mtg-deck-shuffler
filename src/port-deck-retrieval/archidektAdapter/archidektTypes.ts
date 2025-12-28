@@ -6,6 +6,11 @@ export interface ArchidektCard {
     oracleCard: {
       name: string;
       faces: any[];
+      colorIdentity: string[];
+    };
+    edition: {
+      editionname: string;
+      editioncode: string;
     };
   };
   quantity: number;

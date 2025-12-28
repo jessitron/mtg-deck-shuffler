@@ -5,6 +5,8 @@ export interface CardDefinition {
   multiverseid: number;
   twoFaced: boolean;
   oracleCardName?: string;
+  colorIdentity?: string[];
+  set?: string;
 }
 
 export interface DeckProvenance {

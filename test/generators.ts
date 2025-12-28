@@ -38,12 +38,26 @@ export const scryfallId = fc.uuid();
 // Generator for multiverse IDs
 export const multiverseId = fc.integer({ min: 1, max: 999999 });
 
+// Generator for color identity (optional)
+export const colorIdentity = fc.option(
+  fc.subarray(["White", "Blue", "Black", "Red", "Green"], { minLength: 0, maxLength: 5 }),
+  { nil: undefined }
+);
+
+// Generator for set name (optional)
+export const setName = fc.option(
+  fc.constantFrom("Kaldheim", "Crimson Vow", "Bloomburrow", "Aetherdrift", "Tarkir: Dragonstorm"),
+  { nil: undefined }
+);
+
 // Generator for CardDefinition
 export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   name: cardName,
   scryfallId: scryfallId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
+  colorIdentity: colorIdentity,
+  set: setName,
 });
 
 // Generator for commander names (legendary creatures)
@@ -74,6 +88,8 @@ export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   scryfallId: scryfallId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
+  colorIdentity: colorIdentity,
+  set: setName,
 });
 
 // Generator for deck names
