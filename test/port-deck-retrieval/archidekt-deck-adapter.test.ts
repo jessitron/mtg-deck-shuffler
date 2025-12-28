@@ -21,6 +21,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Test Deck",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -80,6 +81,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Commander Deck",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -153,6 +155,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 789,
       name: "Empty Deck",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [],
       cards: [],
     };
@@ -173,6 +176,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 999,
       name: "Deck with Excluded Cards",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -280,6 +284,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 123,
       name: "Oracle Name Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -320,6 +325,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 456,
       name: "Display Name Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -361,6 +367,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 13083247,
       name: "Dual Commander Deck",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: [
         {
           id: 1,
@@ -429,6 +436,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const archidektDeck: ArchidektDeck = {
       id: 555,
       name: "Deck with Null Categories",
+      createdAt: "2023-01-01T00:00:00.000000Z",
       categories: null,
       cards: [
         {
