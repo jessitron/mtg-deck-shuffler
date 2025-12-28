@@ -609,6 +609,80 @@ export class GameState {
     return this.gameCards[gameCardIndex];
   }
 
+  public findPrevCardInZone(currentCardIndex: number): number | null {
+    const currentCard = this.findCardByIndex(currentCardIndex);
+    if (!currentCard) {
+      return null;
+    }
+
+    const location = currentCard.location;
+
+    // Table cards don't have position ordering
+    if (location.type === "Table") {
+      return null;
+    }
+
+    // Get the ordered list of cards in the same zone
+    let cardsInZone: readonly GameCard[];
+    if (location.type === "Library") {
+      cardsInZone = this.listLibrary();
+    } else if (location.type === "Hand") {
+      cardsInZone = this.listHand();
+    } else if (location.type === "Revealed") {
+      cardsInZone = this.listRevealed();
+    } else if (location.type === "CommandZone") {
+      cardsInZone = this.listCommandZone();
+    } else {
+      return null;
+    }
+
+    // Find the current card's position in the ordered list
+    const currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === currentCardIndex);
+    if (currentPosition === -1 || currentPosition === 0) {
+      return null; // Card not found or is first card
+    }
+
+    // Return the previous card's index
+    return cardsInZone[currentPosition - 1].gameCardIndex;
+  }
+
+  public findNextCardInZone(currentCardIndex: number): number | null {
+    const currentCard = this.findCardByIndex(currentCardIndex);
+    if (!currentCard) {
+      return null;
+    }
+
+    const location = currentCard.location;
+
+    // Table cards don't have position ordering
+    if (location.type === "Table") {
+      return null;
+    }
+
+    // Get the ordered list of cards in the same zone
+    let cardsInZone: readonly GameCard[];
+    if (location.type === "Library") {
+      cardsInZone = this.listLibrary();
+    } else if (location.type === "Hand") {
+      cardsInZone = this.listHand();
+    } else if (location.type === "Revealed") {
+      cardsInZone = this.listRevealed();
+    } else if (location.type === "CommandZone") {
+      cardsInZone = this.listCommandZone();
+    } else {
+      return null;
+    }
+
+    // Find the current card's position in the ordered list
+    const currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === currentCardIndex);
+    if (currentPosition === -1 || currentPosition === cardsInZone.length - 1) {
+      return null; // Card not found or is last card
+    }
+
+    // Return the next card's index
+    return cardsInZone[currentPosition + 1].gameCardIndex;
+  }
+
   public undo(gameEventIndex: number, browserTabId?: string): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
