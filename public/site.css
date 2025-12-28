@@ -601,9 +601,15 @@ body {
 }
 
 .commander-colors {
-  font-size: 0.75rem;
-  color: #666;
-  font-style: italic;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.color-icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
 }
 
 .tile-meta {
