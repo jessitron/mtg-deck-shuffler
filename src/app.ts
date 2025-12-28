@@ -180,14 +180,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Returns HTML fragment - local deck selection tab
-  app.get("/deck-selection-tabs/local", async (req, res) => {
+  // Returns HTML fragment - precon deck selection tab
+  app.get("/deck-selection-tabs/precon", async (req, res) => {
     try {
       const availableDecks = deckRetriever.listAvailableDecks();
-      res.render("partials/deck-selection-local", { availableDecks });
+      res.render("partials/deck-selection-precon", { availableDecks });
     } catch (error) {
-      console.error("Error loading local deck tab:", error);
-      res.status(500).send(`<div>Error: Could not load local deck selection</div>`);
+      console.error("Error loading precon deck tab:", error);
+      res.status(500).send(`<div>Error: Could not load precon deck selection</div>`);
     }
   });
 
@@ -206,7 +206,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.post("/deck", async (req, res) => {
     const deckNumberInput: string = req.body["deck-number"];
     const deckSource: string = req.body["deck-source"];
-    const localFile: string = req.body["local-deck"];
+    const preconFile: string = req.body["precon-deck"];
 
     // Parse deck ID from URL if it's an Archidekt URL, otherwise use as-is
     let deckNumber = deckNumberInput;
@@ -219,7 +219,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
     setCommonSpanAttributes({ archidektDeckId: deckNumber, deckSource });
     const deckRequest: DeckRetrievalRequest =
-      deckSource === "archidekt" ? { deckSource: "archidekt", archidektDeckId: deckNumber } : { deckSource: "local", localFile };
+      deckSource === "archidekt" ? { deckSource: "archidekt", archidektDeckId: deckNumber } : { deckSource: "precon", localFile: preconFile };
 
     try {
       const deck = await deckRetriever.retrieveDeck(deckRequest);
@@ -234,7 +234,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         formatErrorPageHtmlPage({
           icon: "🚫",
           title: "Deck Load Error",
-          message: `Could not fetch deck <strong>${deckNumber || localFile}</strong> from <strong>${deckSource}</strong>.`,
+          message: `Could not fetch deck <strong>${deckNumber || preconFile}</strong> from <strong>${deckSource}</strong>.`,
           details: "The deck may not exist, be private, or there may be a network issue.",
         })
       );
@@ -331,10 +331,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
           throw new Error(`Cannot extract archidekt deck ID from URL: ${persistedGame.deckProvenance.sourceUrl}`);
         }
         deckRequest = { deckSource: "archidekt", archidektDeckId: match[1] };
-      } else if (persistedGame.deckProvenance.deckSource === "local") {
+      } else if (persistedGame.deckProvenance.deckSource === "precon") {
         // sourceUrl is like /decks/
-        const localFile = persistedGame.deckProvenance.sourceUrl.replace(/.*\//, "");
-        deckRequest = { deckSource: "local", localFile };
+        const preconFile = persistedGame.deckProvenance.sourceUrl.replace(/.*\//, "");
+        deckRequest = { deckSource: "precon", localFile: preconFile };
       } else {
         throw new Error(`Unsupported deck source: ${persistedGame.deckProvenance.deckSource}`);
       }

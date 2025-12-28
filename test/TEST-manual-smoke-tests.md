@@ -10,7 +10,7 @@
 
 [] There's an input box for an Archidekt deck number. It's pre-filled with 14669648. There's a "Let's Play (from Archidekt)" button next to it.
 
-[] There's a dropdown box to select a local deck. There's a "Let's Play" button next to it.
+[] There's a dropdown box to select a precon deck. There's a "Let's Play" button next to it.
 
 ## Check Archidekt deck loading
 
@@ -32,11 +32,11 @@
 
 [] Check that we're back at the deck selection screen. The URL is https://localhost:3001
 
-## Check local deck loading
+## Check precon deck loading
 
 6. Return to https://localhost:3001
 
-7. The default for the dropdown is fine. Click "Let's Play" in the local deck loading section.
+7. The default for the dropdown is fine. Click "Let's Play" in the precon deck loading section.
 
 [] Check that the deck name is "Rat Girl's Food Hoarding"
 

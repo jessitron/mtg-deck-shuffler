@@ -10,7 +10,7 @@ export interface CardDefinition {
 export interface DeckProvenance {
   retrievedDate: Date;
   sourceUrl: string;
-  deckSource: "archidekt" | "local" | "test";
+  deckSource: "archidekt" | "precon" | "test";
 }
 
 export const PERSISTED_DECK_VERSION: 1 = 1;

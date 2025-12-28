@@ -22,7 +22,7 @@ The deck number defaults to my favorite deck.
 
 The 'Let's Play' button brings out the deck details.
 
-At the moment, there's a dropdown for local decks, as referenced in FEATURE-local-decks.md. That file includes desired improvements.
+At the moment, there's a dropdown for precon decks (preconstructed decks downloaded locally).
 
 ### Second Screen: Deck Review
 

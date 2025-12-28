@@ -10,9 +10,11 @@ For a good example of this in the code, see @src/port-deck-retrieval/index.ts an
 
 The port is an interface, RetrieveDeckPort.
 
-There are two adapters, ArchidektDeckToDeckAdapter and LocalDeckAdapter, plus a compositional adapter, CascadingDeckRetrievalAdapter.
+There are two adapters, ArchidektDeckToDeckAdapter and LocalFileAdapter, plus a compositional adapter, CascadingDeckRetrievalAdapter.
 
-There is one gateway, ArchidektGateway. LocalDeckAdapter is too simple to need a gateway.
+There is one gateway, ArchidektGateway. LocalFileAdapter is too simple to need a gateway.
+
+The LocalFileAdapter deals with the storage mechanism (local files), while the domain uses "precon" to describe what the deck represents.
 
 The adapter is initialized in @src/server.ts
 

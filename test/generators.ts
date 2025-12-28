@@ -95,7 +95,7 @@ export const deckProvenance: fc.Arbitrary<DeckProvenance> = fc.record({
     fc.nat().map((n) => `https://archidekt.com/decks/${n}/test-deck`),
     fc.constantFrom("/deck/123", "https://example.com/deck/456", "file://local-deck.json")
   ),
-  deckSource: fc.constantFrom("archidekt", "local", "test" as const),
+  deckSource: fc.constantFrom("archidekt", "precon", "test" as const),
 });
 
 // Generator for deck ID

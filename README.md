@@ -51,7 +51,7 @@ We'll use npm for dependencies and for running its scripts.
 
 We will eventually deploy to a toy EKS cluster.
 
-## Downloading decks for local use
+## Downloading precon decks
 
 `npm run deck:download -- <archidektDeckId>`
 

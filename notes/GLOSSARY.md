@@ -40,7 +40,11 @@ Deck (Archidekt): a collection of cards meant to be played in a game. Archidekt 
 
 Deck (MTG Deck Shuffler): an unordered collection of cards, along with some provenance info. These are immutable in the MTG Deck Shuffler domain. A deck is necessary to initiate a game.
 
-Deck Source: where a deck came from. This is either "archidekt" or "local", or "test" in tests.
+Deck Source: where a deck came from. This is either "archidekt" or "precon", or "test" in tests.
+
+Precon Deck (MTG Deck Shuffler): A preconstructed deck stored locally in the decks/ directory. From the domain perspective, it's a "precon" (what it is). At the adapter level, it's stored as a "local file" (how it's stored).
+
+Local File Adapter: Infrastructure component that retrieves decks from local JSON files. Uses "local file" terminology to describe the storage mechanism.
 
 Deck Provenance: information about where a deck came from. This includes the Deck Source, a URL, and the retrieved date. Decks are mutable at their source, see, but immutable in MTG Deck Shuffler.
 

@@ -1,0 +1,15 @@
+<% if (availableDecks && availableDecks.length > 0) { %>
+  <% const precons = availableDecks.filter(deck => deck.deckSource === 'precon'); %>
+  <% if (precons.length > 0) { %>
+    <form method="POST" action="/deck" class="deck-input-section">
+      <label for="precon-deck" class="deck-label">Choose a preconstructed deck to play</label>
+      <input type="hidden" name="deck-source" value="precon" />
+      <select id="precon-deck" name="precon-deck">
+        <% precons.forEach(function(deck) { %>
+          <option value="<%= deck.localFile %>"><%= deck.description %></option>
+        <% }); %>
+      </select>
+      <button type="submit" class="lets-play-button">Play</button>
+    </form>
+  <% } %>
+<% } %>

@@ -17,11 +17,11 @@
       <div class="hero-buttons">
         <button
           class="button-base hero-button active"
-          hx-get="/deck-selection-tabs/local"
+          hx-get="/deck-selection-tabs/precon"
           hx-target="#deck-inputs"
           hx-swap="innerHTML"
           onclick="setActiveTab(this)">
-          Local Deck
+          Precon
         </button>
         <button
           class="button-base hero-button"
@@ -37,7 +37,7 @@
     <div class="deck-selection-container">
       <div
         id="deck-inputs"
-        hx-get="/deck-selection-tabs/local"
+        hx-get="/deck-selection-tabs/precon"
         hx-trigger="load"
         hx-swap="innerHTML">
         <!-- Tab content will be loaded here -->

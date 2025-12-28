@@ -37,7 +37,7 @@ async function loadPreconDeckAndStartGame(page: Page): Promise<string> {
 
   // The precon dropdown is already set to a default deck
   // Just click the "Play" button to load that deck
-  const playButton = page.locator('form:has(select#local-deck) button[type="submit"]');
+  const playButton = page.locator('form:has(select#precon-deck) button[type="submit"]');
   await expect(playButton).toBeVisible();
   await playButton.click();
 

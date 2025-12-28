@@ -3,27 +3,27 @@ import { Deck } from "../types.js";
 // this is really config
 export const LOCAL_DECK_RELATIVE_PATH = "./decks/";
 
-export type DeckSource = "archidekt" | "local";
+export type DeckSource = "archidekt" | "precon";
 
 export interface ArchidektDeckRetrievalRequest {
   deckSource: "archidekt";
   archidektDeckId: string;
 }
 
-export interface LocalDeckRetrievalRequest {
-  deckSource: "local";
+export interface LocalFileRetrievalRequest {
+  deckSource: "precon";
   localFile: string;
 }
 
-export type DeckRetrievalRequest = ArchidektDeckRetrievalRequest | LocalDeckRetrievalRequest;
+export type DeckRetrievalRequest = ArchidektDeckRetrievalRequest | LocalFileRetrievalRequest;
 
 // Type guards
 export function isArchidektDeckRetrievalRequest(request: DeckRetrievalRequest): request is ArchidektDeckRetrievalRequest {
   return request.deckSource === "archidekt";
 }
 
-export function isLocalDeckRetrievalRequest(request: DeckRetrievalRequest): request is LocalDeckRetrievalRequest {
-  return request.deckSource === "local";
+export function isLocalFileRetrievalRequest(request: DeckRetrievalRequest): request is LocalFileRetrievalRequest {
+  return request.deckSource === "precon";
 }
 
 export type AvailableDeck = { description: string } & DeckRetrievalRequest;

@@ -1,4 +1,4 @@
-import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalDeckAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
+import { ArchidektGateway, ArchidektDeckToDeckAdapter, LocalFileAdapter, CascadingDeckRetrievalAdapter } from "./port-deck-retrieval/implementations.js";
 import { RetrieveDeckPort, LOCAL_DECK_RELATIVE_PATH } from "./port-deck-retrieval/types.js";
 import { PersistStatePort } from "./port-persist-state/types.js";
 import { InMemoryPersistStateAdapter } from "./port-persist-state/InMemoryPersistStateAdapter.js";
@@ -18,7 +18,7 @@ function createPersistStateAdapter(): PersistStatePort {
   }
 }
 
-const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalDeckAdapter(LOCAL_DECK_RELATIVE_PATH), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
+const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalFileAdapter(LOCAL_DECK_RELATIVE_PATH), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 const persistStatePort: PersistStatePort = createPersistStateAdapter();
 
 const app = createApp(deckRetriever, persistStatePort);
