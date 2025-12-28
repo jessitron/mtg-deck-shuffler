@@ -488,8 +488,6 @@ body {
   max-width: 1040px;
   margin: auto;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: var(--narrow-border) solid var(--dark-pink);
   transition: max-width 0.3s ease-in-out;
 }
 
@@ -497,18 +495,20 @@ body {
   max-width: 100vw;
 }
 
-.deck-input-section {
+.archidekt-input-section,
+.precon-input-section {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: flex-start;
 }
 
-.deck-input-section .deck-label {
+.archidekt-input-section .deck-label,
+.precon-input-section .deck-label {
   width: 100%;
 }
 
-.deck-input-section #deck-number {
+.archidekt-input-section #deck-number {
   flex: 1;
   min-width: 0;
   height: 3rem;
@@ -516,7 +516,7 @@ body {
   box-sizing: border-box;
 }
 
-.deck-input-section .lets-play-button {
+.archidekt-input-section .lets-play-button {
   align-self: flex-start;
   height: 3rem;
   box-sizing: border-box;

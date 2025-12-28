@@ -1,7 +1,7 @@
 <% if (availableDecks && availableDecks.length > 0) { %>
   <% const precons = availableDecks.filter(deck => deck.deckSource === 'precon'); %>
   <% if (precons.length > 0) { %>
-    <form method="POST" action="/deck" class="deck-input-section">
+    <form method="POST" action="/deck" class="precon-input-section">
       <label class="deck-label">Choose a preconstructed deck to play</label>
       <input type="hidden" name="deck-source" value="precon" />
       <div class="precon-tiles-container">

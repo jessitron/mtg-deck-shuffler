@@ -107,24 +107,30 @@ h1 {
   margin-top: 40px;
 }
 
-.deck-input-section {
+.archidekt-input-section,
+.precon-input-section {
   margin: 5px 0;
 }
 
-.deck-input-section label {
+.archidekt-input-section label,
+.precon-input-section label {
   display: block;
 }
 
-.deck-input-section label,
-.deck-input-section a {
+.archidekt-input-section label,
+.archidekt-input-section a,
+.precon-input-section label,
+.precon-input-section a {
   margin-bottom: 10px;
   font-weight: bold;
   color: white;
   font-size: 1.1rem;
 }
 
-.deck-input-section input,
-.deck-input-section select {
+.archidekt-input-section input,
+.archidekt-input-section select,
+.precon-input-section input,
+.precon-input-section select {
   padding: 12px;
   border: 2px solid #ddd;
   border-radius: 5px;
@@ -133,14 +139,17 @@ h1 {
   background: white;
 }
 
-.deck-input-section input:focus,
-.deck-input-section select:focus {
+.archidekt-input-section input:focus,
+.archidekt-input-section select:focus,
+.precon-input-section input:focus,
+.precon-input-section select:focus {
   border-color: #4caf50;
   outline: none;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
-.deck-input-section button {
+.archidekt-input-section button,
+.precon-input-section button {
   padding: 12px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -152,11 +161,13 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.deck-input-section button:hover:not(:disabled) {
+.archidekt-input-section button:hover:not(:disabled),
+.precon-input-section button:hover:not(:disabled) {
   background-color: #45a049;
 }
 
-.deck-input-section button:disabled {
+.archidekt-input-section button:disabled,
+.precon-input-section button:disabled {
   background-color: #ccc;
   border-color: #999;
   color: #666;
