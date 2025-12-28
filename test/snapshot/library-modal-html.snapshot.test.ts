@@ -20,13 +20,13 @@ describe("Library Modal HTML Snapshot Tests", () => {
   });
 
   const createGameStateWithMultipleLibraryCards = (): GameState => {
-    const gameState = GameState.newGame(123, testDeck, 42);
+    const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
     gameState.startGame();
     return gameState;
   };
 
   const createGameStateWithSingleLibraryCard = (): GameState => {
-    const gameState = GameState.newGame(456, testDeck, 42);
+    const gameState = GameState.newGame(456, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw all but one card to leave just one in library
@@ -39,7 +39,7 @@ describe("Library Modal HTML Snapshot Tests", () => {
   };
 
   const createGameStateWithEmptyLibrary = (): GameState => {
-    const gameState = GameState.newGame(789, testDeck, 42);
+    const gameState = GameState.newGame(789, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw all cards to empty the library

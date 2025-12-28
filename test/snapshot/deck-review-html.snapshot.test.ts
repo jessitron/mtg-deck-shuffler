@@ -43,7 +43,7 @@ describe("Deck Review HTML Snapshot Tests", () => {
 
   it("formatDeckReviewHtmlPage with deck containing two-sided cards", async () => {
     const snapshotFile = "deck-review-two-sided-cards.html";
-    const gameState = GameState.newGame(789, deckWithTwoSidedCards);
+    const gameState = GameState.newGame(789, 1, 1, deckWithTwoSidedCards);
     const actualHtml = formatDeckReviewHtmlPage(gameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)

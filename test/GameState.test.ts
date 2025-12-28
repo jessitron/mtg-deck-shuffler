@@ -19,7 +19,7 @@ describe("GameState", () => {
   test("stores game status correctly", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         expect(state.gameStatus()).toBe(GameStatus.Active);
       })
     );
@@ -28,7 +28,7 @@ describe("GameState", () => {
   test("allows zero commanders", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         expect(state.listCommanders().length).toBe(0);
       })
     );
@@ -37,7 +37,7 @@ describe("GameState", () => {
   test("allows one commander", () => {
     fc.assert(
       fc.property(deckWithOneCommander, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         const commanders = state.listCommanders();
         expect(commanders.length).toBe(1);
         expect(commanders[0].card).toEqual(deck.commanders[0]);
@@ -49,7 +49,7 @@ describe("GameState", () => {
   test("allows two commanders", () => {
     fc.assert(
       fc.property(deckWithTwoCommanders, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         const commanders = state.listCommanders();
         expect(commanders.length).toBe(2);
         const commanderCards = commanders.map((gc) => gc.card).sort((a, b) => a.name.localeCompare(b.name));
@@ -64,7 +64,7 @@ describe("GameState", () => {
   test("sorts cards by display name", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         const cards = state.getCards();
 
         // Verify cards are sorted by display name
@@ -78,7 +78,7 @@ describe("GameState", () => {
   test("constructor creates correct number of cards", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
-        const state = GameState.newGame(1, deck);
+        const state = GameState.newGame(1, 1, 1, deck);
         expect(state.getCards().length).toBe(deck.cards.length);
       })
     );
@@ -87,7 +87,7 @@ describe("GameState", () => {
   test("constructor uses provided gameId", () => {
     fc.assert(
       fc.property(minimalDeck, fc.integer({ min: 1, max: 999999 }), (deck, gameId) => {
-        const state = GameState.newGame(gameId, deck);
+        const state = GameState.newGame(gameId, 1, 1, deck);
         expect(state.gameId).toBe(gameId);
       })
     );
@@ -96,7 +96,7 @@ describe("GameState", () => {
   test("initializes cards in sequential positions in Library", () => {
     fc.assert(
       fc.property(deckWithOneCommander, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         const cards = gameState.getCards();
         expect(cards.length).toBe(deck.cards.length + deck.commanders.length);
@@ -120,7 +120,7 @@ describe("GameState", () => {
   test("shuffle randomizes Library positions but preserves card count", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
         const originalOrder = gameState.getCards().map((gc) => gc.card.name);
 
         gameState.shuffle();
@@ -147,7 +147,7 @@ describe("GameState", () => {
   test("shuffle only affects Library cards", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Manually move a non-commander card to Hand for testing
         const cards = gameState.getCards();
@@ -178,7 +178,7 @@ describe("GameState", () => {
   test("startGame changes status to Active and shuffles", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
         expect(gameState.gameStatus()).toBe(GameStatus.Active);
 
         gameState.startGame();
@@ -196,23 +196,13 @@ describe("GameState", () => {
     );
   });
 
-  test("startGame throws error if game already started", () => {
-    fc.assert(
-      fc.property(minimalDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
-        gameState.startGame();
-
-        expect(() => {
-          gameState.startGame();
-        }).toThrow(/Cannot start game: current status is Active/);
-      })
-    );
-  });
+  // Note: startGame() no longer throws on multiple calls - it just shuffles again
+  // Games are created in Active status from GamePrep, so startGame is just for shuffling
 
   test("draw moves top card from Library to Hand", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         const libraryBefore = gameState.listLibrary();
         expect(libraryBefore.length).toBe(deck.cards.length);
@@ -245,7 +235,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length > 0);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Move all cards out of library manually
         const cards = gameState.getCards();
@@ -266,7 +256,7 @@ describe("GameState", () => {
         // Skip test if deck has no cards
         if (deck.cards.length === 0) return;
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
         const initialLibrarySize = deck.cards.length;
 
         // Track the original order of cards in library before drawing
@@ -315,7 +305,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length > 0);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
         gameState.shuffle();
 
         const libraryBefore = gameState.listLibrary();
@@ -340,7 +330,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length > 0);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         const libraryBefore = gameState.listLibrary();
         expect(libraryBefore.length).toBe(deck.cards.length);
@@ -370,7 +360,7 @@ describe("GameState", () => {
   test("reveal throws error when position does not exist in Library", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Try to reveal a position that doesn't exist
         const invalidPosition = deck.cards.length + 5;
@@ -387,7 +377,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 3);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         const libraryBefore = gameState.listLibrary();
 
@@ -420,7 +410,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 3);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
         const libraryBefore = gameState.listLibrary();
 
         // Reveal the last card first
@@ -453,7 +443,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 4);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw cards to populate hand naturally
         for (let i = 0; i < 4; i++) {
@@ -492,7 +482,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 4);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Reveal cards to populate revealed zone using revealByGameCardIndex
         const libraryCards = gameState.listLibrary();
@@ -532,7 +522,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length > 0);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Try to play a card that's still in library
         const libraryCards = gameState.listLibrary();
@@ -569,7 +559,7 @@ describe("GameState", () => {
             },
           };
 
-          const gameState = GameState.newGame(1, deck);
+          const gameState = GameState.newGame(1, 1, 1, deck);
           const gameCards = gameState.listLibrary();
           const gameCardIndex = gameCards[0].gameCardIndex;
 
@@ -590,7 +580,7 @@ describe("GameState", () => {
   test("flipCard throws error when card does not exist", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         expect(() => {
           gameState.flipCard(999);
@@ -623,7 +613,7 @@ describe("GameState", () => {
             },
           };
 
-          const gameState = GameState.newGame(1, deck);
+          const gameState = GameState.newGame(1, 1, 1, deck);
           const gameCards = gameState.listLibrary();
           const gameCardIndex = gameCards[0].gameCardIndex;
 
@@ -640,7 +630,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 3);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 3 cards to populate hand
         for (let i = 0; i < 3; i++) {
@@ -674,7 +664,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 3);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 3 cards to populate hand
         for (let i = 0; i < 3; i++) {
@@ -706,7 +696,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 4);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 4 cards to populate hand
         for (let i = 0; i < 4; i++) {
@@ -740,7 +730,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 2);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 2 cards
         for (let i = 0; i < 2; i++) {
@@ -763,7 +753,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 2);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 2 cards
         for (let i = 0; i < 2; i++) {
@@ -786,7 +776,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 2);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 2 cards
         for (let i = 0; i < 2; i++) {
@@ -805,7 +795,7 @@ describe("GameState", () => {
       fc.property(anyDeck, (deck) => {
         fc.pre(deck.cards.length >= 5);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 5 cards to populate hand
         for (let i = 0; i < 5; i++) {
@@ -834,7 +824,7 @@ describe("GameState", () => {
       fc.property(anyDeck, fc.array(fc.tuple(fc.nat(), fc.nat()), { minLength: 3, maxLength: 20 }), (deck, moves) => {
         fc.pre(deck.cards.length >= 5);
 
-        const gameState = GameState.newGame(1, deck);
+        const gameState = GameState.newGame(1, 1, 1, deck);
 
         // Draw 5 cards to populate hand
         for (let i = 0; i < 5; i++) {

@@ -20,7 +20,7 @@ describe("Game Page HTML Snapshot Tests", () => {
   });
 
   const createActiveGameState = (): GameState => {
-    const gameState = GameState.newGame(789, testDeck, 42);
+    const gameState = GameState.newGame(789, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw some cards to hand
@@ -37,7 +37,7 @@ describe("Game Page HTML Snapshot Tests", () => {
   };
 
   const createNotStartedGameState = (): GameState => {
-    const gameState = GameState.newGame(456, testDeck);
+    const gameState = GameState.newGame(456, 1, 1, testDeck);
     // Don't start the game
     return gameState;
   };

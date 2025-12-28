@@ -21,7 +21,7 @@ describe("Game HTML Snapshot Tests", () => {
   });
 
   const createActiveGameState = (): GameState => {
-    const gameState = GameState.newGame(123, testDeck, 42);
+    const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
 
     // Start the game and shuffle
     gameState.startGame();
@@ -47,11 +47,11 @@ describe("Game HTML Snapshot Tests", () => {
   };
 
   const createNotStartedGameState = (): GameState => {
-    return GameState.newGame(456, testDeck);
+    return GameState.newGame(456, 1, 1, testDeck);
   };
 
   const createEmptyLibraryGameState = (): GameState => {
-    const gameState = GameState.newGame(789, testDeck, 42);
+    const gameState = GameState.newGame(789, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw all cards to empty the library

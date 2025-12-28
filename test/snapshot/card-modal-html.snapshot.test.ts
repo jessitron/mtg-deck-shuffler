@@ -42,7 +42,7 @@ describe("Card Modal HTML Snapshot Tests", () => {
 
   it("formatCardModalHtmlFragment for library card includes both modal close calls", async () => {
     const snapshotFile = "card-modal-library-card.html";
-    const gameState = GameState.newGame(123, testDeck, 42);
+    const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
     gameState.startGame();
     
     const libraryCards = gameState.listLibrary();
@@ -92,7 +92,7 @@ describe("Card Modal HTML Snapshot Tests", () => {
 
   it("formatCardModalHtmlFragment for revealed card includes both modal close calls", async () => {
     const snapshotFile = "card-modal-revealed-card.html";
-    const gameState = GameState.newGame(456, testDeck, 42);
+    const gameState = GameState.newGame(456, 1, 1, testDeck, 42);
     gameState.startGame();
     
     // Reveal a card

@@ -20,7 +20,7 @@ describe("History Modal HTML Snapshot Tests", () => {
   });
 
   const createGameStateWithMultipleEvents = (): GameState => {
-    const gameState = GameState.newGame(123, testDeck, 42);
+    const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Perform multiple actions to create events
@@ -36,13 +36,13 @@ describe("History Modal HTML Snapshot Tests", () => {
   };
 
   const createGameStateWithSingleStartEvent = (): GameState => {
-    const gameState = GameState.newGame(456, testDeck, 42);
+    const gameState = GameState.newGame(456, 1, 1, testDeck, 42);
     gameState.startGame();
     return gameState;
   };
 
   const createGameStateWithEmptyHistory = (): GameState => {
-    const gameState = GameState.newGame(789, testDeck);
+    const gameState = GameState.newGame(789, 1, 1, testDeck);
     // Don't start the game to have empty history
     return gameState;
   };

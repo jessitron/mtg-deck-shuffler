@@ -20,7 +20,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
   });
 
   const createGameStateWithMultipleTableCards = (): GameState => {
-    const gameState = GameState.newGame(456, testDeck, 42);
+    const gameState = GameState.newGame(456, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw some cards and play them to the table
@@ -41,7 +41,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
   };
 
   const createGameStateWithSingleTableCard = (): GameState => {
-    const gameState = GameState.newGame(789, testDeck, 42);
+    const gameState = GameState.newGame(789, 1, 1, testDeck, 42);
     gameState.startGame();
 
     // Draw a card and play it to the table
@@ -55,7 +55,7 @@ describe("Table Modal HTML Snapshot Tests", () => {
   };
 
   const createGameStateWithEmptyTable = (): GameState => {
-    const gameState = GameState.newGame(123, testDeck, 42);
+    const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
     gameState.startGame();
     // Don't play any cards, table remains empty
     return gameState;
