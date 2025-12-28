@@ -13,6 +13,7 @@ export interface DeckProvenance {
   retrievedDate: Date;
   sourceUrl: string;
   deckSource: "archidekt" | "precon" | "test";
+  createdAt?: Date;
 }
 
 export const PERSISTED_DECK_VERSION: 1 = 1;

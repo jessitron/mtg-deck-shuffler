@@ -65,6 +65,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
         retrievedDate: now,
         sourceUrl: `https://archidekt.com/decks/${archidektDeckId}`,
         deckSource: "archidekt",
+        createdAt: new Date(archidektDeck.createdAt),
       },
     };
   }

@@ -20,6 +20,7 @@ export interface ArchidektCard {
 export interface ArchidektDeck {
   id: number;
   name: string;
+  createdAt: string;
   categories: Array<{
     id: number;
     name: string;
