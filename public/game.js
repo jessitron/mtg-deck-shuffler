@@ -249,3 +249,27 @@ function handleDrop(e) {
   return false;
 }
 
+/**
+ * Keyboard navigation for card modal
+ */
+document.addEventListener('keydown', (event) => {
+  // Check if card modal is open
+  const modal = document.querySelector('.card-modal-overlay');
+  if (!modal) return;
+
+  // Navigate with arrow keys
+  if (event.key === 'ArrowLeft') {
+    const prevButton = modal.querySelector('.card-modal-nav-prev');
+    if (prevButton) {
+      prevButton.click();
+      event.preventDefault(); // Prevent default arrow key behavior
+    }
+  } else if (event.key === 'ArrowRight') {
+    const nextButton = modal.querySelector('.card-modal-nav-next');
+    if (nextButton) {
+      nextButton.click();
+      event.preventDefault(); // Prevent default arrow key behavior
+    }
+  }
+});
+
