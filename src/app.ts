@@ -10,7 +10,7 @@ import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatDebugSectionHtmlFragment } from "./view/debug/debug-section.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
-import { GameState } from "./GameState.js";
+import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
@@ -1107,8 +1107,43 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Trigger game-state-updated event to refresh the game container
       res.setHeader("HX-Trigger", "game-state-updated");
 
+      // Calculate navigation indices
+      const prevCardIndex = game.findPrevCardInZone(gameCardIndex);
+      const nextCardIndex = game.findNextCardInZone(gameCardIndex);
+
+      // Calculate position information for display
+      let currentPosition = 1;
+      let totalCardsInZone = 1;
+      const location = flippedCard.location;
+
+      if (location.type !== "Table") {
+        let cardsInZone: readonly GameCard[];
+        if (location.type === "Library") {
+          cardsInZone = game.listLibrary();
+        } else if (location.type === "Hand") {
+          cardsInZone = game.listHand();
+        } else if (location.type === "Revealed") {
+          cardsInZone = game.listRevealed();
+        } else if (location.type === "CommandZone") {
+          cardsInZone = game.listCommandZone();
+        } else {
+          cardsInZone = [];
+        }
+
+        totalCardsInZone = cardsInZone.length;
+        currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
+      }
+
       // Return the updated modal HTML
-      const modalHtml = formatCardModalHtmlFragment(flippedCard, gameId, game.getStateVersion());
+      const modalHtml = formatCardModalHtmlFragment(
+        flippedCard,
+        gameId,
+        game.getStateVersion(),
+        prevCardIndex,
+        nextCardIndex,
+        currentPosition,
+        totalCardsInZone
+      );
       res.send(modalHtml);
     } catch (error) {
       console.error("Error flipping card in modal:", error);
