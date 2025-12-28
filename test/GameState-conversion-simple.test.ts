@@ -6,7 +6,7 @@ import { deckWithOneCommander } from "./generators.js";
 
 test("should convert GameState to PersistedGameState and back", () => {
   fc.assert(fc.property(deckWithOneCommander, fc.integer({ min: 1, max: 999999 }), (testDeck, gameId) => {
-    const originalGameState = GameState.newGame(gameId, testDeck);
+    const originalGameState = GameState.newGame(gameId, 1, 1, testDeck);
 
     // Convert to persisted format
     const persistedGameState = originalGameState.toPersistedGameState();
@@ -14,7 +14,7 @@ test("should convert GameState to PersistedGameState and back", () => {
     // Verify persisted format has expected structure
     expect(persistedGameState.version).toBe(PERSISTED_GAME_STATE_VERSION);
     expect(persistedGameState.gameId).toBe(gameId);
-    expect(persistedGameState.status).toBe(GameStatus.NotStarted);
+    expect(persistedGameState.status).toBe(GameStatus.Active);
     expect(persistedGameState.deckName).toBe(testDeck.name);
     expect(persistedGameState.deckId).toBe(testDeck.id);
     expect(persistedGameState.totalCards).toBe(testDeck.cards.length + testDeck.commanders.length);

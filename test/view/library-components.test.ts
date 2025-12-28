@@ -8,7 +8,7 @@ describe("formatLibrarySectionHtmlFragment", () => {
   test("should handle empty library without crashing", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
-        const game = GameState.newGame(1, deck, 42);
+        const game = GameState.newGame(1, 1, 1, deck, 42);
         game.startGame();
 
         // Draw all cards from library until it's empty

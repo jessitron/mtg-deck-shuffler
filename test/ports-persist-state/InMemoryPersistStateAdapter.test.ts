@@ -13,7 +13,7 @@ describe("InMemoryPersistStateAdapter", () => {
 
     // Use generator to create test deck, then convert to PersistedGameState
     const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
-    testGameState = createTestPersistedGameState(1, testDeck, GameStatus.NotStarted);
+    testGameState = createTestPersistedGameState(1, testDeck, GameStatus.Active);
   });
 
   it("should generate new game IDs incrementally", () => {

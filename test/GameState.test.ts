@@ -20,7 +20,7 @@ describe("GameState", () => {
     fc.assert(
       fc.property(minimalDeck, (deck) => {
         const state = GameState.newGame(1, deck);
-        expect(state.gameStatus()).toBe(GameStatus.NotStarted);
+        expect(state.gameStatus()).toBe(GameStatus.Active);
       })
     );
   });
@@ -179,7 +179,7 @@ describe("GameState", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
         const gameState = GameState.newGame(1, deck);
-        expect(gameState.gameStatus()).toBe(GameStatus.NotStarted);
+        expect(gameState.gameStatus()).toBe(GameStatus.Active);
 
         gameState.startGame();
 
