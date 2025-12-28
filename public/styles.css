@@ -203,6 +203,10 @@ p {
   font-size: 0.9rem;
 }
 
+.error-actions {
+  text-align: center;
+}
+
 .inline-form {
   display: inline;
 }

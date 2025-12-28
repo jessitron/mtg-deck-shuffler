@@ -100,7 +100,7 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
         <p>${message}</p>
         ${details ? `<p class="error-details">${details}</p>` : ""}
       </div>
-      <div class="error-actions" style="text-align: center">
+      <div class="error-actions">
         <a href="/">home</a>
       </div>
     </div>`;
