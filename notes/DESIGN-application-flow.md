@@ -10,50 +10,55 @@
         │                  │                  │
         ▼                  ▼                  ▼
    ┌────────┐         ┌────────┐    ┌─────────────────┐
-   │  Docs  │         │ About  │    │  Deck Selection │ ◄─────────────┐
-   └────────┘         └────────┘    └─────────────────┘               │
- (informational)   (informational)           │                        │
-                                              │ Let's Play             │
-                                              ▼                        │
-                                     ┌─────────────────┐               │
-                                     │   Deck Review   │               │
-                                     │                 │               │
-                                     │ State:          │ ◄─┐           │
-                                     │ • Not Started   │   │           │
-                                     │ • Unshuffled    │   │           │
-                                     │ • Game ID in URL│   │           │
-                                     └─────────────────┘   │           │
-                                              │            │           │
-                                              │ Shuffle Up │           │
-                                              ▼            │           │
-                                     ┌─────────────────┐   │           │
-                                     │   Play Game     │   │           │
-                                     │                 │   │           │
-                                     │ State:          │   │           │
-                                     │ • Game Active   │   │           │
-                                     │ • Library       │   │           │
-                                     │   Shuffled      │   │           │
-                                     │ • Game ID in URL│   │           │
-                                     └─────────────────┘   │           │
-                                              │            │           │
-                                         ┌────┴────┐       │           │
-                                         │         │       │           │
-                                         ▼         ▼       │           │
-                                      Restart    Quit ─────┴───────────┤
-                                        Game       │                   │
-                                         │         │                   │
-                                         └─────────┘                   │
-                                                                       │
-                                Choose Another Deck ────────────────────┘
+   │  Docs  │         │ About  │    │  Deck Selection │ ◄───────────────┐
+   └────────┘         └────────┘    └─────────────────┘                 │
+ (informational)   (informational)           │                          │
+                                              │ Let's Play               │
+                                              ▼                          │
+                                     ┌─────────────────┐                 │
+                                     │   Game Prep     │                 │
+                                     │  (Deck Review)  │                 │
+                                     │                 │                 │
+                                     │ State:          │                 │
+                                     │ • GamePrep      │                 │
+                                     │ • Unshuffled    │                 │
+                                     │ • Prep ID in URL│                 │
+                                     │   /prepare/:id  │                 │
+                                     └─────────────────┘                 │
+                                              │                          │
+                                              │ Shuffle Up               │
+                                              ▼                          │
+                                     ┌─────────────────┐                 │
+                                     │   Play Game     │                 │
+                                     │                 │                 │
+                                     │ State:          │                 │
+                                     │ • Game Active   │                 │
+                                     │ • Library       │                 │
+                                     │   Shuffled      │                 │
+                                     │ • Game ID in URL│                 │
+                                     │   /game/:id     │                 │
+                                     └─────────────────┘                 │
+                                              │                          │
+                                         ┌────┴────┐                     │
+                                         │         │                     │
+                                         ▼         ▼                     │
+                                      Restart    Quit ───────────────────┤
+                                        Game       │                     │
+                                         │         │                     │
+                                         └─────────┘                     │
+                                                                         │
+                                Choose Another Deck ──────────────────────┘
 ```
 
 ## Screen Flow Overview
 
 The application follows a progression through informational and game screens:
 
-**Home → Deck Selection → Deck Review → Play Game**
+**Home → Deck Selection → Game Prep → Play Game**
 
 Informational pages (Docs, About) are accessible from Home and can be navigated to at any time.
+
+**Key Architectural Change:** Game preparation (deck review) and active gameplay are now separate phases with distinct URLs, fixing the browser back button and enabling future prep-specific features.
 
 ## 1. Home
 
@@ -125,30 +130,36 @@ Endpoints:
 
 - Proceeds to: Deck Review
 
-## 5. Deck Review
+## 5. Game Prep (Deck Review)
 
 Shows deck information and allows final preparation before starting the game.
 
 Endpoints:
 
-- GET /game/:gameId
+- GET /prepare/:prepId
 
 **State:**
 
-- Game exists but is "Not Started"
+- GamePrep exists (not a game yet)
 - Library is not shuffled
-- Game ID in URL
+- Prep ID in URL
 
 **Display:**
 
 - Deck information
 - Commander card(s)
-- card list
+- Card list
 
 **Actions:**
 
-- **Shuffle Up** → Proceeds to Play Game (shuffles library)
+- **Shuffle Up** → Creates Active game, proceeds to Play Game (shuffles library)
 - **Choose Another Deck** → Returns to Deck Selection
+
+**Technical Details:**
+
+- Creates PersistedGamePrep on deck load
+- Stores full deck configuration
+- Future: Will store prep-specific settings (playmat, card backs, etc.)
 
 ## 6. Play Game
 
@@ -156,13 +167,14 @@ The active game screen where gameplay occurs.
 
 Endpoints:
 
-- GET /game/:gameId (loads game.html)
+- GET /game/:gameId
 
 **State:**
 
-- Game is active
+- Game is Active (only Active games shown at this URL)
 - Library is shuffled
 - Game ID in URL
+- References prepId and prepVersion (for restart)
 
 **Display:**
 
@@ -173,15 +185,21 @@ Endpoints:
 
 **Actions:**
 
-- **Restart Game** → Reinitializes Play Game screen
+- **Restart Game** → Loads prep, creates new Active game, reinitializes Play Game screen
 - **Quit** → Returns to Deck Selection
+
+**Technical Details:**
+
+- GameState.status is always Active (no NotStarted status)
+- Restart uses existing prep to create new game
 
 ## Key State Transitions
 
 - **Home → Deck Selection:** User clicks to start playing with a deck
 - **Home → Docs/About:** User navigates to informational pages
 - **Docs/About → Home:** User returns to home page
-- **Deck Selection → Deck Review:** "Let's Play" clicked, deck is loaded, game exists but is Not Started
-- **Deck Review → Play Game:** Library gets shuffled, Game ID added to URL
-- **Play Game → Play Game (restart):** Game state reinitialized
+- **Deck Selection → Game Prep:** "Let's Play" clicked, deck is loaded, GamePrep created
+- **Game Prep → Play Game:** "Shuffle Up" clicked, Active game created from prep, library shuffled
+- **Play Game → Play Game (restart):** New Active game created from same prep, library re-shuffled
 - **Any game screen → Deck Selection:** Via Quit/Choose Another Deck buttons
+- **Browser back from Play Game:** Returns to Game Prep (browser history now works correctly!)

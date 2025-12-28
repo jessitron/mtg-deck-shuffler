@@ -14,24 +14,6 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
     return stored ? { ...stored } : null;
   }
 
-  async retrieveLatestPrepByDeck(deckId: number): Promise<PersistedGamePrep | null> {
-    // Find all preps for this deck
-    const prepsForDeck = Array.from(this.storage.values()).filter(
-      (prep) => prep.deck.id === deckId
-    );
-
-    if (prepsForDeck.length === 0) {
-      return null;
-    }
-
-    // Sort by createdAt descending and return the first one
-    const sortedPreps = prepsForDeck.sort(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-    );
-
-    return { ...sortedPreps[0] };
-  }
-
   newPrepId(): PrepId {
     return this.nextPrepId++;
   }

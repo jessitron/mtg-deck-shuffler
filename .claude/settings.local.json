@@ -53,7 +53,8 @@
       "Bash(asdf install:*)",
       "Bash(lsof:*)",
       "Bash(xargs kill -9)",
-      "Bash(mcp tool mcp__playwright__browser_navigate:*)"
+      "Bash(mcp tool mcp__playwright__browser_navigate:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   },

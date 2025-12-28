@@ -19,7 +19,6 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
           id INTEGER PRIMARY KEY,
           prep TEXT NOT NULL,
           version INTEGER NOT NULL,
-          deck_id INTEGER NOT NULL,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
@@ -31,30 +30,18 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
           return;
         }
 
-        // Create index on deck_id for retrieveLatestPrepByDeck queries
-        const createIndexSQL = `
-          CREATE INDEX IF NOT EXISTS idx_game_preps_deck_id
-          ON game_preps(deck_id)
-        `;
-
-        this.db.run(createIndexSQL, (err) => {
-          if (err) {
-            console.warn(`Warning: Could not create deck_id index: ${err.message}`);
-          }
-
-          // Initialize nextPrepId based on existing data
-          this.db.get(
-            "SELECT MAX(id) as maxId FROM game_preps",
-            (err, row: { maxId: number | null }) => {
-              if (err) {
-                console.warn(`Warning: Could not determine next prep ID: ${err.message}`);
-              } else if (row.maxId !== null) {
-                this.nextPrepId = row.maxId + 1;
-              }
-              resolve();
+        // Initialize nextPrepId based on existing data
+        this.db.get(
+          "SELECT MAX(id) as maxId FROM game_preps",
+          (err, row: { maxId: number | null }) => {
+            if (err) {
+              console.warn(`Warning: Could not determine next prep ID: ${err.message}`);
+            } else if (row.maxId !== null) {
+              this.nextPrepId = row.maxId + 1;
             }
-          );
-        });
+            resolve();
+          }
+        );
       });
     });
   }
@@ -64,15 +51,15 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
 
     return new Promise((resolve, reject) => {
       const insertOrUpdateSQL = `
-        INSERT OR REPLACE INTO game_preps (id, prep, version, deck_id, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+        INSERT OR REPLACE INTO game_preps (id, prep, version, created_at, updated_at)
+        VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
       `;
 
       const prepJson = JSON.stringify(prep);
 
       this.db.run(
         insertOrUpdateSQL,
-        [prep.prepId, prepJson, prep.version, prep.deck.id, prep.createdAt.toISOString()],
+        [prep.prepId, prepJson, prep.version, prep.createdAt.toISOString()],
         function (err) {
           if (err) {
             reject(new Error(`Failed to save prep: ${err.message}`));
@@ -121,47 +108,6 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
     });
   }
 
-  async retrieveLatestPrepByDeck(deckId: number): Promise<PersistedGamePrep | null> {
-    await this.initializationPromise;
-
-    return new Promise((resolve, reject) => {
-      const selectSQL = `
-        SELECT prep FROM game_preps
-        WHERE deck_id = ?
-        ORDER BY created_at DESC
-        LIMIT 1
-      `;
-
-      this.db.get(
-        selectSQL,
-        [deckId],
-        (err, row: { prep: string } | undefined) => {
-          if (err) {
-            reject(new Error(`Failed to retrieve latest prep by deck: ${err.message}`));
-          } else if (row) {
-            try {
-              const prep = JSON.parse(row.prep) as PersistedGamePrep;
-              // Convert date strings back to Date objects
-              if (prep.createdAt) {
-                prep.createdAt = new Date(prep.createdAt);
-              }
-              if (prep.updatedAt) {
-                prep.updatedAt = new Date(prep.updatedAt);
-              }
-              if (prep.deck.provenance?.retrievedDate) {
-                prep.deck.provenance.retrievedDate = new Date(prep.deck.provenance.retrievedDate);
-              }
-              resolve(prep);
-            } catch (parseErr) {
-              reject(new Error(`Failed to parse prep JSON: ${parseErr}`));
-            }
-          } else {
-            resolve(null);
-          }
-        }
-      );
-    });
-  }
 
   newPrepId(): PrepId {
     return this.nextPrepId++;

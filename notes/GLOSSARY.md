@@ -50,7 +50,13 @@ Deck Provenance: information about where a deck came from. This includes the Dec
 
 Library (MTG Deck Shuffler UI): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
 
-Game (MTG Deck Shuffler): a temporal scope. During a game, the position of each card is tracked.
+Game Prep (MTG Deck Shuffler): the preparation phase before a game starts. This is where deck review happens. A GamePrep stores the deck and configuration settings (future: playmat, card backs, etc.). GamePrep has its own URL space (/prepare/:prepId) and persistence layer separate from Game. Immutable once created.
+
+Prep ID: a unique identifier for a GamePrep. Used in URLs and to link Games back to their originating prep.
+
+Game (MTG Deck Shuffler): an active gameplay session. During a game, the position of each card is tracked. Games are created from a GamePrep and are always in Active status. A game references its prepId and prepVersion for restart functionality.
+
+Game Status (MTG Deck Shuffler): the state of a game. Can be Active (gameplay in progress) or Ended (game finished). The NotStarted status was removed - prep phase is now handled by GamePrep.
 
 Card Definition (MTG Deck Shuffler): a definition of a card, including name (from Display Name), Scryfall ID, and Multiverse ID. Immutable.
 

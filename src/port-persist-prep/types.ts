@@ -13,6 +13,5 @@ export interface PersistedGamePrep {
 export interface PersistPrepPort {
   savePrep(prep: PersistedGamePrep): Promise<PrepId>;
   retrievePrep(prepId: PrepId): Promise<PersistedGamePrep | null>;
-  retrieveLatestPrepByDeck(deckId: number): Promise<PersistedGamePrep | null>;
   newPrepId(): PrepId;
 }
