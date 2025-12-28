@@ -101,9 +101,7 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
         ${details ? `<p class="error-details">${details}</p>` : ""}
       </div>
       <div class="error-actions">
-        <form method="get" action="/" class="inline-form">
-          <button type="submit" class="primary-button">Start a New Game</button>
-        </form>
+        <a href="/">home</a>
       </div>
     </div>`;
 
