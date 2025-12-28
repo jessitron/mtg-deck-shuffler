@@ -12,18 +12,18 @@
           <div class="tile-commanders">
             <% deck.metadata.commanders.forEach(function(commander, index) { %>
               <div class="tile-commander">
-                <span class="commander-name"><%= commander.name %></span>
-                  <span class="commander-colors">
-                    <% commander.colorIdentity.forEach(function(color) {
-                      const colorCode = color === 'White' ? 'W' :
-                                        color === 'Blue' ? 'U' :
-                                        color === 'Black' ? 'B' :
-                                        color === 'Red' ? 'R' :
-                                        color === 'Green' ? 'G' : '';
-                       %>
-                      <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
+                <span class="commander-colors">
+                  <% commander.colorIdentity.forEach(function(color) {
+                    const colorCode = color === 'White' ? 'W' :
+                    color === 'Blue' ? 'U' :
+                    color === 'Black' ? 'B' :
+                    color === 'Red' ? 'R' :
+                    color === 'Green' ? 'G' : '';
+                    %>
+                    <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
                     <%  }); %>
                   </span>
+                  <span class="commander-name"><%= commander.name %></span>
               </div>
             <% }); %>
           </div>
