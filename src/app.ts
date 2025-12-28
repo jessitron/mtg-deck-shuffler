@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { formatDeckReviewHtmlPage } from "./view/deck-review/deck-review-page.js";
+import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
 import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
@@ -266,8 +267,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const html = formatDeckReviewHtmlPage(prep);
-      res.send(html);
+      // Create view helpers for EJS template
+      const helpers = createPrepViewHelpers(prep);
+
+      // Render EJS template
+      res.render("prepare", {
+        prep,
+        ...helpers
+      });
     } catch (error) {
       console.error("Error loading prep:", error);
       res.status(500).send(

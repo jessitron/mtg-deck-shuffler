@@ -1,0 +1,382 @@
+/* Styles for the prepare/deck review page */
+
+.prepare-page {
+  background: var(--background-color);
+  min-height: 100vh;
+}
+
+.prepare-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Command Zone */
+#command-zone {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.commander-placeholder {
+  width: 200px;
+  height: 280px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+/* Card containers (reuse from game.css but ensure compatibility) */
+.card-container {
+  position: relative;
+  width: 200px;
+  cursor: pointer;
+}
+
+.card-container:hover .mtg-card-image {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Deck Actions - buttons */
+.deck-actions {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.deck-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deck-actions button.start-game-button {
+  background-color: var(--cta-button-color);
+  color: white;
+  padding: 20px 40px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: 2px solid #075b0a;
+}
+
+.deck-actions button.start-game-button:hover {
+  outline: 4px solid rgba(231, 121, 206, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-actions button.start-game-button:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transform: skewX(45deg);
+  background: linear-gradient(90deg, transparent, rgba(231, 121, 206, 0.5), transparent);
+  animation: shimmer 0.8s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.deck-actions button.back-button {
+  background-color: var(--back-button-color);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+}
+
+.deck-actions button.back-button:hover {
+  background-color: #5a6268;
+}
+
+/* Library Section */
+.library-section {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h4.cute-header {
+  font-family: var(--fancy-title-font);
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 5px;
+  color: var(--cute-heading-color);
+}
+
+.cute-header-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  margin-top: -1px;
+}
+
+.library-search-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: auto;
+  column-width: 300px;
+  column-gap: 30px;
+}
+
+.library-card-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  break-inside: avoid;
+}
+
+.library-card-item:last-child {
+  border-bottom: none;
+}
+
+.card-name-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.card-name-link:hover {
+  text-decoration: underline;
+}
+
+.clickable-card-name {
+  cursor: pointer;
+}
+
+/* Modal Styles (from game.css) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modal-close:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Full-Screen Card Modal Styles */
+.card-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.card-modal-dialog {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.card-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+  z-index: 2001;
+}
+
+.card-modal-close:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.card-modal-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card-modal-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px orange solid;
+  height: calc(100vh - 20px);
+  width: calc((100vh - 20px) * 0.72);
+  border-radius: 3vh;
+}
+
+.modal-card-image {
+  height: 100%;
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  object-fit: contain;
+}
+
+.card-modal-info {
+  color: white;
+  text-align: center;
+  min-width: 200px;
+}
+
+.card-modal-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 0 30px 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Flip functionality for two-faced cards */
+.flip-container-outer {
+  perspective: 1000px;
+  width: 200px;
+  height: 278px;
+}
+
+.flip-container-outer .flip-container-inner {
+  transform: translateX(-100px);
+}
+
+.flip-container-outer.card-flipped .flip-container-inner {
+  transform: rotateY(180deg) translateX(-100px);
+}
+
+.two-sided-front,
+.two-sided-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.two-sided-back {
+  transform: rotateY(180deg);
+}
+
+.flip-container-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.flip-button:hover {
+  background-color: #f57c00;
+}
+
+.flip-container-with-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

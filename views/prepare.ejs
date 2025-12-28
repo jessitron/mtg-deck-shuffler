@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('partials/head', {
+  pageTitle: 'Prepare - ' + prep.deck.name + ' - MTG Deck Shuffler',
+  additionalStyles: ['/prepare.css']
+}) %>
+
+<body>
+  <div class="prepare-page">
+    <%- include('partials/header', {
+      activePage: 'play',
+      playLinkText: 'START OVER',
+      linksInNewTabs: true
+    }) %>
+
+    <main class="prepare-container">
+      <section id="command-zone">
+        <% if (commanders.length === 0) { %>
+          <div class="commander-placeholder">No Commander</div>
+        <% } else { %>
+          <% commanders.forEach(function(commander) { %>
+            <%- renderCommanderCard(commander) %>
+          <% }); %>
+        <% } %>
+      </section>
+
+      <section class="deck-actions">
+        <form method="post" action="/start-game" class="inline-form">
+          <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
+          <input type="hidden" name="expected-version" value="<%= prep.version %>" />
+          <button type="submit" class="start-game-button">Shuffle Up</button>
+        </form>
+        <form method="get" action="/choose-any-deck" class="inline-form">
+          <button type="submit" class="back-button">Choose Another Deck</button>
+        </form>
+      </section>
+
+      <section class="library-section" id="library-list" data-testid="library-section">
+        <h4 class="cute-header">Library</h4>
+        <div class="cute-header-subtitle">
+          <%= libraryCards.length %> cards in library, ordered by position
+        </div>
+        <ul class="library-search-list">
+          <%- renderLibraryList() %>
+        </ul>
+      </section>
+    </main>
+
+    <div id="modal-container"></div>
+    <div id="card-modal-container"></div>
+
+    <%- include('partials/footer') %>
+  </div>
+
+  <script src="/htmx.js"></script>
+  <script>
+    // Configure HTMX with browser tab ID
+    document.addEventListener("htmx:configRequest", function (event) {
+      if (window.browserTabId) {
+        event.detail.headers["X-Browser-Tab-Id"] = window.browserTabId;
+      }
+    });
+  </script>
+</body>
+
+</html>

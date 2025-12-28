@@ -16,9 +16,9 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 - **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks. There is some custom JS in the header for tracing; and there is some custom JS for interactivity that can't be implemented with HTMX. Where possible, the JS triggers on HTMX events.
 - **Templating - Two Systems**:
-  - **Static pages (about the game)**: EJS templates in `views/` for informational pages like home and docs. These pages describe what the app does and how to use it. Use `res.render("template-name")` to serve them.
-  - **Dynamic pages (in the game)**: TypeScript functions in `src/view/` that return HTML strings via template literals. These pages display and manipulate game state (deck selection, deck review, active gameplay, modals). Use `res.send(formatSomethingHtmlPage(...))` to serve them.
-  - **Why the split?**: Separates concerns between informational content (EJS for standard templating) and gameplay pages (TypeScript for type safety and composition when working with game state).
+  - **Informational and pre-game pages**: EJS templates in `views/` for informational pages (home, docs, about) and pre-game pages (deck-selection, prepare). These pages describe the app or help set up games. Use `res.render("template-name")` to serve them.
+  - **Active gameplay pages**: TypeScript functions in `src/view/` that return HTML strings via template literals. These pages display and manipulate active game state (play game, modals). Use `res.send(formatSomethingHtmlPage(...))` to serve them.
+  - **Why the split?**: Separates concerns between pre-game setup (EJS with site styling) and active gameplay (TypeScript for type safety and dynamic state composition).
 - **Backend**: Express.js server serving static files and handling form submissions
 - **Build**: TypeScript compiled to JavaScript using tsc, output to `dist/` directory
 
@@ -44,14 +44,14 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - `src/server.ts` - Server initialization, dependency creation, and startup
 - `views/index.ejs` - Home page template (uses EJS templating)
 - `views/docs.ejs` - Documentation page template (uses EJS templating)
+- `views/prepare.ejs` - Deck review/game preparation page (uses EJS templating)
 - `views/partials/` - Shared EJS components (header, footer, head)
 - `public/site.css` - Site-wide page styles (used by all EJS pages)
+- `public/prepare.css` - Styles for the prepare/deck review page
 - `public/home-v3-parallax.js` - Home page parallax scrolling effect
 - `src/view/` - HTML formatting functions organized by screen:
-  - `deck-selection/` - Deck loading/selection screen
-  - `deck-review/` - Deck review screen before game starts
   - `play-game/` - Active game screen with cards in play
-  - `common/` - Shared components and HTML layout
+  - `common/` - Shared components, HTML layout, and view helpers
   - `debug/` - Debug utilities for state inspection
   - `error-view.ts` - Error page formatting
 - `run` - Shell script that sources `.env` and runs the app
