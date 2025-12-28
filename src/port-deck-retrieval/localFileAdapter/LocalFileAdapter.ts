@@ -29,9 +29,13 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           ? new Date(deck.provenance.createdAt).getFullYear()
           : undefined;
 
+        // Remove the " - {set name}" suffix from deck name since we display set separately
+        const deckName = deck.name || filename;
+        const cleanedName = deckName.split(' - ')[0];
+
         return {
           deckSource: "precon",
-          description: deck.name || filename,
+          description: cleanedName,
           localFile: filename,
           metadata: {
             commanders,
