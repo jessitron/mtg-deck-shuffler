@@ -3,6 +3,7 @@
   --light-pink: #ddc7dd;
   --deep-space: #221534;
   --narrow-border: 3px;
+  --medium-blue: #538FC1;  
 }
 
 /* Reset and Base Styles */
@@ -489,7 +490,7 @@ body {
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border: var(--narrow-border) solid var(--dark-pink);
-  transition: max-width 0.4s ease-in-out;
+  transition: max-width 0.3s ease-in-out;
 }
 
 .deck-selection-container.full-width {
@@ -545,7 +546,7 @@ body {
   overflow: hidden;
   opacity: 0;
   animation: fadeInTile 0.4s ease-out forwards;
-  animation-delay: calc(var(--animation-order) * 0.05s);
+  animation-delay: calc(var(--animation-order) * 0.05s + 0.2s);
 }
 
 @keyframes fadeInTile {
