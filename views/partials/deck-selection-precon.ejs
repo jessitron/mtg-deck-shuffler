@@ -32,7 +32,7 @@
           </div>
           <% const firstCommander = deck.metadata.commanders[0]; %>
             <div class="tile-meta">
-              <span><%= firstCommander.set %></span>
+              <span><%= firstCommander.set.replace(/ Commander$/, '') %></span>
               <span><%= deck.metadata.createdYear %></span>
             </div>
         </div>
