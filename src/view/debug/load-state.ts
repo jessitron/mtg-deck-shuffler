@@ -1,9 +1,9 @@
 import { formatPageWrapper } from "../common/html-layout.js";
 
 export function formatLoadStateHtmlPage(): string {
-  const content = `<div class="deck-input-section">
-      <h1>Load Game State</h1>
-      <div class="load-state-container">
+  const content = `<div class="load-state-page">
+  <div class="load-state-container">
+  <h1>Load Game State</h1>
         <p>Paste the JSON state from another game to create a new game with that state:</p>
         <form method="post" action="/create-game-from-state">
           <textarea id="state-json"
@@ -21,8 +21,9 @@ export function formatLoadStateHtmlPage(): string {
     </div>
     <style>
       .load-state-container {
-        max-width: 600px;
+        max-width: 1000px;
         margin: 0 auto;
+        padding-top: 4rem;
       }
       .state-textarea {
         width: 100%;
@@ -31,7 +32,7 @@ export function formatLoadStateHtmlPage(): string {
         border: 1px solid #ddd;
         padding: 8px;
         resize: vertical;
-        min-height: 200px;
+        min-height: 400px;
         box-sizing: border-box;
       }
       .form-actions {
