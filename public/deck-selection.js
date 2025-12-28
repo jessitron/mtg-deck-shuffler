@@ -6,6 +6,7 @@
 /**
  * Set the active tab button state
  * Removes 'active' class from all tab buttons and adds it to the clicked button
+ * Also toggles full-width mode for the container based on which tab is selected
  */
 function setActiveTab(clickedButton) {
   // Remove active class from all hero buttons
@@ -14,6 +15,17 @@ function setActiveTab(clickedButton) {
 
   // Add active class to clicked button
   clickedButton.classList.add('active');
+
+  // Toggle full-width class on container based on selected tab
+  const container = document.querySelector('.deck-selection-container');
+  if (container) {
+    const buttonText = clickedButton.textContent.trim();
+    if (buttonText === 'Precon') {
+      container.classList.add('full-width');
+    } else {
+      container.classList.remove('full-width');
+    }
+  }
 }
 
 /**
@@ -77,6 +89,16 @@ function setupDeckNumberValidation() {
 // Set up validation on page load
 document.addEventListener("DOMContentLoaded", function () {
   setupDeckNumberValidation();
+
+  // Set initial full-width state based on which tab is active
+  const activeButton = document.querySelector('.hero-button.active');
+  const container = document.querySelector('.deck-selection-container');
+  if (activeButton && container) {
+    const buttonText = activeButton.textContent.trim();
+    if (buttonText === 'Precon') {
+      container.classList.add('full-width');
+    }
+  }
 });
 
 // Re-run validation setup when HTMX loads new content (for tab switching)

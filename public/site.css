@@ -491,6 +491,10 @@ body {
   border: var(--narrow-border) solid var(--dark-pink);
 }
 
+.deck-selection-container.full-width {
+  max-width: none;
+}
+
 .deck-input-section {
   display: flex;
   flex-wrap: wrap;
