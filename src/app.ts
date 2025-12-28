@@ -14,13 +14,14 @@ import { GameState } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
+import { PersistPrepPort, PersistedGamePrep } from "./port-persist-prep/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort): express.Application {
+export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort): express.Application {
   const app = express();
 
   // Configure EJS view engine
@@ -223,11 +224,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
     try {
       const deck = await deckRetriever.retrieveDeck(deckRequest);
-      const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, deck);
-      await persistStatePort.save(game.toPersistedGameState());
+      const prepId = persistPrepPort.newPrepId();
+      const prep: PersistedGamePrep = {
+        version: 1,
+        prepId,
+        deck,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      await persistPrepPort.savePrep(prep);
 
-      res.redirect(`/game/${gameId}`);
+      res.redirect(`/prepare/${prepId}`);
     } catch (error) {
       console.error("Error fetching deck:", error);
       res.status(500).send(
@@ -241,13 +248,79 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Redirects to active game page
-  app.post("/start-game", loadGameFromBody, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  // GET /prepare/:prepId - Show deck review page
+  app.get("/prepare/:prepId", async (req, res) => {
+    const prepId = parseInt(req.params.prepId, 10);
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Prep Not Found",
+            message: `Game preparation <strong>${prepId}</strong> could not be found.`,
+            details: "It may have been deleted or the link may be incorrect.",
+          })
+        );
+        return;
+      }
+
+      const html = formatDeckReviewHtmlPage(prep);
+      res.send(html);
+    } catch (error) {
+      console.error("Error loading prep:", error);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "🚫",
+          title: "Error Loading Preparation",
+          message: `Could not load game preparation <strong>${prepId}</strong>.`,
+          details: "There may be a database error.",
+        })
+      );
+    }
+  });
+
+  // Redirects to active game page - creates game from prep
+  app.post("/start-game", async (req, res) => {
+    const prepId = parseInt(req.body["prep-id"], 10);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
+      // Load prep
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Prep Not Found",
+            message: `Game preparation <strong>${prepId}</strong> could not be found.`,
+            details: "It may have been deleted or the link may be incorrect.",
+          })
+        );
+        return;
+      }
+
+      // Validate prep version for optimistic concurrency control
+      const expectedVersionStr = req.body["expected-version"];
+      if (expectedVersionStr !== undefined) {
+        const expectedVersion = parseInt(expectedVersionStr, 10);
+        if (expectedVersion !== prep.version) {
+          res.status(409).send(
+            formatErrorPageHtmlPage({
+              icon: "⚠️",
+              title: "Prep Version Mismatch",
+              message: `The preparation has been modified. Expected version ${expectedVersion}, but current version is ${prep.version}.`,
+              details: "Please reload the page and try again.",
+            })
+          );
+          return;
+        }
+      }
+
+      // Create new game from prep
+      const gameId = persistStatePort.newGameId();
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck);
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -258,14 +331,14 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         formatErrorPageHtmlPage({
           icon: "🎲",
           title: "Game Start Error",
-          message: `Could not start game <strong>${gameId}</strong>.`,
+          message: `Could not start game from preparation <strong>${prepId}</strong>.`,
           details: "There may be a technical issue with the game data.",
         })
       );
     }
   });
 
-  // Returns whole page - game review screen (deck loaded, game not started)
+  // Returns active game page only
   app.get("/game/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
 
@@ -284,12 +357,21 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      var html: string;
-      if (game.gameStatus() === "Active") {
-        html = formatGamePageHtmlPage(game);
-      } else {
-        html = formatDeckReviewHtmlPage(game);
+
+      // Only show active games; prep/review happens at /prepare/:prepId
+      if (game.gameStatus() !== "Active") {
+        res.status(400).send(
+          formatErrorPageHtmlPage({
+            icon: "⚠️",
+            title: "Game Not Active",
+            message: `Game <strong>${gameId}</strong> is not in an active state.`,
+            details: "This game may have ended or not been started properly.",
+          })
+        );
+        return;
       }
+
+      const html = formatGamePageHtmlPage(game);
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
@@ -304,9 +386,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Redirects to new game page
+  // Redirects to new game page - creates new game from prep
   app.post("/restart-game", async (req, res) => {
     const gameId: number = parseInt(req.body["game-id"]);
+    const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
@@ -322,26 +405,24 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Create new game with same deck data
-      let deckRequest: DeckRetrievalRequest;
-      if (persistedGame.deckProvenance.deckSource === "archidekt") {
-        // Extract archidekt deck ID from sourceUrl like "https://archidekt.com/decks/14669648"
-        const match = persistedGame.deckProvenance.sourceUrl.match(/\/decks\/(\d+)/);
-        if (!match) {
-          throw new Error(`Cannot extract archidekt deck ID from URL: ${persistedGame.deckProvenance.sourceUrl}`);
-        }
-        deckRequest = { deckSource: "archidekt", archidektDeckId: match[1] };
-      } else if (persistedGame.deckProvenance.deckSource === "precon") {
-        // sourceUrl is like /decks/
-        const preconFile = persistedGame.deckProvenance.sourceUrl.replace(/.*\//, "");
-        deckRequest = { deckSource: "precon", localFile: preconFile };
-      } else {
-        throw new Error(`Unsupported deck source: ${persistedGame.deckProvenance.deckSource}`);
+      // Load the prep that was used to create this game
+      const prep = await persistPrepPort.retrievePrep(persistedGame.prepId);
+      if (!prep) {
+        res.status(404).send(
+          formatErrorPageHtmlPage({
+            icon: "🎯",
+            title: "Prep Not Found",
+            message: `The game preparation (ID: ${persistedGame.prepId}) for this game could not be found.`,
+            details: "The preparation may have been deleted.",
+          })
+        );
+        return;
       }
 
-      const deck = await deckRetriever.retrieveDeck(deckRequest);
+      // Create new game from the same prep
       const newGameId = persistStatePort.newGameId();
-      const newGame = GameState.newGame(newGameId, deck);
+      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck);
+      newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
 
       res.redirect(`/game/${newGameId}`);
@@ -352,7 +433,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
           icon: "🔄",
           title: "Game Restart Error",
           message: `Could not restart game <strong>${gameId}</strong>.`,
-          details: "There may be an issue with the original deck data.",
+          details: "There may be an issue with the game or prep data.",
         })
       );
     }
