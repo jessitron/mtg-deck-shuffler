@@ -20,10 +20,9 @@
                                         color === 'Black' ? 'B' :
                                         color === 'Red' ? 'R' :
                                         color === 'Green' ? 'G' : '';
-                      if (colorCode) { %>
-                        <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
-                      <% }
-                    }); %>
+                       %>
+                      <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
+                    <%  }); %>
                   </span>
               </div>
             <% }); %>
@@ -31,7 +30,6 @@
           <% const firstCommander = deck.metadata.commanders[0]; %>
             <div class="tile-meta">
               <span><%= firstCommander.set.replace(/ Commander$/, '') %></span>
-              <span><%= deck.metadata.createdYear %></span>
             </div>
         </div>
       </button>
