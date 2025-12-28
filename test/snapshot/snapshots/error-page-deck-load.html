@@ -47,16 +47,14 @@ htmx.config.responseHandling = [
 <script src="/game.js"></script>
 </head>
 <body>
-<div class="deck-input-section">
+<div class="error-page-container">
 <div class="error-message">
 <h2>🚫 Deck Load Error</h2>
 <p>Could not fetch deck <strong>12345</strong> from <strong>archidekt</strong>.</p>
 <p class="error-details">The deck may not exist, be private, or there may be a network issue.</p>
 </div>
-<div class="deck-actions">
-<form method="get" action="/" class="inline-form">
-<button type="submit" class="lets-play-button">Start a New Game</button>
-</form>
+<div class="error-actions">
+<a href="/">home</a>
 </div>
 </div>
 <footer>
