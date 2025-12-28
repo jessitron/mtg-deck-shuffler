@@ -13,7 +13,6 @@
             <% deck.metadata.commanders.forEach(function(commander, index) { %>
               <div class="tile-commander">
                 <span class="commander-name"><%= commander.name %></span>
-                <% if (commander.colorIdentity && commander.colorIdentity.length > 0) { %>
                   <span class="commander-colors">
                     <% commander.colorIdentity.forEach(function(color) {
                       const colorCode = color === 'White' ? 'W' :
@@ -26,7 +25,6 @@
                       <% }
                     }); %>
                   </span>
-                <% } %>
               </div>
             <% }); %>
           </div>
