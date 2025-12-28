@@ -1,6 +1,1 @@
-node_modules/
-dist/
-.playwright-mcp
-data.db
-mtgjson/
-test-results/
+.claude/settings.local.json
