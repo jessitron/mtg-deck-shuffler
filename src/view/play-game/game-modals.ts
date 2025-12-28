@@ -207,7 +207,15 @@ function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expec
   }
 }
 
-export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number, expectedVersion: number): string {
+export function formatCardModalHtmlFragment(
+  gameCard: GameCard,
+  gameId: number,
+  expectedVersion: number,
+  prevCardIndex: number | null,
+  nextCardIndex: number | null,
+  currentPosition: number,
+  totalCardsInZone: number
+): string {
   const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
   const gathererUrl =
     gameCard.card.multiverseid === 0
@@ -241,9 +249,37 @@ export function formatCardModalHtmlFragment(gameCard: GameCard, gameId: number, 
     ${locationActionsHtml}
   </div>`;
 
+  // Navigation buttons and image with position indicator
+  const prevButton = prevCardIndex !== null ? `
+    <button class="card-modal-nav-button card-modal-nav-prev"
+            hx-get="/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}"
+            hx-target="#card-modal-container"
+            hx-swap="innerHTML"
+            title="Previous card">◀</button>
+  ` : '<div class="card-modal-nav-spacer"></div>';
+
+  const nextButton = nextCardIndex !== null ? `
+    <button class="card-modal-nav-button card-modal-nav-next"
+            hx-get="/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}"
+            hx-target="#card-modal-container"
+            hx-swap="innerHTML"
+            title="Next card">▶</button>
+  ` : '<div class="card-modal-nav-spacer"></div>';
+
+  const positionIndicator = totalCardsInZone > 1 ? `
+    <div class="card-modal-position-indicator">Card ${currentPosition} of ${totalCardsInZone}</div>
+  ` : '';
+
   const bodyContent = `<div class="card-modal-content">
-    <div class="card-modal-image">
-      <img src="${imageUrl}" alt="${gameCard.card.name}" class="modal-card-image" />
+    <div class="card-modal-nav-container">
+      ${prevButton}
+      <div class="card-modal-image-wrapper">
+        <div class="card-modal-image">
+          <img src="${imageUrl}" alt="${gameCard.card.name}" class="modal-card-image" />
+        </div>
+        ${positionIndicator}
+      </div>
+      ${nextButton}
     </div>
     <div class="card-modal-info">
       <h3 class="card-modal-title">${gameCard.card.name}</h3>

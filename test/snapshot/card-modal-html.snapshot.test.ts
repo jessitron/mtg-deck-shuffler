@@ -44,11 +44,25 @@ describe("Card Modal HTML Snapshot Tests", () => {
     const snapshotFile = "card-modal-library-card.html";
     const gameState = GameState.newGame(123, 1, 1, testDeck, 42);
     gameState.startGame();
-    
+
     const libraryCards = gameState.listLibrary();
     const firstCard = libraryCards[0];
-    
-    const actualHtml = formatCardModalHtmlFragment(firstCard, gameState.gameId, gameState.getStateVersion());
+
+    // Calculate navigation info
+    const prevCardIndex = gameState.findPrevCardInZone(firstCard.gameCardIndex);
+    const nextCardIndex = gameState.findNextCardInZone(firstCard.gameCardIndex);
+    const currentPosition = 1; // First card in library
+    const totalCardsInZone = libraryCards.length;
+
+    const actualHtml = formatCardModalHtmlFragment(
+      firstCard,
+      gameState.gameId,
+      gameState.getStateVersion(),
+      prevCardIndex,
+      nextCardIndex,
+      currentPosition,
+      totalCardsInZone
+    );
 
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
@@ -94,16 +108,30 @@ describe("Card Modal HTML Snapshot Tests", () => {
     const snapshotFile = "card-modal-revealed-card.html";
     const gameState = GameState.newGame(456, 1, 1, testDeck, 42);
     gameState.startGame();
-    
+
     // Reveal a card
     const libraryCards = gameState.listLibrary();
     const cardToReveal = libraryCards[0];
     gameState.revealByGameCardIndex(cardToReveal.gameCardIndex);
-    
+
     const revealedCards = gameState.listRevealed();
     const revealedCard = revealedCards[0];
-    
-    const actualHtml = formatCardModalHtmlFragment(revealedCard, gameState.gameId, gameState.getStateVersion());
+
+    // Calculate navigation info
+    const prevCardIndex = gameState.findPrevCardInZone(revealedCard.gameCardIndex);
+    const nextCardIndex = gameState.findNextCardInZone(revealedCard.gameCardIndex);
+    const currentPosition = 1; // First card in revealed area
+    const totalCardsInZone = revealedCards.length;
+
+    const actualHtml = formatCardModalHtmlFragment(
+      revealedCard,
+      gameState.gameId,
+      gameState.getStateVersion(),
+      prevCardIndex,
+      nextCardIndex,
+      currentPosition,
+      totalCardsInZone
+    );
 
     // Normalize HTML for consistent comparison
     const normalizedHtml = actualHtml
