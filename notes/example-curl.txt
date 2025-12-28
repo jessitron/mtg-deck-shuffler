@@ -1,0 +1,3 @@
+curl 'https://deckcheck.co/s2/api/v1/precons?page=1&per_page=24&sort=release_date&sort_direction=desc' \
+  -H 'Accept: */*' \
+  -H 'TE: trailers'
