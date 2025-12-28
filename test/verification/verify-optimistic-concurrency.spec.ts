@@ -35,14 +35,13 @@ async function loadPreconDeckAndStartGame(page: Page): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
   await page.waitForLoadState('networkidle');
 
-  // The precon dropdown is already set to a default deck
-  // Just click the "Play" button to load that deck
-  const playButton = page.locator('form:has(select#precon-deck) button[type="submit"]');
-  await expect(playButton).toBeVisible();
-  await playButton.click();
+  // Click the first precon deck tile (the UI now uses tiles, not a dropdown)
+  const preconTile = page.locator('.precon-tile').first();
+  await expect(preconTile).toBeVisible();
+  await preconTile.click();
 
-  // Wait for navigation to the game review page
-  await page.waitForURL('**/game/*', { timeout: 30000 });
+  // Wait for navigation to the prep page (Game Prep feature)
+  await page.waitForURL('**/prepare/*', { timeout: 30000 });
   await page.waitForLoadState('networkidle');
 
   // Find and click the "Shuffle Up" button to start the game
@@ -50,7 +49,8 @@ async function loadPreconDeckAndStartGame(page: Page): Promise<string> {
   await expect(shuffleUpButton).toBeVisible();
   await shuffleUpButton.click();
 
-  // Wait for the game to start - the page will reload and show the active game
+  // Wait for the game to start and redirect to /game/:gameId
+  await page.waitForURL('**/game/*', { timeout: 30000 });
   await page.waitForLoadState('networkidle');
 
   // Wait for the game container to appear (indicates active game state)
