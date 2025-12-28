@@ -1,53 +1,44 @@
-<% if (availableDecks && availableDecks.length > 0) { %>
-  <% const precons = availableDecks.filter(deck => deck.deckSource === 'precon'); %>
-  <% if (precons.length > 0) { %>
-    <form method="POST" action="/deck" class="precon-input-section">
-      <label class="deck-label">Choose a preconstructed deck to play</label>
-      <input type="hidden" name="deck-source" value="precon" />
-      <div class="precon-tiles-container">
-        <% precons.forEach(function(deck, index) { %>
-          <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
-            <% if (deck.metadata && deck.metadata.commanders && deck.metadata.commanders.length > 0 && deck.metadata.commanders[0].imageUrl) { %>
-              <div class="tile-commander-art">
-                <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" />
-              </div>
-            <% } %>
-            <div class="tile-content">
-              <div class="tile-deck-name"><%= deck.description %></div>
-              <% if (deck.metadata && deck.metadata.commanders && deck.metadata.commanders.length > 0) { %>
-                <div class="tile-commanders">
-                  <% deck.metadata.commanders.forEach(function(commander, index) { %>
-                    <div class="tile-commander">
-                      <span class="commander-name"><%= commander.name %></span>
-                      <% if (commander.colorIdentity && commander.colorIdentity.length > 0) { %>
-                        <span class="commander-colors">
-                          <% commander.colorIdentity.forEach(function(color) {
-                            const colorCode = color === 'White' ? 'W' :
-                                              color === 'Blue' ? 'U' :
-                                              color === 'Black' ? 'B' :
-                                              color === 'Red' ? 'R' :
-                                              color === 'Green' ? 'G' : '';
-                            if (colorCode) { %>
-                              <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
-                            <% }
-                          }); %>
-                        </span>
-                      <% } %>
-                    </div>
-                  <% }); %>
-                </div>
-                <% const firstCommander = deck.metadata.commanders[0]; %>
-                <% if (firstCommander.set || deck.metadata.createdYear) { %>
-                  <div class="tile-meta">
-                    <% if (firstCommander.set) { %><span><%= firstCommander.set %></span><% } %>
-                    <% if (deck.metadata.createdYear) { %><span><%= deck.metadata.createdYear %></span><% } %>
-                  </div>
+<form method="POST" action="/deck" class="precon-input-section">
+  <label class="deck-label">Choose a preconstructed deck to play</label>
+  <input type="hidden" name="deck-source" value="precon" />
+  <div class="precon-tiles-container">
+    <% availableDecks.forEach(function(deck, index) { %>
+      <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
+        <div class="tile-commander-art">
+          <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" />
+        </div>
+        <div class="tile-content">
+          <div class="tile-deck-name"><%= deck.description %></div>
+          <div class="tile-commanders">
+            <% deck.metadata.commanders.forEach(function(commander, index) { %>
+              <div class="tile-commander">
+                <span class="commander-name"><%= commander.name %></span>
+                <% if (commander.colorIdentity && commander.colorIdentity.length > 0) { %>
+                  <span class="commander-colors">
+                    <% commander.colorIdentity.forEach(function(color) {
+                      const colorCode = color === 'White' ? 'W' :
+                                        color === 'Blue' ? 'U' :
+                                        color === 'Black' ? 'B' :
+                                        color === 'Red' ? 'R' :
+                                        color === 'Green' ? 'G' : '';
+                      if (colorCode) { %>
+                        <img src="/images/<%= colorCode %>.svg" alt="<%= color %>" class="color-icon" />
+                      <% }
+                    }); %>
+                  </span>
                 <% } %>
-              <% } %>
+              </div>
+            <% }); %>
+          </div>
+          <% const firstCommander = deck.metadata.commanders[0]; %>
+          <% if (firstCommander.set || deck.metadata.createdYear) { %>
+            <div class="tile-meta">
+              <% if (firstCommander.set) { %><span><%= firstCommander.set %></span><% } %>
+              <% if (deck.metadata.createdYear) { %><span><%= deck.metadata.createdYear %></span><% } %>
             </div>
-          </button>
-        <% }); %>
-      </div>
-    </form>
-  <% } %>
-<% } %>
+          <% } %>
+        </div>
+      </button>
+    <% }); %>
+  </div>
+</form>
