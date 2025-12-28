@@ -5,8 +5,8 @@
       <label class="deck-label">Choose a preconstructed deck to play</label>
       <input type="hidden" name="deck-source" value="precon" />
       <div class="precon-tiles-container">
-        <% precons.forEach(function(deck) { %>
-          <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile">
+        <% precons.forEach(function(deck, index) { %>
+          <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
             <% if (deck.metadata && deck.metadata.commanders && deck.metadata.commanders.length > 0 && deck.metadata.commanders[0].imageUrl) { %>
               <div class="tile-commander-art">
                 <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" />
