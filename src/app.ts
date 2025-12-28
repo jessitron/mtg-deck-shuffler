@@ -546,7 +546,42 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const modalHtml = formatCardModalHtmlFragment(gameCard, gameId, game.getStateVersion());
+      // Calculate navigation indices
+      const prevCardIndex = game.findPrevCardInZone(cardIndex);
+      const nextCardIndex = game.findNextCardInZone(cardIndex);
+
+      // Calculate position information for display
+      let currentPosition = 1;
+      let totalCardsInZone = 1;
+      const location = gameCard.location;
+
+      if (location.type !== "Table") {
+        let cardsInZone: readonly GameCard[];
+        if (location.type === "Library") {
+          cardsInZone = game.listLibrary();
+        } else if (location.type === "Hand") {
+          cardsInZone = game.listHand();
+        } else if (location.type === "Revealed") {
+          cardsInZone = game.listRevealed();
+        } else if (location.type === "CommandZone") {
+          cardsInZone = game.listCommandZone();
+        } else {
+          cardsInZone = [];
+        }
+
+        totalCardsInZone = cardsInZone.length;
+        currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === cardIndex) + 1;
+      }
+
+      const modalHtml = formatCardModalHtmlFragment(
+        gameCard,
+        gameId,
+        game.getStateVersion(),
+        prevCardIndex,
+        nextCardIndex,
+        currentPosition,
+        totalCardsInZone
+      );
       res.send(modalHtml);
     } catch (error) {
       console.error("Error loading card modal:", error);
