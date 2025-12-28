@@ -29,6 +29,14 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           ? new Date(deck.provenance.createdAt).getFullYear()
           : undefined;
 
+        // Format release date as "Month Year"
+        const releaseDate = deck.provenance?.createdAt
+          ? new Date(deck.provenance.createdAt).toLocaleDateString('en-US', {
+              month: 'long',
+              year: 'numeric'
+            })
+          : undefined;
+
         // Remove the " - {set name}" suffix from deck name since we display set separately
         const deckName = deck.name || filename;
         const cleanedName = deckName.split(' - ')[0];
@@ -39,7 +47,8 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           localFile: filename,
           metadata: {
             commanders,
-            createdYear
+            createdYear,
+            releaseDate
           }
         };
       } catch (error) {

@@ -34,6 +34,7 @@ export interface PreconMetadata {
     imageUrl?: string;
   }>;
   createdYear?: number;
+  releaseDate?: string; // Formatted as "Month Year" (e.g., "December 2024")
 }
 
 export type AvailableDeck = {

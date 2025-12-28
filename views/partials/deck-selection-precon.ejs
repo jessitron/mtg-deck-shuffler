@@ -30,6 +30,9 @@
           <% const firstCommander = deck.metadata.commanders[0]; %>
             <div class="tile-meta">
               <span><%= firstCommander.set.replace(/ Commander$/, '') %></span>
+              <% if (deck.metadata.releaseDate) { %>
+                <span class="tile-release-date"><%= deck.metadata.releaseDate %></span>
+              <% } %>
             </div>
         </div>
       </button>
