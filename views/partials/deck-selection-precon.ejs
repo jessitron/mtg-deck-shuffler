@@ -31,12 +31,10 @@
             <% }); %>
           </div>
           <% const firstCommander = deck.metadata.commanders[0]; %>
-          <% if (firstCommander.set || deck.metadata.createdYear) { %>
             <div class="tile-meta">
-              <% if (firstCommander.set) { %><span><%= firstCommander.set %></span><% } %>
-              <% if (deck.metadata.createdYear) { %><span><%= deck.metadata.createdYear %></span><% } %>
+              <span><%= firstCommander.set %></span>
+              <span><%= deck.metadata.createdYear %></span>
             </div>
-          <% } %>
         </div>
       </button>
     <% }); %>
