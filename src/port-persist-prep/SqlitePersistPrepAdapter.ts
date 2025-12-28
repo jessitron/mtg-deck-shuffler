@@ -64,15 +64,15 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
 
     return new Promise((resolve, reject) => {
       const insertOrUpdateSQL = `
-        INSERT OR REPLACE INTO game_preps (id, prep, version, deck_id, updated_at)
-        VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+        INSERT OR REPLACE INTO game_preps (id, prep, version, deck_id, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
       `;
 
       const prepJson = JSON.stringify(prep);
 
       this.db.run(
         insertOrUpdateSQL,
-        [prep.prepId, prepJson, prep.version, prep.deck.id],
+        [prep.prepId, prepJson, prep.version, prep.deck.id, prep.createdAt.toISOString()],
         function (err) {
           if (err) {
             reject(new Error(`Failed to save prep: ${err.message}`));
