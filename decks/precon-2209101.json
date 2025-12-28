@@ -8,7 +8,13 @@
       "name": "Syr Gwyn, Hero of Ashvale",
       "scryfallId": "a33add37-379d-4a90-9c04-529dff676986",
       "multiverseid": 476048,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     }
   ],
   "cards": [
@@ -16,360 +22,607 @@
       "name": "Belle of the Brawl",
       "scryfallId": "2c3c992a-70b5-4d3c-9a96-93c3365691ac",
       "multiverseid": 473040,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Corpse Knight",
       "scryfallId": "8b45117b-8369-48fc-8e5d-8986e662d123",
       "multiverseid": 466960,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Embereth Shieldbreaker // Battle Display",
       "scryfallId": "6cc73d16-5ed7-4104-91f6-0997a2080e2e",
       "multiverseid": 473084,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Embereth Skyblazer",
       "scryfallId": "166ee7fc-a0f7-49af-85bf-d5b36bb2bff4",
       "multiverseid": 476039,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Fireborn Knight",
       "scryfallId": "6716f46c-806d-4b3e-8a1c-fd6dcedacf8e",
       "multiverseid": 473172,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Foulmire Knight // Profane Insight",
       "scryfallId": "c5f6c745-e46a-42eb-8eca-b7b74ab1245e",
       "multiverseid": 473052,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Inspiring Veteran",
       "scryfallId": "0c3f372d-259d-4a31-9491-2d369b3f3f8b",
       "multiverseid": 473156,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Knight of the Ebon Legion",
       "scryfallId": "29425426-7bf2-4872-aa35-c12c22801edd",
       "multiverseid": 466859,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Order of Midnight // Alter Fate",
       "scryfallId": "330cc452-4382-401d-9432-ac27ae6e27ad",
       "multiverseid": 473061,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Silverwing Squadron",
       "scryfallId": "4348513e-4a03-4e06-98e0-ac6c0dfb013d",
       "multiverseid": 476033,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Skyknight Legionnaire",
       "scryfallId": "3c27f2ce-702a-4ec2-a470-982171a9ec73",
       "multiverseid": 452948,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Guilds of Ravnica"
     },
     {
       "name": "Skyknight Vanguard",
       "scryfallId": "549634d8-1c33-401b-841d-a79ef4374dd1",
       "multiverseid": 466972,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Smitten Swordmaster // Curry Favor",
       "scryfallId": "f82541f2-b17c-45b4-87ff-f9b46d23578c",
       "multiverseid": 473067,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Syr Konrad, the Grim",
       "scryfallId": "a808868f-aea8-4651-9357-85a4d7b4f290",
       "multiverseid": 473069,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Venerable Knight",
       "scryfallId": "0001f1ef-b957-4a55-b47f-14839cdbab6f",
       "multiverseid": 472997,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Wintermoor Commander",
       "scryfallId": "06e8d715-025f-4578-b427-e401318a9c58",
       "multiverseid": 473167,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Integrity // Intervention",
       "scryfallId": "4a82084e-b178-442b-8007-7b2a70f3fbba",
       "multiverseid": 452977,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Guilds of Ravnica"
     },
     {
       "name": "Ob Nixilis's Cruelty",
       "scryfallId": "94db72a8-57f7-4f17-9f09-cae90ef50304",
       "multiverseid": 461028,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "War of the Spark"
     },
     {
       "name": "Bond of Discipline",
       "scryfallId": "bb7c78bb-9f2a-47a4-adc4-b497bb38f46f",
       "multiverseid": 460933,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "War of the Spark"
     },
     {
       "name": "Single Combat",
       "scryfallId": "ce0e7c6a-e628-4327-a16f-2062c5a662df",
       "multiverseid": 460957,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "War of the Spark"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "84128e98-87d6-4c2f-909b-9435a7833e63",
       "multiverseid": 476049,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Crystal Slipper",
       "scryfallId": "9f738ca6-5254-4dbc-9f59-854e81c8dac2",
       "multiverseid": 473081,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Icon of Ancestry",
       "scryfallId": "9b78e53c-1aec-4c49-bf58-165dd7b59d64",
       "multiverseid": 466983,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Core Set 2020"
     },
     {
       "name": "Mace of the Valiant",
       "scryfallId": "6c141ed6-02ee-49c4-98af-938ebcefb2f5",
       "multiverseid": 476032,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Mask of Immolation",
       "scryfallId": "be2f4165-f87f-454b-b955-e4477c864e95",
       "multiverseid": 466905,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Shining Armor",
       "scryfallId": "7791f46e-f772-4d3f-824e-52b4fc721b58",
       "multiverseid": 472991,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Steelclaw Lance",
       "scryfallId": "cafcf909-d726-4bc2-adf6-c12ca242f0c1",
       "multiverseid": 473164,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Knights' Charge",
       "scryfallId": "6b86f7db-ae1d-49fe-a9c5-488bbf3afac7",
       "multiverseid": 476046,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Command Tower",
       "scryfallId": "ec1f1041-f667-4b73-b1f2-e5bcae84095e",
       "multiverseid": 476051,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Orzhov Guildgate",
       "scryfallId": "f7046b5e-622f-4ae8-9ddd-709ccd61000e",
       "multiverseid": 457397,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Ravnica Allegiance"
     },
     {
       "name": "Swamp",
       "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
       "multiverseid": 473220,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Swamp",
       "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
       "multiverseid": 473220,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Swamp",
       "scryfallId": "e4f184c5-4f3c-4aea-afa1-f0903d3cc71a",
       "multiverseid": 473220,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Tournament Grounds",
       "scryfallId": "cd438d51-a778-4b38-8b4b-a6a9cd9b4b22",
       "multiverseid": 473210,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Wind-Scarred Crag",
       "scryfallId": "75f5875e-487f-4586-95f3-3627050a6744",
       "multiverseid": 475926,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Boros Guildgate",
       "scryfallId": "c52ceefc-90d0-49d1-ae54-9a4eab819849",
       "multiverseid": 452993,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Guilds of Ravnica"
     },
     {
       "name": "Response // Resurgence",
       "scryfallId": "92162888-35ea-4f4f-ab99-64dd3104e230",
       "multiverseid": 452979,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Guilds of Ravnica"
     },
     {
       "name": "Midnight Reaper",
       "scryfallId": "5e122fe0-51c5-404d-a7b9-3d161a426c35",
       "multiverseid": 452827,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Guilds of Ravnica"
     },
     {
       "name": "Mortify",
       "scryfallId": "ebf6c0dc-5c7b-4170-99bc-2637ea44e716",
       "multiverseid": 457336,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Ravnica Allegiance"
     },
     {
       "name": "Rakdos Guildgate",
       "scryfallId": "26f7e55d-d4c9-4755-ab87-a592ba3fb64f",
       "multiverseid": 457399,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Ravnica Allegiance"
     },
     {
       "name": "Godless Shrine",
       "scryfallId": "ced4c824-2dfc-42ae-84e6-09f8e3f51b5b",
       "multiverseid": 457392,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Ravnica Allegiance"
     },
     {
       "name": "Despark",
       "scryfallId": "32b17dfc-b916-4134-ba77-501cff435e7e",
       "multiverseid": 461117,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "War of the Spark"
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "a874dfe1-eb4d-4817-877f-8a4cd75107e1",
       "multiverseid": 467011,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Scoured Barrens",
       "scryfallId": "3b9edd33-a64e-4526-a89f-edd31ac4b175",
       "multiverseid": 467005,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "ad0fa2fb-6770-4a81-b830-4acfa957655a",
       "multiverseid": 467000,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Core Set 2020"
     },
     {
       "name": "Bloodfell Caves",
       "scryfallId": "9b7ec5a3-3c40-4090-b9e3-11fb5b06fb8f",
       "multiverseid": 466996,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Ancestral Blade",
       "scryfallId": "2ba18114-af6c-48cd-82c9-eb6541d566bf",
       "multiverseid": 466757,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Core Set 2020"
     },
     {
       "name": "Colossus Hammer",
       "scryfallId": "fa35b2b5-3e91-4a6c-90b1-8581b4ecaf8b",
       "multiverseid": 466977,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Core Set 2020"
     },
     {
       "name": "Marauder's Axe",
       "scryfallId": "73ac5204-69ef-491d-9ca8-f522b99f1412",
       "multiverseid": 466985,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Core Set 2020"
     },
     {
       "name": "Mountain",
       "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
       "multiverseid": 473224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Mountain",
       "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
       "multiverseid": 473224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Mountain",
       "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
       "multiverseid": 473224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Mountain",
       "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
       "multiverseid": 473224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Mountain",
       "scryfallId": "32982ed2-96e4-4cc5-8562-744b06bca239",
       "multiverseid": 473224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Plains",
       "scryfallId": "7ded4b2a-ba56-43da-8ea7-392b77fc2926",
       "multiverseid": 473212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Plains",
       "scryfallId": "7ded4b2a-ba56-43da-8ea7-392b77fc2926",
       "multiverseid": 473212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Plains",
       "scryfallId": "7ded4b2a-ba56-43da-8ea7-392b77fc2926",
       "multiverseid": 473212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Plains",
       "scryfallId": "7ded4b2a-ba56-43da-8ea7-392b77fc2926",
       "multiverseid": 473212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     },
     {
       "name": "Plains",
       "scryfallId": "7ded4b2a-ba56-43da-8ea7-392b77fc2926",
       "multiverseid": 473212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Throne of Eldraine"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:17.724Z",
+    "retrievedDate": "2025-12-28T02:07:28.967Z",
     "sourceUrl": "https://archidekt.com/decks/2209101",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2021-12-30T18:23:45.847Z"
   }
 }

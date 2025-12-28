@@ -8,7 +8,12 @@
       "name": "Firkraag, Cunning Instigator",
       "scryfallId": "b55e624b-6f6a-42ae-89aa-0cc62ee55a31",
       "multiverseid": 567105,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     }
   ],
   "cards": [
@@ -16,600 +21,968 @@
       "name": "Aether Gale",
       "scryfallId": "cd153e03-4fe1-477d-9e7f-ee5c432a4285",
       "multiverseid": 567529,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Agitator Ant",
       "scryfallId": "e885f56a-a1e8-4289-bbf5-3b156e53f7db",
       "multiverseid": 567593,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Angler Turtle",
       "scryfallId": "9c8d57fc-9695-45df-8b88-0048330608bd",
       "multiverseid": 567530,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "5b245a5b-5a99-4d22-99ef-3f5bf49c3262",
       "multiverseid": 563181,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Artificer Class",
       "scryfallId": "cf4e9335-06e3-4b27-8fd8-3e44ece89a36",
       "multiverseid": 567228,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "fb71aebf-f5d3-45ee-91a4-51088f7141ec",
       "multiverseid": 567697,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Astral Dragon",
       "scryfallId": "670fbc63-4c9b-4e57-b53e-4ca4d7a224ba",
       "multiverseid": 567229,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Avatar of Slaughter",
       "scryfallId": "7951ef42-8e14-4920-bf8a-75ab48e8645a",
       "multiverseid": 567596,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Baeloth Barrityl, Entertainer",
       "scryfallId": "ec983aac-9eda-4086-ad7e-34da9b2987cc",
       "multiverseid": 567148,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "ba975f60-ca29-4fc8-b2f0-416be395f200",
       "multiverseid": 567597,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Bloodthirsty Blade",
       "scryfallId": "bfe00149-b9ca-43d9-aff1-5c2da4dc7753",
       "multiverseid": 567671,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Bothersome Quasit",
       "scryfallId": "6e9a0a23-cd62-4762-b751-ac0159a1b3c5",
       "multiverseid": 567239,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Brash Taunter",
       "scryfallId": "a1480f99-83f8-48e7-ba52-9a3f3a9a24f3",
       "multiverseid": 567599,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Burnished Hart",
       "scryfallId": "98c3f711-7191-4621-b36e-6c1e281216e2",
       "multiverseid": 563186,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Castle Vantress",
       "scryfallId": "dcf70844-18b1-4046-ae1d-ef41790bdcde",
       "multiverseid": 567702,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Chain Reaction",
       "scryfallId": "92ca793e-a54a-4e8f-a87d-f0dc4f178412",
       "multiverseid": 567600,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Chaos Dragon",
       "scryfallId": "08219fbc-c155-4d1d-a08c-d2546c44bccc",
       "multiverseid": 567601,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Clan Crafter",
       "scryfallId": "3e82f96f-bd2b-4672-b729-c44c943fcac9",
       "multiverseid": 567144,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Command Tower",
       "scryfallId": "7eafe88e-ab38-442c-b147-bb01cc81178d",
       "multiverseid": 563234,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Compulsive Research",
       "scryfallId": "27bc62c8-c795-4e4a-a57c-a5f34121b5d1",
       "multiverseid": 567532,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Curse of Opulence",
       "scryfallId": "440acae3-aadb-40f0-a608-d1d93578c6b0",
       "multiverseid": 567603,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Curse of Verbosity",
       "scryfallId": "ff611add-0b1b-4008-a78b-e793ccb38260",
       "multiverseid": 567534,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Curse of the Swine",
       "scryfallId": "a0ef264e-f987-422e-aac1-ae4963c797f5",
       "multiverseid": 567533,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Death Kiss",
       "scryfallId": "537b9888-70c5-4bee-8f26-d1457fdf1167",
       "multiverseid": 567240,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Desolate Lighthouse",
       "scryfallId": "8b7f5239-29d3-4b2b-b464-7e43107b1348",
       "multiverseid": 567707,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Disrupt Decorum",
       "scryfallId": "d1cfc692-f994-4975-acae-4440e9e5857c",
       "multiverseid": 567606,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Dissipation Field",
       "scryfallId": "dd2d9f47-2bd2-4a97-90c7-beca18a8e7fa",
       "multiverseid": 567535,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Domineering Will",
       "scryfallId": "e8c3836d-a08b-424c-aefe-e1585161edf7",
       "multiverseid": 567536,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Dragon's Hoard",
       "scryfallId": "36b6f0a8-b6c2-49fc-880c-01ad63213271",
       "multiverseid": 567675,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Drakuseth, Maw of Flames",
       "scryfallId": "1c8429f1-1a91-4f29-8d56-4c061f21c183",
       "multiverseid": 567607,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Fellwar Stone",
       "scryfallId": "4bca6877-4e1d-4ecb-8812-d75d3470ffee",
       "multiverseid": 567677,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Geode Rager",
       "scryfallId": "1c5974dd-78fc-4bfb-8678-72041c797584",
       "multiverseid": 567611,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Goblin Spymaster",
       "scryfallId": "1687ea64-fcc0-4bd8-aa7e-3c893d4ef2a8",
       "multiverseid": 567612,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Hedron Archive",
       "scryfallId": "3d76d25c-b962-43e4-aa6f-7c6e3bd79f16",
       "multiverseid": 567678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Island",
       "scryfallId": "21b99a83-bfe4-4149-b626-269953c5ac51",
       "multiverseid": 571089,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Izzet Boilerworks",
       "scryfallId": "c86e42c6-342b-443f-9b99-a68cf536ff45",
       "multiverseid": 567714,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "9ddc741b-18d8-41b1-b61b-e2249cad8526",
       "multiverseid": 567680,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Kazuul, Tyrant of the Cliffs",
       "scryfallId": "4ce569cd-964e-44d6-a155-5a853ccc1478",
       "multiverseid": 567617,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Keiga, the Tide Star",
       "scryfallId": "44d544dc-1d2a-4b33-ae62-d0e0217db0a2",
       "multiverseid": 567542,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Kher Keep",
       "scryfallId": "e44bba8e-59e9-4a06-b845-c3ba7625ff58",
       "multiverseid": 567716,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Loot Dispute",
       "scryfallId": "0669a2bb-11c7-45d8-9299-09246ff4e72c",
       "multiverseid": 567242,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Midnight Clock",
       "scryfallId": "72ca85ed-3870-4ba4-abe7-cdcab3cad122",
       "multiverseid": 567544,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "1969ddc0-ee6c-4c3d-a9dd-7f1c491609be",
       "multiverseid": 563208,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mocking Doppelganger",
       "scryfallId": "6c5f81d8-b189-4f6e-872f-a237bb872aa9",
       "multiverseid": 567232,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Mountain",
       "scryfallId": "0333e39b-45e7-46df-908c-0748092ce8c1",
       "multiverseid": 571098,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "276f49f9-019b-44cb-a551-0fba9851ecc7",
       "multiverseid": 567721,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Niv-Mizzet, Parun",
       "scryfallId": "3035a97f-5104-4b56-84a4-5206e75607fc",
       "multiverseid": 567668,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "43710f35-c43f-48bf-82e1-64ba5c3fa03e",
       "multiverseid": 567724,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Prismari Campus",
       "scryfallId": "bf90c219-508f-49af-a7f9-540021d49d8c",
       "multiverseid": 567726,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Propaganda",
       "scryfallId": "e5f293d7-9c2b-41cb-8e3c-dfc1daa6635f",
       "multiverseid": 567547,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Psychic Impetus",
       "scryfallId": "288e811e-7beb-4379-95a3-e5f4e759aa9d",
       "multiverseid": 562972,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Pursued Whale",
       "scryfallId": "f1ba925b-9216-4e37-814d-b061950b3998",
       "multiverseid": 567549,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Reins of Power",
       "scryfallId": "9b5730aa-c74a-4c74-bb1b-a133a3c353ec",
       "multiverseid": 567551,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "1241912a-92d6-4942-b97b-f795e702c4ca",
       "multiverseid": 567728,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Rowan Kenrith",
       "scryfallId": "bcf0514e-63b3-4695-93ae-527524d48c25",
       "multiverseid": 567622,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Ryusei, the Falling Star",
       "scryfallId": "68d57ab8-fbe0-4f01-b7f7-2a5cccd2d13a",
       "multiverseid": 567623,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Shiny Impetus",
       "scryfallId": "57520d99-744f-41bb-9134-f28397a5cb2a",
       "multiverseid": 563077,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Sly Instigator",
       "scryfallId": "c9ed183a-a78a-4934-9317-9f16b29e69a2",
       "multiverseid": 567553,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "199cde21-5bc3-49cd-acd4-bae3af6e5881",
       "multiverseid": 567688,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "5fec09ec-a300-4d3c-8054-0250bb70b93b",
       "multiverseid": 567689,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Spectacular Showdown",
       "scryfallId": "d5b1cbee-528f-48f7-b7c9-16aa3dab850a",
       "multiverseid": 567244,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Sprite Dragon",
       "scryfallId": "361385d8-d9c7-4de8-a5c8-683e682779f4",
       "multiverseid": 567669,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Steel Hellkite",
       "scryfallId": "8823b43b-8a30-4226-b5a7-ac1c06ba146b",
       "multiverseid": 567691,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Stuffy Doll",
       "scryfallId": "978c2c7d-6898-4be2-aed7-e673210ce654",
       "multiverseid": 567692,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Talisman of Creativity",
       "scryfallId": "28b4fea5-aa7b-40e7-a3c4-cb467af16b42",
       "multiverseid": 567693,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "6b3692d4-be30-4b23-b6e7-0c4af8c034a2",
       "multiverseid": 567740,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "1a8b9fd8-ece4-45ba-9fdf-4cb715bcd843",
       "multiverseid": 567742,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Terrain Generator",
       "scryfallId": "f40e9f0f-8c0d-4bfd-9872-370ce3763006",
       "multiverseid": 567743,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Territorial Hellkite",
       "scryfallId": "21618490-f33b-4607-ac61-25df8cb096a1",
       "multiverseid": 567626,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "The Akroan War",
       "scryfallId": "78161e60-878a-45a2-aced-40b739bd0a07",
       "multiverseid": 567594,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Thunder Dragon",
       "scryfallId": "9ff75ff4-495f-4a0c-9d98-69eff1b3fa32",
       "multiverseid": 567627,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Vengeful Ancestor",
       "scryfallId": "a5dabc03-a706-4e84-83e4-dbd405dfb025",
       "multiverseid": 567629,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Wandering Fumarole",
       "scryfallId": "ce3a6a8e-a01e-4d14-a6e5-c02c8205c749",
       "multiverseid": 567745,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Warmonger Hellkite",
       "scryfallId": "bbedbf64-cd51-4f40-9735-272bd86fdf84",
       "multiverseid": 567631,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "b865d247-fe0a-4583-b088-ae900ffe521b",
       "multiverseid": 563227,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Will Kenrith",
       "scryfallId": "406a3ae5-f57e-40ff-8eac-a01781f2329f",
       "multiverseid": 567555,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "8d8ee7b0-ea23-4657-a171-ac8a1308cc4d",
       "multiverseid": 567602,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:37.756Z",
+    "retrievedDate": "2025-12-28T02:07:49.769Z",
     "sourceUrl": "https://archidekt.com/decks/2788678",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2022-06-01T16:05:32.547Z"
   }
 }

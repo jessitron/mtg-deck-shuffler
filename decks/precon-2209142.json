@@ -8,7 +8,14 @@
       "name": "Saskia the Unyielding",
       "scryfallId": "5b483db6-b614-4af1-820a-42a4ee0c8707",
       "multiverseid": 420658,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     }
   ],
   "cards": [
@@ -16,600 +23,1025 @@
       "name": "Alesha, Who Smiles at Death",
       "scryfallId": "3223610b-7a87-42c1-a6cc-b5f249ca8cb9",
       "multiverseid": 420736,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Ankle Shanker",
       "scryfallId": "544a06f8-75fe-41b6-81dc-c9a0358f03c5",
       "multiverseid": 420795,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Brutal Hordechief",
       "scryfallId": "dfa94402-1613-4e65-8470-a05bf4bbb8a8",
       "multiverseid": 420725,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Charging Cinderhorn",
       "scryfallId": "fc0b61f2-4bb7-4dfa-907c-71787930d58f",
       "multiverseid": 420633,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Dauntless Escort",
       "scryfallId": "a71699b8-9644-4b05-99c8-657442e2df73",
       "multiverseid": 420809,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Den Protector",
       "scryfallId": "58ba1b95-270f-48b4-b842-1124a5f8ac34",
       "multiverseid": 420764,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Iroas, God of Victory",
       "scryfallId": "b4036bb7-835d-4690-aca1-1ab566776e9a",
       "multiverseid": 420822,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Korozda Guildmage",
       "scryfallId": "2bb31e43-adb6-494b-a3d6-7d0f1d817dab",
       "multiverseid": 420825,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Managorger Hydra",
       "scryfallId": "f2e4ab33-150e-4004-a346-4842f4e701cc",
       "multiverseid": 420774,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mentor of the Meek",
       "scryfallId": "cce365d2-fb8e-481d-b3d0-537f1ba2c760",
       "multiverseid": 420686,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mirror Entity",
       "scryfallId": "ce459d29-af63-4714-a1df-f33ecbf33708",
       "multiverseid": 420687,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mycoloth",
       "scryfallId": "a45d83bb-5422-4a72-bbc0-2529ecfa0b4a",
       "multiverseid": 420775,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Primeval Protector",
       "scryfallId": "4a492479-07d7-4b17-8f72-b8d2ef6bd1a4",
       "multiverseid": 420640,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Quirion Explorer",
       "scryfallId": "d56bae65-1811-4428-93f4-60c36ceee715",
       "multiverseid": 420777,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Ravos, Soultender",
       "scryfallId": "f2725635-8f90-4d17-9568-51218ba663c1",
       "multiverseid": 420656,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "09e8f0d4-3f33-4ad4-a1e8-2d3de7e076d9",
       "multiverseid": 420781,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Selesnya Guildmage",
       "scryfallId": "13930973-c536-4af6-807b-cf705ef19d5d",
       "multiverseid": 420852,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Stalking Vengeance",
       "scryfallId": "f52a0544-bb0e-4226-8297-8a1b42631dc9",
       "multiverseid": 420751,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Stonehoof Chieftain",
       "scryfallId": "4670d196-9cd9-47b1-b3c6-f78fe0422707",
       "multiverseid": 420642,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Sylvok Explorer",
       "scryfallId": "3881e40f-5d10-4461-aa88-11ba33e5d510",
       "multiverseid": 420786,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Tana, the Bloodsower",
       "scryfallId": "a3d8d64f-a403-42a7-881b-4f70e9fe15a2",
       "multiverseid": 420662,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Taurean Mauler",
       "scryfallId": "bea75ed5-c8dc-4fb8-b6cd-279415927c1d",
       "multiverseid": 420752,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Thelonite Hermit",
       "scryfallId": "08ecfe97-0d21-4c47-a88e-8a1c26e762fb",
       "multiverseid": 420788,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Thunderfoot Baloth",
       "scryfallId": "db929e1a-5f5d-4851-95fc-c6114f1abeb9",
       "multiverseid": 420789,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Tymna the Weaver",
       "scryfallId": "bc7cbe9b-324e-42b8-94e2-36e91cb32163",
       "multiverseid": 420665,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Wight of Precinct Six",
       "scryfallId": "b4c61aa5-6b17-4ced-bd1f-284a63a5b6e9",
       "multiverseid": 420735,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Wild Beastmaster",
       "scryfallId": "393b1f83-8d3a-4e94-a970-fe487e4ac33c",
       "multiverseid": 420793,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Wilderness Elemental",
       "scryfallId": "25d25e02-a266-4fad-bc8c-aa45487fab90",
       "multiverseid": 420847,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Zhur-Taa Druid",
       "scryfallId": "b82d8359-4841-478c-851b-13a1a0f94737",
       "multiverseid": 420849,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Abzan Charm",
       "scryfallId": "c13fbd5d-6ebe-4f7f-a2fb-2d1af4beea6f",
       "multiverseid": 420794,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Artifact Mutation",
       "scryfallId": "ad22e43b-e244-43f2-bb2a-f94b777a4602",
       "multiverseid": 420796,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Aura Mutation",
       "scryfallId": "0526debc-6eca-413e-b68c-50aa70927058",
       "multiverseid": 420797,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Boros Charm",
       "scryfallId": "dfa38f6a-177a-4f3a-9a05-325c715a94c5",
       "multiverseid": 420802,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Crackling Doom",
       "scryfallId": "de200da1-3f81-4ae0-90ab-46e23f0ba296",
       "multiverseid": 420808,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Divergent Transformations",
       "scryfallId": "2fb220db-604d-4779-9f57-fbcaf5c92cbf",
       "multiverseid": 420634,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Grab the Reins",
       "scryfallId": "d74d181c-6783-4472-a3b9-2f6780e2b89b",
       "multiverseid": 420743,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Naya Charm",
       "scryfallId": "f6790639-a287-4790-9a1e-8db7d799e63a",
       "multiverseid": 420831,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Order // Chaos",
       "scryfallId": "2a427922-c659-4563-ada5-4237e3e6353b",
       "multiverseid": 420857,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Sylvan Reclamation",
       "scryfallId": "4a2f6fd8-8676-4e26-85d8-964bf3c84ca3",
       "multiverseid": 420661,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Terminate",
       "scryfallId": "07735ce5-1de4-4eaf-9b61-eba4be6b1459",
       "multiverseid": 420842,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Utter End",
       "scryfallId": "09c10024-99f5-47d8-b74f-11d7f8511de4",
       "multiverseid": 420843,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Clan Defiance",
       "scryfallId": "5c38fa58-d2b7-4745-80e2-8be504378f8c",
       "multiverseid": 420804,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Farseek",
       "scryfallId": "57fbbda5-cdb8-49d2-9147-1fb087fcfa8a",
       "multiverseid": 420766,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Grave Upheaval",
       "scryfallId": "32b25bb5-723d-4af0-8661-60178f00f92b",
       "multiverseid": 420648,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Lavalanche",
       "scryfallId": "f663e19d-fc82-4905-9a09-68b99e1287b6",
       "multiverseid": 420826,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Rampant Growth",
       "scryfallId": "c37c0f48-5d85-4a72-bc51-6b3dcdaab29a",
       "multiverseid": 420778,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Shamanic Revelation",
       "scryfallId": "dba0f546-e6b1-42fc-a041-7908b9480f70",
       "multiverseid": 420784,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Treacherous Terrain",
       "scryfallId": "12a439ea-4454-4178-b005-0ab254d369cd",
       "multiverseid": 420664,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "28e23091-dc18-4964-af54-0ab282811a06",
       "multiverseid": 420865,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Conqueror's Flail",
       "scryfallId": "1644f535-9281-4a88-8fac-916bc0021d1d",
       "multiverseid": 420670,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Fellwar Stone",
       "scryfallId": "d140a606-e9d0-4fda-af38-1fca5d5c8c17",
       "multiverseid": 420871,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Gruul Signet",
       "scryfallId": "a248b8f4-cad5-4e3d-a120-398d18a6e15b",
       "multiverseid": 420873,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "875cf823-8548-47a3-a1c0-85bfaaed94a4",
       "multiverseid": 420877,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Skullclamp",
       "scryfallId": "9090c72c-8d6f-4e94-9111-e5f6929094db",
       "multiverseid": 420888,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0f003fde-be17-4159-a361-711ed0bee911",
       "multiverseid": 420889,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Sunforger",
       "scryfallId": "0f9a9654-edf1-486f-a002-57418f03de8e",
       "multiverseid": 420892,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Beastmaster Ascension",
       "scryfallId": "5f9a9d51-2209-4d37-94ee-ca8105e10466",
       "multiverseid": 420759,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Blind Obedience",
       "scryfallId": "9bc548e8-22d2-4acd-8673-4efcbc57e754",
       "multiverseid": 420676,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Breath of Fury",
       "scryfallId": "a1fce58d-d754-4532-b4d0-4bb3cf108090",
       "multiverseid": 420738,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Everlasting Torment",
       "scryfallId": "28f857d3-661b-45cd-a8d3-65b9ac0a34c8",
       "multiverseid": 420850,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Evolutionary Escalation",
       "scryfallId": "399d4b05-d671-4462-9d5d-4cfe3457727e",
       "multiverseid": 420639,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Frenzied Fugue",
       "scryfallId": "d095412d-874b-4d5d-9672-6074bbc4fcf5",
       "multiverseid": 420635,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Necrogenesis",
       "scryfallId": "32a50be8-3937-458b-a2f9-e75569016665",
       "multiverseid": 420832,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "9d7ac112-bb20-4ea4-b797-5d21f6b7c121",
       "multiverseid": 420673,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "f755f54a-e5e7-4056-a677-520d40e1daf7",
       "multiverseid": 420902,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Command Tower",
       "scryfallId": "6a759aca-50a4-44ba-8a9d-a764da55bfb7",
       "multiverseid": 420903,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Dragonskull Summit",
       "scryfallId": "3fb05d9e-24b4-4cc6-bb75-fd801d183b69",
       "multiverseid": 420909,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "2b3c0b62-39d7-4710-b3ce-f9d614a09841",
       "multiverseid": 420911,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "a95134ee-68d3-44d8-9098-403f100dc73b",
       "multiverseid": 420912,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Forest",
       "scryfallId": "aa36a925-9be7-45ba-bf55-30f9a25c09c1",
       "multiverseid": 420968,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Forest",
       "scryfallId": "aa36a925-9be7-45ba-bf55-30f9a25c09c1",
       "multiverseid": 420968,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Forest",
       "scryfallId": "aa36a925-9be7-45ba-bf55-30f9a25c09c1",
       "multiverseid": 420968,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Forest",
       "scryfallId": "aa36a925-9be7-45ba-bf55-30f9a25c09c1",
       "multiverseid": 420968,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Forest",
       "scryfallId": "aa36a925-9be7-45ba-bf55-30f9a25c09c1",
       "multiverseid": 420968,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Grand Coliseum",
       "scryfallId": "0ea85b58-a396-4ee9-ba77-afc0b0742cf1",
       "multiverseid": 420916,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Gruul Turf",
       "scryfallId": "a8ce122f-5424-4ac0-9d39-95d48e3d5049",
       "multiverseid": 420917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "cb0c705b-cbb4-4837-9c62-fe069fff03ad",
       "multiverseid": 420921,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Karplusan Forest",
       "scryfallId": "6f1406d4-0568-40eb-8002-f882105cd11b",
       "multiverseid": 420922,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "d8b818f1-fdb2-4bd4-9b67-6146d6b1c5b2",
       "multiverseid": 420924,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mountain",
       "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
       "multiverseid": 420963,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mountain",
       "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
       "multiverseid": 420963,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mountain",
       "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
       "multiverseid": 420963,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mountain",
       "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
       "multiverseid": 420963,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Mountain",
       "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
       "multiverseid": 420963,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Nomad Outpost",
       "scryfallId": "5728dffd-0312-4844-8868-12f040b8326f",
       "multiverseid": 420928,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "7f625a1e-688e-4e05-a1a6-13a898d96b58",
       "multiverseid": 420931,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Plains",
       "scryfallId": "bc7bc42c-1619-43c1-b720-1dafa391391f",
       "multiverseid": 420955,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Plains",
       "scryfallId": "bc7bc42c-1619-43c1-b720-1dafa391391f",
       "multiverseid": 420955,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Plains",
       "scryfallId": "bc7bc42c-1619-43c1-b720-1dafa391391f",
       "multiverseid": 420955,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Rootbound Crag",
       "scryfallId": "365b6a35-2388-4e21-8532-d49416dd9a54",
       "multiverseid": 420934,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Sandsteppe Citadel",
       "scryfallId": "7d035968-ba49-47c1-b26a-2faead68b2ac",
       "multiverseid": 420937,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Savage Lands",
       "scryfallId": "9f658788-3667-4dd0-b9cd-04aaa9d7edd4",
       "multiverseid": 420938,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Spinerock Knoll",
       "scryfallId": "4c38757c-8707-4834-afd0-169afec1e235",
       "multiverseid": 420944,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Sunpetal Grove",
       "scryfallId": "ee06bee0-912f-49ae-98ca-a30246de1a5a",
       "multiverseid": 420946,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Swamp",
       "scryfallId": "a834bc0c-2676-4901-a928-5de111b4eedc",
       "multiverseid": 420962,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Swamp",
       "scryfallId": "a834bc0c-2676-4901-a928-5de111b4eedc",
       "multiverseid": 420962,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Swamp",
       "scryfallId": "a834bc0c-2676-4901-a928-5de111b4eedc",
       "multiverseid": 420962,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Commander 2016"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "9b8d7221-b8a8-438e-9ba1-5aa94eeefb84",
       "multiverseid": 420949,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Commander 2016"
     },
     {
       "name": "Windbrisk Heights",
       "scryfallId": "cc8e7dac-f537-4acf-9854-ca3b5faa67e3",
       "multiverseid": 420953,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Commander 2016"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:26.333Z",
+    "retrievedDate": "2025-12-28T02:07:37.983Z",
     "sourceUrl": "https://archidekt.com/decks/2209142",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2021-12-30T18:29:25.820Z"
   }
 }

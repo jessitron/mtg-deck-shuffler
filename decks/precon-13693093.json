@@ -8,7 +8,15 @@
       "name": "Morophon, the Boundless",
       "scryfallId": "58e4a55f-b35a-411a-9a05-0cbb0d767920",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "Secret Lair Drop"
     }
   ],
   "cards": [
@@ -16,600 +24,1027 @@
       "name": "Feline Sovereign",
       "scryfallId": "c4aabecd-f042-46c1-a621-3286fa4e0715",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Bruse Tarl, Roving Rancher",
       "scryfallId": "40196502-3887-4315-bff4-de39f82796fc",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Cloudshredder Sliver",
       "scryfallId": "82008a62-5d70-4e7d-8891-34c5b9c2ef59",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Realmwalker",
       "scryfallId": "903ba152-4ece-4fb7-bbd2-2bead3699faf",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "The Bears of Littjara",
       "scryfallId": "aec45213-dcec-4c23-8348-265977a3e394",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Rukarumel, Biologist",
       "scryfallId": "4460a970-023e-4638-937a-3a0fa44be6fb",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Unsettled Mariner",
       "scryfallId": "9634bcc5-77bc-4a87-99e2-33f09fca13d1",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Impostor of the Sixth Pride",
       "scryfallId": "41dfb1c3-d81f-4a27-add4-568da1e23bdc",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Kinsbaile Cavalier",
       "scryfallId": "f7197a24-efe5-4d92-bb1a-87dd60c2fce9",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Shields of Velis Vel",
       "scryfallId": "a209df57-03a5-4719-96e3-3c7c6c271bd2",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mothdust Changeling",
       "scryfallId": "3b394bfc-b237-4002-8540-90e6e9c405cb",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Shapesharer",
       "scryfallId": "f111ca69-f2e3-407b-848c-7b7b9c64dd65",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Nameless Inversion",
       "scryfallId": "fcd901c6-a5bb-49ba-872c-0769db6b1387",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Skeletal Changeling",
       "scryfallId": "4e1def4e-929c-46ce-936d-307b7bd30e28",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Fire-Belly Changeling",
       "scryfallId": "d049c067-c0f7-47aa-87fe-56cb4f5a20fd",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Distant Melody",
       "scryfallId": "68b9d8c4-877e-4666-ab3f-12176b423757",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Farseek",
       "scryfallId": "204476df-d5b1-4d0b-b0d3-a4c3fc7efcab",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Gemhide Sliver",
       "scryfallId": "4a77d9f3-c365-4dcc-baef-fd20445b918d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Arcane Denial",
       "scryfallId": "251c5250-4af3-4134-995a-8fe022a67ab5",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Adarkar Wastes",
       "scryfallId": "66782316-c1c5-47dc-a693-f4c213ee0834",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Darkwater Catacombs",
       "scryfallId": "01dc71d4-b443-4580-b16f-9e92750f4a72",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Fabled Passage",
       "scryfallId": "4c62f75e-6889-4ab6-addf-432ca4888818",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Brushland",
       "scryfallId": "808c2748-65c5-407f-bb09-1e82dd1a4efb",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "8ab4331e-6284-412f-954e-a87bd2a3c632",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Karplusan Forest",
       "scryfallId": "ca558afb-e5ff-43f9-8726-272d77e2cc50",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "9d217acd-3939-473f-82ed-e3ca33d7c08a",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Murmuring Bosk",
       "scryfallId": "87d11136-c8d6-402d-8cb4-cc0117fe2f1a",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mutavault",
       "scryfallId": "486ed038-2c25-4caf-8240-63674a6f767d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Overflowing Basin",
       "scryfallId": "35bc5710-4bcb-4194-bde5-c8f6fc032a15",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Secluded Glen",
       "scryfallId": "ef35566b-79cb-4462-9711-7f5322b3a528",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "d373d63c-6de6-4ec6-91bf-4f681fefec65",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "The World Tree",
       "scryfallId": "d93769a3-9419-4f60-8a75-495050ba4fa3",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Yavimaya Coast",
       "scryfallId": "feb0c2dc-22be-4128-9bd6-f0e2c50127ad",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Pongify",
       "scryfallId": "f774a9eb-8855-4adf-a4e9-faec198f6d25",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Crib Swap",
       "scryfallId": "eed102ee-959c-4c44-9476-989c1f426624",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Beast Within",
       "scryfallId": "a92582ef-3305-45f9-ba8d-e22ce5381fe8",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Amoeboid Changeling",
       "scryfallId": "7441f723-ed82-496f-85f2-ad8c2b83cfa4",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Graveshifter",
       "scryfallId": "0dfce124-6179-486d-bb81-e15f3e473411",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Harabaz Druid",
       "scryfallId": "c99037f6-6c3d-4070-85af-07098ef0153d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Manaweft Sliver",
       "scryfallId": "f84667e2-7d9e-478c-826c-9701ad02b594",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Masked Vandal",
       "scryfallId": "d6f47fe1-36c6-4af9-a9eb-f2919e8e3446",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Risen Reef",
       "scryfallId": "b2ae2677-8b86-42d4-8b9f-4c165b0923b0",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Spoils of Adventure",
       "scryfallId": "2e4a0686-cb48-404c-a15a-2ad1c53aa144",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Bloodline Pretender",
       "scryfallId": "6d4af123-eb59-487a-bc25-f2e7019e72d1",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Universal Automaton",
       "scryfallId": "bdb05eed-4c00-485d-a519-293a18815324",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Ancient Amphitheater",
       "scryfallId": "ac1a0c88-dc72-459d-bcca-f37eb46cba92",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Frontier Bivouac",
       "scryfallId": "f836fe2e-914f-4886-a4e6-7e73c28c764d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Gilt-Leaf Palace",
       "scryfallId": "1b3dff0f-5f2a-4533-a5b6-be0dd11abc95",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Opulent Palace",
       "scryfallId": "71bf0f4d-ad10-4a5f-8429-0f48ae593089",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "34353930-c69b-4ef3-a6d5-c2e6673ea132",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Wanderwine Hub",
       "scryfallId": "934bd7eb-4f35-470b-92e9-245ad22b8cef",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Swamp",
       "scryfallId": "5bd7ee9b-1be6-44f7-8896-11c2f537a15e",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mountain",
       "scryfallId": "a78ca93f-a833-4ce5-b032-a4225e1ee45b",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mountain",
       "scryfallId": "a78ca93f-a833-4ce5-b032-a4225e1ee45b",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Raise the Palisade",
       "scryfallId": "7d56ea7d-16ef-42b1-9a23-d29ba271b46c",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Maskwood Nexus",
       "scryfallId": "404b3e0f-994e-49c8-b18a-ebbf418e741a",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Tazri, Beacon of Unity",
       "scryfallId": "b058d0cb-fb8f-43d3-a3de-3bdcbde96068",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Arcane Adaptation",
       "scryfallId": "b0384a47-b189-4e10-b847-1819d3ca5f8e",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Coat of Arms",
       "scryfallId": "6257c8a2-4756-40d2-a61d-9fd2ea3a2a92",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Bitterblossom",
       "scryfallId": "776b5cdd-a1e3-4b41-aeb4-d68f1dbaf56d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Taurean Mauler",
       "scryfallId": "3d2fe691-9922-468e-b5d0-6c9bacf875f6",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Avenger of Zendikar",
       "scryfallId": "11dcbb30-c464-4a13-a034-fa4770554f6e",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Kindred Summons",
       "scryfallId": "7c6d6c95-b25a-421a-a65f-c56883e84687",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Tendershoot Dryad",
       "scryfallId": "865832ba-8ed5-4596-89e9-5a6c7b2cfdc5",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "74109c41-d1e7-4108-bed1-3d9110d5e7d2",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Double Down",
       "scryfallId": "52fd2cbd-7e62-46c2-b517-355b20b9b602",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Atla Palani, Nest Tender",
       "scryfallId": "c851c20d-a028-4af9-bcfa-36ceaf36bdfb",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Harper Recruiter",
       "scryfallId": "782d3c9a-3e64-4588-9c39-8ec613f4301e",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Stick Together",
       "scryfallId": "640d1aa1-26ff-49df-aadc-c083d14df6be",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Mirror Entity",
       "scryfallId": "9d574cf8-2b59-4418-ba15-b802c6937c6b",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Rin and Seri, Inseparable",
       "scryfallId": "992b2dd3-87e7-48a4-bd8d-84973ff0ee1f",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "Secret Lair Drop"
     },
     {
       "name": "Kindred Dominance",
       "scryfallId": "22c47433-a0fa-4a1d-9070-25af120c02dd",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Realmbreaker, the Invasion Tree",
       "scryfallId": "b43ddd1e-98ee-44be-abde-73490a538562",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "a660543c-4d8d-4c4a-8135-3a3edbabcb47",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Cultivate",
       "scryfallId": "e903f265-a644-421f-a956-b470831d94fd",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Chameleon Colossus",
       "scryfallId": "57fba44a-fd58-43cb-a5ba-543031b00931",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Guardian Gladewalker",
       "scryfallId": "56808e49-1926-4f3f-93d6-a37213c760b2",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Kirri, Talented Sprout",
       "scryfallId": "05b26fbe-ea68-4595-99cd-3ea2a0a3d739",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Magda, Brazen Outlaw",
       "scryfallId": "338380ba-8415-40a2-8b81-2b30218ea16a",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The List"
     },
     {
       "name": "Moritte of the Frost",
       "scryfallId": "9c83dfd6-bf06-4291-89a3-924c3e9ab3f9",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Sophia, Dogged Detective",
       "scryfallId": "6c22504f-45a4-41b1-9e75-63712162f55b",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Black Market Connections",
       "scryfallId": "d456810a-452c-4cc6-9d73-35fe64787259",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Kindred Discovery",
       "scryfallId": "3a1986eb-24fb-417c-b392-c590cab476d3",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Brenard, Ginger Sculptor",
       "scryfallId": "ca6bf2e0-7dc3-4166-98a2-aa7edbf132a8",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Arcane Sanctum",
       "scryfallId": "a76c5afb-9572-457a-9242-f9b56a182859",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "The List"
     },
     {
       "name": "Forest",
       "scryfallId": "23e1c12f-6c6b-4e44-8fbc-e6703ffe2843",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Forest",
       "scryfallId": "23e1c12f-6c6b-4e44-8fbc-e6703ffe2843",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Forest",
       "scryfallId": "23e1c12f-6c6b-4e44-8fbc-e6703ffe2843",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Llanowar Wastes",
       "scryfallId": "4341d853-d0eb-45ef-9d0a-0b44dc805505",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Command Tower",
       "scryfallId": "4e23958a-191a-4108-a3c9-2ec6cadc241d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The List"
     },
     {
       "name": "Island",
       "scryfallId": "cfc571d7-d34f-4898-803a-f4a73c867f86",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Island",
       "scryfallId": "cfc571d7-d34f-4898-803a-f4a73c867f86",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Island",
       "scryfallId": "cfc571d7-d34f-4898-803a-f4a73c867f86",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "The List"
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "1f713905-d709-46ab-ad88-b6a07e257d6d",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Seaside Citadel",
       "scryfallId": "eb5aeb6d-0e02-4441-9c5f-ec0889d77e39",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "651b834e-b39c-4833-8b2f-6456ac06062c",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The List"
     },
     {
       "name": "Plains",
       "scryfallId": "4d6b9abd-fd5f-4a7a-a911-77696e6bdf08",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Plains",
       "scryfallId": "4d6b9abd-fd5f-4a7a-a911-77696e6bdf08",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     },
     {
       "name": "Plains",
       "scryfallId": "4d6b9abd-fd5f-4a7a-a911-77696e6bdf08",
       "multiverseid": 0,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The List"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:18:05.153Z",
+    "retrievedDate": "2025-12-28T02:08:18.226Z",
     "sourceUrl": "https://archidekt.com/decks/13693093",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2025-06-09T16:14:45.165Z"
   }
 }

@@ -8,7 +8,13 @@
       "name": "Pantlaza, Sun-Favored",
       "scryfallId": "2524645e-b066-4351-885b-10faa8d819d7",
       "multiverseid": 642443,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     }
   ],
   "cards": [
@@ -16,600 +22,990 @@
       "name": "Akroma's Will",
       "scryfallId": "608cdbdb-6f7e-438a-bab0-0e7782435f0f",
       "multiverseid": 640421,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "fc6c69a0-ac24-4486-8893-a6303d08fc6e",
       "multiverseid": 640595,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Bronzebeak Foragers",
       "scryfallId": "dadfcd91-3000-448e-a304-be425ff68644",
       "multiverseid": 640029,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Curious Altisaur",
       "scryfallId": "83fb87d8-d6f6-4cb0-aca1-49e6fcb181b1",
       "multiverseid": 640050,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Dinosaur Egg",
       "scryfallId": "9afdb38b-cdb4-4f64-8fc7-2df666a9db1b",
       "multiverseid": 640052,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Earthshaker Dreadmaw",
       "scryfallId": "cdcbba6f-aa54-44be-a3b0-f712fa8bd5ad",
       "multiverseid": 636897,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "From the Rubble",
       "scryfallId": "9f7f7c5c-592b-4d22-968b-e5162b024b6e",
       "multiverseid": 640032,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Itzquinth, Firstborn of Gishath",
       "scryfallId": "7112c366-b36a-4bc8-aa64-6bad16bebc39",
       "multiverseid": 636950,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Ixalli's Lorekeeper",
       "scryfallId": "4bc94ded-458d-4458-9c0b-136d825b885d",
       "multiverseid": 636910,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "92a45243-2ea9-4da1-984b-287a555a51f4",
       "multiverseid": 640639,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "f30552a5-db59-4164-bbd2-44bf7ae1e91e",
       "multiverseid": 640642,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Plains",
       "scryfallId": "e06c72cb-03ce-48eb-b5dc-b2301c6871a2",
       "multiverseid": 639671,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Plains",
       "scryfallId": "e06c72cb-03ce-48eb-b5dc-b2301c6871a2",
       "multiverseid": 639671,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Plains",
       "scryfallId": "e06c72cb-03ce-48eb-b5dc-b2301c6871a2",
       "multiverseid": 639671,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Plains",
       "scryfallId": "e06c72cb-03ce-48eb-b5dc-b2301c6871a2",
       "multiverseid": 639671,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Progenitor's Icon",
       "scryfallId": "48104961-2090-435a-8d0e-6115e051b05c",
       "multiverseid": 640060,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Quartzwood Crasher",
       "scryfallId": "d39e00aa-9af9-4e53-8540-3fb56009c9b4",
       "multiverseid": 640577,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Ripjaw Raptor",
       "scryfallId": "ec01de20-8f78-47dd-8735-5e3981013708",
       "multiverseid": 640549,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Rishkar's Expertise",
       "scryfallId": "efa9d2dc-b3b8-4475-bbfc-2db457ee4ffd",
       "multiverseid": 640550,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Scion of Calamity",
       "scryfallId": "75db3c02-7a03-4de5-a70e-220777227dd3",
       "multiverseid": 640053,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Sunfrill Imitator",
       "scryfallId": "f1ac22a3-6edb-4f3e-b473-8166529eb769",
       "multiverseid": 640054,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "19b72af8-9bb9-4542-9115-09c27ad6e7ad",
       "multiverseid": 640656,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thrashing Brontodon",
       "scryfallId": "d52ef7c1-dacb-4204-b64e-5fa3ae3b1ace",
       "multiverseid": 636935,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Xenagos, God of Revels",
       "scryfallId": "6f1bc3bb-46da-492a-850c-f1f588ad8d18",
       "multiverseid": 640591,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Wayta, Trainer Prodigy",
       "scryfallId": "04f2d7ee-43a4-48e8-af64-d9fad4b9c5f1",
       "multiverseid": 642145,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Wrathful Raptors",
       "scryfallId": "49243e92-93e3-4090-b4f7-86fa4ca2fef5",
       "multiverseid": 640048,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Unclaimed Territory",
       "scryfallId": "e7bd3aaa-864c-4cbb-bbab-68d87c824e3d",
       "multiverseid": 640662,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Verdant Sun's Avatar",
       "scryfallId": "e8fce06a-56f7-4d0c-b094-ff147fec8256",
       "multiverseid": 640558,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Wakening Sun's Avatar",
       "scryfallId": "820b6327-2cbf-4054-bc33-4baf9c26dd70",
       "multiverseid": 640435,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Wayward Swordtooth",
       "scryfallId": "95a5d742-187a-4eba-82e4-7a4cc5c4e6f3",
       "multiverseid": 640559,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Zacama, Primal Calamity",
       "scryfallId": "05c5a9a8-badd-43ab-8408-a13e75407681",
       "multiverseid": 640592,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Zetalpa, Primal Dawn",
       "scryfallId": "90eb983c-ba42-45f2-9362-211fe40236e7",
       "multiverseid": 640437,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Apex Altisaur",
       "scryfallId": "1e6beba4-128c-418e-83ed-8a82afc0c39e",
       "multiverseid": 640528,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Arch of Orazca",
       "scryfallId": "581dcadd-7de4-4b39-bab0-d3567194a252",
       "multiverseid": 640615,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Atzocan Seer",
       "scryfallId": "985448b8-5852-4074-a4bd-1dee5192b104",
       "multiverseid": 640561,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Bellowing Aegisaur",
       "scryfallId": "f81607f4-d1cc-41a0-97eb-0c23133cfb6c",
       "multiverseid": 640423,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "2258c917-763a-43a6-9635-a5181e6bb54d",
       "multiverseid": 640617,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Chandra's Ignition",
       "scryfallId": "960f45a3-f9cf-41e6-b813-f3dee620a944",
       "multiverseid": 640516,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "fe5ef229-2bce-4f13-93de-003c75fedaf8",
       "multiverseid": 640619,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Clifftop Retreat",
       "scryfallId": "6e2b6fe5-e02d-488d-a176-5a1744dce2b8",
       "multiverseid": 640620,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Cultivate",
       "scryfallId": "e19cd136-0541-4db0-997f-20a58ec8d028",
       "multiverseid": 640531,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Deathgorge Scavenger",
       "scryfallId": "c175e50f-3858-43d7-8d4b-359ece106ccf",
       "multiverseid": 640532,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Descendants' Path",
       "scryfallId": "a2ad7482-8ce2-4e63-8be7-79c2e37d3006",
       "multiverseid": 640534,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Drover of the Mighty",
       "scryfallId": "013360b3-c335-46c0-abe3-b7e3760f62c9",
       "multiverseid": 640535,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Etali, Primal Storm",
       "scryfallId": "e74b5f7e-847d-4eca-a77e-96bad5434292",
       "multiverseid": 640520,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "fa6a5029-f4df-43dd-b5a9-fbf6ff003675",
       "multiverseid": 640624,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "a54b6832-9990-4144-99ef-990a9ad4c081",
       "multiverseid": 640625,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Farseek",
       "scryfallId": "0cfd3cb1-2209-453d-be45-ce1b56265496",
       "multiverseid": 640538,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Fiery Confluence",
       "scryfallId": "b35459f8-2231-4b89-a222-45e94d1b01d9",
       "multiverseid": 640522,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan"
     },
     {
       "name": "Fortified Village",
       "scryfallId": "8b9eae78-d2c9-45a6-baaa-c10dea1e0332",
       "multiverseid": 640627,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Furycalm Snarl",
       "scryfallId": "87b34bda-dff0-4cfb-9093-6a287236cd48",
       "multiverseid": 640629,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Game Trail",
       "scryfallId": "69dc5d4f-a562-4d54-a11f-4a31417c1138",
       "multiverseid": 640630,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Command Tower",
       "scryfallId": "d477d733-2360-4f1d-9ecd-cdedc2e8a7ae",
       "multiverseid": 640621,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Generous Gift",
       "scryfallId": "fc70e127-ffc8-45ed-9ca3-7f9f926ac4d5",
       "multiverseid": 640424,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "13c45b1e-dfa4-4318-96e8-aa5e3e74ca27",
       "multiverseid": 640634,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Kessig Wolf Run",
       "scryfallId": "287ef2b0-530e-4468-b43c-64ac6526562a",
       "multiverseid": 640636,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Kinjalli's Sunwing",
       "scryfallId": "04421508-b5ac-4466-9f77-dfef478d3cc2",
       "multiverseid": 640426,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Lifecrafter's Bestiary",
       "scryfallId": "b6623cb1-15e4-47b3-8460-dfeb5fb2cd09",
       "multiverseid": 640603,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Majestic Heliopterus",
       "scryfallId": "637741c4-5420-4a54-839e-4fd454d93172",
       "multiverseid": 640427,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Marauding Raptor",
       "scryfallId": "0b5cf2aa-f6dd-47d2-a57f-0ae2308c0f9a",
       "multiverseid": 640524,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Migration Path",
       "scryfallId": "4fc05cc9-176d-4ffb-8777-935e54030140",
       "multiverseid": 640542,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "e2f2bd6c-fd3b-4dbd-a710-f004011fd58b",
       "multiverseid": 640638,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Otepec Huntmaster",
       "scryfallId": "00a87f71-8dbe-44e1-b69b-a03f6ab62055",
       "multiverseid": 640525,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Path to Exile",
       "scryfallId": "7e9c2a58-4a1c-454c-b72d-faecaea105fb",
       "multiverseid": 640430,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Raging Regisaur",
       "scryfallId": "35e68007-ac45-40a4-91f3-4a1edf00bd0e",
       "multiverseid": 640578,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Raging Swordtooth",
       "scryfallId": "6bf82a3f-2faf-45b8-95af-32a93880b54c",
       "multiverseid": 640579,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Rampaging Brontodon",
       "scryfallId": "ea3f71d6-e333-4e50-9545-deb73749413c",
       "multiverseid": 640543,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Rampant Growth",
       "scryfallId": "21945dec-25d8-482e-bacb-8bbb92bb9d88",
       "multiverseid": 640544,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Ranging Raptors",
       "scryfallId": "7d4f04bc-30ee-4948-9905-774f532ac811",
       "multiverseid": 640545,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Regal Behemoth",
       "scryfallId": "e3a8bdfa-a39c-4ca7-b591-1c6aca4cc5ac",
       "multiverseid": 640547,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Regisaur Alpha",
       "scryfallId": "2a3c6780-8ac2-489c-a347-19dbe977df43",
       "multiverseid": 640582,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Return of the Wildspeaker",
       "scryfallId": "cf005201-94f3-46d4-9589-ded11f3eb718",
       "multiverseid": 640548,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Rhythm of the Wild",
       "scryfallId": "7305c2e6-b72d-4bbd-8d64-69bc5e4d269c",
       "multiverseid": 640583,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red",
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "a7dc75a8-c500-4b50-aff9-32ce36566104",
       "multiverseid": 640645,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Runic Armasaur",
       "scryfallId": "17913fb0-ef73-4b20-8625-b84d4e62178a",
       "multiverseid": 640552,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Savage Stomp",
       "scryfallId": "a0fe1347-7b04-464a-8226-9526a408b955",
       "multiverseid": 640553,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Secluded Courtyard",
       "scryfallId": "26c40b2a-cb27-4fad-a9b2-1fb065d44d77",
       "multiverseid": 640646,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Shifting Ceratops",
       "scryfallId": "8be37115-b4aa-437a-9b72-01af0cf0a0cd",
       "multiverseid": 640554,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "2d47121d-8b90-4d28-9ffa-0a640b9dd611",
       "multiverseid": 640609,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Temple Altisaur",
       "scryfallId": "83c1ba83-c394-4ff1-b2ba-56907403162a",
       "multiverseid": 640434,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "96a31b2d-ee3f-48e5-b0dd-481a0c3efea2",
       "multiverseid": 640655,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thriving Bluff",
       "scryfallId": "0786c046-0cf6-41c8-800a-082997d2fcbf",
       "multiverseid": 640657,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thriving Grove",
       "scryfallId": "d40a899f-de35-4345-b6ad-336f63be0b2e",
       "multiverseid": 640658,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thriving Heath",
       "scryfallId": "20336c7d-efff-44ef-942b-24672cbb0c48",
       "multiverseid": 640659,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thunderherd Migration",
       "scryfallId": "5b71c6bd-db67-46ca-9c96-119e89f8ef69",
       "multiverseid": 640555,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Thundering Spineback",
       "scryfallId": "0c65d26e-b529-43ba-9e6e-82aed27cbbfc",
       "multiverseid": 640556,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     },
     {
       "name": "Topiary Stomper",
       "scryfallId": "e8b92271-4412-4165-a4a6-e8653e755107",
       "multiverseid": 640557,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "The Lost Caverns of Ixalan Commander"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:51.793Z",
+    "retrievedDate": "2025-12-28T02:08:04.719Z",
     "sourceUrl": "https://archidekt.com/decks/5775250",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2023-11-02T04:24:28.989Z"
   }
 }

@@ -8,7 +8,13 @@
       "name": "Aminatou, Veil Piercer",
       "scryfallId": "9f868023-6035-403d-ba91-7a4840c6c392",
       "multiverseid": 675458,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     }
   ],
   "cards": [
@@ -16,600 +22,998 @@
       "name": "Brainstone",
       "scryfallId": "6e86ad39-2a90-466d-b188-056216429f4e",
       "multiverseid": 676115,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Orzhov Signet",
       "scryfallId": "4930d5ea-a6a9-4a87-9083-d5cd337cd7fa",
       "multiverseid": 676122,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Athreos, Shroud-Veiled",
       "scryfallId": "f50ffa76-f704-4d53-a15c-8316b07c1d12",
       "multiverseid": 676085,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Burnished Hart",
       "scryfallId": "185660f1-584a-4098-aacd-df50fe5669d5",
       "multiverseid": 676116,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Nightmare Shepherd",
       "scryfallId": "c03c1ad6-3122-4267-80d6-94ecf1ff3884",
       "multiverseid": 676022,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Ondu Spiritdancer",
       "scryfallId": "ee1c6432-54d7-4b57-a554-f7194d74e03c",
       "multiverseid": 675974,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Prognostic Sphinx",
       "scryfallId": "d9d36763-2975-4b5c-aeda-2d0159cb5191",
       "multiverseid": 675997,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "916e0c89-5614-4022-b095-9c714c476d13",
       "multiverseid": 676126,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Starfield Mystic",
       "scryfallId": "111bc4a3-5318-4c85-b5d4-d85242bff05f",
       "multiverseid": 675978,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Verge Rangers",
       "scryfallId": "c63a5253-b3b7-48d0-8c2c-700fbd0e4c3f",
       "multiverseid": 675981,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "The Eldest Reborn",
       "scryfallId": "4d29351e-5608-40e8-8220-6c9635d48ad4",
       "multiverseid": 676012,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Timely Ward",
       "scryfallId": "d61f8db1-0148-47bd-ae97-9aedccb83813",
       "multiverseid": 675980,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "875fad57-4048-47ef-93c3-5cfa2fcee360",
       "multiverseid": 676141,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Thriving Heath",
       "scryfallId": "06329ca8-75b0-409d-bb80-6b9164f4e22a",
       "multiverseid": 676188,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Thriving Isle",
       "scryfallId": "4a67f455-f193-4999-9286-bbccee546fa3",
       "multiverseid": 676189,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Thriving Moor",
       "scryfallId": "7057e66a-8b5d-40d1-a685-124a8e0623c3",
       "multiverseid": 676190,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Underground River",
       "scryfallId": "5e50c8d5-6b22-4fc6-87ea-3d7d77ced17f",
       "multiverseid": 676194,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Auramancer",
       "scryfallId": "d0957032-6d98-4cac-889b-890e9bfe1f86",
       "multiverseid": 675970,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "10f8b8fa-1d6e-4b5d-a871-914aa8b26ae6",
       "multiverseid": 676113,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Ancient Cellarspawn",
       "scryfallId": "27e2477d-4f04-408d-8c39-8a886ac81f44",
       "multiverseid": 675611,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "a881be73-7b22-418f-bf20-a07400b3b836",
       "multiverseid": 676133,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Archetype of Imagination",
       "scryfallId": "204972f7-8111-4e7d-97c4-53bcdc222230",
       "multiverseid": 675984,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Bottomless Pool // Locker Room",
       "scryfallId": "606fe87c-d17b-4fa7-8e82-e7002d8229ef",
       "multiverseid": 673448,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Command Tower",
       "scryfallId": "129d1bbd-83ad-4953-bf6d-b55989b2529c",
       "multiverseid": 675824,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Cast Out",
       "scryfallId": "4b491874-4be1-496a-bf04-abe1f5af4482",
       "multiverseid": 675971,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Arcane Denial",
       "scryfallId": "9b3f47a9-65fb-4b53-8e52-1c4b678b5841",
       "multiverseid": 675983,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Adarkar Wastes",
       "scryfallId": "395ed6cd-8027-4b11-a1ce-5f0bbbd2a50b",
       "multiverseid": 676131,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Brainstorm",
       "scryfallId": "8beb987c-1b67-4a4e-ae71-58547afad2a0",
       "multiverseid": 675986,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Arvinox, the Mind Flail",
       "scryfallId": "f81e3110-857c-4074-9c55-7e87c22051c9",
       "multiverseid": 676003,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Arcane Sanctum",
       "scryfallId": "c75eeb97-3249-4762-84b0-387f27fb255f",
       "multiverseid": 676132,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Azorius Chancery",
       "scryfallId": "50ef0ac3-e911-4d67-a751-8d86160ae843",
       "multiverseid": 676134,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Bojuka Bog",
       "scryfallId": "e286c618-ef42-433f-ade9-0c1235a295e3",
       "multiverseid": 676138,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "211a1d86-7257-4621-ae05-c2b235c063f0",
       "multiverseid": 675820,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Aminatou's Augury",
       "scryfallId": "503448da-d14f-4759-85b6-0db2e90e0241",
       "multiverseid": 675799,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Cramped Vents // Access Maze",
       "scryfallId": "7ba1e27e-ed0d-438c-9ec6-a48a04718512",
       "multiverseid": 675612,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Fear of Sleep Paralysis",
       "scryfallId": "845e9d68-11a9-4759-a031-13464d337e12",
       "multiverseid": 675607,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Island",
       "scryfallId": "e1d10d9c-8771-4870-aebf-e767d0fada32",
       "multiverseid": 672917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Island",
       "scryfallId": "e1d10d9c-8771-4870-aebf-e767d0fada32",
       "multiverseid": 672917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Island",
       "scryfallId": "e1d10d9c-8771-4870-aebf-e767d0fada32",
       "multiverseid": 672917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Island",
       "scryfallId": "e1d10d9c-8771-4870-aebf-e767d0fada32",
       "multiverseid": 672917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "a4ce6b63-0b38-4582-94d5-c733af087038",
       "multiverseid": 676117,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Metamorphosis Fanatic",
       "scryfallId": "16448d95-ee21-4def-b880-26f6f159c213",
       "multiverseid": 675616,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Phenomenon Investigators",
       "scryfallId": "57195155-6bdf-43c3-9f2e-11c31aef6b9c",
       "multiverseid": 675633,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "f1f616f2-d69d-4763-8ff0-3eb05a543926",
       "multiverseid": 676121,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Redress Fate",
       "scryfallId": "19f56096-f692-4719-af38-6a4955f2b65c",
       "multiverseid": 675604,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Secret Arcade // Dusty Parlor",
       "scryfallId": "fe050c16-9be5-42ef-988f-0531a8bb2352",
       "multiverseid": 675605,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Soaring Lightbringer",
       "scryfallId": "fc7895bf-a5fe-45bd-bc57-c4abe0703900",
       "multiverseid": 675606,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Demon of Fate's Design",
       "scryfallId": "0d3668fe-78d9-4c2c-8c83-5cace9d39e03",
       "multiverseid": 676010,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "b379c8f1-817c-4f18-8f58-45c40504433e",
       "multiverseid": 673674,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "The Master of Keys",
       "scryfallId": "3545341b-dacc-4ac8-976e-39754a62bbc3",
       "multiverseid": 675461,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Doomwake Giant",
       "scryfallId": "db8ff080-04d8-43c6-a8a5-1bf4eabf01ca",
       "multiverseid": 676011,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Dream Eater",
       "scryfallId": "c721d449-fc77-4d86-8baf-158181e37087",
       "multiverseid": 675989,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Inkshield",
       "scryfallId": "bf3af774-526e-4b64-a34f-407e6ef92d24",
       "multiverseid": 676094,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Extravagant Replication",
       "scryfallId": "c8f6f1f4-a4ab-48dc-9520-0852e6b6ce20",
       "multiverseid": 675990,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Otherworldly Gaze",
       "scryfallId": "40bafd2b-acd4-46f0-abb2-139e2918ae99",
       "multiverseid": 675995,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Life Insurance",
       "scryfallId": "60e1921e-6c98-4c60-88f4-8fbb6f30236e",
       "multiverseid": 676097,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Mirrormade",
       "scryfallId": "a26cbfbe-fbb8-4804-b065-ab2c42ddad9b",
       "multiverseid": 675993,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Return to Dust",
       "scryfallId": "3c3745c2-5509-4d6b-8f49-5cb93374edea",
       "multiverseid": 675975,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Moon-Blessed Cleric",
       "scryfallId": "0555e095-8c6f-4436-80fe-99b641fad2df",
       "multiverseid": 675797,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "b16321b6-3e28-424b-ac72-038cc4ed6458",
       "multiverseid": 675979,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Monologue Tax",
       "scryfallId": "4ba2c9b9-06bc-4bf2-8df5-f0748fb2b8eb",
       "multiverseid": 675973,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Thirst for Meaning",
       "scryfallId": "b91bd773-b36b-4a7a-a9e4-3a07cff90646",
       "multiverseid": 676002,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Dimir Aqueduct",
       "scryfallId": "84bf9d60-64b8-4209-acfe-e07eefc6bf1f",
       "multiverseid": 676143,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "e524216c-ed35-49a3-868f-7ad0a0027a80",
       "multiverseid": 676147,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Telling Time",
       "scryfallId": "c2616749-699b-4928-8984-aba630d3397a",
       "multiverseid": 675803,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "One with the Multiverse",
       "scryfallId": "1c85ae22-ccd0-4649-a736-1915043daae7",
       "multiverseid": 675994,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Portent",
       "scryfallId": "5b360632-9c81-4b9c-8b9f-ac0b51c974a0",
       "multiverseid": 675802,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Ponder",
       "scryfallId": "8cbab1d1-25cb-456f-8d1c-3d64eb7265ea",
       "multiverseid": 675801,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Halimar Depths",
       "scryfallId": "63eb18e0-c723-4de4-8498-c5362c75b2b4",
       "multiverseid": 676155,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Hall of Heliod's Generosity",
       "scryfallId": "f08dfd99-59fa-4a6c-bd69-c647f639de4d",
       "multiverseid": 676156,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Diabolic Vision",
       "scryfallId": "c360753a-af32-4f1d-a1c7-c3f3c075ecc0",
       "multiverseid": 675815,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Obscura Storefront",
       "scryfallId": "d8eaf8d2-8029-49d9-a94b-a72dc31fc81f",
       "multiverseid": 676164,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "9c7c08fc-b6ee-498c-8ab6-fd6be27c9d97",
       "multiverseid": 676165,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Utter End",
       "scryfallId": "1819a0af-0775-431d-9637-13f8f10830f5",
       "multiverseid": 675819,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Tainted Field",
       "scryfallId": "c6eeab6f-a738-4005-91c2-a5f81df5c569",
       "multiverseid": 676175,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Terminus",
       "scryfallId": "4c53c684-37f9-4b95-88be-a42b9600c47c",
       "multiverseid": 675798,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Tainted Isle",
       "scryfallId": "70e8e7e2-e9ea-4358-805e-c5110c8d8443",
       "multiverseid": 676176,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Temple of Deceit",
       "scryfallId": "ebb2cc74-d8dc-47e8-8227-c1b203b52dc4",
       "multiverseid": 676180,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Shark Typhoon",
       "scryfallId": "2b2accb1-d77b-4633-9d0c-b972d9c014bb",
       "multiverseid": 676000,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Sigil of the Empty Throne",
       "scryfallId": "6875be24-1515-488f-a899-929c8e480dfd",
       "multiverseid": 675976,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Sphere of Safety",
       "scryfallId": "5c4e3031-ffc2-4d4d-a9f9-e85820059315",
       "multiverseid": 675977,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Spirit-Sister's Call",
       "scryfallId": "bc495d03-9340-47cd-afc2-82a1677e69df",
       "multiverseid": 676105,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "3dbee324-5df0-470e-96fb-1f87f377cdfc",
       "multiverseid": 676181,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "82f1a8a3-7fdb-49a3-9649-b5c0b4755cd5",
       "multiverseid": 675822,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "e185a110-9e65-4ecd-a051-16ac6967db3b",
       "multiverseid": 676185,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Entreat the Angels",
       "scryfallId": "ff4411bc-ed4e-4d54-9e1b-21fc77b0e415",
       "multiverseid": 675972,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Read the Bones",
       "scryfallId": "b3198f96-f9d8-494f-a556-24ce3ad3895d",
       "multiverseid": 676027,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Time Wipe",
       "scryfallId": "2198907e-a13a-42e4-ad79-ac7efba4e610",
       "multiverseid": 676110,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     },
     {
       "name": "Plains",
       "scryfallId": "1b499b37-efaf-4484-95e8-a70a9778c804",
       "multiverseid": 672914,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Plains",
       "scryfallId": "1b499b37-efaf-4484-95e8-a70a9778c804",
       "multiverseid": 672914,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Plains",
       "scryfallId": "1b499b37-efaf-4484-95e8-a70a9778c804",
       "multiverseid": 672914,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Plains",
       "scryfallId": "1b499b37-efaf-4484-95e8-a70a9778c804",
       "multiverseid": 672914,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Plains",
       "scryfallId": "1b499b37-efaf-4484-95e8-a70a9778c804",
       "multiverseid": 672914,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Swamp",
       "scryfallId": "3c51de66-a3ed-4ca9-befb-9813e96c4ade",
       "multiverseid": 672918,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Swamp",
       "scryfallId": "3c51de66-a3ed-4ca9-befb-9813e96c4ade",
       "multiverseid": 672918,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Swamp",
       "scryfallId": "3c51de66-a3ed-4ca9-befb-9813e96c4ade",
       "multiverseid": 672918,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Swamp",
       "scryfallId": "3c51de66-a3ed-4ca9-befb-9813e96c4ade",
       "multiverseid": 672918,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Swamp",
       "scryfallId": "3c51de66-a3ed-4ca9-befb-9813e96c4ade",
       "multiverseid": 672918,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Duskmourn: House of Horror"
     },
     {
       "name": "Mesa Enchantress",
       "scryfallId": "c4f9e9fc-8b89-40ee-9b20-10e4a23e6333",
       "multiverseid": 675796,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Duskmourn: House of Horror Commander"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:59.991Z",
+    "retrievedDate": "2025-12-28T02:08:13.333Z",
     "sourceUrl": "https://archidekt.com/decks/9166525",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2024-09-11T18:02:10.175Z"
   }
 }

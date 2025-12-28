@@ -7,509 +7,1012 @@
     {
       "name": "Temmet, Naktamun's Will",
       "scryfallId": "c0629894-0b72-4abe-9771-03becfdb241c",
-      "multiverseid": 692081
+      "multiverseid": 692081,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     }
   ],
   "cards": [
     {
       "name": "Lazotep Chancellor",
       "scryfallId": "604d4c94-c73f-423b-8dc0-86a92674adf7",
-      "multiverseid": 692467
+      "multiverseid": 692467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Wayward Servant",
       "scryfallId": "65475db4-ea0f-4ef3-ac2f-18e308c64682",
-      "multiverseid": 692471
+      "multiverseid": 692471,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Timeless Dragon",
       "scryfallId": "21070f13-42b3-40c6-8909-25337be6ea6d",
-      "multiverseid": 692417
+      "multiverseid": 692417,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Plague Belcher",
       "scryfallId": "26c3846a-b5a6-42ad-bcc0-96f2077b1b47",
-      "multiverseid": 692447
+      "multiverseid": 692447,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Hashaton, Scarab's Fist",
       "scryfallId": "02645651-cd55-4bd0-8a4d-fa257270a0e0",
-      "multiverseid": 692078
+      "multiverseid": 692078,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "On Wings of Gold",
       "scryfallId": "d5e247d3-8542-4e6c-b256-5ae216eeceb0",
-      "multiverseid": 692166
+      "multiverseid": 692166,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Priest of the Crossing",
       "scryfallId": "f0740a86-84eb-4720-b4d7-c5f5e561ddc7",
-      "multiverseid": 692167
+      "multiverseid": 692167,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Renewed Solidarity",
       "scryfallId": "9a72b230-dbb0-4d38-ba7a-fb0bd03b6c47",
-      "multiverseid": 692168
+      "multiverseid": 692168,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Wizened Mentor",
       "scryfallId": "f903afd3-01b5-4892-bd78-8da1d2f36252",
-      "multiverseid": 692169
+      "multiverseid": 692169,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Prophet of the Scarab",
       "scryfallId": "0208b947-78d9-45bd-855f-846d9a7c547d",
-      "multiverseid": 692170
+      "multiverseid": 692170,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Rhet-Tomb Mystic",
       "scryfallId": "131a68e6-09ee-4afd-a0e1-d63bbc0775e8",
-      "multiverseid": 692171
+      "multiverseid": 692171,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Lost Monarch of Ifnir",
       "scryfallId": "cae37ab0-9d60-45e9-98cb-e7427e508bc5",
-      "multiverseid": 692172
+      "multiverseid": 692172,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Accursed Duneyard",
       "scryfallId": "bd9e6ba8-1c5e-4416-8bff-90db3b3b1f41",
-      "multiverseid": 692181
+      "multiverseid": 692181,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Commence the Endgame",
       "scryfallId": "4ed00cef-17e0-4d21-97b7-2f7e31c7d752",
-      "multiverseid": 692263
+      "multiverseid": 692263,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Grave Titan",
       "scryfallId": "179c5a3a-ea17-46bb-9a61-18b31f4705a9",
-      "multiverseid": 692267
+      "multiverseid": 692267,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Midnight Reaper",
       "scryfallId": "33c16202-4d7f-449c-8b29-144b2a9fda9a",
-      "multiverseid": 692269
+      "multiverseid": 692269,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Zombie Master",
       "scryfallId": "8b0715e7-8552-4e6f-bb3f-110275f59e88",
-      "multiverseid": 677465
+      "multiverseid": 677465,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Mystery Booster 2"
     },
     {
       "name": "Champion of Wits",
       "scryfallId": "cf76d414-9424-4fd5-a1ff-2ff345ad6b0a",
-      "multiverseid": 692422
+      "multiverseid": 692422,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Murderous Rider // Swift End",
       "scryfallId": "67ea8e53-aa22-42d1-bca4-64b0b0f0bbdb",
-      "multiverseid": 692270
+      "multiverseid": 692270,
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Dusk // Dawn",
       "scryfallId": "b75c309f-b48f-46c6-aef7-7e7ca64da262",
-      "multiverseid": 692415
+      "multiverseid": 692415,
+      "twoFaced": true,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Angel of Sanctions",
       "scryfallId": "546b6ffc-44e3-4994-b84b-6282c6474a1a",
-      "multiverseid": 692412
+      "multiverseid": 692412,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "God-Eternal Oketra",
       "scryfallId": "6453140c-6588-41d8-b43f-1858d70d9761",
-      "multiverseid": 692416
+      "multiverseid": 692416,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Pull from Tomorrow",
       "scryfallId": "e45740e7-c992-4ec0-93bd-9718b6d3ffea",
-      "multiverseid": 692431
+      "multiverseid": 692431,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Archfiend of Ifnir",
       "scryfallId": "9656903f-bd3e-4944-9f5f-f2d372a19f56",
-      "multiverseid": 692436
+      "multiverseid": 692436,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Crowded Crypt",
       "scryfallId": "d6539667-d082-4f8e-919a-c1882545baea",
-      "multiverseid": 692438
+      "multiverseid": 692438,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Dread Summons",
       "scryfallId": "4d1c1c36-869c-4964-a185-7a9c3a043b2d",
-      "multiverseid": 692440
+      "multiverseid": 692440,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Damn",
       "scryfallId": "1b25c224-4531-4fdc-9845-6663eaf60540",
-      "multiverseid": 692439
+      "multiverseid": 692439,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Dreadhorde Invasion",
       "scryfallId": "ccd2fc83-7fbe-45c4-a5f3-18a105ce6f09",
-      "multiverseid": 692441
+      "multiverseid": 692441,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "The Scarab God",
       "scryfallId": "7546b37d-c83a-4632-bebf-cc46d114481f",
-      "multiverseid": 692470
+      "multiverseid": 692470,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Rot Hulk",
       "scryfallId": "83b0c93a-d1f7-4694-990b-6c2c70648bbc",
-      "multiverseid": 692448
+      "multiverseid": 692448,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "God-Pharaoh's Gift",
       "scryfallId": "b34cdeff-f749-4609-93c8-21608106d099",
-      "multiverseid": 692481
+      "multiverseid": 692481,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Never // Return",
       "scryfallId": "f6bb09b1-d28a-48c1-9d97-11bec84afb5e",
-      "multiverseid": 692446
+      "multiverseid": 692446,
+      "twoFaced": true,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Maskwood Nexus",
       "scryfallId": "c6f2c543-9b01-4760-966a-f0609c24f53e",
-      "multiverseid": 692482
+      "multiverseid": 692482,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Adarkar Wastes",
       "scryfallId": "eabb8cd7-3f5c-40ea-b339-f0b6fed3489a",
-      "multiverseid": 692494
+      "multiverseid": 692494,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "18e5a0d3-d132-40e2-85ae-a1b743dfdd33",
-      "multiverseid": 692498
+      "multiverseid": 692498,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Drowned Catacomb",
       "scryfallId": "6b4097eb-a1e5-4560-80d8-11bb5628dd0d",
-      "multiverseid": 692502
+      "multiverseid": 692502,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "0f31cb4c-c0f4-42fc-9661-723f78ee4d56",
-      "multiverseid": 692505
+      "multiverseid": 692505,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Fetid Pools",
       "scryfallId": "e0569522-d023-4023-abb2-97cf3226abf8",
-      "multiverseid": 692506
+      "multiverseid": 692506,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Glacial Fortress",
       "scryfallId": "11bee1bf-bc75-4d4f-8f41-a9a3c0cdd19e",
-      "multiverseid": 692509
+      "multiverseid": 692509,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "5947587e-3284-4d9c-a1cc-e6cbe5577c1e",
-      "multiverseid": 692511
+      "multiverseid": 692511,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Isolated Chapel",
       "scryfallId": "7b68c431-ad14-439b-9513-67479af8f2c2",
-      "multiverseid": 692512
+      "multiverseid": 692512,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "5babbc79-ad36-4088-a456-8acf64cfe9f6",
-      "multiverseid": 692517
+      "multiverseid": 692517,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "133360b4-b408-417f-a16f-966bc328af4b",
-      "multiverseid": 692524
+      "multiverseid": 692524,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Temple of Deceit",
       "scryfallId": "ca93efca-93a0-4307-b004-ec74ad9841fc",
-      "multiverseid": 692526
+      "multiverseid": 692526,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "9e283d6e-db4e-4fec-92d4-1e035f253400",
-      "multiverseid": 692528
+      "multiverseid": 692528,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Underground River",
       "scryfallId": "ac17bee2-5b9f-4b8f-8647-e44d9175e055",
-      "multiverseid": 692531
+      "multiverseid": 692531,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Unholy Grotto",
       "scryfallId": "e29031f5-19c7-49d7-bd05-01d151592f4a",
-      "multiverseid": 692532
+      "multiverseid": 692532,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "3b701a88-6074-476f-b87c-9a6d5d22c414",
-      "multiverseid": 692262
+      "multiverseid": 692262,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Command Tower",
       "scryfallId": "e1fee302-b37b-4057-934f-cf212e6ecc17",
-      "multiverseid": 692284
+      "multiverseid": 692284,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "8380b6c9-b4fd-41fa-8eca-d48e00edef30",
-      "multiverseid": 692276
+      "multiverseid": 692276,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "c946b161-0e4f-4c0a-a075-cdcf05504d0b",
-      "multiverseid": 692282
+      "multiverseid": 692282,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "4898fba1-d692-4440-bfff-ae535bdc1ba8",
-      "multiverseid": 692516
+      "multiverseid": 692516,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Fleshbag Marauder",
       "scryfallId": "ea3ac95f-23ad-4b05-bfbd-5de667c78ddc",
-      "multiverseid": 692442
+      "multiverseid": 692442,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Cast Out",
       "scryfallId": "0d403ab1-56d1-44a6-a414-6cc7a114c62d",
-      "multiverseid": 692414
+      "multiverseid": 692414,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Binding Mummy",
       "scryfallId": "5433a7a1-0602-4aa5-ae7e-815b105bc601",
-      "multiverseid": 692413
+      "multiverseid": 692413,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Eternal Skylord",
       "scryfallId": "ab5b3aba-8542-4157-b6b6-265611a2a52f",
-      "multiverseid": 692426
+      "multiverseid": 692426,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Twisted Abomination",
       "scryfallId": "99e81075-6f82-4cfb-8d49-07609f9882fa",
-      "multiverseid": 692449
+      "multiverseid": 692449,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Despark",
       "scryfallId": "8555d8c1-ef77-4471-8fbf-22bb16d0f040",
-      "multiverseid": 692465
+      "multiverseid": 692465,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Gleaming Overseer",
       "scryfallId": "6369ff49-0b82-4722-b04f-ca5f529d1e82",
-      "multiverseid": 692466
+      "multiverseid": 692466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Bontu's Monument",
       "scryfallId": "ba25bdf9-b6bf-4f4f-af37-8bfb84a74c97",
-      "multiverseid": 692474
+      "multiverseid": 692474,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "3adcc4c3-9305-4394-a64f-fd0fa107cbf9",
-      "multiverseid": 692475
+      "multiverseid": 692475,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Gate to the Afterlife",
       "scryfallId": "4949afaa-e512-4d2e-aeca-a3e4d37b1335",
-      "multiverseid": 692480
+      "multiverseid": 692480,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Talisman of Hierarchy",
       "scryfallId": "8be0a06b-c2b6-4b78-9b14-9d854736c251",
-      "multiverseid": 692492
+      "multiverseid": 692492,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Arcane Sanctum",
       "scryfallId": "b57164a6-aca8-4cd2-9b40-1c10f13c1c6b",
-      "multiverseid": 692496
+      "multiverseid": 692496,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "f05aa4e3-2919-46cb-9eeb-926ddf18d6f4",
-      "multiverseid": 692497
+      "multiverseid": 692497,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Desert of the Glorified",
       "scryfallId": "5f28907a-491d-4d09-93cb-b5729696607d",
-      "multiverseid": 692499
+      "multiverseid": 692499,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Desert of the Mindful",
       "scryfallId": "39a20c39-2254-4052-822f-eb5bbd501cdd",
-      "multiverseid": 692500
+      "multiverseid": 692500,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Desert of the True",
       "scryfallId": "e8513dd3-6e2b-42da-89c7-e35ab0c0c927",
-      "multiverseid": 692501
+      "multiverseid": 692501,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "6a28f0c0-6673-4fe1-b2a1-1f9ed236eff7",
-      "multiverseid": 692504
+      "multiverseid": 692504,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "cc8f8ede-9620-4f7f-8326-a75031ef6ec1",
-      "multiverseid": 692514
+      "multiverseid": 692514,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "ef995c58-19ea-4f09-b2c3-7bb476058ced",
-      "multiverseid": 692529
+      "multiverseid": 692529,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
-      "multiverseid": 689037
+      "multiverseid": 689037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
-      "multiverseid": 689037
+      "multiverseid": 689037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
-      "multiverseid": 689037
+      "multiverseid": 689037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
-      "multiverseid": 689037
+      "multiverseid": 689037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
-      "multiverseid": 689037
+      "multiverseid": 689037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
-      "multiverseid": 689040
+      "multiverseid": 689040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
-      "multiverseid": 689040
+      "multiverseid": 689040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
-      "multiverseid": 689040
+      "multiverseid": 689040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
-      "multiverseid": 689040
+      "multiverseid": 689040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
-      "multiverseid": 689043
+      "multiverseid": 689043,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
-      "multiverseid": 689043
+      "multiverseid": 689043,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
-      "multiverseid": 689043
+      "multiverseid": 689043,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
-      "multiverseid": 689043
+      "multiverseid": 689043,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
-      "multiverseid": 689043
+      "multiverseid": 689043,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift"
     },
     {
       "name": "Corpse Knight",
       "scryfallId": "8859c03c-6c75-402f-9870-d4067a4ec4ed",
-      "multiverseid": 692275
+      "multiverseid": 692275,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Gravecrawler",
       "scryfallId": "08ef7130-5051-4e2c-b473-2dae3176078e",
-      "multiverseid": 692268
+      "multiverseid": 692268,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Lord of the Accursed",
       "scryfallId": "15750fb6-4141-4ad9-937d-e18c76154a85",
-      "multiverseid": 692445
+      "multiverseid": 692445,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Cemetery Reaper",
       "scryfallId": "b874f27a-2e10-4331-8f6d-fd3575be0885",
-      "multiverseid": 692437
+      "multiverseid": 692437,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Gempalm Polluter",
       "scryfallId": "2001d23e-feae-4a91-917e-e239b1c2b17c",
-      "multiverseid": 692443
+      "multiverseid": 692443,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Vizier of Many Faces",
       "scryfallId": "b8385f76-3057-4f8f-af84-f70214364870",
-      "multiverseid": 692434
+      "multiverseid": 692434,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Talisman of Dominance",
       "scryfallId": "939cc767-0de1-4d94-a1f9-fe07e923d343",
-      "multiverseid": 692491
+      "multiverseid": 692491,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Orzhov Signet",
       "scryfallId": "ca0d3984-fbb3-4661-a424-f79d2253e057",
-      "multiverseid": 692484
+      "multiverseid": 692484,
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Dimir Signet",
       "scryfallId": "6173d331-1dd9-47e0-bb9c-5655b179737f",
-      "multiverseid": 692479
+      "multiverseid": 692479,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Liliana, Death's Majesty",
       "scryfallId": "ae653ad0-c796-49d4-b893-25d627f1ff79",
-      "multiverseid": 692444
+      "multiverseid": 692444,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Undead Augur",
       "scryfallId": "5d86f1a9-7c51-4456-b1d9-7fe82f073929",
-      "multiverseid": 692450
+      "multiverseid": 692450,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Corpse Augur",
       "scryfallId": "8d1d7df2-acf8-4e10-81cc-bdb23ffd4c7f",
-      "multiverseid": 692265
+      "multiverseid": 692265,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Forgotten Creation",
       "scryfallId": "2ff3a5b6-b39a-45d0-a8f5-1447776bfe74",
-      "multiverseid": 692427
+      "multiverseid": 692427,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Aetherdrift Commander"
     },
     {
       "name": "Cryptbreaker",
       "scryfallId": "a3364105-68e9-45b5-874a-5c273d10f3f9",
-      "multiverseid": 692266
+      "multiverseid": 692266,
+      "twoFaced": false,
+      "colorIdentity": [
+        "Black"
+      ],
+      "set": "Aetherdrift Commander"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-15T20:05:56.371Z",
+    "retrievedDate": "2025-12-28T02:08:14.721Z",
     "sourceUrl": "https://archidekt.com/decks/11054763",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2025-01-25T20:21:19.007Z"
   }
 }

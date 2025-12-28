@@ -8,13 +8,22 @@
       "name": "Sarah Jane Smith",
       "scryfallId": "1ba76f68-e647-4786-903c-92dbd3cef05d",
       "multiverseid": 634421,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Fourth Doctor",
       "scryfallId": "c84ea0fd-efc7-4614-9f8f-41a3c71fceaa",
       "multiverseid": 634405,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     }
   ],
   "cards": [
@@ -22,594 +31,995 @@
       "name": "Command Tower",
       "scryfallId": "811d6e5d-c8a3-41ae-910e-e0f194f42292",
       "multiverseid": 635589,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Crisis of Conscience",
       "scryfallId": "308d9672-58a7-4ec8-a20d-7054d76fde37",
       "multiverseid": 634712,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Deserted Beach",
       "scryfallId": "ed66e849-8fc9-46a1-9b8a-6845b5bc0734",
       "multiverseid": 635596,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Day of Destiny",
       "scryfallId": "e0f2bd7a-4d14-43ef-b04a-3383aeae615c",
       "multiverseid": 635532,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Displaced Dinosaurs",
       "scryfallId": "43319645-53b0-41f6-be90-9690e86e12d3",
       "multiverseid": 634795,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Gallifrey Council Chamber",
       "scryfallId": "83d990f5-a7b7-4482-95e6-b03a397192e2",
       "multiverseid": 634883,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Reverse the Polarity",
       "scryfallId": "76f3ea66-555c-490d-b34f-12c267bc4e9b",
       "multiverseid": 634749,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Plains",
       "scryfallId": "1aaea970-a19c-400a-a8cb-5d30f9cc2672",
       "multiverseid": 635467,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Plains",
       "scryfallId": "1aaea970-a19c-400a-a8cb-5d30f9cc2672",
       "multiverseid": 635467,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Port Town",
       "scryfallId": "df58d745-2f08-447f-a7db-41765731e36c",
       "multiverseid": 635620,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "e32fcfa0-50df-4815-ad8f-0e0db32c307b",
       "multiverseid": 635621,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Susan Foreman",
       "scryfallId": "ad40ec4f-37e7-4e6d-b47b-8b13ea2c9157",
       "multiverseid": 634805,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Curse of Fenric",
       "scryfallId": "0e399b70-d793-4833-8317-557fa98a611c",
       "multiverseid": 634813,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Five Doctors",
       "scryfallId": "ada5e97f-c079-445c-8071-1c2a6dd00001",
       "multiverseid": 634796,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Traverse Eternity",
       "scryfallId": "f6570c23-f135-4e81-9a4c-934c298a51ad",
       "multiverseid": 634755,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Trial of a Time Lord",
       "scryfallId": "52b68ed3-0d26-4334-8d0c-2d28ced8ee4c",
       "multiverseid": 634724,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Duggan, Private Detective",
       "scryfallId": "ad21aafe-c093-40db-830e-da4c87055254",
       "multiverseid": 634818,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Dreamroot Cascade",
       "scryfallId": "3a8c7416-c0af-419d-892a-ee989585bf79",
       "multiverseid": 635599,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Five Hundred Year Diary",
       "scryfallId": "89c1ebc5-6775-47f3-be43-e59b281eba55",
       "multiverseid": 634737,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Forest",
       "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
       "multiverseid": 635475,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Forest",
       "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
       "multiverseid": 635475,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Forest",
       "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
       "multiverseid": 635475,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Fortified Village",
       "scryfallId": "bb58be08-7988-4ea5-8338-019a03171d16",
       "multiverseid": 635606,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "c2bc648d-def5-4442-9cfe-0f93fee631f4",
       "multiverseid": 635602,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Explore",
       "scryfallId": "25768b76-c6d7-4b0b-8427-d0a80633aa39",
       "multiverseid": 635557,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Horizon Canopy",
       "scryfallId": "3cf2baad-0160-419d-bba5-f4f35596aa61",
       "multiverseid": 635613,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Heroic Intervention",
       "scryfallId": "cd11d822-51c7-41dd-8f78-718d884019e8",
       "multiverseid": 635559,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Sonic Screwdriver",
       "scryfallId": "2a55d514-b670-4fe2-825b-9ba955977cac",
       "multiverseid": 634881,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0f44a54b-512e-45ef-80ee-7982d2eaf762",
       "multiverseid": 635571,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "db4a9124-a692-4086-8f22-574fdcd81ae2",
       "multiverseid": 635637,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Talisman of Unity",
       "scryfallId": "a395b259-1f3f-43ab-9636-d1c218661c15",
       "multiverseid": 635580,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Time Lord Regeneration",
       "scryfallId": "2aeba907-5dc7-4dbb-b5a4-c86e8151f2ec",
       "multiverseid": 634754,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Twice Upon a Time // Unlikely Meeting",
       "scryfallId": "9d504a87-f782-4b70-91da-c1944925e86a",
       "multiverseid": 634756,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "12f1a8ce-a7c2-4e74-a4f2-22c914e998c4",
       "multiverseid": 635644,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Vrestin, Menoptra Leader",
       "scryfallId": "b117d388-ac94-4e20-84f0-f4d242121d7f",
       "multiverseid": 634861,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Temple of Plenty",
       "scryfallId": "9b6a47d5-e96b-4e90-8e63-a0e9376f2359",
       "multiverseid": 635645,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Trenzalore Clocktower",
       "scryfallId": "64444549-1198-4465-91d5-02a7903691dc",
       "multiverseid": 634885,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "c345eb1f-3a44-432c-8bee-39099e1947e6",
       "multiverseid": 635641,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Return to Dust",
       "scryfallId": "c516678c-37ce-4958-a149-aff03ef1dfd6",
       "multiverseid": 635537,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Fifth Doctor",
       "scryfallId": "2f548f4b-77b9-47bb-b262-a851fdf0124f",
       "multiverseid": 634822,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Nyssa of Traken",
       "scryfallId": "bed41499-759d-4a3b-aabb-c462d5831956",
       "multiverseid": 634746,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Tegan Jovanka",
       "scryfallId": "361769b3-7e10-4e0f-b623-c00e2144463d",
       "multiverseid": 634723,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Caves of Androzani",
       "scryfallId": "7b260c0a-b9dc-4a4f-83ee-5a7fbd9b3f67",
       "multiverseid": 634710,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Glacial Fortress",
       "scryfallId": "65e28187-fece-4f78-b8fe-43ee6df4d338",
       "multiverseid": 635611,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Third Doctor",
       "scryfallId": "2934f5e5-2274-4de7-a8c7-ca034f1fec29",
       "multiverseid": 634857,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The War Games",
       "scryfallId": "0662fee0-a6bc-4a1c-8a0f-6e7efc6b8a21",
       "multiverseid": 634725,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Hero's Blade",
       "scryfallId": "a84f5c57-0589-4eac-bad7-775122c767c1",
       "multiverseid": 635567,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "c1422a65-5bda-4d75-8682-8c7351b3dba6",
       "multiverseid": 635614,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Gallifrey Stands",
       "scryfallId": "dd1f865e-759e-4303-81b5-74a558d270ec",
       "multiverseid": 634827,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Overgrown Farmland",
       "scryfallId": "e7790ee3-87dc-497f-87ea-9554ca67600d",
       "multiverseid": 635618,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Sixth Doctor",
       "scryfallId": "c045ccb2-28d1-4bbe-9feb-3e86988fd24d",
       "multiverseid": 634854,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "30c6f93e-e03f-4749-8b30-9375c79f10f4",
       "multiverseid": 635619,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "6ac8db7a-009a-4141-bba7-b5fdfaf8d245",
       "multiverseid": 635570,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Heroes' Podium",
       "scryfallId": "4503b65f-416e-49af-88c8-0871bca2c050",
       "multiverseid": 635568,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Path to Exile",
       "scryfallId": "d0b5c4d1-4271-4e89-9947-95ca9ff1d63d",
       "multiverseid": 635536,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Romana II",
       "scryfallId": "4ccc3ebd-34e1-421c-87b4-0be905954289",
       "multiverseid": 634722,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Peri Brown",
       "scryfallId": "b2f81beb-4565-4cfe-80a2-456f3d44f461",
       "multiverseid": 634721,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Ian Chesterton",
       "scryfallId": "8bce4bde-33af-4c91-903f-c46218664353",
       "multiverseid": 634717,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Jamie McCrimmon",
       "scryfallId": "75cececf-8547-4355-972b-7ffbafcda1c2",
       "multiverseid": 634800,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Jo Grant",
       "scryfallId": "a4c73220-363e-44d7-b406-436246c02a75",
       "multiverseid": 634718,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Leela, Sevateem Warrior",
       "scryfallId": "f5a4e5b5-70c8-4488-9e7d-7d68fe8219d7",
       "multiverseid": 634802,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Island",
       "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
       "multiverseid": 635469,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Island",
       "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
       "multiverseid": 635469,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "K-9, Mark I",
       "scryfallId": "b2e46695-7bd3-448c-a5ea-6d544943ec5f",
       "multiverseid": 634742,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Seaside Citadel",
       "scryfallId": "88308a2d-5d93-4bc3-a5db-e895a0db76e2",
       "multiverseid": 635628,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Sergeant John Benton",
       "scryfallId": "01f40e07-f565-4b9e-87a5-5b28b4e9fb0b",
       "multiverseid": 634852,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "9761639c-8b54-4ef2-83cf-d45f9da33388",
       "multiverseid": 635632,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "TARDIS",
       "scryfallId": "b059b1d8-3bfb-40c9-9344-addda43509ab",
       "multiverseid": 634882,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Talisman of Progress",
       "scryfallId": "c1f67117-3d40-466d-9ea8-f75e1ad10b45",
       "multiverseid": 635579,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "4bc8dea8-a6af-4bba-affa-92aca36a8413",
       "multiverseid": 635538,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Scattered Groves",
       "scryfallId": "f12f441a-4d58-4ea5-90b8-f4e32db391a1",
       "multiverseid": 635627,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Night of the Doctor",
       "scryfallId": "513d33fb-becc-4804-806a-764d08fc7b7d",
       "multiverseid": 634719,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Sea Devils",
       "scryfallId": "96fcb0cb-0df9-4a45-beab-08dc39cf6b3b",
       "multiverseid": 634803,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Eighth Doctor",
       "scryfallId": "a26bf6fd-ced3-4c37-8adb-9a75c6d6d5cc",
       "multiverseid": 634819,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Second Doctor",
       "scryfallId": "568c2687-4381-4954-9cab-f669d1fe6306",
       "multiverseid": 634851,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The First Doctor",
       "scryfallId": "b0b4d7db-56b1-4110-b4e4-11748201caf9",
       "multiverseid": 634823,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "The Seventh Doctor",
       "scryfallId": "8dd6bfb3-1338-4ee6-9281-30a7428200d2",
       "multiverseid": 634853,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Time Wipe",
       "scryfallId": "96e5358a-23b6-4dac-893e-48f4481609ab",
       "multiverseid": 635564,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Waterlogged Grove",
       "scryfallId": "46931098-ae3c-409a-8789-7071205e11ee",
       "multiverseid": 635657,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Thought Vessel",
       "scryfallId": "84506a3f-46ee-4482-9f7d-0409c2699ae4",
       "multiverseid": 635581,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Thriving Isle",
       "scryfallId": "352b106e-46de-4087-9533-a9f4b5536220",
       "multiverseid": 635653,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Three Visits",
       "scryfallId": "fc20bfa9-6d55-49f4-a86a-8fb3b433ee29",
       "multiverseid": 635561,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Vineglimmer Snarl",
       "scryfallId": "ee44297b-fd89-4d95-a502-cdd98fd4fbc3",
       "multiverseid": 635655,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Thriving Heath",
       "scryfallId": "227d230b-43ac-4980-80b8-ae7b9aa63e6d",
       "multiverseid": 635652,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Thriving Grove",
       "scryfallId": "ea2ccec9-7377-4038-b23b-58a714e797b9",
       "multiverseid": 635651,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Ace's Baseball Bat",
       "scryfallId": "5f1132b6-9db6-440c-9e0a-fae6c157e8a3",
       "multiverseid": 634865,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Ace, Fearless Rebel",
       "scryfallId": "75f001a0-8393-4977-84bb-cde39740606c",
       "multiverseid": 634793,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Banish to Another Universe",
       "scryfallId": "61f39d4c-af2d-486d-9408-b987474f8352",
       "multiverseid": 634708,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "City of Death",
       "scryfallId": "bd4d9b25-02ea-4ce3-a35f-7f427a74f591",
       "multiverseid": 634794,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "d87d58eb-b95a-48d9-a174-e2d72a29c167",
       "multiverseid": 635565,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "11b93de5-52e6-4a30-88e9-e636f18dccc8",
       "multiverseid": 635584,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Adric, Mathematical Genius",
       "scryfallId": "1f290a17-699e-420d-8322-3e28300a0d2e",
       "multiverseid": 634728,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Celestial Colonnade",
       "scryfallId": "f5d71183-509f-40b8-85af-8f118cad5c13",
       "multiverseid": 635586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "82fec728-2bf5-40a5-b3d7-02f366271c0c",
       "multiverseid": 635583,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Bessie, the Doctor's Roadster",
       "scryfallId": "e5bb585d-2b49-44a0-93d0-98dc8e0727c2",
       "multiverseid": 634866,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Doctor Who"
     },
     {
       "name": "Barbara Wright",
       "scryfallId": "414bdd33-549d-4690-917c-ea48decffbbb",
       "multiverseid": 634709,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "Alistair, the Brigadier",
       "scryfallId": "bf952d23-291d-42fa-8f2a-e4002a04b95f",
       "multiverseid": 634807,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "set": "Doctor Who"
     },
     {
       "name": "An Unearthly Child",
       "scryfallId": "72b20b07-2983-4b5e-9351-b8d7a5bcd72a",
       "multiverseid": 634730,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Doctor Who"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:49.344Z",
+    "retrievedDate": "2025-12-28T02:08:02.158Z",
     "sourceUrl": "https://archidekt.com/decks/5644280",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2023-10-16T18:41:54.924Z"
   }
 }

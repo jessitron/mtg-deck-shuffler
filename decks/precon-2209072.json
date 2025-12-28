@@ -8,7 +8,12 @@
       "name": "Ranar the Ever-Watchful",
       "scryfallId": "1c8c41dd-8551-4ce8-a9be-9b9f65718852",
       "multiverseid": 508148,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     }
   ],
   "cards": [
@@ -16,600 +21,992 @@
       "name": "Angel of Finality",
       "scryfallId": "fef86cfe-6e4a-4ff7-bb6d-914d8c1e0782",
       "multiverseid": 508307,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Angel of Serenity",
       "scryfallId": "c175b50d-81cc-45dd-854f-7f8ca31cffa4",
       "multiverseid": 508308,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Arcane Artisan",
       "scryfallId": "ba946cfb-a729-406b-be35-0defaf95283e",
       "multiverseid": 508326,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Brago, King Eternal",
       "scryfallId": "0ac3fb08-741a-49e5-9fae-b26819677d24",
       "multiverseid": 508372,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Burnished Hart",
       "scryfallId": "552e8660-4f52-4ce6-aeee-306676746695",
       "multiverseid": 508388,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Cloudblazer",
       "scryfallId": "edab81f0-dd20-45bd-946d-75b682e1d3d0",
       "multiverseid": 508374,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Cloudgoat Ranger",
       "scryfallId": "6dfaa74a-0ef0-44bb-b8b5-6d121278b5a2",
       "multiverseid": 508311,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Empyrean Eagle",
       "scryfallId": "a2a0f40e-12de-4ee8-8b1e-6989dbfa9a4d",
       "multiverseid": 508375,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Ethereal Valkyrie",
       "scryfallId": "552912bf-4085-49ad-902f-5c41540df97a",
       "multiverseid": 508162,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Evangel of Heliod",
       "scryfallId": "ccc00c82-7c2a-4699-8058-e57f690ece96",
       "multiverseid": 508313,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Flickerwisp",
       "scryfallId": "edacc6f3-e105-4648-8dcc-a5c54c7ad043",
       "multiverseid": 508314,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Geist-Honored Monk",
       "scryfallId": "4d09ef1d-3552-43a3-91c7-0d14c0f06780",
       "multiverseid": 508315,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Goldnight Commander",
       "scryfallId": "80be2fea-3fe6-477e-bcb8-63f441d6cfc1",
       "multiverseid": 508317,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Hero of Bretagard",
       "scryfallId": "4458c16c-b71d-481d-863b-f2e3b1320178",
       "multiverseid": 508150,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Inspired Sphinx",
       "scryfallId": "7f58d798-9b99-45a9-9015-f689145018a8",
       "multiverseid": 508330,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Kor Cartographer",
       "scryfallId": "6226b346-ca4c-45ea-871c-1a8fb7f9be0d",
       "multiverseid": 508318,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Meteor Golem",
       "scryfallId": "0abc2aa2-b505-4e6b-8a37-4e818a8561bc",
       "multiverseid": 508391,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Mist Raven",
       "scryfallId": "8f868751-dd1a-4beb-b3cc-c4a88980299b",
       "multiverseid": 508331,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Mistmeadow Witch",
       "scryfallId": "570afcb8-8cf0-4946-863a-be19c0a5e110",
       "multiverseid": 508378,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Mulldrifter",
       "scryfallId": "345fd005-5052-4500-a260-3649500e21f4",
       "multiverseid": 508332,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Restoration Angel",
       "scryfallId": "3dbdd0bc-92d7-49ae-b7fc-b2d1f0670bd8",
       "multiverseid": 508321,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Sage of the Beyond",
       "scryfallId": "1f5497d0-0765-4619-a218-b6a8709810cb",
       "multiverseid": 508152,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Sea Gate Oracle",
       "scryfallId": "498743ce-0ca5-488a-ae5e-d348b274bf3b",
       "multiverseid": 508333,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Soulherder",
       "scryfallId": "50bc0f5b-7421-45b9-af85-86dd9821b7d8",
       "multiverseid": 508383,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Stoic Farmer",
       "scryfallId": "f53f39e9-f07e-444f-8420-4545e56253e5",
       "multiverseid": 508151,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Sun Titan",
       "scryfallId": "b7e857aa-955e-4afa-9afe-a572fe27765a",
       "multiverseid": 508324,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Surtland Elementalist",
       "scryfallId": "1c9e7fdc-676f-4901-83ff-bfea3a96d937",
       "multiverseid": 506917,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Thunderclap Wyvern",
       "scryfallId": "7fc3c21f-99d5-48dc-b36e-8db597da44bf",
       "multiverseid": 508384,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Vega, the Watcher",
       "scryfallId": "28fced7f-3078-4a54-8f76-0ef14c732e97",
       "multiverseid": 503849,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Wall of Omens",
       "scryfallId": "2561dc8e-1ea6-43f3-8cf1-afd7ec9a2191",
       "multiverseid": 508325,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "23dcb171-884d-480f-ba05-2a7c9cde5cfd",
       "multiverseid": 508335,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Behold the Multiverse",
       "scryfallId": "27855a38-a682-4f97-ad22-ac625e86faec",
       "multiverseid": 503653,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Cosmic Intervention",
       "scryfallId": "933c4a54-5c3a-496b-aa35-edf791155d8d",
       "multiverseid": 508149,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Eerie Interlude",
       "scryfallId": "4ba9f15f-00d2-4797-9228-91b320e85705",
       "multiverseid": 508312,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Ghostly Flicker",
       "scryfallId": "485ab561-9c2a-4f99-9317-8726bcdae364",
       "multiverseid": 508329,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Iron Verdict",
       "scryfallId": "2fb38f5b-a2c2-4b06-8c9c-9615475a43e7",
       "multiverseid": 503622,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Momentary Blink",
       "scryfallId": "ee164002-0416-4232-9484-2e15d8afd6d4",
       "multiverseid": 508320,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Return to Dust",
       "scryfallId": "0034ed95-a296-44c1-a084-e03c57c1865f",
       "multiverseid": 508322,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Saw It Coming",
       "scryfallId": "877a1bb9-5eae-453a-bec0-a9de20ea6815",
       "multiverseid": 503684,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Synthetic Destiny",
       "scryfallId": "dc19002c-e87d-45a1-84f2-f953587ddfd1",
       "multiverseid": 508334,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Warhorn Blast",
       "scryfallId": "3fc98aff-edc0-4f78-ae4f-e08735c9e512",
       "multiverseid": 503644,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Cleansing Nova",
       "scryfallId": "990a7ec3-0ace-4245-a374-690d11a827ae",
       "multiverseid": 508310,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Curse of the Swine",
       "scryfallId": "227c0e9c-4f8f-4402-bdd1-dd744dc49927",
       "multiverseid": 508327,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Migratory Route",
       "scryfallId": "ae79df80-b1f0-4035-807d-0364208dbd75",
       "multiverseid": 508377,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Ravenform",
       "scryfallId": "2c2cfcd7-b43a-4dad-a033-e661f55ceecd",
       "multiverseid": 503680,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Spectral Deluge",
       "scryfallId": "7238c46e-6338-4aca-96f2-934c44c8cc36",
       "multiverseid": 508153,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Storm Herd",
       "scryfallId": "2345331c-a14f-4b4b-a9a4-88c5beb48242",
       "multiverseid": 508323,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Tales of the Ancestors",
       "scryfallId": "c286a74c-3714-4190-8322-84b161debe39",
       "multiverseid": 508154,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Windfall",
       "scryfallId": "0846f753-0d53-4bdd-be0e-19d989db5d5f",
       "multiverseid": 508336,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "f0b666de-5a89-417d-a946-00aafd1f1979",
       "multiverseid": 508386,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "1b6ed82a-42a9-4024-bcad-7c2899882767",
       "multiverseid": 508387,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "443c9ff1-8b30-4c19-9011-17de40659442",
       "multiverseid": 508389,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Marble Diamond",
       "scryfallId": "cdc41213-3cc2-4de5-9b33-56623b65918d",
       "multiverseid": 508390,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "ecbe852d-4538-41dd-bfce-a134a7bc3022",
       "multiverseid": 508392,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Replicating Ring",
       "scryfallId": "b079e285-8431-46aa-bb04-70cac586ed0b",
       "multiverseid": 503860,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim"
     },
     {
       "name": "Sky Diamond",
       "scryfallId": "3a5a5a85-b03d-4ab9-9d31-9c85a5e4c1f0",
       "multiverseid": 508393,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0afa0e33-4804-4b00-b625-c2d6b61090fc",
       "multiverseid": 508394,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "bf700ec0-1fd3-4971-ab03-51365dc8f4f4",
       "multiverseid": 508395,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Banishing Light",
       "scryfallId": "0858ab5a-930c-44f0-9621-4dd634cf39c6",
       "multiverseid": 508309,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Day of the Dragons",
       "scryfallId": "76e4dd1d-b0bd-4fcf-b5c5-fe203af2fe8e",
       "multiverseid": 508328,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Ghostly Prison",
       "scryfallId": "1132a103-3dd7-4a17-afdc-27200b8cfbfc",
       "multiverseid": 508316,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Marshal's Anthem",
       "scryfallId": "2077d11c-22b6-43ff-a894-4f8c2c2acafc",
       "multiverseid": 508319,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Niko Defies Destiny",
       "scryfallId": "19312f53-5b9d-4e76-91e8-65f444bb68c9",
       "multiverseid": 503842,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Azorius Chancery",
       "scryfallId": "caccc497-5312-4a28-8582-aa95bcbfb436",
       "multiverseid": 508396,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Azorius Guildgate",
       "scryfallId": "569b53fb-8776-4301-9ed6-f7eabb08cebf",
       "multiverseid": 508397,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Command Tower",
       "scryfallId": "74c5bc49-318c-44fc-b276-f6d036fdf054",
       "multiverseid": 508398,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Cryptic Caves",
       "scryfallId": "03d864b7-8049-4ef7-ae50-ad28df7d87d9",
       "multiverseid": 508399,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Gates of Istfell",
       "scryfallId": "2627acb7-57d9-4429-9bc5-e7dd444d8d48",
       "multiverseid": 503875,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Glacial Floodplain",
       "scryfallId": "9de5fadd-4559-479f-b45d-abe792f0f6e5",
       "multiverseid": 503876,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Meandering River",
       "scryfallId": "e283db9e-6a51-4b28-9f6c-0c040a9d6d8c",
       "multiverseid": 508404,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "4544593c-c155-436f-a74b-eea3e854ad1d",
       "multiverseid": 508405,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Opal Palace",
       "scryfallId": "677f7ab0-27eb-4dcd-a38d-2a880731eaa3",
       "multiverseid": 508406,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Sejiri Refuge",
       "scryfallId": "b474bfdd-e0b2-4b96-b8eb-84ced9ac5a06",
       "multiverseid": 508408,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Tranquil Cove",
       "scryfallId": "be3a2d81-adda-49f7-980f-64bd567f89b6",
       "multiverseid": 508409,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Kaldheim Commander"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Island",
       "scryfallId": "1a25a714-c7f3-4697-8b69-8f966b4d370a",
       "multiverseid": 507586,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     },
     {
       "name": "Plains",
       "scryfallId": "5cbfbafa-f58f-40b2-a374-68ac35b77d89",
       "multiverseid": 507585,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Kaldheim"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:14.015Z",
+    "retrievedDate": "2025-12-28T02:07:25.151Z",
     "sourceUrl": "https://archidekt.com/decks/2209072",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2021-12-30T18:19:20.272Z"
   }
 }

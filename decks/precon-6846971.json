@@ -8,7 +8,13 @@
       "name": "Dr. Madison Li",
       "scryfallId": "95af426d-a8af-4314-9ad0-ac61935e8e8e",
       "multiverseid": 652042,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     }
   ],
   "cards": [
@@ -16,600 +22,965 @@
       "name": "One with the Machine",
       "scryfallId": "0f555efc-4314-4111-8c61-9548c5bae2e0",
       "multiverseid": 653142,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "d69dd983-757e-4de8-9824-a5123b906c62",
       "multiverseid": 653243,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Spire of Industry",
       "scryfallId": "cdda2ce8-23d1-4814-8e81-d6cf40f75a13",
       "multiverseid": 653256,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Sulfur Falls",
       "scryfallId": "c6821409-3793-4a7c-962b-7d501fa50fe5",
       "multiverseid": 653257,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Thought Vessel",
       "scryfallId": "a68c8703-3029-443b-95f5-5310e8b48a2b",
       "multiverseid": 653214,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "53b8f769-57c8-45e7-b451-7b4fe7e80bf8",
       "multiverseid": 653254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Rustvale Bridge",
       "scryfallId": "45dd5b22-c7f8-4c00-a27b-437da0136177",
       "multiverseid": 653248,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "ff6415d9-14fb-4a58-aa86-bf2063037684",
       "multiverseid": 653242,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Behemoth of Vault 0",
       "scryfallId": "592d6e5b-a94e-460c-ab2f-21fd842c3d9a",
       "multiverseid": 652214,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Bottle-Cap Blast",
       "scryfallId": "8bdceec0-0950-4d52-86fc-d0f04e8487ce",
       "multiverseid": 652142,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Nuka-Cola Vending Machine",
       "scryfallId": "405df7c7-0e37-499e-9826-6bf9f5db7a40",
       "multiverseid": 652224,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Overencumbered",
       "scryfallId": "47058eaa-348d-4bbb-8df5-b931eba067f3",
       "multiverseid": 652105,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Island",
       "scryfallId": "a5b0a88d-7049-4206-8085-4a68ab0bfd81",
       "multiverseid": 654254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Island",
       "scryfallId": "a5b0a88d-7049-4206-8085-4a68ab0bfd81",
       "multiverseid": 654254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Island",
       "scryfallId": "a5b0a88d-7049-4206-8085-4a68ab0bfd81",
       "multiverseid": 654254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Island",
       "scryfallId": "a5b0a88d-7049-4206-8085-4a68ab0bfd81",
       "multiverseid": 654254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Island",
       "scryfallId": "a5b0a88d-7049-4206-8085-4a68ab0bfd81",
       "multiverseid": 654254,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Arcade Gannon",
       "scryfallId": "36356522-15fc-41e2-bf14-a745e5a96a50",
       "multiverseid": 652179,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "8bafeaa8-5e77-4303-b30a-23fd137b7c35",
       "multiverseid": 653187,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Assaultron Dominator",
       "scryfallId": "4112fadb-da03-441a-beeb-1dc90425e3f3",
       "multiverseid": 652141,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Austere Command",
       "scryfallId": "5215c18d-90cd-45df-ac14-99909c97c69e",
       "multiverseid": 653119,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "78a90148-5ed9-42db-a64f-4735676d82e3",
       "multiverseid": 653216,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
       "multiverseid": 654252,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
       "multiverseid": 654252,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
       "multiverseid": 654252,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Plains",
       "scryfallId": "c3f33598-1344-4365-9067-17a7379de894",
       "multiverseid": 654252,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Robobrain War Mind",
       "scryfallId": "19c0791d-f0c5-4673-a0c5-40540c1e6d8c",
       "multiverseid": 652125,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Sentry Bot",
       "scryfallId": "b16b0143-3511-4f79-bdb1-1ff7af55f051",
       "multiverseid": 652111,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "The Motherlode, Excavator",
       "scryfallId": "3b9df394-522c-4458-bc36-cf24ad763718",
       "multiverseid": 652149,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Vault 112: Sadistic Simulation",
       "scryfallId": "0a0acee2-f6dc-4e92-937b-01e2c07adc55",
       "multiverseid": 652210,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Vault 13: Dweller's Journey",
       "scryfallId": "a22ad436-215a-4da1-b12e-1faac474f948",
       "multiverseid": 652113,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Talisman of Creativity",
       "scryfallId": "89d318b7-5c82-40a7-a63e-d8e72938624f",
       "multiverseid": 653207,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Panharmonicon",
       "scryfallId": "1d92b7dd-1f63-4f34-87ca-01a0eaa7b3a1",
       "multiverseid": 653200,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Automated Assembly Line",
       "scryfallId": "fe9e2a76-1324-4b8e-b23c-10c04aca1870",
       "multiverseid": 652097,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Brotherhood Vertibird",
       "scryfallId": "c207c76d-5f10-4fd9-9826-cf0611bfa2d0",
       "multiverseid": 652215,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Clifftop Retreat",
       "scryfallId": "e6454d4c-5820-4cb8-b625-3d9a09778513",
       "multiverseid": 653221,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Command Tower",
       "scryfallId": "952cb8cb-633c-468f-8ef5-54ff91ddfb22",
       "multiverseid": 653222,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Crush Contraband",
       "scryfallId": "e0941279-8695-4b71-b27a-5477a1858525",
       "multiverseid": 653121,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Electrosiphon",
       "scryfallId": "8377fce8-edc8-4926-bf75-57162ff6df9f",
       "multiverseid": 652191,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Everflowing Chalice",
       "scryfallId": "bd6be33e-1a5b-482c-a444-3e8ab98d591d",
       "multiverseid": 653193,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "e1cd325f-2762-4ef0-a0f1-b56bb63da0d1",
       "multiverseid": 653231,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "James, Wandering Dad // Follow Him",
       "scryfallId": "31fed516-04e1-4453-b955-dfbd32bab2f3",
       "multiverseid": 652118,
-      "twoFaced": true
+      "twoFaced": true,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "8ec824ef-fd09-4f7e-a350-ac80005c261f",
       "multiverseid": 653196,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Loyal Apprentice",
       "scryfallId": "f5cd0e82-d2aa-4614-93a2-b84828866742",
       "multiverseid": 653153,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "b88baf29-a556-4e89-8471-9ba9bc8efe2c",
       "multiverseid": 653198,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Expert-Level Safe",
       "scryfallId": "499f4bdc-8b6a-4e87-92fd-8368537a6ced",
       "multiverseid": 652220,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Intelligence Bobblehead",
       "scryfallId": "e6546c0d-6be2-4ced-9d7c-4269df8dea76",
       "multiverseid": 652221,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
       "multiverseid": 654258,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
       "multiverseid": 654258,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
       "multiverseid": 654258,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mountain",
       "scryfallId": "85f5bbab-7bf0-48d4-8138-d64f84f4d769",
       "multiverseid": 654258,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "C.A.M.P.",
       "scryfallId": "034d4543-2c53-4cda-acfd-7f26b8dd17fb",
       "multiverseid": 652216,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Endurance Bobblehead",
       "scryfallId": "8768789b-c414-4e35-bff3-d06a69dccff6",
       "multiverseid": 652219,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "912837ca-054a-49a8-a5c5-5e65631b0575",
       "multiverseid": 653226,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "4afe6542-9f4b-4afa-8568-272916125b4a",
       "multiverseid": 653237,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "HELIOS One",
       "scryfallId": "4102d28e-437b-440b-bf9b-8b4f6fb85a6c",
       "multiverseid": 652236,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Glacial Fortress",
       "scryfallId": "9f303a30-e3d9-4b31-aa67-608a627fc6ff",
       "multiverseid": 653229,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "75f07a84-2788-4f5b-bd76-701bab10f01b",
       "multiverseid": 653227,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Ferrous Lake",
       "scryfallId": "0406ff96-419b-44bc-b836-a39eaa55ae78",
       "multiverseid": 652235,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Dispatch",
       "scryfallId": "4cfcc2a8-ab59-47b5-88a9-0692e6091334",
       "multiverseid": 653122,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Glimmer of Genius",
       "scryfallId": "49d84305-2143-470a-bf1f-12fb6d4d63b9",
       "multiverseid": 653139,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Buried Ruin",
       "scryfallId": "8b3ebfce-47cd-4ebe-bfeb-2cb22a1bd9ec",
       "multiverseid": 653217,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Elder Owyn Lyons",
       "scryfallId": "d923c845-59e0-403e-b57b-955fec528f1e",
       "multiverseid": 652190,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mechanized Production",
       "scryfallId": "40dca7cb-4724-48d6-a0e0-2cbb5a7fa4f7",
       "multiverseid": 653141,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Brotherhood Scribe",
       "scryfallId": "b751250e-ebf2-42b1-9a45-779b39974ba7",
       "multiverseid": 652100,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Curie, Emergent Intelligence",
       "scryfallId": "54870f19-96f3-4cde-ae44-a9c5bbb0dbc1",
       "multiverseid": 652117,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Liberty Prime, Recharged",
       "scryfallId": "2da11337-ceb2-4744-9696-c06fec2f2daa",
       "multiverseid": 652068,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mystic Forge",
       "scryfallId": "109a6275-331e-4696-85ea-6f7a0a0f865e",
       "multiverseid": 653199,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Nick Valentine, Private Eye",
       "scryfallId": "0a7c9553-d4a8-4d51-8e8a-8a0ffbdf1715",
       "multiverseid": 652122,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Open the Vaults",
       "scryfallId": "8cd2e9d0-3691-40a4-a0e8-42ca29bfcc10",
       "multiverseid": 653131,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Plasma Caster",
       "scryfallId": "c1654256-25ea-4467-812d-25f32fe65cdd",
       "multiverseid": 652151,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Razortide Bridge",
       "scryfallId": "697d872f-111f-4810-baf2-d4c6f2f48dd5",
       "multiverseid": 653244,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Red Death, Shipwrecker",
       "scryfallId": "edf616fa-b9a0-4f7a-b7ee-32ce3a08d466",
       "multiverseid": 652203,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Rex, Cyber-Hound",
       "scryfallId": "dae95822-d4a9-4698-bd11-c504414fc160",
       "multiverseid": 652204,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Silverbluff Bridge",
       "scryfallId": "820485ab-0a31-4278-9316-ec5b909f4d11",
       "multiverseid": 653253,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "cc91d8b8-ed18-45bf-a9e0-2f6afe6dd23c",
       "multiverseid": 653203,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "T-45 Power Armor",
       "scryfallId": "203b1cb3-5eae-469a-8a5a-2e56dc859f78",
       "multiverseid": 652232,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Talisman of Conviction",
       "scryfallId": "dec517e7-bc4d-4986-ba3c-89866a29991d",
       "multiverseid": 653206,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "658fec13-a62d-4701-ad8b-9cb08d960253",
       "multiverseid": 653267,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "311d6842-0ba6-494d-b10c-9ac47f78c757",
       "multiverseid": 653268,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "548805de-3e2e-4f1f-aafc-d89fddf8288a",
       "multiverseid": 653276,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "The Prydwen, Steel Flagship",
       "scryfallId": "9c0a8eda-bfeb-4fd9-9e41-12fce02883d8",
       "multiverseid": 652109,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Treasure Vault",
       "scryfallId": "3b8a9a88-d4b5-4c2a-86fa-22475ce919ca",
       "multiverseid": 653277,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Unexpected Windfall",
       "scryfallId": "c5261d46-bf8c-4c29-8683-9a4fe4b23b8d",
       "multiverseid": 653156,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Wake the Past",
       "scryfallId": "4548087a-9e65-4d57-988c-2b42c2801197",
       "multiverseid": 653184,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "91323e0e-5384-4571-a7c0-0e2c2ed45f02",
       "multiverseid": 653144,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "084b7503-d05b-4eac-bb6f-ef3bf696437d",
       "multiverseid": 653215,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Talisman of Progress",
       "scryfallId": "3290b095-7f4f-452d-b54d-b4290d182c8d",
       "multiverseid": 653212,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "e675f7e2-5c9f-4912-8fdd-daaeda284a3d",
       "multiverseid": 653202,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Thirst for Knowledge",
       "scryfallId": "5d4cc8d6-b366-4da8-a2d2-ff3be9092789",
       "multiverseid": 653143,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "ed55827d-1d72-4884-8a4f-fe7acbedab2c",
       "multiverseid": 653136,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Nerd Rage",
       "scryfallId": "e9857669-5fad-458a-8eda-c1790298add7",
       "multiverseid": 652121,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Synth Infiltrator",
       "scryfallId": "3fe16bc4-8457-4c5f-902a-0746112e80a4",
       "multiverseid": 652127,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Synth Eradicator",
       "scryfallId": "87fc7b54-26e5-4b0d-b2bb-be8f977f752b",
       "multiverseid": 652154,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Steel Overseer",
       "scryfallId": "ca078f45-b4eb-4b5b-87cb-80b6c0ba5f31",
       "multiverseid": 653204,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "Fallout"
     },
     {
       "name": "Shaun, Father of Synths",
       "scryfallId": "68af449f-3c30-43ea-be60-d85061d7adbd",
       "multiverseid": 652206,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Sentinel Sarah Lyons",
       "scryfallId": "23b76965-528c-48f9-9ee6-332b09cae664",
       "multiverseid": 652205,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Red"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Paladin Danse, Steel Maverick",
       "scryfallId": "f0e7ee3a-18f1-4771-86d6-db1e0b2aa542",
       "multiverseid": 652107,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White"
+      ],
+      "set": "Fallout"
     },
     {
       "name": "Mystic Monastery",
       "scryfallId": "db91902a-a524-4207-8864-4d7085a0e09f",
       "multiverseid": 653238,
-      "twoFaced": false
+      "twoFaced": false,
+      "colorIdentity": [
+        "White",
+        "Blue",
+        "Red"
+      ],
+      "set": "Fallout"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-09-16T02:17:54.868Z",
+    "retrievedDate": "2025-12-28T02:08:07.892Z",
     "sourceUrl": "https://archidekt.com/decks/6846971",
-    "deckSource": "archidekt"
+    "deckSource": "archidekt",
+    "createdAt": "2024-02-26T03:09:40.152Z"
   }
 }
