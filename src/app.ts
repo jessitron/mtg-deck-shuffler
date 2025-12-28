@@ -554,6 +554,87 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns modal fragment - card modal for prep page (before game starts)
+  app.get("/prep-card-modal/:prepId/:cardIndex", async (req, res) => {
+    const prepId = parseInt(req.params.prepId);
+    const cardIndex = parseInt(req.params.cardIndex);
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(`<div>Prep ${prepId} not found</div>`);
+        return;
+      }
+
+      // Find the card by index (commanders first, then library cards)
+      const allCards = [...prep.deck.commanders, ...prep.deck.cards];
+      const cardDef = allCards[cardIndex];
+      if (!cardDef) {
+        res.status(404).send(`<div>Card ${cardIndex} not found</div>`);
+        return;
+      }
+
+      // Create a GameCard-like object for rendering
+      const isCommander = cardIndex < prep.deck.commanders.length;
+      const gameCard = {
+        card: cardDef,
+        isCommander,
+        location: isCommander ? { type: "CommandZone" as const, position: cardIndex } : { type: "Library" as const, position: cardIndex - prep.deck.commanders.length },
+        gameCardIndex: cardIndex,
+        currentFace: "front" as const,
+      };
+
+      const imageUrl = getCardImageUrl(cardDef.scryfallId, "large", "front");
+      const gathererUrl =
+        cardDef.multiverseid === 0
+          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`
+          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`;
+
+      // Simple modal for prep page - just view card and link to Gatherer
+      const utilityButtons = `<div class="card-modal-utility-buttons">
+        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
+        <button class="modal-action-button copy-button"
+                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${cardDef.name}')">Copy</button>
+      </div>`;
+
+      const actionButtons = `<div class="card-modal-actions">
+        ${utilityButtons}
+      </div>`;
+
+      const bodyContent = `<div class="card-modal-content">
+        <div class="card-modal-image">
+          <img src="${imageUrl}" alt="${cardDef.name}" class="modal-card-image" />
+        </div>
+        <div class="card-modal-info">
+          <h3 class="card-modal-title">${cardDef.name}</h3>
+          ${actionButtons}
+        </div>
+      </div>`;
+
+      const modalHtml = `<div class="card-modal-overlay"
+                   hx-get="/close-card-modal"
+                   hx-target="#card-modal-container"
+                   hx-swap="innerHTML"
+                   hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+                   tabindex="0">
+        <div class="card-modal-dialog">
+          <button class="card-modal-close"
+                  hx-get="/close-card-modal"
+                  hx-target="#card-modal-container"
+                  hx-swap="innerHTML">&times;</button>
+          <div class="card-modal-body">
+            ${bodyContent}
+          </div>
+        </div>
+      </div>`;
+
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading prep card modal:", error);
+      res.status(500).send(`<div>Error loading card details</div>`);
+    }
+  });
+
   // Returns empty response - closes modal
   app.get("/close-modal", (req, res) => {
     res.send("");
