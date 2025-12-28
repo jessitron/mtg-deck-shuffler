@@ -94,15 +94,15 @@ interface ErrorPageOptions {
 export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
   const { icon, title, message, details } = options;
 
-  const content = `<div class="deck-input-section">
+  const content = `<div class="error-page-container">
       <div class="error-message">
         <h2>${icon} ${title}</h2>
         <p>${message}</p>
         ${details ? `<p class="error-details">${details}</p>` : ""}
       </div>
-      <div class="deck-actions">
+      <div class="error-actions">
         <form method="get" action="/" class="inline-form">
-          <button type="submit" class="lets-play-button">Start a New Game</button>
+          <button type="submit" class="primary-button">Start a New Game</button>
         </form>
       </div>
     </div>`;
