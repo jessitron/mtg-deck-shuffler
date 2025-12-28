@@ -13,6 +13,7 @@ import {
   PERSISTED_GAME_STATE_VERSION,
   printLocation,
 } from "./port-persist-state/types.js";
+import { PrepId } from "./port-persist-prep/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";
 
@@ -63,6 +64,8 @@ export interface WhatHappened {
 export class GameState {
   public readonly gameId: GameId;
   private status: GameStatus;
+  public readonly prepId: PrepId;
+  public readonly prepVersion: number;
   public readonly deckProvenance: DeckProvenance;
   public readonly deckName: string;
   public readonly deckId: number; // TODO: remove, once it is no longer used in the UI
@@ -71,7 +74,7 @@ export class GameState {
   private readonly eventLog: GameEventLog;
   private readonly randomSeed?: number;
 
-  static newGame(gameId: GameId, deck: Deck, randomSeed?: number) {
+  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -97,7 +100,9 @@ export class GameState {
 
     return new GameState({
       gameId,
-      gameStatus: GameStatus.NotStarted,
+      gameStatus: GameStatus.Active,
+      prepId,
+      prepVersion,
       deckId: deck.id,
       deckName: deck.name,
       deckProvenance: deck.provenance,
@@ -110,6 +115,8 @@ export class GameState {
   private constructor(params: {
     gameId: GameId;
     gameStatus: GameStatus;
+    prepId: PrepId;
+    prepVersion: number;
     deckId: number;
     deckName: string;
     deckProvenance: DeckProvenance;
@@ -119,6 +126,8 @@ export class GameState {
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
+    this.prepId = params.prepId;
+    this.prepVersion = params.prepVersion;
     this.deckProvenance = params.deckProvenance;
     this.deckName = params.deckName;
     this.deckId = params.deckId;
@@ -161,6 +170,8 @@ export class GameState {
       return new GameState({
         gameId: psg.gameId,
         gameStatus: psg.status,
+        prepId: psg.prepId || 0,  // Default for legacy data
+        prepVersion: psg.prepVersion || 1,  // Default for legacy data
         deckId: legacyPsg.deckId,
         deckName: psg.deckName,
         deckProvenance: psg.deckProvenance,
@@ -285,11 +296,8 @@ export class GameState {
   }
 
   public startGame(browserTabId?: string): this {
-    if (this.status !== GameStatus.NotStarted) {
-      throw new Error(`Cannot start game: current status is ${this.status}`);
-    }
-
-    this.status = GameStatus.Active;
+    // Record the start game event and shuffle the library
+    // Status is already set to Active when game is created
     this.eventLog.record({ ...StartGameEvent, browserTabId });
     this.shuffle(browserTabId); // We don't need the return value here, just the side effect
 
@@ -623,6 +631,8 @@ export class GameState {
       version: PERSISTED_GAME_STATE_VERSION,
       gameId: this.gameId,
       status: this.status,
+      prepId: this.prepId,
+      prepVersion: this.prepVersion,
       deckProvenance: this.deckProvenance,
       deckName: this.deckName,
       deckId: this.deckId,

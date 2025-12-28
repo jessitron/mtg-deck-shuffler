@@ -1,10 +1,10 @@
 import { CardDefinition, DeckProvenance } from "../types.js";
 import { GameEvent } from "../GameEvents.js";
+import { PrepId } from "../port-persist-prep/types.js";
 
 export type GameId = number;
 
 export enum GameStatus {
-  NotStarted = "NotStarted",
   Active = "Active",
   Ended = "Ended",
 }
@@ -82,6 +82,8 @@ export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;
   gameId: GameId;
   status: GameStatus;
+  prepId: PrepId;
+  prepVersion: number;
   deckProvenance: DeckProvenance;
   deckName: string;
   deckId: number;
