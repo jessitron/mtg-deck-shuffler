@@ -1,5 +1,5 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isLocalFileRetrievalRequest, AvailableDecks, AvailableDeck, DeckVersionMismatchError } from "../types.js";
-import { Deck, PERSISTED_DECK_VERSION } from "../../types.js";
+import { Deck, PERSISTED_DECK_VERSION, getCardImageUrl } from "../../types.js";
 import fs from "fs";
 
 export class LocalFileAdapter implements RetrieveDeckPort {
@@ -21,7 +21,8 @@ export class LocalFileAdapter implements RetrieveDeckPort {
         const commanders = deck.commanders.map(cmd => ({
           name: cmd.name,
           colorIdentity: cmd.colorIdentity,
-          set: cmd.set
+          set: cmd.set,
+          imageUrl: getCardImageUrl(cmd.scryfallId, "art_crop", "front")
         }));
 
         const createdYear = deck.provenance?.createdAt

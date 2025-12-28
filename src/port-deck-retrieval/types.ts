@@ -31,6 +31,7 @@ export interface PreconMetadata {
     name: string;
     colorIdentity?: string[];
     set?: string;
+    imageUrl?: string;
   }>;
   createdYear?: number;
 }
