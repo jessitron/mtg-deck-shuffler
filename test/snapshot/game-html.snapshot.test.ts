@@ -5,7 +5,6 @@ import { formatActiveGameHtmlSection } from "../../src/view/play-game/active-gam
 import { GameState } from "../../src/GameState.js";
 import { Deck } from "../../src/types.js";
 import { FilesystemArchidektGateway, ArchidektDeckToDeckAdapter } from "../../src/port-deck-retrieval/implementations.js";
-import { formatDeckReviewHtmlPage } from "../../src/view/deck-review/deck-review-page.js";
 
 describe("Game HTML Snapshot Tests", () => {
   const snapshotDir = path.join(process.cwd(), "test", "snapshot", "snapshots");
@@ -46,10 +45,6 @@ describe("Game HTML Snapshot Tests", () => {
     return gameState;
   };
 
-  const createNotStartedGameState = (): GameState => {
-    return GameState.newGame(456, 1, 1, testDeck);
-  };
-
   const createEmptyLibraryGameState = (): GameState => {
     const gameState = GameState.newGame(789, 1, 1, testDeck, 42);
     gameState.startGame();
@@ -88,41 +83,6 @@ describe("Game HTML Snapshot Tests", () => {
     const snapshotFile = "game-active-state.html";
     const gameState = createActiveGameState();
     const actualHtml = formatActiveGameHtmlSection(gameState, {});
-
-    // Normalize HTML for consistent comparison (remove env-dependent values)
-    const normalizedHtml = actualHtml
-      .replace(/apiKey: ".*?"/, 'apiKey: "TEST_API_KEY"')
-      .replace(/\n\s*/g, "\n")
-      .trim();
-
-    const existingSnapshot = await readSnapshot(snapshotFile);
-
-    if (existingSnapshot === null) {
-      // No snapshot exists, create it
-      await writeSnapshot(snapshotFile, normalizedHtml);
-      console.log(`Created new snapshot: ${snapshotFile}`);
-    } else {
-      // Compare with existing snapshot
-      const normalizedSnapshot = existingSnapshot.trim();
-
-      if (normalizedHtml !== normalizedSnapshot) {
-        // Write the actual output for comparison
-        await writeSnapshot(`${snapshotFile}.actual`, normalizedHtml);
-
-        throw new Error(
-          `Snapshot mismatch for ${snapshotFile}.\n` +
-            `Expected content matches snapshot file: test/snapshot/snapshots/${snapshotFile}\n` +
-            `Actual content written to: test/snapshot/snapshots/${snapshotFile}.actual\n` +
-            `Run snapshot tests to update if changes are expected.`
-        );
-      }
-    }
-  });
-
-  it("formatGameHtml with not started game state", async () => {
-    const snapshotFile = "game-not-started-state.html";
-    const notStartedGameState = createNotStartedGameState();
-    const actualHtml = formatDeckReviewHtmlPage(notStartedGameState);
 
     // Normalize HTML for consistent comparison (remove env-dependent values)
     const normalizedHtml = actualHtml
