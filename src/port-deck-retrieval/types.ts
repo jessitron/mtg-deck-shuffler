@@ -26,7 +26,20 @@ export function isLocalFileRetrievalRequest(request: DeckRetrievalRequest): requ
   return request.deckSource === "precon";
 }
 
-export type AvailableDeck = { description: string } & DeckRetrievalRequest;
+export interface PreconMetadata {
+  commanders: Array<{
+    name: string;
+    colorIdentity?: string[];
+    set?: string;
+  }>;
+  createdYear?: number;
+}
+
+export type AvailableDeck = {
+  description: string;
+  metadata?: PreconMetadata;
+} & DeckRetrievalRequest;
+
 export type AvailableDecks = AvailableDeck[];
 
 export interface RetrieveDeckPort {

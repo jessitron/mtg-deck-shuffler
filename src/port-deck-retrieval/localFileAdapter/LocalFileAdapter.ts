@@ -15,8 +15,28 @@ export class LocalFileAdapter implements RetrieveDeckPort {
       try {
         const pathToLocalFile = this.Directory + filename;
         const fileContent = fs.readFileSync(pathToLocalFile, "utf8");
-        const deck = JSON.parse(fileContent);
-        return { deckSource: "precon", description: deck.name || filename, localFile: filename };
+        const deck: Deck = JSON.parse(fileContent);
+
+        // Extract commander metadata
+        const commanders = deck.commanders.map(cmd => ({
+          name: cmd.name,
+          colorIdentity: cmd.colorIdentity,
+          set: cmd.set
+        }));
+
+        const createdYear = deck.provenance?.createdAt
+          ? new Date(deck.provenance.createdAt).getFullYear()
+          : undefined;
+
+        return {
+          deckSource: "precon",
+          description: deck.name || filename,
+          localFile: filename,
+          metadata: {
+            commanders,
+            createdYear
+          }
+        };
       } catch (error) {
         // If we can't read the deck file, fall back to filename
         return { deckSource: "precon", description: filename, localFile: filename };

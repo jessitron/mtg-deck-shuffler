@@ -528,18 +528,16 @@ body {
 .precon-tile {
   background-color: white;
   border: 3px solid var(--dark-pink);
-  padding: 1.5rem;
-  min-height: 80px;
+  padding: 1rem;
+  min-height: 120px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: "Orbitron", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
   color: var(--deep-space);
-  text-align: center;
+  text-align: left;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .precon-tile:hover {
@@ -551,4 +549,43 @@ body {
 .precon-tile:active {
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tile-deck-name {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tile-commanders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.tile-commander {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.commander-name {
+  font-weight: 600;
+}
+
+.commander-colors {
+  font-size: 0.75rem;
+  color: #666;
+  font-style: italic;
+}
+
+.tile-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid #ddd;
 }
