@@ -107,41 +107,6 @@ h1 {
   margin-top: 40px;
 }
 
-.archidekt-input-section,
-.precon-input-section {
-  margin: 5px 0;
-}
-
-.archidekt-input-section label,
-.precon-input-section label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: white;
-  font-size: 1.1rem;
-}
-
-.archidekt-input-section a {
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: white;
-  font-size: 1.1rem;
-}
-
-.archidekt-input-section input {
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  background: white;
-}
-
-.archidekt-input-section input:focus {
-  border-color: #4caf50;
-  outline: none;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-}
 
 h5 {
   font-weight: bold;
