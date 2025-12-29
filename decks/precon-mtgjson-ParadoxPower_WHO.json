@@ -1,0 +1,1018 @@
+{
+  "version": 1,
+  "id": 1299016786,
+  "name": "Paradox Power",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "The Thirteenth Doctor",
+      "scryfallId": "0dc4ec90-1650-4b98-9350-66341394cf0b",
+      "multiverseid": 634407,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Yasmin Khan",
+      "scryfallId": "12b09a4f-bb62-4766-8115-cae4d5cc4c12",
+      "multiverseid": 634422,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Danny Pink",
+      "scryfallId": "bf5e0a50-304c-4b3f-b5f7-1ca1213c0282",
+      "multiverseid": 634734,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Osgood, Operation Double",
+      "scryfallId": "d180a882-84d9-4e38-8aed-1fc6ecd1df72",
+      "multiverseid": 634436,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Twice Upon a Time // Unlikely Meeting",
+      "scryfallId": "9d504a87-f782-4b70-91da-c1944925e86a",
+      "multiverseid": 634756,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Become the Pilot",
+      "scryfallId": "15927163-f203-4d45-b78f-70eafb941bfd",
+      "multiverseid": 634732,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Quantum Misalignment",
+      "scryfallId": "ceba3080-4e10-46b3-887c-e2d45581962b",
+      "multiverseid": 634747,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Nardole, Resourceful Cyborg",
+      "scryfallId": "03a5c463-6b5c-49c9-84c9-666aa8c19fbf",
+      "multiverseid": 634745,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Flatline",
+      "scryfallId": "baea4cd3-cc62-4138-ac2e-5c96c70bbcce",
+      "multiverseid": 634738,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Bill Potts",
+      "scryfallId": "74185710-3877-4080-b1d2-014fabbc7186",
+      "multiverseid": 634771,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Into the Time Vortex",
+      "scryfallId": "a4a3cb61-b760-4cd4-838c-b26310103719",
+      "multiverseid": 634783,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Dan Lewis",
+      "scryfallId": "24b5c60e-f2f5-40d7-8713-edc3ecedb5e0",
+      "multiverseid": 634773,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Flaming Tyrannosaurus",
+      "scryfallId": "0bc8ecfd-7388-4725-8c58-bed2cc61400f",
+      "multiverseid": 634780,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Ryan Sinclair",
+      "scryfallId": "42684d97-fce6-4a96-9c64-20e2cb382dca",
+      "multiverseid": 634789,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Return the Past",
+      "scryfallId": "74de4341-d10a-47c6-8a60-9dfa491f1d02",
+      "multiverseid": 634787,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Impending Flux",
+      "scryfallId": "98cc159d-74f7-41fe-a866-c18d96219794",
+      "multiverseid": 634782,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "The Flux",
+      "scryfallId": "026611f8-ae07-464f-afe5-6e94bcfac05e",
+      "multiverseid": 634781,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Sisterhood of Karn",
+      "scryfallId": "4b94f939-5f3b-4b55-8514-b7d296509ac1",
+      "multiverseid": 634804,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Graham O'Brien",
+      "scryfallId": "3467d66e-1a81-40d6-945a-f2c679d214d1",
+      "multiverseid": 634799,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Karvanista, Loyal Lupari // Lupari Shield",
+      "scryfallId": "ca1cedd8-98d3-408f-8de8-fa682ab0227c",
+      "multiverseid": 634801,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "The Foretold Soldier",
+      "scryfallId": "93391c14-a22c-4223-a980-5f98350c6a99",
+      "multiverseid": 634797,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Fugitive of the Judoon",
+      "scryfallId": "e15f1891-4f80-4c68-8421-8e16ff8d6a6d",
+      "multiverseid": 634798,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "River Song",
+      "scryfallId": "a1efb084-d2a0-44c4-a89d-6445156bb298",
+      "multiverseid": 634847,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Madame Vastra",
+      "scryfallId": "94849571-928a-4c6d-9868-58f606941679",
+      "multiverseid": 634837,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Jenny Flint",
+      "scryfallId": "74ebd099-ce57-4053-8f25-d18b3d47fac4",
+      "multiverseid": 634831,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Strax, Sontaran Nurse",
+      "scryfallId": "b4801775-70e2-4cda-959c-27f9aa623767",
+      "multiverseid": 634855,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "The Twelfth Doctor",
+      "scryfallId": "2400d681-05ef-43b1-b720-c15ca4226c27",
+      "multiverseid": 634859,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "The Fugitive Doctor",
+      "scryfallId": "fea8bd29-80a4-463f-b3bd-e15f4bd5f5ce",
+      "multiverseid": 634825,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Me, the Immortal",
+      "scryfallId": "ddfbf6bf-c0e1-48a1-9223-73099fe470aa",
+      "multiverseid": 634842,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Frost Fair Lure Fish",
+      "scryfallId": "0d85d8c7-07b2-4577-8c62-7a34dca73ad8",
+      "multiverseid": 634824,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Lunar Hatchling",
+      "scryfallId": "2cd60763-8954-4502-99ef-f4f38bf7671b",
+      "multiverseid": 634836,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Heaven Sent",
+      "scryfallId": "5e14692f-f1c3-4d7f-8baf-3248621e36fb",
+      "multiverseid": 634829,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Last Night Together",
+      "scryfallId": "7d4ed521-eff6-4bdd-939d-8304b26ad256",
+      "multiverseid": 634835,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "River Song's Diary",
+      "scryfallId": "96476a30-72b0-4f91-9d2d-85fc196f89c5",
+      "multiverseid": 634877,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Confession Dial",
+      "scryfallId": "df2e0de7-e29d-432e-8782-766c0c31c05d",
+      "multiverseid": 634868,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Clara Oswald",
+      "scryfallId": "9a1ee042-6713-4e9e-9901-9b94d99d33f1",
+      "multiverseid": 634704,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "fff37491-f496-4810-80a4-d13470434994",
+      "multiverseid": 635551,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Cursed Mirror",
+      "scryfallId": "efb9aadf-a50e-4542-82e8-6d8cbc2ea350",
+      "multiverseid": 635552,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Carpet of Flowers",
+      "scryfallId": "fd374915-323c-4d98-9b59-94d405c1dde8",
+      "multiverseid": 635555,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Dreamroot Cascade",
+      "scryfallId": "3a8c7416-c0af-419d-892a-ee989585bf79",
+      "multiverseid": 635599,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Temple of Mystery",
+      "scryfallId": "12f1a8ce-a7c2-4e74-a4f2-22c914e998c4",
+      "multiverseid": 635644,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Vineglimmer Snarl",
+      "scryfallId": "ee44297b-fd89-4d95-a502-cdd98fd4fbc3",
+      "multiverseid": 635655,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Waterlogged Grove",
+      "scryfallId": "46931098-ae3c-409a-8789-7071205e11ee",
+      "multiverseid": 635657,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Desolate Lighthouse",
+      "scryfallId": "cb9a7223-20ce-4802-93f5-be41dcce1c15",
+      "multiverseid": 635597,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Rockfall Vale",
+      "scryfallId": "b782ea91-d31f-4862-8ec0-6e24ef40545c",
+      "multiverseid": 635624,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Rootbound Crag",
+      "scryfallId": "72232b23-d59b-4bf4-aa55-b8f5ab691504",
+      "multiverseid": 635626,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Temple of Abandon",
+      "scryfallId": "b1511f21-d9ae-4949-859a-3246a01c1166",
+      "multiverseid": 635639,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "82d3cd1f-3971-45ae-83c5-f7c2b3f5758a",
+      "multiverseid": 635588,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Sheltered Thicket",
+      "scryfallId": "00e230ab-9cae-43e2-b4dd-54fd2baea76f",
+      "multiverseid": 635630,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Temple of Epiphany",
+      "scryfallId": "a7df0f35-81a1-439f-a9b0-0c3afd4bce68",
+      "multiverseid": 635642,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Frostboil Snarl",
+      "scryfallId": "6e1d2c3d-e6ec-4130-8765-346adbb79d31",
+      "multiverseid": 635608,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Stormcarved Coast",
+      "scryfallId": "54fe029f-e173-4a16-bdb4-394847b4e50b",
+      "multiverseid": 635634,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Fiery Islet",
+      "scryfallId": "daf68138-63c1-4201-998c-eb412463f664",
+      "multiverseid": 635604,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Game Trail",
+      "scryfallId": "066326c9-c1d7-4eca-84fe-fdd95b659ac1",
+      "multiverseid": 635610,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "c2bc648d-def5-4442-9cfe-0f93fee631f4",
+      "multiverseid": 635602,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Gallifrey Council Chamber",
+      "scryfallId": "83d990f5-a7b7-4482-95e6-b03a397192e2",
+      "multiverseid": 634883,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Psychic Paper",
+      "scryfallId": "eae12c61-0125-4810-b0e4-139c27b1b08b",
+      "multiverseid": 634876,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "TARDIS",
+      "scryfallId": "b059b1d8-3bfb-40c9-9344-addda43509ab",
+      "multiverseid": 634882,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Sonic Screwdriver",
+      "scryfallId": "2a55d514-b670-4fe2-825b-9ba955977cac",
+      "multiverseid": 634881,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Start the TARDIS",
+      "scryfallId": "f3574926-dd5a-4997-b9e2-7b051bc59c57",
+      "multiverseid": 634751,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Surge of Brilliance",
+      "scryfallId": "0001c639-8bd0-426f-89cb-4ca61f3cc054",
+      "multiverseid": 634752,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Iraxxa, Empress of Mars",
+      "scryfallId": "0861a74a-a4d5-4b9f-8c62-74cdfcc67825",
+      "multiverseid": 634784,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Memory Worm",
+      "scryfallId": "63837f16-8157-43c7-8da0-88441ac62f04",
+      "multiverseid": 634785,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Decaying Time Loop",
+      "scryfallId": "a0cedaa9-f08a-4d7b-8314-1d0a09a657bd",
+      "multiverseid": 634775,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Thijarian Witness",
+      "scryfallId": "da05e23b-419f-4023-9ad4-1227bb1b53be",
+      "multiverseid": 634806,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Truth or Consequences",
+      "scryfallId": "ce8771cc-1042-47b1-b4fa-459c3eeece04",
+      "multiverseid": 634858,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Bigger on the Inside",
+      "scryfallId": "8d1178ac-35b9-4086-8ad4-6c629d976ce2",
+      "multiverseid": 634810,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Wreck and Rebuild",
+      "scryfallId": "44e7d2ca-3fa9-4cb2-adc2-dae4e161f186",
+      "multiverseid": 634864,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "d87d58eb-b95a-48d9-a174-e2d72a29c167",
+      "multiverseid": 635565,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "0f44a54b-512e-45ef-80ee-7982d2eaf762",
+      "multiverseid": 635571,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Ponder",
+      "scryfallId": "262285ab-3a6f-4932-b53b-8ab20bcad955",
+      "multiverseid": 635543,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Think Twice",
+      "scryfallId": "988111df-e398-4e87-aaf9-5872f36710de",
+      "multiverseid": 635546,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Preordain",
+      "scryfallId": "a3757f89-56fe-4234-bb8e-a2f3ae645a06",
+      "multiverseid": 635544,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Throes of Chaos",
+      "scryfallId": "74881c8f-f21d-4901-90cf-2ae8d0f46c3d",
+      "multiverseid": 635553,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "c6396ba2-ea82-4ca8-9848-08751a1bf45a",
+      "multiverseid": 635556,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Search for Tomorrow",
+      "scryfallId": "857818d8-454b-4c2c-8cf2-7aa9c2898b18",
+      "multiverseid": 635560,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Farseek",
+      "scryfallId": "befd2137-bd91-4209-bdec-219cf53b7be7",
+      "multiverseid": 635558,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Beast Within",
+      "scryfallId": "05df0ecf-9161-4515-8511-fb042b9562ae",
+      "multiverseid": 635554,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Growth Spiral",
+      "scryfallId": "7ac9e381-dbb8-478b-b385-9f09f0325e87",
+      "multiverseid": 635563,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Talisman of Curiosity",
+      "scryfallId": "06f45b45-86ca-48cb-adb1-1d01c197ece4",
+      "multiverseid": 635575,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Talisman of Impulse",
+      "scryfallId": "9d55e1f0-26ce-4ad2-b175-4c64a9638431",
+      "multiverseid": 635577,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Rogue's Passage",
+      "scryfallId": "74f3b1cb-e436-40f9-904c-f5696aa6f383",
+      "multiverseid": 635625,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Frontier Bivouac",
+      "scryfallId": "cadb4128-62f4-47ea-8435-e06dfdb8e964",
+      "multiverseid": 635607,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "3afb2f16-4364-439e-a5ce-6598b351cb4c",
+      "multiverseid": 635622,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "23bcfd8e-e069-4489-8498-2c7b742bf4fe",
+      "multiverseid": 635616,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "3ca70d08-1468-407d-80e6-a58c6655b4f0",
+      "multiverseid": 635646,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "30c6f93e-e03f-4749-8b30-9375c79f10f4",
+      "multiverseid": 635619,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "5b82ac1b-c2d8-45f0-851a-97b0cdcff0ee",
+      "multiverseid": 635591,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Ominous Cemetery",
+      "scryfallId": "2e843c57-fae3-4127-94e7-cad8c8bb9486",
+      "multiverseid": 634884,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "WHO"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ca98e0fb-5f07-40c8-9958-84379bcdc35c",
+      "multiverseid": 635468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "ca98e0fb-5f07-40c8-9958-84379bcdc35c",
+      "multiverseid": 635468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
+      "multiverseid": 635469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
+      "multiverseid": 635469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "58c34fe0-77ec-4ba3-a214-00d0eb42ebae",
+      "multiverseid": 635472,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "58c34fe0-77ec-4ba3-a214-00d0eb42ebae",
+      "multiverseid": 635472,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "49f1fe4e-8da1-4879-8129-bd8a440a45be",
+      "multiverseid": 635473,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c5c95d38-c135-4059-9379-051b2dd33f9c",
+      "multiverseid": 635474,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "c5c95d38-c135-4059-9379-051b2dd33f9c",
+      "multiverseid": 635474,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
+      "multiverseid": 635475,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
+      "multiverseid": 635475,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "WHO"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.443Z",
+    "sourceUrl": "ParadoxPower_WHO.json",
+    "deckSource": "precon",
+    "createdAt": "2023-10-13T00:00:00.000Z"
+  }
+}

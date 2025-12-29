@@ -1,0 +1,1024 @@
+{
+  "version": 1,
+  "id": 1213037988,
+  "name": "Elven Empire",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Lathril, Blade of the Elves",
+      "scryfallId": "547888c3-a9a6-4413-b29a-6bcd8a9279bf",
+      "multiverseid": 508147,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Abomination of Llanowar",
+      "scryfallId": "4b68bc46-5591-44dd-becc-eca154066925",
+      "multiverseid": 508371,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Beast Whisperer",
+      "scryfallId": "b7e90355-80ca-49db-914c-62b3a7bd4726",
+      "multiverseid": 508344,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Canopy Tactician",
+      "scryfallId": "3eaf48c9-09bc-4d81-a3a5-432219a71754",
+      "multiverseid": 506920,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Cultivator of Blades",
+      "scryfallId": "c2e6e8a1-2e69-43de-964d-72f722439d4a",
+      "multiverseid": 508345,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Dwynen, Gilt-Leaf Daen",
+      "scryfallId": "2eb0f12b-9199-440d-9b85-831a5aec5dae",
+      "multiverseid": 508346,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elderfang Ritualist",
+      "scryfallId": "57348f93-8764-4b1a-b02e-4e7881337fa2",
+      "multiverseid": 506927,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Elvish Archdruid",
+      "scryfallId": "4d3fffa5-50ec-4502-9f03-bd9618f1771e",
+      "multiverseid": 508347,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elvish Mystic",
+      "scryfallId": "ed7a0227-ac70-40fb-8198-a55eacf913fa",
+      "multiverseid": 508348,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elvish Rejuvenator",
+      "scryfallId": "7e4723bc-20ce-4f43-9dcf-db44d4d1b224",
+      "multiverseid": 508350,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "End-Raze Forerunners",
+      "scryfallId": "7d113fa6-59b1-4f12-b81b-4b32affb9452",
+      "multiverseid": 508351,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Eyeblight Cullers",
+      "scryfallId": "89b47813-9b6c-4e8f-9212-fe37fb50e405",
+      "multiverseid": 508338,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Farhaven Elf",
+      "scryfallId": "320d0a4c-c556-4468-b934-bfdf17961a53",
+      "multiverseid": 508352,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Golgari Findbroker",
+      "scryfallId": "26413356-327c-494b-a895-0a0ddd466242",
+      "multiverseid": 508376,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Harald, King of Skemfar",
+      "scryfallId": "9eac78a2-599f-4dba-aec7-982c5ae3f75a",
+      "multiverseid": 503828,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Imperious Perfect",
+      "scryfallId": "a93e9d33-0c5d-4890-a1aa-84f59af9d4fb",
+      "multiverseid": 508354,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Jagged-Scar Archers",
+      "scryfallId": "71c4346a-a330-49ca-909e-08fd8aec7b3f",
+      "multiverseid": 508355,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Jaspera Sentinel",
+      "scryfallId": "1a68615d-9808-479d-aa80-50651246954e",
+      "multiverseid": 503792,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Llanowar Tribe",
+      "scryfallId": "407c1b95-dc0c-4154-a441-fe25537df45c",
+      "multiverseid": 508356,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Lys Alana Huntmaster",
+      "scryfallId": "0849f67b-da5d-49f7-840f-f87f48518156",
+      "multiverseid": 508357,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Lys Alana Scarblade",
+      "scryfallId": "58b3b63d-fabb-46ad-aabe-1e9fb34b4f8c",
+      "multiverseid": 508340,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Marwyn, the Nurturer",
+      "scryfallId": "aad61d99-5c8e-47b7-ab1a-e70905f59205",
+      "multiverseid": 508358,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Masked Admirers",
+      "scryfallId": "b8cc3361-046c-4908-8b8d-a0502bfc173a",
+      "multiverseid": 508359,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Miara, Thorn of the Glade",
+      "scryfallId": "7bdb9bfe-5e56-429d-af23-7548532e2406",
+      "multiverseid": 508341,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Nullmage Shepherd",
+      "scryfallId": "c4a15a09-cf68-411a-a18d-aaad00d308c9",
+      "multiverseid": 508360,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Numa, Joraga Chieftain",
+      "scryfallId": "6ac36353-6bf7-46b1-85cb-87d389138d32",
+      "multiverseid": 508361,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Poison-Tip Archer",
+      "scryfallId": "1677d49e-3d63-45bd-9849-01b1bdd95ad8",
+      "multiverseid": 508380,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Reclamation Sage",
+      "scryfallId": "1c4a25f0-2929-4404-9ce5-bcd4715f90a5",
+      "multiverseid": 508362,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Rhys the Exiled",
+      "scryfallId": "85004079-f9fa-4a05-904d-a77782c4165c",
+      "multiverseid": 508363,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Ruthless Winnower",
+      "scryfallId": "886ef13a-4f9d-425b-a071-6366cdb637c8",
+      "multiverseid": 508156,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Shaman of the Pack",
+      "scryfallId": "da9705e2-40e5-4ec9-8aef-2eab28d5a66f",
+      "multiverseid": 508382,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Skemfar Shadowsage",
+      "scryfallId": "c204130f-0483-49ed-8512-03a74894702e",
+      "multiverseid": 503719,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Springbloom Druid",
+      "scryfallId": "f406d477-720b-498c-9f45-1b687e555bcd",
+      "multiverseid": 508364,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Sylvan Messenger",
+      "scryfallId": "085f1b89-857b-4e2b-b796-0b95e53322bd",
+      "multiverseid": 508365,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Timberwatch Elf",
+      "scryfallId": "38807f17-1cf2-4736-ad10-df6c8b1a9f55",
+      "multiverseid": 508366,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Twinblade Assassins",
+      "scryfallId": "f353281a-0e56-448f-b41a-beb3949c5f11",
+      "multiverseid": 508385,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Voice of Many",
+      "scryfallId": "fccfa714-7fa0-4846-88c9-570f13683aa4",
+      "multiverseid": 508367,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Voice of the Woods",
+      "scryfallId": "d7a6315c-aa6f-4be1-a002-d7824bfad622",
+      "multiverseid": 508368,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Wirewood Channeler",
+      "scryfallId": "5670ae47-befb-4aaf-a77a-d7dbd4d8dc08",
+      "multiverseid": 508369,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Wolverine Riders",
+      "scryfallId": "70fd0439-294b-454c-b2af-e814b85f4590",
+      "multiverseid": 508160,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Wood Elves",
+      "scryfallId": "227746cb-8d9e-4f56-a19c-971a35f4cf20",
+      "multiverseid": 508370,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elven Ambush",
+      "scryfallId": "70479c44-da7c-48c7-8c6a-47210dc03277",
+      "multiverseid": 506933,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Poison the Cup",
+      "scryfallId": "7fb94456-5266-47db-b514-a0e17e34b771",
+      "multiverseid": 503712,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Putrefy",
+      "scryfallId": "36e2a569-ed40-48f5-b39c-749b491bc207",
+      "multiverseid": 508381,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Tergrid's Shadow",
+      "scryfallId": "417f71d2-d7da-4279-8847-d27c67e9ea9d",
+      "multiverseid": 503723,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Ambition's Cost",
+      "scryfallId": "c4a15c15-27c2-4ede-9ecd-a28ec7cbd3fb",
+      "multiverseid": 508337,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Bounty of Skemfar",
+      "scryfallId": "3185a67e-648c-48a8-9aad-180e1ca0f4ae",
+      "multiverseid": 508158,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Casualties of War",
+      "scryfallId": "e5a2a709-0273-48a3-874b-13aff4872b0a",
+      "multiverseid": 508373,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Eyeblight Massacre",
+      "scryfallId": "00652c09-c50c-40da-8f0f-86b5cc3f6c26",
+      "multiverseid": 508339,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elvish Promenade",
+      "scryfallId": "20602cb8-f925-4de0-ad4b-86d0f5514384",
+      "multiverseid": 508349,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Harvest Season",
+      "scryfallId": "326b5fad-bb8d-4019-84a8-1a319a14962e",
+      "multiverseid": 508353,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Pact of the Serpent",
+      "scryfallId": "c5b3d118-ba4b-4a93-92a2-cd763de49d29",
+      "multiverseid": 508155,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Return Upon the Tide",
+      "scryfallId": "470601b0-9598-487f-bb14-4bfec7ca6d61",
+      "multiverseid": 503715,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Roots of Wisdom",
+      "scryfallId": "734afb5b-3163-47fa-856f-8a85b9da22d3",
+      "multiverseid": 503806,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "f0b666de-5a89-417d-a946-00aafd1f1979",
+      "multiverseid": 508386,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "KHC"
+    },
+    {
+      "name": "Serpent's Soul-Jar",
+      "scryfallId": "08ae371f-ce62-475f-89a2-1f8a17cf950f",
+      "multiverseid": 508157,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "0afa0e33-4804-4b00-b625-c2d6b61090fc",
+      "multiverseid": 508394,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "KHC"
+    },
+    {
+      "name": "Binding the Old Gods",
+      "scryfallId": "d93ee644-d7d7-48d8-a04b-fb479b74edb0",
+      "multiverseid": 503822,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Crown of Skemfar",
+      "scryfallId": "e6297586-8953-408e-a38c-2239d45807e1",
+      "multiverseid": 508159,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Elderfang Venom",
+      "scryfallId": "7d5bbb02-a04e-4add-ae9a-67819cffdb3a",
+      "multiverseid": 508161,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Pride of the Perfect",
+      "scryfallId": "c8397a00-42b4-4330-9f74-a3b2eb19a6ca",
+      "multiverseid": 508342,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Prowess of the Fair",
+      "scryfallId": "b870c742-e799-4276-bb3d-f2c288ce0db8",
+      "multiverseid": 508343,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Moldervine Reclamation",
+      "scryfallId": "b2e8a239-6d12-49e4-900a-968e0d53d83a",
+      "multiverseid": 508379,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "74c5bc49-318c-44fc-b276-f6d036fdf054",
+      "multiverseid": 508398,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "KHC"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
+      "multiverseid": 507589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Foul Orchard",
+      "scryfallId": "1e1bad7b-e102-4dff-b79a-fd755c2b6d49",
+      "multiverseid": 508400,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Golgari Guildgate",
+      "scryfallId": "7e6228ce-0d36-4c93-80e0-949ffb9fe15e",
+      "multiverseid": 508401,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Golgari Rot Farm",
+      "scryfallId": "aee8e11f-6e73-4c8b-bd4e-3956ee18ac66",
+      "multiverseid": 508402,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Jungle Hollow",
+      "scryfallId": "ae7d3dbc-a3b9-459f-9337-67f9d9b7b563",
+      "multiverseid": 508403,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHC"
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "4544593c-c155-436f-a74b-eea3e854ad1d",
+      "multiverseid": 508405,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "KHC"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "04f35c75-4ede-4c23-867b-58d367f75fc8",
+      "multiverseid": 508407,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "KHC"
+    },
+    {
+      "name": "Skemfar Elderhall",
+      "scryfallId": "82c2a0f7-0f53-4627-8be8-227fde331a69",
+      "multiverseid": 503888,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
+      "multiverseid": 507587,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "KHM"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.649Z",
+    "sourceUrl": "ElvenEmpire_KHC.json",
+    "deckSource": "precon",
+    "createdAt": "2021-02-05T00:00:00.000Z"
+  }
+}

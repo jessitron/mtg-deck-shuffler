@@ -1,0 +1,940 @@
+{
+  "version": 1,
+  "id": 1763232518,
+  "name": "Built From Scratch",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Daretti, Scrap Savant",
+      "scryfallId": "3f4e6adf-d52f-4087-a919-789a543a9a3e",
+      "multiverseid": 446740,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Goblin Welder",
+      "scryfallId": "17cd920a-de09-454a-a9da-c84512e3aff1",
+      "multiverseid": 446837,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Epochrasite",
+      "scryfallId": "6d4fafc8-3466-42f7-9d8d-8c6250da7bd5",
+      "multiverseid": 446923,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Myr Retriever",
+      "scryfallId": "72ad8e04-f3be-4bc8-b62d-e92291317aab",
+      "multiverseid": 446939,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Myr Sire",
+      "scryfallId": "36a5a985-d3b4-4199-bac2-b83862f0439f",
+      "multiverseid": 446940,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Bottle Gnomes",
+      "scryfallId": "fa29a4ce-a8fa-499d-9994-f294c38b2ce5",
+      "multiverseid": 446913,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Cathodion",
+      "scryfallId": "4f8d963e-f210-44ca-a427-6a040cec102d",
+      "multiverseid": 446915,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Junk Diver",
+      "scryfallId": "119a814f-0325-4b69-a0b6-4c623b981f4a",
+      "multiverseid": 446931,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Palladium Myr",
+      "scryfallId": "4c6fc1ee-059e-4371-9f8e-01b0070799e4",
+      "multiverseid": 446943,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Pilgrim's Eye",
+      "scryfallId": "f027c8da-2fae-4799-8f7f-85fac3934bd7",
+      "multiverseid": 446946,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Tuktuk the Explorer",
+      "scryfallId": "bc4c0d5b-6424-44bd-8445-833e01bb6af4",
+      "multiverseid": 446860,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Dualcaster Mage",
+      "scryfallId": "fb883762-6eb7-4d35-9e82-9c32809206cd",
+      "multiverseid": 446830,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Feldon of the Third Path",
+      "scryfallId": "1665327f-8267-4054-9be5-43a610887c26",
+      "multiverseid": 446742,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Solemn Simulacrum",
+      "scryfallId": "5b623b8b-0758-435d-bc35-88035d6960f7",
+      "multiverseid": 446955,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Flametongue Kavu",
+      "scryfallId": "da3da672-cf12-4eb9-be68-aaa0e3cbf5d8",
+      "multiverseid": 446835,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Beetleback Chief",
+      "scryfallId": "3228ed6c-523b-4739-a10a-6867ba4b6c06",
+      "multiverseid": 446819,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Ingot Chewer",
+      "scryfallId": "82e21f16-ae06-4af8-9f66-fd9e001e8898",
+      "multiverseid": 446846,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Steel Hellkite",
+      "scryfallId": "90410a4b-59a5-4e11-8034-91a596098b61",
+      "multiverseid": 446958,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Wurmcoil Engine",
+      "scryfallId": "4ab5195f-7cc3-4972-92f8-1b26fa3fb927",
+      "multiverseid": 446967,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Spitebellows",
+      "scryfallId": "497f8aae-fd62-4cc6-9ccc-22d5ee4f6b81",
+      "multiverseid": 446853,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Hoard-Smelter Dragon",
+      "scryfallId": "8492c80b-c38a-44b0-b2a4-9292077a74c7",
+      "multiverseid": 446840,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Warmonger Hellkite",
+      "scryfallId": "e555b5af-48ed-4682-bf9a-f9f145548e18",
+      "multiverseid": 446864,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Myr Battlesphere",
+      "scryfallId": "c9474949-9a13-4a84-87ff-e52c44abb4a5",
+      "multiverseid": 446938,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Pentavus",
+      "scryfallId": "abf08ea2-187c-4067-81b6-a63db49b50ab",
+      "multiverseid": 446945,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Tyrant's Familiar",
+      "scryfallId": "08076c82-edb6-4c3c-abda-3d3ad7bdd78f",
+      "multiverseid": 446861,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Bosh, Iron Golem",
+      "scryfallId": "7dec8214-f074-4150-89e8-76ca05a3dc97",
+      "multiverseid": 446741,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Bogardan Hellkite",
+      "scryfallId": "412814c8-d6ad-429c-a985-fde809268941",
+      "multiverseid": 446822,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Faithless Looting",
+      "scryfallId": "6b79cc4b-55a1-4030-aedb-1840bf0b9794",
+      "multiverseid": 446832,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Whipflare",
+      "scryfallId": "81a3f7f3-da33-48d6-89c0-faf42998a08b",
+      "multiverseid": 446866,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Scrap Mastery",
+      "scryfallId": "bc6d966e-fa6b-4eb4-b854-7425f5553518",
+      "multiverseid": 446852,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Incite Rebellion",
+      "scryfallId": "3633c759-f86a-436d-b54d-0d6c9ef14b63",
+      "multiverseid": 446844,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Blasphemous Act",
+      "scryfallId": "fc048207-502a-478c-9195-5e20382652af",
+      "multiverseid": 446821,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Impact Resonance",
+      "scryfallId": "cd1742a6-adbd-4fbe-82c7-fe3589623d14",
+      "multiverseid": 446843,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "33a33b4c-2f3c-4f74-aa5b-ec6eb73ee4e7",
+      "multiverseid": 446825,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Volcanic Offering",
+      "scryfallId": "4c30b821-09ec-4b66-9963-f97e3ef5005c",
+      "multiverseid": 446862,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Word of Seizing",
+      "scryfallId": "234d029e-d3e5-4620-92ae-f068c995c035",
+      "multiverseid": 446867,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Magmaquake",
+      "scryfallId": "644012aa-7ca5-49a5-a223-0603cba37626",
+      "multiverseid": 446848,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Starstorm",
+      "scryfallId": "a181760b-949d-4901-b05f-0b1f032d0a8a",
+      "multiverseid": 446854,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Everflowing Chalice",
+      "scryfallId": "b2dadc79-855c-447e-a421-a9e16e81d47a",
+      "multiverseid": 446924,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Panic Spellbomb",
+      "scryfallId": "6d572487-de58-4ec0-9649-0cdacff4bb48",
+      "multiverseid": 446944,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "f9a32f17-49c4-4654-a087-1ba474f37377",
+      "multiverseid": 446953,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Wayfarer's Bauble",
+      "scryfallId": "9b0e3f48-0997-4313-93c9-86cbfc25cd63",
+      "multiverseid": 446965,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Fire Diamond",
+      "scryfallId": "42459fef-8d23-4121-9823-31ab63245364",
+      "multiverseid": 446926,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Ichor Wellspring",
+      "scryfallId": "03c16dfb-7e7a-4372-a1e2-8eb06d890c5c",
+      "multiverseid": 446929,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Liquimetal Coating",
+      "scryfallId": "f631447c-36e3-4d82-a658-19c9767a216b",
+      "multiverseid": 446933,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "2c214d26-8d0f-49a2-8e34-be073d34369a",
+      "multiverseid": 446936,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Mycosynth Wellspring",
+      "scryfallId": "f5670db3-d195-426e-be7d-8cf227a483b0",
+      "multiverseid": 446937,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Ruby Medallion",
+      "scryfallId": "ad5b8a3c-8c75-4af4-975b-031e39d69da3",
+      "multiverseid": 446948,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "e27be26d-4a5d-4dd5-8e9d-7d4e6c1cc5ed",
+      "multiverseid": 446959,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "559da16a-d68e-4e92-8870-b4759d3bba84",
+      "multiverseid": 446918,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Jalum Tome",
+      "scryfallId": "fb28aa21-653c-42c3-a0ce-cf569c11e2fd",
+      "multiverseid": 446930,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Pristine Talisman",
+      "scryfallId": "336dc11b-b16f-45da-a419-7f2751923df7",
+      "multiverseid": 446947,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Unstable Obelisk",
+      "scryfallId": "780d58ec-116f-4f9d-9e62-b3b5b94a610d",
+      "multiverseid": 446963,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Trading Post",
+      "scryfallId": "1ae64bb3-115a-4c68-99c9-a45b6f788b80",
+      "multiverseid": 446961,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Caged Sun",
+      "scryfallId": "dfe6f9ec-3b7f-4c11-acd1-440e14217e5d",
+      "multiverseid": 446914,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Dreamstone Hedron",
+      "scryfallId": "8ae24944-668f-4572-b15c-9e0fad6057ba",
+      "multiverseid": 446922,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Loreseeker's Stone",
+      "scryfallId": "a3821f9b-4767-4bcf-8cd3-2ff42ccb2648",
+      "multiverseid": 446934,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Spine of Ish Sah",
+      "scryfallId": "8c8ae40b-1c7f-4025-8d25-b09a2d1a29f6",
+      "multiverseid": 446956,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Darksteel Citadel",
+      "scryfallId": "bbdbde4e-6868-44e3-9d49-631d41b49a22",
+      "multiverseid": 446979,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Great Furnace",
+      "scryfallId": "52fa0f1b-5a9c-41da-a82c-59c010acd1bc",
+      "multiverseid": 446991,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Bitter Feud",
+      "scryfallId": "26387ab4-74da-49d7-965e-352da48d6a90",
+      "multiverseid": 446820,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Arcane Lighthouse",
+      "scryfallId": "fa90e142-15d4-461a-9e57-4a301a5df958",
+      "multiverseid": 446969,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Buried Ruin",
+      "scryfallId": "13f13189-7e26-4aeb-b9ca-469239688424",
+      "multiverseid": 446977,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Dormant Volcano",
+      "scryfallId": "83f90da4-9b01-431d-83b1-f54c132efec1",
+      "multiverseid": 446982,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Flamekin Village",
+      "scryfallId": "0fe90c85-c9ef-4ceb-9dc3-4d428b4157d5",
+      "multiverseid": 446987,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Forgotten Cave",
+      "scryfallId": "ff15e214-3ffd-4bf4-849b-5e7cf1967f05",
+      "multiverseid": 446988,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Ghost Quarter",
+      "scryfallId": "12f8071c-8955-4aa2-889c-6043df047223",
+      "multiverseid": 446989,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Phyrexia's Core",
+      "scryfallId": "a8b38935-41c4-4157-992e-c584f5e92e04",
+      "multiverseid": 446997,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "2841a331-c915-44b9-8af3-c6991b1d05d3",
+      "multiverseid": 446998,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Smoldering Crater",
+      "scryfallId": "58a562b3-8d45-4f04-9a6a-f21a7e075ebf",
+      "multiverseid": 447004,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "35017400-02ba-4b6a-afb7-1ea870e2833e",
+      "multiverseid": 447007,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b8352d89-48c0-48de-9bf6-330d05e7331f",
+      "multiverseid": 447036,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b8352d89-48c0-48de-9bf6-330d05e7331f",
+      "multiverseid": 447036,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b8352d89-48c0-48de-9bf6-330d05e7331f",
+      "multiverseid": 447036,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b8352d89-48c0-48de-9bf6-330d05e7331f",
+      "multiverseid": 447036,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b8352d89-48c0-48de-9bf6-330d05e7331f",
+      "multiverseid": 447036,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2f0a5c8d-b9d2-448a-a321-22c45832243f",
+      "multiverseid": 447037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2f0a5c8d-b9d2-448a-a321-22c45832243f",
+      "multiverseid": 447037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2f0a5c8d-b9d2-448a-a321-22c45832243f",
+      "multiverseid": 447037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2f0a5c8d-b9d2-448a-a321-22c45832243f",
+      "multiverseid": 447037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2f0a5c8d-b9d2-448a-a321-22c45832243f",
+      "multiverseid": 447037,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3e8ecccf-8786-4770-9879-86c4fbf44768",
+      "multiverseid": 447038,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3e8ecccf-8786-4770-9879-86c4fbf44768",
+      "multiverseid": 447038,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3e8ecccf-8786-4770-9879-86c4fbf44768",
+      "multiverseid": 447038,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3e8ecccf-8786-4770-9879-86c4fbf44768",
+      "multiverseid": 447038,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3e8ecccf-8786-4770-9879-86c4fbf44768",
+      "multiverseid": 447038,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b137c4c5-9091-4130-ba83-87a28435c9e8",
+      "multiverseid": 447039,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b137c4c5-9091-4130-ba83-87a28435c9e8",
+      "multiverseid": 447039,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b137c4c5-9091-4130-ba83-87a28435c9e8",
+      "multiverseid": 447039,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b137c4c5-9091-4130-ba83-87a28435c9e8",
+      "multiverseid": 447039,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "b137c4c5-9091-4130-ba83-87a28435c9e8",
+      "multiverseid": 447039,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0b2f797a-0c9a-46a0-9f07-0f6af1846552",
+      "multiverseid": 447040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0b2f797a-0c9a-46a0-9f07-0f6af1846552",
+      "multiverseid": 447040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0b2f797a-0c9a-46a0-9f07-0f6af1846552",
+      "multiverseid": 447040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0b2f797a-0c9a-46a0-9f07-0f6af1846552",
+      "multiverseid": 447040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0b2f797a-0c9a-46a0-9f07-0f6af1846552",
+      "multiverseid": 447040,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "d28d244f-a41c-433a-932a-efef8623d9fe",
+      "multiverseid": 447041,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "d28d244f-a41c-433a-932a-efef8623d9fe",
+      "multiverseid": 447041,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "d28d244f-a41c-433a-932a-efef8623d9fe",
+      "multiverseid": 447041,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "d28d244f-a41c-433a-932a-efef8623d9fe",
+      "multiverseid": 447041,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CM2"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.331Z",
+    "sourceUrl": "BuiltFromScratch_CM2.json",
+    "deckSource": "precon",
+    "createdAt": "2018-06-08T00:00:00.000Z"
+  }
+}

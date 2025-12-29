@@ -1,0 +1,1027 @@
+{
+  "version": 1,
+  "id": 1538029730,
+  "name": "Scions & Spellcraft Collector's Edition (FINAL FANTASY XIV)",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Y'shtola, Night's Blessed",
+      "scryfallId": "e8df6177-e14d-4dc9-bfc6-5e5f31c2834d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Alisaie Leveilleur",
+      "scryfallId": "ba96f831-02cb-4a74-a2e4-7f76444e3cd7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Alphinaud Leveilleur",
+      "scryfallId": "65331e86-1ff3-45e4-b789-7afec4ca9bd5",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Arcane Sanctum",
+      "scryfallId": "82ce1102-a88c-46ff-9fc1-7153beb50b6a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "4c861c4c-0520-46d9-b281-63a1188417dc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Archaeomancer's Map",
+      "scryfallId": "c6ff5063-c93f-4b21-8d08-ab0e8e046d39",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Archmage Emeritus",
+      "scryfallId": "e85c555a-f034-4c79-92d8-610527d16529",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Ardbert, Warrior of Darkness",
+      "scryfallId": "9fc1ac8a-bbd4-4d17-81d9-fd04876084b1",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "77df073b-49dc-4743-82a3-d595bc938761",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Astrologian's Planisphere",
+      "scryfallId": "a0f6e2d7-58b5-4a7d-8c42-e25185cd173f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Authority of the Consuls",
+      "scryfallId": "53e3fa87-8de0-4e3a-90bf-780dd0a9fb48",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Baleful Strix",
+      "scryfallId": "4ae1ec4a-5367-4663-841b-4038ae30a690",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Bastion of Remembrance",
+      "scryfallId": "68846892-3cdb-4a17-aef7-dd7a3aed22ff",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Blue Mage's Cane",
+      "scryfallId": "9b3cfc13-db4e-4ec3-8444-f715bcd43be6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Champions from Beyond",
+      "scryfallId": "d1031ce5-063f-4c38-a6a9-abc15d254dfc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Choked Estuary",
+      "scryfallId": "d9cf2b77-afb0-4c21-bc23-6942ec292035",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Circle of Power",
+      "scryfallId": "b6dc1f5a-a6cc-4ab4-8bb9-e216e24ca735",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Cleansing Nova",
+      "scryfallId": "81096eba-ad0a-4fa8-8d56-5a1ea9a9155b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "9ac9c12b-5135-4124-b01b-336560907940",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Contaminated Aquifer",
+      "scryfallId": "bf544abb-c338-4da4-bb77-eddd3aaacc9a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Coveted Jewel",
+      "scryfallId": "5b4ce244-d34f-4e96-9fe5-a0a8cefb92c7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Crux of Fate",
+      "scryfallId": "4d507db6-29a6-4816-8e37-5b6e318d740f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Cut a Deal",
+      "scryfallId": "b42f5488-949f-434a-a9cf-c98e070d6a7f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Dancer's Chakrams",
+      "scryfallId": "27ec595f-406b-4539-8d2e-eb98df1a0fc9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Darkwater Catacombs",
+      "scryfallId": "bcb5a670-7c8f-4b76-82c6-c89abffbb4bd",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Demolition Field",
+      "scryfallId": "7f6d8cae-face-4bff-8c0a-348cefe1e9dd",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Desolate Mire",
+      "scryfallId": "a0ecbdad-aebf-421d-a71e-e112f8c0e4bb",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Dig Through Time",
+      "scryfallId": "766b2e52-6ba1-4222-a9f4-01a2bf3e9443",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Drowned Catacomb",
+      "scryfallId": "8a47d5f6-e08d-4311-97d0-16f7737b83a0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Emet-Selch of the Third Seat",
+      "scryfallId": "dd3141de-633e-48e3-a89f-a91339f5e882",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Estinien Varlineau",
+      "scryfallId": "7812c768-8417-4689-9a51-f577c1cf5dc0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "351f791c-4bee-4fce-aee4-d0214ca0c945",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "47c2b572-b54a-444c-8d74-b005e94d751f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Exsanguinate",
+      "scryfallId": "333c8e71-fe90-408c-aabd-c5b7d83d0f03",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Eye of Nidhogg",
+      "scryfallId": "186862e7-91ba-47e9-bc38-e8e20772d40c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Fandaniel, Telophoroi Ascian",
+      "scryfallId": "08c9bf6c-fc52-4565-96d1-951a314e59e5",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Fetid Heath",
+      "scryfallId": "5277f73d-b964-4ce6-823d-ce0fbf0a2d28",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Final Judgment",
+      "scryfallId": "438a7db0-8005-46ac-8dd1-e7e364fd2ba7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "G'raha Tia, Scion Reborn",
+      "scryfallId": "214453a2-9dcb-4bab-853f-5b56bbcbe4f8",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Glacial Fortress",
+      "scryfallId": "d75d748f-38c3-4a7f-8211-db62d5314180",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Hermes, Overseer of Elpis",
+      "scryfallId": "e04a05e5-7bff-46a4-aae1-6713977e6e30",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Hildibrand Manderville // Gentleman's Rise",
+      "scryfallId": "60aed76e-2265-471d-8e41-1d8605603b78",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Hraesvelgr of the First Brood",
+      "scryfallId": "abcfefe3-c66d-4512-bcc3-c9a39cfbb983",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Hypnotic Sprite // Mesmeric Glare",
+      "scryfallId": "4358fcf2-e07c-4a0f-8f69-5d0f83adeb20",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Idyllic Beachfront",
+      "scryfallId": "afe2ebec-0310-4b2f-ace4-fb293a1e4837",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Into the Story",
+      "scryfallId": "24c55c03-2c7a-416d-81d6-74a77a103704",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Isolated Chapel",
+      "scryfallId": "8ca61142-d0ed-42cb-9a51-0e44151f2b44",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Krile Baldesion",
+      "scryfallId": "125dd19b-98a0-49d9-a870-63214255e12a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Lethal Scheme",
+      "scryfallId": "0802be9f-686f-4321-afa4-d472241de653",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Lingering Souls",
+      "scryfallId": "e464408d-3e50-4a9e-beca-b91e15baacaf",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Lyse Hext",
+      "scryfallId": "97845ece-ceef-468c-a4e3-6fde1413c9f0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Murderous Rider // Swift End",
+      "scryfallId": "dd239710-62ef-43b5-aea2-e82bb385744d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Observed Stasis",
+      "scryfallId": "6301c10c-8c27-4595-a0a7-30c621332b2c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Papalymo Totolymo",
+      "scryfallId": "0b876b1e-fcf4-4e5c-81b0-1080ac8099ed",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "4dd83a5d-1908-4141-8449-fac5e77cd6c0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Port Town",
+      "scryfallId": "f1ac3b7f-a1db-49df-ba02-fc80cb2f70af",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "ce3a0ad9-6b7a-470c-8e49-4121fea72c89",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Propaganda",
+      "scryfallId": "8fdbe10e-4a5c-43ee-abb5-20a8d5be9727",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Reaper's Scythe",
+      "scryfallId": "e1e53ff2-c321-4fc8-b4d7-eb253d670c5b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Relic of Legends",
+      "scryfallId": "ed235727-7e60-4b37-8947-4b3613711c4d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Rite of Replication",
+      "scryfallId": "e1d1c0ab-6f75-4144-baab-59b2194742f9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Sage's Nouliths",
+      "scryfallId": "ace9baac-4aa6-49ef-b85d-514de6e77043",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Scavenger Grounds",
+      "scryfallId": "a4e3f65d-8d73-4fd1-9de4-813ba6e40940",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Shineshadow Snarl",
+      "scryfallId": "e45eff2e-c624-4c59-b192-a9d7dc2eeeba",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Skycloud Expanse",
+      "scryfallId": "0972c465-0369-4ac2-9912-2898fad1bdba",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Snuff Out",
+      "scryfallId": "a3b1fc65-3620-4052-a1f8-1779d95029c7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "1abcafa9-0f27-482f-95a9-24520f0106b8",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Sublime Epiphany",
+      "scryfallId": "a71d0330-ae9b-48c4-802b-b2383958e0d4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Summon: Good King Mog XII",
+      "scryfallId": "c14098d6-28ae-492f-8ffc-7d115d83ce6a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Sunken Hollow",
+      "scryfallId": "3eb96a33-46db-4d84-9a7f-9bb6a19a1a93",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Sunken Ruins",
+      "scryfallId": "2dbd21b1-d6cf-4d10-8a31-aa52208c95d7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Sunlit Marsh",
+      "scryfallId": "4b163c67-2e88-4181-90c9-3f15eba59d03",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "1176ebbf-4130-4e4e-ad49-65101a7357b4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "1176ebbf-4130-4e4e-ad49-65101a7357b4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "1176ebbf-4130-4e4e-ad49-65101a7357b4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "1176ebbf-4130-4e4e-ad49-65101a7357b4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIN"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "06554274-78ee-4bfc-b203-b81cb4639427",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Syphon Mind",
+      "scryfallId": "601be092-2353-4b86-ac01-e8fbdbed29b7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "c7fb7ff7-aef0-4893-a120-e17a082cd07f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Talisman of Hierarchy",
+      "scryfallId": "79696e14-837f-431a-b5fb-fe3620bb8262",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "2dc4dfe7-ae80-4a6e-b588-fd497c35fe37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Tataru Taru",
+      "scryfallId": "93176e85-2343-43a8-8578-69699b464b86",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "f1cb4775-8e14-4c83-a417-40d1432ac90a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Thancred Waters",
+      "scryfallId": "cc74ea74-05cf-4a33-84df-94ec34e816fe",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Thought Vessel",
+      "scryfallId": "5c617d99-354a-4586-9a09-1671c0e88754",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Tome of Legends",
+      "scryfallId": "08b0d5aa-8d76-4951-a326-0f4078fdfd28",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "FIC"
+    },
+    {
+      "name": "Torrential Gearhulk",
+      "scryfallId": "a6a0afd5-f3f9-459e-bd03-1a7a3521b570",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Transpose",
+      "scryfallId": "66392b0e-8691-42a4-bc84-03b017174a73",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Underground River",
+      "scryfallId": "c219a41a-d5f4-42f3-841c-2518be583198",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Urianger Augurelt",
+      "scryfallId": "44d44107-da15-41b9-8dfb-6335c1cbd83a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Vindicate",
+      "scryfallId": "1b2c1bf2-d03a-4cd5-ab51-26c928949497",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "Void Rend",
+      "scryfallId": "b1fe4252-f5f8-405a-82c4-2c7b35e7e7fb",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "FIC"
+    },
+    {
+      "name": "White Auracite",
+      "scryfallId": "b8921d64-fdd3-4cdd-9687-983c8d6e0f72",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "FIN"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.662Z",
+    "sourceUrl": "ScionsSpellcraftCollectorSEditionFinalFantasyXiv_FIC.json",
+    "deckSource": "precon",
+    "createdAt": "2025-06-13T00:00:00.000Z"
+  }
+}

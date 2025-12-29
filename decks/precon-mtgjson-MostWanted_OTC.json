@@ -1,0 +1,1017 @@
+{
+  "version": 1,
+  "id": 1741704724,
+  "name": "Most Wanted",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Olivia, Opulent Outlaw",
+      "scryfallId": "55e6c31b-f9e9-4e42-a875-985d99300d9d",
+      "multiverseid": 658282,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Vihaan, Goldwaker",
+      "scryfallId": "7b549690-72eb-4244-bb66-996a2bd1027e",
+      "multiverseid": 658308,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Council's Judgment",
+      "scryfallId": "4005e82f-0b30-4165-87e2-51250c00adb0",
+      "multiverseid": 658523,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Heliod's Intervention",
+      "scryfallId": "9519bb3a-bed3-48e8-93ae-9e9b2e7d646a",
+      "multiverseid": 658525,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Angelic Sell-Sword",
+      "scryfallId": "7581a319-8d15-4b67-a3d5-b90f1e99079b",
+      "multiverseid": 658330,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "We Ride at Dawn",
+      "scryfallId": "fd95daa3-c1f6-4f4c-8dde-ad5a50bfea00",
+      "multiverseid": 658332,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Massacre Girl",
+      "scryfallId": "fab14e57-8e49-49fd-ad3f-ac669318bb14",
+      "multiverseid": 658584,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Fain, the Broker",
+      "scryfallId": "7f1ff9e5-3d69-43a9-965c-2d87951cfd2b",
+      "multiverseid": 658577,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Witch of the Moors",
+      "scryfallId": "6914b30b-24f3-48cb-832f-c1f8510e2c9c",
+      "multiverseid": 658596,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Nighthawk Scavenger",
+      "scryfallId": "47433ce9-1ac6-4359-a5e4-4ec68490cb0c",
+      "multiverseid": 658588,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Curtains' Call",
+      "scryfallId": "9899d9c7-7c68-4d10-8249-5d1193f77030",
+      "multiverseid": 658574,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Misfortune Teller",
+      "scryfallId": "7c9e6ca9-14cf-4476-8c55-b98a6ebe6101",
+      "multiverseid": 658585,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Painful Truths",
+      "scryfallId": "ba841bb9-1b6e-45e4-af66-51ee4fabb504",
+      "multiverseid": 658590,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Kamber, the Plunderer",
+      "scryfallId": "fc7714b3-bcbd-4a63-b517-53166e3facb1",
+      "multiverseid": 658581,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Ogre Slumlord",
+      "scryfallId": "76995067-81a3-41c5-bc95-bfa5a953700d",
+      "multiverseid": 658589,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Hex",
+      "scryfallId": "d87e25fc-b173-4e9a-993d-c1e1053d2f4e",
+      "multiverseid": 658580,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Mari, the Killing Quill",
+      "scryfallId": "6b4b3c1a-671c-422d-a98c-7d750760ca46",
+      "multiverseid": 658582,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Discreet Retreat",
+      "scryfallId": "b221b4d0-7d9f-45bf-8bcd-ce0cea01abdf",
+      "multiverseid": 658340,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Charred Graverobber",
+      "scryfallId": "7bbebce1-88d1-4002-8c28-746b0976d662",
+      "multiverseid": 658339,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Back in Town",
+      "scryfallId": "393a864c-caa0-4030-b8bd-be0bb967eb72",
+      "multiverseid": 658338,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Marshland Bloodcaster",
+      "scryfallId": "4db8bd3e-2554-40eb-8e6d-d2eb589d9344",
+      "multiverseid": 658583,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Veinwitch Coven",
+      "scryfallId": "b88f7970-ccde-499a-ae68-eb74dd6c2639",
+      "multiverseid": 658595,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Rankle, Master of Pranks",
+      "scryfallId": "4821d865-2a46-4611-ab93-1a9fdde08302",
+      "multiverseid": 658592,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Dire Fleet Ravager",
+      "scryfallId": "0d114e88-c5bd-416d-b9f1-25be1432c98c",
+      "multiverseid": 658576,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Mirror Entity",
+      "scryfallId": "f2a3107d-bb96-45c6-97ac-b6c6b84cbad4",
+      "multiverseid": 658527,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Dire Fleet Daredevil",
+      "scryfallId": "9de2ad47-c6d5-4cd8-ae32-66ae167e25a0",
+      "multiverseid": 658606,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Captain Lannery Storm",
+      "scryfallId": "60a457e2-6cc7-47f0-9a24-df5459395358",
+      "multiverseid": 658602,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Seize the Spotlight",
+      "scryfallId": "01fe0af9-55b4-4390-8de4-2cd58aa7efde",
+      "multiverseid": 658623,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Grenzo, Havoc Raiser",
+      "scryfallId": "5fc99c9d-66f5-4858-91f7-425d4248a0b3",
+      "multiverseid": 658612,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Angrath's Marauders",
+      "scryfallId": "cf0a0bef-ed72-4fdf-9799-6f6430c8a8a7",
+      "multiverseid": 658597,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Captivating Crew",
+      "scryfallId": "13710c49-496d-41f9-87a4-5794dea9145d",
+      "multiverseid": 658603,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Rain of Riches",
+      "scryfallId": "d633a188-f533-4d28-b3f0-a19f4d78cc40",
+      "multiverseid": 658621,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Laurine, the Diversion",
+      "scryfallId": "ca2b008e-e144-45b1-9bc7-eb49e03a8a8f",
+      "multiverseid": 658616,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Mass Mutiny",
+      "scryfallId": "b817473f-599d-45bb-a3b0-a96986ec5102",
+      "multiverseid": 658618,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Dead Before Sunrise",
+      "scryfallId": "f2206ff3-f02b-4598-b14b-9db0428f5aeb",
+      "multiverseid": 658346,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Graywater's Fixer",
+      "scryfallId": "958cef68-8417-40c1-8943-c816a3c8a2fd",
+      "multiverseid": 658356,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Life Insurance",
+      "scryfallId": "da8acf63-cf7d-4f95-bdd5-31c766417229",
+      "multiverseid": 658677,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Breena, the Demagogue",
+      "scryfallId": "d0adb0c2-d45f-4c51-a4df-05f75c83e46a",
+      "multiverseid": 658661,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Queen Marchesa",
+      "scryfallId": "0fdae05f-7bdc-45fb-b9b9-e5ec3766f965",
+      "multiverseid": 658683,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Idol of Oblivion",
+      "scryfallId": "fa0e1874-d172-42dd-bebc-5e2c2d3e0b6d",
+      "multiverseid": 658702,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Academy Manufactor",
+      "scryfallId": "76480f4d-ad6d-4ed6-82c6-fa12abc22557",
+      "multiverseid": 658695,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Bounty Board",
+      "scryfallId": "2570aa04-27ac-406c-b1c8-5d84f7daf693",
+      "multiverseid": 658357,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Fetid Heath",
+      "scryfallId": "21359e68-60b0-47ba-b5ff-92d8342bf4c8",
+      "multiverseid": 658739,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Command Beacon",
+      "scryfallId": "4ff61202-fb5e-4cea-a5ea-168505ac31e1",
+      "multiverseid": 658723,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Vault of the Archangel",
+      "scryfallId": "3fb781da-2b8b-44c6-999f-5038e79a7d57",
+      "multiverseid": 658783,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Dragonskull Summit",
+      "scryfallId": "a91bbcd4-2ae9-426c-b42e-47de62f413dc",
+      "multiverseid": 658733,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Temple of Silence",
+      "scryfallId": "84790d0e-19ca-4191-bed9-03790555b5d2",
+      "multiverseid": 658777,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Temple of Malice",
+      "scryfallId": "e30da7eb-619b-4756-9ae6-f710e3f26862",
+      "multiverseid": 658775,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "3da63d3f-3752-48cd-8ea4-0ce08b1b8c21",
+      "multiverseid": 658737,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Temple of Triumph",
+      "scryfallId": "07e73142-a8c0-4bd5-8ab4-cd10e572a975",
+      "multiverseid": 658779,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "5f6b7995-faf8-4fba-8be8-12ee71bd53bf",
+      "multiverseid": 658722,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Isolated Chapel",
+      "scryfallId": "af5398d1-804b-4a38-b16a-57a855e9c3b0",
+      "multiverseid": 658745,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Bonders' Enclave",
+      "scryfallId": "d174f42c-dcf2-4da9-812b-7e1d0991d466",
+      "multiverseid": 658718,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Caves of Koilos",
+      "scryfallId": "e8d95d7c-743e-4031-9431-da0e60969ec3",
+      "multiverseid": 658721,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Battlefield Forge",
+      "scryfallId": "bc6c3170-9e84-46ea-8311-911145f9c48a",
+      "multiverseid": 658715,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Sulfurous Springs",
+      "scryfallId": "17330bbc-2c3d-414f-844e-b467d034c0d2",
+      "multiverseid": 658767,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Rugged Prairie",
+      "scryfallId": "5db20e33-061f-455e-825f-22272b8ee0c6",
+      "multiverseid": 658758,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Desolate Mire",
+      "scryfallId": "cdbc1ab4-c807-4e71-8cfe-e507cbd7fec7",
+      "multiverseid": 658731,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Shadowblood Ridge",
+      "scryfallId": "1e22773d-0408-4da7-8202-7cb86b1e9f61",
+      "multiverseid": 658761,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Canyon Slough",
+      "scryfallId": "7bcb3b2c-087a-473c-890c-6db48498b728",
+      "multiverseid": 658719,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Smoldering Marsh",
+      "scryfallId": "756b85bd-c167-47d4-8b56-fd95ea86a1f6",
+      "multiverseid": 658765,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Blackcleave Cliffs",
+      "scryfallId": "e0396bf2-09a2-433e-bc0e-e2149a831f37",
+      "multiverseid": 658716,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Mistmeadow Skulk",
+      "scryfallId": "c652ce39-903c-466b-91d5-5b1d6e645b57",
+      "multiverseid": 658528,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Requisition Raid",
+      "scryfallId": "154e9ba9-0d0e-4b0e-acf2-f66a993cf3a2",
+      "multiverseid": 654967,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Changeling Outcast",
+      "scryfallId": "ab499df5-ed76-43ad-81b3-70afd0487ccd",
+      "multiverseid": 658572,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Feed the Swarm",
+      "scryfallId": "0be3e9b2-db8f-4b1f-8f22-e2e897ed83d6",
+      "multiverseid": 658578,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Deadly Dispute",
+      "scryfallId": "ed01650e-4eb5-4884-9cc6-947b0e20dd3c",
+      "multiverseid": 658575,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Morbid Opportunist",
+      "scryfallId": "311b0989-63fa-44a3-b1a2-86e39e940ff3",
+      "multiverseid": 658586,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Aetherborn Marauder",
+      "scryfallId": "4c861a13-4e02-41fb-a2c0-29d3a7ae3922",
+      "multiverseid": 658569,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Tenured Inkcaster",
+      "scryfallId": "e315f7ab-14c3-4ad6-8d8d-ac83cee39272",
+      "multiverseid": 658593,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Shoot the Sheriff",
+      "scryfallId": "180d6528-c524-4bb8-8a72-b3775cd2c177",
+      "multiverseid": 655047,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "da9da49d-e319-4897-9ab6-57c7c69478a6",
+      "multiverseid": 658704,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Impulsive Pilferer",
+      "scryfallId": "0f020359-5ad1-43c4-8588-172be635cccc",
+      "multiverseid": 658615,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Shiny Impetus",
+      "scryfallId": "a2e44a73-7cc0-4654-9c6f-d58513c7cabd",
+      "multiverseid": 658624,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Humble Defector",
+      "scryfallId": "d17c10a1-12fe-4a58-81ed-03a8bdd06686",
+      "multiverseid": 658614,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Glittering Stockpile",
+      "scryfallId": "74713a58-e343-4504-9900-cf9d76951242",
+      "multiverseid": 658611,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Boros Charm",
+      "scryfallId": "0f375bb9-1294-4f43-8f0c-504ed6cfb7d0",
+      "multiverseid": 658660,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "2bfeb9dc-0bf7-4f19-9714-b14114e4627f",
+      "multiverseid": 658696,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Trailblazer's Boots",
+      "scryfallId": "aa05985b-e2cb-412f-a2ad-b8d723d9f451",
+      "multiverseid": 658713,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Bandit's Haul",
+      "scryfallId": "68b2e74b-933b-4285-963b-dda3a986a914",
+      "multiverseid": 655181,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTJ"
+    },
+    {
+      "name": "Orzhov Signet",
+      "scryfallId": "2a7eaae2-6fd4-4916-9e22-05806c98f7b9",
+      "multiverseid": 658705,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "6c5c9437-3d99-4a7c-8255-9acdcb1acc40",
+      "multiverseid": 658711,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Rakdos Signet",
+      "scryfallId": "2381f23b-f702-4c94-b261-59fb25330ddc",
+      "multiverseid": 658709,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "d1d019fb-0498-454b-a03b-4f396def718b",
+      "multiverseid": 658724,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Bojuka Bog",
+      "scryfallId": "0efec118-ed01-42a0-93b4-f9a92c01b72e",
+      "multiverseid": 658717,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "1b0431c1-4310-46f8-8d1e-b6e56de7453d",
+      "multiverseid": 658754,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Rogue's Passage",
+      "scryfallId": "45f5d989-d0df-4d6d-822b-cc76b415f9d1",
+      "multiverseid": 658757,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Demolition Field",
+      "scryfallId": "47994cb6-204a-4fbe-a9d4-5798a70c95ab",
+      "multiverseid": 658727,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Tainted Peak",
+      "scryfallId": "2cad9ddd-60f8-47c2-a2f6-c89d007620e7",
+      "multiverseid": 658771,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Sunhome, Fortress of the Legion",
+      "scryfallId": "4ebb97da-e4d5-41ba-9a70-2a1de91f513c",
+      "multiverseid": 658768,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Nomad Outpost",
+      "scryfallId": "0f48687e-8ad2-4654-ab8c-8d278ef0d0a3",
+      "multiverseid": 658750,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "OTC"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "f55a1775-9672-4f0c-9aab-30ba90f0d1e6",
+      "multiverseid": 658778,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "OTC"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "6f501773-1b39-4a4c-9b45-a950385c9e82",
+      "multiverseid": 657094,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "fe60da77-084c-49e8-9948-9ac4b6a6382f",
+      "multiverseid": 657095,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "eb7dc259-9949-4673-a8f1-874396948392",
+      "multiverseid": 657098,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "eb7dc259-9949-4673-a8f1-874396948392",
+      "multiverseid": 657098,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "5c2c9dc0-7f3a-4f3a-ba08-5c2f87e252bc",
+      "multiverseid": 657099,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "5c2c9dc0-7f3a-4f3a-ba08-5c2f87e252bc",
+      "multiverseid": 657099,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "9137b4aa-2289-4a4d-b1f5-ae75a0928278",
+      "multiverseid": 657100,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTJ"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2237ee9b-fff6-472c-903c-11faf9bb116d",
+      "multiverseid": 657101,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "OTJ"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.330Z",
+    "sourceUrl": "MostWanted_OTC.json",
+    "deckSource": "precon",
+    "createdAt": "2024-04-19T00:00:00.000Z"
+  }
+}

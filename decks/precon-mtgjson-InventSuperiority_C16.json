@@ -1,0 +1,992 @@
+{
+  "version": 1,
+  "id": 1204229271,
+  "name": "Invent Superiority",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Breya, Etherium Shaper",
+      "scryfallId": "8b585ce8-77a3-4755-8aa6-aee83724bbab",
+      "multiverseid": 420646,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Daretti, Scrap Savant",
+      "scryfallId": "19e63f83-4587-4ff8-b75b-d0185f6a911c",
+      "multiverseid": 420740,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Myr Retriever",
+      "scryfallId": "fd7081d5-1f90-477f-a06e-f0a8679f4f7d",
+      "multiverseid": 420881,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Chief Engineer",
+      "scryfallId": "8c67872b-f375-42b9-b81c-3c8c52c0c24e",
+      "multiverseid": 420703,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Etherium Sculptor",
+      "scryfallId": "86e072aa-4234-416d-b83e-cdc4f511a6d9",
+      "multiverseid": 420706,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Vedalken Engineer",
+      "scryfallId": "ac3d65ac-efa0-4bce-bc43-802fe1909b58",
+      "multiverseid": 420720,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Slobad, Goblin Tinkerer",
+      "scryfallId": "4256dcc1-0eee-4385-9a5c-70abb212bf49",
+      "multiverseid": 420750,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Baleful Strix",
+      "scryfallId": "8b088449-2968-4f11-91b5-5e1f0a833725",
+      "multiverseid": 420798,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Akiri, Line-Slinger",
+      "scryfallId": "3b951e0c-a4dd-4a20-87c6-eaa947e33aa4",
+      "multiverseid": 420643,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Armory Automaton",
+      "scryfallId": "cc0be4ff-c346-4c22-8357-9a2383a53469",
+      "multiverseid": 420668,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Shimmer Myr",
+      "scryfallId": "8609dc53-774f-4abe-a312-0ff7133d536b",
+      "multiverseid": 420886,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Master of Etherium",
+      "scryfallId": "35b9acb3-2a41-41b9-b443-86684e12af2f",
+      "multiverseid": 420709,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Trinket Mage",
+      "scryfallId": "d644b4df-7c59-4617-89d8-7333e863db31",
+      "multiverseid": 420719,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Magus of the Will",
+      "scryfallId": "3a66dce4-3582-44f0-bb5d-3d94044b32e9",
+      "multiverseid": 420631,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Hanna, Ship's Navigator",
+      "scryfallId": "c2d6fd11-4d4c-49a6-94e5-572679499746",
+      "multiverseid": 420820,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Silas Renn, Seeker Adept",
+      "scryfallId": "4e3fe912-1374-47c7-b73f-89ef55c479c1",
+      "multiverseid": 420660,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Sydri, Galvanic Genius",
+      "scryfallId": "7207c416-dc16-40ab-94a0-836ee0710e24",
+      "multiverseid": 420841,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Etched Oracle",
+      "scryfallId": "89c98ee9-ecfb-4d02-a6fe-df153c8691ab",
+      "multiverseid": 420869,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Solemn Simulacrum",
+      "scryfallId": "a1dfd50e-8aa4-4d7f-b345-8d7dfb7bcb4d",
+      "multiverseid": 420890,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Sanctum Gargoyle",
+      "scryfallId": "c4cc7983-2454-417f-a817-e1bd663ba3d0",
+      "multiverseid": 420693,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Faerie Artisans",
+      "scryfallId": "ff05c503-2536-48f5-a639-480614a2e5f8",
+      "multiverseid": 420625,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Bruse Tarl, Boorish Herder",
+      "scryfallId": "125b552b-45ea-4e0b-94a9-8131c97a04c0",
+      "multiverseid": 420647,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Ethersworn Adjudicator",
+      "scryfallId": "f84cedf6-2ad7-4b94-95b3-70deb03ef23b",
+      "multiverseid": 420707,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Sphinx Summoner",
+      "scryfallId": "83226f26-8d8f-42f2-ab23-997e72e954f2",
+      "multiverseid": 420840,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Jor Kadeen, the Prevailer",
+      "scryfallId": "ceb9bf41-5995-46a9-be37-a105cf8812a4",
+      "multiverseid": 420823,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Soul of New Phyrexia",
+      "scryfallId": "755c95c9-eead-486a-9a0e-384cc3143f6c",
+      "multiverseid": 420891,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Godo, Bandit Warlord",
+      "scryfallId": "73ade6a3-a461-4f90-8bd6-9b17892a8405",
+      "multiverseid": 420742,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Hellkite Tyrant",
+      "scryfallId": "16937c7d-72c8-4640-8000-e4d2dc664a93",
+      "multiverseid": 420745,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Sharuum the Hegemon",
+      "scryfallId": "f8896272-4806-40ba-94fd-51310269aa07",
+      "multiverseid": 420838,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Myr Battlesphere",
+      "scryfallId": "4119859e-5e58-4cdc-8ad2-45a322f31f0d",
+      "multiverseid": 420880,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Hellkite Igniter",
+      "scryfallId": "60d10dc0-736c-4786-b62b-513a16a96329",
+      "multiverseid": 420744,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Filigree Angel",
+      "scryfallId": "afee5684-e9ff-4451-b3e9-184c2e83fb36",
+      "multiverseid": 420816,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Whipflare",
+      "scryfallId": "2d861171-8054-4fe3-b79c-97a8a19be645",
+      "multiverseid": 420757,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Parting Thoughts",
+      "scryfallId": "2e60b5a1-923c-4c67-ae06-2a498dc46506",
+      "multiverseid": 420632,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Trash for Treasure",
+      "scryfallId": "f1c031c7-656b-4bd5-9b59-c03420cc2399",
+      "multiverseid": 420753,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Beacon of Unrest",
+      "scryfallId": "bbf0f0e4-5b79-4e49-b876-99196323200f",
+      "multiverseid": 420724,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Migratory Route",
+      "scryfallId": "9006ff3d-446d-411d-948d-9baee8ea9691",
+      "multiverseid": 420655,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Open the Vaults",
+      "scryfallId": "8d8c1677-14aa-4d51-83ff-d1fee9046715",
+      "multiverseid": 420689,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Phyrexian Rebirth",
+      "scryfallId": "9ac75f09-8173-4a49-ab5e-59563ef6b478",
+      "multiverseid": 420690,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Grave Upheaval",
+      "scryfallId": "32b25bb5-723d-4af0-8661-60178f00f92b",
+      "multiverseid": 420648,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Coastal Breach",
+      "scryfallId": "bf8b550a-c86f-4684-a4f6-14e75172324f",
+      "multiverseid": 420623,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Grip of Phyresis",
+      "scryfallId": "d523ec16-46d0-4f80-8df4-30c6c32f3386",
+      "multiverseid": 420626,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Ancient Excavation",
+      "scryfallId": "191f2e4f-2441-472a-b660-d20c07aeec20",
+      "multiverseid": 420644,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Read the Runes",
+      "scryfallId": "7a3f1e40-839e-400a-b734-ff4d566e7e34",
+      "multiverseid": 420712,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Trial // Error",
+      "scryfallId": "383451e1-9b97-4c85-a044-7c68b61c8c65",
+      "multiverseid": 420856,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Everflowing Chalice",
+      "scryfallId": "63ee2346-e151-45a4-90c1-cf1d63ec35f0",
+      "multiverseid": 420870,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "9090c72c-8d6f-4e94-9111-e5f6929094db",
+      "multiverseid": 420888,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "0f003fde-be17-4159-a361-711ed0bee911",
+      "multiverseid": 420889,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Dispeller's Capsule",
+      "scryfallId": "0710e943-8882-4a31-973b-1bb07d545af8",
+      "multiverseid": 420681,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Executioner's Capsule",
+      "scryfallId": "81c1fe5e-375a-4ca0-a0fe-a3b0d36b0e7c",
+      "multiverseid": 420726,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Cranial Plating",
+      "scryfallId": "169b74e2-72cf-47df-b128-b632313cd24c",
+      "multiverseid": 420866,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "d140a606-e9d0-4fda-af38-1fca5d5c8c17",
+      "multiverseid": 420871,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Ichor Wellspring",
+      "scryfallId": "94de25aa-d29a-45c9-8c4d-1ac27eb6a914",
+      "multiverseid": 420875,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Mycosynth Wellspring",
+      "scryfallId": "ee1dbbf1-3c59-49a1-a805-1cbee1b4b08e",
+      "multiverseid": 420879,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "db9337e8-3315-4821-a08a-b04bb00d4b05",
+      "multiverseid": 420893,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Thopter Foundry",
+      "scryfallId": "a824a790-ab8d-4733-9ed6-1a24676fb8f3",
+      "multiverseid": 420854,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "28e23091-dc18-4964-af54-0ab282811a06",
+      "multiverseid": 420865,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Loxodon Warhammer",
+      "scryfallId": "2106abb6-f136-448b-8505-64c51309094b",
+      "multiverseid": 420878,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Bonehoard",
+      "scryfallId": "9069c746-d0aa-4e6d-b352-58e582f033b2",
+      "multiverseid": 420862,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Nevinyrral's Disk",
+      "scryfallId": "f293d587-6aef-4514-8f6e-ed21b820ef83",
+      "multiverseid": 420882,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Trading Post",
+      "scryfallId": "6e0e70b6-1f5c-4cca-95eb-51ce89d76064",
+      "multiverseid": 420895,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Blinkmoth Urn",
+      "scryfallId": "1016fb10-82b5-465a-8f33-ec54f9785544",
+      "multiverseid": 420861,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Darksteel Citadel",
+      "scryfallId": "4d1d61d9-65de-4d9b-a1f5-f0702f74a7ce",
+      "multiverseid": 420905,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Seat of the Synod",
+      "scryfallId": "ccd300af-057e-4ea2-8132-7e33c8f34e08",
+      "multiverseid": 420940,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Curse of Vengeance",
+      "scryfallId": "22e7d0e3-a87c-414f-8f12-314083539a2a",
+      "multiverseid": 420629,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Arcane Sanctum",
+      "scryfallId": "d15c35b2-ecec-4b63-afd5-25392bf58486",
+      "multiverseid": 420898,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "9d7ac112-bb20-4ea4-b797-5d21f6b7c121",
+      "multiverseid": 420673,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Azorius Chancery",
+      "scryfallId": "16389f46-fd96-4a11-ba78-0867cab80282",
+      "multiverseid": 420899,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Boros Garrison",
+      "scryfallId": "8e6a7b29-d028-41d0-badc-49b514972cfe",
+      "multiverseid": 420900,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Buried Ruin",
+      "scryfallId": "9405ceb1-112b-4cef-8c3f-2a22c7eb6692",
+      "multiverseid": 420901,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "6a759aca-50a4-44ba-8a9d-a764da55bfb7",
+      "multiverseid": 420903,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Crumbling Necropolis",
+      "scryfallId": "80b0c087-4642-4297-aa1c-27d17fb879b9",
+      "multiverseid": 420904,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Dimir Aqueduct",
+      "scryfallId": "7b108bfd-f32d-49d4-9f3c-666799b3dd0d",
+      "multiverseid": 420907,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "2b3c0b62-39d7-4710-b3ce-f9d614a09841",
+      "multiverseid": 420911,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "a95134ee-68d3-44d8-9098-403f100dc73b",
+      "multiverseid": 420912,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Mystic Monastery",
+      "scryfallId": "2770621f-3906-4762-bfbd-e6e32b52ea92",
+      "multiverseid": 420927,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Nomad Outpost",
+      "scryfallId": "5728dffd-0312-4844-8868-12f040b8326f",
+      "multiverseid": 420928,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Rakdos Carnarium",
+      "scryfallId": "39b1b219-be35-48af-849f-af0a61c34a1c",
+      "multiverseid": 420932,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Rupture Spire",
+      "scryfallId": "e748fc8f-e369-4ccb-990a-d1abfa47a023",
+      "multiverseid": 420936,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "12c24992-5042-4d98-b326-909832b41f68",
+      "multiverseid": 420948,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "9b8d7221-b8a8-438e-9ba1-5aa94eeefb84",
+      "multiverseid": 420949,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Transguild Promenade",
+      "scryfallId": "06dfd214-a1be-4fb0-9f55-4f38fdd29f43",
+      "multiverseid": 420951,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C16"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "315bc0a3-3d1a-4c2e-b12c-e81486a02311",
+      "multiverseid": 420954,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "315bc0a3-3d1a-4c2e-b12c-e81486a02311",
+      "multiverseid": 420954,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bc7bc42c-1619-43c1-b720-1dafa391391f",
+      "multiverseid": 420955,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bc7bc42c-1619-43c1-b720-1dafa391391f",
+      "multiverseid": 420955,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "27f8ed5d-a63f-4e8f-8f1a-10bde4fea710",
+      "multiverseid": 420956,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "58651bbd-b3df-4b9c-b515-28d778cc2f7f",
+      "multiverseid": 420957,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "58651bbd-b3df-4b9c-b515-28d778cc2f7f",
+      "multiverseid": 420957,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "34052c96-229b-47c3-ada8-b79e622de846",
+      "multiverseid": 420958,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "34052c96-229b-47c3-ada8-b79e622de846",
+      "multiverseid": 420958,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "3b1238c4-dc34-488f-ad4a-308f584d4d75",
+      "multiverseid": 420959,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "8394a4fc-809b-4586-88a4-1d3c2c3c84ef",
+      "multiverseid": 420960,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "8394a4fc-809b-4586-88a4-1d3c2c3c84ef",
+      "multiverseid": 420960,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "c12c03f3-4d4e-426a-92ed-e605d840fbd5",
+      "multiverseid": 420961,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "a834bc0c-2676-4901-a928-5de111b4eedc",
+      "multiverseid": 420962,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
+      "multiverseid": 420963,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "e5a66092-6748-430e-877c-0ddc94c948c2",
+      "multiverseid": 420963,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "1b9dd110-c03b-4945-9d56-580cebac63fb",
+      "multiverseid": 420964,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "1dfead05-dd09-4a07-905f-56c3a69a43d5",
+      "multiverseid": 420965,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C16"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.989Z",
+    "sourceUrl": "InventSuperiority_C16.json",
+    "deckSource": "precon",
+    "createdAt": "2016-11-11T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,1019 @@
+{
+  "version": 1,
+  "id": 1727749921,
+  "name": "Forces of the Imperium Collector's Edition",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Inquisitor Greyfax",
+      "scryfallId": "86a4afac-69fd-46e9-8009-58de59bf3f5c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Bastion Protector",
+      "scryfallId": "caa14743-b3cd-4b8d-9a31-3da9550d1b4e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Collective Effort",
+      "scryfallId": "e139acd0-91f7-44f8-99a6-ef6dee1dc643",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Deploy to the Front",
+      "scryfallId": "24370b34-b127-47f3-a298-5ae06e9ccd0a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Fell the Mighty",
+      "scryfallId": "c1e67d5d-e676-41ce-90e1-a3ab3e422cb3",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Hour of Reckoning",
+      "scryfallId": "b8a4bf97-c062-471e-855f-f915a61903d0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Launch the Fleet",
+      "scryfallId": "ad04603a-1c0d-4c28-8d1e-f039d59e2367",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Martial Coup",
+      "scryfallId": "f06e7b7e-bd02-4e57-af3c-63daa0be7c2e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Entrapment Maneuver",
+      "scryfallId": "cf3b5214-040e-4ff1-acf5-671004b94be6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Utter End",
+      "scryfallId": "d3d6fea0-f76c-4c28-b629-2b934bdc8aca",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "1db2cf7a-5e66-4f49-a2b2-f32677ddace9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Mortify",
+      "scryfallId": "aa283589-839a-442f-87b0-95f024692929",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Everflowing Chalice",
+      "scryfallId": "546f4ad6-fece-4c99-b859-d0378c86ca8f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "4e9b288a-47dd-4587-87af-6aeb35939ccc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "7e4b027f-b91f-4dd9-a2b8-881416b8c574",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "4f943781-ce41-40e2-9c45-25dcd24f0090",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "1a1bdce9-daa6-4192-a652-038af18583f7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Talisman of Hierarchy",
+      "scryfallId": "4649d98d-7b4f-4e2c-b45a-61780e9a4fdc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "c89fe263-7ad4-4044-978b-ddc9593b9263",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "659624f1-2aab-4dea-ae3c-855b8d923b58",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Commander's Sphere",
+      "scryfallId": "aaccfa9e-23f9-458e-83b5-474df8d79ac3",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Reconnaissance Mission",
+      "scryfallId": "6af9c112-74a0-4ce3-98e3-5b3173709eee",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Choked Estuary",
+      "scryfallId": "5bc62427-1e4b-45dc-97af-7e55fb0e37e7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Darkwater Catacombs",
+      "scryfallId": "4ec5a13d-004d-41fa-aa3e-bec3dc36ba50",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "6380eae9-9839-4b89-9b5f-cfdb8fad6b6b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Port Town",
+      "scryfallId": "1dc0d1fb-56c9-47b0-98db-e232746fa3ca",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "cf30ae4a-7d9c-4bd7-b6d5-0603b0b2e37a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Skycloud Expanse",
+      "scryfallId": "bb66e2b1-0625-4834-8879-a6f2b3f1c6e0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sunken Hollow",
+      "scryfallId": "8303eb24-2099-4e3a-8999-9bfed19c20eb",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Arcane Sanctum",
+      "scryfallId": "0fb3ec17-33a5-4b8e-bb01-0e6aef942d9b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "9bf074bb-b1ec-4c26-8d3a-b60ea7fba510",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Memorial to Glory",
+      "scryfallId": "e70f0ef5-1086-4b3d-8c63-3614d43d19eb",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "288135e8-2081-4c69-8e27-5c7e2a6dfbfa",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Dismal Backwater",
+      "scryfallId": "8ddfec47-8c56-4f6e-9a52-8b7d80a82a4d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "fff47e4d-01d2-43e0-9137-25ad5e2b4b1b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "d41dac35-2b91-4e3b-b9c8-21187e215a2c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Scoured Barrens",
+      "scryfallId": "1081663f-32a8-43f6-af62-2318f2822035",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "a3712152-b6a8-462b-91c3-9d8b9179871f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Tranquil Cove",
+      "scryfallId": "da9d4821-7825-4a27-9da2-f2442569d1e7",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "b047f821-e82f-437c-8f36-6fff0c59f8b0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "b047f821-e82f-437c-8f36-6fff0c59f8b0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "b047f821-e82f-437c-8f36-6fff0c59f8b0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "b047f821-e82f-437c-8f36-6fff0c59f8b0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "b047f821-e82f-437c-8f36-6fff0c59f8b0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "442c806c-3af3-401e-8dc8-7be2ef441ba9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "18389963-e1d2-4f24-a865-76261c82e873",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Marneus Calgar",
+      "scryfallId": "e7517e8e-b424-4731-ba9d-6132bdefa6bf",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Celestine, the Living Saint",
+      "scryfallId": "6a5bd8cd-8f5c-4a92-bdfc-9798c1731c2d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Defenders of Humanity",
+      "scryfallId": "dcc7a975-75fb-4045-a8de-aa059ace85d4",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "For the Emperor!",
+      "scryfallId": "f42ae0a0-f030-43d4-bddf-77d4b07a6c80",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Space Marine Devastator",
+      "scryfallId": "8e1f69b0-ad8c-4b6a-907a-2d84a44ba408",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Triumph of Saint Katherine",
+      "scryfallId": "5eb88b0e-2582-4393-958e-490c07bde8ac",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Ultramarines Honour Guard",
+      "scryfallId": "07114048-6fab-4d73-850e-1f0158a04e7d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Vexilus Praetor",
+      "scryfallId": "58713dfe-c04c-4038-9c8d-37d5ba9fc24d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Zephyrim",
+      "scryfallId": "3698b37f-0d86-42ea-9031-8f7e54b5d953",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sister of Silence",
+      "scryfallId": "05054314-b8d9-4bd9-b21d-5484e1633e89",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Vanguard Suppressor",
+      "scryfallId": "65f45f70-33a7-4cad-8d80-ecd108307509",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Arco-Flagellant",
+      "scryfallId": "b6e2a217-a857-4c62-aa39-e72a95094ddb",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Primaris Eliminator",
+      "scryfallId": "d31c8091-a66d-4f01-975b-0242888a5942",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Assault Intercessor",
+      "scryfallId": "99a383e9-e9d9-42f6-b0bd-bfca17df82d2",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Belisarius Cawl",
+      "scryfallId": "2dc4a3de-e9ae-4023-9cac-d9043fe3d3ca",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Birth of the Imperium",
+      "scryfallId": "3cc91ec1-7e35-442f-b227-0111def92f3c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Callidus Assassin",
+      "scryfallId": "595c08f6-d889-4b03-8f48-1f0fae1f29d2",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Commissar Severina Raine",
+      "scryfallId": "daddf9e7-8b44-4419-9265-02791333b4a9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Company Commander",
+      "scryfallId": "5572531d-155e-4833-a42c-565beb018705",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Cybernetica Datasmith",
+      "scryfallId": "a4622095-adf4-4f83-83e7-fbc4ce12c471",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Epistolary Librarian",
+      "scryfallId": "cab30a57-c41f-44f6-a63c-e19199b0ddce",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Exterminatus",
+      "scryfallId": "e65de05d-a7e4-4d97-8214-54f7b039e0f9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "The Flesh Is Weak",
+      "scryfallId": "4161834d-54ca-4e84-a7c7-bb9c42047e90",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Inquisitor Eisenhorn",
+      "scryfallId": "9780ef78-4177-4e19-81d1-a69b8f2dad3d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Neyam Shai Murad",
+      "scryfallId": "a0367e22-e7e0-4740-917b-bdc58d4e7821",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sister Hospitaller",
+      "scryfallId": "69ae36ca-683b-4557-9c2a-130db4150152",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sister Repentia",
+      "scryfallId": "ab38d9ac-97ba-4bf3-a94c-22a08b76caa8",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "The Golden Throne",
+      "scryfallId": "b9110c5b-bfe5-4164-ba26-7a7f01dabf4d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Inquisitorial Rosette",
+      "scryfallId": "dae655f8-8e3f-4466-86d3-1bba13665370",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Knight Paladin",
+      "scryfallId": "b3807c26-d8b0-4f45-9d06-04f060676d24",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Reaver Titan",
+      "scryfallId": "494556e9-06e7-40fd-b967-cd2631b5b91a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Redemptor Dreadnought",
+      "scryfallId": "91da157b-3d59-4142-be0e-72ebddb39225",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "Thunderhawk Gunship",
+      "scryfallId": "f3818268-6f25-449e-b9aa-42b85667f38f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "40K"
+    },
+    {
+      "name": "And They Shall Know No Fear",
+      "scryfallId": "3881c9af-e5a5-4159-bdfe-fb523a82a515",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Grey Knight Paragon",
+      "scryfallId": "9a111af6-4b80-4aac-8d4d-c53740029913",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Space Marine Scout",
+      "scryfallId": "caf93387-5660-4b6d-bf47-245c3b29f02e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Thunderwolf Cavalry",
+      "scryfallId": "64e64ac3-2e13-4a16-993b-095cb2dabaa1",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sicarian Infiltrator",
+      "scryfallId": "8e4ad023-6672-4f6f-838a-7f923ef44a80",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Sanguinary Priest",
+      "scryfallId": "1e341a97-f056-494b-897a-8a68099dd8ed",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Deny the Witch",
+      "scryfallId": "e674e908-ef8c-4561-8562-aedb5652ae3a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "40K"
+    },
+    {
+      "name": "Primaris Chaplain",
+      "scryfallId": "8f09fd8e-3194-4f32-bf27-df6bf96c3a23",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "40K"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.763Z",
+    "sourceUrl": "ForcesOfTheImperiumCollectorSEdition_40K.json",
+    "deckSource": "precon",
+    "createdAt": "2022-10-07T00:00:00.000Z"
+  }
+}

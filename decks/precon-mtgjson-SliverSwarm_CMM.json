@@ -1,0 +1,1026 @@
+{
+  "version": 1,
+  "id": 1635781749,
+  "name": "Sliver Swarm",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Sliver Gravemother",
+      "scryfallId": "9f5d253e-9eb2-423c-90ee-68f27ec6bf88",
+      "multiverseid": 625048,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Rukarumel, Biologist",
+      "scryfallId": "0b2f7397-9d75-4667-8872-e58a39512583",
+      "multiverseid": 625064,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Regal Sliver",
+      "scryfallId": "9b081723-41a1-4139-88ee-01c0238e50c3",
+      "multiverseid": 625089,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Taunting Sliver",
+      "scryfallId": "3db8a900-b15a-42eb-a240-35764d57c155",
+      "multiverseid": 625092,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Titan of Littjara",
+      "scryfallId": "62807f83-b219-4769-afdd-2870deeb93c0",
+      "multiverseid": 625093,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Lazotep Sliver",
+      "scryfallId": "517f7b4d-2997-412b-8e25-315d93d1603a",
+      "multiverseid": 625098,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Capricious Sliver",
+      "scryfallId": "48938cd4-9158-4eb8-acb7-21ce7a11cfa7",
+      "multiverseid": 625099,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Descendants' Fury",
+      "scryfallId": "53117fac-5bb0-4bc3-b9ec-f0453c38d7f8",
+      "multiverseid": 625101,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "For the Ancestors",
+      "scryfallId": "0da1b0a5-b6ca-41f8-be1c-05a56383c9a9",
+      "multiverseid": 625105,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Hatchery Sliver",
+      "scryfallId": "15d2737c-d8ef-4b03-9316-be3f61288d3c",
+      "multiverseid": 625106,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Bonescythe Sliver",
+      "scryfallId": "7ae24f37-0788-4f53-af5a-c6c1f2b64894",
+      "multiverseid": 625220,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Cleansing Nova",
+      "scryfallId": "167d2e51-eb69-488c-a6b6-042a7b0e1744",
+      "multiverseid": 625222,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Harsh Mercy",
+      "scryfallId": "b1448ffd-42af-475c-8883-1933508a8a6a",
+      "multiverseid": 625230,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Galerider Sliver",
+      "scryfallId": "566dc671-b666-4003-a3a6-ff5b081bca54",
+      "multiverseid": 625254,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Synapse Sliver",
+      "scryfallId": "7c458a0f-0e63-417f-b51e-8491822835b0",
+      "multiverseid": 625262,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Crippling Fear",
+      "scryfallId": "713a28c0-0d12-4c62-bc91-59c2ddfc9ef8",
+      "multiverseid": 625267,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Syphon Sliver",
+      "scryfallId": "3d222985-759c-4fdc-82ba-d970ef789b35",
+      "multiverseid": 625275,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Spiteful Sliver",
+      "scryfallId": "01fb60c9-d10d-4966-b9bd-788fabc182d2",
+      "multiverseid": 625286,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Brood Sliver",
+      "scryfallId": "441a387b-e18a-41c7-84bb-bb7e354f4f2d",
+      "multiverseid": 625292,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Megantic Sliver",
+      "scryfallId": "49c1afd5-d1d3-42b7-8417-bb05c91ef822",
+      "multiverseid": 625306,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Realmwalker",
+      "scryfallId": "d0c65ef6-93b4-448b-bf1c-01fe263cc39d",
+      "multiverseid": 625314,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Cloudshredder Sliver",
+      "scryfallId": "9f523765-7704-4faf-a72b-8a2c414bb179",
+      "multiverseid": 625324,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Decimate",
+      "scryfallId": "fdfc34be-e274-436a-81dd-ced0f90e657c",
+      "multiverseid": 625327,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Sliver Hivelord",
+      "scryfallId": "2b902f64-7795-4f1f-81e6-26db7c78a10c",
+      "multiverseid": 625342,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Icon of Ancestry",
+      "scryfallId": "2ac115db-9a35-41da-bb77-a61ef6c73b6f",
+      "multiverseid": 625360,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Vanquisher's Banner",
+      "scryfallId": "8162961c-bfe0-4e30-bad4-f473bf582f21",
+      "multiverseid": 625387,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Canopy Vista",
+      "scryfallId": "9b99bb11-bec7-4c50-a0c8-49740655f725",
+      "multiverseid": 625394,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "7c02660c-a9ff-4f6e-9a0b-975b20afaff3",
+      "multiverseid": 625396,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "63325755-47d5-4bb2-a21c-f324c27e1bbd",
+      "multiverseid": 625398,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Irrigated Farmland",
+      "scryfallId": "1e428c9d-f70f-4777-8aab-3db7a4140742",
+      "multiverseid": 625410,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "53ac634a-d792-4cca-8735-41a9a663f775",
+      "multiverseid": 625425,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Scattered Groves",
+      "scryfallId": "ebce2f7a-1879-49f1-b4f7-98e5931c5fb9",
+      "multiverseid": 625431,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Sheltered Thicket",
+      "scryfallId": "705cc0f7-9817-4e00-a926-f3b6e8e8cace",
+      "multiverseid": 625437,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Smoldering Marsh",
+      "scryfallId": "66431343-b325-4477-a158-25f0e25fdb8e",
+      "multiverseid": 625441,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Sunken Hollow",
+      "scryfallId": "6a82e6dd-f591-4e71-a1ae-ec24e5b97751",
+      "multiverseid": 625443,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "0539b83c-4459-41b5-a001-d15a1c9ddf23",
+      "multiverseid": 627831,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "fad9cac1-8b2b-42d6-9f0b-d679689ba862",
+      "multiverseid": 627846,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "46ca0b66-a000-4483-b916-f5b89e710244",
+      "multiverseid": 627874,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "df0693ae-55f9-4864-b5db-383715a04d21",
+      "multiverseid": 627883,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "14019383-0327-404b-ab4d-c65c3fa8c50d",
+      "multiverseid": 627884,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "42522c12-874e-450f-bdea-901646eb2821",
+      "multiverseid": 627887,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Constricting Sliver",
+      "scryfallId": "6f7d8e62-9bc0-4064-81c5-919c076de086",
+      "multiverseid": 625223,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Sentinel Sliver",
+      "scryfallId": "7cb2cc85-f4a6-47ad-b94e-f16534d02ae2",
+      "multiverseid": 625240,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Sinew Sliver",
+      "scryfallId": "1ecc983e-bbe3-4bc1-97e9-e40ead987ef0",
+      "multiverseid": 625242,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Diffusion Sliver",
+      "scryfallId": "f5994259-8d16-4f12-b528-1821005f79af",
+      "multiverseid": 625250,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Distant Melody",
+      "scryfallId": "c73c83b5-3a91-4495-b6fb-20cdc6edd07b",
+      "multiverseid": 625251,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Shifting Sliver",
+      "scryfallId": "c1d3b30b-d4c4-4f60-a7b3-e8854bd203d5",
+      "multiverseid": 625260,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Windfall",
+      "scryfallId": "4448fa01-1f81-41dc-9046-cfae41601bc4",
+      "multiverseid": 625264,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Winged Sliver",
+      "scryfallId": "eb1fcaf2-fee3-4088-83e1-bcb72e8c0e88",
+      "multiverseid": 625265,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Clot Sliver",
+      "scryfallId": "486fb777-0cbb-4c04-8b30-f2806366a957",
+      "multiverseid": 625266,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Crypt Sliver",
+      "scryfallId": "2b90c9a9-098b-463a-8588-b078fb0364dd",
+      "multiverseid": 625268,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Blade Sliver",
+      "scryfallId": "6e1165c2-9ea9-459b-a56a-5c0d0e9ae66a",
+      "multiverseid": 625276,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Blur Sliver",
+      "scryfallId": "d44db4fa-8b13-4eb2-a66e-a55b2e0c0fb3",
+      "multiverseid": 625278,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Bonesplitter Sliver",
+      "scryfallId": "83327f18-f9f6-4f9b-b72a-68f85ad96b00",
+      "multiverseid": 625279,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Cleaving Sliver",
+      "scryfallId": "023dd90c-eb55-4876-94c9-b8058c80e82d",
+      "multiverseid": 625282,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Hollowhead Sliver",
+      "scryfallId": "c444a566-bcb1-424b-b66b-55ce87e4d98f",
+      "multiverseid": 625283,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Striking Sliver",
+      "scryfallId": "d4652793-6f02-4bb6-8f71-eef302a001c6",
+      "multiverseid": 625287,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Two-Headed Sliver",
+      "scryfallId": "1fd73d00-feb0-4ec6-8031-6af5b334bba3",
+      "multiverseid": 625288,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "56b34b52-7a67-44b4-82e7-2860729ba410",
+      "multiverseid": 625294,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Farseek",
+      "scryfallId": "14b7c0df-5af2-4a01-86b3-b2ed5d60e613",
+      "multiverseid": 625299,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Gemhide Sliver",
+      "scryfallId": "224af68a-41a6-4e4e-94d0-130be341b788",
+      "multiverseid": 625301,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Manaweft Sliver",
+      "scryfallId": "e51629ac-51d5-47cb-a7fc-315b34dd82ce",
+      "multiverseid": 625305,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Might Sliver",
+      "scryfallId": "c783dfd2-a935-41e0-bd8e-97ac81f771b2",
+      "multiverseid": 625308,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Nature's Lore",
+      "scryfallId": "a78584e8-bb82-4977-a27d-68b1befe9b3b",
+      "multiverseid": 625309,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Quick Sliver",
+      "scryfallId": "f7749b2d-05a6-40ec-8d6a-8c1223cd5a09",
+      "multiverseid": 625312,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Three Visits",
+      "scryfallId": "7c0b6126-c134-4d7d-aa06-ac0f409a9f74",
+      "multiverseid": 625318,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Venom Sliver",
+      "scryfallId": "a5f8f9e9-4505-485a-b6c6-a92a4da5155a",
+      "multiverseid": 625319,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Crystalline Sliver",
+      "scryfallId": "a0c7f341-c61e-491d-850a-221c6a57ac64",
+      "multiverseid": 625325,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Firewake Sliver",
+      "scryfallId": "f6201bcd-1009-4753-b7ac-5c25cc1a4d79",
+      "multiverseid": 625328,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Harmonic Sliver",
+      "scryfallId": "1228d068-a5cb-4fd5-9e6a-5dc6ac9376a4",
+      "multiverseid": 625329,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Hibernation Sliver",
+      "scryfallId": "1e224cfb-5bc1-490c-ab1e-f5405dc2fa0b",
+      "multiverseid": 625330,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Lavabelly Sliver",
+      "scryfallId": "e0de3c85-0662-4374-bd21-65d3a34f2263",
+      "multiverseid": 625332,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Necrotic Sliver",
+      "scryfallId": "d0f4e782-5503-4698-a1ba-0f30e443f14c",
+      "multiverseid": 625337,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Herald's Horn",
+      "scryfallId": "c2cc583b-4ca1-4e34-bf66-693d69e4f77e",
+      "multiverseid": 625358,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Pillar of Origins",
+      "scryfallId": "c92c8c43-e7b5-4339-8926-1268a89bb2da",
+      "multiverseid": 625375,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Flood Plain",
+      "scryfallId": "61fc0fba-c285-4fad-85a6-79fd7f3f9c35",
+      "multiverseid": 625399,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Frontier Bivouac",
+      "scryfallId": "36c4f254-1109-4aaf-a33c-ae59795b1c20",
+      "multiverseid": 625402,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Grasslands",
+      "scryfallId": "ecf52798-b2e0-4d0a-a41b-8927bfa60375",
+      "multiverseid": 625407,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Jungle Shrine",
+      "scryfallId": "1d7f64d5-3e54-4640-a0e4-1fea6ffb67eb",
+      "multiverseid": 625411,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Mountain Valley",
+      "scryfallId": "ac86f172-4f6f-4f9e-9ae0-ca5c489cd671",
+      "multiverseid": 625417,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Mystic Monastery",
+      "scryfallId": "c26d3961-cc3f-408a-821e-2d9ea025c51e",
+      "multiverseid": 625419,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Nomad Outpost",
+      "scryfallId": "1acb9c2c-8fdb-49da-b792-3e21c4274364",
+      "multiverseid": 625421,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "R",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Opulent Palace",
+      "scryfallId": "eacdb4a4-10f8-45d8-abc7-d8b72f1ab0ed",
+      "multiverseid": 625422,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Rocky Tar Pit",
+      "scryfallId": "34fa3e6c-c37b-4e6e-9246-18ff9b36508d",
+      "multiverseid": 625426,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Sandsteppe Citadel",
+      "scryfallId": "37f7d30c-91ec-4d02-9ee0-ed4de495cbf5",
+      "multiverseid": 625429,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Savage Lands",
+      "scryfallId": "8502d1e6-86f1-40d8-8d3b-20d47e57bccb",
+      "multiverseid": 625430,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G",
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Seaside Citadel",
+      "scryfallId": "b198fc2c-9610-4564-a228-bd8cc01eddfe",
+      "multiverseid": 625434,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U",
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Secluded Courtyard",
+      "scryfallId": "cb0da3a5-12fb-4ff0-9894-fdabdfa4d860",
+      "multiverseid": 625435,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "c29e1761-87e6-448d-a901-1a6c5329e195",
+      "multiverseid": 625455,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMM"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d7744562-1df1-4aea-ba15-5aa1e50e26a0",
+      "multiverseid": 624341,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d7744562-1df1-4aea-ba15-5aa1e50e26a0",
+      "multiverseid": 624341,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "efd42c61-1e41-4df9-aa70-a39cc20dff51",
+      "multiverseid": 624344,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "efd42c61-1e41-4df9-aa70-a39cc20dff51",
+      "multiverseid": 624344,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "63803c6b-144c-4c11-b8c1-4a1861085ab7",
+      "multiverseid": 624348,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "63803c6b-144c-4c11-b8c1-4a1861085ab7",
+      "multiverseid": 624348,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3f64898e-d561-402e-8e4f-dda1ce241869",
+      "multiverseid": 624351,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "3f64898e-d561-402e-8e4f-dda1ce241869",
+      "multiverseid": 624351,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "9a028172-c148-46fa-9afa-c5fdc7f9ba9e",
+      "multiverseid": 624354,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "9a028172-c148-46fa-9afa-c5fdc7f9ba9e",
+      "multiverseid": 624354,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "9a028172-c148-46fa-9afa-c5fdc7f9ba9e",
+      "multiverseid": 624354,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMM"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.745Z",
+    "sourceUrl": "SliverSwarm_CMM.json",
+    "deckSource": "precon",
+    "createdAt": "2023-08-04T00:00:00.000Z"
+  }
+}

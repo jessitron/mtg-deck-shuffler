@@ -11,8 +11,19 @@ hx-target="#card-modal-container"
 hx-swap="innerHTML">&times;</button>
 <div class="card-modal-body">
 <div class="card-modal-content">
+<div class="card-modal-nav-container">
+<div class="card-modal-nav-spacer"></div>
+<div class="card-modal-image-wrapper">
 <div class="card-modal-image">
 <img src="https://cards.scryfall.io/large/front/e/0/e09e9b65-ff0e-4efe-b96a-ede69c96e2ea.jpg" alt="Carth the Lion" class="modal-card-image" />
+</div>
+<div class="card-modal-position-indicator">Card 1 of 7</div>
+</div>
+<button class="card-modal-nav-button card-modal-nav-next"
+hx-get="/card-modal/123/2?expected-version=2"
+hx-target="#card-modal-container"
+hx-swap="innerHTML"
+title="Next card">▶</button>
 </div>
 <div class="card-modal-info">
 <h3 class="card-modal-title">Carth the Lion</h3>

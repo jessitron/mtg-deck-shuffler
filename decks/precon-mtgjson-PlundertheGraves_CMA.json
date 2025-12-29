@@ -1,0 +1,1012 @@
+{
+  "version": 1,
+  "id": 1937272287,
+  "name": "Plunder the Graves",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Meren of Clan Nel Toth",
+      "scryfallId": "17d6703c-ad79-457b-a1b5-c2284e363085",
+      "multiverseid": 430405,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "c60af42f-21f8-4fb0-a839-46f49e0856fb",
+      "multiverseid": 430361,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Satyr Wayfinder",
+      "scryfallId": "2aaf1792-1ebf-4233-ac32-432ed67bd1a5",
+      "multiverseid": 430362,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Viridian Emissary",
+      "scryfallId": "e488ed05-d63a-4852-b5e9-d7357c60c3e6",
+      "multiverseid": 430381,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Wall of Blossoms",
+      "scryfallId": "1db75557-bc98-464b-8623-cb8e5c34fbb9",
+      "multiverseid": 430383,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Viridian Zealot",
+      "scryfallId": "4c2052ce-0c60-4baa-8bac-4a479a7368e2",
+      "multiverseid": 430382,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Korozda Guildmage",
+      "scryfallId": "42e19e30-3853-49e5-a3a3-5616e25df4ea",
+      "multiverseid": 430400,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Lotleth Troll",
+      "scryfallId": "97971c5a-98f5-4165-a1b8-a77129e502df",
+      "multiverseid": 430402,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Blood Bairn",
+      "scryfallId": "433821dd-9a38-4ace-b9d2-cd081784e957",
+      "multiverseid": 430268,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Phyrexian Rager",
+      "scryfallId": "8dc66773-7b9b-45ff-b9b3-652bea26370f",
+      "multiverseid": 430281,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Skullwinder",
+      "scryfallId": "e90c4b81-69b8-4310-9799-431e4da8eb48",
+      "multiverseid": 430365,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Wood Elves",
+      "scryfallId": "77f95da2-cbc4-4430-adb7-75f4c469d98e",
+      "multiverseid": 430389,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Eternal Witness",
+      "scryfallId": "0a520b45-77fa-4b9f-b395-06c58939578d",
+      "multiverseid": 430326,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Corpse Augur",
+      "scryfallId": "1b21cd81-9205-4f08-9ec3-478ce7e0ea82",
+      "multiverseid": 430271,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Centaur Vinecrasher",
+      "scryfallId": "468bfb2f-31a4-482a-bfa6-b55e14458dd3",
+      "multiverseid": 430314,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Bloodspore Thrinax",
+      "scryfallId": "d5eef7b6-66f8-4b5e-9427-e377c84e92c2",
+      "multiverseid": 430312,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Jarad, Golgari Lich Lord",
+      "scryfallId": "c6717954-35d8-4d7e-95aa-f7d26d15d4b2",
+      "multiverseid": 430398,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Shriekmaw",
+      "scryfallId": "983dfaaf-d301-4e5e-bc75-aaf779f8f851",
+      "multiverseid": 430287,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Indrik Stomphowler",
+      "scryfallId": "b32eeb51-f54f-4500-a3eb-b6113d19149e",
+      "multiverseid": 430338,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Kessig Cagebreakers",
+      "scryfallId": "a5afd97a-3b9f-40cc-a6a8-84efe1033472",
+      "multiverseid": 430341,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Banshee of the Dread Choir",
+      "scryfallId": "b019f6b5-ce8f-4b95-8fcb-72dc4931b3aa",
+      "multiverseid": 430266,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Phyrexian Plaguelord",
+      "scryfallId": "d0894a99-13e0-406c-8ca3-5552c64e3154",
+      "multiverseid": 430280,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Acidic Slime",
+      "scryfallId": "54f0b514-a85d-4e0c-b331-1dbaa316842d",
+      "multiverseid": 430309,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Mycoloth",
+      "scryfallId": "c3f7faed-de6b-404f-b54f-e60d5b55485b",
+      "multiverseid": 430348,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Mazirek, Kraul Death Priest",
+      "scryfallId": "aee3d3be-b0a8-4a15-8422-83a8040a67f5",
+      "multiverseid": 430404,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Vulturous Zombie",
+      "scryfallId": "a6ae1633-7553-4496-9211-d08c5d6165c5",
+      "multiverseid": 430415,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Great Oak Guardian",
+      "scryfallId": "eab4d522-6784-4db4-a7df-fc728ddd88cd",
+      "multiverseid": 430332,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Champion of Stray Souls",
+      "scryfallId": "ea04dd17-4ecf-4fd0-ae47-80d4dcfde837",
+      "multiverseid": 430270,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Extractor Demon",
+      "scryfallId": "202d81ad-1211-4213-91ec-3021cbd878d1",
+      "multiverseid": 430278,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Thief of Blood",
+      "scryfallId": "1625be56-a8e9-44f3-a213-b758bffd447f",
+      "multiverseid": 430290,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Pathbreaker Ibex",
+      "scryfallId": "4608ea44-e1b2-42de-a0a2-e6d6d24d89d0",
+      "multiverseid": 430351,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Cloudthresher",
+      "scryfallId": "4e18bff6-bf0b-48f8-93e2-09d435247596",
+      "multiverseid": 430315,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Butcher of Malakir",
+      "scryfallId": "709379fe-208e-465f-8b33-d0ae9b2ba928",
+      "multiverseid": 430269,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Eater of Hope",
+      "scryfallId": "2e53342b-2df4-4a4e-969f-1e71e45e394d",
+      "multiverseid": 430276,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Scourge of Nel Toth",
+      "scryfallId": "95536859-a8d9-45fa-9dbd-639bc626812d",
+      "multiverseid": 430285,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Caller of the Pack",
+      "scryfallId": "08620dc9-3a83-4d09-a6d4-b25a7d0ac644",
+      "multiverseid": 430313,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Terastodon",
+      "scryfallId": "d8b6dcac-5049-4974-9992-6540b2f84162",
+      "multiverseid": 430372,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Verdant Force",
+      "scryfallId": "74344897-1763-4d56-9c7c-98b945cfb2cf",
+      "multiverseid": 430380,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Mulch",
+      "scryfallId": "31782426-4128-47af-8922-0207a3233885",
+      "multiverseid": 430347,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Victimize",
+      "scryfallId": "95f0f6fa-2415-4278-bf6c-83ea5aea69cf",
+      "multiverseid": 430291,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Primal Growth",
+      "scryfallId": "6664675f-1ef6-49ba-8f08-cfeac2f38ec7",
+      "multiverseid": 430356,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Ambition's Cost",
+      "scryfallId": "808a8b36-532f-4f38-9cfc-6c715d4ee4f6",
+      "multiverseid": 430265,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Sever the Bloodline",
+      "scryfallId": "fa151bd1-770b-49fe-9db5-aae373fab934",
+      "multiverseid": 430286,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Barter in Blood",
+      "scryfallId": "37d5b6d7-1b3f-4586-8969-8c5d7457b75f",
+      "multiverseid": 430267,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Rise from the Grave",
+      "scryfallId": "9f739b70-882c-437c-8cdb-434f37ab7164",
+      "multiverseid": 430284,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Spider Spawning",
+      "scryfallId": "7813d04e-98f5-49cc-832d-ce3fea4b3798",
+      "multiverseid": 430368,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Overwhelming Stampede",
+      "scryfallId": "ed7405c0-09cf-47a3-97af-516c16ec552c",
+      "multiverseid": 430350,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Dread Summons",
+      "scryfallId": "f4bb62df-5248-46fe-85be-8243fafefca9",
+      "multiverseid": 430275,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Altar's Reap",
+      "scryfallId": "1db55625-25a5-46eb-9d9c-9b3ed219359f",
+      "multiverseid": 430264,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Tribute to the Wild",
+      "scryfallId": "a60d39c4-c97d-4876-81b6-d115910abe7b",
+      "multiverseid": 430379,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Golgari Charm",
+      "scryfallId": "3fee2bfe-4fef-44f9-9192-ad04e1819740",
+      "multiverseid": 430396,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Grisly Salvage",
+      "scryfallId": "083c73aa-76d9-47a9-9040-8795f64de9fd",
+      "multiverseid": 430397,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Putrefy",
+      "scryfallId": "20f5663b-f93e-40e4-a794-b2fc3d93ace4",
+      "multiverseid": 430408,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Wretched Confluence",
+      "scryfallId": "bd9e38ad-389e-4178-9c8a-5ca89c1a2f73",
+      "multiverseid": 430293,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "ae5d9152-6574-4a32-a93a-77077a782fce",
+      "multiverseid": 430449,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "f48f7190-9ee3-477f-8b25-91e8c2916624",
+      "multiverseid": 430450,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Golgari Signet",
+      "scryfallId": "99ab4d9a-9b26-4feb-9d82-76adf352ae02",
+      "multiverseid": 430437,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "047de2fe-6fc1-40c5-98d4-6203b4a83445",
+      "multiverseid": 430439,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Thought Vessel",
+      "scryfallId": "ac9da194-02e3-4f53-9e79-b94cc172fd3b",
+      "multiverseid": 430454,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Bonehoard",
+      "scryfallId": "31ed2d63-5eb6-4027-b702-ef9265fda4b6",
+      "multiverseid": 430430,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Eldrazi Monument",
+      "scryfallId": "d5439677-d3db-4083-8dd9-0d654016bd79",
+      "multiverseid": 430435,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Diabolic Servitude",
+      "scryfallId": "0a616616-8fbb-4e89-ae29-61d31cf49f65",
+      "multiverseid": 430272,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "5f66d99c-7c2d-40b9-ae07-c3a84f018a0d",
+      "multiverseid": 430464,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "a0061e91-c980-4ce2-a25a-340899e05049",
+      "multiverseid": 430466,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Golgari Guildgate",
+      "scryfallId": "14849183-e4db-44ee-b35c-f60b326d6a7e",
+      "multiverseid": 430471,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Golgari Rot Farm",
+      "scryfallId": "84061a9b-44cf-48fe-9c7d-263cf8a38081",
+      "multiverseid": 430472,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Grim Backwoods",
+      "scryfallId": "9b7f1621-d007-44ef-811a-e27df97fd166",
+      "multiverseid": 430473,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "High Market",
+      "scryfallId": "abbaf097-e6c8-407a-a9c6-78ceff055ea3",
+      "multiverseid": 430476,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Jungle Hollow",
+      "scryfallId": "23aa9d89-32fc-45f2-a0c1-7ac0320aafb5",
+      "multiverseid": 430478,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Polluted Mire",
+      "scryfallId": "f204cbfb-c84e-4d2b-9ef3-518f3237e718",
+      "multiverseid": 430484,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Slippery Karst",
+      "scryfallId": "a8c55693-2111-4406-997e-0ad929931c8c",
+      "multiverseid": 430494,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Tainted Wood",
+      "scryfallId": "9395eb43-b0e7-4ca5-adc9-8d1ce1e1b586",
+      "multiverseid": 430495,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B",
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "f8651259-cc23-4089-96f7-d706ab87c8bb",
+      "multiverseid": 430497,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "CMA"
+    },
+    {
+      "name": "Vivid Grove",
+      "scryfallId": "e78bfd1b-3328-4401-9930-cf912fb2c274",
+      "multiverseid": 430500,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Vivid Marsh",
+      "scryfallId": "8c54c49f-8273-4246-952a-63bce7b8ee62",
+      "multiverseid": 430501,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e32d2387-39d4-4aea-99eb-9f56a3d995c8",
+      "multiverseid": 430516,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e32d2387-39d4-4aea-99eb-9f56a3d995c8",
+      "multiverseid": 430516,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "7f61e5b1-8710-4150-8b10-92650d029ed3",
+      "multiverseid": 430517,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "7f61e5b1-8710-4150-8b10-92650d029ed3",
+      "multiverseid": 430517,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "d0ddebc0-ce79-443e-b69f-6a38af2a4f0d",
+      "multiverseid": 430518,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "d0ddebc0-ce79-443e-b69f-6a38af2a4f0d",
+      "multiverseid": 430518,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e5976c0b-ce42-4057-a04c-bdb47ebc71f0",
+      "multiverseid": 430519,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "e5976c0b-ce42-4057-a04c-bdb47ebc71f0",
+      "multiverseid": 430519,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "93f6555b-426c-4eeb-96ea-ba3fafc96964",
+      "multiverseid": 430520,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "93f6555b-426c-4eeb-96ea-ba3fafc96964",
+      "multiverseid": 430520,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "a88de1af-d97b-4228-85ff-41e484c18662",
+      "multiverseid": 430521,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "05e8d2d8-2880-4c1a-97f3-ed3f206883bb",
+      "multiverseid": 430522,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "f0247757-74e0-4c26-9447-650398758a0d",
+      "multiverseid": 430523,
+      "twoFaced": false,
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "b2f44732-17a2-4871-a968-53a32018ba8b",
+      "multiverseid": 430528,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "b977e434-3540-42a2-9a1c-5433d36d09cd",
+      "multiverseid": 430529,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "340238b7-60ce-48d1-bb73-2925df7853a3",
+      "multiverseid": 430530,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e6b72db4-03c0-43f9-9e9c-d49ac0ac7eb7",
+      "multiverseid": 430531,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "09b123bf-9e10-493a-818d-df5f2393159f",
+      "multiverseid": 430532,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0e0ad7b-dcbd-4a9b-8691-6f171425fa0b",
+      "multiverseid": 430533,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "a90b184d-70ac-4e67-b09b-3f20da560687",
+      "multiverseid": 430534,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "e0486be6-fc22-41b1-a7f9-a0311866ceca",
+      "multiverseid": 430535,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "baad690f-4087-4ae9-8e32-9987d33c74ec",
+      "multiverseid": 430536,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "329ae876-a7ed-43e4-9ed9-ac71191ba8d2",
+      "multiverseid": 430537,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "d17befb9-992d-4b30-a3fc-bbbf8839f6a9",
+      "multiverseid": 430538,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "42154a89-c12a-48fa-8eb4-1185b5df1b38",
+      "multiverseid": 430539,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "CMA"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.485Z",
+    "sourceUrl": "PlunderTheGraves_CMA.json",
+    "deckSource": "precon",
+    "createdAt": "2017-06-09T00:00:00.000Z"
+  }
+}

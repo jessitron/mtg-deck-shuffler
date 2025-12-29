@@ -1,0 +1,1019 @@
+{
+  "version": 1,
+  "id": 651972356,
+  "name": "Deep Clue Sea",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Morska, Undersea Sleuth",
+      "scryfallId": "ae9ccfec-05c6-469e-b1dd-dfbafa1e927f",
+      "multiverseid": 649909,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Sophia, Dogged Detective",
+      "scryfallId": "df653cf9-5a99-4f81-adb4-c155a9a63226",
+      "multiverseid": 649930,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Armed with Proof",
+      "scryfallId": "6e75470f-fe57-4b6e-a76b-5daf9d9caf0b",
+      "multiverseid": 649947,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Merchant of Truth",
+      "scryfallId": "0f47e29e-54c5-4b1a-b9b9-d5e267a0203a",
+      "multiverseid": 649949,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Serene Sleuth",
+      "scryfallId": "61e691ff-ab3e-42ae-b160-54b53f5f961e",
+      "multiverseid": 649952,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Detective of the Month",
+      "scryfallId": "e63e381d-142c-4622-ad78-8cacd5778355",
+      "multiverseid": 649959,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Follow the Bodies",
+      "scryfallId": "52ecb9ef-37bc-4327-9ae6-bcef6e2fdb94",
+      "multiverseid": 649961,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Tangletrove Kelp",
+      "scryfallId": "7582d7c0-6cb6-47d1-8026-3d661b5a809f",
+      "multiverseid": 649962,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Innocuous Researcher",
+      "scryfallId": "84039704-d7c9-46fd-987e-4b93f812e803",
+      "multiverseid": 649976,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "On the Trail",
+      "scryfallId": "e5cf1f9f-2e35-49b1-af47-75fbe11f7b7e",
+      "multiverseid": 649977,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Knowledge Is Power",
+      "scryfallId": "1afe55c3-53c3-4257-afb6-32a553639f50",
+      "multiverseid": 649980,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Ransom Note",
+      "scryfallId": "3a16b2f3-2568-4046-8e2f-99af0b6d79ee",
+      "multiverseid": 649984,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Aerial Extortionist",
+      "scryfallId": "5353bcb9-800d-4d74-95fa-42350a0f25de",
+      "multiverseid": 650148,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Bennie Bracks, Zoologist",
+      "scryfallId": "90645549-20f1-4fe9-8363-7f67c20fa3b6",
+      "multiverseid": 650151,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Farewell",
+      "scryfallId": "114d2180-093b-4838-97ad-badbc8ee50b0",
+      "multiverseid": 650158,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Fumigate",
+      "scryfallId": "bd6b4bc0-0671-4394-abe4-516d291a74a5",
+      "multiverseid": 650160,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Organic Extinction",
+      "scryfallId": "900b713f-82f7-4e4a-804d-6bb38436aa9d",
+      "multiverseid": 650170,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Search the Premises",
+      "scryfallId": "08877e2c-79ac-4a4d-a7dd-60652c5eb5f6",
+      "multiverseid": 650175,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Alandra, Sky Dreamer",
+      "scryfallId": "54bf48d4-e350-4ca7-87da-ce04fefd4610",
+      "multiverseid": 650188,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Confirm Suspicions",
+      "scryfallId": "1d1463af-8f22-4771-af19-3799ffe706b8",
+      "multiverseid": 650191,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Ethereal Investigator",
+      "scryfallId": "c675428b-2dc4-408d-9632-81c1a700090f",
+      "multiverseid": 650199,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Finale of Revelation",
+      "scryfallId": "2b090b79-befd-4b18-ae9f-03a2bf516aef",
+      "multiverseid": 650200,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Kappa Cannoneer",
+      "scryfallId": "be0c919a-a592-433e-8e36-8fe633974eff",
+      "multiverseid": 650202,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Mechanized Production",
+      "scryfallId": "eaf86997-68e8-4c37-99f1-db10ac08f54c",
+      "multiverseid": 650203,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Nadir Kraken",
+      "scryfallId": "3bd63804-d538-471f-b57f-e1023f7e14a8",
+      "multiverseid": 650206,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Shimmer Dragon",
+      "scryfallId": "3983a11e-8a8a-4d9d-868b-13e0c3719abb",
+      "multiverseid": 650211,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Teferi's Ageless Insight",
+      "scryfallId": "b1a32b7c-9f26-4504-9f8d-379164d69346",
+      "multiverseid": 650213,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Tezzeret, Betrayer of Flesh",
+      "scryfallId": "35f30004-13e0-42c1-9842-eea52793fcfc",
+      "multiverseid": 650214,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Thought Monitor",
+      "scryfallId": "e3a7560e-9e75-4abd-a45c-c2c9686ee4b0",
+      "multiverseid": 650215,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Hornet Queen",
+      "scryfallId": "8f1ef9d6-b3fb-4a8a-af4a-3530a1e61221",
+      "multiverseid": 650266,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Jolrael, Mwonvuli Recluse",
+      "scryfallId": "188f9016-275f-4060-8b11-9cdeef3759bd",
+      "multiverseid": 650267,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Killer Service",
+      "scryfallId": "b86b0177-0533-4b5a-9da7-1e11d398d828",
+      "multiverseid": 650268,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Tireless Tracker",
+      "scryfallId": "66660f7c-9e1c-4e88-856a-98fab1f1364d",
+      "multiverseid": 650284,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Adrix and Nev, Twincasters",
+      "scryfallId": "b9c11061-bb34-4904-b9f1-ea106b517bbe",
+      "multiverseid": 650292,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Chulane, Teller of Tales",
+      "scryfallId": "d1499a4b-1af1-4913-8e26-57d0707264db",
+      "multiverseid": 650296,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Disorder in the Court",
+      "scryfallId": "07277df0-d306-4c3a-baa7-d7a49332c7dd",
+      "multiverseid": 650303,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Esix, Fractal Bloom",
+      "scryfallId": "2e390f8e-1dd5-4383-83f5-45f20f18d410",
+      "multiverseid": 650304,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Hydroid Krasis",
+      "scryfallId": "3f8e3243-2d82-4044-8e3b-3a4487ac771c",
+      "multiverseid": 650306,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Koma, Cosmos Serpent",
+      "scryfallId": "b2f23d6f-f2c8-4022-9f46-ba7fda00ef99",
+      "multiverseid": 650307,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Lonis, Cryptozoologist",
+      "scryfallId": "e786423d-3a49-4318-ac77-791918bcafcb",
+      "multiverseid": 650309,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Selvala, Explorer Returned",
+      "scryfallId": "28c1b84a-a21b-4df1-9fc9-5b387fb56810",
+      "multiverseid": 650312,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Academy Manufactor",
+      "scryfallId": "60709d98-c98d-48c0-ac4a-4ff73e7a0c4b",
+      "multiverseid": 650315,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Idol of Oblivion",
+      "scryfallId": "6ccfb12e-348e-4a0b-a365-33ec522306f9",
+      "multiverseid": 650323,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Inspiring Statuary",
+      "scryfallId": "4f7e4c0a-683b-4b22-9ea5-ed6470b8b1d7",
+      "multiverseid": 650324,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Nettlecyst",
+      "scryfallId": "0a7cb0f8-2946-4b00-a192-0b31c8e1ec5c",
+      "multiverseid": 650327,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Psychosis Crawler",
+      "scryfallId": "d0f42a19-c180-45b1-9f4c-787cf3a4a649",
+      "multiverseid": 650328,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Canopy Vista",
+      "scryfallId": "b76f2de1-ea17-40b0-8d90-4c4369516eff",
+      "multiverseid": 650346,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "703da628-5a77-4cb4-8c29-1bdbae500d50",
+      "multiverseid": 650354,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Irrigated Farmland",
+      "scryfallId": "7352e874-d332-4a98-ab3f-513f8cb3a76a",
+      "multiverseid": 650361,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "c649f06f-bad5-499b-b70c-47e52cb4a234",
+      "multiverseid": 650375,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Scattered Groves",
+      "scryfallId": "5af79a38-d2e2-4479-ac6e-e34a0dd0bdea",
+      "multiverseid": 650380,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Skycloud Expanse",
+      "scryfallId": "22f95138-6795-4698-ad58-ed2226242835",
+      "multiverseid": 650388,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Spire of Industry",
+      "scryfallId": "90b845fd-5b22-4196-9cba-00c7e1b44509",
+      "multiverseid": 650390,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Sungrass Prairie",
+      "scryfallId": "8af1bed5-fec8-4313-a946-eef9c73e2f87",
+      "multiverseid": 650391,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Temple of Enlightenment",
+      "scryfallId": "e41a5a3d-5fbb-4dbb-b70d-2a480f18df9f",
+      "multiverseid": 650396,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Temple of Mystery",
+      "scryfallId": "975dfe13-41a3-476b-9cc6-bf7c82abe31c",
+      "multiverseid": 650397,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Temple of Plenty",
+      "scryfallId": "36298771-c671-4307-b8b6-31e3ead75be2",
+      "multiverseid": 650398,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "9bbec76c-c1e4-4c6d-ad24-078fe097f195",
+      "multiverseid": 650182,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Erdwal Illuminator",
+      "scryfallId": "5c39fa19-ca75-49f4-8e1e-8b59bc9b664a",
+      "multiverseid": 650198,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Junk Winder",
+      "scryfallId": "1c1acd61-efc9-4fd3-86ec-b5cbd43c0b08",
+      "multiverseid": 650201,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Ongoing Investigation",
+      "scryfallId": "ff084438-2e70-41bc-a208-30ab16c026c1",
+      "multiverseid": 650208,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Whirler Rogue",
+      "scryfallId": "31dec9a8-714f-4e28-9781-d0a8c6775298",
+      "multiverseid": 650218,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Graf Mole",
+      "scryfallId": "70e3e14e-796b-4592-9eb0-758d30ba3a1c",
+      "multiverseid": 650264,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Ulvenwald Mysteries",
+      "scryfallId": "f397a8b1-ffaa-492e-a47e-4a24b62e697e",
+      "multiverseid": 650287,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Wilderness Reclamation",
+      "scryfallId": "77aaad20-e385-4869-859a-4c5f90f8804e",
+      "multiverseid": 650290,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Wavesifter",
+      "scryfallId": "7ca787d2-eee4-4474-9db7-e8efa161ceec",
+      "multiverseid": 650314,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "e593bb16-e709-4d92-bf6f-239f6a11f7db",
+      "multiverseid": 650317,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Azorius Signet",
+      "scryfallId": "ce0c5827-568d-4af2-8948-7e0c9217f029",
+      "multiverseid": 650318,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Simic Signet",
+      "scryfallId": "7ad73d1f-dc6c-4978-b3c1-e7c801534bf1",
+      "multiverseid": 650330,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "d9e098aa-a886-430e-8f11-78fb6f2d8ada",
+      "multiverseid": 650331,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Talisman of Curiosity",
+      "scryfallId": "8388c4e8-bda1-47e5-8df2-ddec5babcaf9",
+      "multiverseid": 650335,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "e3238608-a302-4a42-bd8a-5412e4126b14",
+      "multiverseid": 650337,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Talisman of Unity",
+      "scryfallId": "89e8443d-daf4-4cef-9080-d7568b5c540e",
+      "multiverseid": 650338,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Azorius Chancery",
+      "scryfallId": "798a1aeb-2f0b-496b-a5bc-ee815100fd82",
+      "multiverseid": 650343,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Magnifying Glass",
+      "scryfallId": "c606a71f-8fb0-486b-955f-727ebf436946",
+      "multiverseid": 646809,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKM"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "96c3244e-930f-498c-959e-0f000151597d",
+      "multiverseid": 650350,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Krosan Verge",
+      "scryfallId": "79ca6f07-7a41-464e-814f-eeaae048d95d",
+      "multiverseid": 650365,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Lonely Sandbar",
+      "scryfallId": "5833825f-aeb0-41bb-92a4-13e869765295",
+      "multiverseid": 650367,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "307eea3e-c029-46a1-839c-1783bb4a6243",
+      "multiverseid": 650373,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "f5a1db89-d37f-4839-8ca4-598686c5d6de",
+      "multiverseid": 650376,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Seaside Citadel",
+      "scryfallId": "a030b477-3093-4e66-b33d-530b302d795c",
+      "multiverseid": 650382,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Secluded Steppe",
+      "scryfallId": "22dd757f-e43a-430f-ae79-66fc7dc12525",
+      "multiverseid": 650383,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Selesnya Sanctuary",
+      "scryfallId": "e0b2dc61-36b7-4491-8e12-288541f24b94",
+      "multiverseid": 650384,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Simic Growth Chamber",
+      "scryfallId": "331270ac-15d4-4aa0-ba71-af07d0554b89",
+      "multiverseid": 650387,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Temple of the False God",
+      "scryfallId": "2d21d25e-830a-4d32-b292-c24cdab7516a",
+      "multiverseid": 650399,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "MKC"
+    },
+    {
+      "name": "Tranquil Thicket",
+      "scryfallId": "c558ce99-5f97-46d5-969d-319bfbd11b94",
+      "multiverseid": 650403,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKC"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
+      "multiverseid": 648853,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
+      "multiverseid": 648853,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "ec05cb6c-6e7f-4d40-ba38-a9fc06158094",
+      "multiverseid": 648854,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
+      "multiverseid": 648855,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
+      "multiverseid": 648855,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
+      "multiverseid": 648855,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
+      "multiverseid": 648856,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
+      "multiverseid": 648856,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
+      "multiverseid": 648856,
+      "twoFaced": false,
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
+      "multiverseid": 648861,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
+      "multiverseid": 648861,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
+      "multiverseid": 648861,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
+      "multiverseid": 648862,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKM"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
+      "multiverseid": 648862,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MKM"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.504Z",
+    "sourceUrl": "DeepClueSea_MKC.json",
+    "deckSource": "precon",
+    "createdAt": "2024-02-09T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,966 @@
+{
+  "version": 1,
+  "id": 1773331867,
+  "name": "Angels: They're Just Like Us but Cooler and with Wings",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Gisela, the Broken Blade // Brisela, Voice of Nightmares",
+      "scryfallId": "d1cfc318-9c3e-471f-90eb-dc76454da957",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Bruna, the Fading Light // Brisela, Voice of Nightmares",
+      "scryfallId": "66a0347e-8ec6-463e-aef5-33f7d62899e2",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Ajani, Strength of the Pride",
+      "scryfallId": "49109f9f-c3df-4694-9c80-32fc28169442",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Angel of Destiny",
+      "scryfallId": "74c6f0ea-689c-4fa7-a350-f5527b4ee2f5",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Angel of Finality",
+      "scryfallId": "634950f2-3149-41b5-a93d-81f9f1957801",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Angel of Serenity",
+      "scryfallId": "6625e7be-11d2-4db4-ac49-931168e6ed1e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Angel of the Ruins",
+      "scryfallId": "87fc1e38-a44e-4127-946e-eac0c8db2b2f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Angel of Vitality",
+      "scryfallId": "42dbd2fa-bd0b-495a-8537-552f237e8c19",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Angelic Accord",
+      "scryfallId": "b2cb986c-2a8e-4a24-b5d4-4393edc0c347",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Angelic Field Marshal",
+      "scryfallId": "a1996f78-6752-4c1c-b74f-ccd8e632a987",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "db6cdee9-dc3a-450c-a5a6-b34f021939ca",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Arch of Orazca",
+      "scryfallId": "1a5f3ba3-8c20-4d94-8c97-0f393132168a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Archangel of Thune",
+      "scryfallId": "f6929b98-e81c-48b9-87d8-11c8830974ce",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Archangel of Tithes",
+      "scryfallId": "2f338a9f-2af0-4e0f-9de1-17fc51145c46",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Arden Angel",
+      "scryfallId": "ceb42fb7-1ac5-4923-bec8-2aa2d4dbefd5",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Austere Command",
+      "scryfallId": "9694c118-f6a3-4aeb-b475-b7477ee4c79e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Bishop of Wings",
+      "scryfallId": "c369d381-b48e-43cf-a032-8bcb120f443e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Bonders' Enclave",
+      "scryfallId": "3aff2cc9-2dff-4746-8f15-2d76279d1b6d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Breathkeeper Seraph",
+      "scryfallId": "270c252d-1248-450b-bbc3-3af475a94834",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Cleansing Nova",
+      "scryfallId": "14675074-a5f0-4a6e-ae60-520eb7b46b3a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Commander's Plate",
+      "scryfallId": "25a14f93-6896-4b8e-a0b2-e081dfea5958",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "SLD"
+    },
+    {
+      "name": "Cosmos Elixir",
+      "scryfallId": "a069ab4b-1249-4d0b-8812-c719305d000c",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Court of Grace",
+      "scryfallId": "dc098d5b-0cdb-422f-8bd2-7afd81a7b7c3",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Dawn of Hope",
+      "scryfallId": "f88e1bb5-dd3a-46e9-a52d-ec42002c4a05",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Dawnbreak Reclaimer",
+      "scryfallId": "1b9c48a5-c80f-43e6-ab4e-fa7bd7b5c3a0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Dismantling Wave",
+      "scryfallId": "c41f6b31-1648-4cbe-95c5-d9b986a52e88",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Emeria Shepherd",
+      "scryfallId": "52d1a2a8-9b3e-4dae-84d7-5a3e34228063",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Emeria, the Sky Ruin",
+      "scryfallId": "3fc46e1d-e239-4f21-ba60-4da23338f247",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Endless Atlas",
+      "scryfallId": "9b33e3d0-a950-476c-b7dc-1af5767ab1ae",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Entreat the Angels",
+      "scryfallId": "0c8e0b8f-fd4a-46fb-8eac-7be0dad65c26",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Everflowing Chalice",
+      "scryfallId": "2f7fc988-273a-45f4-85b6-597d1827504f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Giada, Font of Hope",
+      "scryfallId": "d0a98f22-b1ea-4ccb-8782-bf488bcd069b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Griffin Aerie",
+      "scryfallId": "2a64a64f-55d2-41e2-aa33-31daba8344c8",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Heirloom Blade",
+      "scryfallId": "0fc611aa-9418-41c1-ad6d-f2232b3c35c0",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Invoke the Divine",
+      "scryfallId": "1a41ebd8-641f-495b-a315-7e0c7df5c36a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Karoo",
+      "scryfallId": "16dfb04a-e65d-483e-a4fb-f810b36ede9d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Keeper of the Accord",
+      "scryfallId": "1b65b68b-aec3-49b1-a26e-fab1d7c7514f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Kindred Boon",
+      "scryfallId": "cebd4f09-122c-47aa-8975-f971faf269fa",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "ef5c570d-e415-4ac3-b48f-574ce109303a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Marble Diamond",
+      "scryfallId": "a140ae4f-e5a8-4060-a96e-180eb08b889b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Mazemind Tome",
+      "scryfallId": "aee146cf-1f86-4016-8b42-333f194def8e",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "6dcc9f62-5b6c-422d-b4c8-eba1d363ede6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "4e8dc90d-e9cd-401e-9ba0-960b3ee8336b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Nykthos Paragon",
+      "scryfallId": "b4899ae9-4375-4c58-bd27-fbb32df1b53d",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Nykthos, Shrine to Nyx",
+      "scryfallId": "1ac9577f-dd41-4e1a-a96b-6b615297425a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Oketra's Monument",
+      "scryfallId": "01bdc760-a5c9-45a9-9d83-dd3780f8ed6f",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "cbd35684-4ce2-45e7-9858-4d2a9efe2e54",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Path to Exile",
+      "scryfallId": "10d55e28-871f-4dd5-a328-46c34de19ea9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Pearl Medallion",
+      "scryfallId": "498dbe23-6996-4f08-841b-d31c8bf54afc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "8e5173aa-1eca-46ae-81ea-0b1dfe5e12de",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "e77924e4-0f15-48a3-b494-89b544ee9d37",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "9deeda0b-81f7-484d-a99d-0e7d2449d157",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "63607a09-b00c-4c0e-b8ad-d1bb5a45517b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Righteous Valkyrie",
+      "scryfallId": "de21677c-53d1-4054-a5de-abe34ce85754",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Search for Glory",
+      "scryfallId": "55e19168-a827-4a78-b613-6542b5ca47c5",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Sephara, Sky's Blade",
+      "scryfallId": "f445f63a-73a9-4512-83ef-6be7409440bc",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Seraph Sanctuary",
+      "scryfallId": "ab8c12d8-c071-4401-8cb3-64f5bf937c87",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Serra Ascendant",
+      "scryfallId": "a1f76082-d55e-45cc-977a-090a344484ed",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Shattered Angel",
+      "scryfallId": "e357d1de-1464-4bb2-b938-66c0c2105e59",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "1b3a4537-1d51-47ac-a12e-6b8d68f530e6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Speaker of the Heavens",
+      "scryfallId": "cd39083e-f67e-4be1-9c1d-29df27e1ff1a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Starnheim Aspirant",
+      "scryfallId": "9dd231f8-3675-4849-a9f7-66b9ba035c24",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Sunblast Angel",
+      "scryfallId": "382ba321-3d57-43f8-a827-e8298a8e8f5b",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "a41a16a0-6afc-452d-a18f-94f0d68f1cda",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Sword of the Animist",
+      "scryfallId": "fd34a6d0-9368-4cc0-86c1-683354aad7b9",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "5287cab9-29f3-4516-b1f0-57ff6ebe889a",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Thalia's Lancers",
+      "scryfallId": "4daf0b39-8baf-4455-b1d5-d287374c96aa",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "The Book of Exalted Deeds",
+      "scryfallId": "cb0829bd-3108-4ef3-b754-1642c28992ae",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "PLST"
+    },
+    {
+      "name": "Tome of Legends",
+      "scryfallId": "2f0831d0-88d2-40fa-9f9d-6f270c5d94ef",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Urza's Incubator",
+      "scryfallId": "d11f6928-793b-4e91-b7b7-c881ff4ac986",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Valkyrie Harbinger",
+      "scryfallId": "a79ecdf5-2167-4590-a964-e9d7eb32dfe6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SLD"
+    },
+    {
+      "name": "Vanquisher's Banner",
+      "scryfallId": "a5b7aaea-c0d4-475c-818a-6cff35538a86",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "War Room",
+      "scryfallId": "792eb00d-41e2-4556-b560-0925bd9be3a6",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    },
+    {
+      "name": "Well of Lost Dreams",
+      "scryfallId": "aa00103a-6b87-416a-869a-557702844200",
+      "multiverseid": 0,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "PLST"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:12.169Z",
+    "sourceUrl": "AngelsTheyReJustLikeUsButCoolerAndWithWings_SLD.json",
+    "deckSource": "precon",
+    "createdAt": "2023-08-14T00:00:00.000Z"
+  }
+}

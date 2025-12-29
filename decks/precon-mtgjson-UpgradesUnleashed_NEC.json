@@ -1,0 +1,1007 @@
+{
+  "version": 1,
+  "id": 1776337914,
+  "name": "Upgrades Unleashed",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Chishiro, the Shattered Blade",
+      "scryfallId": "bffa36ac-137d-481c-b1b7-76a88ef15d54",
+      "multiverseid": 553668,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Kaima, the Fractured Calm",
+      "scryfallId": "467033f7-8d59-4b80-8c2e-c36f3ad93438",
+      "multiverseid": 553690,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Ox of Agonas",
+      "scryfallId": "00c46d18-064e-403a-bf39-ec655d78390a",
+      "multiverseid": 554191,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Akki Battle Squad",
+      "scryfallId": "ca624ce6-5b99-41af-8e26-b952f5a30916",
+      "multiverseid": 553915,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Kami of Celebration",
+      "scryfallId": "bda67054-bbd8-4979-801a-a5e9ca335f49",
+      "multiverseid": 553917,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Komainu Battle Armor",
+      "scryfallId": "d6ecab4b-fcff-4cf9-8e26-f3c609179050",
+      "multiverseid": 553918,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Ascendant Acolyte",
+      "scryfallId": "918a9e38-29ec-4279-8cf6-f01141497cab",
+      "multiverseid": 553921,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Kosei, Penitent Warlord",
+      "scryfallId": "82291f66-f4f0-4542-992e-8342e90033da",
+      "multiverseid": 553923,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Rampant Rejuvenator",
+      "scryfallId": "16b06b17-f256-428f-9bed-f115af270f27",
+      "multiverseid": 553925,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Tanuki Transplanter",
+      "scryfallId": "45ea5ead-9fd8-4909-96aa-d4e970891c93",
+      "multiverseid": 553927,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Orochi Merge-Keeper",
+      "scryfallId": "736c3278-6ee2-47f9-aab0-1457e90137b1",
+      "multiverseid": 548512,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Towashi Guide-Bot",
+      "scryfallId": "da4ccf70-b661-46ea-bea9-4466a3a35562",
+      "multiverseid": 548575,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEO"
+    },
+    {
+      "name": "Walking Skyscraper",
+      "scryfallId": "958af4ba-f29e-47ef-995e-3985982c75ad",
+      "multiverseid": 548576,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEO"
+    },
+    {
+      "name": "Agitator Ant",
+      "scryfallId": "6a61c242-5273-430c-b14e-fb76dc782ba3",
+      "multiverseid": 554185,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Goblin Razerunners",
+      "scryfallId": "5c06fb09-1e64-49c7-9938-541c0433bf5a",
+      "multiverseid": 554189,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Krenko, Tin Street Kingpin",
+      "scryfallId": "f51d53fc-8e62-45fd-b2cd-8f93d7f9e1fa",
+      "multiverseid": 554190,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Taurean Mauler",
+      "scryfallId": "a4ee4648-dd6e-4ba9-b643-a7e4c430d51f",
+      "multiverseid": 554194,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Acidic Slime",
+      "scryfallId": "c672b34d-066e-40e6-a499-3ab68ea6514c",
+      "multiverseid": 554195,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Champion of Lambholt",
+      "scryfallId": "f37f3696-a780-4203-8ae9-06e14235066b",
+      "multiverseid": 554198,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Fertilid",
+      "scryfallId": "a7402ae8-fd87-4412-ab4f-44bcc2d49764",
+      "multiverseid": 554199,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Forgotten Ancient",
+      "scryfallId": "13ecbd14-bf93-4beb-afb0-6355fe9092a6",
+      "multiverseid": 554200,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Genesis Hydra",
+      "scryfallId": "451eb0dd-f3e8-4504-9de0-0bdf124e9ae2",
+      "multiverseid": 554201,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Loyal Guardian",
+      "scryfallId": "4b9a5878-985d-47ba-a3dd-fe897777b873",
+      "multiverseid": 554204,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Primeval Protector",
+      "scryfallId": "15ab4c3b-323a-47c6-b675-447d16def3d5",
+      "multiverseid": 554206,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Rishkar, Peema Renegade",
+      "scryfallId": "c0bbcf3b-5b7c-4846-b30c-100542ce2204",
+      "multiverseid": 554208,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "53754cb3-0294-41e0-90d7-a35710ea30e4",
+      "multiverseid": 554210,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Spearbreaker Behemoth",
+      "scryfallId": "d7f5cae6-5f1d-4537-9cc5-46d727d1beb1",
+      "multiverseid": 554214,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Whiptongue Hydra",
+      "scryfallId": "57cfa420-306d-4d2c-8e83-fa9b46f2aa27",
+      "multiverseid": 554216,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Grumgully, the Generous",
+      "scryfallId": "ba580628-60d1-4281-8705-dbc7823afd8d",
+      "multiverseid": 554220,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Ulasht, the Hate Seed",
+      "scryfallId": "caf6d1a3-9d07-4eb6-add3-0096422feba1",
+      "multiverseid": 554225,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Collision of Realms",
+      "scryfallId": "49618217-1bbb-498a-a6f0-f269ce7166a6",
+      "multiverseid": 553916,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Smoke Spirits' Aid",
+      "scryfallId": "e492a245-46ba-438e-8d81-4626faa49bff",
+      "multiverseid": 553919,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Chain Reaction",
+      "scryfallId": "491c77ae-ccd9-4eb5-a0f0-bae85b82d50a",
+      "multiverseid": 554186,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Kodama's Reach",
+      "scryfallId": "bf1c9d24-f5f6-43ff-85c3-034b76e1bf1b",
+      "multiverseid": 554203,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Rampant Growth",
+      "scryfallId": "0442b365-c970-478b-b418-ae02d83ca8e1",
+      "multiverseid": 554207,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Rishkar's Expertise",
+      "scryfallId": "4b5882ab-d9c7-4d85-98c4-7edfb19980b0",
+      "multiverseid": 554209,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Shamanic Revelation",
+      "scryfallId": "b95f36ad-2fb0-448c-b74f-a2a104240d8d",
+      "multiverseid": 554211,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Soul's Majesty",
+      "scryfallId": "9fe03ee0-50e4-4893-84ed-0d099be21d4e",
+      "multiverseid": 554213,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Vastwood Surge",
+      "scryfallId": "1dcd904c-fac6-490d-a9dd-ccdf39cbe597",
+      "multiverseid": 554215,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Decimate",
+      "scryfallId": "a99f8c13-c4bd-4e6c-8059-ef5e6ad30331",
+      "multiverseid": 554219,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Silkguard",
+      "scryfallId": "d4373a89-b571-46e2-9021-02aa4cdbb3b0",
+      "multiverseid": 553926,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "9270e071-7a22-4f38-af2f-fb4933a5784b",
+      "multiverseid": 554187,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Starstorm",
+      "scryfallId": "728b356a-e2ec-4c44-bd0a-bb9a5427a1ad",
+      "multiverseid": 554193,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Beast Within",
+      "scryfallId": "de50c5d4-6599-4894-a8d7-01d104fc97fd",
+      "multiverseid": 554197,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Hunter's Insight",
+      "scryfallId": "8c7549c2-7f66-4fdc-9852-6796292c6a85",
+      "multiverseid": 554202,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Mage Slayer",
+      "scryfallId": "e3226808-493e-4df2-9446-cb7cb47aaf2c",
+      "multiverseid": 554222,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "7bdf4615-7a08-40fe-9e04-cdbe10a62e06",
+      "multiverseid": 554226,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Blackblade Reforged",
+      "scryfallId": "da9a73af-57a2-499a-8a14-e164a6506e8b",
+      "multiverseid": 554228,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Bonehoard",
+      "scryfallId": "57c0258f-f464-4f52-b234-ba44a76d932a",
+      "multiverseid": 554229,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Fireshrieker",
+      "scryfallId": "ab1f2ab8-1ef3-4610-a2d0-cb87b982c649",
+      "multiverseid": 554233,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "3917f744-b876-47ae-94ad-f72b215ff1e7",
+      "multiverseid": 554243,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "ee23ba9f-3f5e-4fe4-95f8-3dd464db997b",
+      "multiverseid": 554245,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Sword of Vengeance",
+      "scryfallId": "6f380a12-9656-479e-bd44-1b8facfcc69c",
+      "multiverseid": 554246,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Unquenchable Fury",
+      "scryfallId": "db6b3f71-d833-4548-8d66-1d51da08d8b9",
+      "multiverseid": 553920,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Concord with the Kami",
+      "scryfallId": "c3e38dec-178b-497a-bfbd-371905690a39",
+      "multiverseid": 553922,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "One with the Kami",
+      "scryfallId": "d753c296-8cef-492d-ab41-e7ddb233d46e",
+      "multiverseid": 553924,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Invigorating Hot Spring",
+      "scryfallId": "59a118d1-30b8-42c0-ac42-6fba0778200a",
+      "multiverseid": 548535,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Elemental Mastery",
+      "scryfallId": "77dd1c84-0c67-41a2-aa19-ca448520ac54",
+      "multiverseid": 554188,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Shifting Shadow",
+      "scryfallId": "f4c34cbe-c41f-4fcb-b1b6-720b6b214fef",
+      "multiverseid": 554192,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Bear Umbra",
+      "scryfallId": "5a195fb1-f2e9-4e05-8a04-c335e1afbef6",
+      "multiverseid": 554196,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Ordeal of Nylea",
+      "scryfallId": "fdbbbe4a-976c-4eb3-b32c-eef892b7699d",
+      "multiverseid": 554205,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Snake Umbra",
+      "scryfallId": "106d17d6-5ef2-4634-8dd6-790b12574042",
+      "multiverseid": 554212,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Rhythm of the Wild",
+      "scryfallId": "70d13ff4-e6ba-4bfe-9668-d11f7facb8d3",
+      "multiverseid": 554224,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "f502721a-22f4-4c91-a85a-67628b9efbbb",
+      "multiverseid": 554248,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "a5efe226-a6fc-4fdb-a3d4-2b1ae0d667a8",
+      "multiverseid": 554249,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "d9ed9f21-5dc4-484d-bc31-8efc81254744",
+      "multiverseid": 554250,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Game Trail",
+      "scryfallId": "4d0376e3-a1ae-4935-b392-2cb4ccd0d9a7",
+      "multiverseid": 554251,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Gruul Turf",
+      "scryfallId": "20ca3527-b3e8-4d9b-8a0b-0c7d61fc6d39",
+      "multiverseid": 554252,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Mossfire Valley",
+      "scryfallId": "4f29515c-8554-404a-b3a2-3d868659b687",
+      "multiverseid": 554253,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Mossfire Valley",
+      "scryfallId": "4f29515c-8554-404a-b3a2-3d868659b687",
+      "multiverseid": 554253,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Opal Palace",
+      "scryfallId": "3e639915-9c9c-482f-ad9b-b8158f2971e1",
+      "multiverseid": 554254,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "NEC"
+    },
+    {
+      "name": "Oran-Rief, the Vastwood",
+      "scryfallId": "3cb8fc57-6c2b-45bf-93d3-c573e31cf158",
+      "multiverseid": 554255,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Raging Ravine",
+      "scryfallId": "4f2d9b33-cb78-4a44-81be-61452cb6fc21",
+      "multiverseid": 554258,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Temple of Abandon",
+      "scryfallId": "1f539604-8847-45c7-9934-532583c42eab",
+      "multiverseid": 554261,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "NEC"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
+      "multiverseid": 553466,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
+      "multiverseid": 553467,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+      "multiverseid": 553468,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
+      "multiverseid": 553469,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "NEO"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:14.034Z",
+    "sourceUrl": "UpgradesUnleashed_NEC.json",
+    "deckSource": "precon",
+    "createdAt": "2022-02-18T00:00:00.000Z"
+  }
+}

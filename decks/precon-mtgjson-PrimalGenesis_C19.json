@@ -1,0 +1,1008 @@
+{
+  "version": 1,
+  "id": 802240039,
+  "name": "Primal Genesis",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Ghired, Conclave Exile",
+      "scryfallId": "d0825bcd-8cf8-498a-a61e-406f136e1f3f",
+      "multiverseid": 470588,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Garruk, Primal Hunter",
+      "scryfallId": "a6274dbf-f541-4b7b-a3dc-302197a4410e",
+      "multiverseid": 470713,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Atla Palani, Nest Tender",
+      "scryfallId": "f6aa473b-85cd-431d-844b-218368fe955e",
+      "multiverseid": 470584,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Marisi, Breaker of the Coil",
+      "scryfallId": "c366e1c0-f62d-41ce-baec-de11dbc1c5f4",
+      "multiverseid": 470592,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Doomed Artisan",
+      "scryfallId": "ded9c409-7131-4b3f-a6b9-25fa32c5ec2c",
+      "multiverseid": 470549,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Tectonic Hellion",
+      "scryfallId": "1b86be51-1b0b-49d0-917c-508f12c85c17",
+      "multiverseid": 470575,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Ohran Frostfang",
+      "scryfallId": "9eb08e11-c247-404c-9f40-a12cb7087d0c",
+      "multiverseid": 470579,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Selesnya Eulogist",
+      "scryfallId": "3e65d501-6a11-4278-949b-53a3f3502fcc",
+      "multiverseid": 470581,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Tahngarth, First Mate",
+      "scryfallId": "1692c11b-018e-47bf-b38d-3c3e6b79b37c",
+      "multiverseid": 470596,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Angel of Sanctions",
+      "scryfallId": "f3f7f258-7ac0-4149-9d8c-712b5ea7f0a8",
+      "multiverseid": 470607,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Wingmate Roc",
+      "scryfallId": "16930385-796e-4e11-b439-d0dbda63d72d",
+      "multiverseid": 470624,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Dragonmaster Outcast",
+      "scryfallId": "c1479b6e-b1a2-4089-8ab5-56a6864dbbc0",
+      "multiverseid": 470685,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Feldon of the Third Path",
+      "scryfallId": "4c257487-5494-4251-9e93-43bd9cc6558f",
+      "multiverseid": 470687,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Giant Adephage",
+      "scryfallId": "4fe2d4dd-983a-41d5-addb-67e748b5e339",
+      "multiverseid": 470715,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Soul of Zendikar",
+      "scryfallId": "108a4330-d9dd-429d-a2f8-c355ff914883",
+      "multiverseid": 470728,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Trostani, Selesnya's Voice",
+      "scryfallId": "34ea44f2-cb2f-4b86-83fc-fe507f05bb9d",
+      "multiverseid": 470750,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Desolation Twin",
+      "scryfallId": "ced8fc21-221d-40b6-a1e0-175f03b248db",
+      "multiverseid": 470606,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Flamerush Rider",
+      "scryfallId": "c074adc3-50f1-4443-ae9b-47f8d9fdf3a2",
+      "multiverseid": 470689,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Heart-Piercer Manticore",
+      "scryfallId": "6cd213a1-92f6-49dd-9ea9-41a00879faaa",
+      "multiverseid": 470692,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Rampaging Baloths",
+      "scryfallId": "805c9be0-d3aa-4f81-a70f-f66d0bb43b73",
+      "multiverseid": 470722,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Thragtusk",
+      "scryfallId": "55c5c90b-5113-4205-9489-cd8390dd20b9",
+      "multiverseid": 470731,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Emmara Tandris",
+      "scryfallId": "7d415858-5f7d-406c-bb30-b4c48ebaad08",
+      "multiverseid": 470737,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Wayfaring Temple",
+      "scryfallId": "77d4920f-94f7-4780-9c5f-f0df6f6d3d6e",
+      "multiverseid": 470754,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Cliffside Rescuer",
+      "scryfallId": "c998d2ba-d2ca-4a85-b22a-ce8f42bb0d2f",
+      "multiverseid": 470547,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Voice of Many",
+      "scryfallId": "f82328e9-fb4b-4dc9-afd6-fa210e4330bf",
+      "multiverseid": 470582,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Scaretiller",
+      "scryfallId": "7729fb41-3025-4e7b-8cf3-003fdc10300b",
+      "multiverseid": 470603,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Roc Egg",
+      "scryfallId": "a84a12d7-ffb3-4c05-973f-e00fbc2ab6c4",
+      "multiverseid": 470619,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Garruk's Packleader",
+      "scryfallId": "dafeafa0-b937-4387-8626-449a810486b4",
+      "multiverseid": 470714,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "114328dd-6c4f-4b6b-b9b7-dfa8c9b79495",
+      "multiverseid": 470723,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Vitu-Ghazi Guildmage",
+      "scryfallId": "275a3199-1297-4281-a95c-374bcdc198ce",
+      "multiverseid": 470752,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Ghired's Belligerence",
+      "scryfallId": "b8348ef6-f2ae-4277-ae04-7849c508f0e4",
+      "multiverseid": 470571,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Full Flowering",
+      "scryfallId": "ea2e9f4c-b6b4-4199-93ae-10df75590715",
+      "multiverseid": 470578,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Hour of Reckoning",
+      "scryfallId": "d12768a5-8ee6-407b-87cf-703e69a0c32a",
+      "multiverseid": 470611,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Phyrexian Rebirth",
+      "scryfallId": "9e222a33-6ec6-4114-9660-2b7260ad7755",
+      "multiverseid": 470614,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Shamanic Revelation",
+      "scryfallId": "ac906fdc-a871-4bf8-8b23-6baed64926c6",
+      "multiverseid": 470726,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Hate Mirage",
+      "scryfallId": "9e58b2ad-0c5e-468e-983a-45d412454a67",
+      "multiverseid": 470572,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "faf2ef91-fb95-4cc0-a2a6-53fac5cd807d",
+      "multiverseid": 470705,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Explore",
+      "scryfallId": "da397007-e9a8-4228-a35d-a606e93e37be",
+      "multiverseid": 470710,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Farseek",
+      "scryfallId": "061f0032-eb14-4c63-8231-aa61472396c2",
+      "multiverseid": 470711,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Harmonize",
+      "scryfallId": "bb163285-dabe-448b-a82b-86a828d5bd93",
+      "multiverseid": 470717,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Fresh Meat",
+      "scryfallId": "78bbdc81-d47f-4f0a-b359-c146cc07931d",
+      "multiverseid": 470712,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Momentous Fall",
+      "scryfallId": "ca079f33-2764-462e-ba6a-961cbb8318c3",
+      "multiverseid": 470719,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Second Harvest",
+      "scryfallId": "22b01c98-c24b-4255-921f-4820f3d395ea",
+      "multiverseid": 470724,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Rootborn Defenses",
+      "scryfallId": "ecfcf55c-44d8-4585-9722-e91993e41888",
+      "multiverseid": 470620,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Trostani's Judgment",
+      "scryfallId": "5b105835-8ca3-43fc-9724-29edde02f0bb",
+      "multiverseid": 470623,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Beast Within",
+      "scryfallId": "edf4a131-5f29-46c0-9c73-719d1112d57a",
+      "multiverseid": 470703,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Druid's Deliverance",
+      "scryfallId": "eabb6ba4-4256-401c-96eb-6e2a14c50602",
+      "multiverseid": 470708,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Slice in Twain",
+      "scryfallId": "d7129e47-f502-4df6-b21c-5713c3f8c775",
+      "multiverseid": 470727,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Naya Charm",
+      "scryfallId": "0345854e-860f-4ee0-8a97-591bb41a0212",
+      "multiverseid": 470741,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Sundering Growth",
+      "scryfallId": "96feebe2-0a6b-4df8-8e7d-ee0bb82ac0c1",
+      "multiverseid": 470749,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Idol of Oblivion",
+      "scryfallId": "daed8456-011e-44e2-b180-6a8a75089257",
+      "multiverseid": 470601,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Mimic Vat",
+      "scryfallId": "9050cd01-44c9-4e87-a165-a8b88c8e5d45",
+      "multiverseid": 470765,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Soul Foundry",
+      "scryfallId": "6c7a441b-e4af-41ba-85a4-fcb4f40534c3",
+      "multiverseid": 470769,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "9e01e0e4-7e2b-41b5-86de-8e022170b3fc",
+      "multiverseid": 470763,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "e672d408-997c-4a19-810a-3da8411eecf2",
+      "multiverseid": 470767,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Commander's Insignia",
+      "scryfallId": "44cccb23-a515-4e49-b4ae-a12d81f7d6ef",
+      "multiverseid": 470548,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Song of the Worldsoul",
+      "scryfallId": "bb73ec0d-f582-4f74-9b5c-180fe3aedcf6",
+      "multiverseid": 470552,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Growing Ranks",
+      "scryfallId": "6ea45414-4047-4921-b77d-dfcba2fe7694",
+      "multiverseid": 470739,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Intangible Virtue",
+      "scryfallId": "b08f5d19-55ec-4cb9-b836-4d432cd9da33",
+      "multiverseid": 470613,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Colossal Majesty",
+      "scryfallId": "56f8fd3b-5b1c-4d8c-86c7-ee3ba7de69c7",
+      "multiverseid": 470704,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Elemental Bond",
+      "scryfallId": "516ebdba-0f25-459a-a26b-f6fa928b96e6",
+      "multiverseid": 470709,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "719bd033-77f8-4e0e-b173-63e30ad28970",
+      "multiverseid": 470782,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "23de2dc2-348f-4eeb-ae0c-dda422d654b0",
+      "multiverseid": 470788,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Gargoyle Castle",
+      "scryfallId": "9834b4e1-7e9f-4f93-a2aa-13a52e8a11fc",
+      "multiverseid": 470791,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Sungrass Prairie",
+      "scryfallId": "e4473d07-5c08-4a64-8c72-9e8d1ce8daa0",
+      "multiverseid": 470823,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "247d1875-b59d-475c-926f-0ecf4e7c0faf",
+      "multiverseid": 470834,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "247d1875-b59d-475c-926f-0ecf4e7c0faf",
+      "multiverseid": 470834,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "247d1875-b59d-475c-926f-0ecf4e7c0faf",
+      "multiverseid": 470834,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "a04af0ed-b978-498a-aa56-27f009d58d58",
+      "multiverseid": 470835,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "a04af0ed-b978-498a-aa56-27f009d58d58",
+      "multiverseid": 470835,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "11e044a4-4332-4385-8279-08cb1cfddfe8",
+      "multiverseid": 470836,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "11e044a4-4332-4385-8279-08cb1cfddfe8",
+      "multiverseid": 470836,
+      "twoFaced": false,
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "db6d3fb9-ecec-4a55-bfcf-6ae2d35e416a",
+      "multiverseid": 470843,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "db6d3fb9-ecec-4a55-bfcf-6ae2d35e416a",
+      "multiverseid": 470843,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "0e6a9646-1034-4d09-a141-9a36f51ff229",
+      "multiverseid": 470844,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "1a0d5140-0e5e-461a-bf70-d548f8f02f47",
+      "multiverseid": 470845,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "afa69d38-3344-425e-88ff-0155d8bfc1f0",
+      "multiverseid": 470846,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "afa69d38-3344-425e-88ff-0155d8bfc1f0",
+      "multiverseid": 470846,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "afa69d38-3344-425e-88ff-0155d8bfc1f0",
+      "multiverseid": 470846,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "af042ca5-da40-498b-a7dc-87ab41863ddc",
+      "multiverseid": 470847,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "af042ca5-da40-498b-a7dc-87ab41863ddc",
+      "multiverseid": 470847,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "af042ca5-da40-498b-a7dc-87ab41863ddc",
+      "multiverseid": 470847,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "cf6a3ff8-5153-4616-9c3f-b71966754b52",
+      "multiverseid": 470848,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "cf6a3ff8-5153-4616-9c3f-b71966754b52",
+      "multiverseid": 470848,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Ash Barrens",
+      "scryfallId": "d78e34c2-6a1e-4559-9b3f-ac45d330d515",
+      "multiverseid": 470773,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Blossoming Sands",
+      "scryfallId": "01a33a23-994f-44f4-89c0-3f40ba1fbad3",
+      "multiverseid": 470777,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Boros Garrison",
+      "scryfallId": "a4a3a23c-544d-4ed4-90ad-dbf04f676af3",
+      "multiverseid": 470779,
+      "twoFaced": false,
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "c328d8ac-97df-4240-ac38-7cab363c5da1",
+      "multiverseid": 470783,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "b6f4f0c7-63c8-4d43-9ccb-920733980de0",
+      "multiverseid": 470787,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Graypelt Refuge",
+      "scryfallId": "0849b6dd-0330-4b7e-b7da-98e767adb4a0",
+      "multiverseid": 470795,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Gruul Turf",
+      "scryfallId": "20e5e73b-0ac9-483f-9de5-609db1334e41",
+      "multiverseid": 470796,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Jungle Shrine",
+      "scryfallId": "2678d0f4-cafe-4e7e-9443-6b7917af0182",
+      "multiverseid": 470801,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Kazandu Refuge",
+      "scryfallId": "6ca097f1-eef0-4e18-ab5d-49bb4aeb74e2",
+      "multiverseid": 470802,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Krosan Verge",
+      "scryfallId": "ea793198-7768-4844-98d2-cc6fba11a32d",
+      "multiverseid": 470803,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Myriad Landscape",
+      "scryfallId": "3a1c15b9-8039-4de3-a060-d1c38f9e5518",
+      "multiverseid": 470807,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Naya Panorama",
+      "scryfallId": "9b01e2a8-1103-425f-8774-55667c607301",
+      "multiverseid": 470809,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Rogue's Passage",
+      "scryfallId": "58f4384e-9aca-4533-8714-3dcaf709dee3",
+      "multiverseid": 470816,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    },
+    {
+      "name": "Rugged Highlands",
+      "scryfallId": "92e5c392-9b17-4554-ac53-d255112636ee",
+      "multiverseid": 470817,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Selesnya Sanctuary",
+      "scryfallId": "2261ab48-289d-437e-8e50-b01894e8fe69",
+      "multiverseid": 470818,
+      "twoFaced": false,
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "C19"
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "9acbdb64-fa26-4c77-b513-33e44ac86e20",
+      "multiverseid": 470827,
+      "twoFaced": false,
+      "colorIdentity": [],
+      "set": "C19"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2025-12-28T19:31:13.503Z",
+    "sourceUrl": "PrimalGenesis_C19.json",
+    "deckSource": "precon",
+    "createdAt": "2019-08-23T00:00:00.000Z"
+  }
+}
