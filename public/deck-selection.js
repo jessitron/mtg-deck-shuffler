@@ -29,6 +29,39 @@ function setActiveTab(clickedButton) {
 }
 
 /**
+ * Set up precon deck search functionality
+ * Filters deck tiles based on search input
+ */
+function setupPreconSearch() {
+  const searchInput = document.getElementById("precon-search");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", function() {
+    const searchTerm = this.value.toLowerCase().trim();
+    const deckTiles = document.querySelectorAll(".precon-tile");
+
+    deckTiles.forEach(tile => {
+      // Get text content from the tile
+      const deckName = tile.querySelector(".tile-deck-name")?.textContent.toLowerCase() || "";
+      const commanderNames = Array.from(tile.querySelectorAll(".commander-name"))
+        .map(el => el.textContent.toLowerCase())
+        .join(" ");
+      const setName = tile.querySelector(".tile-meta span:first-child")?.textContent.toLowerCase() || "";
+      
+      // Combine all searchable text
+      const searchableText = `${deckName} ${commanderNames} ${setName}`;
+
+      // Show or hide tile based on search match
+      if (searchableText.includes(searchTerm)) {
+        tile.style.display = "";
+      } else {
+        tile.style.display = "none";
+      }
+    });
+  });
+}
+
+/**
  * Deck number validation for Load Deck button
  * Accepts either a deck number (digits only) or an Archidekt URL
  */
@@ -89,6 +122,7 @@ function setupDeckNumberValidation() {
 // Set up validation on page load
 document.addEventListener("DOMContentLoaded", function () {
   setupDeckNumberValidation();
+  setupPreconSearch();
 
   // Set initial full-width state based on which tab is active
   const activeButton = document.querySelector('.hero-button.active');
@@ -106,5 +140,6 @@ document.addEventListener("htmx:afterSwap", function (event) {
   // Only run if the swap happened in the deck-inputs container
   if (event.detail.target.id === "deck-inputs") {
     setupDeckNumberValidation();
+    setupPreconSearch();
   }
 });
