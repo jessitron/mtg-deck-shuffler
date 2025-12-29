@@ -16,7 +16,7 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 
 - **Frontend**: Simple HTML with HTMX for interactivity, no JavaScript frameworks. There is some custom JS in the header for tracing; and there is some custom JS for interactivity that can't be implemented with HTMX. Where possible, the JS triggers on HTMX events.
 - **Templating - Two Systems**:
-  - **Informational and pre-game pages**: EJS templates in `views/` for informational pages (home, docs, about) and pre-game pages (deck-selection, prepare). These pages describe the app or help set up games. Use `res.render("template-name")` to serve them.
+  - **Informational and pre-game pages**: EJS templates in `views/` for informational pages (home, docs, about) and pre-game pages (choose-any-deck, prepare). These pages describe the app or help set up games. Use `res.render("template-name")` to serve them.
   - **Active gameplay pages**: TypeScript functions in `src/view/` that return HTML strings via template literals. These pages display and manipulate active game state (play game, modals). Use `res.send(formatSomethingHtmlPage(...))` to serve them.
   - **Why the split?**: Separates concerns between pre-game setup (EJS with site styling) and active gameplay (TypeScript for type safety and dynamic state composition).
 - **Backend**: Express.js server serving static files and handling form submissions
@@ -44,11 +44,18 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - `src/server.ts` - Server initialization, dependency creation, and startup
 - `views/index.ejs` - Home page template (uses EJS templating)
 - `views/docs.ejs` - Documentation page template (uses EJS templating)
+- `views/about.ejs` - About page template (uses EJS templating)
+- `views/choose-any-deck.ejs` - Deck selection page (uses EJS templating)
 - `views/prepare.ejs` - Deck review/game preparation page (uses EJS templating)
-- `views/partials/` - Shared EJS components (header, footer, head)
+- `views/partials/` - Shared EJS components (header, footer, head, deck-selection-precon, deck-selection-archidekt)
 - `public/site.css` - Site-wide page styles (used by all EJS pages)
+- `public/styles.css` - Additional styles for active game pages
+- `public/game.css` - Game-specific styles
 - `public/prepare.css` - Styles for the prepare/deck review page
+- `public/deck-selection.css` - Styles for deck selection page
+- `public/docs.css` - Styles for documentation page
 - `public/home-v3-parallax.js` - Home page parallax scrolling effect
+- `public/deck-selection.js` - Deck selection page interactivity
 - `src/view/` - HTML formatting functions organized by screen:
   - `play-game/` - Active game screen with cards in play
   - `common/` - Shared components, HTML layout, and view helpers
@@ -105,6 +112,7 @@ The app integrates with:
 - `src/port-deck-retrieval/mtgjsonAdapter/` - Converts MTGJSON precon format to internal Deck format
 - `src/port-deck-retrieval/archidektAdapter/` - Converts Archidekt API format to internal Deck format
 - `src/port-deck-retrieval/localFileAdapter/` - Reads precon deck files from `decks/` directory
+- `src/port-deck-retrieval/compositeAdapters/` - Combines multiple adapters with fallback logic
 
 ## Port Configuration
 
