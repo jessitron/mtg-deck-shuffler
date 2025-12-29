@@ -53,20 +53,23 @@ We will eventually deploy to a toy EKS cluster.
 
 ## Downloading precon decks
 
+### From MTGJSON (Recommended)
+
+`npm run precons:fetch-mtgjson -- --convert`
+
+This downloads all Commander Deck precons from MTGJSON and saves them to the decks directory. MTGJSON provides accurate release dates and complete metadata without rate limiting.
+
+Options:
+- `--convert` - Convert and save decks to the decks directory
+- `--force` - Overwrite existing deck files
+- `--keep-temp` - Keep temporary downloaded files for inspection
+
+### From a specific Archidekt deck
+
 `npm run deck:download -- <archidektDeckId>`
 
-This will download the deck from archidekt and save it to the decks directory.
+This will download a specific deck from Archidekt and save it to the decks directory.
 You need to redo this every time the Deck structure changes!
-
-## Downloading all precon decks
-
-`npm run precons:fetch -- --download`
-
-This will download all Archidekt precon decks to the decks directory.
-
-`npm run precons:fetch -- --download --force`
-
-Use the `--force` flag to overwrite existing decks (useful when the Deck structure changes).
 
 ## Downloading the database of cards
 
