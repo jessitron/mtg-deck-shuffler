@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an MTG deck shuffler web app designed for remote Magic: The Gathering play. The app has a landing page that introduces the tool and explains how to use it with Mural/Miro and Discord for remote gameplay. The app fetches deck information from Archidekt.com and displays card information to help players set up remote games.
+This is an MTG deck shuffler web app designed for remote Magic: The Gathering play. The app has a landing page that introduces the tool and explains how to use it with Mural/Miro and Discord for remote gameplay. The app can load preconstructed Commander Decks from MTGJSON or fetch custom decks from Archidekt.com, displaying card information to help players set up remote games.
 
 **Application Flow**: Home → Deck Selection → Deck Review → Play Game
 
@@ -64,6 +64,8 @@ This is an MTG deck shuffler web app designed for remote Magic: The Gathering pl
 - **Clean**: `npm run clean` - Removes `dist/` directory
 - **Start**: `npm start` - Builds and runs the server from `dist/`
 - **Run locally**: `./run` - Sources `.env` file and starts the app (preferred)
+- **Fetch precons**: `npm run precons:fetch-mtgjson -- --convert` - Download all Commander Decks from MTGJSON
+- **Download deck**: `npm run deck:download -- <deckId>` - Download a specific deck from Archidekt
 
 ## Testing
 
@@ -90,13 +92,19 @@ The app uses **SQLite by default** for game state persistence, creating a `data.
 - **SQLite (default)**: Persistent storage across server restarts
 - **In-memory**: Set `PORT_PERSIST_STATE=in-memory` for testing/development - data is lost when server stops
 
-## API Integration
+## Data Sources
 
-The app is designed to integrate with:
+The app integrates with:
 
-- Archidekt API: `https://archidekt.com/api/decks/{deckId}/`
-- Archidekt link: `https://archidekt.com/decks/{deckId}/`
-- Scryfall for card images
+- **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` - Preconstructed Commander Decks with accurate release dates (recommended)
+- **Archidekt API**: `https://archidekt.com/api/decks/{deckId}/` - Custom deck imports
+- **Scryfall**: Card images via Scryfall ID
+
+### Deck Adapters
+
+- `src/port-deck-retrieval/mtgjsonAdapter/` - Converts MTGJSON precon format to internal Deck format
+- `src/port-deck-retrieval/archidektAdapter/` - Converts Archidekt API format to internal Deck format
+- `src/port-deck-retrieval/localFileAdapter/` - Reads precon deck files from `decks/` directory
 
 ## Port Configuration
 
