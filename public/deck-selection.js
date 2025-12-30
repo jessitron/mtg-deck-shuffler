@@ -36,21 +36,26 @@ function setupPreconSearch() {
   const searchInput = document.getElementById("precon-search");
   if (!searchInput) return;
 
+  const deckTiles = document.querySelectorAll(".precon-tile");
+  
+  // Pre-compute searchable text for each tile once during setup
+  const tileSearchData = Array.from(deckTiles).map(tile => {
+    const deckName = tile.querySelector(".tile-deck-name")?.textContent.toLowerCase() || "";
+    const commanderNames = Array.from(tile.querySelectorAll(".commander-name"))
+      .map(el => el.textContent.toLowerCase())
+      .join(" ");
+    const setName = tile.querySelector(".tile-meta span:first-child")?.textContent.toLowerCase() || "";
+    
+    return {
+      tile,
+      searchableText: `${deckName} ${commanderNames} ${setName}`
+    };
+  });
+
   searchInput.addEventListener("input", function() {
     const searchTerm = this.value.toLowerCase().trim();
-    const deckTiles = document.querySelectorAll(".precon-tile");
 
-    deckTiles.forEach(tile => {
-      // Get text content from the tile
-      const deckName = tile.querySelector(".tile-deck-name")?.textContent.toLowerCase() || "";
-      const commanderNames = Array.from(tile.querySelectorAll(".commander-name"))
-        .map(el => el.textContent.toLowerCase())
-        .join(" ");
-      const setName = tile.querySelector(".tile-meta span:first-child")?.textContent.toLowerCase() || "";
-      
-      // Combine all searchable text
-      const searchableText = `${deckName} ${commanderNames} ${setName}`;
-
+    tileSearchData.forEach(({ tile, searchableText }) => {
       // Show or hide tile based on search match
       if (searchableText.includes(searchTerm)) {
         tile.style.display = "";
