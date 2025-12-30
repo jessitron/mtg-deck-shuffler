@@ -1,6 +1,15 @@
 <form method="POST" action="/deck" class="precon-input-section">
   <label class="deck-label">Choose a preconstructed deck to play</label>
   <input type="hidden" name="deck-source" value="precon" />
+  <div class="precon-search-container">
+    <input 
+      type="text" 
+      id="precon-search" 
+      class="precon-search-input" 
+      placeholder="Search by deck name, commander, or set..." 
+      autocomplete="off"
+    />
+  </div>
   <div class="precon-tiles-container">
     <% availableDecks.forEach(function(deck, index) { %>
       <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">

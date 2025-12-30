@@ -32,6 +32,33 @@
   width: 100%;
 }
 
+/* Precon Search */
+.precon-search-container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.precon-search-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  background: white;
+  color: var(--deep-space);
+  font-family: "Orbitron", sans-serif;
+}
+
+.precon-search-input:focus {
+  border-color: var(--dark-pink);
+  outline: none;
+  box-shadow: 0 0 5px rgba(219, 39, 119, 0.3);
+}
+
+.precon-search-input::placeholder {
+  color: #888;
+  font-family: "Orbitron", sans-serif;
+}
+
 /* Archidekt-specific styles */
 .archidekt-input-section a {
   margin-bottom: 10px;
