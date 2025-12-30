@@ -4,7 +4,6 @@
 .deck-selection-container {
   max-width: 1040px;
   margin: auto;
-  padding: 1rem;
   transition: max-width 0.3s ease-in-out;
 }
 
@@ -16,10 +15,19 @@
 .archidekt-input-section,
 .precon-input-section {
   margin: 5px 0;
+}
+
+.archidekt-input-section > .input-row,
+.precon-input-section {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: flex-start;
+}
+
+.precon-input-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .archidekt-input-section label,
@@ -70,10 +78,9 @@
 .archidekt-input-section input {
   padding: 12px;
   border: 2px solid #ddd;
-  border-radius: 5px;
   font-size: 1rem;
-  margin-bottom: 20px;
   background: white;
+  font-family: "Orbitron", sans-serif;
 }
 
 .archidekt-input-section input:focus {
@@ -94,6 +101,14 @@
   align-self: flex-start;
   height: 3rem;
   box-sizing: border-box;
+}
+
+.validation-message {
+  text-align: left;
+  margin-top: 5px;
+  color: #f44336;
+  margin-bottom: 20px;
+  font-family: "Ovo", serif;
 }
 
 /* Precon Deck Tiles */
@@ -121,6 +136,14 @@
   opacity: 0;
   animation: fadeInTile 0.4s ease-out forwards;
   animation-delay: calc(var(--animation-order) * 0.05s + 0.2s);
+}
+
+.load-deck-button {
+  border-width: 5px;
+  font-size: 1rem;
+  width: auto;
+  height: 3rem;
+  padding: 8px;
 }
 
 @keyframes fadeInTile {

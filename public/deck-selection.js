@@ -88,28 +88,28 @@ function setupDeckNumberValidation() {
       // Empty input - disable button, no error
       if (value.length === 0) {
         loadDeckButton.disabled = true;
-        errorElement.style.display = "none";
+        errorElement.style.visibility = "hidden";
         return;
       }
 
       // Check if it's a valid deck number
       if (deckNumberPattern.test(value)) {
         loadDeckButton.disabled = false;
-        errorElement.style.display = "none";
+        errorElement.style.visibility = "hidden";
         return;
       }
 
       // Check if it's a valid Archidekt URL
       if (archidektUrlPattern.test(value)) {
         loadDeckButton.disabled = false;
-        errorElement.style.display = "none";
+        errorElement.style.visibility = "hidden";
         return;
       }
 
       // Invalid format - show error and disable button
       loadDeckButton.disabled = true;
       errorElement.textContent = "Please enter a deck number or a valid Archidekt URL (e.g., https://archidekt.com/decks/18476272)";
-      errorElement.style.display = "block";
+      errorElement.style.visibility = "unset";
     }
 
     // Check on input events
