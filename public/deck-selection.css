@@ -84,7 +84,7 @@
 }
 
 .archidekt-input-section input:focus {
-  border-color: #4caf50;
+  border-color: var(--dark-pink);
   outline: none;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }

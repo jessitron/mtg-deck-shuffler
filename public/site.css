@@ -333,6 +333,17 @@ body {
   text-align: center;
 }
 
+.button-base:focus {
+  outline: 3px solid var(--dark-pink);
+}
+
+.button-base:disabled {
+  color: gray;
+  background-color: #f0f0f0;
+  border-style: inset;
+  cursor: not-allowed;
+}
+
 /* BEGIN Button - original button with 3D press behavior */
 .begin-button {
   transition: all 0.1s ease;
