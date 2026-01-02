@@ -1,6 +1,13 @@
 # Defining Port, Adapter, and Gateway
 
-These definitions are not specific to this application. The examples are about some theoretical app that uses customer relationship management (CRM), which can be backed by service providers like MailChimp or Hubspot.
+This design pattern applies when our application is integrating with external software or infrastructure. It isolates our domain language, provides a translation layer, and also gives a clear definition of the external dependency.
+
+It consist of
+* Port - an interface defined in our domain.
+* Adapter - implements the Port; does translation between our domain and the external domain. 
+* Gateway - optional component of an Adapter: a barrier between our app and the external dependency, narrowing the interface to exactly what we need.
+
+The definitions provided here are not specific to this application. The examples are about some theoretical app that uses customer relationship management (CRM), which can be backed by service providers like MailChimp or Hubspot.
 
 ## Port
 
