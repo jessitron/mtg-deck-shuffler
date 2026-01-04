@@ -102,56 +102,24 @@ export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId:
     .join("");
 }
 
-// Generic Command Zone component that works for both prep and game contexts
-type CommandZoneOptions = {
-  commanders: readonly GameCard[];
-  deckName: string;
-  sourceUrl: string;
-  id: number; // prepId or gameId
-  expectedVersion?: number;
-  modalRoutePrefix?: string; // Optional prefix like "/prep-card-modal" or "/card-modal" (default)
-};
-
-export function formatCommandZone(options: CommandZoneOptions): string {
-  const { commanders, deckName, sourceUrl, id, expectedVersion, modalRoutePrefix } = options;
-
+// Function for displaying commanders when we have GameCard objects (in active game)
+export function formatCommandZoneHtmlFragment(game: GameState): string {
   const title = `
-      <span class="game-name">${deckName}</span> <a href="${sourceUrl}" target="_blank">↗</a>
+      <span class="game-name">${game.deckName}</span> <a href="${game.deckProvenance.sourceUrl}" target="_blank">↗</a>
 `;
-
-  if (commanders.length === 0) {
-    return `<div class="commander-placeholder">No Commander</div>`;
-  }
-
-  // Render the cards
-  let commanderCardsHtml = commanders.map((gameCard) =>
-    formatCardContainer({ gameCard, gameId: id, expectedVersion })
-  ).join("");
-
-  // If a custom modal route prefix is specified, replace the default /card-modal route
-  if (modalRoutePrefix && modalRoutePrefix !== "/card-modal") {
-    commanderCardsHtml = commanderCardsHtml.replace(/hx-get="\/card-modal\//g, `hx-get="${modalRoutePrefix}/`);
-  }
-
-  return `<div id="command-zone">
+  const commanders = game.listCommanders();
+  const gameId = game.gameId;
+  const expectedVersion = game.getStateVersion();
+  return commanders.length == 0
+    ? `<div class="commander-placeholder">No Commander</div>`
+    : `<div id="command-zone">
     <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
         <div class="game-title"><p>${title}</p></div>
       <div class="multiple-cards">
-        ${commanderCardsHtml}
+        ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId, expectedVersion })).join("")}
       </div>
       </div>
     </div>`;
-}
-
-// Function for displaying commanders when we have GameCard objects (in active game)
-export function formatCommandZoneHtmlFragment(game: GameState): string {
-  return formatCommandZone({
-    commanders: game.listCommanders(),
-    deckName: game.deckName,
-    sourceUrl: game.deckProvenance.sourceUrl,
-    id: game.gameId,
-    expectedVersion: game.getStateVersion(),
-  });
 }
 
 export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardIndex: number): string {
