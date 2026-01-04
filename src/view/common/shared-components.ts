@@ -1,7 +1,7 @@
 import { getCardImageUrl } from "../../types.js";
 import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 
-export const CARD_BACK = "/mtg-card-back.jpg";
+export const CARD_BACK = "/images/mtg-card-back.jpg";
 
 const app_title = "MTG Deck Shuffler";
 

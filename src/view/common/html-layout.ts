@@ -72,7 +72,7 @@ function formatPageWrapper(options: PageWrapperOptions): string {
   const footerHtml = includeFooter ? `
     <footer>
       ${footerContent}
-      <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
+      <a href="https://github.com/jessitron/mtg-deck-shuffler" target="_blank"><img src="/images/github-mark.svg" height=50px alt="GitHub" class="github-logo"></a></p>
     </footer>` : '';
 
   return `<!DOCTYPE html>

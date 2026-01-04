@@ -18,7 +18,7 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
         <div id="hand-cards" class="hand-cards">
           <div class="hand-symbol">
             <div class="hand-count">${handCardsList.length}</div>
-            <img src="/hand.png" alt="Hand" />
+            <img src="/images/hand.png" alt="Hand" />
           </div>
           ${handCardsWithDropZones}
         </div>
