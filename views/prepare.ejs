@@ -8,21 +8,24 @@
 
 <body>
   <div class="prepare-page">
-    <%- include('partials/header', {
+    <%- include('partials/header', {  
       activePage: 'play',
-      playLinkText: 'START OVER',
+      playLinkText: 'restart',
       linksInNewTabs: true
     }) %>
 
     <main class="prepare-container">
       <section id="command-zone">
-        <% if (commanders.length === 0) { %>
-          <div class="commander-placeholder">No Commander</div>
-        <% } else { %>
-          <% commanders.forEach(function(commander) { %>
-            <%- renderCommanderCard(commander) %>
-          <% }); %>
-        <% } %>
+        <div class="playmat">
+          <img src="/images/mtg-card-back.jpg" alt="Card back" class="card-back-image" />
+          <% if (commanders.length === 0) { %>
+            <div class="commander-placeholder">No Commander</div>
+          <% } else { %>
+            <% commanders.forEach(function(commander) { %>
+              <%- renderCommanderCard(commander) %>
+            <% }); %>
+          <% } %>
+        </div>
       </section>
 
       <section class="deck-actions">
