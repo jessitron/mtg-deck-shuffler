@@ -15,16 +15,10 @@
     }) %>
 
     <main class="prepare-container">
-      <section id="command-zone">
+      <section class="command-zone-section">
         <div class="playmat">
           <%- renderLibraryStack() %>
-          <% if (commanders.length === 0) { %>
-            <div class="commander-placeholder">No Commander</div>
-          <% } else { %>
-            <% commanders.forEach(function(commander) { %>
-              <%- renderCommanderCard(commander) %>
-            <% }); %>
-          <% } %>
+          <%- renderCommandZone() %>
         </div>
       </section>
 
