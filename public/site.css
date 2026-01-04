@@ -337,6 +337,10 @@ body {
   outline: 3px solid var(--dark-pink);
 }
 
+.button-2 {
+  margin: auto;
+}
+
 .button-base:disabled {
   color: gray;
   background-color: #f0f0f0;
