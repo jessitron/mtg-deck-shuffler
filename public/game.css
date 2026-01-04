@@ -251,44 +251,16 @@ h4.cute-header {
   --min-title-slab-height: 6rem;
 }
 
+/* Game page-specific command zone overrides */
 .cool-command-zone-surround {
-  border: 5px outset var(--playmat-one);
-  border-radius: 2px;
-  padding: 10px;
-  min-height: 400px;
-  width: 400px;
   background: repeating-linear-gradient(30deg, var(--playmat-one), var(--playmat-two), var(--playmat-one) 20px);
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.cool-command-zone-surround.two-commanders {
-  width: 600px;
-}
-
-.cool-command-zone-surround .game-title {
-  background-color: #9198e5;
-  border: 3px groove #9198e5;
-  padding: 3px 5px 3px 5px;
-  min-height: var(--min-title-slab-height);
-}
-
 .cool-command-zone-surround .multiple-cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-start;
-  width: fit-content;
   margin-left: auto;
-}
-
-.cool-command-zone-surround .multiple-cards {
-  border-color: var(--playmat-two);
-  border-width: 7px;
-  border-radius: 2px;
-  border-style: inset;
-  background-color: var(--playmat-two);
 }
 
 .section-that-is-horizontally-aligned-with-command-zone {
@@ -331,11 +303,6 @@ h4.cute-header {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 2px;
   padding: 1rem;
-}
-
-.game-name {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 .table-image {
@@ -1156,131 +1123,15 @@ h4.cute-header {
   font-size: 0.9rem;
 }
 
-/* shuffling effect */
-
+/* Game page-specific library stack overrides */
 .library-stack {
-  position: relative;
-  width: 200px;
-  height: 280px;
-  perspective: 1000px;
-  text-align: left;
   margin-bottom: 20px;
   margin-right: 20px;
 }
 
-.library-card-back {
-  position: absolute;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transform-style: preserve-3d;
-  /* background-image: url("/mtg-card-back.jpg"); */
-}
-
-/* Create a card back pattern */
 .library-card-back::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border: 1px solid #666;
-  border-radius: 8px;
   background: repeating-linear-gradient(45deg, #333, #333 10px, #3a3a3a 10px, #3a3a3a 20px);
   opacity: 0.5;
-}
-
-/* Position the three cards in a stack */
-.library-card-back:nth-child(1) {
-  transform: translateZ(0px) translateY(0px);
-  z-index: 3;
-}
-
-.library-card-back:nth-child(2) {
-  transform: translateZ(-2px) translateY(5px) translateX(5px);
-  z-index: 2;
-}
-
-.library-card-back:nth-child(3) {
-  transform: translateZ(-4px) translateY(10px) translateX(10px);
-  z-index: 1;
-}
-
-/* Shuffle animation keyframes */
-@keyframes shuffle-card-1 {
-  0% {
-    transform: translateZ(0px) translateY(0px) rotateY(0deg);
-  }
-
-  25% {
-    transform: translateX(-150px) translateY(-50px) translateZ(100px) rotateY(15deg) rotateZ(-10deg);
-  }
-
-  50% {
-    transform: translateX(150px) translateY(50px) translateZ(50px) rotateY(-15deg) rotateZ(10deg);
-  }
-
-  75% {
-    transform: translateX(-100px) translateY(0px) translateZ(75px) rotateY(10deg) rotateZ(-5deg);
-  }
-
-  100% {
-    transform: translateZ(0px) translateY(0px) rotateY(0deg);
-  }
-}
-
-@keyframes shuffle-card-2 {
-  0% {
-    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
-  }
-
-  25% {
-    transform: translateX(120px) translateY(-60px) translateZ(80px) rotateY(-20deg) rotateZ(8deg);
-  }
-
-  50% {
-    transform: translateX(-130px) translateY(40px) translateZ(60px) rotateY(18deg) rotateZ(-12deg);
-  }
-
-  75% {
-    transform: translateX(80px) translateY(-20px) translateZ(40px) rotateY(-10deg) rotateZ(5deg);
-  }
-
-  100% {
-    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
-  }
-}
-
-@keyframes shuffle-card-3 {
-  0% {
-    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
-  }
-
-  25% {
-    transform: translateX(100px) translateY(70px) translateZ(120px) rotateY(25deg) rotateZ(15deg);
-  }
-
-  50% {
-    transform: translateX(-140px) translateY(-30px) translateZ(90px) rotateY(-22deg) rotateZ(-8deg);
-  }
-
-  75% {
-    transform: translateX(60px) translateY(10px) translateZ(30px) rotateY(12deg) rotateZ(6deg);
-  }
-
-  100% {
-    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
-  }
-}
-
-/* Apply animations when shuffling class is added */
-.library-stack.shuffling .library-card-back:nth-child(1) {
-  animation: shuffle-card-1 1.5s ease-in-out;
-}
-
-.library-stack.shuffling .library-card-back:nth-child(2) {
-  animation: shuffle-card-2 1.5s ease-in-out;
-}
-
-.library-stack.shuffling .library-card-back:nth-child(3) {
-  animation: shuffle-card-3 1.5s ease-in-out;
 }
 
 footer {
