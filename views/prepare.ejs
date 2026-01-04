@@ -17,7 +17,7 @@
     <main class="prepare-container">
       <section id="command-zone">
         <div class="playmat">
-          <img src="/images/mtg-card-back.jpg" alt="Card back" class="card-back-image" />
+          <%- renderLibraryStack() %>
           <% if (commanders.length === 0) { %>
             <div class="commander-placeholder">No Commander</div>
           <% } else { %>

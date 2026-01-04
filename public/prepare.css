@@ -32,14 +32,57 @@
   padding: 40px 0;
 }
 
-.card-back-image {
-  grid-column: 3; /* page column 3 */
+/* Library stack styles (shared with game.css) */
+.library-stack {
+  position: relative;
   width: 200px;
-  height: 278px;
+  height: 280px;
+  perspective: 1000px;
+  text-align: left;
+  pointer-events: none;
+}
+
+.library-card-back {
+  position: absolute;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+}
+
+.library-card-back::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid #666;
+  border-radius: 8px;
+  opacity: 0.3;
+}
+
+/* Position the three cards in a stack */
+.library-card-back:nth-child(1) {
+  transform: translateZ(0px) translateY(0px);
+  z-index: 3;
+}
+
+.library-card-back:nth-child(2) {
+  transform: translateZ(-2px) translateY(5px) translateX(5px);
+  z-index: 2;
+}
+
+.library-card-back:nth-child(3) {
+  transform: translateZ(-4px) translateY(10px) translateX(10px);
+  z-index: 1;
+}
+
+.library-stack-empty {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.playmat .library-stack {
+  grid-column: 3; /* page column 3 */
   align-self: start;
   justify-self: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .playmat .card-container {

@@ -1,6 +1,6 @@
 import { PersistedGamePrep } from "../../port-persist-prep/types.js";
 import { GameCard } from "../../GameState.js";
-import { formatCardContainer, formatLibraryCardList, formatCardNameAsModalLink } from "./shared-components.js";
+import { formatCardContainer, formatLibraryCardList, formatCardNameAsModalLink, formatLibraryStack } from "./shared-components.js";
 
 // Prep-specific version of formatCardNameAsModalLink that uses /prep-card-modal route
 function formatPrepCardNameAsModalLink(cardName: string, prepId: number, cardIndex: number): string {
@@ -55,5 +55,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     renderCommanderCard: renderPrepCommanderCard,
     renderLibraryList: () =>
       formatPrepLibraryCardList(libraryCards, prep.prepId),
+    renderLibraryStack: () =>
+      formatLibraryStack({}, libraryCards.length),
   };
 }
