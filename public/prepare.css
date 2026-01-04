@@ -27,6 +27,7 @@
   background-size: cover;
   background-position: center;
   border-radius: 20px;
+  border: 10px solid black;
   min-height: 500px;
   padding: 40px 0;
 }
