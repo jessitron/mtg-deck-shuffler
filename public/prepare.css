@@ -85,10 +85,47 @@
   justify-self: center;
 }
 
-.playmat .card-container {
+/* Command zone styles (shared with game.css) */
+.cool-command-zone-surround {
   grid-column: 5; /* page column 5 */
   justify-self: center;
   align-self: start;
+  border: 5px outset var(--playmat-one);
+  border-radius: 2px;
+  padding: 10px;
+  min-height: 400px;
+  width: 400px;
+  background-color: var(--playmat-one);
+}
+
+.cool-command-zone-surround.two-commanders {
+  width: 600px;
+}
+
+.cool-command-zone-surround .game-title {
+  background-color: #9198e5;
+  border: 3px groove #9198e5;
+  padding: 3px 5px 3px 5px;
+  min-height: var(--min-title-slab-height);
+}
+
+.cool-command-zone-surround .multiple-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: fit-content;
+  gap: 10px;
+  border-color: var(--playmat-two);
+  border-width: 7px;
+  border-radius: 2px;
+  border-style: inset;
+  background-color: var(--playmat-two);
+}
+
+.game-name {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .playmat .commander-placeholder {

@@ -49,10 +49,26 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     return html.replace(/hx-get="\/card-modal\//g, 'hx-get="/prep-card-modal/');
   }
 
+  // Prep-specific version of command zone that uses /prep-card-modal route
+  function renderPrepCommandZone(): string {
+    const title = `
+      <span class="game-name">${prep.deck.name}</span> <a href="${prep.deck.provenance.sourceUrl}" target="_blank">↗</a>
+    `;
+    return commanders.length === 0
+      ? `<div class="commander-placeholder">No Commander</div>`
+      : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
+          <div class="game-title"><p>${title}</p></div>
+          <div class="multiple-cards">
+            ${commanders.map((commander) => renderPrepCommanderCard(commander)).join("")}
+          </div>
+        </div>`;
+  }
+
   return {
     commanders,
     libraryCards,
     renderCommanderCard: renderPrepCommanderCard,
+    renderCommandZone: renderPrepCommandZone,
     renderLibraryList: () =>
       formatPrepLibraryCardList(libraryCards, prep.prepId),
     renderLibraryStack: () =>
