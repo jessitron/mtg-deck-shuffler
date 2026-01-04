@@ -5,12 +5,9 @@
 }
 
 .prepare-container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 20px;
 }
 
 /* Command Zone */
@@ -20,21 +17,22 @@
 }
 
 .playmat {
-  grid-column: 1 / 8; /* span columns 1-7 */
+  grid-column: 2 / 9; /* span columns 2-8 */
   display: grid;
   grid-template-columns: subgrid; /* inherit parent's columns */
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
   border-radius: 20px;
-  border: 10px solid black;
+  margin-top: 50px;
+  outline: 10px solid black;
   min-height: 500px;
   padding: 40px 0;
 }
 
 /* Page-specific positioning for playmat components */
 .playmat .library-stack {
-  grid-column: 3; /* page column 3 */
+  grid-column: 2; /* page column 3 */
   align-self: start;
   justify-self: center;
   pointer-events: none;
