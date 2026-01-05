@@ -7,7 +7,7 @@
 .prepare-container {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 
 /* Command Zone */
