@@ -32,17 +32,15 @@
 }
 
 /* Page-specific positioning for playmat components */
-.prepare-page .playmat .library-stack {
+.playmat .library-stack {
   grid-column: 2; /* page column 3 */
   grid-row: 1;
   align-self: start;
   justify-self: start; /* left-align, overflow right */
   pointer-events: none;
-  position: static; /* override position: relative from playmat.css */
-  margin-top: calc(var(--min-title-slab-height) + 12px); /* align with commander card, not title */
 }
 
-.prepare-page .playmat .cool-command-zone-surround {
+.playmat .cool-command-zone-surround {
   grid-column: 5; /* page column 5 */
   grid-row: 1;
   justify-self: start; /* left-align, overflow right */
@@ -50,7 +48,7 @@
   background-color: var(--playmat-one);
 }
 
-.prepare-page .playmat .commander-placeholder {
+.playmat .commander-placeholder {
   grid-column: 5; /* page column 5 */
   grid-row: 1;
   justify-self: start; /* left-align, overflow right */
