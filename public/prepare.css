@@ -34,7 +34,7 @@
 .playmat .library-stack {
   grid-column: 2; /* page column 3 */
   align-self: start;
-  justify-self: center;
+  justify-self: start; /* left-align, overflow right */
   pointer-events: none;
 }
 
