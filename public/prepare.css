@@ -40,14 +40,14 @@
 
 .playmat .cool-command-zone-surround {
   grid-column: 5; /* page column 5 */
-  justify-self: center;
+  justify-self: start; /* left-align, overflow right */
   align-self: start;
   background-color: var(--playmat-one);
 }
 
 .playmat .commander-placeholder {
   grid-column: 5; /* page column 5 */
-  justify-self: center;
+  justify-self: start; /* left-align, overflow right */
   align-self: start;
 }
 
