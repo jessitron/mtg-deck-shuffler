@@ -20,7 +20,6 @@
   grid-column: 2 / 9; /* span columns 2-8 */
   display: grid;
   grid-template-columns: subgrid; /* inherit parent's columns */
-  grid-template-rows: auto; /* single row, height fits content */
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
@@ -34,7 +33,6 @@
 /* Page-specific positioning for playmat components */
 .playmat .library-stack {
   grid-column: 2; /* page column 3 */
-  grid-row: 1;
   align-self: start;
   justify-self: start; /* left-align, overflow right */
   pointer-events: none;
@@ -42,7 +40,6 @@
 
 .playmat .cool-command-zone-surround {
   grid-column: 5; /* page column 5 */
-  grid-row: 1;
   justify-self: start; /* left-align, overflow right */
   align-self: start;
   background-color: var(--playmat-one);
@@ -50,7 +47,6 @@
 
 .playmat .commander-placeholder {
   grid-column: 5; /* page column 5 */
-  grid-row: 1;
   justify-self: start; /* left-align, overflow right */
   align-self: start;
 }
