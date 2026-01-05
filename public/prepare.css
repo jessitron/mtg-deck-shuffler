@@ -8,6 +8,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-rows: calc(100vw / 9) auto auto auto auto;
 }
 
 /* Command Zone */
@@ -18,8 +19,10 @@
 
 .playmat {
   grid-column: 2 / 9; /* span columns 2-8 */
+  grid-row: 1 / 5;
   display: grid;
   grid-template-columns: subgrid; /* inherit parent's columns */
+  grid-template-rows: subgrid; /* inherit parent's rows */
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
@@ -33,16 +36,31 @@
 /* Page-specific positioning for playmat components */
 .playmat .library-stack {
   grid-column: 2; /* page column 3 */
+  grid-row: 3;
   align-self: start;
   justify-self: start; /* left-align, overflow right */
   pointer-events: none;
+  margin-top: 7px; /* border of commander card inset */
 }
 
 .playmat .cool-command-zone-surround {
   grid-column: 5; /* page column 5 */
+  grid-row: 2 / 4; 
+  display: grid;
+  grid-template-rows: subgrid;
   justify-self: start; /* left-align, overflow right */
   align-self: start;
   background-color: var(--playmat-one);
+}
+
+.playmat .cool-command-zone-surround .game-title {
+  grid-row: 1; /* first row of command zone, page row 2 */
+  margin-bottom: auto;
+}
+
+.playmat .cool-command-zone-surround .multiple-cards {
+  grid-row: 2; /* second row of command zone, page row 3 */
+  height: calc(278px + (7px * 2)); /* card height + border */
 }
 
 .playmat .commander-placeholder {
@@ -69,11 +87,6 @@
   cursor: pointer;
 }
 
-.card-container:hover .mtg-card-image {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
-}
-
 /* Deck Actions - buttons */
 .deck-actions {
   grid-column: 1 / -1; /* span all columns */
@@ -97,15 +110,6 @@
   background-color: #5a6268;
 }
 
-/* Library Section */
-.library-section {
-  grid-column: 1 / -1; /* span all columns */
-  margin-top: 40px;
-  padding: 30px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
 h4.cute-header {
   font-family: var(--fancy-title-font);

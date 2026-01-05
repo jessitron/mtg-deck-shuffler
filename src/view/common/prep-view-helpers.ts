@@ -52,7 +52,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
   // Prep-specific version of command zone that uses /prep-card-modal route
   function renderPrepCommandZone(): string {
     const title = `
-      <span class="game-name">${prep.deck.name}</span> <a href="${prep.deck.provenance.sourceUrl}" target="_blank">↗</a>
+      <span class="game-name">${prep.deck.name}</span>
     `;
     return commanders.length === 0
       ? `<div class="commander-placeholder">No Commander</div>`
