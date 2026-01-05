@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
-import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -667,6 +667,36 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error loading prep card modal:", error);
       res.status(500).send(`<div>Error loading card details</div>`);
+    }
+  });
+
+  // Returns modal fragment - library contents modal for prep page (before game starts)
+  app.get("/prep-library-modal/:prepId", async (req, res) => {
+    const prepId = parseInt(req.params.prepId);
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(`<div>Prep ${prepId} not found</div>`);
+        return;
+      }
+
+      // Create library cards list with prep-specific modal links
+      const { libraryCards, renderLibraryList } = createPrepViewHelpers(prep);
+      const libraryCardList = renderLibraryList();
+
+      const bodyContent = `<p class="modal-subtitle">
+          ${libraryCards.length} cards
+        </p>
+        <ul class="library-search-list">
+          ${libraryCardList}
+        </ul>`;
+
+      const modalHtml = formatModalHtmlFragment("Library Contents", bodyContent);
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading prep library modal:", error);
+      res.status(500).send(`<div>Error loading library</div>`);
     }
   });
 

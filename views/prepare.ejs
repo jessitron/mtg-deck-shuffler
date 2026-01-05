@@ -16,7 +16,15 @@
 
     <main class="prepare-container">
         <div class="playmat">
-          <%- renderLibraryStack() %>
+          <div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
+            <%- renderLibraryStack() %>
+            <div class="library-buttons">
+              <button class="search-button"
+                      hx-get="/prep-library-modal/<%= prep.prepId %>"
+                      hx-target="#modal-container"
+                      hx-swap="innerHTML">Search</button>
+            </div>
+          </div>
           <%- renderCommandZone() %>
         </div>
 
@@ -26,16 +34,6 @@
           <input type="hidden" name="expected-version" value="<%= prep.version %>" />
           <button type="submit" class="button-base begin-button">Shuffle Up</button>
         </form>
-      </section>
-
-      <section class="library-section" id="library-list" data-testid="library-section">
-        <h4 class="cute-header">Library</h4>
-        <div class="cute-header-subtitle">
-          <%= libraryCards.length %> cards in library, ordered by position
-        </div>
-        <ul class="library-search-list">
-          <%- renderLibraryList() %>
-        </ul>
       </section>
     </main>
 
