@@ -9,6 +9,17 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   listAvailableDecks() {
     return [];
   }
+
+  private convertColorNameToCode(colorName: string): string {
+    const colorMap: Record<string, string> = {
+      'White': 'W',
+      'Blue': 'U',
+      'Black': 'B',
+      'Red': 'R',
+      'Green': 'G'
+    };
+    return colorMap[colorName] || colorName;
+  }
   canHandle(request: DeckRetrievalRequest): boolean {
     return isArchidektDeckRetrievalRequest(request);
   }
@@ -83,7 +94,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       scryfallId: archidektCard.card.uid,
       multiverseid: archidektCard.card.multiverseid,
       twoFaced,
-      colorIdentity: archidektCard.card.oracleCard.colorIdentity,
+      colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
       set: archidektCard.card.edition.editionname
     };
 
