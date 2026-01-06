@@ -21,9 +21,13 @@ body {
   --back-button-color: #6c757d;
   --fancy-title-font: "Rampart One", monospace;
 
-  --playmat-one: #f5dc8b;
-  --playmat-two: #4b7bba;
+  --dark-pink: #bb5277;
+  --light-pink: #ddc7dd;
+  --deep-space: #221534;
+  --narrow-border: 3px;
+  --medium-blue: #538FC1;  
 }
+
 
 h1 {
   font-size: 2rem;

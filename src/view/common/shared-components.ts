@@ -105,7 +105,7 @@ export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId:
 // Function for displaying commanders when we have GameCard objects (in active game)
 export function formatCommandZoneHtmlFragment(game: GameState): string {
   const title = `
-      <span class="game-name">${game.deckName}</span> <a href="${game.deckProvenance.sourceUrl}" target="_blank">↗</a>
+      <span class="game-name">${game.deckName}</span>
 `;
   const commanders = game.listCommanders();
   const gameId = game.gameId;

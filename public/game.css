@@ -1,5 +1,8 @@
 /* Game-specific styles that should only be applied to game pages */
-
+:root {
+  --playmat-one: #f5dc8b;
+  --playmat-two: #4b7bba;
+}
 /* Page container for game pages */
 .page-container {
   max-width: 1800px;
@@ -253,7 +256,6 @@ h4.cute-header {
 
 /* Game page-specific command zone overrides */
 .cool-command-zone-surround {
-  background: repeating-linear-gradient(30deg, var(--playmat-one), var(--playmat-two), var(--playmat-one) 20px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -424,36 +426,74 @@ h4.cute-header {
   margin-top: 8px;
 }
 
-.card-buttons button,
-.library-buttons button {
-  padding: 6px 6px;
-  font-size: 0.8rem;
-  border: 2px outset gray;
-  border-radius: 4px;
-  cursor: pointer;
-  color: white;
-  background-color: black;
-  transition: all 0.2s ease;
-  width: 100%;
+
+/* Apply animations when shuffling class is added */
+.library-stack.shuffling .library-card-back:nth-child(1) {
+  animation: shuffle-card-1 1.5s ease-in-out;
 }
 
-.card-buttons button:active,
-.library-buttons button:active {
-  border: 2px inset gray;
-  transform: translateY(1px);
-  background-color: #333;
+.library-stack.shuffling .library-card-back:nth-child(2) {
+  animation: shuffle-card-2 1.5s ease-in-out;
 }
 
-.card-buttons button:hover,
-.library-buttons button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(256, 256, 256, 0.4);
+.library-stack.shuffling .library-card-back:nth-child(3) {
+  animation: shuffle-card-3 1.5s ease-in-out;
 }
 
-#hand-section {
-  overflow-x: visible;
-  padding-left: 30px;
-  padding-top: 10px;
+
+/* Shuffle animation keyframes */
+@keyframes shuffle-card-1 {
+  0% {
+    transform: translateZ(0px) translateY(0px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(-150px) translateY(-50px) translateZ(100px) rotateY(15deg) rotateZ(-10deg);
+  }
+  50% {
+    transform: translateX(150px) translateY(50px) translateZ(50px) rotateY(-15deg) rotateZ(10deg);
+  }
+  75% {
+    transform: translateX(-100px) translateY(0px) translateZ(75px) rotateY(10deg) rotateZ(-5deg);
+  }
+  100% {
+    transform: translateZ(0px) translateY(0px) rotateY(0deg);
+  }
+}
+
+@keyframes shuffle-card-2 {
+  0% {
+    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(120px) translateY(-60px) translateZ(80px) rotateY(-20deg) rotateZ(8deg);
+  }
+  50% {
+    transform: translateX(-130px) translateY(40px) translateZ(60px) rotateY(18deg) rotateZ(-12deg);
+  }
+  75% {
+    transform: translateX(80px) translateY(-20px) translateZ(40px) rotateY(-10deg) rotateZ(5deg);
+  }
+  100% {
+    transform: translateZ(-2px) translateY(5px) translateX(5px) rotateY(0deg);
+  }
+}
+
+@keyframes shuffle-card-3 {
+  0% {
+    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(100px) translateY(70px) translateZ(120px) rotateY(25deg) rotateZ(15deg);
+  }
+  50% {
+    transform: translateX(-140px) translateY(-30px) translateZ(90px) rotateY(-22deg) rotateZ(-8deg);
+  }
+  75% {
+    transform: translateX(60px) translateY(10px) translateZ(30px) rotateY(12deg) rotateZ(6deg);
+  }
+  100% {
+    transform: translateZ(-4px) translateY(10px) translateX(10px) rotateY(0deg);
+  }
 }
 
 .hand-cards {
@@ -1121,12 +1161,6 @@ h4.cute-header {
   background-color: #e8f4f8;
   border-radius: 4px;
   font-size: 0.9rem;
-}
-
-/* Game page-specific library stack overrides */
-.library-stack {
-  margin-bottom: 20px;
-  margin-right: 20px;
 }
 
 .library-card-back::before {

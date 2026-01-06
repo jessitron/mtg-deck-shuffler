@@ -33,24 +33,35 @@
   padding: 40px 0;
 }
 
-/* Page-specific positioning for playmat components */
-.playmat .library-stack {
+.section-that-is-horizontally-aligned-with-command-zone {
   grid-column: 2; /* page column 3 */
   grid-row: 3;
-  align-self: start;
-  justify-self: start; /* left-align, overflow right */
-  pointer-events: none;
+  justify-self: end; /* left-align, overflow right */
   margin-top: 7px; /* border of commander card inset */
+  width: 210px;
+}
+
+.library-buttons {
+  display: grid;
+  grid-template-areas: "search";
+  grid-template-columns: 1fr;
+  gap: 8px;
+  max-width: 216px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.library-buttons .search-button {
+  grid-area: search;
 }
 
 .playmat .cool-command-zone-surround {
-  grid-column: 5; /* page column 5 */
+  grid-column: 4; /* page column 5 */
   grid-row: 2 / 4; 
   display: grid;
   grid-template-rows: subgrid;
   justify-self: start; /* left-align, overflow right */
   align-self: start;
-  background-color: var(--playmat-one);
 }
 
 .playmat .cool-command-zone-surround .game-title {
