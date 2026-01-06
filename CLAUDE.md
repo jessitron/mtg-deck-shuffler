@@ -69,7 +69,6 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 Verify changes with:
 - `npm run build`
 - `npm run test`
-- `npm run test:snapshot` (HTML snapshots - agent runs only if no HTML changes intended; user reviews/approves HTML changes)
 - `./run` - Verify app starts and loads default deck
 
 ## Environment & Persistence
