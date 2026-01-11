@@ -16,12 +16,12 @@
 .playmat {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: calc(100vw / 9) auto auto auto auto;
+  grid-template-rows: 50px auto auto auto;
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
   border-radius: 20px;
-  margin: 50px auto 0;
+  margin: 50px auto 50px auto;
   outline: 10px solid black;
   min-height: 500px;
   padding: 40px 0;
@@ -55,8 +55,7 @@
   grid-row: 2 / 4;
   display: grid;
   grid-template-rows: subgrid;
-  justify-self: start; /* left-align, overflow right */
-  align-self: start;
+  justify-self: center;
 }
 
 .playmat .cool-command-zone-surround .game-title {
@@ -66,7 +65,7 @@
 
 .playmat .cool-command-zone-surround .multiple-cards {
   grid-row: 2;
-  height: calc(278px + (7px * 2)); /* card height + border */
+
 }
 
 .playmat .commander-placeholder {
@@ -98,8 +97,12 @@
   grid-column: 6;
   grid-row: 3;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
+}
+
+.begin-button {
+  font-size: clamp(1.2rem, 3vw, 2rem);
 }
 
 

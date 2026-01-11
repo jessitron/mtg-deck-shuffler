@@ -118,6 +118,7 @@
   border-radius: 2px;
   border-style: inset;
   background-color: var(--light-pink);
+  height: calc(278px + (7px * 2)); /* card height + border */
 }
 
 .game-name {
