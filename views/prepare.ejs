@@ -26,15 +26,15 @@
             </div>
           </div>
           <%- renderCommandZone() %>
-        </div>
 
-      <section class="deck-actions">
-        <form method="post" action="/start-game" class="inline-form">
-          <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
-          <input type="hidden" name="expected-version" value="<%= prep.version %>" />
-          <button type="submit" class="button-base begin-button">Shuffle Up</button>
-        </form>
-      </section>
+          <div class="shuffle-up-section">
+            <form method="post" action="/start-game" class="inline-form">
+              <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
+              <input type="hidden" name="expected-version" value="<%= prep.version %>" />
+              <button type="submit" class="button-base begin-button">Shuffle Up</button>
+            </form>
+          </div>
+        </div>
     </main>
 
     <div id="modal-container"></div>
