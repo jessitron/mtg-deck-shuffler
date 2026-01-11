@@ -88,8 +88,6 @@
   border: 5px outset black;
   border-radius: 2px;
   padding: 10px;
-  min-height: 400px;
-  width: 400px;
     background: linear-gradient(
     45deg,
     #000000 0%,
@@ -99,10 +97,6 @@
     #333333 80%,
     #000000 100%
   );
-}
-
-.cool-command-zone-surround.two-commanders {
-  width: 600px;
 }
 
 .cool-command-zone-surround .game-title {
@@ -119,7 +113,6 @@
   justify-content: flex-end;
   align-items: flex-start;
   width: fit-content;
-  gap: 10px;
   border-color: black;
   border-width: 7px;
   border-radius: 2px;
