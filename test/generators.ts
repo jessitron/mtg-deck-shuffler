@@ -277,7 +277,7 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
   }));
 
   return {
-    version: 6 as const, // PERSISTED_GAME_STATE_VERSION
+    version: 7 as const, // PERSISTED_GAME_STATE_VERSION
     gameId,
     status,
     prepId,
@@ -288,5 +288,6 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
     totalCards: deck.totalCards,
     gameCards,
     events: [],
+    sleeveConfig: undefined,
   };
 };

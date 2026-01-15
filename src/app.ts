@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
 import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatSleeveCustomizationModalHtml } from "./view/play-game/sleeve-modal.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -15,6 +16,7 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep } from "./port-persist-prep/types.js";
+import { SleeveConfig } from "./types/SleeveConfig.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl } from "./types.js";
 
@@ -326,7 +328,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       // Create new game from prep
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, prep.sleeveConfig);
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -427,7 +429,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       // Create new game from the same prep
       const newGameId = persistStatePort.newGameId();
-      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck);
+      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, prep.sleeveConfig);
       newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
 
@@ -697,6 +699,80 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error loading prep library modal:", error);
       res.status(500).send(`<div>Error loading library</div>`);
+    }
+  });
+
+  // Returns modal fragment - sleeve customization modal for prep page
+  app.get("/customize-sleeve-modal/:prepId", async (req, res) => {
+    const prepId = parseInt(req.params.prepId);
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(`<div>Prep ${prepId} not found</div>`);
+        return;
+      }
+
+      const modalHtml = formatSleeveCustomizationModalHtml(prep);
+      res.send(modalHtml);
+    } catch (error) {
+      console.error("Error loading sleeve customization modal:", error);
+      res.status(500).send(`<div>Error loading sleeve customization</div>`);
+    }
+  });
+
+  // POST /update-sleeve-config/:prepId - Updates sleeve configuration
+  app.post("/update-sleeve-config/:prepId", async (req, res) => {
+    const prepId = parseInt(req.params.prepId);
+    const { type, color, "expected-version": expectedVersionStr } = req.body;
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(`<div>Prep ${prepId} not found</div>`);
+        return;
+      }
+
+      // Optimistic concurrency control
+      if (expectedVersionStr !== undefined) {
+        const expectedVersion = parseInt(expectedVersionStr, 10);
+        if (expectedVersion !== prep.version) {
+          res.status(409).send(`<div>Version mismatch. Please refresh and try again.</div>`);
+          return;
+        }
+      }
+
+      // Update sleeve config
+      const newSleeveConfig: SleeveConfig =
+        type === "solid-color" ? { type: "solid-color", color } : { type: "default" };
+
+      const updatedPrep: PersistedGamePrep = {
+        ...prep,
+        sleeveConfig: newSleeveConfig,
+        version: prep.version + 1,
+        updatedAt: new Date(),
+      };
+
+      await persistPrepPort.savePrep(updatedPrep);
+
+      // Re-render library section with new sleeve config
+      const helpers = createPrepViewHelpers(updatedPrep);
+      const librarySectionHtml = `
+      <div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
+        ${helpers.renderLibraryStackWithCustomize()}
+        <div class="library-buttons">
+          <button class="search-button"
+                  hx-get="/prep-library-modal/${updatedPrep.prepId}"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML">Search</button>
+        </div>
+      </div>
+    `;
+
+      res.send(librarySectionHtml);
+    } catch (error) {
+      console.error("Error updating sleeve config:", error);
+      res.status(500).send(`<div>Error updating sleeve configuration</div>`);
     }
   });
 
