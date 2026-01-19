@@ -1,0 +1,13 @@
+When we play MTG in real life, we put our cards in sleeves. This protects them, but more fun, it changes the appearance of the card backs. This app needs to let them choose the appearance of the card back.
+
+On the /prepare page, the player can click a "customize" button that appears over the library card back.
+That triggers a modal, where they can choose a color or an art card for the card back appearance.
+When they choose one, the appearance of the card back changes. This configuration is saved on the Prep record.
+Then when the Game is created, it's copied there. The appearance of the card back changes on the /game page.
+
+To start with, they can choose from a small selection of solid colors.
+Implement the entire flow with only that option available.
+
+After that works completely, add a selection of an arbitrary color. Find a color picker component somewhere open source.
+After that works completely, add a small selection of art cards.
+After that works, let them paste in a scryfall link of any card.
