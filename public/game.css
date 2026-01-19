@@ -835,7 +835,7 @@ h4.cute-header {
 .card-modal-info {
   color: white;
   text-align: center;
-  min-width: 200px;
+  width: 400px;
 }
 
 .card-modal-title {
@@ -995,7 +995,7 @@ h4.cute-header {
 }
 
 /* Responsive adjustments for smaller screens */
-@media (max-width: 768) {
+@media (max-width: 768px) {
   .card-modal-content {
     flex-direction: column;
     gap: 20px;
