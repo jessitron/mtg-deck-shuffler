@@ -64,19 +64,6 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
         </div>`;
   }
 
-  function renderLibraryStackWithCustomize(): string {
-    const libraryStackHtml = formatLibraryStack({}, libraryCards.length, prep.sleeveConfig);
-    return `<div class="library-stack-with-customize">
-      ${libraryStackHtml}
-      <button class="customize-sleeve-button"
-              hx-get="/customize-sleeve-modal/${prep.prepId}"
-              hx-target="#modal-container"
-              hx-swap="innerHTML">
-        Customize
-      </button>
-    </div>`;
-  }
-
   return {
     commanders,
     libraryCards,
@@ -85,7 +72,6 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     renderLibraryList: () =>
       formatPrepLibraryCardList(libraryCards, prep.prepId),
     renderLibraryStack: () =>
-      formatLibraryStack({}, libraryCards.length, prep.sleeveConfig),
-    renderLibraryStackWithCustomize,
+      formatLibraryStack({}, libraryCards.length),
   };
 }

@@ -49,21 +49,6 @@
   transition: opacity 0.3s ease;
 }
 
-/* Colored sleeve styles */
-.library-card-back.colored-sleeve {
-  width: 200px;
-  height: 278px;
-  border-radius: 12px;
-  display: block;
-}
-
-.library-card-back.colored-sleeve::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-}
 
 /* card buttons are only on the game page, library buttons are on game and prepare */
 .card-buttons button,

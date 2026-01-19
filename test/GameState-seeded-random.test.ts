@@ -33,11 +33,11 @@ describe("GameState seeded random shuffling", () => {
   test("shuffling with same seed produces identical results", () => {
     const seed = 42;
 
-    const gameState1 = GameState.newGame(1, 1, 1, testDeck, undefined, seed);
+    const gameState1 = GameState.newGame(1, 1, 1, testDeck, seed);
     gameState1.startGame();
     const library1 = gameState1.listLibrary().map(card => card.card.name);
 
-    const gameState2 = GameState.newGame(2, 1, 1, testDeck, undefined, seed);
+    const gameState2 = GameState.newGame(2, 1, 1, testDeck, seed);
     gameState2.startGame();
     const library2 = gameState2.listLibrary().map(card => card.card.name);
 
@@ -45,11 +45,11 @@ describe("GameState seeded random shuffling", () => {
   });
 
   test("shuffling with different seeds produces different results", () => {
-    const gameState1 = GameState.newGame(1, 1, 1, testDeck, undefined, 42);
+    const gameState1 = GameState.newGame(1, 1, 1, testDeck, 42);
     gameState1.startGame();
     const library1 = gameState1.listLibrary().map(card => card.card.name);
 
-    const gameState2 = GameState.newGame(2, 1, 1, testDeck, undefined, 123);
+    const gameState2 = GameState.newGame(2, 1, 1, testDeck, 123);
     gameState2.startGame();
     const library2 = gameState2.listLibrary().map(card => card.card.name);
 

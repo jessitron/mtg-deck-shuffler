@@ -14,7 +14,6 @@ import {
   printLocation,
 } from "./port-persist-state/types.js";
 import { PrepId } from "./port-persist-prep/types.js";
-import { SleeveConfig } from "./types/SleeveConfig.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";
 
@@ -74,9 +73,8 @@ export class GameState {
   private readonly gameCards: GameCard[];
   private readonly eventLog: GameEventLog;
   private readonly randomSeed?: number;
-  private readonly sleeveConfig?: SleeveConfig;
 
-  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, sleeveConfig?: SleeveConfig, randomSeed?: number) {
+  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -110,7 +108,6 @@ export class GameState {
       deckProvenance: deck.provenance,
       cards: gameCards,
       events: [],
-      sleeveConfig,
       randomSeed,
     });
   }
@@ -125,7 +122,6 @@ export class GameState {
     deckProvenance: DeckProvenance;
     cards: GameCard[];
     events: GameEvent[];
-    sleeveConfig?: SleeveConfig;
     randomSeed?: number;
   }) {
     this.gameId = params.gameId;
@@ -138,7 +134,6 @@ export class GameState {
     this.totalCards = params.cards.length;
     this.gameCards = params.cards;
     this.eventLog = GameEventLog.fromPersisted(params.events);
-    this.sleeveConfig = params.sleeveConfig;
     this.randomSeed = params.randomSeed;
   }
 
@@ -211,10 +206,6 @@ export class GameState {
    */
   public getStateVersion(): number {
     return this.eventLog.getEvents().length;
-  }
-
-  public getSleeveConfig(): SleeveConfig | undefined {
-    return this.sleeveConfig;
   }
 
   private validateInvariants(): void {
@@ -722,7 +713,6 @@ export class GameState {
       totalCards: this.totalCards,
       gameCards: [...this.gameCards],
       events: this.eventLog.getEvents(),
-      sleeveConfig: this.sleeveConfig,
     };
   }
 }

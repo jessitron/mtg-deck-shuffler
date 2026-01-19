@@ -1,6 +1,5 @@
 import { getCardImageUrl } from "../../types.js";
 import { GameCard, GameState, WhatHappened } from "../../GameState.js";
-import { SleeveConfig } from "../../types/SleeveConfig.js";
 
 export const CARD_BACK = "/images/mtg-card-back.jpg";
 
@@ -137,33 +136,14 @@ export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardInde
   return "";
 }
 
-export function formatLibraryStack(
-  whatHappened: WhatHappened = {},
-  cardCount: number,
-  sleeveConfig?: SleeveConfig
-): string {
+export function formatLibraryStack(whatHappened: WhatHappened = {}, cardCount: number): string {
   const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
   const emptyClass = cardCount === 0 ? " library-stack-empty" : "";
 
-  const renderCardBack = (cardIndex: number) => {
-    if (sleeveConfig?.type === "solid-color" && sleeveConfig.color) {
-      return `<div class="mtg-card-image library-card-back library-card-${cardIndex} colored-sleeve"
-                   style="background-color: ${sleeveConfig.color};"
-                   data-testid="card-back"
-                   ${cardIndex === 1 ? `title="${cardCount} cards"` : ""}></div>`;
-    } else {
-      return `<img src="${CARD_BACK}"
-                   alt="Library"
-                   class="mtg-card-image library-card-back library-card-${cardIndex}"
-                   data-testid="card-back"
-                   ${cardIndex === 1 ? `title="${cardCount} cards"` : ""}/>`;
-    }
-  };
-
   return `<div class="library-stack${shufflingClass}${emptyClass}" data-testid="library-stack">
-          ${renderCardBack(1)}
-          ${renderCardBack(2)}
-          ${renderCardBack(3)}
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="${cardCount} cards"/>
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
+          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
         </div>`;
 }
 
