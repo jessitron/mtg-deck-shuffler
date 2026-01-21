@@ -89,20 +89,25 @@ Complete reference of all pages and modals in the MTG Deck Shuffler application.
 
 ## Modal Nesting (Modal → Modal Links)
 
-Modals can open other modals, creating navigation chains:
+Modals can open other modals, creating navigation chains. **Crucially, when opening a card modal from within a library/table modal, BOTH modals remain open simultaneously** (see Modal Container Architecture section).
 
 ### 1. Game → Library Modal → Card Modal
-- Click "Search" button → `GET /library-modal/:gameId`
-- Click card name in list → `GET /card-modal/:gameId/:cardIndex`
+- Click "Search" button → `GET /library-modal/:gameId` (populates `#modal-container`)
+- Click card name in list → `GET /card-modal/:gameId/:cardIndex` (populates `#card-modal-container`)
+- **Result**: Library modal stays open in background, card modal overlays it
 - Can navigate with ◀/▶ buttons to next/prev card in library
+- Closing card modal returns to library modal view
 
 ### 2. Game → Table Modal → Card Modal
-- Click "N Cards on table" button → `GET /table-modal/:gameId`
-- Click card name in list → `GET /card-modal/:gameId/:cardIndex`
+- Click "N Cards on table" button → `GET /table-modal/:gameId` (populates `#modal-container`)
+- Click card name in list → `GET /card-modal/:gameId/:cardIndex` (populates `#card-modal-container`)
+- **Result**: Table modal stays open in background, card modal overlays it
+- Closing card modal returns to table modal view
 
 ### 3. Game → Card Modal → Card Modal (Navigation)
-- Click card anywhere → `GET /card-modal/:gameId/:cardIndex`
-- Click ◀ or ▶ buttons → `GET /card-modal/:gameId/:nextOrPrevCardIndex`
+- Click card anywhere (hand, revealed, etc.) → `GET /card-modal/:gameId/:cardIndex` (populates `#card-modal-container`)
+- **Result**: Only card modal is open, no background modal
+- Click ◀ or ▶ buttons → `GET /card-modal/:gameId/:nextOrPrevCardIndex` (replaces content in `#card-modal-container`)
 - Flip button on 2-faced cards → Same modal updated with back face
 
 ### 4. Prep → Library Modal → Card Modal
@@ -167,6 +172,37 @@ All modals close on:
 - Click outside modal overlay
 - Press Escape key
 - After card action (Play, Put on Top, etc.) - modals auto-close and update game state
+
+---
+
+## Modal Container Architecture
+
+The application uses **two separate modal containers** to support nested modals:
+
+### 1. `#modal-container`
+- Used for: Library Modal, Table Modal, History Modal, Debug Modal
+- Can have at most one modal open at a time
+- Acts as "background" layer when card modal is also open
+
+### 2. `#card-modal-container`
+- Used for: Card Detail Modals only
+- Can be open independently OR simultaneously with a modal in `#modal-container`
+- Acts as "foreground" layer, overlaying any modal in `#modal-container`
+
+### Possible Modal States
+
+| State | `#modal-container` | `#card-modal-container` | Example URL |
+|---|---|---|---|
+| No modals | empty | empty | `/game/123` |
+| Card only | empty | Card Modal | `/game/123?openCard=5` |
+| Library only | Library Modal | empty | `/game/123?openLibrary=true` |
+| **Library + Card** | **Library Modal** | **Card Modal** | `/game/123?openLibrary=true&openCard=5` |
+| Table only | Table Modal | empty | `/game/123?openTable=true` |
+| **Table + Card** | **Table Modal** | **Card Modal** | `/game/123?openTable=true&openCard=5` |
+| History only | History Modal | empty | `/game/123?openHistory=true` |
+| Debug only | Debug Modal | empty | `/game/123?openDebug=true` |
+
+**Important**: When a card modal is opened from within the library/table modal, BOTH containers have content. The user can close the card modal and still see the library/table modal behind it. This is different from opening a card modal directly (e.g., clicking a card in hand), where only the card modal is open.
 
 ---
 
