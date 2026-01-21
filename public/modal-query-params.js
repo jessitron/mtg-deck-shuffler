@@ -45,20 +45,22 @@ function autoOpenModalsFromQueryParams() {
 
   // Determine which modal(s) to open and in what order
   // Card modal overlays on other modals, so open it last
+  // For modals with buttons, click the button to avoid duplicating HTMX logic
 
   if (isGamePage) {
-    // Game page modals
+    // Game page modals - click the corresponding button
     if (openLibrary === 'true') {
-      htmx.ajax('GET', `/library-modal/${id}`, { target: '#modal-container' });
+      document.querySelector('.search-button')?.click();
     } else if (openTable === 'true') {
-      htmx.ajax('GET', `/table-modal/${id}`, { target: '#modal-container' });
+      document.querySelector('.table-cards-button')?.click();
     } else if (openHistory === 'true') {
-      htmx.ajax('GET', `/history-modal/${id}`, { target: '#modal-container' });
+      document.querySelector('.history-button')?.click();
     } else if (openDebug === 'true') {
-      htmx.ajax('GET', `/debug-state/${id}`, { target: '#modal-container' });
+      document.querySelector('.debug-button')?.click();
     }
 
     // Open card modal (possibly overlaying another modal)
+    // Card modals don't have a simple button, so use htmx.ajax directly
     if (openCard !== null) {
       // Use a small delay if another modal is being opened first
       const delay = (openLibrary === 'true' || openTable === 'true') ? 300 : 0;
@@ -71,12 +73,13 @@ function autoOpenModalsFromQueryParams() {
       }, delay);
     }
   } else if (isPrepPage) {
-    // Prep page modals
+    // Prep page modals - click the search button
     if (openLibrary === 'true') {
-      htmx.ajax('GET', `/prep-library-modal/${id}`, { target: '#modal-container' });
+      document.querySelector('.search-button')?.click();
     }
 
     // Open card modal (possibly overlaying library modal)
+    // Card modals don't have a simple button, so use htmx.ajax directly
     if (openCard !== null) {
       const delay = (openLibrary === 'true') ? 300 : 0;
       setTimeout(() => {
