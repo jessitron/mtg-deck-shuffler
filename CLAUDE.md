@@ -27,6 +27,20 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 - **Testing**: User hates mocks. Use only fakes. Use generators in `test/generators.ts` for Deck objects. For PersistedGameState, instantiate GameState with generated Deck and call methods.
 - **Cleanup**: Look for newly-unused code to delete after each change.
 
+### Task Implementation Process
+
+For each task, follow this workflow:
+1. **Research**: Look at the task and do any research needed
+2. **Clarify**: Ask questions one at a time if needed
+3. **Verify First**: Decide how to verify functionality and write the test before implementing:
+   - **User-visible changes**: Playwright test (browser verification)
+   - **Internal logic**: Unit test
+   - Run the test and confirm it fails
+4. **Implement**: Build the functionality
+5. **Verify Again**: Run the test and see it pass (or fix the implementation)
+6. **Refactor**: Consider refactoring for clarity
+7. **Celebrate**: Print a trumpet in ASCII art
+
 ## UI Style
 
 - Square corners except on physical round elements (cards, playmats)
