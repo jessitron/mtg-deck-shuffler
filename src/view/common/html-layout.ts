@@ -49,6 +49,7 @@ ${additionalStylesheetsHtml}
       ];
     </script>
     <script src="/game.js"></script>
+    <script src="/modal-query-params.js"></script>
   </head>`;
 }
 
