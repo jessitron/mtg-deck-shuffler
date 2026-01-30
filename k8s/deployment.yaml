@@ -18,7 +18,7 @@ spec:
         - name: mtg-deck-shuffler
           image: <your-ecr-repo>/mtg-deck-shuffler:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 3333
           env:
             - name: OTEL_EXPORTER_OTLP_HEADERS
               value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
@@ -42,13 +42,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 3333
             initialDelaySeconds: 30
             periodSeconds: 60
           readinessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 3333
             initialDelaySeconds: 5
             periodSeconds: 5
       volumes:

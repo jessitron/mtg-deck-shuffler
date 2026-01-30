@@ -39,7 +39,7 @@ const persistStatePort: PersistStatePort = createPersistStateAdapter();
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter();
 
 const app = createApp(deckRetriever, persistStatePort, persistPrepPort);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3333;
 
 
 app.listen(PORT, () => {

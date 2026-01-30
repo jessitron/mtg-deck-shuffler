@@ -23,5 +23,5 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/decks ./decks
 COPY --from=builder /app/run-in-docker ./run-in-docker
 
-EXPOSE 3000
+EXPOSE 3333
 CMD ["sh", "-c", "./run-in-docker"]

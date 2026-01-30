@@ -18,7 +18,7 @@ Dead-simple deployment to push the MTG deck shuffler app to your existing EKS cl
 - SQLite database for game state persistence (creates `data.db` file)
 - Static files served from `public/` directory
 - OpenTelemetry configured for Honeycomb observability
-- Runs on port 3000 (configurable via `PORT` env var)
+- Runs on port 3333 (configurable via `PORT` env var)
 
 ## Deployment Strategy
 

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mtg-deck-shuffler
 data:
-  PORT: "3000"
+  PORT: "3333"
   OTEL_SERVICE_NAME: "mtg-deck-shuffler"
   OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"

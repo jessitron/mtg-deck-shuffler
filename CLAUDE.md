@@ -96,7 +96,7 @@ Requires `.env` for OpenTelemetry config. SQLite persistence by default (`data.d
 
 ## Port Configuration
 
-Default port 3000 (`PORT` env var). Use `PORT=3001 ./run` to avoid conflict with user's testing server.
+Default port 3333 (`PORT` env var). Use `PORT=3334 ./run` to avoid conflict with user's testing server.
 
 ## Observability
 
