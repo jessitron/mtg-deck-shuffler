@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3";
-import { PersistStatePort, PersistedGameState, GameId } from "./types.js";
+import { PersistStatePort, PersistedGameState, GameId, GameHistorySummary } from "./types.js";
 
 export class SqlitePersistStateAdapter implements PersistStatePort {
   private db: sqlite3.Database;
@@ -104,6 +104,58 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
 
   newGameId(): GameId {
     return this.nextGameId++;
+  }
+
+  async getAllGames(): Promise<GameHistorySummary[]> {
+    await this.initializationPromise;
+
+    return new Promise((resolve, reject) => {
+      const selectSQL = "SELECT id, state, created_at, updated_at FROM game_states ORDER BY created_at DESC";
+
+      this.db.all(
+        selectSQL,
+        [],
+        (err, rows: Array<{ id: number; state: string; created_at: string; updated_at: string }>) => {
+          if (err) {
+            reject(new Error(`Failed to retrieve game history: ${err.message}`));
+          } else {
+            const summaries: GameHistorySummary[] = rows.map(row => {
+              try {
+                const gameState = JSON.parse(row.state) as PersistedGameState;
+
+                // Extract commander names
+                const commanders = gameState.gameCards
+                  .filter(gc => gc.isCommander)
+                  .map(gc => gc.card.name);
+
+                // Count actions (events minus "start game" event)
+                const actionCount = gameState.events.filter(e => e.eventName !== "start game").length;
+
+                return {
+                  gameId: row.id,
+                  deckName: gameState.deckName,
+                  commanderNames: commanders,
+                  actionCount,
+                  createdAt: new Date(row.created_at),
+                  updatedAt: new Date(row.updated_at),
+                };
+              } catch (parseErr) {
+                console.error(`Failed to parse game state for game ${row.id}: ${parseErr}`);
+                return {
+                  gameId: row.id,
+                  deckName: "Unknown",
+                  commanderNames: [],
+                  actionCount: 0,
+                  createdAt: new Date(row.created_at),
+                  updatedAt: new Date(row.updated_at),
+                };
+              }
+            });
+            resolve(summaries);
+          }
+        }
+      );
+    });
   }
 
   async waitForInitialization(): Promise<void> {

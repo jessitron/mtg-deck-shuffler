@@ -157,6 +157,26 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     res.render("about");
   });
 
+  // Returns whole page - game history page
+  app.get("/history", async (req, res) => {
+    try {
+      const allGames = await persistStatePort.getAllGames();
+      // Filter out games with zero actions
+      const gamesWithActions = allGames.filter(game => game.actionCount > 0);
+      res.render("history", { games: gamesWithActions });
+    } catch (error) {
+      console.error("Error loading game history:", error);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "📜",
+          title: "Error Loading History",
+          message: "Could not load game history.",
+          details: String(error),
+        })
+      );
+    }
+  });
+
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 

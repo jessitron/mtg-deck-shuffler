@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('partials/head', {
+  pageTitle: 'Game History - MTG Deck Shuffler',
+  additionalFonts: ['Ovo', 'Orbitron'],
+  additionalStyles: ['/docs.css']
+}) %>
+
+<body>
+  <div class="docs-page">
+    <%- include('partials/header', { activePage: '' }) %>
+
+    <div class="docs-container">
+      <main class="docs-content history-content">
+        <h2>Game History</h2>
+
+        <% if (games.length === 0) { %>
+          <p>No games with actions found yet. Start playing to build your history!</p>
+        <% } else { %>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Commander(s)</th>
+                <th>Deck</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% games.forEach(game => { %>
+                <tr data-game-id="<%= game.gameId %>">
+                  <td class="game-date" data-testid="game-date">
+                    <%= game.createdAt.toLocaleDateString() %>
+                    <span class="time"><%= game.createdAt.toLocaleTimeString() %></span>
+                  </td>
+                  <td class="commander-name" data-testid="commander-name">
+                    <% if (game.commanderNames.length > 0) { %>
+                      <%= game.commanderNames.join(', ') %>
+                    <% } else { %>
+                      <em>No commander</em>
+                    <% } %>
+                  </td>
+                  <td class="deck-name">
+                    <%= game.deckName %>
+                  </td>
+                  <td class="action-count" data-testid="action-count">
+                    <%= game.actionCount %>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } %>
+      </main>
+    </div>
+
+    <%- include('partials/footer') %>
+  </div>
+
+  <style>
+    .history-content {
+      max-width: 1000px;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    .history-table th {
+      text-align: left;
+      padding: 1rem;
+      background-color: #f5f5f5;
+      border-bottom: 2px solid var(--dark-pink);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+    }
+
+    .history-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .history-table tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .game-date .time {
+      display: block;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .commander-name {
+      font-weight: 600;
+      color: #8b3d5f;
+    }
+
+    .action-count {
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</body>
+
+</html>

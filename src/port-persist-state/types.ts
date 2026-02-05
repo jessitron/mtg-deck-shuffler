@@ -92,8 +92,18 @@ export interface PersistedGameState {
   events: GameEvent[];
 }
 
+export interface GameHistorySummary {
+  gameId: GameId;
+  deckName: string;
+  commanderNames: string[];
+  actionCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface PersistStatePort {
   save(psg: PersistedGameState): Promise<GameId>;
   retrieve(gameId: GameId): Promise<PersistedGameState | null>;
   newGameId(): GameId;
+  getAllGames(): Promise<GameHistorySummary[]>;
 }
