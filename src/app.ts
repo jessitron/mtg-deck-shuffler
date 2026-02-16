@@ -161,8 +161,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   app.get("/history", async (req, res) => {
     try {
       const allGames = await persistStatePort.getAllGames();
-      // Filter out games with zero actions
-      const gamesWithActions = allGames.filter(game => game.actionCount > 0);
+      // Filter out games with few actions (likely abandoned/accidental)
+      const gamesWithActions = allGames.filter(game => game.actionCount >= 10);
       res.render("history", { games: gamesWithActions });
     } catch (error) {
       console.error("Error loading game history:", error);

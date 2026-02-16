@@ -4,7 +4,7 @@
  * This test verifies the Game History admin screen, proving that:
  *
  * 1. Games with actions are displayed in the history
- * 2. Games with zero actions are skipped
+ * 2. Games with fewer than 10 actions are skipped
  * 3. Commander names are displayed for each game
  * 4. Action counts are displayed correctly
  * 5. Date and time are displayed for each game
@@ -59,7 +59,7 @@ test.describe('Game History Feature', () => {
     // Perform some actions - draw 3 cards
     console.log('Drawing 3 cards to create action history...');
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 10; i++) {
       const libraryButton = page.locator('.library-contents').first();
       await libraryButton.click();
       await page.waitForLoadState('networkidle');
@@ -73,7 +73,7 @@ test.describe('Game History Feature', () => {
       await page.waitForTimeout(500);
     }
 
-    console.log('Drew 3 cards successfully');
+    console.log('Drew 10 cards successfully');
 
     // ========================================
     // STEP 2: Create another game with zero actions
@@ -135,7 +135,7 @@ test.describe('Game History Feature', () => {
     const game1Actions = game1Row.locator('.action-count, [data-testid="action-count"]');
     await expect(game1Actions).toBeVisible();
     const actionText = await game1Actions.textContent();
-    expect(actionText).toContain('3'); // We drew 3 cards
+    expect(parseInt(actionText!.trim())).toBeGreaterThanOrEqual(10); // We drew 10 cards
     console.log(`Game 1 actions: ${actionText}`);
 
     // Verify game 1 shows date/time
@@ -143,7 +143,7 @@ test.describe('Game History Feature', () => {
     await expect(game1Date).toBeVisible();
     console.log('Game 1 date is displayed');
 
-    // Verify game 2 (with zero actions) is NOT displayed
+    // Verify game 2 (with zero actions, below threshold of 10) is NOT displayed
     const game2Row = page.locator(`[data-game-id="${gameId2}"]`);
     await expect(game2Row).not.toBeVisible();
     console.log('Game 2 (with zero actions) is correctly hidden');
@@ -151,7 +151,7 @@ test.describe('Game History Feature', () => {
     console.log('\n========================================');
     console.log('ALL GAME HISTORY FEATURE VERIFICATIONS PASSED!');
     console.log('========================================');
-    console.log(`- Game ${gameId1} with 3+ actions is displayed`);
+    console.log(`- Game ${gameId1} with 10+ actions is displayed`);
     console.log(`- Game ${gameId2} with 0 actions is hidden`);
     console.log('- Commander name is visible');
     console.log('- Action count is visible');
