@@ -244,11 +244,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
     try {
       const deck = await deckRetriever.retrieveDeck(deckRequest);
+      // Sort cards alphabetically for the prep review screen
+      const sortedDeck = {
+        ...deck,
+        cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
+      };
       const prepId = persistPrepPort.newPrepId();
       const prep: PersistedGamePrep = {
         version: 1,
         prepId,
-        deck,
+        deck: sortedDeck,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
