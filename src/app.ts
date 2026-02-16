@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
-import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
+import { createPrepViewHelpers, formatPrepCardModalHtmlFragment } from "./view/common/prep-view-helpers.js";
 import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
@@ -629,59 +629,44 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Create a GameCard-like object for rendering
-      const isCommander = cardIndex < prep.deck.commanders.length;
-      const gameCard = {
-        card: cardDef,
-        isCommander,
-        location: isCommander ? { type: "CommandZone" as const, position: cardIndex } : { type: "Library" as const, position: cardIndex - prep.deck.commanders.length },
-        gameCardIndex: cardIndex,
-        currentFace: "front" as const,
-      };
+      // Determine which zone this card is in and calculate navigation
+      const numCommanders = prep.deck.commanders.length;
+      const isCommander = cardIndex < numCommanders;
 
-      const imageUrl = getCardImageUrl(cardDef.scryfallId, "large", "front");
-      const gathererUrl =
-        cardDef.multiverseid === 0
-          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`
-          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`;
+      let prevCardIndex: number | null = null;
+      let nextCardIndex: number | null = null;
+      let currentPosition: number;
+      let totalCardsInZone: number;
 
-      // Simple modal for prep page - just view card and link to Gatherer
-      const utilityButtons = `<div class="card-modal-utility-buttons">
-        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button class="modal-action-button copy-button"
-                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${cardDef.name}')">Copy</button>
-      </div>`;
+      if (isCommander) {
+        // Navigate within commanders
+        totalCardsInZone = numCommanders;
+        currentPosition = cardIndex + 1;
+        prevCardIndex = cardIndex > 0 ? cardIndex - 1 : null;
+        nextCardIndex = cardIndex < numCommanders - 1 ? cardIndex + 1 : null;
+      } else {
+        // Navigate within library cards
+        const libraryIndex = cardIndex - numCommanders;
+        totalCardsInZone = prep.deck.cards.length;
+        currentPosition = libraryIndex + 1;
+        prevCardIndex = libraryIndex > 0 ? cardIndex - 1 : null;
+        nextCardIndex = libraryIndex < prep.deck.cards.length - 1 ? cardIndex + 1 : null;
+      }
 
-      const actionButtons = `<div class="card-modal-actions">
-        ${utilityButtons}
-      </div>`;
+      // Support flipping two-faced cards via query parameter
+      const faceParam = req.query.face as string | undefined;
+      const currentFace: "front" | "back" = faceParam === "back" ? "back" : "front";
 
-      const bodyContent = `<div class="card-modal-content">
-        <div class="card-modal-image">
-          <img src="${imageUrl}" alt="${cardDef.name}" class="modal-card-image" />
-        </div>
-        <div class="card-modal-info">
-          <h3 class="card-modal-title">${cardDef.name}</h3>
-          ${actionButtons}
-        </div>
-      </div>`;
-
-      const modalHtml = `<div class="card-modal-overlay"
-                   hx-get="/close-card-modal"
-                   hx-target="#card-modal-container"
-                   hx-swap="innerHTML"
-                   hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
-                   tabindex="0">
-        <div class="card-modal-dialog">
-          <button class="card-modal-close"
-                  hx-get="/close-card-modal"
-                  hx-target="#card-modal-container"
-                  hx-swap="innerHTML">&times;</button>
-          <div class="card-modal-body">
-            ${bodyContent}
-          </div>
-        </div>
-      </div>`;
+      const modalHtml = formatPrepCardModalHtmlFragment(
+        cardDef,
+        prepId,
+        cardIndex,
+        currentFace,
+        prevCardIndex,
+        nextCardIndex,
+        currentPosition,
+        totalCardsInZone
+      );
 
       res.send(modalHtml);
     } catch (error) {

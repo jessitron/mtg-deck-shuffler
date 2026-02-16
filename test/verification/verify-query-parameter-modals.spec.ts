@@ -359,4 +359,69 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     console.log('SUCCESS: No modals auto-opened on prep page without query parameters');
   });
+
+  test('prep card modal shows navigation arrows for library cards', async ({ page }) => {
+    console.log('Testing: Prep card modal navigation arrows for library cards...');
+
+    const prepId = await setupPrep(page);
+
+    // Open a library card (card index after commanders, e.g., index 10 should be in library)
+    // Commanders are typically indices 0-1, library starts after
+    await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=10`);
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(1000);
+
+    // Verify card modal is open
+    const cardModal = page.locator('.card-modal-overlay');
+    await expect(cardModal).toBeVisible({ timeout: 5000 });
+
+    // Verify navigation arrows are present (library cards should have prev/next)
+    const prevButton = page.locator('.card-modal-nav-prev');
+    const nextButton = page.locator('.card-modal-nav-next');
+
+    // Card 10 in the library should have both prev and next
+    await expect(prevButton).toBeVisible({ timeout: 5000 });
+    await expect(nextButton).toBeVisible({ timeout: 5000 });
+
+    console.log('SUCCESS: Prep card modal shows navigation arrows for library cards');
+  });
+
+  test('prep card modal navigation works - can click through cards', async ({ page }) => {
+    console.log('Testing: Prep card modal navigation clicking...');
+
+    const prepId = await setupPrep(page);
+
+    // Open a library card in the middle of the deck
+    await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=10`);
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(1000);
+
+    const cardModal = page.locator('.card-modal-overlay');
+    await expect(cardModal).toBeVisible({ timeout: 5000 });
+
+    // Get the initial card title
+    const initialTitle = await page.locator('.card-modal-title').textContent();
+
+    // Click next button (use force: true in case of viewport issues with modal positioning)
+    const nextButton = page.locator('.card-modal-nav-next');
+    await expect(nextButton).toBeVisible({ timeout: 5000 });
+    await nextButton.click({ force: true });
+    await page.waitForTimeout(500);
+
+    // Verify we're on a different card
+    const nextTitle = await page.locator('.card-modal-title').textContent();
+    expect(nextTitle).not.toBe(initialTitle);
+
+    // Click prev button to go back
+    const prevButton = page.locator('.card-modal-nav-prev');
+    await expect(prevButton).toBeVisible({ timeout: 5000 });
+    await prevButton.click({ force: true });
+    await page.waitForTimeout(500);
+
+    // Verify we're back on the original card
+    const backTitle = await page.locator('.card-modal-title').textContent();
+    expect(backTitle).toBe(initialTitle);
+
+    console.log('SUCCESS: Prep card modal navigation clicking works');
+  });
 });

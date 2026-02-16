@@ -1,16 +1,20 @@
 # Things to change
 
+## Structural
+
 - migrate the deck review and active game pages to use ejs templates mtg-deck-shuffler-057
   - make the head.ejs take a list of extra .js, so we don't load game.js on the homepage for instance
 
-## Spectator mode mtg-deck-shuffler-qe1
-
-It would be cool if Charlotte could see our hands without worrying about messing up our game state.
+## Features
 
 ## Add card sleeves mtg-deck-shuffler-19r
 
 - on the deck preview page, choose inner and outer sleeve colors
 - inner: mtg-deck-shuffler-10u
+
+### Spectator mode mtg-deck-shuffler-qe1
+
+It would be cool if Charlotte could see our hands without worrying about messing up our game state.
 
 ## Bugs to fix
 
