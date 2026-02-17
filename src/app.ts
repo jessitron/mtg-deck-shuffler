@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { createPrepViewHelpers, formatPrepCardModalHtmlFragment } from "./view/common/prep-view-helpers.js";
-import { formatCardModalHtmlFragment, formatLibraryModalHtml, formatLossModalHtmlFragment, formatModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { formatCardModalHtmlFragment, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -503,8 +503,22 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const game = GameState.fromPersistedGameState(persistedGame);
-      const modalHtml = formatLibraryModalHtml(game);
-      res.send(modalHtml);
+      const expectedVersion = game.getStateVersion();
+      const libraryCards = game.listLibrary();
+
+      // Build card modal URL template with expected version
+      const cardModalUrlTemplate = `/card-modal/${gameId}/{cardIndex}?expected-version=${expectedVersion}`;
+
+      // Map to simple card objects for the template
+      const cards = libraryCards.map(gc => ({
+        name: gc.card.name,
+        gameCardIndex: gc.gameCardIndex
+      }));
+
+      res.render("partials/library-modal", {
+        cards,
+        cardModalUrlTemplate
+      });
     } catch (error) {
       console.error("Error loading library modal:", error);
       res.status(500).send(`<div>Error loading library</div>`);
@@ -692,18 +706,21 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       // Create library cards list with prep-specific modal links
-      const { libraryCards, renderLibraryList } = createPrepViewHelpers(prep);
-      const libraryCardList = renderLibraryList();
+      const { libraryCards } = createPrepViewHelpers(prep);
 
-      const bodyContent = `<p class="modal-subtitle">
-          ${libraryCards.length} cards
-        </p>
-        <ul class="library-search-list">
-          ${libraryCardList}
-        </ul>`;
+      // Build card modal URL template (no expected version for prep page)
+      const cardModalUrlTemplate = `/prep-card-modal/${prepId}/{cardIndex}`;
 
-      const modalHtml = formatModalHtmlFragment("Library Contents", bodyContent);
-      res.send(modalHtml);
+      // Map to simple card objects for the template
+      const cards = libraryCards.map(gc => ({
+        name: gc.card.name,
+        gameCardIndex: gc.gameCardIndex
+      }));
+
+      res.render("partials/library-modal", {
+        cards,
+        cardModalUrlTemplate
+      });
     } catch (error) {
       console.error("Error loading prep library modal:", error);
       res.status(500).send(`<div>Error loading library</div>`);

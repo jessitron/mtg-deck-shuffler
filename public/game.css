@@ -678,92 +678,15 @@ h4.cute-header {
   background-color: #5a6268;
 }
 
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+/* Modal styles moved to playmat.css (shared between game and prepare) */
 
-.modal-dialog {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
-  color: #333;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #666;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.modal-close:hover {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.modal-body {
-  padding: 20px 24px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.modal-subtitle {
-  color: #666;
-  font-size: 0.9rem;
-}
-/* Card modal styles moved to playmat.css (shared between game and prepare) */
-
-.library-search-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  columns: auto;
-  column-width: 300px;
-}
-
+/* Table modal specific styles */
 .table-card-item {
   display: flex;
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
   gap: 16px;
-}
-
-.library-card-item:last-child {
-  border-bottom: none;
 }
 
 .card-position {
@@ -775,16 +698,6 @@ h4.cute-header {
 
 .card-info {
   flex: 1;
-}
-
-.card-name-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.card-name-link:hover {
-  text-decoration: underline;
 }
 
 .card-actions {

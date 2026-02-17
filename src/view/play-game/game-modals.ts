@@ -1,5 +1,5 @@
 import { GameState, GameCard } from "../../GameState.js";
-import { formatCardNameAsModalLink, CardAction, formatLibraryCardList } from "../common/shared-components.js";
+import { formatCardNameAsModalLink, CardAction } from "../common/shared-components.js";
 import { getCardImageUrl } from "../../types.js";
 import { GameEvent } from "../../GameEvents.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
@@ -54,20 +54,6 @@ export function formatTableModalHtmlFragment(game: GameState): string {
         </ul>`;
 
   return formatModalHtmlFragment("Cards on Table", bodyContent);
-}
-
-export function formatLibraryModalHtml(game: GameState): string {
-  const libraryCards = game.listLibrary();
-  const libraryCardList = formatLibraryCardList(game.listLibrary(), game.gameId, game.getStateVersion());
-
-  const bodyContent = `<p class="modal-subtitle">
-          ${libraryCards.length} cards
-        </p>
-        <ul class="library-search-list">
-          ${libraryCardList}
-        </ul>`;
-
-  return formatModalHtmlFragment("Library Contents", bodyContent);
 }
 
 // Helper function to create modal action button with auto-close

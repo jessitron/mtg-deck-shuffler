@@ -92,16 +92,6 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number, expe
           </div>`;
 }
 
-export function formatLibraryCardList(libraryCards: readonly GameCard[], gameId: number, expectedVersion?: number): string {
-  return libraryCards
-    .map((gameCard: any) => {
-      return `<li class="library-card-item">
-            ${formatCardNameAsModalLink(gameCard.card.name, gameId, gameCard.gameCardIndex, expectedVersion)}
-        </li>`;
-    })
-    .join("");
-}
-
 // Function for displaying commanders when we have GameCard objects (in active game)
 export function formatCommandZoneHtmlFragment(game: GameState): string {
   const title = `
