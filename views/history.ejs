@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               <% games.forEach(game => { %>
-                <tr data-game-id="<%= game.gameId %>">
+                <tr data-game-id="<%= game.gameId %>" class="clickable-row" onclick="window.location.href='/game/<%= game.gameId %>?openHistory=true'">
                   <td class="game-date" data-testid="game-date">
                     <%= game.createdAt.toLocaleDateString() %>
                     <span class="time"><%= game.createdAt.toLocaleTimeString() %></span>
@@ -83,8 +83,13 @@
       border-bottom: 1px solid #ddd;
     }
 
-    .history-table tr:hover {
-      background-color: #f9f9f9;
+    .history-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .history-table tbody tr:hover {
+      background-color: #f0f0f0;
     }
 
     .game-date .time {
