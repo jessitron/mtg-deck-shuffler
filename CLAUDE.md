@@ -65,7 +65,7 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 - `npm run build` - Compile TypeScript
 - `npm run clean` - Remove `dist/`
 - `npm start` - Build and run
-- `./run` - Run with `.env` (preferred)
+- `PORT=3344 ./run` - Run with `.env` (preferred)
 - `npm run precons:fetch-mtgjson -- --convert` - Download MTGJSON Commander Decks
 - `npm run deck:download -- <deckId>` - Download Archidekt deck
 
@@ -75,7 +75,7 @@ Verify changes with:
 
 - `npm run build`
 - `npm run test`
-- `./run` - Verify app starts and loads default deck
+- `PORT=3344 ./run` - Verify app starts, click through to what you changed
 
 ## Environment & Persistence
 
@@ -96,7 +96,7 @@ Requires `.env` for OpenTelemetry config. SQLite persistence by default (`data.d
 
 ## Port Configuration
 
-Default port 3333 (`PORT` env var). Use `PORT=3334 ./run` to avoid conflict with user's testing server.
+Use `PORT=3344 ./run` to avoid conflict with user's testing server on the default port.
 
 ## Observability
 

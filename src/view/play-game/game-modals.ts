@@ -1,6 +1,5 @@
 import { GameState, GameCard } from "../../GameState.js";
 import { formatCardNameAsModalLink, CardAction } from "../common/shared-components.js";
-import { getCardImageUrl } from "../../types.js";
 import { GameEvent } from "../../GameEvents.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 
@@ -176,7 +175,7 @@ function formatModalCardActionsForTable(gameId: number, gameCard: GameCard, expe
 }
 
 // Get location-specific actions based on card location
-function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expectedVersion: number): string {
+export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expectedVersion: number): string {
   switch (gameCard.location.type) {
     case "Hand":
       return formatModalCardActionsForHand(gameId, gameCard, expectedVersion);
@@ -193,107 +192,7 @@ function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expec
   }
 }
 
-export function formatCardModalHtmlFragment(
-  gameCard: GameCard,
-  gameId: number,
-  expectedVersion: number,
-  prevCardIndex: number | null,
-  nextCardIndex: number | null,
-  currentPosition: number,
-  totalCardsInZone: number
-): string {
-  const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
-  const gathererUrl =
-    gameCard.card.multiverseid === 0
-      ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
-      : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
 
-  // Utility buttons (Gatherer, Copy, Flip)
-  let utilityButtons = `<div class="card-modal-utility-buttons">
-    <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-    <button class="modal-action-button copy-button"
-            onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
-
-  if (gameCard.card.twoFaced) {
-    utilityButtons += `
-    <button class="modal-action-button flip-button"
-            hx-post="/flip-card-modal/${gameId}/${gameCard.gameCardIndex}"
-            hx-vals='{"expected-version": ${expectedVersion}}'
-            hx-target="#card-modal-container"
-            hx-swap="innerHTML"
-            title="Flip card to see other side">Flip</button>`;
-  }
-
-  utilityButtons += `</div>`;
-
-  // Location-specific action buttons
-  const locationActions = getModalCardActionsByLocation(gameCard, gameId, expectedVersion);
-  const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
-
-  const actionButtons = `<div class="card-modal-actions">
-    ${utilityButtons}
-    ${locationActionsHtml}
-  </div>`;
-
-  // Navigation buttons and image with position indicator
-  const prevButton = prevCardIndex !== null ? `
-    <button class="card-modal-nav-button card-modal-nav-prev"
-            hx-get="/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}"
-            hx-target="#card-modal-container"
-            hx-swap="innerHTML"
-            title="Previous card">◀</button>
-  ` : '<div class="card-modal-nav-spacer"></div>';
-
-  const nextButton = nextCardIndex !== null ? `
-    <button class="card-modal-nav-button card-modal-nav-next"
-            hx-get="/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}"
-            hx-target="#card-modal-container"
-            hx-swap="innerHTML"
-            title="Next card">▶</button>
-  ` : '<div class="card-modal-nav-spacer"></div>';
-
-  const positionIndicator = totalCardsInZone > 1 ? `
-    <div class="card-modal-position-indicator">Card ${currentPosition} of ${totalCardsInZone}</div>
-  ` : '';
-
-  const bodyContent = `<div class="card-modal-content">
-    <div class="card-modal-nav-container">
-      ${prevButton}
-      <div class="card-modal-image-wrapper">
-        <div class="card-modal-image">
-          <img src="${imageUrl}" alt="${gameCard.card.name}" class="modal-card-image" />
-        </div>
-        ${positionIndicator}
-      </div>
-      ${nextButton}
-    </div>
-    <div class="card-modal-info">
-      <h3 class="card-modal-title">${gameCard.card.name}</h3>
-      ${actionButtons}
-    </div>
-  </div>`;
-
-  return formatFullScreenCardModalHtmlFragment(bodyContent);
-}
-
-function formatFullScreenCardModalHtmlFragment(bodyContent: string): string {
-  return `<div class="card-modal-overlay"
-               hx-get="/close-card-modal"
-               hx-target="#card-modal-container"
-               hx-swap="innerHTML"
-               hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
-               tabindex="0">
-    <div class="card-modal-dialog">
-      <button class="card-modal-close"
-              hx-get="/close-card-modal"
-              hx-target="#card-modal-container"
-              hx-swap="innerHTML">&times;</button>
-      <div class="card-modal-body">
-        ${bodyContent}
-      </div>
-    </div>
-  </div>`;
-}
 
 export function formatLossModalHtmlFragment(): string {
   return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);

@@ -1,0 +1,73 @@
+<%# 
+  Card Modal - Unified template for both /game and /prepare pages
+  
+  Parameters:
+  - card: Card object with { name, scryfallId, multiverseid, oracleCardName, twoFaced }
+  - imageUrl: Full URL to card image
+  - gathererUrl: Full URL to Gatherer page
+  - currentFace: "front" or "back"
+  - prevCardIndex: Index of previous card in zone (null if none)
+  - nextCardIndex: Index of next card in zone (null if none)
+  - currentPosition: Position in zone (1-based)
+  - totalCardsInZone: Total cards in zone
+  - utilityButtonsHtml: HTML for utility buttons (Gatherer, Copy, Flip)
+  - locationActionsHtml: HTML for location-specific action buttons (optional, only for game page)
+%>
+<div class="card-modal-overlay"
+     hx-get="/close-card-modal"
+     hx-target="#card-modal-container"
+     hx-swap="innerHTML"
+     hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+     tabindex="0">
+  <div class="card-modal-dialog">
+    <button class="card-modal-close"
+            hx-get="/close-card-modal"
+            hx-target="#card-modal-container"
+            hx-swap="innerHTML">&times;</button>
+    <div class="card-modal-body">
+      <div class="card-modal-content">
+        <div class="card-modal-nav-container">
+          <% if (prevCardIndex !== null) { %>
+            <button class="card-modal-nav-button card-modal-nav-prev"
+                    hx-get="<%= prevNavUrl %>"
+                    hx-target="#card-modal-container"
+                    hx-swap="innerHTML"
+                    title="Previous card">◀</button>
+          <% } else { %>
+            <div class="card-modal-nav-spacer"></div>
+          <% } %>
+          
+          <div class="card-modal-image-wrapper">
+            <div class="card-modal-image">
+              <img src="<%= imageUrl %>" alt="<%= card.name %>" class="modal-card-image" />
+            </div>
+            <% if (totalCardsInZone > 1) { %>
+              <div class="card-modal-position-indicator">Card <%= currentPosition %> of <%= totalCardsInZone %></div>
+            <% } %>
+          </div>
+          
+          <% if (nextCardIndex !== null) { %>
+            <button class="card-modal-nav-button card-modal-nav-next"
+                    hx-get="<%= nextNavUrl %>"
+                    hx-target="#card-modal-container"
+                    hx-swap="innerHTML"
+                    title="Next card">▶</button>
+          <% } else { %>
+            <div class="card-modal-nav-spacer"></div>
+          <% } %>
+        </div>
+        
+        <div class="card-modal-info">
+          <h3 class="card-modal-title"><%= card.name %></h3>
+          <div class="card-modal-actions">
+            <%- utilityButtonsHtml %>
+            <% if (locationActionsHtml) { %>
+              <%- locationActionsHtml %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

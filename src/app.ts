@@ -2,8 +2,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
-import { createPrepViewHelpers, formatPrepCardModalHtmlFragment } from "./view/common/prep-view-helpers.js";
-import { formatCardModalHtmlFragment, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment } from "./view/play-game/game-modals.js";
+import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
+import { formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment, getModalCardActionsByLocation } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -612,16 +612,53 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === cardIndex) + 1;
       }
 
-      const modalHtml = formatCardModalHtmlFragment(
-        gameCard,
-        gameId,
-        game.getStateVersion(),
+      const expectedVersion = game.getStateVersion();
+      const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
+      const gathererUrl =
+        gameCard.card.multiverseid === 0
+          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
+          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
+
+      // Build utility buttons HTML
+      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
+        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
+        <button class="modal-action-button copy-button"
+                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
+
+      if (gameCard.card.twoFaced) {
+        utilityButtonsHtml += `
+        <button class="modal-action-button flip-button"
+                hx-post="/flip-card-modal/${gameId}/${gameCard.gameCardIndex}"
+                hx-vals='{"expected-version": ${expectedVersion}}'
+                hx-target="#card-modal-container"
+                hx-swap="innerHTML"
+                title="Flip card to see other side">Flip</button>`;
+      }
+
+      utilityButtonsHtml += `</div>`;
+
+      // Build location-specific action buttons HTML
+      const locationActions = getModalCardActionsByLocation(gameCard, gameId, expectedVersion);
+      const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
+
+      // Build navigation URLs
+      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}` : "";
+
+      res.render("partials/card-modal", {
+        card: gameCard.card,
+        imageUrl,
+        gathererUrl,
+        currentFace: gameCard.currentFace,
         prevCardIndex,
         nextCardIndex,
+        prevNavUrl,
+        nextNavUrl,
         currentPosition,
-        totalCardsInZone
-      );
-      res.send(modalHtml);
+        totalCardsInZone,
+        utilityButtonsHtml,
+        locationActionsHtml,
+      });
     } catch (error) {
       console.error("Error loading card modal:", error);
       res.status(500).send(`<div>Error loading card details</div>`);
@@ -676,18 +713,48 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const faceParam = req.query.face as string | undefined;
       const currentFace: "front" | "back" = faceParam === "back" ? "back" : "front";
 
-      const modalHtml = formatPrepCardModalHtmlFragment(
-        cardDef,
-        prepId,
-        cardIndex,
+      const imageUrl = getCardImageUrl(cardDef.scryfallId, "large", currentFace);
+      const gathererUrl =
+        cardDef.multiverseid === 0
+          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`
+          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`;
+
+      // Build utility buttons HTML (no expectedVersion for prep page)
+      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
+        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
+        <button class="modal-action-button copy-button"
+                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${cardDef.name}')">Copy</button>`;
+
+      if (cardDef.twoFaced) {
+        const newFace = currentFace === "front" ? "back" : "front";
+        utilityButtonsHtml += `
+        <button class="modal-action-button flip-button"
+                hx-get="/prep-card-modal/${prepId}/${cardIndex}?face=${newFace}"
+                hx-target="#card-modal-container"
+                hx-swap="innerHTML"
+                title="Flip card to see other side">Flip</button>`;
+      }
+
+      utilityButtonsHtml += `</div>`;
+
+      // Build navigation URLs (no expectedVersion for prep page)
+      const prevNavUrl = prevCardIndex !== null ? `/prep-card-modal/${prepId}/${prevCardIndex}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/prep-card-modal/${prepId}/${nextCardIndex}` : "";
+
+      res.render("partials/card-modal", {
+        card: cardDef,
+        imageUrl,
+        gathererUrl,
         currentFace,
         prevCardIndex,
         nextCardIndex,
+        prevNavUrl,
+        nextNavUrl,
         currentPosition,
-        totalCardsInZone
-      );
-
-      res.send(modalHtml);
+        totalCardsInZone,
+        utilityButtonsHtml,
+        locationActionsHtml: "", // No location actions for prep page
+      });
     } catch (error) {
       console.error("Error loading prep card modal:", error);
       res.status(500).send(`<div>Error loading card details</div>`);
@@ -1191,17 +1258,53 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
       }
 
-      // Return the updated modal HTML
-      const modalHtml = formatCardModalHtmlFragment(
-        flippedCard,
-        gameId,
-        game.getStateVersion(),
+      const expectedVersion = game.getStateVersion();
+      const imageUrl = getCardImageUrl(flippedCard.card.scryfallId, "large", flippedCard.currentFace);
+      const gathererUrl =
+        flippedCard.card.multiverseid === 0
+          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`
+          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`;
+
+      // Build utility buttons HTML
+      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
+        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
+        <button class="modal-action-button copy-button"
+                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${flippedCard.card.name}')">Copy</button>`;
+
+      if (flippedCard.card.twoFaced) {
+        utilityButtonsHtml += `
+        <button class="modal-action-button flip-button"
+                hx-post="/flip-card-modal/${gameId}/${flippedCard.gameCardIndex}"
+                hx-vals='{"expected-version": ${expectedVersion}}'
+                hx-target="#card-modal-container"
+                hx-swap="innerHTML"
+                title="Flip card to see other side">Flip</button>`;
+      }
+
+      utilityButtonsHtml += `</div>`;
+
+      // Build location-specific action buttons HTML
+      const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion);
+      const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
+
+      // Build navigation URLs
+      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}` : "";
+
+      res.render("partials/card-modal", {
+        card: flippedCard.card,
+        imageUrl,
+        gathererUrl,
+        currentFace: flippedCard.currentFace,
         prevCardIndex,
         nextCardIndex,
+        prevNavUrl,
+        nextNavUrl,
         currentPosition,
-        totalCardsInZone
-      );
-      res.send(modalHtml);
+        totalCardsInZone,
+        utilityButtonsHtml,
+        locationActionsHtml,
+      });
     } catch (error) {
       console.error("Error flipping card in modal:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
