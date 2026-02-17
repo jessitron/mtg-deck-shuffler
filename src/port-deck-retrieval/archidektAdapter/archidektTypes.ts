@@ -7,6 +7,7 @@ export interface ArchidektCard {
       name: string;
       faces: any[];
       colorIdentity: string[];
+      types: string[];
     };
     edition: {
       editionname: string;

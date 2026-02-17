@@ -543,6 +543,7 @@ describe("GameState", () => {
           scryfallId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(true),
+          types: fc.constant(["Creature"] as string[]),
         }),
         (twoFacedCard) => {
           const deck: Deck = {
@@ -597,6 +598,7 @@ describe("GameState", () => {
           scryfallId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(false),
+          types: fc.constant(["Creature"] as string[]),
         }),
         (singleFacedCard) => {
           const deck: Deck = {

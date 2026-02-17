@@ -55,6 +55,7 @@ export class MtgjsonDeckAdapter {
       twoFaced,
       colorIdentity: mtgjsonCard.colorIdentity,
       set: mtgjsonCard.setCode,
+      types: mtgjsonCard.types || [],
     };
 
     return cardDefinition;

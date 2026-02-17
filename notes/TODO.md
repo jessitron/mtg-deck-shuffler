@@ -66,3 +66,6 @@ mtg-deck-shuffler-z1y
 - it is physically possible for your commander to be in your library or hand. shit.
 
 - keyboard shortcuts
+
+- when a game starts, automatically draw a hand of 7 cards. Sort the hand by card type and then by mana value. Lands first, then creatures, then everything else.
+  - real fun: generate a mulligan recommendation. Are there 2-4 lands? With the lands in the hand, what can be played? do any of those get you more land or mana? with only these cards, can you play a creature (could be your commander)? If not, do any of them get you more cards?

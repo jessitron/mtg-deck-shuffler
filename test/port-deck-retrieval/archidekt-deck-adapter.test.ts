@@ -43,7 +43,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 4,
@@ -53,7 +53,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Mountain", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Mountain", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 20,
@@ -110,7 +110,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "urza-uid",
             multiverseid: 333333,
-            oracleCard: { name: "Urza, Lord High Artificer", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Urza, Lord High Artificer", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 1,
@@ -120,7 +120,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "island-uid",
             multiverseid: 444444,
-            oracleCard: { name: "Island", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Island", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 30,
@@ -130,7 +130,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "counterspell-uid",
             multiverseid: 555555,
-            oracleCard: { name: "Counterspell", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Counterspell", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 1,
@@ -148,7 +148,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.id).toBe(456);
     expect(result.name).toBe("Commander Deck");
     expect(result.totalCards).toBe(32); // 31 non-commander cards + 1 commander
-    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333, twoFaced: false, colorIdentity: [], set: "Test Set" }]);
+    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] }]);
   });
 
   it("handles empty deck", async () => {
@@ -212,7 +212,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid-2",
             multiverseid: 666666,
-            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 4,
@@ -222,7 +222,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid-2",
             multiverseid: 777777,
-            oracleCard: { name: "Mountain", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Mountain", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 20,
@@ -232,7 +232,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "maybe-card-uid",
             multiverseid: 888888,
-            oracleCard: { name: "Maybe Card", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Maybe Card", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 2,
@@ -242,7 +242,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "sideboard-card-uid",
             multiverseid: 999999,
-            oracleCard: { name: "Sideboard Card", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Sideboard Card", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 1,
@@ -303,6 +303,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
               name: "Oracle Name",
               faces: [],
               colorIdentity: [],
+              types: [],
             },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
@@ -318,7 +319,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456, twoFaced: false, colorIdentity: [], set: "Test Set" });
+    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
   });
 
   it("converts cards with display name correctly", async () => {
@@ -345,6 +346,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
               name: "Oracle Name",
               faces: [],
               colorIdentity: [],
+              types: [],
             },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
@@ -360,7 +362,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false, oracleCardName: "Oracle Name", colorIdentity: [], set: "Test Set" });
+    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false, oracleCardName: "Oracle Name", colorIdentity: [], set: "Test Set", types: [] });
   });
 
   it("converts deck with multiple commanders", async () => {
@@ -389,7 +391,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "jaheira-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Jaheira, Friend of the Forest", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Jaheira, Friend of the Forest", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 1,
@@ -399,7 +401,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "agent-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Agent of the Iron Throne", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Agent of the Iron Throne", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 1,
@@ -409,7 +411,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "forest-uid",
             multiverseid: 333333,
-            oracleCard: { name: "Forest", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Forest", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 20,
@@ -428,8 +430,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.name).toBe("Dual Commander Deck");
     expect(result.totalCards).toBe(22); // 20 non-commander cards + 2 commanders
     expect(result.commanders.length).toBe(2);
-    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111, twoFaced: false, colorIdentity: [], set: "Test Set" });
-    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222, twoFaced: false, colorIdentity: [], set: "Test Set" });
+    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
+    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
   });
 
   it("handles deck with null categories", async () => {
@@ -443,7 +445,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "lightning-bolt-uid",
             multiverseid: 111111,
-            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Lightning Bolt", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 4,
@@ -453,7 +455,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
           card: {
             uid: "mountain-uid",
             multiverseid: 222222,
-            oracleCard: { name: "Mountain", faces: [], colorIdentity: [] },
+            oracleCard: { name: "Mountain", faces: [], colorIdentity: [], types: [] },
             edition: { editionname: "Test Set", editioncode: "TST" },
           },
           quantity: 20,
@@ -490,5 +492,126 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
     expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/14669648");
     expect(result.provenance.deckSource).toBe("archidekt");
+  });
+
+  it("extracts single card type correctly", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 999,
+      name: "Single Type Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "forest-uid",
+            multiverseid: 111111,
+            oracleCard: {
+              name: "Forest",
+              faces: [],
+              colorIdentity: ["Green"],
+              types: ["Land"]
+            },
+            edition: { editionname: "Test Set", editioncode: "TST" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "999" };
+    const result = await adapter.retrieveDeck(request);
+
+    expect(result.cards.length).toBe(1);
+    expect(result.cards[0].types).toEqual(["Land"]);
+  });
+
+  it("extracts multiple card types correctly", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 1000,
+      name: "Multiple Types Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "solemn-uid",
+            multiverseid: 222222,
+            oracleCard: {
+              name: "Solemn Simulacrum",
+              faces: [],
+              colorIdentity: [],
+              types: ["Artifact", "Creature"]
+            },
+            edition: { editionname: "Test Set", editioncode: "TST" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+        {
+          card: {
+            uid: "theros-god-uid",
+            multiverseid: 333333,
+            oracleCard: {
+              name: "Heliod, God of the Sun",
+              faces: [],
+              colorIdentity: ["White"],
+              types: ["Legendary", "Enchantment", "Creature"]
+            },
+            edition: { editionname: "Test Set", editioncode: "TST" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "1000" };
+    const result = await adapter.retrieveDeck(request);
+
+    expect(result.cards.length).toBe(2);
+    expect(result.cards[0].types).toEqual(["Artifact", "Creature"]);
+    expect(result.cards[1].types).toEqual(["Legendary", "Enchantment", "Creature"]);
+  });
+
+  it("handles missing types field gracefully", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 1001,
+      name: "Missing Types Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "test-uid",
+            multiverseid: 444444,
+            oracleCard: {
+              name: "Test Card",
+              faces: [],
+              colorIdentity: [],
+              types: [] as any // Simulate missing types
+            },
+            edition: { editionname: "Test Set", editioncode: "TST" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    // Remove types to simulate old API response
+    delete (archidektDeck.cards[0].card.oracleCard as any).types;
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "1001" };
+    const result = await adapter.retrieveDeck(request);
+
+    expect(result.cards.length).toBe(1);
+    expect(result.cards[0].types).toEqual([]);
   });
 });

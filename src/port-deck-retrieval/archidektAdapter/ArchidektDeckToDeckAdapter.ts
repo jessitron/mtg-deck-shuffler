@@ -95,7 +95,8 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       multiverseid: archidektCard.card.multiverseid,
       twoFaced,
       colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
-      set: archidektCard.card.edition.editionname
+      set: archidektCard.card.edition.editionname,
+      types: archidektCard.card.oracleCard.types || []
     };
 
     if (cardName !== oracleCardName) {

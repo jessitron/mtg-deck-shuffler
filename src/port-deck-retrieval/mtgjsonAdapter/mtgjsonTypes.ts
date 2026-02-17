@@ -8,6 +8,7 @@ export interface MtgjsonCard {
   layout: string;
   colorIdentity?: string[];
   setCode: string;
+  types: string[];
   identifiers: {
     scryfallId?: string;
     multiverseId?: string;

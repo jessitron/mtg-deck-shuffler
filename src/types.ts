@@ -7,6 +7,7 @@ export interface CardDefinition {
   oracleCardName?: string;
   colorIdentity?: string[];
   set?: string;
+  types: string[];
 }
 
 export interface DeckProvenance {

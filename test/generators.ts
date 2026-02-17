@@ -50,6 +50,22 @@ export const setName = fc.option(
   { nil: undefined }
 );
 
+// Generator for card types
+export const cardTypes = fc.oneof(
+  // Single type
+  fc.constantFrom(["Land"], ["Creature"], ["Artifact"], ["Enchantment"], ["Planeswalker"], ["Instant"], ["Sorcery"], ["Battle"]),
+  // Multiple types (common combinations)
+  fc.constantFrom(
+    ["Artifact", "Creature"],
+    ["Enchantment", "Creature"],
+    ["Artifact", "Enchantment"],
+    ["Legendary", "Creature"],
+    ["Legendary", "Artifact"],
+    ["Legendary", "Enchantment"],
+    ["Legendary", "Planeswalker"]
+  )
+).map(types => [...types]); // Convert readonly array to mutable array
+
 // Generator for CardDefinition
 export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   name: cardName,
@@ -58,6 +74,7 @@ export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   twoFaced: fc.boolean(),
   colorIdentity: colorIdentity,
   set: setName,
+  types: cardTypes,
 });
 
 // Generator for commander names (legendary creatures)
@@ -90,6 +107,7 @@ export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   twoFaced: fc.boolean(),
   colorIdentity: colorIdentity,
   set: setName,
+  types: fc.constantFrom(["Creature"], ["Legendary", "Creature"]),
 });
 
 // Generator for deck names
@@ -227,6 +245,7 @@ export const lightningBolt: CardDefinition = {
   scryfallId: "abc123",
   multiverseid: 12345,
   twoFaced: false,
+  types: ["Instant"],
 };
 
 export const ancestralRecall: CardDefinition = {
@@ -234,6 +253,7 @@ export const ancestralRecall: CardDefinition = {
   scryfallId: "def456",
   multiverseid: 67890,
   twoFaced: false,
+  types: ["Instant"],
 };
 
 export const blackLotus: CardDefinition = {
@@ -241,6 +261,7 @@ export const blackLotus: CardDefinition = {
   scryfallId: "ghi789",
   multiverseid: 11111,
   twoFaced: false,
+  types: ["Artifact"],
 };
 
 export const atraxa: CardDefinition = {
@@ -248,6 +269,7 @@ export const atraxa: CardDefinition = {
   scryfallId: "cmd001",
   multiverseid: 22222,
   twoFaced: false,
+  types: ["Legendary", "Creature"],
 };
 
 export const testProvenance: DeckProvenance = {
