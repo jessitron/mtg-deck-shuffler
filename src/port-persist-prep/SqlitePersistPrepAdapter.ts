@@ -11,6 +11,7 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
     this.initializeDatabase();
   }
 
+  // 'prep' is a blob of JSON with all the info
   private initializeDatabase(): void {
     const createTableSQL = `
       CREATE TABLE IF NOT EXISTS game_preps (

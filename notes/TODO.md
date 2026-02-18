@@ -1,5 +1,22 @@
 # Things to change
 
+18 Feb: 
+The goal was to add card type sorting to the library search modal.
+That means having card type available.
+Added card type to the card definition, imported it from the two import adapters.
+Then it broke on old decks and games, because they don't have card type.
+Which led me to want card definition denormalized from the prep and game state.
+Which led me to want the game state stored as a real table instead of a JSON blob.
+It tried to come up with a schema for that (REFACTOR-normalize-card-data.md) but it's not right. It doesn't get game, state, version correct.
+Which makes a mess 🥺
+
+OK, let's back up.
+Let's leave the JSON blob for now and let it contain scryfallId.
+Let's import card definitions on deck load.
+Once card definitions are normalized, we can add fields to the card definitions as a migration, nbd.
+The whole schema of storing game state is a problem for later. Store deltas? Reconstruct state from those? Event sourcing in a relational database is always its own problem.
+
+
 ## Structural
 
 - migrate the deck review and active game pages to use ejs templates mtg-deck-shuffler-057
