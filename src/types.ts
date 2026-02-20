@@ -20,7 +20,7 @@ export interface DeckProvenance {
   createdAt?: Date;
 }
 
-export const PERSISTED_DECK_VERSION: 1 = 1;
+export const PERSISTED_DECK_VERSION: 2 = 2;
 
 export interface Deck {
   version: typeof PERSISTED_DECK_VERSION;

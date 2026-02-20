@@ -16,6 +16,8 @@ import {
 import { PrepId } from "./port-persist-prep/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";
+import { CardRepositoryPort } from "./port-card-repository/types.js";
+import { hydrateGameCards, dehydrateGameCards } from "./port-card-repository/hydration.js";
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
@@ -137,7 +139,10 @@ export class GameState {
     this.randomSeed = params.randomSeed;
   }
 
-  static fromPersistedGameState(psg: PersistedGameState | any): GameState {
+  static async fromPersistedGameState(
+    psg: PersistedGameState | any,
+    cardRepo: CardRepositoryPort
+  ): Promise<GameState> {
     // Handle migration from version 3 to version 4
     if (psg.version === 3) {
       const legacyPsg = psg; // Legacy format with commanders property
@@ -180,10 +185,13 @@ export class GameState {
       });
     }
 
+    // Version 7+: Hydrate game cards from repository
+    const hydratedGameCards = await hydrateGameCards(psg.gameCards, cardRepo);
+
     return new GameState({
       ...psg,
       gameStatus: psg.status, // todo: use gameStatus in both places
-      cards: psg.gameCards, // todo: use gameCards in both places
+      cards: hydratedGameCards,
       events: psg.events || [],
     });
   }
@@ -711,7 +719,7 @@ export class GameState {
       deckName: this.deckName,
       deckId: this.deckId,
       totalCards: this.totalCards,
-      gameCards: [...this.gameCards],
+      gameCards: dehydrateGameCards(this.gameCards), // Dehydrate to PersistedGameCard[]
       events: this.eventLog.getEvents(),
     };
   }

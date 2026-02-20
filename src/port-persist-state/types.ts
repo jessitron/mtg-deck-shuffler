@@ -1,6 +1,7 @@
 import { CardDefinition, DeckProvenance } from "../types.js";
 import { GameEvent } from "../GameEvents.js";
 import { PrepId } from "../port-persist-prep/types.js";
+import { PersistedGameCard } from "./persisted-types.js";
 
 export type GameId = number;
 
@@ -76,7 +77,7 @@ export interface GameCard {
   currentFace: "front" | "back";
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 6 = 6;
+export const PERSISTED_GAME_STATE_VERSION: 7 = 7;
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;
@@ -88,7 +89,7 @@ export interface PersistedGameState {
   deckName: string;
   deckId: number;
   totalCards: number;
-  gameCards: GameCard[];
+  gameCards: PersistedGameCard[]; // Changed from GameCard[] to PersistedGameCard[]
   events: GameEvent[];
 }
 

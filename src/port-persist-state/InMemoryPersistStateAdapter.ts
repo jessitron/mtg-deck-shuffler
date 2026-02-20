@@ -1,9 +1,15 @@
 import { PersistStatePort, PersistedGameState, GameId, GameHistorySummary } from "./types.js";
+import { CardRepositoryPort } from "../port-card-repository/types.js";
 
 export class InMemoryPersistStateAdapter implements PersistStatePort {
   private storage = new Map<GameId, PersistedGameState>();
   private timestamps = new Map<GameId, { createdAt: Date; updatedAt: Date }>();
   private nextGameId = 1;
+  private cardRepository: CardRepositoryPort;
+
+  constructor(cardRepository: CardRepositoryPort) {
+    this.cardRepository = cardRepository;
+  }
 
   async save(psg: PersistedGameState): Promise<GameId> {
     this.storage.set(psg.gameId, { ...psg });
@@ -33,10 +39,14 @@ export class InMemoryPersistStateAdapter implements PersistStatePort {
     const summaries: GameHistorySummary[] = [];
 
     for (const [gameId, gameState] of this.storage.entries()) {
-      // Extract commander names
-      const commanders = gameState.gameCards
+      // Extract commander scryfallIds
+      const commanderIds = gameState.gameCards
         .filter(gc => gc.isCommander)
-        .map(gc => gc.card.name);
+        .map(gc => gc.scryfallId);
+
+      // Hydrate commander cards to get names
+      const commanderCards = await this.cardRepository.getCards(commanderIds);
+      const commanders = commanderCards.map(c => c.name);
 
       // Count actions (events minus "start game" event)
       const actionCount = gameState.events.filter(e => e.eventName !== "start game").length;

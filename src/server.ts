@@ -11,16 +11,16 @@ import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCa
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { createApp } from "./app.js";
 
-function createPersistStateAdapter(): PersistStatePort {
+function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
   const adapterType = process.env.PORT_PERSIST_STATE;
 
   if (adapterType === "in-memory") {
     console.log("Using in-memory persistence adapter");
-    return new InMemoryPersistStateAdapter();
+    return new InMemoryPersistStateAdapter(cardRepository);
   } else {
     const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
     console.log(`Using SQLite persistence adapter (${dbPath})`);
-    return new SqlitePersistStateAdapter(dbPath);
+    return new SqlitePersistStateAdapter(dbPath, cardRepository);
   }
 }
 
@@ -51,9 +51,9 @@ function createCardRepositoryAdapter(): CardRepositoryPort {
 }
 
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalFileAdapter(LOCAL_DECK_RELATIVE_PATH), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
-const persistStatePort: PersistStatePort = createPersistStateAdapter();
-const persistPrepPort: PersistPrepPort = createPersistPrepAdapter();
 const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
+const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
+const persistPrepPort: PersistPrepPort = createPersistPrepAdapter();
 
 const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository);
 const PORT = process.env.PORT || 3333;

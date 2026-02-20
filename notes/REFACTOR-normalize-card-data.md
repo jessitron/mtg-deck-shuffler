@@ -145,15 +145,349 @@ export interface CardRepositoryPort {
 
 ---
 
-## Step 3 Notes (for later)
+## Step 3 Detail: Normalize Card References
 
-When we're ready to tackle game state normalization:
+**Status:** ⏸️ Ready to implement (requires db wipe)
 
-- Replace `CardDefinition` in `Deck` with `scryfallId[]`
-- Replace embedded card in `GameCard` with `scryfallId` reference
-- Hydrate card data from repository on game load
-- Consider how game events and state versions interact
-- Database wipe required
+### Overview
+
+Replace embedded `CardDefinition` objects with `scryfallId` string references throughout the persistence layer. Card data will be hydrated from the `CardRepository` when loading game state and game prep.
+
+### Key Changes
+
+#### 1. Type Changes
+
+**Current Structure:**
+
+```typescript
+// Deck stores full card objects
+interface Deck {
+  commanders: CardDefinition[];
+  cards: CardDefinition[];
+  // ...
+}
+
+// GameCard stores full card object
+interface GameCard {
+  card: CardDefinition;
+  location: CardLocation;
+  // ...
+}
+```
+
+**New Structure:**
+
+```typescript
+// PersistedDeck stores only scryfallIds
+interface PersistedDeck {
+  version: typeof PERSISTED_DECK_VERSION; // increment to 2
+  id: number;
+  name: string;
+  totalCards: number;
+  commanderIds: string[]; // scryfallIds
+  cardIds: string[]; // scryfallIds
+  provenance: DeckProvenance;
+}
+
+// PersistedGameCard stores only scryfallId
+interface PersistedGameCard {
+  scryfallId: string; // reference to card in repository
+  location: CardLocation;
+  gameCardIndex: number;
+  isCommander: boolean;
+  currentFace: "front" | "back";
+}
+
+// Runtime Deck (hydrated) keeps CardDefinition for in-memory use
+interface Deck {
+  version: typeof PERSISTED_DECK_VERSION;
+  id: number;
+  name: string;
+  totalCards: number;
+  commanders: CardDefinition[]; // hydrated from repository
+  cards: CardDefinition[]; // hydrated from repository
+  provenance: DeckProvenance;
+}
+
+// Runtime GameCard (hydrated) keeps CardDefinition for in-memory use
+interface GameCard {
+  card: CardDefinition; // hydrated from repository
+  location: CardLocation;
+  gameCardIndex: number;
+  isCommander: boolean;
+  currentFace: "front" | "back";
+}
+```
+
+**Key Insight:** We'll have **two representations**:
+
+- **Persisted types** (`PersistedDeck`, `PersistedGameCard`) - stored in DB with only scryfallIds
+- **Runtime types** (`Deck`, `GameCard`) - used in memory with full `CardDefinition` objects
+
+#### 2. Version Bumps
+
+- `PERSISTED_DECK_VERSION`: 1 → 2
+- `PERSISTED_GAME_STATE_VERSION`: 6 → 7
+- `PERSISTED_GAME_PREP_VERSION`: Add constant, set to 2 (was implicit 1)
+
+#### 3. Hydration Functions
+
+Create utility functions to convert between persisted and runtime representations:
+
+```typescript
+// src/port-card-repository/hydration.ts
+
+async function hydrateDeck(
+  persistedDeck: PersistedDeck,
+  cardRepo: CardRepositoryPort,
+): Promise<Deck> {
+  const allIds = [...persistedDeck.commanderIds, ...persistedDeck.cardIds];
+  const cardMap = await cardRepo.getCards(allIds);
+
+  const commanders = persistedDeck.commanderIds.map((id) => {
+    const card = cardMap.get(id);
+    if (!card) throw new Error(`Card ${id} not found in repository`);
+    return card;
+  });
+
+  const cards = persistedDeck.cardIds.map((id) => {
+    const card = cardMap.get(id);
+    if (!card) throw new Error(`Card ${id} not found in repository`);
+    return card;
+  });
+
+  return {
+    version: persistedDeck.version,
+    id: persistedDeck.id,
+    name: persistedDeck.name,
+    totalCards: persistedDeck.totalCards,
+    commanders,
+    cards,
+    provenance: persistedDeck.provenance,
+  };
+}
+
+function dehydrateDeck(deck: Deck): PersistedDeck {
+  return {
+    version: PERSISTED_DECK_VERSION,
+    id: deck.id,
+    name: deck.name,
+    totalCards: deck.totalCards,
+    commanderIds: deck.commanders.map((c) => c.scryfallId),
+    cardIds: deck.cards.map((c) => c.scryfallId),
+    provenance: deck.provenance,
+  };
+}
+
+async function hydrateGameCards(
+  persistedGameCards: PersistedGameCard[],
+  cardRepo: CardRepositoryPort,
+): Promise<GameCard[]> {
+  const scryfallIds = persistedGameCards.map((gc) => gc.scryfallId);
+  const cardMap = await cardRepo.getCards(scryfallIds);
+
+  return persistedGameCards.map((pgc) => {
+    const card = cardMap.get(pgc.scryfallId);
+    if (!card)
+      throw new Error(`Card ${pgc.scryfallId} not found in repository`);
+
+    return {
+      card,
+      location: pgc.location,
+      gameCardIndex: pgc.gameCardIndex,
+      isCommander: pgc.isCommander,
+      currentFace: pgc.currentFace,
+    };
+  });
+}
+
+function dehydrateGameCards(gameCards: GameCard[]): PersistedGameCard[] {
+  return gameCards.map((gc) => ({
+    scryfallId: gc.card.scryfallId,
+    location: gc.location,
+    gameCardIndex: gc.gameCardIndex,
+    isCommander: gc.isCommander,
+    currentFace: gc.currentFace,
+  }));
+}
+```
+
+#### 4. GameState Changes
+
+**Current:**
+
+- `GameState.fromPersistedGameState(psg)` - loads from `PersistedGameState` with embedded cards
+- `GameState.toPersistedGameState()` - saves with embedded cards
+
+**New:**
+
+- `GameState.fromPersistedGameState(psg, cardRepo)` - loads and hydrates cards from repository
+- `GameState.toPersistedGameState()` - saves with only scryfallIds (dehydrated)
+
+The `GameState` class internally still works with full `CardDefinition` objects (no changes to game logic), but persistence layer uses references.
+
+#### 5. Persistence Adapter Changes
+
+**SqlitePersistStateAdapter:**
+
+- `retrieve(gameId)` - After loading JSON, hydrate cards from repository
+- `save(psg)` - Before saving JSON, dehydrate cards to scryfallIds
+- `getAllGames()` - Needs to hydrate cards to extract commander names
+
+**InMemoryPersistStateAdapter:**
+
+- Same changes as SQLite adapter
+
+**SqlitePersistPrepAdapter:**
+
+- `retrievePrep(prepId)` - After loading JSON, hydrate deck from repository
+- `savePrep(prep)` - Before saving JSON, dehydrate deck to scryfallIds
+
+**InMemoryPersistPrepAdapter:**
+
+- Same changes as SQLite adapter
+
+#### 6. App.ts Route Changes
+
+Routes that load game state or prep need to pass `CardRepository` to hydration:
+
+```typescript
+// Before
+const persistedGame = await persistStatePort.retrieve(gameId);
+const game = GameState.fromPersistedGameState(persistedGame);
+
+// After
+const persistedGame = await persistStatePort.retrieve(gameId);
+const game = await GameState.fromPersistedGameState(
+  persistedGame,
+  cardRepository,
+);
+```
+
+Routes affected:
+
+- `loadGameFromParams` middleware
+- `loadGameFromParamsWithErrorPage` middleware
+- `/game/:gameId` (GET)
+- `/game/:gameId/restart` (POST)
+- `/game/import` (POST)
+- Any other route that loads game state
+
+For prep:
+
+- `/prepare/:prepId` (GET)
+- `/prepare/:prepId/start-game` (POST)
+
+#### 7. Migration Strategy
+
+**No migration path** - this is a breaking change requiring database wipe:
+
+1. Delete `data.db`
+2. All existing games and preps are lost
+3. Fresh start with new schema
+
+**Why no migration?**
+
+- Old data has embedded cards without scryfallIds in a consistent format
+- Card repository is new, so old cards aren't in it
+- Complexity of extracting and upserting all cards from old games isn't worth it for a local dev app
+
+#### 8. Testing Strategy
+
+**Unit Tests:**
+
+- Test hydration/dehydration functions with various card combinations
+- Test GameState with mocked CardRepository
+- Test persistence adapters with in-memory CardRepository
+
+**Integration Tests:**
+
+- Create deck → save prep → load prep → verify cards match
+- Start game → save state → load state → verify cards match
+- Test with commanders, two-faced cards, various card types
+
+**Manual Verification:**
+
+1. Delete `data.db`
+2. `npm run build && npm test` - all tests pass
+3. `PORT=3344 ./run`
+4. Import a precon deck
+5. Import an Archidekt deck
+6. Start games from both
+7. Verify cards display correctly
+8. Perform game actions (draw, shuffle, etc.)
+9. Reload game, verify state persists
+10. Check database: `sqlite3 data.db "SELECT COUNT(*) FROM cards"`
+
+### Implementation Order
+
+1. **Create new types** - `PersistedDeck`, `PersistedGameCard` in new file `src/port-persist-state/persisted-types.ts`
+2. **Create hydration utilities** - `src/port-card-repository/hydration.ts`
+3. **Update version constants** - Bump versions in `src/types.ts` and `src/port-persist-state/types.ts`
+4. **Update GameState** - Add `cardRepo` parameter to `fromPersistedGameState`, update `toPersistedGameState`
+5. **Update persistence adapters** - Both state and prep adapters
+6. **Update app.ts** - Pass `cardRepository` to all hydration points
+7. **Update test generators** - Create helpers for persisted vs runtime types
+8. **Fix all tests** - Update to use new structure
+9. **Manual verification** - Delete DB and test end-to-end
+
+### Risks & Considerations
+
+**Risk: Missing cards in repository**
+
+- If a card is referenced but not in repository, hydration fails
+- Mitigation: Ensure all deck imports upsert cards first (already done in Step 2)
+- Add error handling with clear messages
+
+**Risk: Performance**
+
+- Hydrating 100-card decks requires 100+ repository lookups
+- Mitigation: `CardRepository.getCards(ids[])` uses batch lookup (already implemented)
+- SQLite query with `WHERE scryfall_id IN (...)` is fast
+
+**Risk: Circular dependencies**
+
+- GameState needs CardRepository, but we don't want domain logic to depend on ports
+- Mitigation: Hydration happens at persistence boundary, not in domain
+- GameState internally still uses `CardDefinition` objects
+
+**Benefit: Future-proof**
+
+- Can add new card fields without breaking old games
+- Can enrich card data retroactively
+- Reduces storage size (100-card game: ~500KB → ~50KB)
+
+### Files to Modify
+
+**New files:**
+
+- `src/port-persist-state/persisted-types.ts` - Persisted type definitions
+- `src/port-card-repository/hydration.ts` - Hydration utilities
+
+**Modified files:**
+
+- `src/types.ts` - Bump `PERSISTED_DECK_VERSION` to 2
+- `src/port-persist-state/types.ts` - Bump `PERSISTED_GAME_STATE_VERSION` to 7, update interfaces
+- `src/port-persist-prep/types.ts` - Add `PERSISTED_GAME_PREP_VERSION = 2`
+- `src/GameState.ts` - Update `fromPersistedGameState` and `toPersistedGameState`
+- `src/port-persist-state/SqlitePersistStateAdapter.ts` - Add hydration/dehydration
+- `src/port-persist-state/InMemoryPersistStateAdapter.ts` - Add hydration/dehydration
+- `src/port-persist-prep/SqlitePersistPrepAdapter.ts` - Add hydration/dehydration
+- `src/port-persist-prep/InMemoryPersistPrepAdapter.ts` - Add hydration/dehydration
+- `src/app.ts` - Pass `cardRepository` to hydration points
+- `test/generators.ts` - Add generators for persisted types
+- All test files that create `Deck` or `GameCard` objects
+
+### Success Criteria
+
+✅ All tests pass (109+ tests)
+✅ Can import precon deck and see cards in repository
+✅ Can import Archidekt deck and see cards in repository
+✅ Can start game from prep
+✅ Can perform game actions (draw, shuffle, move cards)
+✅ Can reload game and see correct state
+✅ Database size is smaller (check with `ls -lh data.db`)
+✅ No embedded `CardDefinition` objects in `game_states` or `game_preps` tables
 
 ---
 

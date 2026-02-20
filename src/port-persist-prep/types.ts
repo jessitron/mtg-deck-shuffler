@@ -2,8 +2,10 @@ import { Deck } from "../types.js";
 
 export type PrepId = number;
 
+export const PERSISTED_GAME_PREP_VERSION: 2 = 2;
+
 export interface PersistedGamePrep {
-  version: number;
+  version: typeof PERSISTED_GAME_PREP_VERSION;
   prepId: PrepId;
   deck: Deck;
   createdAt: Date;

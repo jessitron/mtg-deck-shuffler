@@ -1,13 +1,16 @@
 import Database from "better-sqlite3";
 import { PersistStatePort, PersistedGameState, GameId, GameHistorySummary } from "./types.js";
+import { CardRepositoryPort } from "../port-card-repository/types.js";
 
 export class SqlitePersistStateAdapter implements PersistStatePort {
   private db: Database.Database;
   private nextGameId = 1;
   private isClosed = false;
+  private cardRepository: CardRepositoryPort;
 
-  constructor(dbPath: string = "./data.db") {
+  constructor(dbPath: string = "./data.db", cardRepository: CardRepositoryPort) {
     this.db = new Database(dbPath);
+    this.cardRepository = cardRepository;
     this.initializeDatabase();
   }
 
@@ -71,12 +74,16 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
       updated_at: string;
     }>;
 
-    return rows.map((row) => {
+    return Promise.all(rows.map(async (row) => {
       try {
         const gameState = JSON.parse(row.state) as PersistedGameState;
 
-        // Extract commander names
-        const commanders = gameState.gameCards.filter((gc) => gc.isCommander).map((gc) => gc.card.name);
+        // Extract commander scryfallIds
+        const commanderIds = gameState.gameCards.filter((gc) => gc.isCommander).map((gc) => gc.scryfallId);
+
+        // Hydrate commander cards to get names
+        const commanderCards = await this.cardRepository.getCards(commanderIds);
+        const commanders = commanderCards.map(c => c.name);
 
         // Count actions (events minus "start game" event)
         const actionCount = gameState.events.filter((e) => e.eventName !== "start game").length;
@@ -100,7 +107,7 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
           updatedAt: new Date(row.updated_at),
         };
       }
-    });
+    }));
   }
 
   async waitForInitialization(): Promise<void> {

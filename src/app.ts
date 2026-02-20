@@ -79,7 +79,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       res.locals.gameId = gameId;
       next();
     } catch (error) {
@@ -106,7 +106,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      res.locals.game = GameState.fromPersistedGameState(persistedGame);
+      res.locals.game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       res.locals.gameId = gameId;
       next();
     } catch (error) {
@@ -257,7 +257,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       };
       const prepId = persistPrepPort.newPrepId();
       const prep: PersistedGamePrep = {
-        version: 1,
+        version: 2,
         prepId,
         deck: sortedDeck,
         createdAt: new Date(),
@@ -393,7 +393,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
 
       // Only show active games; prep/review happens at /prepare/:prepId
       if (game.gameStatus() !== "Active") {
@@ -484,7 +484,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (persistedGame) {
         // Mark the game as ended by updating its status
-        const game = GameState.fromPersistedGameState(persistedGame);
+        const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
         // TODO: Add an "ended" status to GameState if needed
         await persistStatePort.save(game.toPersistedGameState());
       }
@@ -508,7 +508,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       const expectedVersion = game.getStateVersion();
       const libraryCards = game.listLibrary();
 
@@ -542,7 +542,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       const modalHtml = formatTableModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
@@ -563,7 +563,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
 
       // Validate state version for optimistic concurrency control
       const expectedVersionStr = req.query["expected-version"];
@@ -872,7 +872,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
         return;
       }
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       const modalHtml = formatHistoryModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
@@ -912,7 +912,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
         return;
       }
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
@@ -1085,7 +1085,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const game = GameState.fromPersistedGameState(persistedGame);
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
 
       if (game.gameStatus() !== "Active") {
         res.status(400).send(`<div>Cannot play card: Game is not active</div>`);
