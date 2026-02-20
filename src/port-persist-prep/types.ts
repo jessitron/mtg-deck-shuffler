@@ -7,7 +7,7 @@ export const PERSISTED_GAME_PREP_VERSION: 2 = 2;
 export interface PersistedGamePrep {
   version: typeof PERSISTED_GAME_PREP_VERSION;
   prepId: PrepId;
-  deck: Deck;
+  deck: Deck; // Application layer uses full Deck; adapters handle dehydration internally
   createdAt: Date;
   updatedAt: Date;
 }

@@ -1,13 +1,27 @@
 import Database from "better-sqlite3";
 import { PersistPrepPort, PersistedGamePrep, PrepId } from "./types.js";
+import { CardRepositoryPort } from "../port-card-repository/types.js";
+import { PersistedDeck } from "../port-persist-state/persisted-types.js";
+import { hydrateDeck, dehydrateDeck } from "../port-card-repository/hydration.js";
+
+// Internal storage type with dehydrated deck
+interface StoredPrep {
+  version: number;
+  prepId: PrepId;
+  deck: PersistedDeck;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export class SqlitePersistPrepAdapter implements PersistPrepPort {
   private db: Database.Database;
   private nextPrepId = 1;
   private isClosed = false;
+  private cardRepository: CardRepositoryPort;
 
-  constructor(dbPath: string = "./data.db") {
+  constructor(dbPath: string = "./data.db", cardRepository: CardRepositoryPort) {
     this.db = new Database(dbPath);
+    this.cardRepository = cardRepository;
     this.initializeDatabase();
   }
 
@@ -39,7 +53,13 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
       VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
     `;
 
-    const prepJson = JSON.stringify(prep);
+    // Dehydrate the deck before storing
+    const storedPrep: StoredPrep = {
+      ...prep,
+      deck: dehydrateDeck(prep.deck),
+    };
+
+    const prepJson = JSON.stringify(storedPrep);
     this.db.prepare(insertOrUpdateSQL).run(prep.prepId, prepJson, prep.version, prep.createdAt.toISOString());
     return prep.prepId;
   }
@@ -49,18 +69,31 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
     const row = this.db.prepare(selectSQL).get(prepId) as { prep: string } | undefined;
 
     if (row) {
-      const prep = JSON.parse(row.prep) as PersistedGamePrep;
+      const storedPrep = JSON.parse(row.prep) as StoredPrep;
+
       // Convert date strings back to Date objects
-      if (prep.createdAt) {
-        prep.createdAt = new Date(prep.createdAt);
+      if (storedPrep.createdAt) {
+        storedPrep.createdAt = new Date(storedPrep.createdAt);
       }
-      if (prep.updatedAt) {
-        prep.updatedAt = new Date(prep.updatedAt);
+      if (storedPrep.updatedAt) {
+        storedPrep.updatedAt = new Date(storedPrep.updatedAt);
       }
-      if (prep.deck.provenance?.retrievedDate) {
-        prep.deck.provenance.retrievedDate = new Date(prep.deck.provenance.retrievedDate);
+
+      // Hydrate the deck before returning
+      const hydratedDeck = await hydrateDeck(storedPrep.deck, this.cardRepository);
+
+      // Convert provenance date if present
+      if (hydratedDeck.provenance?.retrievedDate) {
+        hydratedDeck.provenance.retrievedDate = new Date(hydratedDeck.provenance.retrievedDate);
       }
-      return prep;
+
+      return {
+        version: storedPrep.version as 2,
+        prepId: storedPrep.prepId,
+        deck: hydratedDeck,
+        createdAt: storedPrep.createdAt,
+        updatedAt: storedPrep.updatedAt,
+      };
     }
     return null;
   }

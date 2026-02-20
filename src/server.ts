@@ -24,16 +24,16 @@ function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistS
   }
 }
 
-function createPersistPrepAdapter(): PersistPrepPort {
+function createPersistPrepAdapter(cardRepository: CardRepositoryPort): PersistPrepPort {
   const adapterType = process.env.PORT_PERSIST_PREP || process.env.PORT_PERSIST_STATE;
 
   if (adapterType === "in-memory") {
     console.log("Using in-memory prep persistence adapter");
-    return new InMemoryPersistPrepAdapter();
+    return new InMemoryPersistPrepAdapter(cardRepository);
   } else {
     const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
     console.log(`Using SQLite prep persistence adapter (${dbPath})`);
-    return new SqlitePersistPrepAdapter(dbPath);
+    return new SqlitePersistPrepAdapter(dbPath, cardRepository);
   }
 }
 
@@ -53,7 +53,7 @@ function createCardRepositoryAdapter(): CardRepositoryPort {
 const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalFileAdapter(LOCAL_DECK_RELATIVE_PATH), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
 const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
-const persistPrepPort: PersistPrepPort = createPersistPrepAdapter();
+const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
 const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository);
 const PORT = process.env.PORT || 3333;
