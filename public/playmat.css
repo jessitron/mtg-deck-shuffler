@@ -302,8 +302,8 @@
   align-items: center;
   border: 1px orange solid;
   color: white;
-  height: calc(100vh - 20px);
-  width: calc((100vh - 20px) * 0.72);
+  height: calc(100vh - 50px);
+  width: calc((100vh - 50px) * 0.72);
   border-radius: 3vh;
 }
 
