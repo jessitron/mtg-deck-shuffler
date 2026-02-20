@@ -9,11 +9,18 @@
       "scryfallId": "fea6c1c8-eff9-4b66-b96d-e23016f0bb62",
       "multiverseid": 553669,
       "twoFaced": false,
+      "oracleCardName": "Kotori, Pilot Prodigy",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "Vehicles you control have crew 2.\nAt the beginning of combat on your turn, target artifact creature you control gains lifelink and vigilance until end of turn."
     }
   ],
   "cards": [
@@ -22,973 +29,1642 @@
       "scryfallId": "969ac7dd-f3aa-4888-9ff0-d16a31b5e7a9",
       "multiverseid": 553691,
       "twoFaced": false,
+      "oracleCardName": "Shorikai, Genesis Engine",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}{U}",
+      "cmc": 4,
+      "oracleText": "{1}, {T}: Draw two cards, then discard a card. Create a 1/1 colorless Pilot creature token with \"This token crews Vehicles as though its power were 2 greater.\"\nCrew 8 (Tap any number of creatures you control with total power 8 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Jace, Architect of Thought",
       "scryfallId": "c2be221c-76e2-4b18-a3c1-90ced436d01f",
       "multiverseid": 554176,
       "twoFaced": false,
+      "oracleCardName": "Jace, Architect of Thought",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "[+1]: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[−2]: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[−8]: For each player, search that player's library for a nonland card and exile it, then that player shuffles. You may cast those cards without paying their mana costs."
     },
     {
       "name": "Drumbellower",
       "scryfallId": "718c7383-d2e0-449b-b5b5-378d7c6e1fcb",
       "multiverseid": 553903,
       "twoFaced": false,
+      "oracleCardName": "Drumbellower",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nUntap all creatures you control during each other player's untap step."
     },
     {
       "name": "Ironsoul Enforcer",
       "scryfallId": "c2c0dfeb-2af0-4c91-bdfe-5270f64dff03",
       "multiverseid": 553904,
       "twoFaced": false,
+      "oracleCardName": "Ironsoul Enforcer",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Whenever this creature or a commander you control attacks alone, return target artifact card from your graveyard to the battlefield."
     },
     {
       "name": "Cyberdrive Awakener",
       "scryfallId": "2a2c0a2f-07fb-4cc0-9b99-e5ff4303028d",
       "multiverseid": 553909,
       "twoFaced": false,
+      "oracleCardName": "Cyberdrive Awakener",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Flying\nOther artifact creatures you control have flying.\nWhen this creature enters, each noncreature artifact you control becomes a 4/4 artifact creature until end of turn."
     },
     {
       "name": "Kappa Cannoneer",
       "scryfallId": "85a89077-b384-4fca-9d26-7297962c1541",
       "multiverseid": 553911,
       "twoFaced": false,
+      "oracleCardName": "Kappa Cannoneer",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever this creature or another artifact you control enters, put a +1/+1 counter on this creature. It can't be blocked this turn."
     },
     {
       "name": "Katsumasa, the Animator",
       "scryfallId": "ab4b5ff5-fd6a-4948-9c54-440bf6324bd1",
       "multiverseid": 553912,
       "twoFaced": false,
+      "oracleCardName": "Katsumasa, the Animator",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\n{2}{U}: Until end of turn, target noncreature artifact you control becomes an artifact creature and gains flying. If it's not a Vehicle, it has base power and toughness 1/1 until end of turn.\nAt the beginning of your upkeep, put a +1/+1 counter on each of up to three target noncreature artifacts."
     },
     {
       "name": "Research Thief",
       "scryfallId": "d0ef159d-657a-4566-b9e0-f545df230025",
       "multiverseid": 553913,
       "twoFaced": false,
+      "oracleCardName": "Research Thief",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Flash\nFlying\nWhenever an artifact creature you control deals combat damage to a player, draw a card."
     },
     {
       "name": "Aeronaut Admiral",
       "scryfallId": "943f7244-aa62-423f-aaaa-680bdfb4f47e",
       "multiverseid": 554162,
       "twoFaced": false,
+      "oracleCardName": "Aeronaut Admiral",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nVehicles you control have flying."
     },
     {
       "name": "Cataclysmic Gearhulk",
       "scryfallId": "f284c983-6d8e-4aca-85e5-46af8556fb5c",
       "multiverseid": 554164,
       "twoFaced": false,
+      "oracleCardName": "Cataclysmic Gearhulk",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Vigilance\nWhen this creature enters, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest."
     },
     {
       "name": "Indomitable Archangel",
       "scryfallId": "23f4b149-fad5-4ba2-a484-dd29d97d120d",
       "multiverseid": 554168,
       "twoFaced": false,
+      "oracleCardName": "Indomitable Archangel",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nMetalcraft — Artifacts you control have shroud as long as you control three or more artifacts. (An artifact with shroud can't be the target of spells or abilities.)"
     },
     {
       "name": "Myrsmith",
       "scryfallId": "218a4867-e04f-498a-b384-9d7c6d44fb4f",
       "multiverseid": 554169,
       "twoFaced": false,
+      "oracleCardName": "Myrsmith",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you cast an artifact spell, you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token."
     },
     {
       "name": "Sram, Senior Edificer",
       "scryfallId": "93887cc3-888e-479f-9cc2-a0b908e364a5",
       "multiverseid": 554171,
       "twoFaced": false,
+      "oracleCardName": "Sram, Senior Edificer",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card."
     },
     {
       "name": "Teshar, Ancestor's Apostle",
       "scryfallId": "c1f5dd1b-bc42-44a7-aabf-b1b9a5db584d",
       "multiverseid": 554173,
       "twoFaced": false,
+      "oracleCardName": "Teshar, Ancestor's Apostle",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you cast a historic spell, return target creature card with mana value 3 or less from your graveyard to the battlefield. (Artifacts, legendaries, and Sagas are historic.)"
     },
     {
       "name": "Emry, Lurker of the Loch",
       "scryfallId": "20fec02d-77af-4975-b410-7097c7c28e7e",
       "multiverseid": 554174,
       "twoFaced": false,
+      "oracleCardName": "Emry, Lurker of the Loch",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Emry enters, mill four cards.\n{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)"
     },
     {
       "name": "Etherium Sculptor",
       "scryfallId": "ed796f1a-683d-4ac5-af48-ca58a557a74f",
       "multiverseid": 554175,
       "twoFaced": false,
+      "oracleCardName": "Etherium Sculptor",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Artifact spells you cast cost {1} less to cast."
     },
     {
       "name": "Master of Etherium",
       "scryfallId": "ab02f8fb-5d1d-4a65-8283-de70d2a8d048",
       "multiverseid": 554177,
       "twoFaced": false,
+      "oracleCardName": "Master of Etherium",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1."
     },
     {
       "name": "Riddlesmith",
       "scryfallId": "640ff8a9-9dff-4fc7-bafa-6afaa3d9c153",
       "multiverseid": 554179,
       "twoFaced": false,
+      "oracleCardName": "Riddlesmith",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever you cast an artifact spell, you may draw a card. If you do, discard a card."
     },
     {
       "name": "Sai, Master Thopterist",
       "scryfallId": "2beffa94-862d-4cf1-9272-7fe0425a60e7",
       "multiverseid": 554180,
       "twoFaced": false,
+      "oracleCardName": "Sai, Master Thopterist",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.\n{1}{U}, Sacrifice two artifacts: Draw a card."
     },
     {
       "name": "Vedalken Engineer",
       "scryfallId": "2c3bbbe9-91a3-4da5-a1b4-6aed4bd684de",
       "multiverseid": 554183,
       "twoFaced": false,
+      "oracleCardName": "Vedalken Engineer",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "{T}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts."
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "261dd09a-6a68-4fe1-aed3-0892955e52c3",
       "multiverseid": 554184,
       "twoFaced": false,
+      "oracleCardName": "Whirler Rogue",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
     },
     {
       "name": "Arcanist's Owl",
       "scryfallId": "9849087e-ea39-4667-b879-51ecdff4bf6a",
       "multiverseid": 554217,
       "twoFaced": false,
+      "oracleCardName": "Arcanist's Owl",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{W/U}{W/U}{W/U}{W/U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhen this creature enters, look at the top four cards of your library. You may reveal an artifact or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Hanna, Ship's Navigator",
       "scryfallId": "be21540e-2048-45bf-b029-a6a2112f313a",
       "multiverseid": 554221,
       "twoFaced": false,
+      "oracleCardName": "Hanna, Ship's Navigator",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "{1}{W}{U}, {T}: Return target artifact or enchantment card from your graveyard to your hand."
     },
     {
       "name": "Raff Capashen, Ship's Mage",
       "scryfallId": "9250189d-357d-41cb-8dcf-45bed6599b40",
       "multiverseid": 554223,
       "twoFaced": false,
+      "oracleCardName": "Raff Capashen, Ship's Mage",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{U}",
+      "cmc": 4,
+      "oracleText": "Flash\nFlying\nYou may cast historic spells as though they had flash. (Artifacts, legendaries, and Sagas are historic.)"
     },
     {
       "name": "Foundry Inspector",
       "scryfallId": "412d8300-926a-4f94-9edf-e45f07349fb9",
       "multiverseid": 554234,
       "twoFaced": false,
+      "oracleCardName": "Foundry Inspector",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Artifact spells you cast cost {1} less to cast."
     },
     {
       "name": "Gold Myr",
       "scryfallId": "12331b1d-a561-4a8c-8e85-ed3a607ce508",
       "multiverseid": 554235,
       "twoFaced": false,
+      "oracleCardName": "Gold Myr",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {W}."
     },
     {
       "name": "Shimmer Myr",
       "scryfallId": "f5997e2d-a028-4863-801b-133c2e5ad209",
       "multiverseid": 554239,
       "twoFaced": false,
+      "oracleCardName": "Shimmer Myr",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Flash\nYou may cast artifact spells as though they had flash."
     },
     {
       "name": "Silver Myr",
       "scryfallId": "3ebcc053-21c6-4708-b9fc-532e3749962f",
       "multiverseid": 554240,
       "twoFaced": false,
+      "oracleCardName": "Silver Myr",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {U}."
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "3a80f639-b3e8-495a-a967-d9ecff80045d",
       "multiverseid": 554244,
       "twoFaced": false,
+      "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
     },
     {
       "name": "Organic Extinction",
       "scryfallId": "fea0f8be-c242-49dd-bae3-0b306107ac0b",
       "multiverseid": 553905,
       "twoFaced": false,
+      "oracleCardName": "Organic Extinction",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{W}{W}",
+      "cmc": 10,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures."
     },
     {
       "name": "Universal Surveillance",
       "scryfallId": "4b2f5584-df67-439b-b0f0-9c0fdf62f18f",
       "multiverseid": 553914,
       "twoFaced": false,
+      "oracleCardName": "Universal Surveillance",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{U}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw X cards."
     },
     {
       "name": "Thoughtcast",
       "scryfallId": "96e109f7-9be2-4ae0-a1e2-cfd296db84f1",
       "multiverseid": 554182,
       "twoFaced": false,
+      "oracleCardName": "Thoughtcast",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nDraw two cards."
     },
     {
       "name": "Dance of the Manse",
       "scryfallId": "4b32891f-ea17-4543-92ea-54097996a3cb",
       "multiverseid": 554218,
       "twoFaced": false,
+      "oracleCardName": "Dance of the Manse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{W}{U}",
+      "cmc": 2,
+      "oracleText": "Return up to X target artifact and/or non-Aura enchantment cards each with mana value X or less from your graveyard to the battlefield. If X is 6 or more, those permanents are 4/4 creatures in addition to their other types."
     },
     {
       "name": "Release to Memory",
       "scryfallId": "b45c4bbf-2c61-4d49-96c8-34a0fb0d6d02",
       "multiverseid": 553906,
       "twoFaced": false,
+      "oracleCardName": "Release to Memory",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Exile target opponent's graveyard. For each creature card exiled this way, create a 1/1 colorless Spirit creature token."
     },
     {
       "name": "Access Denied",
       "scryfallId": "1642df77-6fe8-47cf-b750-ca4dd9b331ba",
       "multiverseid": 553908,
       "twoFaced": false,
+      "oracleCardName": "Access Denied",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Counter target spell. Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell's mana value."
     },
     {
       "name": "Armed and Armored",
       "scryfallId": "133424c1-4d10-4da2-9d7c-c6ea00c0c98a",
       "multiverseid": 554163,
       "twoFaced": false,
+      "oracleCardName": "Armed and Armored",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it."
     },
     {
       "name": "Crush Contraband",
       "scryfallId": "08c5cdbe-2142-4ddc-b9b5-35ca60eb9970",
       "multiverseid": 554165,
       "twoFaced": false,
+      "oracleCardName": "Crush Contraband",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Choose one or both —\n• Exile target artifact.\n• Exile target enchantment."
     },
     {
       "name": "Dispatch",
       "scryfallId": "06bafa7d-1915-487a-96c8-b8aeafed20d4",
       "multiverseid": 554166,
       "twoFaced": false,
+      "oracleCardName": "Dispatch",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature."
     },
     {
       "name": "Generous Gift",
       "scryfallId": "f2bb6b0c-45e8-43ff-8fd6-78fbf6979b68",
       "multiverseid": 554167,
       "twoFaced": false,
+      "oracleCardName": "Generous Gift",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "80f46b80-0728-49bf-9d54-801eaa10b9b2",
       "multiverseid": 554172,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Reality Shift",
       "scryfallId": "363d4c8e-f7bb-4838-a543-625f71a41257",
       "multiverseid": 554178,
       "twoFaced": false,
+      "oracleCardName": "Reality Shift",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
     },
     {
       "name": "Aerial Surveyor",
       "scryfallId": "7c474f31-336d-44df-a7da-27aefd220e22",
       "multiverseid": 553902,
       "twoFaced": false,
+      "oracleCardName": "Aerial Surveyor",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever this Vehicle attacks, if defending player controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.\nCrew 2"
     },
     {
       "name": "Imposter Mech",
       "scryfallId": "59b7450c-3163-4f12-9af1-2e998a6c36cf",
       "multiverseid": 553910,
       "twoFaced": false,
+      "oracleCardName": "Imposter Mech",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "You may have this Vehicle enter as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.\nCrew 3"
     },
     {
       "name": "Imperial Recovery Unit",
       "scryfallId": "ac9b2c7b-c93b-4b97-999e-86faed8a26ee",
       "multiverseid": 548311,
       "twoFaced": false,
+      "oracleCardName": "Imperial Recovery Unit",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever this Vehicle attacks, return target creature or Vehicle card with mana value 2 or less from your graveyard to your hand.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Mobilizer Mech",
       "scryfallId": "cf4bb9de-ba7c-4916-b8ed-e2e644c06b58",
       "multiverseid": 548362,
       "twoFaced": false,
+      "oracleCardName": "Mobilizer Mech",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this Vehicle becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Prodigy's Prototype",
       "scryfallId": "be046e0a-6509-450b-b34f-29d5a5e3472e",
       "multiverseid": 548544,
       "twoFaced": false,
+      "oracleCardName": "Prodigy's Prototype",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with \"This token crews Vehicles as though its power were 2 greater.\"\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Surgehacker Mech",
       "scryfallId": "3c4bf679-01cc-4786-a3bd-89c8ae70fdfa",
       "multiverseid": 548573,
       "twoFaced": false,
+      "oracleCardName": "Surgehacker Mech",
       "colorIdentity": [],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Menace\nWhen this Vehicle enters, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.\nCrew 4"
     },
     {
       "name": "Parhelion II",
       "scryfallId": "871279e6-9a59-470e-8acc-fd5fe4fda5b3",
       "multiverseid": 554170,
       "twoFaced": false,
+      "oracleCardName": "Parhelion II",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{6}{W}{W}",
+      "cmc": 8,
+      "oracleText": "Flying, first strike, vigilance\nWhenever Parhelion II attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "7bdf4615-7a08-40fe-9e04-cdbe10a62e06",
       "multiverseid": 554226,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "40b0c4e7-1b0f-44ab-ac52-d86d449f555a",
       "multiverseid": 554227,
       "twoFaced": false,
+      "oracleCardName": "Azorius Signet",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Colossal Plow",
       "scryfallId": "53b1bbce-db5b-41a5-ab0a-22c3cd4cfd8e",
       "multiverseid": 554230,
       "twoFaced": false,
+      "oracleCardName": "Colossal Plow",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Whenever this Vehicle attacks, add {W}{W}{W} and you gain 3 life. Until end of turn, you don't lose this mana as steps and phases end.\nCrew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Cultivator's Caravan",
       "scryfallId": "c7bddb42-b754-4121-8ff7-e4e50df2eac6",
       "multiverseid": 554231,
       "twoFaced": false,
+      "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Fellwar Stone",
       "scryfallId": "bb2f8ecb-a2d6-4500-b3c0-3a8a1c55a9fe",
       "multiverseid": 554232,
       "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Mirage Mirror",
       "scryfallId": "4eab5ee9-334d-4f0e-8217-c69dc8b2db8f",
       "multiverseid": 554236,
       "twoFaced": false,
+      "oracleCardName": "Mirage Mirror",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
     },
     {
       "name": "Peacewalker Colossus",
       "scryfallId": "e66a27a1-f15d-46d6-8247-f098603957f1",
       "multiverseid": 554237,
       "twoFaced": false,
+      "oracleCardName": "Peacewalker Colossus",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{1}{W}: Another target Vehicle you control becomes an artifact creature until end of turn.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Raiders' Karve",
       "scryfallId": "a24dfde7-0b29-4adb-914a-90eb2dd09ece",
       "multiverseid": 554238,
       "twoFaced": false,
+      "oracleCardName": "Raiders' Karve",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Whenever this Vehicle attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Skysovereign, Consul Flagship",
       "scryfallId": "4f8075be-8932-49b3-990b-4b365fa27e94",
       "multiverseid": 554241,
       "twoFaced": false,
+      "oracleCardName": "Skysovereign, Consul Flagship",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever Skysovereign enters or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Smuggler's Copter",
       "scryfallId": "2680ed41-da35-475a-9d80-ae2f4686feed",
       "multiverseid": 554242,
       "twoFaced": false,
+      "oracleCardName": "Smuggler's Copter",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this Vehicle attacks or blocks, you may draw a card. If you do, discard a card.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "3917f744-b876-47ae-94ad-f72b215ff1e7",
       "multiverseid": 554243,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Weatherlight",
       "scryfallId": "c86cf087-c50a-487a-bc1a-eee5410f14d9",
       "multiverseid": 554247,
       "twoFaced": false,
+      "oracleCardName": "Weatherlight",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever Weatherlight deals combat damage to a player, look at the top five cards of your library. You may reveal a historic card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. (Artifacts, legendaries, and Sagas are historic.)\nCrew 3"
     },
     {
       "name": "Swift Reconfiguration",
       "scryfallId": "975dcfab-0281-4fee-92aa-021ea6c524c7",
       "multiverseid": 553907,
       "twoFaced": false,
+      "oracleCardName": "Swift Reconfiguration",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Flash\nEnchant creature or Vehicle\nEnchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types. (It's not a creature unless it's crewed.)"
     },
     {
       "name": "Thopter Spy Network",
       "scryfallId": "e98f6c14-dfc4-41a8-a66f-d98ca10b2dc9",
       "multiverseid": 554181,
       "twoFaced": false,
+      "oracleCardName": "Thopter Spy Network",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
     },
     {
       "name": "Command Tower",
       "scryfallId": "a5efe226-a6fc-4fdb-a3d4-2b1ae0d667a8",
       "multiverseid": 554249,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "d9ed9f21-5dc4-484d-bc31-8efc81254744",
       "multiverseid": 554250,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Port Town",
       "scryfallId": "df75dbb7-b042-49f9-8c8d-fc81139a9d9c",
       "multiverseid": 554256,
       "twoFaced": false,
+      "oracleCardName": "Port Town",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "71c171ea-e048-4dd5-8357-b905de2b9906",
       "multiverseid": 554257,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "8053114b-c8a2-4634-b0e0-79ff6681d4ec",
       "multiverseid": 554259,
       "twoFaced": false,
+      "oracleCardName": "Skycloud Expanse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Spire of Industry",
       "scryfallId": "db4f8604-4c00-4efa-819f-f643a78e4119",
       "multiverseid": 554260,
       "twoFaced": false,
+      "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "999538db-d65c-481b-82c8-ff7f71736c82",
       "multiverseid": 554262,
       "twoFaced": false,
+      "oracleCardName": "Temple of Enlightenment",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "5fc26aa1-58b9-41b5-95b4-7e9bf2309b54",
       "multiverseid": 553460,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "4db21784-e56b-46bd-97a4-3770f2ef5caf",
       "multiverseid": 553461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0f66d573-5da4-4b3c-ab06-bb330cff2c9a",
       "multiverseid": 553462,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8eae091d-8bd3-44d0-a083-6b4078303bc3",
       "multiverseid": 553463,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.328Z",
+    "retrievedDate": "2026-02-20T03:10:20.290Z",
     "sourceUrl": "BuckleUp_NEC.json",
     "deckSource": "precon",
     "createdAt": "2022-02-18T00:00:00.000Z"

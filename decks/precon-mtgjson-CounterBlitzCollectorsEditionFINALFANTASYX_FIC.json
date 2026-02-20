@@ -9,12 +9,19 @@
       "scryfallId": "6021debf-8d5d-40e4-a197-3751b3ef5701",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tidus, Yuna's Guardian",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{W}{U}",
+      "cmc": 3,
+      "oracleText": "At the beginning of combat on your turn, you may move a counter from target creature you control onto a second target creature you control.\nCheer — Whenever one or more creatures you control with counters on them deal combat damage to a player, you may draw a card and proliferate. Do this only once each turn."
     }
   ],
   "cards": [
@@ -23,1002 +30,1663 @@
       "scryfallId": "fda23b02-c650-4092-a35d-ae330547c425",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Altered Ego",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "This spell can't be countered.\nYou may have this creature enter as a copy of any creature on the battlefield, except it enters with X additional +1/+1 counters on it."
     },
     {
       "name": "An Offer You Can't Refuse",
       "scryfallId": "fe1023a2-c096-4c62-8627-e865b348ba02",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "An Offer You Can't Refuse",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "9df4b5a2-95bf-4268-9d75-6065176651d1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "77df073b-49dc-4743-82a3-d595bc938761",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Auron, Venerated Guardian",
       "scryfallId": "cb82d614-13d8-40ec-9213-8e6852d37c9c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Auron, Venerated Guardian",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Vigilance\nShooting Star — Whenever Auron attacks, put a +1/+1 counter on it. When you do, exile target creature defending player controls with power less than Auron's power until Auron leaves the battlefield."
     },
     {
       "name": "Bane of Progress",
       "scryfallId": "5fc6876d-7441-42ac-b9a1-c10a0f6a387a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Bane of Progress",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for each permanent destroyed this way."
     },
     {
       "name": "Blitzball Stadium",
       "scryfallId": "771808d9-d0c8-418b-ab6c-1ae6fc07ca20",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Blitzball Stadium",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{X}{U}",
+      "cmc": 1,
+      "oracleText": "When this artifact enters, support X. (Put a +1/+1 counter on each of up to X target creatures.)\nGo for the Goal! — {3}, {T}: Until end of turn, target creature gains \"Whenever this creature deals combat damage to a player, draw a card for each kind of counter on it\" and it can't be blocked this turn."
     },
     {
       "name": "Bred for the Hunt",
       "scryfallId": "a06fe501-0e25-46ee-8ed8-055f3bf636cd",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Bred for the Hunt",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card."
     },
     {
       "name": "Brushland",
       "scryfallId": "c2bc3f62-1e3a-4ec3-a83b-f6547d7c7b0d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Brushland",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "5d33aeaa-df27-4c41-9926-79e9dc6a9c69",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Canopy Vista",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Chasm Skulker",
       "scryfallId": "886ce333-44d7-458e-a3bb-a58d1d7fc69b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chasm Skulker",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you draw a card, put a +1/+1 counter on this creature.\nWhen this creature dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on this creature. (They can't be blocked as long as defending player controls an Island.)"
     },
     {
       "name": "Chocobo Knights",
       "scryfallId": "e874e435-7ade-4299-9803-1358c0f07a8f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chocobo Knights",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Whenever you attack, creatures you control with counters on them gain double strike until end of turn."
     },
     {
       "name": "Collective Effort",
       "scryfallId": "af2dcc4d-f4bf-49e4-9103-9b4bc9545ae4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Collective Effort",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "Escalate—Tap an untapped creature you control. (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Destroy target creature with power 4 or greater.\n• Destroy target enchantment.\n• Put a +1/+1 counter on each creature target player controls."
     },
     {
       "name": "Command Tower",
       "scryfallId": "605b2218-0eab-4c9d-a5d8-7fab342137a0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Damning Verdict",
       "scryfallId": "8d82e20d-09c0-4b16-9b25-4790924aa0b6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Damning Verdict",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all creatures with no counters on them."
     },
     {
       "name": "Destroy Evil",
       "scryfallId": "694e5322-b7c9-4f38-97ce-0b03a391a453",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Destroy Evil",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target creature with toughness 4 or greater.\n• Destroy target enchantment."
     },
     {
       "name": "Duskshell Crawler",
       "scryfallId": "2ce4ebd2-c3e6-4299-bdb7-8e5eb1834168",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Duskshell Crawler",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, put a +1/+1 counter on target creature.\nEach creature you control with a +1/+1 counter on it has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)"
     },
     {
       "name": "Endless Detour",
       "scryfallId": "33a37435-bd6c-4330-8138-98a2afa36e54",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Endless Detour",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}{W}{U}",
+      "cmc": 3,
+      "oracleText": "The owner of target spell, nonland permanent, or card in a graveyard puts it on their choice of the top or bottom of their library."
     },
     {
       "name": "Everflowing Chalice",
       "scryfallId": "5d659b0c-dc93-464f-847f-2af075caf145",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{0}",
+      "cmc": 0,
+      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "351f791c-4bee-4fce-aee4-d0214ca0c945",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "47c2b572-b54a-444c-8d74-b005e94d751f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Farewell",
       "scryfallId": "4d8b6418-da30-4c68-b87c-3936eb77620c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Farewell",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Choose one or more —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all graveyards."
     },
     {
       "name": "Farseek",
       "scryfallId": "f9b52ee8-3cde-4082-8a6c-0a82caa3505d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Farseek",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Fathom Mage",
       "scryfallId": "4bb9c7e1-46a6-4acf-8415-221d9c9d9d23",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fathom Mage",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever a +1/+1 counter is put on this creature, you may draw a card."
     },
     {
       "name": "Fight Rigging",
       "scryfallId": "ed314c9c-ce86-4782-981f-7956ceca564c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fight Rigging",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control a creature with power 7 or greater, you may play the exiled card without paying its mana cost."
     },
     {
       "name": "Flooded Grove",
       "scryfallId": "7b280a73-9246-4da4-8fc1-a5683edd8aab",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Flooded Grove",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
     },
     {
       "name": "Forest",
       "scryfallId": "2036f825-ef57-4a40-b45f-0668d9c8ec6a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2036f825-ef57-4a40-b45f-0668d9c8ec6a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2036f825-ef57-4a40-b45f-0668d9c8ec6a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forge of Heroes",
       "scryfallId": "7ac60dfc-040e-4cc1-a967-3c915770fc8e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
     },
     {
       "name": "Forgotten Ancient",
       "scryfallId": "de0f3be6-4e5b-4186-af49-fe3dadadcd01",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Ancient",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
     },
     {
       "name": "Fortified Village",
       "scryfallId": "1028b210-db71-4bbd-8bd7-59dc4032f426",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fortified Village",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Gatta and Luzzu",
       "scryfallId": "4742c222-1f29-4e1a-a545-798d175255ca",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gatta and Luzzu",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flash\nWhen Gatta and Luzzu enters, choose target creature you control. If damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it."
     },
     {
       "name": "Generous Patron",
       "scryfallId": "8f4a43b9-6ee8-4b89-b204-83093fba8de4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Generous Patron",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, support 2. (Put a +1/+1 counter on each of up to two other target creatures.)\nWhenever you put one or more counters on a creature you don't control, draw a card."
     },
     {
       "name": "Glacial Fortress",
       "scryfallId": "d75d748f-38c3-4a7f-8211-db62d5314180",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Glacial Fortress",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Grateful Apparition",
       "scryfallId": "755e0d2b-9a5e-4a13-b085-13c33e120de0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Grateful Apparition",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this creature deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Gyre Sage",
       "scryfallId": "236c4e0d-1a54-4024-85ef-4d73028bfb87",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gyre Sage",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{T}: Add {G} for each +1/+1 counter on this creature."
     },
     {
       "name": "Hardened Scales",
       "scryfallId": "1219d294-22b3-45de-91d9-8d80e27c2fd6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hardened Scales",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead."
     },
     {
       "name": "Hinterland Harbor",
       "scryfallId": "9f89d20d-bb8b-4da8-97c7-1058c1b60325",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hinterland Harbor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Idyllic Beachfront",
       "scryfallId": "afe2ebec-0310-4b2f-ace4-fb293a1e4837",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Idyllic Beachfront",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped."
     },
     {
       "name": "Incubation Druid",
       "scryfallId": "348d4546-3da5-4f78-82f3-9a79d2f9b0d1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Incubation Druid",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any type that a land you control could produce. If this creature has a +1/+1 counter on it, add three mana of that type instead.\n{3}{G}{G}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)"
     },
     {
       "name": "Inexorable Tide",
       "scryfallId": "a992fad9-1dd1-47fe-b315-a62f7875f3be",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Inexorable Tide",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Whenever you cast a spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Inspiring Call",
       "scryfallId": "be938240-214d-4726-ba2a-aaedc5bbe7ba",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Call",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
     },
     {
       "name": "Island",
       "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "46255a65-b735-4888-85db-3ab2ab3d903c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Kimahri, Valiant Guardian",
       "scryfallId": "42006bd4-f6f0-4638-a50e-46d9d7a54b6e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Kimahri, Valiant Guardian",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Vigilance\nRonso Rage — At the beginning of combat on your turn, put a +1/+1 counter on Kimahri and tap target creature an opponent controls. Then you may have Kimahri become a copy of that creature, except its name is Kimahri, Valiant Guardian and it has vigilance and this ability."
     },
     {
       "name": "Lord Jyscal Guado",
       "scryfallId": "134ef3cd-01ac-4d60-a277-df7ab7b8f88c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Lord Jyscal Guado",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nAt the beginning of each end step, if you put a counter on a creature this turn, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Lulu, Stern Guardian",
       "scryfallId": "9c0b1d5d-2b10-4dde-bb95-8cbf780cca97",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Lulu, Stern Guardian",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever an opponent attacks you, choose target creature attacking you. Put a stun counter on that creature.\n{3}{U}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Luminous Broodmoth",
       "scryfallId": "e6fc5c0b-0b64-491d-b312-b9b2133225d9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Luminous Broodmoth",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever a creature you control without flying dies, return it to the battlefield under its owner's control with a flying counter on it."
     },
     {
       "name": "Maester Seymour",
       "scryfallId": "f6a4267b-aa76-4dec-bc72-252236c44968",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Maester Seymour",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "At the beginning of combat on your turn, put a number of +1/+1 counters equal to Maester Seymour's power on another target creature you control.\n{3}{G}{G}: Monstrosity X, where X is the number of counters among creatures you control. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)"
     },
     {
       "name": "Nesting Grounds",
       "scryfallId": "e99933e3-9237-45e8-b067-44367fc21430",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Nesting Grounds",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery."
     },
     {
       "name": "O'aka, Traveling Merchant",
       "scryfallId": "9d860089-fb88-4736-b7f4-b605551bedc8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "O'aka, Traveling Merchant",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "{T}, Remove a counter from a nonland permanent you control: Draw a card."
     },
     {
       "name": "Overflowing Basin",
       "scryfallId": "2d0812ef-a3b7-49d0-b1b8-ec0c8891b887",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Overflowing Basin",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{U}."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "4dd83a5d-1908-4141-8449-fac5e77cd6c0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Path of Discovery",
       "scryfallId": "ad09a5c2-3081-4d5d-9c0f-037e045e9045",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path of Discovery",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature you control enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)"
     },
     {
       "name": "Path to Exile",
       "scryfallId": "bba46570-dca2-4849-966a-0972e6a4c506",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path to Exile",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Plains",
       "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "dec72b07-8f41-4d42-a455-794bf106302c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIN"
+      "set": "FIN",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Port Town",
       "scryfallId": "f1ac3b7f-a1db-49df-ba02-fc80cb2f70af",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Port Town",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "ce3a0ad9-6b7a-470c-8e49-4121fea72c89",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Promise of Loyalty",
       "scryfallId": "2c6e2b9e-2efb-42f1-9898-77918a7bb1b2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Promise of Loyalty",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
     },
     {
       "name": "Protection Magic",
       "scryfallId": "917e9267-010d-450c-ab98-6f861250c437",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Protection Magic",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Put a shield counter on each of up to three target creatures. (If a creature with a shield counter would be dealt damage or destroyed, remove a shield counter from it instead.)"
     },
     {
       "name": "Pull from Tomorrow",
       "scryfallId": "31d56cda-ee00-4037-a2e3-e17286750b0b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Pull from Tomorrow",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "Draw X cards, then discard a card."
     },
     {
       "name": "Radiant Grove",
       "scryfallId": "977bf5a1-81f2-4c5b-a227-347bf8e19554",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Radiant Grove",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped."
     },
     {
       "name": "Rampant Rejuvenator",
       "scryfallId": "9ce2aa8e-b0c4-4e22-84eb-94b9e5ca6f76",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rampant Rejuvenator",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\nWhen this creature dies, search your library for up to X basic land cards, where X is this creature's power, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Resourceful Defense",
       "scryfallId": "fe1d5e11-0c74-4de0-a8be-428af44be684",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Resourceful Defense",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on target permanent you control.\n{4}{W}: Move any number of counters from target permanent you control onto a second target permanent you control."
     },
     {
       "name": "Rikku, Resourceful Guardian",
       "scryfallId": "d377cc5f-f6eb-4ed0-a358-af22245f3550",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rikku, Resourceful Guardian",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you put one or more counters on a creature, until end of turn, that creature can't be blocked by creatures your opponents control.\nSteal — {1}, {T}: Move a counter from target creature an opponent controls onto target creature you control. Activate only as a sorcery."
     },
     {
       "name": "Scholar of New Horizons",
       "scryfallId": "99e1d96f-c326-49b2-9a24-6e3e5465047e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Scholar of New Horizons",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "This creature enters with a +1/+1 counter on it.\n{T}, Remove a counter from a permanent you control: Search your library for a Plains card and reveal it. If an opponent controls more lands than you, you may put that card onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand. Then shuffle."
     },
     {
       "name": "Seaside Citadel",
       "scryfallId": "a4fa7ef6-4a14-4820-b646-8945ff3b4786",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Seaside Citadel",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
     },
     {
       "name": "Shelinda, Yevon Acolyte",
       "scryfallId": "6f2cec5d-50ea-4d0f-8925-eba06222d015",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shelinda, Yevon Acolyte",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{W}",
+      "cmc": 2,
+      "oracleText": "Lifelink\nWhenever another creature you control enters, put a +1/+1 counter on that creature if its power is less than Shelinda's power. Otherwise, put a +1/+1 counter on Shelinda."
     },
     {
       "name": "Sin, Unending Cataclysm",
       "scryfallId": "fc0474b7-3d32-49b4-80c7-822de6cdbfa6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sin, Unending Cataclysm",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{U}",
+      "cmc": 7,
+      "oracleText": "Flying, trample\nAs Sin enters, remove all counters from any number of artifacts, creatures, and enchantments. Sin enters with X +1/+1 counters on it, where X is twice the number of counters removed this way.\nWhen Sin dies, put its counters on target creature you control, then shuffle this card into its owner's library."
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "0972c465-0369-4ac2-9912-2898fad1bdba",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Skycloud Expanse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "9a34ac23-e318-4c0b-ab4c-e1eaa0e2547e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Sphere Grid",
       "scryfallId": "51188b1d-cb45-40f7-a3c2-5652b0679e02",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sphere Grid",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.\nUnlock Ability — Creatures you control with +1/+1 counters on them have reach and trample."
     },
     {
       "name": "Summon: Ixion",
       "scryfallId": "acb35dcb-0bee-4deb-88bf-ffa1f110c67b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Summon: Ixion",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Aerospark — Exile target creature an opponent controls until this Saga leaves the battlefield.\nII, III — Put a +1/+1 counter on each of up to two target creatures you control. You gain 2 life.\nFirst strike"
     },
     {
       "name": "Summon: Magus Sisters",
       "scryfallId": "76a8cae7-e6ea-45eb-be8d-0e6a29b98aa6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Summon: Magus Sisters",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II, III — Choose one at random —\n• Combine Powers! — Put three +1/+1 counters on target creature.\n• Defense! — Put a shield counter on target creature. You gain 3 life.\n• Fight! — This creature fights up to one target creature an opponent controls.\nHaste"
     },
     {
       "name": "Summon: Valefor",
       "scryfallId": "e0474d99-48e5-4e60-8cd6-537a10bcfea5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Summon: Valefor",
       "colorIdentity": [
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Sonic Wings — Each opponent chooses a creature with the greatest mana value among creatures they control. Return those creatures to their owners' hands.\nII, III, IV — Tap up to one target creature and put a stun counter on it.\nFlying"
     },
     {
       "name": "Summon: Yojimbo",
       "scryfallId": "cdbc2d28-ea35-47c6-af7e-07924e9d5794",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Summon: Yojimbo",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Exile target artifact, enchantment, or tapped creature an opponent controls.\nII, III — Until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures.\nIV — Create X Treasure tokens, where X is the number of opponents who control a creature with power 4 or greater.\nVigilance"
     },
     {
       "name": "Summoner's Sending",
       "scryfallId": "8150be1a-4bac-4c67-9165-9d6fc04a69cc",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Summoner's Sending",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "At the beginning of your end step, you may exile target creature card from a graveyard. If you do, create a 1/1 white Spirit creature token with flying. Put a +1/+1 counter on it if the exiled card's mana value is 4 or greater."
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "81e28e36-893f-4b34-aef7-5f2c15dc231c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sungrass Prairie",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{W}."
     },
     {
       "name": "Sunpetal Grove",
       "scryfallId": "5b0275b1-64bc-4c78-ac1a-9bd31399b946",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sunpetal Grove",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Sunscorch Regent",
       "scryfallId": "25774e8c-bbc1-4a53-926c-7c01c2ac908f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sunscorch Regent",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on this creature and you gain 1 life."
     },
     {
       "name": "Tangled Islet",
       "scryfallId": "defd23e2-9459-45b1-ba18-3661b220fac6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tangled Islet",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped."
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "fc99e7b0-0f2c-4a2b-938b-abd31b71cd4f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of Enlightenment",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "3ede4ff9-b0f6-4075-b7ad-3ec90497d0f6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of Mystery",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
     },
     {
       "name": "Temple of Plenty",
       "scryfallId": "04dc78e1-50d8-493a-9c1f-9c1d95343fff",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of Plenty",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "f1cb4775-8e14-4c83-a417-40d1432ac90a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Three Visits",
       "scryfallId": "5bcf7495-a8af-4c7f-a27d-be27748f64e0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Three Visits",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
     },
     {
       "name": "Tireless Tracker",
       "scryfallId": "fd5a8a4c-4d66-48a1-bc3e-caaa2dbb64d4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tireless Tracker",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, put a +1/+1 counter on this creature."
     },
     {
       "name": "Together Forever",
       "scryfallId": "834c5cf1-69a7-462c-822e-47a43a86f9a9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Together Forever",
       "colorIdentity": [
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{W}{W}",
+      "cmc": 2,
+      "oracleText": "When this enchantment enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand."
     },
     {
       "name": "Tromell, Seymour's Butler",
       "scryfallId": "0f4f6de2-1c3d-4f3b-b999-70879f9cbb26",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tromell, Seymour's Butler",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Each other nontoken creature you control enters with an additional +1/+1 counter on it.\n{1}, {T}: Proliferate X times, where X is the number of nontoken creatures you control that entered this turn. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Vineglimmer Snarl",
       "scryfallId": "353758ce-419f-4f6a-93f4-42a746c4a26d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Vineglimmer Snarl",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Wakka, Devoted Guardian",
       "scryfallId": "9f7fcef4-99fc-4df2-b0f5-4398f71b2fcf",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Wakka, Devoted Guardian",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{W}",
+      "cmc": 4,
+      "oracleText": "Reach, trample\nWhenever Wakka deals combat damage to a player, destroy up to one target artifact that player controls and put a +1/+1 counter on Wakka.\nBlitzball Captain — At the beginning of your end step, if a counter was put on Wakka this turn, put a +1/+1 counter on each other creature you control."
     },
     {
       "name": "Walking Ballista",
       "scryfallId": "50507ec0-72ff-4110-a73c-b6f256ac2e35",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Walking Ballista",
       "colorIdentity": [],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{X}{X}",
+      "cmc": 0,
+      "oracleText": "This creature enters with X +1/+1 counters on it.\n{4}: Put a +1/+1 counter on this creature.\nRemove a +1/+1 counter from this creature: It deals 1 damage to any target."
     },
     {
       "name": "Yuna, Grand Summoner",
       "scryfallId": "a8d64705-c6ce-4bfa-a444-aa06ea9ee122",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Yuna, Grand Summoner",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{W}{U}",
+      "cmc": 4,
+      "oracleText": "Grand Summon — {T}: Add one mana of any color. When you next cast a creature spell this turn, that creature enters with two additional +1/+1 counters on it.\nWhenever another permanent you control is put into a graveyard from the battlefield, if it had one or more counters on it, you may put that number of +1/+1 counters on target creature."
     },
     {
       "name": "Yuna's Decision",
       "scryfallId": "5044eedb-f7d9-4b65-aa5b-fb494d00facd",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Yuna's Decision",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Choose one —\n• Continue the Pilgrimage — Sacrifice a creature. If you do, draw a card, then you may put a creature card and/or a land card from your hand onto the battlefield.\n• Find Another Way — Return one or two target permanent cards from your graveyard to your hand."
     },
     {
       "name": "Yuna's Whistle",
       "scryfallId": "8e591a23-15c3-4a65-a9d2-d1ce0f83552c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Yuna's Whistle",
       "colorIdentity": [
         "G"
       ],
-      "set": "FIC"
+      "set": "FIC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order. When you reveal a creature card this way, put X +1/+1 counters on target creature you control, where X is the mana value of that card."
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.435Z",
+    "retrievedDate": "2026-02-20T03:10:20.425Z",
     "sourceUrl": "CounterBlitzCollectorSEditionFinalFantasyX_FIC.json",
     "deckSource": "precon",
     "createdAt": "2025-06-13T00:00:00.000Z"

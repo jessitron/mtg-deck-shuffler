@@ -9,11 +9,18 @@
       "scryfallId": "e738e675-4fd1-4bc3-97f5-71d0e2fc3f2e",
       "multiverseid": 642442,
       "twoFaced": false,
+      "oracleCardName": "Hakbal of the Surging Soul",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "At the beginning of combat on your turn, each Merfolk creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the exploring creature, then put the card back or put it into your graveyard.)\nWhenever Hakbal attacks, you may put a land card from your hand onto the battlefield. If you don't, draw a card."
     }
   ],
   "cards": [
@@ -22,988 +29,1647 @@
       "scryfallId": "1444a798-4e94-4bcc-b16a-0f20334f2550",
       "multiverseid": 642146,
       "twoFaced": false,
+      "oracleCardName": "Xolatoyac, the Smiling Flood",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{U}",
+      "cmc": 6,
+      "oracleText": "Whenever Xolatoyac enters or attacks, put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it.\nAt the beginning of your end step, untap each permanent you control with a counter on it."
     },
     {
       "name": "Mist Dancer",
       "scryfallId": "97d8fcf4-4606-4560-87da-a3c1a9d8da7e",
       "multiverseid": 640036,
       "twoFaced": false,
+      "oracleCardName": "Mist Dancer",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Flying\nOther Merfolk you control get +1/+0 and have flying.\nEncore {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
     },
     {
       "name": "Ripples of Potential",
       "scryfallId": "b70e6ded-2c25-4608-9ae0-a64e13aa1d2a",
       "multiverseid": 640037,
       "twoFaced": false,
+      "oracleCardName": "Ripples of Potential",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. Treat phased-out permanents and anything attached to them as though they don't exist until their controller's next turn.)"
     },
     {
       "name": "Wave Goodbye",
       "scryfallId": "45803e98-5d99-4bd9-adac-37c854649167",
       "multiverseid": 640039,
       "twoFaced": false,
+      "oracleCardName": "Wave Goodbye",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Return each creature without a +1/+1 counter on it to its owner's hand."
     },
     {
       "name": "Bygone Marvels",
       "scryfallId": "3cc95fd4-901e-4a96-9c20-9e8ecf5cfb7c",
       "multiverseid": 640049,
       "twoFaced": false,
+      "oracleCardName": "Bygone Marvels",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}{G}",
+      "cmc": 2,
+      "oracleText": "Descend 8 — When you cast this spell, if there are eight or more permanent cards in your graveyard, copy this spell twice. You may choose new targets for the copies.\nReturn target permanent card from your graveyard to your hand. Exile Bygone Marvels."
     },
     {
       "name": "Deeproot Historian",
       "scryfallId": "fffb73ed-5748-4c2a-afe5-e29bf954b578",
       "multiverseid": 640051,
       "twoFaced": false,
+      "oracleCardName": "Deeproot Historian",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Merfolk and Druid cards in your graveyard have retrace. (You may cast cards with retrace from your graveyard by discarding a land card in addition to paying their other costs.)"
     },
     {
       "name": "Topography Tracker",
       "scryfallId": "0f1686aa-6b34-4eb7-9811-bc1a8d8b46e9",
       "multiverseid": 640055,
       "twoFaced": false,
+      "oracleCardName": "Topography Tracker",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, create a Map token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")\nIf a creature you control would explore, instead it explores, then it explores again."
     },
     {
       "name": "Tributary Instructor",
       "scryfallId": "af57728e-6f64-4df1-bdf8-55137b8d129e",
       "multiverseid": 640056,
       "twoFaced": false,
+      "oracleCardName": "Tributary Instructor",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card."
     },
     {
       "name": "Singer of Swift Rivers",
       "scryfallId": "43208437-9341-4bea-a1e0-556d9a5cb25b",
       "multiverseid": 640058,
       "twoFaced": false,
+      "oracleCardName": "Singer of Swift Rivers",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Flash\nWhen this creature enters, put a shield counter on another target creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nYou may cast Merfolk spells as though they had flash."
     },
     {
       "name": "Benthic Biomancer",
       "scryfallId": "b83dd3a5-d9cc-470d-a9d0-bf9d270e9eb6",
       "multiverseid": 640441,
       "twoFaced": false,
+      "oracleCardName": "Benthic Biomancer",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "{1}{U}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever one or more +1/+1 counters are put on this creature, draw a card, then discard a card."
     },
     {
       "name": "Commit // Memory",
       "scryfallId": "855af9a8-31fc-4290-8204-04ee026f8853",
       "multiverseid": 640443,
       "twoFaced": false,
+      "oracleCardName": "Commit // Memory",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 10,
+      "oracleText": "Put target spell or nonland permanent into its owner's library second from the top."
     },
     {
       "name": "Coralhelm Commander",
       "scryfallId": "46246d37-dfce-4977-854e-ee79d47cea05",
       "multiverseid": 640444,
       "twoFaced": false,
+      "oracleCardName": "Coralhelm Commander",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-3\n3/3\nFlying\nLEVEL 4+\n4/4\nFlying\nOther Merfolk creatures you control get +1/+1."
     },
     {
       "name": "Curse of the Swine",
       "scryfallId": "55482714-7fc2-488f-b9d6-e3ed70dffaab",
       "multiverseid": 640446,
       "twoFaced": false,
+      "oracleCardName": "Curse of the Swine",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
     },
     {
       "name": "Emperor Mihail II",
       "scryfallId": "444ccd33-e88f-4d37-8a99-e10096eef5d3",
       "multiverseid": 640451,
       "twoFaced": false,
+      "oracleCardName": "Emperor Mihail II",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "You may look at the top card of your library any time.\nYou may cast Merfolk spells from the top of your library.\nWhenever you cast a Merfolk spell, you may pay {1}. If you do, create a 1/1 blue Merfolk creature token."
     },
     {
       "name": "Herald of Secret Streams",
       "scryfallId": "e6e1f2ab-e437-444e-9edb-73278d9c7616",
       "multiverseid": 640454,
       "twoFaced": false,
+      "oracleCardName": "Herald of Secret Streams",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Creatures you control with +1/+1 counters on them can't be blocked."
     },
     {
       "name": "Kindred Discovery",
       "scryfallId": "8d264ad1-10a3-41ba-9740-48f2c07a0ec3",
       "multiverseid": 640455,
       "twoFaced": false,
+      "oracleCardName": "Kindred Discovery",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever a creature you control of the chosen type enters or attacks, draw a card."
     },
     {
       "name": "Kopala, Warden of Waves",
       "scryfallId": "0b018020-73e0-437c-a130-298b2f738c6f",
       "multiverseid": 640456,
       "twoFaced": false,
+      "oracleCardName": "Kopala, Warden of Waves",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Spells your opponents cast that target a Merfolk you control cost {2} more to cast.\nAbilities your opponents activate that target a Merfolk you control cost {2} more to activate."
     },
     {
       "name": "Master of the Pearl Trident",
       "scryfallId": "6b48dc56-667c-4fde-8175-952463e233cc",
       "multiverseid": 640458,
       "twoFaced": false,
+      "oracleCardName": "Master of the Pearl Trident",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Other Merfolk creatures you control get +1/+1 and have islandwalk. (They can't be blocked as long as defending player controls an Island.)"
     },
     {
       "name": "Merfolk Sovereign",
       "scryfallId": "ac545978-ad30-4c6b-8add-3edd6c0eb7f3",
       "multiverseid": 640460,
       "twoFaced": false,
+      "oracleCardName": "Merfolk Sovereign",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Other Merfolk creatures you control get +1/+1.\n{T}: Target Merfolk creature can't be blocked this turn."
     },
     {
       "name": "Reflections of Littjara",
       "scryfallId": "d7689217-6124-4b2c-ab8b-7067de7f6e22",
       "multiverseid": 640464,
       "twoFaced": false,
+      "oracleCardName": "Reflections of Littjara",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever you cast a spell of the chosen type, copy that spell. (A copy of a permanent spell becomes a token.)"
     },
     {
       "name": "Seafloor Oracle",
       "scryfallId": "a746c2ff-60f3-41c4-853d-e5159d005bea",
       "multiverseid": 640466,
       "twoFaced": false,
+      "oracleCardName": "Seafloor Oracle",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever a Merfolk you control deals combat damage to a player, draw a card."
     },
     {
       "name": "Surgespanner",
       "scryfallId": "3303c5cb-0064-47c0-bc91-228acd82348e",
       "multiverseid": 640470,
       "twoFaced": false,
+      "oracleCardName": "Surgespanner",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever this creature becomes tapped, you may pay {1}{U}. If you do, return target permanent to its owner's hand."
     },
     {
       "name": "Svyelun of Sea and Sky",
       "scryfallId": "01f5ab00-5305-4ac4-915d-feeb591f9389",
       "multiverseid": 640471,
       "twoFaced": false,
+      "oracleCardName": "Svyelun of Sea and Sky",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Svyelun has indestructible as long as you control at least two other Merfolk.\nWhenever Svyelun attacks, draw a card.\nOther Merfolk you control have ward {1}. (Whenever another Merfolk you control becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)"
     },
     {
       "name": "Thassa, God of the Sea",
       "scryfallId": "9f9db424-e668-48b4-b275-7b35be4e1bf8",
       "multiverseid": 640472,
       "twoFaced": false,
+      "oracleCardName": "Thassa, God of the Sea",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Indestructible\nAs long as your devotion to blue is less than five, Thassa isn't a creature. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nAt the beginning of your upkeep, scry 1.\n{1}{U}: Target creature you control can't be blocked this turn."
     },
     {
       "name": "Thieving Skydiver",
       "scryfallId": "6bd85a34-c5f8-4d3a-8f12-4bbf42f1f638",
       "multiverseid": 640473,
       "twoFaced": false,
+      "oracleCardName": "Thieving Skydiver",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Kicker {X}. X can't be 0. (You may pay an additional {X} as you cast this spell.)\nFlying\nWhen this creature enters, if it was kicked, gain control of target artifact with mana value X or less. If that artifact is an Equipment, attach it to this creature."
     },
     {
       "name": "Branching Evolution",
       "scryfallId": "999b0d67-aec5-495e-91b0-c4b2f31cf17d",
       "multiverseid": 640530,
       "twoFaced": false,
+      "oracleCardName": "Branching Evolution",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead."
     },
     {
       "name": "Deeproot Elite",
       "scryfallId": "991e24e5-8b37-4034-9be7-2fab5983ee7b",
       "multiverseid": 640533,
       "twoFaced": false,
+      "oracleCardName": "Deeproot Elite",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever another Merfolk you control enters, put a +1/+1 counter on target Merfolk you control."
     },
     {
       "name": "Hardened Scales",
       "scryfallId": "fc69ad56-9ae2-4eb5-b7e2-558524f6cbcc",
       "multiverseid": 640539,
       "twoFaced": false,
+      "oracleCardName": "Hardened Scales",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead."
     },
     {
       "name": "Realmwalker",
       "scryfallId": "7d0f75c8-4cf7-46b3-af5c-7118453bd7a7",
       "multiverseid": 640546,
       "twoFaced": false,
+      "oracleCardName": "Realmwalker",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nYou may look at the top card of your library any time.\nYou may cast creature spells of the chosen type from the top of your library."
     },
     {
       "name": "Ruinous Intrusion",
       "scryfallId": "47f8c11f-8171-416a-a4a3-6530ca3ba7a6",
       "multiverseid": 640551,
       "twoFaced": false,
+      "oracleCardName": "Ruinous Intrusion",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Exile target artifact or enchantment. Put X +1/+1 counters on target creature you control, where X is the mana value of the permanent exiled this way."
     },
     {
       "name": "Cold-Eyed Selkie",
       "scryfallId": "6cdb9cd1-01c5-47b7-b716-4ab33eff39d7",
       "multiverseid": 640562,
       "twoFaced": false,
+      "oracleCardName": "Cold-Eyed Selkie",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G/U}{G/U}",
+      "cmc": 3,
+      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever this creature deals combat damage to a player, you may draw that many cards."
     },
     {
       "name": "Kumena, Tyrant of Orazca",
       "scryfallId": "aebcbb35-2973-41bf-811a-e2413ef45c3e",
       "multiverseid": 640570,
       "twoFaced": false,
+      "oracleCardName": "Kumena, Tyrant of Orazca",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Tap another untapped Merfolk you control: Kumena can't be blocked this turn.\nTap three untapped Merfolk you control: Draw a card.\nTap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control."
     },
     {
       "name": "Prime Speaker Zegana",
       "scryfallId": "44974a77-5d36-49a8-b298-69d3721cfff9",
       "multiverseid": 640574,
       "twoFaced": false,
+      "oracleCardName": "Prime Speaker Zegana",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Prime Speaker Zegana enters with X +1/+1 counters on it, where X is the greatest power among other creatures you control.\nWhen Prime Speaker Zegana enters, draw cards equal to its power."
     },
     {
       "name": "Quandrix Command",
       "scryfallId": "c5e2aaec-d52d-4d9d-9c5f-d0bacd00a801",
       "multiverseid": 640576,
       "twoFaced": false,
+      "oracleCardName": "Quandrix Command",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Choose two —\n• Return target creature or planeswalker to its owner's hand.\n• Counter target artifact or enchantment spell.\n• Put two +1/+1 counters on target creature.\n• Target player shuffles up to three target cards from their graveyard into their library."
     },
     {
       "name": "Simic Ascendancy",
       "scryfallId": "fec1ffcd-84d3-44b3-b1d5-b33a4fee348a",
       "multiverseid": 640584,
       "twoFaced": false,
+      "oracleCardName": "Simic Ascendancy",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "{1}{G}{U}: Put a +1/+1 counter on target creature you control.\nWhenever one or more +1/+1 counters are put on a creature you control, put that many growth counters on this enchantment.\nAt the beginning of your upkeep, if this enchantment has twenty or more growth counters on it, you win the game."
     },
     {
       "name": "Tishana, Voice of Thunder",
       "scryfallId": "e522b695-859e-4fba-bf8c-c415fbce13e3",
       "multiverseid": 640587,
       "twoFaced": false,
+      "oracleCardName": "Tishana, Voice of Thunder",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{U}",
+      "cmc": 7,
+      "oracleText": "Tishana's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhen Tishana enters, draw a card for each creature you control."
     },
     {
       "name": "Vorel of the Hull Clade",
       "scryfallId": "82c8cac8-29ce-43cc-bdb4-428c614d8545",
       "multiverseid": 640590,
       "twoFaced": false,
+      "oracleCardName": "Vorel of the Hull Clade",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "{G}{U}, {T}: Double the number of each kind of counter on target artifact, creature, or land."
     },
     {
       "name": "Zegana, Utopian Speaker",
       "scryfallId": "93800249-4fcd-47ec-92f9-58f875cb6f00",
       "multiverseid": 640594,
       "twoFaced": false,
+      "oracleCardName": "Zegana, Utopian Speaker",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "When Zegana enters, if you control another creature with a +1/+1 counter on it, draw a card.\n{4}{G}{U}: Adapt 4. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)\nEach creature you control with a +1/+1 counter on it has trample."
     },
     {
       "name": "Metallic Mimic",
       "scryfallId": "adb9937b-7f8e-43b2-a2e3-06ccb7fb737e",
       "multiverseid": 640604,
       "twoFaced": false,
+      "oracleCardName": "Metallic Mimic",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nEach other creature you control of the chosen type enters with an additional +1/+1 counter on it."
     },
     {
       "name": "Alchemist's Refuge",
       "scryfallId": "9a53e001-04e7-4252-b693-d8f956ae574e",
       "multiverseid": 640614,
       "twoFaced": false,
+      "oracleCardName": "Alchemist's Refuge",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{G}{U}, {T}: You may cast spells this turn as though they had flash."
     },
     {
       "name": "Hinterland Harbor",
       "scryfallId": "21cab0c4-9091-47f2-ae12-4d9d9eca956e",
       "multiverseid": 640632,
       "twoFaced": false,
+      "oracleCardName": "Hinterland Harbor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Karn's Bastion",
       "scryfallId": "9134181a-55a0-4c92-b3db-0e21df6719c9",
       "multiverseid": 640635,
       "twoFaced": false,
+      "oracleCardName": "Karn's Bastion",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "e2f2bd6c-fd3b-4dbd-a710-f004011fd58b",
       "multiverseid": 640638,
       "twoFaced": false,
+      "oracleCardName": "Mosswort Bridge",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "698fa422-f2e2-4890-9a32-4c6517372213",
       "multiverseid": 640653,
       "twoFaced": false,
+      "oracleCardName": "Temple of Mystery",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
     },
     {
       "name": "Vineglimmer Snarl",
       "scryfallId": "aa570015-fe55-4256-9623-1881aa824f7e",
       "multiverseid": 640664,
       "twoFaced": false,
+      "oracleCardName": "Vineglimmer Snarl",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Merfolk Cave-Diver",
       "scryfallId": "6e0fe81c-b8ef-49ff-8743-f03d0220cb9e",
       "multiverseid": 636766,
       "twoFaced": false,
+      "oracleCardName": "Merfolk Cave-Diver",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control explores, this creature gets +1/+0 until end of turn and can't be blocked this turn."
     },
     {
       "name": "Aetherize",
       "scryfallId": "6700409d-afda-480c-8a66-b5c782f3e5e4",
       "multiverseid": 640438,
       "twoFaced": false,
+      "oracleCardName": "Aetherize",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Return all attacking creatures to their owner's hand."
     },
     {
       "name": "Deeproot Waters",
       "scryfallId": "a624ef59-69e6-4a41-b41a-3d19e287fe08",
       "multiverseid": 640448,
       "twoFaced": false,
+      "oracleCardName": "Deeproot Waters",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)"
     },
     {
       "name": "Merrow Reejerey",
       "scryfallId": "6ae8ea86-46c3-4855-92e9-7906e554becb",
       "multiverseid": 640461,
       "twoFaced": false,
+      "oracleCardName": "Merrow Reejerey",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Other Merfolk creatures you control get +1/+1.\nWhenever you cast a Merfolk spell, you may tap or untap target permanent."
     },
     {
       "name": "Rapid Hybridization",
       "scryfallId": "dc3d101f-7ae4-44e3-9e48-6091aca8587f",
       "multiverseid": 640462,
       "twoFaced": false,
+      "oracleCardName": "Rapid Hybridization",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token."
     },
     {
       "name": "Ravenform",
       "scryfallId": "f2d5e87b-1ee8-47db-9bc3-f5becfe79b37",
       "multiverseid": 640463,
       "twoFaced": false,
+      "oracleCardName": "Ravenform",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.\nForetell {U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Sage of Fables",
       "scryfallId": "36d22296-8eb6-4367-bb21-47b20ad700d9",
       "multiverseid": 640465,
       "twoFaced": false,
+      "oracleCardName": "Sage of Fables",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Each other Wizard creature you control enters with an additional +1/+1 counter on it.\n{2}, Remove a +1/+1 counter from a creature you control: Draw a card."
     },
     {
       "name": "Stonybrook Banneret",
       "scryfallId": "1b3bc8fd-97bd-4383-9ce4-8cfe7a6c1e62",
       "multiverseid": 640469,
       "twoFaced": false,
+      "oracleCardName": "Stonybrook Banneret",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nMerfolk spells and Wizard spells you cast cost {1} less to cast."
     },
     {
       "name": "Beast Within",
       "scryfallId": "eb40c41c-f5f9-4323-b6ac-e28e405909d0",
       "multiverseid": 640529,
       "twoFaced": false,
+      "oracleCardName": "Beast Within",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
     },
     {
       "name": "Nicanzil, Current Conductor",
       "scryfallId": "5e6f4aba-3500-4fb7-ab78-02f63c03778a",
       "multiverseid": 636957,
       "twoFaced": false,
+      "oracleCardName": "Nicanzil, Current Conductor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped.\nWhenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil."
     },
     {
       "name": "Evolution Sage",
       "scryfallId": "d089c2c1-e304-4f28-8700-5b9b3029bdbc",
       "multiverseid": 640536,
       "twoFaced": false,
+      "oracleCardName": "Evolution Sage",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Explore",
       "scryfallId": "e547fc28-970a-4910-94da-dff5acef3285",
       "multiverseid": 640537,
       "twoFaced": false,
+      "oracleCardName": "Explore",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "You may play an additional land this turn.\nDraw a card."
     },
     {
       "name": "Inspiring Call",
       "scryfallId": "6c3dd578-15c9-46c9-9dbd-330e86df8cae",
       "multiverseid": 640540,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Call",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "29fc8594-931f-4cf6-95b8-9b589d6cbcf9",
       "multiverseid": 640541,
       "twoFaced": false,
+      "oracleCardName": "Kodama's Reach",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Growth Spiral",
       "scryfallId": "a275b02c-352a-405e-9a9b-5024506cd67c",
       "multiverseid": 640566,
       "twoFaced": false,
+      "oracleCardName": "Growth Spiral",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
     },
     {
       "name": "Kiora's Follower",
       "scryfallId": "3666d3eb-fc62-4966-9149-aa3435650c29",
       "multiverseid": 640569,
       "twoFaced": false,
+      "oracleCardName": "Kiora's Follower",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "{T}: Untap another target permanent."
     },
     {
       "name": "Merfolk Mistbinder",
       "scryfallId": "f5c2c19b-2cac-4073-8d02-277cf42ae1ce",
       "multiverseid": 640572,
       "twoFaced": false,
+      "oracleCardName": "Merfolk Mistbinder",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Other Merfolk you control get +1/+1."
     },
     {
       "name": "Merfolk Skydiver",
       "scryfallId": "bb8fcaa7-3430-4de1-854a-77b7bef59864",
       "multiverseid": 640573,
       "twoFaced": false,
+      "oracleCardName": "Merfolk Skydiver",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhen this creature enters, put a +1/+1 counter on target creature you control.\n{3}{G}{U}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Tatyova, Benthic Druid",
       "scryfallId": "fe05dc69-8dde-485e-9e55-da729db50205",
       "multiverseid": 640586,
       "twoFaced": false,
+      "oracleCardName": "Tatyova, Benthic Druid",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{U}",
+      "cmc": 5,
+      "oracleText": "Landfall — Whenever a land you control enters, you gain 1 life and draw a card."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "fc6c69a0-ac24-4486-8893-a6303d08fc6e",
       "multiverseid": 640595,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "c643146f-da7b-4cc0-b874-4accad99ccce",
       "multiverseid": 640597,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Simic Signet",
       "scryfallId": "92650d2e-64c0-418d-a5e9-2534ad45e426",
       "multiverseid": 640608,
       "twoFaced": false,
+      "oracleCardName": "Simic Signet",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {G}{U}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "2d47121d-8b90-4d28-9ffa-0a640b9dd611",
       "multiverseid": 640609,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "a3b1da84-9c26-4c3c-b90f-43a0b2b20103",
       "multiverseid": 640610,
       "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Command Tower",
       "scryfallId": "d477d733-2360-4f1d-9ecd-cdedc2e8a7ae",
       "multiverseid": 640621,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Llanowar Reborn",
       "scryfallId": "284e165e-9ab6-47fc-9685-0fb03de237df",
       "multiverseid": 640637,
       "twoFaced": false,
+      "oracleCardName": "Llanowar Reborn",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nGraft 1 (This land enters with a +1/+1 counter on it. Whenever a creature enters, you may move a +1/+1 counter from this land onto it.)"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "92a45243-2ea9-4da1-984b-287a555a51f4",
       "multiverseid": 640639,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "f30552a5-db59-4164-bbd2-44bf7ae1e91e",
       "multiverseid": 640642,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "ca7704cf-0e13-42fa-9e79-41eb94febedd",
       "multiverseid": 640644,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "a7dc75a8-c500-4b50-aff9-32ce36566104",
       "multiverseid": 640645,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Secluded Courtyard",
       "scryfallId": "26c40b2a-cb27-4fad-a9b2-1fb065d44d77",
       "multiverseid": 640646,
       "twoFaced": false,
+      "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
     },
     {
       "name": "Simic Growth Chamber",
       "scryfallId": "0e8f3aa0-c557-4cc7-9b5f-1d2288b5b11f",
       "multiverseid": 640648,
       "twoFaced": false,
+      "oracleCardName": "Simic Growth Chamber",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "96a31b2d-ee3f-48e5-b0dd-481a0c3efea2",
       "multiverseid": 640655,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Unclaimed Territory",
       "scryfallId": "e7bd3aaa-864c-4cbb-bbab-68d87c824e3d",
       "multiverseid": 640662,
       "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "f954219a-fd4b-4fb1-945f-7950efc1d975",
       "multiverseid": 639678,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "1069841a-0642-4fb6-b831-d45ff7fda3af",
       "multiverseid": 639679,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "1069841a-0642-4fb6-b831-d45ff7fda3af",
       "multiverseid": 639679,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "1069841a-0642-4fb6-b831-d45ff7fda3af",
       "multiverseid": 639679,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.697Z",
+    "retrievedDate": "2026-02-20T03:10:20.746Z",
     "sourceUrl": "ExplorersOfTheDeep_LCC.json",
     "deckSource": "precon",
     "createdAt": "2023-11-17T00:00:00.000Z"

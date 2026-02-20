@@ -9,12 +9,19 @@
       "scryfallId": "b5d1955a-9ff0-4f8b-9af8-341371957299",
       "multiverseid": 695727,
       "twoFaced": false,
+      "oracleCardName": "Teval, the Balanced Scale",
       "colorIdentity": [
         "B",
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever Teval attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped.\nWhenever one or more cards leave your graveyard, create a 2/2 black Zombie Druid creature token."
     }
   ],
   "cards": [
@@ -23,1008 +30,1668 @@
       "scryfallId": "b9ea2e9c-c1c7-4870-877a-023118909f56",
       "multiverseid": 695724,
       "twoFaced": false,
+      "oracleCardName": "Kotis, Sibsig Champion",
       "colorIdentity": [
         "B",
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.\nWhenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put two +1/+1 counters on Kotis."
     },
     {
       "name": "Diviner of Mist",
       "scryfallId": "c2880977-4e68-4f04-9218-e6ade72238f6",
       "multiverseid": 695949,
       "twoFaced": false,
+      "oracleCardName": "Diviner of Mist",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever this creature attacks, mill four cards. You may cast an instant or sorcery spell from your graveyard with mana value 4 or less without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
     },
     {
       "name": "Afterlife from the Loam",
       "scryfallId": "9361b548-a8d9-4e57-98cf-0c464742e1c9",
       "multiverseid": 695954,
       "twoFaced": false,
+      "oracleCardName": "Afterlife from the Loam",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{B}{B}{B}",
+      "cmc": 8,
+      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFor each player, choose up to one target creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're Zombies in addition to their other types."
     },
     {
       "name": "Teval's Judgment",
       "scryfallId": "40ed0cef-8ff6-4169-a9f3-7dd5cf56b79f",
       "multiverseid": 695957,
       "twoFaced": false,
+      "oracleCardName": "Teval's Judgment",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more cards leave your graveyard, choose one that hasn't been chosen this turn —\n• Draw a card.\n• Create a Treasure token.\n• Create a 2/2 black Zombie Druid creature token."
     },
     {
       "name": "Welcome the Dead",
       "scryfallId": "f472ea5c-191e-4b19-8ea7-f8649af91530",
       "multiverseid": 695959,
       "twoFaced": false,
+      "oracleCardName": "Welcome the Dead",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Floral Evoker",
       "scryfallId": "4452f54b-1b44-4ccf-be99-7d3c2614d89a",
       "multiverseid": 695975,
       "twoFaced": false,
+      "oracleCardName": "Floral Evoker",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.\n{G}, Discard a creature card: Return target land card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Steward of the Harvest",
       "scryfallId": "6e6ddbf5-e282-48ae-ba86-d15589d96e36",
       "multiverseid": 695977,
       "twoFaced": false,
+      "oracleCardName": "Steward of the Harvest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile up to three target land cards from your graveyard.\nCreatures you control have all activated abilities of all land cards exiled with this creature."
     },
     {
       "name": "Will of the Sultai",
       "scryfallId": "37155f69-1d72-4fcb-80b3-548b7d78f9ec",
       "multiverseid": 695978,
       "twoFaced": false,
+      "oracleCardName": "Will of the Sultai",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Target player mills three cards. Return all land cards from your graveyard to the battlefield tapped.\n• Put X +1/+1 counters on target creature, where X is the number of lands you control. It gains trample until end of turn."
     },
     {
       "name": "Colossal Grave-Reaver",
       "scryfallId": "7c3f7d76-528a-490a-852a-071adcd7bd55",
       "multiverseid": 695979,
       "twoFaced": false,
+      "oracleCardName": "Colossal Grave-Reaver",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{B}{G}",
+      "cmc": 8,
+      "oracleText": "Flying\nWhenever this creature enters or attacks, mill three cards.\nWhenever one or more creature cards are put into your graveyard from your library, put one of them onto the battlefield."
     },
     {
       "name": "Gravecrawler",
       "scryfallId": "6987d609-ba0f-42bf-9b61-bdfb943c03b5",
       "multiverseid": 696182,
       "twoFaced": false,
+      "oracleCardName": "Gravecrawler",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "This creature can't block.\nYou may cast this card from your graveyard as long as you control a Zombie."
     },
     {
       "name": "Life from the Loam",
       "scryfallId": "cdb6432f-3f56-4c92-b09a-2a5b64620c04",
       "multiverseid": 696185,
       "twoFaced": false,
+      "oracleCardName": "Life from the Loam",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Return up to three target land cards from your graveyard to your hand.\nDredge 3 (If you would draw a card, you may mill three cards instead. If you do, return this card from your graveyard to your hand.)"
     },
     {
       "name": "Casualties of War",
       "scryfallId": "cde12c36-f49b-4065-987f-981ca32d536d",
       "multiverseid": 696187,
       "twoFaced": false,
+      "oracleCardName": "Casualties of War",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}{B}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Destroy target enchantment.\n• Destroy target land.\n• Destroy target planeswalker."
     },
     {
       "name": "Amphin Mutineer",
       "scryfallId": "967b5ed9-7275-4564-8bf9-2748fea2f387",
       "multiverseid": 696299,
       "twoFaced": false,
+      "oracleCardName": "Amphin Mutineer",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
     },
     {
       "name": "River Kelpie",
       "scryfallId": "7203136a-2556-4489-ae1e-1ff13a488f39",
       "multiverseid": 696322,
       "twoFaced": false,
+      "oracleCardName": "River Kelpie",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Whenever this creature or another permanent enters from a graveyard, draw a card.\nWhenever a player casts a spell from a graveyard, draw a card.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
     },
     {
       "name": "Dauthi Voidwalker",
       "scryfallId": "3573b9a2-7911-475c-8ae7-25bd0dbb7159",
       "multiverseid": 696332,
       "twoFaced": false,
+      "oracleCardName": "Dauthi Voidwalker",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{B}",
+      "cmc": 2,
+      "oracleText": "Shadow (This creature can block or be blocked by only creatures with shadow.)\nIf a card would be put into an opponent's graveyard from anywhere, instead exile it with a void counter on it.\n{T}, Sacrifice this creature: Choose an exiled card an opponent owns with a void counter on it. You may play it this turn without paying its mana cost."
     },
     {
       "name": "Disciple of Bolas",
       "scryfallId": "01ea8333-38a8-4b7b-9f03-c5534df28353",
       "multiverseid": 696334,
       "twoFaced": false,
+      "oracleCardName": "Disciple of Bolas",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power."
     },
     {
       "name": "Junji, the Midnight Sky",
       "scryfallId": "e9ff50c0-915e-4055-a595-3df6be8f1e1b",
       "multiverseid": 696339,
       "twoFaced": false,
+      "oracleCardName": "Junji, the Midnight Sky",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, menace\nWhen Junji dies, choose one —\n• Each opponent discards two cards and loses 2 life.\n• Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life."
     },
     {
       "name": "Lethal Scheme",
       "scryfallId": "3e449c2b-39a5-48c8-b6a5-60e16306e38a",
       "multiverseid": 696340,
       "twoFaced": false,
+      "oracleCardName": "Lethal Scheme",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
     },
     {
       "name": "Living Death",
       "scryfallId": "4ac29c46-f8ee-42ba-a98c-d785ba65485e",
       "multiverseid": 696341,
       "twoFaced": false,
+      "oracleCardName": "Living Death",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield."
     },
     {
       "name": "Lord of the Forsaken",
       "scryfallId": "0f87514c-cb45-443c-8768-891e2213950e",
       "multiverseid": 696342,
       "twoFaced": false,
+      "oracleCardName": "Lord of the Forsaken",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Flying, trample\n{B}, Sacrifice another creature: Target player mills three cards.\nPay 1 life: Add {C}. Spend this mana only to cast a spell from your graveyard."
     },
     {
       "name": "Necromantic Selection",
       "scryfallId": "2002d779-9ea2-432b-8c15-d61995b8adda",
       "multiverseid": 696345,
       "twoFaced": false,
+      "oracleCardName": "Necromantic Selection",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{B}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection."
     },
     {
       "name": "Necropolis Fiend",
       "scryfallId": "7de44851-ce9b-4979-afed-87f50e8d99b8",
       "multiverseid": 696346,
       "twoFaced": false,
+      "oracleCardName": "Necropolis Fiend",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}{B}{B}",
+      "cmc": 9,
+      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\n{X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn."
     },
     {
       "name": "Noxious Gearhulk",
       "scryfallId": "289c11b7-a460-4a2f-b11a-e1ba54bd1f34",
       "multiverseid": 696347,
       "twoFaced": false,
+      "oracleCardName": "Noxious Gearhulk",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Menace\nWhen this creature enters, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness."
     },
     {
       "name": "Ob Nixilis, the Fallen",
       "scryfallId": "dc9d3ada-9d0d-489a-89b7-08f53f6601e1",
       "multiverseid": 696348,
       "twoFaced": false,
+      "oracleCardName": "Ob Nixilis, the Fallen",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Landfall — Whenever a land you control enters, you may have target player lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis."
     },
     {
       "name": "Tasigur, the Golden Fang",
       "scryfallId": "175ad810-3cdd-43c7-99a9-8a2e8ad6dbae",
       "multiverseid": 696353,
       "twoFaced": false,
+      "oracleCardName": "Tasigur, the Golden Fang",
       "colorIdentity": [
         "B",
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}",
+      "cmc": 6,
+      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\n{2}{G/U}{G/U}: Mill two cards, then return a nonland card of an opponent's choice from your graveyard to your hand."
     },
     {
       "name": "Woe Strider",
       "scryfallId": "73b60c73-bae4-4a5c-819a-b5f2ffab45ce",
       "multiverseid": 696357,
       "twoFaced": false,
+      "oracleCardName": "Woe Strider",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with two +1/+1 counters on it."
     },
     {
       "name": "Avenger of Zendikar",
       "scryfallId": "047e6ce0-b38b-467e-8bc5-102c71054bae",
       "multiverseid": 696403,
       "twoFaced": false,
+      "oracleCardName": "Avenger of Zendikar",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{G}",
+      "cmc": 7,
+      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
     },
     {
       "name": "Conduit of Worlds",
       "scryfallId": "3930cca5-f10c-48eb-8ec8-2df521f5dfe9",
       "multiverseid": 696407,
       "twoFaced": false,
+      "oracleCardName": "Conduit of Worlds",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "You may play lands from your graveyard.\n{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery."
     },
     {
       "name": "Multani, Yavimaya's Avatar",
       "scryfallId": "f7377855-1944-4736-9248-2b9b40d6bf03",
       "multiverseid": 696419,
       "twoFaced": false,
+      "oracleCardName": "Multani, Yavimaya's Avatar",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Reach, trample\nMultani gets +1/+1 for each land you control and each land card in your graveyard.\n{1}{G}, Return two lands you control to their owner's hand: Return this card from your graveyard to your hand."
     },
     {
       "name": "Shigeki, Jukai Visionary",
       "scryfallId": "ed8ea0da-c9d4-4158-aaa7-ebe2fe2b1e15",
       "multiverseid": 696426,
       "twoFaced": false,
+      "oracleCardName": "Shigeki, Jukai Visionary",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{1}{G}, {T}, Return Shigeki to its owner's hand: Reveal the top four cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest into your graveyard.\nChannel — {X}{X}{G}{G}, Discard this card: Return X target nonlegendary cards from your graveyard to your hand."
     },
     {
       "name": "Consuming Aberration",
       "scryfallId": "497fba45-201d-4688-b420-d093beb4e8f4",
       "multiverseid": 696439,
       "twoFaced": false,
+      "oracleCardName": "Consuming Aberration",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard."
     },
     {
       "name": "Jarad, Golgari Lich Lord",
       "scryfallId": "6870b355-e53d-4fa2-887b-0f0445bcd9c5",
       "multiverseid": 696449,
       "twoFaced": false,
+      "oracleCardName": "Jarad, Golgari Lich Lord",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{B}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Jarad gets +1/+1 for each creature card in your graveyard.\n{1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.\nSacrifice a Swamp and a Forest: Return this card from your graveyard to your hand."
     },
     {
       "name": "Lord of Extinction",
       "scryfallId": "4aaf4d64-b5ef-44ae-b25a-7a5ea8f72170",
       "multiverseid": 696451,
       "twoFaced": false,
+      "oracleCardName": "Lord of Extinction",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{G}",
+      "cmc": 5,
+      "oracleText": "Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards."
     },
     {
       "name": "Meren of Clan Nel Toth",
       "scryfallId": "508b1442-bf2c-4ad6-9bcf-bd894e081ab6",
       "multiverseid": 696453,
       "twoFaced": false,
+      "oracleCardName": "Meren of Clan Nel Toth",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever another creature you control dies, you get an experience counter.\nAt the beginning of your end step, choose target creature card in your graveyard. If that card's mana value is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand."
     },
     {
       "name": "Command Beacon",
       "scryfallId": "435e9678-9ff3-4e5d-8061-3f806e1c2ed2",
       "multiverseid": 696508,
       "twoFaced": false,
+      "oracleCardName": "Command Beacon",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Put your commander into your hand from the command zone."
     },
     {
       "name": "Crypt of Agadeem",
       "scryfallId": "18adafe6-de67-4101-8b39-b53ab695ec4a",
       "multiverseid": 696510,
       "twoFaced": false,
+      "oracleCardName": "Crypt of Agadeem",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}, {T}: Add {B} for each black creature card in your graveyard."
     },
     {
       "name": "Darkwater Catacombs",
       "scryfallId": "03fbf51d-f622-4629-a228-a03ce7caf500",
       "multiverseid": 696511,
       "twoFaced": false,
+      "oracleCardName": "Darkwater Catacombs",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Dreamroot Cascade",
       "scryfallId": "4852abd7-98fa-4f5c-936d-b1355e7b0978",
       "multiverseid": 696514,
       "twoFaced": false,
+      "oracleCardName": "Dreamroot Cascade",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Drownyard Temple",
       "scryfallId": "dbc8512a-9f6c-40d4-8049-14505e260746",
       "multiverseid": 696515,
       "twoFaced": false,
+      "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "c2ea2395-4518-4683-8eed-59c43fb3328a",
       "multiverseid": 696516,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Fetid Pools",
       "scryfallId": "d036dfb9-7da2-4375-83ee-b01eb95b64e6",
       "multiverseid": 696519,
       "twoFaced": false,
+      "oracleCardName": "Fetid Pools",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Hinterland Harbor",
       "scryfallId": "3eb512f5-9782-4c49-9b6e-4e967e42408b",
       "multiverseid": 696527,
       "twoFaced": false,
+      "oracleCardName": "Hinterland Harbor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Llanowar Wastes",
       "scryfallId": "9cb4ae53-8a0d-4eaf-900a-1ee6ec20a5df",
       "multiverseid": 696532,
       "twoFaced": false,
+      "oracleCardName": "Llanowar Wastes",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "44f3e367-0dff-4cdb-b23a-52aa57fee946",
       "multiverseid": 696554,
       "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Temple of Malady",
       "scryfallId": "e60eb891-c06b-4a98-be3c-73e244405b45",
       "multiverseid": 696559,
       "twoFaced": false,
+      "oracleCardName": "Temple of Malady",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
     },
     {
       "name": "Woodland Cemetery",
       "scryfallId": "49fd1af7-b53c-4347-a912-7493aa6e55c3",
       "multiverseid": 696568,
       "twoFaced": false,
+      "oracleCardName": "Woodland Cemetery",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G}."
     },
     {
       "name": "Essence Anchor",
       "scryfallId": "e91c4509-918e-44ba-aa13-1991199fee9f",
       "multiverseid": 693524,
       "twoFaced": false,
+      "oracleCardName": "Essence Anchor",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Forbidden Alchemy",
       "scryfallId": "04def7e3-10e4-4733-8c19-8fa6e4469086",
       "multiverseid": 696308,
       "twoFaced": false,
+      "oracleCardName": "Forbidden Alchemy",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Hedron Crab",
       "scryfallId": "d109b70e-862f-4d8a-8b40-ef6dc904868f",
       "multiverseid": 696311,
       "twoFaced": false,
+      "oracleCardName": "Hedron Crab",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Landfall — Whenever a land you control enters, target player mills three cards. (They put the top three cards of their library into their graveyard.)"
     },
     {
       "name": "Treasure Cruise",
       "scryfallId": "7816cb88-6607-4c87-a680-4072da69e8e9",
       "multiverseid": 696325,
       "twoFaced": false,
+      "oracleCardName": "Treasure Cruise",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{7}{U}",
+      "cmc": 8,
+      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
     },
     {
       "name": "Wonder",
       "scryfallId": "567abd78-d4a3-4a33-9b5b-b5ca361059cc",
       "multiverseid": 696326,
       "twoFaced": false,
+      "oracleCardName": "Wonder",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nAs long as this card is in your graveyard and you control an Island, creatures you control have flying."
     },
     {
       "name": "Phyrexian Reclamation",
       "scryfallId": "10c09b68-1d92-42da-8d4d-0d60453a6aa7",
       "multiverseid": 696350,
       "twoFaced": false,
+      "oracleCardName": "Phyrexian Reclamation",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "{1}{B}, Pay 2 life: Return target creature card from your graveyard to your hand."
     },
     {
       "name": "Reassembling Skeleton",
       "scryfallId": "4d431445-d7db-4ce1-b422-41494d9be1b4",
       "multiverseid": 696351,
       "twoFaced": false,
+      "oracleCardName": "Reassembling Skeleton",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "{1}{B}: Return this card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Stitcher's Supplier",
       "scryfallId": "2edcde06-b326-476e-884d-770187c785fe",
       "multiverseid": 696352,
       "twoFaced": false,
+      "oracleCardName": "Stitcher's Supplier",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "When this creature enters or dies, mill three cards. (Put the top three cards of your library into your graveyard.)"
     },
     {
       "name": "Victimize",
       "scryfallId": "ee008d81-df28-49a8-917d-44f66527e469",
       "multiverseid": 696354,
       "twoFaced": false,
+      "oracleCardName": "Victimize",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
     },
     {
       "name": "Kishla Skimmer",
       "scryfallId": "b5f1acb0-d73e-4814-8158-3645daf5c4cc",
       "multiverseid": 693681,
       "twoFaced": false,
+      "oracleCardName": "Kishla Skimmer",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever a card leaves your graveyard during your turn, draw a card. This ability triggers only once each turn."
     },
     {
       "name": "Crawling Sensation",
       "scryfallId": "6d60bde4-5418-483f-9a75-17cf61927749",
       "multiverseid": 696408,
       "twoFaced": false,
+      "oracleCardName": "Crawling Sensation",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nWhenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token."
     },
     {
       "name": "Cultivate",
       "scryfallId": "6bb4dff5-4486-4ba5-9b85-9f005d988108",
       "multiverseid": 696409,
       "twoFaced": false,
+      "oracleCardName": "Cultivate",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Farseek",
       "scryfallId": "9cc7c928-2e45-4653-883d-d13166ccb0df",
       "multiverseid": 696411,
       "twoFaced": false,
+      "oracleCardName": "Farseek",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Grapple with the Past",
       "scryfallId": "76c25c9a-245b-41c7-a75d-8061eb231389",
       "multiverseid": 696413,
       "twoFaced": false,
+      "oracleCardName": "Grapple with the Past",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Mill three cards, then you may return a creature or land card from your graveyard to your hand. (To mill three cards, put the top three cards of your library into your graveyard.)"
     },
     {
       "name": "Harrow",
       "scryfallId": "64f86c4f-67d8-44d1-a6aa-b94601e7cefe",
       "multiverseid": 696414,
       "twoFaced": false,
+      "oracleCardName": "Harrow",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Opulent Palace",
       "scryfallId": "21cb3b3b-0738-4c2e-a3fc-927fd6b9d3fb",
       "multiverseid": 693744,
       "twoFaced": false,
+      "oracleCardName": "Opulent Palace",
       "colorIdentity": [
         "B",
         "G",
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
     },
     {
       "name": "Rampant Growth",
       "scryfallId": "b7c47024-5e08-4b17-b41a-7647f8b814b9",
       "multiverseid": 696421,
       "twoFaced": false,
+      "oracleCardName": "Rampant Growth",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "d619aece-7eab-40f3-8f41-970065f0dc73",
       "multiverseid": 696422,
       "twoFaced": false,
+      "oracleCardName": "Sakura-Tribe Elder",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Satyr Wayfinder",
       "scryfallId": "0973a109-811a-4c78-9404-19a26f4b40c7",
       "multiverseid": 696423,
       "twoFaced": false,
+      "oracleCardName": "Satyr Wayfinder",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
     },
     {
       "name": "Springbloom Druid",
       "scryfallId": "60a211bb-0935-4815-a705-f4674a468bf5",
       "multiverseid": 696427,
       "twoFaced": false,
+      "oracleCardName": "Springbloom Druid",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Tear Asunder",
       "scryfallId": "ebaf248b-37ff-4c28-9c47-ac7434d80e6e",
       "multiverseid": 696429,
       "twoFaced": false,
+      "oracleCardName": "Tear Asunder",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nExile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead."
     },
     {
       "name": "Timeless Witness",
       "scryfallId": "8b63ec86-670b-4acd-b14c-3d90acbde087",
       "multiverseid": 696430,
       "twoFaced": false,
+      "oracleCardName": "Timeless Witness",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, return target card from your graveyard to your hand.\nEternalize {5}{G}{G} ({5}{G}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Human Shaman with no mana cost. Eternalize only as a sorcery.)"
     },
     {
       "name": "Grisly Salvage",
       "scryfallId": "12a90f7a-28df-4017-b221-0e9234ff74a7",
       "multiverseid": 696446,
       "twoFaced": false,
+      "oracleCardName": "Grisly Salvage",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{B}{G}",
+      "cmc": 2,
+      "oracleText": "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard."
     },
     {
       "name": "Nyx Weaver",
       "scryfallId": "26c4c471-f79f-4ca4-acc7-852cdc14e726",
       "multiverseid": 696454,
       "twoFaced": false,
+      "oracleCardName": "Nyx Weaver",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "Reach\nAt the beginning of your upkeep, mill two cards. (Put the top two cards of your library into your graveyard.)\n{1}{B}{G}, Exile this creature: Return target card from your graveyard to your hand."
     },
     {
       "name": "Putrefy",
       "scryfallId": "3759f873-e5a1-46ab-8a60-e907d3c633de",
       "multiverseid": 696456,
       "twoFaced": false,
+      "oracleCardName": "Putrefy",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
     },
     {
       "name": "Skull Prophet",
       "scryfallId": "ea53e2c9-0a3f-4fda-a6ab-9a558bb8f126",
       "multiverseid": 696460,
       "twoFaced": false,
+      "oracleCardName": "Skull Prophet",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {B} or {G}.\n{T}: Mill two cards. (Put the top two cards of your library into your graveyard.)"
     },
     {
       "name": "Millikin",
       "scryfallId": "594049e6-1d91-4adb-bf9f-8a5cc620a69d",
       "multiverseid": 696477,
       "twoFaced": false,
+      "oracleCardName": "Millikin",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}, Mill a card: Add {C}. (To mill a card, put the top card of your library into your graveyard.)"
     },
     {
       "name": "Cephalid Coliseum",
       "scryfallId": "03b9c9ed-fb6f-4f8d-bb1d-7999dec4245c",
       "multiverseid": 696505,
       "twoFaced": false,
+      "oracleCardName": "Cephalid Coliseum",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {U}. This land deals 1 damage to you.\nThreshold — {U}, {T}, Sacrifice this land: Target player draws three cards, then discards three cards. Activate only if there are seven or more cards in your graveyard."
     },
     {
       "name": "Contaminated Aquifer",
       "scryfallId": "9fad6994-1280-4a8e-a2f5-34b4ed6ef6f5",
       "multiverseid": 696509,
       "twoFaced": false,
+      "oracleCardName": "Contaminated Aquifer",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped."
     },
     {
       "name": "Foreboding Landscape",
       "scryfallId": "cf53f97c-dd4c-44bd-93ba-faa6d64c985a",
       "multiverseid": 696521,
       "twoFaced": false,
+      "oracleCardName": "Foreboding Landscape",
       "colorIdentity": [
         "B",
         "G",
         "U"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Swamp, Forest, or Island card, put it onto the battlefield tapped, then shuffle.\nCycling {B}{G}{U} ({B}{G}{U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Golgari Rot Farm",
       "scryfallId": "acc5821d-e31f-4f5d-b4d0-e471db7dee7f",
       "multiverseid": 696524,
       "twoFaced": false,
+      "oracleCardName": "Golgari Rot Farm",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
     },
     {
       "name": "Haunted Mire",
       "scryfallId": "402ff237-6581-47d5-a3f5-a7bdae505b41",
       "multiverseid": 696525,
       "twoFaced": false,
+      "oracleCardName": "Haunted Mire",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {G}.)\nThis land enters tapped."
     },
     {
       "name": "Memorial to Folly",
       "scryfallId": "2c5c070e-91d3-4613-8a46-0323ee425027",
       "multiverseid": 696533,
       "twoFaced": false,
+      "oracleCardName": "Memorial to Folly",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice this land: Return target creature card from your graveyard to your hand."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "db073781-2610-4b3d-baa9-c1931893fe15",
       "multiverseid": 696536,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "9ff6e014-4811-44df-a7f8-a667a4a01f4f",
       "multiverseid": 696564,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Island",
       "scryfallId": "1ff6acc9-581c-468f-894d-41f725da7f33",
       "multiverseid": 693322,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "1ff6acc9-581c-468f-894d-41f725da7f33",
       "multiverseid": 693322,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
       "multiverseid": 693323,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "15be7923-6efc-4650-b8d1-f61cb33ef81d",
       "multiverseid": 693323,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.835Z",
+    "retrievedDate": "2026-02-20T03:10:22.062Z",
     "sourceUrl": "SultaiArisen_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"

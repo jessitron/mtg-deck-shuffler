@@ -9,12 +9,19 @@
       "scryfallId": "648c15d1-a2a2-4f59-9b0a-5448be3e990f",
       "multiverseid": 649907,
       "twoFaced": false,
+      "oracleCardName": "Kaust, Eyes of the Glade",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R/W}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control that was turned face up this turn deals combat damage to a player, draw a card.\n{T}: Turn target face-down attacking creature you control face up."
     }
   ],
   "cards": [
@@ -23,991 +30,1647 @@
       "scryfallId": "31fa9d47-43d6-44b5-ab86-fc94a83eac26",
       "multiverseid": 649927,
       "twoFaced": false,
+      "oracleCardName": "Duskana, the Rage Mother",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}{W}",
+      "cmc": 5,
+      "oracleText": "When Duskana enters, draw a card for each creature you control with base power and toughness 2/2.\nWhenever a creature you control with base power and toughness 2/2 attacks, it gets +3/+3 until end of turn."
     },
     {
       "name": "True Identity",
       "scryfallId": "979c3262-7680-49a3-b0dc-12154e44c317",
       "multiverseid": 649954,
       "twoFaced": false,
+      "oracleCardName": "True Identity",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever this enchantment or another permanent you control is turned face up, scry 1, then draw a card. This ability triggers only once each turn.\nDisguise {W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"
     },
     {
       "name": "Unexplained Absence",
       "scryfallId": "78f526d3-1e1f-4430-9824-ad377fd0d312",
       "multiverseid": 649955,
       "twoFaced": false,
+      "oracleCardName": "Unexplained Absence",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "For each player, exile up to one target nonland permanent that player controls. For each permanent exiled this way, its controller cloaks the top card of their library. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)"
     },
     {
       "name": "Veiled Ascension",
       "scryfallId": "5196eb5b-9330-46f7-b6f7-9c1164ea27d7",
       "multiverseid": 649956,
       "twoFaced": false,
+      "oracleCardName": "Veiled Ascension",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "When this enchantment enters, put a flying counter on each face-down creature you control.\nFace-down creatures you control enter with a flying counter on them.\nAt the beginning of your upkeep, you may cloak the top card of your library."
     },
     {
       "name": "Boltbender",
       "scryfallId": "f0a18bd1-1741-4231-a312-aed1373a96dd",
       "multiverseid": 649968,
       "twoFaced": false,
+      "oracleCardName": "Boltbender",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Disguise {1}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, you may choose new targets for any number of other spells and/or abilities."
     },
     {
       "name": "Showstopping Surprise",
       "scryfallId": "1ffdad45-0111-4c6a-bfb0-25aeee7aea1d",
       "multiverseid": 649973,
       "twoFaced": false,
+      "oracleCardName": "Showstopping Surprise",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Choose target creature you control. Turn it face up if it's face down. Then it deals damage equal to its power to each other creature."
     },
     {
       "name": "Tesak, Judith's Hellhound",
       "scryfallId": "0e563c13-7204-4cda-9b62-d46931fabcef",
       "multiverseid": 649974,
       "twoFaced": false,
+      "oracleCardName": "Tesak, Judith's Hellhound",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Unleash (You may have this creature enter with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\nOther Dogs you control have unleash.\nCreatures you control with counters on them have haste.\nWhenever Tesak attacks, add {R} for each attacking creature."
     },
     {
       "name": "Experiment Twelve",
       "scryfallId": "7d76089e-b21a-4d89-9562-957c18474967",
       "multiverseid": 649975,
       "twoFaced": false,
+      "oracleCardName": "Experiment Twelve",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Trample\nWhenever this creature or another creature you control is turned face up, put +1/+1 counters on that creature equal to its power.\nDisguise {4}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"
     },
     {
       "name": "Printlifter Ooze",
       "scryfallId": "db7fbf69-1118-446b-b5cb-02da2de42ce3",
       "multiverseid": 649978,
       "twoFaced": false,
+      "oracleCardName": "Printlifter Ooze",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Deathtouch\nWhenever this creature or another creature you control is turned face up, create a 0/0 green Ooze creature token with trample. The token enters with X +1/+1 counters on it, where X is the number of other creatures you control.\nDisguise {3}{G}"
     },
     {
       "name": "Panoptic Projektor",
       "scryfallId": "b0912773-42ae-4149-aaa5-194856a1055a",
       "multiverseid": 649982,
       "twoFaced": false,
+      "oracleCardName": "Panoptic Projektor",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "{T}: The next face-down creature spell you cast this turn costs {3} less to cast.\nIf turning a face-down permanent face up causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
     },
     {
       "name": "Ransom Note",
       "scryfallId": "3b3f11dd-dce3-4b87-bfb1-a2fae646a2af",
       "multiverseid": 649985,
       "twoFaced": false,
+      "oracleCardName": "Ransom Note",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
     },
     {
       "name": "Ugin's Mastery",
       "scryfallId": "995b5a27-6a95-4208-9d6d-3a3801a6d0ae",
       "multiverseid": 650147,
       "twoFaced": false,
+      "oracleCardName": "Ugin's Mastery",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast a colorless creature spell, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever you attack with creatures with total power 6 or greater, you may turn a face-down creature you control face up."
     },
     {
       "name": "Austere Command",
       "scryfallId": "a31ffc9e-d21b-4a8f-ac67-695e38e09e3b",
       "multiverseid": 650150,
       "twoFaced": false,
+      "oracleCardName": "Austere Command",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
     },
     {
       "name": "Dusk // Dawn",
       "scryfallId": "5f2facfb-dfde-4e5b-8f6d-4fabb4c85519",
       "multiverseid": 650155,
       "twoFaced": false,
+      "oracleCardName": "Dusk // Dawn",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 9,
+      "oracleText": "Destroy all creatures with power 3 or greater."
     },
     {
       "name": "Exalted Angel",
       "scryfallId": "7a6b087b-a3ac-4c4d-a519-ec5584b4b42d",
       "multiverseid": 650157,
       "twoFaced": false,
+      "oracleCardName": "Exalted Angel",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever this creature deals damage, you gain that much life.\nMorph {2}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Fell the Mighty",
       "scryfallId": "5a3e8132-6576-456c-8777-9e8cb52595fc",
       "multiverseid": 650159,
       "twoFaced": false,
+      "oracleCardName": "Fell the Mighty",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all creatures with power greater than target creature's power."
     },
     {
       "name": "Hidden Dragonslayer",
       "scryfallId": "b29a3e7c-4d19-4737-9b58-deb56de26118",
       "multiverseid": 650163,
       "twoFaced": false,
+      "oracleCardName": "Hidden Dragonslayer",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Lifelink\nMegamorph {2}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, destroy target creature with power 4 or greater an opponent controls."
     },
     {
       "name": "Master of Pearls",
       "scryfallId": "5c0267c9-e0a7-4c16-afc9-f05de9fccaba",
       "multiverseid": 650167,
       "twoFaced": false,
+      "oracleCardName": "Master of Pearls",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Morph {3}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, creatures you control get +2/+2 until end of turn."
     },
     {
       "name": "Mastery of the Unseen",
       "scryfallId": "b27f4217-881d-401d-860e-d3d8689ca1e4",
       "multiverseid": 650168,
       "twoFaced": false,
+      "oracleCardName": "Mastery of the Unseen",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever a permanent you control is turned face up, you gain 1 life for each creature you control.\n{3}{W}: Manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
     },
     {
       "name": "Mirror Entity",
       "scryfallId": "e290b75d-a1fa-4e1e-9cb3-12e6ae223340",
       "multiverseid": 650169,
       "twoFaced": false,
+      "oracleCardName": "Mirror Entity",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types."
     },
     {
       "name": "Welcoming Vampire",
       "scryfallId": "a6ed954c-17e5-45e4-9fba-8eedcad8f9b9",
       "multiverseid": 650185,
       "twoFaced": false,
+      "oracleCardName": "Welcoming Vampire",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever one or more other creatures you control with power 2 or less enter, draw a card. This ability triggers only once each turn."
     },
     {
       "name": "Akroma, Angel of Fury",
       "scryfallId": "2a81f0b5-5116-4946-89fc-18479bf85305",
       "multiverseid": 650240,
       "twoFaced": false,
+      "oracleCardName": "Akroma, Angel of Fury",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}{R}",
+      "cmc": 8,
+      "oracleText": "This spell can't be countered.\nFlying, trample, protection from white and from blue\n{R}: Akroma gets +1/+0 until end of turn.\nMorph {3}{R}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Ashcloud Phoenix",
       "scryfallId": "f628c7de-516b-4907-a3c8-b6361f2bd071",
       "multiverseid": 650241,
       "twoFaced": false,
+      "oracleCardName": "Ashcloud Phoenix",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhen this creature dies, return it to the battlefield face down under your control.\nMorph {4}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, it deals 2 damage to each player."
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "aba4cc8a-05f3-499d-96c2-0edee9fc0ba0",
       "multiverseid": 650243,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Imperial Hellkite",
       "scryfallId": "cffb1feb-9368-4d91-bd4b-36a24fe849e6",
       "multiverseid": 650249,
       "twoFaced": false,
+      "oracleCardName": "Imperial Hellkite",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Flying\nMorph {6}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, you may search your library for a Dragon card, reveal it, put it into your hand, then shuffle."
     },
     {
       "name": "Jeska's Will",
       "scryfallId": "99e0c371-1024-4432-9fd9-3bc29c8d38e4",
       "multiverseid": 650250,
       "twoFaced": false,
+      "oracleCardName": "Jeska's Will",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Add {R} for each card in target opponent's hand.\n• Exile the top three cards of your library. You may play them this turn."
     },
     {
       "name": "Neheb, the Eternal",
       "scryfallId": "767c5831-2195-4efa-802d-2ea2e6dabb5b",
       "multiverseid": 650252,
       "twoFaced": false,
+      "oracleCardName": "Neheb, the Eternal",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nAt the beginning of each of your postcombat main phases, add {R} for each 1 life your opponents have lost this turn."
     },
     {
       "name": "Scourge of the Throne",
       "scryfallId": "63a2993d-0f0e-4386-89d7-1d046c02683d",
       "multiverseid": 650254,
       "twoFaced": false,
+      "oracleCardName": "Scourge of the Throne",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nWhenever this creature attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase."
     },
     {
       "name": "Beast Whisperer",
       "scryfallId": "c5445a0d-319a-4237-94df-19a7182e6df2",
       "multiverseid": 650260,
       "twoFaced": false,
+      "oracleCardName": "Beast Whisperer",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast a creature spell, draw a card."
     },
     {
       "name": "Deathmist Raptor",
       "scryfallId": "0b0502ab-b9df-4e70-b11c-5b178fa5f587",
       "multiverseid": 650262,
       "twoFaced": false,
+      "oracleCardName": "Deathmist Raptor",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Deathtouch\nWhenever a permanent you control is turned face up, you may return this card from your graveyard to the battlefield face up or face down.\nMegamorph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)"
     },
     {
       "name": "Den Protector",
       "scryfallId": "c22d8b77-4274-48ae-a36f-5739d785b599",
       "multiverseid": 650263,
       "twoFaced": false,
+      "oracleCardName": "Den Protector",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Creatures with power less than this creature's power can't block it.\nMegamorph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, return target card from your graveyard to your hand."
     },
     {
       "name": "Hooded Hydra",
       "scryfallId": "828f752e-cf94-4d0e-913d-aa425a005849",
       "multiverseid": 650265,
       "twoFaced": false,
+      "oracleCardName": "Hooded Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}{G}",
+      "cmc": 2,
+      "oracleText": "This creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.\nMorph {3}{G}{G}\nAs this creature is turned face up, put five +1/+1 counters on it."
     },
     {
       "name": "Krosan Cloudscraper",
       "scryfallId": "c1fab763-4e62-418d-b3a6-77c52bf21f23",
       "multiverseid": 650269,
       "twoFaced": false,
+      "oracleCardName": "Krosan Cloudscraper",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}{G}{G}{G}",
+      "cmc": 10,
+      "oracleText": "At the beginning of your upkeep, sacrifice this creature unless you pay {G}{G}.\nMorph {7}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Krosan Colossus",
       "scryfallId": "4f3c1e1a-bd75-4bfb-b44b-05b94f64c634",
       "multiverseid": 650270,
       "twoFaced": false,
+      "oracleCardName": "Krosan Colossus",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{G}{G}{G}",
+      "cmc": 9,
+      "oracleText": "Morph {6}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Obscuring Aether",
       "scryfallId": "d8b28abe-9ff6-42aa-ade6-90b9e44d2a01",
       "multiverseid": 650273,
       "twoFaced": false,
+      "oracleCardName": "Obscuring Aether",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Face-down creature spells you cast cost {1} less to cast.\n{1}{G}: Turn this enchantment face down. (It becomes a 2/2 creature.)"
     },
     {
       "name": "Ohran Frostfang",
       "scryfallId": "4825bc98-5274-4ede-8fa0-368b1153a83a",
       "multiverseid": 650274,
       "twoFaced": false,
+      "oracleCardName": "Ohran Frostfang",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Attacking creatures you control have deathtouch.\nWhenever a creature you control deals combat damage to a player, draw a card."
     },
     {
       "name": "Return of the Wildspeaker",
       "scryfallId": "2540964b-9caa-4951-8bba-ea2f84dc3698",
       "multiverseid": 650275,
       "twoFaced": false,
+      "oracleCardName": "Return of the Wildspeaker",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
     },
     {
       "name": "Root Elemental",
       "scryfallId": "e8d6e393-7378-4113-a5ff-44e9518eff76",
       "multiverseid": 650276,
       "twoFaced": false,
+      "oracleCardName": "Root Elemental",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Morph {5}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, you may put a creature card from your hand onto the battlefield."
     },
     {
       "name": "Saryth, the Viper's Fang",
       "scryfallId": "8050afb7-3c16-4456-aa34-4cc999fac7f5",
       "multiverseid": 650279,
       "twoFaced": false,
+      "oracleCardName": "Saryth, the Viper's Fang",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Other tapped creatures you control have deathtouch.\nOther untapped creatures you control have hexproof.\n{1}, {T}: Untap another target creature or land you control."
     },
     {
       "name": "Seedborn Muse",
       "scryfallId": "f4a9cb46-d4e0-46f2-973f-09275ba0d99c",
       "multiverseid": 650280,
       "twoFaced": false,
+      "oracleCardName": "Seedborn Muse",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Untap all permanents you control during each other player's untap step."
     },
     {
       "name": "Temur War Shaman",
       "scryfallId": "62b869ba-b160-423c-8a8c-db5968f8d187",
       "multiverseid": 650281,
       "twoFaced": false,
+      "oracleCardName": "Temur War Shaman",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "When this creature enters, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a permanent you control is turned face up, if it's a creature, you may have it fight target creature you don't control."
     },
     {
       "name": "Thelonite Hermit",
       "scryfallId": "4271f5b2-32ca-4349-9a09-afffbdacf636",
       "multiverseid": 650282,
       "twoFaced": false,
+      "oracleCardName": "Thelonite Hermit",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "All Saprolings get +1/+1.\nMorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, create four 1/1 green Saproling creature tokens."
     },
     {
       "name": "Toski, Bearer of Secrets",
       "scryfallId": "e82e61d1-488d-4627-a54c-d8496a967814",
       "multiverseid": 650285,
       "twoFaced": false,
+      "oracleCardName": "Toski, Bearer of Secrets",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "This spell can't be countered.\nIndestructible\nToski attacks each combat if able.\nWhenever a creature you control deals combat damage to a player, draw a card."
     },
     {
       "name": "Trail of Mystery",
       "scryfallId": "99d492bb-72ab-4055-b46d-3378d5c590a7",
       "multiverseid": 650286,
       "twoFaced": false,
+      "oracleCardName": "Trail of Mystery",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever a face-down creature you control enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nWhenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn."
     },
     {
       "name": "Whisperwood Elemental",
       "scryfallId": "23ba0d50-9b7b-428b-8d7e-47bd8d67bfd1",
       "multiverseid": 650288,
       "twoFaced": false,
+      "oracleCardName": "Whisperwood Elemental",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your end step, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nSacrifice this creature: Until end of turn, face-up nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.\""
     },
     {
       "name": "Yedora, Grave Gardener",
       "scryfallId": "552ddba8-e1e3-44d8-b341-441c2b4cd937",
       "multiverseid": 650291,
       "twoFaced": false,
+      "oracleCardName": "Yedora, Grave Gardener",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its owner's control. It's a Forest land. (It has no other types or abilities.)"
     },
     {
       "name": "Decimate",
       "scryfallId": "6640956f-c8a1-4cd7-835b-e4f23fa778c0",
       "multiverseid": 650298,
       "twoFaced": false,
+      "oracleCardName": "Decimate",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
     },
     {
       "name": "Sidar Kondo of Jamuraa",
       "scryfallId": "9c551a94-9895-486a-a39a-6bf2f8939b35",
       "multiverseid": 650313,
       "twoFaced": false,
+      "oracleCardName": "Sidar Kondo of Jamuraa",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{W}",
+      "cmc": 4,
+      "oracleText": "Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nCreatures your opponents control without flying or reach can't block creatures with power 2 or less.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Lifecrafter's Bestiary",
       "scryfallId": "cfb90c0c-50e7-4602-a64b-eeba9ec32e17",
       "multiverseid": 650325,
       "twoFaced": false,
+      "oracleCardName": "Lifecrafter's Bestiary",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, scry 1.\nWhenever you cast a creature spell, you may pay {G}. If you do, draw a card."
     },
     {
       "name": "Scroll of Fate",
       "scryfallId": "b079c60c-4de7-4737-8c07-f958e286ab50",
       "multiverseid": 650329,
       "twoFaced": false,
+      "oracleCardName": "Scroll of Fate",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "b76f2de1-ea17-40b0-8d90-4c4369516eff",
       "multiverseid": 650346,
       "twoFaced": false,
+      "oracleCardName": "Canopy Vista",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "10caa17e-3892-435a-8f48-f3d6e4619114",
       "multiverseid": 650349,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "703da628-5a77-4cb4-8c29-1bdbae500d50",
       "multiverseid": 650354,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Fortified Village",
       "scryfallId": "eb2e9534-2eda-4e41-8a87-181e5eb8c328",
       "multiverseid": 650356,
       "twoFaced": false,
+      "oracleCardName": "Fortified Village",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Furycalm Snarl",
       "scryfallId": "bdb27a86-0fbd-4123-9c8e-630c855d5e9e",
       "multiverseid": 650357,
       "twoFaced": false,
+      "oracleCardName": "Furycalm Snarl",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Game Trail",
       "scryfallId": "2a84a604-7b05-4716-bcd8-40d2acdb76e8",
       "multiverseid": 650358,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Kessig Wolf Run",
       "scryfallId": "fcdbc6ba-714d-4f38-8299-dc875ec76a3d",
       "multiverseid": 650363,
       "twoFaced": false,
+      "oracleCardName": "Kessig Wolf Run",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn."
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "285e4907-3d43-4c54-8a7f-cd8d2551de44",
       "multiverseid": 650368,
       "twoFaced": false,
+      "oracleCardName": "Mossfire Valley",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {R}{G}."
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "69955979-1ca3-4fd3-ab7a-dd65c06a9ce0",
       "multiverseid": 650369,
       "twoFaced": false,
+      "oracleCardName": "Mosswort Bridge",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
     },
     {
       "name": "Scattered Groves",
       "scryfallId": "5af79a38-d2e2-4479-ac6e-e34a0dd0bdea",
       "multiverseid": 650380,
       "twoFaced": false,
+      "oracleCardName": "Scattered Groves",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Sheltered Thicket",
       "scryfallId": "76af0d0d-1222-434e-a9ae-f562abf2bbb4",
       "multiverseid": 650385,
       "twoFaced": false,
+      "oracleCardName": "Sheltered Thicket",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Shrine of the Forsaken Gods",
       "scryfallId": "4472d5fb-ca8f-43d0-a95d-5bd8bdb6a02d",
       "multiverseid": 650386,
       "twoFaced": false,
+      "oracleCardName": "Shrine of the Forsaken Gods",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands."
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "8af1bed5-fec8-4313-a946-eef9c73e2f87",
       "multiverseid": 650391,
       "twoFaced": false,
+      "oracleCardName": "Sungrass Prairie",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{W}."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "2f4a85ee-235c-448c-b75b-808a70ed95d2",
       "multiverseid": 650395,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Temple of Plenty",
       "scryfallId": "36298771-c671-4307-b8b6-31e3ead75be2",
       "multiverseid": 650398,
       "twoFaced": false,
+      "oracleCardName": "Temple of Plenty",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "fae394de-a46c-4659-b0c6-aaf9f2c8e190",
       "multiverseid": 650400,
       "twoFaced": false,
+      "oracleCardName": "Temple of Triumph",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
     },
     {
       "name": "Path to Exile",
       "scryfallId": "08c59dfa-361d-4ff1-a15d-6b0cb66571a3",
       "multiverseid": 650172,
       "twoFaced": false,
+      "oracleCardName": "Path to Exile",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Ainok Survivalist",
       "scryfallId": "0f4b5b18-569f-4f61-ad2f-966ba4fbabdc",
       "multiverseid": 650259,
       "twoFaced": false,
+      "oracleCardName": "Ainok Survivalist",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Megamorph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, destroy target artifact or enchantment an opponent controls."
     },
     {
       "name": "Broodhatch Nantuko",
       "scryfallId": "73788eac-a95f-4492-b1aa-de57125cde8f",
       "multiverseid": 650261,
       "twoFaced": false,
+      "oracleCardName": "Broodhatch Nantuko",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever this creature is dealt damage, you may create that many 1/1 green Insect creature tokens.\nMorph {2}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Nervous Gardener",
       "scryfallId": "93b747c7-b342-47f8-a190-16c393b20607",
       "multiverseid": 646726,
       "twoFaced": false,
+      "oracleCardName": "Nervous Gardener",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Disguise {G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle."
     },
     {
       "name": "Nantuko Vigilante",
       "scryfallId": "ec33d7d5-08f4-4737-bc5f-0be4b595395a",
       "multiverseid": 650271,
       "twoFaced": false,
+      "oracleCardName": "Nantuko Vigilante",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Morph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, destroy target artifact or enchantment."
     },
     {
       "name": "Nature's Lore",
       "scryfallId": "f5615c05-eb1e-4d27-a323-72d643d7c1d8",
       "multiverseid": 650272,
       "twoFaced": false,
+      "oracleCardName": "Nature's Lore",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "baa54bbc-88dd-46ba-9a91-6291c3fb420f",
       "multiverseid": 650277,
       "twoFaced": false,
+      "oracleCardName": "Sakura-Tribe Elder",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Salt Road Ambushers",
       "scryfallId": "741e7d92-1570-4eb2-8195-e48c44672648",
       "multiverseid": 650278,
       "twoFaced": false,
+      "oracleCardName": "Salt Road Ambushers",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever another permanent you control is turned face up, if it's a creature, put two +1/+1 counters on it.\nMegamorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)"
     },
     {
       "name": "Three Visits",
       "scryfallId": "ed7a4afa-2b02-4e09-9ac4-f9d579f7d68c",
       "multiverseid": 650283,
       "twoFaced": false,
+      "oracleCardName": "Three Visits",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
     },
     {
       "name": "Wild Growth",
       "scryfallId": "47260e7c-29bf-46f1-a029-9da7bbb418b5",
       "multiverseid": 650289,
       "twoFaced": false,
+      "oracleCardName": "Wild Growth",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "e593bb16-e709-4d92-bf6f-239f6a11f7db",
       "multiverseid": 650317,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "d9e098aa-a886-430e-8f11-78fb6f2d8ada",
       "multiverseid": 650331,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Boros Garrison",
       "scryfallId": "5148fe39-739f-4e9a-8c98-b7b983759138",
       "multiverseid": 650345,
       "twoFaced": false,
+      "oracleCardName": "Boros Garrison",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "96c3244e-930f-498c-959e-0f000151597d",
       "multiverseid": 650350,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Branch of Vitu-Ghazi",
       "scryfallId": "73a8169f-b858-47a5-9c76-2e7c50ad4ecd",
       "multiverseid": 646812,
       "twoFaced": false,
+      "oracleCardName": "Branch of Vitu-Ghazi",
       "colorIdentity": [],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nDisguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this land is turned face up, add two mana of any one color. Until end of turn, you don't lose this mana as steps and phases end."
     },
     {
       "name": "Gruul Turf",
       "scryfallId": "74fe9503-2b40-458f-a5c4-1b227ae54889",
       "multiverseid": 650359,
       "twoFaced": false,
+      "oracleCardName": "Gruul Turf",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "15b90b1e-9a94-42d3-b601-c139f5119176",
       "multiverseid": 650362,
       "twoFaced": false,
+      "oracleCardName": "Jungle Shrine",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
     },
     {
       "name": "Krosan Verge",
       "scryfallId": "79ca6f07-7a41-464e-814f-eeaae048d95d",
       "multiverseid": 650365,
       "twoFaced": false,
+      "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Sacred Peaks",
       "scryfallId": "4220431a-97a3-4957-8201-ce29559b8839",
       "multiverseid": 650379,
       "twoFaced": false,
+      "oracleCardName": "Sacred Peaks",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped."
     },
     {
       "name": "Selesnya Sanctuary",
       "scryfallId": "e0b2dc61-36b7-4491-8e12-288541f24b94",
       "multiverseid": 650384,
       "twoFaced": false,
+      "oracleCardName": "Selesnya Sanctuary",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "2d21d25e-830a-4d32-b292-c24cdab7516a",
       "multiverseid": 650399,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Zoetic Cavern",
       "scryfallId": "37f10035-bf05-460d-9390-433caa2570f4",
       "multiverseid": 650405,
       "twoFaced": false,
+      "oracleCardName": "Zoetic Cavern",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nMorph {2} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
     },
     {
       "name": "Plains",
       "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
       "multiverseid": 648853,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
       "multiverseid": 648853,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ec05cb6c-6e7f-4d40-ba38-a9fc06158094",
       "multiverseid": 648854,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ec05cb6c-6e7f-4d40-ba38-a9fc06158094",
       "multiverseid": 648854,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "de754d20-5371-456b-9064-8f0687d2eab7",
       "multiverseid": 648859,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "de754d20-5371-456b-9064-8f0687d2eab7",
       "multiverseid": 648859,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "cd8a0cd6-8d3b-44bd-b609-c12fb851d17b",
       "multiverseid": 648860,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
       "multiverseid": 648861,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
       "multiverseid": 648861,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
       "multiverseid": 648862,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
       "multiverseid": 648862,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.485Z",
+    "retrievedDate": "2026-02-20T03:10:20.482Z",
     "sourceUrl": "DeadlyDisguise_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

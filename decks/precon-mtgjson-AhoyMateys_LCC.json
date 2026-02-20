@@ -9,12 +9,19 @@
       "scryfallId": "bdc2d492-9d1e-4543-8b9c-c66ee67992ce",
       "multiverseid": 642440,
       "twoFaced": false,
+      "oracleCardName": "Admiral Brass, Unsinkable",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}{R}",
+      "cmc": 5,
+      "oracleText": "When Admiral Brass enters, mill four cards.\nAt the beginning of combat on your turn, you may return target Pirate creature card from your graveyard to the battlefield with a finality counter on it. It has base power and toughness 4/4. It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)"
     }
   ],
   "cards": [
@@ -23,984 +30,1641 @@
       "scryfallId": "3cf9f3ae-694d-4d37-9498-4bdd1723a55e",
       "multiverseid": 642144,
       "twoFaced": false,
+      "oracleCardName": "Don Andres, the Renegade",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Each creature you control but don't own gets +2/+2, has menace and deathtouch, and is a Pirate in addition to its other types.\nWhenever you cast a noncreature spell you don't own, create two tapped Treasure tokens."
     },
     {
       "name": "The Indomitable",
       "scryfallId": "e6456329-b521-474b-bfb5-bfcd7e52b5f8",
       "multiverseid": 640035,
       "twoFaced": false,
+      "oracleCardName": "The Indomitable",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Trample\nWhenever a creature you control deals combat damage to a player, draw a card.\nCrew 3\nYou may cast this card from your graveyard as long as you control three or more tapped Pirates and/or Vehicles."
     },
     {
       "name": "Storm Fleet Negotiator",
       "scryfallId": "7ac4efff-eb66-48dd-9d6b-14eaf1684034",
       "multiverseid": 640038,
       "twoFaced": false,
+      "oracleCardName": "Storm Fleet Negotiator",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Flying\nParley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card. (A Map token is an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")"
     },
     {
       "name": "Francisco, Fowl Marauder",
       "scryfallId": "5182b527-739e-4523-8611-01244ced26ac",
       "multiverseid": 640041,
       "twoFaced": false,
+      "oracleCardName": "Francisco, Fowl Marauder",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Flying\nFrancisco can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "The Grim Captain's Locker",
       "scryfallId": "3f10a61b-d48b-4519-8c7d-d8bbf70091b2",
       "multiverseid": 640042,
       "twoFaced": false,
+      "oracleCardName": "The Grim Captain's Locker",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "{T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Until end of turn, each creature card in your graveyard gains \"Escape—{3}{B}, Exile four other cards from your graveyard.\" (You may cast a card with escape from your graveyard for its escape cost.)"
     },
     {
       "name": "Skeleton Crew",
       "scryfallId": "dd9f52d6-da6d-4f68-aafb-6bd3d022f616",
       "multiverseid": 640045,
       "twoFaced": false,
+      "oracleCardName": "Skeleton Crew",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Each other creature you control that's a Skeleton or Pirate gets +1/+1.\nWhenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token. (This ability triggers only from the battlefield.)\n{5}{B}: Return this card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Broadside Bombardiers",
       "scryfallId": "9721f8da-39ed-4ada-a571-61e08a86032b",
       "multiverseid": 640046,
       "twoFaced": false,
+      "oracleCardName": "Broadside Bombardiers",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Menace, haste\nBoast — Sacrifice another creature or artifact: This creature deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)"
     },
     {
       "name": "Gemcutter Buccaneer",
       "scryfallId": "ce8f708a-2b7b-48b9-88ae-70dd60007b3d",
       "multiverseid": 640047,
       "twoFaced": false,
+      "oracleCardName": "Gemcutter Buccaneer",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever this creature or another Pirate you control enters, create a tapped Treasure token.\nTreasures you control are Equipment in addition to their other types and have \"Equipped creature gets +2/+0,\" equip Pirate {1}, and equip {3}."
     },
     {
       "name": "Arm-Mounted Anchor",
       "scryfallId": "15bcbfae-89cd-4fa4-978c-ad1332e81e18",
       "multiverseid": 640059,
       "twoFaced": false,
+      "oracleCardName": "Arm-Mounted Anchor",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature gets +2/+2 and has menace.\nWhenever equipped creature deals combat damage to a player, draw two cards. Then discard two cards unless you discard a Pirate card.\nEquip {2}. This ability costs {2} less to activate if you have one or fewer cards in hand."
     },
     {
       "name": "Amphin Mutineer",
       "scryfallId": "4b45f225-0553-482b-8be4-9c7f3ccf0d0d",
       "multiverseid": 640439,
       "twoFaced": false,
+      "oracleCardName": "Amphin Mutineer",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
     },
     {
       "name": "Bident of Thassa",
       "scryfallId": "94751d5e-7693-44af-b1b5-e440677dc7a2",
       "multiverseid": 640442,
       "twoFaced": false,
+      "oracleCardName": "Bident of Thassa",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment",
+        "Artifact"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\n{1}{U}, {T}: Creatures your opponents control attack this turn if able."
     },
     {
       "name": "Corsair Captain",
       "scryfallId": "b8deb5cc-14e5-4440-ad12-5fe42d5140a1",
       "multiverseid": 640445,
       "twoFaced": false,
+      "oracleCardName": "Corsair Captain",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nOther Pirates you control get +1/+1."
     },
     {
       "name": "Evacuation",
       "scryfallId": "b11037bc-e719-461e-a89e-9c026dfd9fd4",
       "multiverseid": 640452,
       "twoFaced": false,
+      "oracleCardName": "Evacuation",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Return all creatures to their owners' hands."
     },
     {
       "name": "Timestream Navigator",
       "scryfallId": "086afafe-6b6c-4a54-8ce7-0040295d309c",
       "multiverseid": 640474,
       "twoFaced": false,
+      "oracleCardName": "Timestream Navigator",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{2}{U}{U}, {T}, Put this creature on the bottom of its owner's library: Take an extra turn after this one. Activate only if you have the city's blessing."
     },
     {
       "name": "Warkite Marauder",
       "scryfallId": "be9c4e92-7a20-4070-96b2-57f310d27c12",
       "multiverseid": 640475,
       "twoFaced": false,
+      "oracleCardName": "Warkite Marauder",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this creature attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn."
     },
     {
       "name": "Black Market Connections",
       "scryfallId": "b8c66fab-7494-42b1-bc4e-dae85a48fa41",
       "multiverseid": 640477,
       "twoFaced": false,
+      "oracleCardName": "Black Market Connections",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your first main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
     },
     {
       "name": "Blood Money",
       "scryfallId": "bbbc5c9d-110a-44cd-a2c9-8bad7dac4b5f",
       "multiverseid": 640479,
       "twoFaced": false,
+      "oracleCardName": "Blood Money",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Destroy all creatures. For each nontoken creature destroyed this way, you create a tapped Treasure token."
     },
     {
       "name": "Dire Fleet Ravager",
       "scryfallId": "5538fa26-bf25-4aba-9730-3c4cbde77402",
       "multiverseid": 640488,
       "twoFaced": false,
+      "oracleCardName": "Dire Fleet Ravager",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Menace, deathtouch\nWhen this creature enters, each player loses a third of their life, rounded up."
     },
     {
       "name": "Fathom Fleet Captain",
       "scryfallId": "7374d12c-6a0a-457a-b7b8-5aaf3c11e009",
       "multiverseid": 640493,
       "twoFaced": false,
+      "oracleCardName": "Fathom Fleet Captain",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Menace\nWhenever this creature attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace."
     },
     {
       "name": "Lethal Scheme",
       "scryfallId": "a132a71e-f173-47bc-a014-444e3fd7c122",
       "multiverseid": 640497,
       "twoFaced": false,
+      "oracleCardName": "Lethal Scheme",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
     },
     {
       "name": "Angrath's Marauders",
       "scryfallId": "1685b354-c165-4300-8307-fd38dcd4b3b6",
       "multiverseid": 640511,
       "twoFaced": false,
+      "oracleCardName": "Angrath's Marauders",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead."
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "8aa9682d-5176-4475-a0bd-e000f1d6999a",
       "multiverseid": 640512,
       "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
     },
     {
       "name": "Captain Lannery Storm",
       "scryfallId": "19862605-e965-4cdc-afca-678cff198d21",
       "multiverseid": 640514,
       "twoFaced": false,
+      "oracleCardName": "Captain Lannery Storm",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Haste\nWhenever Captain Lannery Storm attacks, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nWhenever you sacrifice a Treasure, Captain Lannery Storm gets +1/+0 until end of turn."
     },
     {
       "name": "Captivating Crew",
       "scryfallId": "611950cc-d10b-438e-abc2-ca0bbe00d76b",
       "multiverseid": 640515,
       "twoFaced": false,
+      "oracleCardName": "Captivating Crew",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery."
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "73ca9629-b1e3-49d6-ae10-908b9e4e67ce",
       "multiverseid": 640517,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Coercive Recruiter",
       "scryfallId": "16a1d084-34f1-4278-ae54-d0dac288b1da",
       "multiverseid": 640518,
       "twoFaced": false,
+      "oracleCardName": "Coercive Recruiter",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever this creature or another Pirate you control enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types."
     },
     {
       "name": "Dire Fleet Daredevil",
       "scryfallId": "76c57c43-18be-4eee-afa4-111269d8ad87",
       "multiverseid": 640519,
       "twoFaced": false,
+      "oracleCardName": "Dire Fleet Daredevil",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "First strike\nWhen this creature enters, exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead."
     },
     {
       "name": "Kari Zev, Skyship Raider",
       "scryfallId": "48765efe-bcb5-4a15-acd0-607ead64ae6d",
       "multiverseid": 640523,
       "twoFaced": false,
+      "oracleCardName": "Kari Zev, Skyship Raider",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "First strike, menace\nWhenever Kari Zev attacks, create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters tapped and attacking. Exile that token at end of combat."
     },
     {
       "name": "Port Razer",
       "scryfallId": "eb32429a-7ef9-418f-baf8-fed9aa010c9e",
       "multiverseid": 640526,
       "twoFaced": false,
+      "oracleCardName": "Port Razer",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever this creature deals combat damage to a player, untap each creature you control. After this phase, there is an additional combat phase.\nThis creature can't attack a player it has already attacked this turn."
     },
     {
       "name": "Shared Animosity",
       "scryfallId": "1bd77ae9-c5ba-44af-80e9-7c852722ef6c",
       "multiverseid": 640527,
       "twoFaced": false,
+      "oracleCardName": "Shared Animosity",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it."
     },
     {
       "name": "Admiral Beckett Brass",
       "scryfallId": "02cbd397-3ef3-465f-84fe-765dd1444af8",
       "multiverseid": 640560,
       "twoFaced": false,
+      "oracleCardName": "Admiral Beckett Brass",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Other Pirates you control get +1/+1.\nAt the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn."
     },
     {
       "name": "Hostage Taker",
       "scryfallId": "04d0e3f2-04cb-4775-947e-3c92e61b8fac",
       "multiverseid": 640567,
       "twoFaced": false,
+      "oracleCardName": "Hostage Taker",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile another target creature or artifact until this creature leaves the battlefield. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
     },
     {
       "name": "King Narfi's Betrayal",
       "scryfallId": "4c4edeef-7582-4027-8087-e643601d5161",
       "multiverseid": 640568,
       "twoFaced": false,
+      "oracleCardName": "King Narfi's Betrayal",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.\nII, III — Until end of turn, you may cast spells from among cards exiled with this Saga, and you may spend mana as though it were mana of any color to cast those spells."
     },
     {
       "name": "Prismari Command",
       "scryfallId": "85159701-bc58-4d40-9c10-84cbe8099b75",
       "multiverseid": 640575,
       "twoFaced": false,
+      "oracleCardName": "Prismari Command",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Choose two —\n• Prismari Command deals 2 damage to any target.\n• Target player draws two cards, then discards two cards.\n• Target player creates a Treasure token.\n• Destroy target artifact."
     },
     {
       "name": "Zara, Renegade Recruiter",
       "scryfallId": "d8bd1312-2c3a-4591-943c-c1550b506fa4",
       "multiverseid": 640593,
       "twoFaced": false,
+      "oracleCardName": "Zara, Renegade Recruiter",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever Zara attacks, look at defending player's hand. You may put a creature card from it onto the battlefield under your control tapped and attacking that player or a planeswalker they control. Return that creature to its owner's hand at the beginning of the next end step."
     },
     {
       "name": "Icon of Ancestry",
       "scryfallId": "f6cdbdf3-f8bd-48a9-8a47-6b0b9d5de0db",
       "multiverseid": 640601,
       "twoFaced": false,
+      "oracleCardName": "Icon of Ancestry",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Vanquisher's Banner",
       "scryfallId": "efa6944e-b5e2-4584-ae37-f5b59a8ec75e",
       "multiverseid": 640612,
       "twoFaced": false,
+      "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
     },
     {
       "name": "Choked Estuary",
       "scryfallId": "1fee96d0-f470-4ddd-a9ac-9dc724f801b0",
       "multiverseid": 640618,
       "twoFaced": false,
+      "oracleCardName": "Choked Estuary",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Desolate Lighthouse",
       "scryfallId": "c155cc10-09f4-424b-b366-142adf9c1712",
       "multiverseid": 640623,
       "twoFaced": false,
+      "oracleCardName": "Desolate Lighthouse",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}{R}, {T}: Draw a card, then discard a card."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "a54b6832-9990-4144-99ef-990a9ad4c081",
       "multiverseid": 640625,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Foreboding Ruins",
       "scryfallId": "eaf65322-6f41-413e-9852-0366e88e5245",
       "multiverseid": 640626,
       "twoFaced": false,
+      "oracleCardName": "Foreboding Ruins",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Frostboil Snarl",
       "scryfallId": "faa52a92-18ce-46f9-b360-3477b6e78234",
       "multiverseid": 640628,
       "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Geier Reach Sanitarium",
       "scryfallId": "4b9c92f0-4242-4a3e-9ede-6a4935f5c75d",
       "multiverseid": 640631,
       "twoFaced": false,
+      "oracleCardName": "Geier Reach Sanitarium",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}: Each player draws a card, then discards a card."
     },
     {
       "name": "Nephalia Drownyard",
       "scryfallId": "fe2e25b7-f950-482b-9e35-266b1278a71a",
       "multiverseid": 640640,
       "twoFaced": false,
+      "oracleCardName": "Nephalia Drownyard",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}{B}, {T}: Target player mills three cards."
     },
     {
       "name": "Smoldering Marsh",
       "scryfallId": "71727ccd-8243-48f2-a90e-6ae4b80bb61b",
       "multiverseid": 640649,
       "twoFaced": false,
+      "oracleCardName": "Smoldering Marsh",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Sulfur Falls",
       "scryfallId": "fae97b42-b84b-4a12-91f4-9d115b58729a",
       "multiverseid": 640650,
       "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "4622cb98-5a82-4fbf-9a81-d18c56dfea50",
       "multiverseid": 640651,
       "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Azure Fleet Admiral",
       "scryfallId": "adb04bab-a10a-40da-813e-6afa68956efc",
       "multiverseid": 640440,
       "twoFaced": false,
+      "oracleCardName": "Azure Fleet Admiral",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you become the monarch.\nThis creature can't be blocked by creatures the monarch controls."
     },
     {
       "name": "Enterprising Scallywag",
       "scryfallId": "44420f52-2ed8-4f81-93e4-5decc77bed01",
       "multiverseid": 636859,
       "twoFaced": false,
+      "oracleCardName": "Enterprising Scallywag",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)"
     },
     {
       "name": "Daring Saboteur",
       "scryfallId": "66483d05-444a-4710-97fa-7b7481b4a420",
       "multiverseid": 640447,
       "twoFaced": false,
+      "oracleCardName": "Daring Saboteur",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "{2}{U}: This creature can't be blocked this turn.\nWhenever this creature deals combat damage to a player, you may draw a card. If you do, discard a card."
     },
     {
       "name": "Departed Deckhand",
       "scryfallId": "985cfee6-97b7-4f42-8bfe-5e1e44bb54d6",
       "multiverseid": 640449,
       "twoFaced": false,
+      "oracleCardName": "Departed Deckhand",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "When this creature becomes the target of a spell, sacrifice it.\nThis creature can't be blocked except by Spirits.\n{3}{U}: Another target creature you control can't be blocked this turn except by Spirits."
     },
     {
       "name": "Distant Melody",
       "scryfallId": "bba22321-526e-4587-903b-a60cda2093fa",
       "multiverseid": 640450,
       "twoFaced": false,
+      "oracleCardName": "Distant Melody",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
     },
     {
       "name": "Ghost of Ramirez DePietro",
       "scryfallId": "15e649e1-dcb3-41d9-8055-cf3c98e25b1e",
       "multiverseid": 640453,
       "twoFaced": false,
+      "oracleCardName": "Ghost of Ramirez DePietro",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Ghost of Ramirez DePietro can't be blocked by creatures with toughness 3 or greater.\nWhenever Ghost of Ramirez DePietro deals combat damage to a player, choose up to one target card in a graveyard that was discarded or put there from a library this turn. Put that card into its owner's hand.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Malcolm, Keen-Eyed Navigator",
       "scryfallId": "51187cdb-85ee-4f68-9e29-d84d296f0825",
       "multiverseid": 640457,
       "twoFaced": false,
+      "oracleCardName": "Malcolm, Keen-Eyed Navigator",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever one or more Pirates you control deal damage to your opponents, you create a Treasure token for each opponent dealt damage. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Merchant Raiders",
       "scryfallId": "f6236b1e-2e3e-4088-87e0-9cdf1fc8db66",
       "multiverseid": 640459,
       "twoFaced": false,
+      "oracleCardName": "Merchant Raiders",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever this creature or another Pirate you control enters, tap up to one target creature. That creature doesn't untap during its controller's untap step for as long as you control this creature."
     },
     {
       "name": "Siren Stormtamer",
       "scryfallId": "073c301e-5bb6-49fa-bf61-2f662030540f",
       "multiverseid": 640467,
       "twoFaced": false,
+      "oracleCardName": "Siren Stormtamer",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Flying\n{U}, Sacrifice this creature: Counter target spell or ability that targets you or a creature you control."
     },
     {
       "name": "Spectral Sailor",
       "scryfallId": "0b25b281-ab3b-4821-8144-dcb1f3281f96",
       "multiverseid": 640468,
       "twoFaced": false,
+      "oracleCardName": "Spectral Sailor",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nFlying\n{3}{U}: Draw a card."
     },
     {
       "name": "Windfall",
       "scryfallId": "14e1af91-34fe-4d82-b119-cbadf75a7dbe",
       "multiverseid": 640476,
       "twoFaced": false,
+      "oracleCardName": "Windfall",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
     },
     {
       "name": "Feed the Swarm",
       "scryfallId": "9f48e48d-6bc5-4f9c-9c3e-457cf6632cf5",
       "multiverseid": 640494,
       "twoFaced": false,
+      "oracleCardName": "Feed the Swarm",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
     },
     {
       "name": "Pitiless Plunderer",
       "scryfallId": "5b5cd187-857a-44dd-8595-a52857a0b753",
       "multiverseid": 640504,
       "twoFaced": false,
+      "oracleCardName": "Pitiless Plunderer",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Whenever another creature you control dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Breeches, Brazen Plunderer",
       "scryfallId": "fb6dc94e-9b57-4161-a835-15e46c3bb13a",
       "multiverseid": 640513,
       "twoFaced": false,
+      "oracleCardName": "Breeches, Brazen Plunderer",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Menace\nWhenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Faithless Looting",
       "scryfallId": "57800da2-c68c-4535-a5eb-19cd007f6ced",
       "multiverseid": 640521,
       "twoFaced": false,
+      "oracleCardName": "Faithless Looting",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Rakdos Charm",
       "scryfallId": "875fa08c-cb66-4230-a380-0123260aac74",
       "multiverseid": 640580,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Charm",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{B}{R}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
     },
     {
       "name": "Ramirez DePietro, Pillager",
       "scryfallId": "11a4e199-faa9-4c41-863d-92170c8f20cc",
       "multiverseid": 640581,
       "twoFaced": false,
+      "oracleCardName": "Ramirez DePietro, Pillager",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "When Ramirez DePietro enters, you lose 2 life and create two Treasure tokens.\nWhenever one or more Pirates you control deal combat damage to a player, exile the top card of that player's library. You may cast that card for as long as it remains exiled."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "fc6c69a0-ac24-4486-8893-a6303d08fc6e",
       "multiverseid": 640595,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "c643146f-da7b-4cc0-b874-4accad99ccce",
       "multiverseid": 640597,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Dimir Signet",
       "scryfallId": "95de0112-3560-413c-91a9-a2b29d6488f6",
       "multiverseid": 640598,
       "twoFaced": false,
+      "oracleCardName": "Dimir Signet",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Herald's Horn",
       "scryfallId": "4bfa71d4-4125-4404-9c24-979401bae592",
       "multiverseid": 640600,
       "twoFaced": false,
+      "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "8f4f9cb2-4003-4588-af80-d47ec57f65f4",
       "multiverseid": 640602,
       "twoFaced": false,
+      "oracleCardName": "Izzet Signet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{R}."
     },
     {
       "name": "Rakdos Signet",
       "scryfallId": "e9816461-a471-4f29-9a57-67ac8552d09d",
       "multiverseid": 640607,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Signet",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {B}{R}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "2d47121d-8b90-4d28-9ffa-0a640b9dd611",
       "multiverseid": 640609,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "2eb513b3-9c9e-4837-8f58-67d698677041",
       "multiverseid": 640613,
       "twoFaced": false,
+      "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Command Tower",
       "scryfallId": "d477d733-2360-4f1d-9ecd-cdedc2e8a7ae",
       "multiverseid": 640621,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Crumbling Necropolis",
       "scryfallId": "d3600e12-5633-42fd-b1cc-e90790a16b20",
       "multiverseid": 640622,
       "twoFaced": false,
+      "oracleCardName": "Crumbling Necropolis",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "fa6a5029-f4df-43dd-b5a9-fbf6ff003675",
       "multiverseid": 640624,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "f30552a5-db59-4164-bbd2-44bf7ae1e91e",
       "multiverseid": 640642,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Port of Karfell",
       "scryfallId": "c03065d5-ada7-462b-ad2f-26fd4b5aa8b8",
       "multiverseid": 640643,
       "twoFaced": false,
+      "oracleCardName": "Port of Karfell",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice this land: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)"
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "a7dc75a8-c500-4b50-aff9-32ce36566104",
       "multiverseid": 640645,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Secluded Courtyard",
       "scryfallId": "26c40b2a-cb27-4fad-a9b2-1fb065d44d77",
       "multiverseid": 640646,
       "twoFaced": false,
+      "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "19b72af8-9bb9-4542-9115-09c27ad6e7ad",
       "multiverseid": 640656,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Thriving Bluff",
       "scryfallId": "0786c046-0cf6-41c8-800a-082997d2fcbf",
       "multiverseid": 640657,
       "twoFaced": false,
+      "oracleCardName": "Thriving Bluff",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped. As it enters, choose a color other than red.\n{T}: Add {R} or one mana of the chosen color."
     },
     {
       "name": "Thriving Isle",
       "scryfallId": "ae11e661-da7e-4df8-9473-f19bbc4ebeae",
       "multiverseid": 640660,
       "twoFaced": false,
+      "oracleCardName": "Thriving Isle",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
     },
     {
       "name": "Thriving Moor",
       "scryfallId": "c7b522da-9626-42f7-82ec-4a997d47158c",
       "multiverseid": 640661,
       "twoFaced": false,
+      "oracleCardName": "Thriving Moor",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
     },
     {
       "name": "Unclaimed Territory",
       "scryfallId": "e7bd3aaa-864c-4cbb-bbab-68d87c824e3d",
       "multiverseid": 640662,
       "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
-      "set": "LCC"
+      "set": "LCC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "23e3ed2c-342b-44aa-8e3e-0c53602397c3",
       "multiverseid": 639672,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "a5f9dab5-4b13-4a98-8a64-76e69f0ba511",
       "multiverseid": 639673,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
       "multiverseid": 639674,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "4f893107-84b0-4e3f-b1f5-b04632f192c5",
       "multiverseid": 639674,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ed0b0b4f-2b31-4fe1-aedb-be9d34fce688",
       "multiverseid": 639675,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ed0b0b4f-2b31-4fe1-aedb-be9d34fce688",
       "multiverseid": 639675,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e82fc4bc-ac81-4ad6-8b33-781d047f60d5",
       "multiverseid": 639676,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e82fc4bc-ac81-4ad6-8b33-781d047f60d5",
       "multiverseid": 639676,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e82fc4bc-ac81-4ad6-8b33-781d047f60d5",
       "multiverseid": 639676,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "be8e09c2-3384-4d00-a2d0-65d6b8056e30",
       "multiverseid": 639677,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "LCI"
+      "set": "LCI",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.135Z",
+    "retrievedDate": "2026-02-20T03:10:20.044Z",
     "sourceUrl": "AhoyMateys_LCC.json",
     "deckSource": "precon",
     "createdAt": "2023-11-17T00:00:00.000Z"

@@ -9,12 +9,19 @@
       "scryfallId": "a485c2c3-c90b-43b4-bb00-c1b811b4b392",
       "multiverseid": 612004,
       "twoFaced": false,
+      "oracleCardName": "Bright-Palm, Soul Awakener",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}{W}",
+      "cmc": 4,
+      "oracleText": "Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, double the number of +1/+1 counters on target creature. That creature can't be blocked by creatures with power 2 or less this turn."
     }
   ],
   "cards": [
@@ -23,984 +30,1641 @@
       "scryfallId": "80804f25-efc3-44a2-bbae-9a97fec98009",
       "multiverseid": 612088,
       "twoFaced": false,
+      "oracleCardName": "Shalai and Hallar",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}{W}",
+      "cmc": 4,
+      "oracleText": "Flying, vigilance\nWhenever one or more +1/+1 counters are put on a creature you control, Shalai and Hallar deals that much damage to target opponent."
     },
     {
       "name": "Death-Greeter's Champion",
       "scryfallId": "7cb2b582-1c45-4bb2-8aef-59a71a5a9e94",
       "multiverseid": 612143,
       "twoFaced": false,
+      "oracleCardName": "Death-Greeter's Champion",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Dash {3}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)\nBackup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nDouble strike"
     },
     {
       "name": "Uncivil Unrest",
       "scryfallId": "31afae93-d3c7-49c3-9f00-2cd9621e0ff8",
       "multiverseid": 612148,
       "twoFaced": false,
+      "oracleCardName": "Uncivil Unrest",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Nontoken creatures you control have riot. (They enter with your choice of a +1/+1 counter or haste.)\nIf a creature you control with a +1/+1 counter on it would deal damage to a permanent or player, it deals double that damage instead."
     },
     {
       "name": "Ichor Elixir",
       "scryfallId": "5ff34beb-9a69-4e15-91d3-be2100b73797",
       "multiverseid": 612159,
       "twoFaced": false,
+      "oracleCardName": "Ichor Elixir",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.\n{T}: Add {C}{C}."
     },
     {
       "name": "Mirror-Style Master",
       "scryfallId": "d3481424-444e-4f13-881e-339e9c353988",
       "multiverseid": 612145,
       "twoFaced": false,
+      "oracleCardName": "Mirror-Style Master",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Guardian Scalelord",
       "scryfallId": "94716d24-e8c6-4cd2-a3ac-20cdb929bfd4",
       "multiverseid": 612129,
       "twoFaced": false,
+      "oracleCardName": "Guardian Scalelord",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.)\nFlying\nWhenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power."
     },
     {
       "name": "Emergent Woodwurm",
       "scryfallId": "af1b9c3d-5700-4298-a6a5-9379cad8726e",
       "multiverseid": 612150,
       "twoFaced": false,
+      "oracleCardName": "Emergent Woodwurm",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{G}",
+      "cmc": 7,
+      "oracleText": "Backup 3 (When this creature enters, put three +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Path of the Pyromancer",
       "scryfallId": "4eeaf326-4521-4508-8032-627677a82dd4",
       "multiverseid": 612147,
       "twoFaced": false,
+      "oracleCardName": "Path of the Pyromancer",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Discard all the cards in your hand. Add {R} for each card discarded this way, then draw that many cards plus one.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues."
     },
     {
       "name": "Conclave Sledge-Captain",
       "scryfallId": "99ad5807-2adc-40d7-b398-d03fd2cd58b9",
       "multiverseid": 612149,
       "twoFaced": false,
+      "oracleCardName": "Conclave Sledge-Captain",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Backup 1, backup 1, backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn. Each backup ability triggers separately.)\nTrample\nWhenever this creature deals combat damage to a player, put that many +1/+1 counters on it."
     },
     {
       "name": "Kalonian Hydra",
       "scryfallId": "1d21ae20-2ef5-4dc0-aced-97497e6a8025",
       "multiverseid": 612553,
       "twoFaced": false,
+      "oracleCardName": "Kalonian Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Trample\nThis creature enters with four +1/+1 counters on it.\nWhenever this creature attacks, double the number of +1/+1 counters on each creature you control."
     },
     {
       "name": "Mikaeus, the Lunarch",
       "scryfallId": "fb885d30-c6e5-494a-bc01-3d5085b8e262",
       "multiverseid": 612445,
       "twoFaced": false,
+      "oracleCardName": "Mikaeus, the Lunarch",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{W}",
+      "cmc": 1,
+      "oracleText": "Mikaeus enters with X +1/+1 counters on it.\n{T}: Put a +1/+1 counter on Mikaeus.\n{T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control."
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "3ebce74e-35e8-4e19-9979-01b9e2c100f7",
       "multiverseid": 612641,
       "twoFaced": false,
+      "oracleCardName": "Canopy Vista",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Champion of Lambholt",
       "scryfallId": "46eff31d-f460-48f2-aab7-8b9b89cd87fe",
       "multiverseid": 612541,
       "twoFaced": false,
+      "oracleCardName": "Champion of Lambholt",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "179e6e1d-cc0e-4937-b0ce-6d03cbe576b7",
       "multiverseid": 612643,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Dromoka's Command",
       "scryfallId": "43571705-6d53-4ec1-9159-c9c98771b3b6",
       "multiverseid": 612571,
       "twoFaced": false,
+      "oracleCardName": "Dromoka's Command",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}{W}",
+      "cmc": 2,
+      "oracleText": "Choose two —\n• Prevent all damage target instant or sorcery spell would deal this turn.\n• Target player sacrifices an enchantment of their choice.\n• Put a +1/+1 counter on target creature.\n• Target creature you control fights target creature you don't control."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "2448d4fb-f327-4a68-b5ce-806f63425f0a",
       "multiverseid": 612646,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Flamerush Rider",
       "scryfallId": "0de4181f-652e-4eab-8de0-57a346c51994",
       "multiverseid": 612527,
       "twoFaced": false,
+      "oracleCardName": "Flamerush Rider",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever this creature attacks, create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat.\nDash {2}{R}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)"
     },
     {
       "name": "Flameshadow Conjuring",
       "scryfallId": "ae113258-288f-47d5-8f79-e2e51b6326de",
       "multiverseid": 612528,
       "twoFaced": false,
+      "oracleCardName": "Flameshadow Conjuring",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever a nontoken creature you control enters, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step."
     },
     {
       "name": "Forgotten Ancient",
       "scryfallId": "90fc94d9-b8af-4de8-a42d-ae508f8f1cd5",
       "multiverseid": 612545,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Ancient",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
     },
     {
       "name": "Fortified Village",
       "scryfallId": "13c942f1-fe8e-4a2f-a9c6-6f71501545e6",
       "multiverseid": 612649,
       "twoFaced": false,
+      "oracleCardName": "Fortified Village",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Furycalm Snarl",
       "scryfallId": "05dd1c18-b1f3-4c0c-a8f6-3b9fea0ed1da",
       "multiverseid": 612652,
       "twoFaced": false,
+      "oracleCardName": "Furycalm Snarl",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Game Trail",
       "scryfallId": "81c047dc-3a64-433d-ae78-9d84d1be135a",
       "multiverseid": 612653,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Gavony Township",
       "scryfallId": "ce46c4e2-a515-41d7-8d70-d20cf4925996",
       "multiverseid": 612654,
       "twoFaced": false,
+      "oracleCardName": "Gavony Township",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}{G}{W}, {T}: Put a +1/+1 counter on each creature you control."
     },
     {
       "name": "Genesis Hydra",
       "scryfallId": "69467d04-6c7d-44d1-88c4-9721741d6034",
       "multiverseid": 612546,
       "twoFaced": false,
+      "oracleCardName": "Genesis Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}{G}",
+      "cmc": 2,
+      "oracleText": "When you cast this spell, reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library.\nThis creature enters with X +1/+1 counters on it."
     },
     {
       "name": "Gyre Sage",
       "scryfallId": "be573ae7-967a-4b98-9058-ec3ff82ff63f",
       "multiverseid": 612548,
       "twoFaced": false,
+      "oracleCardName": "Gyre Sage",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{T}: Add {G} for each +1/+1 counter on this creature."
     },
     {
       "name": "Heaven // Earth",
       "scryfallId": "82202ac9-7281-4d12-af4e-a8147cc38296",
       "multiverseid": 612576,
       "twoFaced": false,
+      "oracleCardName": "Heaven // Earth",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 3,
+      "oracleText": "Heaven deals X damage to each creature with flying."
     },
     {
       "name": "High Sentinels of Arashin",
       "scryfallId": "d46b34ed-88a4-4868-9ce3-b91901e600d3",
       "multiverseid": 612437,
       "twoFaced": false,
+      "oracleCardName": "High Sentinels of Arashin",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nThis creature gets +1/+1 for each other creature you control with a +1/+1 counter on it.\n{3}{W}: Put a +1/+1 counter on target creature."
     },
     {
       "name": "Incubation Druid",
       "scryfallId": "b3d8c95e-09b9-46d6-80e9-95adb2c2ea9d",
       "multiverseid": 612550,
       "twoFaced": false,
+      "oracleCardName": "Incubation Druid",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any type that a land you control could produce. If this creature has a +1/+1 counter on it, add three mana of that type instead.\n{3}{G}{G}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)"
     },
     {
       "name": "Inscription of Abundance",
       "scryfallId": "897404de-93d8-433e-8e5f-5964d9cc2c2a",
       "multiverseid": 612551,
       "twoFaced": false,
+      "oracleCardName": "Inscription of Abundance",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Kicker {2}{G}\nChoose one. If this spell was kicked, choose any number instead.\n• Put two +1/+1 counters on target creature.\n• Target player gains X life, where X is the greatest power among creatures they control.\n• Target creature you control fights target creature you don't control."
     },
     {
       "name": "Ion Storm",
       "scryfallId": "3871356b-a44c-4393-a69b-e5101508c5a8",
       "multiverseid": 612534,
       "twoFaced": false,
+      "oracleCardName": "Ion Storm",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "{1}{R}, Remove a +1/+1 counter or a charge counter from a permanent you control: This enchantment deals 2 damage to any target."
     },
     {
       "name": "Kessig Wolf Run",
       "scryfallId": "8a238f08-f7c3-46be-b999-77b1c310cb1a",
       "multiverseid": 612658,
       "twoFaced": false,
+      "oracleCardName": "Kessig Wolf Run",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn."
     },
     {
       "name": "Krenko, Tin Street Kingpin",
       "scryfallId": "2f5689e2-d8a2-442b-8027-f89686adcb67",
       "multiverseid": 612535,
       "twoFaced": false,
+      "oracleCardName": "Krenko, Tin Street Kingpin",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever Krenko attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to Krenko's power."
     },
     {
       "name": "Managorger Hydra",
       "scryfallId": "e9c124d7-b4b1-43cf-9830-1244053cc056",
       "multiverseid": 612555,
       "twoFaced": false,
+      "oracleCardName": "Managorger Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Trample\nWhenever a player casts a spell, put a +1/+1 counter on this creature."
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "99b4e4f2-c37c-4bcf-a635-f01a427ffbed",
       "multiverseid": 612662,
       "twoFaced": false,
+      "oracleCardName": "Mossfire Valley",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {R}{G}."
     },
     {
       "name": "Mosswort Bridge",
       "scryfallId": "a02ddda8-703a-468c-93ec-87dc22820fd4",
       "multiverseid": 612663,
       "twoFaced": false,
+      "oracleCardName": "Mosswort Bridge",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
     },
     {
       "name": "Restoration Angel",
       "scryfallId": "5b474f84-9bef-422a-8fc5-489a10aaf1ee",
       "multiverseid": 612449,
       "twoFaced": false,
+      "oracleCardName": "Restoration Angel",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flash\nFlying\nWhen this creature enters, you may exile target non-Angel creature you control, then return that card to the battlefield under your control."
     },
     {
       "name": "Rishkar, Peema Renegade",
       "scryfallId": "6310af34-e671-4974-b291-279b91585459",
       "multiverseid": 612558,
       "twoFaced": false,
+      "oracleCardName": "Rishkar, Peema Renegade",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When Rishkar enters, put a +1/+1 counter on each of up to two target creatures.\nEach creature you control with a counter on it has \"{T}: Add {G}.\""
     },
     {
       "name": "Semester's End",
       "scryfallId": "50a89f66-11b1-4b1f-a8ff-ac23e6e1e1d0",
       "multiverseid": 612452,
       "twoFaced": false,
+      "oracleCardName": "Semester's End",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Exile any number of target creatures and/or planeswalkers you control. At the beginning of the next end step, return each of them to the battlefield under its owner's control. Each of them enters with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker."
     },
     {
       "name": "Strionic Resonator",
       "scryfallId": "b9edb215-f967-4968-905e-d1dc3b5d3424",
       "multiverseid": 612632,
       "twoFaced": false,
+      "oracleCardName": "Strionic Resonator",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words \"when,\" \"whenever,\" or \"at.\")"
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "cdc9ad2c-a0a9-4b38-8941-c300751ce23d",
       "multiverseid": 612675,
       "twoFaced": false,
+      "oracleCardName": "Sungrass Prairie",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{W}."
     },
     {
       "name": "Sunscorch Regent",
       "scryfallId": "da6b530c-5a56-4dc1-8d36-6ed8d2c158a9",
       "multiverseid": 612457,
       "twoFaced": false,
+      "oracleCardName": "Sunscorch Regent",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on this creature and you gain 1 life."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "0203d093-a060-47d7-876b-e7ce8e444bc6",
       "multiverseid": 612678,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Temple of Plenty",
       "scryfallId": "52f06041-0dce-45b2-bb05-833c0ebb438f",
       "multiverseid": 612683,
       "twoFaced": false,
+      "oracleCardName": "Temple of Plenty",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "4f7eb4fa-8950-42e5-8695-b9c3bba91f7d",
       "multiverseid": 612686,
       "twoFaced": false,
+      "oracleCardName": "Temple of Triumph",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
     },
     {
       "name": "Together Forever",
       "scryfallId": "2b22e344-97ae-4e25-9bf9-004ac30c2fd6",
       "multiverseid": 612460,
       "twoFaced": false,
+      "oracleCardName": "Together Forever",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{W}{W}",
+      "cmc": 2,
+      "oracleText": "When this enchantment enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand."
     },
     {
       "name": "Triskelion",
       "scryfallId": "63349fa3-4462-413c-bd96-bbc1049165a0",
       "multiverseid": 612635,
       "twoFaced": false,
+      "oracleCardName": "Triskelion",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "This creature enters with three +1/+1 counters on it.\nRemove a +1/+1 counter from this creature: It deals 1 damage to any target."
     },
     {
       "name": "Command Tower",
       "scryfallId": "91b73884-6850-479d-8531-e17c8531a245",
       "multiverseid": 612644,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "c8ffce25-18a5-4232-aa7c-d5c1a88e6052",
       "multiverseid": 612600,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Cultivate",
       "scryfallId": "66a82a81-9b3e-421c-b916-15f40f359bf8",
       "multiverseid": 612543,
       "twoFaced": false,
+      "oracleCardName": "Cultivate",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "c78d5616-32dc-45ca-a1b2-d6b4f7951393",
       "multiverseid": 612645,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Fertilid",
       "scryfallId": "2d73ea23-52ab-4b92-b263-dc8b9e5a1010",
       "multiverseid": 612544,
       "twoFaced": false,
+      "oracleCardName": "Fertilid",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from this creature: Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles."
     },
     {
       "name": "Fractured Powerstone",
       "scryfallId": "aeaa7115-bebe-4650-9575-f7855c0055cd",
       "multiverseid": 612605,
       "twoFaced": false,
+      "oracleCardName": "Fractured Powerstone",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery."
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "8b0306e0-8887-451c-aad2-527b8161b0fe",
       "multiverseid": 612554,
       "twoFaced": false,
+      "oracleCardName": "Kodama's Reach",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "f975779d-60d4-4838-ac01-74b958b955a1",
       "multiverseid": 612666,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Pridemalkin",
       "scryfallId": "c56cf35b-ca17-4691-9a1d-3a1a8f569c27",
       "multiverseid": 612556,
       "twoFaced": false,
+      "oracleCardName": "Pridemalkin",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, put a +1/+1 counter on target creature you control.\nEach creature you control with a +1/+1 counter on it has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)"
     },
     {
       "name": "Return to Nature",
       "scryfallId": "7e99f99a-68a1-4f35-853c-794630d313fc",
       "multiverseid": 612557,
       "twoFaced": false,
+      "oracleCardName": "Return to Nature",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "66639e5d-8a74-4d58-a77d-0bb9d6d62bb1",
       "multiverseid": 612687,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Wood Elves",
       "scryfallId": "527cf39d-29d1-4c19-9c49-ebf611ca15d5",
       "multiverseid": 612564,
       "twoFaced": false,
+      "oracleCardName": "Wood Elves",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
     },
     {
       "name": "Abzan Battle Priest",
       "scryfallId": "c0fb53e6-441f-4faa-bf0e-0847cf83279d",
       "multiverseid": 612412,
       "twoFaced": false,
+      "oracleCardName": "Abzan Battle Priest",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has lifelink."
     },
     {
       "name": "Abzan Falconer",
       "scryfallId": "f7e2b0e1-c9ea-4f91-b19e-73b1bd6a0884",
       "multiverseid": 612413,
       "twoFaced": false,
+      "oracleCardName": "Abzan Falconer",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying."
     },
     {
       "name": "Alharu, Solemn Ritualist",
       "scryfallId": "73be08fb-f5ce-4458-9f5b-c1055b3fb04d",
       "multiverseid": 612416,
       "twoFaced": false,
+      "oracleCardName": "Alharu, Solemn Ritualist",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "When Alharu enters, put a +1/+1 counter on each of up to two other target creatures.\nWhenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Spirit creature token with flying.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "6fc44891-b291-4234-8e11-a3d86ec26c83",
       "multiverseid": 612596,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Armorcraft Judge",
       "scryfallId": "cb0698bd-03fa-4de8-a98c-87c45b83c254",
       "multiverseid": 612539,
       "twoFaced": false,
+      "oracleCardName": "Armorcraft Judge",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, draw a card for each creature you control with a +1/+1 counter on it."
     },
     {
       "name": "Brawn",
       "scryfallId": "8c05568e-fa50-46e9-aec4-1ba5e814029e",
       "multiverseid": 612540,
       "twoFaced": false,
+      "oracleCardName": "Brawn",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Trample\nAs long as this card is in your graveyard and you control a Forest, creatures you control have trample."
     },
     {
       "name": "Bretagard Stronghold",
       "scryfallId": "67733bb9-9151-4ddc-b104-e48328bd1b28",
       "multiverseid": 612640,
       "twoFaced": false,
+      "oracleCardName": "Bretagard Stronghold",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{G}{W}{W}, {T}, Sacrifice this land: Put a +1/+1 counter on each of up to two target creatures you control. They gain vigilance and lifelink until end of turn. Activate only as a sorcery."
     },
     {
       "name": "Conclave Mentor",
       "scryfallId": "c6d36786-6e36-4a9b-97ad-ad7d9d2b8d92",
       "multiverseid": 612568,
       "twoFaced": false,
+      "oracleCardName": "Conclave Mentor",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{W}",
+      "cmc": 2,
+      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on that creature instead.\nWhen this creature dies, you gain life equal to its power."
     },
     {
       "name": "Constable of the Realm",
       "scryfallId": "a1000f3c-475e-49b8-8c98-bbff0e7ed87b",
       "multiverseid": 612427,
       "twoFaced": false,
+      "oracleCardName": "Constable of the Realm",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Renown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)\nWhenever one or more +1/+1 counters are put on this creature, exile up to one other target nonland permanent until this creature leaves the battlefield."
     },
     {
       "name": "Elite Scaleguard",
       "scryfallId": "af5b1e9e-8342-442d-8305-d9a2c5845ed5",
       "multiverseid": 612429,
       "twoFaced": false,
+      "oracleCardName": "Elite Scaleguard",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls."
     },
     {
       "name": "Enduring Scalelord",
       "scryfallId": "c0ee001b-6ddb-478e-a407-58bcc2bf7c30",
       "multiverseid": 612573,
       "twoFaced": false,
+      "oracleCardName": "Enduring Scalelord",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{W}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on this creature."
     },
     {
       "name": "Falkenrath Exterminator",
       "scryfallId": "75cb8891-90bc-41d9-96ff-e24564d3970e",
       "multiverseid": 612524,
       "twoFaced": false,
+      "oracleCardName": "Falkenrath Exterminator",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.\n{2}{R}: This creature deals damage to target creature equal to the number of +1/+1 counters on this creature."
     },
     {
       "name": "Field of Ruin",
       "scryfallId": "143147d2-2eec-41e7-b78a-592288b38630",
       "multiverseid": 612648,
       "twoFaced": false,
+      "oracleCardName": "Field of Ruin",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles."
     },
     {
       "name": "Generous Gift",
       "scryfallId": "3125ff49-32cc-4732-88e8-222527e06fa5",
       "multiverseid": 612435,
       "twoFaced": false,
+      "oracleCardName": "Generous Gift",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
     },
     {
       "name": "Good-Fortune Unicorn",
       "scryfallId": "a9c61721-3f80-44e6-8a75-08ff609e4470",
       "multiverseid": 612574,
       "twoFaced": false,
+      "oracleCardName": "Good-Fortune Unicorn",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever another creature you control enters, put a +1/+1 counter on that creature."
     },
     {
       "name": "Hamza, Guardian of Arashin",
       "scryfallId": "f402e6d9-8c72-4b31-bec5-4a1b3ffb39ae",
       "multiverseid": 612575,
       "twoFaced": false,
+      "oracleCardName": "Hamza, Guardian of Arashin",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{W}",
+      "cmc": 6,
+      "oracleText": "This spell costs {1} less to cast for each creature you control with a +1/+1 counter on it.\nCreature spells you cast cost {1} less to cast for each creature you control with a +1/+1 counter on it."
     },
     {
       "name": "Hindervines",
       "scryfallId": "bab0c821-965c-4086-b787-f30a6da86ff8",
       "multiverseid": 612549,
       "twoFaced": false,
+      "oracleCardName": "Hindervines",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them."
     },
     {
       "name": "Inspiring Call",
       "scryfallId": "b5f00ea4-a26f-49c6-b175-c3b7cb42c3ae",
       "multiverseid": 612552,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Call",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "24bec77b-a5f4-4f71-a8ca-4f365dc755d8",
       "multiverseid": 612656,
       "twoFaced": false,
+      "oracleCardName": "Jungle Shrine",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
     },
     {
       "name": "Juniper Order Ranger",
       "scryfallId": "9f299f1e-2694-44e6-aad4-1f29c2ee5553",
       "multiverseid": 612578,
       "twoFaced": false,
+      "oracleCardName": "Juniper Order Ranger",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{W}",
+      "cmc": 5,
+      "oracleText": "Whenever another creature you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on this creature."
     },
     {
       "name": "Krosan Verge",
       "scryfallId": "dabcee54-dda3-4208-81a8-e1ae3f79acf5",
       "multiverseid": 612660,
       "twoFaced": false,
+      "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Llanowar Reborn",
       "scryfallId": "992e1549-0c3e-4c0f-954f-c1061e36c276",
       "multiverseid": 612661,
       "twoFaced": false,
+      "oracleCardName": "Llanowar Reborn",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nGraft 1 (This land enters with a +1/+1 counter on it. Whenever a creature enters, you may move a +1/+1 counter from this land onto it.)"
     },
     {
       "name": "Mindless Automaton",
       "scryfallId": "db51ea5c-762f-4c60-9cf5-9c9fe5270f65",
       "multiverseid": 612613,
       "twoFaced": false,
+      "oracleCardName": "Mindless Automaton",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}, Discard a card: Put a +1/+1 counter on this creature.\nRemove two +1/+1 counters from this creature: Draw a card."
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "25d11ee4-9cb8-4688-8004-d83e00861028",
       "multiverseid": 612669,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Slurrk, All-Ingesting",
       "scryfallId": "8107fd21-7d34-44ce-afb8-920eab3b924e",
       "multiverseid": 612560,
       "twoFaced": false,
+      "oracleCardName": "Slurrk, All-Ingesting",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Slurrk enters with five +1/+1 counters on it.\nWhenever Slurrk or another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "eca9ae7b-a6d9-43ea-92d4-0110fd6643a7",
       "multiverseid": 612629,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "81c31217-7919-40fd-97e7-88431b7bd277",
       "multiverseid": 612459,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "bb218ee0-24fd-4d23-8135-468f3e4a41be",
       "multiverseid": 612685,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "MOC"
+      "set": "MOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Plains",
       "scryfallId": "00bf269d-aca3-494c-8777-de90ae903af2",
       "multiverseid": 610461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "00bf269d-aca3-494c-8777-de90ae903af2",
       "multiverseid": 610461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "00bf269d-aca3-494c-8777-de90ae903af2",
       "multiverseid": 610461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "00bf269d-aca3-494c-8777-de90ae903af2",
       "multiverseid": 610461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "00bf269d-aca3-494c-8777-de90ae903af2",
       "multiverseid": 610461,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "21041ed6-8f13-4909-a2c3-fa4894a2d1e3",
       "multiverseid": 610464,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "21041ed6-8f13-4909-a2c3-fa4894a2d1e3",
       "multiverseid": 610464,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "80716ed1-8d0e-44e6-8b18-606e80d22181",
       "multiverseid": 610465,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MOM"
+      "set": "MOM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.338Z",
+    "retrievedDate": "2026-02-20T03:10:20.305Z",
     "sourceUrl": "CallForBackup_MOC.json",
     "deckSource": "precon",
     "createdAt": "2023-04-21T00:00:00.000Z"

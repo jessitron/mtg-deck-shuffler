@@ -9,12 +9,19 @@
       "scryfallId": "8319b155-0fba-4d30-9481-bf01afbd3457",
       "multiverseid": 495894,
       "twoFaced": false,
+      "oracleCardName": "Obuun, Mul Daya Ancestor",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}{W}",
+      "cmc": 4,
+      "oracleText": "At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.\nLandfall — Whenever a land you control enters, put a +1/+1 counter on target creature."
     }
   ],
   "cards": [
@@ -23,989 +30,1647 @@
       "scryfallId": "a6e7713d-6054-46a7-a8bc-f09e7a81a571",
       "multiverseid": 495948,
       "twoFaced": false,
+      "oracleCardName": "Admonition Angel",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may exile target nonland permanent other than this creature.\nWhen this creature leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control."
     },
     {
       "name": "Trove Warden",
       "scryfallId": "3336593c-c83c-48e7-9173-2c2b74b94d3b",
       "multiverseid": 495895,
       "twoFaced": false,
+      "oracleCardName": "Trove Warden",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Vigilance\nLandfall — Whenever a land you control enters, exile target permanent card with mana value 3 or less from your graveyard.\nWhen this creature dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner."
     },
     {
       "name": "Geode Rager",
       "scryfallId": "28f684e5-a263-4841-b297-a094c76d906f",
       "multiverseid": 495898,
       "twoFaced": false,
+      "oracleCardName": "Geode Rager",
       "colorIdentity": [
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "First strike\nLandfall — Whenever a land you control enters, goad each creature target player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Emeria Angel",
       "scryfallId": "491c6b65-244e-4146-9fbc-6eb00e78e1b7",
       "multiverseid": 495953,
       "twoFaced": false,
+      "oracleCardName": "Emeria Angel",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may create a 1/1 white Bird creature token with flying."
     },
     {
       "name": "Emeria Shepherd",
       "scryfallId": "a99dd58d-9fed-4d85-9bb5-f9c91834cab8",
       "multiverseid": 495954,
       "twoFaced": false,
+      "oracleCardName": "Emeria Shepherd",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{W}{W}",
+      "cmc": 7,
+      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead."
     },
     {
       "name": "Sun Titan",
       "scryfallId": "ef3e7352-5768-4d4e-befb-560b9d10a178",
       "multiverseid": 495959,
       "twoFaced": false,
+      "oracleCardName": "Sun Titan",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
     },
     {
       "name": "Multani, Yavimaya's Avatar",
       "scryfallId": "88733b6d-6d45-4318-ae49-623929231d17",
       "multiverseid": 496013,
       "twoFaced": false,
+      "oracleCardName": "Multani, Yavimaya's Avatar",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Reach, trample\nMultani gets +1/+1 for each land you control and each land card in your graveyard.\n{1}{G}, Return two lands you control to their owner's hand: Return this card from your graveyard to your hand."
     },
     {
       "name": "Rampaging Baloths",
       "scryfallId": "7c4d6cce-ef92-47b9-a65b-870024f71e83",
       "multiverseid": 496015,
       "twoFaced": false,
+      "oracleCardName": "Rampaging Baloths",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
     },
     {
       "name": "Sylvan Advocate",
       "scryfallId": "7f5ac7ee-52e0-4c30-83cd-d27c29c19dbc",
       "multiverseid": 496022,
       "twoFaced": false,
+      "oracleCardName": "Sylvan Advocate",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Vigilance\nAs long as you control six or more lands, this creature and land creatures you control get +2/+2."
     },
     {
       "name": "Waker of the Wilds",
       "scryfallId": "4124807b-15f9-46d7-8b0b-d4f1b3587d99",
       "multiverseid": 496024,
       "twoFaced": false,
+      "oracleCardName": "Waker of the Wilds",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "{X}{G}{G}: Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land."
     },
     {
       "name": "Living Twister",
       "scryfallId": "d2f5e2c4-7a58-4666-b28f-d8e459547724",
       "multiverseid": 496031,
       "twoFaced": false,
+      "oracleCardName": "Living Twister",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{R}{G}",
+      "cmc": 3,
+      "oracleText": "{1}{R}, Discard a land card: This creature deals 2 damage to any target.\n{G}: Return a tapped land you control to its owner's hand."
     },
     {
       "name": "Mina and Denn, Wildborn",
       "scryfallId": "374b5d57-fd20-4062-9ec2-24ac557d9dde",
       "multiverseid": 496032,
       "twoFaced": false,
+      "oracleCardName": "Mina and Denn, Wildborn",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "You may play an additional land on each of your turns.\n{R}{G}, Return a land you control to its owner's hand: Target creature gains trample until end of turn."
     },
     {
       "name": "Omnath, Locus of Rage",
       "scryfallId": "08c14bb4-c9d9-41ce-a075-a441522a52c6",
       "multiverseid": 496035,
       "twoFaced": false,
+      "oracleCardName": "Omnath, Locus of Rage",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Landfall — Whenever a land you control enters, create a 5/5 red and green Elemental creature token.\nWhenever Omnath or another Elemental you control dies, Omnath deals 3 damage to any target."
     },
     {
       "name": "Abzan Falconer",
       "scryfallId": "42560ce5-c7ac-422f-8f22-e2fb043861b7",
       "multiverseid": 495947,
       "twoFaced": false,
+      "oracleCardName": "Abzan Falconer",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying."
     },
     {
       "name": "Elite Scaleguard",
       "scryfallId": "817002d2-1150-4769-b9de-f363b69ffb8a",
       "multiverseid": 495952,
       "twoFaced": false,
+      "oracleCardName": "Elite Scaleguard",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls."
     },
     {
       "name": "Kor Cartographer",
       "scryfallId": "975ad85f-1314-4707-974d-2f49b11b9490",
       "multiverseid": 495956,
       "twoFaced": false,
+      "oracleCardName": "Kor Cartographer",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Acidic Slime",
       "scryfallId": "2baac648-a789-403f-a490-a6f6c65f5eb5",
       "multiverseid": 495997,
       "twoFaced": false,
+      "oracleCardName": "Acidic Slime",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
     },
     {
       "name": "Armorcraft Judge",
       "scryfallId": "0893ada6-d7dd-4913-8c94-a780fc559859",
       "multiverseid": 495998,
       "twoFaced": false,
+      "oracleCardName": "Armorcraft Judge",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, draw a card for each creature you control with a +1/+1 counter on it."
     },
     {
       "name": "Elvish Rejuvenator",
       "scryfallId": "db9168c5-7da7-402c-91e5-734898694e22",
       "multiverseid": 496001,
       "twoFaced": false,
+      "oracleCardName": "Elvish Rejuvenator",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Embodiment of Insight",
       "scryfallId": "2f3d83f7-b087-4e9b-8e98-6b9b060d0627",
       "multiverseid": 496002,
       "twoFaced": false,
+      "oracleCardName": "Embodiment of Insight",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Vigilance\nLand creatures you control have vigilance.\nLandfall — Whenever a land you control enters, you may have target land you control become a 3/3 Elemental creature with haste until end of turn. It's still a land."
     },
     {
       "name": "Evolution Sage",
       "scryfallId": "969bf351-c7df-4eb0-8065-9b8d5233f8f3",
       "multiverseid": 496003,
       "twoFaced": false,
+      "oracleCardName": "Evolution Sage",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Fertilid",
       "scryfallId": "4532020f-c6b5-43e6-946b-a4491c1785b3",
       "multiverseid": 496005,
       "twoFaced": false,
+      "oracleCardName": "Fertilid",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from this creature: Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles."
     },
     {
       "name": "Keeper of Fables",
       "scryfallId": "3e7d8c13-bfab-4501-8773-64adbfeb0957",
       "multiverseid": 496009,
       "twoFaced": false,
+      "oracleCardName": "Keeper of Fables",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card."
     },
     {
       "name": "Satyr Wayfinder",
       "scryfallId": "84cb8203-88e4-4a3b-9334-91b70c747091",
       "multiverseid": 496019,
       "twoFaced": false,
+      "oracleCardName": "Satyr Wayfinder",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
     },
     {
       "name": "Sporemound",
       "scryfallId": "8d104172-fad9-466a-910b-23863bd1a205",
       "multiverseid": 496020,
       "twoFaced": false,
+      "oracleCardName": "Sporemound",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Saproling creature token."
     },
     {
       "name": "Springbloom Druid",
       "scryfallId": "76ccbb7c-6563-4ed0-a812-f94b002b7618",
       "multiverseid": 496021,
       "twoFaced": false,
+      "oracleCardName": "Springbloom Druid",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Tuskguard Captain",
       "scryfallId": "1faffaf0-6be6-458f-b0f1-e3e74627c406",
       "multiverseid": 496023,
       "twoFaced": false,
+      "oracleCardName": "Tuskguard Captain",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Outlast {G} ({G}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has trample."
     },
     {
       "name": "Yavimaya Elder",
       "scryfallId": "8549396b-f525-412d-9ff6-60b6a6b66a18",
       "multiverseid": 496025,
       "twoFaced": false,
+      "oracleCardName": "Yavimaya Elder",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
     },
     {
       "name": "Sandstone Oracle",
       "scryfallId": "e8df2b87-9671-4827-9ee9-5c6d6bb50aac",
       "multiverseid": 496054,
       "twoFaced": false,
+      "oracleCardName": "Sandstone Oracle",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhen this creature enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference."
     },
     {
       "name": "Scaretiller",
       "scryfallId": "83ad06e3-c498-49f8-b8d4-34d044ede097",
       "multiverseid": 496055,
       "twoFaced": false,
+      "oracleCardName": "Scaretiller",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Murasa Rootgrazer",
       "scryfallId": "e70b3b78-9bdc-449b-82a9-c2fc3dd7f120",
       "multiverseid": 491880,
       "twoFaced": false,
+      "oracleCardName": "Murasa Rootgrazer",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{W}",
+      "cmc": 2,
+      "oracleText": "Vigilance\n{T}: You may put a basic land card from your hand onto the battlefield.\n{T}: Return target basic land you control to its owner's hand."
     },
     {
       "name": "Hour of Revelation",
       "scryfallId": "ddb53e90-f91e-4da9-ab70-5460958c6c99",
       "multiverseid": 495955,
       "twoFaced": false,
+      "oracleCardName": "Hour of Revelation",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}{W}",
+      "cmc": 6,
+      "oracleText": "This spell costs {3} less to cast if there are ten or more nonland permanents on the battlefield.\nDestroy all nonland permanents."
     },
     {
       "name": "Planar Outburst",
       "scryfallId": "5b72535d-16dc-4b03-a18e-0da4a7cc901e",
       "multiverseid": 495957,
       "twoFaced": false,
+      "oracleCardName": "Planar Outburst",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all nonland creatures.\nAwaken 4—{5}{W}{W}{W} (If you cast this spell for {5}{W}{W}{W}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)"
     },
     {
       "name": "Nissa's Renewal",
       "scryfallId": "288c0c3e-48a9-4ea5-ac8b-7071fc0a3fc7",
       "multiverseid": 496014,
       "twoFaced": false,
+      "oracleCardName": "Nissa's Renewal",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You gain 7 life."
     },
     {
       "name": "Beanstalk Giant // Fertile Footsteps",
       "scryfallId": "1f4495c3-46be-4b9c-bedf-7998e313662b",
       "multiverseid": 495999,
       "twoFaced": false,
+      "oracleCardName": "Beanstalk Giant // Fertile Footsteps",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{G}",
+      "cmc": 7,
+      "oracleText": "Beanstalk Giant's power and toughness are each equal to the number of lands you control."
     },
     {
       "name": "Circuitous Route",
       "scryfallId": "6130036c-2cb7-4216-9bfe-0b751d653529",
       "multiverseid": 496000,
       "twoFaced": false,
+      "oracleCardName": "Circuitous Route",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Far Wanderings",
       "scryfallId": "db67c59e-a9fb-4580-a8cc-ac5ef6c07440",
       "multiverseid": 496004,
       "twoFaced": false,
+      "oracleCardName": "Far Wanderings",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nThreshold — If there are seven or more cards in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Harmonize",
       "scryfallId": "35c74267-2c54-4883-b96a-5e912e5bde32",
       "multiverseid": 496006,
       "twoFaced": false,
+      "oracleCardName": "Harmonize",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Draw three cards."
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "d1a6d4f8-31e8-46b1-a0e3-5a0f9da112fd",
       "multiverseid": 496011,
       "twoFaced": false,
+      "oracleCardName": "Kodama's Reach",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Ground Assault",
       "scryfallId": "570edcbb-5770-4589-9941-787bf9d139bd",
       "multiverseid": 496029,
       "twoFaced": false,
+      "oracleCardName": "Ground Assault",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}{G}",
+      "cmc": 2,
+      "oracleText": "Ground Assault deals damage to target creature equal to the number of lands you control."
     },
     {
       "name": "Treacherous Terrain",
       "scryfallId": "5fb6efb3-bde3-4e29-8637-265e5c1da616",
       "multiverseid": 496043,
       "twoFaced": false,
+      "oracleCardName": "Treacherous Terrain",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{6}{R}{G}",
+      "cmc": 8,
+      "oracleText": "Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Return of the Wildspeaker",
       "scryfallId": "cbbfd12c-9d16-4abe-83e9-ef5fa5977631",
       "multiverseid": 496017,
       "twoFaced": false,
+      "oracleCardName": "Return of the Wildspeaker",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
     },
     {
       "name": "Condemn",
       "scryfallId": "b28100b4-f4ee-4e1c-be50-508dd01e846a",
       "multiverseid": 495950,
       "twoFaced": false,
+      "oracleCardName": "Condemn",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness."
     },
     {
       "name": "Crush Contraband",
       "scryfallId": "bc566018-5d35-44cc-adc4-76e09be9e47f",
       "multiverseid": 495951,
       "twoFaced": false,
+      "oracleCardName": "Crush Contraband",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Choose one or both —\n• Exile target artifact.\n• Exile target enchantment."
     },
     {
       "name": "Harrow",
       "scryfallId": "f8095ca6-2f5f-497f-8b78-7e530ac31d22",
       "multiverseid": 496007,
       "twoFaced": false,
+      "oracleCardName": "Harrow",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Inspiring Call",
       "scryfallId": "6221f00b-39dc-423a-bace-1bc15e1e91f7",
       "multiverseid": 496008,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Call",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
     },
     {
       "name": "Naya Charm",
       "scryfallId": "8d999a15-34a4-4a1e-862e-569b91948786",
       "multiverseid": 496033,
       "twoFaced": false,
+      "oracleCardName": "Naya Charm",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}{G}{W}",
+      "cmc": 3,
+      "oracleText": "Choose one —\n• Naya Charm deals 3 damage to target creature.\n• Return target card from a graveyard to its owner's hand.\n• Tap all creatures target player controls."
     },
     {
       "name": "Sylvan Reclamation",
       "scryfallId": "7999b93a-b18d-4d82-99ec-719e481b0c00",
       "multiverseid": 496042,
       "twoFaced": false,
+      "oracleCardName": "Sylvan Reclamation",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{G}{W}",
+      "cmc": 5,
+      "oracleText": "Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Roiling Regrowth",
       "scryfallId": "fa259096-b24f-414c-af59-301bed4b4627",
       "multiverseid": 491849,
       "twoFaced": false,
+      "oracleCardName": "Roiling Regrowth",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Seer's Sundial",
       "scryfallId": "814e5257-464e-4451-8bee-780d80d8dec5",
       "multiverseid": 496057,
       "twoFaced": false,
+      "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "89ed88b1-c2b8-4c6e-87a6-168035b2f8c8",
       "multiverseid": 496044,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "8a5edac3-855a-4820-b913-44de5b29b7d0",
       "multiverseid": 496058,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Together Forever",
       "scryfallId": "0ee24937-a282-4cf4-8daa-114e68285094",
       "multiverseid": 495960,
       "twoFaced": false,
+      "oracleCardName": "Together Forever",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{W}{W}",
+      "cmc": 2,
+      "oracleText": "When this enchantment enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand."
     },
     {
       "name": "Abundance",
       "scryfallId": "73a44759-1fa4-4a96-b668-316851e8a35a",
       "multiverseid": 495996,
       "twoFaced": false,
+      "oracleCardName": "Abundance",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order."
     },
     {
       "name": "The Mending of Dominaria",
       "scryfallId": "726feeb3-6403-4f23-8415-a4a6878faf61",
       "multiverseid": 496012,
       "twoFaced": false,
+      "oracleCardName": "The Mending of Dominaria",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library."
     },
     {
       "name": "Rites of Flourishing",
       "scryfallId": "ab014d5a-aec5-4ea8-bfb4-1392f43c1b30",
       "multiverseid": 496018,
       "twoFaced": false,
+      "oracleCardName": "Rites of Flourishing",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns."
     },
     {
       "name": "Banishing Light",
       "scryfallId": "d35bad68-e1a9-4cdc-bd68-cee4ccebef6c",
       "multiverseid": 495949,
       "twoFaced": false,
+      "oracleCardName": "Banishing Light",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
     },
     {
       "name": "Retreat to Emeria",
       "scryfallId": "9f18221f-e900-48ef-9b8e-e8ee52b31939",
       "multiverseid": 495958,
       "twoFaced": false,
+      "oracleCardName": "Retreat to Emeria",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn."
     },
     {
       "name": "Khalni Heart Expedition",
       "scryfallId": "fc9c99e7-1e0a-4012-9b6e-6d2299b22269",
       "multiverseid": 496010,
       "twoFaced": false,
+      "oracleCardName": "Khalni Heart Expedition",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Retreat to Kazandu",
       "scryfallId": "a4b9e374-bc7e-4e43-8efd-5cb7b965ac2b",
       "multiverseid": 496016,
       "twoFaced": false,
+      "oracleCardName": "Retreat to Kazandu",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Put a +1/+1 counter on target creature.\n• You gain 2 life."
     },
     {
       "name": "Zendikar's Roil",
       "scryfallId": "60297593-2438-48d7-9414-48af114a93d2",
       "multiverseid": 496026,
       "twoFaced": false,
+      "oracleCardName": "Zendikar's Roil",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Landfall — Whenever a land you control enters, create a 2/2 green Elemental creature token."
     },
     {
       "name": "Needle Spires",
       "scryfallId": "5e1903c2-6b22-4e2c-99fa-8e259fff29c5",
       "multiverseid": 496075,
       "twoFaced": false,
+      "oracleCardName": "Needle Spires",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}: Until end of turn, this land becomes a 2/1 red and white Elemental creature with double strike. It's still a land."
     },
     {
       "name": "Blighted Woodland",
       "scryfallId": "5005cb1a-ea29-4a5e-959c-21fdf1997575",
       "multiverseid": 496059,
       "twoFaced": false,
+      "oracleCardName": "Blighted Woodland",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Boros Garrison",
       "scryfallId": "9bddfae4-f928-4209-96c5-a483f9c20823",
       "multiverseid": 496060,
       "twoFaced": false,
+      "oracleCardName": "Boros Garrison",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
     },
     {
       "name": "Boros Guildgate",
       "scryfallId": "62512962-8d98-4e18-a910-39abd72229ce",
       "multiverseid": 496061,
       "twoFaced": false,
+      "oracleCardName": "Boros Guildgate",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "50976f27-1878-46b0-a3c9-ac53616905ac",
       "multiverseid": 496062,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Cryptic Caves",
       "scryfallId": "204acb48-a705-4c5f-b462-2bcb3bc75fa4",
       "multiverseid": 496063,
       "twoFaced": false,
+      "oracleCardName": "Cryptic Caves",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "46ee12e6-569e-446a-9600-b1eac394e213",
       "multiverseid": 496067,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Gruul Guildgate",
       "scryfallId": "e62b42cf-abdb-4807-bb7d-4009faf92635",
       "multiverseid": 496068,
       "twoFaced": false,
+      "oracleCardName": "Gruul Guildgate",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Gruul Turf",
       "scryfallId": "296e140d-3510-4bbf-8c96-9b361bb369ee",
       "multiverseid": 496069,
       "twoFaced": false,
+      "oracleCardName": "Gruul Turf",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
     },
     {
       "name": "Jungle Shrine",
       "scryfallId": "57e7fedd-3e02-462d-b13e-32c34eedd069",
       "multiverseid": 496070,
       "twoFaced": false,
+      "oracleCardName": "Jungle Shrine",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
     },
     {
       "name": "Krosan Verge",
       "scryfallId": "8d6adf14-e1ee-4248-bad2-67f209e686f6",
       "multiverseid": 496072,
       "twoFaced": false,
+      "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "99d861db-bb12-4fa8-9122-167e7e7898ec",
       "multiverseid": 496073,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Naya Panorama",
       "scryfallId": "4ba615a5-ad3a-4ad1-ab5f-69d7a3e4cf34",
       "multiverseid": 496074,
       "twoFaced": false,
+      "oracleCardName": "Naya Panorama",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Selesnya Guildgate",
       "scryfallId": "e9b50917-6b95-41b8-86c7-1f4c8204d099",
       "multiverseid": 496077,
       "twoFaced": false,
+      "oracleCardName": "Selesnya Guildgate",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Selesnya Sanctuary",
       "scryfallId": "c6d7a00e-f828-43c1-bcbe-ea04589dc4ed",
       "multiverseid": 496078,
       "twoFaced": false,
+      "oracleCardName": "Selesnya Sanctuary",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "660d83ac-e159-4f5e-936c-51ee19fed53c",
       "multiverseid": 496080,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ae92e656-6c9d-48c3-a238-5a11c2c62ec8",
       "multiverseid": 495098,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3c6a38dd-e8f5-420f-9576-66937c71286b",
       "multiverseid": 495101,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3c6a38dd-e8f5-420f-9576-66937c71286b",
       "multiverseid": 495101,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3c6a38dd-e8f5-420f-9576-66937c71286b",
       "multiverseid": 495101,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3c6a38dd-e8f5-420f-9576-66937c71286b",
       "multiverseid": 495101,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2b90e88b-60a3-4d1d-bb8c-14633e5005a5",
       "multiverseid": 495102,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "ZNR"
+      "set": "ZNR",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Struggle // Survive",
       "scryfallId": "92f0a448-fc11-4a1e-ab87-5a02b72a481c",
       "multiverseid": 496040,
       "twoFaced": false,
+      "oracleCardName": "Struggle // Survive",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "ZNC"
+      "set": "ZNC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 5,
+      "oracleText": "Struggle deals damage to target creature equal to the number of lands you control."
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.116Z",
+    "retrievedDate": "2026-02-20T03:10:21.231Z",
     "sourceUrl": "LandSWrath_ZNC.json",
     "deckSource": "precon",
     "createdAt": "2020-09-25T00:00:00.000Z"

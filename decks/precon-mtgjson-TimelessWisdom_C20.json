@@ -9,12 +9,19 @@
       "scryfallId": "80bc07d5-bdbb-4a6d-8958-0c172ea80245",
       "multiverseid": 484714,
       "twoFaced": false,
+      "oracleCardName": "Gavi, Nest Warden",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{R}{W}",
+      "cmc": 5,
+      "oracleText": "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.\nWhenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token."
     }
   ],
   "cards": [
@@ -23,988 +30,1644 @@
       "scryfallId": "a83ca3a1-82a9-4f47-b0b8-21687afd705b",
       "multiverseid": 482773,
       "twoFaced": false,
+      "oracleCardName": "Chandra, Flamecaller",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "[+1]: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.\n[0]: Discard all the cards in your hand, then draw that many cards plus one.\n[−X]: Chandra deals X damage to each creature."
     },
     {
       "name": "Akim, the Soaring Wind",
       "scryfallId": "23736c5f-bd1c-4505-8639-5fb92cd74b21",
       "multiverseid": 484713,
       "twoFaced": false,
+      "oracleCardName": "Akim, the Soaring Wind",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{R}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever you create one or more tokens for the first time each turn, create a 1/1 white Bird creature token with flying.\n{3}{U}{R}{W}: Creature tokens you control gain double strike until end of turn."
     },
     {
       "name": "Brallin, Skyshark Rider",
       "scryfallId": "9b4fdcd5-5346-46a8-b1a4-84ddb74089e0",
       "multiverseid": 484711,
       "twoFaced": false,
+      "oracleCardName": "Brallin, Skyshark Rider",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Partner with Shabraz, the Skyshark (When this creature enters, target player may put Shabraz into their hand from their library, then shuffle.)\nWhenever you discard a card, put a +1/+1 counter on Brallin and it deals 1 damage to each opponent.\n{R}: Target Shark gains trample until end of turn."
     },
     {
       "name": "Shabraz, the Skyshark",
       "scryfallId": "9955d172-0b24-4c61-9dee-c935a1f26da2",
       "multiverseid": 484721,
       "twoFaced": false,
+      "oracleCardName": "Shabraz, the Skyshark",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{U}",
+      "cmc": 5,
+      "oracleText": "Partner with Brallin, Skyshark Rider\nFlying\nWhenever you draw a card, put a +1/+1 counter on Shabraz and you gain 1 life.\n{W/U}: Target Human gains flying until end of turn."
     },
     {
       "name": "Cryptic Trilobite",
       "scryfallId": "a73c630c-c98d-4f8a-9e6a-2576d5fec4ee",
       "multiverseid": 484868,
       "twoFaced": false,
+      "oracleCardName": "Cryptic Trilobite",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{X}",
+      "cmc": 0,
+      "oracleText": "This creature enters with X +1/+1 counters on it.\nRemove a +1/+1 counter from this creature: Add {C}{C}. Spend this mana only to activate abilities.\n{1}, {T}: Put a +1/+1 counter on this creature."
     },
     {
       "name": "Herald of the Forgotten",
       "scryfallId": "c3dba1c4-ee9a-4ea6-bf66-f639d38711cd",
       "multiverseid": 484874,
       "twoFaced": false,
+      "oracleCardName": "Herald of the Forgotten",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{W}{W}",
+      "cmc": 8,
+      "oracleText": "Flying\nWhen this creature enters, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield."
     },
     {
       "name": "Ethereal Forager",
       "scryfallId": "97543d69-547e-41f8-9a4f-908e5eb0ee4a",
       "multiverseid": 484881,
       "twoFaced": false,
+      "oracleCardName": "Ethereal Forager",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\nWhenever this creature attacks, you may return an instant or sorcery card exiled with this creature to its owner's hand."
     },
     {
       "name": "Agitator Ant",
       "scryfallId": "29d1122e-ac2d-4d95-829b-7b3b54159a4a",
       "multiverseid": 484896,
       "twoFaced": false,
+      "oracleCardName": "Agitator Ant",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Spellpyre Phoenix",
       "scryfallId": "f492c4f5-27b7-4f09-a3af-2fb1aeac50d5",
       "multiverseid": 484903,
       "twoFaced": false,
+      "oracleCardName": "Spellpyre Phoenix",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, you may return target instant or sorcery card with a cycling ability from your graveyard to your hand.\nAt the beginning of each end step, if you cycled two or more cards this turn, return this card from your graveyard to your hand."
     },
     {
       "name": "Surly Badgersaur",
       "scryfallId": "7ba507e2-fe5e-4947-aada-20184aa09700",
       "multiverseid": 484904,
       "twoFaced": false,
+      "oracleCardName": "Surly Badgersaur",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you discard a creature card, put a +1/+1 counter on this creature.\nWhenever you discard a land card, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nWhenever you discard a noncreature, nonland card, this creature fights up to one target creature you don't control."
     },
     {
       "name": "Eternal Dragon",
       "scryfallId": "e659b6ea-8522-4644-9f73-5c9312e28c81",
       "multiverseid": 482716,
       "twoFaced": false,
+      "oracleCardName": "Eternal Dragon",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{W}{W}",
+      "cmc": 7,
+      "oracleText": "Flying\n{3}{W}{W}: Return this card from your graveyard to your hand. Activate only during your upkeep.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Sun Titan",
       "scryfallId": "d5529c38-3071-40c8-8afb-12e84f8cb4c8",
       "multiverseid": 482729,
       "twoFaced": false,
+      "oracleCardName": "Sun Titan",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
     },
     {
       "name": "Curator of Mysteries",
       "scryfallId": "127c28d5-dd5f-4678-b5ed-604aefc98947",
       "multiverseid": 482737,
       "twoFaced": false,
+      "oracleCardName": "Curator of Mysteries",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you cycle or discard another card, scry 1.\nCycling {U} ({U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Nimble Obstructionist",
       "scryfallId": "832426d7-be22-4092-b614-7fa417af03bd",
       "multiverseid": 482749,
       "twoFaced": false,
+      "oracleCardName": "Nimble Obstructionist",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Flash\nFlying\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, counter target activated or triggered ability you don't control."
     },
     {
       "name": "Portal Mage",
       "scryfallId": "e9f6cb64-07e3-44ca-986c-fd10ab74cc8a",
       "multiverseid": 482750,
       "twoFaced": false,
+      "oracleCardName": "Portal Mage",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Flash\nWhen this creature enters during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)"
     },
     {
       "name": "Isperia, Supreme Judge",
       "scryfallId": "1e3b82a7-ebef-4190-9f50-40b992ba89c9",
       "multiverseid": 482845,
       "twoFaced": false,
+      "oracleCardName": "Isperia, Supreme Judge",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever a creature attacks you or a planeswalker you control, you may draw a card."
     },
     {
       "name": "Mercurial Chemister",
       "scryfallId": "24bf4eac-784d-4d9e-b7b3-92da98215376",
       "multiverseid": 482849,
       "twoFaced": false,
+      "oracleCardName": "Mercurial Chemister",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}",
+      "cmc": 5,
+      "oracleText": "{U}, {T}: Draw two cards.\n{R}, {T}, Discard a card: This creature deals damage to target creature equal to the discarded card's mana value."
     },
     {
       "name": "Niv-Mizzet, the Firemind",
       "scryfallId": "395465b8-f5ed-4668-9e6a-82257150c52c",
       "multiverseid": 482853,
       "twoFaced": false,
+      "oracleCardName": "Niv-Mizzet, the Firemind",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever you draw a card, Niv-Mizzet deals 1 damage to any target.\n{T}: Draw a card."
     },
     {
       "name": "The Locust God",
       "scryfallId": "87f6aaba-ad2d-41ea-8d07-21c67d384aa0",
       "multiverseid": 482847,
       "twoFaced": false,
+      "oracleCardName": "The Locust God",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.\n{2}{U}{R}: Draw a card, then discard a card.\nWhen The Locust God dies, return it to its owner's hand at the beginning of the next end step."
     },
     {
       "name": "Psychosis Crawler",
       "scryfallId": "cd10270a-6bf1-4c90-94ba-d22621281e1a",
       "multiverseid": 482876,
       "twoFaced": false,
+      "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
     },
     {
       "name": "Valiant Rescuer",
       "scryfallId": "a2b13ff6-67e9-4760-aef4-a8548ea44344",
       "multiverseid": 479556,
       "twoFaced": false,
+      "oracleCardName": "Valiant Rescuer",
       "colorIdentity": [
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you cycle another card for the first time each turn, create a 1/1 white Human Soldier creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Rooting Moloch",
       "scryfallId": "cc2fd581-5cf8-4154-90dd-922afddcd556",
       "multiverseid": 479653,
       "twoFaced": false,
+      "oracleCardName": "Rooting Moloch",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, exile target card with a cycling ability from your graveyard. Until the end of your next turn, you may play that card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Savai Thundermane",
       "scryfallId": "73d3925c-cf7d-4546-bc70-33f04d4b7566",
       "multiverseid": 479725,
       "twoFaced": false,
+      "oracleCardName": "Savai Thundermane",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you cycle a card, you may pay {2}. When you do, this creature deals 2 damage to target creature and you gain 2 life."
     },
     {
       "name": "Vizier of Tumbling Sands",
       "scryfallId": "b1514f3d-7444-4c6c-8f7c-bf3565603429",
       "multiverseid": 482754,
       "twoFaced": false,
+      "oracleCardName": "Vizier of Tumbling Sands",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "{T}: Untap another target permanent.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, untap target permanent."
     },
     {
       "name": "Dismantling Wave",
       "scryfallId": "9db4c1ec-ddd6-4443-8d93-8628e67aa6bb",
       "multiverseid": 484872,
       "twoFaced": false,
+      "oracleCardName": "Dismantling Wave",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "For each opponent, destroy up to one target artifact or enchantment that player controls.\nCycling {6}{W}{W} ({6}{W}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy all artifacts and enchantments."
     },
     {
       "name": "Akroma's Vengeance",
       "scryfallId": "e45b4cba-cd60-4491-a334-30976d0990b7",
       "multiverseid": 482702,
       "twoFaced": false,
+      "oracleCardName": "Akroma's Vengeance",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Destroy all artifacts, creatures, and enchantments.\nCycling {3} ({3}, Discard this card: Draw a card.)"
     },
     {
       "name": "Decree of Justice",
       "scryfallId": "f3150eef-b1e9-44d8-a561-eaeb80e38020",
       "multiverseid": 482713,
       "twoFaced": false,
+      "oracleCardName": "Decree of Justice",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{X}{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Create X 4/4 white Angel creature tokens with flying.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens."
     },
     {
       "name": "Descend upon the Sinful",
       "scryfallId": "98e42eb8-b556-4ea6-aded-d0087d243b75",
       "multiverseid": 482714,
       "twoFaced": false,
+      "oracleCardName": "Descend upon the Sinful",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Exile all creatures.\nDelirium — Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard."
     },
     {
       "name": "Boon of the Wish-Giver",
       "scryfallId": "0e790851-f0f7-4f1a-80e6-94be649499b6",
       "multiverseid": 479563,
       "twoFaced": false,
+      "oracleCardName": "Boon of the Wish-Giver",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Draw four cards.\nCycling {1} ({1}, Discard this card: Draw a card.)"
     },
     {
       "name": "Windfall",
       "scryfallId": "3484e885-253e-41dc-a541-1576debc9884",
       "multiverseid": 482756,
       "twoFaced": false,
+      "oracleCardName": "Windfall",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
     },
     {
       "name": "Slice and Dice",
       "scryfallId": "7e8c87a8-b527-4d76-8516-d1147e21773f",
       "multiverseid": 482787,
       "twoFaced": false,
+      "oracleCardName": "Slice and Dice",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Slice and Dice deals 4 damage to each creature.\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have it deal 1 damage to each creature."
     },
     {
       "name": "Migratory Route",
       "scryfallId": "3c5ed87f-a439-4136-a8c4-9f6a694c459b",
       "multiverseid": 482850,
       "twoFaced": false,
+      "oracleCardName": "Migratory Route",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{U}",
+      "cmc": 5,
+      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Fierce Guardianship",
       "scryfallId": "4c5ffa83-c88d-4f5d-851e-a642b229d596",
       "multiverseid": 484882,
       "twoFaced": false,
+      "oracleCardName": "Fierce Guardianship",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "If you control a commander, you may cast this spell without paying its mana cost.\nCounter target noncreature spell."
     },
     {
       "name": "Neutralize",
       "scryfallId": "0430da3c-9460-4b62-ae28-2e7e6f4d06a4",
       "multiverseid": 479579,
       "twoFaced": false,
+      "oracleCardName": "Neutralize",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Counter target spell.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Zenith Flare",
       "scryfallId": "0efac1ed-3f01-487c-86be-8239568b4425",
       "multiverseid": 479737,
       "twoFaced": false,
+      "oracleCardName": "Zenith Flare",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}{W}",
+      "cmc": 4,
+      "oracleText": "Zenith Flare deals X damage to any target and you gain X life, where X is the number of cards with a cycling ability in your graveyard."
     },
     {
       "name": "Hieroglyphic Illumination",
       "scryfallId": "0bd05638-d621-4967-b7e3-63121c88f18b",
       "multiverseid": 482740,
       "twoFaced": false,
+      "oracleCardName": "Hieroglyphic Illumination",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Draw two cards.\nCycling {U} ({U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Abandoned Sarcophagus",
       "scryfallId": "23b587f3-5eac-45a7-a048-dd73d2a2b74f",
       "multiverseid": 482864,
       "twoFaced": false,
+      "oracleCardName": "Abandoned Sarcophagus",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "You may cast spells that have a cycling ability from your graveyard.\nIf a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead."
     },
     {
       "name": "Fluctuator",
       "scryfallId": "c06a2fb3-d933-461f-bcf8-5c614bb75d0b",
       "multiverseid": 482869,
       "twoFaced": false,
+      "oracleCardName": "Fluctuator",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Cycling abilities you activate cost {2} less to activate."
     },
     {
       "name": "Bonder's Ornament",
       "scryfallId": "5afe425c-50a7-4d29-ac14-0edb094fc770",
       "multiverseid": 484914,
       "twoFaced": false,
+      "oracleCardName": "Bonder's Ornament",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\n{4}, {T}: Each player who controls a permanent named Bonder's Ornament draws a card."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "1486170d-4ad3-4318-bf72-f948617d567f",
       "multiverseid": 482865,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "20c8186f-4874-4870-b99f-73d333045d9a",
       "multiverseid": 482866,
       "twoFaced": false,
+      "oracleCardName": "Azorius Signet",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Boros Signet",
       "scryfallId": "c6b1edb0-47ee-4679-93e8-0a06138f9c5e",
       "multiverseid": 482867,
       "twoFaced": false,
+      "oracleCardName": "Boros Signet",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {R}{W}."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "89c29c9c-9d4b-4809-9a95-796adfbce22a",
       "multiverseid": 482868,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "1de256fd-367f-4517-90c4-19d826c11a48",
       "multiverseid": 482871,
       "twoFaced": false,
+      "oracleCardName": "Izzet Signet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{R}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "286bea73-8ad8-4423-8a7c-8497420fdb54",
       "multiverseid": 482880,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Raugrin Crystal",
       "scryfallId": "c5bce0fb-53d6-47ee-8c5a-a99e50f67fc9",
       "multiverseid": 479758,
       "twoFaced": false,
+      "oracleCardName": "Raugrin Crystal",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {U}, {R}, or {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Crystalline Resonance",
       "scryfallId": "93f20664-c3d0-4dbd-93dc-4f69a0cbff46",
       "multiverseid": 484878,
       "twoFaced": false,
+      "oracleCardName": "Crystalline Resonance",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cycle a card, you may have this enchantment become a copy of another target permanent until your next turn, except it has this ability."
     },
     {
       "name": "Astral Drift",
       "scryfallId": "07a2c7fa-7aea-4da4-b7d5-9c24f5024c74",
       "multiverseid": 482704,
       "twoFaced": false,
+      "oracleCardName": "Astral Drift",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever you cycle this card or cycle another card while this enchantment is on the battlefield, you may exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Hoofprints of the Stag",
       "scryfallId": "56b90c9f-b717-4a2a-a62d-e878ab7caa81",
       "multiverseid": 482718,
       "twoFaced": false,
+      "oracleCardName": "Hoofprints of the Stag",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Kindred",
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you draw a card, you may put a hoofprint counter on this enchantment.\n{2}{W}, Remove four hoofprint counters from this enchantment: Create a 4/4 white Elemental creature token with flying. Activate only during your turn."
     },
     {
       "name": "Drake Haven",
       "scryfallId": "e2502a3a-2c1d-490e-b958-969dfc7f875a",
       "multiverseid": 482738,
       "twoFaced": false,
+      "oracleCardName": "Drake Haven",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying."
     },
     {
       "name": "New Perspectives",
       "scryfallId": "286be1fb-8ed2-4228-9df8-0ea413714778",
       "multiverseid": 482747,
       "twoFaced": false,
+      "oracleCardName": "New Perspectives",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "When this enchantment enters, draw three cards.\nAs long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs."
     },
     {
       "name": "Tectonic Reformation",
       "scryfallId": "656c3e32-8928-4b99-b79c-5761c592aa3d",
       "multiverseid": 482790,
       "twoFaced": false,
+      "oracleCardName": "Tectonic Reformation",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Each land card in your hand has cycling {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Ominous Seas",
       "scryfallId": "ce8965f2-756a-4461-a643-db024a11c2de",
       "multiverseid": 479581,
       "twoFaced": false,
+      "oracleCardName": "Ominous Seas",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever you draw a card, put a foreshadow counter on this enchantment.\nRemove eight foreshadow counters from this enchantment: Create an 8/8 blue Kraken creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Reconnaissance Mission",
       "scryfallId": "ae9f7efa-d125-4f83-825e-172ea099a62a",
       "multiverseid": 479585,
       "twoFaced": false,
+      "oracleCardName": "Reconnaissance Mission",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Martial Impetus",
       "scryfallId": "25656d3d-dc5a-4085-8461-cab11b96e70a",
       "multiverseid": 484875,
       "twoFaced": false,
+      "oracleCardName": "Martial Impetus",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn."
     },
     {
       "name": "Psychic Impetus",
       "scryfallId": "9440d3f3-f4f4-450b-ab88-0acbaeec972b",
       "multiverseid": 484884,
       "twoFaced": false,
+      "oracleCardName": "Psychic Impetus",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you scry 2."
     },
     {
       "name": "Shiny Impetus",
       "scryfallId": "0aa80931-0501-4712-a11b-563a3cd1e1c9",
       "multiverseid": 484902,
       "twoFaced": false,
+      "oracleCardName": "Shiny Impetus",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Cast Out",
       "scryfallId": "1bf09533-3849-4756-8ccf-143196cc17d9",
       "multiverseid": 482707,
       "twoFaced": false,
+      "oracleCardName": "Cast Out",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Spirit Cairn",
       "scryfallId": "9b0f860c-029c-4856-a999-05b3306c7d46",
       "multiverseid": 482728,
       "twoFaced": false,
+      "oracleCardName": "Spirit Cairn",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying."
     },
     {
       "name": "Lightning Rift",
       "scryfallId": "c6d8746d-3a8c-48a9-91ad-354b69a402c6",
       "multiverseid": 482783,
       "twoFaced": false,
+      "oracleCardName": "Lightning Rift",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever a player cycles a card, you may pay {1}. If you do, this enchantment deals 2 damage to any target."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "f623a2c3-ebe5-4f43-8b87-59b4d6991ff0",
       "multiverseid": 482901,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Hostile Desert",
       "scryfallId": "90b7872c-0702-43f8-841c-22ff7923ca29",
       "multiverseid": 482909,
       "twoFaced": false,
+      "oracleCardName": "Hostile Desert",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, Exile a land card from your graveyard: This land becomes a 3/4 Elemental creature until end of turn. It's still a land."
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "54065d26-39ae-412c-b60e-d22d7f3e78be",
       "multiverseid": 482910,
       "twoFaced": false,
+      "oracleCardName": "Irrigated Farmland",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "b9bc9e0e-8da2-4213-bb23-f46433425022",
       "multiverseid": 482927,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Shivan Reef",
       "scryfallId": "983d129b-809b-436e-bb66-3c7028709e50",
       "multiverseid": 482938,
       "twoFaced": false,
+      "oracleCardName": "Shivan Reef",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "44205d8c-4fa5-4c06-9ad5-c743bf4f90d2",
       "multiverseid": 482940,
       "twoFaced": false,
+      "oracleCardName": "Skycloud Expanse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "a2803e9d-cb96-44d8-9702-36d9c4d2ee45",
       "multiverseid": 482883,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Azorius Chancery",
       "scryfallId": "382b28ea-3706-480c-b7cc-4f16160d5d6b",
       "multiverseid": 482884,
       "twoFaced": false,
+      "oracleCardName": "Azorius Chancery",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
     },
     {
       "name": "Boros Garrison",
       "scryfallId": "7fbc73e9-a17f-475c-8a23-f9673e1930ae",
       "multiverseid": 482888,
       "twoFaced": false,
+      "oracleCardName": "Boros Garrison",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "37691c08-7763-42bd-b882-3cb0624a2098",
       "multiverseid": 482892,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Desert of the Fervent",
       "scryfallId": "0f80b293-e586-4d0d-9387-1c497ae8e5a0",
       "multiverseid": 482894,
       "twoFaced": false,
+      "oracleCardName": "Desert of the Fervent",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)"
     },
     {
       "name": "Desert of the Mindful",
       "scryfallId": "16444255-dcb9-442e-b015-feaa6dea8a26",
       "multiverseid": 482895,
       "twoFaced": false,
+      "oracleCardName": "Desert of the Mindful",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Desert of the True",
       "scryfallId": "3f96abac-9876-4fb6-af56-6c0c47c9d86b",
       "multiverseid": 482896,
       "twoFaced": false,
+      "oracleCardName": "Desert of the True",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Drifting Meadow",
       "scryfallId": "64dde056-f16f-495b-bba6-2e6edc8cb63a",
       "multiverseid": 482899,
       "twoFaced": false,
+      "oracleCardName": "Drifting Meadow",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Forgotten Cave",
       "scryfallId": "c4b2e22e-ad34-4d4a-beb6-82a64b3127e5",
       "multiverseid": 482902,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Cave",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
     },
     {
       "name": "Izzet Boilerworks",
       "scryfallId": "2d96b00c-8b73-4b4a-b784-4c7e779f8fd7",
       "multiverseid": 482911,
       "twoFaced": false,
+      "oracleCardName": "Izzet Boilerworks",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
     },
     {
       "name": "Lonely Sandbar",
       "scryfallId": "f93d8da4-7af1-481a-b0a6-78df793b91f0",
       "multiverseid": 482915,
       "twoFaced": false,
+      "oracleCardName": "Lonely Sandbar",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "42bb5732-5c17-447f-9fcd-dc12136fa145",
       "multiverseid": 482920,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Mystic Monastery",
       "scryfallId": "3242ffa7-01e8-4349-9a59-2060bc37f8fe",
       "multiverseid": 482921,
       "twoFaced": false,
+      "oracleCardName": "Mystic Monastery",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "ce724b58-769f-424a-8e82-a1c3875d90a4",
       "multiverseid": 482929,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Remote Isle",
       "scryfallId": "452c82dc-6388-4d60-84ee-f8961a81980c",
       "multiverseid": 482930,
       "twoFaced": false,
+      "oracleCardName": "Remote Isle",
       "colorIdentity": [
         "U"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Secluded Steppe",
       "scryfallId": "06e93b14-d226-41c0-9366-d4e1bfff5186",
       "multiverseid": 482935,
       "twoFaced": false,
+      "oracleCardName": "Secluded Steppe",
       "colorIdentity": [
         "W"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Smoldering Crater",
       "scryfallId": "26a9d3ef-2a56-45f4-a68a-c6acac381fbc",
       "multiverseid": 482941,
       "twoFaced": false,
+      "oracleCardName": "Smoldering Crater",
       "colorIdentity": [
         "R"
       ],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "b69cc893-4e71-4724-8df3-fcc0a037e399",
       "multiverseid": 482947,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "C20"
+      "set": "C20",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Island",
       "scryfallId": "4b2ad5b3-7257-4521-8916-6b1cbfb89e27",
       "multiverseid": 482538,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "4b2ad5b3-7257-4521-8916-6b1cbfb89e27",
       "multiverseid": 482538,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0b9bbc32-a89a-4bed-ab52-ac6569ec74ce",
       "multiverseid": 482539,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "0b9bbc32-a89a-4bed-ab52-ac6569ec74ce",
       "multiverseid": 482539,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "be169f8c-6472-40ec-9b4a-0edcb63e9e2f",
       "multiverseid": 482540,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "ae3d2fcd-11e0-4071-8c53-cb3315b7360a",
       "multiverseid": 482544,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "ae3d2fcd-11e0-4071-8c53-cb3315b7360a",
       "multiverseid": 482544,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "eb1ba09d-ecdd-48c0-af0b-3dc5ef908f9e",
       "multiverseid": 482545,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "eb1ba09d-ecdd-48c0-af0b-3dc5ef908f9e",
       "multiverseid": 482545,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
       "multiverseid": 482546,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e609028b-43b8-4aea-9f9a-25aa127482db",
       "multiverseid": 482546,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "16ebbce9-fd10-4c14-b52d-cf82c0c1a58c",
       "multiverseid": 482535,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "16ebbce9-fd10-4c14-b52d-cf82c0c1a58c",
       "multiverseid": 482535,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "e84f2b9b-1412-476f-8739-17d35ea48a51",
       "multiverseid": 482536,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "8a65b379-47a9-48f2-be6e-abb4e7868ad0",
       "multiverseid": 482537,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "IKO"
+      "set": "IKO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.986Z",
+    "retrievedDate": "2026-02-20T03:10:22.235Z",
     "sourceUrl": "TimelessWisdom_C20.json",
     "deckSource": "precon",
     "createdAt": "2020-04-17T00:00:00.000Z"

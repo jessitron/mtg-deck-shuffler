@@ -9,11 +9,18 @@
       "scryfallId": "719f172b-f9ad-4960-af66-757eb54147f6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Atarka, World Render",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{G}",
+      "cmc": 7,
+      "oracleText": "Flying, trample\nWhenever a Dragon you control attacks, it gains double strike until end of turn."
     }
   ],
   "cards": [
@@ -22,990 +29,1644 @@
       "scryfallId": "cc2bff9a-b8a4-49a0-8208-9c6ebc56df14",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Akoum Hellkite",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nLandfall — Whenever a land you control enters, this creature deals 1 damage to any target. If that land is a Mountain, this creature deals 2 damage instead."
     },
     {
       "name": "Chain Reaction",
       "scryfallId": "0609ddd2-1e98-4fe3-855e-c0ba1c365369",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chain Reaction",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
     },
     {
       "name": "Crucible of Fire",
       "scryfallId": "a4cfcb17-6401-4595-82e6-ac1ab2a9e43b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Crucible of Fire",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Dragon creatures you control get +3/+3."
     },
     {
       "name": "Demanding Dragon",
       "scryfallId": "f97d0541-f04f-44a6-a20f-4d909ccc90ca",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Demanding Dragon",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, it deals 5 damage to target opponent unless that player sacrifices a creature of their choice."
     },
     {
       "name": "Dragonkin Berserker",
       "scryfallId": "dcfd4840-c524-464a-9519-3fb78e6ee8c5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragonkin Berserker",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "First strike\nBoast abilities you activate cost {1} less to activate for each Dragon you control.\nBoast — {4}{R}: Create a 5/5 red Dragon creature token with flying. (Activate only if this creature attacked this turn and only once each turn.)"
     },
     {
       "name": "Dragonmaster Outcast",
       "scryfallId": "e7198cf2-795d-4921-be28-86f208dfe1f3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragonmaster Outcast",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."
     },
     {
       "name": "Drakuseth, Maw of Flames",
       "scryfallId": "c8b43b68-ee35-4704-9a0f-1df4a42d3791",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Drakuseth, Maw of Flames",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhenever Drakuseth attacks, it deals 4 damage to any target and 3 damage to each of up to two other targets."
     },
     {
       "name": "Dream Pillager",
       "scryfallId": "5284c6db-82f4-4285-ade3-9b136abcedd2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dream Pillager",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards."
     },
     {
       "name": "Flameblast Dragon",
       "scryfallId": "90390efc-beca-440e-abee-65c1a29223cb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Flameblast Dragon",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever this creature attacks, you may pay {X}{R}. If you do, it deals X damage to any target."
     },
     {
       "name": "Hoard-Smelter Dragon",
       "scryfallId": "b4487bbe-2bc4-48d9-8a6f-9b0c7555fb47",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hoard-Smelter Dragon",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\n{3}{R}: Destroy target artifact. This creature gets +X/+0 until end of turn, where X is that artifact's mana value."
     },
     {
       "name": "Magmaquake",
       "scryfallId": "dd99b254-3830-4543-a8c7-42899dc6fc65",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Magmaquake",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{R}{R}",
+      "cmc": 2,
+      "oracleText": "Magmaquake deals X damage to each creature without flying and each planeswalker."
     },
     {
       "name": "Mordant Dragon",
       "scryfallId": "a83a2fe7-36df-4a38-8dd3-605eeb5f58f1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mordant Dragon",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\n{1}{R}: This creature gets +1/+0 until end of turn.\nWhenever this creature deals combat damage to a player, you may have it deal that much damage to target creature that player controls."
     },
     {
       "name": "Runehorn Hellkite",
       "scryfallId": "932504ec-274e-49e6-ac51-a8ec362e83d5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Runehorn Hellkite",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\n{5}{R}, Exile this card from your graveyard: Each player discards their hand, then draws seven cards."
     },
     {
       "name": "Sarkhan, the Dragonspeaker",
       "scryfallId": "e653b95e-43c8-4cd6-a094-b2cd22d0eda2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sarkhan, the Dragonspeaker",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "[+1]: Until end of turn, Sarkhan becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)\n[−3]: Sarkhan deals 4 damage to target creature.\n[−6]: You get an emblem with \"At the beginning of your draw step, draw two additional cards\" and \"At the beginning of your end step, discard your hand.\""
     },
     {
       "name": "Scourge of Valkas",
       "scryfallId": "02ba0244-b7fa-4090-a1ac-1ba762dd8cc3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Scourge of Valkas",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever this creature or another Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control.\n{R}: This creature gets +1/+0 until end of turn."
     },
     {
       "name": "Spit Flame",
       "scryfallId": "49fed954-0341-4a06-ae34-71e7d8c779ab",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Spit Flame",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Spit Flame deals 4 damage to target creature.\nWhenever a Dragon you control enters, you may pay {R}. If you do, return this card from your graveyard to your hand."
     },
     {
       "name": "Sweltering Suns",
       "scryfallId": "7414b8da-abbe-4fba-afaf-2c9ff650a429",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sweltering Suns",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}{R}",
+      "cmc": 3,
+      "oracleText": "Sweltering Suns deals 3 damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
     },
     {
       "name": "Thunderbreak Regent",
       "scryfallId": "a985687c-7a3a-4de2-9af3-450cb665d523",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Thunderbreak Regent",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, this creature deals 3 damage to that player."
     },
     {
       "name": "Thundermaw Hellkite",
       "scryfallId": "7a517c33-b516-4ad9-8cd8-d2ca27310252",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Thundermaw Hellkite",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)\nWhen this creature enters, it deals 1 damage to each creature with flying your opponents control. Tap those creatures."
     },
     {
       "name": "Tyrant's Familiar",
       "scryfallId": "4f0c7f3b-337e-4b61-8ab9-5e67a0979a9a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tyrant's Familiar",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Flying, haste\nLieutenant — As long as you control your commander, this creature gets +2/+2 and has \"Whenever this creature attacks, it deals 7 damage to target creature defending player controls.\""
     },
     {
       "name": "Verix Bladewing",
       "scryfallId": "359be9e6-0770-43e3-853c-95e5317e9d30",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Verix Bladewing",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Kicker {3} (You may pay an additional {3} as you cast this spell.)\nFlying\nWhen Verix Bladewing enters, if it was kicked, create Karox Bladewing, a legendary 4/4 red Dragon creature token with flying."
     },
     {
       "name": "Foe-Razer Regent",
       "scryfallId": "fde4a5a2-adcc-4011-b866-3bb2161ce966",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Foe-Razer Regent",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhen this creature enters, you may have it fight target creature you don't control.\nWhenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step."
     },
     {
       "name": "Frontier Siege",
       "scryfallId": "25b37249-bf5c-48ad-a5ea-c7538cc46929",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Frontier Siege",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of each of your main phases, add {G}{G}.\n• Dragons — Whenever a creature you control with flying enters, you may have it fight target creature you don't control."
     },
     {
       "name": "Hunter's Prowess",
       "scryfallId": "40220c41-f70e-49e8-8885-3525d01e0ff1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hunter's Prowess",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Until end of turn, target creature gets +3/+3 and gains trample and \"Whenever this creature deals combat damage to a player, draw that many cards.\""
     },
     {
       "name": "Primal Might",
       "scryfallId": "2c9ed4cd-260e-4109-a962-44c58ab1b76d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Primal Might",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)"
     },
     {
       "name": "Shamanic Revelation",
       "scryfallId": "c2e1151b-9203-4415-802d-1f3c8e4b9d03",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shamanic Revelation",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
     },
     {
       "name": "Clan Defiance",
       "scryfallId": "aebd371a-8564-4687-9874-7986fc64ecfe",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Clan Defiance",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{R}{G}",
+      "cmc": 2,
+      "oracleText": "Choose one or more —\n• Clan Defiance deals X damage to target creature with flying.\n• Clan Defiance deals X damage to target creature without flying.\n• Clan Defiance deals X damage to target player or planeswalker."
     },
     {
       "name": "Harbinger of the Hunt",
       "scryfallId": "52b7ea31-e853-4e8f-82f8-440388a5b110",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Harbinger of the Hunt",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "Flying\n{2}{R}: This creature deals 1 damage to each creature without flying.\n{2}{G}: This creature deals 1 damage to each other creature with flying."
     },
     {
       "name": "Dragon's Hoard",
       "scryfallId": "398748c4-0ca4-4a7e-a7c7-995d5c3fa646",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragon's Hoard",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Whenever a Dragon you control enters, put a gold counter on this artifact.\n{T}, Remove a gold counter from this artifact: Draw a card.\n{T}: Add one mana of any color."
     },
     {
       "name": "Steel Hellkite",
       "scryfallId": "ef97714b-b0e0-43b4-b2f0-414cc7997ff3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "6db7c44f-7c15-48e9-8170-43b00c7c11c1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Game Trail",
       "scryfallId": "2e53f295-60f6-4c6b-a0a4-304556b4eea0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Haven of the Spirit Dragon",
       "scryfallId": "f4454c38-a490-4ea7-8525-c695e37b9fc9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Haven of the Spirit Dragon",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Dragon creature spell.\n{2}, {T}, Sacrifice this land: Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "49dceacc-a71a-4115-b0a9-7c7bd3c9f451",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Dragon Mage",
       "scryfallId": "2847214c-f435-42db-80db-f3ca8bfb8567",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragon Mage",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, each player discards their hand, then draws seven cards."
     },
     {
       "name": "Dragon Tempest",
       "scryfallId": "13ad7bb2-e58b-4cd1-9b32-38c7f8589214",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragon Tempest",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control with flying enters, it gains haste until end of turn.\nWhenever a Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control."
     },
     {
       "name": "Dragonlord's Servant",
       "scryfallId": "d746adc2-5844-424e-af19-c7e80498f106",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragonlord's Servant",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Dragon spells you cast cost {1} less to cast."
     },
     {
       "name": "Dragonspeaker Shaman",
       "scryfallId": "938de396-9701-4737-b913-c3c010f1b142",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dragonspeaker Shaman",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{R}",
+      "cmc": 3,
+      "oracleText": "Dragon spells you cast cost {2} less to cast."
     },
     {
       "name": "Furnace Whelp",
       "scryfallId": "396db1ad-e463-49b7-a4da-24302f771441",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Furnace Whelp",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\n{R}: This creature gets +1/+0 until end of turn."
     },
     {
       "name": "Provoke the Trolls",
       "scryfallId": "964ae341-64eb-4ac1-9fb0-7243d5fe744d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Provoke the Trolls",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Provoke the Trolls deals 3 damage to any target. If a creature is dealt damage this way, it gets +5/+0 until end of turn."
     },
     {
       "name": "Rapacious Dragon",
       "scryfallId": "af7d2077-c108-4cb6-af56-3815991439b7",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rapacious Dragon",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Unleash Fury",
       "scryfallId": "04b1739c-bc65-482c-81fd-fa08d6f29fcd",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Unleash Fury",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Double the power of target creature until end of turn."
     },
     {
       "name": "Vandalblast",
       "scryfallId": "71eb87ef-7e79-4370-a367-f8960cfe188e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Vandalblast",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
     },
     {
       "name": "Beast Within",
       "scryfallId": "fb961f73-e352-4373-b2ae-1730b654640c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Beast Within",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
     },
     {
       "name": "Blossoming Defense",
       "scryfallId": "bf65fcd0-5f4e-4e65-ac86-2f14d5c7d527",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Blossoming Defense",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Target creature you control gets +2/+2 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
     },
     {
       "name": "Cultivate",
       "scryfallId": "ea325c2c-36cb-46c5-b410-a3ee0b15e638",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Cultivate",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Drumhunter",
       "scryfallId": "658c6338-2bd4-450a-a2f3-9c57aaaa7739",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Drumhunter",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, if you control a creature with power 5 or greater, you may draw a card.\n{T}: Add {C}."
     },
     {
       "name": "Elemental Bond",
       "scryfallId": "b2c1a36e-a17b-4168-9048-4cc02dd464c5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Elemental Bond",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control with power 3 or greater enters, draw a card."
     },
     {
       "name": "Garruk's Uprising",
       "scryfallId": "2b4746f0-233a-4e6f-9054-7a269e36a206",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Garruk's Uprising",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
     },
     {
       "name": "Harmonize",
       "scryfallId": "ada28221-e5be-4d87-9dc7-649e01ca1e24",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Harmonize",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Draw three cards."
     },
     {
       "name": "Hunter's Insight",
       "scryfallId": "b2fb825e-0c93-4555-9f6e-9b9d21566c2a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hunter's Insight",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards."
     },
     {
       "name": "Loaming Shaman",
       "scryfallId": "595ed9e9-65b3-4dc1-be6b-6bcd4f7ab8a0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Loaming Shaman",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, target player shuffles any number of target cards from their graveyard into their library."
     },
     {
       "name": "Return to Nature",
       "scryfallId": "6f68ce77-b581-465c-9532-69df6de7827b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Return to Nature",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard."
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "7611e8e3-9529-4d0b-bc23-88ba907c4939",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sakura-Tribe Elder",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Draconic Disciple",
       "scryfallId": "8cc56c65-b199-4203-b6f3-d890ab613800",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Draconic Disciple",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\n{7}, {T}, Sacrifice this creature: Create a 5/5 red Dragon creature token with flying."
     },
     {
       "name": "Fires of Yavimaya",
       "scryfallId": "f8003d09-9c1a-4bd3-8672-f4d7960c972e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fires of Yavimaya",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Creatures you control have haste.\nSacrifice this enchantment: Target creature gets +2/+2 until end of turn."
     },
     {
       "name": "Savage Ventmaw",
       "scryfallId": "4e3bd256-09d8-4d13-90fb-dff4aed3f328",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Savage Ventmaw",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{G}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever this creature attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "02cb9420-fbfb-4123-a830-a992ff470db6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Atarka Monument",
       "scryfallId": "5e9fc80b-9602-4250-a282-e44aab6f8feb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Atarka Monument",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {R} or {G}.\n{4}{R}{G}: This artifact becomes a 4/4 red and green Dragon artifact creature with flying until end of turn."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "686b4c7f-5b42-4625-8ff9-782795eec264",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "1b023575-4cb5-434f-92ef-d3b81aaa3c3e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "adc02df9-fbe8-4ef9-9bed-a48ea43a9242",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Talisman of Impulse",
       "scryfallId": "b08ce0bf-ee14-451c-8a77-b0ffffbb3e0d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Impulse",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This artifact deals 1 damage to you."
     },
     {
       "name": "Command Tower",
       "scryfallId": "cae0c9e0-3be9-4151-9d59-658a032c30e9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Kazandu Refuge",
       "scryfallId": "304b4d37-53e1-44a3-a892-627439edaf6f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Kazandu Refuge",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "dbab5b0a-c80f-4604-bec8-04da67ae1691",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Rugged Highlands",
       "scryfallId": "a0300df7-54a9-4719-81bb-08e4d7762eac",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rugged Highlands",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Shivan Oasis",
       "scryfallId": "815fd52c-852a-4eac-8f7c-879f3af5548e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shivan Oasis",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Timber Gorge",
       "scryfallId": "dd47ccf1-500c-4553-9f25-d8a192a65c4e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Timber Gorge",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Mountain",
       "scryfallId": "77c65a79-b8ae-4743-b124-c34140a06731",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "77c65a79-b8ae-4743-b124-c34140a06731",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "77c65a79-b8ae-4743-b124-c34140a06731",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "77c65a79-b8ae-4743-b124-c34140a06731",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "77c65a79-b8ae-4743-b124-c34140a06731",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "0282ebd2-c264-4157-9808-7151988d7cb6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "0282ebd2-c264-4157-9808-7151988d7cb6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "0282ebd2-c264-4157-9808-7151988d7cb6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "0282ebd2-c264-4157-9808-7151988d7cb6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "0282ebd2-c264-4157-9808-7151988d7cb6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "63120f1b-8052-49fb-9fc9-09d7746a627f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "63120f1b-8052-49fb-9fc9-09d7746a627f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "63120f1b-8052-49fb-9fc9-09d7746a627f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "63120f1b-8052-49fb-9fc9-09d7746a627f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "38576aaf-7286-49cc-8329-91159ee81025",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "38576aaf-7286-49cc-8329-91159ee81025",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "38576aaf-7286-49cc-8329-91159ee81025",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "38576aaf-7286-49cc-8329-91159ee81025",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2950dace-a653-47e4-a80a-a3de5db8d491",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2950dace-a653-47e4-a80a-a3de5db8d491",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "2950dace-a653-47e4-a80a-a3de5db8d491",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "7c507a5b-f981-4881-8c51-6c5379dfea70",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "7c507a5b-f981-4881-8c51-6c5379dfea70",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "7c507a5b-f981-4881-8c51-6c5379dfea70",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "55b781ec-abed-41e1-85de-a60f6ac9e87e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "55b781ec-abed-41e1-85de-a60f6ac9e87e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "55b781ec-abed-41e1-85de-a60f6ac9e87e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b49e6028-cb92-4a8a-8e85-4c403f55f61c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b49e6028-cb92-4a8a-8e85-4c403f55f61c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b49e6028-cb92-4a8a-8e85-4c403f55f61c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "SCD"
+      "set": "SCD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.572Z",
+    "retrievedDate": "2026-02-20T03:10:20.591Z",
     "sourceUrl": "DraconicDestruction_SCD.json",
     "deckSource": "precon",
     "createdAt": "2022-12-02T00:00:00.000Z"

@@ -9,21 +9,35 @@
       "scryfallId": "0dc4ec90-1650-4b98-9350-66341394cf0b",
       "multiverseid": 634407,
       "twoFaced": false,
+      "oracleCardName": "The Thirteenth Doctor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Paradox — Whenever you cast a spell from anywhere other than your hand, put a +1/+1 counter on target creature.\nTeam TARDIS — At the beginning of your end step, untap each creature you control with a counter on it."
     },
     {
       "name": "Yasmin Khan",
       "scryfallId": "12b09a4f-bb62-4766-8115-cae4d5cc4c12",
       "multiverseid": 634422,
       "twoFaced": false,
+      "oracleCardName": "Yasmin Khan",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "{T}: Exile the top card of your library. Until your next end step, you may play it.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     }
   ],
   "cards": [
@@ -32,985 +46,1636 @@
       "scryfallId": "bf5e0a50-304c-4b3f-b5f7-1ca1213c0282",
       "multiverseid": 634734,
       "twoFaced": false,
+      "oracleCardName": "Danny Pink",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nCreatures you control have \"Whenever one or more counters are put on this creature for the first time each turn, draw a card.\""
     },
     {
       "name": "Osgood, Operation Double",
       "scryfallId": "d180a882-84d9-4e38-8aed-1fc6ecd1df72",
       "multiverseid": 634436,
       "twoFaced": false,
+      "oracleCardName": "Osgood, Operation Double",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "When you cast this spell, create a token that's a copy of it, except it isn't legendary.\n{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact.\nParadox — Whenever you cast a spell from anywhere other than your hand, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Twice Upon a Time // Unlikely Meeting",
       "scryfallId": "9d504a87-f782-4b70-91da-c1944925e86a",
       "multiverseid": 634756,
       "twoFaced": false,
+      "oracleCardName": "Twice Upon a Time // Unlikely Meeting",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Cast this spell only if you control two or more Doctors.\nTake an extra turn after this one. Exile Twice Upon a Time."
     },
     {
       "name": "Become the Pilot",
       "scryfallId": "15927163-f203-4d45-b78f-70eafb941bfd",
       "multiverseid": 634732,
       "twoFaced": false,
+      "oracleCardName": "Become the Pilot",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Enchant noncommander creature\nYou control enchanted creature.\nEnchanted creature gets +2/+2 and can't be blocked unless it's attacking its owner or a permanent its owner controls."
     },
     {
       "name": "Quantum Misalignment",
       "scryfallId": "ceba3080-4e10-46b3-887c-e2d45581962b",
       "multiverseid": 634747,
       "twoFaced": false,
+      "oracleCardName": "Quantum Misalignment",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Create a token that's a copy of target creature you control, except it isn't legendary.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
     },
     {
       "name": "Nardole, Resourceful Cyborg",
       "scryfallId": "03a5c463-6b5c-49c9-84c9-666aa8c19fbf",
       "multiverseid": 634745,
       "twoFaced": false,
+      "oracleCardName": "Nardole, Resourceful Cyborg",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {U} for each counter on Nardole. Spend this mana only to cast noncreature spells.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Flatline",
       "scryfallId": "baea4cd3-cc62-4138-ac2e-5c96c70bbcce",
       "multiverseid": 634738,
       "twoFaced": false,
+      "oracleCardName": "Flatline",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Creatures your opponents control have base power and toughness 0/1 until end of turn."
     },
     {
       "name": "Bill Potts",
       "scryfallId": "74185710-3877-4080-b1d2-014fabbc7186",
       "multiverseid": 634771,
       "twoFaced": false,
+      "oracleCardName": "Bill Potts",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast an instant or sorcery spell that targets only Bill Potts or activate an ability that targets only Bill Potts, copy that spell or ability. You may choose new targets for the copy. This ability triggers only once each turn.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Into the Time Vortex",
       "scryfallId": "a4a3cb61-b760-4cd4-838c-b26310103719",
       "multiverseid": 634783,
       "twoFaced": false,
+      "oracleCardName": "Into the Time Vortex",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
     },
     {
       "name": "Dan Lewis",
       "scryfallId": "24b5c60e-f2f5-40d7-8713-edc3ecedb5e0",
       "multiverseid": 634773,
       "twoFaced": false,
+      "oracleCardName": "Dan Lewis",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Noncreature, non-Equipment artifacts you control are Equipment in addition to their other types and have \"Equipped creature gets +1/+0\" and equip {1}.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Flaming Tyrannosaurus",
       "scryfallId": "0bc8ecfd-7388-4725-8c58-bed2cc61400f",
       "multiverseid": 634780,
       "twoFaced": false,
+      "oracleCardName": "Flaming Tyrannosaurus",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Menace\nParadox — Whenever you cast a spell from anywhere other than your hand, this creature deals 3 damage to any target. Then put a +1/+1 counter on this creature.\nWhen this creature dies, it deals damage equal to its power to each opponent."
     },
     {
       "name": "Ryan Sinclair",
       "scryfallId": "42684d97-fce6-4a96-9c64-20e2cb382dca",
       "multiverseid": 634789,
       "twoFaced": false,
+      "oracleCardName": "Ryan Sinclair",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever Ryan attacks, exile cards from the top of your library until you exile a nonland card. You may cast the exiled card without paying its mana cost if it's a spell with mana value less than or equal to Ryan's power. Put the exiled cards not cast this way on the bottom of your library in a random order.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Return the Past",
       "scryfallId": "74de4341-d10a-47c6-8a60-9dfa491f1d02",
       "multiverseid": 634787,
       "twoFaced": false,
+      "oracleCardName": "Return the Past",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "During your turn, each instant and sorcery card in your graveyard has flashback. Its flashback cost is equal to its mana cost."
     },
     {
       "name": "Impending Flux",
       "scryfallId": "98cc159d-74f7-41fe-a866-c18d96219794",
       "multiverseid": 634782,
       "twoFaced": false,
+      "oracleCardName": "Impending Flux",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Paradox — Impending Flux deals X damage to each opponent and each creature they control, where X is 1 plus the number of spells you've cast from anywhere other than your hand this turn.\nForetell {1}{R}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "The Flux",
       "scryfallId": "026611f8-ae07-464f-afe5-6e94bcfac05e",
       "multiverseid": 634781,
       "twoFaced": false,
+      "oracleCardName": "The Flux",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after VI.)\nI — This Saga deals 4 damage to target creature an opponent controls.\nII, III, IV, V — Exile the top card of your library. You may play that card this turn.\nVI — Add six {R}."
     },
     {
       "name": "Sisterhood of Karn",
       "scryfallId": "4b94f939-5f3b-4b55-8514-b7d296509ac1",
       "multiverseid": 634804,
       "twoFaced": false,
+      "oracleCardName": "Sisterhood of Karn",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "This creature enters with a +1/+1 counter on it.\nParadox — Whenever you cast a spell from anywhere other than your hand, double the number of +1/+1 counters on this creature."
     },
     {
       "name": "Graham O'Brien",
       "scryfallId": "3467d66e-1a81-40d6-945a-f2c679d214d1",
       "multiverseid": 634799,
       "twoFaced": false,
+      "oracleCardName": "Graham O'Brien",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Paradox — Whenever you cast a spell from anywhere other than your hand, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Karvanista, Loyal Lupari // Lupari Shield",
       "scryfallId": "ca1cedd8-98d3-408f-8de8-fa682ab0227c",
       "multiverseid": 634801,
       "twoFaced": false,
+      "oracleCardName": "Karvanista, Loyal Lupari // Lupari Shield",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Vigilance, trample, haste\nWhenever Karvanista attacks, put a +1/+1 counter on each Human you control."
     },
     {
       "name": "The Foretold Soldier",
       "scryfallId": "93391c14-a22c-4223-a980-5f98350c6a99",
       "multiverseid": 634797,
       "twoFaced": false,
+      "oracleCardName": "The Foretold Soldier",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "This creature must be blocked if able.\nThis creature can't be blocked by more than one creature.\nWhenever this creature deals damage, exile it face down. It becomes foretold.\nForetell {1}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Fugitive of the Judoon",
       "scryfallId": "e15f1891-4f80-4c68-8421-8e16ff8d6a6d",
       "multiverseid": 634798,
       "twoFaced": false,
+      "oracleCardName": "Fugitive of the Judoon",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human creature token with ward {2} and a 4/4 white Alien Rhino creature token.\nII — Investigate.\nIII — You may exile a Human you control and an artifact you control. If you do, search your library for a Doctor card, put it onto the battlefield, then shuffle."
     },
     {
       "name": "River Song",
       "scryfallId": "a1efb084-d2a0-44c4-a89d-6445156bb298",
       "multiverseid": 634847,
       "twoFaced": false,
+      "oracleCardName": "River Song",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Meet in Reverse — You draw cards from the bottom of your library rather than the top.\nSpoilers — Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song. Then River Song deals damage to that player equal to its power."
     },
     {
       "name": "Madame Vastra",
       "scryfallId": "94849571-928a-4c6d-9868-58f606941679",
       "multiverseid": 634837,
       "twoFaced": false,
+      "oracleCardName": "Madame Vastra",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Partner with Jenny Flint (When this creature enters, target player may put Jenny Flint into their hand from their library, then shuffle.)\nMadame Vastra must be blocked if able.\nWhenever a creature dealt damage by Madame Vastra this turn dies, create a Clue token and a Food token."
     },
     {
       "name": "Jenny Flint",
       "scryfallId": "74ebd099-ce57-4053-8f25-d18b3d47fac4",
       "multiverseid": 634831,
       "twoFaced": false,
+      "oracleCardName": "Jenny Flint",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Partner with Madame Vastra\nFirst strike\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control."
     },
     {
       "name": "Strax, Sontaran Nurse",
       "scryfallId": "b4801775-70e2-4cda-959c-27f9aa623767",
       "multiverseid": 634855,
       "twoFaced": false,
+      "oracleCardName": "Strax, Sontaran Nurse",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "Vigilance, trample\nGrenades! — {2}, {T}, Sacrifice an artifact: Choose a player at random. When you do, Strax fights another target creature that player controls.\nGlory of Battle — Whenever Strax deals damage to a creature, put a +1/+1 counter on Strax."
     },
     {
       "name": "The Twelfth Doctor",
       "scryfallId": "2400d681-05ef-43b1-b720-c15ca4226c27",
       "multiverseid": 634859,
       "twoFaced": false,
+      "oracleCardName": "The Twelfth Doctor",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}",
+      "cmc": 5,
+      "oracleText": "The first spell you cast from anywhere other than your hand each turn has demonstrate. (When you cast that spell, you may copy it. If you do, choose an opponent to also copy it. A copy of a permanent spell becomes a token.)\nWhenever you copy a spell, put a +1/+1 counter on The Twelfth Doctor."
     },
     {
       "name": "The Fugitive Doctor",
       "scryfallId": "fea8bd29-80a4-463f-b3bd-e15f4bd5f5ce",
       "multiverseid": 634825,
       "twoFaced": false,
+      "oracleCardName": "The Fugitive Doctor",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "When The Fugitive Doctor enters, investigate.\nWhenever The Fugitive Doctor attacks, you may sacrifice a Clue. When you do, target instant or sorcery card in your graveyard gains flashback {2}{R}{G} until end of turn. (You may cast that card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Me, the Immortal",
       "scryfallId": "ddfbf6bf-c0e1-48a1-9223-73099fe470aa",
       "multiverseid": 634842,
       "twoFaced": false,
+      "oracleCardName": "Me, the Immortal",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}{R}",
+      "cmc": 5,
+      "oracleText": "At the beginning of combat on your turn, put your choice of a +1/+1, first strike, vigilance, or menace counter on Me.\nCounters remain on Me as it moves to any zone other than a player's hand or library.\nYou may cast this card from your graveyard by discarding two cards in addition to paying its other costs."
     },
     {
       "name": "Frost Fair Lure Fish",
       "scryfallId": "0d85d8c7-07b2-4577-8c62-7a34dca73ad8",
       "multiverseid": 634824,
       "twoFaced": false,
+      "oracleCardName": "Frost Fair Lure Fish",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}{R}",
+      "cmc": 7,
+      "oracleText": "When this creature enters, create two 1/1 blue Fish creature tokens and create two tapped Treasure tokens.\nFish you control have haste and can't be blocked by Humans.\nForetell {3}{U}{R}"
     },
     {
       "name": "Lunar Hatchling",
       "scryfallId": "2cd60763-8954-4502-99ef-f4f38bf7671b",
       "multiverseid": 634836,
       "twoFaced": false,
+      "oracleCardName": "Lunar Hatchling",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{U}",
+      "cmc": 6,
+      "oracleText": "Flying, trample\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)\nEscape—{4}{G}{U}, Exile a land you control, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)"
     },
     {
       "name": "Heaven Sent",
       "scryfallId": "5e14692f-f1c3-4d7f-8baf-3248621e36fb",
       "multiverseid": 634829,
       "twoFaced": false,
+      "oracleCardName": "Heaven Sent",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{U}{R}",
+      "cmc": 2,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Investigate.\nIII — This Saga deals 1 damage to each opponent. Then if an opponent has 0 or less life, draw seven cards. Otherwise, exile this Saga and you may cast it this turn."
     },
     {
       "name": "Last Night Together",
       "scryfallId": "7d4ed521-eff6-4bdd-939d-8304b26ad256",
       "multiverseid": 634835,
       "twoFaced": false,
+      "oracleCardName": "Last Night Together",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "Choose two target creatures. Untap them. Put two +1/+1 counters on each of them. They gain vigilance, indestructible, and haste until end of turn. After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase."
     },
     {
       "name": "River Song's Diary",
       "scryfallId": "96476a30-72b0-4f91-9d2d-85fc196f89c5",
       "multiverseid": 634877,
       "twoFaced": false,
+      "oracleCardName": "River Song's Diary",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.\nAt the beginning of your upkeep, if there are four or more cards exiled with this artifact, choose one of them at random. You may cast it without paying its mana cost."
     },
     {
       "name": "Confession Dial",
       "scryfallId": "df2e0de7-e29d-432e-8782-766c0c31c05d",
       "multiverseid": 634868,
       "twoFaced": false,
+      "oracleCardName": "Confession Dial",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "When this artifact enters, surveil 3.\n{T}: Target legendary creature card in your graveyard gains escape until end of turn. The escape cost is equal to its mana cost plus exile three other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)"
     },
     {
       "name": "Clara Oswald",
       "scryfallId": "9a1ee042-6713-4e9e-9901-9b94d99d33f1",
       "multiverseid": 634704,
       "twoFaced": false,
+      "oracleCardName": "Clara Oswald",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Impossible Girl — If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color.\nIf a triggered ability of a Doctor you control triggers, that ability triggers an additional time.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "fff37491-f496-4810-80a4-d13470434994",
       "multiverseid": 635551,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Cursed Mirror",
       "scryfallId": "efb9aadf-a50e-4542-82e8-6d8cbc2ea350",
       "multiverseid": 635552,
       "twoFaced": false,
+      "oracleCardName": "Cursed Mirror",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {R}.\nAs this artifact enters, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste."
     },
     {
       "name": "Carpet of Flowers",
       "scryfallId": "fd374915-323c-4d98-9b59-94d405c1dde8",
       "multiverseid": 635555,
       "twoFaced": false,
+      "oracleCardName": "Carpet of Flowers",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls."
     },
     {
       "name": "Dreamroot Cascade",
       "scryfallId": "3a8c7416-c0af-419d-892a-ee989585bf79",
       "multiverseid": 635599,
       "twoFaced": false,
+      "oracleCardName": "Dreamroot Cascade",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "12f1a8ce-a7c2-4e74-a4f2-22c914e998c4",
       "multiverseid": 635644,
       "twoFaced": false,
+      "oracleCardName": "Temple of Mystery",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
     },
     {
       "name": "Vineglimmer Snarl",
       "scryfallId": "ee44297b-fd89-4d95-a502-cdd98fd4fbc3",
       "multiverseid": 635655,
       "twoFaced": false,
+      "oracleCardName": "Vineglimmer Snarl",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Waterlogged Grove",
       "scryfallId": "46931098-ae3c-409a-8789-7071205e11ee",
       "multiverseid": 635657,
       "twoFaced": false,
+      "oracleCardName": "Waterlogged Grove",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Pay 1 life: Add {G} or {U}.\n{1}, {T}, Sacrifice this land: Draw a card."
     },
     {
       "name": "Desolate Lighthouse",
       "scryfallId": "cb9a7223-20ce-4802-93f5-be41dcce1c15",
       "multiverseid": 635597,
       "twoFaced": false,
+      "oracleCardName": "Desolate Lighthouse",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}{R}, {T}: Draw a card, then discard a card."
     },
     {
       "name": "Rockfall Vale",
       "scryfallId": "b782ea91-d31f-4862-8ec0-6e24ef40545c",
       "multiverseid": 635624,
       "twoFaced": false,
+      "oracleCardName": "Rockfall Vale",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Rootbound Crag",
       "scryfallId": "72232b23-d59b-4bf4-aa55-b8f5ab691504",
       "multiverseid": 635626,
       "twoFaced": false,
+      "oracleCardName": "Rootbound Crag",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "b1511f21-d9ae-4949-859a-3246a01c1166",
       "multiverseid": 635639,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "82d3cd1f-3971-45ae-83c5-f7c2b3f5758a",
       "multiverseid": 635588,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Sheltered Thicket",
       "scryfallId": "00e230ab-9cae-43e2-b4dd-54fd2baea76f",
       "multiverseid": 635630,
       "twoFaced": false,
+      "oracleCardName": "Sheltered Thicket",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "a7df0f35-81a1-439f-a9b0-0c3afd4bce68",
       "multiverseid": 635642,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Frostboil Snarl",
       "scryfallId": "6e1d2c3d-e6ec-4130-8765-346adbb79d31",
       "multiverseid": 635608,
       "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Stormcarved Coast",
       "scryfallId": "54fe029f-e173-4a16-bdb4-394847b4e50b",
       "multiverseid": 635634,
       "twoFaced": false,
+      "oracleCardName": "Stormcarved Coast",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Fiery Islet",
       "scryfallId": "daf68138-63c1-4201-998c-eb412463f664",
       "multiverseid": 635604,
       "twoFaced": false,
+      "oracleCardName": "Fiery Islet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Pay 1 life: Add {U} or {R}.\n{1}, {T}, Sacrifice this land: Draw a card."
     },
     {
       "name": "Game Trail",
       "scryfallId": "066326c9-c1d7-4eca-84fe-fdd95b659ac1",
       "multiverseid": 635610,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "c2bc648d-def5-4442-9cfe-0f93fee631f4",
       "multiverseid": 635602,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Gallifrey Council Chamber",
       "scryfallId": "83d990f5-a7b7-4482-95e6-b03a397192e2",
       "multiverseid": 634883,
       "twoFaced": false,
+      "oracleCardName": "Gallifrey Council Chamber",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "When Gallifrey Council Chamber enters, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Time Lord or Alien spell or activate an ability of a Time Lord or Alien."
     },
     {
       "name": "Psychic Paper",
       "scryfallId": "eae12c61-0125-4810-b0e4-139c27b1b08b",
       "multiverseid": 634876,
       "twoFaced": false,
+      "oracleCardName": "Psychic Paper",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "As this Equipment becomes attached to a creature, choose a creature card name and a creature type.\nEquipped creature has ward {1}, it can't be blocked, and its name and creature type are the last chosen name and creature type.\nEquip {2}"
     },
     {
       "name": "TARDIS",
       "scryfallId": "b059b1d8-3bfb-40c9-9344-addda43509ab",
       "multiverseid": 634882,
       "twoFaced": false,
+      "oracleCardName": "TARDIS",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this Vehicle attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Sonic Screwdriver",
       "scryfallId": "2a55d514-b670-4fe2-825b-9ba955977cac",
       "multiverseid": 634881,
       "twoFaced": false,
+      "oracleCardName": "Sonic Screwdriver",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\n{1}, {T}: Untap another target artifact.\n{2}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{3}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Start the TARDIS",
       "scryfallId": "f3574926-dd5a-4997-b9e2-7b051bc59c57",
       "multiverseid": 634751,
       "twoFaced": false,
+      "oracleCardName": "Start the TARDIS",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Surveil 2, then draw a card. You may planeswalk. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)"
     },
     {
       "name": "Surge of Brilliance",
       "scryfallId": "0001c639-8bd0-426f-89cb-4ca61f3cc054",
       "multiverseid": 634752,
       "twoFaced": false,
+      "oracleCardName": "Surge of Brilliance",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Paradox — Draw a card for each spell you've cast this turn from anywhere other than your hand.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Iraxxa, Empress of Mars",
       "scryfallId": "0861a74a-a4d5-4b9f-8c62-74cdfcc67825",
       "multiverseid": 634784,
       "twoFaced": false,
+      "oracleCardName": "Iraxxa, Empress of Mars",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Trample\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nParadox — Whenever you cast a spell from anywhere other than your hand, create a 2/2 red Alien Warrior creature token."
     },
     {
       "name": "Memory Worm",
       "scryfallId": "63837f16-8157-43c7-8da0-88441ac62f04",
       "multiverseid": 634785,
       "twoFaced": false,
+      "oracleCardName": "Memory Worm",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Paradox — Whenever you cast a spell from anywhere other than your hand, this creature deals 2 damage to target player. That player discards a card, then draws a card. Put a +1/+1 counter on this creature."
     },
     {
       "name": "Decaying Time Loop",
       "scryfallId": "a0cedaa9-f08a-4d7b-8314-1d0a09a657bd",
       "multiverseid": 634775,
       "twoFaced": false,
+      "oracleCardName": "Decaying Time Loop",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Discard all the cards in your hand, then draw that many cards.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
     },
     {
       "name": "Thijarian Witness",
       "scryfallId": "da05e23b-419f-4023-9ad4-1227bb1b53be",
       "multiverseid": 634806,
       "twoFaced": false,
+      "oracleCardName": "Thijarian Witness",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Flash\nBear Witness — Whenever another creature dies, if it was attacking or blocking alone, exile it and investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Truth or Consequences",
       "scryfallId": "ce8771cc-1042-47b1-b4fa-459c3eeece04",
       "multiverseid": 634858,
       "twoFaced": false,
+      "oracleCardName": "Truth or Consequences",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. Truth or Consequences deals 3 damage to that player for each consequences vote."
     },
     {
       "name": "Bigger on the Inside",
       "scryfallId": "8d1178ac-35b9-4086-8ad4-6c629d976ce2",
       "multiverseid": 634810,
       "twoFaced": false,
+      "oracleCardName": "Bigger on the Inside",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "Enchant artifact or land\nEnchanted permanent has \"{T}: Target player adds two mana of any one color. The next spell they cast this turn has cascade.\" (When they cast their next spell, they exile cards from the top of their library until they exile a nonland card that costs less. They may cast it without paying its mana cost. They put the exiled cards on the bottom in a random order.)"
     },
     {
       "name": "Wreck and Rebuild",
       "scryfallId": "44e7d2ca-3fa9-4cb2-adc2-dae4e161f186",
       "multiverseid": 634864,
       "twoFaced": false,
+      "oracleCardName": "Wreck and Rebuild",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Choose one —\n• Destroy target artifact or enchantment.\n• Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped.\nFlashback {3}{R}{G}"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "d87d58eb-b95a-48d9-a174-e2d72a29c167",
       "multiverseid": 635565,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0f44a54b-512e-45ef-80ee-7982d2eaf762",
       "multiverseid": 635571,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Ponder",
       "scryfallId": "262285ab-3a6f-4932-b53b-8ab20bcad955",
       "multiverseid": 635543,
       "twoFaced": false,
+      "oracleCardName": "Ponder",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card."
     },
     {
       "name": "Think Twice",
       "scryfallId": "988111df-e398-4e87-aaf9-5872f36710de",
       "multiverseid": 635546,
       "twoFaced": false,
+      "oracleCardName": "Think Twice",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Draw a card.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Preordain",
       "scryfallId": "a3757f89-56fe-4234-bb8e-a2f3ae645a06",
       "multiverseid": 635544,
       "twoFaced": false,
+      "oracleCardName": "Preordain",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
     },
     {
       "name": "Throes of Chaos",
       "scryfallId": "74881c8f-f21d-4901-90cf-2ae8d0f46c3d",
       "multiverseid": 635553,
       "twoFaced": false,
+      "oracleCardName": "Throes of Chaos",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
     },
     {
       "name": "Cultivate",
       "scryfallId": "c6396ba2-ea82-4ca8-9848-08751a1bf45a",
       "multiverseid": 635556,
       "twoFaced": false,
+      "oracleCardName": "Cultivate",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Search for Tomorrow",
       "scryfallId": "857818d8-454b-4c2c-8cf2-7aa9c2898b18",
       "multiverseid": 635560,
       "twoFaced": false,
+      "oracleCardName": "Search for Tomorrow",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nSuspend 2—{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
     },
     {
       "name": "Farseek",
       "scryfallId": "befd2137-bd91-4209-bdec-219cf53b7be7",
       "multiverseid": 635558,
       "twoFaced": false,
+      "oracleCardName": "Farseek",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Beast Within",
       "scryfallId": "05df0ecf-9161-4515-8511-fb042b9562ae",
       "multiverseid": 635554,
       "twoFaced": false,
+      "oracleCardName": "Beast Within",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
     },
     {
       "name": "Growth Spiral",
       "scryfallId": "7ac9e381-dbb8-478b-b385-9f09f0325e87",
       "multiverseid": 635563,
       "twoFaced": false,
+      "oracleCardName": "Growth Spiral",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
     },
     {
       "name": "Talisman of Curiosity",
       "scryfallId": "06f45b45-86ca-48cb-adb1-1d01c197ece4",
       "multiverseid": 635575,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Curiosity",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Impulse",
       "scryfallId": "9d55e1f0-26ce-4ad2-b175-4c64a9638431",
       "multiverseid": 635577,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Impulse",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This artifact deals 1 damage to you."
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "74f3b1cb-e436-40f9-904c-f5696aa6f383",
       "multiverseid": 635625,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Frontier Bivouac",
       "scryfallId": "cadb4128-62f4-47ea-8435-e06dfdb8e964",
       "multiverseid": 635607,
       "twoFaced": false,
+      "oracleCardName": "Frontier Bivouac",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "3afb2f16-4364-439e-a5ce-6598b351cb4c",
       "multiverseid": 635622,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "23bcfd8e-e069-4489-8498-2c7b742bf4fe",
       "multiverseid": 635616,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "3ca70d08-1468-407d-80e6-a58c6655b4f0",
       "multiverseid": 635646,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "30c6f93e-e03f-4749-8b30-9375c79f10f4",
       "multiverseid": 635619,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Command Tower",
       "scryfallId": "5b82ac1b-c2d8-45f0-851a-97b0cdcff0ee",
       "multiverseid": 635591,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Ominous Cemetery",
       "scryfallId": "2e843c57-fae3-4127-94e7-cad8c8bb9486",
       "multiverseid": 634884,
       "twoFaced": false,
+      "oracleCardName": "Ominous Cemetery",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{5}, {T}, Exile this land: Target creature's owner shuffles it into their library."
     },
     {
       "name": "Island",
       "scryfallId": "ca98e0fb-5f07-40c8-9958-84379bcdc35c",
       "multiverseid": 635468,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "ca98e0fb-5f07-40c8-9958-84379bcdc35c",
       "multiverseid": 635468,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
       "multiverseid": 635469,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
       "multiverseid": 635469,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "58c34fe0-77ec-4ba3-a214-00d0eb42ebae",
       "multiverseid": 635472,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "58c34fe0-77ec-4ba3-a214-00d0eb42ebae",
       "multiverseid": 635472,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "49f1fe4e-8da1-4879-8129-bd8a440a45be",
       "multiverseid": 635473,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "c5c95d38-c135-4059-9379-051b2dd33f9c",
       "multiverseid": 635474,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "c5c95d38-c135-4059-9379-051b2dd33f9c",
       "multiverseid": 635474,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
       "multiverseid": 635475,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "15b3f35e-451e-4de6-a4f7-249287566964",
       "multiverseid": 635475,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.443Z",
+    "retrievedDate": "2026-02-20T03:10:21.610Z",
     "sourceUrl": "ParadoxPower_WHO.json",
     "deckSource": "precon",
     "createdAt": "2023-10-13T00:00:00.000Z"

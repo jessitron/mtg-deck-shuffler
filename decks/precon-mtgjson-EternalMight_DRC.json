@@ -9,12 +9,19 @@
       "scryfallId": "c0629894-0b72-4abe-9771-03becfdb241c",
       "multiverseid": 692081,
       "twoFaced": false,
+      "oracleCardName": "Temmet, Naktamun's Will",
       "colorIdentity": [
         "B",
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{U}{B}",
+      "cmc": 5,
+      "oracleText": "Vigilance, menace\nWhenever you attack, draw a card, then discard a card.\nWhenever you draw a card, Zombies you control get +1/+1 until end of turn."
     }
   ],
   "cards": [
@@ -23,994 +30,1648 @@
       "scryfallId": "02645651-cd55-4bd0-8a4d-fa257270a0e0",
       "multiverseid": 692078,
       "twoFaced": false,
+      "oracleCardName": "Hashaton, Scarab's Fist",
       "colorIdentity": [
         "B",
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever you discard a creature card, you may pay {2}{U}. If you do, create a tapped token that's a copy of that card, except it's a 4/4 black Zombie."
     },
     {
       "name": "On Wings of Gold",
       "scryfallId": "d5e247d3-8542-4e6c-b256-5ae216eeceb0",
       "multiverseid": 692166,
       "twoFaced": false,
+      "oracleCardName": "On Wings of Gold",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Creatures you control that are Zombies and/or tokens get +1/+1 and have flying.\nWhenever one or more cards leave your graveyard, create a 1/1 white Zombie creature token."
     },
     {
       "name": "Priest of the Crossing",
       "scryfallId": "f0740a86-84eb-4720-b4d7-c5f5e561ddc7",
       "multiverseid": 692167,
       "twoFaced": false,
+      "oracleCardName": "Priest of the Crossing",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nAt the beginning of each end step, put X +1/+1 counters on each creature you control, where X is the number of creatures that died under your control this turn."
     },
     {
       "name": "Renewed Solidarity",
       "scryfallId": "9a72b230-dbb0-4d38-ba7a-fb0bd03b6c47",
       "multiverseid": 692168,
       "twoFaced": false,
+      "oracleCardName": "Renewed Solidarity",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "As this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+0.\nAt the beginning of your end step, for each token you control of the chosen type that entered this turn, create a token that's a copy of it."
     },
     {
       "name": "Wizened Mentor",
       "scryfallId": "f903afd3-01b5-4892-bd78-8da1d2f36252",
       "multiverseid": 692169,
       "twoFaced": false,
+      "oracleCardName": "Wizened Mentor",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever an opponent activates an ability of a permanent that isn't a mana ability, you create a 1/1 white Zombie creature token. This ability triggers only once each turn."
     },
     {
       "name": "Prophet of the Scarab",
       "scryfallId": "0208b947-78d9-45bd-855f-846d9a7c547d",
       "multiverseid": 692170,
       "twoFaced": false,
+      "oracleCardName": "Prophet of the Scarab",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Vigilance\nWhen this creature enters, draw cards equal to the number of Zombies you control or the number of Zombie cards in your graveyard, whichever is greater."
     },
     {
       "name": "Rhet-Tomb Mystic",
       "scryfallId": "131a68e6-09ee-4afd-a0e1-d63bbc0775e8",
       "multiverseid": 692171,
       "twoFaced": false,
+      "oracleCardName": "Rhet-Tomb Mystic",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nEach creature card in your hand has cycling {1}{U}. ({1}{U}, Discard that card: Draw a card.)"
     },
     {
       "name": "Lost Monarch of Ifnir",
       "scryfallId": "cae37ab0-9d60-45e9-98cb-e7427e508bc5",
       "multiverseid": 692172,
       "twoFaced": false,
+      "oracleCardName": "Lost Monarch of Ifnir",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nOther Zombies you control have afflict 3.\nAt the beginning of your second main phase, if a player was dealt combat damage by a Zombie this turn, mill three cards, then you may return a creature card from your graveyard to your hand."
     },
     {
       "name": "Accursed Duneyard",
       "scryfallId": "bd9e6ba8-1c5e-4416-8bff-90db3b3b1f41",
       "multiverseid": 692181,
       "twoFaced": false,
+      "oracleCardName": "Accursed Duneyard",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}: Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
     },
     {
       "name": "Commence the Endgame",
       "scryfallId": "4ed00cef-17e0-4d21-97b7-2f7e31c7d752",
       "multiverseid": 692263,
       "twoFaced": false,
+      "oracleCardName": "Commence the Endgame",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "This spell can't be countered.\nDraw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
     },
     {
       "name": "Cryptbreaker",
       "scryfallId": "a3364105-68e9-45b5-874a-5c273d10f3f9",
       "multiverseid": 692266,
       "twoFaced": false,
+      "oracleCardName": "Cryptbreaker",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "{1}{B}, {T}, Discard a card: Create a 2/2 black Zombie creature token.\nTap three untapped Zombies you control: You draw a card and you lose 1 life."
     },
     {
       "name": "Grave Titan",
       "scryfallId": "179c5a3a-ea17-46bb-9a61-18b31f4705a9",
       "multiverseid": 692267,
       "twoFaced": false,
+      "oracleCardName": "Grave Titan",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Deathtouch\nWhenever this creature enters or attacks, create two 2/2 black Zombie creature tokens."
     },
     {
       "name": "Gravecrawler",
       "scryfallId": "08ef7130-5051-4e2c-b473-2dae3176078e",
       "multiverseid": 692268,
       "twoFaced": false,
+      "oracleCardName": "Gravecrawler",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "This creature can't block.\nYou may cast this card from your graveyard as long as you control a Zombie."
     },
     {
       "name": "Midnight Reaper",
       "scryfallId": "33c16202-4d7f-449c-8b29-144b2a9fda9a",
       "multiverseid": 692269,
       "twoFaced": false,
+      "oracleCardName": "Midnight Reaper",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
     },
     {
       "name": "Murderous Rider // Swift End",
       "scryfallId": "67ea8e53-aa22-42d1-bca4-64b0b0f0bbdb",
       "multiverseid": 692270,
       "twoFaced": false,
+      "oracleCardName": "Murderous Rider // Swift End",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Lifelink\nWhen this creature dies, put it on the bottom of its owner's library."
     },
     {
       "name": "Zombie Master",
       "scryfallId": "8ba84f22-a78a-4a05-905d-a1e6f932350c",
       "multiverseid": 692271,
       "twoFaced": false,
+      "oracleCardName": "Zombie Master",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)\nOther Zombies have \"{B}: Regenerate this permanent.\""
     },
     {
       "name": "Angel of Sanctions",
       "scryfallId": "546b6ffc-44e3-4994-b84b-6282c6474a1a",
       "multiverseid": 692412,
       "twoFaced": false,
+      "oracleCardName": "Angel of Sanctions",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, you may exile target nonland permanent an opponent controls until this creature leaves the battlefield.\nEmbalm {5}{W} ({5}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Angel with no mana cost. Embalm only as a sorcery.)"
     },
     {
       "name": "Dusk // Dawn",
       "scryfallId": "b75c309f-b48f-46c6-aef7-7e7ca64da262",
       "multiverseid": 692415,
       "twoFaced": false,
+      "oracleCardName": "Dusk // Dawn",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 9,
+      "oracleText": "Destroy all creatures with power 3 or greater."
     },
     {
       "name": "God-Eternal Oketra",
       "scryfallId": "6453140c-6588-41d8-b43f-1858d70d9761",
       "multiverseid": 692416,
       "twoFaced": false,
+      "oracleCardName": "God-Eternal Oketra",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Double strike\nWhenever you cast a creature spell, create a 4/4 black Zombie Warrior creature token with vigilance.\nWhen God-Eternal Oketra dies or is put into exile from the battlefield, you may put it into its owner's library third from the top."
     },
     {
       "name": "Timeless Dragon",
       "scryfallId": "21070f13-42b3-40c6-8909-25337be6ea6d",
       "multiverseid": 692417,
       "twoFaced": false,
+      "oracleCardName": "Timeless Dragon",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)\nEternalize {2}{W}{W} ({2}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Dragon with no mana cost. Eternalize only as a sorcery.)"
     },
     {
       "name": "Champion of Wits",
       "scryfallId": "cf76d414-9424-4fd5-a1ff-2ff345ad6b0a",
       "multiverseid": 692422,
       "twoFaced": false,
+      "oracleCardName": "Champion of Wits",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may draw cards equal to its power. If you do, discard two cards.\nEternalize {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Snake Wizard with no mana cost. Eternalize only as a sorcery.)"
     },
     {
       "name": "Forgotten Creation",
       "scryfallId": "2ff3a5b6-b39a-45d0-a8f5-1447776bfe74",
       "multiverseid": 692427,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Creation",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards."
     },
     {
       "name": "Pull from Tomorrow",
       "scryfallId": "e45740e7-c992-4ec0-93bd-9718b6d3ffea",
       "multiverseid": 692431,
       "twoFaced": false,
+      "oracleCardName": "Pull from Tomorrow",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "Draw X cards, then discard a card."
     },
     {
       "name": "Vizier of Many Faces",
       "scryfallId": "b8385f76-3057-4f8f-af84-f70214364870",
       "multiverseid": 692434,
       "twoFaced": false,
+      "oracleCardName": "Vizier of Many Faces",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "You may have this creature enter as a copy of any creature on the battlefield, except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.\nEmbalm {3}{U}{U}"
     },
     {
       "name": "Archfiend of Ifnir",
       "scryfallId": "9656903f-bd3e-4944-9f5f-f2d372a19f56",
       "multiverseid": 692436,
       "twoFaced": false,
+      "oracleCardName": "Archfiend of Ifnir",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Cemetery Reaper",
       "scryfallId": "b874f27a-2e10-4331-8f6d-fd3575be0885",
       "multiverseid": 692437,
       "twoFaced": false,
+      "oracleCardName": "Cemetery Reaper",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token."
     },
     {
       "name": "Crowded Crypt",
       "scryfallId": "d6539667-d082-4f8e-919a-c1882545baea",
       "multiverseid": 692438,
       "twoFaced": false,
+      "oracleCardName": "Crowded Crypt",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {B}.\nWhenever a creature you control dies, put a corpse counter on this artifact.\n{4}{B}{B}, {T}, Sacrifice this artifact: Create a 2/2 black Zombie creature token with decayed for each corpse counter on this artifact. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)"
     },
     {
       "name": "Damn",
       "scryfallId": "1b25c224-4531-4fdc-9845-6663eaf60540",
       "multiverseid": 692439,
       "twoFaced": false,
+      "oracleCardName": "Damn",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{B}{B}",
+      "cmc": 2,
+      "oracleText": "Destroy target creature. A creature destroyed this way can't be regenerated.\nOverload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
     },
     {
       "name": "Dread Summons",
       "scryfallId": "4d1c1c36-869c-4964-a185-7a9c3a043b2d",
       "multiverseid": 692440,
       "twoFaced": false,
+      "oracleCardName": "Dread Summons",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{B}{B}",
+      "cmc": 2,
+      "oracleText": "Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token. (To mill a card, a player puts the top card of their library into their graveyard.)"
     },
     {
       "name": "Dreadhorde Invasion",
       "scryfallId": "ccd2fc83-7fbe-45c4-a5f3-18a105ce6f09",
       "multiverseid": 692441,
       "twoFaced": false,
+      "oracleCardName": "Dreadhorde Invasion",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "At the beginning of your upkeep, you lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nWhenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn."
     },
     {
       "name": "Liliana, Death's Majesty",
       "scryfallId": "ae653ad0-c796-49d4-b893-25d627f1ff79",
       "multiverseid": 692444,
       "twoFaced": false,
+      "oracleCardName": "Liliana, Death's Majesty",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "[+1]: Create a 2/2 black Zombie creature token. Mill two cards.\n[−3]: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.\n[−7]: Destroy all non-Zombie creatures."
     },
     {
       "name": "Never // Return",
       "scryfallId": "f6bb09b1-d28a-48c1-9d97-11bec84afb5e",
       "multiverseid": 692446,
       "twoFaced": false,
+      "oracleCardName": "Never // Return",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Destroy target creature or planeswalker."
     },
     {
       "name": "Plague Belcher",
       "scryfallId": "26c3846a-b5a6-42ad-bcc0-96f2077b1b47",
       "multiverseid": 692447,
       "twoFaced": false,
+      "oracleCardName": "Plague Belcher",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Menace\nWhen this creature enters, put two -1/-1 counters on target creature you control.\nWhenever another Zombie you control dies, each opponent loses 1 life."
     },
     {
       "name": "Rot Hulk",
       "scryfallId": "83b0c93a-d1f7-4694-990b-6c2c70648bbc",
       "multiverseid": 692448,
       "twoFaced": false,
+      "oracleCardName": "Rot Hulk",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Menace\nWhen this creature enters, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."
     },
     {
       "name": "The Scarab God",
       "scryfallId": "7546b37d-c83a-4632-bebf-cc46d114481f",
       "multiverseid": 692470,
       "twoFaced": false,
+      "oracleCardName": "The Scarab God",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your upkeep, each opponent loses X life and you scry X, where X is the number of Zombies you control.\n{2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.\nWhen The Scarab God dies, return it to its owner's hand at the beginning of the next end step."
     },
     {
       "name": "God-Pharaoh's Gift",
       "scryfallId": "b34cdeff-f749-4609-93c8-21608106d099",
       "multiverseid": 692481,
       "twoFaced": false,
+      "oracleCardName": "God-Pharaoh's Gift",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn."
     },
     {
       "name": "Maskwood Nexus",
       "scryfallId": "c6f2c543-9b01-4760-966a-f0609c24f53e",
       "multiverseid": 692482,
       "twoFaced": false,
+      "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)"
     },
     {
       "name": "Adarkar Wastes",
       "scryfallId": "eabb8cd7-3f5c-40ea-b339-f0b6fed3489a",
       "multiverseid": 692494,
       "twoFaced": false,
+      "oracleCardName": "Adarkar Wastes",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "18e5a0d3-d132-40e2-85ae-a1b743dfdd33",
       "multiverseid": 692498,
       "twoFaced": false,
+      "oracleCardName": "Caves of Koilos",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
     },
     {
       "name": "Drowned Catacomb",
       "scryfallId": "6b4097eb-a1e5-4560-80d8-11bb5628dd0d",
       "multiverseid": 692502,
       "twoFaced": false,
+      "oracleCardName": "Drowned Catacomb",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "0f31cb4c-c0f4-42fc-9661-723f78ee4d56",
       "multiverseid": 692505,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Fetid Pools",
       "scryfallId": "e0569522-d023-4023-abb2-97cf3226abf8",
       "multiverseid": 692506,
       "twoFaced": false,
+      "oracleCardName": "Fetid Pools",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Glacial Fortress",
       "scryfallId": "11bee1bf-bc75-4d4f-8f41-a9a3c0cdd19e",
       "multiverseid": 692509,
       "twoFaced": false,
+      "oracleCardName": "Glacial Fortress",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "5947587e-3284-4d9c-a1cc-e6cbe5577c1e",
       "multiverseid": 692511,
       "twoFaced": false,
+      "oracleCardName": "Irrigated Farmland",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Isolated Chapel",
       "scryfallId": "7b68c431-ad14-439b-9513-67479af8f2c2",
       "multiverseid": 692512,
       "twoFaced": false,
+      "oracleCardName": "Isolated Chapel",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "5babbc79-ad36-4088-a456-8acf64cfe9f6",
       "multiverseid": 692517,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "133360b4-b408-417f-a16f-966bc328af4b",
       "multiverseid": 692524,
       "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Temple of Deceit",
       "scryfallId": "ca93efca-93a0-4307-b004-ec74ad9841fc",
       "multiverseid": 692526,
       "twoFaced": false,
+      "oracleCardName": "Temple of Deceit",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "9e283d6e-db4e-4fec-92d4-1e035f253400",
       "multiverseid": 692528,
       "twoFaced": false,
+      "oracleCardName": "Temple of Silence",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
     },
     {
       "name": "Underground River",
       "scryfallId": "ac17bee2-5b9f-4b8f-8647-e44d9175e055",
       "multiverseid": 692531,
       "twoFaced": false,
+      "oracleCardName": "Underground River",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
     },
     {
       "name": "Unholy Grotto",
       "scryfallId": "e29031f5-19c7-49d7-bd05-01d151592f4a",
       "multiverseid": 692532,
       "twoFaced": false,
+      "oracleCardName": "Unholy Grotto",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{B}, {T}: Put target Zombie card from your graveyard on top of your library."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "3b701a88-6074-476f-b87c-9a6d5d22c414",
       "multiverseid": 692262,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Corpse Augur",
       "scryfallId": "8d1d7df2-acf8-4e10-81cc-bdb23ffd4c7f",
       "multiverseid": 692265,
       "twoFaced": false,
+      "oracleCardName": "Corpse Augur",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard."
     },
     {
       "name": "Corpse Knight",
       "scryfallId": "8859c03c-6c75-402f-9870-d4067a4ec4ed",
       "multiverseid": 692275,
       "twoFaced": false,
+      "oracleCardName": "Corpse Knight",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever another creature you control enters, each opponent loses 1 life."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "8380b6c9-b4fd-41fa-8eca-d48e00edef30",
       "multiverseid": 692276,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "fe202721-c5be-46de-9fb3-ac18c699e10d",
       "multiverseid": 692281,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "e1fee302-b37b-4057-934f-cf212e6ecc17",
       "multiverseid": 692284,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "14313a22-93dc-46fc-aeb6-09ab3b6f8686",
       "multiverseid": 692286,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Binding Mummy",
       "scryfallId": "5433a7a1-0602-4aa5-ae7e-815b105bc601",
       "multiverseid": 692413,
       "twoFaced": false,
+      "oracleCardName": "Binding Mummy",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever another Zombie you control enters, you may tap target artifact or creature."
     },
     {
       "name": "Cast Out",
       "scryfallId": "0d403ab1-56d1-44a6-a414-6cc7a114c62d",
       "multiverseid": 692414,
       "twoFaced": false,
+      "oracleCardName": "Cast Out",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Eternal Skylord",
       "scryfallId": "ab5b3aba-8542-4157-b6b6-265611a2a52f",
       "multiverseid": 692426,
       "twoFaced": false,
+      "oracleCardName": "Eternal Skylord",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have flying."
     },
     {
       "name": "Fleshbag Marauder",
       "scryfallId": "ea3ac95f-23ad-4b05-bfbd-5de667c78ddc",
       "multiverseid": 692442,
       "twoFaced": false,
+      "oracleCardName": "Fleshbag Marauder",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, each player sacrifices a creature of their choice."
     },
     {
       "name": "Gempalm Polluter",
       "scryfallId": "2001d23e-feae-4a91-917e-e239b1c2b17c",
       "multiverseid": 692443,
       "twoFaced": false,
+      "oracleCardName": "Gempalm Polluter",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}",
+      "cmc": 6,
+      "oracleText": "Cycling {B}{B} ({B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have target player lose life equal to the number of Zombies on the battlefield."
     },
     {
       "name": "Lord of the Accursed",
       "scryfallId": "15750fb6-4141-4ad9-937d-e18c76154a85",
       "multiverseid": 692445,
       "twoFaced": false,
+      "oracleCardName": "Lord of the Accursed",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Other Zombies you control get +1/+1.\n{1}{B}, {T}: All Zombies gain menace until end of turn."
     },
     {
       "name": "Twisted Abomination",
       "scryfallId": "99e81075-6f82-4cfb-8d49-07609f9882fa",
       "multiverseid": 692449,
       "twoFaced": false,
+      "oracleCardName": "Twisted Abomination",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}",
+      "cmc": 6,
+      "oracleText": "{B}: Regenerate this creature. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Undead Augur",
       "scryfallId": "5d86f1a9-7c51-4456-b1d9-7fe82f073929",
       "multiverseid": 692450,
       "twoFaced": false,
+      "oracleCardName": "Undead Augur",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever this creature or another Zombie you control dies, you draw a card and you lose 1 life."
     },
     {
       "name": "Despark",
       "scryfallId": "8555d8c1-ef77-4471-8fbf-22bb16d0f040",
       "multiverseid": 692465,
       "twoFaced": false,
+      "oracleCardName": "Despark",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Exile target permanent with mana value 4 or greater."
     },
     {
       "name": "Gleaming Overseer",
       "scryfallId": "6369ff49-0b82-4722-b04f-ca5f529d1e82",
       "multiverseid": 692466,
       "twoFaced": false,
+      "oracleCardName": "Gleaming Overseer",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have hexproof and menace."
     },
     {
       "name": "Lazotep Chancellor",
       "scryfallId": "604d4c94-c73f-423b-8dc0-86a92674adf7",
       "multiverseid": 692467,
       "twoFaced": false,
+      "oracleCardName": "Lazotep Chancellor",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever you discard a card, you may pay {1}. If you do, amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
     },
     {
       "name": "Wayward Servant",
       "scryfallId": "65475db4-ea0f-4ef3-ac2f-18e308c64682",
       "multiverseid": 692471,
       "twoFaced": false,
+      "oracleCardName": "Wayward Servant",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever another Zombie you control enters, each opponent loses 1 life and you gain 1 life."
     },
     {
       "name": "Bontu's Monument",
       "scryfallId": "ba25bdf9-b6bf-4f4f-af37-8bfb84a74c97",
       "multiverseid": 692474,
       "twoFaced": false,
+      "oracleCardName": "Bontu's Monument",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Black creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, each opponent loses 1 life and you gain 1 life."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "3adcc4c3-9305-4394-a64f-fd0fa107cbf9",
       "multiverseid": 692475,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Dimir Signet",
       "scryfallId": "6173d331-1dd9-47e0-bb9c-5655b179737f",
       "multiverseid": 692479,
       "twoFaced": false,
+      "oracleCardName": "Dimir Signet",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Gate to the Afterlife",
       "scryfallId": "4949afaa-e512-4d2e-aeca-a3e4d37b1335",
       "multiverseid": 692480,
       "twoFaced": false,
+      "oracleCardName": "Gate to the Afterlife",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.\n{2}, {T}, Sacrifice this artifact: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you search your library this way, shuffle. Activate only if there are six or more creature cards in your graveyard."
     },
     {
       "name": "Orzhov Signet",
       "scryfallId": "ca0d3984-fbb3-4661-a424-f79d2253e057",
       "multiverseid": 692484,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Signet",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{B}."
     },
     {
       "name": "Talisman of Dominance",
       "scryfallId": "939cc767-0de1-4d94-a1f9-fe07e923d343",
       "multiverseid": 692491,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Hierarchy",
       "scryfallId": "8be0a06b-c2b6-4b78-9b14-9d854736c251",
       "multiverseid": 692492,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Hierarchy",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Arcane Sanctum",
       "scryfallId": "b57164a6-aca8-4cd2-9b40-1c10f13c1c6b",
       "multiverseid": 692496,
       "twoFaced": false,
+      "oracleCardName": "Arcane Sanctum",
       "colorIdentity": [
         "B",
         "U",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "f05aa4e3-2919-46cb-9eeb-926ddf18d6f4",
       "multiverseid": 692497,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Desert of the Glorified",
       "scryfallId": "5f28907a-491d-4d09-93cb-b5729696607d",
       "multiverseid": 692499,
       "twoFaced": false,
+      "oracleCardName": "Desert of the Glorified",
       "colorIdentity": [
         "B"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)"
     },
     {
       "name": "Desert of the Mindful",
       "scryfallId": "39a20c39-2254-4052-822f-eb5bbd501cdd",
       "multiverseid": 692500,
       "twoFaced": false,
+      "oracleCardName": "Desert of the Mindful",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Desert of the True",
       "scryfallId": "e8513dd3-6e2b-42da-89c7-e35ab0c0c927",
       "multiverseid": 692501,
       "twoFaced": false,
+      "oracleCardName": "Desert of the True",
       "colorIdentity": [
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "860fef67-8a14-4c67-a86f-4dcd682d1321",
       "multiverseid": 692503,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "cc8f8ede-9620-4f7f-8326-a75031ef6ec1",
       "multiverseid": 692514,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Basilica",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "ef995c58-19ea-4f09-b2c3-7bb476058ced",
       "multiverseid": 692529,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
       "multiverseid": 689037,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
       "multiverseid": 689037,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
       "multiverseid": 689037,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
       "multiverseid": 689037,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "464723b3-0723-45f2-a258-32d098c39039",
       "multiverseid": 689037,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
       "multiverseid": 689043,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
       "multiverseid": 689043,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
       "multiverseid": 689043,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
       "multiverseid": 689043,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "040d064e-b023-4750-afeb-1f58e36bc4ab",
       "multiverseid": 689043,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.674Z",
+    "retrievedDate": "2026-02-20T03:10:20.721Z",
     "sourceUrl": "EternalMight_DRC.json",
     "deckSource": "precon",
     "createdAt": "2025-02-14T00:00:00.000Z"

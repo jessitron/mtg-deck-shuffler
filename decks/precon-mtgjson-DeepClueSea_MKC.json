@@ -9,12 +9,19 @@
       "scryfallId": "ae9ccfec-05c6-469e-b1dd-dfbafa1e927f",
       "multiverseid": 649909,
       "twoFaced": false,
+      "oracleCardName": "Morska, Undersea Sleuth",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{W}{U}",
+      "cmc": 3,
+      "oracleText": "You have no maximum hand size.\nAt the beginning of your upkeep, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you draw your second card each turn, put two +1/+1 counters on Morska."
     }
   ],
   "cards": [
@@ -23,995 +30,1656 @@
       "scryfallId": "df653cf9-5a99-4f81-adb4-c155a9a63226",
       "multiverseid": 649930,
       "twoFaced": false,
+      "oracleCardName": "Sophia, Dogged Detective",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{W}{U}",
+      "cmc": 4,
+      "oracleText": "When Sophia enters, create Tiny, a legendary 2/2 green Dog Detective creature token with trample.\n{1}, Sacrifice an artifact token: Put a +1/+1 counter on each Dog you control.\nWhenever a Dog you control deals combat damage to a player, create a Food token, then investigate."
     },
     {
       "name": "Armed with Proof",
       "scryfallId": "6e75470f-fe57-4b6e-a76b-5daf9d9caf0b",
       "multiverseid": 649947,
       "twoFaced": false,
+      "oracleCardName": "Armed with Proof",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nClues you control are Equipment in addition to their other types and have \"Equipped creature gets +2/+0\" and equip {2}."
     },
     {
       "name": "Merchant of Truth",
       "scryfallId": "0f47e29e-54c5-4b1a-b9b9-d5e267a0203a",
       "multiverseid": 649949,
       "twoFaced": false,
+      "oracleCardName": "Merchant of Truth",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever a nontoken creature you control dies, investigate.\nClues you control have exalted. (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn for each instance of exalted among permanents you control.)"
     },
     {
       "name": "Serene Sleuth",
       "scryfallId": "61e691ff-ab3e-42ae-b160-54b53f5f961e",
       "multiverseid": 649952,
       "twoFaced": false,
+      "oracleCardName": "Serene Sleuth",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nAt the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded."
     },
     {
       "name": "Detective of the Month",
       "scryfallId": "e63e381d-142c-4622-ad78-8cacd5778355",
       "multiverseid": 649959,
       "twoFaced": false,
+      "oracleCardName": "Detective of the Month",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs long as you have the city's blessing, Detectives you control can't be blocked.\nWhenever you draw your second card each turn, create a 2/2 white and blue Detective creature token."
     },
     {
       "name": "Follow the Bodies",
       "scryfallId": "52ecb9ef-37bc-4327-9ae6-bcef6e2fdb94",
       "multiverseid": 649961,
       "twoFaced": false,
+      "oracleCardName": "Follow the Bodies",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn.)\nInvestigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Tangletrove Kelp",
       "scryfallId": "7582d7c0-6cb6-47d1-8026-3d661b5a809f",
       "multiverseid": 649962,
       "twoFaced": false,
+      "oracleCardName": "Tangletrove Kelp",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}{U}{U}",
+      "cmc": 7,
+      "oracleText": "Ward {2}\nAt the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.\n{2}, Sacrifice this creature: Draw a card."
     },
     {
       "name": "Innocuous Researcher",
       "scryfallId": "84039704-d7c9-46fd-987e-4b93f812e803",
       "multiverseid": 649976,
       "twoFaced": false,
+      "oracleCardName": "Innocuous Researcher",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Parley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you investigate. Then each player draws a card.\nAt the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn."
     },
     {
       "name": "On the Trail",
       "scryfallId": "e5cf1f9f-2e35-49b1-af47-75fbe11f7b7e",
       "multiverseid": 649977,
       "twoFaced": false,
+      "oracleCardName": "On the Trail",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever you draw your second card each turn, you may put a land card from your hand onto the battlefield tapped."
     },
     {
       "name": "Knowledge Is Power",
       "scryfallId": "1afe55c3-53c3-4257-afb6-32a553639f50",
       "multiverseid": 649980,
       "twoFaced": false,
+      "oracleCardName": "Knowledge Is Power",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}{U}",
+      "cmc": 5,
+      "oracleText": "Creatures you control get +X/+X, where X is the number of cards you've drawn this turn."
     },
     {
       "name": "Ransom Note",
       "scryfallId": "3a16b2f3-2568-4046-8e2f-99af0b6d79ee",
       "multiverseid": 649984,
       "twoFaced": false,
+      "oracleCardName": "Ransom Note",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
     },
     {
       "name": "Aerial Extortionist",
       "scryfallId": "5353bcb9-800d-4d74-95fa-42350a0f25de",
       "multiverseid": 650148,
       "twoFaced": false,
+      "oracleCardName": "Aerial Extortionist",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever this creature enters or deals combat damage to a player, exile up to one target nonland permanent. For as long as that card remains exiled, its owner may cast it.\nWhenever another player casts a spell from anywhere other than their hand, draw a card."
     },
     {
       "name": "Bennie Bracks, Zoologist",
       "scryfallId": "90645549-20f1-4fe9-8363-7f67c20fa3b6",
       "multiverseid": 650151,
       "twoFaced": false,
+      "oracleCardName": "Bennie Bracks, Zoologist",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAt the beginning of each end step, if you created a token this turn, draw a card."
     },
     {
       "name": "Farewell",
       "scryfallId": "114d2180-093b-4838-97ad-badbc8ee50b0",
       "multiverseid": 650158,
       "twoFaced": false,
+      "oracleCardName": "Farewell",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Choose one or more —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all graveyards."
     },
     {
       "name": "Fumigate",
       "scryfallId": "bd6b4bc0-0671-4394-abe4-516d291a74a5",
       "multiverseid": 650160,
       "twoFaced": false,
+      "oracleCardName": "Fumigate",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all creatures. You gain 1 life for each creature destroyed this way."
     },
     {
       "name": "Organic Extinction",
       "scryfallId": "900b713f-82f7-4e4a-804d-6bb38436aa9d",
       "multiverseid": 650170,
       "twoFaced": false,
+      "oracleCardName": "Organic Extinction",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{W}{W}",
+      "cmc": 10,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures."
     },
     {
       "name": "Search the Premises",
       "scryfallId": "08877e2c-79ac-4a4d-a7dd-60652c5eb5f6",
       "multiverseid": 650175,
       "twoFaced": false,
+      "oracleCardName": "Search the Premises",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature attacks you or a planeswalker you control, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Alandra, Sky Dreamer",
       "scryfallId": "54bf48d4-e350-4ca7-87da-ce04fefd4610",
       "multiverseid": 650188,
       "twoFaced": false,
+      "oracleCardName": "Alandra, Sky Dreamer",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever you draw your second card each turn, create a 2/2 blue Drake creature token with flying.\nWhenever you draw your fifth card each turn, Alandra and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand."
     },
     {
       "name": "Confirm Suspicions",
       "scryfallId": "1d1463af-8f22-4771-af19-3799ffe706b8",
       "multiverseid": 650191,
       "twoFaced": false,
+      "oracleCardName": "Confirm Suspicions",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Counter target spell.\nInvestigate three times. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Ethereal Investigator",
       "scryfallId": "c675428b-2dc4-408d-9632-81c1a700090f",
       "multiverseid": 650199,
       "twoFaced": false,
+      "oracleCardName": "Ethereal Investigator",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhen this creature enters, investigate X times, where X is the number of opponents you have. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you draw your second card each turn, create a 1/1 white Spirit creature token with flying."
     },
     {
       "name": "Finale of Revelation",
       "scryfallId": "2b090b79-befd-4b18-ae9f-03a2bf516aef",
       "multiverseid": 650200,
       "twoFaced": false,
+      "oracleCardName": "Finale of Revelation",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.\nExile Finale of Revelation."
     },
     {
       "name": "Kappa Cannoneer",
       "scryfallId": "be0c919a-a592-433e-8e36-8fe633974eff",
       "multiverseid": 650202,
       "twoFaced": false,
+      "oracleCardName": "Kappa Cannoneer",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever this creature or another artifact you control enters, put a +1/+1 counter on this creature. It can't be blocked this turn."
     },
     {
       "name": "Mechanized Production",
       "scryfallId": "eaf86997-68e8-4c37-99f1-db10ac08f54c",
       "multiverseid": 650203,
       "twoFaced": false,
+      "oracleCardName": "Mechanized Production",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."
     },
     {
       "name": "Nadir Kraken",
       "scryfallId": "3bd63804-d538-471f-b57f-e1023f7e14a8",
       "multiverseid": 650206,
       "twoFaced": false,
+      "oracleCardName": "Nadir Kraken",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you draw a card, you may pay {1}. If you do, put a +1/+1 counter on this creature and create a 1/1 blue Tentacle creature token."
     },
     {
       "name": "Shimmer Dragon",
       "scryfallId": "3983a11e-8a8a-4d9d-868b-13e0c3719abb",
       "multiverseid": 650211,
       "twoFaced": false,
+      "oracleCardName": "Shimmer Dragon",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Flying\nAs long as you control four or more artifacts, this creature has hexproof. (It can't be the target of spells or abilities your opponents control.)\nTap two untapped artifacts you control: Draw a card."
     },
     {
       "name": "Teferi's Ageless Insight",
       "scryfallId": "b1a32b7c-9f26-4504-9f8d-379164d69346",
       "multiverseid": 650213,
       "twoFaced": false,
+      "oracleCardName": "Teferi's Ageless Insight",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead."
     },
     {
       "name": "Tezzeret, Betrayer of Flesh",
       "scryfallId": "35f30004-13e0-42c1-9842-eea52793fcfc",
       "multiverseid": 650214,
       "twoFaced": false,
+      "oracleCardName": "Tezzeret, Betrayer of Flesh",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "The first activated ability of an artifact you activate each turn costs {2} less to activate.\n[+1]: Draw two cards. Then discard two cards unless you discard an artifact card.\n[−2]: Target artifact becomes an artifact creature. If it isn't a Vehicle, it has base power and toughness 4/4.\n[−6]: You get an emblem with \"Whenever an artifact you control becomes tapped, draw a card.\""
     },
     {
       "name": "Thought Monitor",
       "scryfallId": "e3a7560e-9e75-4abd-a45c-c2c9686ee4b0",
       "multiverseid": 650215,
       "twoFaced": false,
+      "oracleCardName": "Thought Monitor",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{6}{U}",
+      "cmc": 7,
+      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen this creature enters, draw two cards."
     },
     {
       "name": "Hornet Queen",
       "scryfallId": "8f1ef9d6-b3fb-4a8a-af4a-3530a1e61221",
       "multiverseid": 650266,
       "twoFaced": false,
+      "oracleCardName": "Hornet Queen",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
     },
     {
       "name": "Jolrael, Mwonvuli Recluse",
       "scryfallId": "188f9016-275f-4060-8b11-9cdeef3759bd",
       "multiverseid": 650267,
       "twoFaced": false,
+      "oracleCardName": "Jolrael, Mwonvuli Recluse",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Whenever you draw your second card each turn, create a 2/2 green Cat creature token.\n{4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand."
     },
     {
       "name": "Killer Service",
       "scryfallId": "b86b0177-0533-4b5a-9da7-1e11d398d828",
       "multiverseid": 650268,
       "twoFaced": false,
+      "oracleCardName": "Killer Service",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, create a number of Food tokens equal to the number of opponents you have. (They're artifacts with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nAt the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token."
     },
     {
       "name": "Tireless Tracker",
       "scryfallId": "66660f7c-9e1c-4e88-856a-98fab1f1364d",
       "multiverseid": 650284,
       "twoFaced": false,
+      "oracleCardName": "Tireless Tracker",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, put a +1/+1 counter on this creature."
     },
     {
       "name": "Adrix and Nev, Twincasters",
       "scryfallId": "b9c11061-bb34-4904-b9f1-ea106b517bbe",
       "multiverseid": 650292,
       "twoFaced": false,
+      "oracleCardName": "Adrix and Nev, Twincasters",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead."
     },
     {
       "name": "Chulane, Teller of Tales",
       "scryfallId": "d1499a4b-1af1-4913-8e26-57d0707264db",
       "multiverseid": 650296,
       "twoFaced": false,
+      "oracleCardName": "Chulane, Teller of Tales",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{W}{U}",
+      "cmc": 5,
+      "oracleText": "Vigilance\nWhenever you cast a creature spell, draw a card, then you may put a land card from your hand onto the battlefield.\n{3}, {T}: Return target creature you control to its owner's hand."
     },
     {
       "name": "Disorder in the Court",
       "scryfallId": "07277df0-d306-4c3a-baa7-d7a49332c7dd",
       "multiverseid": 650303,
       "twoFaced": false,
+      "oracleCardName": "Disorder in the Court",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{W}{U}",
+      "cmc": 2,
+      "oracleText": "Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Esix, Fractal Bloom",
       "scryfallId": "2e390f8e-1dd5-4383-83f5-45f20f18d410",
       "multiverseid": 650304,
       "twoFaced": false,
+      "oracleCardName": "Esix, Fractal Bloom",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{U}",
+      "cmc": 6,
+      "oracleText": "Flying\nThe first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix and create that many tokens that are copies of that creature."
     },
     {
       "name": "Hydroid Krasis",
       "scryfallId": "3f8e3243-2d82-4044-8e3b-3a4487ac771c",
       "multiverseid": 650306,
       "twoFaced": false,
+      "oracleCardName": "Hydroid Krasis",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}{U}",
+      "cmc": 2,
+      "oracleText": "When you cast this spell, you gain half X life and draw half X cards. Round down each time.\nFlying, trample\nThis creature enters with X +1/+1 counters on it."
     },
     {
       "name": "Koma, Cosmos Serpent",
       "scryfallId": "b2f23d6f-f2c8-4022-9f46-ba7fda00ef99",
       "multiverseid": 650307,
       "twoFaced": false,
+      "oracleCardName": "Koma, Cosmos Serpent",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}{U}{U}",
+      "cmc": 7,
+      "oracleText": "This spell can't be countered.\nAt the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.\nSacrifice another Serpent: Choose one —\n• Tap target permanent. Its activated abilities can't be activated this turn.\n• Koma gains indestructible until end of turn."
     },
     {
       "name": "Lonis, Cryptozoologist",
       "scryfallId": "e786423d-3a49-4318-ac77-791918bcafcb",
       "multiverseid": 650309,
       "twoFaced": false,
+      "oracleCardName": "Lonis, Cryptozoologist",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever another nontoken creature you control enters, investigate.\n{T}, Sacrifice X Clues: Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order."
     },
     {
       "name": "Selvala, Explorer Returned",
       "scryfallId": "28c1b84a-a21b-4df1-9fc9-5b387fb56810",
       "multiverseid": 650312,
       "twoFaced": false,
+      "oracleCardName": "Selvala, Explorer Returned",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{W}",
+      "cmc": 3,
+      "oracleText": "Parley — {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card."
     },
     {
       "name": "Academy Manufactor",
       "scryfallId": "60709d98-c98d-48c0-ac4a-4ff73e7a0c4b",
       "multiverseid": 650315,
       "twoFaced": false,
+      "oracleCardName": "Academy Manufactor",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "If you would create a Clue, Food, or Treasure token, instead create one of each."
     },
     {
       "name": "Idol of Oblivion",
       "scryfallId": "6ccfb12e-348e-4a0b-a365-33ec522306f9",
       "multiverseid": 650323,
       "twoFaced": false,
+      "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
     },
     {
       "name": "Inspiring Statuary",
       "scryfallId": "4f7e4c0a-683b-4b22-9ea5-ed6470b8b1d7",
       "multiverseid": 650324,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Statuary",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)"
     },
     {
       "name": "Nettlecyst",
       "scryfallId": "0a7cb0f8-2946-4b00-a192-0b31c8e1ec5c",
       "multiverseid": 650327,
       "twoFaced": false,
+      "oracleCardName": "Nettlecyst",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each artifact and/or enchantment you control.\nEquip {2}"
     },
     {
       "name": "Psychosis Crawler",
       "scryfallId": "d0f42a19-c180-45b1-9f4c-787cf3a4a649",
       "multiverseid": 650328,
       "twoFaced": false,
+      "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
     },
     {
       "name": "Canopy Vista",
       "scryfallId": "b76f2de1-ea17-40b0-8d90-4c4369516eff",
       "multiverseid": 650346,
       "twoFaced": false,
+      "oracleCardName": "Canopy Vista",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "703da628-5a77-4cb4-8c29-1bdbae500d50",
       "multiverseid": 650354,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Irrigated Farmland",
       "scryfallId": "7352e874-d332-4a98-ab3f-513f8cb3a76a",
       "multiverseid": 650361,
       "twoFaced": false,
+      "oracleCardName": "Irrigated Farmland",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "c649f06f-bad5-499b-b70c-47e52cb4a234",
       "multiverseid": 650375,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Scattered Groves",
       "scryfallId": "5af79a38-d2e2-4479-ac6e-e34a0dd0bdea",
       "multiverseid": 650380,
       "twoFaced": false,
+      "oracleCardName": "Scattered Groves",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "22f95138-6795-4698-ad58-ed2226242835",
       "multiverseid": 650388,
       "twoFaced": false,
+      "oracleCardName": "Skycloud Expanse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Spire of Industry",
       "scryfallId": "90b845fd-5b22-4196-9cba-00c7e1b44509",
       "multiverseid": 650390,
       "twoFaced": false,
+      "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
     },
     {
       "name": "Sungrass Prairie",
       "scryfallId": "8af1bed5-fec8-4313-a946-eef9c73e2f87",
       "multiverseid": 650391,
       "twoFaced": false,
+      "oracleCardName": "Sungrass Prairie",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{W}."
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "e41a5a3d-5fbb-4dbb-b70d-2a480f18df9f",
       "multiverseid": 650396,
       "twoFaced": false,
+      "oracleCardName": "Temple of Enlightenment",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "975dfe13-41a3-476b-9cc6-bf7c82abe31c",
       "multiverseid": 650397,
       "twoFaced": false,
+      "oracleCardName": "Temple of Mystery",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
     },
     {
       "name": "Temple of Plenty",
       "scryfallId": "36298771-c671-4307-b8b6-31e3ead75be2",
       "multiverseid": 650398,
       "twoFaced": false,
+      "oracleCardName": "Temple of Plenty",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "9bbec76c-c1e4-4c6d-ad24-078fe097f195",
       "multiverseid": 650182,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Erdwal Illuminator",
       "scryfallId": "5c39fa19-ca75-49f4-8e1e-8b59bc9b664a",
       "multiverseid": 650198,
       "twoFaced": false,
+      "oracleCardName": "Erdwal Illuminator",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever you investigate for the first time each turn, investigate an additional time."
     },
     {
       "name": "Junk Winder",
       "scryfallId": "1c1acd61-efc9-4fd3-86ec-b5cbd43c0b08",
       "multiverseid": 650201,
       "twoFaced": false,
+      "oracleCardName": "Junk Winder",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}{U}",
+      "cmc": 7,
+      "oracleText": "Affinity for tokens (This spell costs {1} less to cast for each token you control.)\nWhenever a token you control enters, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step."
     },
     {
       "name": "Ongoing Investigation",
       "scryfallId": "ff084438-2e70-41bc-a208-30ab16c026c1",
       "multiverseid": 650208,
       "twoFaced": false,
+      "oracleCardName": "Ongoing Investigation",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever one or more creatures you control deal combat damage to a player, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life."
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "31dec9a8-714f-4e28-9781-d0a8c6775298",
       "multiverseid": 650218,
       "twoFaced": false,
+      "oracleCardName": "Whirler Rogue",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
     },
     {
       "name": "Graf Mole",
       "scryfallId": "70e3e14e-796b-4592-9eb0-758d30ba3a1c",
       "multiverseid": 650264,
       "twoFaced": false,
+      "oracleCardName": "Graf Mole",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever you sacrifice a Clue, you gain 3 life."
     },
     {
       "name": "Ulvenwald Mysteries",
       "scryfallId": "f397a8b1-ffaa-492e-a47e-4a24b62e697e",
       "multiverseid": 650287,
       "twoFaced": false,
+      "oracleCardName": "Ulvenwald Mysteries",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever a nontoken creature you control dies, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, create a 1/1 white Human Soldier creature token."
     },
     {
       "name": "Wilderness Reclamation",
       "scryfallId": "77aaad20-e385-4869-859a-4c5f90f8804e",
       "multiverseid": 650290,
       "twoFaced": false,
+      "oracleCardName": "Wilderness Reclamation",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, untap all lands you control."
     },
     {
       "name": "Wavesifter",
       "scryfallId": "7ca787d2-eee4-4474-9db7-e8efa161ceec",
       "multiverseid": 650314,
       "twoFaced": false,
+      "oracleCardName": "Wavesifter",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{U}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nEvoke {G}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "e593bb16-e709-4d92-bf6f-239f6a11f7db",
       "multiverseid": 650317,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "ce0c5827-568d-4af2-8948-7e0c9217f029",
       "multiverseid": 650318,
       "twoFaced": false,
+      "oracleCardName": "Azorius Signet",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Simic Signet",
       "scryfallId": "7ad73d1f-dc6c-4978-b3c1-e7c801534bf1",
       "multiverseid": 650330,
       "twoFaced": false,
+      "oracleCardName": "Simic Signet",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {G}{U}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "d9e098aa-a886-430e-8f11-78fb6f2d8ada",
       "multiverseid": 650331,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Talisman of Curiosity",
       "scryfallId": "8388c4e8-bda1-47e5-8df2-ddec5babcaf9",
       "multiverseid": 650335,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Curiosity",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Progress",
       "scryfallId": "e3238608-a302-4a42-bd8a-5412e4126b14",
       "multiverseid": 650337,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Progress",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Unity",
       "scryfallId": "89e8443d-daf4-4cef-9080-d7568b5c540e",
       "multiverseid": 650338,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Unity",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This artifact deals 1 damage to you."
     },
     {
       "name": "Azorius Chancery",
       "scryfallId": "798a1aeb-2f0b-496b-a5bc-ee815100fd82",
       "multiverseid": 650343,
       "twoFaced": false,
+      "oracleCardName": "Azorius Chancery",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
     },
     {
       "name": "Magnifying Glass",
       "scryfallId": "c606a71f-8fb0-486b-955f-727ebf436946",
       "multiverseid": 646809,
       "twoFaced": false,
+      "oracleCardName": "Magnifying Glass",
       "colorIdentity": [],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
     },
     {
       "name": "Command Tower",
       "scryfallId": "96c3244e-930f-498c-959e-0f000151597d",
       "multiverseid": 650350,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Krosan Verge",
       "scryfallId": "79ca6f07-7a41-464e-814f-eeaae048d95d",
       "multiverseid": 650365,
       "twoFaced": false,
+      "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Lonely Sandbar",
       "scryfallId": "5833825f-aeb0-41bb-92a4-13e869765295",
       "multiverseid": 650367,
       "twoFaced": false,
+      "oracleCardName": "Lonely Sandbar",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "307eea3e-c029-46a1-839c-1783bb4a6243",
       "multiverseid": 650373,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "f5a1db89-d37f-4839-8ca4-598686c5d6de",
       "multiverseid": 650376,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Seaside Citadel",
       "scryfallId": "a030b477-3093-4e66-b33d-530b302d795c",
       "multiverseid": 650382,
       "twoFaced": false,
+      "oracleCardName": "Seaside Citadel",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
     },
     {
       "name": "Secluded Steppe",
       "scryfallId": "22dd757f-e43a-430f-ae79-66fc7dc12525",
       "multiverseid": 650383,
       "twoFaced": false,
+      "oracleCardName": "Secluded Steppe",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
     },
     {
       "name": "Selesnya Sanctuary",
       "scryfallId": "e0b2dc61-36b7-4491-8e12-288541f24b94",
       "multiverseid": 650384,
       "twoFaced": false,
+      "oracleCardName": "Selesnya Sanctuary",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
     },
     {
       "name": "Simic Growth Chamber",
       "scryfallId": "331270ac-15d4-4aa0-ba71-af07d0554b89",
       "multiverseid": 650387,
       "twoFaced": false,
+      "oracleCardName": "Simic Growth Chamber",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "2d21d25e-830a-4d32-b292-c24cdab7516a",
       "multiverseid": 650399,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Tranquil Thicket",
       "scryfallId": "c558ce99-5f97-46d5-969d-319bfbd11b94",
       "multiverseid": 650403,
       "twoFaced": false,
+      "oracleCardName": "Tranquil Thicket",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
     },
     {
       "name": "Plains",
       "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
       "multiverseid": 648853,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "81a1a8a6-916b-4eef-8079-6775afcb63cf",
       "multiverseid": 648853,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "ec05cb6c-6e7f-4d40-ba38-a9fc06158094",
       "multiverseid": 648854,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
       "multiverseid": 648861,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
       "multiverseid": 648861,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "cc485069-e081-4e83-bbad-d5faf7a5bd03",
       "multiverseid": 648861,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
       "multiverseid": 648862,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "6cb8f264-cc26-476e-a3b7-53638dce7395",
       "multiverseid": 648862,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.504Z",
+    "retrievedDate": "2026-02-20T03:10:20.505Z",
     "sourceUrl": "DeepClueSea_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

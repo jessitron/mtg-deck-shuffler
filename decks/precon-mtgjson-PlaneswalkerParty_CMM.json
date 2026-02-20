@@ -9,12 +9,19 @@
       "scryfallId": "92870fc6-a6bc-4198-bb31-397e07e0e835",
       "multiverseid": 625047,
       "twoFaced": false,
+      "oracleCardName": "Commodore Guff",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U}{R}{W}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n[+1]: Create a 1/1 red Wizard creature token with \"{T}: Add {R}. Spend this mana only to cast a planeswalker spell.\"\n[−3]: You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.\nCommodore Guff can be your commander."
     }
   ],
   "cards": [
@@ -23,991 +30,1647 @@
       "scryfallId": "342979de-041e-4026-94c5-fc457ecde95d",
       "multiverseid": 625062,
       "twoFaced": false,
+      "oracleCardName": "Leori, Sparktouched Hunter",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{R}{W}",
+      "cmc": 3,
+      "oracleText": "Flying, vigilance\nWhenever Leori deals combat damage to a player, choose a planeswalker type. Until end of turn, whenever you activate an ability of a planeswalker of that type, copy that ability. You may choose new targets for the copies."
     },
     {
       "name": "Mangara, the Diplomat",
       "scryfallId": "09e77ae5-a1a6-4e51-9853-10e81ca2dd2c",
       "multiverseid": 622650,
       "twoFaced": false,
+      "oracleCardName": "Mangara, the Diplomat",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Lifelink\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.\nWhenever an opponent casts their second spell each turn, draw a card."
     },
     {
       "name": "Gatewatch Beacon",
       "scryfallId": "08b3a1bb-1191-4484-80b0-71cf9f8e510b",
       "multiverseid": 625086,
       "twoFaced": false,
+      "oracleCardName": "Gatewatch Beacon",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "This artifact enters with three loyalty counters on it.\n{T}: Add {W}.\nWhenever a planeswalker you control enters, if this artifact has loyalty counters on it, you may move a loyalty counter from this artifact onto that planeswalker."
     },
     {
       "name": "Onakke Oathkeeper",
       "scryfallId": "55d0caac-50c0-434e-af77-9ebd2a466415",
       "multiverseid": 625087,
       "twoFaced": false,
+      "oracleCardName": "Onakke Oathkeeper",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Creatures can't attack planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control.\n{4}{W}{W}, Exile this card from your graveyard: Return target planeswalker card from your graveyard to the battlefield."
     },
     {
       "name": "Teyo, Geometric Tactician",
       "scryfallId": "c66fa93a-6888-4297-b22e-7d69fd25c0d7",
       "multiverseid": 625090,
       "twoFaced": false,
+      "oracleCardName": "Teyo, Geometric Tactician",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When Teyo enters, create a 0/4 white Wall creature token with defender and flying.\n[+1]: You and target opponent each draw a card.\n[−2]: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent."
     },
     {
       "name": "Sparkshaper Visionary",
       "scryfallId": "5e941849-033b-499b-b691-6ad9250d9ecd",
       "multiverseid": 625091,
       "twoFaced": false,
+      "oracleCardName": "Sparkshaper Visionary",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "At the beginning of combat on your turn, choose any number of target planeswalkers you control. Until end of turn, they become 3/3 blue Bird creatures with flying, hexproof, and \"Whenever this creature deals combat damage to a player, scry 1.\" (They're no longer planeswalkers. Loyalty abilities can still be activated.)"
     },
     {
       "name": "Vronos, Masked Inquisitor",
       "scryfallId": "fdd2504b-ff9b-464c-9595-7dffab3bc5b9",
       "multiverseid": 625094,
       "twoFaced": false,
+      "oracleCardName": "Vronos, Masked Inquisitor",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "[+1]: Up to two other target planeswalkers you control phase out at the beginning of the next end step. (Treat them and anything attached to them as though they don't exist until your next turn.)\n[−2]: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.\n[−7]: Target artifact you control becomes a 9/9 Construct artifact creature and gains vigilance, indestructible, and \"This creature can't be blocked.\""
     },
     {
       "name": "Chandra, Legacy of Fire",
       "scryfallId": "6b764e0d-ded0-4036-83b1-de49c6ee8f7e",
       "multiverseid": 625100,
       "twoFaced": false,
+      "oracleCardName": "Chandra, Legacy of Fire",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your end step, Chandra deals X damage to each opponent, where X is the number of planeswalkers you control.\n[+1]: Add {R} for each planeswalker you control.\n[0]: Remove a loyalty counter from each of any number of permanents you control. Exile that many cards from the top of your library. You may play them this turn."
     },
     {
       "name": "Guff Rewrites History",
       "scryfallId": "e16c6ab7-cab9-4ee3-9f17-d6817f61efcc",
       "multiverseid": 625102,
       "twoFaced": false,
+      "oracleCardName": "Guff Rewrites History",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "For each player, choose target nonenchantment, nonland permanent that player controls. Those permanents' owners shuffle them into their libraries. Each player who controlled one of those permanents exiles cards from the top of their library until they exile a nonland card, then puts the rest on the bottom of their library in a random order. Each player may cast the nonland card they exiled without paying its mana cost."
     },
     {
       "name": "Jaya's Phoenix",
       "scryfallId": "aca45c6b-8cce-44db-9f5b-fa66075db6f6",
       "multiverseid": 625103,
       "twoFaced": false,
+      "oracleCardName": "Jaya's Phoenix",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Flying, haste\nWhenever this creature deals combat damage to a player or planeswalker, copy the next loyalty ability you activate this turn when you activate it. You may choose new targets for the copy.\nWhenever you cast a planeswalker spell, you may return this card from your graveyard to the battlefield."
     },
     {
       "name": "Ajani Steadfast",
       "scryfallId": "51825d35-cdb2-40fa-ab89-1625161b04af",
       "multiverseid": 625218,
       "twoFaced": false,
+      "oracleCardName": "Ajani Steadfast",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "[+1]: Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.\n[−2]: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.\n[−7]: You get an emblem with \"If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.\""
     },
     {
       "name": "Deploy the Gatewatch",
       "scryfallId": "34f4c453-97b4-4cd5-a766-85e5647f71d5",
       "multiverseid": 625224,
       "twoFaced": false,
+      "oracleCardName": "Deploy the Gatewatch",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Elspeth, Sun's Champion",
       "scryfallId": "08382257-68d5-493e-8754-2ff72e9321e9",
       "multiverseid": 625225,
       "twoFaced": false,
+      "oracleCardName": "Elspeth, Sun's Champion",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "[+1]: Create three 1/1 white Soldier creature tokens.\n[−3]: Destroy all creatures with power 4 or greater.\n[−7]: You get an emblem with \"Creatures you control get +2/+2 and have flying.\""
     },
     {
       "name": "Gideon Jura",
       "scryfallId": "d608df31-bcc6-4fec-89f1-5cefe5c2ec99",
       "multiverseid": 625227,
       "twoFaced": false,
+      "oracleCardName": "Gideon Jura",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "[+2]: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[−2]: Destroy target tapped creature.\n[0]: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn."
     },
     {
       "name": "Norn's Annex",
       "scryfallId": "d25bbe18-709c-4ed3-a047-5578ecfaaba7",
       "multiverseid": 625234,
       "twoFaced": false,
+      "oracleCardName": "Norn's Annex",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}{W/P}{W/P}",
+      "cmc": 5,
+      "oracleText": "({W/P} can be paid with either {W} or 2 life.)\nCreatures can't attack you or planeswalkers you control unless their controller pays {W/P} for each of those creatures."
     },
     {
       "name": "Oath of Gideon",
       "scryfallId": "b8a3f02b-9408-46a5-8d25-f5cec553d600",
       "multiverseid": 625235,
       "twoFaced": false,
+      "oracleCardName": "Oath of Gideon",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When Oath of Gideon enters, create two 1/1 white Kor Ally creature tokens.\nEach planeswalker you control enters with an additional loyalty counter on it."
     },
     {
       "name": "Promise of Loyalty",
       "scryfallId": "2a0ae3bb-c22f-495f-82e3-cf909e8a8e49",
       "multiverseid": 625238,
       "twoFaced": false,
+      "oracleCardName": "Promise of Loyalty",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
     },
     {
       "name": "Semester's End",
       "scryfallId": "db2bb091-ac6d-4c99-bdf6-70ffb6291ef0",
       "multiverseid": 625239,
       "twoFaced": false,
+      "oracleCardName": "Semester's End",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Exile any number of target creatures and/or planeswalkers you control. At the beginning of the next end step, return each of them to the battlefield under its owner's control. Each of them enters with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker."
     },
     {
       "name": "Urza's Ruinous Blast",
       "scryfallId": "76b10977-64eb-4a50-a481-d67cc2950f56",
       "multiverseid": 625247,
       "twoFaced": false,
+      "oracleCardName": "Urza's Ruinous Blast",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nExile all nonland permanents that aren't legendary."
     },
     {
       "name": "Deepglow Skate",
       "scryfallId": "94e8e7b9-042e-4d01-87dd-27dc95257113",
       "multiverseid": 625249,
       "twoFaced": false,
+      "oracleCardName": "Deepglow Skate",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, double the number of each kind of counter on any number of target permanents."
     },
     {
       "name": "Jace Beleren",
       "scryfallId": "806d4e61-004f-4e52-b2e8-ba11b922cc7d",
       "multiverseid": 625255,
       "twoFaced": false,
+      "oracleCardName": "Jace Beleren",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "[+2]: Each player draws a card.\n[−1]: Target player draws a card.\n[−10]: Target player mills twenty cards."
     },
     {
       "name": "Jace, Architect of Thought",
       "scryfallId": "7051cdfa-509e-4d84-bbae-f77556c861e4",
       "multiverseid": 625256,
       "twoFaced": false,
+      "oracleCardName": "Jace, Architect of Thought",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "[+1]: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[−2]: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[−8]: For each player, search that player's library for a nonland card and exile it, then that player shuffles. You may cast those cards without paying their mana costs."
     },
     {
       "name": "Jace, Mirror Mage",
       "scryfallId": "86d34cbf-e424-461a-adf3-003d556a7859",
       "multiverseid": 625257,
       "twoFaced": false,
+      "oracleCardName": "Jace, Mirror Mage",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Kicker {2}\nWhen Jace enters, if Jace was kicked, create a token that's a copy of Jace, except it's not legendary and its starting loyalty is 1.\n[+1]: Scry 2.\n[0]: Draw a card and reveal it. Remove a number of loyalty counters equal to that card's mana value from Jace."
     },
     {
       "name": "Oath of Jace",
       "scryfallId": "da62e9a8-d1aa-4fea-abb7-50c10d40fa6a",
       "multiverseid": 625259,
       "twoFaced": false,
+      "oracleCardName": "Oath of Jace",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "When Oath of Jace enters, draw three cards, then discard two cards.\nAt the beginning of your upkeep, scry X, where X is the number of planeswalkers you control."
     },
     {
       "name": "Spark Double",
       "scryfallId": "cdbb32db-fb1d-4f47-a258-fa1a0a00bd76",
       "multiverseid": 625261,
       "twoFaced": false,
+      "oracleCardName": "Spark Double",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "You may have this creature enter as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary."
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "cd15a627-f7a6-4d66-abb5-5aaa167b41a9",
       "multiverseid": 625277,
       "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
     },
     {
       "name": "Chandra, Awakened Inferno",
       "scryfallId": "0d4fb926-fe8c-4640-ac8d-ef418b8945d5",
       "multiverseid": 625280,
       "twoFaced": false,
+      "oracleCardName": "Chandra, Awakened Inferno",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "This spell can't be countered.\n[+2]: Each opponent gets an emblem with \"At the beginning of your upkeep, this emblem deals 1 damage to you.\"\n[−3]: Chandra deals 3 damage to each non-Elemental creature.\n[−X]: Chandra deals X damage to target creature or planeswalker. If a permanent dealt damage this way would die this turn, exile it instead."
     },
     {
       "name": "Chandra, Torch of Defiance",
       "scryfallId": "2eac0eaa-55b2-444a-863d-c66769aab4ee",
       "multiverseid": 625281,
       "twoFaced": false,
+      "oracleCardName": "Chandra, Torch of Defiance",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "[+1]: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.\n[+1]: Add {R}{R}.\n[−3]: Chandra deals 4 damage to target creature.\n[−7]: You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\""
     },
     {
       "name": "Repeated Reverberation",
       "scryfallId": "1cb03593-9369-4c26-bfcc-8819648dc018",
       "multiverseid": 625284,
       "twoFaced": false,
+      "oracleCardName": "Repeated Reverberation",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies."
     },
     {
       "name": "Sarkhan the Masterless",
       "scryfallId": "2aced16a-ebbd-47bb-a4c4-9454afa9971c",
       "multiverseid": 625285,
       "twoFaced": false,
+      "oracleCardName": "Sarkhan the Masterless",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever a creature attacks you or a planeswalker you control, each Dragon you control deals 1 damage to that creature.\n[+1]: Until end of turn, each planeswalker you control becomes a 4/4 red Dragon creature and gains flying.\n[−3]: Create a 4/4 red Dragon creature token with flying."
     },
     {
       "name": "Nahiri, the Harbinger",
       "scryfallId": "c0b2cc03-5d07-43e1-a8d9-298d17a5af44",
       "multiverseid": 625334,
       "twoFaced": false,
+      "oracleCardName": "Nahiri, the Harbinger",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{R}{W}",
+      "cmc": 4,
+      "oracleText": "[+2]: You may discard a card. If you do, draw a card.\n[−2]: Exile target enchantment, tapped artifact, or tapped creature.\n[−8]: Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step."
     },
     {
       "name": "Narset of the Ancient Way",
       "scryfallId": "300f766f-9609-4105-9ed5-4299c48f7fa7",
       "multiverseid": 625335,
       "twoFaced": false,
+      "oracleCardName": "Narset of the Ancient Way",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U}{R}{W}",
+      "cmc": 4,
+      "oracleText": "[+1]: You gain 2 life. Add {U}, {R}, or {W}. Spend this mana only to cast a noncreature spell.\n[−2]: Draw a card, then you may discard a card. When you discard a nonland card this way, Narset deals damage equal to that card's mana value to target creature or planeswalker.\n[−6]: You get an emblem with \"Whenever you cast a noncreature spell, this emblem deals 2 damage to any target.\""
     },
     {
       "name": "Narset, Enlightened Master",
       "scryfallId": "de4b0d5f-1071-4030-be16-2b4dadbdf9e9",
       "multiverseid": 625336,
       "twoFaced": false,
+      "oracleCardName": "Narset, Enlightened Master",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}{W}",
+      "cmc": 6,
+      "oracleText": "First strike, hexproof\nWhenever Narset attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs."
     },
     {
       "name": "Oath of Teferi",
       "scryfallId": "f7474f9e-a994-4ed7-83df-22edd8219e24",
       "multiverseid": 625339,
       "twoFaced": false,
+      "oracleCardName": "Oath of Teferi",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}{U}",
+      "cmc": 5,
+      "oracleText": "When Oath of Teferi enters, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.\nYou may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once."
     },
     {
       "name": "The Chain Veil",
       "scryfallId": "1ca66955-d900-45b6-9a40-38467689a68d",
       "multiverseid": 625348,
       "twoFaced": false,
+      "oracleCardName": "The Chain Veil",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.\n{4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn."
     },
     {
       "name": "Nevinyrral's Disk",
       "scryfallId": "36fb6ee3-bd54-4e5b-b055-c2c42515c162",
       "multiverseid": 625370,
       "twoFaced": false,
+      "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "This artifact enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
     },
     {
       "name": "Silent Arbiter",
       "scryfallId": "14f42cc9-8b7f-4f8a-8d68-8480e668c239",
       "multiverseid": 625377,
       "twoFaced": false,
+      "oracleCardName": "Silent Arbiter",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "No more than one creature can attack each combat.\nNo more than one creature can block each combat."
     },
     {
       "name": "Cascade Bluffs",
       "scryfallId": "15406173-530f-4f4f-82f3-f3e193979fd7",
       "multiverseid": 625395,
       "twoFaced": false,
+      "oracleCardName": "Cascade Bluffs",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "63325755-47d5-4bb2-a21c-f324c27e1bbd",
       "multiverseid": 625398,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Frostboil Snarl",
       "scryfallId": "6c295e4b-0b52-4422-85bc-e631a93d9e5f",
       "multiverseid": 625403,
       "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Furycalm Snarl",
       "scryfallId": "703f058c-6fc4-4e06-8570-a094ffe44574",
       "multiverseid": 625404,
       "twoFaced": false,
+      "oracleCardName": "Furycalm Snarl",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Karn's Bastion",
       "scryfallId": "875ca80a-3eb8-434c-8114-536caab23211",
       "multiverseid": 625412,
       "twoFaced": false,
+      "oracleCardName": "Karn's Bastion",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Mobilized District",
       "scryfallId": "c7921b97-083b-480a-a7df-f2ab82e6f8fb",
       "multiverseid": 625416,
       "twoFaced": false,
+      "oracleCardName": "Mobilized District",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}: This land becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control."
     },
     {
       "name": "Mystic Gate",
       "scryfallId": "6f99714f-43bc-4048-b650-97dfef4c10fe",
       "multiverseid": 625418,
       "twoFaced": false,
+      "oracleCardName": "Mystic Gate",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}."
     },
     {
       "name": "Port Town",
       "scryfallId": "d15c035d-1309-4286-a758-07517f323f34",
       "multiverseid": 625424,
       "twoFaced": false,
+      "oracleCardName": "Port Town",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Prairie Stream",
       "scryfallId": "53ac634a-d792-4cca-8735-41a9a663f775",
       "multiverseid": 625425,
       "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Rugged Prairie",
       "scryfallId": "bbec2908-0b96-4b91-a269-3d7bc75be168",
       "multiverseid": 625427,
       "twoFaced": false,
+      "oracleCardName": "Rugged Prairie",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
     },
     {
       "name": "Skycloud Expanse",
       "scryfallId": "0c1c9810-c6bf-4bce-b131-37ea34f3f840",
       "multiverseid": 625440,
       "twoFaced": false,
+      "oracleCardName": "Skycloud Expanse",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Temple of Enlightenment",
       "scryfallId": "6ef1c3e3-f038-4ec3-84a1-756c52b5dbe1",
       "multiverseid": 625446,
       "twoFaced": false,
+      "oracleCardName": "Temple of Enlightenment",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "d77363b9-276b-421d-b422-8c9a3838d118",
       "multiverseid": 625447,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "f0ead529-accb-4b6f-ab60-d715d80b3c99",
       "multiverseid": 625452,
       "twoFaced": false,
+      "oracleCardName": "Temple of Triumph",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
     },
     {
       "name": "Cartographer's Hawk",
       "scryfallId": "12d0b07f-9823-45b7-89bb-0a2a71833d46",
       "multiverseid": 622626,
       "twoFaced": false,
+      "oracleCardName": "Cartographer's Hawk",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhen this creature deals combat damage to a player who controls more lands than you, return it to its owner's hand. If you do, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Path to Exile",
       "scryfallId": "4970389b-08f4-4a15-a128-954b072a8137",
       "multiverseid": 622657,
       "twoFaced": false,
+      "oracleCardName": "Path to Exile",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Kazuul, Tyrant of the Cliffs",
       "scryfallId": "9a7c54ed-594d-40d7-a64a-a57db6d5ba16",
       "multiverseid": 627701,
       "twoFaced": false,
+      "oracleCardName": "Kazuul, Tyrant of the Cliffs",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "0539b83c-4459-41b5-a001-d15a1c9ddf23",
       "multiverseid": 627831,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Fellwar Stone",
       "scryfallId": "fad9cac1-8b2b-42d6-9f0b-d679689ba862",
       "multiverseid": 627846,
       "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "46ca0b66-a000-4483-b916-f5b89e710244",
       "multiverseid": 627874,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "14019383-0327-404b-ab4d-c65c3fa8c50d",
       "multiverseid": 627884,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "643f0ee9-9eba-4aa8-9f68-1f57313fc030",
       "multiverseid": 627885,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "ec1d8a99-8a06-4e51-9277-96edb6899b29",
       "multiverseid": 627889,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Grateful Apparition",
       "scryfallId": "5e1cf888-dd41-4cc2-a16e-3414ef7a78ed",
       "multiverseid": 625229,
       "twoFaced": false,
+      "oracleCardName": "Grateful Apparition",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this creature deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Oreskos Explorer",
       "scryfallId": "5ebabe38-a035-4c2d-89b5-760712f311b8",
       "multiverseid": 625237,
       "twoFaced": false,
+      "oracleCardName": "Oreskos Explorer",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "42ecba4b-9624-428f-a8af-dd88139ab13c",
       "multiverseid": 625246,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "The Wanderer",
       "scryfallId": "c6ec3686-cecd-4dee-8a68-c3e4baec25ca",
       "multiverseid": 625248,
       "twoFaced": false,
+      "oracleCardName": "The Wanderer",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Prevent all noncombat damage that would be dealt to you and other permanents you control.\n[−2]: Exile target creature with power 4 or greater."
     },
     {
       "name": "Flux Channeler",
       "scryfallId": "3c520263-6bad-4521-ba9e-192ca8223b07",
       "multiverseid": 625252,
       "twoFaced": false,
+      "oracleCardName": "Flux Channeler",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Fog Bank",
       "scryfallId": "c14fb062-ff43-43eb-aaaf-304a876d5962",
       "multiverseid": 625253,
       "twoFaced": false,
+      "oracleCardName": "Fog Bank",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Defender (This creature can't attack.)\nFlying\nPrevent all combat damage that would be dealt to and dealt by this creature."
     },
     {
       "name": "Narset, Parter of Veils",
       "scryfallId": "4e6e5c63-b6e5-4756-bf23-6c6f8669442d",
       "multiverseid": 625258,
       "twoFaced": false,
+      "oracleCardName": "Narset, Parter of Veils",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Each opponent can't draw more than one card each turn.\n[−2]: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Thrummingbird",
       "scryfallId": "86ff84d8-1b89-42cc-a8c0-4ac6fa26ce65",
       "multiverseid": 625263,
       "twoFaced": false,
+      "oracleCardName": "Thrummingbird",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
     },
     {
       "name": "Saheeli, Sublime Artificer",
       "scryfallId": "ce35a39a-6dcd-4bbc-b43b-bd1a5425cb05",
       "multiverseid": 625340,
       "twoFaced": false,
+      "oracleCardName": "Saheeli, Sublime Artificer",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U/R}{U/R}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
     },
     {
       "name": "Wall of Denial",
       "scryfallId": "049ce45b-ab07-4bce-bb4a-83f5720b6ee7",
       "multiverseid": 625344,
       "twoFaced": false,
+      "oracleCardName": "Wall of Denial",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "Defender, flying\nShroud (This creature can't be the target of spells or abilities.)"
     },
     {
       "name": "Azorius Signet",
       "scryfallId": "f012f5c8-a974-40a4-9375-071e4d95182a",
       "multiverseid": 625346,
       "twoFaced": false,
+      "oracleCardName": "Azorius Signet",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{U}."
     },
     {
       "name": "Boros Signet",
       "scryfallId": "0c6e02b3-be4c-45b8-9cb8-6b3142b30c6b",
       "multiverseid": 625347,
       "twoFaced": false,
+      "oracleCardName": "Boros Signet",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {R}{W}."
     },
     {
       "name": "Honor-Worn Shaku",
       "scryfallId": "dd39f563-2ea9-4ddd-8d76-900fa14b480c",
       "multiverseid": 625359,
       "twoFaced": false,
+      "oracleCardName": "Honor-Worn Shaku",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {C}.\nTap an untapped legendary permanent you control: Untap this artifact."
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "e894c45f-30fa-493c-af9e-20261c37d1e1",
       "multiverseid": 625362,
       "twoFaced": false,
+      "oracleCardName": "Izzet Signet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{R}."
     },
     {
       "name": "Talisman of Conviction",
       "scryfallId": "293a58b9-2cf5-4898-8261-b7c51edc2051",
       "multiverseid": 625383,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Conviction",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Creativity",
       "scryfallId": "8ebb2086-3d9c-4322-bd3f-1366a4354578",
       "multiverseid": 625384,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Creativity",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Progress",
       "scryfallId": "32c406a0-607a-49eb-b506-bee60234fe6d",
       "multiverseid": 625385,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Progress",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "b61a30eb-66b2-4a59-ada3-400580cc9c36",
       "multiverseid": 625388,
       "twoFaced": false,
+      "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Forge of Heroes",
       "scryfallId": "5f11f053-5150-4a76-b2ca-9df3a0629911",
       "multiverseid": 625400,
       "twoFaced": false,
+      "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
     },
     {
       "name": "Interplanar Beacon",
       "scryfallId": "bc1bed72-2440-4364-a69f-a9d7c4fe3fea",
       "multiverseid": 625409,
       "twoFaced": false,
+      "oracleCardName": "Interplanar Beacon",
       "colorIdentity": [],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Whenever you cast a planeswalker spell, you gain 1 life.\n{T}: Add {C}.\n{1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells."
     },
     {
       "name": "Mystic Monastery",
       "scryfallId": "c26d3961-cc3f-408a-821e-2d9ea025c51e",
       "multiverseid": 625419,
       "twoFaced": false,
+      "oracleCardName": "Mystic Monastery",
       "colorIdentity": [
         "R",
         "U",
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
     },
     {
       "name": "Island",
       "scryfallId": "8f21ed59-a8c8-46fc-ac20-2b351fffd36c",
       "multiverseid": 624343,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8f21ed59-a8c8-46fc-ac20-2b351fffd36c",
       "multiverseid": 624343,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8f21ed59-a8c8-46fc-ac20-2b351fffd36c",
       "multiverseid": 624343,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8f21ed59-a8c8-46fc-ac20-2b351fffd36c",
       "multiverseid": 624343,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "03438868-e177-46af-9ae8-edc4a991f18c",
       "multiverseid": 624345,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "03438868-e177-46af-9ae8-edc4a991f18c",
       "multiverseid": 624345,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "03438868-e177-46af-9ae8-edc4a991f18c",
       "multiverseid": 624345,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e9f08835-74ca-4ac5-980e-e802aada2bb7",
       "multiverseid": 624349,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "e9f08835-74ca-4ac5-980e-e802aada2bb7",
       "multiverseid": 624349,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "748b9a1d-0fa3-41bc-beb0-7e3cf2eb33ed",
       "multiverseid": 624350,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "748b9a1d-0fa3-41bc-beb0-7e3cf2eb33ed",
       "multiverseid": 624350,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "51cfdbd6-00c3-4eac-acd3-b058b82ff947",
       "multiverseid": 624340,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "51cfdbd6-00c3-4eac-acd3-b058b82ff947",
       "multiverseid": 624340,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "51cfdbd6-00c3-4eac-acd3-b058b82ff947",
       "multiverseid": 624340,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "51cfdbd6-00c3-4eac-acd3-b058b82ff947",
       "multiverseid": 624340,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "54b1c00c-c292-44c7-a6c9-0dcdb00581aa",
       "multiverseid": 624342,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "54b1c00c-c292-44c7-a6c9-0dcdb00581aa",
       "multiverseid": 624342,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "54b1c00c-c292-44c7-a6c9-0dcdb00581aa",
       "multiverseid": 624342,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "CMM"
+      "set": "CMM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.481Z",
+    "retrievedDate": "2026-02-20T03:10:21.660Z",
     "sourceUrl": "PlaneswalkerParty_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

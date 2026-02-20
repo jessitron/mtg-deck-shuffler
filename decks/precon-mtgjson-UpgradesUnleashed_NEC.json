@@ -9,11 +9,18 @@
       "scryfallId": "bffa36ac-137d-481c-b1b7-76a88ef15d54",
       "multiverseid": 553668,
       "twoFaced": false,
+      "oracleCardName": "Chishiro, the Shattered Blade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever an Aura or Equipment you control enters, create a 2/2 red Spirit creature token with menace.\nAt the beginning of your end step, put a +1/+1 counter on each modified creature you control. (Equipment, Auras you control, and counters are modifications.)"
     }
   ],
   "cards": [
@@ -22,984 +29,1644 @@
       "scryfallId": "467033f7-8d59-4b80-8c2e-c36f3ad93438",
       "multiverseid": 553690,
       "twoFaced": false,
+      "oracleCardName": "Kaima, the Fractured Calm",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, goad each creature your opponents control that's enchanted by an Aura you control. Put a +1/+1 counter on Kaima for each creature goaded this way. (Until your next turn, the goaded creatures attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Ox of Agonas",
       "scryfallId": "00c46d18-064e-403a-bf39-ec655d78390a",
       "multiverseid": 554191,
       "twoFaced": false,
+      "oracleCardName": "Ox of Agonas",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, discard your hand, then draw three cards.\nEscape—{R}{R}, Exile eight other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with a +1/+1 counter on it."
     },
     {
       "name": "Akki Battle Squad",
       "scryfallId": "ca624ce6-5b99-41af-8e26-b952f5a30916",
       "multiverseid": 553915,
       "twoFaced": false,
+      "oracleCardName": "Akki Battle Squad",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "Whenever one or more modified creatures you control attack, untap all modified creatures you control. After this phase, there is an additional combat phase. This ability triggers only once each turn. (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Kami of Celebration",
       "scryfallId": "bda67054-bbd8-4979-801a-a5e9ca335f49",
       "multiverseid": 553917,
       "twoFaced": false,
+      "oracleCardName": "Kami of Celebration",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Whenever a modified creature you control attacks, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)\nWhenever you cast a spell from exile, put a +1/+1 counter on target creature you control."
     },
     {
       "name": "Komainu Battle Armor",
       "scryfallId": "d6ecab4b-fcff-4cf9-8e26-f3c609179050",
       "multiverseid": 553918,
       "twoFaced": false,
+      "oracleCardName": "Komainu Battle Armor",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Menace\nEquipped creature gets +2/+2 and has menace.\nWhenever this creature or equipped creature deals combat damage to a player, goad each creature that player controls.\nReconfigure {4} ({4}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
     },
     {
       "name": "Ascendant Acolyte",
       "scryfallId": "918a9e38-29ec-4279-8cf6-f01141497cab",
       "multiverseid": 553921,
       "twoFaced": false,
+      "oracleCardName": "Ascendant Acolyte",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "This creature enters with a +1/+1 counter on it for each +1/+1 counter among other creatures you control.\nAt the beginning of your upkeep, double the number of +1/+1 counters on this creature."
     },
     {
       "name": "Kosei, Penitent Warlord",
       "scryfallId": "82291f66-f4f0-4542-992e-8342e90033da",
       "multiverseid": 553923,
       "twoFaced": false,
+      "oracleCardName": "Kosei, Penitent Warlord",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "As long as Kosei is enchanted, equipped, and has a counter on it, Kosei has \"Whenever Kosei deals combat damage to an opponent, you draw that many cards and Kosei deals that much damage to each other opponent.\""
     },
     {
       "name": "Rampant Rejuvenator",
       "scryfallId": "16b06b17-f256-428f-9bed-f115af270f27",
       "multiverseid": 553925,
       "twoFaced": false,
+      "oracleCardName": "Rampant Rejuvenator",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\nWhen this creature dies, search your library for up to X basic land cards, where X is this creature's power, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Tanuki Transplanter",
       "scryfallId": "45ea5ead-9fd8-4909-96aa-d4e970891c93",
       "multiverseid": 553927,
       "twoFaced": false,
+      "oracleCardName": "Tanuki Transplanter",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever this creature or equipped creature attacks, add an amount of {G} equal to its power. Until end of turn, you don't lose this mana as steps and phases end.\nReconfigure {3} ({3}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
     },
     {
       "name": "Orochi Merge-Keeper",
       "scryfallId": "736c3278-6ee2-47f9-aab0-1457e90137b1",
       "multiverseid": 548512,
       "twoFaced": false,
+      "oracleCardName": "Orochi Merge-Keeper",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {G}.\nAs long as this creature is modified, it has \"{T}: Add {G}{G}.\" (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Towashi Guide-Bot",
       "scryfallId": "da4ccf70-b661-46ea-bea9-4466a3a35562",
       "multiverseid": 548575,
       "twoFaced": false,
+      "oracleCardName": "Towashi Guide-Bot",
       "colorIdentity": [],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, put a +1/+1 counter on target creature you control.\n{4}, {T}: Draw a card. This ability costs {1} less to activate for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Walking Skyscraper",
       "scryfallId": "958af4ba-f29e-47ef-995e-3985982c75ad",
       "multiverseid": 548576,
       "twoFaced": false,
+      "oracleCardName": "Walking Skyscraper",
       "colorIdentity": [],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{8}",
+      "cmc": 8,
+      "oracleText": "This spell costs {1} less to cast for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)\nTrample\nThis creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)"
     },
     {
       "name": "Agitator Ant",
       "scryfallId": "6a61c242-5273-430c-b14e-fb76dc782ba3",
       "multiverseid": 554185,
       "twoFaced": false,
+      "oracleCardName": "Agitator Ant",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Goblin Razerunners",
       "scryfallId": "5c06fb09-1e64-49c7-9938-541c0433bf5a",
       "multiverseid": 554189,
       "twoFaced": false,
+      "oracleCardName": "Goblin Razerunners",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "{1}{R}, Sacrifice a land: Put a +1/+1 counter on this creature.\nAt the beginning of your end step, you may have this creature deal damage equal to the number of +1/+1 counters on it to target player or planeswalker."
     },
     {
       "name": "Krenko, Tin Street Kingpin",
       "scryfallId": "f51d53fc-8e62-45fd-b2cd-8f93d7f9e1fa",
       "multiverseid": 554190,
       "twoFaced": false,
+      "oracleCardName": "Krenko, Tin Street Kingpin",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever Krenko attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to Krenko's power."
     },
     {
       "name": "Taurean Mauler",
       "scryfallId": "a4ee4648-dd6e-4ba9-b643-a7e4c430d51f",
       "multiverseid": 554194,
       "twoFaced": false,
+      "oracleCardName": "Taurean Mauler",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
     },
     {
       "name": "Acidic Slime",
       "scryfallId": "c672b34d-066e-40e6-a499-3ab68ea6514c",
       "multiverseid": 554195,
       "twoFaced": false,
+      "oracleCardName": "Acidic Slime",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
     },
     {
       "name": "Champion of Lambholt",
       "scryfallId": "f37f3696-a780-4203-8ae9-06e14235066b",
       "multiverseid": 554198,
       "twoFaced": false,
+      "oracleCardName": "Champion of Lambholt",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
     },
     {
       "name": "Fertilid",
       "scryfallId": "a7402ae8-fd87-4412-ab4f-44bcc2d49764",
       "multiverseid": 554199,
       "twoFaced": false,
+      "oracleCardName": "Fertilid",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from this creature: Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles."
     },
     {
       "name": "Forgotten Ancient",
       "scryfallId": "13ecbd14-bf93-4beb-afb0-6355fe9092a6",
       "multiverseid": 554200,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Ancient",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
     },
     {
       "name": "Genesis Hydra",
       "scryfallId": "451eb0dd-f3e8-4504-9de0-0bdf124e9ae2",
       "multiverseid": 554201,
       "twoFaced": false,
+      "oracleCardName": "Genesis Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}{G}",
+      "cmc": 2,
+      "oracleText": "When you cast this spell, reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library.\nThis creature enters with X +1/+1 counters on it."
     },
     {
       "name": "Loyal Guardian",
       "scryfallId": "4b9a5878-985d-47ba-a3dd-fe897777b873",
       "multiverseid": 554204,
       "twoFaced": false,
+      "oracleCardName": "Loyal Guardian",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
     },
     {
       "name": "Primeval Protector",
       "scryfallId": "15ab4c3b-323a-47c6-b675-447d16def3d5",
       "multiverseid": 554206,
       "twoFaced": false,
+      "oracleCardName": "Primeval Protector",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{10}{G}",
+      "cmc": 11,
+      "oracleText": "This spell costs {1} less to cast for each creature your opponents control.\nWhen this creature enters, put a +1/+1 counter on each other creature you control."
     },
     {
       "name": "Rishkar, Peema Renegade",
       "scryfallId": "c0bbcf3b-5b7c-4846-b30c-100542ce2204",
       "multiverseid": 554208,
       "twoFaced": false,
+      "oracleCardName": "Rishkar, Peema Renegade",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When Rishkar enters, put a +1/+1 counter on each of up to two target creatures.\nEach creature you control with a counter on it has \"{T}: Add {G}.\""
     },
     {
       "name": "Sakura-Tribe Elder",
       "scryfallId": "53754cb3-0294-41e0-90d7-a35710ea30e4",
       "multiverseid": 554210,
       "twoFaced": false,
+      "oracleCardName": "Sakura-Tribe Elder",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Spearbreaker Behemoth",
       "scryfallId": "d7f5cae6-5f1d-4537-9cc5-46d727d1beb1",
       "multiverseid": 554214,
       "twoFaced": false,
+      "oracleCardName": "Spearbreaker Behemoth",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Indestructible\n{1}: Target creature with power 5 or greater gains indestructible until end of turn."
     },
     {
       "name": "Whiptongue Hydra",
       "scryfallId": "57cfa420-306d-4d2c-8e83-fa9b46f2aa27",
       "multiverseid": 554216,
       "twoFaced": false,
+      "oracleCardName": "Whiptongue Hydra",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Reach\nWhen this creature enters, destroy all creatures with flying. Put a +1/+1 counter on this creature for each creature destroyed this way."
     },
     {
       "name": "Grumgully, the Generous",
       "scryfallId": "ba580628-60d1-4281-8705-dbc7823afd8d",
       "multiverseid": 554220,
       "twoFaced": false,
+      "oracleCardName": "Grumgully, the Generous",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Each other non-Human creature you control enters with an additional +1/+1 counter on it."
     },
     {
       "name": "Ulasht, the Hate Seed",
       "scryfallId": "caf6d1a3-9d07-4eb6-add3-0096422feba1",
       "multiverseid": 554225,
       "twoFaced": false,
+      "oracleCardName": "Ulasht, the Hate Seed",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "Ulasht enters with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.\n{1}, Remove a +1/+1 counter from Ulasht: Choose one —\n• Ulasht deals 1 damage to target creature.\n• Create a 1/1 green Saproling creature token."
     },
     {
       "name": "Collision of Realms",
       "scryfallId": "49618217-1bbb-498a-a6f0-f269ce7166a6",
       "multiverseid": 553916,
       "twoFaced": false,
+      "oracleCardName": "Collision of Realms",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{6}{R}",
+      "cmc": 7,
+      "oracleText": "Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order."
     },
     {
       "name": "Smoke Spirits' Aid",
       "scryfallId": "e492a245-46ba-438e-8d81-4626faa49bff",
       "multiverseid": 553919,
       "twoFaced": false,
+      "oracleCardName": "Smoke Spirits' Aid",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{R}",
+      "cmc": 1,
+      "oracleText": "For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and \"When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token.\""
     },
     {
       "name": "Chain Reaction",
       "scryfallId": "491c77ae-ccd9-4eb5-a0f0-bae85b82d50a",
       "multiverseid": 554186,
       "twoFaced": false,
+      "oracleCardName": "Chain Reaction",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
     },
     {
       "name": "Kodama's Reach",
       "scryfallId": "bf1c9d24-f5f6-43ff-85c3-034b76e1bf1b",
       "multiverseid": 554203,
       "twoFaced": false,
+      "oracleCardName": "Kodama's Reach",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Rampant Growth",
       "scryfallId": "0442b365-c970-478b-b418-ae02d83ca8e1",
       "multiverseid": 554207,
       "twoFaced": false,
+      "oracleCardName": "Rampant Growth",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Rishkar's Expertise",
       "scryfallId": "4b5882ab-d9c7-4d85-98c4-7edfb19980b0",
       "multiverseid": 554209,
       "twoFaced": false,
+      "oracleCardName": "Rishkar's Expertise",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Draw cards equal to the greatest power among creatures you control.\nYou may cast a spell with mana value 5 or less from your hand without paying its mana cost."
     },
     {
       "name": "Shamanic Revelation",
       "scryfallId": "b95f36ad-2fb0-448c-b74f-a2a104240d8d",
       "multiverseid": 554211,
       "twoFaced": false,
+      "oracleCardName": "Shamanic Revelation",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
     },
     {
       "name": "Soul's Majesty",
       "scryfallId": "9fe03ee0-50e4-4893-84ed-0d099be21d4e",
       "multiverseid": 554213,
       "twoFaced": false,
+      "oracleCardName": "Soul's Majesty",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Draw cards equal to the power of target creature you control."
     },
     {
       "name": "Vastwood Surge",
       "scryfallId": "1dcd904c-fac6-490d-a9dd-ccdf39cbe597",
       "multiverseid": 554215,
       "twoFaced": false,
+      "oracleCardName": "Vastwood Surge",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Kicker {4} (You may pay an additional {4} as you cast this spell.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, put two +1/+1 counters on each creature you control."
     },
     {
       "name": "Decimate",
       "scryfallId": "a99f8c13-c4bd-4e6c-8059-ef5e6ad30331",
       "multiverseid": 554219,
       "twoFaced": false,
+      "oracleCardName": "Decimate",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
     },
     {
       "name": "Silkguard",
       "scryfallId": "d4373a89-b571-46e2-9021-02aa4cdbb3b0",
       "multiverseid": 553926,
       "twoFaced": false,
+      "oracleCardName": "Silkguard",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Put a +1/+1 counter on each of up to X target creatures you control.\nAuras, Equipment, and modified creatures you control gain hexproof until end of turn. (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "9270e071-7a22-4f38-af2f-fb4933a5784b",
       "multiverseid": 554187,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Starstorm",
       "scryfallId": "728b356a-e2ec-4c44-bd0a-bb9a5427a1ad",
       "multiverseid": 554193,
       "twoFaced": false,
+      "oracleCardName": "Starstorm",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{R}{R}",
+      "cmc": 2,
+      "oracleText": "Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
     },
     {
       "name": "Beast Within",
       "scryfallId": "de50c5d4-6599-4894-a8d7-01d104fc97fd",
       "multiverseid": 554197,
       "twoFaced": false,
+      "oracleCardName": "Beast Within",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
     },
     {
       "name": "Hunter's Insight",
       "scryfallId": "8c7549c2-7f66-4fdc-9852-6796292c6a85",
       "multiverseid": 554202,
       "twoFaced": false,
+      "oracleCardName": "Hunter's Insight",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards."
     },
     {
       "name": "Mage Slayer",
       "scryfallId": "e3226808-493e-4df2-9446-cb7cb47aaf2c",
       "multiverseid": 554222,
       "twoFaced": false,
+      "oracleCardName": "Mage Slayer",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever equipped creature attacks, it deals damage equal to its power to the player or planeswalker it's attacking.\nEquip {3}"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "7bdf4615-7a08-40fe-9e04-cdbe10a62e06",
       "multiverseid": 554226,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Blackblade Reforged",
       "scryfallId": "da9a73af-57a2-499a-8a14-e164a6506e8b",
       "multiverseid": 554228,
       "twoFaced": false,
+      "oracleCardName": "Blackblade Reforged",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}"
     },
     {
       "name": "Bonehoard",
       "scryfallId": "57c0258f-f464-4f52-b234-ba44a76d932a",
       "multiverseid": 554229,
       "twoFaced": false,
+      "oracleCardName": "Bonehoard",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
     },
     {
       "name": "Fireshrieker",
       "scryfallId": "ab1f2ab8-1ef3-4610-a2d0-cb87b982c649",
       "multiverseid": 554233,
       "twoFaced": false,
+      "oracleCardName": "Fireshrieker",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "3917f744-b876-47ae-94ad-f72b215ff1e7",
       "multiverseid": 554243,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "ee23ba9f-3f5e-4fe4-95f8-3dd464db997b",
       "multiverseid": 554245,
       "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Sword of Vengeance",
       "scryfallId": "6f380a12-9656-479e-bd44-1b8facfcc69c",
       "multiverseid": 554246,
       "twoFaced": false,
+      "oracleCardName": "Sword of Vengeance",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}"
     },
     {
       "name": "Unquenchable Fury",
       "scryfallId": "db6b3f71-d833-4548-8d66-1d51da08d8b9",
       "multiverseid": 553920,
       "twoFaced": false,
+      "oracleCardName": "Unquenchable Fury",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature has \"Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand.\"\nWhen this Aura is put into your graveyard from the battlefield, return it to your hand."
     },
     {
       "name": "Concord with the Kami",
       "scryfallId": "c3e38dec-178b-497a-bfbd-371905690a39",
       "multiverseid": 553922,
       "twoFaced": false,
+      "oracleCardName": "Concord with the Kami",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, choose one or more —\n• Put a +1/+1 counter on target creature with a counter on it.\n• Draw a card if you control an enchanted creature.\n• Create a 1/1 colorless Spirit creature token if you control an equipped creature."
     },
     {
       "name": "One with the Kami",
       "scryfallId": "d753c296-8cef-492d-ab41-e7ddb233d46e",
       "multiverseid": 553924,
       "twoFaced": false,
+      "oracleCardName": "One with the Kami",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Flash\nEnchant creature you control\nWhenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power. (Equipment, Auras you control, and counters are modifications.)"
     },
     {
       "name": "Invigorating Hot Spring",
       "scryfallId": "59a118d1-30b8-42c0-ac42-6fba0778200a",
       "multiverseid": 548535,
       "twoFaced": false,
+      "oracleCardName": "Invigorating Hot Spring",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "This enchantment enters with four +1/+1 counters on it.\nModified creatures you control have haste. (Equipment, Auras you control, and counters are modifications.)\nRemove a +1/+1 counter from this enchantment: Put a +1/+1 counter on target creature you control. Activate only as a sorcery and only once each turn."
     },
     {
       "name": "Elemental Mastery",
       "scryfallId": "77dd1c84-0c67-41a2-aa19-ca448520ac54",
       "multiverseid": 554188,
       "twoFaced": false,
+      "oracleCardName": "Elemental Mastery",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Enchant creature\nEnchanted creature has \"{T}: Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step.\""
     },
     {
       "name": "Shifting Shadow",
       "scryfallId": "f4c34cbe-c41f-4fcb-b1b6-720b6b214fef",
       "multiverseid": 554192,
       "twoFaced": false,
+      "oracleCardName": "Shifting Shadow",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature has haste and \"At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order.\""
     },
     {
       "name": "Bear Umbra",
       "scryfallId": "5a195fb1-f2e9-4e05-8a04-c335e1afbef6",
       "multiverseid": 554196,
       "twoFaced": false,
+      "oracleCardName": "Bear Umbra",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and has \"Whenever this creature attacks, untap all lands you control.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
     },
     {
       "name": "Ordeal of Nylea",
       "scryfallId": "fdbbbe4a-976c-4eb3-b32c-eef892b7699d",
       "multiverseid": 554205,
       "twoFaced": false,
+      "oracleCardName": "Ordeal of Nylea",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice this Aura.\nWhen you sacrifice this Aura, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Snake Umbra",
       "scryfallId": "106d17d6-5ef2-4634-8dd6-790b12574042",
       "multiverseid": 554212,
       "twoFaced": false,
+      "oracleCardName": "Snake Umbra",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and has \"Whenever this creature deals damage to an opponent, you may draw a card.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
     },
     {
       "name": "Rhythm of the Wild",
       "scryfallId": "70d13ff4-e6ba-4bfe-9668-d11f7facb8d3",
       "multiverseid": 554224,
       "twoFaced": false,
+      "oracleCardName": "Rhythm of the Wild",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Creature spells you control can't be countered.\nNontoken creatures you control have riot. (They enter with your choice of a +1/+1 counter or haste.)"
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "f502721a-22f4-4c91-a85a-67628b9efbbb",
       "multiverseid": 554248,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Command Tower",
       "scryfallId": "a5efe226-a6fc-4fdb-a3d4-2b1ae0d667a8",
       "multiverseid": 554249,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "d9ed9f21-5dc4-484d-bc31-8efc81254744",
       "multiverseid": 554250,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Game Trail",
       "scryfallId": "4d0376e3-a1ae-4935-b392-2cb4ccd0d9a7",
       "multiverseid": 554251,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Gruul Turf",
       "scryfallId": "20ca3527-b3e8-4d9b-8a0b-0c7d61fc6d39",
       "multiverseid": 554252,
       "twoFaced": false,
+      "oracleCardName": "Gruul Turf",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "4f29515c-8554-404a-b3a2-3d868659b687",
       "multiverseid": 554253,
       "twoFaced": false,
+      "oracleCardName": "Mossfire Valley",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {R}{G}."
     },
     {
       "name": "Mossfire Valley",
       "scryfallId": "4f29515c-8554-404a-b3a2-3d868659b687",
       "multiverseid": 554253,
       "twoFaced": false,
+      "oracleCardName": "Mossfire Valley",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {R}{G}."
     },
     {
       "name": "Opal Palace",
       "scryfallId": "3e639915-9c9c-482f-ad9b-b8158f2971e1",
       "multiverseid": 554254,
       "twoFaced": false,
+      "oracleCardName": "Opal Palace",
       "colorIdentity": [],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
     },
     {
       "name": "Oran-Rief, the Vastwood",
       "scryfallId": "3cb8fc57-6c2b-45bf-93d3-c573e31cf158",
       "multiverseid": 554255,
       "twoFaced": false,
+      "oracleCardName": "Oran-Rief, the Vastwood",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
     },
     {
       "name": "Raging Ravine",
       "scryfallId": "4f2d9b33-cb78-4a44-81be-61452cb6fc21",
       "multiverseid": 554258,
       "twoFaced": false,
+      "oracleCardName": "Raging Ravine",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}: Until end of turn, this land becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "1f539604-8847-45c7-9934-532583c42eab",
       "multiverseid": 554261,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "NEC"
+      "set": "NEC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "2fe601b0-0398-47f0-9e4f-9f841ad79b9b",
       "multiverseid": 553466,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "4b8489c0-b01c-466e-b33b-239406d7ea69",
       "multiverseid": 553467,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "aea5c36b-c107-4daf-bedb-507b4cd64724",
       "multiverseid": 553468,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "8e17db23-a8ca-416e-b978-1eae852c6690",
       "multiverseid": 553469,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "NEO"
+      "set": "NEO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:14.034Z",
+    "retrievedDate": "2026-02-20T03:10:22.289Z",
     "sourceUrl": "UpgradesUnleashed_NEC.json",
     "deckSource": "precon",
     "createdAt": "2022-02-18T00:00:00.000Z"

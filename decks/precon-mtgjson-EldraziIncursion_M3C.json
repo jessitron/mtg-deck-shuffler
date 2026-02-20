@@ -9,6 +9,7 @@
       "scryfallId": "fdad1b0e-d3cc-4d76-ae7e-fee12558cf2c",
       "multiverseid": 668531,
       "twoFaced": false,
+      "oracleCardName": "Ulalek, Fused Atrocity",
       "colorIdentity": [
         "B",
         "G",
@@ -16,7 +17,13 @@
         "U",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{C/W}{C/U}{C/B}{C/R}{C/G}",
+      "cmc": 5,
+      "oracleText": "Devoid (This card has no color.)\nWhenever you cast an Eldrazi spell, you may pay {C}{C}. If you do, copy all spells you control, then copy all other activated and triggered abilities you control. You may choose new targets for the copies. (Mana abilities can't be copied.)"
     }
   ],
   "cards": [
@@ -25,6 +32,7 @@
       "scryfallId": "ced9db11-ba95-4b09-89b6-0b49ffb1fa82",
       "multiverseid": 665326,
       "twoFaced": false,
+      "oracleCardName": "Azlask, the Swelling Scourge",
       "colorIdentity": [
         "B",
         "G",
@@ -32,368 +40,621 @@
         "U",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Whenever Azlask or another colorless creature you control dies, you get an experience counter.\n{W}{U}{B}{R}{G}: Creatures you control get +X/+X until end of turn, where X is the number of experience counters you have. Scions and Spawns you control gain indestructible and annihilator 1 until end of turn."
     },
     {
       "name": "Ulamog's Dreadsire",
       "scryfallId": "b5821c21-8133-40f7-a28d-addf64b1e35f",
       "multiverseid": 665048,
       "twoFaced": false,
+      "oracleCardName": "Ulamog's Dreadsire",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{10}",
+      "cmc": 10,
+      "oracleText": "Vigilance\nWard—Sacrifice a permanent with mana value 1 or greater.\n{T}: Create a 10/10 colorless Eldrazi creature token."
     },
     {
       "name": "Benthic Anomaly",
       "scryfallId": "08ff764d-2c0d-4599-a22a-6a64766dad3a",
       "multiverseid": 665056,
       "twoFaced": false,
+      "oracleCardName": "Benthic Anomaly",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{U}",
+      "cmc": 7,
+      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, for each opponent, choose a creature that player controls. Create a token that's a copy of one of those creatures, except its power is equal to the total power of those creatures, its toughness is equal to the total toughness of those creatures, and it's a colorless Eldrazi creature."
     },
     {
       "name": "Eldritch Immunity",
       "scryfallId": "64a63b90-dbd6-4b66-8031-a3e230ada5b9",
       "multiverseid": 665043,
       "twoFaced": false,
+      "oracleCardName": "Eldritch Immunity",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Kindred",
+        "Instant"
+      ],
+      "manaCost": "{C}",
+      "cmc": 1,
+      "oracleText": "Target creature you control gains protection from each color until end of turn.\nOverload {4}{C} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
     },
     {
       "name": "Selective Obliteration",
       "scryfallId": "f0c21e73-8db1-4ede-bea5-1dcd4b3cef01",
       "multiverseid": 665045,
       "twoFaced": false,
+      "oracleCardName": "Selective Obliteration",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{C}{C}",
+      "cmc": 5,
+      "oracleText": "Each player chooses a color. Then exile each permanent unless it's colorless or it's only the color its controller chose."
     },
     {
       "name": "Angelic Aberration",
       "scryfallId": "c79a5bbe-7b70-4b05-a336-9b2bcb2f2b8f",
       "multiverseid": 665049,
       "twoFaced": false,
+      "oracleCardName": "Angelic Aberration",
       "colorIdentity": [
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{W}",
+      "cmc": 6,
+      "oracleText": "Devoid (This card has no color.)\nFlying, vigilance\nWhen this creature enters, sacrifice any number of creatures each with base power or toughness 1 or less. Create that many 4/4 colorless Eldrazi Angel creature tokens with flying and vigilance."
     },
     {
       "name": "Bismuth Mindrender",
       "scryfallId": "d1ee8ead-df6a-4c02-83f7-2902d97132b8",
       "multiverseid": 665061,
       "twoFaced": false,
+      "oracleCardName": "Bismuth Mindrender",
       "colorIdentity": [
         "B"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Devoid (This card has no color.)\nMenace\nWhenever this creature deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to the spell's mana value rather than paying its mana cost."
     },
     {
       "name": "Hideous Taskmaster",
       "scryfallId": "ba7191d0-d567-4814-8a92-52e96aa7660f",
       "multiverseid": 665067,
       "twoFaced": false,
+      "oracleCardName": "Hideous Taskmaster",
       "colorIdentity": [
         "R"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{R}",
+      "cmc": 7,
+      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, for each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain trample, haste, and annihilator 1 until end of turn.\nTrample, haste, annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.)"
     },
     {
       "name": "Twins of Discord",
       "scryfallId": "b3c237a5-1d2a-457a-be4e-c07483b31799",
       "multiverseid": 665047,
       "twoFaced": false,
+      "oracleCardName": "Twins of Discord",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Whenever you attack, choose odd or even. Creatures with mana value of that quality can't block this turn. (Zero is even.)\nEach other colorless creature you control has bloodthirst 2. (If an opponent was dealt damage this turn, that creature enters with two additional +1/+1 counters on it.)"
     },
     {
       "name": "Mutated Cultist",
       "scryfallId": "cc4bb871-cde9-43a9-8089-5987fa0dd4ef",
       "multiverseid": 665063,
       "twoFaced": false,
+      "oracleCardName": "Mutated Cultist",
       "colorIdentity": [
         "B"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, remove all counters from up to one target permanent or opponent. The next spell you cast this turn costs {1} less to cast for each counter removed this way.\nDeathtouch"
     },
     {
       "name": "Eldrazi Confluence",
       "scryfallId": "78ee2013-29dc-4879-9d59-1b492996d297",
       "multiverseid": 665042,
       "twoFaced": false,
+      "oracleCardName": "Eldrazi Confluence",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{C}{C}",
+      "cmc": 4,
+      "oracleText": "Choose three. You may choose the same mode more than once.\n• Target creature gets +3/-3 until end of turn.\n• Exile target nonland permanent, then return it to the battlefield tapped under its owner's control.\n• Create a 1/1 colorless Eldrazi Scion creature token with \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Spawnbed Protector",
       "scryfallId": "bf2d8dab-71f3-4da7-a4b1-ed3309a4c756",
       "multiverseid": 665046,
       "twoFaced": false,
+      "oracleCardName": "Spawnbed Protector",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "At the beginning of your end step, return up to one target Eldrazi creature card from your graveyard to your hand. Create two 1/1 colorless Eldrazi Scion creature tokens with \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Chittering Dispatcher",
       "scryfallId": "ec5fe7d0-b444-4488-b058-f3916e404cac",
       "multiverseid": 665073,
       "twoFaced": false,
+      "oracleCardName": "Chittering Dispatcher",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\nMyriad\nWhen this creature leaves the battlefield, create a 0/1 colorless Eldrazi Spawn creature token with \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Inversion Behemoth",
       "scryfallId": "77a5ca5d-a377-4ee4-8e72-5a6b60c67521",
       "multiverseid": 665044,
       "twoFaced": false,
+      "oracleCardName": "Inversion Behemoth",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{C}{C}",
+      "cmc": 4,
+      "oracleText": "At the beginning of combat on your turn, switch the power and toughness of each of any number of target creatures until end of turn."
     },
     {
       "name": "Ugin, the Ineffable",
       "scryfallId": "fba9e014-8abe-4662-8a47-998b5eaa7a6b",
       "multiverseid": 665574,
       "twoFaced": false,
+      "oracleCardName": "Ugin, the Ineffable",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Colorless spells you cast cost {2} less to cast.\n[+1]: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.\n[−3]: Destroy target permanent that's one or more colors."
     },
     {
       "name": "Eldrazi Conscription",
       "scryfallId": "29609c18-40e7-4e50-ae8a-cfa6f49f1511",
       "multiverseid": 665569,
       "twoFaced": false,
+      "oracleCardName": "Eldrazi Conscription",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Kindred",
+        "Enchantment"
+      ],
+      "manaCost": "{8}",
+      "cmc": 8,
+      "oracleText": "Enchant creature\nEnchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents of their choice.)"
     },
     {
       "name": "Cascading Cataracts",
       "scryfallId": "33e6761c-cb01-4eb6-95fa-ac452684f3e7",
       "multiverseid": 665740,
       "twoFaced": false,
+      "oracleCardName": "Cascading Cataracts",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Indestructible\n{T}: Add {C}.\n{5}, {T}: Add five mana in any combination of colors."
     },
     {
       "name": "Eldrazi Monument",
       "scryfallId": "f8ecdf65-c6e6-4dac-899b-55cd80242629",
       "multiverseid": 665704,
       "twoFaced": false,
+      "oracleCardName": "Eldrazi Monument",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Creatures you control get +1/+1 and have flying and indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice this artifact."
     },
     {
       "name": "Sire of Stagnation",
       "scryfallId": "e62cddab-34ef-46c6-b700-9b59751b9a2c",
       "multiverseid": 665686,
       "twoFaced": false,
+      "oracleCardName": "Sire of Stagnation",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{B}",
+      "cmc": 6,
+      "oracleText": "Devoid (This card has no color.)\nWhenever a land an opponent controls enters, that player exiles the top two cards of their library and you draw two cards."
     },
     {
       "name": "Shrine of the Forsaken Gods",
       "scryfallId": "dde7ad4e-a38b-4981-8c9f-78a9e9ea2c36",
       "multiverseid": 665790,
       "twoFaced": false,
+      "oracleCardName": "Shrine of the Forsaken Gods",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands."
     },
     {
       "name": "Ugin's Insight",
       "scryfallId": "cbe80abe-cbc7-499b-92bb-accbf59bb138",
       "multiverseid": 665610,
       "twoFaced": false,
+      "oracleCardName": "Ugin's Insight",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Scry X, where X is the greatest mana value among permanents you control, then draw three cards."
     },
     {
       "name": "Drowner of Hope",
       "scryfallId": "5091396e-a3cb-44a2-ade3-4f3a3bbd1942",
       "multiverseid": 665596,
       "twoFaced": false,
+      "oracleCardName": "Drowner of Hope",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Devoid (This card has no color.)\nWhen this creature enters, create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this token: Add {C}.\"\nSacrifice an Eldrazi Scion: Tap target creature."
     },
     {
       "name": "Return of the Wildspeaker",
       "scryfallId": "3fd677c8-5989-4b33-9746-539a5dcb6f3a",
       "multiverseid": 665656,
       "twoFaced": false,
+      "oracleCardName": "Return of the Wildspeaker",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
     },
     {
       "name": "Tendo Ice Bridge",
       "scryfallId": "929961bf-c866-4ed8-a552-b261ecd5f2fb",
       "multiverseid": 665807,
       "twoFaced": false,
+      "oracleCardName": "Tendo Ice Bridge",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters with a charge counter on it.\n{T}: Add {C}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
     },
     {
       "name": "Battlefield Forge",
       "scryfallId": "8ba7cd01-5fa4-40e2-a6d3-fe5e876f69b0",
       "multiverseid": 665735,
       "twoFaced": false,
+      "oracleCardName": "Battlefield Forge",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
     },
     {
       "name": "Llanowar Wastes",
       "scryfallId": "e34a7793-a9b5-4892-b6e2-e4b97c3acd80",
       "multiverseid": 665768,
       "twoFaced": false,
+      "oracleCardName": "Llanowar Wastes",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
     },
     {
       "name": "Brushland",
       "scryfallId": "5541b572-28c0-4c71-b382-da70721dc321",
       "multiverseid": 665738,
       "twoFaced": false,
+      "oracleCardName": "Brushland",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
     },
     {
       "name": "Underground River",
       "scryfallId": "5045f269-d931-4786-b7aa-4e0b1db1cd26",
       "multiverseid": 665814,
       "twoFaced": false,
+      "oracleCardName": "Underground River",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
     },
     {
       "name": "Oblivion Sower",
       "scryfallId": "eb179ae3-28d9-4741-a055-e7e767d8a408",
       "multiverseid": 665572,
       "twoFaced": false,
+      "oracleCardName": "Oblivion Sower",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control."
     },
     {
       "name": "Adarkar Wastes",
       "scryfallId": "6be6ebf1-4e4c-4c6f-ace1-3fed55fe5c69",
       "multiverseid": 665730,
       "twoFaced": false,
+      "oracleCardName": "Adarkar Wastes",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
     },
     {
       "name": "Karplusan Forest",
       "scryfallId": "78f25169-2d3f-47b3-ad5d-87b04910783a",
       "multiverseid": 665765,
       "twoFaced": false,
+      "oracleCardName": "Karplusan Forest",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
     },
     {
       "name": "Yavimaya Coast",
       "scryfallId": "0378af42-0e35-4ee0-96ed-d588a71c0bea",
       "multiverseid": 665824,
       "twoFaced": false,
+      "oracleCardName": "Yavimaya Coast",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
     },
     {
       "name": "Sulfurous Springs",
       "scryfallId": "38c0d259-106c-4281-b96d-2747e00e521d",
       "multiverseid": 665795,
       "twoFaced": false,
+      "oracleCardName": "Sulfurous Springs",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "94b2b5b9-1227-4b4b-a229-c9804550f9b6",
       "multiverseid": 665742,
       "twoFaced": false,
+      "oracleCardName": "Caves of Koilos",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
     },
     {
       "name": "Shivan Reef",
       "scryfallId": "6fc5d0a1-8c29-4961-8567-d1ccc3669a32",
       "multiverseid": 665789,
       "twoFaced": false,
+      "oracleCardName": "Shivan Reef",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
     },
     {
       "name": "Imprisoned in the Moon",
       "scryfallId": "925b566c-3774-49bc-b788-59b322163c8c",
       "multiverseid": 665602,
       "twoFaced": false,
+      "oracleCardName": "Imprisoned in the Moon",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Enchant creature, land, or planeswalker\nEnchanted permanent is a colorless land with \"{T}: Add {C}\" and loses all other card types and abilities."
     },
     {
       "name": "Temple of Malady",
       "scryfallId": "7e299990-4128-4a9c-9f8c-08838f248094",
       "multiverseid": 665802,
       "twoFaced": false,
+      "oracleCardName": "Temple of Malady",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "627eb62a-399d-4f2b-9ea1-73ce0396ba1c",
       "multiverseid": 665805,
       "twoFaced": false,
+      "oracleCardName": "Temple of Silence",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
     },
     {
       "name": "Morophon, the Boundless",
       "scryfallId": "33c2e889-d2e1-4197-ba97-81a2b8512746",
       "multiverseid": 665571,
       "twoFaced": false,
+      "oracleCardName": "Morophon, the Boundless",
       "colorIdentity": [
         "B",
         "G",
@@ -401,559 +662,965 @@
         "U",
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Changeling (This card is every creature type.)\nAs Morophon enters, choose a creature type.\nSpells of the chosen type you cast cost {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.\nOther creatures you control of the chosen type get +1/+1."
     },
     {
       "name": "Kozilek's Return",
       "scryfallId": "eed3be26-6c05-48cf-889a-9cbbd4977283",
       "multiverseid": 665628,
       "twoFaced": false,
+      "oracleCardName": "Kozilek's Return",
       "colorIdentity": [
         "R"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\nKozilek's Return deals 2 damage to each creature.\nWhenever you cast an Eldrazi creature spell with mana value 7 or greater, you may exile this card from your graveyard. If you do, this card deals 5 damage to each creature."
     },
     {
       "name": "World Breaker",
       "scryfallId": "ca111e56-79a0-43be-acd1-d1de110d6509",
       "multiverseid": 665667,
       "twoFaced": false,
+      "oracleCardName": "World Breaker",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{G}",
+      "cmc": 7,
+      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, exile target artifact, enchantment, or land.\nReach\n{2}{C}, Sacrifice a land: Return this card from your graveyard to your hand. ({C} represents colorless mana.)"
     },
     {
       "name": "Ruins of Oran-Rief",
       "scryfallId": "dd563d94-787d-4098-8b38-b462640c4216",
       "multiverseid": 665784,
       "twoFaced": false,
+      "oracleCardName": "Ruins of Oran-Rief",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}. ({C} represents colorless mana.)\n{T}: Put a +1/+1 counter on target colorless creature that entered this turn."
     },
     {
       "name": "Sifter of Skulls",
       "scryfallId": "f824d5b6-259b-467b-93b5-e93db8b15359",
       "multiverseid": 665617,
       "twoFaced": false,
+      "oracleCardName": "Sifter of Skulls",
       "colorIdentity": [
         "B"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Devoid (This card has no color.)\nWhenever another nontoken creature you control dies, create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\" ({C} represents colorless mana.)"
     },
     {
       "name": "Endbringer",
       "scryfallId": "d9d7309a-d1ec-4b29-bb96-2daaa6be9eb8",
       "multiverseid": 665570,
       "twoFaced": false,
+      "oracleCardName": "Endbringer",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{C}",
+      "cmc": 6,
+      "oracleText": "Untap this creature during each other player's untap step.\n{T}: This creature deals 1 damage to any target.\n{C}, {T}: Target creature can't attack or block this turn.\n{C}{C}, {T}: Draw a card."
     },
     {
       "name": "Corrupted Crossroads",
       "scryfallId": "03b91bd1-de0f-4e3e-b467-174beba8ffeb",
       "multiverseid": 665746,
       "twoFaced": false,
+      "oracleCardName": "Corrupted Crossroads",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid."
     },
     {
       "name": "Deepfathom Skulker",
       "scryfallId": "5f26c11a-b84b-4670-b135-359b93afb83d",
       "multiverseid": 665594,
       "twoFaced": false,
+      "oracleCardName": "Deepfathom Skulker",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Devoid (This card has no color.)\nWhenever a creature you control deals combat damage to a player, you may draw a card.\n{3}{C}: Target creature can't be blocked this turn. ({C} represents colorless mana.)"
     },
     {
       "name": "Vile Redeemer",
       "scryfallId": "7a08e28c-dee2-4ab8-bc72-1498a7dd3a40",
       "multiverseid": 665665,
       "twoFaced": false,
+      "oracleCardName": "Vile Redeemer",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\nFlash\nWhen you cast this spell, you may pay {C}. If you do, create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. Those tokens have \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Eldrazi Displacer",
       "scryfallId": "0d87a0d9-13d5-46f2-b32a-acc080d8f480",
       "multiverseid": 665583,
       "twoFaced": false,
+      "oracleCardName": "Eldrazi Displacer",
       "colorIdentity": [
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\n{2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control. ({C} represents colorless mana.)"
     },
     {
       "name": "Mystic Forge",
       "scryfallId": "375e6985-e212-4bd0-b06c-0ca7dc1f68e6",
       "multiverseid": 665716,
       "twoFaced": false,
+      "oracleCardName": "Mystic Forge",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library."
     },
     {
       "name": "All Is Dust",
       "scryfallId": "600518f5-4598-436d-9513-3d32adfc93f9",
       "multiverseid": 665566,
       "twoFaced": false,
+      "oracleCardName": "All Is Dust",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Kindred",
+        "Sorcery"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Each player sacrifices all permanents they control that are one or more colors."
     },
     {
       "name": "Rishkar's Expertise",
       "scryfallId": "a28ab6cc-d065-495c-a76c-7996a0e4d14d",
       "multiverseid": 666602,
       "twoFaced": false,
+      "oracleCardName": "Rishkar's Expertise",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Draw cards equal to the greatest power among creatures you control.\nYou may cast a spell with mana value 5 or less from your hand without paying its mana cost."
     },
     {
       "name": "Awakening Zone",
       "scryfallId": "e8f1affa-4c7e-49a9-916f-6395da259430",
       "multiverseid": 665636,
       "twoFaced": false,
+      "oracleCardName": "Awakening Zone",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Eldrazi Temple",
       "scryfallId": "4f0ee055-1b1e-4ffa-9eb5-9ce7e8965f71",
       "multiverseid": 665753,
       "twoFaced": false,
+      "oracleCardName": "Eldrazi Temple",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi."
     },
     {
       "name": "Elder Deep-Fiend",
       "scryfallId": "e7b913c5-ea9b-4774-87b7-1656c072d15a",
       "multiverseid": 665568,
       "twoFaced": false,
+      "oracleCardName": "Elder Deep-Fiend",
       "colorIdentity": [
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{8}",
+      "cmc": 8,
+      "oracleText": "Flash\nEmerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, tap up to four target permanents."
     },
     {
       "name": "Bonders' Enclave",
       "scryfallId": "290a78a2-feb0-4ea7-b681-49a4feb12b3b",
       "multiverseid": 665737,
       "twoFaced": false,
+      "oracleCardName": "Bonders' Enclave",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "89f51c70-fcc8-4d97-94bb-5a75740523ad",
       "multiverseid": 665755,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Forsaken Monument",
       "scryfallId": "516d5db4-92c2-4bf1-b3aa-f10ac3490bba",
       "multiverseid": 665707,
       "twoFaced": false,
+      "oracleCardName": "Forsaken Monument",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Colorless creatures you control get +2/+2.\nWhenever you tap a permanent for {C}, add an additional {C}.\nWhenever you cast a colorless spell, you gain 2 life."
     },
     {
       "name": "Snapping Voidcraw",
       "scryfallId": "9185371c-2dde-48ad-ab27-08be04b3c522",
       "multiverseid": 662356,
       "twoFaced": false,
+      "oracleCardName": "Snapping Voidcraw",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Devoid (This card has no color.)\n{T}: Add {C}{C}.\n{3}{C}, {T}: Draw a card."
     },
     {
       "name": "Herald's Horn",
       "scryfallId": "2cfafee3-c060-44bd-be6e-8d36501d72d3",
       "multiverseid": 665710,
       "twoFaced": false,
+      "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
     },
     {
       "name": "Everflowing Chalice",
       "scryfallId": "5261ff88-270b-4ab4-b5c0-e028f2a55ece",
       "multiverseid": 665705,
       "twoFaced": false,
+      "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{0}",
+      "cmc": 0,
+      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
     },
     {
       "name": "Glaring Fleshraker",
       "scryfallId": "80c2a3c7-1486-4ff9-88ec-79ec67a437f8",
       "multiverseid": 662159,
       "twoFaced": false,
+      "oracleCardName": "Glaring Fleshraker",
       "colorIdentity": [],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{C}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with \"Sacrifice this token: Add {C}.\"\nWhenever another colorless creature you control enters, this creature deals 1 damage to each opponent."
     },
     {
       "name": "Wastescape Battlemage",
       "scryfallId": "6bc119b8-429c-4ab6-adba-b65b03810e98",
       "multiverseid": 662169,
       "twoFaced": false,
+      "oracleCardName": "Wastescape Battlemage",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{C}",
+      "cmc": 2,
+      "oracleText": "Kicker {G} and/or {1}{U}\nWhen you cast this spell, if it was kicked with its {G} kicker, exile target artifact or enchantment an opponent controls.\nWhen you cast this spell, if it was kicked with its {1}{U} kicker, return target creature an opponent controls to its owner's hand."
     },
     {
       "name": "Crib Swap",
       "scryfallId": "31704e73-5168-4880-be9b-ae32b2197d35",
       "multiverseid": 665582,
       "twoFaced": false,
+      "oracleCardName": "Crib Swap",
       "colorIdentity": [
         "W"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Kindred",
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling."
     },
     {
       "name": "Titans' Vanguard",
       "scryfallId": "fb3ea14e-44ac-4f69-bfea-cb6bf1bfbd74",
       "multiverseid": 662358,
       "twoFaced": false,
+      "oracleCardName": "Titans' Vanguard",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{G}",
+      "cmc": 5,
+      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell and whenever this creature attacks, put a +1/+1 counter on each colorless creature you control.\nTrample"
     },
     {
       "name": "Talisman of Resilience",
       "scryfallId": "e77335bc-ba8c-4d44-9f7e-57700132ca68",
       "multiverseid": 665728,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Resilience",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This artifact deals 1 damage to you."
     },
     {
       "name": "Hedron Archive",
       "scryfallId": "d946ad52-b09b-4ce5-800f-8415550c1936",
       "multiverseid": 665709,
       "twoFaced": false,
+      "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
     },
     {
       "name": "Spawning Bed",
       "scryfallId": "c256d8c5-a8e7-4b9a-a330-899301db7f52",
       "multiverseid": 665794,
       "twoFaced": false,
+      "oracleCardName": "Spawning Bed",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{6}, {T}, Sacrifice this land: Create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Ulamog's Nullifier",
       "scryfallId": "e991c9ad-de2d-439b-bc4c-6da9da756130",
       "multiverseid": 665689,
       "twoFaced": false,
+      "oracleCardName": "Ulamog's Nullifier",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "Devoid (This card has no color.)\nFlash\nFlying\nWhen this creature enters, you may put two cards your opponents own from exile into their owners' graveyards. If you do, counter target spell."
     },
     {
       "name": "Twisted Landscape",
       "scryfallId": "d0e3e7b3-7ba9-47a2-b46c-a40bffb445e2",
       "multiverseid": 662384,
       "twoFaced": false,
+      "oracleCardName": "Twisted Landscape",
       "colorIdentity": [
         "B",
         "G",
         "R"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.\nCycling {B}{R}{G} ({B}{R}{G}, Discard this card: Draw a card.)"
     },
     {
       "name": "Tranquil Landscape",
       "scryfallId": "113f48b9-a972-4e2c-af95-05ab078e01f2",
       "multiverseid": 662383,
       "twoFaced": false,
+      "oracleCardName": "Tranquil Landscape",
       "colorIdentity": [
         "G",
         "U",
         "W"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle.\nCycling {G}{W}{U} ({G}{W}{U}, Discard this card: Draw a card.)"
     },
     {
       "name": "Tectonic Edge",
       "scryfallId": "02174040-f292-468b-9aa6-4bd468b38cf9",
       "multiverseid": 665798,
       "twoFaced": false,
+      "oracleCardName": "Tectonic Edge",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Destroy target nonbasic land. Activate only if an opponent controls four or more lands."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "43631610-5fad-4b73-a57c-26bf38eff309",
       "multiverseid": 665782,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "19911e6e-7c35-4281-b31c-266382f052cc",
       "multiverseid": 665719,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Artisan of Kozilek",
       "scryfallId": "c632f5a4-7f5f-4d77-9364-58ea03dfdcad",
       "multiverseid": 665567,
       "twoFaced": false,
+      "oracleCardName": "Artisan of Kozilek",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{9}",
+      "cmc": 9,
+      "oracleText": "When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"
     },
     {
       "name": "Opal Palace",
       "scryfallId": "76219ec4-65dc-4137-9b3b-070e02524397",
       "multiverseid": 665775,
       "twoFaced": false,
+      "oracleCardName": "Opal Palace",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
     },
     {
       "name": "Dreamstone Hedron",
       "scryfallId": "25c5e6f8-eec6-4a90-b7c6-36f882bab64a",
       "multiverseid": 665703,
       "twoFaced": false,
+      "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "156a1ca1-e4b1-4e0c-a786-fd80fe189896",
       "multiverseid": 665697,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Tomb of the Spirit Dragon",
       "scryfallId": "c5c2da3e-5e82-4236-b866-93bec88d86b0",
       "multiverseid": 665811,
       "twoFaced": false,
+      "oracleCardName": "Tomb of the Spirit Dragon",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}: You gain 1 life for each colorless creature you control."
     },
     {
       "name": "Secluded Courtyard",
       "scryfallId": "ebb1e934-b013-47bf-984b-7ac89de6811b",
       "multiverseid": 665786,
       "twoFaced": false,
+      "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
     },
     {
       "name": "Idol of Oblivion",
       "scryfallId": "1c602e17-7eee-45f5-82d9-406cb4498b18",
       "multiverseid": 665711,
       "twoFaced": false,
+      "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
     },
     {
       "name": "Wastes",
       "scryfallId": "475be6db-6541-412b-a07e-5357b25a499f",
       "multiverseid": 665822,
       "twoFaced": false,
+      "oracleCardName": "Wastes",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}."
     },
     {
       "name": "Talisman of Curiosity",
       "scryfallId": "00413cf3-bc14-4881-8feb-829f11af0fdd",
       "multiverseid": 665723,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Curiosity",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Impulse",
       "scryfallId": "f2e47cb9-39c2-4419-b90f-0cd3fbb8d4b2",
       "multiverseid": 665725,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Impulse",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This artifact deals 1 damage to you."
     },
     {
       "name": "Warping Wail",
       "scryfallId": "5e3f50c4-2443-4e7a-9d3a-b360037fc94d",
       "multiverseid": 665576,
       "twoFaced": false,
+      "oracleCardName": "Warping Wail",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{C}",
+      "cmc": 2,
+      "oracleText": "({C} represents colorless mana.)\nChoose one —\n• Exile target creature with power or toughness 1 or less.\n• Counter target sorcery spell.\n• Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Talisman of Dominance",
       "scryfallId": "58ebb5f3-5491-4f9c-84d5-f98d9ebece38",
       "multiverseid": 665724,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Command Tower",
       "scryfallId": "27e36832-09ca-4070-8511-94580014c3ed",
       "multiverseid": 665745,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "8720542c-965e-4a98-9de8-7e97ac20966f",
       "multiverseid": 665732,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Ancient Stirrings",
       "scryfallId": "c381f0dd-b009-4405-93f4-75a90bacbfcd",
       "multiverseid": 665633,
       "twoFaced": false,
+      "oracleCardName": "Ancient Stirrings",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. Then put the rest on the bottom of your library in any order."
     },
     {
       "name": "Ulamog's Crusher",
       "scryfallId": "ac896541-b271-4bbb-a45c-753869361df6",
       "multiverseid": 665575,
       "twoFaced": false,
+      "oracleCardName": "Ulamog's Crusher",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{8}",
+      "cmc": 8,
+      "oracleText": "Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)\nThis creature attacks each combat if able."
     },
     {
       "name": "Garruk's Uprising",
       "scryfallId": "b65810e6-e163-46a9-b2c0-941c53e5255a",
       "multiverseid": 665643,
       "twoFaced": false,
+      "oracleCardName": "Garruk's Uprising",
       "colorIdentity": [
         "G"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
     },
     {
       "name": "Suffer the Past",
       "scryfallId": "e6555906-8844-4a8b-8b40-3e5af4a6ef41",
       "multiverseid": 665619,
       "twoFaced": false,
+      "oracleCardName": "Suffer the Past",
       "colorIdentity": [
         "B"
       ],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{B}",
+      "cmc": 1,
+      "oracleText": "Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life."
     },
     {
       "name": "Skittering Invasion",
       "scryfallId": "0bf49859-c1ef-43ca-aa0a-6f4116825b7d",
       "multiverseid": 665573,
       "twoFaced": false,
+      "oracleCardName": "Skittering Invasion",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Kindred",
+        "Sorcery"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Create five 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "06869588-eb99-43b4-9521-948ca9f27c3e",
       "multiverseid": 665777,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Unclaimed Territory",
       "scryfallId": "951762f1-716c-451c-af0d-c1f6de231a72",
       "multiverseid": 665813,
       "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
-      "set": "M3C"
+      "set": "M3C",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
     },
     {
       "name": "Plains",
       "scryfallId": "e0281fba-d771-4431-931f-920db2f14c47",
       "multiverseid": 660965,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Island",
       "scryfallId": "64daf0ac-678b-4683-9351-a6daf9c9f849",
       "multiverseid": 660967,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f5e672fc-673b-4476-b9cc-a395dc60b471",
       "multiverseid": 660969,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "186e36d5-3f1d-4423-a8db-f4c38898fa30",
       "multiverseid": 660971,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "7ac34881-de32-42c7-af60-f992638e1da2",
       "multiverseid": 660973,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "MH3"
+      "set": "MH3",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.629Z",
+    "retrievedDate": "2026-02-20T03:10:20.660Z",
     "sourceUrl": "EldraziIncursion_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

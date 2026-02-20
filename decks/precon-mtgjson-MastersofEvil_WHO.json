@@ -9,12 +9,20 @@
       "scryfallId": "59c5bd2b-cf68-4e5e-819d-53917a6c5275",
       "multiverseid": 634404,
       "twoFaced": false,
+      "oracleCardName": "Davros, Dalek Creator",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Menace\nAt the beginning of your end step, create a 3/3 black Dalek artifact creature token with menace if an opponent lost 3 or more life this turn. Then each opponent who lost 3 or more life this turn faces a villainous choice — You draw a card, or that player discards a card."
     }
   ],
   "cards": [
@@ -23,995 +31,1664 @@
       "scryfallId": "2dfae7d1-c09b-47e0-92d8-49b21402207d",
       "multiverseid": 634423,
       "twoFaced": false,
+      "oracleCardName": "Missy",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}{R}",
+      "cmc": 6,
+      "oracleText": "Whenever another nonartifact creature dies, return it to the battlefield under your control face down and tapped. It's a 2/2 Cyberman artifact creature.\nAt the beginning of your end step, each opponent faces a villainous choice — Each artifact creature you control deals 1 damage to that opponent, or you draw a card and chaos ensues."
     },
     {
       "name": "Auton Soldier",
       "scryfallId": "4cc35b82-a233-4460-968e-d90980fb2074",
       "multiverseid": 634731,
       "twoFaced": false,
+      "oracleCardName": "Auton Soldier",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "You may have this creature enter as a copy of any creature on the battlefield, except it isn't legendary, is an artifact in addition to its other types, and has myriad. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
     },
     {
       "name": "The Flood of Mars",
       "scryfallId": "8c3474c4-9466-46fc-8327-50950d75e79f",
       "multiverseid": 634740,
       "twoFaced": false,
+      "oracleCardName": "The Flood of Mars",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWater Always Wins — Whenever this creature attacks, put a flood counter on another target creature or land. If it's a creature, it becomes a copy of this creature. If it's a land, it becomes an Island in addition to its other types."
     },
     {
       "name": "Cyber Conversion",
       "scryfallId": "e4ce5aa7-70cb-4ab2-9a25-4363aa2b370f",
       "multiverseid": 634733,
       "twoFaced": false,
+      "oracleCardName": "Cyber Conversion",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Turn target creature face down. It's a 2/2 Cyberman artifact creature."
     },
     {
       "name": "Hunted by The Family",
       "scryfallId": "04b0a2a9-ba95-4330-a8ab-9cb530eb4257",
       "multiverseid": 634741,
       "twoFaced": false,
+      "oracleCardName": "Hunted by The Family",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{U}{U}",
+      "cmc": 7,
+      "oracleText": "Choose up to four target creatures you don't control. For each of them, that creature's controller faces a villainous choice — That creature becomes a 1/1 white Human creature and loses all abilities, or you create a token that's a copy of it."
     },
     {
       "name": "Dalek Drone",
       "scryfallId": "ba77763c-b50c-4787-b352-68af16e4c741",
       "multiverseid": 634759,
       "twoFaced": false,
+      "oracleCardName": "Dalek Drone",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, menace\nExterminate! — When this creature enters, destroy target creature an opponent controls. That player loses 3 life."
     },
     {
       "name": "Vashta Nerada",
       "scryfallId": "8bb2765f-4016-4e41-9db4-5ad463faceab",
       "multiverseid": 634768,
       "twoFaced": false,
+      "oracleCardName": "Vashta Nerada",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Indestructible\nShadow (This creature can block or be blocked by only creatures with shadow.)\nMorbid — At the beginning of each end step, if a creature died this turn, put a +1/+1 counter on this creature."
     },
     {
       "name": "Time Reaper",
       "scryfallId": "da05bca9-a756-4492-b085-221daa384a93",
       "multiverseid": 634766,
       "twoFaced": false,
+      "oracleCardName": "Time Reaper",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, haste\nConsume Anomaly — Whenever this creature deals combat damage to a player, put target face-up card they own in exile on the bottom of their library. If you do, you gain 3 life."
     },
     {
       "name": "Doomsday Confluence",
       "scryfallId": "a4e86622-6f30-41b2-87d0-d345110e2387",
       "multiverseid": 634762,
       "twoFaced": false,
+      "oracleCardName": "Doomsday Confluence",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{X}{B}",
+      "cmc": 1,
+      "oracleText": "Choose X. You may choose the same mode more than once.\n• Each player sacrifices a nonartifact creature of their choice.\n• Create a 3/3 black Dalek artifact creature token with menace.\n• Each opponent discards a card."
     },
     {
       "name": "The Toymaker's Trap",
       "scryfallId": "381de078-6eac-462c-b6d9-095779279d42",
       "multiverseid": 634767,
       "twoFaced": false,
+      "oracleCardName": "The Toymaker's Trap",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, secretly choose a number between 1 and 5 that hasn't been chosen. If you do, an opponent guesses which number you chose, then you reveal the number you chose. If they guessed wrong, they lose life equal to the number they guessed and you draw a card. If they guessed right, sacrifice this enchantment."
     },
     {
       "name": "Vislor Turlough",
       "scryfallId": "f25ec946-036b-480a-bab6-c4102e5c31db",
       "multiverseid": 634769,
       "twoFaced": false,
+      "oracleCardName": "Vislor Turlough",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Deal with the Black Guardian — When Vislor Turlough enters, you may have an opponent gain control of it. If you do, it's goaded for as long as they control it.\nAt the beginning of your end step, draw a card, then you lose life equal to the number of cards in your hand.\nDoctor's companion (You can have two commanders if the other is the Doctor.)"
     },
     {
       "name": "Genesis of the Daleks",
       "scryfallId": "6ce10eb6-9718-4739-a796-da33d823a463",
       "multiverseid": 634764,
       "twoFaced": false,
+      "oracleCardName": "Genesis of the Daleks",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Create a 3/3 black Dalek artifact creature token with menace for each lore counter on Genesis of the Daleks.\nIV — Target opponent faces a villainous choice — Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn, or destroy all non-Dalek creatures."
     },
     {
       "name": "This Is How It Ends",
       "scryfallId": "250f6265-c0c8-4f51-bea8-408caf0a58d8",
       "multiverseid": 634765,
       "twoFaced": false,
+      "oracleCardName": "This Is How It Ends",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Target creature's owner shuffles it into their library, then faces a villainous choice — They lose 5 life, or they shuffle another creature they own into their library."
     },
     {
       "name": "Death in Heaven",
       "scryfallId": "96c55c73-eed0-433c-b1a4-c2edae06a77f",
       "multiverseid": 634761,
       "twoFaced": false,
+      "oracleCardName": "Death in Heaven",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Target player mills two cards, then exiles their graveyard.\nIII — Put all creature cards exiled with this enchantment onto the battlefield face down under your control. They're 2/2 Cyberman artifact creatures."
     },
     {
       "name": "Delete",
       "scryfallId": "875c7337-78af-4e13-89e5-3255ba2d4053",
       "multiverseid": 634776,
       "twoFaced": false,
+      "oracleCardName": "Delete",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{R}{R}",
+      "cmc": 2,
+      "oracleText": "Delete deals X damage to each nonartifact creature and each player."
     },
     {
       "name": "Ensnared by the Mara",
       "scryfallId": "11454c82-3f1d-4456-8857-0dcb01d34298",
       "multiverseid": 634779,
       "twoFaced": false,
+      "oracleCardName": "Ensnared by the Mara",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Each opponent faces a villainous choice — They exile cards from the top of their library until they exile a nonland card, then you may cast that card without paying its mana cost, or that player exiles the top four cards of their library and Ensnared by the Mara deals damage equal to the total mana value of those exiled cards to that player."
     },
     {
       "name": "Day of the Moon",
       "scryfallId": "adc53534-f362-4871-a594-9855a4923cd0",
       "multiverseid": 634774,
       "twoFaced": false,
+      "oracleCardName": "Day of the Moon",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II, III — Choose a creature card name, then goad all creatures with a name chosen for this enchantment. (Until your next turn, they attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "The Master, Multiplied",
       "scryfallId": "7f734ca0-91bc-4496-9bd7-2d09415e850f",
       "multiverseid": 634841,
       "twoFaced": false,
+      "oracleCardName": "The Master, Multiplied",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{R}",
+      "cmc": 6,
+      "oracleText": "Myriad\nThe \"legend rule\" doesn't apply to creature tokens you control.\nTriggered abilities you control can't cause you to sacrifice or exile creature tokens you control."
     },
     {
       "name": "The Master, Mesmerist",
       "scryfallId": "772306d4-63d1-4d90-8c1b-4e4d6edb9aab",
       "multiverseid": 634840,
       "twoFaced": false,
+      "oracleCardName": "The Master, Mesmerist",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "{T}: Target creature an opponent controls with power less than or equal to The Master's power gains skulk until end of turn. Goad it. (A creature with skulk can't be blocked by creatures with greater power.)\nWhenever a creature with skulk deals combat damage to one of your opponents, put a +1/+1 counter on The Master and draw a card."
     },
     {
       "name": "Rassilon, the War President",
       "scryfallId": "564120cb-dbe5-4a28-947c-d79ad3123152",
       "multiverseid": 634845,
       "twoFaced": false,
+      "oracleCardName": "Rassilon, the War President",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your upkeep, you lose 2 life and exile the top card of your library. You may play that card for as long as it remains exiled.\nEach noncreature spell you cast from exile has conspire. (As you cast that spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)"
     },
     {
       "name": "The Master, Gallifrey's End",
       "scryfallId": "7efb5dd0-abc4-4741-9d90-d8d93b03cf21",
       "multiverseid": 634839,
       "twoFaced": false,
+      "oracleCardName": "The Master, Gallifrey's End",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Make Them Pay — Whenever a nontoken artifact creature you control dies, you may exile it. If you do, choose an opponent with the most life among your opponents. That player faces a villainous choice — They lose 4 life, or you create a token that's a copy of that card."
     },
     {
       "name": "The Valeyard",
       "scryfallId": "d63218a4-afaf-4ad8-9ca4-4f9af87877b9",
       "multiverseid": 634860,
       "twoFaced": false,
+      "oracleCardName": "The Valeyard",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}{R}",
+      "cmc": 5,
+      "oracleText": "If an opponent would face a villainous choice, they face that choice an additional time. (They can make the same or different choices.)\nWhile voting, you may vote an additional time."
     },
     {
       "name": "Weeping Angel",
       "scryfallId": "e0fd7b66-28f1-407b-bd60-6bcc577288cb",
       "multiverseid": 634863,
       "twoFaced": false,
+      "oracleCardName": "Weeping Angel",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Flash\nFirst strike, vigilance\nWhenever an opponent casts a creature spell, this creature isn't a creature until end of turn.\nIf this creature would deal combat damage to a creature, prevent that damage and that creature's owner shuffles it into their library."
     },
     {
       "name": "The Beast, Deathless Prince",
       "scryfallId": "6218badd-d352-4e6d-9c84-f1e3f2f84695",
       "multiverseid": 634809,
       "twoFaced": false,
+      "oracleCardName": "The Beast, Deathless Prince",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{R}",
+      "cmc": 4,
+      "oracleText": "When you cast this spell, gain control of target creature until end of turn. Untap it. It gains menace and haste until end of turn.\nThe Beast enters tapped with six stun counters on it. (If it would become untapped, remove a stun counter from it instead.)\nWhenever a creature deals combat damage to its owner, untap The Beast and draw a card."
     },
     {
       "name": "The Rani",
       "scryfallId": "01b44c52-b3a3-4954-adcc-53b79921ea24",
       "multiverseid": 634844,
       "twoFaced": false,
+      "oracleCardName": "The Rani",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever The Rani enters or attacks, create a red Aura enchantment token named Mark of the Rani attached to another target creature. That token has enchant creature and \"Enchanted creature gets +2/+2 and is goaded.\"\nWhenever a goaded creature deals combat damage to one of your opponents, investigate."
     },
     {
       "name": "Sycorax Commander",
       "scryfallId": "3d27ceaf-f4cf-489b-b305-552a9d065584",
       "multiverseid": 634856,
       "twoFaced": false,
+      "oracleCardName": "Sycorax Commander",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{R}",
+      "cmc": 4,
+      "oracleText": "First strike, haste\nSanctified Rules of Combat — When this creature enters, each opponent faces a villainous choice — That opponent discards all the cards in their hand, then draws that many cards minus one, or this creature deals damage to that player equal to the number of cards in their hand."
     },
     {
       "name": "The Cyber-Controller",
       "scryfallId": "3cab0df1-d53f-4208-9ff9-d015aac20141",
       "multiverseid": 634814,
       "twoFaced": false,
+      "oracleCardName": "The Cyber-Controller",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{X}{U}{U}{B}",
+      "cmc": 3,
+      "oracleText": "When The Cyber-Controller enters, each opponent mills X cards. Put all creature cards milled this way onto the battlefield face down under your control. They're 2/2 Cyberman artifact creatures.\nOther artifact creatures you control get +1/+1."
     },
     {
       "name": "Cult of Skaro",
       "scryfallId": "3913111c-6a77-4536-bbb4-0ac5bf18fe53",
       "multiverseid": 634812,
       "twoFaced": false,
+      "oracleCardName": "Cult of Skaro",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever Cult of Skaro attacks, choose one at random —\n• Thay — Put a +1/+1 counter on each artifact creature you control.\n• Caan — Draw two cards.\n• Sec — Create a 3/3 black Dalek artifact creature token with menace.\n• Jast — Each opponent loses 4 life."
     },
     {
       "name": "The Dalek Emperor",
       "scryfallId": "e96e1793-cf1c-452d-9443-b0aad4475d50",
       "multiverseid": 634815,
       "twoFaced": false,
+      "oracleCardName": "The Dalek Emperor",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{5}{B}{R}",
+      "cmc": 7,
+      "oracleText": "Affinity for Daleks (This spell costs {1} less to cast for each Dalek you control.)\nOther Daleks you control have haste.\nAt the beginning of combat on your turn, each opponent faces a villainous choice — That player sacrifices a creature of their choice, or you create a 3/3 black Dalek artifact creature token with menace."
     },
     {
       "name": "Ashad, the Lone Cyberman",
       "scryfallId": "2dc19e32-4f78-492f-8586-54ad4ae6fcec",
       "multiverseid": 634808,
       "twoFaced": false,
+      "oracleCardName": "Ashad, the Lone Cyberman",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "The first nonlegendary artifact spell you cast each turn has casualty 2. (As you cast it, you may sacrifice a creature with power 2 or greater. When you do, copy it. A copy of an artifact spell becomes a token.)\nWhenever you sacrifice another creature, put a +1/+1 counter on Ashad."
     },
     {
       "name": "Blink",
       "scryfallId": "032adfbd-3898-410c-acf0-79b88f924520",
       "multiverseid": 634811,
       "twoFaced": false,
+      "oracleCardName": "Blink",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, III — Choose target creature. Its owner shuffles it into their library, then investigates. (They create a Clue token.)\nII, IV — Create a 2/2 black Alien Angel artifact creature token with first strike, vigilance, and \"Whenever an opponent casts a creature spell, this token isn't a creature until end of turn.\""
     },
     {
       "name": "The Master, Formed Anew",
       "scryfallId": "a85edffb-37ce-45ca-b8d2-ddbbbee3b571",
       "multiverseid": 634838,
       "twoFaced": false,
+      "oracleCardName": "The Master, Formed Anew",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{B}",
+      "cmc": 2,
+      "oracleText": "Body Thief — When you cast this spell, you may exile a creature you control and put a takeover counter on it.\nYou may have The Master enter as a copy of a creature card in exile with a takeover counter on it."
     },
     {
       "name": "Cybermen Squadron",
       "scryfallId": "7ce660ef-0c6f-413d-8ddd-b755a19ab731",
       "multiverseid": 634871,
       "twoFaced": false,
+      "oracleCardName": "Cybermen Squadron",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Nonlegendary artifact creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
     },
     {
       "name": "Cybership",
       "scryfallId": "b0b9d006-7179-4d59-88ef-34b4d4b2e2fc",
       "multiverseid": 634872,
       "twoFaced": false,
+      "oracleCardName": "Cybership",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever this Vehicle deals combat damage to a player, put the top two cards of that player's library onto the battlefield face down under your control. They're 2/2 Cyberman artifact creatures.\nCrew 4"
     },
     {
       "name": "Wound Reflection",
       "scryfallId": "32d7dcdd-bec4-4795-b04f-63430228e48c",
       "multiverseid": 635549,
       "twoFaced": false,
+      "oracleCardName": "Wound Reflection",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{5}{B}",
+      "cmc": 6,
+      "oracleText": "At the beginning of each end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)"
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "34e5d93b-2f1f-43ed-b8ff-ee00d98eb46c",
       "multiverseid": 635550,
       "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "0bd72802-8eab-4700-9bd2-d3997c17438f",
       "multiverseid": 635572,
       "twoFaced": false,
+      "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
     },
     {
       "name": "The Sound of Drums",
       "scryfallId": "5ff2141a-a3ed-4ad0-9338-560502b1c85c",
       "multiverseid": 634792,
       "twoFaced": false,
+      "oracleCardName": "The Sound of Drums",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature is goaded.\nIf enchanted creature would deal combat damage to a permanent or player, it deals double that damage instead.\n{2}{R}: Return this card from your graveyard to your hand."
     },
     {
       "name": "River of Tears",
       "scryfallId": "f1ebb072-492c-4ec0-8b1d-f8ea48221647",
       "multiverseid": 635623,
       "twoFaced": false,
+      "oracleCardName": "River of Tears",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {U}. If you played a land this turn, add {B} instead."
     },
     {
       "name": "Foreboding Ruins",
       "scryfallId": "f1724c72-8e0e-4380-82ba-1f9ec8e45f01",
       "multiverseid": 635605,
       "twoFaced": false,
+      "oracleCardName": "Foreboding Ruins",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Shadowblood Ridge",
       "scryfallId": "be9e7104-debd-474c-a602-3226dae5a553",
       "multiverseid": 635629,
       "twoFaced": false,
+      "oracleCardName": "Shadowblood Ridge",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {B}{R}."
     },
     {
       "name": "Smoldering Marsh",
       "scryfallId": "d1b65ecb-ace2-4247-a654-1e704d24319a",
       "multiverseid": 635633,
       "twoFaced": false,
+      "oracleCardName": "Smoldering Marsh",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Temple of Deceit",
       "scryfallId": "cbbfbb9b-f2b8-42ed-89ba-c0d894e1e8d4",
       "multiverseid": 635640,
       "twoFaced": false,
+      "oracleCardName": "Temple of Deceit",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
     },
     {
       "name": "Choked Estuary",
       "scryfallId": "0f33320e-8dcb-40e2-a356-038f2eea77d7",
       "multiverseid": 635587,
       "twoFaced": false,
+      "oracleCardName": "Choked Estuary",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "4247c058-7f27-4195-b847-db883a430e6a",
       "multiverseid": 635638,
       "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Darkwater Catacombs",
       "scryfallId": "f8036733-de99-4f33-a7a2-b1dde43606f1",
       "multiverseid": 635595,
       "twoFaced": false,
+      "oracleCardName": "Darkwater Catacombs",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Fetid Pools",
       "scryfallId": "4830469e-2323-4e00-9c97-8fa8a5a03580",
       "multiverseid": 635603,
       "twoFaced": false,
+      "oracleCardName": "Fetid Pools",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Temple of Malice",
       "scryfallId": "ee9fabb0-9f83-49a3-9da3-d2b1d89fdb61",
       "multiverseid": 635643,
       "twoFaced": false,
+      "oracleCardName": "Temple of Malice",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {R}."
     },
     {
       "name": "Canyon Slough",
       "scryfallId": "221cd894-19e2-433b-a624-f6838fadd6fd",
       "multiverseid": 635585,
       "twoFaced": false,
+      "oracleCardName": "Canyon Slough",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "c2bc648d-def5-4442-9cfe-0f93fee631f4",
       "multiverseid": 635602,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "a7df0f35-81a1-439f-a9b0-0c3afd4bce68",
       "multiverseid": 635642,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Frostboil Snarl",
       "scryfallId": "6e1d2c3d-e6ec-4130-8765-346adbb79d31",
       "multiverseid": 635608,
       "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Stormcarved Coast",
       "scryfallId": "54fe029f-e173-4a16-bdb4-394847b4e50b",
       "multiverseid": 635634,
       "twoFaced": false,
+      "oracleCardName": "Stormcarved Coast",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Fiery Islet",
       "scryfallId": "daf68138-63c1-4201-998c-eb412463f664",
       "multiverseid": 635604,
       "twoFaced": false,
+      "oracleCardName": "Fiery Islet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Pay 1 life: Add {U} or {R}.\n{1}, {T}, Sacrifice this land: Draw a card."
     },
     {
       "name": "Lavaclaw Reaches",
       "scryfallId": "59735c0d-5793-478a-b40c-f8d13413f67b",
       "multiverseid": 635615,
       "twoFaced": false,
+      "oracleCardName": "Lavaclaw Reaches",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}.\n{1}{B}{R}: Until end of turn, this land becomes a 2/2 black and red Elemental creature with \"{X}: This creature gets +X/+0 until end of turn.\" It's still a land."
     },
     {
       "name": "Shipwreck Marsh",
       "scryfallId": "9d0dfc2d-5d13-4051-b24c-108b566b5e23",
       "multiverseid": 635631,
       "twoFaced": false,
+      "oracleCardName": "Shipwreck Marsh",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Drowned Catacomb",
       "scryfallId": "41f3d434-bab7-48c2-961d-347735d61d38",
       "multiverseid": 635600,
       "twoFaced": false,
+      "oracleCardName": "Drowned Catacomb",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Haunted Ridge",
       "scryfallId": "01b62353-e170-4c29-bda1-7cd8441c01c2",
       "multiverseid": 635612,
       "twoFaced": false,
+      "oracleCardName": "Haunted Ridge",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Dragonskull Summit",
       "scryfallId": "787c5c8e-7274-4d74-8a8d-728b28ec0b71",
       "multiverseid": 635598,
       "twoFaced": false,
+      "oracleCardName": "Dragonskull Summit",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Creeping Tar Pit",
       "scryfallId": "254a6531-7cf7-4c74-9050-65fe4b273744",
       "multiverseid": 635593,
       "twoFaced": false,
+      "oracleCardName": "Creeping Tar Pit",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}.\n{1}{U}{B}: Until end of turn, this land becomes a 3/2 blue and black Elemental creature. It's still a land. It can't be blocked this turn."
     },
     {
       "name": "Gallifrey Council Chamber",
       "scryfallId": "83d990f5-a7b7-4482-95e6-b03a397192e2",
       "multiverseid": 634883,
       "twoFaced": false,
+      "oracleCardName": "Gallifrey Council Chamber",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "When Gallifrey Council Chamber enters, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Time Lord or Alien spell or activate an ability of a Time Lord or Alien."
     },
     {
       "name": "Renegade Silent",
       "scryfallId": "6deb8b33-723d-4927-934c-5d049125d235",
       "multiverseid": 634748,
       "twoFaced": false,
+      "oracleCardName": "Renegade Silent",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, goad up to one target creature you don't control and put a +1/+1 counter on this creature. This creature phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)"
     },
     {
       "name": "Zygon Infiltrator",
       "scryfallId": "71b5538b-4561-4929-8e1c-9763e75cad0e",
       "multiverseid": 634758,
       "twoFaced": false,
+      "oracleCardName": "Zygon Infiltrator",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Body-print — {2}{U}: Tap another target creature and put a stun counter on it. This creature becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery. (If a permanent with a stun counter would become untapped, remove one from it instead.)"
     },
     {
       "name": "Don't Blink",
       "scryfallId": "ef31cf95-6e1d-4786-ae92-e1eebdb1da13",
       "multiverseid": 634735,
       "twoFaced": false,
+      "oracleCardName": "Don't Blink",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Until end of turn, if one or more creatures would enter from exile or after being cast from exile, their owners shuffle them into their libraries instead.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Exterminate!",
       "scryfallId": "da54bbfd-48d8-4b1f-9336-e45be7e0b0e5",
       "multiverseid": 634763,
       "twoFaced": false,
+      "oracleCardName": "Exterminate!",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Replicate—Tap an untapped Dalek you control. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nDestroy target creature. Its controller loses 3 life."
     },
     {
       "name": "Dalek Squadron",
       "scryfallId": "76573f9d-f0f2-47b8-88e7-17d58d0d20d3",
       "multiverseid": 634760,
       "twoFaced": false,
+      "oracleCardName": "Dalek Squadron",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Menace\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
     },
     {
       "name": "Sontaran General",
       "scryfallId": "cb70fa62-fea1-4e91-a8a1-64b43b777091",
       "multiverseid": 634791,
       "twoFaced": false,
+      "oracleCardName": "Sontaran General",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Trample, haste\nBattalion — Whenever this creature and at least two other creatures attack, for each opponent, goad up to one target creature that player controls. Those creatures can't block this turn. (Until your next turn, they attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Great Intelligence's Plan",
       "scryfallId": "a798feb4-561b-4bb9-bdc9-771325faec57",
       "multiverseid": 634828,
       "twoFaced": false,
+      "oracleCardName": "Great Intelligence's Plan",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}{B}",
+      "cmc": 6,
+      "oracleText": "Draw three cards. Then target opponent faces a villainous choice — They discard three cards, or you may cast a spell from your hand without paying its mana cost."
     },
     {
       "name": "Cyberman Patrol",
       "scryfallId": "566ae475-48cd-42d0-8d96-168529b2180d",
       "multiverseid": 634869,
       "twoFaced": false,
+      "oracleCardName": "Cyberman Patrol",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Artifact creatures you control have afflict 3. (Whenever a creature with afflict 3 becomes blocked, defending player loses 3 life.)"
     },
     {
       "name": "Cybermat",
       "scryfallId": "db625a36-5b87-4ddd-8c9e-0969ff8e6488",
       "multiverseid": 634870,
       "twoFaced": false,
+      "oracleCardName": "Cybermat",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Skulk (This creature can't be blocked by creatures with greater power.)\nWhenever this creature attacks and isn't blocked, it gets +X/+0 until end of turn, where X is the number of attacking artifact creatures."
     },
     {
       "name": "Clockwork Droid",
       "scryfallId": "9b4fa6d0-dc2d-4903-bbba-6cf83be2b187",
       "multiverseid": 634867,
       "twoFaced": false,
+      "oracleCardName": "Clockwork Droid",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "You may exert this creature as it attacks. When you do, it can't be blocked this turn and you scry 1. (An exerted creature won't untap during your next untap step. To scry 1, look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Midnight Crusader Shuttle",
       "scryfallId": "0a8dcf01-8e2c-439c-81c4-650dd01ecb65",
       "multiverseid": 634874,
       "twoFaced": false,
+      "oracleCardName": "Midnight Crusader Shuttle",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Midnight Entity — Whenever this Vehicle attacks, defending player faces a villainous choice — That player sacrifices a creature of their choice, or you gain control of a creature of your choice that player controls until end of turn. If you gain control of a creature this way, tap it, and it's attacking that player.\nCrew 2"
     },
     {
       "name": "Laser Screwdriver",
       "scryfallId": "9e646af0-1a7a-4e2c-83ba-78e748737846",
       "multiverseid": 634873,
       "twoFaced": false,
+      "oracleCardName": "Laser Screwdriver",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\n{1}, {T}: Tap target artifact.\n{2}, {T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\n{3}, {T}: Goad target creature. (Until your next turn, it attacks each combat if able and attacks a player other than you if able.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "d87d58eb-b95a-48d9-a174-e2d72a29c167",
       "multiverseid": 635565,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0f44a54b-512e-45ef-80ee-7982d2eaf762",
       "multiverseid": 635571,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Thought Vessel",
       "scryfallId": "84506a3f-46ee-4482-9f7d-0409c2699ae4",
       "multiverseid": 635581,
       "twoFaced": false,
+      "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Mind Stone",
       "scryfallId": "6ac8db7a-009a-4141-bba7-b5fdfaf8d245",
       "multiverseid": 635570,
       "twoFaced": false,
+      "oracleCardName": "Mind Stone",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "59cb10b3-6856-4355-94a7-a14c516887d5",
       "multiverseid": 635569,
       "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
     },
     {
       "name": "Propaganda",
       "scryfallId": "16023fe1-f5e7-4ec0-aef2-c34c131b8ff3",
       "multiverseid": 635545,
       "twoFaced": false,
+      "oracleCardName": "Propaganda",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
     },
     {
       "name": "Feed the Swarm",
       "scryfallId": "c5ca70f4-2fb2-4e0b-b1d6-c9220766807f",
       "multiverseid": 635547,
       "twoFaced": false,
+      "oracleCardName": "Feed the Swarm",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
     },
     {
       "name": "Snuff Out",
       "scryfallId": "760660d0-06f2-49ea-afbf-647d7f1ea151",
       "multiverseid": 635548,
       "twoFaced": false,
+      "oracleCardName": "Snuff Out",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "If you control a Swamp, you may pay 4 life rather than pay this spell's mana cost.\nDestroy target nonblack creature. It can't be regenerated."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "331338ed-5b1e-4cc0-8a3f-ea43539b9346",
       "multiverseid": 635566,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "4fa3660a-4141-46fe-b34b-3aeb45589cac",
       "multiverseid": 635582,
       "twoFaced": false,
+      "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Talisman of Dominance",
       "scryfallId": "827edf4f-2442-4c9d-8aac-3dead3af3146",
       "multiverseid": 635576,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Indulgence",
       "scryfallId": "3f1e2fad-0aab-4ead-9b25-509c83ad4a93",
       "multiverseid": 635578,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Indulgence",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
     },
     {
       "name": "Command Tower",
       "scryfallId": "98e819e5-573c-49d3-87d7-9abd60532e71",
       "multiverseid": 635592,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "fa85babf-6764-4cf7-9108-ec15cda6ada5",
       "multiverseid": 635648,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Thriving Moor",
       "scryfallId": "50ae3a27-cd9a-4344-8879-1ed81932aaec",
       "multiverseid": 635654,
       "twoFaced": false,
+      "oracleCardName": "Thriving Moor",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "30c6f93e-e03f-4749-8b30-9375c79f10f4",
       "multiverseid": 635619,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "3ca70d08-1468-407d-80e6-a58c6655b4f0",
       "multiverseid": 635646,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "3afb2f16-4364-439e-a5ce-6598b351cb4c",
       "multiverseid": 635622,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Crumbling Necropolis",
       "scryfallId": "eeb7fadc-dcd8-473a-9b12-d9c8f0a19f79",
       "multiverseid": 635594,
       "twoFaced": false,
+      "oracleCardName": "Crumbling Necropolis",
       "colorIdentity": [
         "B",
         "R",
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
     },
     {
       "name": "Ominous Cemetery",
       "scryfallId": "2e843c57-fae3-4127-94e7-cad8c8bb9486",
       "multiverseid": 634884,
       "twoFaced": false,
+      "oracleCardName": "Ominous Cemetery",
       "colorIdentity": [],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{5}, {T}, Exile this land: Target creature's owner shuffles it into their library."
     },
     {
       "name": "Island",
       "scryfallId": "ca98e0fb-5f07-40c8-9958-84379bcdc35c",
       "multiverseid": 635468,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "12b2aae2-a0b4-4c52-8a43-a4155527bae9",
       "multiverseid": 635469,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "5788684f-1339-4cb4-863a-a9883ccab79b",
       "multiverseid": 635470,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "1c5d8a2c-b98a-4dae-8b89-4a2435fa7103",
       "multiverseid": 635471,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "58c34fe0-77ec-4ba3-a214-00d0eb42ebae",
       "multiverseid": 635472,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "49f1fe4e-8da1-4879-8129-bd8a440a45be",
       "multiverseid": 635473,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "WHO"
+      "set": "WHO",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.270Z",
+    "retrievedDate": "2026-02-20T03:10:21.405Z",
     "sourceUrl": "MastersOfEvil_WHO.json",
     "deckSource": "precon",
     "createdAt": "2023-10-13T00:00:00.000Z"

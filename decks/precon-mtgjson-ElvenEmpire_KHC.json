@@ -9,11 +9,18 @@
       "scryfallId": "547888c3-a9a6-4413-b29a-6bcd8a9279bf",
       "multiverseid": 508147,
       "twoFaced": false,
+      "oracleCardName": "Lathril, Blade of the Elves",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{G}",
+      "cmc": 4,
+      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Lathril deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life."
     }
   ],
   "cards": [
@@ -22,1001 +29,1659 @@
       "scryfallId": "4b68bc46-5591-44dd-becc-eca154066925",
       "multiverseid": 508371,
       "twoFaced": false,
+      "oracleCardName": "Abomination of Llanowar",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "Vigilance; menace (This creature can't be blocked except by two or more creatures.)\nAbomination of Llanowar's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard."
     },
     {
       "name": "Beast Whisperer",
       "scryfallId": "b7e90355-80ca-49db-914c-62b3a7bd4726",
       "multiverseid": 508344,
       "twoFaced": false,
+      "oracleCardName": "Beast Whisperer",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast a creature spell, draw a card."
     },
     {
       "name": "Canopy Tactician",
       "scryfallId": "3eaf48c9-09bc-4d81-a3a5-432219a71754",
       "multiverseid": 506920,
       "twoFaced": false,
+      "oracleCardName": "Canopy Tactician",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Other Elves you control get +1/+1.\n{T}: Add {G}{G}{G}."
     },
     {
       "name": "Cultivator of Blades",
       "scryfallId": "c2e6e8a1-2e69-43de-964d-72f722439d4a",
       "multiverseid": 508345,
       "twoFaced": false,
+      "oracleCardName": "Cultivator of Blades",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Fabricate 2 (When this creature enters, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)\nWhenever this creature attacks, you may have other attacking creatures get +X/+X until end of turn, where X is this creature's power."
     },
     {
       "name": "Dwynen, Gilt-Leaf Daen",
       "scryfallId": "2eb0f12b-9199-440d-9b85-831a5aec5dae",
       "multiverseid": 508346,
       "twoFaced": false,
+      "oracleCardName": "Dwynen, Gilt-Leaf Daen",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Reach (This creature can block creatures with flying.)\nOther Elf creatures you control get +1/+1.\nWhenever Dwynen attacks, you gain 1 life for each attacking Elf you control."
     },
     {
       "name": "Elderfang Ritualist",
       "scryfallId": "57348f93-8764-4b1a-b02e-4e7881337fa2",
       "multiverseid": 506927,
       "twoFaced": false,
+      "oracleCardName": "Elderfang Ritualist",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature dies, return another target Elf card from your graveyard to your hand."
     },
     {
       "name": "Elvish Archdruid",
       "scryfallId": "4d3fffa5-50ec-4502-9f03-bd9618f1771e",
       "multiverseid": 508347,
       "twoFaced": false,
+      "oracleCardName": "Elvish Archdruid",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control."
     },
     {
       "name": "Elvish Mystic",
       "scryfallId": "ed7a0227-ac70-40fb-8198-a55eacf913fa",
       "multiverseid": 508348,
       "twoFaced": false,
+      "oracleCardName": "Elvish Mystic",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {G}."
     },
     {
       "name": "Elvish Rejuvenator",
       "scryfallId": "7e4723bc-20ce-4f43-9dcf-db44d4d1b224",
       "multiverseid": 508350,
       "twoFaced": false,
+      "oracleCardName": "Elvish Rejuvenator",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "End-Raze Forerunners",
       "scryfallId": "7d113fa6-59b1-4f12-b81b-4b32affb9452",
       "multiverseid": 508351,
       "twoFaced": false,
+      "oracleCardName": "End-Raze Forerunners",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}{G}{G}",
+      "cmc": 8,
+      "oracleText": "Vigilance, trample, haste\nWhen this creature enters, other creatures you control get +2/+2 and gain vigilance and trample until end of turn."
     },
     {
       "name": "Eyeblight Cullers",
       "scryfallId": "89b47813-9b6c-4e8f-9212-fe37fb50e405",
       "multiverseid": 508338,
       "twoFaced": false,
+      "oracleCardName": "Eyeblight Cullers",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "When this creature dies, create three 1/1 green Elf Warrior creature tokens, then mill three cards. (Put the top three cards of your library into your graveyard.)"
     },
     {
       "name": "Farhaven Elf",
       "scryfallId": "320d0a4c-c556-4468-b934-bfdf17961a53",
       "multiverseid": 508352,
       "twoFaced": false,
+      "oracleCardName": "Farhaven Elf",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Golgari Findbroker",
       "scryfallId": "26413356-327c-494b-a895-0a0ddd466242",
       "multiverseid": 508376,
       "twoFaced": false,
+      "oracleCardName": "Golgari Findbroker",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}{B}{G}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, return target permanent card from your graveyard to your hand."
     },
     {
       "name": "Harald, King of Skemfar",
       "scryfallId": "9eac78a2-599f-4dba-aec7-982c5ae3f75a",
       "multiverseid": 503828,
       "twoFaced": false,
+      "oracleCardName": "Harald, King of Skemfar",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhen Harald enters, look at the top five cards of your library. You may reveal an Elf, Warrior, or Tyvar card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Imperious Perfect",
       "scryfallId": "a93e9d33-0c5d-4890-a1aa-84f59af9d4fb",
       "multiverseid": 508354,
       "twoFaced": false,
+      "oracleCardName": "Imperious Perfect",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Other Elves you control get +1/+1.\n{G}, {T}: Create a 1/1 green Elf Warrior creature token."
     },
     {
       "name": "Jagged-Scar Archers",
       "scryfallId": "71c4346a-a330-49ca-909e-08fd8aec7b3f",
       "multiverseid": 508355,
       "twoFaced": false,
+      "oracleCardName": "Jagged-Scar Archers",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Jagged-Scar Archers's power and toughness are each equal to the number of Elves you control.\n{T}: This creature deals damage equal to its power to target creature with flying."
     },
     {
       "name": "Jaspera Sentinel",
       "scryfallId": "1a68615d-9808-479d-aa80-50651246954e",
       "multiverseid": 503792,
       "twoFaced": false,
+      "oracleCardName": "Jaspera Sentinel",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Reach\n{T}, Tap an untapped creature you control: Add one mana of any color."
     },
     {
       "name": "Llanowar Tribe",
       "scryfallId": "407c1b95-dc0c-4154-a441-fe25537df45c",
       "multiverseid": 508356,
       "twoFaced": false,
+      "oracleCardName": "Llanowar Tribe",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{G}{G}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {G}{G}{G}."
     },
     {
       "name": "Lys Alana Huntmaster",
       "scryfallId": "0849f67b-da5d-49f7-840f-f87f48518156",
       "multiverseid": 508357,
       "twoFaced": false,
+      "oracleCardName": "Lys Alana Huntmaster",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token."
     },
     {
       "name": "Lys Alana Scarblade",
       "scryfallId": "58b3b63d-fabb-46ad-aabe-1e9fb34b4f8c",
       "multiverseid": 508340,
       "twoFaced": false,
+      "oracleCardName": "Lys Alana Scarblade",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "{T}, Discard an Elf card: Target creature gets -X/-X until end of turn, where X is the number of Elves you control."
     },
     {
       "name": "Marwyn, the Nurturer",
       "scryfallId": "aad61d99-5c8e-47b7-ab1a-e70905f59205",
       "multiverseid": 508358,
       "twoFaced": false,
+      "oracleCardName": "Marwyn, the Nurturer",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever another Elf you control enters, put a +1/+1 counter on Marwyn.\n{T}: Add an amount of {G} equal to Marwyn's power."
     },
     {
       "name": "Masked Admirers",
       "scryfallId": "b8cc3361-046c-4908-8b8d-a0502bfc173a",
       "multiverseid": 508359,
       "twoFaced": false,
+      "oracleCardName": "Masked Admirers",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, draw a card.\nWhenever you cast a creature spell, you may pay {G}{G}. If you do, return this card from your graveyard to your hand."
     },
     {
       "name": "Miara, Thorn of the Glade",
       "scryfallId": "7bdb9bfe-5e56-429d-af23-7548532e2406",
       "multiverseid": 508341,
       "twoFaced": false,
+      "oracleCardName": "Miara, Thorn of the Glade",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever Miara or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Nullmage Shepherd",
       "scryfallId": "c4a15a09-cf68-411a-a18d-aaad00d308c9",
       "multiverseid": 508360,
       "twoFaced": false,
+      "oracleCardName": "Nullmage Shepherd",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Tap four untapped creatures you control: Destroy target artifact or enchantment."
     },
     {
       "name": "Numa, Joraga Chieftain",
       "scryfallId": "6ac36353-6bf7-46b1-85cb-87d389138d32",
       "multiverseid": 508361,
       "twoFaced": false,
+      "oracleCardName": "Numa, Joraga Chieftain",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Poison-Tip Archer",
       "scryfallId": "1677d49e-3d63-45bd-9849-01b1bdd95ad8",
       "multiverseid": 508380,
       "twoFaced": false,
+      "oracleCardName": "Poison-Tip Archer",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{G}",
+      "cmc": 4,
+      "oracleText": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever another creature dies, each opponent loses 1 life."
     },
     {
       "name": "Reclamation Sage",
       "scryfallId": "1c4a25f0-2929-4404-9ce5-bcd4715f90a5",
       "multiverseid": 508362,
       "twoFaced": false,
+      "oracleCardName": "Reclamation Sage",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
     },
     {
       "name": "Rhys the Exiled",
       "scryfallId": "85004079-f9fa-4a05-904d-a77782c4165c",
       "multiverseid": 508363,
       "twoFaced": false,
+      "oracleCardName": "Rhys the Exiled",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever Rhys attacks, you gain 1 life for each Elf you control.\n{B}, Sacrifice an Elf: Regenerate Rhys."
     },
     {
       "name": "Ruthless Winnower",
       "scryfallId": "886ef13a-4f9d-425b-a071-6366cdb637c8",
       "multiverseid": 508156,
       "twoFaced": false,
+      "oracleCardName": "Ruthless Winnower",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "At the beginning of each player's upkeep, that player sacrifices a non-Elf creature of their choice."
     },
     {
       "name": "Shaman of the Pack",
       "scryfallId": "da9705e2-40e5-4ec9-8aef-2eab28d5a66f",
       "multiverseid": 508382,
       "twoFaced": false,
+      "oracleCardName": "Shaman of the Pack",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, target opponent loses life equal to the number of Elves you control."
     },
     {
       "name": "Skemfar Shadowsage",
       "scryfallId": "c204130f-0483-49ed-8512-03a74894702e",
       "multiverseid": 503719,
       "twoFaced": false,
+      "oracleCardName": "Skemfar Shadowsage",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, choose one —\n• Each opponent loses X life, where X is the greatest number of creatures you control that have a creature type in common.\n• You gain X life, where X is the greatest number of creatures you control that have a creature type in common."
     },
     {
       "name": "Springbloom Druid",
       "scryfallId": "f406d477-720b-498c-9f45-1b687e555bcd",
       "multiverseid": 508364,
       "twoFaced": false,
+      "oracleCardName": "Springbloom Druid",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Sylvan Messenger",
       "scryfallId": "085f1b89-857b-4e2b-b796-0b95e53322bd",
       "multiverseid": 508365,
       "twoFaced": false,
+      "oracleCardName": "Sylvan Messenger",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhen this creature enters, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order."
     },
     {
       "name": "Timberwatch Elf",
       "scryfallId": "38807f17-1cf2-4736-ad10-df6c8b1a9f55",
       "multiverseid": 508366,
       "twoFaced": false,
+      "oracleCardName": "Timberwatch Elf",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "{T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield."
     },
     {
       "name": "Twinblade Assassins",
       "scryfallId": "f353281a-0e56-448f-b41a-beb3949c5f11",
       "multiverseid": 508385,
       "twoFaced": false,
+      "oracleCardName": "Twinblade Assassins",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{G}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your end step, if a creature died this turn, draw a card."
     },
     {
       "name": "Voice of Many",
       "scryfallId": "fccfa714-7fa0-4846-88c9-570f13683aa4",
       "multiverseid": 508367,
       "twoFaced": false,
+      "oracleCardName": "Voice of Many",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, draw a card for each opponent who controls fewer creatures than you."
     },
     {
       "name": "Voice of the Woods",
       "scryfallId": "d7a6315c-aa6f-4be1-a002-d7824bfad622",
       "multiverseid": 508368,
       "twoFaced": false,
+      "oracleCardName": "Voice of the Woods",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Tap five untapped Elves you control: Create a 7/7 green Elemental creature token with trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)"
     },
     {
       "name": "Wirewood Channeler",
       "scryfallId": "5670ae47-befb-4aaf-a77a-d7dbd4d8dc08",
       "multiverseid": 508369,
       "twoFaced": false,
+      "oracleCardName": "Wirewood Channeler",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "{T}: Add X mana of any one color, where X is the number of Elves on the battlefield."
     },
     {
       "name": "Wolverine Riders",
       "scryfallId": "70fd0439-294b-454c-b2af-e814b85f4590",
       "multiverseid": 508160,
       "twoFaced": false,
+      "oracleCardName": "Wolverine Riders",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.\nWhenever another Elf you control enters, you gain life equal to its toughness."
     },
     {
       "name": "Wood Elves",
       "scryfallId": "227746cb-8d9e-4f56-a19c-971a35f4cf20",
       "multiverseid": 508370,
       "twoFaced": false,
+      "oracleCardName": "Wood Elves",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
     },
     {
       "name": "Elven Ambush",
       "scryfallId": "70479c44-da7c-48c7-8c6a-47210dc03277",
       "multiverseid": 506933,
       "twoFaced": false,
+      "oracleCardName": "Elven Ambush",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Create a 1/1 green Elf Warrior creature token for each Elf you control."
     },
     {
       "name": "Poison the Cup",
       "scryfallId": "7fb94456-5266-47db-b514-a0e17e34b771",
       "multiverseid": 503712,
       "twoFaced": false,
+      "oracleCardName": "Poison the Cup",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Destroy target creature. If this spell was foretold, scry 2.\nForetell {1}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Putrefy",
       "scryfallId": "36e2a569-ed40-48f5-b39c-749b491bc207",
       "multiverseid": 508381,
       "twoFaced": false,
+      "oracleCardName": "Putrefy",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
     },
     {
       "name": "Tergrid's Shadow",
       "scryfallId": "417f71d2-d7da-4279-8847-d27c67e9ea9d",
       "multiverseid": 503723,
       "twoFaced": false,
+      "oracleCardName": "Tergrid's Shadow",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Each player sacrifices two creatures.\nForetell {2}{B}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Ambition's Cost",
       "scryfallId": "c4a15c15-27c2-4ede-9ecd-a28ec7cbd3fb",
       "multiverseid": 508337,
       "twoFaced": false,
+      "oracleCardName": "Ambition's Cost",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "You draw three cards and you lose 3 life."
     },
     {
       "name": "Bounty of Skemfar",
       "scryfallId": "3185a67e-648c-48a8-9aad-180e1ca0f4ae",
       "multiverseid": 508158,
       "twoFaced": false,
+      "oracleCardName": "Bounty of Skemfar",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Reveal the top six cards of your library. You may put up to one land card from among them onto the battlefield tapped and up to one Elf card from among them into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Casualties of War",
       "scryfallId": "e5a2a709-0273-48a3-874b-13aff4872b0a",
       "multiverseid": 508373,
       "twoFaced": false,
+      "oracleCardName": "Casualties of War",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}{B}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Destroy target enchantment.\n• Destroy target land.\n• Destroy target planeswalker."
     },
     {
       "name": "Eyeblight Massacre",
       "scryfallId": "00652c09-c50c-40da-8f0f-86b5cc3f6c26",
       "multiverseid": 508339,
       "twoFaced": false,
+      "oracleCardName": "Eyeblight Massacre",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Non-Elf creatures get -2/-2 until end of turn."
     },
     {
       "name": "Elvish Promenade",
       "scryfallId": "20602cb8-f925-4de0-ad4b-86d0f5514384",
       "multiverseid": 508349,
       "twoFaced": false,
+      "oracleCardName": "Elvish Promenade",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Kindred",
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Create a 1/1 green Elf Warrior creature token for each Elf you control."
     },
     {
       "name": "Harvest Season",
       "scryfallId": "326b5fad-bb8d-4019-84a8-1a319a14962e",
       "multiverseid": 508353,
       "twoFaced": false,
+      "oracleCardName": "Harvest Season",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to X basic land cards, where X is the number of tapped creatures you control, put those cards onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Pact of the Serpent",
       "scryfallId": "c5b3d118-ba4b-4a93-92a2-cd763de49d29",
       "multiverseid": 508155,
       "twoFaced": false,
+      "oracleCardName": "Pact of the Serpent",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Choose a creature type. Target player draws X cards and loses X life, where X is the number of creatures they control of the chosen type."
     },
     {
       "name": "Return Upon the Tide",
       "scryfallId": "470601b0-9598-487f-bb14-4bfec7ca6d61",
       "multiverseid": 503715,
       "twoFaced": false,
+      "oracleCardName": "Return Upon the Tide",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "Return target creature card from your graveyard to the battlefield. If it's an Elf, create two 1/1 green Elf Warrior creature tokens.\nForetell {3}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
     },
     {
       "name": "Roots of Wisdom",
       "scryfallId": "734afb5b-3163-47fa-856f-8a85b9da22d3",
       "multiverseid": 503806,
       "twoFaced": false,
+      "oracleCardName": "Roots of Wisdom",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Mill three cards, then return a land card or Elf card from your graveyard to your hand. If you can't, draw a card. (To mill a card, put the top card of your library into your graveyard.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "f0b666de-5a89-417d-a946-00aafd1f1979",
       "multiverseid": 508386,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Serpent's Soul-Jar",
       "scryfallId": "08ae371f-ce62-475f-89a2-1f8a17cf950f",
       "multiverseid": 508157,
       "twoFaced": false,
+      "oracleCardName": "Serpent's Soul-Jar",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever an Elf you control dies, exile it.\n{T}, Pay 2 life: Until end of turn, you may cast a creature spell from among cards exiled with this artifact."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "0afa0e33-4804-4b00-b625-c2d6b61090fc",
       "multiverseid": 508394,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Binding the Old Gods",
       "scryfallId": "d93ee644-d7d7-48d8-a04b-fb479b74edb0",
       "multiverseid": 503822,
       "twoFaced": false,
+      "oracleCardName": "Binding the Old Gods",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}{G}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target nonland permanent an opponent controls.\nII — Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.\nIII — Creatures you control gain deathtouch until end of turn."
     },
     {
       "name": "Crown of Skemfar",
       "scryfallId": "e6297586-8953-408e-a38c-2239d45807e1",
       "multiverseid": 508159,
       "twoFaced": false,
+      "oracleCardName": "Crown of Skemfar",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 for each Elf you control and has reach.\n{2}{G}: Return this card from your graveyard to your hand."
     },
     {
       "name": "Elderfang Venom",
       "scryfallId": "7d5bbb02-a04e-4add-ae9a-67819cffdb3a",
       "multiverseid": 508161,
       "twoFaced": false,
+      "oracleCardName": "Elderfang Venom",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}{G}",
+      "cmc": 4,
+      "oracleText": "Attacking Elves you control have deathtouch.\nWhenever an Elf you control dies, each opponent loses 1 life and you gain 1 life."
     },
     {
       "name": "Pride of the Perfect",
       "scryfallId": "c8397a00-42b4-4330-9f74-a3b2eb19a6ca",
       "multiverseid": 508342,
       "twoFaced": false,
+      "oracleCardName": "Pride of the Perfect",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Elves you control get +2/+0."
     },
     {
       "name": "Prowess of the Fair",
       "scryfallId": "b870c742-e799-4276-bb3d-f2c288ce0db8",
       "multiverseid": 508343,
       "twoFaced": false,
+      "oracleCardName": "Prowess of the Fair",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Kindred",
+        "Enchantment"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token."
     },
     {
       "name": "Moldervine Reclamation",
       "scryfallId": "b2e8a239-6d12-49e4-900a-968e0d53d83a",
       "multiverseid": 508379,
       "twoFaced": false,
+      "oracleCardName": "Moldervine Reclamation",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}{G}",
+      "cmc": 5,
+      "oracleText": "Whenever a creature you control dies, you gain 1 life and draw a card."
     },
     {
       "name": "Command Tower",
       "scryfallId": "74c5bc49-318c-44fc-b276-f6d036fdf054",
       "multiverseid": 508398,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "771e307c-b2e3-47ac-aac2-59f0c3542fa6",
       "multiverseid": 507589,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Foul Orchard",
       "scryfallId": "1e1bad7b-e102-4dff-b79a-fd755c2b6d49",
       "multiverseid": 508400,
       "twoFaced": false,
+      "oracleCardName": "Foul Orchard",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
     },
     {
       "name": "Golgari Guildgate",
       "scryfallId": "7e6228ce-0d36-4c93-80e0-949ffb9fe15e",
       "multiverseid": 508401,
       "twoFaced": false,
+      "oracleCardName": "Golgari Guildgate",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
     },
     {
       "name": "Golgari Rot Farm",
       "scryfallId": "aee8e11f-6e73-4c8b-bd4e-3956ee18ac66",
       "multiverseid": 508402,
       "twoFaced": false,
+      "oracleCardName": "Golgari Rot Farm",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
     },
     {
       "name": "Jungle Hollow",
       "scryfallId": "ae7d3dbc-a3b9-459f-9337-67f9d9b7b563",
       "multiverseid": 508403,
       "twoFaced": false,
+      "oracleCardName": "Jungle Hollow",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "4544593c-c155-436f-a74b-eea3e854ad1d",
       "multiverseid": 508405,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "04f35c75-4ede-4c23-867b-58d367f75fc8",
       "multiverseid": 508407,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "KHC"
+      "set": "KHC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Skemfar Elderhall",
       "scryfallId": "82c2a0f7-0f53-4627-8be8-227fde331a69",
       "multiverseid": 503888,
       "twoFaced": false,
+      "oracleCardName": "Skemfar Elderhall",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{2}{B}{B}{G}, {T}, Sacrifice this land: Up to one target creature you don't control gets -2/-2 until end of turn. Create two 1/1 green Elf Warrior creature tokens. Activate only as a sorcery."
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "9f9e61c0-b185-4704-913f-9284ed0ce250",
       "multiverseid": 507587,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "KHM"
+      "set": "KHM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.649Z",
+    "retrievedDate": "2026-02-20T03:10:20.689Z",
     "sourceUrl": "ElvenEmpire_KHC.json",
     "deckSource": "precon",
     "createdAt": "2021-02-05T00:00:00.000Z"

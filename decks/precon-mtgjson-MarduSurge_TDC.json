@@ -9,12 +9,19 @@
       "scryfallId": "dc8eb325-75c9-4331-830d-3f7d62d77290",
       "multiverseid": 695729,
       "twoFaced": false,
+      "oracleCardName": "Zurgo Stormrender",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{W}{B}",
+      "cmc": 3,
+      "oracleText": "Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\nWhenever a creature token you control leaves the battlefield, draw a card if it was attacking. Otherwise, each opponent loses 1 life."
     }
   ],
   "cards": [
@@ -23,991 +30,1649 @@
       "scryfallId": "ac552ea3-f521-4c42-a846-21a73364e0ca",
       "multiverseid": 695725,
       "twoFaced": false,
+      "oracleCardName": "Neriv, Crackling Vanguard",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{W}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, deathtouch\nWhen Neriv enters, create two 1/1 red Goblin creature tokens.\nWhenever Neriv attacks, exile a number of cards from the top of your library equal to the number of differently named tokens you control. During any turn you attacked with a commander, you may play those cards."
     },
     {
       "name": "Ainok Strike Leader",
       "scryfallId": "cabd77a6-0913-4522-891d-c8a412a536c2",
       "multiverseid": 695940,
       "twoFaced": false,
+      "oracleCardName": "Ainok Strike Leader",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever you attack with this creature and/or your commander, for each opponent, create a 1/1 red Goblin creature token that's tapped and attacking that player.\nSacrifice this creature: Creature tokens you control gain indestructible until end of turn."
     },
     {
       "name": "Ironwill Forger",
       "scryfallId": "53398f76-7c8a-4009-8f28-9ce586e2c7e4",
       "multiverseid": 695942,
       "twoFaced": false,
+      "oracleCardName": "Ironwill Forger",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Lieutenant — At the beginning of combat on your turn, if you control your commander, target nonlegendary creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
     },
     {
       "name": "Will of the Mardu",
       "scryfallId": "26f6b519-20ff-4255-926d-5caee6c572d8",
       "multiverseid": 695946,
       "twoFaced": false,
+      "oracleCardName": "Will of the Mardu",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Create a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls.\n• Will of the Mardu deals damage to target creature equal to the number of creatures you control."
     },
     {
       "name": "Bone Devourer",
       "scryfallId": "5acb9bd4-ed86-400e-9f5d-4c26351242f2",
       "multiverseid": 695955,
       "twoFaced": false,
+      "oracleCardName": "Bone Devourer",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Flash\nFlying\nThis creature enters with a number of +1/+1 counters on it equal to the number of creatures that died this turn.\nWhen this creature dies, you draw X cards and you lose X life, where X is the number of +1/+1 counters on it."
     },
     {
       "name": "Within Range",
       "scryfallId": "51188edb-9705-4960-854b-170744f40a88",
       "multiverseid": 695961,
       "twoFaced": false,
+      "oracleCardName": "Within Range",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "When this enchantment enters, create two 1/1 red Warrior creature tokens.\nWhenever you attack, each opponent loses life equal to the number of creatures attacking them."
     },
     {
       "name": "Goldlust Triad",
       "scryfallId": "2876d57a-a17e-4892-9992-321a32562e13",
       "multiverseid": 695963,
       "twoFaced": false,
+      "oracleCardName": "Goldlust Triad",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever this creature deals combat damage to a player, create a Treasure token."
     },
     {
       "name": "Infantry Shield",
       "scryfallId": "37332798-462e-49d3-b197-72411ccf67e5",
       "multiverseid": 695964,
       "twoFaced": false,
+      "oracleCardName": "Infantry Shield",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Equipped creature has menace and mobilize X, where X is its power. (Whenever it attacks, create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nEquip {2}"
     },
     {
       "name": "Redoubled Stormsinger",
       "scryfallId": "fcddd8e1-8b8e-43b9-9922-6c3317cc45ae",
       "multiverseid": 695966,
       "twoFaced": false,
+      "oracleCardName": "Redoubled Stormsinger",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "First strike\nWhenever this creature attacks, for each creature token you control that entered this turn, create a tapped and attacking token that's a copy of that token. At the beginning of the next end step, sacrifice those tokens."
     },
     {
       "name": "Adeline, Resplendent Cathar",
       "scryfallId": "1de30c12-2011-495a-be25-f7a46b23e142",
       "multiverseid": 696264,
       "twoFaced": false,
+      "oracleCardName": "Adeline, Resplendent Cathar",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "Vigilance\nAdeline's power is equal to the number of creatures you control.\nWhenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control."
     },
     {
       "name": "Angel of Invention",
       "scryfallId": "98c42f02-6eda-4ef7-929f-b3a2ece9f650",
       "multiverseid": 696265,
       "twoFaced": false,
+      "oracleCardName": "Angel of Invention",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying, vigilance, lifelink\nFabricate 2 (When this creature enters, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)\nOther creatures you control get +1/+1."
     },
     {
       "name": "Commander's Insignia",
       "scryfallId": "8a800591-04a9-40d9-acfe-eebc04e8291b",
       "multiverseid": 696267,
       "twoFaced": false,
+      "oracleCardName": "Commander's Insignia",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game."
     },
     {
       "name": "Divine Visitation",
       "scryfallId": "3800216f-5b35-4cfa-bcdb-d70e9b368d18",
       "multiverseid": 696269,
       "twoFaced": false,
+      "oracleCardName": "Divine Visitation",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead."
     },
     {
       "name": "Emeria Angel",
       "scryfallId": "2406ab7c-c6be-421a-a92c-048441a01acd",
       "multiverseid": 696270,
       "twoFaced": false,
+      "oracleCardName": "Emeria Angel",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may create a 1/1 white Bird creature token with flying."
     },
     {
       "name": "Grand Crescendo",
       "scryfallId": "c2157a04-f9e8-47b7-bf8d-763d794159f5",
       "multiverseid": 696274,
       "twoFaced": false,
+      "oracleCardName": "Grand Crescendo",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{W}{W}",
+      "cmc": 2,
+      "oracleText": "Create X 1/1 green and white Citizen creature tokens. Creatures you control gain indestructible until end of turn."
     },
     {
       "name": "Hero of Bladehold",
       "scryfallId": "8ca58965-1dfa-40ac-b6c8-f957167ff066",
       "multiverseid": 696275,
       "twoFaced": false,
+      "oracleCardName": "Hero of Bladehold",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever this creature attacks, create two 1/1 white Soldier creature tokens that are tapped and attacking."
     },
     {
       "name": "Hour of Reckoning",
       "scryfallId": "14d60131-8715-477d-8a67-5f1f99a906a8",
       "multiverseid": 696276,
       "twoFaced": false,
+      "oracleCardName": "Hour of Reckoning",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}{W}",
+      "cmc": 7,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures."
     },
     {
       "name": "Legion Loyalty",
       "scryfallId": "11681eae-f5bd-4e78-a980-5ab58db0d9f3",
       "multiverseid": 696278,
       "twoFaced": false,
+      "oracleCardName": "Legion Loyalty",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{6}{W}{W}",
+      "cmc": 8,
+      "oracleText": "Creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
     },
     {
       "name": "Selfless Spirit",
       "scryfallId": "da85f3fb-e7d6-494a-ad3a-2ef35917f574",
       "multiverseid": 696285,
       "twoFaced": false,
+      "oracleCardName": "Selfless Spirit",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nSacrifice this creature: Creatures you control gain indestructible until end of turn."
     },
     {
       "name": "Sun Titan",
       "scryfallId": "c7974707-88bf-474b-b1a9-30733c16b1ef",
       "multiverseid": 696289,
       "twoFaced": false,
+      "oracleCardName": "Sun Titan",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
     },
     {
       "name": "Tocasia's Welcome",
       "scryfallId": "cf3805a6-7892-454c-a009-1e385543729d",
       "multiverseid": 696291,
       "twoFaced": false,
+      "oracleCardName": "Tocasia's Welcome",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more creatures you control with mana value 3 or less enter, draw a card. This ability triggers only once each turn."
     },
     {
       "name": "Twilight Drover",
       "scryfallId": "481b1eb5-9fbb-4e27-8d0a-5ca6c34179b6",
       "multiverseid": 696292,
       "twoFaced": false,
+      "oracleCardName": "Twilight Drover",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature token leaves the battlefield, put a +1/+1 counter on this creature.\n{2}{W}, Remove a +1/+1 counter from this creature: Create two 1/1 white Spirit creature tokens with flying."
     },
     {
       "name": "Chittering Witch",
       "scryfallId": "7e361851-346e-4747-bbce-e2dc19e39b31",
       "multiverseid": 696331,
       "twoFaced": false,
+      "oracleCardName": "Chittering Witch",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.\n{1}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn."
     },
     {
       "name": "Eliminate the Competition",
       "scryfallId": "e6e54953-0d6d-4f65-85cb-d26e66a76dce",
       "multiverseid": 696335,
       "twoFaced": false,
+      "oracleCardName": "Eliminate the Competition",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "As an additional cost to cast this spell, sacrifice X creatures.\nDestroy X target creatures."
     },
     {
       "name": "Gix, Yawgmoth Praetor",
       "scryfallId": "135c5948-4c95-4f24-b648-eda55ab637c8",
       "multiverseid": 696337,
       "twoFaced": false,
+      "oracleCardName": "Gix, Yawgmoth Praetor",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature deals combat damage to one of your opponents, its controller may pay 1 life. If they do, they draw a card.\n{4}{B}{B}{B}, Discard X cards: Exile the top X cards of target opponent's library. You may play lands and cast spells from among cards exiled this way without paying their mana costs."
     },
     {
       "name": "Mindblade Render",
       "scryfallId": "27e43b25-9a9e-4bfc-9589-77d1f53a3c4b",
       "multiverseid": 696343,
       "twoFaced": false,
+      "oracleCardName": "Mindblade Render",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever your opponents are dealt combat damage, if any of that damage was dealt by a Warrior, you draw a card and you lose 1 life."
     },
     {
       "name": "Ophiomancer",
       "scryfallId": "7da2511d-f5ae-4c51-a9b2-dffd581243b6",
       "multiverseid": 696349,
       "twoFaced": false,
+      "oracleCardName": "Ophiomancer",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."
     },
     {
       "name": "Yahenni, Undying Partisan",
       "scryfallId": "396c5d77-f530-42f8-80b5-7cbfd562d1e2",
       "multiverseid": 696358,
       "twoFaced": false,
+      "oracleCardName": "Yahenni, Undying Partisan",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Haste\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni.\nSacrifice another creature: Yahenni gains indestructible until end of turn."
     },
     {
       "name": "Grenzo, Havoc Raiser",
       "scryfallId": "aba981f9-ebc6-48ac-b768-557f632b82df",
       "multiverseid": 696372,
       "twoFaced": false,
+      "oracleCardName": "Grenzo, Havoc Raiser",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, choose one —\n• Goad target creature that player controls.\n• Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
     },
     {
       "name": "Legion Warboss",
       "scryfallId": "3d726dff-2904-4a82-adaa-29c57a5c2aed",
       "multiverseid": 696376,
       "twoFaced": false,
+      "oracleCardName": "Legion Warboss",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able."
     },
     {
       "name": "Ogre Battledriver",
       "scryfallId": "49998b89-61ae-4b10-903b-9eb24ce50d4b",
       "multiverseid": 696383,
       "twoFaced": false,
+      "oracleCardName": "Ogre Battledriver",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever another creature you control enters, that creature gets +2/+0 and gains haste until end of turn. (It can attack and {T} this turn.)"
     },
     {
       "name": "Siege-Gang Commander",
       "scryfallId": "a2d3ddb9-ddfb-4ca9-ae77-cf691d385a4a",
       "multiverseid": 696388,
       "twoFaced": false,
+      "oracleCardName": "Siege-Gang Commander",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, create three 1/1 red Goblin creature tokens.\n{1}{R}, Sacrifice a Goblin: This creature deals 2 damage to any target."
     },
     {
       "name": "Tempt with Vengeance",
       "scryfallId": "44ffb919-7b7c-4b7f-b616-cff8369409f2",
       "multiverseid": 696395,
       "twoFaced": false,
+      "oracleCardName": "Tempt with Vengeance",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{R}",
+      "cmc": 1,
+      "oracleText": "Tempting offer — Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste."
     },
     {
       "name": "Kaya, Geist Hunter",
       "scryfallId": "52faa78e-252e-465b-91b5-6f64d828da81",
       "multiverseid": 696450,
       "twoFaced": false,
+      "oracleCardName": "Kaya, Geist Hunter",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{W}{B}",
+      "cmc": 3,
+      "oracleText": "[+1]: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.\n[−2]: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.\n[−6]: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way."
     },
     {
       "name": "Blade of Selves",
       "scryfallId": "d0ca6a34-724f-47bb-b12d-c4998ffc3bf7",
       "multiverseid": 696469,
       "twoFaced": false,
+      "oracleCardName": "Blade of Selves",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has myriad. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nEquip {4}"
     },
     {
       "name": "Idol of Oblivion",
       "scryfallId": "cbc25725-1485-4d98-abe1-906520f868d8",
       "multiverseid": 696475,
       "twoFaced": false,
+      "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
     },
     {
       "name": "Myr Battlesphere",
       "scryfallId": "71e7ef4a-2032-4571-afc6-5207d4b40c3d",
       "multiverseid": 696478,
       "twoFaced": false,
+      "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "When this creature enters, create four 1/1 colorless Myr artifact creature tokens.\nWhenever this creature attacks, you may tap X untapped Myr you control. If you do, this creature gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking."
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "cb1563a1-c8dc-4fcb-b9c8-e7432235d31e",
       "multiverseid": 696481,
       "twoFaced": false,
+      "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
     },
     {
       "name": "Battlefield Forge",
       "scryfallId": "f09bf0b7-45fa-4315-b393-f3ec0303c0c2",
       "multiverseid": 696496,
       "twoFaced": false,
+      "oracleCardName": "Battlefield Forge",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
     },
     {
       "name": "Canyon Slough",
       "scryfallId": "d66c52dd-2a69-4fe9-9037-f82b3e50ee54",
       "multiverseid": 696500,
       "twoFaced": false,
+      "oracleCardName": "Canyon Slough",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Castle Ardenvale",
       "scryfallId": "65e4de2e-47d2-4967-be31-9df0057a9c74",
       "multiverseid": 696502,
       "twoFaced": false,
+      "oracleCardName": "Castle Ardenvale",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains.\n{T}: Add {W}.\n{2}{W}{W}, {T}: Create a 1/1 white Human creature token."
     },
     {
       "name": "Castle Embereth",
       "scryfallId": "337f2d97-b317-4c10-b151-7acccf38fca8",
       "multiverseid": 696503,
       "twoFaced": false,
+      "oracleCardName": "Castle Embereth",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn."
     },
     {
       "name": "Caves of Koilos",
       "scryfallId": "92bef577-f055-4d54-9a75-e9d4a125001c",
       "multiverseid": 696504,
       "twoFaced": false,
+      "oracleCardName": "Caves of Koilos",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
     },
     {
       "name": "Clifftop Retreat",
       "scryfallId": "c5e81948-a362-4805-9bdf-ca65488a1a09",
       "multiverseid": 696507,
       "twoFaced": false,
+      "oracleCardName": "Clifftop Retreat",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Dragonskull Summit",
       "scryfallId": "243ae383-f77d-4942-ae73-61f991131e03",
       "multiverseid": 696513,
       "twoFaced": false,
+      "oracleCardName": "Dragonskull Summit",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "c2ea2395-4518-4683-8eed-59c43fb3328a",
       "multiverseid": 696516,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Fetid Heath",
       "scryfallId": "16af23b7-db97-4dd0-84c2-c0095f6dbe96",
       "multiverseid": 696518,
       "twoFaced": false,
+      "oracleCardName": "Fetid Heath",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}."
     },
     {
       "name": "Isolated Chapel",
       "scryfallId": "2358a441-4ef7-469c-bb9c-c6ff4d719658",
       "multiverseid": 696529,
       "twoFaced": false,
+      "oracleCardName": "Isolated Chapel",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Shattered Sanctum",
       "scryfallId": "2c531254-1b12-44d8-a942-e767d516364e",
       "multiverseid": 696547,
       "twoFaced": false,
+      "oracleCardName": "Shattered Sanctum",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Smoldering Marsh",
       "scryfallId": "a357b4ad-adb8-4db7-a4dc-2fc3f6b7e2d5",
       "multiverseid": 696551,
       "twoFaced": false,
+      "oracleCardName": "Smoldering Marsh",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Temple of Silence",
       "scryfallId": "41393bce-01c1-4268-907e-de0fa8a76719",
       "multiverseid": 696562,
       "twoFaced": false,
+      "oracleCardName": "Temple of Silence",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
     },
     {
       "name": "Temple of Triumph",
       "scryfallId": "56f75be9-7373-4ceb-850d-425ef3be9bfc",
       "multiverseid": 696563,
       "twoFaced": false,
+      "oracleCardName": "Temple of Triumph",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
     },
     {
       "name": "Vault of the Archangel",
       "scryfallId": "8f203f04-bd73-4d88-bb5e-aab63507dbd1",
       "multiverseid": 696566,
       "twoFaced": false,
+      "oracleCardName": "Vault of the Archangel",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}{W}{B}, {T}: Creatures you control gain deathtouch and lifelink until end of turn."
     },
     {
       "name": "Windbrisk Heights",
       "scryfallId": "df441bae-3b9c-46a9-8287-870c00d58a64",
       "multiverseid": 696567,
       "twoFaced": false,
+      "oracleCardName": "Windbrisk Heights",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn."
     },
     {
       "name": "Shadow Summoning",
       "scryfallId": "71398076-a0ff-4bc5-b141-25dfaebe0d53",
       "multiverseid": 696190,
       "twoFaced": false,
+      "oracleCardName": "Shadow Summoning",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Create two tapped 1/1 white Spirit creature tokens with flying."
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "8b59b12c-fde5-4f19-a357-e09f06f490cc",
       "multiverseid": 696191,
       "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
     },
     {
       "name": "Skullclamp",
       "scryfallId": "b5bb89dd-9d31-49d9-ba54-4a04798e515e",
       "multiverseid": 696192,
       "twoFaced": false,
+      "oracleCardName": "Skullclamp",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Goldnight Commander",
       "scryfallId": "854ee15f-bf36-4b80-9717-6e6f02da790e",
       "multiverseid": 696273,
       "twoFaced": false,
+      "oracleCardName": "Goldnight Commander",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Whenever another creature you control enters, creatures you control get +1/+1 until end of turn."
     },
     {
       "name": "Lingering Souls",
       "scryfallId": "2a00c585-5bbc-4622-bf5b-4ec63b669f4c",
       "multiverseid": 696279,
       "twoFaced": false,
+      "oracleCardName": "Lingering Souls",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Create two 1/1 white Spirit creature tokens with flying.\nFlashback {1}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Release the Dogs",
       "scryfallId": "7e1df99a-c139-44c9-8881-077dbfd7332f",
       "multiverseid": 696283,
       "twoFaced": false,
+      "oracleCardName": "Release the Dogs",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Create four 1/1 white Dog creature tokens."
     },
     {
       "name": "Stroke of Midnight",
       "scryfallId": "b000f605-177f-459d-a197-fcf54efec2fb",
       "multiverseid": 696288,
       "twoFaced": false,
+      "oracleCardName": "Stroke of Midnight",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "f87cf997-14b5-4a2c-a7d1-34b7de6561a2",
       "multiverseid": 696290,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Bastion of Remembrance",
       "scryfallId": "9d0c6077-f84c-4e91-87dc-b0ac81d557f8",
       "multiverseid": 696327,
       "twoFaced": false,
+      "oracleCardName": "Bastion of Remembrance",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, create a 1/1 white Human Soldier creature token.\nWhenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
     },
     {
       "name": "Bitter Triumph",
       "scryfallId": "c5333556-eea2-41ae-833e-007b9d540700",
       "multiverseid": 696329,
       "twoFaced": false,
+      "oracleCardName": "Bitter Triumph",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "As an additional cost to cast this spell, discard a card or pay 3 life.\nDestroy target creature or planeswalker."
     },
     {
       "name": "Deadly Dispute",
       "scryfallId": "b22ef77b-67a3-45d3-9d18-12b7b124cbf4",
       "multiverseid": 696333,
       "twoFaced": false,
+      "oracleCardName": "Deadly Dispute",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Morbid Opportunist",
       "scryfallId": "5f0440bc-807a-4425-8707-e74f468b2ca7",
       "multiverseid": 696344,
       "twoFaced": false,
+      "oracleCardName": "Morbid Opportunist",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
     },
     {
       "name": "Viscera Seer",
       "scryfallId": "d0f3a502-064e-4700-a730-2e86f985bbc3",
       "multiverseid": 696355,
       "twoFaced": false,
+      "oracleCardName": "Viscera Seer",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Abrade",
       "scryfallId": "4c2a1b4e-858c-47a3-be89-9275e48d5475",
       "multiverseid": 696359,
       "twoFaced": false,
+      "oracleCardName": "Abrade",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact."
     },
     {
       "name": "Beetleback Chief",
       "scryfallId": "2d19a474-b008-4088-8a31-333c0b2d9d65",
       "multiverseid": 696361,
       "twoFaced": false,
+      "oracleCardName": "Beetleback Chief",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, create two 1/1 red Goblin creature tokens."
     },
     {
       "name": "Loyal Apprentice",
       "scryfallId": "d4d469ea-824b-4eff-82e8-2a0b9b4c0e2d",
       "multiverseid": 696378,
       "twoFaced": false,
+      "oracleCardName": "Loyal Apprentice",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
     },
     {
       "name": "Nomad Outpost",
       "scryfallId": "a68fbeaa-941f-4d53-becd-f93ed22b9a54",
       "multiverseid": 693743,
       "twoFaced": false,
+      "oracleCardName": "Nomad Outpost",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
     },
     {
       "name": "Aron, Benalia's Ruin",
       "scryfallId": "721cd840-5f2e-40b7-8b33-ea2d6343d390",
       "multiverseid": 696436,
       "twoFaced": false,
+      "oracleCardName": "Aron, Benalia's Ruin",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{W}{B}",
+      "cmc": 3,
+      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\n{W}{B}, {T}, Sacrifice another creature: Put a +1/+1 counter on each creature you control."
     },
     {
       "name": "Thalisse, Reverent Medium",
       "scryfallId": "f8cd8b55-2927-4e53-be1e-cc33c35f85b7",
       "multiverseid": 696462,
       "twoFaced": false,
+      "oracleCardName": "Thalisse, Reverent Medium",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{B}",
+      "cmc": 5,
+      "oracleText": "At the beginning of each end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of tokens you created this turn."
     },
     {
       "name": "Fellwar Stone",
       "scryfallId": "ce55e00c-cd95-48eb-986e-edf5125f3534",
       "multiverseid": 696474,
       "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Talisman of Conviction",
       "scryfallId": "efeafc9d-a953-4915-8342-725836d0f645",
       "multiverseid": 696485,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Conviction",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
     },
     {
       "name": "Talisman of Hierarchy",
       "scryfallId": "7a283444-2cb5-4dd2-8d20-e8cb90ac0ffe",
       "multiverseid": 696487,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Hierarchy",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Wayfarer's Bauble",
       "scryfallId": "ac1960a1-9141-468c-b96c-6c8e6905084d",
       "multiverseid": 696491,
       "twoFaced": false,
+      "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Bojuka Bog",
       "scryfallId": "38834333-f9ea-43a8-b00a-17935d59eaea",
       "multiverseid": 696497,
       "twoFaced": false,
+      "oracleCardName": "Bojuka Bog",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "b8504812-fcf5-47d3-977d-1d9a11231fd0",
       "multiverseid": 696538,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Shattered Landscape",
       "scryfallId": "f8373e5a-94bb-4aa0-bd09-13a01e0cb02a",
       "multiverseid": 696546,
       "twoFaced": false,
+      "oracleCardName": "Shattered Landscape",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tapped, then shuffle.\nCycling {R}{W}{B} ({R}{W}{B}, Discard this card: Draw a card.)"
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "9ff6e014-4811-44df-a7f8-a667a4a01f4f",
       "multiverseid": 696564,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "TDC"
+      "set": "TDC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Plains",
       "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
       "multiverseid": 693321,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
       "multiverseid": 693321,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
       "multiverseid": 693326,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
       "multiverseid": 693326,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
       "multiverseid": 693326,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3df7c206-97b6-49d7-ba01-7a35fd8c61d9",
       "multiverseid": 693327,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "3df7c206-97b6-49d7-ba01-7a35fd8c61d9",
       "multiverseid": 693327,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "TDM"
+      "set": "TDM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.261Z",
+    "retrievedDate": "2026-02-20T03:10:21.396Z",
     "sourceUrl": "MarduSurge_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"

@@ -9,12 +9,19 @@
       "scryfallId": "8d94b8ec-ecda-43c8-a60e-1ba33e6a54a4",
       "multiverseid": 433277,
       "twoFaced": false,
+      "oracleCardName": "Edgar Markov",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{W}{B}",
+      "cmc": 6,
+      "oracleText": "Eminence — Whenever you cast another Vampire spell, if Edgar is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\nFirst strike, haste\nWhenever Edgar attacks, put a +1/+1 counter on each Vampire you control."
     }
   ],
   "cards": [
@@ -23,1001 +30,1657 @@
       "scryfallId": "64eab2ba-ed5e-4757-b42d-c0fc71a96c4c",
       "multiverseid": 433281,
       "twoFaced": false,
+      "oracleCardName": "Licia, Sanguine Tribune",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{W}{B}",
+      "cmc": 8,
+      "oracleText": "This spell costs {1} less to cast for each 1 life you gained this turn.\nFirst strike, lifelink\nPay 5 life: Put three +1/+1 counters on Licia. Activate only during your turn and only once each turn."
     },
     {
       "name": "Mathas, Fiend Seeker",
       "scryfallId": "a5fc5dfc-ee07-4fd6-8d5d-55099752254a",
       "multiverseid": 433283,
       "twoFaced": false,
+      "oracleCardName": "Mathas, Fiend Seeker",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{W}{B}",
+      "cmc": 3,
+      "oracleText": "Menace\nAt the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has \"When this creature dies, each opponent draws a card and gains 2 life.\""
     },
     {
       "name": "Kheru Mind-Eater",
       "scryfallId": "e6246cf3-76bd-476b-9cd9-789b6ad48887",
       "multiverseid": 433258,
       "twoFaced": false,
+      "oracleCardName": "Kheru Mind-Eater",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Menace\nWhenever this creature deals combat damage to a player, that player exiles a card from their hand face down.\nYou may look at cards exiled with this creature, and you may play lands and cast spells from among those cards."
     },
     {
       "name": "Patron of the Vein",
       "scryfallId": "e27db39c-c4b8-46b9-afe6-1737841bdad6",
       "multiverseid": 433261,
       "twoFaced": false,
+      "oracleCardName": "Patron of the Vein",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhen this creature enters, destroy target creature an opponent controls.\nWhenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control."
     },
     {
       "name": "Bloodsworn Steward",
       "scryfallId": "e185f493-57c3-47dd-8dac-de8690ce8fbc",
       "multiverseid": 433263,
       "twoFaced": false,
+      "oracleCardName": "Bloodsworn Steward",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nCommander creatures you control get +2/+2 and have haste."
     },
     {
       "name": "Crimson Honor Guard",
       "scryfallId": "9597255c-2657-40e4-855f-c8701a70aa39",
       "multiverseid": 433264,
       "twoFaced": false,
+      "oracleCardName": "Crimson Honor Guard",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Trample\nAt the beginning of each player's end step, this creature deals 4 damage to that player unless they control a commander."
     },
     {
       "name": "Anowon, the Ruin Sage",
       "scryfallId": "e3631ede-7703-4e84-aec0-b4880fdb3685",
       "multiverseid": 433028,
       "twoFaced": false,
+      "oracleCardName": "Anowon, the Ruin Sage",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your upkeep, each player sacrifices a non-Vampire creature of their choice."
     },
     {
       "name": "Bloodlord of Vaasgoth",
       "scryfallId": "7e753603-9822-427b-bee2-85b99f102470",
       "multiverseid": 433034,
       "twoFaced": false,
+      "oracleCardName": "Bloodlord of Vaasgoth",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters with three +1/+1 counters on it.)\nFlying\nWhenever you cast a Vampire creature spell, it gains bloodthirst 3."
     },
     {
       "name": "Blood Baron of Vizkopa",
       "scryfallId": "5e07f522-df4d-4090-b53a-1934bd8542fb",
       "multiverseid": 433096,
       "twoFaced": false,
+      "oracleCardName": "Blood Baron of Vizkopa",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{B}",
+      "cmc": 5,
+      "oracleText": "Lifelink, protection from white and from black\nAs long as you have 30 or more life and an opponent has 10 or less life, this creature gets +6/+6 and has flying."
     },
     {
       "name": "Butcher of Malakir",
       "scryfallId": "da3257cb-f3a5-440b-b197-def28676a063",
       "multiverseid": 433035,
       "twoFaced": false,
+      "oracleCardName": "Butcher of Malakir",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
     },
     {
       "name": "Captivating Vampire",
       "scryfallId": "1b825bd1-9cbc-45a8-bfbe-fc3e8fdc575e",
       "multiverseid": 433036,
       "twoFaced": false,
+      "oracleCardName": "Captivating Vampire",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Other Vampire creatures you control get +1/+1.\nTap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types."
     },
     {
       "name": "Dark Impostor",
       "scryfallId": "78e79bbf-9b18-44d2-ae57-1559cdb38bc5",
       "multiverseid": 433041,
       "twoFaced": false,
+      "oracleCardName": "Dark Impostor",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "{4}{B}{B}: Exile target creature and put a +1/+1 counter on this creature.\nThis creature has all activated abilities of all creature cards exiled with it."
     },
     {
       "name": "Drana, Kalastria Bloodchief",
       "scryfallId": "2c58ce5e-b038-4376-a5f4-9849baa255b9",
       "multiverseid": 433044,
       "twoFaced": false,
+      "oracleCardName": "Drana, Kalastria Bloodchief",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying\n{X}{B}{B}: Target creature gets -0/-X until end of turn and Drana gets +X/+0 until end of turn."
     },
     {
       "name": "Malakir Bloodwitch",
       "scryfallId": "be917193-f4ab-485d-aac2-826db6a08275",
       "multiverseid": 433048,
       "twoFaced": false,
+      "oracleCardName": "Malakir Bloodwitch",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, protection from white\nWhen this creature enters, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way."
     },
     {
       "name": "Sangromancer",
       "scryfallId": "3af47f00-2f43-4de9-9a88-966331be83c4",
       "multiverseid": 433055,
       "twoFaced": false,
+      "oracleCardName": "Sangromancer",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever a creature an opponent controls dies, you may gain 3 life.\nWhenever an opponent discards a card, you may gain 3 life."
     },
     {
       "name": "Skeletal Vampire",
       "scryfallId": "327096bb-78d3-444f-a017-4c504d18203a",
       "multiverseid": 433058,
       "twoFaced": false,
+      "oracleCardName": "Skeletal Vampire",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhen this creature enters, create two 1/1 black Bat creature tokens with flying.\n{3}{B}{B}, Sacrifice a Bat: Create two 1/1 black Bat creature tokens with flying.\nSacrifice a Bat: Regenerate this creature."
     },
     {
       "name": "Vein Drinker",
       "scryfallId": "25ad3372-51cb-4b82-a23c-81938b7c01b6",
       "multiverseid": 433062,
       "twoFaced": false,
+      "oracleCardName": "Vein Drinker",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Flying\n{R}, {T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature.\nWhenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature."
     },
     {
       "name": "Bloodline Necromancer",
       "scryfallId": "42bffd03-3821-4b0f-9535-2eb455154587",
       "multiverseid": 433255,
       "twoFaced": false,
+      "oracleCardName": "Bloodline Necromancer",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "Lifelink\nWhen this creature enters, you may return target Vampire or Wizard creature card from your graveyard to the battlefield."
     },
     {
       "name": "Blood Artist",
       "scryfallId": "e93e65d6-c2c8-4ab6-9296-7b21ff2ff8bf",
       "multiverseid": 433031,
       "twoFaced": false,
+      "oracleCardName": "Blood Artist",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
     },
     {
       "name": "Bloodhusk Ritualist",
       "scryfallId": "31ae4ee7-c540-4e32-95a4-6a2e7def094f",
       "multiverseid": 433033,
       "twoFaced": false,
+      "oracleCardName": "Bloodhusk Ritualist",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Multikicker {B} (You may pay an additional {B} any number of times as you cast this spell.)\nWhen this creature enters, target opponent discards a card for each time it was kicked."
     },
     {
       "name": "Falkenrath Noble",
       "scryfallId": "d470a2d1-0a68-4c73-95cb-a924f0a9631b",
       "multiverseid": 433045,
       "twoFaced": false,
+      "oracleCardName": "Falkenrath Noble",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
     },
     {
       "name": "Pawn of Ulamog",
       "scryfallId": "d9b9e2c6-7af7-42ae-91b2-0d17312b3624",
       "multiverseid": 433052,
       "twoFaced": false,
+      "oracleCardName": "Pawn of Ulamog",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever this creature or another nontoken creature you control dies, you may create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\""
     },
     {
       "name": "Vampire Nighthawk",
       "scryfallId": "f5a3c19b-c8b3-4b22-87d4-6d998e473da2",
       "multiverseid": 433061,
       "twoFaced": false,
+      "oracleCardName": "Vampire Nighthawk",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)"
     },
     {
       "name": "Rakish Heir",
       "scryfallId": "6c216b82-2280-4d9b-950c-be546703de6e",
       "multiverseid": 433072,
       "twoFaced": false,
+      "oracleCardName": "Rakish Heir",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it."
     },
     {
       "name": "Stromkirk Captain",
       "scryfallId": "759d0e2d-960b-482e-a2cd-4a1c5423de0f",
       "multiverseid": 433129,
       "twoFaced": false,
+      "oracleCardName": "Stromkirk Captain",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{R}",
+      "cmc": 3,
+      "oracleText": "First strike\nOther Vampire creatures you control get +1/+1 and have first strike."
     },
     {
       "name": "Tithe Drinker",
       "scryfallId": "35e22f03-55f1-449a-b8c1-6ad9f92c55ed",
       "multiverseid": 433132,
       "twoFaced": false,
+      "oracleCardName": "Tithe Drinker",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{B}",
+      "cmc": 2,
+      "oracleText": "Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)"
     },
     {
       "name": "New Blood",
       "scryfallId": "f6b44503-7978-4c9e-a8a1-fd38c76d3545",
       "multiverseid": 433260,
       "twoFaced": false,
+      "oracleCardName": "New Blood",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "As an additional cost to cast this spell, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire."
     },
     {
       "name": "Disrupt Decorum",
       "scryfallId": "397de47f-02e8-4ccd-8de0-a37971cab3b0",
       "multiverseid": 433266,
       "twoFaced": false,
+      "oracleCardName": "Disrupt Decorum",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Goad all creatures you don't control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
     },
     {
       "name": "Kindred Charge",
       "scryfallId": "3e7dc7f0-ba05-4a13-b8e0-7f536fbf0f34",
       "multiverseid": 433268,
       "twoFaced": false,
+      "oracleCardName": "Kindred Charge",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Choose a creature type. For each creature you control of the chosen type, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step."
     },
     {
       "name": "Fell the Mighty",
       "scryfallId": "0741e122-e538-4e0b-bdf4-c21b47d27b5c",
       "multiverseid": 432992,
       "twoFaced": false,
+      "oracleCardName": "Fell the Mighty",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all creatures with power greater than target creature's power."
     },
     {
       "name": "Blood Tribute",
       "scryfallId": "361912f4-5205-44a5-b21e-17402526c1fd",
       "multiverseid": 433032,
       "twoFaced": false,
+      "oracleCardName": "Blood Tribute",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Kicker—Tap an untapped Vampire you control. (You may tap a Vampire you control in addition to any other costs as you cast this spell.)\nTarget opponent loses half their life, rounded up. If this spell was kicked, you gain life equal to the life lost this way."
     },
     {
       "name": "Consuming Vapors",
       "scryfallId": "9d47bea4-3286-4a96-ab61-f4865ed03ac5",
       "multiverseid": 433037,
       "twoFaced": false,
+      "oracleCardName": "Consuming Vapors",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Target player sacrifices a creature of their choice. You gain life equal to that creature's toughness.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
     },
     {
       "name": "Damnable Pact",
       "scryfallId": "0817c5fa-acd9-4fed-ab8b-06750a8817b0",
       "multiverseid": 433040,
       "twoFaced": false,
+      "oracleCardName": "Damnable Pact",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{B}{B}",
+      "cmc": 2,
+      "oracleText": "Target player draws X cards and loses X life."
     },
     {
       "name": "Merciless Eviction",
       "scryfallId": "0d6901de-65b9-47f5-bcb6-ffab7fe06d51",
       "multiverseid": 433111,
       "twoFaced": false,
+      "oracleCardName": "Merciless Eviction",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{B}",
+      "cmc": 6,
+      "oracleText": "Choose one —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all planeswalkers."
     },
     {
       "name": "Ambition's Cost",
       "scryfallId": "c40f60fe-0f81-43a8-9205-57cf718db81e",
       "multiverseid": 433027,
       "twoFaced": false,
+      "oracleCardName": "Ambition's Cost",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "You draw three cards and you lose 3 life."
     },
     {
       "name": "Read the Bones",
       "scryfallId": "ece1852d-8b7f-4fe6-b9fe-0584a94087ab",
       "multiverseid": 433054,
       "twoFaced": false,
+      "oracleCardName": "Read the Bones",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
     },
     {
       "name": "Syphon Mind",
       "scryfallId": "d1ad2f61-d891-4104-99bd-ca69f726920f",
       "multiverseid": 433059,
       "twoFaced": false,
+      "oracleCardName": "Syphon Mind",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
     },
     {
       "name": "Teferi's Protection",
       "scryfallId": "77f130c7-0138-4a1a-9f67-62d2c302dc48",
       "multiverseid": 433249,
       "twoFaced": false,
+      "oracleCardName": "Teferi's Protection",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)\nExile Teferi's Protection."
     },
     {
       "name": "Crackling Doom",
       "scryfallId": "2ab2b411-912f-4cb6-b4ca-f545ca8820d5",
       "multiverseid": 433099,
       "twoFaced": false,
+      "oracleCardName": "Crackling Doom",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}{W}{B}",
+      "cmc": 3,
+      "oracleText": "Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures that player controls."
     },
     {
       "name": "Return to Dust",
       "scryfallId": "82ec86ad-03fc-4df6-a20a-aeca1d7905b9",
       "multiverseid": 433002,
       "twoFaced": false,
+      "oracleCardName": "Return to Dust",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
     },
     {
       "name": "Swords to Plowshares",
       "scryfallId": "d8d4eaeb-6546-44d8-a96f-7270e23014d1",
       "multiverseid": 433008,
       "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
     },
     {
       "name": "Go for the Throat",
       "scryfallId": "3c6cb231-41df-409c-923e-100319f27ee3",
       "multiverseid": 433046,
       "twoFaced": false,
+      "oracleCardName": "Go for the Throat",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Destroy target nonartifact creature."
     },
     {
       "name": "Skeletal Scrying",
       "scryfallId": "6653ed3b-2a82-4e22-a9ca-18da5da94990",
       "multiverseid": 433057,
       "twoFaced": false,
+      "oracleCardName": "Skeletal Scrying",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{B}",
+      "cmc": 1,
+      "oracleText": "As an additional cost to cast this spell, exile X cards from your graveyard.\nYou draw X cards and you lose X life."
     },
     {
       "name": "Mortify",
       "scryfallId": "f376fe4f-87a1-4942-a8ef-3553d73a2334",
       "multiverseid": 433114,
       "twoFaced": false,
+      "oracleCardName": "Mortify",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}{B}",
+      "cmc": 3,
+      "oracleText": "Destroy target creature or enchantment."
     },
     {
       "name": "Blade of the Bloodchief",
       "scryfallId": "0c80fbef-ad13-4ff1-92ae-f8363ed5c6ab",
       "multiverseid": 433136,
       "twoFaced": false,
+      "oracleCardName": "Blade of the Bloodchief",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.\nEquip {1}"
     },
     {
       "name": "Door of Destinies",
       "scryfallId": "75fd3fea-158a-4575-84a8-879ee9404242",
       "multiverseid": 433140,
       "twoFaced": false,
+      "oracleCardName": "Door of Destinies",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "As this artifact enters, choose a creature type.\nWhenever you cast a spell of the chosen type, put a charge counter on this artifact.\nCreatures you control of the chosen type get +1/+1 for each charge counter on this artifact."
     },
     {
       "name": "Well of Lost Dreams",
       "scryfallId": "26bbf680-cfdc-4d8f-93fc-5ffa15042191",
       "multiverseid": 433163,
       "twoFaced": false,
+      "oracleCardName": "Well of Lost Dreams",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards."
     },
     {
       "name": "Heirloom Blade",
       "scryfallId": "aae598eb-871d-45af-b12c-346c344ae74b",
       "multiverseid": 433293,
       "twoFaced": false,
+      "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
     },
     {
       "name": "Boros Signet",
       "scryfallId": "c5cc1e0b-da54-482a-8ed3-e56a1df4d8f2",
       "multiverseid": 433137,
       "twoFaced": false,
+      "oracleCardName": "Boros Signet",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {R}{W}."
     },
     {
       "name": "Orzhov Signet",
       "scryfallId": "ee21d8d0-65ad-462a-8a6d-8c7615ca9cde",
       "multiverseid": 433151,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Signet",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {W}{B}."
     },
     {
       "name": "Rakdos Signet",
       "scryfallId": "902d2af6-d52d-42bd-89d4-c0034fd0d763",
       "multiverseid": 433153,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Signet",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {B}{R}."
     },
     {
       "name": "Skullclamp",
       "scryfallId": "ab56119b-1e13-44d4-b73b-991488c039f1",
       "multiverseid": 433154,
       "twoFaced": false,
+      "oracleCardName": "Skullclamp",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "c6399a22-cebf-4c1d-a23e-4c68f784ac1b",
       "multiverseid": 433155,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Worn Powerstone",
       "scryfallId": "c9dffd88-fb82-4ce2-889c-7e247398995c",
       "multiverseid": 433164,
       "twoFaced": false,
+      "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
     },
     {
       "name": "Kindred Boon",
       "scryfallId": "3b09c3dc-94ed-4d9d-8c5f-51169200de45",
       "multiverseid": 433246,
       "twoFaced": false,
+      "oracleCardName": "Kindred Boon",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "As this enchantment enters, choose a creature type.\n{1}{W}: Put a divinity counter on target creature you control of the chosen type.\nEach creature you control with a divinity counter on it has indestructible."
     },
     {
       "name": "Blind Obedience",
       "scryfallId": "77fccacf-a9b3-4290-9b83-24188e7c885b",
       "multiverseid": 432989,
       "twoFaced": false,
+      "oracleCardName": "Blind Obedience",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nArtifacts and creatures your opponents control enter tapped."
     },
     {
       "name": "Black Market",
       "scryfallId": "779f87b6-b99c-4eb1-a43e-af275b9ef3b1",
       "multiverseid": 433030,
       "twoFaced": false,
+      "oracleCardName": "Black Market",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Whenever a creature dies, put a charge counter on this enchantment.\nAt the beginning of your first main phase, add {B} for each charge counter on this enchantment."
     },
     {
       "name": "Sanguine Bond",
       "scryfallId": "241a25c7-7205-46ee-8b08-845cdcc546bb",
       "multiverseid": 433056,
       "twoFaced": false,
+      "oracleCardName": "Sanguine Bond",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Whenever you gain life, target opponent loses that much life."
     },
     {
       "name": "Underworld Connections",
       "scryfallId": "d388ed15-42fc-49fa-853b-61a6510a4b25",
       "multiverseid": 433060,
       "twoFaced": false,
+      "oracleCardName": "Underworld Connections",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "Enchant land\nEnchanted land has \"{T}, Pay 1 life: Draw a card.\""
     },
     {
       "name": "Outpost Siege",
       "scryfallId": "b909b8bc-667b-4784-979f-093029b5a156",
       "multiverseid": 433071,
       "twoFaced": false,
+      "oracleCardName": "Outpost Siege",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, this enchantment deals 1 damage to any target."
     },
     {
       "name": "Curse of Vitality",
       "scryfallId": "c1a80504-d991-4eef-8407-2acf444401f0",
       "multiverseid": 433244,
       "twoFaced": false,
+      "oracleCardName": "Curse of Vitality",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Enchant player\nWhenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same."
     },
     {
       "name": "Curse of Disturbance",
       "scryfallId": "d022b7d7-e9f5-4f58-8010-331baaa4e3c4",
       "multiverseid": 433257,
       "twoFaced": false,
+      "oracleCardName": "Curse of Disturbance",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Enchant player\nWhenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same."
     },
     {
       "name": "Swamp",
       "scryfallId": "3dd92a77-c852-410a-9ee9-abc01e9867a4",
       "multiverseid": 433233,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "3dd92a77-c852-410a-9ee9-abc01e9867a4",
       "multiverseid": 433233,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "3dd92a77-c852-410a-9ee9-abc01e9867a4",
       "multiverseid": 433233,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "d284ddf5-a1cb-4073-a53e-e8ccaaded32c",
       "multiverseid": 433234,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "d284ddf5-a1cb-4073-a53e-e8ccaaded32c",
       "multiverseid": 433234,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "d284ddf5-a1cb-4073-a53e-e8ccaaded32c",
       "multiverseid": 433234,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "de62de43-a74e-499f-8fe6-68a8a51078ce",
       "multiverseid": 433235,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "de62de43-a74e-499f-8fe6-68a8a51078ce",
       "multiverseid": 433235,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "15a7deb5-0163-42a5-90c7-388f8dda83fb",
       "multiverseid": 433236,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "15a7deb5-0163-42a5-90c7-388f8dda83fb",
       "multiverseid": 433236,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "76a38a60-7e1d-4ef3-acec-1699b29662ce",
       "multiverseid": 433237,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "95ec918b-3039-402d-a52e-b9f0a08284e2",
       "multiverseid": 433238,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "1927feea-a2ee-43ca-a413-9084be8f50a2",
       "multiverseid": 433227,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "2fb86b5f-0ff7-4924-8c69-3042ddec7911",
       "multiverseid": 433228,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plains",
       "scryfallId": "e67be1a3-24cc-43d9-bc22-3777a0549b5c",
       "multiverseid": 433229,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "70e70720-f0b9-4ad7-9366-927d6798d31e",
       "multiverseid": 433297,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Akoum Refuge",
       "scryfallId": "2745cd0e-086b-4456-9124-e7bf692fcc21",
       "multiverseid": 433165,
       "twoFaced": false,
+      "oracleCardName": "Akoum Refuge",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Bloodfell Caves",
       "scryfallId": "83a54064-982f-4ff8-b5e6-c5b92ae61071",
       "multiverseid": 433168,
       "twoFaced": false,
+      "oracleCardName": "Bloodfell Caves",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Bojuka Bog",
       "scryfallId": "e379c13b-88c6-46ef-b3f6-d35ed2e8860b",
       "multiverseid": 433170,
       "twoFaced": false,
+      "oracleCardName": "Bojuka Bog",
       "colorIdentity": [
         "B"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
     },
     {
       "name": "Boros Garrison",
       "scryfallId": "cb8914b9-7339-48dd-9fa1-0a7bccefc872",
       "multiverseid": 433171,
       "twoFaced": false,
+      "oracleCardName": "Boros Garrison",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
     },
     {
       "name": "Boros Guildgate",
       "scryfallId": "095082a3-1b7d-4d45-954b-2c2881256ad8",
       "multiverseid": 433172,
       "twoFaced": false,
+      "oracleCardName": "Boros Guildgate",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Cinder Barrens",
       "scryfallId": "a91dd6b5-03e1-46fa-8c7a-2c780e641550",
       "multiverseid": 433173,
       "twoFaced": false,
+      "oracleCardName": "Cinder Barrens",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "d2b1183f-bfc6-425f-9089-8657f7c8822b",
       "multiverseid": 433174,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "1d8bbc93-4bb8-4cba-b284-5149ac71767d",
       "multiverseid": 433180,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Forsaken Sanctuary",
       "scryfallId": "381097a1-aac8-449b-bed5-ec0d9879a2c8",
       "multiverseid": 433182,
       "twoFaced": false,
+      "oracleCardName": "Forsaken Sanctuary",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Kabira Crossroads",
       "scryfallId": "7f6a18b8-d490-490d-83a5-227a416ccf92",
       "multiverseid": 433191,
       "twoFaced": false,
+      "oracleCardName": "Kabira Crossroads",
       "colorIdentity": [
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 2 life.\n{T}: Add {W}."
     },
     {
       "name": "Nomad Outpost",
       "scryfallId": "fc472eca-ffae-4d66-97f2-9204d825402c",
       "multiverseid": 433197,
       "twoFaced": false,
+      "oracleCardName": "Nomad Outpost",
       "colorIdentity": [
         "B",
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
     },
     {
       "name": "Opal Palace",
       "scryfallId": "c7d25e91-a1a4-4c64-bb4e-3aac8145d885",
       "multiverseid": 433198,
       "twoFaced": false,
+      "oracleCardName": "Opal Palace",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
     },
     {
       "name": "Orzhov Basilica",
       "scryfallId": "b31f4a31-fe5c-4430-a8b3-630ceb80e38d",
       "multiverseid": 433200,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Basilica",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
     },
     {
       "name": "Orzhov Guildgate",
       "scryfallId": "27c6f99a-4a1a-44a3-bc41-507aa7b62e1c",
       "multiverseid": 433201,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Guildgate",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Rakdos Carnarium",
       "scryfallId": "67ba680b-b32e-4c2e-8693-bbbe9855a049",
       "multiverseid": 433202,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Carnarium",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
     },
     {
       "name": "Rakdos Guildgate",
       "scryfallId": "88e5b326-dbdb-4f97-8496-d2b093d1f822",
       "multiverseid": 433203,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Guildgate",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Scoured Barrens",
       "scryfallId": "0d525f2e-3330-4145-9e78-ce5408627c34",
       "multiverseid": 433208,
       "twoFaced": false,
+      "oracleCardName": "Scoured Barrens",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Stone Quarry",
       "scryfallId": "b2a226c2-da8a-4255-967f-d9561f4206b3",
       "multiverseid": 433214,
       "twoFaced": false,
+      "oracleCardName": "Stone Quarry",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "c7daa923-6bd9-4315-a483-840021b745dd",
       "multiverseid": 433217,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Urborg Volcano",
       "scryfallId": "c69f6612-c974-4723-925e-afd4211c76db",
       "multiverseid": 433220,
       "twoFaced": false,
+      "oracleCardName": "Urborg Volcano",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Wind-Scarred Crag",
       "scryfallId": "ea993daa-f793-4caf-a2f8-eb2a6a0fc94a",
       "multiverseid": 433226,
       "twoFaced": false,
+      "oracleCardName": "Wind-Scarred Crag",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "C17"
+      "set": "C17",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {W}."
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:14.044Z",
+    "retrievedDate": "2026-02-20T03:10:22.304Z",
     "sourceUrl": "VampiricBloodlust_C17.json",
     "deckSource": "precon",
     "createdAt": "2017-08-25T00:00:00.000Z"

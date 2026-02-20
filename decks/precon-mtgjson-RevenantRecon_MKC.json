@@ -9,11 +9,18 @@
       "scryfallId": "690acbbf-5e92-4323-b939-31bdb07f9905",
       "multiverseid": 649908,
       "twoFaced": false,
+      "oracleCardName": "Mirko, Obsessive Theorist",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Flying, vigilance\nWhenever you surveil, put a +1/+1 counter on Mirko.\nAt the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it. (If it would die, exile it instead.)"
     }
   ],
   "cards": [
@@ -22,984 +29,1642 @@
       "scryfallId": "8fdb30c1-0551-48b7-8bcb-d7e0dbb6690a",
       "multiverseid": 649929,
       "twoFaced": false,
+      "oracleCardName": "Marvo, Deep Operative",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "Whenever Marvo attacks, clash with defending player. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)\nWhenever you win a clash, draw a card. Then you may cast a spell from your hand with mana value 8 or less without paying its mana cost."
     },
     {
       "name": "Case of the Shifting Visage",
       "scryfallId": "65463a1b-39c1-4fc8-8de2-85224de810ac",
       "multiverseid": 649957,
       "twoFaced": false,
+      "oracleCardName": "Case of the Shifting Visage",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, surveil 1.\nTo solve — There are fifteen or more cards in your graveyard. (If unsolved, solve at the beginning of your end step.)\nSolved — Whenever you cast a nonlegendary creature spell, copy that spell. (The copy becomes a token.)"
     },
     {
       "name": "Copy Catchers",
       "scryfallId": "af6b5cec-49fa-4f8d-8493-4bb7f3e291e8",
       "multiverseid": 649958,
       "twoFaced": false,
+      "oracleCardName": "Copy Catchers",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever you surveil, you may pay {1}{U}. If you do, create a token that's a copy of this creature."
     },
     {
       "name": "Final-Word Phantom",
       "scryfallId": "7a51d392-58dc-483e-81f7-2d51e64e54ff",
       "multiverseid": 649960,
       "twoFaced": false,
+      "oracleCardName": "Final-Word Phantom",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Flash\nFlying\nDuring each opponent's end step, you may cast spells as though they had flash."
     },
     {
       "name": "Watcher of Hours",
       "scryfallId": "d827fc3c-bc86-4ee9-9db9-461cb0276f6b",
       "multiverseid": 649963,
       "twoFaced": false,
+      "oracleCardName": "Watcher of Hours",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Flying, ward {3}\nWhenever you remove a time counter from this card while it's exiled, surveil 1.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)"
     },
     {
       "name": "Charnel Serenade",
       "scryfallId": "05a2477e-a9a2-49fb-86e6-53d3e153a965",
       "multiverseid": 649964,
       "twoFaced": false,
+      "oracleCardName": "Charnel Serenade",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Surveil 3, then return a creature card from your graveyard to the battlefield with a finality counter on it. Exile Charnel Serenade with three time counters on it.\nSuspend 3—{2}{B} (Rather than cast this card from your hand, you may pay {2}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
     },
     {
       "name": "Eye of Duskmantle",
       "scryfallId": "905fa4ed-e496-43d8-9c4a-38e85d9b7651",
       "multiverseid": 649965,
       "twoFaced": false,
+      "oracleCardName": "Eye of Duskmantle",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Flying, lifelink\nYou may play lands and cast spells from among cards in your graveyard you've surveilled this turn. If you cast a spell this way, you pay life equal to its mana value rather than paying its mana cost."
     },
     {
       "name": "Foreboding Steamboat",
       "scryfallId": "cbd9a0cb-e1ea-446e-aa57-4305d4b3b92e",
       "multiverseid": 649966,
       "twoFaced": false,
+      "oracleCardName": "Foreboding Steamboat",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield.\nWhenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.\nCrew 2"
     },
     {
       "name": "Unshakable Tail",
       "scryfallId": "053183e7-b505-49d2-b614-b704e984cb1a",
       "multiverseid": 649967,
       "twoFaced": false,
+      "oracleCardName": "Unshakable Tail",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature enters and at the beginning of your upkeep, surveil 1.\nWhenever one or more creature cards are put into your graveyard from your library, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{2}, Sacrifice a Clue: Return this card from your graveyard to your hand."
     },
     {
       "name": "Counterpoint",
       "scryfallId": "b74caf65-1e6c-444e-9121-906ba7e8ea20",
       "multiverseid": 649979,
       "twoFaced": false,
+      "oracleCardName": "Counterpoint",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "Counter target spell. You may cast a creature, instant, sorcery, or planeswalker spell from your graveyard with mana value less than or equal to that spell's mana value without paying its mana cost."
     },
     {
       "name": "Ransom Note",
       "scryfallId": "24a93c86-e0a5-4d94-8df3-f6ebf8b42892",
       "multiverseid": 649986,
       "twoFaced": false,
+      "oracleCardName": "Ransom Note",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
     },
     {
       "name": "Amphin Mutineer",
       "scryfallId": "0f54f429-80c2-4f55-bb99-236f2c697985",
       "multiverseid": 650189,
       "twoFaced": false,
+      "oracleCardName": "Amphin Mutineer",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
     },
     {
       "name": "Dream Eater",
       "scryfallId": "2b7b2d1b-aefd-4199-ac82-548da3025e82",
       "multiverseid": 650195,
       "twoFaced": false,
+      "oracleCardName": "Dream Eater",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Flash\nFlying\nWhen this creature enters, surveil 4. When you do, you may return target nonland permanent an opponent controls to its owner's hand. (To surveil 4, look at the top four cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Mission Briefing",
       "scryfallId": "5ed398e7-9d2b-4bd2-9a4b-2885e4749003",
       "multiverseid": 650204,
       "twoFaced": false,
+      "oracleCardName": "Mission Briefing",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Surveil 2, then choose an instant or sorcery card in your graveyard. You may cast it this turn. If that spell would be put into your graveyard, exile it instead. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Phyrexian Metamorph",
       "scryfallId": "e5a1ff9e-fef2-4890-baf2-7bd0852ea0b9",
       "multiverseid": 650210,
       "twoFaced": false,
+      "oracleCardName": "Phyrexian Metamorph",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}{U/P}",
+      "cmc": 4,
+      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nYou may have this creature enter as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types."
     },
     {
       "name": "Sphinx of the Second Sun",
       "scryfallId": "be2d74cd-76fb-4bca-99b5-07749aef4d06",
       "multiverseid": 650212,
       "twoFaced": false,
+      "oracleCardName": "Sphinx of the Second Sun",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}{U}{U}",
+      "cmc": 8,
+      "oracleText": "Flying\nAt the beginning of each of your postcombat main phases, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)"
     },
     {
       "name": "Vizier of Many Faces",
       "scryfallId": "f4f5deae-3fa7-4c06-abe1-753d94158a0a",
       "multiverseid": 650217,
       "twoFaced": false,
+      "oracleCardName": "Vizier of Many Faces",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "You may have this creature enter as a copy of any creature on the battlefield, except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.\nEmbalm {3}{U}{U}"
     },
     {
       "name": "Black Sun's Zenith",
       "scryfallId": "e842b4bb-a1b7-440b-a0da-856fb0eea4c4",
       "multiverseid": 650220,
       "twoFaced": false,
+      "oracleCardName": "Black Sun's Zenith",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{B}{B}",
+      "cmc": 2,
+      "oracleText": "Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library."
     },
     {
       "name": "Dogged Detective",
       "scryfallId": "57d1f729-0d7c-4122-9bca-f3b08cf6fe4f",
       "multiverseid": 650221,
       "twoFaced": false,
+      "oracleCardName": "Dogged Detective",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nWhenever an opponent draws their second card each turn, you may return this card from your graveyard to your hand."
     },
     {
       "name": "Doom Whisperer",
       "scryfallId": "e8aabcaf-0968-402f-bc9f-289756e4d4b7",
       "multiverseid": 650222,
       "twoFaced": false,
+      "oracleCardName": "Doom Whisperer",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, trample\nPay 2 life: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Grave Titan",
       "scryfallId": "13680953-cf05-4e38-a3cf-22900c02fab7",
       "multiverseid": 650223,
       "twoFaced": false,
+      "oracleCardName": "Grave Titan",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}{B}",
+      "cmc": 6,
+      "oracleText": "Deathtouch\nWhenever this creature enters or attacks, create two 2/2 black Zombie creature tokens."
     },
     {
       "name": "Massacre Wurm",
       "scryfallId": "95cca140-e371-4d32-8a44-fd080329a28f",
       "multiverseid": 650224,
       "twoFaced": false,
+      "oracleCardName": "Massacre Wurm",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}{B}",
+      "cmc": 6,
+      "oracleText": "When this creature enters, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life."
     },
     {
       "name": "Overseer of the Damned",
       "scryfallId": "0a1a06a4-af73-43e3-a2cd-3a2f0f9b18f0",
       "multiverseid": 650226,
       "twoFaced": false,
+      "oracleCardName": "Overseer of the Damned",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Flying\nWhen this creature enters, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token."
     },
     {
       "name": "Phyrexian Arena",
       "scryfallId": "26bfb2b4-8dc2-4632-a393-d3477f6c3c40",
       "multiverseid": 650227,
       "twoFaced": false,
+      "oracleCardName": "Phyrexian Arena",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{B}{B}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, you draw a card and you lose 1 life."
     },
     {
       "name": "Pile On",
       "scryfallId": "570b56ff-b25a-43e4-927b-99dba542be5e",
       "multiverseid": 650228,
       "twoFaced": false,
+      "oracleCardName": "Pile On",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Reanimate",
       "scryfallId": "7d0fe02b-f45a-45c6-ab7c-270594a29da7",
       "multiverseid": 650231,
       "twoFaced": false,
+      "oracleCardName": "Reanimate",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{B}",
+      "cmc": 1,
+      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
     },
     {
       "name": "Rise of the Dark Realms",
       "scryfallId": "ceb5df52-4e03-4629-b8d5-d440d9cc5175",
       "multiverseid": 650232,
       "twoFaced": false,
+      "oracleCardName": "Rise of the Dark Realms",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{7}{B}{B}",
+      "cmc": 9,
+      "oracleText": "Put all creature cards from all graveyards onto the battlefield under your control."
     },
     {
       "name": "Toxic Deluge",
       "scryfallId": "64d3d8ad-927f-4c4e-96cf-03e98bec3987",
       "multiverseid": 650236,
       "twoFaced": false,
+      "oracleCardName": "Toxic Deluge",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
     },
     {
       "name": "Twilight Prophet",
       "scryfallId": "050ca791-265a-4e7b-9640-4fd5a6d8cd3a",
       "multiverseid": 650237,
       "twoFaced": false,
+      "oracleCardName": "Twilight Prophet",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value."
     },
     {
       "name": "Baleful Strix",
       "scryfallId": "679c1ac6-a015-45ec-a634-e665e377672b",
       "multiverseid": 650294,
       "twoFaced": false,
+      "oracleCardName": "Baleful Strix",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{U}{B}",
+      "cmc": 2,
+      "oracleText": "Flying, deathtouch\nWhen this creature enters, draw a card."
     },
     {
       "name": "Connive // Concoct",
       "scryfallId": "d7481287-fce9-4ef0-a3a8-7801c9eb3fa8",
       "multiverseid": 650297,
       "twoFaced": false,
+      "oracleCardName": "Connive // Concoct",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U/B}{U/B}",
+      "cmc": 9,
+      "oracleText": "Gain control of target creature with power 2 or less."
     },
     {
       "name": "Lazav, the Multifarious",
       "scryfallId": "662758ee-f7c8-4cba-b67b-48ac80c3b5ca",
       "multiverseid": 650308,
       "twoFaced": false,
+      "oracleCardName": "Lazav, the Multifarious",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{B}",
+      "cmc": 2,
+      "oracleText": "When Lazav enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{X}: Lazav becomes a copy of target creature card in your graveyard with mana value X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability."
     },
     {
       "name": "Master of Death",
       "scryfallId": "73903784-06c9-48ec-9d4a-e78461903617",
       "multiverseid": 650310,
       "twoFaced": false,
+      "oracleCardName": "Master of Death",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nAt the beginning of your upkeep, if this card is in your graveyard, you may pay 1 life. If you do, return it to your hand."
     },
     {
       "name": "Choked Estuary",
       "scryfallId": "e9ad18b2-1061-4893-9171-07ffe142a762",
       "multiverseid": 650348,
       "twoFaced": false,
+      "oracleCardName": "Choked Estuary",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Darkwater Catacombs",
       "scryfallId": "c5c68f5e-b6ce-4832-9e76-2ceb54afe29a",
       "multiverseid": 650351,
       "twoFaced": false,
+      "oracleCardName": "Darkwater Catacombs",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Drownyard Temple",
       "scryfallId": "a2ac347e-3dad-42a2-b57f-fd2c70373730",
       "multiverseid": 650353,
       "twoFaced": false,
+      "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
     },
     {
       "name": "Fetid Pools",
       "scryfallId": "404fb2b0-cce9-4fe2-8008-2c9fb29e710d",
       "multiverseid": 650355,
       "twoFaced": false,
+      "oracleCardName": "Fetid Pools",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Hostile Desert",
       "scryfallId": "d71031c2-7379-4d83-b6d6-61f3104593c4",
       "multiverseid": 650360,
       "twoFaced": false,
+      "oracleCardName": "Hostile Desert",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, Exile a land card from your graveyard: This land becomes a 3/4 Elemental creature until end of turn. It's still a land."
     },
     {
       "name": "River of Tears",
       "scryfallId": "67b626cc-1c12-4059-afa5-e5a1221ea1ba",
       "multiverseid": 650377,
       "twoFaced": false,
+      "oracleCardName": "River of Tears",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {U}. If you played a land this turn, add {B} instead."
     },
     {
       "name": "Sunken Hollow",
       "scryfallId": "d9352f50-1289-4fa9-a595-226dd6ca807c",
       "multiverseid": 650393,
       "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Brainstorm",
       "scryfallId": "84479779-d570-4eee-9982-f6e918b4d75b",
       "multiverseid": 650190,
       "twoFaced": false,
+      "oracleCardName": "Brainstorm",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Draw three cards, then put two cards from your hand on top of your library in any order."
     },
     {
       "name": "Consider",
       "scryfallId": "edd144f2-ab2d-486f-bf0a-8860022b7c35",
       "multiverseid": 650192,
       "twoFaced": false,
+      "oracleCardName": "Consider",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nDraw a card."
     },
     {
       "name": "Curate",
       "scryfallId": "78cd258b-431e-42f7-a938-76ebc80d528d",
       "multiverseid": 650193,
       "twoFaced": false,
+      "oracleCardName": "Curate",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nDraw a card."
     },
     {
       "name": "Deep Analysis",
       "scryfallId": "42ea52a4-15fa-4243-ae27-cd293bd176e7",
       "multiverseid": 650194,
       "twoFaced": false,
+      "oracleCardName": "Deep Analysis",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Enhanced Surveillance",
       "scryfallId": "42e6f705-2af7-47c2-961a-cf4c02b29f21",
       "multiverseid": 650196,
       "twoFaced": false,
+      "oracleCardName": "Enhanced Surveillance",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "You may look at an additional two cards each time you surveil.\nExile this enchantment: Shuffle your graveyard into your library."
     },
     {
       "name": "Ephara's Dispersal",
       "scryfallId": "b622aad1-4f57-472e-9bd8-9404da88d6be",
       "multiverseid": 650197,
       "twoFaced": false,
+      "oracleCardName": "Ephara's Dispersal",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "This spell costs {2} less to cast if it targets an attacking creature.\nReturn target creature to its owner's hand. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Mulldrifter",
       "scryfallId": "eb6d8d1c-8d23-4273-9c9b-f3b71eb0e105",
       "multiverseid": 650205,
       "twoFaced": false,
+      "oracleCardName": "Mulldrifter",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
     },
     {
       "name": "Nightveil Sprite",
       "scryfallId": "82f806fe-3970-4ae2-b232-d99002d46062",
       "multiverseid": 650207,
       "twoFaced": false,
+      "oracleCardName": "Nightveil Sprite",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flying\nWhenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
     },
     {
       "name": "Otherworldly Gaze",
       "scryfallId": "2ed35631-2435-4873-a45f-c620e86a60dd",
       "multiverseid": 650209,
       "twoFaced": false,
+      "oracleCardName": "Otherworldly Gaze",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Thoughtbound Phantasm",
       "scryfallId": "dbcdf292-a391-4452-8116-20084754f591",
       "multiverseid": 650216,
       "twoFaced": false,
+      "oracleCardName": "Thoughtbound Phantasm",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Defender\nWhenever you surveil, put a +1/+1 counter on this creature.\nAs long as this creature has three or more +1/+1 counters on it, it can attack as though it didn't have defender."
     },
     {
       "name": "Animate Dead",
       "scryfallId": "1489943b-c010-488e-9c9d-87f4af67a4e4",
       "multiverseid": 650219,
       "twoFaced": false,
+      "oracleCardName": "Animate Dead",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Enchant creature card in a graveyard\nWhen this Aura enters, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with this Aura.\" Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets -1/-0."
     },
     {
       "name": "Necromancy",
       "scryfallId": "3dd34a1a-e76b-46ee-be8d-5f7f4a092648",
       "multiverseid": 650225,
       "twoFaced": false,
+      "oracleCardName": "Necromancy",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen this enchantment enters, if it's on the battlefield, it becomes an Aura with \"enchant creature put onto the battlefield with Necromancy.\" Put target creature card from a graveyard onto the battlefield under your control and attach this enchantment to it. When this enchantment leaves the battlefield, that creature's controller sacrifices it."
     },
     {
       "name": "Price of Fame",
       "scryfallId": "e9054114-6740-4e2d-ae40-ccfb5e497d67",
       "multiverseid": 650229,
       "twoFaced": false,
+      "oracleCardName": "Price of Fame",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "This spell costs {2} less to cast if it targets a legendary creature.\nDestroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Ravenous Chupacabra",
       "scryfallId": "a4dfbac0-1849-41c5-853a-1fee108d0b01",
       "multiverseid": 650230,
       "twoFaced": false,
+      "oracleCardName": "Ravenous Chupacabra",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, destroy target creature an opponent controls."
     },
     {
       "name": "Shriekmaw",
       "scryfallId": "9c062442-a84b-4b47-8f84-a7c0abfff41b",
       "multiverseid": 650233,
       "twoFaced": false,
+      "oracleCardName": "Shriekmaw",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen this creature enters, destroy target nonartifact, nonblack creature.\nEvoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
     },
     {
       "name": "Sinister Starfish",
       "scryfallId": "5f75b7f4-249c-4b10-a06d-6b7654cccc46",
       "multiverseid": 650234,
       "twoFaced": false,
+      "oracleCardName": "Sinister Starfish",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "{T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
     },
     {
       "name": "Syr Konrad, the Grim",
       "scryfallId": "9241a72e-cb88-4cea-a2f4-ff10af461437",
       "multiverseid": 650235,
       "twoFaced": false,
+      "oracleCardName": "Syr Konrad, the Grim",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
     },
     {
       "name": "Whispering Snitch",
       "scryfallId": "be9abe56-7d56-4fc6-ab24-7b78646266be",
       "multiverseid": 650238,
       "twoFaced": false,
+      "oracleCardName": "Whispering Snitch",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "Whenever you surveil for the first time each turn, this creature deals 1 damage to each opponent and you gain 1 life."
     },
     {
       "name": "Dimir Spybug",
       "scryfallId": "69840910-eb86-49a4-915f-d21b5628fc04",
       "multiverseid": 650300,
       "twoFaced": false,
+      "oracleCardName": "Dimir Spybug",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{B}",
+      "cmc": 2,
+      "oracleText": "Flying\nMenace (This creature can't be blocked except by two or more creatures.)\nWhenever you surveil, put a +1/+1 counter on this creature."
     },
     {
       "name": "Discovery // Dispersal",
       "scryfallId": "8df2658a-6174-411c-9217-aa5d15b9fef2",
       "multiverseid": 650301,
       "twoFaced": false,
+      "oracleCardName": "Discovery // Dispersal",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{U/B}",
+      "cmc": 7,
+      "oracleText": "Surveil 2, then draw a card. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Disinformation Campaign",
       "scryfallId": "d34ea8c4-03b1-415f-80e1-7c3cf6933685",
       "multiverseid": 650302,
       "twoFaced": false,
+      "oracleCardName": "Disinformation Campaign",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, you draw a card and each opponent discards a card.\nWhenever you surveil, return this enchantment to its owner's hand."
     },
     {
       "name": "Notion Rain",
       "scryfallId": "66ed78c5-be23-4fcb-9143-e6574cd6ec68",
       "multiverseid": 650311,
       "twoFaced": false,
+      "oracleCardName": "Notion Rain",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Surveil 2, then draw two cards. Notion Rain deals 2 damage to you. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "e593bb16-e709-4d92-bf6f-239f6a11f7db",
       "multiverseid": 650317,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Dimir Signet",
       "scryfallId": "343a0d98-56b3-4113-a287-e36f2a1652f1",
       "multiverseid": 650320,
       "twoFaced": false,
+      "oracleCardName": "Dimir Signet",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{B}."
     },
     {
       "name": "Everflowing Chalice",
       "scryfallId": "e89eca1c-19f5-4db0-9330-cecb87be8b55",
       "multiverseid": 650321,
       "twoFaced": false,
+      "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{0}",
+      "cmc": 0,
+      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
     },
     {
       "name": "Mind Stone",
       "scryfallId": "b227672f-967e-4f8d-87f4-c6cd4622fe3f",
       "multiverseid": 650326,
       "twoFaced": false,
+      "oracleCardName": "Mind Stone",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "d9e098aa-a886-430e-8f11-78fb6f2d8ada",
       "multiverseid": 650331,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Talisman of Dominance",
       "scryfallId": "f6c8e0b5-218e-41dd-8b09-2d4aaec2c979",
       "multiverseid": 650336,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
     },
     {
       "name": "Thought Vessel",
       "scryfallId": "67b26b45-19bf-4675-86c4-fae4f3aca234",
       "multiverseid": 650339,
       "twoFaced": false,
+      "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "46b99a84-3733-48bf-b743-522e5f94aca3",
       "multiverseid": 650342,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Bojuka Bog",
       "scryfallId": "73d9ec0e-9d88-454e-aa48-a861b2bb8b77",
       "multiverseid": 650344,
       "twoFaced": false,
+      "oracleCardName": "Bojuka Bog",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "96c3244e-930f-498c-959e-0f000151597d",
       "multiverseid": 650350,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Dimir Aqueduct",
       "scryfallId": "6fbf38d3-4922-42ec-ae3a-bea2172c3258",
       "multiverseid": 650352,
       "twoFaced": false,
+      "oracleCardName": "Dimir Aqueduct",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "bf4797b0-4d0a-433f-b891-b14f96fd1484",
       "multiverseid": 650370,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Mystic Sanctuary",
       "scryfallId": "67652446-6d12-4e2a-bb51-ba685f2e79d1",
       "multiverseid": 650371,
       "twoFaced": false,
+      "oracleCardName": "Mystic Sanctuary",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)\nThis land enters tapped unless you control three or more other Islands.\nWhen this land enters untapped, you may put target instant or sorcery card from your graveyard on top of your library."
     },
     {
       "name": "Port of Karfell",
       "scryfallId": "c1377ca1-aa54-4fed-b289-45309eb2f6b6",
       "multiverseid": 650374,
       "twoFaced": false,
+      "oracleCardName": "Port of Karfell",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice this land: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)"
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "f5a1db89-d37f-4839-8ca4-598686c5d6de",
       "multiverseid": 650376,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "670d6a0d-d10b-4b0a-961a-a95dbf413fc5",
       "multiverseid": 650378,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Tainted Isle",
       "scryfallId": "867c8386-c317-4131-83d1-a8bdfb746380",
       "multiverseid": 650394,
       "twoFaced": false,
+      "oracleCardName": "Tainted Isle",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. Activate only if you control a Swamp."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "2d21d25e-830a-4d32-b292-c24cdab7516a",
       "multiverseid": 650399,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     },
     {
       "name": "Tocasia's Dig Site",
       "scryfallId": "bbb5d40b-f0e1-4e98-b4d3-1ee2cfa5b579",
       "multiverseid": 650402,
       "twoFaced": false,
+      "oracleCardName": "Tocasia's Dig Site",
       "colorIdentity": [],
-      "set": "MKC"
+      "set": "MKC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "6908b583-4a52-4819-82a3-9db9c860aeb6",
       "multiverseid": 648855,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "df18762d-9980-4344-9d4f-e9d2cd8e0456",
       "multiverseid": 648856,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "70d0ef58-c0b3-4bcd-b470-0cf41219a4e6",
       "multiverseid": 648857,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "70d0ef58-c0b3-4bcd-b470-0cf41219a4e6",
       "multiverseid": 648857,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "70d0ef58-c0b3-4bcd-b470-0cf41219a4e6",
       "multiverseid": 648857,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "70d0ef58-c0b3-4bcd-b470-0cf41219a4e6",
       "multiverseid": 648857,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "70d0ef58-c0b3-4bcd-b470-0cf41219a4e6",
       "multiverseid": 648857,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "b1cbccfc-3585-4895-94d1-c3a67205e5fe",
       "multiverseid": 648858,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "b1cbccfc-3585-4895-94d1-c3a67205e5fe",
       "multiverseid": 648858,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "b1cbccfc-3585-4895-94d1-c3a67205e5fe",
       "multiverseid": 648858,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     },
     {
       "name": "Swamp",
       "scryfallId": "b1cbccfc-3585-4895-94d1-c3a67205e5fe",
       "multiverseid": 648858,
       "twoFaced": false,
+      "oracleCardName": "Swamp",
       "colorIdentity": [
         "B"
       ],
-      "set": "MKM"
+      "set": "MKM",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.597Z",
+    "retrievedDate": "2026-02-20T03:10:21.793Z",
     "sourceUrl": "RevenantRecon_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

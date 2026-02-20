@@ -9,20 +9,34 @@
       "scryfallId": "d5dfd236-b1da-4552-b94f-ebf6bb9dafdf",
       "multiverseid": 0,
       "twoFaced": true,
+      "oracleCardName": "Zndrsplt, Eye of Wisdom // Zndrsplt, Eye of Wisdom",
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Partner with Okaun, Eye of Chaos (When this creature enters, target player may put Okaun into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, draw a card."
     },
     {
       "name": "Okaun, Eye of Chaos // Okaun, Eye of Chaos",
       "scryfallId": "94eea6e3-20bc-4dab-90ba-3113c120fb90",
       "multiverseid": 0,
       "twoFaced": true,
+      "oracleCardName": "Okaun, Eye of Chaos // Okaun, Eye of Chaos",
       "colorIdentity": [
         "R"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Partner with Zndrsplt, Eye of Wisdom (When this creature enters, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn."
     }
   ],
   "cards": [
@@ -31,957 +45,1607 @@
       "scryfallId": "e18a9acc-70c6-4cf0-b73a-fdf7ce8e3535",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Daretti, Scrap Savant",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "[+2]: Discard up to two cards, then draw that many cards.\n[−2]: Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.\n[−10]: You get an emblem with \"Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step.\"\nDaretti, Scrap Savant can be your commander."
     },
     {
       "name": "Ral Zarek",
       "scryfallId": "cd865c54-7381-4940-8b30-b8a94b58090e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Ral Zarek",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{U}{R}",
+      "cmc": 4,
+      "oracleText": "[+1]: Tap target permanent, then untap another target permanent.\n[−2]: Ral Zarek deals 3 damage to any target.\n[−7]: Flip five coins. Take an extra turn after this one for each coin that comes up heads."
     },
     {
       "name": "Goblin Kaboomist",
       "scryfallId": "3768c769-0b8d-46df-847b-0cf4df45decc",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Goblin Kaboomist",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "At the beginning of your upkeep, create a colorless artifact token named Land Mine with \"{R}, Sacrifice this token: This token deals 2 damage to target attacking creature without flying.\" Then flip a coin. If you lose the flip, this creature deals 2 damage to itself."
     },
     {
       "name": "Krark, the Thumbless",
       "scryfallId": "24614006-d99f-44b6-8ec1-29b48a1713d0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Krark, the Thumbless",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever you cast an instant or sorcery spell, flip a coin. If you lose the flip, return that spell to its owner's hand. If you win the flip, copy that spell, and you may choose new targets for the copy.\nPartner (You can have two commanders if both have partner.)"
     },
     {
       "name": "Niv-Mizzet, Parun",
       "scryfallId": "4825e7cb-53ae-4e4b-bb37-8d8eb414772c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Niv-Mizzet, Parun",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{U}{U}{R}{R}{R}",
+      "cmc": 6,
+      "oracleText": "This spell can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card."
     },
     {
       "name": "Spark Double",
       "scryfallId": "0b649145-426f-4576-a71c-6ee5d3981243",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Spark Double",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "You may have this creature enter as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary."
     },
     {
       "name": "Frenetic Sliver",
       "scryfallId": "7fbd25e4-6a45-4e70-8cba-8ba5ce1ee550",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Frenetic Sliver",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "All Slivers have \"{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it.\""
     },
     {
       "name": "Goblin Archaeologist",
       "scryfallId": "4d6c6f6f-7097-46ef-9687-d6f7ec31586e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Goblin Archaeologist",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "{R}, {T}: Flip a coin. If you win the flip, destroy target artifact and untap this creature. If you lose the flip, sacrifice this creature."
     },
     {
       "name": "Karplusan Minotaur",
       "scryfallId": "a30390cc-d5f5-442f-b387-0242eb768ede",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Karplusan Minotaur",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Cumulative upkeep—Flip a coin. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you win a coin flip, this creature deals 1 damage to any target.\nWhenever you lose a coin flip, this creature deals 1 damage to any target of an opponent's choice."
     },
     {
       "name": "Tavern Scoundrel",
       "scryfallId": "c71f0329-27ec-463d-8fde-edbdc378ee0f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tavern Scoundrel",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever you win a coin flip, create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")\n{1}, {T}, Sacrifice another permanent: Flip a coin."
     },
     {
       "name": "Tribute Mage",
       "scryfallId": "08505dcf-8e39-498c-b21a-5e074e7efe48",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tribute Mage",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may search your library for an artifact card with mana value 2, reveal that card, put it into your hand, then shuffle."
     },
     {
       "name": "Bloodsworn Steward",
       "scryfallId": "539b5715-965a-4066-b75b-c4bb952ad65f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Bloodsworn Steward",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nCommander creatures you control get +2/+2 and have haste."
     },
     {
       "name": "Goblin Engineer",
       "scryfallId": "944ca6e7-084b-424a-80c1-e88de192fd98",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Goblin Engineer",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, you may search your library for an artifact card, put it into your graveyard, then shuffle.\n{R}, {T}, Sacrifice an artifact: Return target artifact card with mana value 3 or less from your graveyard to the battlefield."
     },
     {
       "name": "The Locust God",
       "scryfallId": "30265355-d0cc-411a-a2da-8d38803d9021",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "The Locust God",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{R}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.\n{2}{U}{R}: Draw a card, then discard a card.\nWhen The Locust God dies, return it to its owner's hand at the beginning of the next end step."
     },
     {
       "name": "Yusri, Fortune's Flame",
       "scryfallId": "5a75a38d-8bfc-4fe3-8bec-66f46313e48e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Yusri, Fortune's Flame",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever Yusri attacks, choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. For each flip you lose, Yusri deals 2 damage to you. If you won five flips this way, you may cast spells from your hand this turn without paying their mana costs."
     },
     {
       "name": "Mogg Assassin",
       "scryfallId": "3ac8843e-6d9a-4db8-aa08-f83127cab355",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mogg Assassin",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "{T}: You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose."
     },
     {
       "name": "Sakashima the Impostor",
       "scryfallId": "9ab09047-f76b-4d3a-843b-73f798e8f03e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sakashima the Impostor",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "You may have Sakashima the Impostor enter as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has \"{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step.\""
     },
     {
       "name": "Stitch in Time // Stitch in Time",
       "scryfallId": "087c3a0d-c710-4451-989e-596b55352184",
       "multiverseid": 0,
       "twoFaced": true,
+      "oracleCardName": "Stitch in Time // Stitch in Time",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Flip a coin. If you win the flip, take an extra turn after this one."
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "40eb7856-95f7-4a62-bc99-b5d0852606ad",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
     },
     {
       "name": "Fabricate",
       "scryfallId": "6f6fe03c-91b5-4555-a93f-39935f5fe881",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fabricate",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Search your library for an artifact card, reveal it, put it into your hand, then shuffle."
     },
     {
       "name": "Fiery Gambit",
       "scryfallId": "6e2f138d-a39d-4bff-b334-9f556311881b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fiery Gambit",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control."
     },
     {
       "name": "Chandra's Ignition",
       "scryfallId": "31d0275d-1a1a-421d-a2ae-9a61697a3a74",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chandra's Ignition",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Target creature you control deals damage equal to its power to each other creature and each opponent."
     },
     {
       "name": "Gamble",
       "scryfallId": "924db286-fb3e-40dd-b5e2-f8128701685d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gamble",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Search your library for a card, put that card into your hand, discard a card at random, then shuffle."
     },
     {
       "name": "Reshape",
       "scryfallId": "9574f9a0-e062-47bf-b8ad-895d02852be8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Reshape",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "As an additional cost to cast this spell, sacrifice an artifact.\nSearch your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle."
     },
     {
       "name": "Seize the Day",
       "scryfallId": "610b3a04-76ba-4388-8808-53f7d91b1ac1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Seize the Day",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
     },
     {
       "name": "Ponder",
       "scryfallId": "7b0d4d01-9044-4b68-8b55-1b27ff0ffa75",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Ponder",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card."
     },
     {
       "name": "Preordain",
       "scryfallId": "f2a1a648-a84c-45a6-99cb-eeccdb17ab2a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Preordain",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
     },
     {
       "name": "Serum Visions",
       "scryfallId": "5c75ec73-0f6a-4392-b058-ab40a07dcd3a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Serum Visions",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Draw a card. Scry 2."
     },
     {
       "name": "Slip Through Space",
       "scryfallId": "0fc0a593-580c-405c-803e-2f13aa74ab5e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Slip Through Space",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Devoid (This card has no color.)\nTarget creature can't be blocked this turn.\nDraw a card."
     },
     {
       "name": "Squee's Revenge",
       "scryfallId": "664c8130-311b-4f65-853d-02f8e57ebe5c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Squee's Revenge",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip."
     },
     {
       "name": "Vandalblast",
       "scryfallId": "3636b07e-eab9-4cc8-8624-322c18e8133d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Vandalblast",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
     },
     {
       "name": "Negate",
       "scryfallId": "1dc492d5-ec52-4ab3-813e-acb40b0b6d5a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Negate",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Counter target noncreature spell."
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "bc1d3b9c-6376-48a6-b890-519e978379fe",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Whir of Invention",
       "scryfallId": "a679659c-7fed-4afa-9b99-fdeb8ccda964",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Whir of Invention",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{U}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nSearch your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle."
     },
     {
       "name": "Counterspell",
       "scryfallId": "a457f404-ddf1-40fa-b0f0-23c8598533f4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Counterspell",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Counter target spell."
     },
     {
       "name": "Long-Term Plans",
       "scryfallId": "d236e528-2cb1-4de5-a4fd-b80516e4a1f9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Long-Term Plans",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Search your library for a card, then shuffle and put that card third from the top."
     },
     {
       "name": "Muddle the Mixture",
       "scryfallId": "79fc4b92-0efe-4370-a2b3-2155c458a966",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Muddle the Mixture",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}{U}",
+      "cmc": 2,
+      "oracleText": "Counter target instant or sorcery spell.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)"
     },
     {
       "name": "Temur Battle Rage",
       "scryfallId": "8c850548-400e-41a5-8acd-77ff67541d54",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temur Battle Rage",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Target creature gains double strike until end of turn.\nFerocious — That creature also gains trample until end of turn if you control a creature with power 4 or greater."
     },
     {
       "name": "Krark's Thumb // Krark's Thumb",
       "scryfallId": "9f63277b-e139-46c8-b9e3-0cfb647f44cc",
       "multiverseid": 0,
       "twoFaced": true,
+      "oracleCardName": "Krark's Thumb // Krark's Thumb",
       "colorIdentity": [],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "If you would flip a coin, instead flip two coins and ignore one."
     },
     {
       "name": "Izzet Signet",
       "scryfallId": "4b274648-a1fc-4c2f-af95-f990b8c6dc43",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Izzet Signet",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{1}, {T}: Add {U}{R}."
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "e5ed8037-0450-4668-9f50-3abf367d7661",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
     },
     {
       "name": "Mind Stone",
       "scryfallId": "3aed2452-915a-4a84-8408-6722425201f8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mind Stone",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
     },
     {
       "name": "Swiftfoot Boots",
       "scryfallId": "9c316917-1569-4d95-8729-3b7a0fc39465",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Sword of Vengeance",
       "scryfallId": "9dd53110-bb42-4c42-851f-d2688c7c17a2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sword of Vengeance",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}"
     },
     {
       "name": "Thought Vessel",
       "scryfallId": "671d3d4b-e4ab-4d40-a3fd-1db1e52501a7",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Whispersilk Cloak",
       "scryfallId": "8b49e2c5-c447-45f4-979d-68556f6cd647",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Whispersilk Cloak",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}"
     },
     {
       "name": "Boompile",
       "scryfallId": "86dea2dc-7e94-41e6-a0ef-81aaa10aaf8c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Boompile",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "{T}: Flip a coin. If you win the flip, destroy all nonland permanents."
     },
     {
       "name": "Commander's Plate",
       "scryfallId": "107ea1fe-167f-4a79-b0f1-f76dce2e6b0a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Commander's Plate",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +3/+3 and has protection from each color that's not in your commander's color identity.\nEquip commander {3}\nEquip {5}"
     },
     {
       "name": "Embercleave",
       "scryfallId": "998aac7f-700e-48dd-81c3-3d8fed040c95",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Embercleave",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flash\nThis spell costs {1} less to cast for each attacking creature you control.\nWhen Embercleave enters, attach it to target creature you control.\nEquipped creature gets +1/+1 and has double strike and trample.\nEquip {3}"
     },
     {
       "name": "Shadowspear",
       "scryfallId": "769326d4-60af-4b19-85d9-d96d3acdb56e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shadowspear",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/+1 and has trample and lifelink.\n{1}: Permanents your opponents control lose hexproof and indestructible until end of turn.\nEquip {2}"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "fd061dd3-3cf1-4102-a9a2-dd89500171a7",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Crooked Scales",
       "scryfallId": "3352ba84-22cc-40e3-ae76-ca5cef8c2dfb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Crooked Scales",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "{4}, {T}: Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "38d347b7-dc17-417a-ab07-29fe99b9a101",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Talisman of Creativity",
       "scryfallId": "35805e27-fc26-4eb1-943c-f5b6c2185e03",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Creativity",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
     },
     {
       "name": "Propaganda // Propaganda",
       "scryfallId": "3e3f0bcd-0796-494d-bf51-94b33c1671e9",
       "multiverseid": 0,
       "twoFaced": true,
+      "oracleCardName": "Propaganda // Propaganda",
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
     },
     {
       "name": "Mirror March",
       "scryfallId": "6f114552-e33b-42c0-a27a-eb1a08646d88",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mirror March",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "Whenever a nontoken creature you control enters, flip a coin until you lose a flip. For each flip you won, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step."
     },
     {
       "name": "Chance Encounter",
       "scryfallId": "f5763940-c987-4612-be87-8ec299be391a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chance Encounter",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you win a coin flip, put a luck counter on this enchantment.\nAt the beginning of your upkeep, if this enchantment has ten or more luck counters on it, you win the game."
     },
     {
       "name": "Footfall Crater",
       "scryfallId": "f080d1bb-282b-4008-ab58-1a82e4bb7766",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Footfall Crater",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Enchant land\nEnchanted land has \"{T}: Target creature gains trample and haste until end of turn.\"\nCycling {1} ({1}, Discard this card: Draw a card.)"
     },
     {
       "name": "Impulsive Maneuvers",
       "scryfallId": "a43acc1c-82e9-4234-aac5-bbc8e3ee42c0",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Impulsive Maneuvers",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage."
     },
     {
       "name": "Planar Chaos",
       "scryfallId": "a7ce1d3e-6335-447b-8a70-1c906fef1547",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Planar Chaos",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice this enchantment.\nWhenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell."
     },
     {
       "name": "Risky Move",
       "scryfallId": "d10de061-c4f9-4550-ad97-71b69b6f5e18",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Risky Move",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}{R}{R}",
+      "cmc": 6,
+      "oracleText": "At the beginning of each player's upkeep, that player gains control of this enchantment.\nWhen you gain control of this enchantment from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature."
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "446ae4aa-6eba-4872-8a07-c8767c3b02c5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Wandering Fumarole",
       "scryfallId": "30d0c177-81b5-44d3-9c0a-b72428c38155",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Wandering Fumarole",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U} or {R}.\n{2}{U}{R}: Until end of turn, this land becomes a 1/4 blue and red Elemental creature with \"{0}: Switch this creature's power and toughness until end of turn.\" It's still a land."
     },
     {
       "name": "Buried Ruin",
       "scryfallId": "1f3dd48b-20a9-436a-a518-5eb77e17609c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
     },
     {
       "name": "Great Furnace",
       "scryfallId": "5ff05a43-b5fe-4fc5-aeb3-ddd9b49dc8a6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Great Furnace",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {R}."
     },
     {
       "name": "Izzet Boilerworks",
       "scryfallId": "56451d43-93b0-4237-a889-6a662cfc3e67",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Izzet Boilerworks",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
     },
     {
       "name": "Myriad Landscape",
       "scryfallId": "96d7382a-adaf-4cff-b31e-d648ee6ba834",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "a674d18a-a710-434a-a833-50ee9b95a23d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Rogue's Passage",
       "scryfallId": "6aa3c430-1a41-415d-8736-3541b5b6b4c6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "9c0f350d-13ec-4e13-9c4c-1d6bfb9aa0b3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "961dcc35-a282-4d40-93b3-1cc7fa5221f5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Academy Ruins",
       "scryfallId": "579cce0c-5afe-4104-97e8-fd303e8fcc28",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Academy Ruins",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}, {T}: Put target artifact card from your graveyard on top of your library."
     },
     {
       "name": "Cascade Bluffs",
       "scryfallId": "d4c307be-a9e7-47f2-aa29-cfd2657ee5c4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Cascade Bluffs",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."
     },
     {
       "name": "Desolate Lighthouse",
       "scryfallId": "b130e223-aa05-433c-90c3-1261c262296b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Desolate Lighthouse",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}{R}, {T}: Draw a card, then discard a card."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "6287b2e4-d2d3-4ba4-abc9-b2525dd726d7",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Flamekin Village",
       "scryfallId": "930e6064-3d4b-40f1-850d-daa15cea756b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Flamekin Village",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Elemental card from your hand. If you don't, this land enters tapped.\n{T}: Add {R}.\n{R}, {T}: Target creature gains haste until end of turn."
     },
     {
       "name": "Inventors' Fair",
       "scryfallId": "a4ba795a-8a08-4853-a7ca-cf3883a6f667",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Inventors' Fair",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C}.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle. Activate only if you control three or more artifacts."
     },
     {
       "name": "Shivan Reef",
       "scryfallId": "070ed235-1452-4bdb-ba63-0743a59f4d8d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shivan Reef",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
     },
     {
       "name": "Spinerock Knoll",
       "scryfallId": "652e0a21-787a-40f2-b5fb-837683f61f26",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Spinerock Knoll",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
     },
     {
       "name": "Sulfur Falls",
       "scryfallId": "bf1b1e48-6315-476a-a27a-3f02dbf3ad9f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Tolaria West",
       "scryfallId": "9cb7d00a-0b8d-4d0c-9592-058f1e0ce087",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tolaria West",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with mana value 0, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)"
     },
     {
       "name": "Training Center",
       "scryfallId": "6df5d9dc-e4d9-42d6-8a5e-40ac04bc3dc8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Training Center",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "6576ee65-45e4-4291-a10a-8631366f0e8f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Reliquary Tower",
       "scryfallId": "ef4e383e-ca2c-40d0-b510-8cf9a2e10176",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
     },
     {
       "name": "Temple of the False God",
       "scryfallId": "688b294f-c252-4655-a153-ccc7dec1a36d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.884Z",
+    "retrievedDate": "2026-02-20T03:10:20.970Z",
     "sourceUrl": "HeadsIWinTailsYouLose_SLD.json",
     "deckSource": "precon",
     "createdAt": "2022-04-22T00:00:00.000Z"

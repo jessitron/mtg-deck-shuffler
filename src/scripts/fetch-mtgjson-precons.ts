@@ -46,7 +46,7 @@ async function extractTarGz(tarGzPath: string, destDir: string): Promise<void> {
   console.log(`✓ Extracted to ${destDir}`);
 }
 
-async function processDecks(shouldConvert: boolean, shouldForce: boolean): Promise<void> {
+async function processDecks(shouldConvert: boolean, skipExisting: boolean): Promise<void> {
   const adapter = new MtgjsonDeckAdapter();
 
   // Read AllDeckFiles directory
@@ -89,16 +89,20 @@ async function processDecks(shouldConvert: boolean, shouldForce: boolean): Promi
         const outputFilename = `precon-mtgjson-${safeName}_${setCode}.json`;
         const outputPath = join(DECKS_DIR, outputFilename);
 
-        // Skip if already exists (unless --force)
-        if (!shouldForce) {
-          try {
-            await fs.access(outputPath);
+        // Check if file exists
+        let fileExists = false;
+        try {
+          await fs.access(outputPath);
+          fileExists = true;
+
+          // Skip if --skip-existing flag is set
+          if (skipExisting) {
             console.log(`  ⏭️  Skipping - already exists`);
             skippedCount++;
             continue;
-          } catch {
-            // File doesn't exist, continue with conversion
           }
+        } catch {
+          // File doesn't exist
         }
 
         try {
@@ -108,7 +112,11 @@ async function processDecks(shouldConvert: boolean, shouldForce: boolean): Promi
           // Save to decks directory
           await fs.writeFile(outputPath, JSON.stringify(deck, null, 2), "utf-8");
 
-          console.log(`  ✓ Saved: ${outputFilename}`);
+          if (fileExists) {
+            console.log(`  ✓ Updated: ${outputFilename}`);
+          } else {
+            console.log(`  ✓ Saved: ${outputFilename}`);
+          }
           convertedCount++;
         } catch (error) {
           console.error(`  ✗ Failed to convert:`, error);
@@ -144,7 +152,7 @@ async function cleanup(): Promise<void> {
 
 async function main(): Promise<void> {
   const shouldConvert = process.argv.includes("--convert");
-  const shouldForce = process.argv.includes("--force");
+  const skipExisting = process.argv.includes("--skip-existing");
   const shouldKeepTemp = process.argv.includes("--keep-temp");
 
   try {
@@ -160,11 +168,11 @@ async function main(): Promise<void> {
     await extractTarGz(tarGzPath, TEMP_DIR);
 
     // Process decks
-    await processDecks(shouldConvert, shouldForce);
+    await processDecks(shouldConvert, skipExisting);
 
     if (!shouldConvert) {
       console.log("\n💡 Add --convert flag to convert Commander Decks to our format and save to ./decks/");
-      console.log("💡 Add --force flag to overwrite existing deck files");
+      console.log("💡 Add --skip-existing flag to skip decks that already exist (default: replace all)");
     } else {
       console.log(`\n✅ Conversion complete! Saved decks to ${DECKS_DIR}`);
     }

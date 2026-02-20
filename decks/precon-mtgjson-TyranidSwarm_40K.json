@@ -9,12 +9,19 @@
       "scryfallId": "c9dbba5a-fb9a-422e-87a1-a29d2c17a04e",
       "multiverseid": 582574,
       "twoFaced": false,
+      "oracleCardName": "The Swarmlord",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{U}{R}",
+      "cmc": 6,
+      "oracleText": "Rapid Regeneration — The Swarmlord enters with two +1/+1 counters on it for each time you've cast your commander from the command zone this game.\nXenos Cunning — Whenever a creature you control with a counter on it dies, draw a card."
     }
   ],
   "cards": [
@@ -23,995 +30,1649 @@
       "scryfallId": "a644b428-44b4-4f76-a1e7-0bbd134774da",
       "multiverseid": 582473,
       "twoFaced": false,
+      "oracleCardName": "Hull Breach",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}{G}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment."
     },
     {
       "name": "Cultivate",
       "scryfallId": "8bc964b1-26bc-4dd2-99e3-4f421c2f8e67",
       "multiverseid": 582460,
       "twoFaced": false,
+      "oracleCardName": "Cultivate",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
     },
     {
       "name": "Explore",
       "scryfallId": "b6838782-079a-47d0-bdab-cdcc975feab4",
       "multiverseid": 582462,
       "twoFaced": false,
+      "oracleCardName": "Explore",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "You may play an additional land this turn.\nDraw a card."
     },
     {
       "name": "Farseek",
       "scryfallId": "7873fe27-392e-4273-b1a3-e64fa0cd03e6",
       "multiverseid": 582463,
       "twoFaced": false,
+      "oracleCardName": "Farseek",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Rampant Growth",
       "scryfallId": "ba3026d2-334d-41bd-8c6b-7de7d78e54e0",
       "multiverseid": 582469,
       "twoFaced": false,
+      "oracleCardName": "Rampant Growth",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Starstorm",
       "scryfallId": "b45264cb-67d0-4dfb-9229-61c4e90c760a",
       "multiverseid": 582457,
       "twoFaced": false,
+      "oracleCardName": "Starstorm",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{R}{R}",
+      "cmc": 2,
+      "oracleText": "Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
     },
     {
       "name": "Aetherize",
       "scryfallId": "45a3b89a-d20c-43d0-a34c-644a58040421",
       "multiverseid": 582440,
       "twoFaced": false,
+      "oracleCardName": "Aetherize",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Return all attacking creatures to their owner's hand."
     },
     {
       "name": "Inspiring Call",
       "scryfallId": "a0c450e4-3ae4-4d69-a40e-cf29c383e5c3",
       "multiverseid": 582466,
       "twoFaced": false,
+      "oracleCardName": "Inspiring Call",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
     },
     {
       "name": "Harrow",
       "scryfallId": "699b2ef2-84e1-4c5a-8b8a-e669de05aedb",
       "multiverseid": 582465,
       "twoFaced": false,
+      "oracleCardName": "Harrow",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Icon of Ancestry",
       "scryfallId": "612250ac-16fc-4d65-be38-25256f9cc164",
       "multiverseid": 582491,
       "twoFaced": false,
+      "oracleCardName": "Icon of Ancestry",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Herald's Horn",
       "scryfallId": "e7ac5242-6b78-438f-b609-ccd5970481e8",
       "multiverseid": 582490,
       "twoFaced": false,
+      "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "33773feb-5b49-4d44-adca-93b99009acc0",
       "multiverseid": 582498,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "44ff370e-b72d-4a6c-b6dd-8434820559cc",
       "multiverseid": 582476,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Abundance",
       "scryfallId": "51d27db7-3c11-4896-a8f9-2f7f7beeec18",
       "multiverseid": 582459,
       "twoFaced": false,
+      "oracleCardName": "Abundance",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order."
     },
     {
       "name": "Death's Presence",
       "scryfallId": "fe4069fc-947d-4902-ab96-3994df4cc0d8",
       "multiverseid": 582461,
       "twoFaced": false,
+      "oracleCardName": "Death's Presence",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died."
     },
     {
       "name": "Hardened Scales",
       "scryfallId": "7034ba14-14b0-430e-899b-50601a220d8c",
       "multiverseid": 582464,
       "twoFaced": false,
+      "oracleCardName": "Hardened Scales",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead."
     },
     {
       "name": "Bred for the Hunt",
       "scryfallId": "e747ba48-8088-43be-b97b-ba5d1c23781f",
       "multiverseid": 582471,
       "twoFaced": false,
+      "oracleCardName": "Bred for the Hunt",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card."
     },
     {
       "name": "New Horizons",
       "scryfallId": "4ffbe455-f08a-4f9b-a5e7-19370c0f2919",
       "multiverseid": 582467,
       "twoFaced": false,
+      "oracleCardName": "New Horizons",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Enchant land\nWhen this Aura enters, put a +1/+1 counter on target creature you control.\nEnchanted land has \"{T}: Add two mana of any one color.\""
     },
     {
       "name": "Overgrowth",
       "scryfallId": "d8c7c4ec-30da-426d-8be7-f1b8705052f1",
       "multiverseid": 582468,
       "twoFaced": false,
+      "oracleCardName": "Overgrowth",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}."
     },
     {
       "name": "Cinder Glade",
       "scryfallId": "f0654ea5-d192-4c2e-ba48-fa516d4a3f94",
       "multiverseid": 582518,
       "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "ec9c7011-694b-4705-b85c-bf4edf26e437",
       "multiverseid": 582527,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Game Trail",
       "scryfallId": "f2777ccc-342d-4a1a-8566-94810decee11",
       "multiverseid": 582531,
       "twoFaced": false,
+      "oracleCardName": "Game Trail",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Temple of Abandon",
       "scryfallId": "c12a751e-82e9-4181-bb9d-f9412b9c6df3",
       "multiverseid": 582546,
       "twoFaced": false,
+      "oracleCardName": "Temple of Abandon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "5faecebe-1688-40e9-89a4-1a523a8bd8d6",
       "multiverseid": 582547,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Temple of Mystery",
       "scryfallId": "659c3062-2a60-4186-a531-0d29b048804e",
       "multiverseid": 582548,
       "twoFaced": false,
+      "oracleCardName": "Temple of Mystery",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
     },
     {
       "name": "Ash Barrens",
       "scryfallId": "2816a820-bde0-404a-ba2c-86fbe461e01b",
       "multiverseid": 582514,
       "twoFaced": false,
+      "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
     },
     {
       "name": "Frontier Bivouac",
       "scryfallId": "0cae4207-868b-45a0-b356-6f789aa6ae78",
       "multiverseid": 582530,
       "twoFaced": false,
+      "oracleCardName": "Frontier Bivouac",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
     },
     {
       "name": "Unclaimed Territory",
       "scryfallId": "0d167949-2fd2-4b85-b2fa-f598b55b4915",
       "multiverseid": 582553,
       "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
     },
     {
       "name": "Cave of Temptation",
       "scryfallId": "3405206b-992b-4912-817c-d90b2eecbac5",
       "multiverseid": 582516,
       "twoFaced": false,
+      "oracleCardName": "Cave of Temptation",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery."
     },
     {
       "name": "Command Tower",
       "scryfallId": "7cf39d35-1426-4edb-98ae-d1f1a470629f",
       "multiverseid": 582519,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "184e5367-e901-4a0b-a2f5-06db42e6cf31",
       "multiverseid": 582526,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Opal Palace",
       "scryfallId": "eb4e0145-c339-4c60-aacf-67d8e785df49",
       "multiverseid": 582535,
       "twoFaced": false,
+      "oracleCardName": "Opal Palace",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "5410dbe8-006d-4267-92f1-b9bd7b1069e3",
       "multiverseid": 582536,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Rugged Highlands",
       "scryfallId": "420cb35b-1d76-4e86-9e88-47a8ec9e13bd",
       "multiverseid": 582541,
       "twoFaced": false,
+      "oracleCardName": "Rugged Highlands",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Terramorphic Expanse",
       "scryfallId": "67161521-aae6-4017-abf8-46f3a41b59bc",
       "multiverseid": 582550,
       "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Thornwood Falls",
       "scryfallId": "3ed70d84-d5f5-48ec-bbd9-08d0377c3e17",
       "multiverseid": 582551,
       "twoFaced": false,
+      "oracleCardName": "Thornwood Falls",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "a1ba2d4f-7a9b-4cf7-98fd-17b1b8c70bcd",
       "multiverseid": 582564,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "8956b4c4-3703-433f-b147-a1f67e728017",
       "multiverseid": 582558,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "d1d15705-981c-44db-9070-592dbeace299",
       "multiverseid": 582566,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Magus Lucea Kane",
       "scryfallId": "419ac203-d8b9-46df-99a8-65dfcea07ff5",
       "multiverseid": 582572,
       "twoFaced": false,
+      "oracleCardName": "Magus Lucea Kane",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Spiritual Leader — At the beginning of combat on your turn, put a +1/+1 counter on target creature.\nPsychic Stimulus — {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its activation cost this turn, copy that spell or ability. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)"
     },
     {
       "name": "Genestealer Patriarch",
       "scryfallId": "a0df01d1-6131-4ef7-abea-ba084f3b0954",
       "multiverseid": 580844,
       "twoFaced": false,
+      "oracleCardName": "Genestealer Patriarch",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Genestealer's Kiss — Whenever this creature attacks, put an infection counter on target creature defending player controls.\nChildren of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types."
     },
     {
       "name": "Exocrine",
       "scryfallId": "5b8c1303-6829-4c82-96de-a67bc0d72e42",
       "multiverseid": 580898,
       "twoFaced": false,
+      "oracleCardName": "Exocrine",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{2}{R}",
+      "cmc": 3,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nBio-plasmic Barrage — When this creature enters, it deals X damage to each player and each other creature."
     },
     {
       "name": "The Red Terror",
       "scryfallId": "1d16f75d-988d-4417-9a5e-549b785f9dc4",
       "multiverseid": 580905,
       "twoFaced": false,
+      "oracleCardName": "The Red Terror",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Advanced Species — Whenever a red source you control deals damage to one or more permanents and/or players, put a +1/+1 counter on The Red Terror."
     },
     {
       "name": "Screamer-Killer",
       "scryfallId": "078b560f-9b86-401a-afff-21ddb1ebed61",
       "multiverseid": 580906,
       "twoFaced": false,
+      "oracleCardName": "Screamer-Killer",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Trample\nBio-Plasmic Scream — Whenever you cast a creature spell with mana value 5 or greater, this creature deals 5 damage to any target."
     },
     {
       "name": "Biophagus",
       "scryfallId": "cfd188ec-5e63-414e-a949-20a0daa82690",
       "multiverseid": 580909,
       "twoFaced": false,
+      "oracleCardName": "Biophagus",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Genomic Enhancement — {T}: Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters with an additional +1/+1 counter on it."
     },
     {
       "name": "Bone Sabres",
       "scryfallId": "73d9374d-72b8-4397-9c46-be9216fab911",
       "multiverseid": 580910,
       "twoFaced": false,
+      "oracleCardName": "Bone Sabres",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Whenever equipped creature attacks, put four +1/+1 counters on it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)"
     },
     {
       "name": "Broodlord",
       "scryfallId": "a5e700b9-ea2f-47a0-8a18-6231c8f2e1e9",
       "multiverseid": 580911,
       "twoFaced": false,
+      "oracleCardName": "Broodlord",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{3}{G}",
+      "cmc": 4,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nBrood Telepathy — When this creature enters, distribute X +1/+1 counters among any number of other target creatures you control."
     },
     {
       "name": "Clamavus",
       "scryfallId": "127e9c03-f8de-497e-b94d-d6c484cab7fd",
       "multiverseid": 580912,
       "twoFaced": false,
+      "oracleCardName": "Clamavus",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it."
     },
     {
       "name": "Haruspex",
       "scryfallId": "76e93d5d-c255-45a6-9217-84ac270740a7",
       "multiverseid": 580913,
       "twoFaced": false,
+      "oracleCardName": "Haruspex",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Rapacious Hunger — Whenever another creature dies, put a +1/+1 counter on this creature.\nDevouring Monster — {T}, Remove X +1/+1 counters from this creature: Add X mana of any one color."
     },
     {
       "name": "Hierophant Bio-Titan",
       "scryfallId": "be8a8e26-39cb-440a-a428-58b49ff8d017",
       "multiverseid": 580914,
       "twoFaced": false,
+      "oracleCardName": "Hierophant Bio-Titan",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{10}{G}{G}",
+      "cmc": 12,
+      "oracleText": "Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — This creature can't be blocked by creatures with power 2 or less."
     },
     {
       "name": "Hormagaunt Horde",
       "scryfallId": "6a623ab2-4cdf-4e2e-a14d-6a709cf34cf1",
       "multiverseid": 580915,
       "twoFaced": false,
+      "oracleCardName": "Hormagaunt Horde",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nEndless Swarm — Whenever a land you control enters, you may pay {2}{G}. If you do, return this card from your graveyard to your hand."
     },
     {
       "name": "Lictor",
       "scryfallId": "3c4d8f36-461f-48a6-a4e4-9ddfb388de19",
       "multiverseid": 580916,
       "twoFaced": false,
+      "oracleCardName": "Lictor",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Flash\nPheromone Trail — When this creature enters, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample."
     },
     {
       "name": "Nexos",
       "scryfallId": "73ca0549-5775-4778-bd47-f5f234a71201",
       "multiverseid": 580917,
       "twoFaced": false,
+      "oracleCardName": "Nexos",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Strategic Coordinator — Basic lands you control have \"{T}: Add {C}{C}. Spend this mana only on costs that contain {X}.\""
     },
     {
       "name": "Old One Eye",
       "scryfallId": "b5aaaee0-9a61-45df-821e-cce516f8de6a",
       "multiverseid": 580918,
       "twoFaced": false,
+      "oracleCardName": "Old One Eye",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Trample\nOther creatures you control have trample.\nWhen Old One Eye enters, create a 5/5 green Tyranid creature token.\nFast Healing — At the beginning of your first main phase, you may discard two cards. If you do, return this card from your graveyard to your hand."
     },
     {
       "name": "Sporocyst",
       "scryfallId": "72101d5f-f3a4-4490-a6f5-c320f3aeb242",
       "multiverseid": 580920,
       "twoFaced": false,
+      "oracleCardName": "Sporocyst",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{X}{G}",
+      "cmc": 1,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDefender\nSpore Chimney — When this creature enters, search your library for up to X basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Termagant Swarm",
       "scryfallId": "31079fcb-49bf-41a2-a9b4-07c96f93399d",
       "multiverseid": 580921,
       "twoFaced": false,
+      "oracleCardName": "Termagant Swarm",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDeath Frenzy — When this creature dies, create a number of 1/1 green Tyranid creature tokens equal to this creature's power."
     },
     {
       "name": "Tervigon",
       "scryfallId": "50909e0e-0bed-423a-beb4-a24b14e95edc",
       "multiverseid": 580922,
       "twoFaced": false,
+      "oracleCardName": "Tervigon",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{1}{G}",
+      "cmc": 2,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nSpawn Termagants — Whenever this creature deals combat damage to a player, create that many 1/1 green Tyranid creature tokens."
     },
     {
       "name": "Toxicrene",
       "scryfallId": "a9b0fe26-18af-4b2e-861e-568d2f6208fd",
       "multiverseid": 580923,
       "twoFaced": false,
+      "oracleCardName": "Toxicrene",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Reach, deathtouch\nHypertoxic Miasma — All lands have \"{T}: Add one mana of any color\" and lose all other abilities."
     },
     {
       "name": "Tyrant Guard",
       "scryfallId": "4e785abe-ae43-4e6b-9d6d-56e39ea348ef",
       "multiverseid": 580925,
       "twoFaced": false,
+      "oracleCardName": "Tyrant Guard",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{2}{G}",
+      "cmc": 3,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nShieldwall — Sacrifice this creature: Creatures you control with counters on them gain hexproof and indestructible until end of turn."
     },
     {
       "name": "Atalan Jackal",
       "scryfallId": "3fc069f7-2445-44ff-bcff-5b0741841690",
       "multiverseid": 580927,
       "twoFaced": false,
+      "oracleCardName": "Atalan Jackal",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Trample, haste\nSkilled Outrider — Whenever this creature deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Deathleaper, Terror Weapon",
       "scryfallId": "9819d50f-aae8-4e92-8dab-01eebace3c1e",
       "multiverseid": 580937,
       "twoFaced": false,
+      "oracleCardName": "Deathleaper, Terror Weapon",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{G}",
+      "cmc": 4,
+      "oracleText": "Flash\nHaste\nFlesh Hooks — Creatures you control that entered this turn have double strike."
     },
     {
       "name": "The First Tyrannic War",
       "scryfallId": "64c814f3-8d4e-4c64-ad00-fd8b836b48b1",
       "multiverseid": 580943,
       "twoFaced": false,
+      "oracleCardName": "The First Tyrannic War",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{U}{R}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.\nII, III — Double the number of each kind of counter on target creature you control."
     },
     {
       "name": "Gargoyle Flock",
       "scryfallId": "0b8c7302-a5ae-484e-8ba5-397ffeb3b19c",
       "multiverseid": 580945,
       "twoFaced": false,
+      "oracleCardName": "Gargoyle Flock",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nSkyswarm — At the beginning of your end step, if a creature entered the battlefield under your control this turn, create a 1/1 blue Tyranid Gargoyle creature token with flying."
     },
     {
       "name": "Ghyrson Starn, Kelermorph",
       "scryfallId": "fa7349d9-c82f-4cf8-a852-92168d1f4966",
       "multiverseid": 580946,
       "twoFaced": false,
+      "oracleCardName": "Ghyrson Starn, Kelermorph",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nThree Autostubs — Whenever another source you control deals exactly 1 damage to a permanent or player, Ghyrson Starn deals 2 damage to that permanent or player."
     },
     {
       "name": "Malanthrope",
       "scryfallId": "28d4eb51-a6ec-488a-a79a-ec4676d7af52",
       "multiverseid": 580954,
       "twoFaced": false,
+      "oracleCardName": "Malanthrope",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Flying\nScavenge the Dead — When this creature enters, exile target player's graveyard. Put a +1/+1 counter on this creature for each creature card exiled this way."
     },
     {
       "name": "Mawloc",
       "scryfallId": "bbec97ff-bb84-4496-9e09-d4fc1570c516",
       "multiverseid": 580955,
       "twoFaced": false,
+      "oracleCardName": "Mawloc",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{R}{G}",
+      "cmc": 2,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTerror from the Deep — When this creature enters, it fights up to one target creature an opponent controls. If that creature would die this turn, exile it instead."
     },
     {
       "name": "Ravener",
       "scryfallId": "b6a9ed40-78d7-4de2-816f-1791e12fbb0c",
       "multiverseid": 580960,
       "twoFaced": false,
+      "oracleCardName": "Ravener",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{G}{U}",
+      "cmc": 2,
+      "oracleText": "Flash\nRavenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nWhen this creature enters, target creature attacks target opponent this turn if able."
     },
     {
       "name": "Shadow in the Warp",
       "scryfallId": "bd60cd99-1511-4903-b678-ff5a1853a742",
       "multiverseid": 580962,
       "twoFaced": false,
+      "oracleCardName": "Shadow in the Warp",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "The first creature spell you cast each turn costs {2} less to cast.\nWhenever an opponent casts their first noncreature spell each turn, this enchantment deals 2 damage to that player."
     },
     {
       "name": "Tyranid Harridan",
       "scryfallId": "dff00a51-977e-43ba-a4bf-b251e62f1100",
       "multiverseid": 580966,
       "twoFaced": false,
+      "oracleCardName": "Tyranid Harridan",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{U}",
+      "cmc": 6,
+      "oracleText": "Flying, ward {4}\nShrieking Gargoyles — Whenever this creature or another Tyranid you control deals combat damage to a player, create a 1/1 blue Tyranid Gargoyle creature token with flying."
     },
     {
       "name": "Tyranid Prime",
       "scryfallId": "6f6546f2-0db3-4969-b7d9-2e2138997155",
       "multiverseid": 580967,
       "twoFaced": false,
+      "oracleCardName": "Tyranid Prime",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nSynapse Creature — Other creatures you control have evolve."
     },
     {
       "name": "Winged Hive Tyrant",
       "scryfallId": "58b0df1c-d7ce-4883-b0d1-23069770514d",
       "multiverseid": 580970,
       "twoFaced": false,
+      "oracleCardName": "Winged Hive Tyrant",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}",
+      "cmc": 5,
+      "oracleText": "Flying, haste\nThe Will of the Hive Mind — Other creatures you control with counters on them have flying and haste."
     },
     {
       "name": "Zoanthrope",
       "scryfallId": "a71d6605-4a8a-473b-9f8d-0ba2f70a34e0",
       "multiverseid": 580971,
       "twoFaced": false,
+      "oracleCardName": "Zoanthrope",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{U}{R}",
+      "cmc": 2,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nFlying, ward {2}\nWarp Blast — When this creature enters, it deals X damage to any target."
     },
     {
       "name": "Genestealer Locus",
       "scryfallId": "4cdc3172-6df0-48a8-85d6-c4b727202f83",
       "multiverseid": 580843,
       "twoFaced": false,
+      "oracleCardName": "Genestealer Locus",
       "colorIdentity": [
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.\nWhenever a creature attacks one of your opponents, it gets +0/+1 until end of turn."
     },
     {
       "name": "Acolyte Hybrid",
       "scryfallId": "b229697e-b6ff-450b-8020-45c454da9b3e",
       "multiverseid": 580892,
       "twoFaced": false,
+      "oracleCardName": "Acolyte Hybrid",
       "colorIdentity": [
         "R"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Heavy Rock Cutter — Whenever this creature attacks, destroy up to one target artifact. If an artifact is destroyed this way, its controller draws a card."
     },
     {
       "name": "Aberrant",
       "scryfallId": "49dfee68-c242-4579-94b1-c23238f8c87d",
       "multiverseid": 580908,
       "twoFaced": false,
+      "oracleCardName": "Aberrant",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{X}{1}{G}",
+      "cmc": 2,
+      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nHeavy Power Hammer — Whenever this creature deals combat damage to a player, destroy target artifact or enchantment that player controls."
     },
     {
       "name": "Purestrain Genestealer",
       "scryfallId": "4f15be08-085a-464a-aad5-e4305279e04a",
       "multiverseid": 580919,
       "twoFaced": false,
+      "oracleCardName": "Purestrain Genestealer",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "This creature enters with two +1/+1 counters on it.\nVanguard Species — Whenever this creature attacks, you may remove a +1/+1 counter from it. If you do, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Tyranid Invasion",
       "scryfallId": "7082df45-6c2f-4a92-8c73-a582e9ea1948",
       "multiverseid": 580924,
       "twoFaced": false,
+      "oracleCardName": "Tyranid Invasion",
       "colorIdentity": [
         "G"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Create a number of 3/3 green Tyranid Warrior creature tokens with trample equal to the number of opponents you have."
     },
     {
       "name": "Trygon Prime",
       "scryfallId": "f6a419b2-6586-4abf-9751-eabe568066ab",
       "multiverseid": 580965,
       "twoFaced": false,
+      "oracleCardName": "Trygon Prime",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "Subterranean Assault — Whenever this creature attacks, put a +1/+1 counter on it and a +1/+1 counter on up to one other target attacking creature. That creature can't be blocked this turn."
     },
     {
       "name": "Venomthrope",
       "scryfallId": "e2284a8a-caf3-4eef-8cd2-6b2f507e7154",
       "multiverseid": 580969,
       "twoFaced": false,
+      "oracleCardName": "Venomthrope",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "Flying, deathtouch, hexproof"
     },
     {
       "name": "Goliath Truck",
       "scryfallId": "347a5d65-ef0f-4859-b433-807af500f52d",
       "multiverseid": 580980,
       "twoFaced": false,
+      "oracleCardName": "Goliath Truck",
       "colorIdentity": [],
-      "set": "40K"
+      "set": "40K",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Stowage — Whenever this Vehicle attacks, put two +1/+1 counters on another target attacking creature.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:14.018Z",
+    "retrievedDate": "2026-02-20T03:10:22.272Z",
     "sourceUrl": "TyranidSwarm_40K.json",
     "deckSource": "precon",
     "createdAt": "2022-10-07T00:00:00.000Z"

@@ -9,12 +9,19 @@
       "scryfallId": "5fea0781-e933-47ef-9414-92c8652a7778",
       "multiverseid": 692080,
       "twoFaced": false,
+      "oracleCardName": "Saheeli, Radiant Creator",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast an Artificer or artifact spell, you get {E} (an energy counter).\nAt the beginning of combat on your turn, you may pay {E}{E}{E}. When you do, create a token that's a copy of target permanent you control, except it's a 5/5 artifact creature in addition to its other types and has haste. Sacrifice it at the beginning of the next end step."
     }
   ],
   "cards": [
@@ -23,959 +30,1623 @@
       "scryfallId": "f4b46b1f-0cfe-42cc-aac5-e6912b2f9fd2",
       "multiverseid": 692079,
       "twoFaced": false,
+      "oracleCardName": "Pia Nalaar, Chief Mechanic",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more artifact creatures you control deal combat damage to a player, you get {E}{E} (two energy counters).\nAt the beginning of your end step, you may pay one or more {E}. If you do, create an X/X colorless Vehicle artifact token named Nalaar Aetherjet with flying and crew 2, where X is the amount of {E} paid this way."
     },
     {
       "name": "Territorial Aetherkite",
       "scryfallId": "c1e2f2af-dbba-4e4c-9c60-ac4d245e1431",
       "multiverseid": 692173,
       "twoFaced": false,
+      "oracleCardName": "Territorial Aetherkite",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying, haste\nWhen this creature enters, you get {E}{E} (two energy counters). Then you may pay one or more {E}. When you do, this creature deals that much damage to each other creature."
     },
     {
       "name": "Nissa, Worldsoul Speaker",
       "scryfallId": "a471b306-4941-4e46-a0cb-d92895c16f8a",
       "multiverseid": 692174,
       "twoFaced": false,
+      "oracleCardName": "Nissa, Worldsoul Speaker",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).\nYou may pay eight {E} rather than pay the mana cost for permanent spells you cast."
     },
     {
       "name": "Peema Trailblazer",
       "scryfallId": "d513e533-d3c5-45a1-a03c-2770b7b6832b",
       "multiverseid": 692175,
       "twoFaced": false,
+      "oracleCardName": "Peema Trailblazer",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, you get that many {E} (energy counters).\nExhaust — Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)"
     },
     {
       "name": "Rampaging Aetherhood",
       "scryfallId": "bd923b84-067b-4041-a0f8-e2083e0debe9",
       "multiverseid": 692176,
       "twoFaced": false,
+      "oracleCardName": "Rampaging Aetherhood",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}",
+      "cmc": 5,
+      "oracleText": "Trample, ward {2}\nAt the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature."
     },
     {
       "name": "Adaptive Omnitool",
       "scryfallId": "1603aab8-731c-407a-bb44-625c36ace43e",
       "multiverseid": 692177,
       "twoFaced": false,
+      "oracleCardName": "Adaptive Omnitool",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature gets +1/+1 for each artifact you control.\nWhenever equipped creature attacks, look at the top six cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nEquip {3}"
     },
     {
       "name": "Aetherflux Conduit",
       "scryfallId": "dd9ac0f2-2d8f-40fc-97fb-d6e05633405d",
       "multiverseid": 692178,
       "twoFaced": false,
+      "oracleCardName": "Aetherflux Conduit",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Whenever you cast a spell, you get an amount of {E} (energy counters) equal to the amount of mana spent to cast that spell.\n{T}, Pay fifty {E}: Draw seven cards. You may cast any number of spells from your hand without paying their mana costs."
     },
     {
       "name": "Aetheric Amplifier",
       "scryfallId": "21c33a91-b02c-43ec-a385-aa0349928f9c",
       "multiverseid": 692179,
       "twoFaced": false,
+      "oracleCardName": "Aetheric Amplifier",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\n{4}, {T}: Choose one. Activate only as a sorcery.\n• Double the number of each kind of counter on target permanent.\n• Double the number of each kind of counter you have."
     },
     {
       "name": "Stridehangar Automaton",
       "scryfallId": "4c398d11-a2fc-43e2-96e9-7f3383e1a43c",
       "multiverseid": 692180,
       "twoFaced": false,
+      "oracleCardName": "Stridehangar Automaton",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Thopters you control get +1/+1.\nIf one or more artifact tokens would be created under your control, those tokens plus an additional 1/1 colorless Thopter artifact creature token with flying are created instead."
     },
     {
       "name": "Chain Reaction",
       "scryfallId": "4ec4e917-97c8-4b68-ba83-514d5c29679f",
       "multiverseid": 692272,
       "twoFaced": false,
+      "oracleCardName": "Chain Reaction",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
     },
     {
       "name": "Chaos Warp",
       "scryfallId": "18081e2b-6a63-45d0-b321-1ca7c90ef408",
       "multiverseid": 692273,
       "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
     },
     {
       "name": "Druid of Purification",
       "scryfallId": "85fc3d2a-e254-4e1c-8a9d-15a3ea94810b",
       "multiverseid": 692274,
       "twoFaced": false,
+      "oracleCardName": "Druid of Purification",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way."
     },
     {
       "name": "Chromatic Lantern",
       "scryfallId": "9099b12d-8c5b-4e76-b7c4-260599e5a3b3",
       "multiverseid": 692278,
       "twoFaced": false,
+      "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
     },
     {
       "name": "Duplicant",
       "scryfallId": "de6a3b58-ddb6-4524-9685-3a34a1fd9e8f",
       "multiverseid": 692279,
       "twoFaced": false,
+      "oracleCardName": "Duplicant",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Imprint — When this creature enters, you may exile target nontoken creature.\nAs long as a card exiled with this creature is a creature card, this creature has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter."
     },
     {
       "name": "Academy Ruins",
       "scryfallId": "128deed2-b9bc-4065-95c9-ccd7b08f1230",
       "multiverseid": 692283,
       "twoFaced": false,
+      "oracleCardName": "Academy Ruins",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{U}, {T}: Put target artifact card from your graveyard on top of your library."
     },
     {
       "name": "Aethersquall Ancient",
       "scryfallId": "192882f3-88bc-4fcf-b57c-31108401e4bd",
       "multiverseid": 692418,
       "twoFaced": false,
+      "oracleCardName": "Aethersquall Ancient",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}{U}",
+      "cmc": 7,
+      "oracleText": "Flying\nAt the beginning of your upkeep, you get {E}{E}{E} (three energy counters).\nPay eight {E}: Return all other creatures to their owners' hands. Activate only as a sorcery."
     },
     {
       "name": "Aethertide Whale",
       "scryfallId": "78e396a1-a56e-418b-a342-c09a11218a85",
       "multiverseid": 692419,
       "twoFaced": false,
+      "oracleCardName": "Aethertide Whale",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Flying\nWhen this creature enters, you get six {E} (energy counters).\nPay {E}{E}{E}{E}: Return this creature to its owner's hand."
     },
     {
       "name": "Confiscation Coup",
       "scryfallId": "fdd39363-34f0-4bb7-9537-69a47789a3b4",
       "multiverseid": 692423,
       "twoFaced": false,
+      "oracleCardName": "Confiscation Coup",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "Choose target artifact or creature. You get {E}{E}{E}{E} (four energy counters), then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it."
     },
     {
       "name": "Disallow",
       "scryfallId": "80f8aa2a-78e1-4717-a0bd-a435f4922668",
       "multiverseid": 692424,
       "twoFaced": false,
+      "oracleCardName": "Disallow",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}{U}",
+      "cmc": 3,
+      "oracleText": "Counter target spell, activated ability, or triggered ability. (Mana abilities can't be targeted.)"
     },
     {
       "name": "Midnight Clock",
       "scryfallId": "d401b4af-649d-4b97-864d-5796a1a8e22b",
       "multiverseid": 692429,
       "twoFaced": false,
+      "oracleCardName": "Midnight Clock",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "{T}: Add {U}.\n{2}{U}: Put an hour counter on this artifact.\nAt the beginning of each upkeep, put an hour counter on this artifact.\nWhen the twelfth hour counter is put on this artifact, shuffle your hand and graveyard into your library, then draw seven cards. Exile this artifact."
     },
     {
       "name": "One with the Machine",
       "scryfallId": "f114e0fe-1879-42de-83cb-104ace913ffb",
       "multiverseid": 692430,
       "twoFaced": false,
+      "oracleCardName": "One with the Machine",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Draw cards equal to the greatest mana value among artifacts you control."
     },
     {
       "name": "Sai, Master Thopterist",
       "scryfallId": "dea200c8-6da5-4938-8b76-cc693e03de29",
       "multiverseid": 692432,
       "twoFaced": false,
+      "oracleCardName": "Sai, Master Thopterist",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.\n{1}{U}, Sacrifice two artifacts: Draw a card."
     },
     {
       "name": "Thopter Spy Network",
       "scryfallId": "d0adecc7-21fe-41b1-a0bd-58f98970e283",
       "multiverseid": 692433,
       "twoFaced": false,
+      "oracleCardName": "Thopter Spy Network",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
     },
     {
       "name": "Blasphemous Act",
       "scryfallId": "d1fff9a2-75c1-4623-9185-7cade6531b1e",
       "multiverseid": 692451,
       "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
     },
     {
       "name": "Combustible Gearhulk",
       "scryfallId": "4be99ea7-331a-406d-8a75-5bcfe64d1890",
       "multiverseid": 692452,
       "twoFaced": false,
+      "oracleCardName": "Combustible Gearhulk",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "First strike\nWhen this creature enters, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then this creature deals damage to that player equal to the total mana value of those cards."
     },
     {
       "name": "Lightning Runner",
       "scryfallId": "80e06596-fb1a-4d89-8d91-c6b95014f132",
       "multiverseid": 692453,
       "twoFaced": false,
+      "oracleCardName": "Lightning Runner",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Double strike, haste\nWhenever this creature attacks, you get {E}{E} (two energy counters), then you may pay eight {E}. If you pay, untap all creatures you control, and after this phase, there is an additional combat phase."
     },
     {
       "name": "Pia and Kiran Nalaar",
       "scryfallId": "f17e68fd-9c05-460d-96aa-dd0ab8b7af37",
       "multiverseid": 692455,
       "twoFaced": false,
+      "oracleCardName": "Pia and Kiran Nalaar",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "When Pia and Kiran Nalaar enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\n{2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target."
     },
     {
       "name": "Aetherwind Basker",
       "scryfallId": "76f318f4-f809-42ff-99f4-12a51d38c8f7",
       "multiverseid": 692457,
       "twoFaced": false,
+      "oracleCardName": "Aetherwind Basker",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{G}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Trample\nWhenever this creature enters or attacks, you get {E} (an energy counter) for each creature you control.\nPay {E}: This creature gets +1/+1 until end of turn."
     },
     {
       "name": "Architect of the Untamed",
       "scryfallId": "f11222dc-0dd8-48df-8106-f9e99f0b6e11",
       "multiverseid": 692458,
       "twoFaced": false,
+      "oracleCardName": "Architect of the Untamed",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, you get {E} (an energy counter).\nPay eight {E}: Create a 6/6 colorless Beast artifact creature token."
     },
     {
       "name": "Bootleggers' Stash",
       "scryfallId": "9be25e90-393a-4c30-86e2-6fa0d8be4247",
       "multiverseid": 692460,
       "twoFaced": false,
+      "oracleCardName": "Bootleggers' Stash",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Lands you control have \"{T}: Create a Treasure token.\""
     },
     {
       "name": "Elder Gargaroth",
       "scryfallId": "e5729bd1-f480-4a9a-a36c-c36bf4b85a3f",
       "multiverseid": 692461,
       "twoFaced": false,
+      "oracleCardName": "Elder Gargaroth",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Vigilance, reach, trample\nWhenever this creature attacks or blocks, choose one —\n• Create a 3/3 green Beast creature token.\n• You gain 3 life.\n• Draw a card."
     },
     {
       "name": "Aetherworks Marvel",
       "scryfallId": "b7e7eba5-8bd8-4c7d-8843-cae6c2ce0043",
       "multiverseid": 692473,
       "twoFaced": false,
+      "oracleCardName": "Aetherworks Marvel",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Whenever a permanent you control is put into a graveyard, you get {E} (an energy counter).\n{T}, Pay six {E}: Look at the top six cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order."
     },
     {
       "name": "Conjurer's Closet",
       "scryfallId": "7e520d49-f3d5-46b3-a941-c57936648a47",
       "multiverseid": 692476,
       "twoFaced": false,
+      "oracleCardName": "Conjurer's Closet",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control."
     },
     {
       "name": "Cultivator's Caravan",
       "scryfallId": "6e6ab4b6-49a8-4c02-a230-74a29f535f8c",
       "multiverseid": 692477,
       "twoFaced": false,
+      "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
     },
     {
       "name": "Panharmonicon",
       "scryfallId": "9d7903ff-359b-49f5-8782-c9dd789c2da6",
       "multiverseid": 692485,
       "twoFaced": false,
+      "oracleCardName": "Panharmonicon",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
     },
     {
       "name": "Retrofitter Foundry",
       "scryfallId": "fcddaf73-0242-4db8-817b-d65c17119372",
       "multiverseid": 692486,
       "twoFaced": false,
+      "oracleCardName": "Retrofitter Foundry",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{3}: Untap this artifact.\n{2}, {T}: Create a 1/1 colorless Servo artifact creature token.\n{1}, {T}, Sacrifice a Servo: Create a 1/1 colorless Thopter artifact creature token with flying.\n{T}, Sacrifice a Thopter: Create a 4/4 colorless Construct artifact creature token."
     },
     {
       "name": "Solemn Simulacrum",
       "scryfallId": "399d68b5-adeb-4a7c-99de-c1ea99b73fa1",
       "multiverseid": 692488,
       "twoFaced": false,
+      "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
     },
     {
       "name": "Triplicate Titan",
       "scryfallId": "36726ee1-b960-4f85-b648-dd3fe0c38e6f",
       "multiverseid": 692493,
       "twoFaced": false,
+      "oracleCardName": "Triplicate Titan",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{9}",
+      "cmc": 9,
+      "oracleText": "Flying, vigilance, trample\nWhen this creature dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "0f31cb4c-c0f4-42fc-9661-723f78ee4d56",
       "multiverseid": 692505,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Frostboil Snarl",
       "scryfallId": "85ca1a50-7627-4a6e-aaf7-83761abc31b9",
       "multiverseid": 692508,
       "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Hinterland Harbor",
       "scryfallId": "105c31a5-6e63-4442-b87a-56f324ab816e",
       "multiverseid": 692510,
       "twoFaced": false,
+      "oracleCardName": "Hinterland Harbor",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Karplusan Forest",
       "scryfallId": "cffc9b01-2f61-4eb1-8bfa-cbe746a7104b",
       "multiverseid": 692513,
       "twoFaced": false,
+      "oracleCardName": "Karplusan Forest",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
     },
     {
       "name": "Overflowing Basin",
       "scryfallId": "93a361a8-ecf2-4901-a948-c2fda6bd3aa9",
       "multiverseid": 692515,
       "twoFaced": false,
+      "oracleCardName": "Overflowing Basin",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {G}{U}."
     },
     {
       "name": "Rootbound Crag",
       "scryfallId": "70ea3d14-a1e6-4150-98c5-44be53473bd1",
       "multiverseid": 692518,
       "twoFaced": false,
+      "oracleCardName": "Rootbound Crag",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Sheltered Thicket",
       "scryfallId": "f6af5583-bb1d-4405-95b1-5e2683580c19",
       "multiverseid": 692519,
       "twoFaced": false,
+      "oracleCardName": "Sheltered Thicket",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
     },
     {
       "name": "Shivan Reef",
       "scryfallId": "2c6275ea-0565-436b-ab9a-ac17c465e14b",
       "multiverseid": 692520,
       "twoFaced": false,
+      "oracleCardName": "Shivan Reef",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
     },
     {
       "name": "Spire of Industry",
       "scryfallId": "47b550aa-5304-491e-b486-58a6258986b7",
       "multiverseid": 692522,
       "twoFaced": false,
+      "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
     },
     {
       "name": "Sulfur Falls",
       "scryfallId": "eb24d2b9-8683-454b-b911-d694202d1081",
       "multiverseid": 692523,
       "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Temple of Epiphany",
       "scryfallId": "6263bd52-081a-4307-918d-a9aeb4419a16",
       "multiverseid": 692527,
       "twoFaced": false,
+      "oracleCardName": "Temple of Epiphany",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
     },
     {
       "name": "Treasure Vault",
       "scryfallId": "f183b2d3-961a-499a-aa04-595793f01edc",
       "multiverseid": 692530,
       "twoFaced": false,
+      "oracleCardName": "Treasure Vault",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{X}{X}, {T}, Sacrifice this land: Create X Treasure tokens."
     },
     {
       "name": "Vineglimmer Snarl",
       "scryfallId": "4b1003ca-809c-4e91-8368-e6b8fa870f23",
       "multiverseid": 692533,
       "twoFaced": false,
+      "oracleCardName": "Vineglimmer Snarl",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Yavimaya Coast",
       "scryfallId": "9fbdd138-142d-4712-954e-8673d02d8079",
       "multiverseid": 692534,
       "twoFaced": false,
+      "oracleCardName": "Yavimaya Coast",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
     },
     {
       "name": "Reality Shift",
       "scryfallId": "ea37a906-2f9b-4eb1-97be-134c280ba43e",
       "multiverseid": 692264,
       "twoFaced": false,
+      "oracleCardName": "Reality Shift",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "0422cfdd-0a7c-4097-8655-b074cd8fd713",
       "multiverseid": 692277,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "4b8bfdd3-7c73-4d13-8a8d-50b6dd85fad3",
       "multiverseid": 692280,
       "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
     },
     {
       "name": "Sol Ring",
       "scryfallId": "c946b161-0e4f-4c0a-a075-cdcf05504d0b",
       "multiverseid": 692282,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Command Tower",
       "scryfallId": "0bf28443-7124-44e1-b387-95c3bd1a9da2",
       "multiverseid": 692285,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Arcane Denial",
       "scryfallId": "0baad613-6c5b-4b5e-a784-b43f2acaf689",
       "multiverseid": 692420,
       "twoFaced": false,
+      "oracleCardName": "Arcane Denial",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
     },
     {
       "name": "Bespoke Battlewagon",
       "scryfallId": "e42f232d-73c3-40bd-8ca2-da53ca20f9de",
       "multiverseid": 692421,
       "twoFaced": false,
+      "oracleCardName": "Bespoke Battlewagon",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "{T}: You get {E}{E} (two energy counters).\n{T}, Pay {E}{E}: Tap target creature.\n{T}, Pay {E}{E}{E}: Draw a card.\nPay {E}{E}{E}{E}: This Vehicle becomes an artifact creature until end of turn.\nCrew 4"
     },
     {
       "name": "Era of Innovation",
       "scryfallId": "edf49825-c432-4eb3-97da-b92ae6b9fab8",
       "multiverseid": 692425,
       "twoFaced": false,
+      "oracleCardName": "Era of Innovation",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever an artifact or Artificer you control enters, you may pay {1}. If you do, you get {E}{E} (two energy counters).\nPay six {E}, Sacrifice this enchantment: Draw three cards."
     },
     {
       "name": "Glimmer of Genius",
       "scryfallId": "913bb5da-57b7-44c0-9c6e-630ae71c4b1b",
       "multiverseid": 692428,
       "twoFaced": false,
+      "oracleCardName": "Glimmer of Genius",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Scry 2, then draw two cards. You get {E}{E} (two energy counters)."
     },
     {
       "name": "Whirler Rogue",
       "scryfallId": "3f2ddb63-e4d0-418e-9ec7-70add0ed06a8",
       "multiverseid": 692435,
       "twoFaced": false,
+      "oracleCardName": "Whirler Rogue",
       "colorIdentity": [
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
     },
     {
       "name": "Loyal Apprentice",
       "scryfallId": "072e502a-c340-4f50-9f51-62d50242b17c",
       "multiverseid": 692454,
       "twoFaced": false,
+      "oracleCardName": "Loyal Apprentice",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
     },
     {
       "name": "Reckless Fireweaver",
       "scryfallId": "3e626e3e-1d08-4d6c-b29b-71157e568b45",
       "multiverseid": 692456,
       "twoFaced": false,
+      "oracleCardName": "Reckless Fireweaver",
       "colorIdentity": [
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever an artifact you control enters, this creature deals 1 damage to each opponent."
     },
     {
       "name": "Attune with Aether",
       "scryfallId": "442c3621-3d4c-4145-b63d-81cd2564374b",
       "multiverseid": 692459,
       "twoFaced": false,
+      "oracleCardName": "Attune with Aether",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You get {E}{E} (two energy counters)."
     },
     {
       "name": "Explosive Vegetation",
       "scryfallId": "ea73440b-a306-4425-84c0-5e18b6ec0516",
       "multiverseid": 692462,
       "twoFaced": false,
+      "oracleCardName": "Explosive Vegetation",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Peema Aether-Seer",
       "scryfallId": "deaad8d1-9a60-4a65-8f20-53d83be09619",
       "multiverseid": 692463,
       "twoFaced": false,
+      "oracleCardName": "Peema Aether-Seer",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, you get an amount of {E} (energy counters) equal to the greatest power among creatures you control.\nPay {E}{E}{E}: Target creature blocks this turn if able."
     },
     {
       "name": "Servant of the Conduit",
       "scryfallId": "f433cd63-1d11-4782-a051-00151fac3a85",
       "multiverseid": 692464,
       "twoFaced": false,
+      "oracleCardName": "Servant of the Conduit",
       "colorIdentity": [
         "G"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "When this creature enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Add one mana of any color."
     },
     {
       "name": "Rogue Refiner",
       "scryfallId": "4d2f716f-97b3-49dd-b52c-0030d20b1c7f",
       "multiverseid": 692468,
       "twoFaced": false,
+      "oracleCardName": "Rogue Refiner",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, draw a card and you get {E}{E} (two energy counters)."
     },
     {
       "name": "Saheeli, Sublime Artificer",
       "scryfallId": "2e7329c4-5803-43f0-a4b5-306fb77923b7",
       "multiverseid": 692469,
       "twoFaced": false,
+      "oracleCardName": "Saheeli, Sublime Artificer",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{1}{U/R}{U/R}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
     },
     {
       "name": "Whirler Virtuoso",
       "scryfallId": "e6f210bf-30c9-4904-9ceb-4ab180938f09",
       "multiverseid": 692472,
       "twoFaced": false,
+      "oracleCardName": "Whirler Virtuoso",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flying."
     },
     {
       "name": "Commander's Sphere",
       "scryfallId": "3adcc4c3-9305-4394-a64f-fd0fa107cbf9",
       "multiverseid": 692475,
       "twoFaced": false,
+      "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
     },
     {
       "name": "Decoction Module",
       "scryfallId": "0e63512b-32a4-495a-8f8d-273e74505995",
       "multiverseid": 692478,
       "twoFaced": false,
+      "oracleCardName": "Decoction Module",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control enters, you get {E} (an energy counter).\n{4}, {T}: Return target creature you control to its owner's hand."
     },
     {
       "name": "Ornithopter of Paradise",
       "scryfallId": "47c976ee-7eb3-42bb-8bfb-5eda12417e97",
       "multiverseid": 692483,
       "twoFaced": false,
+      "oracleCardName": "Ornithopter of Paradise",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Flying\n{T}: Add one mana of any color."
     },
     {
       "name": "Solar Transformer",
       "scryfallId": "fbc1c8dd-ea66-4dc3-8444-9f20758a45f7",
       "multiverseid": 692487,
       "twoFaced": false,
+      "oracleCardName": "Solar Transformer",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "This artifact enters tapped.\nWhen this artifact enters, you get {E}{E}{E} (three energy counters).\n{T}: Add {C}.\n{T}, Pay {E}: Add one mana of any color."
     },
     {
       "name": "Soul-Guide Lantern",
       "scryfallId": "6a0f5301-0af9-496d-b55d-6bb5518b009c",
       "multiverseid": 692489,
       "twoFaced": false,
+      "oracleCardName": "Soul-Guide Lantern",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "When this artifact enters, exile target card from a graveyard.\n{T}, Sacrifice this artifact: Exile each opponent's graveyard.\n{1}, {T}, Sacrifice this artifact: Draw a card."
     },
     {
       "name": "Talisman of Curiosity",
       "scryfallId": "40bccd95-acd9-48d1-817c-b07f95234427",
       "multiverseid": 692490,
       "twoFaced": false,
+      "oracleCardName": "Talisman of Curiosity",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
     },
     {
       "name": "Aether Hub",
       "scryfallId": "bb6a8c30-e824-4137-b83e-b9d175a0d037",
       "multiverseid": 692495,
       "twoFaced": false,
+      "oracleCardName": "Aether Hub",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "When this land enters, you get {E} (an energy counter).\n{T}: Add {C}.\n{T}, Pay {E}: Add one mana of any color."
     },
     {
       "name": "Evolving Wilds",
       "scryfallId": "6a28f0c0-6673-4fe1-b2a1-1f9ed236eff7",
       "multiverseid": 692504,
       "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Frontier Bivouac",
       "scryfallId": "8e629e32-c3c3-4582-b319-e70b8fd6403d",
       "multiverseid": 692507,
       "twoFaced": false,
+      "oracleCardName": "Frontier Bivouac",
       "colorIdentity": [
         "G",
         "R",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "4898fba1-d692-4440-bfff-ae535bdc1ba8",
       "multiverseid": 692516,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Slagwoods Bridge",
       "scryfallId": "39a60957-eaee-4154-824f-148dba07161a",
       "multiverseid": 692521,
       "twoFaced": false,
+      "oracleCardName": "Slagwoods Bridge",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {R} or {G}."
     },
     {
       "name": "Tanglepool Bridge",
       "scryfallId": "2adf277c-945e-49b4-88d7-ac720863d0d6",
       "multiverseid": 692525,
       "twoFaced": false,
+      "oracleCardName": "Tanglepool Bridge",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "DRC"
+      "set": "DRC",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {G} or {U}."
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Island",
       "scryfallId": "5a8e9b9e-4947-4b6a-b21b-6fe009760fc5",
       "multiverseid": 689040,
       "twoFaced": false,
+      "oracleCardName": "Island",
       "colorIdentity": [
         "U"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "fb76cb6c-2f4d-4ca2-876f-d49ea529e59b",
       "multiverseid": 689046,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "fb76cb6c-2f4d-4ca2-876f-d49ea529e59b",
       "multiverseid": 689046,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "fb76cb6c-2f4d-4ca2-876f-d49ea529e59b",
       "multiverseid": 689046,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "fb76cb6c-2f4d-4ca2-876f-d49ea529e59b",
       "multiverseid": 689046,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Mountain",
       "scryfallId": "fb76cb6c-2f4d-4ca2-876f-d49ea529e59b",
       "multiverseid": 689046,
       "twoFaced": false,
+      "oracleCardName": "Mountain",
       "colorIdentity": [
         "R"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forest",
       "scryfallId": "b69adddd-3626-45d6-8100-26cf1f314d00",
       "multiverseid": 689049,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "DFT"
+      "set": "DFT",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:13.153Z",
+    "retrievedDate": "2026-02-20T03:10:21.270Z",
     "sourceUrl": "LivingEnergy_DRC.json",
     "deckSource": "precon",
     "createdAt": "2025-02-14T00:00:00.000Z"

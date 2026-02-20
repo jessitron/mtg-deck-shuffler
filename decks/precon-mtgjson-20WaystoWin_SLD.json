@@ -9,6 +9,7 @@
       "scryfallId": "4e9a1f19-6ee3-49fb-a08d-4048ee7c1e34",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Go-Shintai of Life's Origin",
       "colorIdentity": [
         "B",
         "G",
@@ -16,7 +17,14 @@
         "U",
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "{W}{U}{B}{R}{G}, {T}: Return target enchantment card from your graveyard to the battlefield.\nWhenever Go-Shintai of Life's Origin or another nontoken Shrine you control enters, create a 1/1 colorless Shrine enchantment creature token."
     }
   ],
   "cards": [
@@ -25,895 +33,1500 @@
       "scryfallId": "12d48761-027a-4f12-bcf6-8ff78523d7cc",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Alseid of Life's Bounty",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Lifelink\n{1}, Sacrifice this creature: Target creature or enchantment you control gains protection from the color of your choice until end of turn."
     },
     {
       "name": "Approach of the Second Sun",
       "scryfallId": "78d7ca09-b6dc-4906-95ce-1571f6c4cefb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Approach of the Second Sun",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{6}{W}",
+      "cmc": 7,
+      "oracleText": "If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. Otherwise, put Approach of the Second Sun into its owner's library seventh from the top and you gain 7 life."
     },
     {
       "name": "Arcane Signet",
       "scryfallId": "49175b73-d09a-43cb-bc89-fba82b5ccc1b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Augur of Autumn",
       "scryfallId": "d06a31b1-f0e7-4512-a810-4a9a7e682b79",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Augur of Autumn",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "You may look at the top card of your library any time.\nYou may play lands from the top of your library.\nCoven — As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library."
     },
     {
       "name": "Auriok Champion",
       "scryfallId": "cce78699-38d3-4806-b2d7-6d64afbedba8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Auriok Champion",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{W}",
+      "cmc": 2,
+      "oracleText": "Protection from black and from red\nWhenever another creature enters, you may gain 1 life."
     },
     {
       "name": "Austere Command",
       "scryfallId": "c3eb6c28-cf67-4d27-924d-4e44395662de",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Austere Command",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
     },
     {
       "name": "Azorius Guildgate",
       "scryfallId": "c11f10dc-0636-4a48-8294-11c0c84480fa",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Azorius Guildgate",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
     },
     {
       "name": "Baldur's Gate",
       "scryfallId": "096012fb-a92b-4842-aee3-56d6598e9419",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Baldur's Gate",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}: Add X mana of any one color, where X is the number of other Gates you control."
     },
     {
       "name": "Biovisionary",
       "scryfallId": "bb70ac85-1361-4c90-b78e-99b15ffef5ba",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Biovisionary",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{U}",
+      "cmc": 3,
+      "oracleText": "At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game."
     },
     {
       "name": "Black Dragon Gate",
       "scryfallId": "a28c674c-ae89-416e-bac6-edfd9f24ee7b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Black Dragon Gate",
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAs this land enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
     },
     {
       "name": "Boros Guildgate",
       "scryfallId": "95940c4c-d600-4086-b5d8-fd84ce5cc2b5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Boros Guildgate",
       "colorIdentity": [
         "R",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
     },
     {
       "name": "Bountiful Promenade",
       "scryfallId": "7e423417-238a-4dde-abe9-fa79385b1bdb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Bountiful Promenade",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Brushland",
       "scryfallId": "6de242ab-fab3-43f0-b8b4-6f323109eeaf",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Brushland",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
     },
     {
       "name": "Chromatic Lantern",
       "scryfallId": "48f82f38-a4bf-41f6-99fc-1f8132267fc4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
     },
     {
       "name": "Circuitous Route",
       "scryfallId": "a779a5c2-b047-41cf-82f3-ef3de23217d8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Circuitous Route",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle."
     },
     {
       "name": "Citadel Gate",
       "scryfallId": "7dca83ce-1b75-4dcc-a839-598106a92ca9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Citadel Gate",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAs this land enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color."
     },
     {
       "name": "Clever Concealment",
       "scryfallId": "3b31a68a-3df2-4963-b9f9-cb81df79d758",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Clever Concealment",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAny number of target nonland permanents you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)"
     },
     {
       "name": "Cliffgate",
       "scryfallId": "efcc59e2-5976-4895-89f5-a80fd57a0fe2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Cliffgate",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAs this land enters, choose a color other than red.\n{T}: Add {R} or one mana of the chosen color."
     },
     {
       "name": "Command Tower",
       "scryfallId": "4a2d381e-4082-4e7d-a109-a7c700ceddfd",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
     },
     {
       "name": "Crib Swap",
       "scryfallId": "20aa5ffa-e393-47a1-8ebb-61d461e904ed",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Crib Swap",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Kindred",
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling."
     },
     {
       "name": "Darksteel Citadel",
       "scryfallId": "0b9605b7-5146-4bdc-890a-c23fa1bfebc2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Darksteel Citadel",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Indestructible\n{T}: Add {C}."
     },
     {
       "name": "Darksteel Mutation",
       "scryfallId": "0ca32f80-ccff-475e-8e5e-a754fe60bb4e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Darksteel Mutation",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Enchant creature\nEnchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types."
     },
     {
       "name": "Dimir Guildgate",
       "scryfallId": "f7678f13-d8d8-4932-88b6-c39dbad1188b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dimir Guildgate",
       "colorIdentity": [
         "B",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
     },
     {
       "name": "Drown in Dreams",
       "scryfallId": "047cc3eb-7ec2-4813-899c-890b74fbbed1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Drown in Dreams",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{2}{U}",
+      "cmc": 3,
+      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Target player draws X cards.\n• Target player mills twice X cards."
     },
     {
       "name": "Dryad of the Ilysian Grove",
       "scryfallId": "76e85c9f-bd0a-4285-b86c-69e170d4405a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Dryad of the Ilysian Grove",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "You may play an additional land on each of your turns.\nLands you control are every basic land type in addition to their other types."
     },
     {
       "name": "Eerie Ultimatum",
       "scryfallId": "50ef833c-8472-4d6c-9bcf-bd448c650d2f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Eerie Ultimatum",
       "colorIdentity": [
         "B",
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{W}{W}{B}{B}{B}{G}{G}",
+      "cmc": 7,
+      "oracleText": "Return any number of permanent cards with different names from your graveyard to the battlefield."
     },
     {
       "name": "Exotic Orchard",
       "scryfallId": "ac9b4334-4413-466f-a841-4059cd1ac8c1",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
     },
     {
       "name": "Faeburrow Elder",
       "scryfallId": "5224f47f-9c49-413a-aca2-695523ef29a4",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Faeburrow Elder",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{W}",
+      "cmc": 3,
+      "oracleText": "Vigilance\nThis creature gets +1/+1 for each color among permanents you control.\n{T}: For each color among permanents you control, add one mana of that color."
     },
     {
       "name": "Felidar Sovereign",
       "scryfallId": "f48ad345-9db0-4e37-8d9d-a67e47e7eb14",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Felidar Sovereign",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance (Attacking doesn't cause this creature to tap.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nAt the beginning of your upkeep, if you have 40 or more life, you win the game."
     },
     {
       "name": "Fertile Ground",
       "scryfallId": "f57840d7-d411-4f16-ba84-314ac63023ac",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Fertile Ground",
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color."
     },
     {
       "name": "Forbidden Orchard",
       "scryfallId": "3f79add5-6c23-4a36-86d3-8647605d2a71",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forbidden Orchard",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color.\nWhenever you tap this land for mana, target opponent creates a 1/1 colorless Spirit creature token."
     },
     {
       "name": "Forest",
       "scryfallId": "1d416790-fca9-42ab-b211-bae68858a614",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forest",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
     },
     {
       "name": "Forgotten Ancient",
       "scryfallId": "43a6da93-2dd3-44fe-93b1-e4e557812f81",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Forgotten Ancient",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
     },
     {
       "name": "Gateway Plaza",
       "scryfallId": "b58dd869-4225-4b4f-ae8f-15b4338fd390",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gateway Plaza",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
     },
     {
       "name": "Ghostly Prison",
       "scryfallId": "f66cce50-ce75-4fa4-9d2d-85694e5938cf",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Ghostly Prison",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
     },
     {
       "name": "Ghoulish Impetus",
       "scryfallId": "90041ea9-5336-40f4-9ea1-6bef88a3c20b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Ghoulish Impetus",
       "colorIdentity": [
         "B"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1, has deathtouch, and is goaded.\nWhen enchanted creature dies, return this card to the battlefield at the beginning of the next end step."
     },
     {
       "name": "Golgari Guildgate",
       "scryfallId": "127226e7-d51c-4a85-9195-9bbb375ffc31",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Golgari Guildgate",
       "colorIdentity": [
         "B",
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
     },
     {
       "name": "Gond Gate",
       "scryfallId": "a01096b1-a026-4dfd-bea2-de9ecb686ffa",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gond Gate",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Gates you control enter untapped.\n{T}: Add {C}.\n{T}: Add one mana of any color that a Gate you control could produce."
     },
     {
       "name": "Gruul Guildgate",
       "scryfallId": "397805e8-f7c2-4b13-9454-5d526a429c88",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Gruul Guildgate",
       "colorIdentity": [
         "G",
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
     },
     {
       "name": "Halo Fountain",
       "scryfallId": "90ad88c2-561d-4c40-ba9b-d89f43142498",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Halo Fountain",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "{W}, {T}, Untap a tapped creature you control: Create a 1/1 green and white Citizen creature token.\n{W}{W}, {T}, Untap two tapped creatures you control: Draw a card.\n{W}{W}{W}{W}{W}, {T}, Untap fifteen tapped creatures you control: You win the game."
     },
     {
       "name": "Hangarback Walker",
       "scryfallId": "40dd3666-32db-4fcd-8d96-f0cd58d715ae",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hangarback Walker",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{X}{X}",
+      "cmc": 0,
+      "oracleText": "This creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on this creature.\n{1}, {T}: Put a +1/+1 counter on this creature."
     },
     {
       "name": "Happily Ever After",
       "scryfallId": "3691341c-676f-4460-9d2d-31b103b77679",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Happily Ever After",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, each player gains 5 life and draws a card.\nAt the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game."
     },
     {
       "name": "Heap Gate",
       "scryfallId": "756a8e0a-f76e-4947-ac67-bc76d6fe98a6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Heap Gate",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{1}, {T}, Tap an untapped Gate you control: Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Heliod's Intervention",
       "scryfallId": "3c3793c3-c9f6-4fb0-9b95-cd4cd07ab40d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Heliod's Intervention",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{W}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy X target artifacts and/or enchantments.\n• Target player gains twice X life."
     },
     {
       "name": "Heliod, Sun-Crowned",
       "scryfallId": "e15cff2e-4fab-4729-b01c-2d32deb76b6b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Heliod, Sun-Crowned",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Indestructible\nAs long as your devotion to white is less than five, Heliod isn't a creature.\nWhenever you gain life, put a +1/+1 counter on target creature or enchantment you control.\n{1}{W}: Another target creature gains lifelink until end of turn."
     },
     {
       "name": "Helix Pinnacle",
       "scryfallId": "286e8e16-1b07-447e-b88c-507125632e40",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Helix Pinnacle",
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Shroud (This enchantment can't be the target of spells or abilities.)\n{X}: Put X tower counters on this enchantment.\nAt the beginning of your upkeep, if there are 100 or more tower counters on this enchantment, you win the game."
     },
     {
       "name": "Hellkite Tyrant",
       "scryfallId": "a7cb4100-1696-4393-8f1f-634018e0b78f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Hellkite Tyrant",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}{R}",
+      "cmc": 6,
+      "oracleText": "Flying, trample\nWhenever this creature deals combat damage to a player, gain control of all artifacts that player controls.\nAt the beginning of your upkeep, if you control twenty or more artifacts, you win the game."
     },
     {
       "name": "Homeward Path",
       "scryfallId": "197a4f38-0c19-4ba4-82f5-3d1fd6d054d3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Homeward Path",
       "colorIdentity": [],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Each player gains control of all creatures they own."
     },
     {
       "name": "Izzet Guildgate",
       "scryfallId": "e0abeaf6-1ec9-4abb-a3a0-48afa475a946",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Izzet Guildgate",
       "colorIdentity": [
         "R",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U} or {R}."
     },
     {
       "name": "Kynaios and Tiro of Meletis",
       "scryfallId": "36afd5e0-e9c2-4f48-a218-5366f151abdd",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Kynaios and Tiro of Meletis",
       "colorIdentity": [
         "G",
         "R",
         "U",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{G}{W}{U}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your end step, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card."
     },
     {
       "name": "Lightning Greaves",
       "scryfallId": "ea21033a-9318-4599-a4bc-b7262621d7d8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
     },
     {
       "name": "Lignify",
       "scryfallId": "b0e014d9-3402-4541-ac62-8997c3613128",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Lignify",
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Kindred",
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Enchant creature\nEnchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities."
     },
     {
       "name": "Liliana's Contract",
       "scryfallId": "f9df4ea9-d127-4723-bbd7-a5a0314d657c",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Liliana's Contract",
       "colorIdentity": [
         "B"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{B}{B}",
+      "cmc": 5,
+      "oracleText": "When this enchantment enters, you draw four cards and you lose 4 life.\nAt the beginning of your upkeep, if you control four or more Demons with different names, you win the game."
     },
     {
       "name": "Mangara, the Diplomat",
       "scryfallId": "f0955519-6eb8-4305-902b-8b7323ee90a3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mangara, the Diplomat",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Lifelink\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.\nWhenever an opponent casts their second spell each turn, draw a card."
     },
     {
       "name": "Manor Gate",
       "scryfallId": "08a1a78c-f715-4d92-a428-bcc409bdbd79",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Manor Gate",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAs this land enters, choose a color other than green.\n{T}: Add {G} or one mana of the chosen color."
     },
     {
       "name": "Maskwood Nexus",
       "scryfallId": "9e1aef13-3a5d-4a83-8851-e667a4cb5a67",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)"
     },
     {
       "name": "Mayael's Aria",
       "scryfallId": "ee887151-5777-49c3-ae74-101760a85433",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mayael's Aria",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{R}{G}{W}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater."
     },
     {
       "name": "Maze's End",
       "scryfallId": "bf5e2643-d2c3-41b5-b1ac-0428aec32196",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Maze's End",
       "colorIdentity": [],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{3}, {T}, Return this land to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle. If you control ten or more Gates with different names, you win the game."
     },
     {
       "name": "Mechanized Production",
       "scryfallId": "e332f426-c6ef-4232-a250-694537c2510f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mechanized Production",
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."
     },
     {
       "name": "Monologue Tax",
       "scryfallId": "b2b1ab21-fee9-42c4-abae-4e0883d34801",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Monologue Tax",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever an opponent casts their second spell each turn, you create a Treasure token."
     },
     {
       "name": "Morbid Opportunist",
       "scryfallId": "49966f0c-7edb-4543-be5b-2b26d8351852",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Morbid Opportunist",
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
     },
     {
       "name": "Mystic Remora",
       "scryfallId": "3588abed-15e5-459b-998a-0a94f0ab215b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Mystic Remora",
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{U}",
+      "cmc": 1,
+      "oracleText": "Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}."
     },
     {
       "name": "Orzhov Guildgate",
       "scryfallId": "8ab96220-44e1-4c1d-8fb5-1fd44d8bdd8d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Orzhov Guildgate",
       "colorIdentity": [
         "B",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {W} or {B}."
     },
     {
       "name": "Overgrown Farmland",
       "scryfallId": "5d61ebe0-e115-49d8-a97d-53b81b8acdc5",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Overgrown Farmland",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Pariah",
       "scryfallId": "a0d39b2d-7f85-4ac2-b002-3cea6e23a708",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Pariah",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nAll damage that would be dealt to you is dealt to enchanted creature instead."
     },
     {
       "name": "Path of Ancestry",
       "scryfallId": "821e64c6-58d1-4601-95a7-bff517465148",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
     },
     {
       "name": "Plains",
       "scryfallId": "6a462a95-f841-45a6-97a2-d6ddcffa3c20",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Plains",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
     },
     {
       "name": "Plaza of Harmony",
       "scryfallId": "8ac4f15f-6191-4d23-939a-9d3f3c751395",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Plaza of Harmony",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "When this land enters, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type that a Gate you control could produce."
     },
     {
       "name": "Rakdos Guildgate",
       "scryfallId": "55909c50-8065-481d-b3df-00b0d6ef1ee8",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rakdos Guildgate",
       "colorIdentity": [
         "B",
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
     },
     {
       "name": "Razorverge Thicket",
       "scryfallId": "62c38e0a-7113-4023-9f18-c01fd5abc827",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Razorverge Thicket",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Reflecting Pool",
       "scryfallId": "e04ab780-16b5-476a-a920-3c46fbf1c0a3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Reflecting Pool",
       "colorIdentity": [],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any type that a land you control could produce."
     },
     {
       "name": "Revel in Riches",
       "scryfallId": "22ddde38-79e0-48f2-9920-b66f6399b077",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Revel in Riches",
       "colorIdentity": [
         "B"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "Whenever a creature an opponent controls dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nAt the beginning of your upkeep, if you control ten or more Treasures, you win the game."
     },
     {
       "name": "Rite of Replication",
       "scryfallId": "63ad6e28-feeb-414f-8daf-5727f54a5d97",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Rite of Replication",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead."
     },
     {
       "name": "Sanctum Weaver",
       "scryfallId": "f15b8e8e-1a71-4445-ba82-e3d2cc7afdfc",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sanctum Weaver",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Enchantment",
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add X mana of any one color, where X is the number of enchantments you control."
     },
     {
       "name": "Sea Gate",
       "scryfallId": "dfc51143-c2cb-4cb6-836e-662bc1b15afb",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sea Gate",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAs this land enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
     },
     {
       "name": "Seedborn Muse",
       "scryfallId": "5a8412d9-8ee2-48ac-ad41-8957d535bcce",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Seedborn Muse",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Untap all permanents you control during each other player's untap step."
     },
     {
       "name": "Selesnya Guildgate",
       "scryfallId": "69ea39da-93c8-4806-8f93-10f71fb8c62e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Selesnya Guildgate",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
     },
     {
       "name": "Shalai, Voice of Plenty",
       "scryfallId": "14a74ac1-d827-48d5-9d7d-5eb0122b0069",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shalai, Voice of Plenty",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nYou, planeswalkers you control, and other creatures you control have hexproof.\n{4}{G}{G}: Put a +1/+1 counter on each creature you control."
     },
     {
       "name": "Shiny Impetus",
       "scryfallId": "6c4b24f2-eaf6-47e6-8536-c769ef9cca7f",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Shiny Impetus",
       "colorIdentity": [
         "R"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
     },
     {
       "name": "Simic Ascendancy",
       "scryfallId": "ed12a38e-284e-439d-8203-cf730cc40805",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Simic Ascendancy",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}{U}",
+      "cmc": 2,
+      "oracleText": "{1}{G}{U}: Put a +1/+1 counter on target creature you control.\nWhenever one or more +1/+1 counters are put on a creature you control, put that many growth counters on this enchantment.\nAt the beginning of your upkeep, if this enchantment has twenty or more growth counters on it, you win the game."
     },
     {
       "name": "Simic Guildgate",
       "scryfallId": "4485d30c-7471-474f-b2b4-cfa2c2144d89",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Simic Guildgate",
       "colorIdentity": [
         "G",
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
     },
     {
       "name": "Sol Ring",
       "scryfallId": "b162b131-5612-4605-9de8-a5731eeac37e",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
     },
     {
       "name": "Soul's Attendant",
       "scryfallId": "819219bd-1364-4032-ab5b-6f5ac73b394a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Soul's Attendant",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Whenever another creature enters, you may gain 1 life."
     },
     {
       "name": "Sphinx's Revelation",
       "scryfallId": "6350b216-4a11-4e33-89ac-ffaf6315ab7d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sphinx's Revelation",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{W}{U}{U}",
+      "cmc": 3,
+      "oracleText": "You gain X life and draw X cards."
     },
     {
       "name": "Sun Titan",
       "scryfallId": "3399b285-3d38-43d4-b017-e1752ddd19f7",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sun Titan",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
     },
     {
       "name": "Sunscorch Regent",
       "scryfallId": "ef205151-315b-48d9-921b-ab255a4db893",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Sunscorch Regent",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on this creature and you gain 1 life."
     },
     {
       "name": "Supreme Verdict",
       "scryfallId": "21a6bdf6-0c91-49c3-8f9d-7f244807e689",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Supreme Verdict",
       "colorIdentity": [
         "U",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{W}{W}{U}",
+      "cmc": 4,
+      "oracleText": "This spell can't be countered.\nDestroy all creatures."
     },
     {
       "name": "Taurean Mauler",
       "scryfallId": "4a76aa6e-e92a-4e31-b062-cc9a1a341a57",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Taurean Mauler",
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
     },
     {
       "name": "Test of Endurance",
       "scryfallId": "8792ef56-5eeb-4bc6-896e-c737315eb74d",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Test of Endurance",
       "colorIdentity": [
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your upkeep, if you have 50 or more life, you win the game."
     },
     {
       "name": "The Eternal Wanderer",
       "scryfallId": "c391f842-bf99-407d-a369-dddb6eaa4a5a",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "The Eternal Wanderer",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "No more than one creature can attack The Eternal Wanderer each combat.\n[+1]: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.\n[0]: Create a 2/2 white Samurai creature token with double strike.\n[−4]: For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way."
     },
     {
       "name": "The World Tree",
       "scryfallId": "d93769a3-9419-4f60-8a75-495050ba4fa3",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "The World Tree",
       "colorIdentity": [
         "B",
         "G",
@@ -921,95 +1534,155 @@
         "U",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nAs long as you control six or more lands, lands you control have \"{T}: Add one mana of any color.\"\n{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice this land: Search your library for any number of God cards, put them onto the battlefield, then shuffle."
     },
     {
       "name": "Thornglint Bridge",
       "scryfallId": "13e96e38-22e3-4e85-a323-4d0ce45ed5b9",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Thornglint Bridge",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Artifact",
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {G} or {W}."
     },
     {
       "name": "Tireless Tracker",
       "scryfallId": "7e656b81-43b6-4d92-b68b-fbf8848620c2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tireless Tracker",
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, put a +1/+1 counter on this creature."
     },
     {
       "name": "Trace of Abundance",
       "scryfallId": "85c31032-e18a-435e-b027-b20590831b66",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Trace of Abundance",
       "colorIdentity": [
         "G",
         "R",
         "W"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{R/W}{G}",
+      "cmc": 2,
+      "oracleText": "Enchant land\nEnchanted land has shroud. (It can't be the target of spells or abilities.)\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color."
     },
     {
       "name": "Tragic Arrogance",
       "scryfallId": "a7452070-668c-4f15-91b6-08a0a5344ccc",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Tragic Arrogance",
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control."
     },
     {
       "name": "Triskaidekaphile",
       "scryfallId": "2ddbaeed-ba00-476d-a68a-d98f179b62a6",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Triskaidekaphile",
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD"
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "You have no maximum hand size.\nAt the beginning of your upkeep, if you have exactly thirteen cards in your hand, you win the game.\n{3}{U}: Draw a card."
     },
     {
       "name": "Twenty-Toed Toad",
       "scryfallId": "1b3de0d8-5911-4743-8623-010f12c2055b",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Twenty-Toed Toad",
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Your maximum hand size is twenty.\nWhenever you attack with two or more creatures, put a +1/+1 counter on this creature and draw a card.\nWhenever this creature attacks, you win the game if there are twenty or more counters on it or you have twenty or more cards in hand."
     },
     {
       "name": "Wooded Bastion",
       "scryfallId": "4040f465-9220-4e5d-98ff-7a13cec2dba2",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Wooded Bastion",
       "colorIdentity": [
         "G",
         "W"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}."
     },
     {
       "name": "Yahenni, Undying Partisan",
       "scryfallId": "3e28848e-01ea-4471-a8d2-54bad9f1c356",
       "multiverseid": 0,
       "twoFaced": false,
+      "oracleCardName": "Yahenni, Undying Partisan",
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST"
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Haste\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni.\nSacrifice another creature: Yahenni gains indestructible until end of turn."
     }
   ],
   "provenance": {
-    "retrievedDate": "2025-12-28T19:31:12.085Z",
+    "retrievedDate": "2026-02-20T03:10:19.993Z",
     "sourceUrl": "20WaysToWin_SLD.json",
     "deckSource": "precon",
     "createdAt": "2024-12-04T00:00:00.000Z"
