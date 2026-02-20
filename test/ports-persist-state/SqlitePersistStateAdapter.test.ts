@@ -6,20 +6,28 @@ import path from "node:path";
 import * as fc from "fast-check";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { ShuffleEvent } from "../../src/GameEvents.js";
+import { SqliteCardRepositoryAdapter } from "../../src/port-card-repository/SqliteCardRepositoryAdapter.js";
+import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 
 describe("SqlitePersistStateAdapter", () => {
   let adapter: SqlitePersistStateAdapter;
+  let cardRepository: CardRepositoryPort;
   let testGameState: PersistedGameState;
   let testDbPath: string;
 
   beforeEach(async () => {
     // Create a unique test database file
     testDbPath = path.join(process.cwd(), `test-${Date.now()}-${Math.random()}.db`);
-    adapter = new SqlitePersistStateAdapter(testDbPath);
+    cardRepository = new SqliteCardRepositoryAdapter(testDbPath);
+    adapter = new SqlitePersistStateAdapter(testDbPath, cardRepository);
     await adapter.waitForInitialization();
 
     // Use generator to create test deck, then convert to PersistedGameState
     const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save all cards to the repository so they can be hydrated later
+    await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
+
     testGameState = createTestPersistedGameState(1, testDeck, GameStatus.Active);
   });
 
@@ -114,8 +122,8 @@ describe("SqlitePersistStateAdapter", () => {
     await adapter.save(testGameState);
     await adapter.close();
 
-    // Create new adapter instance with same database file
-    const adapter2 = new SqlitePersistStateAdapter(testDbPath);
+    // Create new adapter instance with same database file (reuse same cardRepository)
+    const adapter2 = new SqlitePersistStateAdapter(testDbPath, cardRepository);
     await adapter2.waitForInitialization();
 
     try {

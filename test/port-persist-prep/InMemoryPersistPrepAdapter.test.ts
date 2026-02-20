@@ -2,18 +2,26 @@ import { InMemoryPersistPrepAdapter } from "../../src/port-persist-prep/InMemory
 import { PersistedGamePrep } from "../../src/port-persist-prep/types.js";
 import * as fc from "fast-check";
 import { deckWithOneCommander } from "../generators.js";
+import { InMemoryCardRepositoryAdapter } from "../../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
+import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 
 describe("InMemoryPersistPrepAdapter", () => {
   let adapter: InMemoryPersistPrepAdapter;
+  let cardRepository: CardRepositoryPort;
   let testPrep: PersistedGamePrep;
 
-  beforeEach(() => {
-    adapter = new InMemoryPersistPrepAdapter();
+  beforeEach(async () => {
+    cardRepository = new InMemoryCardRepositoryAdapter();
+    adapter = new InMemoryPersistPrepAdapter(cardRepository);
 
     // Use generator to create test deck, then wrap in PersistedGamePrep
     const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save all cards to the repository so they can be hydrated later
+    await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
+
     testPrep = {
-      version: 1,
+      version: 2,
       prepId: 1,
       deck: testDeck,
       createdAt: new Date("2024-01-15T10:00:00.000Z"),
@@ -50,8 +58,12 @@ describe("InMemoryPersistPrepAdapter", () => {
 
   it("should store multiple preps independently", async () => {
     const testDeck2 = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save cards for second deck to repository
+    await cardRepository.saveCards([...testDeck2.cards, ...testDeck2.commanders]);
+
     const prep2: PersistedGamePrep = {
-      version: 1,
+      version: 2,
       prepId: 2,
       deck: testDeck2,
       createdAt: new Date("2024-01-16T10:00:00.000Z"),

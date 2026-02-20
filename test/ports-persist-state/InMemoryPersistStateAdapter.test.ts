@@ -3,16 +3,24 @@ import { PersistedGameState, PERSISTED_GAME_STATE_VERSION } from "../../src/port
 import { GameStatus } from "../../src/GameState.js";
 import * as fc from "fast-check";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
+import { InMemoryCardRepositoryAdapter } from "../../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
+import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 
 describe("InMemoryPersistStateAdapter", () => {
   let adapter: InMemoryPersistStateAdapter;
+  let cardRepository: CardRepositoryPort;
   let testGameState: PersistedGameState;
 
-  beforeEach(() => {
-    adapter = new InMemoryPersistStateAdapter();
+  beforeEach(async () => {
+    cardRepository = new InMemoryCardRepositoryAdapter();
+    adapter = new InMemoryPersistStateAdapter(cardRepository);
 
     // Use generator to create test deck, then convert to PersistedGameState
     const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save all cards to the repository so they can be hydrated later
+    await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
+
     testGameState = createTestPersistedGameState(1, testDeck, GameStatus.Active);
   });
 

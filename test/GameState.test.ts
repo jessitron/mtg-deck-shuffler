@@ -551,7 +551,7 @@ describe("GameState", () => {
         }),
         (twoFacedCard) => {
           const deck: Deck = {
-            version: 1,
+            version: 2,
             name: "Test Deck",
             commanders: [],
             cards: [twoFacedCard],
@@ -610,7 +610,7 @@ describe("GameState", () => {
         }),
         (singleFacedCard) => {
           const deck: Deck = {
-            version: 1,
+            version: 2,
             name: "Test Deck",
             commanders: [],
             cards: [singleFacedCard],

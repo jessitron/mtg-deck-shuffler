@@ -4,22 +4,30 @@ import fs from "node:fs";
 import path from "node:path";
 import * as fc from "fast-check";
 import { deckWithOneCommander } from "../generators.js";
+import { SqliteCardRepositoryAdapter } from "../../src/port-card-repository/SqliteCardRepositoryAdapter.js";
+import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 
 describe("SqlitePersistPrepAdapter", () => {
   let adapter: SqlitePersistPrepAdapter;
+  let cardRepository: CardRepositoryPort;
   let testPrep: PersistedGamePrep;
   let testDbPath: string;
 
   beforeEach(async () => {
     // Create a unique test database file
     testDbPath = path.join(process.cwd(), `test-prep-${Date.now()}-${Math.random()}.db`);
-    adapter = new SqlitePersistPrepAdapter(testDbPath);
+    cardRepository = new SqliteCardRepositoryAdapter(testDbPath);
+    adapter = new SqlitePersistPrepAdapter(testDbPath, cardRepository);
     await adapter.waitForInitialization();
 
     // Use generator to create test deck, then wrap in PersistedGamePrep
     const testDeck = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save all cards to the repository so they can be hydrated later
+    await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
+
     testPrep = {
-      version: 1,
+      version: 2,
       prepId: 1,
       deck: testDeck,
       createdAt: new Date("2024-01-15T10:00:00.000Z"),
@@ -64,8 +72,12 @@ describe("SqlitePersistPrepAdapter", () => {
 
   it("should store multiple preps independently", async () => {
     const testDeck2 = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+
+    // Save cards for second deck to repository
+    await cardRepository.saveCards([...testDeck2.cards, ...testDeck2.commanders]);
+
     const prep2: PersistedGamePrep = {
-      version: 1,
+      version: 2,
       prepId: 2,
       deck: testDeck2,
       createdAt: new Date("2024-01-16T10:00:00.000Z"),
@@ -131,8 +143,8 @@ describe("SqlitePersistPrepAdapter", () => {
     await adapter.savePrep(testPrep);
     await adapter.close();
 
-    // Create new adapter instance with same database file
-    const adapter2 = new SqlitePersistPrepAdapter(testDbPath);
+    // Create new adapter instance with same database file (reuse same cardRepository)
+    const adapter2 = new SqlitePersistPrepAdapter(testDbPath, cardRepository);
     await adapter2.waitForInitialization();
 
     try {

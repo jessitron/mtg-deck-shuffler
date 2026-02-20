@@ -1,5 +1,7 @@
 import * as fc from "fast-check";
 import { CardDefinition, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
+import { PersistedGameCard } from "../src/port-persist-state/persisted-types.js";
+import { PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
 
 // Generator for card names using common MTG card patterns
 export const cardName = fc.oneof(
@@ -329,7 +331,7 @@ export const testProvenance: DeckProvenance = {
 };
 
 // Simple helper for creating test PersistedGameState - to be used in PersistStateAdapter tests
-export const createTestPersistedGameState = (gameId: number, deck: Deck, status: any = 0, prepId: number = 1, prepVersion: number = 1) => {
+export const createTestPersistedGameState = (gameId: number, deck: Deck, status: any = 0, prepId: number = 1, prepVersion: number = 2) => {
   // Combine all cards and sort alphabetically (maintaining existing invariant)
   const allCards = [...deck.commanders.map((card) => ({ card, isCommander: true })), ...deck.cards.map((card) => ({ card, isCommander: false }))].sort((a, b) =>
     a.card.name.localeCompare(b.card.name)
@@ -338,8 +340,9 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
   let commanderPositionCounter = 0;
   let libraryPositionCounter = 0;
 
-  const gameCards = allCards.map((item, index) => ({
-    card: item.card,
+  // Create PersistedGameCard objects (with scryfallId only, not full card)
+  const gameCards: PersistedGameCard[] = allCards.map((item, index) => ({
+    scryfallId: item.card.scryfallId,
     isCommander: item.isCommander,
     location: item.isCommander
       ? { type: "CommandZone" as const, position: commanderPositionCounter++ }
@@ -349,7 +352,7 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
   }));
 
   return {
-    version: 6 as const, // PERSISTED_GAME_STATE_VERSION
+    version: PERSISTED_GAME_STATE_VERSION,
     gameId,
     status,
     prepId,
