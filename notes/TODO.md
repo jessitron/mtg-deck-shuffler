@@ -2,7 +2,7 @@
 
 20 Feb:
 The goal is to add card type sorting to the library search modal.
-See `notes/card-type-grouping.md` for implementation instructions.
+See `notes/FEATURE-card-type-grouping.md` for implementation instructions.
 
 ## Structural
 

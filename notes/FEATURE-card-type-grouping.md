@@ -9,6 +9,7 @@ The previous attempt was blocked by a DB migration issue (cards didn't have `typ
 ## What to implement
 
 Cherry-pick or re-implement the changes from commit `99322b9`. The diff touches:
+
 - `views/partials/library-modal.ejs` — toggle button + grouped card display
 - `src/app.ts` — pass `groupBy`, `types`, `gameId`/`prepId`, `expectedVersion` to the template
 - `public/modal-query-params.js` — support `?groupBy=type` query parameter
