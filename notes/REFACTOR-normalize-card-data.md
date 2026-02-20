@@ -152,6 +152,29 @@ When we're ready to tackle game state normalization:
 - Consider how game events and state versions interact
 - This will require a database wipe or migration
 
-## Adapter Changes (already done)
+## Adapter Changes Needed
 
 The `types` field has already been added to `CardDefinition` and both adapters populate it.
+
+But `Card` includes fields that `CardDefinition` doesn't have yet: `manaCost`, `cmc`, `oracleText`, and makes `oracleCardName`, `colorIdentity`, and `set` required (currently optional on `CardDefinition`).
+
+Either:
+- Expand `CardDefinition` to include these fields, or
+- Have adapters return a `Card` object (for the repository) alongside the `CardDefinition` (for existing flows)
+
+The simpler path: expand `CardDefinition` to match `Card`. Then upserting into the card repository is just a matter of mapping `CardDefinition` → `Card`.
+
+### MTGJSON Adapter
+
+Needs to additionally populate:
+- `oracleCardName` ← `name` (always set)
+- `manaCost` ← `mtgjsonCard.manaCost`
+- `cmc` ← `mtgjsonCard.manaValue`
+- `oracleText` ← `mtgjsonCard.text`
+
+### Archidekt Adapter
+
+Needs to additionally populate:
+- `manaCost` ← `archidektCard.card.oracleCard.manaCost`
+- `cmc` ← `archidektCard.card.oracleCard.cmc`
+- `oracleText` ← `archidektCard.card.oracleCard.text`
