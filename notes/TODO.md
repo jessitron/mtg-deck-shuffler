@@ -1,6 +1,6 @@
 # Things to change
 
-18 Feb: 
+18 Feb:
 The goal was to add card type sorting to the library search modal.
 That means having card type available.
 Added card type to the card definition, imported it from the two import adapters.
@@ -16,6 +16,7 @@ Let's import card definitions on deck load.
 Once card definitions are normalized, we can add fields to the card definitions as a migration, nbd.
 The whole schema of storing game state is a problem for later. Store deltas? Reconstruct state from those? Event sourcing in a relational database is always its own problem.
 
+See: REFACTOR-normalize-card-data.md
 
 ## Structural
 
