@@ -1,7 +1,6 @@
 # Card Data Normalization Refactoring
 
-State: in planning, but the plan isn't right yet.
-The relationship between games, game events, game states, and game cards is not correct.
+State: revised plan, phased approach. Phase 1 is the current focus.
 
 ## Problem Statement
 
@@ -16,11 +15,31 @@ This causes issues:
 2. **No way to enrich old data** - Can't retroactively add universal card properties
 3. **Data duplication** - Same card stored hundreds of times across games
 
-## Solution: Normalize Card Data
+## Revised Strategy (Feb 18)
 
-Create a separate `cards` table with universal card properties, referenced by `scryfallId`.
+Instead of normalizing everything at once (which gets tangled in game state schema issues), take a phased approach:
 
-## Design Decisions
+### Phase 1: Card Repository (current focus)
+
+Create a `cards` table and populate it on deck load. This gives us a single source of truth for card definitions, independent of game state.
+
+- Game state JSON blob stays as-is (still contains embedded card data)
+- Decks and game preps keep their current structure
+- The card repository is populated as a side effect of loading decks
+- Views can look up enriched card data from the repository when needed
+
+**Why this works**: Once cards are in their own table, we can add fields (like `types`) as a simple migration. Old games still work because they have their own embedded card data. New features (like type-based sorting) can pull from the card repository.
+
+### Phase 2: Denormalize game state from card definitions (later)
+
+Replace embedded `CardDefinition` in game state with `scryfallId` references. This is the harder problem because it touches game state versioning and persistence.
+
+Deferred because:
+- The game state JSON blob schema is tricky (games, events, versions)
+- Event sourcing in a relational DB is its own problem
+- Phase 1 gives us most of the value without this complexity
+
+## Phase 1 Design
 
 ### Card Identity
 
@@ -29,8 +48,6 @@ Create a separate `cards` table with universal card properties, referenced by `s
 - **Display:** `name` (what's printed on the card)
 
 ### Fields to Store
-
-Keep these fields in the normalized card table:
 
 - `scryfallId` (PK)
 - `name` (display name)
@@ -46,19 +63,32 @@ Keep these fields in the normalized card table:
 
 ### Card Repository Pattern
 
-- Adapters return card data with all fields
-- Card repository ensures cards exist in DB (upsert on scryfallId)
-- Decks and games reference cards by scryfallId only
+- Adapters return card data with all fields (as they already do)
+- On deck load, upsert cards into the repository
+- Game state continues to embed card data for now
+- Views that need enriched data (e.g., type sorting) query the repository
 
-### Dynamic Population
+### Schema
 
-- Cards added to repository as they appear in decks
-- No pre-import needed
-- Works for both MTGJSON and Archidekt sources
+```sql
+CREATE TABLE IF NOT EXISTS cards (
+  scryfall_id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  oracle_card_name TEXT NOT NULL,
+  color_identity TEXT NOT NULL,  -- JSON array
+  set_code TEXT NOT NULL,
+  two_faced INTEGER NOT NULL,    -- SQLite boolean (0/1)
+  types TEXT NOT NULL,            -- JSON array
+  mana_cost TEXT,
+  cmc REAL NOT NULL,
+  oracle_text TEXT,
+  multiverseid INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-## Type Changes
-
-### New Types
+### Types
 
 ```typescript
 // src/port-card-repository/types.ts
@@ -84,228 +114,44 @@ export interface CardRepositoryPort {
 }
 ```
 
-### Modified Types
-
-```typescript
-// src/types.ts
-export interface CardDefinition {
-  // REMOVE - all fields moved to Card table
-  // This interface will be replaced by Card from card repository
-}
-
-export interface Deck {
-  version: typeof PERSISTED_DECK_VERSION;
-  id: number;
-  name: string;
-  totalCards: number;
-  commanders: string[]; // CHANGED: array of scryfallIds
-  cards: string[]; // CHANGED: array of scryfallIds
-  provenance: DeckProvenance;
-}
-```
-
-```typescript
-// src/port-persist-state/types.ts
-export interface GameCard {
-  scryfallId: string; // CHANGED: reference instead of embedded card
-  location: CardLocation;
-  gameCardIndex: number;
-  isCommander: boolean;
-  currentFace: "front" | "back";
-}
-```
-
-```typescript
-// src/port-persist-prep/types.ts
-export interface PersistedGamePrep {
-  version: number;
-  prepId: PrepId;
-  deck: Deck; // Deck now has scryfallId arrays
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-
-## Schema Changes
-
-### New Table: `cards`
-
-```sql
-CREATE TABLE IF NOT EXISTS cards (
-  scryfall_id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  oracle_card_name TEXT NOT NULL,
-  color_identity TEXT NOT NULL,  -- JSON array
-  set_code TEXT NOT NULL,
-  two_faced INTEGER NOT NULL,    -- SQLite boolean (0/1)
-  types TEXT NOT NULL,            -- JSON array
-  mana_cost TEXT,
-  cmc REAL NOT NULL,
-  oracle_text TEXT,
-  multiverseid INTEGER NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-
-### Modified Table: `game_preps`
-
-**JSON structure changes:**
-
-- `deck.cards[]` → array of scryfallId strings
-- `deck.commanders[]` → array of scryfallId strings
-
-## Flow Changes
-
-### Deck Loading Flow (Before)
-
-```
-Adapter → CardDefinition[] → Deck → Save to DB
-```
-
-### Deck Loading Flow (After)
-
-```
-Adapter → CardDefinition[] → Card Repository (upsert cards)
-                           → Deck (with scryfallIds) → Save to DB
-```
-
-### Game Creation Flow (Before)
-
-```
-Load Deck → GameState.createNewGame(deck with CardDefinitions)
-```
-
-### Game Creation Flow (After)
-
-```
-Load Deck (scryfallIds) → Load Cards from repository
-                        → GameState.createNewGame(deck, cards)
-```
-
-### Game Loading Flow (Before)
-
-```
-Load game_states row → Parse JSON blob → GameState (with embedded cards)
-```
-
-### Game Loading Flow (After)
-
-```
-Load game_states row → JOIN game_cards → JOIN cards → GameState (hydrated)
-                     → Load game_events
-```
-
-### Game Save Flow (After)
-
-```
-GameState → Save game_states row
-         → Delete old game_cards rows
-         → Insert new game_cards rows
-         → Delete old game_events rows
-         → Insert new game_events rows
-```
-
-## Implementation Plan
+### Phase 1 Implementation Plan
 
 1. **Create Card Repository**
    - Define types in `src/port-card-repository/types.ts`
    - Implement `SqliteCardRepositoryAdapter.ts` with `cards` table
    - Implement `InMemoryCardRepositoryAdapter.ts`
 
-2. **Update Adapters**
-   - Modify MTGJSON adapter to always set `oracleCardName = name`
-   - Modify Archidekt adapter to populate all new fields
-   - Update type definitions to include `manaCost`, `cmc`, `oracleText`
-   - Adapters now return `Card` objects instead of `CardDefinition`
+2. **Populate on Deck Load**
+   - When a deck is loaded (from any adapter), upsert its cards into the repository
+   - This happens at the route/service level, not inside adapters themselves
+   - Adapters continue returning `CardDefinition` as before
 
-3. **Update Deck Persistence**
-   - Modify deck save to store scryfallId arrays
-   - Modify deck load to hydrate cards from repository
-   - Update `PERSISTED_DECK_VERSION` to 2
+3. **Wire Up**
+   - Create card repository instance in server initialization
+   - Pass to the deck-loading flow
 
-4. **Rewrite Game State Persistence**
-   - Create new `game_states` table schema (normalized)
-   - Create `game_cards` table with foreign keys
-   - Create `game_events` table
-   - Rewrite `SqlitePersistStateAdapter.save()` to:
-     - Save game_states row
-     - Delete/insert game_cards rows
-     - Delete/insert game_events rows
-   - Rewrite `SqlitePersistStateAdapter.retrieve()` to:
-     - Load game_states row
-     - JOIN game_cards with cards table
-     - Load game_events
-     - Construct PersistedGameState
-   - Update `InMemoryPersistStateAdapter` to match new structure
-   - Update `PERSISTED_GAME_STATE_VERSION` to 7
+4. **Use It**
+   - Features that need enriched card data (type sorting, etc.) query the repository
+   - Existing game state code is untouched
 
-5. **Update GameState Class**
-   - Modify `GameCard` to reference scryfallId
-   - Update `GameState.createNewGame()` to accept cards Map
-   - Update `GameState.fromPersistedGameState()` to work with new structure
-   - Keep in-memory representation similar (GameCard with full Card data)
+### What This Doesn't Change
 
-6. **Update Server Initialization**
-   - Create card repository instance
-   - Pass to deck adapters
-   - Pass to game state persistence adapter
-   - Wire up dependencies
+- `CardDefinition` interface stays
+- `Deck` type keeps `CardDefinition[]` for cards and commanders
+- `PersistedGameState` keeps embedded card data in JSON blob
+- Game state versioning is not affected
+- No database wipe needed (new table only)
 
-7. **Migration**
-   - **WIPE DATABASE** - Delete `data.db`
-   - New schema will be created on first run
-   - No migration needed since we're in prototype phase
+## Phase 2 Notes (for later)
 
-## Adapter Changes Required
+When we're ready to tackle game state normalization:
 
-### MTGJSON Adapter
+- Replace `CardDefinition` in `Deck` with `scryfallId[]`
+- Replace embedded card in `GameCard` with `scryfallId` reference
+- Hydrate card data from repository on game load
+- Consider how game events and state versions interact
+- This will require a database wipe or migration
 
-```typescript
-private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard): Card {
-  return {
-    name: mtgjsonCard.name,
-    oracleCardName: mtgjsonCard.name,  // NEW: always set
-    scryfallId: mtgjsonCard.identifiers.scryfallId || "",
-    multiverseid: parseInt(mtgjsonCard.identifiers.multiverseId || "0", 10),
-    twoFaced: twoFacedLayouts.includes(mtgjsonCard.layout),
-    colorIdentity: mtgjsonCard.colorIdentity || [],
-    set: mtgjsonCard.setCode,
-    types: mtgjsonCard.types || [],
-    manaCost: mtgjsonCard.manaCost,     // NEW
-    cmc: mtgjsonCard.manaValue || 0,    // NEW
-    oracleText: mtgjsonCard.text,       // NEW
-  };
-}
-```
+## Adapter Changes (already done)
 
-### Archidekt Adapter
-
-```typescript
-private convertArchidektToCard(archidektCard: ArchidektCard): Card {
-  const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
-  const oracleCardName = archidektCard.card.oracleCard.name;
-
-  return {
-    name: cardName,
-    oracleCardName: oracleCardName,  // CHANGED: always set, even if same as name
-    scryfallId: archidektCard.card.uid,
-    multiverseid: archidektCard.card.multiverseid,
-    twoFaced: (archidektCard.card.oracleCard.faces || []).length === 2,
-    colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(this.convertColorNameToCode),
-    set: archidektCard.card.edition.editioncode,
-    types: archidektCard.card.oracleCard.types || [],
-    manaCost: archidektCard.card.oracleCard.manaCost,  // NEW
-    cmc: archidektCard.card.oracleCard.cmc,            // NEW
-    oracleText: archidektCard.card.oracleCard.text,    // NEW
-  };
-}
-```
-
-## Breaking Changes
-
-- Database wipe required (acceptable in prototype phase)
-- `PERSISTED_DECK_VERSION` bumped to 2
-- `PERSISTED_GAME_STATE_VERSION` bumped to 7
-- All existing games and preps will be lost
+The `types` field has already been added to `CardDefinition` and both adapters populate it.
