@@ -39,12 +39,21 @@ async function selectPreconDeck(page: any): Promise<void> {
   const firstTile = page.locator(".precon-tile").first();
   await firstTile.waitFor({ state: "visible", timeout: 15000 });
 
-  // Click the tile — this submits the form, server loads the deck, then redirects to /prepare/:id
-  // Deck loading can be slow (parsing large JSON files), so allow extra time
-  await Promise.all([
-    page.waitForURL("**/prepare/*", { timeout: 60000 }),
-    firstTile.click(),
-  ]);
+  // The tile is a submit button inside a form POST to /deck.
+  // Use page.evaluate to submit the form directly — avoids Playwright actionability
+  // checks that can block on image loading.
+  const deckFile = await firstTile.getAttribute("value");
+  console.log(`  Selecting deck: ${deckFile}`);
+  await page.evaluate((file: string) => {
+    const form = document.querySelector("form.precon-input-section") as HTMLFormElement;
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "precon-deck";
+    input.value = file;
+    form.appendChild(input);
+    form.submit();
+  }, deckFile);
+  await page.waitForURL("**/prepare/*", { timeout: 60000 });
 }
 
 async function createPrep(page: any): Promise<PrepData> {
@@ -133,6 +142,18 @@ async function main() {
 
   try {
     const page = await context.newPage();
+
+    // Block external image loading to keep pages fast
+    await page.route("**/*.{jpg,jpeg,png,gif,webp}", (route: any) => {
+      const url = route.request().url();
+      if (url.includes("scryfall") || url.includes("fonts.gstatic")) {
+        route.abort();
+      } else {
+        route.continue();
+      }
+    });
+    await page.route("https://fonts.googleapis.com/**", (route: any) => route.abort());
+    await page.route("https://api.honeycomb.io/**", (route: any) => route.abort());
 
     console.log("Creating prep (deck review)...");
     const prep = await createPrep(page);

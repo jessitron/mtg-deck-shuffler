@@ -92,7 +92,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     const cardDefinition: CardDefinition = {
       name: cardName,
       scryfallId: archidektCard.card.uid,
-      multiverseid: archidektCard.card.multiverseid,
+      multiverseid: archidektCard.card.multiverseid || undefined,
       twoFaced,
       oracleCardName,
       colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
