@@ -16,7 +16,8 @@
     "test": "jest",
     "test:verify": "./verify.sh",
     "deck:download": "node dist/scripts/download-deck.js",
-    "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js"
+    "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js",
+    "seed": "npm run build && node dist/scripts/seed-test-data.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",

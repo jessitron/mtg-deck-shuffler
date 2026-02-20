@@ -37,8 +37,8 @@ export const cardName = fc.oneof(
 // Generator for Scryfall IDs (UUID format)
 export const scryfallId = fc.uuid();
 
-// Generator for multiverse IDs
-export const multiverseId = fc.integer({ min: 1, max: 999999 });
+// Generator for multiverse IDs (optional)
+export const multiverseId = fc.option(fc.integer({ min: 1, max: 999999 }), { nil: undefined });
 
 // Generator for color identity (now required)
 export const colorIdentity = fc.subarray(["W", "U", "B", "R", "G"], { minLength: 0, maxLength: 5 });

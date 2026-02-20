@@ -1,10 +1,6 @@
 # Card Data Normalization Refactoring
 
-**Status: Steps 1 & 2 COMPLETE ✅**
-
-- Step 1 (Enrich the adapters): ✅ Complete - All tests passing (109 tests)
-- Step 2 (Card Repository): ✅ Complete - Verified with real deck imports
-- Step 3 (Reference cards from game state): ⏸️ Deferred - Requires db wipe
+**Status: Complete**
 
 ## Problem Statement
 

@@ -2,7 +2,7 @@
 export interface CardDefinition {
   name: string;
   scryfallId: string;
-  multiverseid: number;
+  multiverseid?: number;
   twoFaced: boolean;
   oracleCardName: string;
   colorIdentity: string[];

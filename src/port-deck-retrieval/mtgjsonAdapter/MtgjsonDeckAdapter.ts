@@ -51,7 +51,7 @@ export class MtgjsonDeckAdapter {
       scryfallId: mtgjsonCard.identifiers.scryfallId || "",
       multiverseid: mtgjsonCard.identifiers.multiverseId
         ? parseInt(mtgjsonCard.identifiers.multiverseId, 10)
-        : 0,
+        : undefined,
       twoFaced,
       oracleCardName: mtgjsonCard.name,
       colorIdentity: mtgjsonCard.colorIdentity || [],

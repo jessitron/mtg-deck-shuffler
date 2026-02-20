@@ -16,7 +16,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       CREATE TABLE IF NOT EXISTS cards (
         scryfall_id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
-        multiverseid INTEGER NOT NULL,
+        multiverseid INTEGER,
         two_faced INTEGER NOT NULL,
         oracle_card_name TEXT NOT NULL,
         color_identity TEXT NOT NULL,
@@ -51,7 +51,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
         stmt.run(
           card.scryfallId,
           card.name,
-          card.multiverseid,
+          card.multiverseid ?? null,
           card.twoFaced ? 1 : 0,
           card.oracleCardName,
           JSON.stringify(card.colorIdentity),
@@ -76,7 +76,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       | {
           scryfall_id: string;
           name: string;
-          multiverseid: number;
+          multiverseid: number | null;
           two_faced: number;
           oracle_card_name: string;
           color_identity: string;
@@ -109,7 +109,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     const rows = this.db.prepare(selectSQL).all(...scryfallIds) as Array<{
       scryfall_id: string;
       name: string;
-      multiverseid: number;
+      multiverseid: number | null;
       two_faced: number;
       oracle_card_name: string;
       color_identity: string;
@@ -126,7 +126,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
   private rowToCardDefinition(row: {
     scryfall_id: string;
     name: string;
-    multiverseid: number;
+    multiverseid: number | null;
     two_faced: number;
     oracle_card_name: string;
     color_identity: string;
@@ -139,7 +139,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     return {
       scryfallId: row.scryfall_id,
       name: row.name,
-      multiverseid: row.multiverseid,
+      multiverseid: row.multiverseid ?? undefined,
       twoFaced: row.two_faced === 1,
       oracleCardName: row.oracle_card_name,
       colorIdentity: JSON.parse(row.color_identity) as string[],

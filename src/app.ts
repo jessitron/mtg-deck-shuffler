@@ -621,9 +621,9 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const expectedVersion = game.getStateVersion();
       const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
       const gathererUrl =
-        gameCard.card.multiverseid === 0
-          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`
-          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`;
+        gameCard.card.multiverseid
+          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`
+          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`;
 
       // Build utility buttons HTML
       let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
@@ -721,9 +721,9 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const imageUrl = getCardImageUrl(cardDef.scryfallId, "large", currentFace);
       const gathererUrl =
-        cardDef.multiverseid === 0
-          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`
-          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`;
+        cardDef.multiverseid
+          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`
+          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`;
 
       // Build utility buttons HTML (no expectedVersion for prep page)
       let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
@@ -1267,9 +1267,9 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const expectedVersion = game.getStateVersion();
       const imageUrl = getCardImageUrl(flippedCard.card.scryfallId, "large", flippedCard.currentFace);
       const gathererUrl =
-        flippedCard.card.multiverseid === 0
-          ? `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`
-          : `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`;
+        flippedCard.card.multiverseid
+          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`
+          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`;
 
       // Build utility buttons HTML
       let utilityButtonsHtml = `<div class="card-modal-utility-buttons">

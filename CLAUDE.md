@@ -87,6 +87,17 @@ Verify changes with:
 - `npm run test`
 - `PORT=3344 ./run` - Verify app starts, click through to what you changed
 
+## Test Data for Browser Testing
+
+For features that need existing games/preps in the database (e.g. testing modals, game UI):
+
+1. Start the app: `PORT=3344 ./run`
+2. Run `npm run seed` — creates a prep and a game (with 7 cards drawn) via browser automation
+3. Check `test/TEST-DATA.md` for the resulting IDs and direct URLs
+
+If `test/TEST-DATA.md` doesn't exist or the IDs in it 404, re-run `npm run seed`.
+The file is .gitignored since IDs depend on local DB state.
+
 ## Environment & Persistence
 
 Requires `.env` for OpenTelemetry config. SQLite persistence by default (`data.db`). Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
