@@ -11,6 +11,10 @@
 import { chromium } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || "3344";
 const BASE_URL = `http://localhost:${PORT}`;
@@ -56,20 +60,27 @@ async function selectPreconDeck(page: any): Promise<void> {
   await page.waitForURL("**/prepare/*", { timeout: 60000 });
 }
 
+async function getDeckName(page: any): Promise<string> {
+  const title = await page.title();
+  // Page title is like "Prepare - Deck Name - MTG Deck Shuffler"
+  const match = title.match(/Prepare - (.+?) - MTG/);
+  return match ? match[1] : "Unknown";
+}
+
 async function createPrep(page: any): Promise<PrepData> {
   await selectPreconDeck(page);
 
   const prepId = extractId(page.url(), /\/prepare\/(\d+)/);
-  const deckName = await page.locator(".deck-name, h1, h2").first().textContent();
+  const deckName = await getDeckName(page);
 
-  return { prepId, deckName: deckName?.trim() || "Unknown" };
+  return { prepId, deckName };
 }
 
 async function createGame(page: any, drawCount: number): Promise<GameData> {
   await selectPreconDeck(page);
 
   // Get deck name before starting game
-  const deckName = await page.locator(".deck-name, h1, h2").first().textContent();
+  const deckName = await getDeckName(page);
 
   // Click Shuffle Up
   const shuffleButton = page.locator(
@@ -86,7 +97,7 @@ async function createGame(page: any, drawCount: number): Promise<GameData> {
 
   // Draw cards
   for (let i = 0; i < drawCount; i++) {
-    const drawButton = page.locator('button:has-text("Draw")');
+    const drawButton = page.locator("button.draw-button");
     await drawButton.waitFor({ state: "visible", timeout: 5000 });
     await drawButton.click();
     // Wait for HTMX to update the page
