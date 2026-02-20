@@ -15,13 +15,14 @@ import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep } from "./port-persist-prep/types.js";
+import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl } from "./types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort): express.Application {
+export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort): express.Application {
   const app = express();
 
   // Configure EJS view engine
@@ -244,6 +245,11 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
     try {
       const deck = await deckRetriever.retrieveDeck(deckRequest);
+
+      // Upsert all cards from the deck into the card repository
+      const allCards = [...deck.cards, ...deck.commanders];
+      await cardRepository.saveCards(allCards);
+
       // Sort cards alphabetically for the prep review screen
       const sortedDeck = {
         ...deck,
