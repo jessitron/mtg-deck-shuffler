@@ -8,6 +8,9 @@ export interface ArchidektCard {
       faces: any[];
       colorIdentity: string[];
       types: string[];
+      manaCost?: string;
+      cmc?: number;
+      text?: string;
     };
     edition: {
       editionname: string;

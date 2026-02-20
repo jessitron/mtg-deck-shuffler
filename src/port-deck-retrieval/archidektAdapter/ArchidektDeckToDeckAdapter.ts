@@ -94,14 +94,14 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       scryfallId: archidektCard.card.uid,
       multiverseid: archidektCard.card.multiverseid,
       twoFaced,
+      oracleCardName,
       colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
       set: archidektCard.card.edition.editionname,
-      types: archidektCard.card.oracleCard.types || []
+      types: archidektCard.card.oracleCard.types || [],
+      manaCost: archidektCard.card.oracleCard.manaCost,
+      cmc: archidektCard.card.oracleCard.cmc ?? 0,
+      oracleText: archidektCard.card.oracleCard.text,
     };
-
-    if (cardName !== oracleCardName) {
-      cardDefinition.oracleCardName = oracleCardName;
-    }
 
     return cardDefinition;
   }

@@ -9,6 +9,9 @@ export interface MtgjsonCard {
   colorIdentity?: string[];
   setCode: string;
   types: string[];
+  manaCost?: string;
+  manaValue?: number;
+  text?: string;
   identifiers: {
     scryfallId?: string;
     multiverseId?: string;

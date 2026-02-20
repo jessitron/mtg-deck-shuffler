@@ -38,17 +38,11 @@ export const scryfallId = fc.uuid();
 // Generator for multiverse IDs
 export const multiverseId = fc.integer({ min: 1, max: 999999 });
 
-// Generator for color identity (optional)
-export const colorIdentity = fc.option(
-  fc.subarray(["White", "Blue", "Black", "Red", "Green"], { minLength: 0, maxLength: 5 }),
-  { nil: undefined }
-);
+// Generator for color identity (now required)
+export const colorIdentity = fc.subarray(["W", "U", "B", "R", "G"], { minLength: 0, maxLength: 5 });
 
-// Generator for set name (optional)
-export const setName = fc.option(
-  fc.constantFrom("Kaldheim", "Crimson Vow", "Bloomburrow", "Aetherdrift", "Tarkir: Dragonstorm"),
-  { nil: undefined }
-);
+// Generator for set name (now required)
+export const setName = fc.constantFrom("KHM", "VOW", "BLB", "AER", "DTK", "MOC", "C15", "SCD", "PIP", "SLD");
 
 // Generator for card types
 export const cardTypes = fc.oneof(
@@ -66,15 +60,43 @@ export const cardTypes = fc.oneof(
   )
 ).map(types => [...types]); // Convert readonly array to mutable array
 
+// Generator for mana cost
+export const manaCost = fc.option(
+  fc.oneof(
+    fc.constantFrom("{1}{R}", "{2}{U}{U}", "{3}{G}", "{W}{W}", "{B}{B}{B}", "{4}", "{X}{R}", ""),
+    fc.nat({ max: 10 }).map(n => `{${n}}`)
+  ),
+  { nil: undefined }
+);
+
+// Generator for CMC (converted mana cost)
+export const cmc = fc.nat({ max: 15 });
+
+// Generator for oracle text
+export const oracleText = fc.option(
+  fc.constantFrom(
+    "Draw a card.",
+    "Destroy target creature.",
+    "{T}: Add one mana of any color.",
+    "Flying, vigilance",
+    "When this enters the battlefield, draw a card."
+  ),
+  { nil: undefined }
+);
+
 // Generator for CardDefinition
 export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   name: cardName,
   scryfallId: scryfallId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
+  oracleCardName: cardName,
   colorIdentity: colorIdentity,
   set: setName,
   types: cardTypes,
+  manaCost: manaCost,
+  cmc: cmc,
+  oracleText: oracleText,
 });
 
 // Generator for commander names (legendary creatures)
@@ -105,9 +127,13 @@ export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   scryfallId: scryfallId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
+  oracleCardName: commanderName,
   colorIdentity: colorIdentity,
   set: setName,
   types: fc.constantFrom(["Creature"], ["Legendary", "Creature"]),
+  manaCost: manaCost,
+  cmc: cmc,
+  oracleText: oracleText,
 });
 
 // Generator for deck names
@@ -245,7 +271,13 @@ export const lightningBolt: CardDefinition = {
   scryfallId: "abc123",
   multiverseid: 12345,
   twoFaced: false,
+  oracleCardName: "Lightning Bolt",
+  colorIdentity: ["R"],
+  set: "LEA",
   types: ["Instant"],
+  manaCost: "{R}",
+  cmc: 1,
+  oracleText: "Lightning Bolt deals 3 damage to any target.",
 };
 
 export const ancestralRecall: CardDefinition = {
@@ -253,7 +285,13 @@ export const ancestralRecall: CardDefinition = {
   scryfallId: "def456",
   multiverseid: 67890,
   twoFaced: false,
+  oracleCardName: "Ancestral Recall",
+  colorIdentity: ["U"],
+  set: "LEA",
   types: ["Instant"],
+  manaCost: "{U}",
+  cmc: 1,
+  oracleText: "Target player draws three cards.",
 };
 
 export const blackLotus: CardDefinition = {
@@ -261,7 +299,13 @@ export const blackLotus: CardDefinition = {
   scryfallId: "ghi789",
   multiverseid: 11111,
   twoFaced: false,
+  oracleCardName: "Black Lotus",
+  colorIdentity: [],
+  set: "LEA",
   types: ["Artifact"],
+  manaCost: "{0}",
+  cmc: 0,
+  oracleText: "{T}, Sacrifice Black Lotus: Add three mana of any one color.",
 };
 
 export const atraxa: CardDefinition = {
@@ -269,7 +313,13 @@ export const atraxa: CardDefinition = {
   scryfallId: "cmd001",
   multiverseid: 22222,
   twoFaced: false,
+  oracleCardName: "Atraxa, Praetors' Voice",
+  colorIdentity: ["W", "U", "B", "G"],
+  set: "C16",
   types: ["Legendary", "Creature"],
+  manaCost: "{G}{W}{U}{B}",
+  cmc: 4,
+  oracleText: "Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate.",
 };
 
 export const testProvenance: DeckProvenance = {

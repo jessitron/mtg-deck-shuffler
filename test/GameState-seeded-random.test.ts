@@ -6,11 +6,11 @@ describe("GameState seeded random shuffling", () => {
 
   beforeEach(() => {
     const cards: CardDefinition[] = [
-      { name: "Card A", scryfallId: "a1", multiverseid: 1, twoFaced: false, types: ["Creature"] },
-      { name: "Card B", scryfallId: "b1", multiverseid: 2, twoFaced: false, types: ["Creature"] },
-      { name: "Card C", scryfallId: "c1", multiverseid: 3, twoFaced: false, types: ["Creature"] },
-      { name: "Card D", scryfallId: "d1", multiverseid: 4, twoFaced: false, types: ["Creature"] },
-      { name: "Card E", scryfallId: "e1", multiverseid: 5, twoFaced: false, types: ["Creature"] },
+      { name: "Card A", scryfallId: "a1", multiverseid: 1, twoFaced: false, oracleCardName: "Card A", colorIdentity: [], set: "TST", types: ["Creature"], cmc: 1 },
+      { name: "Card B", scryfallId: "b1", multiverseid: 2, twoFaced: false, oracleCardName: "Card B", colorIdentity: [], set: "TST", types: ["Creature"], cmc: 2 },
+      { name: "Card C", scryfallId: "c1", multiverseid: 3, twoFaced: false, oracleCardName: "Card C", colorIdentity: [], set: "TST", types: ["Creature"], cmc: 3 },
+      { name: "Card D", scryfallId: "d1", multiverseid: 4, twoFaced: false, oracleCardName: "Card D", colorIdentity: [], set: "TST", types: ["Creature"], cmc: 4 },
+      { name: "Card E", scryfallId: "e1", multiverseid: 5, twoFaced: false, oracleCardName: "Card E", colorIdentity: [], set: "TST", types: ["Creature"], cmc: 5 },
     ];
 
     const testProvenance: DeckProvenance = {

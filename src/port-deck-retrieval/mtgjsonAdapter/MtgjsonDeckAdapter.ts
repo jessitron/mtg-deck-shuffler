@@ -53,9 +53,13 @@ export class MtgjsonDeckAdapter {
         ? parseInt(mtgjsonCard.identifiers.multiverseId, 10)
         : 0,
       twoFaced,
-      colorIdentity: mtgjsonCard.colorIdentity,
+      oracleCardName: mtgjsonCard.name,
+      colorIdentity: mtgjsonCard.colorIdentity || [],
       set: mtgjsonCard.setCode,
       types: mtgjsonCard.types || [],
+      manaCost: mtgjsonCard.manaCost,
+      cmc: mtgjsonCard.manaValue ?? 0,
+      oracleText: mtgjsonCard.text,
     };
 
     return cardDefinition;

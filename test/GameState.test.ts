@@ -543,7 +543,11 @@ describe("GameState", () => {
           scryfallId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(true),
+          oracleCardName: fc.string(),
+          colorIdentity: fc.constant([] as string[]),
+          set: fc.constant("TST"),
           types: fc.constant(["Creature"] as string[]),
+          cmc: fc.constant(0),
         }),
         (twoFacedCard) => {
           const deck: Deck = {
@@ -598,7 +602,11 @@ describe("GameState", () => {
           scryfallId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(false),
+          oracleCardName: fc.string(),
+          colorIdentity: fc.constant([] as string[]),
+          set: fc.constant("TST"),
           types: fc.constant(["Creature"] as string[]),
+          cmc: fc.constant(0),
         }),
         (singleFacedCard) => {
           const deck: Deck = {

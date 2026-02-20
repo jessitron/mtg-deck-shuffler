@@ -4,10 +4,13 @@ export interface CardDefinition {
   scryfallId: string;
   multiverseid: number;
   twoFaced: boolean;
-  oracleCardName?: string;
-  colorIdentity?: string[];
-  set?: string;
+  oracleCardName: string;
+  colorIdentity: string[];
+  set: string;
   types: string[];
+  manaCost?: string;
+  cmc: number;
+  oracleText?: string;
 }
 
 export interface DeckProvenance {

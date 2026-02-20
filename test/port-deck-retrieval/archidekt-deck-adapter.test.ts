@@ -148,7 +148,19 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.id).toBe(456);
     expect(result.name).toBe("Commander Deck");
     expect(result.totalCards).toBe(32); // 31 non-commander cards + 1 commander
-    expect(result.commanders).toEqual([{ name: "Urza, Lord High Artificer", scryfallId: "urza-uid", multiverseid: 333333, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] }]);
+    expect(result.commanders).toEqual([{
+      name: "Urza, Lord High Artificer",
+      scryfallId: "urza-uid",
+      multiverseid: 333333,
+      twoFaced: false,
+      oracleCardName: "Urza, Lord High Artificer",
+      colorIdentity: [],
+      set: "Test Set",
+      types: [],
+      manaCost: undefined,
+      cmc: 0,
+      oracleText: undefined,
+    }]);
   });
 
   it("handles empty deck", async () => {
@@ -319,7 +331,19 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Oracle Name", scryfallId: "test-uid", multiverseid: 123456, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
+    expect(result.cards[0]).toEqual({
+      name: "Oracle Name",
+      scryfallId: "test-uid",
+      multiverseid: 123456,
+      twoFaced: false,
+      oracleCardName: "Oracle Name",
+      colorIdentity: [],
+      set: "Test Set",
+      types: [],
+      manaCost: undefined,
+      cmc: 0,
+      oracleText: undefined,
+    });
   });
 
   it("converts cards with display name correctly", async () => {
@@ -362,7 +386,19 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0]).toEqual({ name: "Display Name", scryfallId: "test-uid-2", multiverseid: 789012, twoFaced: false, oracleCardName: "Oracle Name", colorIdentity: [], set: "Test Set", types: [] });
+    expect(result.cards[0]).toEqual({
+      name: "Display Name",
+      scryfallId: "test-uid-2",
+      multiverseid: 789012,
+      twoFaced: false,
+      oracleCardName: "Oracle Name",
+      colorIdentity: [],
+      set: "Test Set",
+      types: [],
+      manaCost: undefined,
+      cmc: 0,
+      oracleText: undefined,
+    });
   });
 
   it("converts deck with multiple commanders", async () => {
@@ -430,8 +466,32 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.name).toBe("Dual Commander Deck");
     expect(result.totalCards).toBe(22); // 20 non-commander cards + 2 commanders
     expect(result.commanders.length).toBe(2);
-    expect(result.commanders[0]).toEqual({ name: "Jaheira, Friend of the Forest", scryfallId: "jaheira-uid", multiverseid: 111111, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
-    expect(result.commanders[1]).toEqual({ name: "Agent of the Iron Throne", scryfallId: "agent-uid", multiverseid: 222222, twoFaced: false, colorIdentity: [], set: "Test Set", types: [] });
+    expect(result.commanders[0]).toEqual({
+      name: "Jaheira, Friend of the Forest",
+      scryfallId: "jaheira-uid",
+      multiverseid: 111111,
+      twoFaced: false,
+      oracleCardName: "Jaheira, Friend of the Forest",
+      colorIdentity: [],
+      set: "Test Set",
+      types: [],
+      manaCost: undefined,
+      cmc: 0,
+      oracleText: undefined,
+    });
+    expect(result.commanders[1]).toEqual({
+      name: "Agent of the Iron Throne",
+      scryfallId: "agent-uid",
+      multiverseid: 222222,
+      twoFaced: false,
+      oracleCardName: "Agent of the Iron Throne",
+      colorIdentity: [],
+      set: "Test Set",
+      types: [],
+      manaCost: undefined,
+      cmc: 0,
+      oracleText: undefined,
+    });
   });
 
   it("handles deck with null categories", async () => {
