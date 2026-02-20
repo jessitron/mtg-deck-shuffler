@@ -61,6 +61,7 @@
 .playmat .cool-command-zone-surround .game-title {
   grid-row: 1;
   margin-bottom: auto;
+  text-align: center;
 }
 
 .playmat .cool-command-zone-surround .multiple-cards {

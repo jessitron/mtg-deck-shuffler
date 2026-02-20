@@ -36,6 +36,8 @@ It would be cool if Charlotte could see our hands without worrying about messing
 
 ## Bugs to fix
 
+- the Flip functionality on the Prepare screen (for the commander) is broken.
+
 ## More Things to change
 
 - add a play counter to the command zone mtg-deck-shuffler-mwz
