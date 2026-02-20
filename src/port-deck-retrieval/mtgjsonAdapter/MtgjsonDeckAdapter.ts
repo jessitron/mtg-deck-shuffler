@@ -4,6 +4,13 @@ import { MtgjsonCard, MtgjsonDeck } from "./mtgjsonTypes.js";
 export class MtgjsonDeckAdapter {
   /**
    * Converts a MTGJSON preconstructed deck format to our internal Deck format
+   *
+   * ⚠️ IMPORTANT: If you change the conversion logic in this adapter (especially in convertMtgjsonToCard),
+   * you MUST regenerate all precon files by running:
+   *   npm run precons:fetch-mtgjson -- --convert
+   *
+   * The precon JSON files in decks/ are generated once and read directly by LocalFileAdapter,
+   * so they won't pick up changes to this adapter until regenerated.
    */
   convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string): Deck {
     const data = mtgjsonDeck.data;

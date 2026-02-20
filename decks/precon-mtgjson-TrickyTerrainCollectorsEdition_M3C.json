@@ -7,7 +7,6 @@
     {
       "name": "Omo, Queen of Vesuva",
       "scryfallId": "bf5a3655-cd08-46a3-b099-253708c6539e",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Omo, Queen of Vesuva",
       "colorIdentity": [
@@ -27,7 +26,6 @@
     {
       "name": "Jyoti, Moag Ancient",
       "scryfallId": "f8a1f0ff-8680-41fb-bddb-e2ed071a166b",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Jyoti, Moag Ancient",
       "colorIdentity": [
@@ -1526,7 +1524,6 @@
     {
       "name": "Island",
       "scryfallId": "5754638d-14ce-452d-bb45-d1d8f1151a96",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Island",
       "colorIdentity": [
@@ -1542,7 +1539,6 @@
     {
       "name": "Island",
       "scryfallId": "5754638d-14ce-452d-bb45-d1d8f1151a96",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Island",
       "colorIdentity": [
@@ -1558,7 +1554,6 @@
     {
       "name": "Island",
       "scryfallId": "e906bdc0-3b04-46ed-a162-92a366319cbf",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Island",
       "colorIdentity": [
@@ -1574,7 +1569,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1590,7 +1584,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1606,7 +1599,6 @@
     {
       "name": "Forest",
       "scryfallId": "1814fc7a-0f2a-407c-9d71-e7a7339ce82c",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1622,7 +1614,6 @@
     {
       "name": "Forest",
       "scryfallId": "1814fc7a-0f2a-407c-9d71-e7a7339ce82c",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1637,7 +1628,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:49:31.351Z",
+    "retrievedDate": "2026-02-20T16:54:10.474Z",
     "sourceUrl": "TrickyTerrainCollectorSEdition_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

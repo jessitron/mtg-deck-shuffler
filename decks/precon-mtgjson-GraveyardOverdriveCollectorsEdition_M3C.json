@@ -7,7 +7,6 @@
     {
       "name": "Disa the Restless",
       "scryfallId": "3c8e2de5-cad6-4bb6-8351-b1e8d25e210f",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Disa the Restless",
       "colorIdentity": [
@@ -28,7 +27,6 @@
     {
       "name": "Coram, the Undertaker",
       "scryfallId": "d7886c2b-515f-40d2-9bd8-cd1755c0b318",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Coram, the Undertaker",
       "colorIdentity": [
@@ -873,7 +871,6 @@
     {
       "name": "Twisted Landscape",
       "scryfallId": "0d647d67-f963-43b4-ade8-6c90e91f65ac",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Twisted Landscape",
       "colorIdentity": [
@@ -1113,7 +1110,6 @@
     {
       "name": "Accursed Marauder",
       "scryfallId": "c7bb0ba5-67c5-4b04-b604-27182878be1a",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Accursed Marauder",
       "colorIdentity": [
@@ -1504,7 +1500,6 @@
     {
       "name": "Swamp",
       "scryfallId": "9a63c166-93c2-4c56-a202-1f9dc40fd557",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1520,7 +1515,6 @@
     {
       "name": "Swamp",
       "scryfallId": "9a63c166-93c2-4c56-a202-1f9dc40fd557",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1536,7 +1530,6 @@
     {
       "name": "Swamp",
       "scryfallId": "23e8c5ea-12a2-44b6-a0b6-6c7cea1119f3",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1552,7 +1545,6 @@
     {
       "name": "Swamp",
       "scryfallId": "23e8c5ea-12a2-44b6-a0b6-6c7cea1119f3",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1568,7 +1560,6 @@
     {
       "name": "Mountain",
       "scryfallId": "8be9bbc9-77f2-4a61-b19f-30f2e61b8e88",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Mountain",
       "colorIdentity": [
@@ -1584,7 +1575,6 @@
     {
       "name": "Mountain",
       "scryfallId": "8be9bbc9-77f2-4a61-b19f-30f2e61b8e88",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Mountain",
       "colorIdentity": [
@@ -1600,7 +1590,6 @@
     {
       "name": "Mountain",
       "scryfallId": "aa04994a-4295-4be6-90c8-8f67fabd2e99",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Mountain",
       "colorIdentity": [
@@ -1616,7 +1605,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1632,7 +1620,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1648,7 +1635,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1664,7 +1650,6 @@
     {
       "name": "Forest",
       "scryfallId": "1814fc7a-0f2a-407c-9d71-e7a7339ce82c",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1680,7 +1665,6 @@
     {
       "name": "Forest",
       "scryfallId": "1814fc7a-0f2a-407c-9d71-e7a7339ce82c",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1695,7 +1679,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:49:29.964Z",
+    "retrievedDate": "2026-02-20T16:54:09.109Z",
     "sourceUrl": "GraveyardOverdriveCollectorSEdition_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

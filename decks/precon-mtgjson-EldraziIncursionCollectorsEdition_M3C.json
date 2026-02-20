@@ -7,7 +7,6 @@
     {
       "name": "Ulalek, Fused Atrocity",
       "scryfallId": "66c46ae5-d83e-41b5-81ab-a3c9c482a44e",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Ulalek, Fused Atrocity",
       "colorIdentity": [
@@ -30,7 +29,6 @@
     {
       "name": "Azlask, the Swelling Scourge",
       "scryfallId": "cbe191c5-c019-4ee2-b3a4-dad4116d2bbb",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Azlask, the Swelling Scourge",
       "colorIdentity": [
@@ -957,7 +955,6 @@
     {
       "name": "Snapping Voidcraw",
       "scryfallId": "7ab3a5a5-9cb1-4ee5-b7b2-d870c9a56097",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Snapping Voidcraw",
       "colorIdentity": [
@@ -1005,7 +1002,6 @@
     {
       "name": "Glaring Fleshraker",
       "scryfallId": "afb0e442-cd29-4dde-a7c5-6eed5df5cfe9",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Glaring Fleshraker",
       "colorIdentity": [],
@@ -1020,7 +1016,6 @@
     {
       "name": "Wastescape Battlemage",
       "scryfallId": "e7310b5b-a0ba-4779-a7d0-aecab2608991",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Wastescape Battlemage",
       "colorIdentity": [
@@ -1056,7 +1051,6 @@
     {
       "name": "Titans' Vanguard",
       "scryfallId": "907e314e-b346-4bc0-8754-3d436cbe1360",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Titans' Vanguard",
       "colorIdentity": [
@@ -1139,7 +1133,6 @@
     {
       "name": "Twisted Landscape",
       "scryfallId": "0d647d67-f963-43b4-ade8-6c90e91f65ac",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Twisted Landscape",
       "colorIdentity": [
@@ -1157,7 +1150,6 @@
     {
       "name": "Tranquil Landscape",
       "scryfallId": "3097049b-c25e-43ea-8de5-d708b058a556",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Tranquil Landscape",
       "colorIdentity": [
@@ -1541,7 +1533,6 @@
     {
       "name": "Plains",
       "scryfallId": "96c9319a-a257-472a-9ab3-676d41adf877",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Plains",
       "colorIdentity": [
@@ -1557,7 +1548,6 @@
     {
       "name": "Island",
       "scryfallId": "5754638d-14ce-452d-bb45-d1d8f1151a96",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Island",
       "colorIdentity": [
@@ -1573,7 +1563,6 @@
     {
       "name": "Swamp",
       "scryfallId": "9a63c166-93c2-4c56-a202-1f9dc40fd557",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1589,7 +1578,6 @@
     {
       "name": "Mountain",
       "scryfallId": "8be9bbc9-77f2-4a61-b19f-30f2e61b8e88",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Mountain",
       "colorIdentity": [
@@ -1605,7 +1593,6 @@
     {
       "name": "Forest",
       "scryfallId": "1b20aa40-2b88-4cac-ad15-f730fde60643",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1620,7 +1607,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:49:29.721Z",
+    "retrievedDate": "2026-02-20T16:54:08.870Z",
     "sourceUrl": "EldraziIncursionCollectorSEdition_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

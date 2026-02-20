@@ -811,7 +811,6 @@
     {
       "name": "Arcane Signet",
       "scryfallId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
@@ -826,7 +825,6 @@
     {
       "name": "Sol Ring",
       "scryfallId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
@@ -841,7 +839,6 @@
     {
       "name": "Command Tower",
       "scryfallId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
-      "multiverseid": 0,
       "twoFaced": false,
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
@@ -1680,7 +1677,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:49:29.059Z",
+    "retrievedDate": "2026-02-20T16:54:08.206Z",
     "sourceUrl": "AbzanArmor_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"
