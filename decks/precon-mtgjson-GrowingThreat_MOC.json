@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1281303723,
   "name": "Growing Threat",
   "totalCards": 100,
@@ -1639,7 +1639,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.927Z",
+    "retrievedDate": "2026-02-20T03:49:29.983Z",
     "sourceUrl": "GrowingThreat_MOC.json",
     "deckSource": "precon",
     "createdAt": "2023-04-21T00:00:00.000Z"

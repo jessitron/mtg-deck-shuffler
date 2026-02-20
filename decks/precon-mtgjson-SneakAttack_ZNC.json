@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 2060574444,
   "name": "Sneak Attack",
   "totalCards": 100,
@@ -1667,7 +1667,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:21.971Z",
+    "retrievedDate": "2026-02-20T03:49:31.059Z",
     "sourceUrl": "SneakAttack_ZNC.json",
     "deckSource": "precon",
     "createdAt": "2020-09-25T00:00:00.000Z"

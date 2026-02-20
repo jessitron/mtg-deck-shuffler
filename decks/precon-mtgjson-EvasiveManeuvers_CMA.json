@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1135131247,
   "name": "Evasive Maneuvers",
   "totalCards": 100,
@@ -1662,7 +1662,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.726Z",
+    "retrievedDate": "2026-02-20T03:49:29.784Z",
     "sourceUrl": "EvasiveManeuvers_CMA.json",
     "deckSource": "precon",
     "createdAt": "2017-06-09T00:00:00.000Z"

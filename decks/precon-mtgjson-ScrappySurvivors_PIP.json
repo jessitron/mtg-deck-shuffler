@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 2054749449,
   "name": "Scrappy Survivors",
   "totalCards": 100,
@@ -1647,7 +1647,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:21.878Z",
+    "retrievedDate": "2026-02-20T03:49:30.966Z",
     "sourceUrl": "ScrappySurvivors_PIP.json",
     "deckSource": "precon",
     "createdAt": "2024-03-08T00:00:00.000Z"

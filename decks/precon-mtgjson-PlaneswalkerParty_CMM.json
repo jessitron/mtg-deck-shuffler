@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1769434733,
   "name": "Planeswalker Party",
   "totalCards": 100,
@@ -1670,7 +1670,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:21.660Z",
+    "retrievedDate": "2026-02-20T03:49:30.734Z",
     "sourceUrl": "PlaneswalkerParty_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

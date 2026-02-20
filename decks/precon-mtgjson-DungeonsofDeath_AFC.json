@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 163361266,
   "name": "Dungeons of Death",
   "totalCards": 100,
@@ -1664,7 +1664,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.633Z",
+    "retrievedDate": "2026-02-20T03:49:29.697Z",
     "sourceUrl": "DungeonsOfDeath_AFC.json",
     "deckSource": "precon",
     "createdAt": "2021-07-23T00:00:00.000Z"

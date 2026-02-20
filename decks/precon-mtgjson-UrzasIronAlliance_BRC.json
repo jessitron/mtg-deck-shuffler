@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1571947713,
   "name": "Urza's Iron Alliance",
   "totalCards": 100,
@@ -1690,7 +1690,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:22.294Z",
+    "retrievedDate": "2026-02-20T03:49:31.379Z",
     "sourceUrl": "UrzaSIronAlliance_BRC.json",
     "deckSource": "precon",
     "createdAt": "2022-11-18T00:00:00.000Z"

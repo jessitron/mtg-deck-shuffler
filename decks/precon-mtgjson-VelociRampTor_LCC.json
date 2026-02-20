@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 699977425,
   "name": "Veloci-Ramp-Tor",
   "totalCards": 100,
@@ -1665,7 +1665,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:22.309Z",
+    "retrievedDate": "2026-02-20T03:49:31.396Z",
     "sourceUrl": "VelociRampTor_LCC.json",
     "deckSource": "precon",
     "createdAt": "2023-11-17T00:00:00.000Z"

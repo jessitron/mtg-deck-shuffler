@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 796966369,
   "name": "Heads I Win, Tails You Lose",
   "totalCards": 100,
@@ -1645,7 +1645,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.970Z",
+    "retrievedDate": "2026-02-20T03:49:30.022Z",
     "sourceUrl": "HeadsIWinTailsYouLose_SLD.json",
     "deckSource": "precon",
     "createdAt": "2022-04-22T00:00:00.000Z"

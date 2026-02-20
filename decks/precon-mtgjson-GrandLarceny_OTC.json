@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1021209974,
   "name": "Grand Larceny",
   "totalCards": 100,
@@ -1690,7 +1690,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.900Z",
+    "retrievedDate": "2026-02-20T03:49:29.953Z",
     "sourceUrl": "GrandLarceny_OTC.json",
     "deckSource": "precon",
     "createdAt": "2024-04-19T00:00:00.000Z"

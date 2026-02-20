@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1537820157,
   "name": "Mardu Surge",
   "totalCards": 100,
@@ -1672,7 +1672,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:21.396Z",
+    "retrievedDate": "2026-02-20T03:49:30.451Z",
     "sourceUrl": "MarduSurge_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"

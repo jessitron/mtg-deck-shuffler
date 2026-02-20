@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 2048925576,
   "name": "From Cute to Brute",
   "totalCards": 100,
@@ -1699,7 +1699,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.837Z",
+    "retrievedDate": "2026-02-20T03:49:29.892Z",
     "sourceUrl": "FromCuteToBrute_SLD.json",
     "deckSource": "precon",
     "createdAt": "2023-05-08T00:00:00.000Z"

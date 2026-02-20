@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": 1810949469,
   "name": "Counter Intelligence",
   "totalCards": 100,
@@ -1659,7 +1659,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T03:10:20.429Z",
+    "retrievedDate": "2026-02-20T03:49:29.499Z",
     "sourceUrl": "CounterIntelligence_EOC.json",
     "deckSource": "precon",
     "createdAt": "2025-08-01T00:00:00.000Z"
