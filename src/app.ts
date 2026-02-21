@@ -521,7 +521,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: gc.card.types
+        types: gc.card.types,
+        colorIdentity: gc.card.colorIdentity
       }));
 
       res.render("partials/library-modal", {
@@ -797,7 +798,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: gc.card.types
+        types: gc.card.types,
+        colorIdentity: gc.card.colorIdentity
       }));
 
       res.render("partials/library-modal", {

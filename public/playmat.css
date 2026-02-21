@@ -236,11 +236,23 @@
   gap: 0.35rem;
 }
 
+.card-type-icon,
+.card-type-header-icon {
+  display: inline-block;
+  background-color: #000;
+  opacity: 0.6;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
 .card-type-icon {
   width: 16px;
   height: 16px;
   vertical-align: middle;
-  opacity: 0.6;
 }
 
 .card-type-icon:first-child {
@@ -256,6 +268,15 @@
   height: 20px;
   opacity: 0.7;
 }
+
+/* Icon file mappings via mask-image */
+[data-icon="artifact"] { -webkit-mask-image: url(/icons/card-types/artifact.svg); mask-image: url(/icons/card-types/artifact.svg); }
+[data-icon="creature"] { -webkit-mask-image: url(/icons/card-types/creature.svg); mask-image: url(/icons/card-types/creature.svg); }
+[data-icon="enchantment"] { -webkit-mask-image: url(/icons/card-types/enchantment.svg); mask-image: url(/icons/card-types/enchantment.svg); }
+[data-icon="instant"] { -webkit-mask-image: url(/icons/card-types/instant.svg); mask-image: url(/icons/card-types/instant.svg); }
+[data-icon="land"] { -webkit-mask-image: url(/icons/card-types/land.svg); mask-image: url(/icons/card-types/land.svg); }
+[data-icon="planeswalker"] { -webkit-mask-image: url(/icons/card-types/planeswalker.svg); mask-image: url(/icons/card-types/planeswalker.svg); }
+[data-icon="sorcery"] { -webkit-mask-image: url(/icons/card-types/sorcery.svg); mask-image: url(/icons/card-types/sorcery.svg); }
 
 .library-search-list {
   list-style: none;

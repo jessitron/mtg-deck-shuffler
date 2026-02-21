@@ -26,10 +26,24 @@
     'Instant': 'instant', 'Land': 'land', 'Planeswalker': 'planeswalker', 'Sorcery': 'sorcery'
   };
 
-  function typeIcon(typeName, cssClass) {
+  const MANA_COLORS = {
+    'W': '#f0e68c', // Plains — warm gold
+    'U': '#4a90d9', // Island — blue
+    'B': '#8b6fae', // Swamp — purple-ish (visible against dark bg)
+    'R': '#d94b4b', // Mountain — red
+    'G': '#4aad5b', // Forest — green
+  };
+
+  function typeIcon(typeName, cssClass, colorIdentity) {
     const file = TYPE_ICON_FILES[typeName];
     if (!file) return '';
-    return `<img src="/icons/card-types/${file}.svg" alt="${typeName}" title="${typeName}" class="${cssClass}" />`;
+    // Color land icons based on single-color identity
+    let colorStyle = '';
+    if (typeName === 'Land' && colorIdentity && colorIdentity.length === 1) {
+      const color = MANA_COLORS[colorIdentity[0]];
+      if (color) colorStyle = ` style="background-color: ${color};"`;
+    }
+    return `<span class="${cssClass}" title="${typeName}" role="img" aria-label="${typeName}" data-icon="${file}"${colorStyle}></span>`;
   }
 %>
 <div class="modal-overlay"
@@ -94,7 +108,7 @@
                         hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
                         hx-target="#card-modal-container"
                         hx-swap="innerHTML"
-                        style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon')).join('') %></span>
+                        style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %></span>
                 </li>
               <% }); %>
             </ul>
@@ -108,7 +122,7 @@
                     hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
                     hx-target="#card-modal-container"
                     hx-swap="innerHTML"
-                    style="cursor: pointer;"><%- (card.types || []).map(t => typeIcon(t, 'card-type-icon')).join('') %><%= card.name %></span>
+                    style="cursor: pointer;"><%- (card.types || []).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %><%= card.name %></span>
             </li>
           <% }); %>
         </ul>
