@@ -37,11 +37,16 @@
   function typeIcon(typeName, cssClass, colorIdentity) {
     const file = TYPE_ICON_FILES[typeName];
     if (!file) return '';
-    // Color land icons based on single-color identity
+    // Color land icons based on color identity
     let colorStyle = '';
-    if (typeName === 'Land' && colorIdentity && colorIdentity.length === 1) {
-      const color = MANA_COLORS[colorIdentity[0]];
-      if (color) colorStyle = ` style="background-color: ${color};"`;
+    if (typeName === 'Land' && colorIdentity && colorIdentity.length > 0) {
+      const colors = colorIdentity.map(c => MANA_COLORS[c]).filter(Boolean);
+      if (colors.length === 1) {
+        colorStyle = ` style="background-color: ${colors[0]};"`;
+      } else if (colors.length > 1) {
+        const stops = colors.map((c, i) => `${c} ${Math.round(i / (colors.length - 1) * 100)}%`).join(', ');
+        colorStyle = ` style="background: linear-gradient(135deg, ${stops});"`;
+      }
     }
     return `<span class="${cssClass}" title="${typeName}" role="img" aria-label="${typeName}" data-icon="${file}"${colorStyle}></span>`;
   }
