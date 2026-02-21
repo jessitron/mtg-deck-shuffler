@@ -20,6 +20,17 @@
     : `${modalBaseUrl}?groupBy=type${versionParam}`;
 
   const KNOWN_TYPE_ORDER = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Artifact', 'Battle', 'Land'];
+
+  const TYPE_ICON_FILES = {
+    'Artifact': 'artifact', 'Creature': 'creature', 'Enchantment': 'enchantment',
+    'Instant': 'instant', 'Land': 'land', 'Planeswalker': 'planeswalker', 'Sorcery': 'sorcery'
+  };
+
+  function typeIcon(typeName, cssClass) {
+    const file = TYPE_ICON_FILES[typeName];
+    if (!file) return '';
+    return `<img src="/icons/card-types/${file}.svg" alt="${typeName}" title="${typeName}" class="${cssClass}" />`;
+  }
 %>
 <div class="modal-overlay"
      hx-get="/close-modal"
@@ -75,7 +86,7 @@
         <% sortedTypeNames.forEach(typeName => { %>
           <% const groupCards = typeGroups.get(typeName); %>
           <div class="card-type-group">
-            <h3 class="card-type-header"><%= typeName %> (<%= groupCards.length %>)</h3>
+            <h3 class="card-type-header"><%- typeIcon(typeName, 'card-type-header-icon') %><%= typeName %> (<%= groupCards.length %>)</h3>
             <ul class="library-search-list">
               <% groupCards.forEach(card => { %>
                 <li class="library-card-item">
@@ -83,7 +94,7 @@
                         hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
                         hx-target="#card-modal-container"
                         hx-swap="innerHTML"
-                        style="cursor: pointer;"><%= card.name %><%= (card.types && card.types.length > 1) ? ' *' : '' %></span>
+                        style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon')).join('') %></span>
                 </li>
               <% }); %>
             </ul>
@@ -97,7 +108,7 @@
                     hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
                     hx-target="#card-modal-container"
                     hx-swap="innerHTML"
-                    style="cursor: pointer;"><%= card.name %></span>
+                    style="cursor: pointer;"><%- (card.types || []).map(t => typeIcon(t, 'card-type-icon')).join('') %><%= card.name %></span>
             </li>
           <% }); %>
         </ul>

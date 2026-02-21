@@ -231,6 +231,23 @@
   margin: 0 0 0.5rem 0;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid #007bff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.card-type-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  opacity: 0.6;
+  margin-left: 0.25rem;
+}
+
+.card-type-header-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
 }
 
 .library-search-list {
