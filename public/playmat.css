@@ -241,7 +241,7 @@
   height: 16px;
   vertical-align: middle;
   opacity: 0.6;
-  margin-left: 0.25rem;
+  margin: 0 3px;
 }
 
 .card-type-header-icon {
