@@ -39,6 +39,7 @@ function autoOpenModalsFromQueryParams() {
   // Check which modals to open
   const openCard = urlParams.get('openCard');
   const openLibrary = urlParams.get('openLibrary');
+  const groupBy = urlParams.get('groupBy');
   const openTable = urlParams.get('openTable');
   const openHistory = urlParams.get('openHistory');
   const openDebug = urlParams.get('openDebug');
@@ -50,7 +51,14 @@ function autoOpenModalsFromQueryParams() {
   if (isGamePage) {
     // Game page modals - click the corresponding button
     if (openLibrary === 'true') {
-      document.querySelector('.search-button')?.click();
+      if (groupBy) {
+        const gameContainer = document.querySelector('#game-container');
+        const expectedVersion = gameContainer?.dataset.expectedVersion;
+        const versionParam = expectedVersion ? `&expected-version=${expectedVersion}` : '';
+        htmx.ajax('GET', `/library-modal/${id}?groupBy=${groupBy}${versionParam}`, { target: '#modal-container' });
+      } else {
+        document.querySelector('.search-button')?.click();
+      }
     } else if (openTable === 'true') {
       document.querySelector('.table-cards-button')?.click();
     } else if (openHistory === 'true') {
@@ -75,7 +83,11 @@ function autoOpenModalsFromQueryParams() {
   } else if (isPrepPage) {
     // Prep page modals - click the search button
     if (openLibrary === 'true') {
-      document.querySelector('.search-button')?.click();
+      if (groupBy) {
+        htmx.ajax('GET', `/prep-library-modal/${id}?groupBy=${groupBy}`, { target: '#modal-container' });
+      } else {
+        document.querySelector('.search-button')?.click();
+      }
     }
 
     // Open card modal (possibly overlaying library modal)

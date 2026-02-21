@@ -515,15 +515,22 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Build card modal URL template with expected version
       const cardModalUrlTemplate = `/card-modal/${gameId}/{cardIndex}?expected-version=${expectedVersion}`;
 
+      const groupBy = req.query.groupBy as string | undefined;
+
       // Map to simple card objects for the template
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
-        gameCardIndex: gc.gameCardIndex
+        gameCardIndex: gc.gameCardIndex,
+        types: gc.card.types
       }));
 
       res.render("partials/library-modal", {
         cards,
-        cardModalUrlTemplate
+        cardModalUrlTemplate,
+        groupBy,
+        gameId,
+        prepId: undefined,
+        expectedVersion
       });
     } catch (error) {
       console.error("Error loading library modal:", error);
@@ -781,18 +788,25 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Create library cards list with prep-specific modal links
       const { libraryCards } = createPrepViewHelpers(prep);
 
+      const groupBy = req.query.groupBy as string | undefined;
+
       // Build card modal URL template (no expected version for prep page)
       const cardModalUrlTemplate = `/prep-card-modal/${prepId}/{cardIndex}`;
 
       // Map to simple card objects for the template
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
-        gameCardIndex: gc.gameCardIndex
+        gameCardIndex: gc.gameCardIndex,
+        types: gc.card.types
       }));
 
       res.render("partials/library-modal", {
         cards,
-        cardModalUrlTemplate
+        cardModalUrlTemplate,
+        groupBy,
+        gameId: undefined,
+        prepId,
+        expectedVersion: undefined
       });
     } catch (error) {
       console.error("Error loading prep library modal:", error);

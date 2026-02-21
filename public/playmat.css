@@ -194,6 +194,43 @@
 .modal-subtitle {
   color: #666;
   font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.group-by-type-toggle {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.group-by-type-toggle:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
+
+.group-by-type-toggle.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.card-type-group {
+  margin-bottom: 1.5rem;
+}
+
+.card-type-header {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #007bff;
 }
 
 .library-search-list {

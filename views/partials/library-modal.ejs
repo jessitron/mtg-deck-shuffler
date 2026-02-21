@@ -1,9 +1,25 @@
-<%# 
+<%#
   Library Search Modal - Unified template for both /prepare and /game pages
-  
+
   Parameters:
-  - cards: Array of card objects with { name, gameCardIndex }
+  - cards: Array of card objects with { name, gameCardIndex, types }
   - cardModalUrlTemplate: URL template with {cardIndex} placeholder (e.g., "/card-modal/123/{cardIndex}?expected-version=5")
+  - groupBy: Optional string ("type") to group cards by type
+  - gameId: Optional game ID (for game pages)
+  - prepId: Optional prep ID (for prep pages)
+  - expectedVersion: Optional expected version (for game pages)
+%>
+<%
+  const modalBaseUrl = gameId ? `/library-modal/${gameId}` : `/prep-library-modal/${prepId}`;
+  const isGrouped = groupBy === 'type';
+  const versionParam = expectedVersion ? `&expected-version=${expectedVersion}` : '';
+
+  // Build toggle URL: if currently grouped, go ungrouped; if ungrouped, go grouped
+  const toggleUrl = isGrouped
+    ? `${modalBaseUrl}?${expectedVersion ? `expected-version=${expectedVersion}` : ''}`
+    : `${modalBaseUrl}?groupBy=type${versionParam}`;
+
+  const KNOWN_TYPE_ORDER = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Artifact', 'Battle', 'Land'];
 %>
 <div class="modal-overlay"
      hx-get="/close-modal"
@@ -21,20 +37,71 @@
     </div>
     <div class="modal-body">
       <p class="modal-subtitle">
-        <%= cards.length %> cards
+        <span><%= cards.length %> cards</span>
+        <button class="group-by-type-toggle<%= isGrouped ? ' active' : '' %>"
+                hx-get="<%= toggleUrl %>"
+                hx-target="#modal-container"
+                hx-swap="innerHTML"><%= isGrouped ? '✓ ' : '' %>Group by Type</button>
       </p>
-      <ul class="library-search-list">
-        <% cards.forEach(card => { %>
-          <li class="library-card-item">
-            <span class="card-name-link clickable-card-name"
-                  hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
-                  hx-target="#card-modal-container"
-                  hx-swap="innerHTML"
-                  style="cursor: pointer;"><%= card.name %></span>
-          </li>
+      <% if (isGrouped) { %>
+        <%
+          // Group cards by type
+          const typeGroups = new Map();
+          cards.forEach(card => {
+            const cardTypes = card.types || [];
+            if (cardTypes.length === 0) {
+              const group = typeGroups.get('Other') || [];
+              group.push(card);
+              typeGroups.set('Other', group);
+            } else {
+              cardTypes.forEach(type => {
+                const group = typeGroups.get(type) || [];
+                group.push(card);
+                typeGroups.set(type, group);
+              });
+            }
+          });
+
+          // Sort groups: known types first in order, then unknown alphabetically
+          const sortedTypeNames = [...typeGroups.keys()].sort((a, b) => {
+            const aIdx = KNOWN_TYPE_ORDER.indexOf(a);
+            const bIdx = KNOWN_TYPE_ORDER.indexOf(b);
+            if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+            if (aIdx !== -1) return -1;
+            if (bIdx !== -1) return 1;
+            return a.localeCompare(b);
+          });
+        %>
+        <% sortedTypeNames.forEach(typeName => { %>
+          <% const groupCards = typeGroups.get(typeName); %>
+          <div class="card-type-group">
+            <h3 class="card-type-header"><%= typeName %> (<%= groupCards.length %>)</h3>
+            <ul class="library-search-list">
+              <% groupCards.forEach(card => { %>
+                <li class="library-card-item">
+                  <span class="card-name-link clickable-card-name"
+                        hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
+                        hx-target="#card-modal-container"
+                        hx-swap="innerHTML"
+                        style="cursor: pointer;"><%= card.name %><%= (card.types && card.types.length > 1) ? ' *' : '' %></span>
+                </li>
+              <% }); %>
+            </ul>
+          </div>
         <% }); %>
-      </ul>
+      <% } else { %>
+        <ul class="library-search-list">
+          <% cards.forEach(card => { %>
+            <li class="library-card-item">
+              <span class="card-name-link clickable-card-name"
+                    hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
+                    hx-target="#card-modal-container"
+                    hx-swap="innerHTML"
+                    style="cursor: pointer;"><%= card.name %></span>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
     </div>
   </div>
 </div>
-
