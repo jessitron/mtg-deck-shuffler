@@ -1,6 +1,15 @@
 /* Shared styles for playmat components (library stack, command zone) */
 /* Used by both game.css and prepare.css */
 
+/* Mana colors for card type icons */
+:root {
+  --mana-W: #f0e68c; /* Plains — warm gold */
+  --mana-U: #4a90d9; /* Island — blue */
+  --mana-B: #8b6fae; /* Swamp — purple */
+  --mana-R: #d94b4b; /* Mountain — red */
+  --mana-G: #4aad5b; /* Forest — green */
+}
+
 /* === Library Stack === */
 .library-stack {
   position: relative;
