@@ -4,10 +4,10 @@
 /* Mana colors for card type icons */
 :root {
   --mana-W: #f0e68c; /* Plains — warm gold */
-  --mana-U: #4a90d9; /* Island — blue */
-  --mana-B: #8b6fae; /* Swamp — purple */
-  --mana-R: #d94b4b; /* Mountain — red */
-  --mana-G: #4aad5b; /* Forest — green */
+  --mana-U: #3c99e5; /* Island — blue */
+  --mana-B: #530aae; /* Swamp — purple */
+  --mana-R: #bd0a0a; /* Mountain — red */
+  --mana-G: #2a8439; /* Forest — green */
 }
 
 /* === Library Stack === */
