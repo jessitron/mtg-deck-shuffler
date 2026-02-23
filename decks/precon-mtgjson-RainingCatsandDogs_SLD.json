@@ -40,7 +40,16 @@
       ],
       "manaCost": "{1}{R}{G}{W}",
       "cmc": 4,
-      "oracleText": "Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures."
+      "oracleText": "Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures.",
+      "backFace": {
+        "name": "Jetmir, Nexus of Revels",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{1}{R}{G}{W}",
+        "cmc": 4,
+        "oracleText": "Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures."
+      }
     },
     {
       "name": "Jinnie Fay, Jetmir's Second // Jinnie Fay, Jetmir's Second",
@@ -58,7 +67,16 @@
       ],
       "manaCost": "{R/G}{G}{G/W}",
       "cmc": 3,
-      "oracleText": "If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance."
+      "oracleText": "If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance.",
+      "backFace": {
+        "name": "Jinnie Fay, Jetmir's Second",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{R/G}{G}{G/W}",
+        "cmc": 3,
+        "oracleText": "If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance."
+      }
     },
     {
       "name": "Anointed Procession // Anointed Procession",
@@ -74,7 +92,16 @@
       ],
       "manaCost": "{3}{W}",
       "cmc": 4,
-      "oracleText": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."
+      "oracleText": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.",
+      "backFace": {
+        "name": "Anointed Procession",
+        "types": [
+          "Enchantment"
+        ],
+        "manaCost": "{3}{W}",
+        "cmc": 4,
+        "oracleText": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."
+      }
     },
     {
       "name": "Sol Ring // Sol Ring",
@@ -88,7 +115,16 @@
       ],
       "manaCost": "{1}",
       "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      "oracleText": "{T}: Add {C}{C}.",
+      "backFace": {
+        "name": "Sol Ring",
+        "types": [
+          "Artifact"
+        ],
+        "manaCost": "{1}",
+        "cmc": 1,
+        "oracleText": "{T}: Add {C}{C}."
+      }
     },
     {
       "name": "Alms Collector",
@@ -1575,7 +1611,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T16:54:09.892Z",
+    "retrievedDate": "2026-02-23T17:33:46.397Z",
     "sourceUrl": "RainingCatsAndDogs_SLD.json",
     "deckSource": "precon",
     "createdAt": "2024-01-22T00:00:00.000Z"

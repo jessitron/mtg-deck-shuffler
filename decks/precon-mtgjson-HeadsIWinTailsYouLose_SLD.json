@@ -18,7 +18,16 @@
       ],
       "manaCost": "{4}{U}",
       "cmc": 5,
-      "oracleText": "Partner with Okaun, Eye of Chaos (When this creature enters, target player may put Okaun into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, draw a card."
+      "oracleText": "Partner with Okaun, Eye of Chaos (When this creature enters, target player may put Okaun into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, draw a card.",
+      "backFace": {
+        "name": "Zndrsplt, Eye of Wisdom",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{4}{U}",
+        "cmc": 5,
+        "oracleText": "Partner with Okaun, Eye of Chaos (When this creature enters, target player may put Okaun into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, draw a card."
+      }
     },
     {
       "name": "Okaun, Eye of Chaos // Okaun, Eye of Chaos",
@@ -34,7 +43,16 @@
       ],
       "manaCost": "{4}{R}",
       "cmc": 5,
-      "oracleText": "Partner with Zndrsplt, Eye of Wisdom (When this creature enters, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn."
+      "oracleText": "Partner with Zndrsplt, Eye of Wisdom (When this creature enters, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn.",
+      "backFace": {
+        "name": "Okaun, Eye of Chaos",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{4}{R}",
+        "cmc": 5,
+        "oracleText": "Partner with Zndrsplt, Eye of Wisdom (When this creature enters, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn."
+      }
     }
   ],
   "cards": [
@@ -330,7 +348,16 @@
       ],
       "manaCost": "{1}{U}{R}",
       "cmc": 3,
-      "oracleText": "Flip a coin. If you win the flip, take an extra turn after this one."
+      "oracleText": "Flip a coin. If you win the flip, take an extra turn after this one.",
+      "backFace": {
+        "name": "Stitch in Time",
+        "types": [
+          "Sorcery"
+        ],
+        "manaCost": "{1}{U}{R}",
+        "cmc": 3,
+        "oracleText": "Flip a coin. If you win the flip, take an extra turn after this one."
+      }
     },
     {
       "name": "Blasphemous Act",
@@ -665,7 +692,16 @@
       ],
       "manaCost": "{2}",
       "cmc": 2,
-      "oracleText": "If you would flip a coin, instead flip two coins and ignore one."
+      "oracleText": "If you would flip a coin, instead flip two coins and ignore one.",
+      "backFace": {
+        "name": "Krark's Thumb",
+        "types": [
+          "Artifact"
+        ],
+        "manaCost": "{2}",
+        "cmc": 2,
+        "oracleText": "If you would flip a coin, instead flip two coins and ignore one."
+      }
     },
     {
       "name": "Izzet Signet",
@@ -899,7 +935,16 @@
       ],
       "manaCost": "{2}{U}",
       "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.",
+      "backFace": {
+        "name": "Propaganda",
+        "types": [
+          "Enchantment"
+        ],
+        "manaCost": "{2}{U}",
+        "cmc": 3,
+        "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      }
     },
     {
       "name": "Mirror March",
@@ -1545,7 +1590,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T16:54:09.169Z",
+    "retrievedDate": "2026-02-23T17:33:45.493Z",
     "sourceUrl": "HeadsIWinTailsYouLose_SLD.json",
     "deckSource": "precon",
     "createdAt": "2022-04-22T00:00:00.000Z"

@@ -22,7 +22,16 @@
       ],
       "manaCost": "{1}{G}{G}",
       "cmc": 3,
-      "oracleText": "Vigilance\n{T}: Add one mana of any color.\nOther legendary creatures you control have vigilance and \"{T}: Add one mana of any color.\""
+      "oracleText": "Vigilance\n{T}: Add one mana of any color.\nOther legendary creatures you control have vigilance and \"{T}: Add one mana of any color.\"",
+      "backFace": {
+        "name": "The Prismatic Bridge",
+        "types": [
+          "Enchantment"
+        ],
+        "manaCost": "{W}{U}{B}{R}{G}",
+        "cmc": 5,
+        "oracleText": "At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+      }
     }
   ],
   "cards": [
@@ -41,7 +50,15 @@
       ],
       "manaCost": "{3}{W}{W}",
       "cmc": 5,
-      "oracleText": "Flash\nFlying, vigilance\nWhen Archangel Avacyn enters, creatures you control gain indestructible until end of turn.\nWhen a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep."
+      "oracleText": "Flash\nFlying, vigilance\nWhen Archangel Avacyn enters, creatures you control gain indestructible until end of turn.\nWhen a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.",
+      "backFace": {
+        "name": "Avacyn, the Purifier",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 5,
+        "oracleText": "Flying\nWhen this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent."
+      }
     },
     {
       "name": "Bloodline Keeper // Lord of Lineage",
@@ -57,7 +74,15 @@
       ],
       "manaCost": "{2}{B}{B}",
       "cmc": 4,
-      "oracleText": "Flying\n{T}: Create a 2/2 black Vampire creature token with flying.\n{B}: Transform this creature. Activate only if you control five or more Vampires."
+      "oracleText": "Flying\n{T}: Create a 2/2 black Vampire creature token with flying.\n{B}: Transform this creature. Activate only if you control five or more Vampires.",
+      "backFace": {
+        "name": "Lord of Lineage",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 4,
+        "oracleText": "Flying\nOther Vampire creatures you control get +2/+2.\n{T}: Create a 2/2 black Vampire creature token with flying."
+      }
     },
     {
       "name": "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
@@ -75,7 +100,15 @@
       ],
       "manaCost": "{1}{U}{B}{R}",
       "cmc": 4,
-      "oracleText": "Flying\nWhen Nicol Bolas enters, each opponent discards a card.\n{4}{U}{B}{R}: Exile Nicol Bolas, then return him to the battlefield transformed under his owner's control. Activate only as a sorcery."
+      "oracleText": "Flying\nWhen Nicol Bolas enters, each opponent discards a card.\n{4}{U}{B}{R}: Exile Nicol Bolas, then return him to the battlefield transformed under his owner's control. Activate only as a sorcery.",
+      "backFace": {
+        "name": "Nicol Bolas, the Arisen",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 4,
+        "oracleText": "[+2]: Draw two cards.\n[−3]: Nicol Bolas deals 10 damage to target creature or planeswalker.\n[−4]: Put target creature or planeswalker card from a graveyard onto the battlefield under your control.\n[−12]: Exile all but the bottom card of target player's library."
+      }
     },
     {
       "name": "Westvale Abbey // Ormendahl, Profane Prince",
@@ -90,7 +123,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}, Pay 1 life: Create a 1/1 white and black Human Cleric creature token.\n{5}, {T}, Sacrifice five creatures: Transform this land, then untap it."
+      "oracleText": "{T}: Add {C}.\n{5}, {T}, Pay 1 life: Create a 1/1 white and black Human Cleric creature token.\n{5}, {T}, Sacrifice five creatures: Transform this land, then untap it.",
+      "backFace": {
+        "name": "Ormendahl, Profane Prince",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 0,
+        "oracleText": "Flying, lifelink, indestructible, haste"
+      }
     },
     {
       "name": "Putrefy",
@@ -182,7 +223,15 @@
       ],
       "manaCost": "{2}{R}{G}",
       "cmc": 4,
-      "oracleText": "[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord."
+      "oracleText": "[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.",
+      "backFace": {
+        "name": "Arlinn, Embraced by the Moon",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 4,
+        "oracleText": "[+1]: Creatures you control get +1/+1 and gain trample until end of turn.\n[−1]: Arlinn deals 3 damage to any target. Transform Arlinn.\n[−6]: You get an emblem with \"Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'\""
+      }
     },
     {
       "name": "Voldaren Pariah // Abolisher of Bloodlines",
@@ -198,7 +247,15 @@
       ],
       "manaCost": "{3}{B}{B}",
       "cmc": 5,
-      "oracleText": "Flying\nSacrifice three other creatures: Transform this creature.\nMadness {B}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      "oracleText": "Flying\nSacrifice three other creatures: Transform this creature.\nMadness {B}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",
+      "backFace": {
+        "name": "Abolisher of Bloodlines",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 5,
+        "oracleText": "Flying\nWhen this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures of their choice."
+      }
     },
     {
       "name": "Guardian Project",
@@ -277,7 +334,15 @@
       ],
       "manaCost": "{7}",
       "cmc": 7,
-      "oracleText": "Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, then transform it.\nEquip {1}"
+      "oracleText": "Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, then transform it.\nEquip {1}",
+      "backFace": {
+        "name": "Withengar Unbound",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 7,
+        "oracleText": "Flying, intimidate, trample (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound."
+      }
     },
     {
       "name": "Sisay, Weatherlight Captain",
@@ -422,7 +487,15 @@
       ],
       "manaCost": "{1}{R}{R}",
       "cmc": 3,
-      "oracleText": "Whenever you cast a red spell, untap Chandra.\n{T}: Chandra deals 1 damage to target player or planeswalker. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control."
+      "oracleText": "Whenever you cast a red spell, untap Chandra.\n{T}: Chandra deals 1 damage to target player or planeswalker. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.",
+      "backFace": {
+        "name": "Chandra, Roaring Flame",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 3,
+        "oracleText": "[+1]: Chandra deals 2 damage to target player or planeswalker.\n[−2]: Chandra deals 2 damage to target creature.\n[−7]: Chandra deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with \"At the beginning of your upkeep, this emblem deals 3 damage to you.\""
+      }
     },
     {
       "name": "Jace, Vryn's Prodigy // Jace, Telepath Unbound",
@@ -438,7 +511,15 @@
       ],
       "manaCost": "{1}{U}",
       "cmc": 2,
-      "oracleText": "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, then return him to the battlefield transformed under his owner's control."
+      "oracleText": "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, then return him to the battlefield transformed under his owner's control.",
+      "backFace": {
+        "name": "Jace, Telepath Unbound",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 2,
+        "oracleText": "[+1]: Up to one target creature gets -2/-0 until your next turn.\n[−3]: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead.\n[−9]: You get an emblem with \"Whenever you cast a spell, target opponent mills five cards.\""
+      }
     },
     {
       "name": "Kytheon, Hero of Akros // Gideon, Battle-Forged",
@@ -454,7 +535,15 @@
       ],
       "manaCost": "{W}",
       "cmc": 1,
-      "oracleText": "At end of combat, if Kytheon and at least two other creatures attacked this combat, exile Kytheon, then return him to the battlefield transformed under his owner's control.\n{2}{W}: Kytheon gains indestructible until end of turn."
+      "oracleText": "At end of combat, if Kytheon and at least two other creatures attacked this combat, exile Kytheon, then return him to the battlefield transformed under his owner's control.\n{2}{W}: Kytheon gains indestructible until end of turn.",
+      "backFace": {
+        "name": "Gideon, Battle-Forged",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 1,
+        "oracleText": "[+2]: Up to one target creature an opponent controls attacks Gideon during its controller's next turn if able.\n[+1]: Until your next turn, target creature gains indestructible. Untap that creature.\n[0]: Until end of turn, Gideon becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn."
+      }
     },
     {
       "name": "Liliana, Heretical Healer // Liliana, Defiant Necromancer",
@@ -470,7 +559,15 @@
       ],
       "manaCost": "{1}{B}{B}",
       "cmc": 3,
-      "oracleText": "Lifelink\nWhenever another nontoken creature you control dies, exile Liliana, Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, create a 2/2 black Zombie creature token."
+      "oracleText": "Lifelink\nWhenever another nontoken creature you control dies, exile Liliana, Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, create a 2/2 black Zombie creature token.",
+      "backFace": {
+        "name": "Liliana, Defiant Necromancer",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 3,
+        "oracleText": "[+2]: Each player discards a card.\n[−X]: Return target nonlegendary creature card with mana value X from your graveyard to the battlefield.\n[−8]: You get an emblem with \"Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.\""
+      }
     },
     {
       "name": "Nissa, Vastwood Seer // Nissa, Sage Animist",
@@ -486,7 +583,15 @@
       ],
       "manaCost": "{2}{G}",
       "cmc": 3,
-      "oracleText": "When Nissa enters, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle.\nWhenever a land you control enters, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control."
+      "oracleText": "When Nissa enters, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle.\nWhenever a land you control enters, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.",
+      "backFace": {
+        "name": "Nissa, Sage Animist",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 3,
+        "oracleText": "[+1]: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.\n[−2]: Create Ashaya, the Awoken World, a legendary 4/4 green Elemental creature token.\n[−7]: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands."
+      }
     },
     {
       "name": "Opulent Palace",
@@ -517,7 +622,15 @@
       ],
       "manaCost": "{2}",
       "cmc": 2,
-      "oracleText": "{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it."
+      "oracleText": "{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.",
+      "backFace": {
+        "name": "Sanctum of the Sun",
+        "types": [
+          "Land"
+        ],
+        "cmc": 2,
+        "oracleText": "(Transforms from Azor's Gateway.)\n{T}: Add X mana of any one color, where X is your life total."
+      }
     },
     {
       "name": "Hadana's Climb // Winged Temple of Orazca",
@@ -534,7 +647,15 @@
       ],
       "manaCost": "{1}{G}{U}",
       "cmc": 3,
-      "oracleText": "At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if that creature has three or more +1/+1 counters on it, transform Hadana's Climb."
+      "oracleText": "At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if that creature has three or more +1/+1 counters on it, transform Hadana's Climb.",
+      "backFace": {
+        "name": "Winged Temple of Orazca",
+        "types": [
+          "Land"
+        ],
+        "cmc": 3,
+        "oracleText": "(Transforms from Hadana's Climb.)\n{T}: Add one mana of any color.\n{1}{G}{U}, {T}: Target creature you control gains flying and gets +X/+X until end of turn, where X is its power."
+      }
     },
     {
       "name": "Journey to Eternity // Atzal, Cave of Eternity",
@@ -551,7 +672,15 @@
       ],
       "manaCost": "{1}{B}{G}",
       "cmc": 3,
-      "oracleText": "Enchant creature you control\nWhen enchanted creature dies, return it to the battlefield under your control, then return this card to the battlefield transformed under your control."
+      "oracleText": "Enchant creature you control\nWhen enchanted creature dies, return it to the battlefield under your control, then return this card to the battlefield transformed under your control.",
+      "backFace": {
+        "name": "Atzal, Cave of Eternity",
+        "types": [
+          "Land"
+        ],
+        "cmc": 3,
+        "oracleText": "(Transforms from Journey to Eternity.)\n{T}: Add one mana of any color.\n{3}{B}{G}, {T}: Return target creature card from your graveyard to the battlefield."
+      }
     },
     {
       "name": "Dowsing Dagger // Lost Vale",
@@ -565,7 +694,15 @@
       ],
       "manaCost": "{2}",
       "cmc": 2,
-      "oracleText": "When this Equipment enters, target opponent creates two 0/2 green Plant creature tokens with defender.\nEquipped creature gets +2/+1.\nWhenever equipped creature deals combat damage to a player, you may transform this Equipment.\nEquip {2}"
+      "oracleText": "When this Equipment enters, target opponent creates two 0/2 green Plant creature tokens with defender.\nEquipped creature gets +2/+1.\nWhenever equipped creature deals combat damage to a player, you may transform this Equipment.\nEquip {2}",
+      "backFace": {
+        "name": "Lost Vale",
+        "types": [
+          "Land"
+        ],
+        "cmc": 2,
+        "oracleText": "(Transforms from Dowsing Dagger.)\n{T}: Add three mana of any one color."
+      }
     },
     {
       "name": "Legion's Landing // Adanto, the First Fort",
@@ -581,7 +718,15 @@
       ],
       "manaCost": "{W}",
       "cmc": 1,
-      "oracleText": "When Legion's Landing enters, create a 1/1 white Vampire creature token with lifelink.\nWhen you attack with three or more creatures, transform Legion's Landing."
+      "oracleText": "When Legion's Landing enters, create a 1/1 white Vampire creature token with lifelink.\nWhen you attack with three or more creatures, transform Legion's Landing.",
+      "backFace": {
+        "name": "Adanto, the First Fort",
+        "types": [
+          "Land"
+        ],
+        "cmc": 1,
+        "oracleText": "(Transforms from Legion's Landing.)\n{T}: Add {W}.\n{2}{W}, {T}: Create a 1/1 white Vampire creature token with lifelink."
+      }
     },
     {
       "name": "Search for Azcanta // Azcanta, the Sunken Ruin",
@@ -597,7 +742,15 @@
       ],
       "manaCost": "{1}{U}",
       "cmc": 2,
-      "oracleText": "At the beginning of your upkeep, surveil 1. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta. (Look at the top card of your library. You may put that card into your graveyard.)"
+      "oracleText": "At the beginning of your upkeep, surveil 1. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta. (Look at the top card of your library. You may put that card into your graveyard.)",
+      "backFace": {
+        "name": "Azcanta, the Sunken Ruin",
+        "types": [
+          "Land"
+        ],
+        "cmc": 2,
+        "oracleText": "(Transforms from Search for Azcanta.)\n{T}: Add {U}.\n{2}{U}, {T}: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+      }
     },
     {
       "name": "Thaumatic Compass // Spires of Orazca",
@@ -611,7 +764,15 @@
       ],
       "manaCost": "{2}",
       "cmc": 2,
-      "oracleText": "{3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nAt the beginning of your end step, if you control seven or more lands, transform this artifact."
+      "oracleText": "{3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nAt the beginning of your end step, if you control seven or more lands, transform this artifact.",
+      "backFace": {
+        "name": "Spires of Orazca",
+        "types": [
+          "Land"
+        ],
+        "cmc": 2,
+        "oracleText": "(Transforms from Thaumatic Compass.)\n{T}: Add {C}.\n{T}: Untap target attacking creature an opponent controls and remove it from combat."
+      }
     },
     {
       "name": "Treasure Map // Treasure Cove",
@@ -625,7 +786,15 @@
       ],
       "manaCost": "{2}",
       "cmc": 2,
-      "oracleText": "{1}, {T}: Scry 1. Put a landmark counter on this artifact. Then if there are three or more landmark counters on it, remove those counters, transform this artifact, and create three Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      "oracleText": "{1}, {T}: Scry 1. Put a landmark counter on this artifact. Then if there are three or more landmark counters on it, remove those counters, transform this artifact, and create three Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+      "backFace": {
+        "name": "Treasure Cove",
+        "types": [
+          "Land"
+        ],
+        "cmc": 2,
+        "oracleText": "(Transforms from Treasure Map.)\n{T}: Add {C}.\n{T}, Sacrifice a Treasure: Draw a card."
+      }
     },
     {
       "name": "Beast Within",
@@ -674,7 +843,15 @@
       ],
       "manaCost": "{3}{G}",
       "cmc": 4,
-      "oracleText": "When Garruk has two or fewer loyalty counters on him, transform him.\n[0]: Garruk deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0]: Create a 2/2 green Wolf creature token."
+      "oracleText": "When Garruk has two or fewer loyalty counters on him, transform him.\n[0]: Garruk deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0]: Create a 2/2 green Wolf creature token.",
+      "backFace": {
+        "name": "Garruk, the Veil-Cursed",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 4,
+        "oracleText": "[+1]: Create a 1/1 black Wolf creature token with deathtouch.\n[−1]: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n[−3]: Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard."
+      }
     },
     {
       "name": "Command Tower",
@@ -703,7 +880,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {W}."
+      "oracleText": "{T}: Add {W}.",
+      "backFace": {
+        "name": "Grimclimb Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {B}."
+      }
     },
     {
       "name": "Branchloft Pathway // Boulderloft Pathway",
@@ -719,7 +904,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {G}."
+      "oracleText": "{T}: Add {G}.",
+      "backFace": {
+        "name": "Boulderloft Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {W}."
+      }
     },
     {
       "name": "Cragcrown Pathway // Timbercrown Pathway",
@@ -735,7 +928,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {R}."
+      "oracleText": "{T}: Add {R}.",
+      "backFace": {
+        "name": "Timbercrown Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {G}."
+      }
     },
     {
       "name": "Needleverge Pathway // Pillarverge Pathway",
@@ -751,7 +952,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {R}."
+      "oracleText": "{T}: Add {R}.",
+      "backFace": {
+        "name": "Pillarverge Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {W}."
+      }
     },
     {
       "name": "Riverglide Pathway // Lavaglide Pathway",
@@ -767,7 +976,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {U}."
+      "oracleText": "{T}: Add {U}.",
+      "backFace": {
+        "name": "Lavaglide Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {R}."
+      }
     },
     {
       "name": "Valakut Awakening // Valakut Stoneforge",
@@ -783,7 +1000,15 @@
       ],
       "manaCost": "{2}{R}",
       "cmc": 3,
-      "oracleText": "Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one."
+      "oracleText": "Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.",
+      "backFace": {
+        "name": "Valakut Stoneforge",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "This land enters tapped.\n{T}: Add {R}."
+      }
     },
     {
       "name": "Bala Ged Recovery // Bala Ged Sanctuary",
@@ -799,7 +1024,15 @@
       ],
       "manaCost": "{2}{G}",
       "cmc": 3,
-      "oracleText": "Return target card from your graveyard to your hand."
+      "oracleText": "Return target card from your graveyard to your hand.",
+      "backFace": {
+        "name": "Bala Ged Sanctuary",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "This land enters tapped.\n{T}: Add {G}."
+      }
     },
     {
       "name": "Clearwater Pathway // Murkwater Pathway",
@@ -815,7 +1048,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {U}."
+      "oracleText": "{T}: Add {U}.",
+      "backFace": {
+        "name": "Murkwater Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {B}."
+      }
     },
     {
       "name": "Hagra Mauling // Hagra Broodpit",
@@ -831,7 +1072,15 @@
       ],
       "manaCost": "{2}{B}{B}",
       "cmc": 4,
-      "oracleText": "This spell costs {1} less to cast if an opponent controls no basic lands.\nDestroy target creature."
+      "oracleText": "This spell costs {1} less to cast if an opponent controls no basic lands.\nDestroy target creature.",
+      "backFace": {
+        "name": "Hagra Broodpit",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "This land enters tapped.\n{T}: Add {B}."
+      }
     },
     {
       "name": "Ondu Inversion // Ondu Skyruins",
@@ -847,7 +1096,15 @@
       ],
       "manaCost": "{6}{W}{W}",
       "cmc": 8,
-      "oracleText": "Destroy all nonland permanents."
+      "oracleText": "Destroy all nonland permanents.",
+      "backFace": {
+        "name": "Ondu Skyruins",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "This land enters tapped.\n{T}: Add {W}."
+      }
     },
     {
       "name": "Sandstone Oracle",
@@ -922,7 +1179,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {B}."
+      "oracleText": "{T}: Add {B}.",
+      "backFace": {
+        "name": "Searstep Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {R}."
+      }
     },
     {
       "name": "Hengegate Pathway // Mistgate Pathway",
@@ -938,7 +1203,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {W}."
+      "oracleText": "{T}: Add {W}.",
+      "backFace": {
+        "name": "Mistgate Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {U}."
+      }
     },
     {
       "name": "Barkchannel Pathway // Tidechannel Pathway",
@@ -954,7 +1227,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {G}."
+      "oracleText": "{T}: Add {G}.",
+      "backFace": {
+        "name": "Tidechannel Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {U}."
+      }
     },
     {
       "name": "Darkbore Pathway // Slitherbore Pathway",
@@ -970,7 +1251,15 @@
         "Land"
       ],
       "cmc": 0,
-      "oracleText": "{T}: Add {B}."
+      "oracleText": "{T}: Add {B}.",
+      "backFace": {
+        "name": "Slitherbore Pathway",
+        "types": [
+          "Land"
+        ],
+        "cmc": 0,
+        "oracleText": "{T}: Add {G}."
+      }
     },
     {
       "name": "Valki, God of Lies // Tibalt, Cosmic Impostor",
@@ -987,7 +1276,16 @@
       ],
       "manaCost": "{1}{B}",
       "cmc": 2,
-      "oracleText": "When Valki enters, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.\n{X}: Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card."
+      "oracleText": "When Valki enters, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.\n{X}: Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.",
+      "backFace": {
+        "name": "Tibalt, Cosmic Impostor",
+        "types": [
+          "Planeswalker"
+        ],
+        "manaCost": "{5}{B}{R}",
+        "cmc": 7,
+        "oracleText": "As Tibalt enters, you get an emblem with \"You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.\"\n[+2]: Exile the top card of each player's library.\n[−3]: Exile target artifact or creature.\n[−8]: Exile all graveyards. Add {R}{R}{R}."
+      }
     },
     {
       "name": "Rimewood Falls",
@@ -1035,7 +1333,16 @@
       ],
       "manaCost": "{2}{G}{G}",
       "cmc": 4,
-      "oracleText": "As long as you control three or more legendary creatures, Kolvori gets +4/+2 and has vigilance.\n{1}{G}, {T}: Look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      "oracleText": "As long as you control three or more legendary creatures, Kolvori gets +4/+2 and has vigilance.\n{1}{G}, {T}: Look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+      "backFace": {
+        "name": "The Ringhart Crest",
+        "types": [
+          "Artifact"
+        ],
+        "manaCost": "{1}{G}",
+        "cmc": 2,
+        "oracleText": "As The Ringhart Crest enters, choose a creature type.\n{T}: Add {G}. Spend this mana only to cast a creature spell of the chosen type or a legendary creature spell."
+      }
     },
     {
       "name": "Cosima, God of the Voyage // The Omenkeel",
@@ -1051,7 +1358,16 @@
       ],
       "manaCost": "{2}{U}",
       "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may exile Cosima. If you do, it gains \"Whenever a land you control enters, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.\""
+      "oracleText": "At the beginning of your upkeep, you may exile Cosima. If you do, it gains \"Whenever a land you control enters, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.\"",
+      "backFace": {
+        "name": "The Omenkeel",
+        "types": [
+          "Artifact"
+        ],
+        "manaCost": "{1}{U}",
+        "cmc": 2,
+        "oracleText": "Whenever a Vehicle you control deals combat damage to a player, that player exiles that many cards from the top of their library. You may play lands from among those cards for as long as they remain exiled.\nCrew 1"
+      }
     },
     {
       "name": "Plargg, Dean of Chaos // Augusta, Dean of Order",
@@ -1068,7 +1384,16 @@
       ],
       "manaCost": "{1}{R}",
       "cmc": 2,
-      "oracleText": "{T}, Discard a card: Draw a card.\n{4}{R}, {T}: Reveal cards from the top of your library until you reveal a nonlegendary, nonland card with mana value 3 or less. You may cast that card without paying its mana cost. Put all revealed cards not cast this way on the bottom of your library in a random order."
+      "oracleText": "{T}, Discard a card: Draw a card.\n{4}{R}, {T}: Reveal cards from the top of your library until you reveal a nonlegendary, nonland card with mana value 3 or less. You may cast that card without paying its mana cost. Put all revealed cards not cast this way on the bottom of your library in a random order.",
+      "backFace": {
+        "name": "Augusta, Dean of Order",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{2}{W}",
+        "cmc": 3,
+        "oracleText": "Other tapped creatures you control get +1/+0.\nOther untapped creatures you control get +0/+1.\nWhenever you attack, untap each creature you control, then tap any number of creatures you control."
+      }
     },
     {
       "name": "Valentin, Dean of the Vein // Lisette, Dean of the Root",
@@ -1085,7 +1410,16 @@
       ],
       "manaCost": "{B}",
       "cmc": 1,
-      "oracleText": "Menace, lifelink\nIf a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with \"When this token dies, you gain 1 life.\""
+      "oracleText": "Menace, lifelink\nIf a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with \"When this token dies, you gain 1 life.\"",
+      "backFace": {
+        "name": "Lisette, Dean of the Root",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{2}{G}{G}",
+        "cmc": 4,
+        "oracleText": "Whenever you gain life, you may pay {1}. If you do, put a +1/+1 counter on each creature you control and those creatures gain trample until end of turn."
+      }
     },
     {
       "name": "Shaile, Dean of Radiance // Embrose, Dean of Shadow",
@@ -1102,7 +1436,16 @@
       ],
       "manaCost": "{1}{W}",
       "cmc": 2,
-      "oracleText": "Flying, vigilance\n{T}: Put a +1/+1 counter on each creature that entered the battlefield under your control this turn."
+      "oracleText": "Flying, vigilance\n{T}: Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.",
+      "backFace": {
+        "name": "Embrose, Dean of Shadow",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "{2}{B}{B}",
+        "cmc": 4,
+        "oracleText": "{T}: Put a +1/+1 counter on another target creature, then Embrose deals 2 damage to that creature.\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card."
+      }
     },
     {
       "name": "Mila, Crafty Companion // Lukka, Wayward Bonder",
@@ -1119,7 +1462,16 @@
       ],
       "manaCost": "{1}{W}{W}",
       "cmc": 3,
-      "oracleText": "Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card."
+      "oracleText": "Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.",
+      "backFace": {
+        "name": "Lukka, Wayward Bonder",
+        "types": [
+          "Planeswalker"
+        ],
+        "manaCost": "{4}{R}{R}",
+        "cmc": 6,
+        "oracleText": "[+1]: You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.\n[−2]: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next upkeep.\n[−7]: You get an emblem with \"Whenever a creature you control enters, it deals damage equal to its power to any target.\""
+      }
     },
     {
       "name": "Triplicate Titan",
@@ -1184,7 +1536,15 @@
       ],
       "manaCost": "{2}{R}{G}",
       "cmc": 4,
-      "oracleText": "Daybound (If a player casts no spells during their own turn, it becomes night next turn.)\n[+1]: Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters with an additional +1/+1 counter on it.\n[−3]: Create two 2/2 green Wolf creature tokens."
+      "oracleText": "Daybound (If a player casts no spells during their own turn, it becomes night next turn.)\n[+1]: Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters with an additional +1/+1 counter on it.\n[−3]: Create two 2/2 green Wolf creature tokens.",
+      "backFace": {
+        "name": "Arlinn, the Moon's Fury",
+        "types": [
+          "Planeswalker"
+        ],
+        "cmc": 4,
+        "oracleText": "Nightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)\n[+2]: Add {R}{G}.\n[0]: Until end of turn, Arlinn becomes a 5/5 Werewolf creature with trample, indestructible, and haste."
+      }
     },
     {
       "name": "Ludevic, Necrogenius // Olag, Ludevic's Hubris",
@@ -1201,7 +1561,15 @@
       ],
       "manaCost": "{U}{B}",
       "cmc": 2,
-      "oracleText": "Whenever Ludevic enters or attacks, mill a card.\n{X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic. X can't be 0. Activate only as a sorcery."
+      "oracleText": "Whenever Ludevic enters or attacks, mill a card.\n{X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic. X can't be 0. Activate only as a sorcery.",
+      "backFace": {
+        "name": "Olag, Ludevic's Hubris",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 2,
+        "oracleText": "As this creature transforms into Olag, Ludevic's Hubris, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on Olag equal to the number of creature cards exiled with it."
+      }
     },
     {
       "name": "Dennick, Pious Apprentice // Dennick, Pious Apparition",
@@ -1218,7 +1586,15 @@
       ],
       "manaCost": "{W}{U}",
       "cmc": 2,
-      "oracleText": "Lifelink\nCards in graveyards can't be the targets of spells or abilities.\nDisturb {2}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)"
+      "oracleText": "Lifelink\nCards in graveyards can't be the targets of spells or abilities.\nDisturb {2}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)",
+      "backFace": {
+        "name": "Dennick, Pious Apparition",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 2,
+        "oracleText": "Flying\nWhenever one or more creature cards are put into graveyards from anywhere, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nIf Dennick would be put into a graveyard from anywhere, exile it instead."
+      }
     },
     {
       "name": "Tovolar's Huntmaster // Tovolar's Packleader",
@@ -1234,7 +1610,15 @@
       ],
       "manaCost": "{4}{G}{G}",
       "cmc": 6,
-      "oracleText": "When this creature enters, create two 2/2 green Wolf creature tokens.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)"
+      "oracleText": "When this creature enters, create two 2/2 green Wolf creature tokens.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)",
+      "backFace": {
+        "name": "Tovolar's Packleader",
+        "types": [
+          "Creature"
+        ],
+        "cmc": 6,
+        "oracleText": "Whenever this creature enters or attacks, create two 2/2 green Wolf creature tokens.\n{2}{G}{G}: Another target Wolf or Werewolf you control fights target creature you don't control.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)"
+      }
     },
     {
       "name": "Butcher of Malakir",
@@ -1599,7 +1983,7 @@
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-20T16:54:09.041Z",
+    "retrievedDate": "2026-02-23T17:33:45.340Z",
     "sourceUrl": "FromCuteToBrute_SLD.json",
     "deckSource": "precon",
     "createdAt": "2023-05-08T00:00:00.000Z"
