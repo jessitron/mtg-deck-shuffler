@@ -3,6 +3,7 @@
 
 export interface MtgjsonCard {
   name: string;
+  faceName?: string; // Individual face name (name has both faces like "A // B")
   uuid: string;
   count: number;
   layout: string;

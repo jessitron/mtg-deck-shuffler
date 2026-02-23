@@ -12,12 +12,18 @@ export class MtgjsonDeckAdapter {
    * The precon JSON files in decks/ are generated once and read directly by LocalFileAdapter,
    * so they won't pick up changes to this adapter until regenerated.
    */
-  convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string): Deck {
+  convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string, cardDatabase?: Map<string, MtgjsonCard>): Deck {
     const data = mtgjsonDeck.data;
 
-    // Build UUID map of all cards for back-face lookup
-    const allCards = [...data.commander, ...data.mainBoard, ...(data.sideBoard || [])];
+    // Build UUID map from deck cards + optional external database for back-face lookup
     const cardsByUuid = new Map<string, MtgjsonCard>();
+    if (cardDatabase) {
+      for (const [uuid, card] of cardDatabase) {
+        cardsByUuid.set(uuid, card);
+      }
+    }
+    // Deck cards override external database (they're more specific to this printing)
+    const allCards = [...data.commander, ...data.mainBoard, ...(data.sideBoard || [])];
     for (const card of allCards) {
       cardsByUuid.set(card.uuid, card);
     }
@@ -69,12 +75,16 @@ export class MtgjsonDeckAdapter {
         .find(c => c && c.side === "b");
       if (backFaceCard) {
         backFace = {
-          name: backFaceCard.name,
+          name: backFaceCard.faceName || backFaceCard.name,
           types: backFaceCard.types || [],
           manaCost: backFaceCard.manaCost,
           cmc: backFaceCard.manaValue ?? 0,
           oracleText: backFaceCard.text,
         };
+      } else {
+        throw new Error(
+          `Two-faced card "${mtgjsonCard.name}" (uuid: ${mtgjsonCard.uuid}) has otherFaceIds ${JSON.stringify(mtgjsonCard.otherFaceIds)} but back face not found. Provide a cardDatabase with the missing UUIDs.`
+        );
       }
     }
 

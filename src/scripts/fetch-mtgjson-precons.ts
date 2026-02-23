@@ -7,9 +7,10 @@ import { pipeline } from "stream/promises";
 import { createGunzip } from "zlib";
 import * as tar from "tar";
 import { MtgjsonDeckAdapter } from "../port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.js";
-import { MtgjsonDeck } from "../port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
+import { MtgjsonCard, MtgjsonDeck } from "../port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
 
 const MTGJSON_URL = "https://mtgjson.com/api/v5/AllDeckFiles.tar.gz";
+const ALL_IDENTIFIERS_URL = "https://mtgjson.com/api/v5/AllIdentifiers.json.gz";
 const TEMP_DIR = join(process.cwd(), "temp-mtgjson");
 const DECKS_DIR = join(process.cwd(), "decks");
 
@@ -46,7 +47,40 @@ async function extractTarGz(tarGzPath: string, destDir: string): Promise<void> {
   console.log(`✓ Extracted to ${destDir}`);
 }
 
-async function processDecks(shouldConvert: boolean, skipExisting: boolean): Promise<void> {
+async function downloadAndDecompressGz(url: string, destPath: string): Promise<void> {
+  console.log(`Downloading ${url}...`);
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  }
+
+  if (!response.body) {
+    throw new Error("Response body is null");
+  }
+
+  const fileStream = createWriteStream(destPath);
+  const gunzip = createGunzip();
+
+  // @ts-ignore - Node.js streams are compatible
+  await pipeline(response.body, gunzip, fileStream);
+
+  console.log(`✓ Downloaded and decompressed to ${destPath}`);
+}
+
+async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCard>> {
+  console.log(`Loading card database from ${jsonPath}...`);
+  const content = await fs.readFile(jsonPath, "utf-8");
+  const allIdentifiers = JSON.parse(content) as { data: Record<string, MtgjsonCard> };
+  const cardDatabase = new Map<string, MtgjsonCard>();
+  for (const [uuid, card] of Object.entries(allIdentifiers.data)) {
+    cardDatabase.set(uuid, card);
+  }
+  console.log(`✓ Loaded ${cardDatabase.size} cards into database`);
+  return cardDatabase;
+}
+
+async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardDatabase?: Map<string, MtgjsonCard>): Promise<void> {
   const adapter = new MtgjsonDeckAdapter();
 
   // Read AllDeckFiles directory
@@ -106,8 +140,8 @@ async function processDecks(shouldConvert: boolean, skipExisting: boolean): Prom
         }
 
         try {
-          // Convert using adapter
-          const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file);
+          // Convert using adapter (pass card database for back-face lookups)
+          const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file, cardDatabase);
 
           // Save to decks directory
           await fs.writeFile(outputPath, JSON.stringify(deck, null, 2), "utf-8");
@@ -161,14 +195,22 @@ async function main(): Promise<void> {
 
     const tarGzPath = join(TEMP_DIR, "AllDeckFiles.tar.gz");
 
-    // Download
+    // Download deck files
     await downloadFile(MTGJSON_URL, tarGzPath);
 
     // Extract
     await extractTarGz(tarGzPath, TEMP_DIR);
 
+    // Download card database for back-face lookups (only needed when converting)
+    let cardDatabase: Map<string, MtgjsonCard> | undefined;
+    if (shouldConvert) {
+      const allIdentifiersPath = join(TEMP_DIR, "AllIdentifiers.json");
+      await downloadAndDecompressGz(ALL_IDENTIFIERS_URL, allIdentifiersPath);
+      cardDatabase = await loadCardDatabase(allIdentifiersPath);
+    }
+
     // Process decks
-    await processDecks(shouldConvert, skipExisting);
+    await processDecks(shouldConvert, skipExisting, cardDatabase);
 
     if (!shouldConvert) {
       console.log("\n💡 Add --convert flag to convert Commander Decks to our format and save to ./decks/");

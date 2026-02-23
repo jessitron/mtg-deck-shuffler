@@ -1,5 +1,5 @@
 import { MtgjsonDeckAdapter } from "../../src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.js";
-import { MtgjsonDeck } from "../../src/port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
+import { MtgjsonCard, MtgjsonDeck } from "../../src/port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
 
 describe("MtgjsonDeckAdapter", () => {
   let adapter: MtgjsonDeckAdapter;
@@ -234,7 +234,7 @@ describe("MtgjsonDeckAdapter", () => {
     expect(solRing!.backFace).toBeUndefined();
   });
 
-  it("handles two-faced card when back face is not in deck data", () => {
+  it("errors when two-faced card back face is not found", () => {
     const mtgjsonDeck: MtgjsonDeck = {
       meta: {
         date: "2023-01-01",
@@ -265,11 +265,75 @@ describe("MtgjsonDeckAdapter", () => {
       },
     };
 
-    const result = adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json");
+    expect(() => adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json")).toThrow(
+      /back face not found/
+    );
+  });
+
+  it("finds back face from external cardDatabase", () => {
+    const mtgjsonDeck: MtgjsonDeck = {
+      meta: {
+        date: "2023-01-01",
+        version: "5.0.0",
+      },
+      data: {
+        name: "External Lookup Deck",
+        code: "M19",
+        type: "Commander Deck",
+        releaseDate: "2018-07-13",
+        commander: [],
+        mainBoard: [
+          {
+            name: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+            uuid: "nicol-front-uuid",
+            count: 1,
+            layout: "transform",
+            side: "a",
+            otherFaceIds: ["nicol-back-uuid"],
+            colorIdentity: ["U", "B", "R"],
+            setCode: "M19",
+            types: ["Legendary", "Creature"],
+            manaCost: "{1}{U}{B}{R}",
+            manaValue: 4,
+            text: "Flying",
+            identifiers: {
+              scryfallId: "nicol-scryfall-id",
+            },
+          },
+        ],
+      },
+    };
+
+    // Back face is NOT in the deck, but IS in the external database
+    const cardDatabase = new Map<string, MtgjsonCard>();
+    cardDatabase.set("nicol-back-uuid", {
+      name: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+      faceName: "Nicol Bolas, the Arisen",
+      uuid: "nicol-back-uuid",
+      count: 1,
+      layout: "transform",
+      side: "b",
+      otherFaceIds: ["nicol-front-uuid"],
+      colorIdentity: ["U", "B", "R"],
+      setCode: "M19",
+      types: ["Legendary", "Planeswalker"],
+      manaValue: 4,
+      text: "+2: Draw two cards.",
+      identifiers: {
+        scryfallId: "nicol-scryfall-id",
+      },
+    });
+
+    const result = adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json", cardDatabase);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0].twoFaced).toBe(true);
-    expect(result.cards[0].backFace).toBeUndefined();
+    expect(result.cards[0].backFace).toEqual({
+      name: "Nicol Bolas, the Arisen",
+      types: ["Legendary", "Planeswalker"],
+      manaCost: undefined,
+      cmc: 4,
+      oracleText: "+2: Draw two cards.",
+    });
   });
 });
 
