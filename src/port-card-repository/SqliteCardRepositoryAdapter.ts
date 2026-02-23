@@ -1,6 +1,21 @@
 import Database from "better-sqlite3";
 import { CardRepositoryPort } from "./types.js";
-import { CardDefinition } from "../types.js";
+import { CardDefinition, CardFace } from "../types.js";
+
+interface CardRow {
+  scryfall_id: string;
+  name: string;
+  multiverseid: number | null;
+  two_faced: number;
+  oracle_card_name: string;
+  color_identity: string;
+  set_code: string;
+  types: string;
+  mana_cost: string | null;
+  cmc: number;
+  oracle_text: string | null;
+  back_face: string | null;
+}
 
 export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
   private db: Database.Database;
@@ -25,12 +40,20 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
         mana_cost TEXT,
         cmc INTEGER NOT NULL,
         oracle_text TEXT,
+        back_face TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `;
 
     this.db.exec(createTableSQL);
+
+    // Add back_face column to existing tables
+    try {
+      this.db.exec(`ALTER TABLE cards ADD COLUMN back_face TEXT`);
+    } catch {
+      // Column already exists
+    }
   }
 
   async saveCards(cards: CardDefinition[]): Promise<void> {
@@ -38,9 +61,9 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       INSERT OR REPLACE INTO cards (
         scryfall_id, name, multiverseid, two_faced, oracle_card_name,
         color_identity, set_code, types, mana_cost, cmc, oracle_text,
-        updated_at
+        back_face, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     `;
 
     const stmt = this.db.prepare(insertOrUpdateSQL);
@@ -59,7 +82,8 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
           JSON.stringify(card.types),
           card.manaCost ?? null,
           card.cmc,
-          card.oracleText ?? null
+          card.oracleText ?? null,
+          card.backFace ? JSON.stringify(card.backFace) : null
         );
       }
     });
@@ -73,19 +97,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     `;
 
     const row = this.db.prepare(selectSQL).get(scryfallId) as
-      | {
-          scryfall_id: string;
-          name: string;
-          multiverseid: number | null;
-          two_faced: number;
-          oracle_card_name: string;
-          color_identity: string;
-          set_code: string;
-          types: string;
-          mana_cost: string | null;
-          cmc: number;
-          oracle_text: string | null;
-        }
+      | CardRow
       | undefined;
 
     if (!row) {
@@ -106,36 +118,12 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       SELECT * FROM cards WHERE scryfall_id IN (${placeholders})
     `;
 
-    const rows = this.db.prepare(selectSQL).all(...scryfallIds) as Array<{
-      scryfall_id: string;
-      name: string;
-      multiverseid: number | null;
-      two_faced: number;
-      oracle_card_name: string;
-      color_identity: string;
-      set_code: string;
-      types: string;
-      mana_cost: string | null;
-      cmc: number;
-      oracle_text: string | null;
-    }>;
+    const rows = this.db.prepare(selectSQL).all(...scryfallIds) as CardRow[];
 
     return rows.map((row) => this.rowToCardDefinition(row));
   }
 
-  private rowToCardDefinition(row: {
-    scryfall_id: string;
-    name: string;
-    multiverseid: number | null;
-    two_faced: number;
-    oracle_card_name: string;
-    color_identity: string;
-    set_code: string;
-    types: string;
-    mana_cost: string | null;
-    cmc: number;
-    oracle_text: string | null;
-  }): CardDefinition {
+  private rowToCardDefinition(row: CardRow): CardDefinition {
     return {
       scryfallId: row.scryfall_id,
       name: row.name,
@@ -148,6 +136,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       manaCost: row.mana_cost ?? undefined,
       cmc: row.cmc,
       oracleText: row.oracle_text ?? undefined,
+      backFace: row.back_face ? JSON.parse(row.back_face) as CardFace : undefined,
     };
   }
 
