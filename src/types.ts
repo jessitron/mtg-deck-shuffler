@@ -1,4 +1,12 @@
 
+export interface CardFace {
+  name: string;
+  types: string[];
+  manaCost?: string;
+  cmc: number;
+  oracleText?: string;
+}
+
 export interface CardDefinition {
   name: string;
   scryfallId: string;
@@ -11,6 +19,7 @@ export interface CardDefinition {
   manaCost?: string;
   cmc: number;
   oracleText?: string;
+  backFace?: CardFace;
 }
 
 export interface DeckProvenance {
