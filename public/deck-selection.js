@@ -52,8 +52,19 @@ function setupPreconSearch() {
     };
   });
 
+  const tilesContainer = document.querySelector(".precon-tiles-container");
+
   searchInput.addEventListener("input", function() {
     const searchTerm = this.value.toLowerCase().trim();
+
+    // Skip fade-in animation when searching
+    if (tilesContainer) {
+      if (searchTerm.length > 0) {
+        tilesContainer.classList.add("search-active");
+      } else {
+        tilesContainer.classList.remove("search-active");
+      }
+    }
 
     tileSearchData.forEach(({ tile, searchableText }) => {
       // Show or hide tile based on search match

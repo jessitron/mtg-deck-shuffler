@@ -146,6 +146,12 @@
   padding: 8px;
 }
 
+.precon-tiles-container.search-active .precon-tile {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
 @keyframes fadeInTile {
   from {
     opacity: 0;
