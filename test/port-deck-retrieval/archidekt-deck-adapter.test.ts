@@ -638,6 +638,119 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.cards[1].types).toEqual(["Legendary", "Enchantment", "Creature"]);
   });
 
+  it("extracts back-face data for two-faced cards", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 2000,
+      name: "Two-Faced Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "nicol-bolas-uid",
+            multiverseid: 555555,
+            oracleCard: {
+              name: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+              faces: [
+                {
+                  name: "Nicol Bolas, the Ravager",
+                  types: ["Legendary", "Creature"],
+                  manaCost: "{1}{U}{B}{R}",
+                  cmc: 4,
+                  text: "Flying\nWhen Nicol Bolas, the Ravager enters the battlefield, each opponent discards a card.",
+                },
+                {
+                  name: "Nicol Bolas, the Arisen",
+                  types: ["Legendary", "Planeswalker"],
+                  cmc: 4,
+                  text: "+2: Draw two cards.",
+                },
+              ],
+              colorIdentity: ["Blue", "Black", "Red"],
+              types: ["Legendary", "Creature"],
+              manaCost: "{1}{U}{B}{R}",
+              cmc: 4,
+              text: "Flying\nWhen Nicol Bolas, the Ravager enters the battlefield, each opponent discards a card.",
+            },
+            edition: { editionname: "Core Set 2019", editioncode: "M19" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "2000" };
+    const result = await adapter.retrieveDeck(request);
+
+    expect(result.cards.length).toBe(1);
+    const card = result.cards[0];
+    expect(card.twoFaced).toBe(true);
+    expect(card.types).toEqual(["Legendary", "Creature"]);
+    expect(card.backFace).toEqual({
+      name: "Nicol Bolas, the Arisen",
+      types: ["Legendary", "Planeswalker"],
+      manaCost: undefined,
+      cmc: 4,
+      oracleText: "+2: Draw two cards.",
+    });
+  });
+
+  it("uses front face types when top-level types are empty for two-faced cards", async () => {
+    const archidektDeck: ArchidektDeck = {
+      id: 2001,
+      name: "Two-Faced Empty Top-Level",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "esika-uid",
+            multiverseid: 666666,
+            oracleCard: {
+              name: "Esika, God of the Tree // The Prismatic Bridge",
+              faces: [
+                {
+                  name: "Esika, God of the Tree",
+                  types: ["Legendary", "Creature"],
+                  manaCost: "{1}{G}{G}",
+                  cmc: 3,
+                  text: "Each other legendary creature you control has \"{T}: Add one mana of any color.\"",
+                },
+                {
+                  name: "The Prismatic Bridge",
+                  types: ["Legendary", "Enchantment"],
+                  manaCost: "{W}{U}{B}{R}{G}",
+                  cmc: 5,
+                  text: "At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card.",
+                },
+              ],
+              colorIdentity: ["White", "Blue", "Black", "Red", "Green"],
+              types: [],
+              cmc: 3,
+            },
+            edition: { editionname: "Kaldheim", editioncode: "KHM" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "2001" };
+    const result = await adapter.retrieveDeck(request);
+
+    const card = result.cards[0];
+    expect(card.twoFaced).toBe(true);
+    expect(card.types).toEqual(["Legendary", "Creature"]);
+    expect(card.backFace?.name).toBe("The Prismatic Bridge");
+    expect(card.backFace?.types).toEqual(["Legendary", "Enchantment"]);
+  });
+
   it("handles missing types field gracefully", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 1001,

@@ -1,3 +1,11 @@
+export interface ArchidektFace {
+  name: string;
+  types: string[];
+  manaCost?: string;
+  cmc?: number;
+  text?: string;
+}
+
 export interface ArchidektCard {
   card: {
     displayName?: string;
@@ -5,7 +13,7 @@ export interface ArchidektCard {
     multiverseid: number;
     oracleCard: {
       name: string;
-      faces: any[];
+      faces: ArchidektFace[];
       colorIdentity: string[];
       types: string[];
       manaCost?: string;

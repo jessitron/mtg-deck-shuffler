@@ -1,6 +1,6 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
-import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
+import { Deck, CardDefinition, CardFace, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
@@ -87,7 +87,26 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
      * while certain fancy cards get a vanity name. On the printed card, the Oracle Name shows up as a subtitle */
     const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
     const oracleCardName = archidektCard.card.oracleCard.name;
-    const twoFaced = (archidektCard.card.oracleCard.faces || []).length === 2;
+    const faces = archidektCard.card.oracleCard.faces || [];
+    const twoFaced = faces.length === 2;
+
+    // For two-faced cards, Archidekt sometimes puts data on faces rather than top-level fields
+    const frontFace = twoFaced ? faces[0] : undefined;
+    const types = (frontFace?.types?.length ? frontFace.types : archidektCard.card.oracleCard.types) || [];
+    const manaCost = frontFace?.manaCost ?? archidektCard.card.oracleCard.manaCost;
+    const oracleText = frontFace?.text ?? archidektCard.card.oracleCard.text;
+
+    let backFace: CardFace | undefined;
+    if (twoFaced) {
+      const back = faces[1];
+      backFace = {
+        name: back.name,
+        types: back.types || [],
+        manaCost: back.manaCost,
+        cmc: back.cmc ?? archidektCard.card.oracleCard.cmc ?? 0,
+        oracleText: back.text,
+      };
+    }
 
     const cardDefinition: CardDefinition = {
       name: cardName,
@@ -97,10 +116,11 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       oracleCardName,
       colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
       set: archidektCard.card.edition.editionname,
-      types: archidektCard.card.oracleCard.types || [],
-      manaCost: archidektCard.card.oracleCard.manaCost,
+      types,
+      manaCost,
       cmc: archidektCard.card.oracleCard.cmc ?? 0,
-      oracleText: archidektCard.card.oracleCard.text,
+      oracleText,
+      backFace,
     };
 
     return cardDefinition;
