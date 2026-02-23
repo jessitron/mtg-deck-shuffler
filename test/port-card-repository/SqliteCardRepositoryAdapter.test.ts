@@ -3,7 +3,7 @@ import { CardDefinition } from "../../src/types.js";
 import fs from "node:fs";
 import path from "node:path";
 import * as fc from "fast-check";
-import { cardDefinition } from "../generators.js";
+import { cardDefinition, nicolBolas } from "../generators.js";
 
 describe("SqliteCardRepositoryAdapter", () => {
   let adapter: SqliteCardRepositoryAdapter;
@@ -128,6 +128,17 @@ describe("SqliteCardRepositoryAdapter", () => {
 
     expect(retrieved.length).toBe(1);
     expect(retrieved[0]).toEqual(testCard);
+  });
+
+  it("should save and retrieve a two-faced card with backFace", async () => {
+    await adapter.saveCards([nicolBolas]);
+
+    const retrieved = await adapter.getCard(nicolBolas.scryfallId);
+
+    expect(retrieved).toEqual(nicolBolas);
+    expect(retrieved?.backFace).toBeDefined();
+    expect(retrieved?.backFace?.name).toBe("Nicol Bolas, the Arisen");
+    expect(retrieved?.backFace?.types).toEqual(["Legendary", "Planeswalker"]);
   });
 
   it("should handle saving many cards in a transaction", async () => {
