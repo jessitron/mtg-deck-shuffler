@@ -1,4 +1,4 @@
-import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../types.js";
+import { CardDefinition, CardFace, Deck, PERSISTED_DECK_VERSION } from "../../types.js";
 import { MtgjsonCard, MtgjsonDeck } from "./mtgjsonTypes.js";
 
 export class MtgjsonDeckAdapter {
@@ -15,15 +15,23 @@ export class MtgjsonDeckAdapter {
   convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string): Deck {
     const data = mtgjsonDeck.data;
 
-    // Convert commanders
-    const commanders: CardDefinition[] = data.commander.map(card =>
-      this.convertMtgjsonToCard(card)
-    );
+    // Build UUID map of all cards for back-face lookup
+    const allCards = [...data.commander, ...data.mainBoard, ...(data.sideBoard || [])];
+    const cardsByUuid = new Map<string, MtgjsonCard>();
+    for (const card of allCards) {
+      cardsByUuid.set(card.uuid, card);
+    }
 
-    // Convert mainboard cards (respecting count for each card)
+    // Convert commanders (skip side "b" entries)
+    const commanders: CardDefinition[] = data.commander
+      .filter(card => card.side !== "b")
+      .map(card => this.convertMtgjsonToCard(card, cardsByUuid));
+
+    // Convert mainboard cards (respecting count for each card, skip side "b")
     const mainboardCards: CardDefinition[] = [];
     for (const card of data.mainBoard) {
-      const cardDef = this.convertMtgjsonToCard(card);
+      if (card.side === "b") continue;
+      const cardDef = this.convertMtgjsonToCard(card, cardsByUuid);
       for (let i = 0; i < card.count; i++) {
         mainboardCards.push(cardDef);
       }
@@ -48,10 +56,27 @@ export class MtgjsonDeckAdapter {
     };
   }
 
-  private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard): CardDefinition {
+  private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard, cardsByUuid: Map<string, MtgjsonCard>): CardDefinition {
     // Determine if card is two-faced based on layout
     const twoFacedLayouts = ["transform", "modal_dfc", "reversible_card", "double_faced_token"];
     const twoFaced = twoFacedLayouts.includes(mtgjsonCard.layout);
+
+    // Look up back face via otherFaceIds
+    let backFace: CardFace | undefined;
+    if (twoFaced && mtgjsonCard.otherFaceIds?.length) {
+      const backFaceCard = mtgjsonCard.otherFaceIds
+        .map(id => cardsByUuid.get(id))
+        .find(c => c && c.side === "b");
+      if (backFaceCard) {
+        backFace = {
+          name: backFaceCard.name,
+          types: backFaceCard.types || [],
+          manaCost: backFaceCard.manaCost,
+          cmc: backFaceCard.manaValue ?? 0,
+          oracleText: backFaceCard.text,
+        };
+      }
+    }
 
     const cardDefinition: CardDefinition = {
       name: mtgjsonCard.name,
@@ -67,6 +92,7 @@ export class MtgjsonDeckAdapter {
       manaCost: mtgjsonCard.manaCost,
       cmc: mtgjsonCard.manaValue ?? 0,
       oracleText: mtgjsonCard.text,
+      backFace,
     };
 
     return cardDefinition;

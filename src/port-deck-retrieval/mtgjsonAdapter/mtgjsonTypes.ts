@@ -12,6 +12,8 @@ export interface MtgjsonCard {
   manaCost?: string;
   manaValue?: number;
   text?: string;
+  side?: string; // "a" or "b" for two-faced cards
+  otherFaceIds?: string[]; // UUIDs of other faces
   identifiers: {
     scryfallId?: string;
     multiverseId?: string;
