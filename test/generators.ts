@@ -1,5 +1,5 @@
 import * as fc from "fast-check";
-import { CardDefinition, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
+import { CardDefinition, CardFace, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
 import { PersistedGameCard } from "../src/port-persist-state/persisted-types.js";
 import { PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
 
@@ -86,20 +86,35 @@ export const oracleText = fc.option(
   { nil: undefined }
 );
 
-// Generator for CardDefinition
-export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
+// Generator for CardFace (back face data)
+export const cardFace: fc.Arbitrary<CardFace> = fc.record({
   name: cardName,
-  scryfallId: scryfallId,
-  multiverseid: multiverseId,
-  twoFaced: fc.boolean(),
-  oracleCardName: cardName,
-  colorIdentity: colorIdentity,
-  set: setName,
   types: cardTypes,
   manaCost: manaCost,
   cmc: cmc,
   oracleText: oracleText,
 });
+
+// Generator for optional backFace (present ~30% of the time)
+const optionalBackFace = fc.option(cardFace, { nil: undefined, freq: 3 });
+
+// Generator for CardDefinition
+export const cardDefinition: fc.Arbitrary<CardDefinition> = optionalBackFace.chain(backFace =>
+  fc.record({
+    name: cardName,
+    scryfallId: scryfallId,
+    multiverseid: multiverseId,
+    twoFaced: fc.constant(backFace !== undefined),
+    oracleCardName: cardName,
+    colorIdentity: colorIdentity,
+    set: setName,
+    types: cardTypes,
+    manaCost: manaCost,
+    cmc: cmc,
+    oracleText: oracleText,
+    backFace: fc.constant(backFace),
+  })
+);
 
 // Generator for commander names (legendary creatures)
 export const commanderName = fc.oneof(
@@ -322,6 +337,26 @@ export const atraxa: CardDefinition = {
   manaCost: "{G}{W}{U}{B}",
   cmc: 4,
   oracleText: "Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate.",
+};
+
+export const nicolBolas: CardDefinition = {
+  name: "Nicol Bolas, the Ravager",
+  scryfallId: "nicol001",
+  multiverseid: 33333,
+  twoFaced: true,
+  oracleCardName: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+  colorIdentity: ["U", "B", "R"],
+  set: "M19",
+  types: ["Legendary", "Creature"],
+  manaCost: "{1}{U}{B}{R}",
+  cmc: 4,
+  oracleText: "Flying\nWhen Nicol Bolas, the Ravager enters the battlefield, each opponent discards a card.",
+  backFace: {
+    name: "Nicol Bolas, the Arisen",
+    types: ["Legendary", "Planeswalker"],
+    cmc: 4,
+    oracleText: "+2: Draw two cards.\n−3: Nicol Bolas, the Arisen deals 10 damage to target creature or planeswalker.",
+  },
 };
 
 export const testProvenance: DeckProvenance = {
