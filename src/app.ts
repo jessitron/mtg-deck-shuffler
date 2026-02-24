@@ -522,7 +522,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: [...gc.card.types, ...(gc.card.backFace?.types || [])],
+        types: [...new Set([...gc.card.types, ...(gc.card.backFace?.types || [])])],
         colorIdentity: gc.card.colorIdentity
       }));
 
@@ -800,7 +800,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: [...gc.card.types, ...(gc.card.backFace?.types || [])],
+        types: [...new Set([...gc.card.types, ...(gc.card.backFace?.types || [])])],
         colorIdentity: gc.card.colorIdentity
       }));
 
