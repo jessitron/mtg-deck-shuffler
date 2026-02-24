@@ -10,6 +10,13 @@ All files involved in the library search feature, grouped by role.
 | `src/app.ts` | 780-819 | Prep library modal route (`/prep-library-modal/:prepId`) |
 | `views/partials/library-modal.ejs` | all | Modal template (grouping logic, type icons, card list) |
 
+## Navigation (navList)
+
+| File | Role |
+|------|------|
+| `src/navList.ts` | `resolveNavListNavigation()` and `navListQueryParam()` helpers |
+| `test/navList.test.ts` | Unit tests for navList parsing and navigation |
+
 ## UI Entry Points
 
 | File | Lines | Role |

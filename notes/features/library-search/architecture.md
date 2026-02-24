@@ -105,6 +105,18 @@ Button in `views/prepare.ejs` line 22-25:
 
 `public/modal-query-params.js` handles `?openLibrary=true` and `?openLibrary=true&groupBy=type` on page load, either clicking the search button or making a direct HTMX ajax call (for grouped view).
 
+## Card Modal Navigation (navList)
+
+When the library is displayed grouped by type, each type section builds a `navList` query parameter — a comma-separated list of card indices in that section. This is appended to card modal URLs so that prev/next navigation stays within the type group.
+
+**Helper**: `src/navList.ts` — `resolveNavListNavigation()` parses the navList and returns prev/next indices, position, and total count. `navListQueryParam()` builds the query string fragment.
+
+**Flow**: Library modal (grouped) → card modal URL includes `&navList=12,45,7,...` → card modal route checks for navList before falling back to zone-order navigation → prev/next URLs preserve navList.
+
+**Fallback**: Without navList (ungrouped view, other entry points), navigation uses the existing zone-order logic (`findPrevCardInZone`/`findNextCardInZone`).
+
+**Flip support**: The flip-card-modal POST route also reads navList from the request body and preserves it through the re-rendered card modal.
+
 ## GameState Integration
 
 `GameState.listLibrary()` (src/GameState.ts):
