@@ -54,7 +54,8 @@ All files involved in the library search feature, grouped by role.
 
 | File | What It Tests |
 |------|---------------|
-| `test/verification/verify-library-grouping.spec.ts` | E2E: toggle button visibility, groupBy=type shows headers |
+| `test/verification/verify-library-grouping.spec.ts` | E2E: toggle button, grouped headers, group-scoped nav, flip preserves navList (game + prep) |
+| `src/scripts/seed-test-data.ts` | Seeds test data including a game with two-faced cards (From Cute to Brute) |
 
 ## Documentation
 

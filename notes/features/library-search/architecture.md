@@ -115,7 +115,7 @@ When the library is displayed grouped by type, each type section builds a `navLi
 
 **Fallback**: Without navList (ungrouped view, other entry points), navigation uses the existing zone-order logic (`findPrevCardInZone`/`findNextCardInZone`).
 
-**Flip support**: The flip-card-modal POST route also reads navList from the request body and preserves it through the re-rendered card modal.
+**Flip support**: Both flip routes preserve navList. The game flip-card-modal POST route reads navList from the request body. The prep card modal flip (GET with `?face=back`) passes navList as a query parameter.
 
 ## GameState Integration
 
