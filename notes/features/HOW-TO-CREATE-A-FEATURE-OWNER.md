@@ -132,7 +132,22 @@ The description should mention concrete triggers: which parts of the codebase, w
 
 ## Step 4: Link and Commit
 
-Ask the user to link the skill files from `.claude/skills/`. Commit the knowledge base and skills together or in logical chunks (knowledge base first, then skills).
+Claude Code discovers skills as directories under `.claude/skills/`, each containing a `SKILL.md` file. Create a directory per skill and symlink `SKILL.md` to the actual skill file:
+
+```bash
+mkdir -p .claude/skills/feature-name-context
+ln -s ../../../notes/features/feature-name/skill-context.md .claude/skills/feature-name-context/SKILL.md
+
+mkdir -p .claude/skills/feature-name-review
+ln -s ../../../notes/features/feature-name/skill-review.md .claude/skills/feature-name-review/SKILL.md
+
+mkdir -p .claude/skills/feature-name-update
+ln -s ../../../notes/features/feature-name/skill-update.md .claude/skills/feature-name-update/SKILL.md
+```
+
+Note the extra `../` in the symlink target compared to a flat file — the symlink is one directory deeper.
+
+Commit the knowledge base and skills together or in logical chunks (knowledge base first, then skills).
 
 ## Maintenance
 
