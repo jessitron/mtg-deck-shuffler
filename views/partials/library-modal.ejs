@@ -111,7 +111,7 @@
               <% groupCards.forEach(card => { %>
                 <li class="library-card-item">
                   <span class="card-name-link clickable-card-name"
-                        hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) + '&navList=' + navList %>"
+                        hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) + (cardModalUrlTemplate.includes('?') ? '&' : '?') + 'navList=' + navList %>"
                         hx-target="#card-modal-container"
                         hx-swap="innerHTML"
                         style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %></span>
