@@ -15,6 +15,14 @@ In Magic: the Gathering, many cards instruct a player to "search your library" f
 - [Interactions](./interactions.md) - How it connects to other features
 - [Files](./files.md) - All files involved, grouped by role
 
+## Users
+
+The app is public but currently used by people Jessitron invites for remote MTG games. Library search is used during gameplay when a card effect says "search your library for [card type]" - the player opens the modal, browses/filters by type, clicks a card, and uses card modal actions to move it.
+
+## Design Philosophy
+
+The app assists gameplay without enforcing MTG rules. Library search shows card positions (top to bottom), and the player decides whether to shuffle afterward. No auto-shuffle, no restrictions on what you can pick.
+
 ## Feature Summary
 
 | Aspect | Detail |
@@ -25,6 +33,7 @@ In Magic: the Gathering, many cards instruct a player to "search your library" f
 | Two routes | `/library-modal/:gameId` (game), `/prep-library-modal/:prepId` (prep) |
 | Template | Single shared EJS template: `views/partials/library-modal.ejs` |
 | Cards shown | All cards with `location.type === "Library"`, sorted by position |
+| Auto-shuffle | No. The app doesn't enforce MTG rules; player shuffles manually if needed |
 | Grouping | Toggle to group cards by MTG card type (Creature, Instant, etc.) |
 | Type icons | SVG icons for each card type, colored for lands |
 | Two-faced cards | Both front and back face types merged (deduplicated) |
