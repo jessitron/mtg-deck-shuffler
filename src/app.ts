@@ -18,6 +18,7 @@ import { PersistPrepPort, PersistedGamePrep } from "./port-persist-prep/types.js
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl } from "./types.js";
+import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -600,31 +601,42 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Calculate navigation indices
-      const prevCardIndex = game.findPrevCardInZone(cardIndex);
-      const nextCardIndex = game.findNextCardInZone(cardIndex);
+      // Calculate navigation indices — use navList if provided, else zone order
+      const navListParam = req.query.navList as string | undefined;
+      const navListNav = resolveNavListNavigation(navListParam, cardIndex);
 
-      // Calculate position information for display
+      let prevCardIndex: number | null;
+      let nextCardIndex: number | null;
       let currentPosition = 1;
       let totalCardsInZone = 1;
-      const location = gameCard.location;
 
-      if (location.type !== "Table") {
-        let cardsInZone: readonly GameCard[];
-        if (location.type === "Library") {
-          cardsInZone = game.listLibrary();
-        } else if (location.type === "Hand") {
-          cardsInZone = game.listHand();
-        } else if (location.type === "Revealed") {
-          cardsInZone = game.listRevealed();
-        } else if (location.type === "CommandZone") {
-          cardsInZone = game.listCommandZone();
-        } else {
-          cardsInZone = [];
+      if (navListNav) {
+        prevCardIndex = navListNav.prevCardIndex;
+        nextCardIndex = navListNav.nextCardIndex;
+        currentPosition = navListNav.currentPosition;
+        totalCardsInZone = navListNav.totalCardsInZone;
+      } else {
+        prevCardIndex = game.findPrevCardInZone(cardIndex);
+        nextCardIndex = game.findNextCardInZone(cardIndex);
+        const location = gameCard.location;
+
+        if (location.type !== "Table") {
+          let cardsInZone: readonly GameCard[];
+          if (location.type === "Library") {
+            cardsInZone = game.listLibrary();
+          } else if (location.type === "Hand") {
+            cardsInZone = game.listHand();
+          } else if (location.type === "Revealed") {
+            cardsInZone = game.listRevealed();
+          } else if (location.type === "CommandZone") {
+            cardsInZone = game.listCommandZone();
+          } else {
+            cardsInZone = [];
+          }
+
+          totalCardsInZone = cardsInZone.length;
+          currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === cardIndex) + 1;
         }
-
-        totalCardsInZone = cardsInZone.length;
-        currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === cardIndex) + 1;
       }
 
       const expectedVersion = game.getStateVersion();
@@ -641,10 +653,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
 
       if (gameCard.card.twoFaced) {
+        const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
+        if (navListParam) flipVals["navList"] = navListParam;
         utilityButtonsHtml += `
         <button class="modal-action-button flip-button"
                 hx-post="/flip-card-modal/${gameId}/${gameCard.gameCardIndex}"
-                hx-vals='{"expected-version": ${expectedVersion}}'
+                hx-vals='${JSON.stringify(flipVals)}'
                 hx-target="#card-modal-container"
                 hx-swap="innerHTML"
                 title="Flip card to see other side">Flip</button>`;
@@ -656,9 +670,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const locationActions = getModalCardActionsByLocation(gameCard, gameId, expectedVersion);
       const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
-      // Build navigation URLs
-      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}` : "";
-      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}` : "";
+      // Build navigation URLs, preserving navList if present
+      const navListSuffix = navListQueryParam(navListParam);
+      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
 
       res.render("partials/card-modal", {
         card: gameCard.card,
@@ -700,28 +715,38 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      // Determine which zone this card is in and calculate navigation
-      const numCommanders = prep.deck.commanders.length;
-      const isCommander = cardIndex < numCommanders;
+      // Determine navigation — use navList if provided, else zone order
+      const navListParam = req.query.navList as string | undefined;
+      const navListNav = resolveNavListNavigation(navListParam, cardIndex);
 
-      let prevCardIndex: number | null = null;
-      let nextCardIndex: number | null = null;
+      let prevCardIndex: number | null;
+      let nextCardIndex: number | null;
       let currentPosition: number;
       let totalCardsInZone: number;
 
-      if (isCommander) {
-        // Navigate within commanders
-        totalCardsInZone = numCommanders;
-        currentPosition = cardIndex + 1;
-        prevCardIndex = cardIndex > 0 ? cardIndex - 1 : null;
-        nextCardIndex = cardIndex < numCommanders - 1 ? cardIndex + 1 : null;
+      if (navListNav) {
+        prevCardIndex = navListNav.prevCardIndex;
+        nextCardIndex = navListNav.nextCardIndex;
+        currentPosition = navListNav.currentPosition;
+        totalCardsInZone = navListNav.totalCardsInZone;
       } else {
-        // Navigate within library cards
-        const libraryIndex = cardIndex - numCommanders;
-        totalCardsInZone = prep.deck.cards.length;
-        currentPosition = libraryIndex + 1;
-        prevCardIndex = libraryIndex > 0 ? cardIndex - 1 : null;
-        nextCardIndex = libraryIndex < prep.deck.cards.length - 1 ? cardIndex + 1 : null;
+        const numCommanders = prep.deck.commanders.length;
+        const isCommander = cardIndex < numCommanders;
+
+        if (isCommander) {
+          // Navigate within commanders
+          totalCardsInZone = numCommanders;
+          currentPosition = cardIndex + 1;
+          prevCardIndex = cardIndex > 0 ? cardIndex - 1 : null;
+          nextCardIndex = cardIndex < numCommanders - 1 ? cardIndex + 1 : null;
+        } else {
+          // Navigate within library cards
+          const libraryIndex = cardIndex - numCommanders;
+          totalCardsInZone = prep.deck.cards.length;
+          currentPosition = libraryIndex + 1;
+          prevCardIndex = libraryIndex > 0 ? cardIndex - 1 : null;
+          nextCardIndex = libraryIndex < prep.deck.cards.length - 1 ? cardIndex + 1 : null;
+        }
       }
 
       // Support flipping two-faced cards via query parameter
@@ -752,9 +777,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       utilityButtonsHtml += `</div>`;
 
-      // Build navigation URLs (no expectedVersion for prep page)
-      const prevNavUrl = prevCardIndex !== null ? `/prep-card-modal/${prepId}/${prevCardIndex}` : "";
-      const nextNavUrl = nextCardIndex !== null ? `/prep-card-modal/${prepId}/${nextCardIndex}` : "";
+      // Build navigation URLs, preserving navList if present
+      const navListSuffix = navListQueryParam(navListParam);
+      const prevNavUrl = prevCardIndex !== null ? `/prep-card-modal/${prepId}/${prevCardIndex}${navListSuffix ? '?' + navListSuffix.slice(1) : ''}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/prep-card-modal/${prepId}/${nextCardIndex}${navListSuffix ? '?' + navListSuffix.slice(1) : ''}` : "";
 
       res.render("partials/card-modal", {
         card: cardDef,
@@ -1255,31 +1281,42 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Trigger game-state-updated event to refresh the game container
       res.setHeader("HX-Trigger", "game-state-updated");
 
-      // Calculate navigation indices
-      const prevCardIndex = game.findPrevCardInZone(gameCardIndex);
-      const nextCardIndex = game.findNextCardInZone(gameCardIndex);
+      // Calculate navigation indices — use navList if provided, else zone order
+      const navListParam = req.body.navList as string | undefined;
+      const navListNav = resolveNavListNavigation(navListParam, gameCardIndex);
 
-      // Calculate position information for display
+      let prevCardIndex: number | null;
+      let nextCardIndex: number | null;
       let currentPosition = 1;
       let totalCardsInZone = 1;
-      const location = flippedCard.location;
 
-      if (location.type !== "Table") {
-        let cardsInZone: readonly GameCard[];
-        if (location.type === "Library") {
-          cardsInZone = game.listLibrary();
-        } else if (location.type === "Hand") {
-          cardsInZone = game.listHand();
-        } else if (location.type === "Revealed") {
-          cardsInZone = game.listRevealed();
-        } else if (location.type === "CommandZone") {
-          cardsInZone = game.listCommandZone();
-        } else {
-          cardsInZone = [];
+      if (navListNav) {
+        prevCardIndex = navListNav.prevCardIndex;
+        nextCardIndex = navListNav.nextCardIndex;
+        currentPosition = navListNav.currentPosition;
+        totalCardsInZone = navListNav.totalCardsInZone;
+      } else {
+        prevCardIndex = game.findPrevCardInZone(gameCardIndex);
+        nextCardIndex = game.findNextCardInZone(gameCardIndex);
+        const location = flippedCard.location;
+
+        if (location.type !== "Table") {
+          let cardsInZone: readonly GameCard[];
+          if (location.type === "Library") {
+            cardsInZone = game.listLibrary();
+          } else if (location.type === "Hand") {
+            cardsInZone = game.listHand();
+          } else if (location.type === "Revealed") {
+            cardsInZone = game.listRevealed();
+          } else if (location.type === "CommandZone") {
+            cardsInZone = game.listCommandZone();
+          } else {
+            cardsInZone = [];
+          }
+
+          totalCardsInZone = cardsInZone.length;
+          currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
         }
-
-        totalCardsInZone = cardsInZone.length;
-        currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
       }
 
       const expectedVersion = game.getStateVersion();
@@ -1296,10 +1333,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${flippedCard.card.name}')">Copy</button>`;
 
       if (flippedCard.card.twoFaced) {
+        const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
+        if (navListParam) flipVals["navList"] = navListParam;
         utilityButtonsHtml += `
         <button class="modal-action-button flip-button"
                 hx-post="/flip-card-modal/${gameId}/${flippedCard.gameCardIndex}"
-                hx-vals='{"expected-version": ${expectedVersion}}'
+                hx-vals='${JSON.stringify(flipVals)}'
                 hx-target="#card-modal-container"
                 hx-swap="innerHTML"
                 title="Flip card to see other side">Flip</button>`;
@@ -1311,9 +1350,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion);
       const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
-      // Build navigation URLs
-      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}` : "";
-      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}` : "";
+      // Build navigation URLs, preserving navList if present
+      const navListSuffix = navListQueryParam(navListParam);
+      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
+      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
 
       res.render("partials/card-modal", {
         card: flippedCard.card,

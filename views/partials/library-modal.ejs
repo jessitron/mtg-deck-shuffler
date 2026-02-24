@@ -104,13 +104,14 @@
         %>
         <% sortedTypeNames.forEach(typeName => { %>
           <% const groupCards = typeGroups.get(typeName); %>
+          <% const navList = groupCards.map(c => c.gameCardIndex).join(','); %>
           <div class="card-type-group">
             <h3 class="card-type-header"><%- typeIcon(typeName, 'card-type-header-icon') %><%= typeName %> (<%= groupCards.length %>)</h3>
             <ul class="library-search-list">
               <% groupCards.forEach(card => { %>
                 <li class="library-card-item">
                   <span class="card-name-link clickable-card-name"
-                        hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
+                        hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) + '&navList=' + navList %>"
                         hx-target="#card-modal-container"
                         hx-swap="innerHTML"
                         style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %></span>
