@@ -767,9 +767,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       if (cardDef.twoFaced) {
         const newFace = currentFace === "front" ? "back" : "front";
+        const flipNavList = navListParam ? `&navList=${navListParam}` : "";
         utilityButtonsHtml += `
         <button class="modal-action-button flip-button"
-                hx-get="/prep-card-modal/${prepId}/${cardIndex}?face=${newFace}"
+                hx-get="/prep-card-modal/${prepId}/${cardIndex}?face=${newFace}${flipNavList}"
                 hx-target="#card-modal-container"
                 hx-swap="innerHTML"
                 title="Flip card to see other side">Flip</button>`;

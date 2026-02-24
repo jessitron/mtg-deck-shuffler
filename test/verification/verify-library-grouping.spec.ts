@@ -259,4 +259,89 @@ test.describe('Library Modal - Card Type Grouping', () => {
 
     expect(foundFlipCard).toBe(true);
   });
+
+  test('prep page: flipping a two-faced card preserves group-scoped navigation', async ({ page }) => {
+    const prepId = await setupPrep(page, TWO_FACED_DECK);
+
+    // Open grouped library modal
+    await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true&groupBy=type`);
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(1000);
+
+    const libraryModal = page.locator('.modal-overlay');
+    await expect(libraryModal).toBeVisible({ timeout: 5000 });
+
+    // Find a type group that has multiple cards
+    const groups = page.locator('.card-type-group');
+    const groupCount = await groups.count();
+    let targetGroup = null;
+    let targetGroupSize = 0;
+
+    for (let i = 0; i < groupCount; i++) {
+      const group = groups.nth(i);
+      const headerText = await group.locator('.card-type-header').textContent();
+      const match = headerText?.match(/\((\d+)\)/);
+      const size = match ? parseInt(match[1]) : 0;
+      if (size > 2) {
+        targetGroup = group;
+        targetGroupSize = size;
+        break;
+      }
+    }
+
+    expect(targetGroup).not.toBeNull();
+
+    // Find a two-faced card in this group
+    const cardNames = targetGroup!.locator('.clickable-card-name');
+    const cardCount = await cardNames.count();
+    let foundFlipCard = false;
+
+    for (let i = 0; i < cardCount; i++) {
+      await cardNames.nth(i).click();
+      await page.waitForTimeout(500);
+
+      const cardModal = page.locator('.card-modal-overlay');
+      await expect(cardModal).toBeVisible({ timeout: 5000 });
+
+      const flipButton = page.locator('.card-modal-overlay .flip-button');
+      if (await flipButton.isVisible()) {
+        foundFlipCard = true;
+
+        // Record position before flip
+        const positionIndicator = page.locator('.card-modal-position-indicator');
+        const positionText = await positionIndicator.textContent();
+        const positionMatch = positionText?.match(/Card (\d+) of (\d+)/);
+        const currentPosition = positionMatch ? parseInt(positionMatch[1]) : 0;
+        const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
+        expect(totalInGroup).toBe(targetGroupSize);
+
+        // Flip the card
+        await flipButton.click();
+        await page.waitForTimeout(500);
+
+        // After flip, position indicator should still show group-scoped count
+        await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
+
+        // Navigate to next card (if not at end)
+        if (currentPosition < totalInGroup) {
+          const nextButton = page.locator('.card-modal-nav-next');
+          await expect(nextButton).toBeVisible();
+          await nextButton.click({ force: true });
+          await page.waitForTimeout(500);
+
+          // Position should advance within the group
+          await expect(positionIndicator).toHaveText(`Card ${currentPosition + 1} of ${totalInGroup}`);
+        }
+
+        break;
+      }
+
+      // Close the modal and try the next card
+      const closeButton = page.locator('.card-modal-close');
+      await closeButton.click();
+      await page.waitForTimeout(300);
+    }
+
+    expect(foundFlipCard).toBe(true);
+  });
 });
