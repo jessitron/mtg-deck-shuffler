@@ -36,18 +36,21 @@ function extractId(url: string, pattern: RegExp): string {
   return match[1];
 }
 
-async function selectPreconDeck(page: any): Promise<void> {
+async function selectPreconDeck(page: any, deckFilename?: string): Promise<void> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
 
   // Wait for HTMX to load the precon tab content
   const firstTile = page.locator(".precon-tile").first();
   await firstTile.waitFor({ state: "visible", timeout: 15000 });
 
-  // The tile is a submit button inside a form POST to /deck.
-  // Use page.evaluate to submit the form directly — avoids Playwright actionability
-  // checks that can block on image loading.
-  const deckFile = await firstTile.getAttribute("value");
+  // Pick the requested deck or fall back to the first tile
+  const deckFile = deckFilename
+    ? deckFilename
+    : await firstTile.getAttribute("value");
   console.log(`  Selecting deck: ${deckFile}`);
+
+  // Submit the form directly — avoids Playwright actionability
+  // checks that can block on image loading.
   await page.evaluate((file: string) => {
     const form = document.querySelector("form.precon-input-section") as HTMLFormElement;
     const input = document.createElement("input");
@@ -67,8 +70,8 @@ async function getDeckName(page: any): Promise<string> {
   return match ? match[1] : "Unknown";
 }
 
-async function createPrep(page: any): Promise<PrepData> {
-  await selectPreconDeck(page);
+async function createPrep(page: any, deckFilename?: string): Promise<PrepData> {
+  await selectPreconDeck(page, deckFilename);
 
   const prepId = extractId(page.url(), /\/prepare\/(\d+)/);
   const deckName = await getDeckName(page);
@@ -76,8 +79,8 @@ async function createPrep(page: any): Promise<PrepData> {
   return { prepId, deckName };
 }
 
-async function createGame(page: any, drawCount: number): Promise<GameData> {
-  await selectPreconDeck(page);
+async function createGame(page: any, drawCount: number, deckFilename?: string): Promise<GameData> {
+  await selectPreconDeck(page, deckFilename);
 
   // Get deck name before starting game
   const deckName = await getDeckName(page);
@@ -107,7 +110,7 @@ async function createGame(page: any, drawCount: number): Promise<GameData> {
   return { gameId, deckName: deckName?.trim() || "Unknown", cardsDrawn: drawCount };
 }
 
-function writeTestDataFile(prep: PrepData, game: GameData): string {
+function writeTestDataFile(prep: PrepData, game: GameData, twoFacedGame: GameData): string {
   const filePath = path.join(__dirname, "../../test/TEST-DATA.md");
   const now = new Date().toISOString().split("T")[0];
 
@@ -130,6 +133,14 @@ Server: ${BASE_URL}
 - Game page: ${BASE_URL}/game/${game.gameId}
 - Library search: ${BASE_URL}/game/${game.gameId}?openLibrary=true
 - Library grouped by type: ${BASE_URL}/game/${game.gameId}?openLibrary=true&groupBy=type
+
+## Game with two-faced cards (active, ${twoFacedGame.cardsDrawn} cards drawn)
+
+- Game ID: ${twoFacedGame.gameId}
+- Deck: ${twoFacedGame.deckName}
+- Game page: ${BASE_URL}/game/${twoFacedGame.gameId}
+- Library search: ${BASE_URL}/game/${twoFacedGame.gameId}?openLibrary=true
+- Library grouped by type: ${BASE_URL}/game/${twoFacedGame.gameId}?openLibrary=true&groupBy=type
 `;
 
   fs.writeFileSync(filePath, content);
@@ -174,7 +185,12 @@ async function main() {
     const game = await createGame(page, 7);
     console.log(`  Game ID: ${game.gameId} (${game.deckName})`);
 
-    const filePath = writeTestDataFile(prep, game);
+    const TWO_FACED_DECK = "precon-mtgjson-FromCutetoBrute_SLD.json";
+    console.log("Creating game with two-faced cards (From Cute to Brute)...");
+    const twoFacedGame = await createGame(page, 7, TWO_FACED_DECK);
+    console.log(`  Game ID: ${twoFacedGame.gameId} (${twoFacedGame.deckName})`);
+
+    const filePath = writeTestDataFile(prep, game, twoFacedGame);
     console.log(`\nWrote ${filePath}`);
     console.log("Done!");
   } finally {
