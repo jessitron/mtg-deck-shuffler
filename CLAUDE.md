@@ -129,17 +129,27 @@ Design directives, features, vocabulary, and code structure in `notes/`. Keep up
 
 Update this file when anything in it changes.
 
+## Feature Owners
+
+Feature owners are agent skills that maintain deep knowledge about specific features. They live in `notes/features/<name>/` with skills linked from `.claude/skills/`. Each feature owner has three skills: `-context`, `-review`, and `-update`.
+
+See `notes/features/HOW-TO-CREATE-A-FEATURE-OWNER.md` for creating new ones.
+
 ## Task Implementation Process
 
 For each task, follow this workflow:
 
 1. **Research**: Look at the task and do any research needed
-2. **Clarify**: Ask questions one at a time if needed
-3. **Verify First**: Decide how to verify functionality and write the test before implementing:
+2. **Consult feature owners**: List directories in `notes/features/*/`. For each feature owner found, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
+3. **Clarify**: Ask questions one at a time if needed
+4. **Plan**: Design the implementation approach
+5. **Review with feature owners**: For each feature owner that flagged potential interactions in step 2, invoke its `-review` skill with your plan. Adjust the plan based on their feedback.
+6. **Verify First**: Decide how to verify functionality and write the test before implementing:
    - **User-visible changes**: Playwright test (browser verification)
    - **Internal logic**: Unit test
    - Run the test and confirm it fails
-4. **Implement**: Build the functionality
-5. **Verify Again**: Run the test and see it pass (or fix the implementation)
-6. **Refactor**: Consider refactoring for clarity
-7. **Celebrate**: Print a trumpet in ASCII art
+7. **Implement**: Build the functionality
+8. **Verify Again**: Run the test and see it pass (or fix the implementation)
+9. **Update feature owners**: For any feature owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
+10. **Refactor**: Consider refactoring for clarity
+11. **Celebrate**: Print a trumpet in ASCII art
