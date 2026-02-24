@@ -1,8 +1,5 @@
 # Things to change
 
-20 Feb:
-[x] Add card type sorting to the library search modal. (Done - see commit)
-
 ## Structural
 
 - migrate the active game page to use ejs templates mtg-deck-shuffler-057
