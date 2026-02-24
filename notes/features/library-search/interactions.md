@@ -31,10 +31,12 @@ How library search connects to other parts of the app.
 
 ## Depended On By
 
-### Card Modal (from Library)
+### Card Modal (from Library) - Critical Coupling
 - Clicking a card name in the library modal opens a card detail modal
 - Card modal URL template: `/card-modal/:gameId/{cardIndex}` or `/prep-card-modal/:prepId/{cardIndex}`
 - Card modal overlays on top of library modal (uses separate `#card-modal-container`)
+- **On the game page, the card modal provides actions (e.g. "draw") so library search + card modal together form the complete "search your library and pick a card" flow.** Library search is the browse step; card modal is the act step.
+- On the prep page, the card modal is view-only (no game actions available)
 
 ### URL Query Parameter System
 - `public/modal-query-params.js` auto-opens library modal on page load
