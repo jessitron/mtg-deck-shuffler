@@ -19,7 +19,9 @@
 - `a0c72de` - "Modify being-played animation to move cards toward Table instead of disappearing" — changed from vertical disappear to diagonal drift toward table area
 - `e904a8c` - "Fix being-played animation for two-faced cards by targeting nested flip container images"
 
-**Status**: The play exit animation has been broken for a while. The copy-to-clipboard part of Play works, but the visual animation doesn't play properly.
+- `943ece6` - "Remove broken card play exit animation" — removed all play exit animation code (CSS, JS class application, HTMX swap delays). Clipboard copy on play preserved.
+
+**Outcome**: The play exit animation was broken for a while and was fully removed. The client-driven exit animation pattern (JS class + HTMX swap delay) was abandoned. If exit animations are desired in the future, a different approach will be needed.
 
 ### Hand Rearrangement Animations
 
@@ -45,10 +47,11 @@
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
 - **WhatHappened for entrance animations**: Works well. Server tells the view what changed, view applies CSS classes.
-- **JS class application for exit animations**: The card play exit uses JS because the old element needs to animate before being replaced. This pattern is fragile — it depends on timing alignment between CSS duration, JS class application, and HTMX swap delay.
+- **No exit animations currently**: The client-driven exit animation pattern (JS class + HTMX swap delay) proved fragile and was removed. All current animations are entrance-only (server-driven via WhatHappened).
 - **Typo preserved**: `dropppedFromLeft/Right` has three p's. It's in the interface and multiple files. Not worth a rename.
 
 ## What Was Tried and Abandoned
 
 - Using WhatHappened structure for card flip animations (reverted in `c8bf381`)
 - JS-driven flip animation timing (reverted in `db5885a`)
+- Client-driven card play exit animation using JS class application + HTMX swap delay (removed in `943ece6` — was broken, never properly worked)

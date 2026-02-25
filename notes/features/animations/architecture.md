@@ -1,8 +1,6 @@
 # Animations Architecture
 
-## Two Animation Mechanisms
-
-### 1. Server-Driven (WhatHappened)
+## Animation Mechanism: Server-Driven (WhatHappened)
 
 Most gameplay animations use a **server-driven** approach:
 
@@ -21,20 +19,6 @@ User action → POST route → GameState mutation → WhatHappened
 ```
 
 This works for **entrance animations** — new content arrives with animation classes already applied.
-
-### 2. Client-Driven (JS class application)
-
-The card play exit animation uses a **client-driven** approach:
-
-1. Player clicks "Play" button
-2. `htmx:beforeRequest` handler in `game.js` adds `.being-played` class to the card container
-3. CSS `cardPlayExit` animation starts (1.5s)
-4. HTMX sends POST, gets response, waits 1.5s (`hx-swap="outerHTML swap:1.5s"`)
-5. After 1.5s, HTMX swaps in new game state (card is gone)
-
-This is needed for **exit animations** — the old element needs to animate out before being replaced.
-
-**Status**: This mechanism is currently broken. The `.being-played` class is added but the animation doesn't visually play.
 
 ## WhatHappened Interface
 
@@ -58,13 +42,7 @@ In `src/view/common/shared-components.ts` (lines 115-127):
 
 ## HTMX Swap Timing
 
-The `swap:Xs` modifier in `hx-swap` tells HTMX to keep old content in the DOM for X seconds before replacing it. This is the only mechanism for exit animations.
-
-Used in:
-- `game-modals.ts` line 73: `hx-swap="outerHTML swap:1.5s"` for Play action
-- `revealed-cards-components.ts` line 57: same pattern for Play from revealed cards
-
-All other actions use immediate `hx-swap="outerHTML"`.
+All game actions use immediate `hx-swap="outerHTML"`. There are currently no exit animations (the card play exit animation was removed in `943ece6`).
 
 ## CSS Keyframes
 
