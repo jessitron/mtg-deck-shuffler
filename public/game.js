@@ -89,13 +89,6 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
     }
 
     button.disabled = true;
-
-    // Find the card container and add "being-played" class
-    const cardContainer = button.closest(".card-container");
-    console.log("cardContainer", cardContainer);
-    if (cardContainer) {
-      cardContainer.classList.add("being-played");
-    }
   }
 });
 
