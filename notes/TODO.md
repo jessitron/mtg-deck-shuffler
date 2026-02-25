@@ -1,5 +1,19 @@
 # Things to change
 
+## Team
+
+I'm making feature owners. The feature owners retain history and context, and they look for feature interactions.
+
+I made a library search feature owner, because we were working on that feature.
+
+I'm making a two-faced card feature owner, because the feature interactions with that are extensive, and I tend to forget.
+
+- make the skill links
+
+CLAUDE.md is where agents get told to consult feature owners.
+
+Do I need a feature owner feature owner? yikes
+
 ## Structural
 
 - migrate the active game page to use ejs templates mtg-deck-shuffler-057
