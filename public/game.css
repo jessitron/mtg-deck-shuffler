@@ -727,6 +727,54 @@ body.dev-mode .menu-debug {
   display: block;
 }
 
+/* The Mulligan Advisor recommendation is part of developer mode: hidden by
+   default, revealed only when <body class="dev-mode">. Like .menu-debug, the
+   class lives on body (never HTMX-swapped), so it survives every game-state
+   swap of the hand section. See notes/DESIGN-mulligan-advisor.md. */
+.mulligan-recommendation {
+  display: none;
+}
+
+body.dev-mode .mulligan-recommendation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 6px 0;
+  padding: 6px 10px;
+  background-color: #2a2a2a;
+  border-left: 3px solid #888;
+  color: #ddd;
+  font-size: 0.85rem;
+}
+
+.mulligan-recommendation-label {
+  font-weight: bold;
+  color: #aaa;
+}
+
+.mulligan-recommendation-verdict {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.mulligan-recommendation-verdict-keep {
+  color: #6ec06e;
+}
+
+.mulligan-recommendation-verdict-mulligan {
+  color: #d98a5a;
+}
+
+.mulligan-recommendation-confidence {
+  color: #aaa;
+}
+
+.mulligan-recommendation-commentary {
+  flex-basis: 100%;
+  color: #bbb;
+}
+
 .exit-dev-mode {
   display: block;
   margin-top: 8px;
