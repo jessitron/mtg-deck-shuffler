@@ -156,10 +156,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       oracleCardName: "Urza, Lord High Artificer",
       colorIdentity: [],
       set: "Test Set",
-      types: [],
-      manaCost: undefined,
-      cmc: 0,
-      oracleText: undefined,
+      cardTypes: [],
     }]);
   });
 
@@ -339,10 +336,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       oracleCardName: "Oracle Name",
       colorIdentity: [],
       set: "Test Set",
-      types: [],
-      manaCost: undefined,
-      cmc: 0,
-      oracleText: undefined,
+      cardTypes: [],
     });
   });
 
@@ -394,10 +388,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       oracleCardName: "Oracle Name",
       colorIdentity: [],
       set: "Test Set",
-      types: [],
-      manaCost: undefined,
-      cmc: 0,
-      oracleText: undefined,
+      cardTypes: [],
     });
   });
 
@@ -474,10 +465,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       oracleCardName: "Jaheira, Friend of the Forest",
       colorIdentity: [],
       set: "Test Set",
-      types: [],
-      manaCost: undefined,
-      cmc: 0,
-      oracleText: undefined,
+      cardTypes: [],
     });
     expect(result.commanders[1]).toEqual({
       name: "Agent of the Iron Throne",
@@ -487,10 +475,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       oracleCardName: "Agent of the Iron Throne",
       colorIdentity: [],
       set: "Test Set",
-      types: [],
-      manaCost: undefined,
-      cmc: 0,
-      oracleText: undefined,
+      cardTypes: [],
     });
   });
 
@@ -585,7 +570,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0].types).toEqual(["Land"]);
+    expect(result.cards[0].cardTypes).toEqual(["Land"]);
   });
 
   it("extracts multiple card types correctly", async () => {
@@ -634,8 +619,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(2);
-    expect(result.cards[0].types).toEqual(["Artifact", "Creature"]);
-    expect(result.cards[1].types).toEqual(["Legendary", "Enchantment", "Creature"]);
+    expect(result.cards[0].cardTypes).toEqual(["Artifact", "Creature"]);
+    expect(result.cards[1].cardTypes).toEqual(["Legendary", "Enchantment", "Creature"]);
   });
 
   it("extracts back-face data for two-faced cards", async () => {
@@ -689,17 +674,11 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.cards.length).toBe(1);
     const card = result.cards[0];
     expect(card.twoFaced).toBe(true);
-    expect(card.types).toEqual(["Legendary", "Creature"]);
-    expect(card.backFace).toEqual({
-      name: "Nicol Bolas, the Arisen",
-      types: ["Legendary", "Planeswalker"],
-      manaCost: undefined,
-      cmc: 4,
-      oracleText: "+2: Draw two cards.",
-    });
+    // cardTypes is the union of both faces' types
+    expect(card.cardTypes).toEqual(["Legendary", "Creature", "Planeswalker"]);
   });
 
-  it("uses front face types when top-level types are empty for two-faced cards", async () => {
+  it("unions all faces' types for two-faced cards even when top-level types are empty", async () => {
     const archidektDeck: ArchidektDeck = {
       id: 2001,
       name: "Two-Faced Empty Top-Level",
@@ -748,9 +727,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     const card = result.cards[0];
     expect(card.twoFaced).toBe(true);
-    expect(card.types).toEqual(["Legendary", "Creature"]);
-    expect(card.backFace?.name).toBe("The Prismatic Bridge");
-    expect(card.backFace?.types).toEqual(["Legendary", "Enchantment"]);
+    expect(card.cardTypes).toEqual(["Legendary", "Creature", "Enchantment"]);
   });
 
   it("does not treat a single-image multi-face card (Prepared) as two-faced", async () => {
@@ -808,13 +785,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     const card = result.cards[0];
     expect(card.twoFaced).toBe(false);
-    expect(card.backFace).toBeUndefined();
-    // Front-face data still comes from faces[0], not the combined top-level fields
-    expect(card.types).toEqual(["Creature"]);
-    expect(card.manaCost).toBe("{G}");
-    expect(card.oracleText).toBe(
-      "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
-    );
+    // cardTypes is the union of all parts' types: the creature AND its spell half
+    expect(card.cardTypes).toEqual(["Creature", "Sorcery"]);
   });
 
   it("handles missing types field gracefully", async () => {
@@ -851,6 +823,6 @@ describe("ArchidektDeckToDeckAdapter", () => {
     const result = await adapter.retrieveDeck(request);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0].types).toEqual([]);
+    expect(result.cards[0].cardTypes).toEqual([]);
   });
 });

@@ -1,4 +1,4 @@
-import { CardDefinition, CardFace, Deck, PERSISTED_DECK_VERSION } from "../../types.js";
+import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../types.js";
 import { MtgjsonCard, MtgjsonDeck } from "./mtgjsonTypes.js";
 import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
 
@@ -64,29 +64,25 @@ export class MtgjsonDeckAdapter {
   }
 
   private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard, cardsByUuid: Map<string, MtgjsonCard>): CardDefinition {
-    // Determine if card is two-faced based on layout
+    // Determine if card is two-faced based on layout (drives the flip button)
     const twoFaced = isDoubleSidedLayout(mtgjsonCard.layout);
 
-    // Look up back face via otherFaceIds
-    let backFace: CardFace | undefined;
-    if (twoFaced && mtgjsonCard.otherFaceIds?.length) {
-      const backFaceCard = mtgjsonCard.otherFaceIds
-        .map(id => cardsByUuid.get(id))
-        .find(c => c && c.side === "b");
-      if (backFaceCard) {
-        backFace = {
-          name: backFaceCard.faceName || backFaceCard.name,
-          types: backFaceCard.types || [],
-          manaCost: backFaceCard.manaCost,
-          cmc: backFaceCard.manaValue ?? 0,
-          oracleText: backFaceCard.text,
-        };
-      } else {
-        throw new Error(
-          `Two-faced card "${mtgjsonCard.name}" (uuid: ${mtgjsonCard.uuid}) has otherFaceIds ${JSON.stringify(mtgjsonCard.otherFaceIds)} but back face not found. Provide a cardDatabase with the missing UUIDs.`
-        );
-      }
+    // cardTypes is the union of every face's/part's types. Resolve other faces
+    // (back of a DFC, the other half of a split/adventure) via otherFaceIds.
+    const otherFaces = (mtgjsonCard.otherFaceIds || [])
+      .map(id => cardsByUuid.get(id))
+      .filter((c): c is MtgjsonCard => c !== undefined);
+
+    // A genuinely double-sided card whose back can't be resolved means the
+    // AllIdentifiers database wasn't provided -- fail loudly so we don't ship
+    // decks with incomplete type grouping.
+    if (twoFaced && mtgjsonCard.otherFaceIds?.length && otherFaces.length === 0) {
+      throw new Error(
+        `Two-faced card "${mtgjsonCard.name}" (uuid: ${mtgjsonCard.uuid}) has otherFaceIds ${JSON.stringify(mtgjsonCard.otherFaceIds)} but no other face found. Provide a cardDatabase with the missing UUIDs.`
+      );
     }
+
+    const cardTypes = [...new Set([mtgjsonCard, ...otherFaces].flatMap(c => c.types || []))];
 
     const cardDefinition: CardDefinition = {
       name: mtgjsonCard.name,
@@ -98,11 +94,7 @@ export class MtgjsonDeckAdapter {
       oracleCardName: mtgjsonCard.name,
       colorIdentity: mtgjsonCard.colorIdentity || [],
       set: mtgjsonCard.setCode,
-      types: mtgjsonCard.types || [],
-      manaCost: mtgjsonCard.manaCost,
-      cmc: mtgjsonCard.manaValue ?? 0,
-      oracleText: mtgjsonCard.text,
-      backFace,
+      cardTypes,
     };
 
     return cardDefinition;

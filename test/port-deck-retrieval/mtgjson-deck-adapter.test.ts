@@ -42,7 +42,7 @@ describe("MtgjsonDeckAdapter", () => {
 
     expect(result.name).toBe("Test Deck");
     expect(result.cards.length).toBe(20);
-    expect(result.cards[0].types).toEqual(["Land"]);
+    expect(result.cards[0].cardTypes).toEqual(["Land"]);
   });
 
   it("converts deck with multiple card types", () => {
@@ -92,8 +92,8 @@ describe("MtgjsonDeckAdapter", () => {
 
     expect(result.name).toBe("Artifact Creatures");
     expect(result.cards.length).toBe(2);
-    expect(result.cards[0].types).toEqual(["Artifact", "Creature"]);
-    expect(result.cards[1].types).toEqual(["Legendary", "Enchantment", "Creature"]);
+    expect(result.cards[0].cardTypes).toEqual(["Artifact", "Creature"]);
+    expect(result.cards[1].cardTypes).toEqual(["Legendary", "Enchantment", "Creature"]);
   });
 
   it("converts commander with types", () => {
@@ -143,12 +143,12 @@ describe("MtgjsonDeckAdapter", () => {
     const result = adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json");
 
     expect(result.commanders.length).toBe(1);
-    expect(result.commanders[0].types).toEqual(["Legendary", "Creature"]);
+    expect(result.commanders[0].cardTypes).toEqual(["Legendary", "Creature"]);
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0].types).toEqual(["Artifact"]);
+    expect(result.cards[0].cardTypes).toEqual(["Artifact"]);
   });
 
-  it("extracts back-face data for two-faced cards via otherFaceIds", () => {
+  it("unions all faces' types for two-faced cards via otherFaceIds", () => {
     const mtgjsonDeck: MtgjsonDeck = {
       meta: {
         date: "2023-01-01",
@@ -219,19 +219,13 @@ describe("MtgjsonDeckAdapter", () => {
     const nicolBolas = result.cards.find(c => c.name === "Nicol Bolas, the Ravager");
     expect(nicolBolas).toBeDefined();
     expect(nicolBolas!.twoFaced).toBe(true);
-    expect(nicolBolas!.types).toEqual(["Legendary", "Creature"]);
-    expect(nicolBolas!.backFace).toEqual({
-      name: "Nicol Bolas, the Arisen",
-      types: ["Legendary", "Planeswalker"],
-      manaCost: undefined,
-      cmc: 4,
-      oracleText: "+2: Draw two cards.",
-    });
+    // Union of front (Creature) and back (Planeswalker) face types
+    expect(nicolBolas!.cardTypes).toEqual(["Legendary", "Creature", "Planeswalker"]);
 
     const solRing = result.cards.find(c => c.name === "Sol Ring");
     expect(solRing).toBeDefined();
     expect(solRing!.twoFaced).toBe(false);
-    expect(solRing!.backFace).toBeUndefined();
+    expect(solRing!.cardTypes).toEqual(["Artifact"]);
   });
 
   it("errors when two-faced card back face is not found", () => {
@@ -266,7 +260,7 @@ describe("MtgjsonDeckAdapter", () => {
     };
 
     expect(() => adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json")).toThrow(
-      /back face not found/
+      /no other face found/
     );
   });
 
@@ -327,13 +321,8 @@ describe("MtgjsonDeckAdapter", () => {
     const result = adapter.convertMtgjsonToDeck(mtgjsonDeck, "test-file.json", cardDatabase);
 
     expect(result.cards.length).toBe(1);
-    expect(result.cards[0].backFace).toEqual({
-      name: "Nicol Bolas, the Arisen",
-      types: ["Legendary", "Planeswalker"],
-      manaCost: undefined,
-      cmc: 4,
-      oracleText: "+2: Draw two cards.",
-    });
+    // The back face's type comes from the external database and joins cardTypes
+    expect(result.cards[0].cardTypes).toEqual(["Legendary", "Creature", "Planeswalker"]);
   });
 });
 

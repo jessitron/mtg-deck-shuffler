@@ -1,6 +1,6 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
-import { Deck, CardDefinition, CardFace, PERSISTED_DECK_VERSION } from "../../types.js";
+import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
 
@@ -94,25 +94,12 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     const multiFace = faces.length === 2;
     const twoFaced = multiFace && isDoubleSidedLayout(archidektCard.card.oracleCard.layout);
 
-    // For multi-face cards, Archidekt puts the clean front-face data on faces[0]
-    // (top-level fields are the combined "{G} // {1}{G}" mess). Use faces[0] for
-    // the front even when the card isn't flippable.
-    const frontFace = multiFace ? faces[0] : undefined;
-    const types = (frontFace?.types?.length ? frontFace.types : archidektCard.card.oracleCard.types) || [];
-    const manaCost = frontFace?.manaCost ?? archidektCard.card.oracleCard.manaCost;
-    const oracleText = frontFace?.text ?? archidektCard.card.oracleCard.text;
-
-    let backFace: CardFace | undefined;
-    if (twoFaced) {
-      const back = faces[1];
-      backFace = {
-        name: back.name,
-        types: back.types || [],
-        manaCost: back.manaCost,
-        cmc: back.cmc ?? archidektCard.card.oracleCard.cmc ?? 0,
-        oracleText: back.text,
-      };
-    }
+    // cardTypes is the union of every face's/part's types. For multi-face cards
+    // the per-face types live on faces[]; the top-level types are unreliable
+    // (sometimes only one part). Fall back to top-level for single-face cards.
+    const cardTypes = multiFace
+      ? [...new Set(faces.flatMap(face => face.types || []))]
+      : archidektCard.card.oracleCard.types || [];
 
     const cardDefinition: CardDefinition = {
       name: cardName,
@@ -122,11 +109,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       oracleCardName,
       colorIdentity: archidektCard.card.oracleCard.colorIdentity.map(color => this.convertColorNameToCode(color)),
       set: archidektCard.card.edition.editionname,
-      types,
-      manaCost,
-      cmc: archidektCard.card.oracleCard.cmc ?? 0,
-      oracleText,
-      backFace,
+      cardTypes,
     };
 
     return cardDefinition;

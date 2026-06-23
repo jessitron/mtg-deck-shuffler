@@ -1,12 +1,4 @@
 
-export interface CardFace {
-  name: string;
-  types: string[];
-  manaCost?: string;
-  cmc: number;
-  oracleText?: string;
-}
-
 export interface CardDefinition {
   name: string;
   scryfallId: string;
@@ -15,11 +7,10 @@ export interface CardDefinition {
   oracleCardName: string;
   colorIdentity: string[];
   set: string;
-  types: string[];
-  manaCost?: string;
-  cmc: number;
-  oracleText?: string;
-  backFace?: CardFace;
+  /** The union of card types across every face/part (e.g. ["Creature", "Sorcery"]
+   * for an adventure or "prepare" card, ["Creature", "Planeswalker"] for a
+   * transforming planeswalker). Drives library-search type grouping. */
+  cardTypes: string[];
 }
 
 export interface DeckProvenance {
@@ -29,7 +20,7 @@ export interface DeckProvenance {
   createdAt?: Date;
 }
 
-export const PERSISTED_DECK_VERSION: 2 = 2;
+export const PERSISTED_DECK_VERSION: 3 = 3;
 
 export interface Deck {
   version: typeof PERSISTED_DECK_VERSION;

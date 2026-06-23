@@ -546,12 +546,11 @@ describe("GameState", () => {
           oracleCardName: fc.string(),
           colorIdentity: fc.constant([] as string[]),
           set: fc.constant("TST"),
-          types: fc.constant(["Creature"] as string[]),
-          cmc: fc.constant(0),
+          cardTypes: fc.constant(["Creature"] as string[]),
         }),
         (twoFacedCard) => {
           const deck: Deck = {
-            version: 2,
+            version: 3,
             name: "Test Deck",
             commanders: [],
             cards: [twoFacedCard],
@@ -605,12 +604,11 @@ describe("GameState", () => {
           oracleCardName: fc.string(),
           colorIdentity: fc.constant([] as string[]),
           set: fc.constant("TST"),
-          types: fc.constant(["Creature"] as string[]),
-          cmc: fc.constant(0),
+          cardTypes: fc.constant(["Creature"] as string[]),
         }),
         (singleFacedCard) => {
           const deck: Deck = {
-            version: 2,
+            version: 3,
             name: "Test Deck",
             commanders: [],
             cards: [singleFacedCard],

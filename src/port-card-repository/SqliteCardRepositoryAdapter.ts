@@ -1,6 +1,6 @@
 import Database from "better-sqlite3";
 import { CardRepositoryPort } from "./types.js";
-import { CardDefinition, CardFace } from "../types.js";
+import { CardDefinition } from "../types.js";
 
 interface CardRow {
   scryfall_id: string;
@@ -10,11 +10,7 @@ interface CardRow {
   oracle_card_name: string;
   color_identity: string;
   set_code: string;
-  types: string;
-  mana_cost: string | null;
-  cmc: number;
-  oracle_text: string | null;
-  back_face: string | null;
+  card_types: string;
 }
 
 export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
@@ -27,6 +23,15 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
   }
 
   private initializeDatabase(): void {
+    // The cards table is a local cache. If an older schema is present (it had
+    // mana_cost/cmc/oracle_text/back_face columns and a `types` column), drop it
+    // and rebuild with the current shape -- cards are re-saved when decks load.
+    const columns = this.db.prepare(`PRAGMA table_info(cards)`).all() as Array<{ name: string }>;
+    const isStaleSchema = columns.length > 0 && !columns.some(c => c.name === "card_types");
+    if (isStaleSchema) {
+      this.db.exec(`DROP TABLE cards`);
+    }
+
     const createTableSQL = `
       CREATE TABLE IF NOT EXISTS cards (
         scryfall_id TEXT PRIMARY KEY,
@@ -36,34 +41,22 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
         oracle_card_name TEXT NOT NULL,
         color_identity TEXT NOT NULL,
         set_code TEXT NOT NULL,
-        types TEXT NOT NULL,
-        mana_cost TEXT,
-        cmc INTEGER NOT NULL,
-        oracle_text TEXT,
-        back_face TEXT,
+        card_types TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `;
 
     this.db.exec(createTableSQL);
-
-    // Add back_face column to existing tables
-    try {
-      this.db.exec(`ALTER TABLE cards ADD COLUMN back_face TEXT`);
-    } catch {
-      // Column already exists
-    }
   }
 
   async saveCards(cards: CardDefinition[]): Promise<void> {
     const insertOrUpdateSQL = `
       INSERT OR REPLACE INTO cards (
         scryfall_id, name, multiverseid, two_faced, oracle_card_name,
-        color_identity, set_code, types, mana_cost, cmc, oracle_text,
-        back_face, updated_at
+        color_identity, set_code, card_types, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     `;
 
     const stmt = this.db.prepare(insertOrUpdateSQL);
@@ -79,11 +72,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
           card.oracleCardName,
           JSON.stringify(card.colorIdentity),
           card.set,
-          JSON.stringify(card.types),
-          card.manaCost ?? null,
-          card.cmc,
-          card.oracleText ?? null,
-          card.backFace ? JSON.stringify(card.backFace) : null
+          JSON.stringify(card.cardTypes)
         );
       }
     });
@@ -132,11 +121,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       oracleCardName: row.oracle_card_name,
       colorIdentity: JSON.parse(row.color_identity) as string[],
       set: row.set_code,
-      types: JSON.parse(row.types) as string[],
-      manaCost: row.mana_cost ?? undefined,
-      cmc: row.cmc,
-      oracleText: row.oracle_text ?? undefined,
-      backFace: row.back_face ? JSON.parse(row.back_face) as CardFace : undefined,
+      cardTypes: JSON.parse(row.card_types) as string[],
     };
   }
 

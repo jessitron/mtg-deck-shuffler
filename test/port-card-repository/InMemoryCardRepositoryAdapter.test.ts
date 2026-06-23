@@ -52,10 +52,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
       oracleCardName: "Lightning Bolt",
       colorIdentity: ["R"],
       set: "LEA",
-      types: ["Instant"],
-      manaCost: "{R}",
-      cmc: 1,
-      oracleText: "Lightning Bolt deals 3 damage to any target.",
+      cardTypes: ["Instant"],
     };
 
     // Save the card
@@ -65,7 +62,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
     const updatedCard: CardDefinition = {
       ...testCard,
       name: "Lightning Bolt (Updated)",
-      oracleText: "Updated text",
+      cardTypes: ["Instant", "Tribal"],
     };
 
     await adapter.saveCards([updatedCard]);
@@ -75,21 +72,19 @@ describe("InMemoryCardRepositoryAdapter", () => {
 
     expect(retrieved).not.toBe(null);
     expect(retrieved?.name).toBe("Lightning Bolt (Updated)");
-    expect(retrieved?.oracleText).toBe("Updated text");
+    expect(retrieved?.cardTypes).toEqual(["Instant", "Tribal"]);
   });
 
   it("should handle cards with optional fields", async () => {
     const cardWithoutOptionals: CardDefinition = {
       name: "Test Card",
       scryfallId: "test-id-no-optionals",
-      multiverseid: 99999,
       twoFaced: false,
       oracleCardName: "Test Card",
       colorIdentity: [],
       set: "TST",
-      types: ["Creature"],
-      cmc: 0,
-      // manaCost and oracleText are undefined
+      cardTypes: ["Creature"],
+      // multiverseid is undefined
     };
 
     await adapter.saveCards([cardWithoutOptionals]);
@@ -97,8 +92,8 @@ describe("InMemoryCardRepositoryAdapter", () => {
     const retrieved = await adapter.getCard(cardWithoutOptionals.scryfallId);
 
     expect(retrieved).not.toBe(null);
-    expect(retrieved?.manaCost).toBeUndefined();
-    expect(retrieved?.oracleText).toBeUndefined();
+    expect(retrieved?.multiverseid).toBeUndefined();
+    expect(retrieved?.cardTypes).toEqual(["Creature"]);
   });
 
   it("should return empty array when getting cards with empty array", async () => {
@@ -117,15 +112,14 @@ describe("InMemoryCardRepositoryAdapter", () => {
     expect(retrieved[0]).toEqual(testCard);
   });
 
-  it("should save and retrieve a two-faced card with backFace", async () => {
+  it("should save and retrieve a two-faced card with all faces' types", async () => {
     await adapter.saveCards([nicolBolas]);
 
     const retrieved = await adapter.getCard(nicolBolas.scryfallId);
 
     expect(retrieved).toEqual(nicolBolas);
-    expect(retrieved?.backFace).toBeDefined();
-    expect(retrieved?.backFace?.name).toBe("Nicol Bolas, the Arisen");
-    expect(retrieved?.backFace?.types).toEqual(["Legendary", "Planeswalker"]);
+    expect(retrieved?.twoFaced).toBe(true);
+    expect(retrieved?.cardTypes).toEqual(["Legendary", "Creature", "Planeswalker"]);
   });
 
   it("should clear all cards", async () => {

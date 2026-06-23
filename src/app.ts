@@ -518,12 +518,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       const groupBy = req.query.groupBy as string | undefined;
 
-      // Map to simple card objects for the template
-      // Merge back-face types so two-faced cards appear in both type groups
+      // Map to simple card objects for the template. cardTypes already holds the
+      // union of every face's types, so two-faced cards appear in all their groups.
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: [...new Set([...gc.card.types, ...(gc.card.backFace?.types || [])])],
+        cardTypes: gc.card.cardTypes,
         colorIdentity: gc.card.colorIdentity
       }));
 
@@ -822,12 +822,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       // Build card modal URL template (no expected version for prep page)
       const cardModalUrlTemplate = `/prep-card-modal/${prepId}/{cardIndex}`;
 
-      // Map to simple card objects for the template
-      // Merge back-face types so two-faced cards appear in both type groups
+      // Map to simple card objects for the template. cardTypes already holds the
+      // union of every face's types, so two-faced cards appear in all their groups.
       const cards = libraryCards.map(gc => ({
         name: gc.card.name,
         gameCardIndex: gc.gameCardIndex,
-        types: [...new Set([...gc.card.types, ...(gc.card.backFace?.types || [])])],
+        cardTypes: gc.card.cardTypes,
         colorIdentity: gc.card.colorIdentity
       }));
 

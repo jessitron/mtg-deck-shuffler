@@ -1,5 +1,5 @@
 import * as fc from "fast-check";
-import { CardDefinition, CardFace, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
+import { CardDefinition, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
 import { PersistedGameCard } from "../src/port-persist-state/persisted-types.js";
 import { PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
 
@@ -62,59 +62,17 @@ export const cardTypes = fc.oneof(
   )
 ).map(types => [...types]); // Convert readonly array to mutable array
 
-// Generator for mana cost
-export const manaCost = fc.option(
-  fc.oneof(
-    fc.constantFrom("{1}{R}", "{2}{U}{U}", "{3}{G}", "{W}{W}", "{B}{B}{B}", "{4}", "{X}{R}", ""),
-    fc.nat({ max: 10 }).map(n => `{${n}}`)
-  ),
-  { nil: undefined }
-);
-
-// Generator for CMC (converted mana cost)
-export const cmc = fc.nat({ max: 15 });
-
-// Generator for oracle text
-export const oracleText = fc.option(
-  fc.constantFrom(
-    "Draw a card.",
-    "Destroy target creature.",
-    "{T}: Add one mana of any color.",
-    "Flying, vigilance",
-    "When this enters the battlefield, draw a card."
-  ),
-  { nil: undefined }
-);
-
-// Generator for CardFace (back face data)
-export const cardFace: fc.Arbitrary<CardFace> = fc.record({
-  name: cardName,
-  types: cardTypes,
-  manaCost: manaCost,
-  cmc: cmc,
-  oracleText: oracleText,
-});
-
-// Generator for optional backFace (present ~30% of the time)
-const optionalBackFace = fc.option(cardFace, { nil: undefined, freq: 3 });
-
 // Generator for CardDefinition
-export const cardDefinition: fc.Arbitrary<CardDefinition> = optionalBackFace.chain(backFace =>
-  fc.record({
-    name: cardName,
-    scryfallId: scryfallId,
-    multiverseid: multiverseId,
-    twoFaced: fc.constant(backFace !== undefined),
-    oracleCardName: cardName,
-    colorIdentity: colorIdentity,
-    set: setName,
-    types: cardTypes,
-    manaCost: manaCost,
-    cmc: cmc,
-    oracleText: oracleText,
-    backFace: fc.constant(backFace),
-  })
-);
+export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
+  name: cardName,
+  scryfallId: scryfallId,
+  multiverseid: multiverseId,
+  twoFaced: fc.boolean(),
+  oracleCardName: cardName,
+  colorIdentity: colorIdentity,
+  set: setName,
+  cardTypes: cardTypes,
+});
 
 // Generator for commander names (legendary creatures)
 export const commanderName = fc.oneof(
@@ -147,10 +105,7 @@ export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   oracleCardName: commanderName,
   colorIdentity: colorIdentity,
   set: setName,
-  types: fc.constantFrom(["Creature"], ["Legendary", "Creature"]),
-  manaCost: manaCost,
-  cmc: cmc,
-  oracleText: oracleText,
+  cardTypes: fc.constantFrom(["Creature"], ["Legendary", "Creature"]),
 });
 
 // Generator for deck names
@@ -291,10 +246,7 @@ export const lightningBolt: CardDefinition = {
   oracleCardName: "Lightning Bolt",
   colorIdentity: ["R"],
   set: "LEA",
-  types: ["Instant"],
-  manaCost: "{R}",
-  cmc: 1,
-  oracleText: "Lightning Bolt deals 3 damage to any target.",
+  cardTypes: ["Instant"],
 };
 
 export const ancestralRecall: CardDefinition = {
@@ -305,10 +257,7 @@ export const ancestralRecall: CardDefinition = {
   oracleCardName: "Ancestral Recall",
   colorIdentity: ["U"],
   set: "LEA",
-  types: ["Instant"],
-  manaCost: "{U}",
-  cmc: 1,
-  oracleText: "Target player draws three cards.",
+  cardTypes: ["Instant"],
 };
 
 export const blackLotus: CardDefinition = {
@@ -319,10 +268,7 @@ export const blackLotus: CardDefinition = {
   oracleCardName: "Black Lotus",
   colorIdentity: [],
   set: "LEA",
-  types: ["Artifact"],
-  manaCost: "{0}",
-  cmc: 0,
-  oracleText: "{T}, Sacrifice Black Lotus: Add three mana of any one color.",
+  cardTypes: ["Artifact"],
 };
 
 export const atraxa: CardDefinition = {
@@ -333,12 +279,10 @@ export const atraxa: CardDefinition = {
   oracleCardName: "Atraxa, Praetors' Voice",
   colorIdentity: ["W", "U", "B", "G"],
   set: "C16",
-  types: ["Legendary", "Creature"],
-  manaCost: "{G}{W}{U}{B}",
-  cmc: 4,
-  oracleText: "Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate.",
+  cardTypes: ["Legendary", "Creature"],
 };
 
+// A transforming card: cardTypes is the union of both faces' types.
 export const nicolBolas: CardDefinition = {
   name: "Nicol Bolas, the Ravager",
   scryfallId: "nicol001",
@@ -347,16 +291,7 @@ export const nicolBolas: CardDefinition = {
   oracleCardName: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
   colorIdentity: ["U", "B", "R"],
   set: "M19",
-  types: ["Legendary", "Creature"],
-  manaCost: "{1}{U}{B}{R}",
-  cmc: 4,
-  oracleText: "Flying\nWhen Nicol Bolas, the Ravager enters the battlefield, each opponent discards a card.",
-  backFace: {
-    name: "Nicol Bolas, the Arisen",
-    types: ["Legendary", "Planeswalker"],
-    cmc: 4,
-    oracleText: "+2: Draw two cards.\n−3: Nicol Bolas, the Arisen deals 10 damage to target creature or planeswalker.",
-  },
+  cardTypes: ["Legendary", "Creature", "Planeswalker"],
 };
 
 export const testProvenance: DeckProvenance = {

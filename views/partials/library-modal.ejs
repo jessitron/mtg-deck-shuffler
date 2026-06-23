@@ -78,7 +78,7 @@
           // Group cards by type
           const typeGroups = new Map();
           cards.forEach(card => {
-            const cardTypes = card.types || [];
+            const cardTypes = card.cardTypes || [];
             if (cardTypes.length === 0) {
               const group = typeGroups.get('Other') || [];
               group.push(card);
@@ -114,7 +114,7 @@
                         hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) + (cardModalUrlTemplate.includes('?') ? '&' : '?') + 'navList=' + navList %>"
                         hx-target="#card-modal-container"
                         hx-swap="innerHTML"
-                        style="cursor: pointer;"><%= card.name %><%- (card.types || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %></span>
+                        style="cursor: pointer;"><%= card.name %><%- (card.cardTypes || []).filter(t => t !== typeName).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %></span>
                 </li>
               <% }); %>
             </ul>
@@ -128,7 +128,7 @@
                     hx-get="<%= cardModalUrlTemplate.replace('{cardIndex}', card.gameCardIndex) %>"
                     hx-target="#card-modal-container"
                     hx-swap="innerHTML"
-                    style="cursor: pointer;"><%- (card.types || []).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %><%= card.name %></span>
+                    style="cursor: pointer;"><%- (card.cardTypes || []).map(t => typeIcon(t, 'card-type-icon', card.colorIdentity)).join('') %><%= card.name %></span>
             </li>
           <% }); %>
         </ul>
