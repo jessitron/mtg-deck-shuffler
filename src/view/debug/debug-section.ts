@@ -1,11 +1,10 @@
 
 export function formatDebugSectionHtmlFragment(gameId: number, stateVersion: number): string {
-  return `<p class="game-id">Game ID: ${gameId} | <button class="debug-button"
+  return `<p class="game-id">Game: ${gameId} | <button class="debug-button"
                   hx-get="/debug-state/${gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML"
-                  class="debug-button">State</button>: ${stateVersion}</p>
-  <p class="browser-tab-id">Tab ID: <span id="browser-tab-id-display">loading...</span></p>
+                  class="debug-button">State</button>: ${stateVersion} | Tab: <span id="browser-tab-id-display">loading...</span></p>
   <script>
     // Display the browser tab ID once available
     if (window.browserTabId) {
