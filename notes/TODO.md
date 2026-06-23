@@ -34,6 +34,8 @@ It would be cool if Charlotte could see our hands without worrying about messing
 
 - the Flip functionality on the Prepare screen (for the commander) is broken.
 
+- the flip button looks sad right now. Make it look like a circle of two arrows, centered under the card.
+
 ## More Things to change
 
 - add a play counter to the command zone mtg-deck-shuffler-mwz
@@ -60,6 +62,8 @@ mtg-deck-shuffler-z1y
 
 ### other
 
+- other-language editions. Offer English translations. Example: adventurous impulse in squirrel girl deck 23735063
+
 - in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table. mtg-deck-shuffler-199
 
 - let people pick a playmat mtg-deck-shuffler-eds
@@ -81,7 +85,7 @@ mtg-deck-shuffler-z1y
 
 - it is physically possible for your commander to be in your library or hand. shit.
 
-- keyboard shortcuts
+- on undo with ctrl-Z, I'd like it to notify somehow about what was undone. A toast, maybe.
 
 - when a game starts, automatically draw a hand of 7 cards. Sort the hand by card type and then by mana value. Lands first, then creatures, then everything else.
   - real fun: generate a mulligan recommendation. Are there 2-4 lands? With the lands in the hand, what can be played? do any of those get you more land or mana? with only these cards, can you play a creature (could be your commander)? If not, do any of them get you more cards?
