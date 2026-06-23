@@ -18,7 +18,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/4/d438237b-c6f7-44d0-a3e6-6ec7d7465d33.jpg?1673481677",
+        "large": "https://cards.scryfall.io/large/front/d/4/d438237b-c6f7-44d0-a3e6-6ec7d7465d33.jpg?1673481677",
+        "png": "https://cards.scryfall.io/png/front/d/4/d438237b-c6f7-44d0-a3e6-6ec7d7465d33.png?1673481677",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/4/d438237b-c6f7-44d0-a3e6-6ec7d7465d33.jpg?1673481677"
+      }
     }
   ],
   "cards": [
@@ -36,7 +42,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/2/12e71d52-5c75-4798-9fe7-8a34a2bf0c9a.jpg?1673481694",
+        "large": "https://cards.scryfall.io/large/front/1/2/12e71d52-5c75-4798-9fe7-8a34a2bf0c9a.jpg?1673481694",
+        "png": "https://cards.scryfall.io/png/front/1/2/12e71d52-5c75-4798-9fe7-8a34a2bf0c9a.png?1673481694",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/2/12e71d52-5c75-4798-9fe7-8a34a2bf0c9a.jpg?1673481694"
+      }
     },
     {
       "name": "Ajani Unyielding",
@@ -51,7 +63,13 @@
       "set": "NCC",
       "cardTypes": [
         "Planeswalker"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/1/41000308-144d-4d3b-afec-e3928d20edfc.jpg?1673484913",
+        "large": "https://cards.scryfall.io/large/front/4/1/41000308-144d-4d3b-afec-e3928d20edfc.jpg?1673484913",
+        "png": "https://cards.scryfall.io/png/front/4/1/41000308-144d-4d3b-afec-e3928d20edfc.png?1673484913",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/1/41000308-144d-4d3b-afec-e3928d20edfc.jpg?1673484913"
+      }
     },
     {
       "name": "Angelic Sleuth",
@@ -65,7 +83,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/0/b0d044fe-9a6b-4994-9fad-2cc52696f90d.jpg?1673481740",
+        "large": "https://cards.scryfall.io/large/front/b/0/b0d044fe-9a6b-4994-9fad-2cc52696f90d.jpg?1673481740",
+        "png": "https://cards.scryfall.io/png/front/b/0/b0d044fe-9a6b-4994-9fad-2cc52696f90d.png?1673481740",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/0/b0d044fe-9a6b-4994-9fad-2cc52696f90d.jpg?1673481740"
+      }
     },
     {
       "name": "Aven Courier",
@@ -79,7 +103,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/b/7bb0e478-c359-4523-a1e1-ba711a8cb8e0.jpg?1673481831",
+        "large": "https://cards.scryfall.io/large/front/7/b/7bb0e478-c359-4523-a1e1-ba711a8cb8e0.jpg?1673481831",
+        "png": "https://cards.scryfall.io/png/front/7/b/7bb0e478-c359-4523-a1e1-ba711a8cb8e0.png?1673481831",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/b/7bb0e478-c359-4523-a1e1-ba711a8cb8e0.jpg?1673481831"
+      }
     },
     {
       "name": "Aven Mimeomancer",
@@ -94,7 +124,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/5/c50162a7-a791-4afc-a129-d259cd4419f2.jpg?1673484964",
+        "large": "https://cards.scryfall.io/large/front/c/5/c50162a7-a791-4afc-a129-d259cd4419f2.jpg?1673484964",
+        "png": "https://cards.scryfall.io/png/front/c/5/c50162a7-a791-4afc-a129-d259cd4419f2.png?1673484964",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/5/c50162a7-a791-4afc-a129-d259cd4419f2.jpg?1673484964"
+      }
     },
     {
       "name": "Avenging Huntbonder",
@@ -108,7 +144,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/5/05e201fa-fdd3-45bf-89a2-dae8c896aa28.jpg?1673483625",
+        "large": "https://cards.scryfall.io/large/front/0/5/05e201fa-fdd3-45bf-89a2-dae8c896aa28.jpg?1673483625",
+        "png": "https://cards.scryfall.io/png/front/0/5/05e201fa-fdd3-45bf-89a2-dae8c896aa28.png?1673483625",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/5/05e201fa-fdd3-45bf-89a2-dae8c896aa28.jpg?1673483625"
+      }
     },
     {
       "name": "Bribe Taker",
@@ -122,7 +164,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/0/70aeb0a0-67dc-4cee-9b88-000e98b11d2c.jpg?1673482184",
+        "large": "https://cards.scryfall.io/large/front/7/0/70aeb0a0-67dc-4cee-9b88-000e98b11d2c.jpg?1673482184",
+        "png": "https://cards.scryfall.io/png/front/7/0/70aeb0a0-67dc-4cee-9b88-000e98b11d2c.png?1673482184",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/0/70aeb0a0-67dc-4cee-9b88-000e98b11d2c.jpg?1673482184"
+      }
     },
     {
       "name": "Crystalline Giant",
@@ -135,7 +183,13 @@
       "cardTypes": [
         "Artifact",
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/5/e5e0e7fa-d911-449b-8902-921d861f1d13.jpg?1673485325",
+        "large": "https://cards.scryfall.io/large/front/e/5/e5e0e7fa-d911-449b-8902-921d861f1d13.jpg?1673485325",
+        "png": "https://cards.scryfall.io/png/front/e/5/e5e0e7fa-d911-449b-8902-921d861f1d13.png?1673485325",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/5/e5e0e7fa-d911-449b-8902-921d861f1d13.jpg?1673485325"
+      }
     },
     {
       "name": "Devoted Druid",
@@ -149,7 +203,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/6/56f7c91c-5075-43b7-890d-a49b4a87f9df.jpg?1673484528",
+        "large": "https://cards.scryfall.io/large/front/5/6/56f7c91c-5075-43b7-890d-a49b4a87f9df.jpg?1673484528",
+        "png": "https://cards.scryfall.io/png/front/5/6/56f7c91c-5075-43b7-890d-a49b4a87f9df.png?1673484528",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/6/56f7c91c-5075-43b7-890d-a49b4a87f9df.jpg?1673484528"
+      }
     },
     {
       "name": "Denry Klin, Editor in Chief",
@@ -164,7 +224,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/c/ac40ca08-50e6-46e6-9d50-c4e84325620d.jpg?1673482362",
+        "large": "https://cards.scryfall.io/large/front/a/c/ac40ca08-50e6-46e6-9d50-c4e84325620d.jpg?1673482362",
+        "png": "https://cards.scryfall.io/png/front/a/c/ac40ca08-50e6-46e6-9d50-c4e84325620d.png?1673482362",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/c/ac40ca08-50e6-46e6-9d50-c4e84325620d.jpg?1673482362"
+      }
     },
     {
       "name": "Evolution Sage",
@@ -178,7 +244,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/4/245cb567-5d71-49ca-8670-46197ccdac8a.jpg?1673484539",
+        "large": "https://cards.scryfall.io/large/front/2/4/245cb567-5d71-49ca-8670-46197ccdac8a.jpg?1673484539",
+        "png": "https://cards.scryfall.io/png/front/2/4/245cb567-5d71-49ca-8670-46197ccdac8a.png?1673484539",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/4/245cb567-5d71-49ca-8670-46197ccdac8a.jpg?1673484539"
+      }
     },
     {
       "name": "Fathom Mage",
@@ -193,7 +265,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/2/22be6c55-f95e-498e-b6d2-65b7ed57d2d3.jpg?1673485063",
+        "large": "https://cards.scryfall.io/large/front/2/2/22be6c55-f95e-498e-b6d2-65b7ed57d2d3.jpg?1673485063",
+        "png": "https://cards.scryfall.io/png/front/2/2/22be6c55-f95e-498e-b6d2-65b7ed57d2d3.png?1673485063",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/2/22be6c55-f95e-498e-b6d2-65b7ed57d2d3.jpg?1673485063"
+      }
     },
     {
       "name": "Forgotten Ancient",
@@ -207,7 +285,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/2/c23e3732-4589-4ea7-8125-a5434861b9f5.jpg?1673484579",
+        "large": "https://cards.scryfall.io/large/front/c/2/c23e3732-4589-4ea7-8125-a5434861b9f5.jpg?1673484579",
+        "png": "https://cards.scryfall.io/png/front/c/2/c23e3732-4589-4ea7-8125-a5434861b9f5.png?1673484579",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/2/c23e3732-4589-4ea7-8125-a5434861b9f5.jpg?1673484579"
+      }
     },
     {
       "name": "Grateful Apparition",
@@ -221,7 +305,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/f/2f6d50f3-5f5f-4bf3-b132-e527b70be33f.jpg?1673483704",
+        "large": "https://cards.scryfall.io/large/front/2/f/2f6d50f3-5f5f-4bf3-b132-e527b70be33f.jpg?1673483704",
+        "png": "https://cards.scryfall.io/png/front/2/f/2f6d50f3-5f5f-4bf3-b132-e527b70be33f.png?1673483704",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/f/2f6d50f3-5f5f-4bf3-b132-e527b70be33f.jpg?1673483704"
+      }
     },
     {
       "name": "Incubation Druid",
@@ -235,7 +325,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c0e7322c-97b2-49c6-8ed0-8af96362f580.jpg?1673484632",
+        "large": "https://cards.scryfall.io/large/front/c/0/c0e7322c-97b2-49c6-8ed0-8af96362f580.jpg?1673484632",
+        "png": "https://cards.scryfall.io/png/front/c/0/c0e7322c-97b2-49c6-8ed0-8af96362f580.png?1673484632",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c0e7322c-97b2-49c6-8ed0-8af96362f580.jpg?1673484632"
+      }
     },
     {
       "name": "Jenara, Asura of War",
@@ -251,7 +347,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/b/4bcf5b5f-b908-4975-91f7-c4c6f819e0a6.jpg?1673485098",
+        "large": "https://cards.scryfall.io/large/front/4/b/4bcf5b5f-b908-4975-91f7-c4c6f819e0a6.jpg?1673485098",
+        "png": "https://cards.scryfall.io/png/front/4/b/4bcf5b5f-b908-4975-91f7-c4c6f819e0a6.png?1673485098",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/b/4bcf5b5f-b908-4975-91f7-c4c6f819e0a6.jpg?1673485098"
+      }
     },
     {
       "name": "Luminarch Aspirant",
@@ -265,7 +367,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/c/dcd27fa3-f6b6-4137-9b6c-4cba7187664c.jpg?1673483738",
+        "large": "https://cards.scryfall.io/large/front/d/c/dcd27fa3-f6b6-4137-9b6c-4cba7187664c.jpg?1673483738",
+        "png": "https://cards.scryfall.io/png/front/d/c/dcd27fa3-f6b6-4137-9b6c-4cba7187664c.png?1673483738",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/c/dcd27fa3-f6b6-4137-9b6c-4cba7187664c.jpg?1673483738"
+      }
     },
     {
       "name": "Park Heights Maverick",
@@ -279,7 +387,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/2/f2ecac25-c187-40c6-af50-e7ce0ff9e921.jpg?1673482270",
+        "large": "https://cards.scryfall.io/large/front/f/2/f2ecac25-c187-40c6-af50-e7ce0ff9e921.jpg?1673482270",
+        "png": "https://cards.scryfall.io/png/front/f/2/f2ecac25-c187-40c6-af50-e7ce0ff9e921.png?1673482270",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/2/f2ecac25-c187-40c6-af50-e7ce0ff9e921.jpg?1673482270"
+      }
     },
     {
       "name": "Rishkar, Peema Renegade",
@@ -293,7 +407,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/f/5fcd6cd6-ec95-406c-92f7-c063254fb19a.jpg?1673484734",
+        "large": "https://cards.scryfall.io/large/front/5/f/5fcd6cd6-ec95-406c-92f7-c063254fb19a.jpg?1673484734",
+        "png": "https://cards.scryfall.io/png/front/5/f/5fcd6cd6-ec95-406c-92f7-c063254fb19a.png?1673484734",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/f/5fcd6cd6-ec95-406c-92f7-c063254fb19a.jpg?1673484734"
+      }
     },
     {
       "name": "Roalesk, Apex Hybrid",
@@ -308,7 +428,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/5/a52a5f4b-d2e1-405e-82b4-ea35ab851c42.jpg?1673485159",
+        "large": "https://cards.scryfall.io/large/front/a/5/a52a5f4b-d2e1-405e-82b4-ea35ab851c42.jpg?1673485159",
+        "png": "https://cards.scryfall.io/png/front/a/5/a52a5f4b-d2e1-405e-82b4-ea35ab851c42.png?1673485159",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/5/a52a5f4b-d2e1-405e-82b4-ea35ab851c42.jpg?1673485159"
+      }
     },
     {
       "name": "Scavenging Ooze",
@@ -322,7 +448,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/7/67d93e17-13fd-4cf5-a53c-a7b6c57a8351.jpg?1673484773",
+        "large": "https://cards.scryfall.io/large/front/6/7/67d93e17-13fd-4cf5-a53c-a7b6c57a8351.jpg?1673484773",
+        "png": "https://cards.scryfall.io/png/front/6/7/67d93e17-13fd-4cf5-a53c-a7b6c57a8351.png?1673484773",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/7/67d93e17-13fd-4cf5-a53c-a7b6c57a8351.jpg?1673484773"
+      }
     },
     {
       "name": "Shield Broker",
@@ -336,7 +468,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/3/a319afae-019c-408d-a57b-b7bf0b1598bd.jpg?1673481896",
+        "large": "https://cards.scryfall.io/large/front/a/3/a319afae-019c-408d-a57b-b7bf0b1598bd.jpg?1673481896",
+        "png": "https://cards.scryfall.io/png/front/a/3/a319afae-019c-408d-a57b-b7bf0b1598bd.png?1673481896",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a319afae-019c-408d-a57b-b7bf0b1598bd.jpg?1673481896"
+      }
     },
     {
       "name": "Skyboon Evangelist",
@@ -350,7 +488,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/7/a776f162-5ac4-444a-8254-ff6915932358.jpg?1673481814",
+        "large": "https://cards.scryfall.io/large/front/a/7/a776f162-5ac4-444a-8254-ff6915932358.jpg?1673481814",
+        "png": "https://cards.scryfall.io/png/front/a/7/a776f162-5ac4-444a-8254-ff6915932358.png?1673481814",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/7/a776f162-5ac4-444a-8254-ff6915932358.jpg?1673481814"
+      }
     },
     {
       "name": "Skyship Plunderer",
@@ -364,7 +508,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/1/113ebd1b-380d-42a1-accb-9889c40478f6.jpg?1673483998",
+        "large": "https://cards.scryfall.io/large/front/1/1/113ebd1b-380d-42a1-accb-9889c40478f6.jpg?1673483998",
+        "png": "https://cards.scryfall.io/png/front/1/1/113ebd1b-380d-42a1-accb-9889c40478f6.png?1673483998",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/1/113ebd1b-380d-42a1-accb-9889c40478f6.jpg?1673483998"
+      }
     },
     {
       "name": "Slippery Bogbonder",
@@ -378,7 +528,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/9/f9fc4f93-398c-4d11-a393-dd35e16ac1cc.jpg?1673484802",
+        "large": "https://cards.scryfall.io/large/front/f/9/f9fc4f93-398c-4d11-a393-dd35e16ac1cc.jpg?1673484802",
+        "png": "https://cards.scryfall.io/png/front/f/9/f9fc4f93-398c-4d11-a393-dd35e16ac1cc.png?1673484802",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/9/f9fc4f93-398c-4d11-a393-dd35e16ac1cc.jpg?1673484802"
+      }
     },
     {
       "name": "Steelbane Hydra",
@@ -392,7 +548,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c091fe70-ade7-43f9-9081-3263a2524d51.jpg?1673484812",
+        "large": "https://cards.scryfall.io/large/front/c/0/c091fe70-ade7-43f9-9081-3263a2524d51.jpg?1673484812",
+        "png": "https://cards.scryfall.io/png/front/c/0/c091fe70-ade7-43f9-9081-3263a2524d51.png?1673484812",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c091fe70-ade7-43f9-9081-3263a2524d51.jpg?1673484812"
+      }
     },
     {
       "name": "Thrummingbird",
@@ -406,7 +568,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/6/669bd3ff-2a78-47ca-87b7-635c6c1d6721.jpg?1673484041",
+        "large": "https://cards.scryfall.io/large/front/6/6/669bd3ff-2a78-47ca-87b7-635c6c1d6721.jpg?1673484041",
+        "png": "https://cards.scryfall.io/png/front/6/6/669bd3ff-2a78-47ca-87b7-635c6c1d6721.png?1673484041",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/6/669bd3ff-2a78-47ca-87b7-635c6c1d6721.jpg?1673484041"
+      }
     },
     {
       "name": "Vorel of the Hull Clade",
@@ -421,7 +589,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/e/8e7053ff-c825-41bc-9dad-eaf7a37447e5.jpg?1673485236",
+        "large": "https://cards.scryfall.io/large/front/8/e/8e7053ff-c825-41bc-9dad-eaf7a37447e5.jpg?1673485236",
+        "png": "https://cards.scryfall.io/png/front/8/e/8e7053ff-c825-41bc-9dad-eaf7a37447e5.png?1673485236",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/e/8e7053ff-c825-41bc-9dad-eaf7a37447e5.jpg?1673485236"
+      }
     },
     {
       "name": "Wall of Roots",
@@ -435,7 +609,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/8/d80940ad-8e36-4226-ad5f-b54487c75c76.jpg?1673484868",
+        "large": "https://cards.scryfall.io/large/front/d/8/d80940ad-8e36-4226-ad5f-b54487c75c76.jpg?1673484868",
+        "png": "https://cards.scryfall.io/png/front/d/8/d80940ad-8e36-4226-ad5f-b54487c75c76.png?1673484868",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/8/d80940ad-8e36-4226-ad5f-b54487c75c76.jpg?1673484868"
+      }
     },
     {
       "name": "Wickerbough Elder",
@@ -449,7 +629,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/a/3a5832cc-f9f6-4881-99dd-c0728a52cabe.jpg?1673484877",
+        "large": "https://cards.scryfall.io/large/front/3/a/3a5832cc-f9f6-4881-99dd-c0728a52cabe.jpg?1673484877",
+        "png": "https://cards.scryfall.io/png/front/3/a/3a5832cc-f9f6-4881-99dd-c0728a52cabe.png?1673484877",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/a/3a5832cc-f9f6-4881-99dd-c0728a52cabe.jpg?1673484877"
+      }
     },
     {
       "name": "Wingspan Mentor",
@@ -463,7 +649,13 @@
       "set": "NCC",
       "cardTypes": [
         "Creature"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/2/225701da-1e6d-479c-aecc-3a13e0698524.jpg?1673484074",
+        "large": "https://cards.scryfall.io/large/front/2/2/225701da-1e6d-479c-aecc-3a13e0698524.jpg?1673484074",
+        "png": "https://cards.scryfall.io/png/front/2/2/225701da-1e6d-479c-aecc-3a13e0698524.png?1673484074",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/2/225701da-1e6d-479c-aecc-3a13e0698524.jpg?1673484074"
+      }
     },
     {
       "name": "Declaration in Stone",
@@ -477,7 +669,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/f/6f5513a2-e63d-44df-b8a5-37c298e38e3c.jpg?1697357006",
+        "large": "https://cards.scryfall.io/large/front/6/f/6f5513a2-e63d-44df-b8a5-37c298e38e3c.jpg?1697357006",
+        "png": "https://cards.scryfall.io/png/front/6/f/6f5513a2-e63d-44df-b8a5-37c298e38e3c.png?1697357006",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/f/6f5513a2-e63d-44df-b8a5-37c298e38e3c.jpg?1697357006"
+      }
     },
     {
       "name": "Damning Verdict",
@@ -491,7 +689,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/b/5be40c34-6df0-4471-b99b-850ae2be9923.jpg?1673481768",
+        "large": "https://cards.scryfall.io/large/front/5/b/5be40c34-6df0-4471-b99b-850ae2be9923.jpg?1673481768",
+        "png": "https://cards.scryfall.io/png/front/5/b/5be40c34-6df0-4471-b99b-850ae2be9923.png?1673481768",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/b/5be40c34-6df0-4471-b99b-850ae2be9923.jpg?1673481768"
+      }
     },
     {
       "name": "Planar Outburst",
@@ -505,7 +709,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/d/3d45dfee-810e-4359-96ad-8d423ab86178.jpg?1673483781",
+        "large": "https://cards.scryfall.io/large/front/3/d/3d45dfee-810e-4359-96ad-8d423ab86178.jpg?1673483781",
+        "png": "https://cards.scryfall.io/png/front/3/d/3d45dfee-810e-4359-96ad-8d423ab86178.png?1673483781",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/d/3d45dfee-810e-4359-96ad-8d423ab86178.jpg?1673483781"
+      }
     },
     {
       "name": "Tezzeret's Gambit",
@@ -519,7 +729,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/2/421391da-7435-4364-8d48-009d2c2bdad4.jpg?1673484030",
+        "large": "https://cards.scryfall.io/large/front/4/2/421391da-7435-4364-8d48-009d2c2bdad4.jpg?1673484030",
+        "png": "https://cards.scryfall.io/png/front/4/2/421391da-7435-4364-8d48-009d2c2bdad4.png?1673484030",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/2/421391da-7435-4364-8d48-009d2c2bdad4.jpg?1673484030"
+      }
     },
     {
       "name": "Rishkar's Expertise",
@@ -533,7 +749,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/4/74201f17-37f5-4e1c-93e6-2762c472b3b3.jpg?1673484746",
+        "large": "https://cards.scryfall.io/large/front/7/4/74201f17-37f5-4e1c-93e6-2762c472b3b3.jpg?1673484746",
+        "png": "https://cards.scryfall.io/png/front/7/4/74201f17-37f5-4e1c-93e6-2762c472b3b3.png?1673484746",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/4/74201f17-37f5-4e1c-93e6-2762c472b3b3.jpg?1673484746"
+      }
     },
     {
       "name": "Urban Evolution",
@@ -548,7 +770,13 @@
       "set": "NCC",
       "cardTypes": [
         "Sorcery"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/5/85df7b1b-7cd6-499d-aa9d-5599a79a3512.jpg?1733502700",
+        "large": "https://cards.scryfall.io/large/front/8/5/85df7b1b-7cd6-499d-aa9d-5599a79a3512.jpg?1733502700",
+        "png": "https://cards.scryfall.io/png/front/8/5/85df7b1b-7cd6-499d-aa9d-5599a79a3512.png?1733502700",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/5/85df7b1b-7cd6-499d-aa9d-5599a79a3512.jpg?1733502700"
+      }
     },
     {
       "name": "Bant Charm",
@@ -564,7 +792,13 @@
       "set": "NCC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/2/c27fff99-2ed2-4ab5-955f-108c5513faf1.jpg?1673484973",
+        "large": "https://cards.scryfall.io/large/front/c/2/c27fff99-2ed2-4ab5-955f-108c5513faf1.jpg?1673484973",
+        "png": "https://cards.scryfall.io/png/front/c/2/c27fff99-2ed2-4ab5-955f-108c5513faf1.png?1673484973",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/2/c27fff99-2ed2-4ab5-955f-108c5513faf1.jpg?1673484973"
+      }
     },
     {
       "name": "Brokers Charm",
@@ -580,7 +814,13 @@
       "set": "SNC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/4/74c9c315-1cf4-468e-a74a-b5f3be4a63a1.jpg?1664412741",
+        "large": "https://cards.scryfall.io/large/front/7/4/74c9c315-1cf4-468e-a74a-b5f3be4a63a1.jpg?1664412741",
+        "png": "https://cards.scryfall.io/png/front/7/4/74c9c315-1cf4-468e-a74a-b5f3be4a63a1.png?1664412741",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/4/74c9c315-1cf4-468e-a74a-b5f3be4a63a1.jpg?1664412741"
+      }
     },
     {
       "name": "Brokers Confluence",
@@ -596,7 +836,13 @@
       "set": "NCC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/5/657ff5fc-1a95-46f9-85f7-fc1ad757c8c4.jpg?1673482329",
+        "large": "https://cards.scryfall.io/large/front/6/5/657ff5fc-1a95-46f9-85f7-fc1ad757c8c4.jpg?1673482329",
+        "png": "https://cards.scryfall.io/png/front/6/5/657ff5fc-1a95-46f9-85f7-fc1ad757c8c4.png?1673482329",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/5/657ff5fc-1a95-46f9-85f7-fc1ad757c8c4.jpg?1673482329"
+      }
     },
     {
       "name": "Contractual Safeguard",
@@ -610,7 +856,13 @@
       "set": "NCC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/0/f0428cba-a895-4dbd-b495-8f358bb632cf.jpg?1673481759",
+        "large": "https://cards.scryfall.io/large/front/f/0/f0428cba-a895-4dbd-b495-8f358bb632cf.jpg?1673481759",
+        "png": "https://cards.scryfall.io/png/front/f/0/f0428cba-a895-4dbd-b495-8f358bb632cf.png?1673481759",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/0/f0428cba-a895-4dbd-b495-8f358bb632cf.jpg?1673481759"
+      }
     },
     {
       "name": "Exotic Pets",
@@ -625,7 +877,13 @@
       "set": "SNC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/0/902f1ed8-5c10-45e4-8f2f-182e800faab4.jpg?1664412996",
+        "large": "https://cards.scryfall.io/large/front/9/0/902f1ed8-5c10-45e4-8f2f-182e800faab4.jpg?1664412996",
+        "png": "https://cards.scryfall.io/png/front/9/0/902f1ed8-5c10-45e4-8f2f-182e800faab4.png?1664412996",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/0/902f1ed8-5c10-45e4-8f2f-182e800faab4.jpg?1664412996"
+      }
     },
     {
       "name": "Generous Gift",
@@ -639,7 +897,13 @@
       "set": "NCC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/f/cf80a8e3-1905-413c-a510-54fef2afde69.jpg?1673483693",
+        "large": "https://cards.scryfall.io/large/front/c/f/cf80a8e3-1905-413c-a510-54fef2afde69.jpg?1673483693",
+        "png": "https://cards.scryfall.io/png/front/c/f/cf80a8e3-1905-413c-a510-54fef2afde69.png?1673483693",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/f/cf80a8e3-1905-413c-a510-54fef2afde69.jpg?1673483693"
+      }
     },
     {
       "name": "Storm of Forms",
@@ -653,7 +917,13 @@
       "set": "NCC",
       "cardTypes": [
         "Instant"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/f/5fab4f0d-006d-4a94-80ba-924f19b42f63.jpg?1673481932",
+        "large": "https://cards.scryfall.io/large/front/5/f/5fab4f0d-006d-4a94-80ba-924f19b42f63.jpg?1673481932",
+        "png": "https://cards.scryfall.io/png/front/5/f/5fab4f0d-006d-4a94-80ba-924f19b42f63.png?1673481932",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/f/5fab4f0d-006d-4a94-80ba-924f19b42f63.jpg?1673481932"
+      }
     },
     {
       "name": "Family's Favor",
@@ -667,7 +937,13 @@
       "set": "NCC",
       "cardTypes": [
         "Enchantment"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/f/afb85bc6-7799-48c6-98c0-04dd7ced4058.jpg?1673482225",
+        "large": "https://cards.scryfall.io/large/front/a/f/afb85bc6-7799-48c6-98c0-04dd7ced4058.jpg?1673482225",
+        "png": "https://cards.scryfall.io/png/front/a/f/afb85bc6-7799-48c6-98c0-04dd7ced4058.png?1673482225",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/f/afb85bc6-7799-48c6-98c0-04dd7ced4058.jpg?1673482225"
+      }
     },
     {
       "name": "Hoofprints of the Stag",
@@ -682,7 +958,13 @@
       "cardTypes": [
         "Kindred",
         "Enchantment"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/7/47f70c41-25b2-468c-b679-8bbc7eaf913b.jpg?1673483714",
+        "large": "https://cards.scryfall.io/large/front/4/7/47f70c41-25b2-468c-b679-8bbc7eaf913b.jpg?1673483714",
+        "png": "https://cards.scryfall.io/png/front/4/7/47f70c41-25b2-468c-b679-8bbc7eaf913b.png?1673483714",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/7/47f70c41-25b2-468c-b679-8bbc7eaf913b.jpg?1673483714"
+      }
     },
     {
       "name": "Primal Empathy",
@@ -697,7 +979,13 @@
       "set": "NCC",
       "cardTypes": [
         "Enchantment"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/8/b8099a93-c59d-40a9-96e2-f3dd2a6dd8b8.jpg?1673485151",
+        "large": "https://cards.scryfall.io/large/front/b/8/b8099a93-c59d-40a9-96e2-f3dd2a6dd8b8.jpg?1673485151",
+        "png": "https://cards.scryfall.io/png/front/b/8/b8099a93-c59d-40a9-96e2-f3dd2a6dd8b8.png?1673485151",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/8/b8099a93-c59d-40a9-96e2-f3dd2a6dd8b8.jpg?1673485151"
+      }
     },
     {
       "name": "Resourceful Defense",
@@ -711,7 +999,13 @@
       "set": "NCC",
       "cardTypes": [
         "Enchantment"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/1/91f4dfc0-7478-4e47-89b4-685b72197ef0.jpg?1673481805",
+        "large": "https://cards.scryfall.io/large/front/9/1/91f4dfc0-7478-4e47-89b4-685b72197ef0.jpg?1673481805",
+        "png": "https://cards.scryfall.io/png/front/9/1/91f4dfc0-7478-4e47-89b4-685b72197ef0.png?1673481805",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/1/91f4dfc0-7478-4e47-89b4-685b72197ef0.jpg?1673481805"
+      }
     },
     {
       "name": "Together Forever",
@@ -725,7 +1019,13 @@
       "set": "NCC",
       "cardTypes": [
         "Enchantment"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/2/4290786d-fbc2-4fdc-8bb1-def8944f0563.jpg?1673483813",
+        "large": "https://cards.scryfall.io/large/front/4/2/4290786d-fbc2-4fdc-8bb1-def8944f0563.jpg?1673483813",
+        "png": "https://cards.scryfall.io/png/front/4/2/4290786d-fbc2-4fdc-8bb1-def8944f0563.png?1673483813",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/2/4290786d-fbc2-4fdc-8bb1-def8944f0563.jpg?1673483813"
+      }
     },
     {
       "name": "Agent's Toolkit",
@@ -740,7 +1040,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/4/64cbb81d-3444-4491-963f-8ce9a9430788.jpg?1673482306",
+        "large": "https://cards.scryfall.io/large/front/6/4/64cbb81d-3444-4491-963f-8ce9a9430788.jpg?1673482306",
+        "png": "https://cards.scryfall.io/png/front/6/4/64cbb81d-3444-4491-963f-8ce9a9430788.png?1673482306",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/4/64cbb81d-3444-4491-963f-8ce9a9430788.jpg?1673482306"
+      }
     },
     {
       "name": "Arcane Signet",
@@ -752,7 +1058,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/3/f3ee9829-f4c0-44a0-8252-4097402e2f8d.jpg?1673485271",
+        "large": "https://cards.scryfall.io/large/front/f/3/f3ee9829-f4c0-44a0-8252-4097402e2f8d.jpg?1673485271",
+        "png": "https://cards.scryfall.io/png/front/f/3/f3ee9829-f4c0-44a0-8252-4097402e2f8d.png?1673485271",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/3/f3ee9829-f4c0-44a0-8252-4097402e2f8d.jpg?1673485271"
+      }
     },
     {
       "name": "Commander's Sphere",
@@ -764,7 +1076,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/4/e4330ad8-ce2c-47bd-8956-c5e19bdbf4e0.jpg?1673485311",
+        "large": "https://cards.scryfall.io/large/front/e/4/e4330ad8-ce2c-47bd-8956-c5e19bdbf4e0.jpg?1673485311",
+        "png": "https://cards.scryfall.io/png/front/e/4/e4330ad8-ce2c-47bd-8956-c5e19bdbf4e0.png?1673485311",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/4/e4330ad8-ce2c-47bd-8956-c5e19bdbf4e0.jpg?1673485311"
+      }
     },
     {
       "name": "Everflowing Chalice",
@@ -776,7 +1094,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/a/ba721716-e19a-4ac5-9b44-1a18ad51554b.jpg?1673485342",
+        "large": "https://cards.scryfall.io/large/front/b/a/ba721716-e19a-4ac5-9b44-1a18ad51554b.jpg?1673485342",
+        "png": "https://cards.scryfall.io/png/front/b/a/ba721716-e19a-4ac5-9b44-1a18ad51554b.png?1673485342",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/a/ba721716-e19a-4ac5-9b44-1a18ad51554b.jpg?1673485342"
+      }
     },
     {
       "name": "Fellwar Stone",
@@ -788,7 +1112,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/8/68c3d065-0519-4472-ae6e-23f58af5e859.jpg?1673485350",
+        "large": "https://cards.scryfall.io/large/front/6/8/68c3d065-0519-4472-ae6e-23f58af5e859.jpg?1673485350",
+        "png": "https://cards.scryfall.io/png/front/6/8/68c3d065-0519-4472-ae6e-23f58af5e859.png?1673485350",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/8/68c3d065-0519-4472-ae6e-23f58af5e859.jpg?1673485350"
+      }
     },
     {
       "name": "Gavel of the Righteous",
@@ -800,7 +1130,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/7/97aa0173-ed1e-4b5a-a7a1-7d93dca8e189.jpg?1673482487",
+        "large": "https://cards.scryfall.io/large/front/9/7/97aa0173-ed1e-4b5a-a7a1-7d93dca8e189.jpg?1673482487",
+        "png": "https://cards.scryfall.io/png/front/9/7/97aa0173-ed1e-4b5a-a7a1-7d93dca8e189.png?1673482487",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/7/97aa0173-ed1e-4b5a-a7a1-7d93dca8e189.jpg?1673482487"
+      }
     },
     {
       "name": "Midnight Clock",
@@ -814,7 +1150,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/3/c3b04d8a-f651-4538-bc40-6f2c8e13fb99.jpg?1673483938",
+        "large": "https://cards.scryfall.io/large/front/c/3/c3b04d8a-f651-4538-bc40-6f2c8e13fb99.jpg?1673483938",
+        "png": "https://cards.scryfall.io/png/front/c/3/c3b04d8a-f651-4538-bc40-6f2c8e13fb99.png?1673483938",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/3/c3b04d8a-f651-4538-bc40-6f2c8e13fb99.jpg?1673483938"
+      }
     },
     {
       "name": "Oblivion Stone",
@@ -826,7 +1168,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/0/f0cd5548-ce7b-493a-8119-62f000839e4d.jpg?1673485409",
+        "large": "https://cards.scryfall.io/large/front/f/0/f0cd5548-ce7b-493a-8119-62f000839e4d.jpg?1673485409",
+        "png": "https://cards.scryfall.io/png/front/f/0/f0cd5548-ce7b-493a-8119-62f000839e4d.png?1673485409",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/0/f0cd5548-ce7b-493a-8119-62f000839e4d.jpg?1673485409"
+      }
     },
     {
       "name": "Oracle's Vault",
@@ -838,7 +1186,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/3/0314bea5-4e04-4e74-9832-3e935eb90ee1.jpg?1673485419",
+        "large": "https://cards.scryfall.io/large/front/0/3/0314bea5-4e04-4e74-9832-3e935eb90ee1.jpg?1673485419",
+        "png": "https://cards.scryfall.io/png/front/0/3/0314bea5-4e04-4e74-9832-3e935eb90ee1.png?1673485419",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/3/0314bea5-4e04-4e74-9832-3e935eb90ee1.jpg?1673485419"
+      }
     },
     {
       "name": "Power Conduit",
@@ -850,7 +1204,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/4/b4634637-ba33-4849-b647-d33018a02f39.jpg?1673485439",
+        "large": "https://cards.scryfall.io/large/front/b/4/b4634637-ba33-4849-b647-d33018a02f39.jpg?1673485439",
+        "png": "https://cards.scryfall.io/png/front/b/4/b4634637-ba33-4849-b647-d33018a02f39.png?1673485439",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/4/b4634637-ba33-4849-b647-d33018a02f39.jpg?1673485439"
+      }
     },
     {
       "name": "Sol Ring",
@@ -862,7 +1222,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/1/e1187999-521d-4ed0-8673-6eb8f3c58bb8.jpg?1673485469",
+        "large": "https://cards.scryfall.io/large/front/e/1/e1187999-521d-4ed0-8673-6eb8f3c58bb8.jpg?1673485469",
+        "png": "https://cards.scryfall.io/png/front/e/1/e1187999-521d-4ed0-8673-6eb8f3c58bb8.png?1673485469",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/1/e1187999-521d-4ed0-8673-6eb8f3c58bb8.jpg?1673485469"
+      }
     },
     {
       "name": "Swiftfoot Boots",
@@ -874,7 +1240,13 @@
       "set": "NCC",
       "cardTypes": [
         "Artifact"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/c/3cb171ef-42eb-466e-b425-e3c16301c0ca.jpg?1673485497",
+        "large": "https://cards.scryfall.io/large/front/3/c/3cb171ef-42eb-466e-b425-e3c16301c0ca.jpg?1673485497",
+        "png": "https://cards.scryfall.io/png/front/3/c/3cb171ef-42eb-466e-b425-e3c16301c0ca.png?1673485497",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/c/3cb171ef-42eb-466e-b425-e3c16301c0ca.jpg?1673485497"
+      }
     },
     {
       "name": "Ash Barrens",
@@ -886,7 +1258,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/2/5233b31f-a179-4ae9-95a2-2ff75b374edf.jpg?1673485542",
+        "large": "https://cards.scryfall.io/large/front/5/2/5233b31f-a179-4ae9-95a2-2ff75b374edf.jpg?1673485542",
+        "png": "https://cards.scryfall.io/png/front/5/2/5233b31f-a179-4ae9-95a2-2ff75b374edf.png?1673485542",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/2/5233b31f-a179-4ae9-95a2-2ff75b374edf.jpg?1673485542"
+      }
     },
     {
       "name": "Bant Panorama",
@@ -898,7 +1276,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/c/dc506497-4ecd-41d3-9042-f92f498251b0.jpg?1673485553",
+        "large": "https://cards.scryfall.io/large/front/d/c/dc506497-4ecd-41d3-9042-f92f498251b0.jpg?1673485553",
+        "png": "https://cards.scryfall.io/png/front/d/c/dc506497-4ecd-41d3-9042-f92f498251b0.png?1673485553",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/c/dc506497-4ecd-41d3-9042-f92f498251b0.jpg?1673485553"
+      }
     },
     {
       "name": "Brokers Hideout",
@@ -910,7 +1294,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/8/989b299b-daa9-4bda-94e2-9a2f0e8f2bce.jpg?1664414401",
+        "large": "https://cards.scryfall.io/large/front/9/8/989b299b-daa9-4bda-94e2-9a2f0e8f2bce.jpg?1664414401",
+        "png": "https://cards.scryfall.io/png/front/9/8/989b299b-daa9-4bda-94e2-9a2f0e8f2bce.png?1664414401",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/8/989b299b-daa9-4bda-94e2-9a2f0e8f2bce.jpg?1664414401"
+      }
     },
     {
       "name": "Canopy Vista",
@@ -925,7 +1315,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/9/79dffd83-05c8-4698-9677-5decb997e29f.jpg?1673485580",
+        "large": "https://cards.scryfall.io/large/front/7/9/79dffd83-05c8-4698-9677-5decb997e29f.jpg?1673485580",
+        "png": "https://cards.scryfall.io/png/front/7/9/79dffd83-05c8-4698-9677-5decb997e29f.png?1673485580",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/9/79dffd83-05c8-4698-9677-5decb997e29f.jpg?1673485580"
+      }
     },
     {
       "name": "Command Tower",
@@ -937,7 +1333,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/3/43a32bdf-c430-46a0-9d23-8b8e8468391b.jpg?1673485643",
+        "large": "https://cards.scryfall.io/large/front/4/3/43a32bdf-c430-46a0-9d23-8b8e8468391b.jpg?1673485643",
+        "png": "https://cards.scryfall.io/png/front/4/3/43a32bdf-c430-46a0-9d23-8b8e8468391b.png?1673485643",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/3/43a32bdf-c430-46a0-9d23-8b8e8468391b.jpg?1673485643"
+      }
     },
     {
       "name": "Exotic Orchard",
@@ -949,7 +1351,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/e/7ebb6c13-e495-4953-a036-b99426e507ef.jpg?1673485696",
+        "large": "https://cards.scryfall.io/large/front/7/e/7ebb6c13-e495-4953-a036-b99426e507ef.jpg?1673485696",
+        "png": "https://cards.scryfall.io/png/front/7/e/7ebb6c13-e495-4953-a036-b99426e507ef.png?1673485696",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/e/7ebb6c13-e495-4953-a036-b99426e507ef.jpg?1673485696"
+      }
     },
     {
       "name": "Flooded Grove",
@@ -964,7 +1372,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/8/680477b2-9406-4108-acbd-dadce03d36b1.jpg?1673485714",
+        "large": "https://cards.scryfall.io/large/front/6/8/680477b2-9406-4108-acbd-dadce03d36b1.jpg?1673485714",
+        "png": "https://cards.scryfall.io/png/front/6/8/680477b2-9406-4108-acbd-dadce03d36b1.png?1673485714",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/8/680477b2-9406-4108-acbd-dadce03d36b1.jpg?1673485714"
+      }
     },
     {
       "name": "Fortified Village",
@@ -979,7 +1393,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/9/39060644-f5a6-4802-b0fc-b49b1c92d5a0.jpg?1673485731",
+        "large": "https://cards.scryfall.io/large/front/3/9/39060644-f5a6-4802-b0fc-b49b1c92d5a0.jpg?1673485731",
+        "png": "https://cards.scryfall.io/png/front/3/9/39060644-f5a6-4802-b0fc-b49b1c92d5a0.png?1673485731",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/9/39060644-f5a6-4802-b0fc-b49b1c92d5a0.jpg?1673485731"
+      }
     },
     {
       "name": "Gavony Township",
@@ -994,7 +1414,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/3/e39a449a-5681-49af-a58d-d15d470d0735.jpg?1673485749",
+        "large": "https://cards.scryfall.io/large/front/e/3/e39a449a-5681-49af-a58d-d15d470d0735.jpg?1673485749",
+        "png": "https://cards.scryfall.io/png/front/e/3/e39a449a-5681-49af-a58d-d15d470d0735.png?1673485749",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/3/e39a449a-5681-49af-a58d-d15d470d0735.jpg?1673485749"
+      }
     },
     {
       "name": "Karn's Bastion",
@@ -1006,7 +1432,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/7/a72a437d-2b69-4dad-a537-aab24168dd3c.jpg?1673485789",
+        "large": "https://cards.scryfall.io/large/front/a/7/a72a437d-2b69-4dad-a537-aab24168dd3c.jpg?1673485789",
+        "png": "https://cards.scryfall.io/png/front/a/7/a72a437d-2b69-4dad-a537-aab24168dd3c.png?1673485789",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/7/a72a437d-2b69-4dad-a537-aab24168dd3c.jpg?1673485789"
+      }
     },
     {
       "name": "Littjara Mirrorlake",
@@ -1021,7 +1453,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/f/cf1f38de-44b3-42fa-9288-d7c1832ff75f.jpg?1673485812",
+        "large": "https://cards.scryfall.io/large/front/c/f/cf1f38de-44b3-42fa-9288-d7c1832ff75f.jpg?1673485812",
+        "png": "https://cards.scryfall.io/png/front/c/f/cf1f38de-44b3-42fa-9288-d7c1832ff75f.png?1673485812",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/f/cf1f38de-44b3-42fa-9288-d7c1832ff75f.jpg?1673485812"
+      }
     },
     {
       "name": "Llanowar Reborn",
@@ -1035,7 +1473,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/a/1adb1d4a-b8e4-465f-ab1e-691a7c5e89d3.jpg?1673485836",
+        "large": "https://cards.scryfall.io/large/front/1/a/1adb1d4a-b8e4-465f-ab1e-691a7c5e89d3.jpg?1673485836",
+        "png": "https://cards.scryfall.io/png/front/1/a/1adb1d4a-b8e4-465f-ab1e-691a7c5e89d3.png?1673485836",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/a/1adb1d4a-b8e4-465f-ab1e-691a7c5e89d3.jpg?1673485836"
+      }
     },
     {
       "name": "Myriad Landscape",
@@ -1047,7 +1491,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/5/1577b698-f2e7-448d-b8a8-3d2329dd3f46.jpg?1673485900",
+        "large": "https://cards.scryfall.io/large/front/1/5/1577b698-f2e7-448d-b8a8-3d2329dd3f46.jpg?1673485900",
+        "png": "https://cards.scryfall.io/png/front/1/5/1577b698-f2e7-448d-b8a8-3d2329dd3f46.png?1673485900",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/5/1577b698-f2e7-448d-b8a8-3d2329dd3f46.jpg?1673485900"
+      }
     },
     {
       "name": "Nesting Grounds",
@@ -1059,7 +1509,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/f/eff98f9d-ec73-4e77-b639-17da8f833852.jpg?1673485923",
+        "large": "https://cards.scryfall.io/large/front/e/f/eff98f9d-ec73-4e77-b639-17da8f833852.jpg?1673485923",
+        "png": "https://cards.scryfall.io/png/front/e/f/eff98f9d-ec73-4e77-b639-17da8f833852.png?1673485923",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/f/eff98f9d-ec73-4e77-b639-17da8f833852.jpg?1673485923"
+      }
     },
     {
       "name": "Path of Ancestry",
@@ -1071,7 +1527,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/d/cdeb7d54-053f-45ee-8062-c3c1f40d27ce.jpg?1673485933",
+        "large": "https://cards.scryfall.io/large/front/c/d/cdeb7d54-053f-45ee-8062-c3c1f40d27ce.jpg?1673485933",
+        "png": "https://cards.scryfall.io/png/front/c/d/cdeb7d54-053f-45ee-8062-c3c1f40d27ce.png?1673485933",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/d/cdeb7d54-053f-45ee-8062-c3c1f40d27ce.jpg?1673485933"
+      }
     },
     {
       "name": "Port Town",
@@ -1086,7 +1548,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/3/0392196d-cd02-47e4-be7f-588ebee859fe.jpg?1673485944",
+        "large": "https://cards.scryfall.io/large/front/0/3/0392196d-cd02-47e4-be7f-588ebee859fe.jpg?1673485944",
+        "png": "https://cards.scryfall.io/png/front/0/3/0392196d-cd02-47e4-be7f-588ebee859fe.png?1673485944",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/3/0392196d-cd02-47e4-be7f-588ebee859fe.jpg?1673485944"
+      }
     },
     {
       "name": "Prairie Stream",
@@ -1101,7 +1569,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/0/40e52996-863b-46ee-893a-6ecb29f23106.jpg?1673485954",
+        "large": "https://cards.scryfall.io/large/front/4/0/40e52996-863b-46ee-893a-6ecb29f23106.jpg?1673485954",
+        "png": "https://cards.scryfall.io/png/front/4/0/40e52996-863b-46ee-893a-6ecb29f23106.png?1673485954",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/0/40e52996-863b-46ee-893a-6ecb29f23106.jpg?1673485954"
+      }
     },
     {
       "name": "Seaside Citadel",
@@ -1117,7 +1591,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/1/816ce96f-9180-4f95-a7cd-334f4a159fa7.jpg?1673486002",
+        "large": "https://cards.scryfall.io/large/front/8/1/816ce96f-9180-4f95-a7cd-334f4a159fa7.jpg?1673486002",
+        "png": "https://cards.scryfall.io/png/front/8/1/816ce96f-9180-4f95-a7cd-334f4a159fa7.png?1673486002",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/1/816ce96f-9180-4f95-a7cd-334f4a159fa7.jpg?1673486002"
+      }
     },
     {
       "name": "Skycloud Expanse",
@@ -1132,7 +1612,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/7/b7709220-02e3-4669-bdda-fd3e04981e1e.jpg?1673486025",
+        "large": "https://cards.scryfall.io/large/front/b/7/b7709220-02e3-4669-bdda-fd3e04981e1e.jpg?1673486025",
+        "png": "https://cards.scryfall.io/png/front/b/7/b7709220-02e3-4669-bdda-fd3e04981e1e.png?1673486025",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/7/b7709220-02e3-4669-bdda-fd3e04981e1e.jpg?1673486025"
+      }
     },
     {
       "name": "Sungrass Prairie",
@@ -1147,7 +1633,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/9/69f8f64c-2a4d-4df0-8356-cb15a60b54a6.jpg?1687648736",
+        "large": "https://cards.scryfall.io/large/front/6/9/69f8f64c-2a4d-4df0-8356-cb15a60b54a6.jpg?1687648736",
+        "png": "https://cards.scryfall.io/png/front/6/9/69f8f64c-2a4d-4df0-8356-cb15a60b54a6.png?1687648736",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/9/69f8f64c-2a4d-4df0-8356-cb15a60b54a6.jpg?1687648736"
+      }
     },
     {
       "name": "Temple of Mystery",
@@ -1162,7 +1654,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/7/c79d3853-f2a3-4dea-b60f-831e39ecdc44.jpg?1673486105",
+        "large": "https://cards.scryfall.io/large/front/c/7/c79d3853-f2a3-4dea-b60f-831e39ecdc44.jpg?1673486105",
+        "png": "https://cards.scryfall.io/png/front/c/7/c79d3853-f2a3-4dea-b60f-831e39ecdc44.png?1673486105",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/7/c79d3853-f2a3-4dea-b60f-831e39ecdc44.jpg?1673486105"
+      }
     },
     {
       "name": "Vivid Creek",
@@ -1176,7 +1674,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/9/c9082527-aa88-42f7-b2f2-de21878cb179.jpg?1673486251",
+        "large": "https://cards.scryfall.io/large/front/c/9/c9082527-aa88-42f7-b2f2-de21878cb179.jpg?1673486251",
+        "png": "https://cards.scryfall.io/png/front/c/9/c9082527-aa88-42f7-b2f2-de21878cb179.png?1673486251",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/9/c9082527-aa88-42f7-b2f2-de21878cb179.jpg?1673486251"
+      }
     },
     {
       "name": "Vivid Grove",
@@ -1190,7 +1694,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/2/12ccc686-bbaa-4c34-a7b8-a1e763fe0ad0.jpg?1673486263",
+        "large": "https://cards.scryfall.io/large/front/1/2/12ccc686-bbaa-4c34-a7b8-a1e763fe0ad0.jpg?1673486263",
+        "png": "https://cards.scryfall.io/png/front/1/2/12ccc686-bbaa-4c34-a7b8-a1e763fe0ad0.png?1673486263",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/2/12ccc686-bbaa-4c34-a7b8-a1e763fe0ad0.jpg?1673486263"
+      }
     },
     {
       "name": "Vivid Meadow",
@@ -1204,7 +1714,13 @@
       "set": "NCC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/2/625a42b4-d88c-48e0-96b1-77388ca48810.jpg?1673486274",
+        "large": "https://cards.scryfall.io/large/front/6/2/625a42b4-d88c-48e0-96b1-77388ca48810.jpg?1673486274",
+        "png": "https://cards.scryfall.io/png/front/6/2/625a42b4-d88c-48e0-96b1-77388ca48810.png?1673486274",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/2/625a42b4-d88c-48e0-96b1-77388ca48810.jpg?1673486274"
+      }
     },
     {
       "name": "Forest",
@@ -1218,7 +1734,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "large": "https://cards.scryfall.io/large/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "png": "https://cards.scryfall.io/png/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.png?1664414844",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844"
+      }
     },
     {
       "name": "Forest",
@@ -1232,7 +1754,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "large": "https://cards.scryfall.io/large/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "png": "https://cards.scryfall.io/png/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.png?1664414844",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844"
+      }
     },
     {
       "name": "Forest",
@@ -1246,7 +1774,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "large": "https://cards.scryfall.io/large/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844",
+        "png": "https://cards.scryfall.io/png/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.png?1664414844",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c086cb5e-3146-4a41-a471-fcbbf8fa4e09.jpg?1664414844"
+      }
     },
     {
       "name": "Forest",
@@ -1260,7 +1794,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869",
+        "large": "https://cards.scryfall.io/large/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869",
+        "png": "https://cards.scryfall.io/png/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.png?1664414869",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869"
+      }
     },
     {
       "name": "Forest",
@@ -1274,7 +1814,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869",
+        "large": "https://cards.scryfall.io/large/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869",
+        "png": "https://cards.scryfall.io/png/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.png?1664414869",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/1/818442df-fb81-4f1c-bcf2-fbd6b05912ed.jpg?1664414869"
+      }
     },
     {
       "name": "Island",
@@ -1288,7 +1834,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727",
+        "large": "https://cards.scryfall.io/large/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727",
+        "png": "https://cards.scryfall.io/png/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.png?1664414727",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727"
+      }
     },
     {
       "name": "Island",
@@ -1302,7 +1854,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727",
+        "large": "https://cards.scryfall.io/large/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727",
+        "png": "https://cards.scryfall.io/png/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.png?1664414727",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/e/2ef2c956-cf03-462c-8981-ae80edfc0c5a.jpg?1664414727"
+      }
     },
     {
       "name": "Island",
@@ -1316,7 +1874,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748",
+        "large": "https://cards.scryfall.io/large/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748",
+        "png": "https://cards.scryfall.io/png/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.png?1664414748",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748"
+      }
     },
     {
       "name": "Island",
@@ -1330,7 +1894,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748",
+        "large": "https://cards.scryfall.io/large/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748",
+        "png": "https://cards.scryfall.io/png/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.png?1664414748",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/d/8dd1b4d2-ccf0-498d-81e0-c9d755f5eb13.jpg?1664414748"
+      }
     },
     {
       "name": "Plains",
@@ -1344,7 +1914,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "large": "https://cards.scryfall.io/large/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "png": "https://cards.scryfall.io/png/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.png?1664414688",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688"
+      }
     },
     {
       "name": "Plains",
@@ -1358,7 +1934,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "large": "https://cards.scryfall.io/large/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "png": "https://cards.scryfall.io/png/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.png?1664414688",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688"
+      }
     },
     {
       "name": "Plains",
@@ -1372,7 +1954,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "large": "https://cards.scryfall.io/large/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688",
+        "png": "https://cards.scryfall.io/png/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.png?1664414688",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/b/8bbb3646-c427-4302-86ac-9ac28d045959.jpg?1664414688"
+      }
     },
     {
       "name": "Plains",
@@ -1386,7 +1974,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708",
+        "large": "https://cards.scryfall.io/large/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708",
+        "png": "https://cards.scryfall.io/png/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.png?1664414708",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708"
+      }
     },
     {
       "name": "Plains",
@@ -1400,7 +1994,13 @@
       "set": "SNC",
       "cardTypes": [
         "Land"
-      ]
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708",
+        "large": "https://cards.scryfall.io/large/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708",
+        "png": "https://cards.scryfall.io/png/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.png?1664414708",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/a/aa6f0743-c433-4348-bcef-20cfe7b28293.jpg?1664414708"
+      }
     }
   ],
   "provenance": {
