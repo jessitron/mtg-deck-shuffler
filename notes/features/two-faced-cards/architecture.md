@@ -22,15 +22,27 @@ Runtime game state tracks:
 ### PersistedGameCard (`src/port-persist-state/persisted-types.ts:24-30`)
 Persisted version also stores `currentFace`. On hydration, the full `CardDefinition` is loaded from the card repository, and `currentFace` comes from the persisted game card.
 
+## What Counts as Two-Faced (layout allowlist)
+
+**`twoFaced` means "two separate physical faces, each with its own image" — NOT "two entries in the source data's faces array."** Many single-image layouts (split, adventure, aftermath, flip, and Strixhaven's `prepare`) print both halves on one front face. They have two `faces` in the data but no back image, so a flip button would request a nonexistent Scryfall `face=back` image.
+
+The single source of truth is `src/port-deck-retrieval/twoFacedLayouts.ts`:
+- `DOUBLE_SIDED_LAYOUTS = ["transform", "modal_dfc", "reversible_card", "double_faced_token"]`
+- `isDoubleSidedLayout(layout)` — true only for those layouts
+
+Both adapters use it, so they agree on what's flippable.
+
 ## Data Flow: Ingestion
 
 ### Archidekt Adapter (`src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-127`)
-- Checks `faces.length === 2` to determine `twoFaced`
-- Front face data: tries `faces[0]` fields first, falls back to top-level oracle card fields
-- Back face: constructs `CardFace` from `faces[1]`
+- `multiFace = faces.length === 2` — card has two faces in the data (any layout)
+- `twoFaced = multiFace && isDoubleSidedLayout(layout)` — only genuinely double-sided layouts
+- **Front face data: derived from `faces[0]` whenever `multiFace` (even non-flippable cards)**, falling back to top-level oracle card fields. This matters because top-level fields for split-layout cards are the combined mess (e.g. `manaCost: "{G} // {1}{G}"`, empty `text`); `faces[0]` has the clean front data.
+- Back face: constructs `CardFace` from `faces[1]` **only when `twoFaced`** (so prepare/adventure/split get no `backFace`)
+- Reads `layout` from `archidektCard.card.oracleCard.layout` (`layout?: string` in `archidektTypes.ts`)
 
 ### MTGJSON Adapter (`src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:65-109`)
-- Checks card `layout` against known two-faced layouts: `transform`, `modal_dfc`, `reversible_card`, `double_faced_token`
+- `twoFaced = isDoubleSidedLayout(mtgjsonCard.layout)` (shared with Archidekt; no behavior change)
 - Looks up back face via `otherFaceIds` → finds card with `side === "b"` in the card database
 - Throws error if a two-faced card's back face can't be found (requires AllIdentifiers data)
 

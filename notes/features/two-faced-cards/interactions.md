@@ -15,8 +15,9 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Hydration/dehydration in `src/port-card-repository/hydration.ts` preserves `currentFace`
 
 ### Deck Adapters
-- Archidekt adapter: determines two-faced from `faces.length === 2`
-- MTGJSON adapter: determines two-faced from `layout` field against known layouts (`transform`, `modal_dfc`, `reversible_card`, `double_faced_token`)
+- **Both adapters share `src/port-deck-retrieval/twoFacedLayouts.ts`** (`isDoubleSidedLayout()` / `DOUBLE_SIDED_LAYOUTS`) — the single source of truth for what's flippable
+- Archidekt adapter: `twoFaced = faces.length === 2 && isDoubleSidedLayout(layout)`. It still derives front-face data from `faces[0]` for any 2-face card, but only builds `backFace` for double-sided layouts. Single-image layouts (`prepare`, `adventure`, `split`, `aftermath`, `flip`) are NOT two-faced.
+- MTGJSON adapter: `twoFaced = isDoubleSidedLayout(layout)`
 - MTGJSON requires AllIdentifiers data to look up back-face cards by UUID
 
 ### Modal System
@@ -84,11 +85,15 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 6. **Prep flip gaining persistence**: Currently prep flip is stateless (query param). When this changes, the prep page will need a persistence mechanism for flip state, and the prep-card-modal route will need to read/write that state.
 
-7. **New deck adapters**: Must determine `twoFaced` and populate `backFace` with a `CardFace` object. Missing back-face data degrades library search grouping and means the flip button won't appear.
+7. **New deck adapters**: Must determine `twoFaced` via `isDoubleSidedLayout(layout)` (from `twoFacedLayouts.ts`) and populate `backFace` with a `CardFace` object only for those layouts. Do NOT infer two-faced from "two faces in the data" — split/adventure/prepare cards have two faces but one image. Missing back-face data on a genuinely double-sided card degrades library search grouping and means the flip button won't appear.
 
 8. **Precon deck regeneration**: When regenerating precon decks, AllIdentifiers data must be available for MTGJSON adapter to look up back faces. Without it, the adapter throws an error. AllIdentifiers.json now exceeds Node's max string length, so `fetch-mtgjson-precons.ts` stream-parses it with `stream-json` (commit `5b3e5b5`) rather than `fs.readFile` + `JSON.parse`. If you touch `loadCardDatabase()`, keep it streaming — a whole-file read will throw `RangeError: Invalid string length`.
 
 9. **Game state version**: `currentFace` is persisted. If the persisted game state version changes, migration code must preserve or default `currentFace`.
+
+10. **Single-image multi-face layouts** (`prepare`, `adventure`, `split`, `aftermath`, `flip`): These are deliberately NOT two-faced (no flip button, no `backFace`). Consequence: they contribute only their front-face type to library search grouping (e.g. a Prepared creature appears under Creature, not also under its spell's type). If a future card type needs both halves shown, that's a display feature, not a flip — don't reach for `twoFaced`.
+
+11. **Stale cached deck files**: `twoFaced`/`backFace` are baked into `decks/*.json` at download time. Changing adapter classification does NOT retroactively fix already-downloaded decks — they keep their old flags until re-downloaded (`npm run deck:download -- <id>` for Archidekt, precon regeneration for MTGJSON). After a classification change, re-download affected decks.
 
 ## Not Related To
 

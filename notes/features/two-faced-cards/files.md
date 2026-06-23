@@ -49,9 +49,12 @@
 
 | File | Role |
 |---|---|
-| `src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-127` | Extracts `twoFaced` and `backFace` from Archidekt faces array |
-| `src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:65-109` | Extracts `twoFaced` from layout, `backFace` via `otherFaceIds` lookup |
+| `src/port-deck-retrieval/twoFacedLayouts.ts` | **Shared source of truth**: `DOUBLE_SIDED_LAYOUTS` + `isDoubleSidedLayout()`. Distinguishes real two-faced layouts from single-image multi-face layouts (split/adventure/prepare/...) |
+| `src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-127` | `twoFaced = faces.length===2 && isDoubleSidedLayout(layout)`; front data from `faces[0]`; `backFace` only when two-faced |
+| `src/port-deck-retrieval/archidektAdapter/archidektTypes.ts` | `ArchidektCard.oracleCard.layout?: string` (read for classification) |
+| `src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:65-109` | `twoFaced = isDoubleSidedLayout(layout)` (shared helper), `backFace` via `otherFaceIds` lookup |
 | `src/port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.ts:16` | `side` field used to identify back face ("b") |
+| `src/scripts/inspect-archidekt-card.ts` | Diagnostic: dumps raw Archidekt `oracleCard` (layout, faces) — `npm run card:inspect -- <deckId> <nameSubstring>` |
 
 ## Persistence
 

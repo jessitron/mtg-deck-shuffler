@@ -75,6 +75,17 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 - **`b937ea2`** - Add two-faced card game to seed test data
   - Seed script creates a game with "From Cute to Brute" precon (many two-faced cards) for testing
 
+## Layout-Gated Classification (single-image multi-face cards)
+
+- **Restrict Archidekt `twoFaced` to genuinely double-sided layouts**
+  - **Bug**: "Studious First-Year // Rampant Growth" (Secrets of Strixhaven, a Prepared card, layout `prepare`) got a flip button in hand but has no back image. Clicking flip requested a nonexistent Scryfall `face=back` image.
+  - **Cause**: The Archidekt adapter inferred `twoFaced` from `faces.length === 2`. That's true for split/adventure/aftermath/flip/prepare cards too — single physical cards with two halves printed on one front face.
+  - **Fix**: Added `src/port-deck-retrieval/twoFacedLayouts.ts` (`DOUBLE_SIDED_LAYOUTS` + `isDoubleSidedLayout()`) as the shared source of truth. Archidekt now uses `twoFaced = faces.length === 2 && isDoubleSidedLayout(layout)`; MTGJSON switched from its inline array to the shared helper (no behavior change). Front-face data is still pulled from `faces[0]` for any 2-face card (top-level fields for split cards are the combined `"{G} // {1}{G}"` mess with empty text), but `backFace` is built only when `twoFaced`.
+  - Added `layout?: string` to `ArchidektCard.oracleCard` (`archidektTypes.ts`).
+  - **Decision**: These cards are deliberately single-faced — no flip, no `backFace`. They now group under only their front-face type in library search (a Prepared creature shows under Creature, not also Sorcery). Showing both halves would be a display feature, not a flip.
+  - Tests: added "does not treat a single-image multi-face card (Prepared) as two-faced" to `archidekt-deck-adapter.test.ts`; added `layout` (`transform`/`modal_dfc`) to the existing Nicol Bolas / Esika fixtures so they still classify as two-faced.
+  - Added `npm run card:inspect -- <deckId> <nameSubstring>` (`src/scripts/inspect-archidekt-card.ts`) to dump raw Archidekt `oracleCard` data (layout, faces) for diagnosing this class of bug.
+
 ## What Was Tried and Abandoned
 
 - **FlipCardEvent**: Recording flip as a game event was added and removed. It cluttered history without purpose since flipping doesn't change the game's logical state.
