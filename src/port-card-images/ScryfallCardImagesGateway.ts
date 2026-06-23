@@ -8,8 +8,12 @@ const STORED_FORMATS: ImageFormat[] = ["normal", "large", "png", "art_crop"];
 const SCRYFALL_COLLECTION_URL = "https://api.scryfall.com/cards/collection";
 /** Scryfall allows up to 75 identifiers per /cards/collection request. */
 const BATCH_SIZE = 75;
-/** Scryfall asks for 50-100ms between requests. */
-const REQUEST_DELAY_MS = 100;
+/** Scryfall asks for 50-100ms between requests (10 req/s). Stay comfortably
+ * under that across the whole run, not just within one fetchImages call. */
+const MIN_REQUEST_GAP_MS = 150;
+/** Retry budget for 429 Too Many Requests responses. */
+const MAX_RETRIES = 5;
+const DEFAULT_BACKOFF_MS = 1000;
 
 /** Minimal shape of the bits of a Scryfall card we read. */
 interface ScryfallImageUris {
@@ -61,15 +65,16 @@ const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
  * precon decks) are fetched once. */
 export class ScryfallCardImagesGateway implements CardImagesPort {
   private cache = new Map<string, FetchedCardImages>();
+  /** Epoch ms of the last request, to throttle across all fetchImages calls
+   * (the same instance is reused across many decks during backfill). */
+  private lastRequestAt = 0;
 
   async fetchImages(scryfallIds: string[]): Promise<Map<string, FetchedCardImages>> {
     const unique = [...new Set(scryfallIds.filter((id) => id && id.length > 0))];
     const missing = unique.filter((id) => !this.cache.has(id));
 
-    const batches = chunk(missing, BATCH_SIZE);
-    for (let i = 0; i < batches.length; i++) {
-      await this.fetchBatch(batches[i]);
-      if (i < batches.length - 1) await delay(REQUEST_DELAY_MS);
+    for (const batch of chunk(missing, BATCH_SIZE)) {
+      await this.fetchBatch(batch);
     }
 
     const result = new Map<string, FetchedCardImages>();
@@ -80,26 +85,46 @@ export class ScryfallCardImagesGateway implements CardImagesPort {
     return result;
   }
 
+  /** Wait until at least MIN_REQUEST_GAP_MS has elapsed since the last request. */
+  private async throttle(): Promise<void> {
+    const elapsed = Date.now() - this.lastRequestAt;
+    if (elapsed < MIN_REQUEST_GAP_MS) await delay(MIN_REQUEST_GAP_MS - elapsed);
+    this.lastRequestAt = Date.now();
+  }
+
   private async fetchBatch(ids: string[]): Promise<void> {
     if (ids.length === 0) return;
-    const response = await fetch(SCRYFALL_COLLECTION_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Scryfall requires a User-Agent and Accept header on API requests.
-        "User-Agent": "mtg-deck-shuffler/1.0 (https://github.com/jessitron/mtg-deck-shuffler)",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ identifiers: ids.map((id) => ({ id })) }),
-    });
-    if (!response.ok) {
-      throw new Error(`Scryfall /cards/collection failed: ${response.status} ${response.statusText}`);
-    }
-    const body = (await response.json()) as ScryfallCollectionResponse;
-    for (const card of body.data || []) {
-      if (!card.id) continue;
-      const images = mapScryfallCardToImages(card);
-      if (images) this.cache.set(card.id, images);
+
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      await this.throttle();
+      const response = await fetch(SCRYFALL_COLLECTION_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Scryfall requires a User-Agent and Accept header on API requests.
+          "User-Agent": "mtg-deck-shuffler/1.0 (https://github.com/jessitron/mtg-deck-shuffler)",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ identifiers: ids.map((id) => ({ id })) }),
+      });
+
+      if (response.status === 429 && attempt < MAX_RETRIES) {
+        const retryAfter = Number(response.headers.get("retry-after"));
+        const backoff = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : DEFAULT_BACKOFF_MS * (attempt + 1);
+        await delay(backoff);
+        continue;
+      }
+      if (!response.ok) {
+        throw new Error(`Scryfall /cards/collection failed: ${response.status} ${response.statusText}`);
+      }
+
+      const body = (await response.json()) as ScryfallCollectionResponse;
+      for (const card of body.data || []) {
+        if (!card.id) continue;
+        const images = mapScryfallCardToImages(card);
+        if (images) this.cache.set(card.id, images);
+      }
+      return;
     }
   }
 }
