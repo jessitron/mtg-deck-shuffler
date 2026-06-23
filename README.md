@@ -1,5 +1,7 @@
 # Shuffle your deck
 
+**Deployed at: https://mtg.jessitron.honeydemo.io** (AWS EKS — see [notes/DEPLOYMENT.md](notes/DEPLOYMENT.md))
+
 My real objective is to play Magic with my sister remotely. Here's our simplest-possible plan:
 We create a Mural and paste pictures of the cards in there. Then we move them around the same way as when we're playing.
 We have VC open so we're talking to each other as we do this, so we can communicate about what is happening.
