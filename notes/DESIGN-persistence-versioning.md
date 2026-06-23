@@ -47,6 +47,23 @@ When unsure, ask: *"Does the old persisted bytes, read back by the new code, pro
 5. **Update tests:** bump version literals; add a test that an old version is rejected (or migrated). See `test/GameState-conversion-simple.test.ts` ("rejects a game saved in an older, incompatible format").
 6. **`data.db` is a gitignored local cache** — fine to delete. In production the card cache rebuilds on deploy; *old saved games/preps fail loudly per step 3* (that's the intended outcome, not a regression).
 
+## Exception: optional fields with a graceful fallback
+
+A `CardDefinition` field change does **not** require a version bump if the new
+field is **optional** and the code **falls back to correct behavior when it's
+absent**. Run the litmus: *"does old persisted data, read by new code, produce a
+correct object?"* If yes, don't bump.
+
+Worked example — `imageUris`/`backImageUris` (the Scryfall image-URL change):
+the fields are optional and `getCardImageUrl` falls back to constructing the URL
+from `scryfallId` (the prior behavior) when they're missing. So old decks/games/
+preps stay valid, no version was bumped, and no reject path was added. The SQLite
+card cache gained the columns via non-destructive `ALTER TABLE ADD COLUMN` (old
+rows get NULL → fallback). Regenerating decks (`precons:fetch-mtgjson --convert`,
+`deck:download`) is then *optional* — it bakes the URLs in so the fix reaches
+brand-new cards, but isn't needed for correctness. Contrast with `cardTypes`,
+which was non-optional with no fallback → full bump + reject + mandatory regen.
+
 ## Gotchas
 
 - **Bumping `PERSISTED_GAME_PREP_VERSION` interacts with the prep optimistic-lock check.** `prep.version` doubles as the optimistic-concurrency token in `/start-game` (`expected-version` vs `prep.version`). Preps are immutable, so this is fine: a current prep renders its own version into the form. The format-version guard rejects old preps *before* that check.

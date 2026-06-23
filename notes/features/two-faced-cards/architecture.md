@@ -41,6 +41,7 @@ Both adapters use it, so they agree on what's flippable.
 
 ### Card Repository Storage (`src/port-card-repository/SqliteCardRepositoryAdapter.ts`)
 - `card_types` column stores JSON-serialized `string[]`; `two_faced` stores 0/1
+- `image_uris` / `back_image_uris` columns store JSON-serialized `CardImageUris` (nullable). Added via non-destructive `ALTER TABLE ADD COLUMN` (existing rows get NULL → fallback to constructed URLs).
 - No `back_face`/`mana_cost`/`cmc`/`oracle_text` columns. The table is a gitignored cache; on startup an old-schema table (one lacking `card_types`) is DROPped and recreated.
 
 ## Data Flow: Flip in Game
@@ -102,12 +103,23 @@ div.flip-container-with-button
 ```
 Both face images are always in the DOM. CSS 3D transforms with `backface-visibility: hidden` show only the current face. The `.card-flipped` class triggers a 180-degree Y rotation.
 
-### Image URL Construction (`src/types.ts:49-54`)
-`getCardImageUrl(scryfallId, format, face)` builds Scryfall CDN URLs:
-```
-https://cards.scryfall.io/{format}/{face}/{id[0]}/{id[1]}/{scryfallId}.{ext}
-```
-The `face` parameter (`"front"` or `"back"`) is part of the URL path.
+### Image URLs (`src/types.ts`)
+Two functions now exist:
+- **`getCardImageUrl(card: CardDefinition, format, face)`** — the one views call. Prefers the **stored** Scryfall URL on the card (`card.imageUris` for front, `card.backImageUris` for back), falling back to construction when absent.
+- **`constructCardImageUrl(scryfallId, format, face)`** — the old by-hand construction (`https://cards.scryfall.io/{format}/{face}/{id[0]}/{id[1]}/{scryfallId}.{ext}`), kept as the fallback. The `face` (`"front"`/`"back"`) is part of the path.
+
+**Why stored URLs:** the bare constructed `normal` URL 404s for very recently released cards (e.g. Arcane Signet, set ECC) — Scryfall only serves them at the **versioned** URL (`...jpg?<timestamp>`). The stored URLs are copied verbatim from Scryfall (so they carry the `?<version>` tag).
+
+`CardDefinition` carries two **optional** fields for this: `imageUris?: CardImageUris` (front/only face) and `backImageUris?: CardImageUris` (present only when `twoFaced`). `CardImageUris = Partial<Record<ImageFormat, string>>`, storing only the formats the app uses (`normal`, `large`, `png`, `art_crop`). Both faces still share **one** `scryfallId`; the back is no longer derived by path-swapping the same id at render — it comes from `card_faces[1].image_uris` at ingestion. The fields are optional with a graceful fallback, so legacy data (no stored URLs) still renders via construction.
+
+### Image enrichment at ingestion (`src/port-card-images/`)
+A new port fetches Scryfall image URLs by scryfallId:
+- `CardImagesPort` / `FetchedCardImages` (`{front, back?}`) — `types.ts`
+- `ScryfallCardImagesGateway` — batches `POST https://api.scryfall.com/cards/collection` (75 ids/request, caches across calls, sends `User-Agent`+`Accept` headers Scryfall requires). Pure mapper `mapScryfallCardToImages`: single-faced reads top-level `image_uris`; genuine DFCs read `card_faces[0].image_uris` (front) and `card_faces[1].image_uris` (back).
+- `FakeCardImagesGateway` — test fake (synthesizes deterministic versioned URLs, or seed specific ids).
+- `enrichDeckWithImages(deck, port)` — collects unique scryfallIds, fetches, attaches `imageUris` to every card and `backImageUris` only to `twoFaced` cards. Best-effort: cards Scryfall doesn't return are left unset → fallback.
+
+Enrichment runs: Archidekt adapter (optional injected `imagesPort`, wired in `server.ts` + `download-deck` script), and the `fetch-mtgjson-precons` script after conversion. The MTGJSON adapter's `convertMtgjsonToDeck` stays synchronous (enrichment is a separate post-pass).
 
 ## CSS Animation
 
