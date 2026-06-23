@@ -41,6 +41,20 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
     next();
   });
+
+  // Developer mode: an undocumented per-browser toggle. Entered via the secret
+  // /dontdie URL (sets the cookie below); exited via the menu link to
+  // /dontdie/off. When set, full pages render <body class="dev-mode"> and CSS
+  // reveals otherwise-hidden debug affordances. No new dependency: we read the
+  // cookie straight off the header rather than pulling in cookie-parser.
+  const DEV_MODE_COOKIE = "devMode";
+  app.use((req, res, next) => {
+    const cookieHeader = req.headers.cookie ?? "";
+    res.locals.devMode = cookieHeader
+      .split(";")
+      .some((c) => c.trim() === `${DEV_MODE_COOKIE}=1`);
+    next();
+  });
   
   // Helper function to validate state version for optimistic concurrency control
   function validateStateVersion(
@@ -462,7 +476,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const html = formatGamePageHtmlPage(game);
+      const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
@@ -1480,6 +1494,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       console.error("Error proxying image:", error);
       res.status(500).send("Internal server error");
     }
+  });
+
+  // Developer mode entrance (undocumented). Sets a long-lived cookie and sends
+  // you back where you came from. The exit link in the game menu hits /off.
+  app.get("/dontdie", (req, res) => {
+    res.cookie(DEV_MODE_COOKIE, "1", { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: "lax" });
+    res.redirect(req.get("referer") || "/");
+  });
+
+  app.get("/dontdie/off", (req, res) => {
+    res.clearCookie(DEV_MODE_COOKIE);
+    res.redirect(req.get("referer") || "/");
   });
 
   // 404 handler - must be last

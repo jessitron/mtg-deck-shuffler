@@ -17,6 +17,7 @@ export function formatGameMenuHtmlFragment(game: GameState): string {
         ${formatEndGameActionsHtmlFragment(game)}
         <div class="menu-section menu-debug">
           ${formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion())}
+          <a class="exit-dev-mode" href="/dontdie/off">Exit dev mode</a>
         </div>
       </div>
     </div>`;

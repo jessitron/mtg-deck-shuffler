@@ -67,7 +67,9 @@ test.describe('Game Hamburger Menu', () => {
     await expect(panel.locator('button:has-text("Action History")')).toBeVisible();
     await expect(panel.locator('button:has-text("Restart Game")')).toBeVisible();
     await expect(panel.locator('button:has-text("Choose Another Deck")')).toBeVisible();
-    await expect(panel.locator('.game-id')).toBeVisible();
+    // The debug block (.game-id et al.) is now gated behind developer mode,
+    // so it is hidden here. See verify-developer-mode.spec.ts.
+    await expect(panel.locator('.game-id')).not.toBeVisible();
 
     console.log('SUCCESS: game controls are inside the hamburger menu');
   });

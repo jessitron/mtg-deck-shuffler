@@ -50,6 +50,8 @@ HTMX swaps have two phases: **swap** (insert new DOM, fire `htmx:afterSwap`) the
 
 This bit the hamburger menu: keeping its open state as an `.open` class on `#game-menu` (which lives inside the swapped `#game-container`) and re-applying it in `afterSwap` failed intermittently. The fix: store transient UI state that must survive swaps as a class on a **stable element HTMX never swaps** — the menu uses `document.body` (`body.game-menu-open`) and drives visibility purely via CSS (`body.game-menu-open .game-menu-panel { display: flex }`). The same principle applies to any future animation/UI state that needs to outlive a swap: don't re-apply it to swapped content; anchor it on `body` (or another non-swapped ancestor). Scroll-position restore (also in `game.js` `afterSwap`) works because it sets a *property* (`scrollLeft`) that settle doesn't reconcile, not a class.
 
+**Second example — `body.dev-mode` (developer mode).** The debug block (`.menu-debug`) lives inside the swapped `#game-container`, but its visibility is gated by `body.dev-mode .menu-debug { display: block }`. The `dev-mode` class is rendered server-side onto `<body>` by `formatPageWrapper` (from a `devMode` cookie — see `/dontdie` in `app.ts`), and `<body>` is never swapped, so the debug block reveals/hides correctly across every game-state swap with **zero `afterSwap` JS**. This is the cleanest form of the pattern: when the swap-surviving state is known at full-page render time, set the body class on the server and let CSS do everything — no JS class management at all.
+
 ## CSS Keyframes
 
 All animation keyframes live in `public/game.css` except:

@@ -6,7 +6,7 @@ import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js"
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
 
-export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}): string {
+export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
   const contentWithModal = `
     <div class="page-container">
@@ -16,7 +16,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
     </div>`;
   return formatPageWrapper({
     title: `MTG Game - ${game.deckName}`,
-    content: contentWithModal
+    content: contentWithModal,
+    devMode
   });
 }
 

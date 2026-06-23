@@ -42,6 +42,11 @@
 - Moved Undo, Action History, Restart Game, Choose Another Deck, and the debug/game-state block into a hamburger menu at the top of the game screen. Edited `game.js`'s `htmx:beforeSwap`/`afterSwap` handlers (scroll restore unchanged; added `syncMenuToggleAria()`).
 - **Lesson (see architecture.md)**: re-applying an `.open` class to `#game-menu` in `afterSwap` raced the HTMX **settle phase** and got reverted. Fixed by storing open state on `document.body` (`body.game-menu-open`) instead of on the swapped-in menu element.
 
+### Developer Mode (body-anchored visibility)
+
+- Added an undocumented developer mode: the secret URL `/dontdie` sets a `devMode` cookie; `formatPageWrapper` then renders `<body class="dev-mode">`. The debug block (`.menu-debug`) in the hamburger menu is `display:none` by default and revealed only under `body.dev-mode` (plus an "Exit dev mode" link → `/dontdie/off`).
+- **Lesson (see architecture.md)**: this is a second instance of the "anchor swap-surviving state on `body`, not on swapped content" principle — and the cleanest one, since the state is known at full-page render and set server-side, so CSS handles everything with **no `afterSwap` JS** (contrast `body.game-menu-open`, which is toggled by JS).
+
 ### CSS Organization
 
 - `ca27f4c` - "Separate game styles from home page styles"

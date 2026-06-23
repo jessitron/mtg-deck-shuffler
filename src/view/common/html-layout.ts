@@ -59,6 +59,7 @@ interface PageWrapperOptions {
   footerContent?: string;
   additionalStylesheets?: string[];
   includeFooter?: boolean;
+  devMode?: boolean;
 }
 
 function formatPageWrapper(options: PageWrapperOptions): string {
@@ -67,10 +68,12 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     content,
     footerContent = ``,
     additionalStylesheets = [],
-    includeFooter = true
+    includeFooter = true,
+    devMode = false
   } = options;
 
   const headHtml = formatHtmlHead(title, additionalStylesheets);
+  const bodyClass = devMode ? ` class="dev-mode"` : ``;
   const footerHtml = includeFooter ? `
     <footer>
       ${footerContent}
@@ -80,7 +83,7 @@ function formatPageWrapper(options: PageWrapperOptions): string {
   return `<!DOCTYPE html>
 <html lang="en">
   ${headHtml}
-  <body>
+  <body${bodyClass}>
     ${content}${footerHtml}
   </body>
 </html>`;

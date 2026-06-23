@@ -710,9 +710,31 @@ body.game-menu-open .game-menu-panel {
   background-color: #5a6268;
 }
 
+/* The debug block is part of developer mode: hidden by default, revealed only
+   when <body class="dev-mode"> (set server-side from the devMode cookie — see
+   /dontdie). The class lives on body, which HTMX never swaps, so visibility
+   survives every game-state swap of the menu fragment. */
 .menu-debug {
+  display: none;
   color: #ccc;
   font-size: 0.85rem;
+}
+
+body.dev-mode .menu-debug {
+  display: block;
+}
+
+.exit-dev-mode {
+  display: block;
+  margin-top: 8px;
+  color: #ccc;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.exit-dev-mode:hover {
+  color: white;
 }
 
 .menu-debug p {
