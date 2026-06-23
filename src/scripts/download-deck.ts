@@ -2,6 +2,7 @@
 
 import { ArchidektGateway } from "../port-deck-retrieval/archidektAdapter/ArchidektGateway.js";
 import { ArchidektDeckToDeckAdapter } from "../port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.js";
+import { ScryfallCardImagesGateway } from "../port-card-images/ScryfallCardImagesGateway.js";
 import { promises as fs } from "fs";
 import { join } from "path";
 
@@ -17,7 +18,7 @@ async function main(): Promise<void> {
 
   try {
     const gateway = new ArchidektGateway();
-    const adapter = new ArchidektDeckToDeckAdapter(gateway);
+    const adapter = new ArchidektDeckToDeckAdapter(gateway, undefined, new ScryfallCardImagesGateway());
     const deckData = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: deckId });
 
     const filename = `deck-${deckId}.json`;

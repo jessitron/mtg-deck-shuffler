@@ -9,6 +9,7 @@ import { SqlitePersistPrepAdapter } from "./port-persist-prep/SqlitePersistPrepA
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
+import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
 import { createApp } from "./app.js";
 
 function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
@@ -50,7 +51,10 @@ function createCardRepositoryAdapter(): CardRepositoryPort {
   }
 }
 
-const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(new LocalFileAdapter(LOCAL_DECK_RELATIVE_PATH), new ArchidektDeckToDeckAdapter(new ArchidektGateway()));
+const deckRetriever: RetrieveDeckPort = new CascadingDeckRetrievalAdapter(
+  new LocalFileAdapter(LOCAL_DECK_RELATIVE_PATH),
+  new ArchidektDeckToDeckAdapter(new ArchidektGateway(), undefined, new ScryfallCardImagesGateway())
+);
 const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);

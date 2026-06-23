@@ -56,7 +56,7 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
       ${actions}
     </div>`;
   } else {
-    const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", gameCard.currentFace);
+    const imageUrl = getCardImageUrl(gameCard.card, "normal", gameCard.currentFace);
     return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
@@ -71,8 +71,8 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
 }
 
 export function formatFlippingContainer(gameCard: GameCard, gameId: number, expectedVersion?: number): string {
-  const frontImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "front");
-  const backImageUrl = getCardImageUrl(gameCard.card.scryfallId, "normal", "back");
+  const frontImageUrl = getCardImageUrl(gameCard.card, "normal", "front");
+  const backImageUrl = getCardImageUrl(gameCard.card, "normal", "back");
   const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;

@@ -22,7 +22,7 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           name: cmd.name,
           colorIdentity: cmd.colorIdentity,
           set: cmd.set,
-          imageUrl: getCardImageUrl(cmd.scryfallId, "art_crop", "front")
+          imageUrl: getCardImageUrl(cmd, "art_crop", "front")
         }));
 
         const createdYear = deck.provenance?.createdAt

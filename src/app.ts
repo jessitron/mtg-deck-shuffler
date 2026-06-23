@@ -16,7 +16,7 @@ import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, Inc
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
-import { getCardImageUrl } from "./types.js";
+import { getCardImageUrl, constructCardImageUrl } from "./types.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -693,7 +693,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const expectedVersion = game.getStateVersion();
-      const imageUrl = getCardImageUrl(gameCard.card.scryfallId, "large", gameCard.currentFace);
+      const imageUrl = getCardImageUrl(gameCard.card, "large", gameCard.currentFace);
       const gathererUrl =
         gameCard.card.multiverseid
           ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`
@@ -806,7 +806,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const faceParam = req.query.face as string | undefined;
       const currentFace: "front" | "back" = faceParam === "back" ? "back" : "front";
 
-      const imageUrl = getCardImageUrl(cardDef.scryfallId, "large", currentFace);
+      const imageUrl = getCardImageUrl(cardDef, "large", currentFace);
       const gathererUrl =
         cardDef.multiverseid
           ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`
@@ -1391,7 +1391,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const expectedVersion = game.getStateVersion();
-      const imageUrl = getCardImageUrl(flippedCard.card.scryfallId, "large", flippedCard.currentFace);
+      const imageUrl = getCardImageUrl(flippedCard.card, "large", flippedCard.currentFace);
       const gathererUrl =
         flippedCard.card.multiverseid
           ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`
@@ -1459,8 +1459,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const cardFace: "front" | "back" = face === "front" || face === "back" ? face : "front";
 
     try {
-      // Import getCardImageUrl function
-      const imageUrl = getCardImageUrl(cardId, "png", cardFace);
+      // Prefer the card's stored Scryfall URL (carries the version tag fresh
+      // cards need); fall back to constructing it if the card isn't cached.
+      const card = await cardRepository.getCard(cardId);
+      const imageUrl = card ? getCardImageUrl(card, "png", cardFace) : constructCardImageUrl(cardId, "png", cardFace);
 
       const response = await fetch(imageUrl);
       if (!response.ok) {

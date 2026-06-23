@@ -3,9 +3,11 @@ import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
 import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
+import { CardImagesPort } from "../../port-card-images/types.js";
+import { enrichDeckWithImages } from "../../port-card-images/enrichDeckWithImages.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
-  constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date) {}
+  constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date, private imagesPort?: CardImagesPort) {}
 
   listAvailableDecks() {
     return [];
@@ -32,7 +34,17 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
     // TypeScript now knows request is ArchidektDeckRetrievalRequest
     const archidektDeck = await this.gateway.fetchDeck(request.archidektDeckId);
-    return this.convertArchidektToDeck(archidektDeck, request.archidektDeckId);
+    const deck = this.convertArchidektToDeck(archidektDeck, request.archidektDeckId);
+    if (this.imagesPort) {
+      // Best-effort: if Scryfall is unreachable, ship the deck anyway and let
+      // image URLs fall back to construction at render time.
+      try {
+        await enrichDeckWithImages(deck, this.imagesPort);
+      } catch (error) {
+        console.error("Failed to enrich Archidekt deck with Scryfall images; falling back to constructed URLs:", error);
+      }
+    }
+    return deck;
   }
 
   private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {

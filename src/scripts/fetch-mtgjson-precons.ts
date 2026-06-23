@@ -12,6 +12,8 @@ import { pick } from "stream-json/filters/pick.js";
 import { streamObject } from "stream-json/streamers/stream-object.js";
 import { MtgjsonDeckAdapter } from "../port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.js";
 import { MtgjsonCard, MtgjsonDeck } from "../port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
+import { ScryfallCardImagesGateway } from "../port-card-images/ScryfallCardImagesGateway.js";
+import { enrichDeckWithImages } from "../port-card-images/enrichDeckWithImages.js";
 
 const MTGJSON_URL = "https://mtgjson.com/api/v5/AllDeckFiles.tar.gz";
 const ALL_IDENTIFIERS_URL = "https://mtgjson.com/api/v5/AllIdentifiers.json.gz";
@@ -100,6 +102,9 @@ async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCa
 
 async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardDatabase?: Map<string, MtgjsonCard>): Promise<void> {
   const adapter = new MtgjsonDeckAdapter();
+  // One gateway across all decks so shared cards (Arcane Signet, Sol Ring, ...)
+  // are fetched from Scryfall once and reused.
+  const imagesGateway = new ScryfallCardImagesGateway();
 
   // Read AllDeckFiles directory
   const allDeckFilesDir = join(TEMP_DIR, "AllDeckFiles");
@@ -160,6 +165,9 @@ async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardD
         try {
           // Convert using adapter (pass card database for back-face lookups)
           const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file, cardDatabase);
+
+          // Enrich with Scryfall image URLs (the versioned URLs fresh cards need)
+          await enrichDeckWithImages(deck, imagesGateway);
 
           // Save to decks directory
           await fs.writeFile(outputPath, JSON.stringify(deck, null, 2), "utf-8");
