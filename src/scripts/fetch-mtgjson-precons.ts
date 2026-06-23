@@ -6,6 +6,10 @@ import { join } from "path";
 import { pipeline } from "stream/promises";
 import { createGunzip } from "zlib";
 import * as tar from "tar";
+import chain from "stream-chain";
+import { parser } from "stream-json";
+import { pick } from "stream-json/filters/pick.js";
+import { streamObject } from "stream-json/streamers/stream-object.js";
 import { MtgjsonDeckAdapter } from "../port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.js";
 import { MtgjsonCard, MtgjsonDeck } from "../port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
 
@@ -70,12 +74,26 @@ async function downloadAndDecompressGz(url: string, destPath: string): Promise<v
 
 async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCard>> {
   console.log(`Loading card database from ${jsonPath}...`);
-  const content = await fs.readFile(jsonPath, "utf-8");
-  const allIdentifiers = JSON.parse(content) as { data: Record<string, MtgjsonCard> };
+  // AllIdentifiers.json exceeds Node's max string length (~512MB), so we can't
+  // read it as a single string. Stream the top-level `data` object's entries
+  // instead, building the UUID→card map one card at a time.
   const cardDatabase = new Map<string, MtgjsonCard>();
-  for (const [uuid, card] of Object.entries(allIdentifiers.data)) {
-    cardDatabase.set(uuid, card);
-  }
+  const cardStream = chain([
+    createReadStream(jsonPath),
+    parser(),
+    pick({ filter: "data" }),
+    streamObject(),
+  ]);
+
+  cardStream.on("data", ({ key, value }: { key: string; value: MtgjsonCard }) => {
+    cardDatabase.set(key, value);
+  });
+
+  await new Promise<void>((resolve, reject) => {
+    cardStream.on("end", resolve);
+    cardStream.on("error", reject);
+  });
+
   console.log(`✓ Loaded ${cardDatabase.size} cards into database`);
   return cardDatabase;
 }
