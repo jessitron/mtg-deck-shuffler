@@ -38,6 +38,10 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - If `cardTypes` stops being the full union (e.g. an adapter only stores the front type), grouping silently loses groups
 - Multi-face cards show in multiple type groups (e.g., Creature and Planeswalker)
 
+### Mulligan Advisor (cardTypes as land signal)
+- `src/mulligan/recommendMulligan.ts` defines `isLand(card) = card.cardTypes.includes("Land")` and counts lands in the opening hand. This is the first real instance of the "is this hand worth keeping?" feature anticipated in watch point #1 / the README — and it reads `cardTypes` rather than re-storing per-face card text, as that note directs.
+- Because it relies on `cardTypes` being the **union of all faces' types**, a modal double-faced land (whose union includes `"Land"`) is correctly counted. **Narrowing `cardTypes` to front-face-only would now break mulligan land counts too**, not just library-search grouping — there are two silent dependents on the union now.
+
 ### Card Display (every card rendering path)
 - `formatCardContainer()` branches on `card.twoFaced` to decide between simple `<img>` and `formatFlippingContainer()`
 - Any new card display context must handle the two-faced branch

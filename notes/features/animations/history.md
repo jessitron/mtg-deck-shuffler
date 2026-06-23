@@ -59,6 +59,11 @@
 - `hand-components.ts` renders a Mulligan button (`.mulligan-row > button.mulligan-button`) as a sibling above `#hand-cards` during the hand-acceptance stage. It does not alter `.card-container`, hand-drop-zones, or card markup, so the drag-and-drop animation-class cleanup in `game.js` is untouched. `game.css` gained `.mulligan-row`/`.mulligan-button` layout rules only (no keyframes/transitions).
 - `startGame()` now auto-draws seven cards, so the first game render shows a full hand (no animation involved — it's the initial render).
 
+### Mulligan Advisor (dev-mode fragment, no animation)
+
+- **`1034189`** - `hand-components.ts` now renders a `<div class="mulligan-recommendation">` sibling next to the mulligan button during the hand-acceptance stage (`formatMulliganRecommendationHtmlFragment`). It is **static, server-rendered, read-only text — no keyframes, transitions, or client JS**, so it touches none of the animation machinery (no `WhatHappened` fields, no `game.js` class cleanup).
+- `game.css` gained `.mulligan-recommendation` rules gated by `body.dev-mode` (default `display:none`), exactly mirroring the `.menu-debug` developer-mode pattern. Because the gate lives on `body` (never HTMX-swapped) and the fragment re-renders server-side on every game-state swap, it survives swaps with **no `afterSwap` handling** — a third clean example of the "anchor swap-surviving state on `body`" principle.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
