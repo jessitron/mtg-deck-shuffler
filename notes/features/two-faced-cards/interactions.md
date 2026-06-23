@@ -89,7 +89,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 8. **Precon deck regeneration**: When regenerating precon decks, AllIdentifiers data must be available for MTGJSON adapter to look up back faces. Without it, the adapter throws an error. AllIdentifiers.json now exceeds Node's max string length, so `fetch-mtgjson-precons.ts` stream-parses it with `stream-json` (commit `5b3e5b5`) rather than `fs.readFile` + `JSON.parse`. If you touch `loadCardDatabase()`, keep it streaming — a whole-file read will throw `RangeError: Invalid string length`.
 
-9. **Game state version**: `currentFace` is persisted. If the persisted game state version changes, migration code must preserve or default `currentFace`.
+9. **Game/prep state version**: `currentFace` is persisted on `PersistedGameCard`. Persisted state is now version-gated and **rejected** rather than migrated: `PERSISTED_GAME_STATE_VERSION` (8) and `PERSISTED_GAME_PREP_VERSION` (3) were bumped for the `cardTypes` card-data break, and `fromPersistedGameState` / the prep routes throw `IncompatibleStateVersionError` / `IncompatiblePrepVersionError` (clear 410 page) for older versions. If you change the card-data shape again, bump these constants so old games/preps fail loudly instead of crashing in hydration.
 
 10. **Single-image multi-face layouts** (`prepare`, `adventure`, `split`, `aftermath`, `flip`): These are deliberately NOT two-faced (no flip button) but DO contribute all their parts' types to `cardTypes`, so they appear under every relevant group in library search (e.g. a Prepared creature shows under both Creature and Sorcery). If a future feature needs both halves shown as images, that's a display feature, not a flip — don't reach for `twoFaced`.
 
