@@ -664,17 +664,20 @@ body.game-menu-open .game-menu-panel {
   pointer-events: auto;
 }
 
+/* Dividers are border-top (a section's divider belongs to the section it
+   precedes), so a hidden section — e.g. .menu-debug when not in dev mode —
+   contributes no dangling border. The first section gets no top border. */
 .menu-section {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #444;
+  padding-top: 14px;
+  border-top: 1px solid #444;
 }
 
-.menu-section:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+.menu-section:first-child {
+  padding-top: 0;
+  border-top: none;
 }
 
 .menu-section button {
