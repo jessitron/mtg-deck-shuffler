@@ -75,10 +75,13 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
   - Default: **replaces all** existing deck files (rewrites every file, including a fresh `provenance.retrievedDate` — a noisy diff)
   - Add `--skip-existing` to convert only newly-released precons and leave existing files untouched (clean diff — use this when just picking up new precons)
   - Downloads from https://mtgjson.com/api/v5/AllDeckFiles.tar.gz, plus AllIdentifiers.json for two-faced back-face lookups (stream-parsed, since it exceeds Node's max string length)
-  - Converts to internal format with enriched card data (manaCost, cmc, oracleText)
+  - Converts to internal format (`cardTypes`, `twoFaced`, etc.) and fetches Scryfall image URLs (`imageUris`/`backImageUris`) via `port-card-images/`
 - `npm run deck:download -- <deckId>` - Download a specific Archidekt deck by ID
   - Example: `npm run deck:download -- 14669648`
-  - Saves to `decks/deck-<deckId>.json` in internal format
+  - Saves to `decks/deck-<deckId>.json` in internal format (includes Scryfall image URLs)
+- `npm run decks:backfill-images [-- <file>...]` - Add/refresh Scryfall `imageUris` on existing `decks/*.json` **without** re-downloading from MTGJSON/Archidekt
+  - Clean, additive diff (only adds image-URL fields; no `retrievedDate` churn), unlike the full `precons:fetch-mtgjson` rewrite
+  - Defaults to all decks; pass filenames to target specific ones. Throttled + retries on Scryfall 429s. Use this to pick up image URLs for freshly-released cards.
 - `npm run card:inspect -- <deckId> <nameSubstring>` - Dump raw Archidekt `oracleCard` data for matching cards
   - Example: `npm run card:inspect -- 23735063 Studious`
   - Useful for diagnosing layout/faces issues (e.g. why a single-faced card is treated as two-faced)
@@ -112,14 +115,16 @@ Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `Per
 
 - **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (precons with release dates)
 - **Archidekt API**: `https://archidekt.com/api/decks/{deckId}/` (custom decks)
-- **Scryfall**: Card images via Scryfall ID
+- **Scryfall**: image URLs fetched at ingestion via `POST /cards/collection` and stored on the card (`imageUris`/`backImageUris`). `getCardImageUrl()` prefers the stored URL and falls back to `constructCardImageUrl()` (bare CDN path) — the bare path 404s for freshly-released cards, which is why we store the versioned URLs.
 
 **Adapters** in `src/port-deck-retrieval/`:
 
 - `mtgjsonAdapter/` - MTGJSON → internal format
-- `archidektAdapter/` - Archidekt → internal format
+- `archidektAdapter/` - Archidekt → internal format (enriches with Scryfall images when given an images port)
 - `localFileAdapter/` - Read `decks/` files
 - `compositeAdapters/` - Combine adapters with fallback
+
+**Card images** in `src/port-card-images/` (`CardImagesPort`): `ScryfallCardImagesGateway` (batched, throttled, 429-retrying), `FakeCardImagesGateway`, and `enrichDeckWithImages()`. Wired into the Archidekt adapter at runtime (`server.ts`) and into the deck scripts.
 
 ## Port Configuration
 
