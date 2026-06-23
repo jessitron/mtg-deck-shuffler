@@ -64,4 +64,14 @@ describe("enrichDeckWithImages", () => {
     // Two unique ids requested (nicolBolas + lightningBolt), despite duplicates.
     expect(new Set(gateway.requestedIds).size).toBe(2);
   });
+
+  it("enriches EVERY copy of a duplicated card, even as distinct objects (JSON round-trip)", async () => {
+    // Simulate a deck read back from a file: each copy is a separate object,
+    // not a shared reference. All copies must get image URLs, not just the first.
+    const deck = deckOf([], [{ ...lightningBolt }, { ...lightningBolt }, { ...lightningBolt }]);
+    const roundTripped: Deck = JSON.parse(JSON.stringify(deck));
+    await enrichDeckWithImages(roundTripped, new FakeCardImagesGateway());
+
+    expect(roundTripped.cards.every((c) => c.imageUris?.normal)).toBe(true);
+  });
 });

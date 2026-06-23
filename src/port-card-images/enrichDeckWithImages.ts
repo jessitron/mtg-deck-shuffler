@@ -5,21 +5,18 @@ import { CardImagesPort } from "./types.js";
  * CardDefinitions in place. Best-effort: cards Scryfall doesn't recognize are
  * left without stored URLs (callers fall back to constructing the URL).
  *
- * Cards are shared object references (the same CardDefinition is pushed once per
- * copy), so mutating each unique card once updates all its copies. */
+ * Fetches once per unique scryfallId but applies the result to EVERY card with
+ * that id. Fresh adapter output shares object references across copies, but a
+ * deck round-tripped through JSON (e.g. the backfill script) has a distinct
+ * object per copy — so we must enrich each card, not just one per id. */
 export async function enrichDeckWithImages(deck: Deck, imagesPort: CardImagesPort): Promise<void> {
   const allCards: CardDefinition[] = [...deck.commanders, ...deck.cards];
-  const uniqueByScryfallId = new Map<string, CardDefinition>();
+  const uniqueIds = [...new Set(allCards.map((c) => c.scryfallId).filter((id) => id && id.length > 0))];
+
+  const images = await imagesPort.fetchImages(uniqueIds);
+
   for (const card of allCards) {
-    if (card.scryfallId && !uniqueByScryfallId.has(card.scryfallId)) {
-      uniqueByScryfallId.set(card.scryfallId, card);
-    }
-  }
-
-  const images = await imagesPort.fetchImages([...uniqueByScryfallId.keys()]);
-
-  for (const [scryfallId, card] of uniqueByScryfallId) {
-    const fetched = images.get(scryfallId);
+    const fetched = images.get(card.scryfallId);
     if (!fetched) continue;
     card.imageUris = fetched.front;
     if (card.twoFaced && fetched.back) {
