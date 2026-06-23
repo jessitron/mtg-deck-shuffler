@@ -55,11 +55,13 @@ test.describe('Game Hamburger Menu', () => {
     await expect(toggle).toBeVisible({ timeout: 5000 });
 
     const panel = page.locator('#game-menu-panel');
-    // Panel exists in the DOM but is not visible until opened.
-    await expect(panel).toBeHidden();
+    // The panel stays in the layout (display: flex) and is hidden via
+    // opacity/pointer-events, so Playwright reports it as "visible". Assert
+    // on opacity to capture whether it's actually shown to the player.
+    await expect(panel).toHaveCSS('opacity', '0');
 
     await toggle.click();
-    await expect(panel).toBeVisible({ timeout: 5000 });
+    await expect(panel).toHaveCSS('opacity', '1', { timeout: 5000 });
 
     // The menu houses the relocated controls.
     await expect(panel.locator('button:has-text("Action History")')).toBeVisible();
@@ -81,14 +83,14 @@ test.describe('Game Hamburger Menu', () => {
 
     await page.locator('#menu-toggle').click();
     const panel = page.locator('#game-menu-panel');
-    await expect(panel).toBeVisible();
+    await expect(panel).toHaveCSS('opacity', '1');
 
     // Undo from inside the menu triggers a #game-container swap. The menu lives
     // inside that swapped region, so it should re-open itself after the swap.
     await panel.locator('.undo-button').click();
     await page.waitForTimeout(800);
 
-    await expect(panel).toBeVisible();
+    await expect(panel).toHaveCSS('opacity', '1');
 
     console.log('SUCCESS: menu open state survives a swap triggered from inside the menu');
   });
@@ -98,13 +100,13 @@ test.describe('Game Hamburger Menu', () => {
 
     await page.locator('#menu-toggle').click();
     const panel = page.locator('#game-menu-panel');
-    await expect(panel).toBeVisible();
+    await expect(panel).toHaveCSS('opacity', '1');
 
     // The draw button is outside the menu — clicking it should close the menu.
     await page.locator('button.draw-button').click();
     await page.waitForTimeout(800);
 
-    await expect(panel).toBeHidden();
+    await expect(panel).toHaveCSS('opacity', '0');
 
     console.log('SUCCESS: clicking outside dismisses the menu');
   });
