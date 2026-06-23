@@ -127,7 +127,10 @@ Use `PORT=3344 ./run` to avoid conflict with user's testing server on the defaul
 
 ## Observability
 
-Honeycomb telemetry: environment `librarytron-local`, dataset `mtg-deck-shuffler` (shared with other production apps).
+Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernity`):
+
+- **Local tests**: environment `local`, dataset `mtg-deck-shuffler` (web/browser spans go to `mtg-deck-shuffler-web`).
+- **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
 
 ## Documentation
 
