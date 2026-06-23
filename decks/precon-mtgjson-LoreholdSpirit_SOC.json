@@ -1,0 +1,1572 @@
+{
+  "version": 2,
+  "id": 1776844356,
+  "name": "Lorehold Spirit",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Quintorius, History Chaser",
+      "scryfallId": "0742f19d-179c-43c4-ab95-4160c56b4384",
+      "twoFaced": false,
+      "oracleCardName": "Quintorius, History Chaser",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Planeswalker"
+      ],
+      "manaCost": "{2}{R}{W}",
+      "cmc": 4,
+      "oracleText": "Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.\n[+1]: You may discard a card. If you do, draw two cards, then mill a card.\n[−4]: Spirits you control gain double strike and vigilance until end of turn.\nQuintorius, History Chaser can be your commander."
+    }
+  ],
+  "cards": [
+    {
+      "name": "Excava, the Risen Past",
+      "scryfallId": "d47ebf19-b3fa-48a2-851a-254d32b0305a",
+      "twoFaced": false,
+      "oracleCardName": "Excava, the Risen Past",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{W}",
+      "cmc": 4,
+      "oracleText": "Flying, haste\nWhenever Excava attacks, return up to one target artifact, creature, or non-Aura enchantment card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it. It's a 1/1 Spirit creature with flying in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)"
+    },
+    {
+      "name": "Lorehold Archivist // Restore Relic",
+      "scryfallId": "cb535433-f062-4c35-977e-2f896251b1d8",
+      "twoFaced": false,
+      "oracleCardName": "Lorehold Archivist // Restore Relic",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{W}",
+      "cmc": 3,
+      "oracleText": "First strike\nAt the beginning of your upkeep, if there are three or more artifact and/or creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+    },
+    {
+      "name": "Augusta, Order Returned",
+      "scryfallId": "a0d1df84-0cb6-44fb-9916-d766d93f1519",
+      "twoFaced": false,
+      "oracleCardName": "Augusta, Order Returned",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying, vigilance\nWhenever Augusta attacks, each player exiles a card from their graveyard. When one or more nonland cards are exiled this way, put that many +1/+1 counters on target attacking creature."
+    },
+    {
+      "name": "Ceaseless Conflict",
+      "scryfallId": "a0e18f74-7fa6-4e3a-bc80-390a25055205",
+      "twoFaced": false,
+      "oracleCardName": "Ceaseless Conflict",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Destroy all creatures. Then create a 3/2 red and white Spirit creature token for each nontoken creature you controlled that was destroyed this way."
+    },
+    {
+      "name": "Vanguard of the Restless",
+      "scryfallId": "91211c56-b562-4889-8c5c-110c42be62c8",
+      "twoFaced": false,
+      "oracleCardName": "Vanguard of the Restless",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nSpirits you control get +1/+1 for each time you've cast your commander from the command zone this game.\nWhenever a Spirit you control enters, you may pay {2}{W}. If you do, return this card from your graveyard to the battlefield."
+    },
+    {
+      "name": "Advanced Reconstruction",
+      "scryfallId": "cc912fec-827d-4deb-8430-79f5ea31ca9b",
+      "twoFaced": false,
+      "oracleCardName": "Advanced Reconstruction",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your first main phase, mill a card, then exile a card from your graveyard at random. You may play the exiled card this turn.\n{1}{R}: Level 2\nWhenever one or more cards leave your graveyard, this Class deals 2 damage to each opponent.\n{1}{R}: Level 3\nSpells you cast from anywhere other than your hand cost {2} less to cast."
+    },
+    {
+      "name": "Fateful Tempest",
+      "scryfallId": "96ab4d23-14d7-429f-b62e-868c13997fb8",
+      "twoFaced": false,
+      "oracleCardName": "Fateful Tempest",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Council's dilemma — Starting with you, each player votes for past or present. You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards."
+    },
+    {
+      "name": "Naktamun Lorespinner // Wheel of Fortune",
+      "scryfallId": "acca1fd4-6384-460e-905f-118f01aa76ed",
+      "twoFaced": false,
+      "oracleCardName": "Naktamun Lorespinner // Wheel of Fortune",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, if a player has one or fewer cards in hand, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+    },
+    {
+      "name": "Relic Retriever",
+      "scryfallId": "a016463d-a0aa-44a5-97ca-17ff70c4eb95",
+      "twoFaced": false,
+      "oracleCardName": "Relic Retriever",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "First strike\nAt the beginning of each end step, if a card left your graveyard this turn, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+    },
+    {
+      "name": "Spirit of Resilience",
+      "scryfallId": "60584e5b-4138-405b-bd02-612cf175184e",
+      "twoFaced": false,
+      "oracleCardName": "Spirit of Resilience",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more cards leave your graveyard, put a +1/+1 counter on this creature, then you may have this creature become a copy of an artifact or creature card from among those cards until end of turn."
+    },
+    {
+      "name": "Turbulent Steppe",
+      "scryfallId": "c0c73dd5-0a88-4a94-9c01-c1473433e46f",
+      "twoFaced": false,
+      "oracleCardName": "Turbulent Steppe",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless your opponents control eight or more lands."
+    },
+    {
+      "name": "Moonshaker Cavalry",
+      "scryfallId": "ca90d382-7e13-4637-a624-2a1b82abe56c",
+      "twoFaced": false,
+      "oracleCardName": "Moonshaker Cavalry",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{W}{W}{W}",
+      "cmc": 8,
+      "oracleText": "Flying\nWhen this creature enters, creatures you control gain flying and get +X/+X until end of turn, where X is the number of creatures you control."
+    },
+    {
+      "name": "Staff of the Storyteller",
+      "scryfallId": "67083aca-b077-4b12-8218-876e22476f85",
+      "twoFaced": false,
+      "oracleCardName": "Staff of the Storyteller",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "When this artifact enters, create a 1/1 white Spirit creature token with flying.\nWhenever you create one or more creature tokens, put a story counter on this artifact.\n{W}, {T}, Remove a story counter from this artifact: Draw a card."
+    },
+    {
+      "name": "Wave of Reckoning",
+      "scryfallId": "7be0c25a-5e65-48e1-9560-9391111bb912",
+      "twoFaced": false,
+      "oracleCardName": "Wave of Reckoning",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Each creature deals damage to itself equal to its power."
+    },
+    {
+      "name": "Fabled Passage",
+      "scryfallId": "8119d329-6ee5-433c-bd81-8579bb061162",
+      "twoFaced": false,
+      "oracleCardName": "Fabled Passage",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+    },
+    {
+      "name": "Angel of Indemnity",
+      "scryfallId": "41163f43-7357-4bbc-a1e7-9c8070135c93",
+      "twoFaced": false,
+      "oracleCardName": "Angel of Indemnity",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{W}",
+      "cmc": 6,
+      "oracleText": "Flying, lifelink\nWhen this creature enters, return target permanent card with mana value 4 or less from your graveyard to the battlefield.\nEncore {6}{W}{W} ({6}{W}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+    },
+    {
+      "name": "Ao, the Dawn Sky",
+      "scryfallId": "e002d351-3795-4cd9-b389-9ed81077845e",
+      "twoFaced": false,
+      "oracleCardName": "Ao, the Dawn Sky",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying, vigilance\nWhen Ao dies, choose one —\n• Look at the top seven cards of your library. Put any number of nonland permanent cards with total mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.\n• Put two +1/+1 counters on each permanent you control that's a creature or Vehicle."
+    },
+    {
+      "name": "Archaeomancer's Map",
+      "scryfallId": "3679b9c8-ebae-474a-b862-6397edbcc4ea",
+      "twoFaced": false,
+      "oracleCardName": "Archaeomancer's Map",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "When this artifact enters, search your library for up to two basic Plains cards, reveal them, put them into your hand, then shuffle.\nWhenever a land an opponent controls enters, if that player controls more lands than you, you may put a land card from your hand onto the battlefield."
+    },
+    {
+      "name": "Claim Jumper",
+      "scryfallId": "11bda4c5-099f-489e-b64b-f4719241cf9d",
+      "twoFaced": false,
+      "oracleCardName": "Claim Jumper",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Vigilance\nWhen this creature enters, if an opponent controls more lands than you, you may search your library for a Plains card and put it onto the battlefield tapped. Then if an opponent controls more lands than you, repeat this process once. If you search your library this way, shuffle."
+    },
+    {
+      "name": "Drumbellower",
+      "scryfallId": "c19e0ebf-ca94-4684-8b2c-68e592b65a24",
+      "twoFaced": false,
+      "oracleCardName": "Drumbellower",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nUntap all creatures you control during each other player's untap step."
+    },
+    {
+      "name": "Guardian of Faith",
+      "scryfallId": "037739cd-e05c-4aae-9123-f924e420010c",
+      "twoFaced": false,
+      "oracleCardName": "Guardian of Faith",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "Flash\nVigilance\nWhen this creature enters, any number of other target creatures you control phase out. (Treat them and anything attached to them as though they don't exist until their controller's next turn.)"
+    },
+    {
+      "name": "Guardian Scalelord",
+      "scryfallId": "8415c0b3-9bf7-4c45-a215-4a73f1a42cbd",
+      "twoFaced": false,
+      "oracleCardName": "Guardian Scalelord",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.)\nFlying\nWhenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power."
+    },
+    {
+      "name": "Karmic Guide",
+      "scryfallId": "b26d50dd-54a1-43ce-9884-3999f698d97b",
+      "twoFaced": false,
+      "oracleCardName": "Karmic Guide",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Flying, protection from black\nEcho {3}{W}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters, return target creature card from your graveyard to the battlefield."
+    },
+    {
+      "name": "Monologue Tax",
+      "scryfallId": "7b88cb4c-8044-4e88-80f1-1688273ad0ec",
+      "twoFaced": false,
+      "oracleCardName": "Monologue Tax",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever an opponent casts their second spell each turn, you create a Treasure token."
+    },
+    {
+      "name": "Remorseful Cleric",
+      "scryfallId": "665a1bd1-db82-4db9-af7d-af161d31a696",
+      "twoFaced": false,
+      "oracleCardName": "Remorseful Cleric",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nSacrifice this creature: Exile target player's graveyard."
+    },
+    {
+      "name": "Selfless Spirit",
+      "scryfallId": "9cd16dac-3bf9-4a71-a906-0cfbf98cdca5",
+      "twoFaced": false,
+      "oracleCardName": "Selfless Spirit",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Flying\nSacrifice this creature: Creatures you control gain indestructible until end of turn."
+    },
+    {
+      "name": "Serra Paragon",
+      "scryfallId": "8e77a410-a053-4349-950c-d59e76b17923",
+      "twoFaced": false,
+      "oracleCardName": "Serra Paragon",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nOnce during each of your turns, you may play a land from your graveyard or cast a permanent spell with mana value 3 or less from your graveyard. If you do, it gains \"When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life.\""
+    },
+    {
+      "name": "Sevinne's Reclamation",
+      "scryfallId": "8deab1ef-4219-4767-a3c4-b61250d0ebe0",
+      "twoFaced": false,
+      "oracleCardName": "Sevinne's Reclamation",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Return target permanent card with mana value 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.\nFlashback {4}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Skyclave Apparition",
+      "scryfallId": "e671de25-c47c-48a1-919b-6aa30dab142f",
+      "twoFaced": false,
+      "oracleCardName": "Skyclave Apparition",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, exile up to one target nonland, nontoken permanent you don't control with mana value 4 or less.\nWhen this creature leaves the battlefield, the exiled card's owner creates an X/X blue Illusion creature token, where X is the mana value of the exiled card."
+    },
+    {
+      "name": "Sun Titan",
+      "scryfallId": "3d6eacf2-f6c7-4ede-b5a5-7463602699ae",
+      "twoFaced": false,
+      "oracleCardName": "Sun Titan",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+    },
+    {
+      "name": "Tocasia's Welcome",
+      "scryfallId": "90e38661-292a-45e7-bda9-51af53cf0f68",
+      "twoFaced": false,
+      "oracleCardName": "Tocasia's Welcome",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more creatures you control with mana value 3 or less enter, draw a card. This ability triggers only once each turn."
+    },
+    {
+      "name": "Tragic Arrogance",
+      "scryfallId": "ac5a8ba5-90ab-4e5d-8aff-c72f88851990",
+      "twoFaced": false,
+      "oracleCardName": "Tragic Arrogance",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control."
+    },
+    {
+      "name": "White Orchid Phantom",
+      "scryfallId": "e6cebc57-d7b0-4e86-bc9e-ebb1de58f932",
+      "twoFaced": false,
+      "oracleCardName": "White Orchid Phantom",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{W}",
+      "cmc": 2,
+      "oracleText": "Flying, first strike\nWhen this creature enters, destroy up to one target nonbasic land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Atsushi, the Blazing Sky",
+      "scryfallId": "06658540-0104-428f-91b1-40552826e781",
+      "twoFaced": false,
+      "oracleCardName": "Atsushi, the Blazing Sky",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying, trample\nWhen Atsushi dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens."
+    },
+    {
+      "name": "Conspiracy Theorist",
+      "scryfallId": "dd6797f7-ecc4-4c45-b1e4-26963a1614dc",
+      "twoFaced": false,
+      "oracleCardName": "Conspiracy Theorist",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever this creature attacks, you may pay {1} and discard a card. If you do, draw a card.\nWhenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn."
+    },
+    {
+      "name": "Laelia, the Blade Reforged",
+      "scryfallId": "2cb16354-1211-4230-90e2-4858ba68f348",
+      "twoFaced": false,
+      "oracleCardName": "Laelia, the Blade Reforged",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Haste\nWhenever Laelia attacks, exile the top card of your library. You may play that card this turn.\nWhenever one or more cards are put into exile from your library and/or your graveyard, put a +1/+1 counter on Laelia."
+    },
+    {
+      "name": "Balefire Liege",
+      "scryfallId": "6f236f33-f6d2-4b07-a69d-42165670bd45",
+      "twoFaced": false,
+      "oracleCardName": "Balefire Liege",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R/W}{R/W}{R/W}",
+      "cmc": 5,
+      "oracleText": "Other red creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\nWhenever you cast a red spell, this creature deals 3 damage to target player or planeswalker.\nWhenever you cast a white spell, you gain 3 life."
+    },
+    {
+      "name": "Hofri Ghostforge",
+      "scryfallId": "bc03cdb6-5ad0-452d-a698-bd19f5ebac83",
+      "twoFaced": false,
+      "oracleCardName": "Hofri Ghostforge",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{W}",
+      "cmc": 5,
+      "oracleText": "Spirits you control get +1/+1 and have trample and haste.\nWhenever another nontoken creature you control dies, exile it. If you do, create a token that's a copy of that creature, except it's a Spirit in addition to its other types and it has \"When this token leaves the battlefield, return the exiled card to its owner's graveyard.\""
+    },
+    {
+      "name": "Quintorius, Loremaster",
+      "scryfallId": "7a609e56-667d-48b5-a6e6-629f1d7a2f72",
+      "twoFaced": false,
+      "oracleCardName": "Quintorius, Loremaster",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{W}",
+      "cmc": 5,
+      "oracleText": "Vigilance\nAt the beginning of your end step, exile target noncreature, nonland card from your graveyard. Create a 3/2 red and white Spirit creature token.\n{1}{R}{W}, {T}, Sacrifice a Spirit: Choose target card exiled with Quintorius. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead."
+    },
+    {
+      "name": "Venerable Warsinger",
+      "scryfallId": "cdd0062f-6b2a-49c4-bf47-9b05f16ca6eb",
+      "twoFaced": false,
+      "oracleCardName": "Venerable Warsinger",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{W}",
+      "cmc": 3,
+      "oracleText": "Vigilance, trample\nWhenever this creature deals combat damage to a player, you may return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of damage this creature dealt to that player."
+    },
+    {
+      "name": "Bitterthorn, Nissa's Animus",
+      "scryfallId": "926cbd68-3b66-4ccc-a7c9-fb20e38a3126",
+      "twoFaced": false,
+      "oracleCardName": "Bitterthorn, Nissa's Animus",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1.\nWhenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nEquip {3}"
+    },
+    {
+      "name": "Currency Converter",
+      "scryfallId": "2413e7e1-f9a5-4657-9375-2c30d32d7853",
+      "twoFaced": false,
+      "oracleCardName": "Currency Converter",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard.\n{2}, {T}: Draw a card, then discard a card.\n{T}: Put a card exiled with this artifact into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token."
+    },
+    {
+      "name": "Battlefield Forge",
+      "scryfallId": "c47c1bf5-f11e-4f86-b20b-5d899a11dc56",
+      "twoFaced": false,
+      "oracleCardName": "Battlefield Forge",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "09d0e0dd-28e6-4d78-b768-b08188681d92",
+      "twoFaced": false,
+      "oracleCardName": "Clifftop Retreat",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Emeria, the Sky Ruin",
+      "scryfallId": "90f148e6-1a5e-46fc-9557-40c5c0038069",
+      "twoFaced": false,
+      "oracleCardName": "Emeria, the Sky Ruin",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nAt the beginning of your upkeep, if you control seven or more Plains, you may return target creature card from your graveyard to the battlefield.\n{T}: Add {W}."
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "7db2934a-43a0-46ad-8380-ff6703f8fd6d",
+      "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Furycalm Snarl",
+      "scryfallId": "25a1cd4f-be6c-4e05-93ba-9e393cec76df",
+      "twoFaced": false,
+      "oracleCardName": "Furycalm Snarl",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Glittering Massif",
+      "scryfallId": "0f741296-c523-49bd-9ff4-ce2a1a70883e",
+      "twoFaced": false,
+      "oracleCardName": "Glittering Massif",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Lotus Field",
+      "scryfallId": "ee5ac47c-e8b6-400e-b91e-a7cd0f952cf1",
+      "twoFaced": false,
+      "oracleCardName": "Lotus Field",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hexproof\nThis land enters tapped.\nWhen this land enters, sacrifice two lands.\n{T}: Add three mana of any one color."
+    },
+    {
+      "name": "Radiant Summit",
+      "scryfallId": "5ca0311f-6218-4c1c-ac5f-23b9708446f1",
+      "twoFaced": false,
+      "oracleCardName": "Radiant Summit",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Rugged Prairie",
+      "scryfallId": "6bd21c9e-de16-4ee9-ae16-6e82b490109d",
+      "twoFaced": false,
+      "oracleCardName": "Rugged Prairie",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
+    },
+    {
+      "name": "Sunscorched Divide",
+      "scryfallId": "eae999f9-9c58-4609-8ade-aca0acf07519",
+      "twoFaced": false,
+      "oracleCardName": "Sunscorched Divide",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{1}, {T}: Add {R}{W}."
+    },
+    {
+      "name": "Temple of Triumph",
+      "scryfallId": "d0e763f7-25b8-444f-8722-614297d0663f",
+      "twoFaced": false,
+      "oracleCardName": "Temple of Triumph",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "7811dd72-61b9-4067-ac20-cea153e625d2",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "870ec754-a76c-40ea-9b81-81b3dca1f62c",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "c46a217c-0ed2-4b3c-9a01-ee38d12d76f3",
+      "twoFaced": false,
+      "oracleCardName": "Command Tower",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Primary Research",
+      "scryfallId": "f6fdb814-45c6-4d14-afff-7f5bd1bd10a1",
+      "twoFaced": false,
+      "oracleCardName": "Primary Research",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "When this enchantment enters, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield.\nAt the beginning of your end step, if a card left your graveyard this turn, draw a card."
+    },
+    {
+      "name": "Seize the Spoils",
+      "scryfallId": "4ddf4e34-a1f9-4636-942d-0a08e9f94320",
+      "twoFaced": false,
+      "oracleCardName": "Seize the Spoils",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+    },
+    {
+      "name": "Kirol, History Buff // Pack a Punch",
+      "scryfallId": "676ba521-66e4-42cf-a315-70d03cb7334e",
+      "twoFaced": false,
+      "oracleCardName": "Kirol, History Buff // Pack a Punch",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{W}",
+      "cmc": 2,
+      "oracleText": "Whenever one or more cards leave your graveyard, Kirol becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+    },
+    {
+      "name": "Lorehold Charm",
+      "scryfallId": "5fe70295-e550-4577-a341-dab6c25aabfd",
+      "twoFaced": false,
+      "oracleCardName": "Lorehold Charm",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Each opponent sacrifices a nontoken artifact of their choice.\n• Return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield.\n• Creatures you control get +1/+1 and gain trample until end of turn."
+    },
+    {
+      "name": "Fields of Strife",
+      "scryfallId": "3dc7a4c3-c356-4fba-bea0-e8788da3eb57",
+      "twoFaced": false,
+      "oracleCardName": "Fields of Strife",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "9a4c5629-fadd-42b9-850f-9f8586a2ca50",
+      "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
+      "colorIdentity": [],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Kami of Ancient Law",
+      "scryfallId": "4edbce98-bfc1-4c66-bd04-16100d9e22d3",
+      "twoFaced": false,
+      "oracleCardName": "Kami of Ancient Law",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Destroy target enchantment."
+    },
+    {
+      "name": "Path to Exile",
+      "scryfallId": "90b690f4-9647-4e67-b7cb-b2692ea149b1",
+      "twoFaced": false,
+      "oracleCardName": "Path to Exile",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Secret Rendezvous",
+      "scryfallId": "9be712b3-14ed-4a73-b3d3-5b76b2c5db64",
+      "twoFaced": false,
+      "oracleCardName": "Secret Rendezvous",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "You and target opponent each draw three cards."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "68ec2aed-7662-48ae-ab25-04f74ece1e41",
+      "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+    },
+    {
+      "name": "Teshar, Ancestor's Apostle",
+      "scryfallId": "6e80198c-cfae-46f9-84cb-584d091014c5",
+      "twoFaced": false,
+      "oracleCardName": "Teshar, Ancestor's Apostle",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you cast a historic spell, return target creature card with mana value 3 or less from your graveyard to the battlefield. (Artifacts, legendaries, and Sagas are historic.)"
+    },
+    {
+      "name": "Anger",
+      "scryfallId": "e886a604-e3ce-4c6a-b63e-2c7f910a177a",
+      "twoFaced": false,
+      "oracleCardName": "Anger",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Haste\nAs long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+    },
+    {
+      "name": "Faithless Looting",
+      "scryfallId": "fc019ffa-4461-4f3d-ab8d-e4d20e77ca0c",
+      "twoFaced": false,
+      "oracleCardName": "Faithless Looting",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Squee, Goblin Nabob",
+      "scryfallId": "8aabc541-ff2a-416f-a973-44eda8ec4706",
+      "twoFaced": false,
+      "oracleCardName": "Squee, Goblin Nabob",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your upkeep, you may return this card from your graveyard to your hand."
+    },
+    {
+      "name": "Quintorius, Field Historian",
+      "scryfallId": "8e3c7f00-e997-4b07-98af-45b9ea35d2d7",
+      "twoFaced": false,
+      "oracleCardName": "Quintorius, Field Historian",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{W}",
+      "cmc": 5,
+      "oracleText": "Spirits you control get +1/+0.\nWhenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token."
+    },
+    {
+      "name": "Rip Apart",
+      "scryfallId": "ab3443be-ab7f-4ab1-bc31-0ace68773f2d",
+      "twoFaced": false,
+      "oracleCardName": "Rip Apart",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Rip Apart deals 3 damage to target creature or planeswalker.\n• Destroy target artifact or enchantment."
+    },
+    {
+      "name": "Containment Construct",
+      "scryfallId": "feb09084-0fdb-4226-b536-56d856354b5a",
+      "twoFaced": false,
+      "oracleCardName": "Containment Construct",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard. If you do, you may play that card this turn."
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "385b9f5e-81dd-49f6-a644-59d53245e3dc",
+      "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Millikin",
+      "scryfallId": "c2073453-4108-4039-a8c2-0f94dd7bf237",
+      "twoFaced": false,
+      "oracleCardName": "Millikin",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}, Mill a card: Add {C}. (To mill a card, put the top card of your library into your graveyard.)"
+    },
+    {
+      "name": "Mind Stone",
+      "scryfallId": "ad881aa0-decc-447b-8c8a-983546a9a55a",
+      "twoFaced": false,
+      "oracleCardName": "Mind Stone",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+    },
+    {
+      "name": "Patchwork Banner",
+      "scryfallId": "81669ca8-3f20-45e6-b088-65969dcd93d1",
+      "twoFaced": false,
+      "oracleCardName": "Patchwork Banner",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{T}: Add one mana of any color."
+    },
+    {
+      "name": "Perpetual Timepiece",
+      "scryfallId": "6edbedf9-273f-4d7f-80a2-705858bd4d6d",
+      "twoFaced": false,
+      "oracleCardName": "Perpetual Timepiece",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Mill two cards. (Put the top two cards of your library into your graveyard.)\n{2}, Exile this artifact: Shuffle any number of target cards from your graveyard into your library."
+    },
+    {
+      "name": "Lorehold Campus",
+      "scryfallId": "b6ad08da-c9e8-4061-a4a6-032d6957a403",
+      "twoFaced": false,
+      "oracleCardName": "Lorehold Campus",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}.\n{4}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+    },
+    {
+      "name": "Mistveil Plains",
+      "scryfallId": "c53028dd-efb5-486c-a7d3-45f2f6050c1d",
+      "twoFaced": false,
+      "oracleCardName": "Mistveil Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)\nThis land enters tapped.\n{W}, {T}: Put target card from your graveyard on the bottom of your library. Activate only if you control two or more white permanents."
+    },
+    {
+      "name": "Sacred Peaks",
+      "scryfallId": "ee2d6798-b19d-4628-bb57-05663ab4af68",
+      "twoFaced": false,
+      "oracleCardName": "Sacred Peaks",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped."
+    },
+    {
+      "name": "Study Hall",
+      "scryfallId": "93f812bc-7663-4504-b566-79e2c0a0f845",
+      "twoFaced": false,
+      "oracleCardName": "Study Hall",
+      "colorIdentity": [],
+      "set": "SOC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game."
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d85d0f25-a24a-4de0-9b8b-93fb5017bce9",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bac08825-ca54-4a9f-bf4f-f75708a1550b",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bac08825-ca54-4a9f-bf4f-f75708a1550b",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bac08825-ca54-4a9f-bf4f-f75708a1550b",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bac08825-ca54-4a9f-bf4f-f75708a1550b",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "bac08825-ca54-4a9f-bf4f-f75708a1550b",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "a642c7b1-d4d1-4125-a66d-560438e5ee51",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "a642c7b1-d4d1-4125-a66d-560438e5ee51",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "a642c7b1-d4d1-4125-a66d-560438e5ee51",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bce45bc0-accd-4853-a166-9dd5597526d5",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bce45bc0-accd-4853-a166-9dd5597526d5",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "bce45bc0-accd-4853-a166-9dd5597526d5",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SOS",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:09:55.590Z",
+    "sourceUrl": "LoreholdSpirit_SOC.json",
+    "deckSource": "precon",
+    "createdAt": "2026-04-24T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,1592 @@
+{
+  "version": 2,
+  "id": 16215578,
+  "name": "The Fantastic Four",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Invisible Woman",
+      "scryfallId": "d8e13ecb-98be-4d9b-86a2-24eaa98f7f0d",
+      "twoFaced": false,
+      "oracleCardName": "Invisible Woman",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a 0/3 colorless Wall creature token with defender and reach.\nWhenever you attack, you may pay {R}{G}{W}{U}. When you do, target creature gets +1/+0 until end of turn for each creature you control and can't be blocked this turn."
+    }
+  ],
+  "cards": [
+    {
+      "name": "Mister Fantastic",
+      "scryfallId": "f1d80509-ece1-4b6d-bfe5-c6d003f581cf",
+      "twoFaced": false,
+      "oracleCardName": "Mister Fantastic",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Vigilance, reach\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card.\n{R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies."
+    },
+    {
+      "name": "Human Torch",
+      "scryfallId": "bf7b63ef-c7b4-4001-b64a-c7443f5268ba",
+      "twoFaced": false,
+      "oracleCardName": "Human Torch",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, Human Torch gains flying, double strike, and haste until end of turn.\nWhenever Human Torch attacks, you may pay {R}{G}{W}{U}. If you do, until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent."
+    },
+    {
+      "name": "The Thing",
+      "scryfallId": "ba5167e4-27b1-4f55-8282-7b5bd6de611a",
+      "twoFaced": false,
+      "oracleCardName": "The Thing",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{G}",
+      "cmc": 6,
+      "oracleText": "Trample\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, put four +1/+1 counters on The Thing.\nWhenever The Thing attacks, you may pay {R}{G}{W}{U}. When you do, double the number of each kind of counter on any number of target permanents you control."
+    },
+    {
+      "name": "Galactus, Devourer of Worlds",
+      "scryfallId": "3a9df9dd-a480-406c-ba28-94895fbfb574",
+      "twoFaced": false,
+      "oracleCardName": "Galactus, Devourer of Worlds",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{10}",
+      "cmc": 10,
+      "oracleText": "Flying, trample, indestructible\nWhen Galactus enters, exile target permanent.\nInsatiable Hunger — Galactus attacks an opponent with the most life among your opponents each combat if able unless you control a creature named Silver Surfer, Galactus's Herald."
+    },
+    {
+      "name": "Silver Surfer, Galactus's Herald",
+      "scryfallId": "b463462f-8044-4e57-b96e-408a9f4e0974",
+      "twoFaced": false,
+      "oracleCardName": "Silver Surfer, Galactus's Herald",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhen Silver Surfer enters, you may search your library for a card named Galactus, Devourer of Worlds, reveal it, put it into your hand, then shuffle.\nWhenever Silver Surfer deals combat damage to a player, until the end of your next turn, target creature attacks that player each combat if able."
+    },
+    {
+      "name": "Invisible Force Field",
+      "scryfallId": "7b05925b-ac8f-4ca5-9c9d-5e4e408c9f1d",
+      "twoFaced": false,
+      "oracleCardName": "Invisible Force Field",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Up to four target permanents you control gain indestructible until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Ultimate Nullification",
+      "scryfallId": "3c27ca1c-8f2d-4ac8-aef1-bb6201763392",
+      "twoFaced": false,
+      "oracleCardName": "Ultimate Nullification",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "As an additional cost to cast this spell, sacrifice a legendary creature.\nExile all creatures and graveyards. Put Ultimate Nullification on the bottom of its owner's library."
+    },
+    {
+      "name": "Council of Reeds",
+      "scryfallId": "a0d824ea-75d2-4de5-923b-813bba44e80b",
+      "twoFaced": false,
+      "oracleCardName": "Council of Reeds",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "The \"legend rule\" doesn't apply to creatures you control.\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of Council of Reeds."
+    },
+    {
+      "name": "Fantastic Elasticity",
+      "scryfallId": "35521ad2-f701-48d6-8686-537ef1f079da",
+      "twoFaced": false,
+      "oracleCardName": "Fantastic Elasticity",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Choose one —\n• Return target nonland permanent to its owner's hand.\n• Return target instant or sorcery card from your graveyard to your hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Lockjaw, Slobbering Teleporter",
+      "scryfallId": "e273f4e6-4691-4cb3-89e2-9b1ab45a2bc0",
+      "twoFaced": false,
+      "oracleCardName": "Lockjaw, Slobbering Teleporter",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Vigilance\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on Lockjaw. When you do, Lockjaw and up to one other target creature you control can't be blocked this turn."
+    },
+    {
+      "name": "Valeria Richards, Precocious",
+      "scryfallId": "5e0c357b-c5e8-4082-b1ec-85d40d10524c",
+      "twoFaced": false,
+      "oracleCardName": "Valeria Richards, Precocious",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Noncreature spells you cast cost {1} less to cast.\nWhenever you cast your first noncreature spell each turn, draw a card."
+    },
+    {
+      "name": "Alicia Masters, Skilled Sculptor",
+      "scryfallId": "3db94749-340c-4454-a15d-ba6353e0c4a4",
+      "twoFaced": false,
+      "oracleCardName": "Alicia Masters, Skilled Sculptor",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a Treasure token.\nSense the Good — At the beginning of your end step, each player gains control of all creatures they own."
+    },
+    {
+      "name": "Flame On!",
+      "scryfallId": "7030f86d-d7e7-444d-9ed0-1758260926ed",
+      "twoFaced": false,
+      "oracleCardName": "Flame On!",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Put X +1/+1 counters on target creature, where X is the number of noncreature, nonland cards in your graveyard. It gains flying until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Franklin Richards, Ascendant",
+      "scryfallId": "0957b296-c34d-4193-9fe7-a339533ac121",
+      "twoFaced": false,
+      "oracleCardName": "Franklin Richards, Ascendant",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, discover 6. (Exile cards from the top of your library until you exile a nonland card with mana value 6 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+    },
+    {
+      "name": "Nova Flame",
+      "scryfallId": "1b5f713f-6ad9-445e-ae4c-56250bb3aecb",
+      "twoFaced": false,
+      "oracleCardName": "Nova Flame",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Put X +1/+1 counters on target creature you control. It deals damage equal to its power to each other creature."
+    },
+    {
+      "name": "It's Clobberin' Time!",
+      "scryfallId": "7665948b-23d0-4b06-a32a-bfab8009b04f",
+      "twoFaced": false,
+      "oracleCardName": "It's Clobberin' Time!",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Choose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact or enchantment.\nRebound"
+    },
+    {
+      "name": "Medusa, Inhuman Queen",
+      "scryfallId": "3187ebab-8008-455c-a3c9-794a5b225b88",
+      "twoFaced": false,
+      "oracleCardName": "Medusa, Inhuman Queen",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Vigilance, reach\nWhenever a player casts a noncreature spell, put a +1/+1 counter on Medusa."
+    },
+    {
+      "name": "Black Bolt, Inhuman King",
+      "scryfallId": "0d484566-6816-4535-a754-dbda8073ae73",
+      "twoFaced": false,
+      "oracleCardName": "Black Bolt, Inhuman King",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you cast a noncreature spell, Black Bolt gets +2/+2 until end of turn.\nLethal Voice — Whenever Black Bolt becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls."
+    },
+    {
+      "name": "Cosmic Crucible",
+      "scryfallId": "7436364b-5604-44c8-b539-9b7c3221ccdf",
+      "twoFaced": false,
+      "oracleCardName": "Cosmic Crucible",
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{G}{U}",
+      "cmc": 6,
+      "oracleText": "At the beginning of your first main phase, add four mana in any combination of colors.\nWhenever you cast a noncreature spell, you may copy it. You may choose new targets for the copy. Do this only once each turn. (A copy of a permanent spell becomes a token.)"
+    },
+    {
+      "name": "Crystal, Inhuman Princess",
+      "scryfallId": "1e9aec49-08d7-4fc8-87dd-69ab8910688a",
+      "twoFaced": false,
+      "oracleCardName": "Crystal, Inhuman Princess",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever you cast a noncreature spell, Crystal deals X damage to each opponent, where X is the number of colors that spell is.\n{T}: Add {R}, {G}, {W}, or {U}."
+    },
+    {
+      "name": "Dragon Man, Reformed Robot",
+      "scryfallId": "527e930b-b233-432c-a0dc-73c68ea3f686",
+      "twoFaced": false,
+      "oracleCardName": "Dragon Man, Reformed Robot",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}{W}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nDragon Man's power is equal to the greatest mana value among noncreature permanents you control and noncreature cards in your graveyard.\nYou may cast this card from your graveyard by discarding a card in addition to paying its other costs."
+    },
+    {
+      "name": "First Family",
+      "scryfallId": "96679821-f850-4de1-b5f9-21e0681647ee",
+      "twoFaced": false,
+      "oracleCardName": "First Family",
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}{U}",
+      "cmc": 4,
+      "oracleText": "You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn."
+    },
+    {
+      "name": "Namor, Atlantean King",
+      "scryfallId": "6b06f1aa-53f1-49e1-b9f7-e4b489ef7d55",
+      "twoFaced": false,
+      "oracleCardName": "Namor, Atlantean King",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever you cast a noncreature spell, create a 1/1 blue Merfolk creature token.\nWhenever Namor attacks a player who has more life than you, other creatures you control attacking that player get +2/+0 until end of turn."
+    },
+    {
+      "name": "Power Pack",
+      "scryfallId": "04f8aa71-f27b-48b3-9146-b9e785555428",
+      "twoFaced": false,
+      "oracleCardName": "Power Pack",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{G}{W}{U}",
+      "cmc": 5,
+      "oracleText": "Flying, vigilance, trample, haste\nWhenever Power Pack deals combat damage to a player, exile target instant or sorcery card from your graveyard chosen at random. At the beginning of your next upkeep, you may cast that card without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+    },
+    {
+      "name": "Willie Lumpkin, Postman",
+      "scryfallId": "2021033b-ccad-4cb0-9528-357a3c726008",
+      "twoFaced": false,
+      "oracleCardName": "Willie Lumpkin, Postman",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{W}{U}",
+      "cmc": 2,
+      "oracleText": "Willie Lumpkin can't be blocked.\nWhenever Willie Lumpkin deals combat damage to an opponent, you draw a card and that player may draw a card. If they do, that player can't attack you or permanents you control during their next turn."
+    },
+    {
+      "name": "The Fantasticar",
+      "scryfallId": "ed0beb69-8441-4104-9990-81bd82f81f9a",
+      "twoFaced": false,
+      "oracleCardName": "The Fantasticar",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever you cast a noncreature spell, you may have The Fantasticar become an artifact creature until end of turn.\nWhenever you cast your fourth noncreature spell each turn, you may sacrifice The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste."
+    },
+    {
+      "name": "H.E.R.B.I.E., Lovable Robot",
+      "scryfallId": "5e2f9f4c-dbdd-4da6-b08f-1f4d3fcb1328",
+      "twoFaced": false,
+      "oracleCardName": "H.E.R.B.I.E., Lovable Robot",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Flying\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+    },
+    {
+      "name": "Negative Zone Portal",
+      "scryfallId": "16fa4f17-972b-4a35-8dd6-88ee9b2ea2ce",
+      "twoFaced": false,
+      "oracleCardName": "Negative Zone Portal",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{2}, {T}: Exile target card from an opponent's graveyard. If it's a creature card, draw a card.\nAt the beginning of your upkeep, if there are four or more creature cards exiled with this artifact, flip a coin. If you lose the flip, sacrifice this artifact and return a card exiled with it at random to its owner's hand."
+    },
+    {
+      "name": "Unstable Molecule Suit",
+      "scryfallId": "5e24bfd5-1bc1-4c4b-9268-8e3b9829784d",
+      "twoFaced": false,
+      "oracleCardName": "Unstable Molecule Suit",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Equipped creature gets +2/+2 and has indestructible.\nEquip commander {2}\nEquip {4}"
+    },
+    {
+      "name": "Cleansing Nova",
+      "scryfallId": "670e4457-927e-42ed-a36f-28b60c2f7566",
+      "twoFaced": false,
+      "oracleCardName": "Cleansing Nova",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+    },
+    {
+      "name": "Clever Concealment",
+      "scryfallId": "41d45a8a-ea1d-4fbc-86d2-5d6340f3b639",
+      "twoFaced": false,
+      "oracleCardName": "Clever Concealment",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}{W}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAny number of target nonland permanents you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)"
+    },
+    {
+      "name": "Collective Effort",
+      "scryfallId": "d9138f86-34dc-46d2-99f4-18eb3b26c253",
+      "twoFaced": false,
+      "oracleCardName": "Collective Effort",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "oracleText": "Escalate—Tap an untapped creature you control. (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Destroy target creature with power 4 or greater.\n• Destroy target enchantment.\n• Put a +1/+1 counter on each creature target player controls."
+    },
+    {
+      "name": "Monologue Tax",
+      "scryfallId": "ee68d390-11cb-4617-a9ee-6e8cf7ff0e55",
+      "twoFaced": false,
+      "oracleCardName": "Monologue Tax",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever an opponent casts their second spell each turn, you create a Treasure token."
+    },
+    {
+      "name": "Promise of Loyalty",
+      "scryfallId": "dcca54de-3b2e-4801-bb66-3809382d6f01",
+      "twoFaced": false,
+      "oracleCardName": "Promise of Loyalty",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+    },
+    {
+      "name": "Tragic Arrogance",
+      "scryfallId": "956d4728-e7a3-43f4-a350-86eca1b95d06",
+      "twoFaced": false,
+      "oracleCardName": "Tragic Arrogance",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control."
+    },
+    {
+      "name": "Quantum Misalignment",
+      "scryfallId": "561caecd-e065-48f6-8fde-85b938794ed3",
+      "twoFaced": false,
+      "oracleCardName": "Quantum Misalignment",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Create a token that's a copy of target creature you control, except it isn't legendary.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Recurring Insight",
+      "scryfallId": "a3b0c460-1a5f-4e22-a594-34905117169c",
+      "twoFaced": false,
+      "oracleCardName": "Recurring Insight",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Draw cards equal to the number of cards in target opponent's hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Into the Time Vortex",
+      "scryfallId": "9c1763b6-c83b-4a76-af58-64c0a6418326",
+      "twoFaced": false,
+      "oracleCardName": "Into the Time Vortex",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Seize the Day",
+      "scryfallId": "9cb5d064-f474-4db9-b349-b9f71c587742",
+      "twoFaced": false,
+      "oracleCardName": "Seize the Day",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Path of Discovery",
+      "scryfallId": "8063528c-7347-4757-8254-5aa3e4b61c6f",
+      "twoFaced": false,
+      "oracleCardName": "Path of Discovery",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature you control enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)"
+    },
+    {
+      "name": "Galvanic Iteration",
+      "scryfallId": "4e148c83-09d1-4055-b1a6-5c624c67810d",
+      "twoFaced": false,
+      "oracleCardName": "Galvanic Iteration",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{U}{R}",
+      "cmc": 2,
+      "oracleText": "When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\nFlashback {1}{U}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Taunt from the Rampart",
+      "scryfallId": "ad79ee29-dd86-484f-bd70-8ecd9d90ef75",
+      "twoFaced": false,
+      "oracleCardName": "Taunt from the Rampart",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}{W}",
+      "cmc": 5,
+      "oracleText": "Goad all creatures your opponents control. Until your next turn, those creatures can't block. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+    },
+    {
+      "name": "Whirlwind of Thought",
+      "scryfallId": "a3069683-0ff5-49e5-b7ae-f5bd40a4a32f",
+      "twoFaced": false,
+      "oracleCardName": "Whirlwind of Thought",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{R}{W}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast a noncreature spell, draw a card."
+    },
+    {
+      "name": "Chromatic Lantern",
+      "scryfallId": "693da13a-49af-4f7e-b247-36b454fb31a0",
+      "twoFaced": false,
+      "oracleCardName": "Chromatic Lantern",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+    },
+    {
+      "name": "Mirage Mirror",
+      "scryfallId": "e516bc14-749c-4da6-b5d3-cb5c16316e0c",
+      "twoFaced": false,
+      "oracleCardName": "Mirage Mirror",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
+    },
+    {
+      "name": "Canopy Vista",
+      "scryfallId": "369e6485-fbc7-45f9-ac9d-2e26dd94f2d5",
+      "twoFaced": false,
+      "oracleCardName": "Canopy Vista",
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Cinder Glade",
+      "scryfallId": "ec93087a-5728-40e8-8625-a1d175d5252c",
+      "twoFaced": false,
+      "oracleCardName": "Cinder Glade",
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "4a7f7767-1959-4812-8654-0a22634096b1",
+      "twoFaced": false,
+      "oracleCardName": "Clifftop Retreat",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "8853ff94-bf44-4cfd-9d3a-0743c361fb0d",
+      "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Fabled Passage",
+      "scryfallId": "62ef854d-ec9e-443d-a4ba-4b2875ed3fe7",
+      "twoFaced": false,
+      "oracleCardName": "Fabled Passage",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+    },
+    {
+      "name": "Glacial Fortress",
+      "scryfallId": "d673a2d5-0c61-48dc-8c8d-06f0c7b6b8bf",
+      "twoFaced": false,
+      "oracleCardName": "Glacial Fortress",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+    },
+    {
+      "name": "Hinterland Harbor",
+      "scryfallId": "892451a1-5527-4857-84f8-62028d147489",
+      "twoFaced": false,
+      "oracleCardName": "Hinterland Harbor",
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "b2e133b4-2263-4ac2-8d16-7bf307d5e104",
+      "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Radiant Summit",
+      "scryfallId": "81b619cc-900c-4d65-83da-8b9dcb370984",
+      "twoFaced": false,
+      "oracleCardName": "Radiant Summit",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Rejuvenating Springs",
+      "scryfallId": "c4565a7b-a0ed-4a7f-ad48-7745c56d141b",
+      "twoFaced": false,
+      "oracleCardName": "Rejuvenating Springs",
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {G} or {U}."
+    },
+    {
+      "name": "Rootbound Crag",
+      "scryfallId": "42d174e5-b8c2-45eb-8e08-1b94fc27cbee",
+      "twoFaced": false,
+      "oracleCardName": "Rootbound Crag",
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+    },
+    {
+      "name": "Scorched Geyser",
+      "scryfallId": "43abdfba-0a55-4b8a-858e-3372ee40a579",
+      "twoFaced": false,
+      "oracleCardName": "Scorched Geyser",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Sodden Verdure",
+      "scryfallId": "0a451ab5-6244-48a0-a638-07da72b156b5",
+      "twoFaced": false,
+      "oracleCardName": "Sodden Verdure",
+      "colorIdentity": [
+        "G",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Sulfur Falls",
+      "scryfallId": "c762f475-7e58-4477-839b-b3c55434b88f",
+      "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+    },
+    {
+      "name": "Sunpetal Grove",
+      "scryfallId": "e83092ee-4a90-4eac-915f-3fd01b7d9bd0",
+      "twoFaced": false,
+      "oracleCardName": "Sunpetal Grove",
+      "colorIdentity": [
+        "G",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "719704eb-04b2-4e2f-9954-50f77dd9bf08",
+      "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Mind's Dilation",
+      "scryfallId": "b9de3ca6-d62f-422b-a67f-199f535cb56f",
+      "twoFaced": false,
+      "oracleCardName": "Mind's Dilation",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{5}{U}{U}",
+      "cmc": 7,
+      "oracleText": "Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost."
+    },
+    {
+      "name": "Annie Joins Up",
+      "scryfallId": "e86ccaf7-9686-415f-b1e1-3d574fbdf34b",
+      "twoFaced": false,
+      "oracleCardName": "Annie Joins Up",
+      "colorIdentity": [
+        "G",
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}{G}{W}",
+      "cmc": 4,
+      "oracleText": "When Annie Joins Up enters, it deals 5 damage to target creature or planeswalker an opponent controls.\nIf a triggered ability of a legendary creature you control triggers, that ability triggers an additional time."
+    },
+    {
+      "name": "Genesis Ultimatum",
+      "scryfallId": "ef2a26fe-ce75-45e2-b0c8-bb6ddb80abd9",
+      "twoFaced": false,
+      "oracleCardName": "Genesis Ultimatum",
+      "colorIdentity": [
+        "G",
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}{G}{U}{U}{U}{R}{R}",
+      "cmc": 7,
+      "oracleText": "Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile Genesis Ultimatum."
+    },
+    {
+      "name": "Mister Fantastic, Reed Richards",
+      "scryfallId": "17ef068b-61fc-443d-97b0-1e41f2622425",
+      "twoFaced": false,
+      "oracleCardName": "Mister Fantastic, Reed Richards",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Reach\nWhenever one or more tokens you control enter, you may draw a card."
+    },
+    {
+      "name": "Baxter Building",
+      "scryfallId": "1abc652f-8e9d-4df7-bc4e-d8b515a40fec",
+      "twoFaced": false,
+      "oracleCardName": "Baxter Building",
+      "colorIdentity": [],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{4}, {T}: Add four mana in any combination of colors.\n{4}, {T}: Draw a card. Activate only if you control a creature with toughness 4 or greater."
+    },
+    {
+      "name": "Bovine Intervention",
+      "scryfallId": "9fe4ad5a-3337-467a-b857-7297085da11f",
+      "twoFaced": false,
+      "oracleCardName": "Bovine Intervention",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token."
+    },
+    {
+      "name": "Cut a Deal",
+      "scryfallId": "088388a6-1cc3-4782-91af-504e70f40a97",
+      "twoFaced": false,
+      "oracleCardName": "Cut a Deal",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Each opponent draws a card, then you draw a card for each opponent who drew a card this way."
+    },
+    {
+      "name": "Path to Exile",
+      "scryfallId": "95ca89ea-1200-4bb4-ae4b-af35d3ccd35b",
+      "twoFaced": false,
+      "oracleCardName": "Path to Exile",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Deep Analysis",
+      "scryfallId": "1a297bae-f259-4fc7-b76a-285f972d69e3",
+      "twoFaced": false,
+      "oracleCardName": "Deep Analysis",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Cultivate",
+      "scryfallId": "e60deb92-f7dd-4f4e-9036-e47dd586f985",
+      "twoFaced": false,
+      "oracleCardName": "Cultivate",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+    },
+    {
+      "name": "Farseek",
+      "scryfallId": "598f6334-4baf-4f9a-a70c-0cc1e8af68c9",
+      "twoFaced": false,
+      "oracleCardName": "Farseek",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Terramorph",
+      "scryfallId": "1389d46e-956d-4be6-a519-9c8338007715",
+      "twoFaced": false,
+      "oracleCardName": "Terramorph",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+    },
+    {
+      "name": "Three Visits",
+      "scryfallId": "99bf792f-963e-4509-8d3c-7db129c6a77f",
+      "twoFaced": false,
+      "oracleCardName": "Three Visits",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+    },
+    {
+      "name": "Expressive Iteration",
+      "scryfallId": "96f866ec-a163-4095-b088-d93fa0b6f6f7",
+      "twoFaced": false,
+      "oracleCardName": "Expressive Iteration",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{U}{R}",
+      "cmc": 2,
+      "oracleText": "Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn."
+    },
+    {
+      "name": "Hull Breach",
+      "scryfallId": "3ff49b0b-322b-4b98-8604-d6716f3bec39",
+      "twoFaced": false,
+      "oracleCardName": "Hull Breach",
+      "colorIdentity": [
+        "G",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}{G}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment."
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "1cad1bd2-7c56-4ce0-99a6-b2a49c1288dd",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "b61634ae-05be-4b56-8ebb-9d4ade902e42",
+      "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "91fdb56b-54d5-4272-8319-505ff987fe9b",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "0548fb60-c843-4f8f-a029-6f10efc63a41",
+      "twoFaced": false,
+      "oracleCardName": "Command Tower",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "c0318a48-30e4-4ef7-be3d-5e561c5ce428",
+      "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "836b8f52-10d2-4716-9f7b-38fb23bc68de",
+      "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "22463284-2478-4b1e-9a37-6dd2383266cf",
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "22463284-2478-4b1e-9a37-6dd2383266cf",
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "22463284-2478-4b1e-9a37-6dd2383266cf",
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "22463284-2478-4b1e-9a37-6dd2383266cf",
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "22463284-2478-4b1e-9a37-6dd2383266cf",
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:09:57.125Z",
+    "sourceUrl": "TheFantasticFour_MSC.json",
+    "deckSource": "precon",
+    "createdAt": "2026-06-26T00:00:00.000Z"
+  }
+}

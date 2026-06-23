@@ -1,0 +1,1577 @@
+{
+  "version": 2,
+  "id": 2084872455,
+  "name": "Doom Prevails",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Doctor Doom, King of Latveria",
+      "scryfallId": "099ed408-9178-4403-8b2d-479ca3cbda9b",
+      "twoFaced": false,
+      "oracleCardName": "Doctor Doom, King of Latveria",
+      "colorIdentity": [
+        "B",
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you discard one or more land cards, each opponent loses 2 life.\nAt the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Molecule Man",
+      "scryfallId": "ee64d0dd-e3d8-4abc-b9d6-b19c505fbfa1",
+      "twoFaced": false,
+      "oracleCardName": "Molecule Man",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{6}",
+      "cmc": 6,
+      "oracleText": "Nonland cards in your hand have miracle {0}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+    },
+    {
+      "name": "Extract Power",
+      "scryfallId": "11aaa7c6-c79d-48f9-af66-3b360d3b15b5",
+      "twoFaced": false,
+      "oracleCardName": "Extract Power",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{U}",
+      "cmc": 6,
+      "oracleText": "Look at the top card of each player's library, then exile those cards face down. You may play them without paying their mana costs for as long as they remain exiled."
+    },
+    {
+      "name": "Glorious Purpose",
+      "scryfallId": "d78f2105-030f-4951-aa02-0d4db3d34f59",
+      "twoFaced": false,
+      "oracleCardName": "Glorious Purpose",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control connives, put a +1/+1 counter on that creature and a plan counter on this enchantment.\nWhen the sixth plan counter is put on this enchantment, sacrifice it. If you do, exile the top four cards of your library. You may cast any number of spells from among them without paying their mana costs. Put the rest into your hand."
+    },
+    {
+      "name": "Helmut Zemo, Mastermind",
+      "scryfallId": "545f7f8d-f6a3-4e85-a53c-3eb9b28ebd14",
+      "twoFaced": false,
+      "oracleCardName": "Helmut Zemo, Mastermind",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever Helmut Zemo attacks, you may cast target instant or sorcery card with mana value less than or equal to his power from your graveyard. If that spell would be put into your graveyard, exile it instead. If you cast a spell this way, put a +1/+1 counter on Helmut Zemo."
+    },
+    {
+      "name": "Kang Dynasty",
+      "scryfallId": "5e4223df-c9fc-410a-913a-17bbfd054b57",
+      "twoFaced": false,
+      "oracleCardName": "Kang Dynasty",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — For each opponent, tap up to one target creature that player controls. Goad those creatures. Until your next turn, whenever any of those creatures deals combat damage to a player, draw a card.\nIII — Target creature you control gets +1/+1 until end of turn for each card in your hand and can't be blocked this turn."
+    },
+    {
+      "name": "Age of Ultron",
+      "scryfallId": "54050442-c9b1-481a-a1cd-77c147e9013e",
+      "twoFaced": false,
+      "oracleCardName": "Age of Ultron",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, destroy up to one target nonartifact creature that player controls.\nII — For each opponent, you create a 2/2 colorless Robot Villain artifact creature token.\nIII — Artifact creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on each of them."
+    },
+    {
+      "name": "Damocles Base, Sword of Kang",
+      "scryfallId": "89936964-7131-4ebf-b956-9692659866c1",
+      "twoFaced": false,
+      "oracleCardName": "Damocles Base, Sword of Kang",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}{B}",
+      "cmc": 5,
+      "oracleText": "Flying, deathtouch\nWhenever Damocles Base deals combat damage to a player, that player faces a villainous choice — They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards.\nCrew 3"
+    },
+    {
+      "name": "Endless Ranks of HYDRA",
+      "scryfallId": "27da10b3-a131-4afc-ab84-5df93160d81f",
+      "twoFaced": false,
+      "oracleCardName": "Endless Ranks of HYDRA",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "For each opponent, you create a 2/1 black Villain creature token with menace.\nWhenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand."
+    },
+    {
+      "name": "The Frightful Four",
+      "scryfallId": "3e792132-de96-47aa-bcd5-58f1e9be5932",
+      "twoFaced": false,
+      "oracleCardName": "The Frightful Four",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Menace\nWhenever an opponent casts their first noncreature spell each turn, that player loses life equal to that spell's mana value."
+    },
+    {
+      "name": "Iron Monger, Sadistic Tycoon",
+      "scryfallId": "799554d1-d1fb-4206-af9a-80d3582bedc0",
+      "twoFaced": false,
+      "oracleCardName": "Iron Monger, Sadistic Tycoon",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever a creature you control connives, put a +1/+1 counter on each Villain you control."
+    },
+    {
+      "name": "Klaw, Master of Sound",
+      "scryfallId": "5c589d94-7cea-4d4c-91a8-4d939634a5e5",
+      "twoFaced": false,
+      "oracleCardName": "Klaw, Master of Sound",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Deathtouch\nWhenever you play a card from exile, Klaw gains indestructible until end of turn.\nWhenever Klaw deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play it for as long as it remains exiled. Mana of any type can be spent to cast a spell this way."
+    },
+    {
+      "name": "Abomination, World Ravager",
+      "scryfallId": "fddd2e68-8e1e-4162-a2c7-49da2c86d471",
+      "twoFaced": false,
+      "oracleCardName": "Abomination, World Ravager",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{7}{R}",
+      "cmc": 8,
+      "oracleText": "Menace, trample\nMayhem {4}{R} (You may cast this card from your graveyard for {4}{R} if you discarded it this turn. Timing rules still apply.)"
+    },
+    {
+      "name": "Batroc the Leaper",
+      "scryfallId": "e34e33ea-042e-409c-b304-52644ec5b1f5",
+      "twoFaced": false,
+      "oracleCardName": "Batroc the Leaper",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nBatroc enters with a +1/+1 counter on him for each time he was kicked.\nWhen Batroc enters, he deals damage equal to his power to each of up to X targets, where X is the number of times he was kicked."
+    },
+    {
+      "name": "Killmonger, Ruthless Usurper",
+      "scryfallId": "0ec1ec8b-24d7-40e4-9e9d-4d9ec4f0a4f8",
+      "twoFaced": false,
+      "oracleCardName": "Killmonger, Ruthless Usurper",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Trample\nWhenever Killmonger attacks, he gets +1/+0 until end of turn for each artifact defending player controls.\nWhenever Killmonger deals combat damage to a player, that player sacrifices an artifact of their choice and you create a Treasure token."
+    },
+    {
+      "name": "Lady Loki, Agent of Chaos",
+      "scryfallId": "44ac85d4-0429-4813-b7fe-eed1f6575b7d",
+      "twoFaced": false,
+      "oracleCardName": "Lady Loki, Agent of Chaos",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "Whenever you cast your first instant, sorcery, or Villain spell each turn, exile it, then exile cards from the top of your library until you exile a nonland card. Lady Loki deals damage to each opponent equal to the difference between that spell's mana value and that nonland card's mana value. You may cast that card without paying its mana cost."
+    },
+    {
+      "name": "Living Laser",
+      "scryfallId": "595ee0b4-393f-4bda-bcb4-f0fa43cf7ed2",
+      "twoFaced": false,
+      "oracleCardName": "Living Laser",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Haste\nWhenever Living Laser attacks, for each card you've discarded this turn, create a token that's a copy of Living Laser, except the token isn't legendary. The tokens enter tapped and attacking. Exile the tokens at the beginning of the next end step."
+    },
+    {
+      "name": "Loki's Scepter",
+      "scryfallId": "57e90938-9225-4c15-b4fb-aad2cced2e6a",
+      "twoFaced": false,
+      "oracleCardName": "Loki's Scepter",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "When Loki's Scepter enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it becomes a Villain in addition to its other types and gains haste.\n{T}: Add one mana of any color."
+    },
+    {
+      "name": "Puppet Master, String Puller",
+      "scryfallId": "ab888daa-1161-4917-bca0-efd5c430b2d9",
+      "twoFaced": false,
+      "oracleCardName": "Puppet Master, String Puller",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever you attack, goad target creature an opponent controls. It can't block this turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever one or more goaded creatures deal combat damage to one of your opponents, create a Treasure token."
+    },
+    {
+      "name": "Stilt-Man, Towering Terror",
+      "scryfallId": "7ffa820c-ac05-4b3d-a0ec-5cbd3c42ac9c",
+      "twoFaced": false,
+      "oracleCardName": "Stilt-Man, Towering Terror",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Reach\nWhenever one or more Villains you control deal combat damage to a player, gain control of target noncreature, nonland permanent that player controls until the end of your next turn. It gains \"This permanent can't be sacrificed\" until the end of your next turn."
+    },
+    {
+      "name": "Titania, Proud Pummeler",
+      "scryfallId": "31255422-9afa-416c-90b2-62baf1d02cca",
+      "twoFaced": false,
+      "oracleCardName": "Titania, Proud Pummeler",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "First strike\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther creatures you control have melee."
+    },
+    {
+      "name": "Archnemesis",
+      "scryfallId": "b440109f-af52-415e-94d3-d4997f5bee3e",
+      "twoFaced": false,
+      "oracleCardName": "Archnemesis",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Enchant opponent\nWhenever you attack enchanted player, that player loses 2 life. You draw a card and gain 2 life.\nWhenever a player attacks you, you may attach this Aura to that player."
+    },
+    {
+      "name": "Kang Prime",
+      "scryfallId": "88cf0311-d7e3-40bb-85fa-3cca973c5e44",
+      "twoFaced": false,
+      "oracleCardName": "Kang Prime",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{B}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever Kang Prime enters or attacks, exile cards from the top of your library until you exile a nonland card. Put two time counters on that card. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. If it's a creature, it has haste.)"
+    },
+    {
+      "name": "Loki, the Deceiver",
+      "scryfallId": "c0cd3d41-909b-4f20-a44b-db82807d10ae",
+      "twoFaced": false,
+      "oracleCardName": "Loki, the Deceiver",
+      "colorIdentity": [
+        "B",
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever Loki attacks, create a tapped and attacking token that's a copy of another target Villain you control, except it isn't legendary and it's an Illusion in addition to its other types. Sacrifice that token at the beginning of the next end step.\nWhenever one or more Villains you control deal combat damage to a player, draw a card."
+    },
+    {
+      "name": "Red Ghost, Intangible Genius",
+      "scryfallId": "35bae013-51e9-4047-91e3-3b366ad0764e",
+      "twoFaced": false,
+      "oracleCardName": "Red Ghost, Intangible Genius",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Ward {2}\nRed Ghost can't be blocked.\nWhenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste."
+    },
+    {
+      "name": "The Squadron Sinister",
+      "scryfallId": "96714d95-baef-45e3-a2b0-00a8bdb3a76d",
+      "twoFaced": false,
+      "oracleCardName": "The Squadron Sinister",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{U}{R}",
+      "cmc": 7,
+      "oracleText": "Flying, haste\nOther Villains you control get +2/+2 and have flying and haste.\nMayhem {3}{U}{R} (You may cast this card from your graveyard for {3}{U}{R} if you discarded it this turn. Timing rules still apply.)"
+    },
+    {
+      "name": "Typhoid Mary, Fractured",
+      "scryfallId": "6880df6d-2ec3-459d-aa4f-92f595fab9b8",
+      "twoFaced": false,
+      "oracleCardName": "Typhoid Mary, Fractured",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{B}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever Typhoid Mary attacks, choose one at random. If you discarded a card this turn, you choose one instead.\n• Mary — Create a Treasure token.\n• Typhoid Mary — Draw a card.\n• Bloody Mary — Each opponent loses 2 life and you gain 2 life."
+    },
+    {
+      "name": "Ultron, Unlimited",
+      "scryfallId": "bf5b410f-d6cb-4a74-a975-372975cf21f6",
+      "twoFaced": false,
+      "oracleCardName": "Ultron, Unlimited",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever Ultron attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever a creature you control connives, you may pay {1}. If you do, create a 2/2 colorless Robot Villain artifact creature token."
+    },
+    {
+      "name": "Doom's Time Platform",
+      "scryfallId": "6f7935d1-d588-40ca-804f-bac56d986d74",
+      "twoFaced": false,
+      "oracleCardName": "Doom's Time Platform",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Whenever you attack, exile target nonland card from your graveyard with two time counters on it. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. If it's a creature, it has haste.)"
+    },
+    {
+      "name": "Tri-Sentinel, Act of Vengeance",
+      "scryfallId": "a4960ab8-fac3-4a11-a3f6-46527cf228ea",
+      "twoFaced": false,
+      "oracleCardName": "Tri-Sentinel, Act of Vengeance",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Flying, menace, trample\nWhen Tri-Sentinel enters, for each opponent, Tri-Sentinel deals 3 damage to up to one target creature that player controls.\nUnearth {7} ({7}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+    },
+    {
+      "name": "Black Market Connections",
+      "scryfallId": "9d9ca869-e68a-4f53-9f52-85c714dac6f3",
+      "twoFaced": false,
+      "oracleCardName": "Black Market Connections",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "At the beginning of your first main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
+    },
+    {
+      "name": "Kindred Dominance",
+      "scryfallId": "f6cd7c08-f5d4-4bdc-a254-809d900b0fc3",
+      "twoFaced": false,
+      "oracleCardName": "Kindred Dominance",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{5}{B}{B}",
+      "cmc": 7,
+      "oracleText": "Choose a creature type. Destroy all creatures that aren't of the chosen type."
+    },
+    {
+      "name": "Lethal Scheme",
+      "scryfallId": "b2d9c467-6e56-401c-ade1-95dad7e4e766",
+      "twoFaced": false,
+      "oracleCardName": "Lethal Scheme",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{B}{B}",
+      "cmc": 4,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+    },
+    {
+      "name": "Toxic Deluge",
+      "scryfallId": "de5afccc-8d42-4bd6-b068-b9ea2361655e",
+      "twoFaced": false,
+      "oracleCardName": "Toxic Deluge",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
+    },
+    {
+      "name": "Blasphemous Act",
+      "scryfallId": "7d4b1d44-126e-4987-9a9f-f0f9627a09cb",
+      "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "57f61970-382e-415c-868b-6bbb6c78825d",
+      "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+    },
+    {
+      "name": "Bedevil",
+      "scryfallId": "985b9779-b8f6-4d7e-9490-5d2b91ee8db2",
+      "twoFaced": false,
+      "oracleCardName": "Bedevil",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{B}{B}{R}",
+      "cmc": 3,
+      "oracleText": "Destroy target artifact, creature, or planeswalker."
+    },
+    {
+      "name": "Currency Converter",
+      "scryfallId": "4eab054c-93f8-4da4-afb9-8f4c73c19213",
+      "twoFaced": false,
+      "oracleCardName": "Currency Converter",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard.\n{2}, {T}: Draw a card, then discard a card.\n{T}: Put a card exiled with this artifact into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token."
+    },
+    {
+      "name": "Progenitor's Icon",
+      "scryfallId": "55a7f877-dc7c-4c1b-b233-900958c9e8f5",
+      "twoFaced": false,
+      "oracleCardName": "Progenitor's Icon",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\n{T}: Add one mana of any color.\n{T}: The next spell of the chosen type you cast this turn can be cast as though it had flash."
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "1d8b007b-3169-4ee3-80c7-781fc096fc7a",
+      "twoFaced": false,
+      "oracleCardName": "Skullclamp",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+    },
+    {
+      "name": "Canyon Slough",
+      "scryfallId": "587cc3ba-75c2-46a0-bd44-6f953fe1eb01",
+      "twoFaced": false,
+      "oracleCardName": "Canyon Slough",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Choked Estuary",
+      "scryfallId": "0c37e84e-e7e0-4dfe-bf17-daeb2e434861",
+      "twoFaced": false,
+      "oracleCardName": "Choked Estuary",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+    },
+    {
+      "name": "Coastal Peak",
+      "scryfallId": "d2a70a9d-2d9f-4afd-9393-8d6518936ee2",
+      "twoFaced": false,
+      "oracleCardName": "Coastal Peak",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Dragonskull Summit",
+      "scryfallId": "d20e433a-eb62-4301-bc20-bfe27468b033",
+      "twoFaced": false,
+      "oracleCardName": "Dragonskull Summit",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+    },
+    {
+      "name": "Drowned Catacomb",
+      "scryfallId": "ebea49ab-e5cf-46d9-ae35-226a7321ede0",
+      "twoFaced": false,
+      "oracleCardName": "Drowned Catacomb",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "8853ff94-bf44-4cfd-9d3a-0743c361fb0d",
+      "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Fetid Pools",
+      "scryfallId": "5fa4556f-2fdc-42e6-98cb-291cee2ca3ac",
+      "twoFaced": false,
+      "oracleCardName": "Fetid Pools",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Foreboding Ruins",
+      "scryfallId": "76fdf6be-e13b-49ee-9d50-8625edb49951",
+      "twoFaced": false,
+      "oracleCardName": "Foreboding Ruins",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+    },
+    {
+      "name": "Frostboil Snarl",
+      "scryfallId": "ae705a26-5371-4236-904c-fe3e58b4721d",
+      "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+    },
+    {
+      "name": "Luxury Suite",
+      "scryfallId": "3c409d1e-f634-44a2-8fcf-dcdcb0babc3f",
+      "twoFaced": false,
+      "oracleCardName": "Luxury Suite",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {B} or {R}."
+    },
+    {
+      "name": "Scavenger Grounds",
+      "scryfallId": "9fbe68ba-ffe5-4fe0-ac0a-0b3221e4f395",
+      "twoFaced": false,
+      "oracleCardName": "Scavenger Grounds",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+    },
+    {
+      "name": "Scorched Geyser",
+      "scryfallId": "43abdfba-0a55-4b8a-858e-3372ee40a579",
+      "twoFaced": false,
+      "oracleCardName": "Scorched Geyser",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Smoldering Marsh",
+      "scryfallId": "d707c477-440f-417c-970a-0e7426a58045",
+      "twoFaced": false,
+      "oracleCardName": "Smoldering Marsh",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Sulfur Falls",
+      "scryfallId": "c762f475-7e58-4477-839b-b3c55434b88f",
+      "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+    },
+    {
+      "name": "Sunken Hollow",
+      "scryfallId": "3a8eef9b-9b03-42cd-a27a-07021bf0b33f",
+      "twoFaced": false,
+      "oracleCardName": "Sunken Hollow",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Spark Double",
+      "scryfallId": "c0bd188b-7fb9-4070-a92b-80b81ba71c61",
+      "twoFaced": false,
+      "oracleCardName": "Spark Double",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "You may have this creature enter as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary."
+    },
+    {
+      "name": "Titan of Littjara",
+      "scryfallId": "6ac8eb8a-01b8-41b2-b725-01a1fc17fcb7",
+      "twoFaced": false,
+      "oracleCardName": "Titan of Littjara",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nWhenever this creature enters or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card."
+    },
+    {
+      "name": "Baron Strucker, HYDRA Overlord",
+      "scryfallId": "eaf2251a-ffaf-4055-9474-7e3d08d89609",
+      "twoFaced": false,
+      "oracleCardName": "Baron Strucker, HYDRA Overlord",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Villain spells you cast cost {1} less to cast.\nWhenever another Villain you control enters, you may have it connive. Do this only once each turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+    },
+    {
+      "name": "Moonstone, Harsh Mistress",
+      "scryfallId": "1a1b2bd0-e17d-4b34-a8ee-7c913a6bc945",
+      "twoFaced": false,
+      "oracleCardName": "Moonstone, Harsh Mistress",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you discard a card, you may exile that card from your graveyard. If you do, until the end of your next turn, you may play that card."
+    },
+    {
+      "name": "Kang, Temporal Tyrant",
+      "scryfallId": "fb96ee86-5139-472a-9c4b-8a8a4280fc7e",
+      "twoFaced": false,
+      "oracleCardName": "Kang, Temporal Tyrant",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{B}",
+      "cmc": 4,
+      "oracleText": "Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life."
+    },
+    {
+      "name": "Madame Hydra",
+      "scryfallId": "e94ccedb-1d27-4098-8823-d8d99b30387c",
+      "twoFaced": false,
+      "oracleCardName": "Madame Hydra",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast a Villain spell, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)"
+    },
+    {
+      "name": "Villainous Hideout",
+      "scryfallId": "822b0249-e1df-453d-8b60-75a5196ed818",
+      "twoFaced": false,
+      "oracleCardName": "Villainous Hideout",
+      "colorIdentity": [],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source.\n{3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+    },
+    {
+      "name": "Containment Construct",
+      "scryfallId": "050c52b1-5dea-4aae-aa32-e501d61b56e7",
+      "twoFaced": false,
+      "oracleCardName": "Containment Construct",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard. If you do, you may play that card this turn."
+    },
+    {
+      "name": "Chameleon, Master of Disguise",
+      "scryfallId": "dcc50ba7-c4be-4c20-a1fc-466194aab7c2",
+      "twoFaced": false,
+      "oracleCardName": "Chameleon, Master of Disguise",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "You may have Chameleon enter as a copy of a creature you control, except his name is Chameleon, Master of Disguise.\nMayhem {2}{U} (You may cast this card from your graveyard for {2}{U} if you discarded it this turn. Timing rules still apply.)"
+    },
+    {
+      "name": "Propaganda",
+      "scryfallId": "ac943e31-26bc-4b54-b73f-460e6e402d86",
+      "twoFaced": false,
+      "oracleCardName": "Propaganda",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+    },
+    {
+      "name": "Night's Whisper",
+      "scryfallId": "1ed2b60b-5f20-4ae6-93fb-51540ad9c9e7",
+      "twoFaced": false,
+      "oracleCardName": "Night's Whisper",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{B}",
+      "cmc": 2,
+      "oracleText": "You draw two cards and lose 2 life."
+    },
+    {
+      "name": "Syphon Mind",
+      "scryfallId": "be3f418b-25c3-4370-a1de-50e8e88c2ef6",
+      "twoFaced": false,
+      "oracleCardName": "Syphon Mind",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{B}",
+      "cmc": 4,
+      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+    },
+    {
+      "name": "Tombstone, Career Criminal",
+      "scryfallId": "d3cd086b-8ffe-452f-9bb1-cc235058a3af",
+      "twoFaced": false,
+      "oracleCardName": "Tombstone, Career Criminal",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "When Tombstone enters, return target Villain card from your graveyard to your hand.\nVillain spells you cast cost {1} less to cast."
+    },
+    {
+      "name": "Withering Torment",
+      "scryfallId": "06d44ada-f98e-405f-89d3-ac1002bfb854",
+      "twoFaced": false,
+      "oracleCardName": "Withering Torment",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{B}",
+      "cmc": 3,
+      "oracleText": "Destroy target creature or enchantment. You lose 2 life."
+    },
+    {
+      "name": "Superior Foes of Spider-Man",
+      "scryfallId": "bb759a0b-df7b-43c8-8e8e-bd52535cdbc0",
+      "twoFaced": false,
+      "oracleCardName": "Superior Foes of Spider-Man",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Trample\nWhenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature."
+    },
+    {
+      "name": "Vandalblast",
+      "scryfallId": "71067239-d46f-4201-a91c-6aa4c41fa8b1",
+      "twoFaced": false,
+      "oracleCardName": "Vandalblast",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+    },
+    {
+      "name": "Prowler, Clawed Thief",
+      "scryfallId": "08d18fce-e250-4bcb-9acf-08a8a6e4f1e2",
+      "twoFaced": false,
+      "oracleCardName": "Prowler, Clawed Thief",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{B}",
+      "cmc": 3,
+      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)"
+    },
+    {
+      "name": "Terminate",
+      "scryfallId": "379ffc67-4142-4ead-a871-0f851523745e",
+      "twoFaced": false,
+      "oracleCardName": "Terminate",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{B}{R}",
+      "cmc": 2,
+      "oracleText": "Destroy target creature. It can't be regenerated."
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "09cb4254-b88c-4231-b604-a144a20187a2",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Patchwork Banner",
+      "scryfallId": "537ea7e7-e8e8-4736-bdd9-1085f1a7c259",
+      "twoFaced": false,
+      "oracleCardName": "Patchwork Banner",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{T}: Add one mana of any color."
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "a7fc546e-7e3c-436d-a0b9-9ac3548ec344",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "6675632d-d74a-4b1e-8539-ac678d5545a5",
+      "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "00d4a1d4-b86a-4c05-9ecc-130e011e0486",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+    },
+    {
+      "name": "Talisman of Indulgence",
+      "scryfallId": "ccacf88d-407d-465d-958a-1389b7d700e6",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Indulgence",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "a508330c-f223-4ee3-8610-e2c394519ae6",
+      "twoFaced": false,
+      "oracleCardName": "Command Tower",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Crumbling Necropolis",
+      "scryfallId": "d28542af-936f-44e5-a4e3-119f23c9f0d6",
+      "twoFaced": false,
+      "oracleCardName": "Crumbling Necropolis",
+      "colorIdentity": [
+        "B",
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "836b8f52-10d2-4716-9f7b-38fb23bc68de",
+      "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+    },
+    {
+      "name": "Secluded Courtyard",
+      "scryfallId": "c0d17d04-cf0b-4918-bfec-b34b0d98a602",
+      "twoFaced": false,
+      "oracleCardName": "Secluded Courtyard",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "scryfallId": "719704eb-04b2-4e2f-9954-50f77dd9bf08",
+      "twoFaced": false,
+      "oracleCardName": "Terramorphic Expanse",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "d3782952-3839-4a94-95bc-716611d3ece6",
+      "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "74414c62-4b68-4e1b-9241-feff3231b9ee",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {B}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:09:54.417Z",
+    "sourceUrl": "DoomPrevails_MSC.json",
+    "deckSource": "precon",
+    "createdAt": "2026-06-26T00:00:00.000Z"
+  }
+}

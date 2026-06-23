@@ -1,0 +1,1562 @@
+{
+  "version": 2,
+  "id": 1410759520,
+  "name": "Goblin Storm",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Zada, Hedron Grinder",
+      "scryfallId": "b17fb671-f7ff-4633-bdef-39375c6f857c",
+      "twoFaced": false,
+      "oracleCardName": "Zada, Hedron Grinder",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Whenever you cast an instant or sorcery spell that targets only Zada, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures."
+    }
+  ],
+  "cards": [
+    {
+      "name": "Krenko, Mob Boss",
+      "scryfallId": "45b2ec40-cb5f-476f-9c23-2c89eb8ff8c1",
+      "twoFaced": false,
+      "oracleCardName": "Krenko, Mob Boss",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control."
+    },
+    {
+      "name": "Pashalik Mons",
+      "scryfallId": "f66ca912-a7ec-4e51-9ae7-0d98b5be21b1",
+      "twoFaced": false,
+      "oracleCardName": "Pashalik Mons",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.\n{3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens."
+    },
+    {
+      "name": "Brightstone Ritual",
+      "scryfallId": "6fcd20d9-660d-43be-a146-ba260ebc0dd1",
+      "twoFaced": false,
+      "oracleCardName": "Brightstone Ritual",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Add {R} for each Goblin on the battlefield."
+    },
+    {
+      "name": "Broadside Bombardiers",
+      "scryfallId": "e74176a0-52bb-407e-9cce-f26bf1eceb41",
+      "twoFaced": false,
+      "oracleCardName": "Broadside Bombardiers",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Menace, haste\nBoast — Sacrifice another creature or artifact: This creature deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)"
+    },
+    {
+      "name": "Conspicuous Snoop",
+      "scryfallId": "3c09a00b-07c3-42d9-bf93-339c2c32cec8",
+      "twoFaced": false,
+      "oracleCardName": "Conspicuous Snoop",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{R}",
+      "cmc": 2,
+      "oracleText": "Play with the top card of your library revealed.\nYou may cast Goblin spells from the top of your library.\nAs long as the top card of your library is a Goblin card, this creature has all activated abilities of that card."
+    },
+    {
+      "name": "Empty the Warrens",
+      "scryfallId": "07e5e725-c482-4dbc-9612-d3155ed71a75",
+      "twoFaced": false,
+      "oracleCardName": "Empty the Warrens",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Create two 1/1 red Goblin creature tokens.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)"
+    },
+    {
+      "name": "Grapeshot",
+      "scryfallId": "bfbb7e69-7903-4be3-b13a-97057ac0d3bd",
+      "twoFaced": false,
+      "oracleCardName": "Grapeshot",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Grapeshot deals 1 damage to any target.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+    },
+    {
+      "name": "Skirk Prospector",
+      "scryfallId": "33e25cf3-07b5-4aa8-9ead-decd14071813",
+      "twoFaced": false,
+      "oracleCardName": "Skirk Prospector",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Sacrifice a Goblin: Add {R}."
+    },
+    {
+      "name": "Roaming Throne",
+      "scryfallId": "4e81692d-bbb1-4051-83c0-f7251f98d5ba",
+      "twoFaced": false,
+      "oracleCardName": "Roaming Throne",
+      "colorIdentity": [],
+      "set": "SLD",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Ward {2}\nAs this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nIf a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time."
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "080f004f-0601-4566-83df-049264eaa7d9",
+      "twoFaced": false,
+      "oracleCardName": "Skullclamp",
+      "colorIdentity": [],
+      "set": "SLD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "2418af21-7be9-4dec-8be6-4d0bcf84a7ca",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "SLD",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Blasphemous Act",
+      "scryfallId": "f038d13b-5ef6-46e0-b04c-9407a9fed754",
+      "twoFaced": false,
+      "oracleCardName": "Blasphemous Act",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{8}{R}",
+      "cmc": 9,
+      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+    },
+    {
+      "name": "Chaos Warp",
+      "scryfallId": "5e1ebb59-2f14-4452-9010-2a7908aaecad",
+      "twoFaced": false,
+      "oracleCardName": "Chaos Warp",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+    },
+    {
+      "name": "Frontline Heroism",
+      "scryfallId": "7fb34149-5e09-47cb-bd1f-f2f9ee14dce3",
+      "twoFaced": false,
+      "oracleCardName": "Frontline Heroism",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "When this enchantment enters, create a 1/1 red Soldier creature token with haste.\nWhenever you cast a spell that targets only a single creature you control, create a 1/1 red Soldier creature token with haste, then copy that spell. The copy targets that token."
+    },
+    {
+      "name": "Goblin Bombardment",
+      "scryfallId": "c367397d-ed04-4f35-b1b4-9d82c9d5ad29",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Bombardment",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Sacrifice a creature: This enchantment deals 1 damage to any target."
+    },
+    {
+      "name": "Goblin Chieftain",
+      "scryfallId": "0f1bd405-54f6-4e99-8fdb-7924438d699f",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Chieftain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{R}",
+      "cmc": 3,
+      "oracleText": "Haste (This creature can attack and {T} as soon as it comes under your control.)\nOther Goblin creatures you control get +1/+1 and have haste."
+    },
+    {
+      "name": "Goblin Dark-Dwellers",
+      "scryfallId": "5eacb8b6-996d-4fbe-89d7-bf070ace4f3f",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Dark-Dwellers",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+    },
+    {
+      "name": "Goblin Lackey",
+      "scryfallId": "5e29fbdb-84d2-4d47-8d35-c91538f26c4f",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Lackey",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Whenever this creature deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield."
+    },
+    {
+      "name": "Goblin Trashmaster",
+      "scryfallId": "b77a6286-a8a8-4762-ab62-99eb2088bda3",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Trashmaster",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Other Goblins you control get +1/+1.\nSacrifice a Goblin: Destroy target artifact."
+    },
+    {
+      "name": "Great Train Heist",
+      "scryfallId": "7e607ace-e833-4f44-b4ec-fec8a42285da",
+      "twoFaced": false,
+      "oracleCardName": "Great Train Heist",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Spree (Choose one or more additional costs.)\n+ {2}{R} — Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase.\n+ {2} — Creatures you control get +1/+0 and gain first strike until end of turn.\n+ {R} — Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token."
+    },
+    {
+      "name": "Grenzo, Havoc Raiser",
+      "scryfallId": "9bc97501-93ed-4235-bfe7-745ac57653da",
+      "twoFaced": false,
+      "oracleCardName": "Grenzo, Havoc Raiser",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, choose one —\n• Goad target creature that player controls.\n• Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
+    },
+    {
+      "name": "Howlsquad Heavy",
+      "scryfallId": "cc43b129-06e9-4b17-8320-2699bfc67d0e",
+      "twoFaced": false,
+      "oracleCardName": "Howlsquad Heavy",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Start your engines!\nOther Goblins you control have haste.\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.\nMax speed — {T}: Add {R} for each Goblin you control."
+    },
+    {
+      "name": "Past in Flames",
+      "scryfallId": "90241362-b7e1-4d55-b5aa-af73227da16e",
+      "twoFaced": false,
+      "oracleCardName": "Past in Flames",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Redcap Gutter-Dweller",
+      "scryfallId": "ba23225e-d527-47fd-9c19-9f861df87158",
+      "twoFaced": false,
+      "oracleCardName": "Redcap Gutter-Dweller",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Menace\nWhen this creature enters, create two 1/1 black Rat creature tokens with \"This token can't block.\"\nAt the beginning of your upkeep, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature and exile the top card of your library. You may play that card this turn."
+    },
+    {
+      "name": "Rundvelt Hordemaster",
+      "scryfallId": "762e63c6-cd09-4f5d-aa7e-f204b4b2b523",
+      "twoFaced": false,
+      "oracleCardName": "Rundvelt Hordemaster",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Other Goblins you control get +1/+1.\nWhenever this creature or another Goblin you control dies, exile the top card of your library. If it's a Goblin creature card, you may cast that card until the end of your next turn."
+    },
+    {
+      "name": "Searslicer Goblin",
+      "scryfallId": "4b180672-e2db-4b39-a9fe-9ea0d2ad4791",
+      "twoFaced": false,
+      "oracleCardName": "Searslicer Goblin",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token."
+    },
+    {
+      "name": "Siege-Gang Commander",
+      "scryfallId": "7d67e614-03d2-4034-b82f-25962fc378d4",
+      "twoFaced": false,
+      "oracleCardName": "Siege-Gang Commander",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "When this creature enters, create three 1/1 red Goblin creature tokens.\n{1}{R}, Sacrifice a Goblin: This creature deals 2 damage to any target."
+    },
+    {
+      "name": "Siege-Gang Lieutenant",
+      "scryfallId": "76049160-69f7-4114-81f3-dfab8242ac15",
+      "twoFaced": false,
+      "oracleCardName": "Siege-Gang Lieutenant",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Lieutenant — At the beginning of combat on your turn, if you control your commander, create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn.\n{2}, Sacrifice a Goblin: This creature deals 1 damage to any target."
+    },
+    {
+      "name": "Idol of Oblivion",
+      "scryfallId": "0fca2f74-d220-47f1-964a-a4cd6e096fbf",
+      "twoFaced": false,
+      "oracleCardName": "Idol of Oblivion",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+    },
+    {
+      "name": "Ruby Medallion",
+      "scryfallId": "77cc4574-acc0-4f03-bd3b-af7a47f19053",
+      "twoFaced": false,
+      "oracleCardName": "Ruby Medallion",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Red spells you cast cost {1} less to cast."
+    },
+    {
+      "name": "Throne of Eldraine",
+      "scryfallId": "6d98bdb7-bdba-4e06-a122-9bcf131f4cc8",
+      "twoFaced": false,
+      "oracleCardName": "Throne of Eldraine",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "As Throne of Eldraine enters, choose a color.\n{T}: Add four mana of the chosen color. Spend this mana only to cast monocolored spells of that color.\n{3}, {T}: Draw two cards. Spend only mana of the chosen color to activate this ability."
+    },
+    {
+      "name": "Arena of Glory",
+      "scryfallId": "7230f119-b663-483c-aa9b-eb22259fcc2d",
+      "twoFaced": false,
+      "oracleCardName": "Arena of Glory",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{R}, {T}, Exert this land: Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)"
+    },
+    {
+      "name": "Castle Embereth",
+      "scryfallId": "516db41b-188b-405e-8665-fa7021c72fd3",
+      "twoFaced": false,
+      "oracleCardName": "Castle Embereth",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn."
+    },
+    {
+      "name": "Den of the Bugbear",
+      "scryfallId": "8fd0fdb6-3a6d-4831-8d1b-0b1b69304c36",
+      "twoFaced": false,
+      "oracleCardName": "Den of the Bugbear",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "If you control two or more other lands, this land enters tapped.\n{T}: Add {R}.\n{3}{R}: Until end of turn, this land becomes a 3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\" It's still a land."
+    },
+    {
+      "name": "Fountainport",
+      "scryfallId": "c2ff06c7-6731-45db-acf5-704634de825f",
+      "twoFaced": false,
+      "oracleCardName": "Fountainport",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a token: Draw a card.\n{3}, {T}, Pay 1 life: Create a 1/1 blue Fish creature token.\n{4}, {T}: Create a Treasure token."
+    },
+    {
+      "name": "Kher Keep",
+      "scryfallId": "f7f8cbda-be92-4f14-a626-81682544612f",
+      "twoFaced": false,
+      "oracleCardName": "Kher Keep",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep."
+    },
+    {
+      "name": "Spinerock Knoll",
+      "scryfallId": "007d53d3-3fb7-4ca5-8195-203fb96fafa7",
+      "twoFaced": false,
+      "oracleCardName": "Spinerock Knoll",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+    },
+    {
+      "name": "War Room",
+      "scryfallId": "caf2dc02-9989-4e5f-8b9b-76ff416f8070",
+      "twoFaced": false,
+      "oracleCardName": "War Room",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{3}, {T}, Pay life equal to the number of colors in your commanders' color identity: Draw a card."
+    },
+    {
+      "name": "Shinka, the Bloodsoaked Keep",
+      "scryfallId": "eb444c1e-0655-4251-9ecf-ad03473c6bb5",
+      "twoFaced": false,
+      "oracleCardName": "Shinka, the Bloodsoaked Keep",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {R}.\n{R}, {T}: Target legendary creature gains first strike until end of turn."
+    },
+    {
+      "name": "Ancestors' Aid",
+      "scryfallId": "bc49a9d1-9c5f-4a80-bab8-767f6d3b75e2",
+      "twoFaced": false,
+      "oracleCardName": "Ancestors' Aid",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Target creature gets +2/+0 and gains first strike until end of turn.\nCreate a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+    },
+    {
+      "name": "Battle Hymn",
+      "scryfallId": "edbd57be-7bcd-4423-8337-c8c34f3da0bd",
+      "twoFaced": false,
+      "oracleCardName": "Battle Hymn",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Add {R} for each creature you control."
+    },
+    {
+      "name": "Boggart Shenanigans",
+      "scryfallId": "103a6910-951c-409d-901d-0fa5e510d22e",
+      "twoFaced": false,
+      "oracleCardName": "Boggart Shenanigans",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Kindred",
+        "Enchantment"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever another Goblin you control is put into a graveyard from the battlefield, you may have this enchantment deal 1 damage to target player or planeswalker."
+    },
+    {
+      "name": "Crimson Wisps",
+      "scryfallId": "443a9cee-01aa-43ab-89ef-aff9d596a077",
+      "twoFaced": false,
+      "oracleCardName": "Crimson Wisps",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Target creature becomes red and gains haste until end of turn. (It can attack and {T} this turn.)\nDraw a card."
+    },
+    {
+      "name": "Daring Discovery",
+      "scryfallId": "8976c2bd-ac7a-4e25-be17-1099a104626b",
+      "twoFaced": false,
+      "oracleCardName": "Daring Discovery",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Up to three target creatures can't block this turn.\nDiscover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+    },
+    {
+      "name": "Dragon Fodder",
+      "scryfallId": "ebb84e38-57cd-4539-99e7-c4e319d16314",
+      "twoFaced": false,
+      "oracleCardName": "Dragon Fodder",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Create two 1/1 red Goblin creature tokens."
+    },
+    {
+      "name": "Expedite",
+      "scryfallId": "dc18464f-24ee-4202-9dea-591bd90d62ab",
+      "twoFaced": false,
+      "oracleCardName": "Expedite",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Target creature gains haste until end of turn.\nDraw a card."
+    },
+    {
+      "name": "Faithless Looting",
+      "scryfallId": "5aeda464-e71e-4e89-b355-237680bc1a7b",
+      "twoFaced": false,
+      "oracleCardName": "Faithless Looting",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "name": "Fists of Flame",
+      "scryfallId": "0e7c9403-fb7f-4334-a3b2-0932b4a13eb8",
+      "twoFaced": false,
+      "oracleCardName": "Fists of Flame",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)"
+    },
+    {
+      "name": "Gempalm Incinerator",
+      "scryfallId": "0ac7667c-2526-4f4b-8886-2516d4a8fbae",
+      "twoFaced": false,
+      "oracleCardName": "Gempalm Incinerator",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Cycling {1}{R} ({1}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield."
+    },
+    {
+      "name": "General Kreat, the Boltbringer",
+      "scryfallId": "b44c7ba3-c90a-436d-a159-89dc9981e0c3",
+      "twoFaced": false,
+      "oracleCardName": "General Kreat, the Boltbringer",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking.\nWhenever another creature you control enters, General Kreat deals 1 damage to each opponent."
+    },
+    {
+      "name": "Glimpse the Impossible",
+      "scryfallId": "378afb65-9251-4678-a915-538b7ea8ea1b",
+      "twoFaced": false,
+      "oracleCardName": "Glimpse the Impossible",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have \"Sacrifice this token: Add {C}.\""
+    },
+    {
+      "name": "Goblin Bushwhacker",
+      "scryfallId": "0ad8738e-ea8e-4e26-be20-5e99e141222e",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Bushwhacker",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Kicker {R} (You may pay an additional {R} as you cast this spell.)\nWhen this creature enters, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn."
+    },
+    {
+      "name": "Goblin Matron",
+      "scryfallId": "8ee0fdd4-1fb5-4160-b408-2c51ef4f85d0",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Matron",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may search your library for a Goblin card, reveal that card, put it into your hand, then shuffle."
+    },
+    {
+      "name": "Goblin Negotiation",
+      "scryfallId": "2470167c-acee-4de3-b762-a7ade6fc284e",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Negotiation",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{R}{R}",
+      "cmc": 2,
+      "oracleText": "Goblin Negotiation deals X damage to target creature. Create a number of 1/1 red Goblin creature tokens equal to the amount of excess damage dealt to that creature this way."
+    },
+    {
+      "name": "Goblin Warchief",
+      "scryfallId": "3766428a-5206-4faf-aaee-f01b7a1998a3",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Warchief",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{R}",
+      "cmc": 3,
+      "oracleText": "Goblin spells you cast cost {1} less to cast.\nGoblins you control have haste."
+    },
+    {
+      "name": "Haze of Rage",
+      "scryfallId": "20d95359-07c3-4634-86ac-a1be78083a09",
+      "twoFaced": false,
+      "oracleCardName": "Haze of Rage",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreatures you control get +1/+0 until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)"
+    },
+    {
+      "name": "Impact Tremors",
+      "scryfallId": "df82f3d1-c7ee-4aa5-a14b-f090e4c6ce91",
+      "twoFaced": false,
+      "oracleCardName": "Impact Tremors",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent."
+    },
+    {
+      "name": "Impulsive Pilferer",
+      "scryfallId": "d9e8f74a-fb7d-4291-b3c0-72c1796f3c70",
+      "twoFaced": false,
+      "oracleCardName": "Impulsive Pilferer",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "When this creature dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nEncore {3}{R} ({3}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+    },
+    {
+      "name": "Krenko's Command",
+      "scryfallId": "edd9e8d3-6e30-43fc-8931-0f5c07a0e5b7",
+      "twoFaced": false,
+      "oracleCardName": "Krenko's Command",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Create two 1/1 red Goblin creature tokens."
+    },
+    {
+      "name": "Mana Geyser",
+      "scryfallId": "e676108f-c5e5-4c00-aae1-75faab39da24",
+      "twoFaced": false,
+      "oracleCardName": "Mana Geyser",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "oracleText": "Add {R} for each tapped land your opponents control."
+    },
+    {
+      "name": "Mogg War Marshal",
+      "scryfallId": "4ebce261-3a53-48f2-a173-0d98c68aff2c",
+      "twoFaced": false,
+      "oracleCardName": "Mogg War Marshal",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Echo {1}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters or dies, create a 1/1 red Goblin creature token."
+    },
+    {
+      "name": "Quest for the Goblin Lord",
+      "scryfallId": "6fa14511-abab-447c-9e44-aeeb51591869",
+      "twoFaced": false,
+      "oracleCardName": "Quest for the Goblin Lord",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Whenever a Goblin you control enters, you may put a quest counter on this enchantment.\nAs long as this enchantment has five or more quest counters on it, creatures you control get +2/+0."
+    },
+    {
+      "name": "Renegade Tactics",
+      "scryfallId": "ab0a2925-281a-4466-9c96-48438cdc6561",
+      "twoFaced": false,
+      "oracleCardName": "Renegade Tactics",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Target creature can't block this turn.\nDraw a card."
+    },
+    {
+      "name": "Sazacap's Brew",
+      "scryfallId": "67c4be9a-5c29-4e5f-bfab-030bbc1686f4",
+      "twoFaced": false,
+      "oracleCardName": "Sazacap's Brew",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)\nAs an additional cost to cast this spell, discard a card.\nTarget player draws two cards. If the gift was promised, target creature you control gets +2/+0 until end of turn."
+    },
+    {
+      "name": "Seething Song",
+      "scryfallId": "22f6489d-133b-40da-a5ea-0417d3962eff",
+      "twoFaced": false,
+      "oracleCardName": "Seething Song",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Add {R}{R}{R}{R}{R}."
+    },
+    {
+      "name": "Spreading Insurrection",
+      "scryfallId": "3b68238a-f3e1-4796-8e83-882645af9618",
+      "twoFaced": false,
+      "oracleCardName": "Spreading Insurrection",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Gain control of target creature you don't control until end of turn. Untap that creature. It gains haste until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+    },
+    {
+      "name": "Storm-Kiln Artist",
+      "scryfallId": "dd408ccb-3578-4729-82a7-8a61af0fd32e",
+      "twoFaced": false,
+      "oracleCardName": "Storm-Kiln Artist",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "This creature gets +1/+0 for each artifact you control.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+    },
+    {
+      "name": "Vandalblast",
+      "scryfallId": "9e0a57ca-f9e4-4f06-9c67-b7b87646954b",
+      "twoFaced": false,
+      "oracleCardName": "Vandalblast",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+    },
+    {
+      "name": "Wild Ride",
+      "scryfallId": "cc0ed18d-c91a-4907-ab9a-a64f48918451",
+      "twoFaced": false,
+      "oracleCardName": "Wild Ride",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}",
+      "cmc": 1,
+      "oracleText": "Target creature gets +3/+0 and gains haste until end of turn.\nHarmonize {4}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)"
+    },
+    {
+      "name": "Witch's Mark",
+      "scryfallId": "7120f534-cc20-453a-8ddd-ebd6f64235e7",
+      "twoFaced": false,
+      "oracleCardName": "Witch's Mark",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "You may discard a card. If you do, draw two cards.\nCreate a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "a118b473-0898-4c3c-8d5c-ffa95a0c2987",
+      "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+    },
+    {
+      "name": "Dwarven Mine",
+      "scryfallId": "a2e4e574-7def-4980-967c-8acae22cb1a7",
+      "twoFaced": false,
+      "oracleCardName": "Dwarven Mine",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)\nThis land enters tapped unless you control three or more other Mountains.\nWhen this land enters untapped, create a 1/1 red Dwarf creature token."
+    },
+    {
+      "name": "Forgotten Cave",
+      "scryfallId": "bd75c360-931e-4bce-8e25-dd1d361efcc3",
+      "twoFaced": false,
+      "oracleCardName": "Forgotten Cave",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Goblin Burrows",
+      "scryfallId": "232bcc20-bb2f-4e45-89f4-6c797f1bea3b",
+      "twoFaced": false,
+      "oracleCardName": "Goblin Burrows",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Target Goblin creature gets +2/+0 until end of turn."
+    },
+    {
+      "name": "Hidden Volcano",
+      "scryfallId": "1a40757f-a9ef-4832-b063-14686633ab3b",
+      "twoFaced": false,
+      "oracleCardName": "Hidden Volcano",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+    },
+    {
+      "name": "Reliquary Tower",
+      "scryfallId": "064e88cb-b9ae-4b70-a788-7a0c2e215f1c",
+      "twoFaced": false,
+      "oracleCardName": "Reliquary Tower",
+      "colorIdentity": [],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+    },
+    {
+      "name": "Smoldering Crater",
+      "scryfallId": "cbf82db0-26b9-4b32-832b-18710d1010b3",
+      "twoFaced": false,
+      "oracleCardName": "Smoldering Crater",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "PLST",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "68c35440-ddb6-4b43-baba-889ff3ce0c0d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eb5257a6-5a4d-4b7d-ad4f-3ff0b7c74dfd",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "eef2a9c2-2079-4a34-80f0-f0ca7f882498",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "SLD",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:09:54.912Z",
+    "sourceUrl": "GoblinStorm_SLD.json",
+    "deckSource": "precon",
+    "createdAt": "2026-05-18T00:00:00.000Z"
+  }
+}

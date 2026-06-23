@@ -1,0 +1,1572 @@
+{
+  "version": 2,
+  "id": 1980037717,
+  "name": "Avengers Assemble",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Captain America, Team Leader",
+      "scryfallId": "61a51b67-d941-4e07-9c12-ffe583cb65d4",
+      "twoFaced": false,
+      "oracleCardName": "Captain America, Team Leader",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{R}{W}",
+      "cmc": 3,
+      "oracleText": "Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America."
+    }
+  ],
+  "cards": [
+    {
+      "name": "Avenge",
+      "scryfallId": "8b385779-bc6b-4f67-8724-d8ae136d1436",
+      "twoFaced": false,
+      "oracleCardName": "Avenge",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "This spell costs {2} less to cast if a player attacked you during their last turn.\nDestroy all creatures. You gain 1 life for each creature destroyed this way."
+    },
+    {
+      "name": "Falcon and Redwing",
+      "scryfallId": "e565fb47-acca-4348-87bb-afdadbf55e8a",
+      "twoFaced": false,
+      "oracleCardName": "Falcon and Redwing",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing."
+    },
+    {
+      "name": "Hercules, Olympian Hero",
+      "scryfallId": "77be0e26-90db-41a5-97c2-43cf6ef87ab0",
+      "twoFaced": false,
+      "oracleCardName": "Hercules, Olympian Hero",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{W}{W}",
+      "cmc": 5,
+      "oracleText": "Whenever Hercules attacks, put a +1/+1 counter on him. He gains indestructible until end of turn.\nWhenever Hercules is dealt damage for the first time each turn, put that many +1/+1 counters on him. (He must survive the damage to get the counters.)"
+    },
+    {
+      "name": "Heroic Return",
+      "scryfallId": "707e0b51-701b-4eb6-b721-19c21a3c4d90",
+      "twoFaced": false,
+      "oracleCardName": "Heroic Return",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{5}{W}",
+      "cmc": 6,
+      "oracleText": "This spell costs {2} less to cast if a creature is attacking you.\nReturn target creature card from your graveyard to the battlefield. If a Hero enters this way, it enters with two additional +1/+1 counters on it."
+    },
+    {
+      "name": "Heroic Sacrifice",
+      "scryfallId": "ec7bd155-1dd6-4fc3-870f-e0905f8c6d42",
+      "twoFaced": false,
+      "oracleCardName": "Heroic Sacrifice",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Choose target creature you control. Until end of turn, all damage that would be dealt to you and creatures you control is dealt to the chosen creature instead (if it's still on the battlefield). When that creature dies this turn, put its counters on up to one target creature you control and draw a card."
+    },
+    {
+      "name": "Methods of the Mighty",
+      "scryfallId": "f3699f46-6173-47e1-97b2-a7632224fb6c",
+      "twoFaced": false,
+      "oracleCardName": "Methods of the Mighty",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{3}{W}",
+      "cmc": 4,
+      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target tapped creature.\n• Put a +1/+1 counter on each creature you control."
+    },
+    {
+      "name": "Winter Soldier, Reborn Avenger",
+      "scryfallId": "de13b219-a99c-47ef-8b68-d57463cf5de8",
+      "twoFaced": false,
+      "oracleCardName": "Winter Soldier, Reborn Avenger",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Whenever Winter Soldier attacks, return target creature card with mana value less than or equal to Winter Soldier's power from your graveyard to the battlefield. If a Hero enters this way, it enters with an additional +1/+1 counter on it."
+    },
+    {
+      "name": "Iron Man, Armored Avenger",
+      "scryfallId": "94af0633-59c6-4893-ab44-232d37573dde",
+      "twoFaced": false,
+      "oracleCardName": "Iron Man, Armored Avenger",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}{U}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever you draw a card, put a +1/+1 counter on target creature.\nWhenever Iron Man attacks, other attacking modified creatures gain flying until end of turn. (Equipment, Auras you control, and counters are modifications.)"
+    },
+    {
+      "name": "Jarvis, Earth's Mightiest Butler",
+      "scryfallId": "62c31cd8-0c30-4cfb-89d6-2e4dac19f6ea",
+      "twoFaced": false,
+      "oracleCardName": "Jarvis, Earth's Mightiest Butler",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}",
+      "cmc": 3,
+      "oracleText": "Whenever you cast a Hero spell, draw a card."
+    },
+    {
+      "name": "Professor Hulk",
+      "scryfallId": "1b03fa4e-b3a1-4c23-8341-e9ce89aa872f",
+      "twoFaced": false,
+      "oracleCardName": "Professor Hulk",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{U}{U}",
+      "cmc": 6,
+      "oracleText": "Trample\nWhenever Professor Hulk deals combat damage to a player, draw that many cards."
+    },
+    {
+      "name": "The Wasp, Winsome Avenger",
+      "scryfallId": "ce5fb436-fcc6-426f-a33b-a8ba904df0ff",
+      "twoFaced": false,
+      "oracleCardName": "The Wasp, Winsome Avenger",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flash\nFlying\nWhen The Wasp enters, target Hero gains hexproof until end of turn.\nWhenever The Wasp attacks, tap target creature defending player controls."
+    },
+    {
+      "name": "West Coast Expansion",
+      "scryfallId": "41533f78-4a4e-424a-9612-a8bdb2a14b4b",
+      "twoFaced": false,
+      "oracleCardName": "West Coast Expansion",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{U}{U}",
+      "cmc": 2,
+      "oracleText": "Draw X cards. If X is 5 or more, you may cast a Hero spell from your hand without paying its mana cost."
+    },
+    {
+      "name": "Firebird, Blazing Ranger",
+      "scryfallId": "11dc3b30-b130-4558-ab37-9c32792641ea",
+      "twoFaced": false,
+      "oracleCardName": "Firebird, Blazing Ranger",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever Firebird attacks, other attacking creatures get +X/+0 until end of turn, where X is Firebird's power."
+    },
+    {
+      "name": "Photon, Mighty Marvel",
+      "scryfallId": "2b164aca-2bda-49a6-81ce-16ef4721ec63",
+      "twoFaced": false,
+      "oracleCardName": "Photon, Mighty Marvel",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever Photon deals combat damage to a player, add that much mana of any one color. Until end of turn, you don't lose this mana as steps and phases end."
+    },
+    {
+      "name": "She-Hulk, Wallbreaker",
+      "scryfallId": "8c57fb16-f4a3-437c-be27-d1c00a2be01e",
+      "twoFaced": false,
+      "oracleCardName": "She-Hulk, Wallbreaker",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}",
+      "cmc": 6,
+      "oracleText": "Trample\nOther Heroes you control have trample.\nWhenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it."
+    },
+    {
+      "name": "War Machine, Avenging Arsenal",
+      "scryfallId": "8c62621f-20b2-4950-a74a-7c2e4fc02e54",
+      "twoFaced": false,
+      "oracleCardName": "War Machine, Avenging Arsenal",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}{R}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever War Machine attacks, attacking modified creatures you control gain double strike until end of turn. (Equipment, Auras you control, and counters are modifications.)"
+    },
+    {
+      "name": "Ant-Man, Elusive Avenger",
+      "scryfallId": "18e2b0a4-0ed3-48e6-8334-198a19e54bff",
+      "twoFaced": false,
+      "oracleCardName": "Ant-Man, Elusive Avenger",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Ant-Man can't be blocked by creatures with greater power.\nWhenever Ant-Man deals combat damage to a player, create that many Treasure tokens."
+    },
+    {
+      "name": "Black Widow, Agile Avenger",
+      "scryfallId": "8c2bf77c-9acf-4e2c-9cad-e74546f26070",
+      "twoFaced": false,
+      "oracleCardName": "Black Widow, Agile Avenger",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}{W}",
+      "cmc": 3,
+      "oracleText": "Menace\nWhenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card."
+    },
+    {
+      "name": "Captain Marvel, Apex Avenger",
+      "scryfallId": "516e14ce-9cc8-4be3-aacb-ba801f26a6bc",
+      "twoFaced": false,
+      "oracleCardName": "Captain Marvel, Apex Avenger",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{5}{R}{W}",
+      "cmc": 7,
+      "oracleText": "Flying, double strike, indestructible\nWhenever you put one or more counters on another creature, if it's not a Kree, you may put the same number and kind of counters on Captain Marvel."
+    },
+    {
+      "name": "Director Nick Fury",
+      "scryfallId": "9a19d4ec-399a-4371-acc3-0956dd4dcb84",
+      "twoFaced": false,
+      "oracleCardName": "Director Nick Fury",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{U}{R}{W}",
+      "cmc": 3,
+      "oracleText": "Hero spells you cast cost {1} less to cast.\nWhenever you attack, look at the top four cards of your library. You may reveal a Hero card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order."
+    },
+    {
+      "name": "Hawkeye, Avenging Archer",
+      "scryfallId": "1f394a6f-3649-4464-939b-c183b2b01768",
+      "twoFaced": false,
+      "oracleCardName": "Hawkeye, Avenging Archer",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Reach\nWhenever a creature an opponent controls dies, if Hawkeye dealt damage to it this turn, draw a card.\n{T}: Hawkeye deals 1 damage to any target."
+    },
+    {
+      "name": "Love on the Battlefield",
+      "scryfallId": "3f2e65ff-27ae-4dfc-bf17-66f0c4949699",
+      "twoFaced": false,
+      "oracleCardName": "Love on the Battlefield",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{U}{R}",
+      "cmc": 3,
+      "oracleText": "Whenever you attack with exactly two creatures, those creatures gain first strike until end of turn, then draw a card. Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it."
+    },
+    {
+      "name": "Quicksilver, Speedster",
+      "scryfallId": "5a454bad-c137-4d7c-9fcc-928c0c1798f4",
+      "twoFaced": false,
+      "oracleCardName": "Quicksilver, Speedster",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{U}{R}",
+      "cmc": 5,
+      "oracleText": "Flash\nDouble strike, haste\nAs long as Quicksilver is tapped, you may cast spells as though they had flash."
+    },
+    {
+      "name": "Scarlet Witch, Chaotic Avenger",
+      "scryfallId": "2308c274-40d8-490f-955e-67a57b89525a",
+      "twoFaced": false,
+      "oracleCardName": "Scarlet Witch, Chaotic Avenger",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{U}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever Scarlet Witch deals combat damage to a player, look at the top two cards of your library, then exile them face down. Then you may cast a Hero or noncreature spell from among cards exiled with Scarlet Witch without paying its mana cost."
+    },
+    {
+      "name": "Shang-Chi and the Ten Rings",
+      "scryfallId": "8d6288b7-c959-437b-9a3f-eb85c306c9f2",
+      "twoFaced": false,
+      "oracleCardName": "Shang-Chi and the Ten Rings",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "First strike\nWhenever you draw a card, put a +1/+1 counter on Shang-Chi.\nWhen the tenth +1/+1 counter is put on Shang-Chi, you draw five cards and gain 5 life."
+    },
+    {
+      "name": "Avengers Quinjet",
+      "scryfallId": "c090d4b3-b108-4596-9d6d-738eb5e2249c",
+      "twoFaced": false,
+      "oracleCardName": "Avengers Quinjet",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{5}",
+      "cmc": 5,
+      "oracleText": "Flying\nWhenever this Vehicle enters or attacks, choose one —\n• You may put a Hero creature card from your hand onto the battlefield.\n• Return target Hero creature card from your graveyard to your hand.\nCrew 3"
+    },
+    {
+      "name": "Hulkbuster Armor",
+      "scryfallId": "0cd857a3-ad93-4d74-80e0-c99d0a04a60a",
+      "twoFaced": false,
+      "oracleCardName": "Hulkbuster Armor",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Equipped creature has base power and toughness 9/9 and has flying.\nEquip Hero {3}\nEquip {6}"
+    },
+    {
+      "name": "Jocasta, Automaton Avenger",
+      "scryfallId": "f666e211-0d80-4f01-b206-dac19bcbcfa7",
+      "twoFaced": false,
+      "oracleCardName": "Jocasta, Automaton Avenger",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Flying\nWhenever your commander deals combat damage to a player, put a +1/+1 counter on Jocasta.\nWhenever you attack with your commander, if this card is in your graveyard, you may return it to the battlefield tapped and attacking."
+    },
+    {
+      "name": "Vision, Synthezoid Avenger",
+      "scryfallId": "f7007b77-84ec-4391-b279-8c188dd569d0",
+      "twoFaced": false,
+      "oracleCardName": "Vision, Synthezoid Avenger",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "Flying\nWhenever a player casts a spell, if it isn't that player's turn, choose one —\n• Put a +1/+1 counter on Vision.\n• Vision phases out. (Treat him and anything attached to him as though they don't exist until your next turn.)"
+    },
+    {
+      "name": "Austere Command",
+      "scryfallId": "a8bc7912-e201-468a-b251-140205cb741c",
+      "twoFaced": false,
+      "oracleCardName": "Austere Command",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{W}{W}",
+      "cmc": 6,
+      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+    },
+    {
+      "name": "Bastion Protector",
+      "scryfallId": "1582488a-ad15-487e-9271-6d9330b46fb4",
+      "twoFaced": false,
+      "oracleCardName": "Bastion Protector",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Commander creatures you control get +2/+2 and have indestructible."
+    },
+    {
+      "name": "Dismantling Wave",
+      "scryfallId": "39e7bb05-96df-4e76-90a6-3f3625b7965a",
+      "twoFaced": false,
+      "oracleCardName": "Dismantling Wave",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "For each opponent, destroy up to one target artifact or enchantment that player controls.\nCycling {6}{W}{W} ({6}{W}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy all artifacts and enchantments."
+    },
+    {
+      "name": "Folk Hero",
+      "scryfallId": "85bf7c95-4534-435b-bb25-f39340ecf9be",
+      "twoFaced": false,
+      "oracleCardName": "Folk Hero",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Commander creatures you own have \"Whenever you cast a spell that shares a creature type with this creature, draw a card. This ability triggers only once each turn.\""
+    },
+    {
+      "name": "Gift of Immortality",
+      "scryfallId": "4ae22015-073a-4666-9e3b-15dcf61f50ce",
+      "twoFaced": false,
+      "oracleCardName": "Gift of Immortality",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under its owner's control. Return this card to the battlefield attached to that creature at the beginning of the next end step."
+    },
+    {
+      "name": "Kindred Discovery",
+      "scryfallId": "19bdedb2-768b-4adf-8193-917a10c8f729",
+      "twoFaced": false,
+      "oracleCardName": "Kindred Discovery",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{U}{U}",
+      "cmc": 5,
+      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever a creature you control of the chosen type enters or attacks, draw a card."
+    },
+    {
+      "name": "Door of Destinies",
+      "scryfallId": "1d0d80c7-87b5-47cc-b2fd-7defd281e1a2",
+      "twoFaced": false,
+      "oracleCardName": "Door of Destinies",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{4}",
+      "cmc": 4,
+      "oracleText": "As this artifact enters, choose a creature type.\nWhenever you cast a spell of the chosen type, put a charge counter on this artifact.\nCreatures you control of the chosen type get +1/+1 for each charge counter on this artifact."
+    },
+    {
+      "name": "Metallic Mimic",
+      "scryfallId": "2623640e-51bb-4aba-a31f-1b6d170f58f6",
+      "twoFaced": false,
+      "oracleCardName": "Metallic Mimic",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nEach other creature you control of the chosen type enters with an additional +1/+1 counter on it."
+    },
+    {
+      "name": "Tome of Legends",
+      "scryfallId": "84546bb2-6c82-4e3e-8f64-cb7aa865ee60",
+      "twoFaced": false,
+      "oracleCardName": "Tome of Legends",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "This artifact enters with a page counter on it.\nWhenever your commander enters or attacks, put a page counter on this artifact.\n{1}, {T}, Remove a page counter from this artifact: Draw a card."
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "4a7f7767-1959-4812-8654-0a22634096b1",
+      "twoFaced": false,
+      "oracleCardName": "Clifftop Retreat",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Coastal Peak",
+      "scryfallId": "d2a70a9d-2d9f-4afd-9393-8d6518936ee2",
+      "twoFaced": false,
+      "oracleCardName": "Coastal Peak",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "8853ff94-bf44-4cfd-9d3a-0743c361fb0d",
+      "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Frostboil Snarl",
+      "scryfallId": "ae705a26-5371-4236-904c-fe3e58b4721d",
+      "twoFaced": false,
+      "oracleCardName": "Frostboil Snarl",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+    },
+    {
+      "name": "Furycalm Snarl",
+      "scryfallId": "afc12892-4978-4442-ace5-c4dea5c0ee00",
+      "twoFaced": false,
+      "oracleCardName": "Furycalm Snarl",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Glacial Fortress",
+      "scryfallId": "d673a2d5-0c61-48dc-8c8d-06f0c7b6b8bf",
+      "twoFaced": false,
+      "oracleCardName": "Glacial Fortress",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+    },
+    {
+      "name": "Glittering Massif",
+      "scryfallId": "a01274c2-a8f4-43b5-bd91-c4905b8cee7e",
+      "twoFaced": false,
+      "oracleCardName": "Glittering Massif",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Irrigated Farmland",
+      "scryfallId": "996b4484-a701-409a-822c-aa19be89a2c6",
+      "twoFaced": false,
+      "oracleCardName": "Irrigated Farmland",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Plaza of Heroes",
+      "scryfallId": "96fe4b9b-d766-463b-a6df-345ebebfc17c",
+      "twoFaced": false,
+      "oracleCardName": "Plaza of Heroes",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell.\n{T}: Add one mana of any color among legendary permanents you control.\n{3}, {T}, Exile this land: Target legendary creature gains hexproof and indestructible until end of turn."
+    },
+    {
+      "name": "Port Town",
+      "scryfallId": "3f962cab-c058-41f5-b7e1-5b063f374eb0",
+      "twoFaced": false,
+      "oracleCardName": "Port Town",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "b2e133b4-2263-4ac2-8d16-7bf307d5e104",
+      "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Radiant Summit",
+      "scryfallId": "81b619cc-900c-4d65-83da-8b9dcb370984",
+      "twoFaced": false,
+      "oracleCardName": "Radiant Summit",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Scavenger Grounds",
+      "scryfallId": "9fbe68ba-ffe5-4fe0-ac0a-0b3221e4f395",
+      "twoFaced": false,
+      "oracleCardName": "Scavenger Grounds",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+    },
+    {
+      "name": "Scorched Geyser",
+      "scryfallId": "43abdfba-0a55-4b8a-858e-3372ee40a579",
+      "twoFaced": false,
+      "oracleCardName": "Scorched Geyser",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+    },
+    {
+      "name": "Spectator Seating",
+      "scryfallId": "4c62dcfc-4bc8-4551-b3c7-9eec26be3362",
+      "twoFaced": false,
+      "oracleCardName": "Spectator Seating",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {R} or {W}."
+    },
+    {
+      "name": "Sulfur Falls",
+      "scryfallId": "c762f475-7e58-4477-839b-b3c55434b88f",
+      "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+    },
+    {
+      "name": "Raise the Palisade",
+      "scryfallId": "ce9347e8-962f-4fc1-808f-b59ac751de13",
+      "twoFaced": false,
+      "oracleCardName": "Raise the Palisade",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{4}{U}",
+      "cmc": 5,
+      "oracleText": "Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands."
+    },
+    {
+      "name": "Thor, Asgard's Avenger",
+      "scryfallId": "3513c041-7147-467d-845d-3d1c83fb3328",
+      "twoFaced": false,
+      "oracleCardName": "Thor, Asgard's Avenger",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSC",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "oracleText": "Flying\nIf another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead."
+    },
+    {
+      "name": "Captain Mar-Vell, Space-Born",
+      "scryfallId": "27924c2f-756c-42af-9830-18a5a2735137",
+      "twoFaced": false,
+      "oracleCardName": "Captain Mar-Vell, Space-Born",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{4}{W}",
+      "cmc": 5,
+      "oracleText": "Flying, vigilance\nCosmic Awareness — As long as an opponent has cast a spell this turn, you may cast spells as though they had flash."
+    },
+    {
+      "name": "Patriot, Shield Wielder",
+      "scryfallId": "1467d7c9-00d8-43f1-b4e7-a279d2b10503",
+      "twoFaced": false,
+      "oracleCardName": "Patriot, Shield Wielder",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "{2}, {T}: Another target creature you control gets +2/+0 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
+    },
+    {
+      "name": "Speed, Young Avenger",
+      "scryfallId": "d15d187b-dc5d-482d-a79a-b9b98193ad7a",
+      "twoFaced": false,
+      "oracleCardName": "Speed, Young Avenger",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "oracleText": "Haste\nWhenever you cast a noncreature spell, you may pay {1}. When you do, target creature with haste can't be blocked this turn except by creatures with haste."
+    },
+    {
+      "name": "Captain America, Living Legend",
+      "scryfallId": "6516f292-469d-4092-b099-97c698f373cd",
+      "twoFaced": false,
+      "oracleCardName": "Captain America, Living Legend",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{W}{U}",
+      "cmc": 3,
+      "oracleText": "Vigilance\nWhenever a creature you control becomes tapped during your turn, if it's the first time that creature has become tapped this turn, untap it."
+    },
+    {
+      "name": "Avengers Tower",
+      "scryfallId": "88f0d9c9-8a1f-4b5a-b6f9-821ddd658d27",
+      "twoFaced": false,
+      "oracleCardName": "Avengers Tower",
+      "colorIdentity": [],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source.\n{4}, {T}: Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+    },
+    {
+      "name": "Destroy Evil",
+      "scryfallId": "af2498a2-3763-408a-9bd2-279034869285",
+      "twoFaced": false,
+      "oracleCardName": "Destroy Evil",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Destroy target creature with toughness 4 or greater.\n• Destroy target enchantment."
+    },
+    {
+      "name": "Make Your Move",
+      "scryfallId": "05fa34df-99b0-4121-b2f1-d41afe97b200",
+      "twoFaced": false,
+      "oracleCardName": "Make Your Move",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "oracleText": "Destroy target artifact, enchantment, or creature with power 4 or greater."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "b4e9c870-23c0-413a-ae39-265f09da16d1",
+      "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{W}",
+      "cmc": 1,
+      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+    },
+    {
+      "name": "Arcane Denial",
+      "scryfallId": "5eb843ef-b223-40d0-a461-54b16d188d0e",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Denial",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+    },
+    {
+      "name": "Reconnaissance Mission",
+      "scryfallId": "9fdd83d4-b473-498f-b45e-174f025e1259",
+      "twoFaced": false,
+      "oracleCardName": "Reconnaissance Mission",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{U}{U}",
+      "cmc": 4,
+      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+    },
+    {
+      "name": "Rip Apart",
+      "scryfallId": "b4964c78-b9ca-43c2-bcaa-bf75d92b9065",
+      "twoFaced": false,
+      "oracleCardName": "Rip Apart",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{R}{W}",
+      "cmc": 2,
+      "oracleText": "Choose one —\n• Rip Apart deals 3 damage to target creature or planeswalker.\n• Destroy target artifact or enchantment."
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "1cad1bd2-7c56-4ce0-99a6-b2a49c1288dd",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Hero's Blade",
+      "scryfallId": "6f2fa911-5735-4ee2-828f-59dea6927b20",
+      "twoFaced": false,
+      "oracleCardName": "Hero's Blade",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature gets +3/+2.\nWhenever a legendary creature you control enters, you may attach this Equipment to it.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)"
+    },
+    {
+      "name": "Relic of Legends",
+      "scryfallId": "89691cda-e38b-4f53-bee6-4c234186e6ad",
+      "twoFaced": false,
+      "oracleCardName": "Relic of Legends",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "{T}: Add one mana of any color.\nTap an untapped legendary creature you control: Add one mana of any color."
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "91fdb56b-54d5-4272-8319-505ff987fe9b",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Talisman of Conviction",
+      "scryfallId": "a365885c-f7d9-4ea1-9125-5265055e5570",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Conviction",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+    },
+    {
+      "name": "Talisman of Creativity",
+      "scryfallId": "3ed13229-bbbb-41a7-933e-8975a6b64226",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Creativity",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "b356ee36-1c62-4097-87d7-fef6a6dad067",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Progress",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+    },
+    {
+      "name": "Thought Vessel",
+      "scryfallId": "6ec6a910-f6d0-4225-8b55-d329dc788c64",
+      "twoFaced": false,
+      "oracleCardName": "Thought Vessel",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "0548fb60-c843-4f8f-a029-6f10efc63a41",
+      "twoFaced": false,
+      "oracleCardName": "Command Tower",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "name": "Mystic Monastery",
+      "scryfallId": "bc23343a-3a01-4975-8430-17bf15fa639d",
+      "twoFaced": false,
+      "oracleCardName": "Mystic Monastery",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "836b8f52-10d2-4716-9f7b-38fb23bc68de",
+      "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+    },
+    {
+      "name": "Secluded Courtyard",
+      "scryfallId": "c0d17d04-cf0b-4918-bfec-b34b0d98a602",
+      "twoFaced": false,
+      "oracleCardName": "Secluded Courtyard",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+    },
+    {
+      "name": "Unclaimed Territory",
+      "scryfallId": "d3782952-3839-4a94-95bc-716611d3ece6",
+      "twoFaced": false,
+      "oracleCardName": "Unclaimed Territory",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "1e24e2bc-b239-4f9a-85c0-5f272f58ed43",
+      "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "name": "Herald's Horn",
+      "scryfallId": "1c2e4ff2-5c14-488e-8548-eb89ffd18e41",
+      "twoFaced": false,
+      "oracleCardName": "Herald's Horn",
+      "colorIdentity": [],
+      "set": "MSC",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+    },
+    {
+      "name": "Rescue, Pepper Potts",
+      "scryfallId": "476f75a4-a4e0-4d09-9756-f1001ebabc84",
+      "twoFaced": false,
+      "oracleCardName": "Rescue, Pepper Potts",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSC",
+      "types": [
+        "Artifact",
+        "Creature"
+      ],
+      "manaCost": "{1}{U}",
+      "cmc": 2,
+      "oracleText": "Flash\nFlying\nWhen Rescue enters, return up to one other target artifact or creature you control to its owner's hand. If it was an artifact, put a +1/+1 counter on Rescue."
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {W}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Island",
+      "scryfallId": "5a74175b-2418-4226-8435-1490532e644f",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {U}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "MSH",
+      "types": [
+        "Land"
+      ],
+      "cmc": 0,
+      "oracleText": "({T}: Add {R}.)"
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:09:53.679Z",
+    "sourceUrl": "AvengersAssemble_MSC.json",
+    "deckSource": "precon",
+    "createdAt": "2026-06-26T00:00:00.000Z"
+  }
+}
