@@ -46,6 +46,9 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 - **`3af3b01`** - Error on missing back face, download AllIdentifiers for lookups
   - MTGJSON precon files don't include back-face cards inline. The adapter needs AllIdentifiers.json to look up back faces by UUID.
 - **`329baf5`** - Regenerate precon decks with back-face data from AllIdentifiers
+- **`5b3e5b5`** - Stream-parse AllIdentifiers.json in precon fetch script
+  - AllIdentifiers.json outgrew Node's max string length (~512MB), so `fs.readFile` threw `RangeError: Invalid string length` when building the back-face lookup database. `loadCardDatabase()` now uses a `stream-json` pipeline (`chain` → `parser` → `pick({filter: "data"})` → `streamObject`) to build the UUID→card Map one entry at a time. Resulting Map and back-face resolution are unchanged. Required adding the `stream-json` dependency and switching `tsconfig.json` `moduleResolution` to `"bundler"` (so TS honors stream-json's package `exports` map; runtime emit unchanged).
+  - Added 15 new precons (Marvel MSC, Strixhaven SOC, TMNT) via `--convert --skip-existing`, 0 conversion errors.
 
 ## Type Merging for Library Search
 

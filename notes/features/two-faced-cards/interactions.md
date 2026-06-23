@@ -86,7 +86,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 7. **New deck adapters**: Must determine `twoFaced` and populate `backFace` with a `CardFace` object. Missing back-face data degrades library search grouping and means the flip button won't appear.
 
-8. **Precon deck regeneration**: When regenerating precon decks, AllIdentifiers data must be available for MTGJSON adapter to look up back faces. Without it, the adapter throws an error.
+8. **Precon deck regeneration**: When regenerating precon decks, AllIdentifiers data must be available for MTGJSON adapter to look up back faces. Without it, the adapter throws an error. AllIdentifiers.json now exceeds Node's max string length, so `fetch-mtgjson-precons.ts` stream-parses it with `stream-json` (commit `5b3e5b5`) rather than `fs.readFile` + `JSON.parse`. If you touch `loadCardDatabase()`, keep it streaming — a whole-file read will throw `RangeError: Invalid string length`.
 
 9. **Game state version**: `currentFace` is persisted. If the persisted game state version changes, migration code must preserve or default `currentFace`.
 

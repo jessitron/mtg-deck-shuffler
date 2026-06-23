@@ -72,8 +72,9 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 **Deck Management Scripts:**
 
 - `npm run precons:fetch-mtgjson -- --convert` - Download and convert all MTGJSON Commander precon decks to `decks/` directory
-  - Use `--force` to overwrite existing files
-  - Downloads from https://mtgjson.com/api/v5/AllDeckFiles.tar.gz
+  - Default: **replaces all** existing deck files (rewrites every file, including a fresh `provenance.retrievedDate` — a noisy diff)
+  - Add `--skip-existing` to convert only newly-released precons and leave existing files untouched (clean diff — use this when just picking up new precons)
+  - Downloads from https://mtgjson.com/api/v5/AllDeckFiles.tar.gz, plus AllIdentifiers.json for two-faced back-face lookups (stream-parsed, since it exceeds Node's max string length)
   - Converts to internal format with enriched card data (manaCost, cmc, oracleText)
 - `npm run deck:download -- <deckId>` - Download a specific Archidekt deck by ID
   - Example: `npm run deck:download -- 14669648`
