@@ -12,8 +12,13 @@ export class MtgjsonDeckAdapter {
    *
    * The precon JSON files in decks/ are generated once and read directly by LocalFileAdapter,
    * so they won't pick up changes to this adapter until regenerated.
+   *
+   * Pass `setNames` (set-code→full-name, from fetchScryfallSetNames) so cards store
+   * the full set TEXT ("Secret Lair Drop") rather than the code ("SLD"). To fix the
+   * set field on already-generated files without a full regenerate, run
+   * `npm run decks:backfill-set-names`.
    */
-  convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string, cardDatabase?: Map<string, MtgjsonCard>): Deck {
+  convertMtgjsonToDeck(mtgjsonDeck: MtgjsonDeck, sourceFilePath: string, cardDatabase?: Map<string, MtgjsonCard>, setNames?: Map<string, string>): Deck {
     const data = mtgjsonDeck.data;
 
     // Build UUID map from deck cards + optional external database for back-face lookup
@@ -32,13 +37,13 @@ export class MtgjsonDeckAdapter {
     // Convert commanders (skip side "b" entries)
     const commanders: CardDefinition[] = data.commander
       .filter(card => card.side !== "b")
-      .map(card => this.convertMtgjsonToCard(card, cardsByUuid));
+      .map(card => this.convertMtgjsonToCard(card, cardsByUuid, setNames));
 
     // Convert mainboard cards (respecting count for each card, skip side "b")
     const mainboardCards: CardDefinition[] = [];
     for (const card of data.mainBoard) {
       if (card.side === "b") continue;
-      const cardDef = this.convertMtgjsonToCard(card, cardsByUuid);
+      const cardDef = this.convertMtgjsonToCard(card, cardsByUuid, setNames);
       for (let i = 0; i < card.count; i++) {
         mainboardCards.push(cardDef);
       }
@@ -63,7 +68,7 @@ export class MtgjsonDeckAdapter {
     };
   }
 
-  private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard, cardsByUuid: Map<string, MtgjsonCard>): CardDefinition {
+  private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard, cardsByUuid: Map<string, MtgjsonCard>, setNames?: Map<string, string>): CardDefinition {
     // Determine if card is two-faced based on layout (drives the flip button)
     const twoFaced = isDoubleSidedLayout(mtgjsonCard.layout);
 
@@ -93,7 +98,9 @@ export class MtgjsonDeckAdapter {
       twoFaced,
       oracleCardName: mtgjsonCard.name,
       colorIdentity: mtgjsonCard.colorIdentity || [],
-      set: mtgjsonCard.setCode,
+      // Prefer the full set name (e.g. "Secret Lair Drop") for display; fall back
+      // to the raw set code if Scryfall didn't have it.
+      set: setNames?.get(mtgjsonCard.setCode) ?? mtgjsonCard.setCode,
       cardTypes,
     };
 

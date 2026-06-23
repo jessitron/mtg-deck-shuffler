@@ -17,6 +17,7 @@
     "test:verify": "./verify.sh",
     "deck:download": "node dist/scripts/download-deck.js",
     "decks:backfill-images": "npm run build && node dist/scripts/backfill-deck-images.js",
+    "decks:backfill-set-names": "npm run build && node dist/scripts/backfill-set-names.js",
     "card:inspect": "node dist/scripts/inspect-archidekt-card.js",
     "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js",
     "seed": "npm run build && node dist/scripts/seed-test-data.js"

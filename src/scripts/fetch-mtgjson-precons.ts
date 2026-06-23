@@ -14,6 +14,7 @@ import { MtgjsonDeckAdapter } from "../port-deck-retrieval/mtgjsonAdapter/Mtgjso
 import { MtgjsonCard, MtgjsonDeck } from "../port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.js";
 import { ScryfallCardImagesGateway } from "../port-card-images/ScryfallCardImagesGateway.js";
 import { enrichDeckWithImages } from "../port-card-images/enrichDeckWithImages.js";
+import { fetchScryfallSetNames } from "../port-deck-retrieval/mtgjsonAdapter/scryfallSetNames.js";
 
 const MTGJSON_URL = "https://mtgjson.com/api/v5/AllDeckFiles.tar.gz";
 const ALL_IDENTIFIERS_URL = "https://mtgjson.com/api/v5/AllIdentifiers.json.gz";
@@ -100,7 +101,7 @@ async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCa
   return cardDatabase;
 }
 
-async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardDatabase?: Map<string, MtgjsonCard>): Promise<void> {
+async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardDatabase?: Map<string, MtgjsonCard>, setNames?: Map<string, string>): Promise<void> {
   const adapter = new MtgjsonDeckAdapter();
   // One gateway across all decks so shared cards (Arcane Signet, Sol Ring, ...)
   // are fetched from Scryfall once and reused.
@@ -163,8 +164,9 @@ async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardD
         }
 
         try {
-          // Convert using adapter (pass card database for back-face lookups)
-          const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file, cardDatabase);
+          // Convert using adapter (pass card database for back-face lookups,
+          // set names so cards display the full set text instead of the code)
+          const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file, cardDatabase, setNames);
 
           // Enrich with Scryfall image URLs (the versioned URLs fresh cards need)
           await enrichDeckWithImages(deck, imagesGateway);
@@ -229,14 +231,19 @@ async function main(): Promise<void> {
 
     // Download card database for back-face lookups (only needed when converting)
     let cardDatabase: Map<string, MtgjsonCard> | undefined;
+    let setNames: Map<string, string> | undefined;
     if (shouldConvert) {
       const allIdentifiersPath = join(TEMP_DIR, "AllIdentifiers.json");
       await downloadAndDecompressGz(ALL_IDENTIFIERS_URL, allIdentifiersPath);
       cardDatabase = await loadCardDatabase(allIdentifiersPath);
+
+      console.log("\nFetching set names from Scryfall...");
+      setNames = await fetchScryfallSetNames();
+      console.log(`  Loaded ${setNames.size} set names`);
     }
 
     // Process decks
-    await processDecks(shouldConvert, skipExisting, cardDatabase);
+    await processDecks(shouldConvert, skipExisting, cardDatabase, setNames);
 
     if (!shouldConvert) {
       console.log("\n💡 Add --convert flag to convert Commander Decks to our format and save to ./decks/");
