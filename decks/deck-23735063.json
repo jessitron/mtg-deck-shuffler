@@ -1,0 +1,1692 @@
+{
+  "version": 2,
+  "id": 23735063,
+  "name": "Squirrel Invasion",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "The Unbeatable Squirrel Girl",
+      "scryfallId": "d8b94ebb-0b3a-4e68-8c0c-3a61ac32f3ef",
+      "twoFaced": false,
+      "oracleCardName": "The Unbeatable Squirrel Girl",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Marvel Super Heroes",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Do You Like Squirrels? — Whenever The Unbeatable Squirrel Girl enters or attacks, create a 1/1 green Squirrel creature token.\nI LOVE Squirrels! — {1}{G}{G}{G}: Create X 1/1 green Squirrel creature tokens, where X is the number of Squirrels you control."
+    }
+  ],
+  "cards": [
+    {
+      "name": "Leyline of Abundance",
+      "scryfallId": "c68e8342-78d2-4826-a287-64c371b97d19",
+      "multiverseid": 466933,
+      "twoFaced": false,
+      "oracleCardName": "Leyline of Abundance",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Core Set 2020",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "If this card is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you tap a creature for mana, add an additional {G}.\n{6}{G}{G}: Put a +1/+1 counter on each creature you control."
+    },
+    {
+      "name": "Kenrith's Transformation",
+      "scryfallId": "a34add4e-5d5e-489c-a3b4-daef05a2bb0f",
+      "multiverseid": 633354,
+      "twoFaced": false,
+      "oracleCardName": "Kenrith's Transformation",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Wilds of Eldraine Commander",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3. (It loses all other card types and creature types.)"
+    },
+    {
+      "name": "Archdruid's Charm",
+      "scryfallId": "5caae5ae-845f-42c2-b1ae-956df2739433",
+      "multiverseid": 646708,
+      "twoFaced": false,
+      "oracleCardName": "Archdruid's Charm",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Murders at Karlov Manor",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Choose one —\n• Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.\n• Put a +1/+1 counter on target creature you control. It deals damage equal to its power to target creature you don't control.\n• Exile target artifact or enchantment."
+    },
+    {
+      "name": "Concordant Crossroads",
+      "scryfallId": "ecb4025e-8c7b-47d9-ba74-08015ccc1ce6",
+      "twoFaced": false,
+      "oracleCardName": "Concordant Crossroads",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secret Lair Drop",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "All creatures have haste."
+    },
+    {
+      "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+      "scryfallId": "004524bf-b249-4dac-9c10-44d57143feb9",
+      "multiverseid": 636902,
+      "twoFaced": true,
+      "oracleCardName": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "The Lost Caverns of Ixalan",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When Growing Rites of Itlimoc enters, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\nAt the beginning of your end step, if you control four or more creatures, transform Growing Rites of Itlimoc.",
+      "backFace": {
+        "name": "Itlimoc, Cradle of the Sun",
+        "types": [
+          "Land"
+        ],
+        "manaCost": "",
+        "cmc": 3,
+        "oracleText": "(Transforms from Growing Rites of Itlimoc.)\n{T}: Add {G}.\n{T}: Add {G} for each creature you control."
+      }
+    },
+    {
+      "name": "Scurry of Squirrels",
+      "scryfallId": "c343b965-af2b-45c3-babb-9242736cf1e5",
+      "multiverseid": 671150,
+      "twoFaced": false,
+      "oracleCardName": "Scurry of Squirrels",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Myriad, myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Then do it again. Exile the tokens at end of combat.)\nWhenever this creature deals combat damage to a player, put a +1/+1 counter on target creature you control."
+    },
+    {
+      "name": "Ulvenwald Oddity // Ulvenwald Behemoth",
+      "scryfallId": "5fdf5fc4-69c8-4a59-9095-c2feefb64371",
+      "multiverseid": 541092,
+      "twoFaced": true,
+      "oracleCardName": "Ulvenwald Oddity // Ulvenwald Behemoth",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Innistrad: Crimson Vow",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}{G}",
+      "cmc": 4,
+      "oracleText": "Trample, haste\n{5}{G}{G}: Transform this creature.",
+      "backFace": {
+        "name": "Ulvenwald Behemoth",
+        "types": [
+          "Creature"
+        ],
+        "manaCost": "",
+        "cmc": 4,
+        "oracleText": "Trample, haste\nOther creatures you control get +1/+1 and have trample and haste."
+      }
+    },
+    {
+      "name": "Curious Forager",
+      "scryfallId": "64653b4a-e139-45f9-a915-ab49afb6b795",
+      "multiverseid": 669083,
+      "twoFaced": false,
+      "oracleCardName": "Curious Forager",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may forage. When you do, return target permanent card from your graveyard to your hand. (To forage, exile three cards from your graveyard or sacrifice a Food.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Forest",
+      "scryfallId": "bbbeb57d-5fa0-4ff7-b5e8-caafc139669b",
+      "multiverseid": 677809,
+      "twoFaced": false,
+      "oracleCardName": "Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "({T}: Add {G}.)"
+    },
+    {
+      "name": "Thrashing Brontodon",
+      "scryfallId": "592364bf-68b5-4ea0-97d6-c7cadce940fd",
+      "multiverseid": 677999,
+      "twoFaced": false,
+      "oracleCardName": "Thrashing Brontodon",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "{1}, Sacrifice this creature: Destroy target artifact or enchantment."
+    },
+    {
+      "name": "Swiftfoot Boots",
+      "scryfallId": "aff074f2-6ad9-4c0c-88e2-fc622772d2a1",
+      "twoFaced": false,
+      "oracleCardName": "Swiftfoot Boots",
+      "colorIdentity": [],
+      "set": "Avatar: The Last Airbender Eternal",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+    },
+    {
+      "name": "A Realm Reborn",
+      "scryfallId": "d1af74e4-38d5-44b5-85e1-4d13f6970453",
+      "twoFaced": false,
+      "oracleCardName": "A Realm Reborn",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Final Fantasy",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{4}{G}{G}",
+      "cmc": 6,
+      "oracleText": "Other permanents you control have \"{T}: Add one mana of any color.\""
+    },
+    {
+      "name": "Elven Chorus",
+      "scryfallId": "616cfb94-3faf-44fe-bf04-e90643765e48",
+      "multiverseid": 616990,
+      "twoFaced": false,
+      "oracleCardName": "Elven Chorus",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "The Lord of the Rings: Tales of Middle-earth",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "You may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.\nCreatures you control have \"{T}: Add one mana of any color.\""
+    },
+    {
+      "name": "Toski, Bearer of Secrets",
+      "scryfallId": "08eb31f3-7686-4d6b-a0e4-5d6ece6fba82",
+      "multiverseid": 507673,
+      "twoFaced": false,
+      "oracleCardName": "Toski, Bearer of Secrets",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Kaldheim",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "This spell can't be countered.\nIndestructible\nToski attacks each combat if able.\nWhenever a creature you control deals combat damage to a player, draw a card."
+    },
+    {
+      "name": "Crashing Drawbridge",
+      "scryfallId": "018257cf-8981-4691-92ab-6a33f77c9680",
+      "multiverseid": 696472,
+      "twoFaced": false,
+      "oracleCardName": "Crashing Drawbridge",
+      "colorIdentity": [],
+      "set": "Tarkir: Dragonstorm Commander",
+      "types": [
+        "Creature",
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Defender\n{T}: Creatures you control gain haste until end of turn."
+    },
+    {
+      "name": "Spider Food",
+      "scryfallId": "b9fd720b-e9c2-4e82-917e-bab6c544afb0",
+      "multiverseid": 629687,
+      "twoFaced": false,
+      "oracleCardName": "Spider Food",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Wilds of Eldraine",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy up to one target artifact, enchantment, or creature with flying. Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+    },
+    {
+      "name": "Chord of Calling",
+      "scryfallId": "b18fe7e0-8344-40cc-b242-83f01c6be7a6",
+      "multiverseid": 643141,
+      "twoFaced": false,
+      "oracleCardName": "Chord of Calling",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Ravnica Remastered",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{G}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nSearch your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle."
+    },
+    {
+      "name": "Nature's Lore",
+      "scryfallId": "761adafd-0bf5-4bab-95d4-8362954c1019",
+      "multiverseid": 599044,
+      "twoFaced": false,
+      "oracleCardName": "Nature's Lore",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Dominaria Remastered",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+    },
+    {
+      "name": "Seismic Sense",
+      "scryfallId": "a7b93c2a-c478-4734-8aca-03f3e9c11b20",
+      "twoFaced": false,
+      "oracleCardName": "Seismic Sense",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Avatar: The Last Airbender",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Look at the top X cards of your library, where X is the number of lands you control. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+    },
+    {
+      "name": "Evolving Wilds",
+      "scryfallId": "c0318a48-30e4-4ef7-be3d-5e561c5ce428",
+      "twoFaced": false,
+      "oracleCardName": "Evolving Wilds",
+      "colorIdentity": [],
+      "set": "Marvel Super Heroes Commander",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Eternal Witness",
+      "scryfallId": "cf722227-5b90-47e3-9f56-5ba43114c14e",
+      "multiverseid": 573030,
+      "twoFaced": false,
+      "oracleCardName": "Eternal Witness",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Double Masters 2022",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+    },
+    {
+      "name": "Enduring Vitality",
+      "scryfallId": "9d76a30c-0431-4334-892a-9822dda9671a",
+      "multiverseid": 673581,
+      "twoFaced": false,
+      "oracleCardName": "Enduring Vitality",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Duskmourn: House of Horror",
+      "types": [
+        "Creature",
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Vigilance\nCreatures you control have \"{T}: Add one mana of any color.\"\nWhen Enduring Vitality dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)"
+    },
+    {
+      "name": "Ghost Quarter",
+      "scryfallId": "25e987d9-6a69-46af-bd9f-8e505fa721bb",
+      "multiverseid": 621424,
+      "twoFaced": false,
+      "oracleCardName": "Ghost Quarter",
+      "colorIdentity": [],
+      "set": "Tales of Middle-earth Commander",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+    },
+    {
+      "name": "Squirrel Nest",
+      "scryfallId": "bac26044-b41f-4c75-8bc1-26359250d8bc",
+      "multiverseid": 671597,
+      "twoFaced": false,
+      "oracleCardName": "Squirrel Nest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow Commander",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Enchant land\nEnchanted land has \"{T}: Create a 1/1 green Squirrel creature token.\""
+    },
+    {
+      "name": "Cryptolith Rite",
+      "scryfallId": "0a4e707f-b760-434d-ba97-a0fe651f3f6a",
+      "multiverseid": 686030,
+      "twoFaced": false,
+      "oracleCardName": "Cryptolith Rite",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Innistrad Remastered",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Creatures you control have \"{T}: Add one mana of any color.\""
+    },
+    {
+      "name": "Thornvault Forager",
+      "scryfallId": "8c2d6b02-a453-40f9-992a-5c5542987cfb",
+      "multiverseid": 669111,
+      "twoFaced": false,
+      "oracleCardName": "Thornvault Forager",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "{T}: Add {G}.\n{T}, Forage: Add two mana in any combination of colors. (To forage, exile three cards from your graveyard or sacrifice a Food.)\n{3}{G}, {T}: Search your library for a Squirrel card, reveal it, put it into your hand, then shuffle."
+    },
+    {
+      "name": "冒険の衝動",
+      "scryfallId": "b0c56784-e106-4f17-a1a3-2c0bbb41d316",
+      "twoFaced": false,
+      "oracleCardName": "Adventurous Impulse",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Strixhaven Mystical Archive",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Look at the top three cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+    },
+    {
+      "name": "Steward of the Harvest",
+      "scryfallId": "6e6ddbf5-e282-48ae-ba86-d15589d96e36",
+      "multiverseid": 695977,
+      "twoFaced": false,
+      "oracleCardName": "Steward of the Harvest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Tarkir: Dragonstorm Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "When this creature enters, exile up to three target land cards from your graveyard.\nCreatures you control have all activated abilities of all land cards exiled with this creature."
+    },
+    {
+      "name": "Heraldic Banner",
+      "scryfallId": "743ea709-dbb3-4db8-a2ce-544f47eb6339",
+      "multiverseid": 679996,
+      "twoFaced": false,
+      "oracleCardName": "Heraldic Banner",
+      "colorIdentity": [],
+      "set": "Foundations",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "As this artifact enters, choose a color.\nCreatures you control of the chosen color get +1/+0.\n{T}: Add one mana of the chosen color."
+    },
+    {
+      "name": "Broken Wings",
+      "scryfallId": "1d7d5b71-7c1b-4fc2-a5ec-7285e17ffe0f",
+      "multiverseid": 690593,
+      "twoFaced": false,
+      "oracleCardName": "Broken Wings",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Aetherdrift",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Destroy target artifact, enchantment, or creature with flying."
+    },
+    {
+      "name": "Tyvar's Stand",
+      "scryfallId": "b6ab0855-782a-498c-a885-b3ab3d1bb362",
+      "twoFaced": false,
+      "oracleCardName": "Tyvar's Stand",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secrets of Strixhaven Commander",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be the target of spells or abilities your opponents control. Damage and effects that say \"destroy\" don't destroy it.)"
+    },
+    {
+      "name": "Fade into Antiquity",
+      "scryfallId": "55174ab7-9f2e-42e5-a61b-57458cfd33f3",
+      "multiverseid": 548490,
+      "twoFaced": false,
+      "oracleCardName": "Fade into Antiquity",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Kamigawa: Neon Dynasty",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Exile target artifact or enchantment."
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "91fdb56b-54d5-4272-8319-505ff987fe9b",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "Marvel Super Heroes Commander",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {C}{C}."
+    },
+    {
+      "name": "Saved by the Shell",
+      "scryfallId": "f6314c7f-41dc-4bbd-99db-3a8a1d2977b2",
+      "twoFaced": false,
+      "oracleCardName": "Saved by the Shell",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Teenage Mutant Ninja Turtles",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "This spell costs {1} less to cast if you control a Turtle.\nPut a +1/+1 counter on target creature you control. It gains trample, hexproof, and indestructible until end of turn."
+    },
+    {
+      "name": "Root Snare",
+      "scryfallId": "5f38b1a2-3f85-4dcd-b90d-bb049651b8b7",
+      "multiverseid": 457281,
+      "twoFaced": false,
+      "oracleCardName": "Root Snare",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Ravnica Allegiance",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Prevent all combat damage that would be dealt this turn."
+    },
+    {
+      "name": "Commune with Beavers",
+      "scryfallId": "784287c2-43c5-4210-93ae-cdd33b9acb1b",
+      "twoFaced": false,
+      "oracleCardName": "Commune with Beavers",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Final Fantasy",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Look at the top three cards of your library. You may reveal an artifact, creature, or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+    },
+    {
+      "name": "Citanul Hierophants",
+      "scryfallId": "f378ee17-bf8b-4a83-b42e-86da10817dba",
+      "multiverseid": 675809,
+      "twoFaced": false,
+      "oracleCardName": "Citanul Hierophants",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Duskmourn: House of Horror Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Creatures you control have \"{T}: Add {G}.\""
+    },
+    {
+      "name": "Swarmyard",
+      "scryfallId": "2b4ee0e7-7528-4fdc-a768-055d2c097f05",
+      "twoFaced": false,
+      "oracleCardName": "Swarmyard",
+      "colorIdentity": [],
+      "set": "Edge of Eternities: Stellar Sights",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "{T}: Add {C}.\n{T}: Regenerate target Insect, Rat, Spider, or Squirrel. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
+    },
+    {
+      "name": "Springbloom Druid",
+      "scryfallId": "c7b7d415-d9b4-49b7-ab31-b2fc91d57fe3",
+      "twoFaced": false,
+      "oracleCardName": "Springbloom Druid",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secrets of Strixhaven Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Jar of Eyeballs",
+      "scryfallId": "72da56bd-dd1c-4b3c-a655-afa31e9adca0",
+      "multiverseid": 376381,
+      "twoFaced": false,
+      "oracleCardName": "Jar of Eyeballs",
+      "colorIdentity": [],
+      "set": "Commander 2013",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{3}",
+      "cmc": 3,
+      "oracleText": "Whenever a creature you control dies, put two eyeball counters on this artifact.\n{3}, {T}, Remove all eyeball counters from this artifact: Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order."
+    },
+    {
+      "name": "New Generation's Technique",
+      "scryfallId": "f1616a07-e4a1-4574-b341-d6b31d76b3c5",
+      "twoFaced": false,
+      "oracleCardName": "New Generation's Technique",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Teenage Mutant Ninja Turtles",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "Sneak {2}{G} (You may cast this spell for {2}{G} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "For the Common Good",
+      "scryfallId": "60d1e35e-f5c8-422d-83d2-839ab7766f25",
+      "multiverseid": 670524,
+      "twoFaced": false,
+      "oracleCardName": "For the Common Good",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{X}{G}",
+      "cmc": 1,
+      "oracleText": "Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control."
+    },
+    {
+      "name": "Snakeskin Veil",
+      "scryfallId": "a3d2c692-7566-468e-9c86-47a9f768fde2",
+      "multiverseid": 693639,
+      "twoFaced": false,
+      "oracleCardName": "Snakeskin Veil",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Tarkir: Dragonstorm",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
+    },
+    {
+      "name": "Thornweald Archer",
+      "scryfallId": "189f6199-f2fe-49a5-89ca-3c4cb39fbf2b",
+      "multiverseid": 677998,
+      "twoFaced": false,
+      "oracleCardName": "Thornweald Archer",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+    },
+    {
+      "name": "Shamanic Revelation",
+      "scryfallId": "b4e193e8-1127-475b-9af6-d0d0c44adf49",
+      "multiverseid": 671595,
+      "twoFaced": false,
+      "oracleCardName": "Shamanic Revelation",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow Commander",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+    },
+    {
+      "name": "Oran-Rief, the Vastwood",
+      "scryfallId": "d46d3ef7-b81f-42f4-9c1b-fa53f11eae65",
+      "twoFaced": false,
+      "oracleCardName": "Oran-Rief, the Vastwood",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secrets of Strixhaven Commander",
+      "types": [
+        "Land"
+      ],
+      "manaCost": "",
+      "cmc": 0,
+      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
+    },
+    {
+      "name": "Llanowar Elves",
+      "scryfallId": "d9c02310-6a14-45c2-ae8c-b0fff7245673",
+      "multiverseid": 681553,
+      "twoFaced": false,
+      "oracleCardName": "Llanowar Elves",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations Jumpstart",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "{T}: Add {G}."
+    },
+    {
+      "name": "Akroma's Memorial",
+      "scryfallId": "950ee61d-0bc1-4d7b-ba68-157061aa98eb",
+      "multiverseid": 509627,
+      "twoFaced": false,
+      "oracleCardName": "Akroma's Memorial",
+      "colorIdentity": [],
+      "set": "Time Spiral Remastered",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{7}",
+      "cmc": 7,
+      "oracleText": "Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red."
+    },
+    {
+      "name": "Jaheira, Friend of the Forest",
+      "scryfallId": "feb7ad1b-4466-48f7-b46d-cc83d4e22b51",
+      "multiverseid": 563120,
+      "twoFaced": false,
+      "oracleCardName": "Jaheira, Friend of the Forest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Commander Legends: Battle for Baldur's Gate",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Tokens you control have \"{T}: Add {G}.\"\nChoose a Background (You can have a Background as a second commander.)"
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "scryfallId": "b4fcd09d-6754-4d60-adc3-1a79037e67c6",
+      "twoFaced": false,
+      "oracleCardName": "Sakura-Tribe Elder",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Magic Online Promos",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+    },
+    {
+      "name": "Regrowth",
+      "scryfallId": "af727601-5251-48b6-b5e3-b68ca0608bc9",
+      "multiverseid": 517606,
+      "twoFaced": false,
+      "oracleCardName": "Regrowth",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Strixhaven Mystical Archive",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Return target card from your graveyard to your hand."
+    },
+    {
+      "name": "Essence Warden",
+      "scryfallId": "ff09be4d-bbcc-4c25-9df2-b3df07fca955",
+      "multiverseid": 621352,
+      "twoFaced": false,
+      "oracleCardName": "Essence Warden",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Tales of Middle-earth Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Whenever another creature enters, you gain 1 life."
+    },
+    {
+      "name": "Keeper of Fables",
+      "scryfallId": "80e652f5-696e-43d9-bb10-100700dffc09",
+      "twoFaced": false,
+      "oracleCardName": "Keeper of Fables",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "The List",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card."
+    },
+    {
+      "name": "Abundant Harvest",
+      "scryfallId": "516e137a-d9d9-4ba7-89fb-e680ddb2c2d1",
+      "multiverseid": 627733,
+      "twoFaced": false,
+      "oracleCardName": "Abundant Harvest",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Commander Masters",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Choose land or nonland. Reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and the rest on the bottom of your library in a random order."
+    },
+    {
+      "name": "Atraxa's Fall",
+      "scryfallId": "e08ed414-77bf-402a-82a8-9d4e1bd627a1",
+      "multiverseid": 607224,
+      "twoFaced": false,
+      "oracleCardName": "Atraxa's Fall",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "March of the Machine",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Destroy target artifact, battle, enchantment, or creature with flying."
+    },
+    {
+      "name": "Cache Grab",
+      "scryfallId": "dfd977dc-a7c3-4d0a-aca7-b25bd154e963",
+      "multiverseid": 669081,
+      "twoFaced": false,
+      "oracleCardName": "Cache Grab",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow",
+      "types": [
+        "Instant"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "Mill four cards. You may put a permanent card from among the cards milled this way into your hand. If you control a Squirrel or returned a Squirrel card to your hand this way, create a Food token. (To mill four cards, put the top four cards of your library into your graveyard. A Food token is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+    },
+    {
+      "name": "Honored Dreyleader",
+      "scryfallId": "bc5ee537-52e1-474a-9326-dfacc2a758ab",
+      "multiverseid": 669092,
+      "twoFaced": false,
+      "oracleCardName": "Honored Dreyleader",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{2}{G}",
+      "cmc": 3,
+      "oracleText": "Trample\nWhen this creature enters, put a +1/+1 counter on it for each other Squirrel and/or Food you control.\nWhenever another Squirrel or Food you control enters, put a +1/+1 counter on this creature."
+    },
+    {
+      "name": "Commune with Spirits",
+      "scryfallId": "a35ff4dd-bad3-4496-82b3-8253f48af06d",
+      "multiverseid": 548487,
+      "twoFaced": false,
+      "oracleCardName": "Commune with Spirits",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Kamigawa: Neon Dynasty",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "Look at the top four cards of your library. You may reveal an enchantment or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+    },
+    {
+      "name": "Shang-Chi, Master of Kung Fu",
+      "scryfallId": "2edbb62f-ad45-4422-850b-68dcc18b4c73",
+      "twoFaced": false,
+      "oracleCardName": "Shang-Chi, Master of Kung Fu",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Marvel Super Heroes",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{1}{G}",
+      "cmc": 2,
+      "oracleText": "You may activate abilities of creatures you control as though those creatures had haste.\n{T}: Add two mana of any one color. Spend this mana only to activate abilities of creature sources."
+    },
+    {
+      "name": "Lightning Greaves",
+      "scryfallId": "b61634ae-05be-4b56-8ebb-9d4ade902e42",
+      "twoFaced": false,
+      "oracleCardName": "Lightning Greaves",
+      "colorIdentity": [],
+      "set": "Marvel Super Heroes Commander",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{2}",
+      "cmc": 2,
+      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+    },
+    {
+      "name": "Studious First-Year // Rampant Growth",
+      "scryfallId": "24f888dd-785c-4089-a89c-03f9080130ed",
+      "twoFaced": false,
+      "oracleCardName": "Studious First-Year // Rampant Growth",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secrets of Strixhaven",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{G}",
+      "cmc": 1,
+      "oracleText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+    },
+    {
+      "name": "Green Sun's Zenith",
+      "scryfallId": "70291c7b-a86f-4466-8502-c28765a89b2a",
+      "multiverseid": 571483,
+      "twoFaced": false,
+      "oracleCardName": "Green Sun's Zenith",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Double Masters 2022",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{G}",
+      "cmc": 1,
+      "oracleText": "Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle Green Sun's Zenith into its owner's library."
+    },
+    {
+      "name": "Springleaf Parade",
+      "scryfallId": "44265489-645a-43b0-bc1f-726905b06876",
+      "twoFaced": false,
+      "oracleCardName": "Springleaf Parade",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Lorwyn Eclipsed Commander",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{X}{G}{G}",
+      "cmc": 2,
+      "oracleText": "When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)\nCreature tokens you control have \"{T}: Add one mana of any color.\""
+    },
+    {
+      "name": "Genesis Wave",
+      "scryfallId": "4b51445b-1590-4072-9712-5ca344b25e3e",
+      "multiverseid": 678431,
+      "twoFaced": false,
+      "oracleCardName": "Genesis Wave",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Foundations",
+      "types": [
+        "Sorcery"
+      ],
+      "manaCost": "{X}{G}{G}{G}",
+      "cmc": 3,
+      "oracleText": "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard."
+    },
+    {
+      "name": "Skullclamp",
+      "scryfallId": "97b729d3-5965-4e16-a50a-1e9bf51a9f13",
+      "multiverseid": 671641,
+      "twoFaced": false,
+      "oracleCardName": "Skullclamp",
+      "colorIdentity": [],
+      "set": "Bloomburrow Commander",
+      "types": [
+        "Artifact"
+      ],
+      "manaCost": "{1}",
+      "cmc": 1,
+      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+    },
+    {
+      "name": "Deep Forest Hermit",
+      "scryfallId": "f712e233-1de8-45e4-9225-790d608ac90b",
+      "multiverseid": 671571,
+      "twoFaced": false,
+      "oracleCardName": "Deep Forest Hermit",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Bloomburrow Commander",
+      "types": [
+        "Creature"
+      ],
+      "manaCost": "{3}{G}{G}",
+      "cmc": 5,
+      "oracleText": "Vanishing 3 (This creature enters with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen this creature enters, create four 1/1 green Squirrel creature tokens.\nSquirrels you control get +1/+1."
+    },
+    {
+      "name": "Defense of the Heart",
+      "scryfallId": "7500dc43-932c-457e-9d9d-1efb9dca372e",
+      "twoFaced": false,
+      "oracleCardName": "Defense of the Heart",
+      "colorIdentity": [
+        "G"
+      ],
+      "set": "Secret Lair Drop",
+      "types": [
+        "Enchantment"
+      ],
+      "manaCost": "{3}{G}",
+      "cmc": 4,
+      "oracleText": "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice this enchantment, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle."
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-06-23T17:14:57.439Z",
+    "sourceUrl": "https://archidekt.com/decks/23735063",
+    "deckSource": "archidekt",
+    "createdAt": "2026-06-22T19:52:37.330Z"
+  }
+}

@@ -2,6 +2,7 @@ import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest
 import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
 import { Deck, CardDefinition, CardFace, PERSISTED_DECK_VERSION } from "../../types.js";
 import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
+import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date) {}
@@ -88,10 +89,15 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
     const oracleCardName = archidektCard.card.oracleCard.name;
     const faces = archidektCard.card.oracleCard.faces || [];
-    const twoFaced = faces.length === 2;
+    // A card has multiple faces in the data (split/adventure/prepare/transform/...),
+    // but only genuinely double-sided layouts have a back image and get a flip button.
+    const multiFace = faces.length === 2;
+    const twoFaced = multiFace && isDoubleSidedLayout(archidektCard.card.oracleCard.layout);
 
-    // For two-faced cards, Archidekt sometimes puts data on faces rather than top-level fields
-    const frontFace = twoFaced ? faces[0] : undefined;
+    // For multi-face cards, Archidekt puts the clean front-face data on faces[0]
+    // (top-level fields are the combined "{G} // {1}{G}" mess). Use faces[0] for
+    // the front even when the card isn't flippable.
+    const frontFace = multiFace ? faces[0] : undefined;
     const types = (frontFace?.types?.length ? frontFace.types : archidektCard.card.oracleCard.types) || [];
     const manaCost = frontFace?.manaCost ?? archidektCard.card.oracleCard.manaCost;
     const oracleText = frontFace?.text ?? archidektCard.card.oracleCard.text;

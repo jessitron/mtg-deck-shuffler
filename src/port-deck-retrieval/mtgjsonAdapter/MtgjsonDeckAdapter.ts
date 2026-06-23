@@ -1,5 +1,6 @@
 import { CardDefinition, CardFace, Deck, PERSISTED_DECK_VERSION } from "../../types.js";
 import { MtgjsonCard, MtgjsonDeck } from "./mtgjsonTypes.js";
+import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
 
 export class MtgjsonDeckAdapter {
   /**
@@ -64,8 +65,7 @@ export class MtgjsonDeckAdapter {
 
   private convertMtgjsonToCard(mtgjsonCard: MtgjsonCard, cardsByUuid: Map<string, MtgjsonCard>): CardDefinition {
     // Determine if card is two-faced based on layout
-    const twoFacedLayouts = ["transform", "modal_dfc", "reversible_card", "double_faced_token"];
-    const twoFaced = twoFacedLayouts.includes(mtgjsonCard.layout);
+    const twoFaced = isDoubleSidedLayout(mtgjsonCard.layout);
 
     // Look up back face via otherFaceIds
     let backFace: CardFace | undefined;

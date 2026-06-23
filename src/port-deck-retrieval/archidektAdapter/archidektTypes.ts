@@ -13,6 +13,7 @@ export interface ArchidektCard {
     multiverseid: number;
     oracleCard: {
       name: string;
+      layout?: string;
       faces: ArchidektFace[];
       colorIdentity: string[];
       types: string[];

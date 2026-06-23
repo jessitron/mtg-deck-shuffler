@@ -651,6 +651,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
             multiverseid: 555555,
             oracleCard: {
               name: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+              layout: "transform",
               faces: [
                 {
                   name: "Nicol Bolas, the Ravager",
@@ -711,6 +712,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
             multiverseid: 666666,
             oracleCard: {
               name: "Esika, God of the Tree // The Prismatic Bridge",
+              layout: "modal_dfc",
               faces: [
                 {
                   name: "Esika, God of the Tree",
@@ -749,6 +751,70 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(card.types).toEqual(["Legendary", "Creature"]);
     expect(card.backFace?.name).toBe("The Prismatic Bridge");
     expect(card.backFace?.types).toEqual(["Legendary", "Enchantment"]);
+  });
+
+  it("does not treat a single-image multi-face card (Prepared) as two-faced", async () => {
+    // "Prepared" cards (Secrets of Strixhaven) print both halves on one physical
+    // front face -- layout "prepare", like adventure/split. Archidekt gives them
+    // two entries in `faces`, but there is no back image, so no flip button.
+    const archidektDeck: ArchidektDeck = {
+      id: 3000,
+      name: "Prepared Card Test",
+      createdAt: "2023-01-01T00:00:00.000000Z",
+      categories: null,
+      cards: [
+        {
+          card: {
+            uid: "studious-first-year-uid",
+            multiverseid: 777777,
+            oracleCard: {
+              name: "Studious First-Year // Rampant Growth",
+              layout: "prepare",
+              faces: [
+                {
+                  name: "Studious First-Year",
+                  types: ["Creature"],
+                  manaCost: "{G}",
+                  cmc: 1,
+                  text: "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+                },
+                {
+                  name: "Rampant Growth",
+                  types: ["Sorcery"],
+                  manaCost: "{1}{G}",
+                  cmc: 1,
+                  text: "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.",
+                },
+              ],
+              colorIdentity: ["Green"],
+              // Top-level data is the combined/empty mess we must NOT use for the front face
+              types: ["Creature"],
+              manaCost: "{G} // {1}{G}",
+              cmc: 1,
+              text: "",
+            },
+            edition: { editionname: "Secrets of Strixhaven", editioncode: "SOS" },
+          },
+          quantity: 1,
+          categories: [],
+        },
+      ],
+    };
+
+    mockGateway.fetchDeck = async (_deckId: string) => archidektDeck;
+
+    const request: ArchidektDeckRetrievalRequest = { deckSource: "archidekt", archidektDeckId: "3000" };
+    const result = await adapter.retrieveDeck(request);
+
+    const card = result.cards[0];
+    expect(card.twoFaced).toBe(false);
+    expect(card.backFace).toBeUndefined();
+    // Front-face data still comes from faces[0], not the combined top-level fields
+    expect(card.types).toEqual(["Creature"]);
+    expect(card.manaCost).toBe("{G}");
+    expect(card.oracleText).toBe(
+      "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+    );
   });
 
   it("handles missing types field gracefully", async () => {
