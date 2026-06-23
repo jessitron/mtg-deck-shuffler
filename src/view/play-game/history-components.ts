@@ -1,5 +1,6 @@
 import { GameState } from "../../GameState.js";
 import { GameEvent, nameMove } from "../../GameEvents.js";
+import { formatCardNameAsModalLink } from "../common/shared-components.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -27,7 +28,10 @@ function cardIndexToDefinition(game: GameState, gci: number) {
   return game.getCards()[gci].card;
 }
 
-export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
+// `cardNamesAsLinks` makes move-card card names clickable links that open the
+// card modal. Off by default so the undo button (which embeds this fragment
+// inside a <button>) avoids nesting interactive elements.
+export function formatGameEventHtmlFragment(event: GameEvent, game: GameState, cardNamesAsLinks = false) {
   const isUndone = game.getEventLog().hasBeenUndone(event.gameEventIndex);
   const eventNameToCssClass = {
     "move card": "event-move-card",
@@ -37,7 +41,7 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
     undo: "event-undo",
   };
 
-  const description = describeEvent(event, game);
+  const description = describeEvent(event, game, cardNamesAsLinks);
   const tabIdDisplay = event.browserTabId
     ? ` <span class="event-tab-id" title="${event.browserTabId}">(${event.browserTabId.slice(0, 8)})</span>`
     : '';
@@ -45,18 +49,21 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState) {
   <span class="event-description ${isUndone ? "undone" : ""} ${eventNameToCssClass[event.eventName]}">${description}${tabIdDisplay}</span>`;
 }
 
-function describeEvent(event: GameEvent, game: GameState): string {
+function describeEvent(event: GameEvent, game: GameState, cardNamesAsLinks: boolean): string {
   switch (event.eventName) {
     case "move card":
       const description = nameMove(event.move);
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
-      return `${description}: ${card.name}`;
+      const cardName = cardNamesAsLinks
+        ? formatCardNameAsModalLink(card.name, game.gameId, event.move.gameCardIndex, game.getStateVersion())
+        : card.name;
+      return `${description}: ${cardName}`;
     case "shuffle library":
       return `Shuffle ${event.compactMoves.length} cards in library`;
     case "start game":
       return "Start game";
     case "undo":
-      return `Undo: ${formatGameEventHtmlFragment(game.getEvent(event.originalEventIndex), game)}`;
+      return `Undo: ${formatGameEventHtmlFragment(game.getEvent(event.originalEventIndex), game, cardNamesAsLinks)}`;
   }
 }
 
@@ -69,7 +76,7 @@ function formatHistoryListHtmlFragment(game: GameState): string {
     .map(({ event, originalIndex }) => {
       return `<li class="history-item" id="event-${event.gameEventIndex}">
         <span class="event-number">${originalIndex}.</span>
-        ${formatGameEventHtmlFragment(event, game)}
+        ${formatGameEventHtmlFragment(event, game, true)}
       </li>`;
     })
     .join("");
