@@ -78,6 +78,9 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 - `npm run deck:download -- <deckId>` - Download a specific Archidekt deck by ID
   - Example: `npm run deck:download -- 14669648`
   - Saves to `decks/deck-<deckId>.json` in internal format
+- `npm run card:inspect -- <deckId> <nameSubstring>` - Dump raw Archidekt `oracleCard` data for matching cards
+  - Example: `npm run card:inspect -- 23735063 Studious`
+  - Useful for diagnosing layout/faces issues (e.g. why a single-faced card is treated as two-faced)
 
 ## Testing
 
