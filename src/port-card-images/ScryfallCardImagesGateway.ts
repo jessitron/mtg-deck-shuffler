@@ -84,7 +84,12 @@ export class ScryfallCardImagesGateway implements CardImagesPort {
     if (ids.length === 0) return;
     const response = await fetch(SCRYFALL_COLLECTION_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        // Scryfall requires a User-Agent and Accept header on API requests.
+        "User-Agent": "mtg-deck-shuffler/1.0 (https://github.com/jessitron/mtg-deck-shuffler)",
+        Accept: "application/json",
+      },
       body: JSON.stringify({ identifiers: ids.map((id) => ({ id })) }),
     });
     if (!response.ok) {
