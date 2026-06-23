@@ -704,6 +704,23 @@ body.game-menu-open .game-menu-panel {
   margin: 0;
 }
 
+/* The "State" control is informational — render it as an inline link, not a
+   button (override the generic .menu-section button styling). */
+.menu-debug button.debug-button {
+  display: inline;
+  width: auto;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.menu-debug button.debug-button:hover {
+  color: white;
+}
+
 /* Modal styles moved to playmat.css (shared between game and prepare) */
 
 /* Table modal specific styles */
