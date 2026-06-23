@@ -13,8 +13,8 @@ import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
-import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState } from "./port-persist-state/types.js";
-import { PersistPrepPort, PersistedGamePrep } from "./port-persist-prep/types.js";
+import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
+import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl } from "./types.js";
@@ -84,6 +84,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.locals.gameId = gameId;
       next();
     } catch (error) {
+      if (error instanceof IncompatibleStateVersionError) {
+        console.warn(`Game ${gameId} has incompatible version:`, error.message);
+        res.status(410).send(
+          formatErrorPageHtmlPage({
+            icon: "🕰️",
+            title: "Game Too Old to Load",
+            message: `Game <strong>${gameId}</strong> was saved in an older, incompatible format.`,
+            details: error.message,
+          })
+        );
+        return;
+      }
       console.error("Error loading game:", error);
       res.status(500).send(`<div>Error loading game ${gameId}</div>`);
     }
@@ -111,6 +123,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       res.locals.gameId = gameId;
       next();
     } catch (error) {
+      if (error instanceof IncompatibleStateVersionError) {
+        console.warn(`Game ${gameId} has incompatible version:`, error.message);
+        res.status(410).send(
+          formatErrorPageHtmlPage({
+            icon: "🕰️",
+            title: "Game Too Old to Load",
+            message: `Game <strong>${gameId}</strong> was saved in an older, incompatible format.`,
+            details: error.message,
+          })
+        );
+        return;
+      }
       console.error("Error loading game:", error);
       res.status(500).send(
         formatErrorPageHtmlPage({
@@ -258,7 +282,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       };
       const prepId = persistPrepPort.newPrepId();
       const prep: PersistedGamePrep = {
-        version: 2,
+        version: PERSISTED_GAME_PREP_VERSION,
         prepId,
         deck: sortedDeck,
         createdAt: new Date(),
@@ -298,6 +322,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      if (prep.version !== PERSISTED_GAME_PREP_VERSION) {
+        throw new IncompatiblePrepVersionError(prep.version, PERSISTED_GAME_PREP_VERSION);
+      }
+
       // Create view helpers for EJS template
       const helpers = createPrepViewHelpers(prep);
 
@@ -307,6 +335,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         ...helpers
       });
     } catch (error) {
+      if (error instanceof IncompatiblePrepVersionError) {
+        console.warn(`Prep ${prepId} has incompatible version:`, error.message);
+        res.status(410).send(
+          formatErrorPageHtmlPage({
+            icon: "🕰️",
+            title: "Preparation Too Old to Load",
+            message: `Game preparation <strong>${prepId}</strong> was saved in an older, incompatible format.`,
+            details: error.message,
+          })
+        );
+        return;
+      }
       console.error("Error loading prep:", error);
       res.status(500).send(
         formatErrorPageHtmlPage({
@@ -334,6 +374,20 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
             title: "Prep Not Found",
             message: `Game preparation <strong>${prepId}</strong> could not be found.`,
             details: "It may have been deleted or the link may be incorrect.",
+          })
+        );
+        return;
+      }
+
+      // Reject preps saved in an incompatible format before doing anything with them
+      if (prep.version !== PERSISTED_GAME_PREP_VERSION) {
+        console.warn(`Prep ${prepId} has incompatible version:`, prep.version);
+        res.status(410).send(
+          formatErrorPageHtmlPage({
+            icon: "🕰️",
+            title: "Preparation Too Old to Load",
+            message: `Game preparation <strong>${prepId}</strong> was saved in an older, incompatible format.`,
+            details: "Please start a new preparation.",
           })
         );
         return;

@@ -21,7 +21,7 @@ describe("InMemoryPersistPrepAdapter", () => {
     await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
 
     testPrep = {
-      version: 2,
+      version: 3,
       prepId: 1,
       deck: testDeck,
       createdAt: new Date("2024-01-15T10:00:00.000Z"),
@@ -63,7 +63,7 @@ describe("InMemoryPersistPrepAdapter", () => {
     await cardRepository.saveCards([...testDeck2.cards, ...testDeck2.commanders]);
 
     const prep2: PersistedGamePrep = {
-      version: 2,
+      version: 3,
       prepId: 2,
       deck: testDeck2,
       createdAt: new Date("2024-01-16T10:00:00.000Z"),
@@ -85,7 +85,7 @@ describe("InMemoryPersistPrepAdapter", () => {
 
     const updatedPrep: PersistedGamePrep = {
       ...testPrep,
-      version: 2,
+      version: 3,
       updatedAt: new Date("2024-01-15T11:00:00.000Z"),
     };
 
@@ -93,7 +93,7 @@ describe("InMemoryPersistPrepAdapter", () => {
 
     const retrieved = await adapter.retrievePrep(testPrep.prepId);
 
-    expect(retrieved?.version).toBe(2);
+    expect(retrieved?.version).toBe(3);
     expect(retrieved?.updatedAt).toEqual(new Date("2024-01-15T11:00:00.000Z"));
   });
 });

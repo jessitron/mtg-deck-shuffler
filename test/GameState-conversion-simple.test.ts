@@ -1,7 +1,7 @@
 import { test, expect } from "@jest/globals";
 import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
-import { GameStatus, PERSISTED_GAME_STATE_VERSION } from "../src/port-persist-state/types.js";
+import { GameStatus, PERSISTED_GAME_STATE_VERSION, IncompatibleStateVersionError } from "../src/port-persist-state/types.js";
 import { deckWithOneCommander } from "./generators.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 
@@ -42,4 +42,25 @@ test("should convert GameState to PersistedGameState and back", async () => {
     expect(restoredGameState.getCards()).toEqual(originalGameState.getCards());
     expect(restoredGameState.deckProvenance).toEqual(originalGameState.deckProvenance);
   }));
+});
+
+test("rejects a game saved in an older, incompatible format", async () => {
+  const cardRepository = new InMemoryCardRepositoryAdapter();
+  // A game persisted before the cardTypes change (any version below current)
+  const oldGame: any = {
+    version: PERSISTED_GAME_STATE_VERSION - 1,
+    gameId: 42,
+    status: GameStatus.Active,
+    prepId: 1,
+    prepVersion: 1,
+    deckName: "Old Deck",
+    deckId: 1,
+    totalCards: 0,
+    gameCards: [],
+    events: [],
+  };
+
+  await expect(GameState.fromPersistedGameState(oldGame, cardRepository)).rejects.toThrow(
+    IncompatibleStateVersionError
+  );
 });

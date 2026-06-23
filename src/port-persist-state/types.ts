@@ -77,7 +77,21 @@ export interface GameCard {
   currentFace: "front" | "back";
 }
 
-export const PERSISTED_GAME_STATE_VERSION: 7 = 7;
+// Bumped 7 -> 8 when CardDefinition dropped manaCost/cmc/oracleText/backFace and
+// renamed types -> cardTypes (commit f76b49c). The game-state envelope itself is
+// unchanged, but the card data its scryfallIds resolve to is now incompatible, so
+// games saved before this are not loadable. fromPersistedGameState rejects them.
+export const PERSISTED_GAME_STATE_VERSION: 8 = 8;
+
+/** Thrown when a persisted game was saved in a format this build can't load. */
+export class IncompatibleStateVersionError extends Error {
+  constructor(public readonly foundVersion: unknown, public readonly expectedVersion: number) {
+    super(
+      `This game was saved in an older, incompatible format (version ${foundVersion}); this build expects version ${expectedVersion}. Old games can't be loaded — please start a new game.`
+    );
+    this.name = "IncompatibleStateVersionError";
+  }
+}
 
 export interface PersistedGameState {
   version: typeof PERSISTED_GAME_STATE_VERSION;

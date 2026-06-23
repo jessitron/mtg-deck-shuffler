@@ -1,4 +1,4 @@
-import { PersistPrepPort, PersistedGamePrep, PrepId } from "./types.js";
+import { PersistPrepPort, PersistedGamePrep, PrepId, PERSISTED_GAME_PREP_VERSION } from "./types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { PersistedDeck } from "../port-persist-state/persisted-types.js";
 import { hydrateDeck, dehydrateDeck } from "../port-card-repository/hydration.js";
@@ -40,7 +40,7 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
     // Hydrate the deck before returning
     const hydratedDeck = await hydrateDeck(stored.deck, this.cardRepository);
     return {
-      version: stored.version as 2,
+      version: stored.version as typeof PERSISTED_GAME_PREP_VERSION,
       prepId: stored.prepId,
       deck: hydratedDeck,
       createdAt: stored.createdAt,

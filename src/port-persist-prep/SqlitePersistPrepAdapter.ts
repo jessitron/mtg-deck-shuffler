@@ -1,5 +1,5 @@
 import Database from "better-sqlite3";
-import { PersistPrepPort, PersistedGamePrep, PrepId } from "./types.js";
+import { PersistPrepPort, PersistedGamePrep, PrepId, PERSISTED_GAME_PREP_VERSION } from "./types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { PersistedDeck } from "../port-persist-state/persisted-types.js";
 import { hydrateDeck, dehydrateDeck } from "../port-card-repository/hydration.js";
@@ -88,7 +88,7 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
       }
 
       return {
-        version: storedPrep.version as 2,
+        version: storedPrep.version as typeof PERSISTED_GAME_PREP_VERSION,
         prepId: storedPrep.prepId,
         deck: hydratedDeck,
         createdAt: storedPrep.createdAt,

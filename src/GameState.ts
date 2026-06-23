@@ -11,6 +11,7 @@ import {
   TableLocation,
   CommandZoneLocation,
   PERSISTED_GAME_STATE_VERSION,
+  IncompatibleStateVersionError,
   printLocation,
 } from "./port-persist-state/types.js";
 import { PrepId } from "./port-persist-prep/types.js";
@@ -143,49 +144,14 @@ export class GameState {
     psg: PersistedGameState | any,
     cardRepo: CardRepositoryPort
   ): Promise<GameState> {
-    // Handle migration from version 3 to version 4
-    if (psg.version === 3) {
-      const legacyPsg = psg; // Legacy format with commanders property
-      const commanders: CardDefinition[] = legacyPsg.commanders || [];
-
-      // Add isCommander flag to existing game cards
-      const migratedGameCards: GameCard[] = legacyPsg.gameCards.map((gc: any) => ({
-        ...gc,
-        isCommander: false,
-        currentFace: gc.currentFace || ("front" as const),
-      }));
-
-      // Add commanders as game cards in command zone
-      const commanderCards: GameCard[] = commanders.map((commander, index) => {
-        const gameCardIndex = migratedGameCards.length + index;
-        return {
-          card: commander,
-          location: { type: "CommandZone", position: index } as CommandZoneLocation,
-          gameCardIndex,
-          isCommander: true,
-          currentFace: "front" as const,
-        };
-      });
-
-      // Combine and re-sort to maintain alphabetical invariant
-      const allCards = [...migratedGameCards, ...commanderCards]
-        .sort((a, b) => a.card.name.localeCompare(b.card.name))
-        .map((card, index) => ({ ...card, gameCardIndex: index }));
-
-      return new GameState({
-        gameId: psg.gameId,
-        gameStatus: psg.status,
-        prepId: psg.prepId || 0,  // Default for legacy data
-        prepVersion: psg.prepVersion || 1,  // Default for legacy data
-        deckId: legacyPsg.deckId,
-        deckName: psg.deckName,
-        deckProvenance: psg.deckProvenance,
-        cards: allCards,
-        events: psg.events || [],
-      });
+    // Fail loudly on incompatible versions rather than crashing later with a
+    // cryptic "card not found"/JSON error during hydration. Every format before
+    // the current one stored card data (inline or in the repository) in a shape
+    // this build can no longer read, so there is no safe migration path.
+    if (psg.version !== PERSISTED_GAME_STATE_VERSION) {
+      throw new IncompatibleStateVersionError(psg.version, PERSISTED_GAME_STATE_VERSION);
     }
 
-    // Version 7+: Hydrate game cards from repository
     const hydratedGameCards = await hydrateGameCards(psg.gameCards, cardRepo);
 
     return new GameState({
