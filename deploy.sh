@@ -3,8 +3,14 @@ set -e
 
 # Configuration - EDIT THESE VALUES
 AWS_REGION="us-west-2"  # Change to your region
-if [ -z "ECR_REPO" ]; then
-    echo "ECR_REPO not set in .env. Please set it."
+
+# Load local config (ECR_REPO lives here, alongside the app's OTEL settings)
+if [ -f .env ]; then
+    source .env
+fi
+
+if [ -z "$ECR_REPO" ]; then
+    echo "ECR_REPO not set. Add 'export ECR_REPO=<your-ecr-repo>/mtg-deck-shuffler' to .env"
     exit 1
 fi
 HONEYCOMB_API_KEY=""  # Add your Honeycomb API key here
