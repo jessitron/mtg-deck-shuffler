@@ -87,8 +87,11 @@ export interface GameCard {
 // and count are now DERIVED from the event log ("deal opening hand"/"mulligan"
 // marker events) instead of stored, so undo restores them for free. Old games
 // lack the markers, so they'd derive the wrong stage — rejected, not migrated.
+// Bumped 10 -> 11 when the deal/mulligan events became atomic and carry their
+// `moves` (so a mulligan is one undoable event). v10 events lack `moves`, so an
+// old mulligan couldn't be undone — rejected, not migrated.
 // When/how to bump: notes/DESIGN-persistence-versioning.md
-export const PERSISTED_GAME_STATE_VERSION: 10 = 10;
+export const PERSISTED_GAME_STATE_VERSION: 11 = 11;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */
 export class IncompatibleStateVersionError extends Error {

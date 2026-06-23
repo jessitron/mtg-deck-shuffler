@@ -961,6 +961,29 @@ describe("GameState", () => {
       expect(game.isInMulliganStage()).toBe(true);
     });
 
+    test("a mulligan can be undone, restoring the previous hand, library, and count", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+      const handBefore = game.listHand().map((gc) => gc.gameCardIndex);
+      const libraryBefore = game.listLibrary().map((gc) => gc.gameCardIndex);
+
+      game.mulligan();
+      expect(game.getMulliganCount()).toBe(1);
+
+      // The mulligan is one atomic event; undoing it reverses the whole thing.
+      const mulliganEvent = game
+        .getEventLog()
+        .getEvents()
+        .reverse()
+        .find((e) => e.eventName === "mulligan");
+      game.undo(mulliganEvent!.gameEventIndex);
+
+      expect(game.getMulliganCount()).toBe(0);
+      expect(game.isInMulliganStage()).toBe(true);
+      expect(game.listHand().map((gc) => gc.gameCardIndex)).toEqual(handBefore);
+      expect(game.listLibrary().map((gc) => gc.gameCardIndex)).toEqual(libraryBefore);
+    });
+
     test("rearranging the hand after a mulligan keeps the stage open", () => {
       const game = GameState.newGame(1, 1, 1, tenCardDeck());
       game.startGame();

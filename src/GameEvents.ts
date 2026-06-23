@@ -43,23 +43,27 @@ export type UndoEvent = {
 };
 
 /**
- * Marks that an opening hand was dealt. Recorded AFTER the deal's draw events,
- * so it is the most-recent "live" event while the player is still deciding
- * whether to keep their hand. The hand-acceptance (mulligan) stage is derived
- * from this position in the log — see GameEventLog.isInHandAcceptanceStage().
- * Not undoable (like "start game").
+ * An opening hand being dealt, as a single atomic event. `moves` is the draws
+ * it performed (Library→Hand), so the deal is one line in history rather than
+ * seven. It is the most-recent "live" event while the player decides whether to
+ * keep their hand — that position is how the hand-acceptance (mulligan) stage is
+ * derived from the log (see GameEventLog.isInHandAcceptanceStage()). Not
+ * undoable (like "start game") — there's nothing to go back to.
  */
 export type DealOpeningHandEvent = {
   eventName: "deal opening hand";
+  moves: CardMove[];
 };
 
 /**
- * Marks that a mulligan was taken (hand returned to library, shuffled, redrawn).
- * Recorded after the mulligan's moves. The mulligan count is the number of
- * these events. Not undoable.
+ * A mulligan as a single atomic event: `moves` is everything it did, in order —
+ * return the hand to the library, shuffle, redraw. Undoing this event reverses
+ * all those moves at once, restoring the previous hand and library exactly. The
+ * mulligan count is the number of live (not-undone) mulligan events.
  */
 export type MulliganEvent = {
   eventName: "mulligan";
+  moves: CardMove[];
 };
 
 /**
@@ -156,9 +160,10 @@ export class GameEventLog {
     if (event.eventName === "start game") {
       throw new Error("Cannot undo start game");
     }
-    if (event.eventName === "deal opening hand" || event.eventName === "mulligan") {
-      throw new Error(`Cannot undo ${event.eventName}`);
+    if (event.eventName === "deal opening hand") {
+      throw new Error("Cannot undo deal opening hand");
     }
+    // A "mulligan" event IS undoable — see GameState.undo, which reverses its moves.
 
     const undoEvent: UndoEvent & EventProvenance = {
       eventName: "undo",
@@ -220,13 +225,8 @@ export class GameEventLog {
     const event = this.events[gameEventIndex];
     if (!event) return false;
 
-    // Cannot undo these event types
-    if (
-      event.eventName === "undo" ||
-      event.eventName === "start game" ||
-      event.eventName === "deal opening hand" ||
-      event.eventName === "mulligan"
-    ) {
+    // Cannot undo these event types ("mulligan" IS undoable)
+    if (event.eventName === "undo" || event.eventName === "start game" || event.eventName === "deal opening hand") {
       return false;
     }
 

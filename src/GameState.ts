@@ -242,6 +242,22 @@ export class GameState {
   }
 
   public shuffle(browserTabId?: string): WhatHappened {
+    const moves = this.shuffleCollectingMoves();
+    this.eventLog.record({
+      eventName: "shuffle library",
+      compactMoves: compactShuffleMoves(moves),
+      browserTabId,
+    });
+    return { shuffling: true };
+  }
+
+  /**
+   * Fisher-Yates the library and apply the moves WITHOUT recording an event,
+   * returning the moves performed. Used both by the public shuffle() (which
+   * wraps it in a "shuffle library" event) and by mulligan() (which folds these
+   * moves into its single atomic "mulligan" event).
+   */
+  private shuffleCollectingMoves(): CardMove[] {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
     // Create random number generator (seeded if randomSeed is provided)
@@ -264,12 +280,7 @@ export class GameState {
 
     this.validateInvariants();
 
-    this.eventLog.record({
-      eventName: "shuffle library",
-      compactMoves: compactShuffleMoves(moves),
-      browserTabId,
-    });
-    return { shuffling: true };
+    return moves;
   }
 
   public startGame(browserTabId?: string): this {
@@ -285,22 +296,45 @@ export class GameState {
   }
 
   /**
-   * Deal the opening hand: draw up to OPENING_HAND_SIZE cards (fewer only for
-   * tiny test decks), then record a "deal opening hand" marker. The marker is
-   * recorded AFTER the draws so it is the most-recent live event while the
-   * player decides whether to keep — that's how the hand-acceptance stage is
-   * derived from the log (see GameEventLog.isInHandAcceptanceStage).
+   * Deal the opening hand as a single atomic "deal opening hand" event carrying
+   * its draw moves. Being one event (recorded after the draws) makes it the
+   * most-recent live event while the player decides whether to keep — that's how
+   * the hand-acceptance stage is derived (see isInHandAcceptanceStage).
    */
   private dealOpeningHand(browserTabId?: string): void {
-    this.drawUpToOpeningHandSize(browserTabId);
-    this.eventLog.record({ eventName: "deal opening hand", browserTabId });
+    const moves = this.drawCardsCollectingMoves(OPENING_HAND_SIZE);
+    this.eventLog.record({ eventName: "deal opening hand", moves, browserTabId });
   }
 
-  private drawUpToOpeningHandSize(browserTabId?: string): void {
-    const cardsToDraw = Math.min(OPENING_HAND_SIZE, this.listLibrary().length);
+  /**
+   * Move up to `count` cards (fewer only for tiny test decks) from the top of
+   * the library into the hand WITHOUT recording per-card events, returning the
+   * moves. Callers fold these into a single atomic deal/mulligan event.
+   */
+  private drawCardsCollectingMoves(count: number): CardMove[] {
+    const cardsToDraw = Math.min(count, this.listLibrary().length);
+    const moves: CardMove[] = [];
     for (let i = 0; i < cardsToDraw; i++) {
-      this.draw(browserTabId);
+      const topCard = this.listLibrary()[0];
+      const move: CardMove = {
+        gameCardIndex: topCard.gameCardIndex,
+        fromLocation: topCard.location,
+        toLocation: { type: "Hand", position: this.nextHandPosition() },
+      };
+      this.executeMove(move, false);
+      moves.push(move);
     }
+    return moves;
+  }
+
+  private nextHandPosition(): number {
+    const handCards = this.listHand();
+    return handCards.length > 0 ? Math.max(...handCards.map((gc) => gc.location.position)) + 1 : 0;
+  }
+
+  private nextLibraryBottomPosition(): number {
+    const libraryCards = this.listLibrary();
+    return libraryCards.length > 0 ? Math.max(...libraryCards.map((gc) => gc.location.position)) + 1 : 0;
   }
 
   /**
@@ -319,22 +353,32 @@ export class GameState {
 
   /**
    * Mulligan: return the whole hand to the library, shuffle, and redraw a fresh
-   * opening hand. Records a "mulligan" marker (after the redraw), keeping us in
-   * the hand-acceptance stage and bumping the derived mulligan count.
+   * opening hand — recorded as a SINGLE atomic "mulligan" event carrying every
+   * move it made. That keeps us in the hand-acceptance stage, bumps the derived
+   * mulligan count, and (because it's one event) lets undo reverse the whole
+   * mulligan in one step, restoring the previous hand and library exactly.
    */
   public mulligan(browserTabId?: string): WhatHappened {
-    // Return every hand card to the library, resetting any flipped two-faced
-    // cards to their front face (library cards are shown face-down anyway, and
-    // a freshly redrawn card should start on its front).
-    const handCards = this.listHand();
-    handCards.forEach((gameCard) => {
+    const moves: CardMove[] = [];
+
+    // Return every hand card to the bottom of the library, resetting any flipped
+    // two-faced cards to their front face (library cards are shown face-down
+    // anyway, and a freshly redrawn card should start on its front).
+    this.listHand().forEach((gameCard) => {
       gameCard.currentFace = "front";
-      this.addToBottomOfLibrary(gameCard, browserTabId);
+      const move: CardMove = {
+        gameCardIndex: gameCard.gameCardIndex,
+        fromLocation: gameCard.location,
+        toLocation: { type: "Library", position: this.nextLibraryBottomPosition() },
+      };
+      this.executeMove(move, false);
+      moves.push(move);
     });
 
-    this.shuffle(browserTabId);
-    this.drawUpToOpeningHandSize(browserTabId);
-    this.eventLog.record({ eventName: "mulligan", browserTabId });
+    moves.push(...this.shuffleCollectingMoves());
+    moves.push(...this.drawCardsCollectingMoves(OPENING_HAND_SIZE));
+
+    this.eventLog.record({ eventName: "mulligan", moves, browserTabId });
 
     this.validateInvariants();
     return { shuffling: true };
@@ -721,6 +765,19 @@ export class GameState {
 
   public undo(gameEventIndex: number, browserTabId?: string): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
+
+    // A mulligan is atomic: reverse every move it made, in reverse order, to
+    // restore the previous hand and library exactly.
+    if (event.eventName === "mulligan") {
+      for (let i = event.moves.length - 1; i >= 0; i--) {
+        const move = event.moves[i];
+        this.executeMove({ gameCardIndex: move.gameCardIndex, fromLocation: move.toLocation, toLocation: move.fromLocation }, false);
+      }
+      this.eventLog.recordUndo(event, browserTabId);
+      this.validateInvariants();
+      return this;
+    }
+
     const applyToState = this.eventLog.reverse(event);
 
     if (applyToState.eventName === "shuffle library") {

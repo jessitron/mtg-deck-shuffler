@@ -74,7 +74,7 @@ Opening Hand: the seven cards dealt automatically when a game starts (fewer only
 
 Mulligan Stage / Hand Acceptance Stage (MTG Deck Shuffler, game scope): the stage right after the opening hand is dealt, before play begins, while the player decides whether to keep their hand. It is **derived from the event log** (not stored): a "deal opening hand"/"mulligan" marker event is recorded after the deal, and the stage is active while that marker is the most-recent "live" event (hand rearrangement is transparent). It ends as soon as the player takes any action other than rearranging their hand (draw, play, reveal, ...) — and undoing that action brings the stage back automatically.
 
-Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. Each mulligan increments the mulligan count; the button is labeled "Mulligan", then "Mulligan #2", "#3", and so on.
+Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. Each mulligan increments the mulligan count; the button is labeled "Mulligan", then "Mulligan #2", "#3", and so on. A mulligan is recorded as a single atomic event carrying all its moves, so it can be undone in one step (restoring the previous hand and library exactly).
 
 Reveal: flip a card from the top of the Library so that the player can look at it.
 

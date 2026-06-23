@@ -116,4 +116,24 @@ test.describe('Opening hand & Mulligan', () => {
 
     console.log('SUCCESS: undo restores the hand-acceptance stage from history');
   });
+
+  test('a mulligan itself can be undone', async ({ page }) => {
+    await setupGame(page);
+
+    const mulligan = page.locator('button.mulligan-button');
+    await mulligan.click();
+    await page.waitForTimeout(1800); // shuffle animation
+    await expect(mulligan).toHaveText('Mulligan #2');
+
+    // Undo the mulligan via the standard hotkey — it's one atomic event.
+    await page.keyboard.press('ControlOrMeta+z');
+    await page.waitForTimeout(1000);
+
+    // Back to the first mulligan offer, still seven cards, still deciding.
+    await expect(page.locator('.hand-count')).toHaveText('7');
+    await expect(mulligan).toBeVisible();
+    await expect(mulligan).toHaveText(/^Mulligan$/);
+
+    console.log('SUCCESS: a mulligan can be undone, returning to the first mulligan offer');
+  });
 });
