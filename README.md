@@ -1,6 +1,6 @@
 # Shuffle your deck
 
-**Deployed at: https://mtg.jessitron.honeydemo.io** (AWS EKS — see [notes/DEPLOYMENT.md](notes/DEPLOYMENT.md))
+**Deployed at: https://mtg.jessitron.honeydemo.io**
 
 My real objective is to play Magic with my sister remotely. Here's our simplest-possible plan:
 We create a Mural and paste pictures of the cards in there. Then we move them around the same way as when we're playing.
@@ -62,6 +62,7 @@ We will eventually deploy to a toy EKS cluster.
 This downloads all Commander Deck precons from MTGJSON and saves them to the decks directory. MTGJSON provides accurate release dates and complete metadata without rate limiting.
 
 Options:
+
 - `--convert` - Convert and save decks to the decks directory
 - `--force` - Overwrite existing deck files
 - `--keep-temp` - Keep temporary downloaded files for inspection
