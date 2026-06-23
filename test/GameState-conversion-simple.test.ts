@@ -44,6 +44,22 @@ test("should convert GameState to PersistedGameState and back", async () => {
   }));
 });
 
+test("mulligan stage and count survive a persistence round-trip", async () => {
+  await fc.assert(fc.asyncProperty(deckWithOneCommander, async (testDeck) => {
+    const cardRepository = new InMemoryCardRepositoryAdapter();
+    await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
+
+    const game = GameState.newGame(7, 1, 2, testDeck);
+    game.startGame(); // deals opening hand, opens mulligan stage
+    game.mulligan(); // count -> 1, still in stage
+
+    const restored = await GameState.fromPersistedGameState(game.toPersistedGameState(), cardRepository);
+
+    expect(restored.isInMulliganStage()).toBe(true);
+    expect(restored.getMulliganCount()).toBe(1);
+  }));
+});
+
 test("rejects a game saved in an older, incompatible format", async () => {
   const cardRepository = new InMemoryCardRepositoryAdapter();
   // A game persisted before the cardTypes change (any version below current)

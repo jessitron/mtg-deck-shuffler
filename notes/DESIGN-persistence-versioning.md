@@ -7,7 +7,7 @@ Runbook for the persisted-format version constants: what each guards, **when to 
 | Constant | Defined in | Current | Stamped on | Validated (fails) at |
 |---|---|---|---|---|
 | `PERSISTED_DECK_VERSION` | `src/types.ts` | 3 | every `Deck` (adapters + `hydrateDeck`) | `LocalFileAdapter.retrieveDeck` → `DeckVersionMismatchError` |
-| `PERSISTED_GAME_STATE_VERSION` | `src/port-persist-state/types.ts` | 8 | `PersistedGameState` (`toPersistedGameState`) | `GameState.fromPersistedGameState` → `IncompatibleStateVersionError` |
+| `PERSISTED_GAME_STATE_VERSION` | `src/port-persist-state/types.ts` | 9 | `PersistedGameState` (`toPersistedGameState`) | `GameState.fromPersistedGameState` → `IncompatibleStateVersionError` |
 | `PERSISTED_GAME_PREP_VERSION` | `src/port-persist-prep/types.ts` | 3 | `PersistedGamePrep` | `/prepare` + `/start-game` routes → `IncompatiblePrepVersionError` |
 | `PersistedDeck.version` | `src/port-persist-state/persisted-types.ts` | 2 | `PersistedDeck` (`dehydrateDeck`) | not validated on load (dehydrated form) |
 

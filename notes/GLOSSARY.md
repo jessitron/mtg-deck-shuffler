@@ -70,6 +70,12 @@ Hand (MTG Deck Shuffler, UI): a set of cards that are visible to a player. They 
 
 Draw: move a card from the Library to the Hand
 
+Opening Hand: the seven cards dealt automatically when a game starts (fewer only for tiny test decks).
+
+Mulligan Stage / Hand Acceptance Stage (MTG Deck Shuffler, game scope): the stage right after the opening hand is dealt, before play begins, while the player decides whether to keep their hand. It is part of game state (`mulliganStage`). It ends as soon as the player takes any action other than rearranging their hand (draw, play, reveal, ...).
+
+Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. Each mulligan increments the mulligan count; the button is labeled "Mulligan", then "Mulligan #2", "#3", and so on.
+
 Reveal: flip a card from the top of the Library so that the player can look at it.
 
 Revealed cards (MTG Deck Shuffler, UI): a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.

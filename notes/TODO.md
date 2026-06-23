@@ -40,7 +40,7 @@ It would be cool if Charlotte could see our hands without worrying about messing
 
 - add a play counter to the command zone mtg-deck-shuffler-mwz
 
-- mulligan button which puts them all back and reshuffles mtg-deck-shuffler-9bh
+- ~~mulligan button which puts them all back and reshuffles mtg-deck-shuffler-9bh~~ DONE - claude (button above the hand during the hand-acceptance stage; increments "Mulligan #2"…)
 
 - make cmd-Z undo mtg-deck-shuffler-236
 
@@ -87,5 +87,5 @@ mtg-deck-shuffler-z1y
 
 - on undo with ctrl-Z, I'd like it to notify somehow about what was undone. A toast, maybe.
 
-- when a game starts, automatically draw a hand of 7 cards. Sort the hand by card type and then by mana value. Lands first, then creatures, then everything else.
+- when a game starts, automatically draw a hand of 7 cards. ✅ DONE - claude (auto-draws 7 on start/restart). STILL TODO: sort the hand by card type and then by mana value. Lands first, then creatures, then everything else.
   - real fun: generate a mulligan recommendation. Are there 2-4 lands? With the lands in the hand, what can be played? do any of those get you more land or mana? with only these cards, can you play a creature (could be your commander)? If not, do any of them get you more cards?

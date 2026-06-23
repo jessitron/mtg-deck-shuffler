@@ -34,11 +34,11 @@ describe("GameState seeded random shuffling", () => {
     const seed = 42;
 
     const gameState1 = GameState.newGame(1, 1, 1, testDeck, seed);
-    gameState1.startGame();
+    gameState1.shuffle();
     const library1 = gameState1.listLibrary().map(card => card.card.name);
 
     const gameState2 = GameState.newGame(2, 1, 1, testDeck, seed);
-    gameState2.startGame();
+    gameState2.shuffle();
     const library2 = gameState2.listLibrary().map(card => card.card.name);
 
     expect(library1).toEqual(library2);
@@ -46,11 +46,11 @@ describe("GameState seeded random shuffling", () => {
 
   test("shuffling with different seeds produces different results", () => {
     const gameState1 = GameState.newGame(1, 1, 1, testDeck, 42);
-    gameState1.startGame();
+    gameState1.shuffle();
     const library1 = gameState1.listLibrary().map(card => card.card.name);
 
     const gameState2 = GameState.newGame(2, 1, 1, testDeck, 123);
-    gameState2.startGame();
+    gameState2.shuffle();
     const library2 = gameState2.listLibrary().map(card => card.card.name);
 
     expect(library1).not.toEqual(library2);
@@ -58,7 +58,7 @@ describe("GameState seeded random shuffling", () => {
 
   test("shuffling without seed still works (random)", () => {
     const gameState = GameState.newGame(1, 1, 1, testDeck);
-    gameState.startGame();
+    gameState.shuffle();
     const library = gameState.listLibrary();
 
     expect(library).toHaveLength(5);

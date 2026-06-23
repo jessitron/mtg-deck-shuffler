@@ -81,8 +81,11 @@ export interface GameCard {
 // renamed types -> cardTypes (commit f76b49c). The game-state envelope itself is
 // unchanged, but the card data its scryfallIds resolve to is now incompatible, so
 // games saved before this are not loadable. fromPersistedGameState rejects them.
+// Bumped 8 -> 9 when the envelope gained mulliganStage/mulliganCount (the
+// opening-hand acceptance stage). Old games lack these fields and predate the
+// auto-deal-opening-hand behavior, so they're rejected rather than migrated.
 // When/how to bump: notes/DESIGN-persistence-versioning.md
-export const PERSISTED_GAME_STATE_VERSION: 8 = 8;
+export const PERSISTED_GAME_STATE_VERSION: 9 = 9;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */
 export class IncompatibleStateVersionError extends Error {
@@ -106,6 +109,10 @@ export interface PersistedGameState {
   totalCards: number;
   gameCards: PersistedGameCard[]; // Changed from GameCard[] to PersistedGameCard[]
   events: GameEvent[];
+  /** Whether the game is still in the opening-hand acceptance (mulligan) stage. */
+  mulliganStage: boolean;
+  /** How many mulligans have been taken (0 = none yet). */
+  mulliganCount: number;
 }
 
 export interface GameHistorySummary {

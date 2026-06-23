@@ -1233,6 +1233,29 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns active game fragment - mulligan: hand back to library, shuffle, redraw
+  app.post("/mulligan/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const browserTabId = res.locals.browserTabId as string | undefined;
+
+    if (game.gameStatus() !== "Active") {
+      res.status(400).send(`<div>Cannot mulligan: Game is not active</div>`);
+      return;
+    }
+
+    try {
+      const whatHappened = game.mulligan(browserTabId);
+      await persistStatePort.save(game.toPersistedGameState());
+
+      const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
+      res.send(html);
+    } catch (error) {
+      console.error("Error taking mulligan:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mulligan"}</div>`);
+    }
+  });
+
   app.post("/move-hand-card/:gameId/:from/:to", loadGameFromParams, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;

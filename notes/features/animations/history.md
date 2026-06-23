@@ -48,6 +48,12 @@
 - `f95319d` - "Complete CSS cleanup: separate game and shared styles" — game.css created from styles.css
 - `9539966` - "Extract shared playmat component styles into playmat.css"
 
+### Mulligan / Opening Hand
+
+- Added the mulligan / opening-hand feature. `GameState.mulligan()` returns `{ shuffling: true }`, so the new `POST /mulligan/:gameId` reuses the existing library-shuffle animation with **no new `WhatHappened` fields or CSS classes**.
+- `hand-components.ts` renders a Mulligan button (`.mulligan-row > button.mulligan-button`) as a sibling above `#hand-cards` during the hand-acceptance stage. It does not alter `.card-container`, hand-drop-zones, or card markup, so the drag-and-drop animation-class cleanup in `game.js` is untouched. `game.css` gained `.mulligan-row`/`.mulligan-button` layout rules only (no keyframes/transitions).
+- `startGame()` now auto-draws seven cards, so the first game render shows a full hand (no animation involved — it's the initial render).
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

@@ -14,7 +14,10 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
     })
     .join("");
 
+  const mulliganButtonHtml = formatMulliganButtonHtmlFragment(game);
+
   return `<div id="hand-section" data-testid="hand-section">
+        ${mulliganButtonHtml}
         <div id="hand-cards" class="hand-cards">
           <div class="hand-symbol">
             <div class="hand-count">${handCardsList.length}</div>
@@ -23,4 +26,27 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
           ${handCardsWithDropZones}
         </div>
       </div>`;
+}
+
+/**
+ * The Mulligan button sits above the hand during the opening-hand acceptance
+ * stage. It's gone once the player takes any action other than rearranging
+ * their hand (the stage lives in game state — see GameState.isInMulliganStage).
+ * Label is "Mulligan" for the first one, then "Mulligan #2", "#3", ...
+ */
+function formatMulliganButtonHtmlFragment(game: GameState): string {
+  if (!game.isInMulliganStage()) {
+    return "";
+  }
+
+  const count = game.getMulliganCount();
+  const label = count === 0 ? "Mulligan" : `Mulligan #${count + 1}`;
+
+  return `<div class="mulligan-row">
+          <button class="mulligan-button"
+                  hx-post="/mulligan/${game.gameId}"
+                  hx-vals='{"expected-version": ${game.getStateVersion()}}'
+                  hx-target="#game-container"
+                  hx-swap="outerHTML">${label}</button>
+        </div>`;
 }

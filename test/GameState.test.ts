@@ -175,7 +175,7 @@ describe("GameState", () => {
     );
   });
 
-  test("startGame changes status to Active and shuffles", () => {
+  test("startGame changes status to Active, shuffles, and deals an opening hand", () => {
     fc.assert(
       fc.property(anyDeck, (deck) => {
         const gameState = GameState.newGame(1, 1, 1, deck);
@@ -185,13 +185,19 @@ describe("GameState", () => {
 
         expect(gameState.gameStatus()).toBe(GameStatus.Active);
 
-        // Verify shuffle happened - cards should still be in library with valid positions
-        const libraryCards = gameState.getCards().filter((gc) => gc.location.type === "Library");
-        expect(libraryCards.length).toBe(deck.cards.length);
+        // An opening hand of up to seven cards is dealt automatically.
+        const expectedHandSize = Math.min(7, deck.cards.length);
+        expect(gameState.listHand().length).toBe(expectedHandSize);
+        // The remaining non-commander cards stay in the library.
+        expect(gameState.listLibrary().length).toBe(deck.cards.length - expectedHandSize);
 
-        const positions = libraryCards.map((gc) => (gc.location as LibraryLocation).position).sort((a, b) => a - b);
-        const expectedPositions = Array.from({ length: deck.cards.length }, (_, i) => i);
-        expect(positions).toEqual(expectedPositions);
+        // Library positions remain unique (shuffle/draw left a valid ordering).
+        const positions = gameState.listLibrary().map((gc) => (gc.location as LibraryLocation).position);
+        expect(new Set(positions).size).toBe(positions.length);
+
+        // The player is offered a mulligan, none taken yet.
+        expect(gameState.isInMulliganStage()).toBe(true);
+        expect(gameState.getMulliganCount()).toBe(0);
       })
     );
   });
@@ -882,5 +888,86 @@ describe("GameState", () => {
         });
       })
     );
+  });
+
+  describe("opening hand & mulligan", () => {
+    // A fixed deck with comfortably more than seven cards so the opening hand
+    // is always a full seven.
+    function tenCardDeck(): Deck {
+      const cards: CardDefinition[] = Array.from({ length: 10 }, (_, i) => ({
+        name: `Card ${String.fromCharCode(65 + i)}`,
+        scryfallId: `card-${i}`,
+        multiverseid: i + 1,
+        twoFaced: false,
+        oracleCardName: `Card ${String.fromCharCode(65 + i)}`,
+        colorIdentity: [],
+        set: "TST",
+        cardTypes: ["Creature"],
+      }));
+      return {
+        version: 3,
+        id: 999,
+        name: "Ten Card Deck",
+        totalCards: 10,
+        provenance: testProvenance,
+        cards,
+        commanders: [],
+      };
+    }
+
+    test("startGame deals seven cards and opens the mulligan stage", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+
+      expect(game.listHand().length).toBe(7);
+      expect(game.listLibrary().length).toBe(3);
+      expect(game.isInMulliganStage()).toBe(true);
+      expect(game.getMulliganCount()).toBe(0);
+    });
+
+    test("rearranging the hand keeps the mulligan stage open", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+
+      game.moveHandCard(0, 1);
+
+      expect(game.isInMulliganStage()).toBe(true);
+    });
+
+    test("drawing ends the mulligan stage", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+
+      game.draw();
+
+      expect(game.isInMulliganStage()).toBe(false);
+    });
+
+    test("playing a card ends the mulligan stage", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+
+      const handCard = game.listHand()[0];
+      game.playCard(handCard.gameCardIndex);
+
+      expect(game.isInMulliganStage()).toBe(false);
+    });
+
+    test("mulligan returns the hand, redraws seven, and increments the count", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+      expect(game.getMulliganCount()).toBe(0);
+
+      game.mulligan();
+
+      expect(game.listHand().length).toBe(7);
+      expect(game.listLibrary().length).toBe(3);
+      expect(game.isInMulliganStage()).toBe(true);
+      expect(game.getMulliganCount()).toBe(1);
+
+      game.mulligan();
+      expect(game.getMulliganCount()).toBe(2);
+      expect(game.listHand().length).toBe(7);
+    });
   });
 });
