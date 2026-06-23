@@ -98,9 +98,9 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
   - **`PERSISTED_DECK_VERSION` 2 → 3.** `PersistedDeck` (scryfallIds only) stays at 2; `PersistedGamePrep` stays at 2 (embeds a Deck that now carries version 3 internally).
 - **`ef75759`** - Regenerated all 190 precons (full MTGJSON re-fetch) + the Archidekt example deck for the new format. 0 conversion errors. Verified: app boots, grouped library modal renders, 124 tests pass.
 
-## Mulligan / Opening Hand (state version 9)
+## Mulligan / Opening Hand (state version 9, then 10)
 
-- Added the mulligan / opening-hand feature. `PERSISTED_GAME_STATE_VERSION` bumped **8 → 9** (envelope-only: two new top-level fields `mulliganStage`/`mulliganCount` on `PersistedGameState`). `PERSISTED_DECK_VERSION` and `PERSISTED_GAME_PREP_VERSION` were NOT touched — no `CardDefinition`/`Deck`/prep change. Old games rejected by the existing `fromPersistedGameState` version guard.
+- Added the mulligan / opening-hand feature. First cut bumped `PERSISTED_GAME_STATE_VERSION` **8 → 9** (envelope-only: stored fields `mulliganStage`/`mulliganCount`). Then refactored to **derive** the stage and count from the event log (new non-undoable marker events "deal opening hand" and "mulligan"), removing the stored fields and bumping **9 → 10**. `PERSISTED_DECK_VERSION` and `PERSISTED_GAME_PREP_VERSION` were NOT touched — no `CardDefinition`/`Deck`/prep change. Old games rejected by the existing `fromPersistedGameState` version guard.
   - **Two-faced touch point**: `GameState.mulligan()` returns the hand to the library, shuffles, and redraws. As each hand card returns to the library it resets `currentFace` to `"front"`, so a redrawn two-faced card starts on its front (matches `newGame`'s default). No `CardDefinition`/`CardFace`/adapter/modal/flip changes; the hand still renders through `formatCardContainer()`, so the two-faced branch is unaffected.
 
 ## What Was Tried and Abandoned

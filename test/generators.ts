@@ -333,7 +333,5 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
     totalCards: deck.totalCards,
     gameCards,
     events: [],
-    mulliganStage: false,
-    mulliganCount: 0,
   };
 };

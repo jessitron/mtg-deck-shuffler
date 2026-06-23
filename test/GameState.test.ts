@@ -943,6 +943,35 @@ describe("GameState", () => {
       expect(game.isInMulliganStage()).toBe(false);
     });
 
+    test("undoing the action that ended the stage brings the stage back", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+
+      game.draw();
+      expect(game.isInMulliganStage()).toBe(false);
+
+      // Undo the draw — derived from the event log, the stage returns.
+      const drawEvent = game
+        .getEventLog()
+        .getEvents()
+        .reverse()
+        .find((e) => e.eventName === "move card");
+      game.undo(drawEvent!.gameEventIndex);
+
+      expect(game.isInMulliganStage()).toBe(true);
+    });
+
+    test("rearranging the hand after a mulligan keeps the stage open", () => {
+      const game = GameState.newGame(1, 1, 1, tenCardDeck());
+      game.startGame();
+      game.mulligan();
+
+      game.moveHandCard(0, 1);
+
+      expect(game.isInMulliganStage()).toBe(true);
+      expect(game.getMulliganCount()).toBe(1);
+    });
+
     test("playing a card ends the mulligan stage", () => {
       const game = GameState.newGame(1, 1, 1, tenCardDeck());
       game.startGame();

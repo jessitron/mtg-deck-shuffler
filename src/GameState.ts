@@ -79,15 +79,6 @@ export class GameState {
   private readonly gameCards: GameCard[];
   private readonly eventLog: GameEventLog;
   private readonly randomSeed?: number;
-  /**
-   * The "hand acceptance" stage before play begins. True from the moment the
-   * opening hand is dealt until the player takes any action other than
-   * rearranging their hand (draw, play, reveal, ...). While true, the player is
-   * offered a Mulligan.
-   */
-  private mulliganStage: boolean;
-  /** How many mulligans have been taken so far (0 = none yet). */
-  private mulliganCount: number;
 
   static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number) {
     if (deck.commanders.length > 2) {
@@ -138,8 +129,6 @@ export class GameState {
     cards: GameCard[];
     events: GameEvent[];
     randomSeed?: number;
-    mulliganStage?: boolean;
-    mulliganCount?: number;
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
@@ -152,8 +141,6 @@ export class GameState {
     this.gameCards = params.cards;
     this.eventLog = GameEventLog.fromPersisted(params.events);
     this.randomSeed = params.randomSeed;
-    this.mulliganStage = params.mulliganStage ?? false;
-    this.mulliganCount = params.mulliganCount ?? 0;
   }
 
   static async fromPersistedGameState(
@@ -255,7 +242,6 @@ export class GameState {
   }
 
   public shuffle(browserTabId?: string): WhatHappened {
-    this.leaveMulliganStage();
     const libraryCards = this.gameCards.filter(isInLibrary);
 
     // Create random number generator (seeded if randomSeed is provided)
@@ -299,31 +285,42 @@ export class GameState {
   }
 
   /**
-   * Draw an opening hand and enter the mulligan stage. Draws up to
-   * OPENING_HAND_SIZE cards (fewer only for tiny test decks). Each draw clears
-   * the mulligan flag, so we set it true at the end.
+   * Deal the opening hand: draw up to OPENING_HAND_SIZE cards (fewer only for
+   * tiny test decks), then record a "deal opening hand" marker. The marker is
+   * recorded AFTER the draws so it is the most-recent live event while the
+   * player decides whether to keep — that's how the hand-acceptance stage is
+   * derived from the log (see GameEventLog.isInHandAcceptanceStage).
    */
   private dealOpeningHand(browserTabId?: string): void {
+    this.drawUpToOpeningHandSize(browserTabId);
+    this.eventLog.record({ eventName: "deal opening hand", browserTabId });
+  }
+
+  private drawUpToOpeningHandSize(browserTabId?: string): void {
     const cardsToDraw = Math.min(OPENING_HAND_SIZE, this.listLibrary().length);
     for (let i = 0; i < cardsToDraw; i++) {
       this.draw(browserTabId);
     }
-    this.mulliganStage = true;
   }
 
-  /** Whether the player is still in the opening-hand acceptance stage. */
+  /**
+   * Whether the player is still in the opening-hand acceptance (mulligan) stage.
+   * Derived from the event log, so undoing the action that ended the stage
+   * brings it back automatically.
+   */
   public isInMulliganStage(): boolean {
-    return this.mulliganStage;
+    return this.eventLog.isInHandAcceptanceStage();
   }
 
-  /** How many mulligans have been taken so far (0 = none). */
+  /** How many mulligans have been taken so far (0 = none). Derived from the log. */
   public getMulliganCount(): number {
-    return this.mulliganCount;
+    return this.eventLog.mulliganCount();
   }
 
   /**
    * Mulligan: return the whole hand to the library, shuffle, and redraw a fresh
-   * opening hand. Stays in the mulligan stage and bumps the mulligan count.
+   * opening hand. Records a "mulligan" marker (after the redraw), keeping us in
+   * the hand-acceptance stage and bumping the derived mulligan count.
    */
   public mulligan(browserTabId?: string): WhatHappened {
     // Return every hand card to the library, resetting any flipped two-faced
@@ -336,16 +333,11 @@ export class GameState {
     });
 
     this.shuffle(browserTabId);
-    this.dealOpeningHand(browserTabId);
-    this.mulliganCount++;
+    this.drawUpToOpeningHandSize(browserTabId);
+    this.eventLog.record({ eventName: "mulligan", browserTabId });
 
     this.validateInvariants();
     return { shuffling: true };
-  }
-
-  /** End the hand-acceptance stage. Called by every action except hand reordering. */
-  private leaveMulliganStage(): void {
-    this.mulliganStage = false;
   }
 
   /**
@@ -422,7 +414,6 @@ export class GameState {
   }
 
   public draw(browserTabId?: string): this {
-    this.leaveMulliganStage();
     const libraryCards = this.listLibrary();
 
     if (libraryCards.length === 0) {
@@ -440,7 +431,6 @@ export class GameState {
   }
 
   public playCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
-    this.leaveMulliganStage();
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
     }
@@ -467,7 +457,6 @@ export class GameState {
   }
 
   public reveal(position: number, browserTabId?: string): this {
-    this.leaveMulliganStage();
     const libraryCards = this.listLibrary();
     const cardToReveal = libraryCards.find((gc) => (gc.location as LibraryLocation).position === position);
 
@@ -482,7 +471,6 @@ export class GameState {
   }
 
   public revealByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    this.leaveMulliganStage();
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -497,7 +485,6 @@ export class GameState {
   }
 
   public putInHandByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    this.leaveMulliganStage();
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -512,7 +499,6 @@ export class GameState {
   }
 
   public putOnTopByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    this.leaveMulliganStage();
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -527,7 +513,6 @@ export class GameState {
   }
 
   public putOnBottomByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    this.leaveMulliganStage();
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -735,7 +720,6 @@ export class GameState {
   }
 
   public undo(gameEventIndex: number, browserTabId?: string): GameState {
-    this.leaveMulliganStage();
     const event = this.eventLog.getEvents()[gameEventIndex];
     const applyToState = this.eventLog.reverse(event);
 
@@ -765,8 +749,6 @@ export class GameState {
       totalCards: this.totalCards,
       gameCards: dehydrateGameCards(this.gameCards), // Dehydrate to PersistedGameCard[]
       events: this.eventLog.getEvents(),
-      mulliganStage: this.mulliganStage,
-      mulliganCount: this.mulliganCount,
     };
   }
 }

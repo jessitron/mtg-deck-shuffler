@@ -37,6 +37,8 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState, c
     "move card": "event-move-card",
     "shuffle library": "event-shuffle-library",
     "start game": "event-start-game",
+    "deal opening hand": "event-deal-opening-hand",
+    mulligan: "event-mulligan",
     "flip card": "event-flip-card",
     undo: "event-undo",
   };
@@ -62,6 +64,10 @@ function describeEvent(event: GameEvent, game: GameState, cardNamesAsLinks: bool
       return `Shuffle ${event.compactMoves.length} cards in library`;
     case "start game":
       return "Start game";
+    case "deal opening hand":
+      return "Deal opening hand";
+    case "mulligan":
+      return "Mulligan";
     case "undo":
       return `Undo: ${formatGameEventHtmlFragment(game.getEvent(event.originalEventIndex), game, cardNamesAsLinks)}`;
   }

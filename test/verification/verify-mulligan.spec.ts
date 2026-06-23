@@ -92,4 +92,28 @@ test.describe('Opening hand & Mulligan', () => {
 
     console.log('SUCCESS: drawing ends the hand-acceptance stage and removes the Mulligan button');
   });
+
+  test('undoing the draw brings the Mulligan button back (derived from history)', async ({ page }) => {
+    await setupGame(page);
+
+    const mulligan = page.locator('button.mulligan-button');
+    await expect(mulligan).toBeVisible();
+
+    // Draw — stage ends, button disappears.
+    await page.locator('button.draw-button').click();
+    await page.waitForTimeout(800);
+    await expect(mulligan).toHaveCount(0);
+    await expect(page.locator('.hand-count')).toHaveText('8');
+
+    // Undo via the standard hotkey — the stage is derived from the event log,
+    // so undoing the draw restores it and the button reappears.
+    await page.keyboard.press('ControlOrMeta+z');
+    await page.waitForTimeout(800);
+
+    await expect(page.locator('.hand-count')).toHaveText('7');
+    await expect(mulligan).toBeVisible();
+    await expect(mulligan).toHaveText(/^Mulligan$/);
+
+    console.log('SUCCESS: undo restores the hand-acceptance stage from history');
+  });
 });

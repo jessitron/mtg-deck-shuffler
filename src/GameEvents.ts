@@ -43,6 +43,26 @@ export type UndoEvent = {
 };
 
 /**
+ * Marks that an opening hand was dealt. Recorded AFTER the deal's draw events,
+ * so it is the most-recent "live" event while the player is still deciding
+ * whether to keep their hand. The hand-acceptance (mulligan) stage is derived
+ * from this position in the log — see GameEventLog.isInHandAcceptanceStage().
+ * Not undoable (like "start game").
+ */
+export type DealOpeningHandEvent = {
+  eventName: "deal opening hand";
+};
+
+/**
+ * Marks that a mulligan was taken (hand returned to library, shuffled, redrawn).
+ * Recorded after the mulligan's moves. The mulligan count is the number of
+ * these events. Not undoable.
+ */
+export type MulliganEvent = {
+  eventName: "mulligan";
+};
+
+/**
  * Convert compact shuffle moves to full CardMove array
  */
 export function expandCompactShuffleMoves(compactMoves: [number, number, number][]): CardMove[] {
@@ -94,7 +114,7 @@ export function nameMove(move: CardMove): string {
   return `Move from ${move.fromLocation.type} to ${move.toLocation.type}`;
 }
 
-export type GameEventDefinition = (ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent) & EventProvenance;
+export type GameEventDefinition = (ShuffleEvent | StartEvent | MoveCardEvent | UndoEvent | DealOpeningHandEvent | MulliganEvent) & EventProvenance;
 
 export type GameEvent = GameEventDefinition & GameEventIdentifier;
 
@@ -136,6 +156,9 @@ export class GameEventLog {
     if (event.eventName === "start game") {
       throw new Error("Cannot undo start game");
     }
+    if (event.eventName === "deal opening hand" || event.eventName === "mulligan") {
+      throw new Error(`Cannot undo ${event.eventName}`);
+    }
 
     const undoEvent: UndoEvent & EventProvenance = {
       eventName: "undo",
@@ -174,6 +197,9 @@ export class GameEventLog {
         };
       case "start game":
         throw new Error("there isn't an event for reversing start game");
+      case "deal opening hand":
+      case "mulligan":
+        throw new Error(`there isn't an event for reversing ${event.eventName}`);
     }
   }
 
@@ -195,7 +221,12 @@ export class GameEventLog {
     if (!event) return false;
 
     // Cannot undo these event types
-    if (event.eventName === "undo" || event.eventName === "start game") {
+    if (
+      event.eventName === "undo" ||
+      event.eventName === "start game" ||
+      event.eventName === "deal opening hand" ||
+      event.eventName === "mulligan"
+    ) {
       return false;
     }
 
@@ -222,5 +253,35 @@ export class GameEventLog {
    */
   public hasBeenUndone(gameEventIndex: number): boolean {
     return this.events.slice(gameEventIndex + 1).some((event) => event.eventName === "undo" && event.originalEventIndex === gameEventIndex);
+  }
+
+  /**
+   * Are we still in the opening-hand acceptance (mulligan) stage? Derived purely
+   * from the event log so that undo restores it automatically.
+   *
+   * Walk back through the "live" events (skipping undo events and events that
+   * have been undone). Hand rearrangement (a Hand→Hand move) is transparent — it
+   * doesn't end the stage — so we look past it. The first live, non-rearrange
+   * event we hit decides: if it's the dealing of a hand (initial deal or a
+   * mulligan), we're still accepting; anything else (a draw, play, reveal,
+   * manual shuffle, ...) means play has begun.
+   */
+  public isInHandAcceptanceStage(): boolean {
+    for (let i = this.events.length - 1; i >= 0; i--) {
+      const event = this.events[i];
+      if (event.eventName === "undo" || this.hasBeenUndone(i)) {
+        continue;
+      }
+      if (event.eventName === "move card" && event.move.fromLocation.type === "Hand" && event.move.toLocation.type === "Hand") {
+        continue; // rearranging the hand is transparent
+      }
+      return event.eventName === "deal opening hand" || event.eventName === "mulligan";
+    }
+    return false;
+  }
+
+  /** How many mulligans have been taken (number of live "mulligan" events). */
+  public mulliganCount(): number {
+    return this.events.filter((event, i) => event.eventName === "mulligan" && !this.hasBeenUndone(i)).length;
   }
 }
