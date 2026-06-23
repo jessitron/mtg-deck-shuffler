@@ -36,5 +36,6 @@ The app assists gameplay without enforcing MTG rules. Library search shows card 
 | Auto-shuffle | No. The app doesn't enforce MTG rules; player shuffles manually if needed |
 | Grouping | Toggle to group cards by MTG card type (Creature, Instant, etc.) |
 | Type icons | SVG icons for each card type, colored for lands |
-| Two-faced cards | Both front and back face types merged (deduplicated) |
+| Card types source | `CardDefinition.cardTypes` — pre-unioned across all faces/parts at ingestion |
+| Multi-face cards | Appear in every group their faces/parts belong to (transform, MDFC, split, adventure, prepare) |
 | Card click | Opens card detail modal overlaid on library modal |

@@ -4,9 +4,8 @@
 
 | File | Role |
 |---|---|
-| `src/types.ts:2-8` | `CardFace` interface (back-face data) |
-| `src/types.ts:10-23` | `CardDefinition` with `twoFaced` flag and `backFace?: CardFace` |
-| `src/types.ts:49-54` | `getCardImageUrl()` — constructs Scryfall URL with `face` parameter |
+| `src/types.ts` | `CardDefinition` with `twoFaced` flag and `cardTypes` (union of all faces' types); no `CardFace`/`backFace` |
+| `src/types.ts` | `getCardImageUrl()` — constructs Scryfall URL with `face` parameter |
 | `src/port-persist-state/types.ts:72-78` | `GameCard` with `currentFace: "front" \| "back"` |
 | `src/port-persist-state/persisted-types.ts:24-30` | `PersistedGameCard` with `currentFace` |
 
@@ -26,8 +25,8 @@
 | `POST /flip-card-modal/:gameId/:gameCardIndex` | ~1264-1377 | Modal flip — returns full card modal with navigation |
 | `GET /card-modal/:gameId/:cardIndex` | ~580-696 | Card modal — shows flip button if `twoFaced` |
 | `GET /prep-card-modal/:prepId/:cardIndex` | ~698-804 | Prep card modal — flip via `?face=` query param |
-| `GET /library-modal/:gameId` | ~500-542 | Game library modal — merges back-face types |
-| `GET /prep-library-modal/:prepId` | ~807-845 | Prep library modal — merges back-face types |
+| `GET /library-modal/:gameId` | ~500-542 | Game library modal — maps `cardTypes` (already unioned) |
+| `GET /prep-library-modal/:prepId` | ~807-845 | Prep library modal — maps `cardTypes` (already unioned) |
 
 ## View Rendering
 
@@ -50,9 +49,9 @@
 | File | Role |
 |---|---|
 | `src/port-deck-retrieval/twoFacedLayouts.ts` | **Shared source of truth**: `DOUBLE_SIDED_LAYOUTS` + `isDoubleSidedLayout()`. Distinguishes real two-faced layouts from single-image multi-face layouts (split/adventure/prepare/...) |
-| `src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-127` | `twoFaced = faces.length===2 && isDoubleSidedLayout(layout)`; front data from `faces[0]`; `backFace` only when two-faced |
+| `src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-110` | `twoFaced = faces.length===2 && isDoubleSidedLayout(layout)`; `cardTypes` = union of all faces' types |
 | `src/port-deck-retrieval/archidektAdapter/archidektTypes.ts` | `ArchidektCard.oracleCard.layout?: string` (read for classification) |
-| `src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:65-109` | `twoFaced = isDoubleSidedLayout(layout)` (shared helper), `backFace` via `otherFaceIds` lookup |
+| `src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:66-100` | `twoFaced = isDoubleSidedLayout(layout)` (shared helper); `cardTypes` = union of card + `otherFaceIds` faces' types |
 | `src/port-deck-retrieval/mtgjsonAdapter/mtgjsonTypes.ts:16` | `side` field used to identify back face ("b") |
 | `src/scripts/inspect-archidekt-card.ts` | Diagnostic: dumps raw Archidekt `oracleCard` (layout, faces) — `npm run card:inspect -- <deckId> <nameSubstring>` |
 
@@ -60,7 +59,7 @@
 
 | File | Role |
 |---|---|
-| `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `back_face` as JSON, `two_faced` as integer |
+| `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `card_types` as JSON, `two_faced` as integer; rebuilds the cache table on old schema |
 | `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` between GameCard and PersistedGameCard |
 
 ## Tests
@@ -68,7 +67,7 @@
 | File | Role |
 |---|---|
 | `test/GameState.test.ts` | `flipCard` tests: flip two-faced card, error on non-existent, error on single-faced |
-| `test/generators.ts:90-117` | `CardFace` generator, `cardDefinition` with linked `twoFaced`/`backFace` |
+| `test/generators.ts` | `cardDefinition` generator (`cardTypes` + boolean `twoFaced`); `nicolBolas` fixture is two-faced with `cardTypes` `[Legendary, Creature, Planeswalker]` |
 | `test/generators.ts:342-360` | `nicolBolas` fixture — ready-made two-faced card |
 | `test/port-deck-retrieval/archidekt-deck-adapter.test.ts` | Two-faced card extraction tests |
 | `test/port-deck-retrieval/mtgjson-deck-adapter.test.ts` | Two-faced card extraction tests |

@@ -13,8 +13,8 @@ Route handler (src/app.ts)
   - Retrieves persisted game/prep state
   - For games: reconstructs GameState, calls game.listLibrary()
   - For preps: uses createPrepViewHelpers(prep).libraryCards
-  - Maps GameCards to simple objects: { name, gameCardIndex, types, colorIdentity }
-  - Merges back-face types: [...new Set([...card.types, ...card.backFace?.types || []])]
+  - Maps GameCards to simple objects: { name, gameCardIndex, cardTypes, colorIdentity }
+  - cardTypes comes straight from gc.card.cardTypes (already unioned across all faces at ingestion)
   - Passes groupBy query param through
   |
   v
@@ -59,7 +59,7 @@ Single template shared by both routes. Parameters:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `cards` | `Array<{name, gameCardIndex, types, colorIdentity}>` | Cards to display |
+| `cards` | `Array<{name, gameCardIndex, cardTypes, colorIdentity}>` | Cards to display |
 | `cardModalUrlTemplate` | `string` | URL template with `{cardIndex}` placeholder |
 | `groupBy` | `string \| undefined` | `"type"` for grouped view |
 | `gameId` | `number \| undefined` | Game ID (for toggle URL) |

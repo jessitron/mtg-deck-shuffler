@@ -2,18 +2,12 @@
 
 ## Data Model
 
-### CardFace (`src/types.ts:2-8`)
-Represents the back face's data:
-```
-CardFace { name, types[], manaCost?, cmc, oracleText? }
-```
-
-### CardDefinition (`src/types.ts:10-23`)
+### CardDefinition (`src/types.ts`)
 Every card has:
-- `twoFaced: boolean` — whether the card has two faces
-- `backFace?: CardFace` — back-face data (present when `twoFaced` is true)
+- `twoFaced: boolean` — whether the card has a separate back image (drives the flip button)
+- `cardTypes: string[]` — the union of every face's/part's types (e.g. `["Legendary","Creature","Planeswalker"]`)
 
-Front-face data lives directly on `CardDefinition` (name, types, manaCost, etc.).
+Plus identity fields: `name`, `scryfallId`, `multiverseid?`, `oracleCardName`, `colorIdentity`, `set`. There is **no** `CardFace`/`backFace` and no `manaCost`/`cmc`/`oracleText` — those were removed (commit `f76b49c`) since the card is displayed as a Scryfall image and nothing read them. The flip button needs only `twoFaced` + `scryfallId`; library grouping needs only `cardTypes`.
 
 ### GameCard (`src/port-persist-state/types.ts:72-78`)
 Runtime game state tracks:
@@ -34,22 +28,20 @@ Both adapters use it, so they agree on what's flippable.
 
 ## Data Flow: Ingestion
 
-### Archidekt Adapter (`src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-127`)
+### Archidekt Adapter (`src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-110`)
 - `multiFace = faces.length === 2` — card has two faces in the data (any layout)
 - `twoFaced = multiFace && isDoubleSidedLayout(layout)` — only genuinely double-sided layouts
-- **Front face data: derived from `faces[0]` whenever `multiFace` (even non-flippable cards)**, falling back to top-level oracle card fields. This matters because top-level fields for split-layout cards are the combined mess (e.g. `manaCost: "{G} // {1}{G}"`, empty `text`); `faces[0]` has the clean front data.
-- Back face: constructs `CardFace` from `faces[1]` **only when `twoFaced`** (so prepare/adventure/split get no `backFace`)
+- `cardTypes = multiFace ? union(faces[].types) : oracleCard.types` — every face's types, deduped. (Top-level types for split-layout cards are unreliable, so use the per-face arrays.)
 - Reads `layout` from `archidektCard.card.oracleCard.layout` (`layout?: string` in `archidektTypes.ts`)
 
-### MTGJSON Adapter (`src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:65-109`)
-- `twoFaced = isDoubleSidedLayout(mtgjsonCard.layout)` (shared with Archidekt; no behavior change)
-- Looks up back face via `otherFaceIds` → finds card with `side === "b"` in the card database
-- Throws error if a two-faced card's back face can't be found (requires AllIdentifiers data)
+### MTGJSON Adapter (`src/port-deck-retrieval/mtgjsonAdapter/MtgjsonDeckAdapter.ts:66-100`)
+- `twoFaced = isDoubleSidedLayout(mtgjsonCard.layout)` (shared with Archidekt)
+- `cardTypes = union(card.types + every otherFaceIds face's types)`, resolved from `cardsByUuid`, **regardless of layout** — this captures the second part of adventure/split cards (e.g. `Eiganjo Dynastorian // Replenish` → `[Creature, Sorcery]`).
+- Throws if a genuine double-sided card's other face can't be resolved (AllIdentifiers missing) — message "no other face found".
 
 ### Card Repository Storage (`src/port-card-repository/SqliteCardRepositoryAdapter.ts`)
-- `back_face` column stores JSON-serialized `CardFace` (or null)
-- `two_faced` column stores 0/1 integer
-- On read, `back_face` JSON is parsed back to `CardFace`
+- `card_types` column stores JSON-serialized `string[]`; `two_faced` stores 0/1
+- No `back_face`/`mana_cost`/`cmc`/`oracle_text` columns. The table is a gitignored cache; on startup an old-schema table (one lacking `card_types`) is DROPped and recreated.
 
 ## Data Flow: Flip in Game
 
@@ -140,6 +132,6 @@ Two separate CSS files define flip styles:
 
 In both game and prep library modal routes (`src/app.ts`), when mapping cards for the library search template:
 ```typescript
-types: [...new Set([...gc.card.types, ...(gc.card.backFace?.types || [])])]
+cardTypes: gc.card.cardTypes
 ```
-This merges front and back face types, deduplicating, so a transform card appears in all relevant type groups.
+`cardTypes` is already the deduplicated union of all faces' types (computed at ingestion), so a transform card appears in all relevant type groups with no per-request merge. (Before commit `f76b49c` this merged `card.types` with `card.backFace?.types` here.)

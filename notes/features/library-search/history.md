@@ -67,6 +67,15 @@
   - Bug: prep card modal flip button was not passing `navList` through in `hx-get` URL
   - Flipping on prep page now preserves `&navList=...` in the flip URL
 
+### cardTypes Replaces types + backFace
+
+- **`f76b49c`** - Replace face data with a single `cardTypes` field (union of all faces)
+  - `CardDefinition.types` renamed to `cardTypes`; `backFace`/`CardFace` and the never-displayed `manaCost`/`cmc`/`oracleText` removed.
+  - `cardTypes` holds the union of every face's/part's types, computed at ingestion in the deck adapters. The per-request merge in `app.ts` (`[...new Set([...card.types, ...backFace?.types])]`) is gone — both routes now map `cardTypes: gc.card.cardTypes`.
+  - `library-modal.ejs`: the three `card.types` reads became `card.cardTypes` (grouping + two icon spans). Grouping/sorting/icon logic unchanged.
+  - **Behavior improvement**: split/adventure/prepare cards now group under ALL their parts' types (the MTGJSON adapter unions `otherFaceIds` faces). Previously only the front part's type was stored (e.g. `Eiganjo Dynastorian // Replenish` was `[Creature]`; now `[Creature, Sorcery]`).
+- **`ef75759`** - Regenerated all 190 precons + the Archidekt example deck for the `cardTypes` format (PERSISTED_DECK_VERSION 3).
+
 ## Design Decision: EJS vs TypeScript Template
 
 The library search modal is an EJS template (`views/partials/library-modal.ejs`) rather than a TypeScript view function (like `src/view/play-game/`). This follows the project's convention: EJS for informational/pre-game pages and modals, TypeScript for active gameplay page structure.

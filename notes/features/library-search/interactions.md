@@ -8,7 +8,7 @@ How library search connects to other parts of the app.
 - Game route needs `persistStatePort.retrieve(gameId)` to load game state
 - Prep route needs `persistPrepPort.retrievePrep(prepId)` to load prep
 - Game route reconstructs `GameState` via `GameState.fromPersistedGameState(persisted, cardRepository)`
-- Card data must include `types: string[]` and optionally `backFace.types` and `colorIdentity`
+- Card data must include `cardTypes: string[]` (union of all faces' types) and optionally `colorIdentity`
 
 ### GameState Model
 - `game.listLibrary()` - provides the cards to display
@@ -48,7 +48,7 @@ How library search connects to other parts of the app.
 When making changes elsewhere, consider these interactions:
 
 ### CardDefinition Changes
-If `CardDefinition` fields change (especially `types`, `backFace`, `colorIdentity`), the library search template mapping in `src/app.ts` needs updating (lines ~522-527 and ~800-805).
+If `CardDefinition` fields change (especially `cardTypes`, `colorIdentity`), the library search template mapping in `src/app.ts` needs updating (game ~523-528 and prep ~825-830). Note: `cardTypes` is the pre-unioned set of all faces'/parts' types (there is no separate `backFace`); the merge that used to happen here was removed once adapters started unioning at ingestion (commit `f76b49c`).
 
 ### New Card Locations
 If new card locations are added (beyond Library, Hand, Table, Revealed), `listLibrary()` filtering still works since it checks `location.type === "Library"`.
@@ -57,10 +57,10 @@ If new card locations are added (beyond Library, Hand, Table, Revealed), `listLi
 Library search uses the shared modal pattern. Changes to modal overlay behavior, close mechanism, or container IDs affect this feature.
 
 ### Deck Data Sources
-New deck adapters (beyond MTGJSON, Archidekt, local files) must ensure `types` is populated in `CardDefinition` or grouping will put cards in "Other".
+New deck adapters (beyond MTGJSON, Archidekt, local files) must ensure `cardTypes` is populated in `CardDefinition` (unioned across all faces) or grouping will put cards in "Other".
 
 ### Precon Deck Regeneration
-When precon decks are regenerated, back-face data must be preserved. The `backFace.types` field is used for type grouping. Missing back-face data degrades grouping accuracy for two-faced cards.
+When precon decks are regenerated, `cardTypes` must include every face's/part's types (the MTGJSON adapter unions them via `otherFaceIds`). Missing face types degrade grouping accuracy for multi-face cards. Regeneration requires AllIdentifiers data so the adapter can resolve other faces.
 
 ## Not Related To
 

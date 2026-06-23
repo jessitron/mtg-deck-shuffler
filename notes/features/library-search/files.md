@@ -46,7 +46,7 @@ All files involved in the library search feature, grouped by role.
 
 | File | Relevant Parts |
 |------|----------------|
-| `src/types.ts` | `CardDefinition.types`, `CardDefinition.backFace.types`, `CardDefinition.colorIdentity` |
+| `src/types.ts` | `CardDefinition.cardTypes` (union of all faces' types), `CardDefinition.colorIdentity` |
 | `src/GameState.ts` | `listLibrary()` method (~line 251) |
 | `src/port-persist-state/types.ts` | `GameCard` interface (location, gameCardIndex) |
 

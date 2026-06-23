@@ -82,9 +82,21 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
   - **Cause**: The Archidekt adapter inferred `twoFaced` from `faces.length === 2`. That's true for split/adventure/aftermath/flip/prepare cards too — single physical cards with two halves printed on one front face.
   - **Fix**: Added `src/port-deck-retrieval/twoFacedLayouts.ts` (`DOUBLE_SIDED_LAYOUTS` + `isDoubleSidedLayout()`) as the shared source of truth. Archidekt now uses `twoFaced = faces.length === 2 && isDoubleSidedLayout(layout)`; MTGJSON switched from its inline array to the shared helper (no behavior change). Front-face data is still pulled from `faces[0]` for any 2-face card (top-level fields for split cards are the combined `"{G} // {1}{G}"` mess with empty text), but `backFace` is built only when `twoFaced`.
   - Added `layout?: string` to `ArchidektCard.oracleCard` (`archidektTypes.ts`).
-  - **Decision**: These cards are deliberately single-faced — no flip, no `backFace`. They now group under only their front-face type in library search (a Prepared creature shows under Creature, not also Sorcery). Showing both halves would be a display feature, not a flip.
+  - **Decision**: These cards are deliberately single-faced — no flip. (At the time, this also dropped their second part from library grouping. That regression was undone by the next change, which unions all parts' types into `cardTypes` — see below.)
   - Tests: added "does not treat a single-image multi-face card (Prepared) as two-faced" to `archidekt-deck-adapter.test.ts`; added `layout` (`transform`/`modal_dfc`) to the existing Nicol Bolas / Esika fixtures so they still classify as two-faced.
   - Added `npm run card:inspect -- <deckId> <nameSubstring>` (`src/scripts/inspect-archidekt-card.ts`) to dump raw Archidekt `oracleCard` data (layout, faces) for diagnosing this class of bug.
+
+## cardTypes Replaces Face Data (data-model simplification)
+
+- **`f76b49c`** - Replace face data with a single `cardTypes` field (union of all faces)
+  - Removed `CardFace`, `CardDefinition.backFace`, and the never-displayed `manaCost`/`cmc`/`oracleText`. The card is shown as a Scryfall image; nothing read those fields. They were speculative storage for an unbuilt "is this hand worth keeping?" feature — which should instead read canonical data from MTGJSON/Scryfall.
+  - Renamed `types` → `cardTypes` (the word "types" was hopelessly overloaded) holding the UNION of every face's/part's types.
+  - **Flip was unaffected**: it never read `backFace` — it refetches the same `scryfallId` with `face=back`. The flip button needs only `twoFaced` + `scryfallId`.
+  - Adapters now union all faces' types into `cardTypes`. MTGJSON resolves `otherFaceIds` faces regardless of layout, so adventure/split second parts are captured (e.g. `Eiganjo Dynastorian // Replenish` → `[Creature, Sorcery]`, previously just `[Creature]`) — this restored the grouping the layout-gating change had dropped, and improved it for all split/adventure cards.
+  - `app.ts` library grouping simplified from the per-request merge to `gc.card.cardTypes`. `library-modal.ejs` reads `card.cardTypes`.
+  - `SqliteCardRepositoryAdapter`: dropped `mana_cost`/`cmc`/`oracle_text`/`back_face` columns, renamed `types`→`card_types`, rebuilds the gitignored cache table when an old schema is detected.
+  - **`PERSISTED_DECK_VERSION` 2 → 3.** `PersistedDeck` (scryfallIds only) stays at 2; `PersistedGamePrep` stays at 2 (embeds a Deck that now carries version 3 internally).
+- **`ef75759`** - Regenerated all 190 precons (full MTGJSON re-fetch) + the Archidekt example deck for the new format. 0 conversion errors. Verified: app boots, grouped library modal renders, 124 tests pass.
 
 ## What Was Tried and Abandoned
 
