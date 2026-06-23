@@ -35,6 +35,45 @@ document.addEventListener("htmx:afterSwap", function (evt) {
     const maxScrollLeft = revealedCardsSection.scrollWidth - revealedCardsSection.clientWidth;
     revealedCardsSection.scrollLeft = Math.min(revealedCardsScrollPosition, Math.max(0, maxScrollLeft));
   }
+
+  // The new menu markup renders with aria-expanded="false"; re-sync it to the
+  // persistent body state (see setMenuOpen below).
+  syncMenuToggleAria();
+});
+
+/**
+ * Hamburger menu toggle.
+ *
+ * The open/closed state is a class on <body>, which HTMX never swaps. The menu
+ * markup itself lives inside #game-container and is replaced on every
+ * game-state-updated swap, so keeping the state on an element that survives
+ * swaps avoids racing the swap/settle lifecycle. The toggle uses event
+ * delegation on the document so it keeps working after the markup is replaced.
+ */
+function setMenuOpen(open) {
+  document.body.classList.toggle("game-menu-open", open);
+  syncMenuToggleAria();
+}
+
+function syncMenuToggleAria() {
+  const toggle = document.querySelector("#menu-toggle");
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", document.body.classList.contains("game-menu-open") ? "true" : "false");
+  }
+}
+
+document.addEventListener("click", function (evt) {
+  if (evt.target.closest("#menu-toggle")) {
+    setMenuOpen(!document.body.classList.contains("game-menu-open"));
+    return;
+  }
+
+  // Clicking anywhere outside the open menu closes it. Clicks land on an open
+  // modal overlay too (it sits above the panel, outside #game-menu), so opening
+  // a modal then interacting with it dismisses the menu underneath.
+  if (document.body.classList.contains("game-menu-open") && !evt.target.closest("#game-menu")) {
+    setMenuOpen(false);
+  }
 });
 
 /**
@@ -245,6 +284,29 @@ function handleDrop(e) {
 /**
  * Keyboard navigation for card modal
  */
+/**
+ * Standard undo hotkey (Ctrl+Z / Cmd+Z).
+ *
+ * Clicks the live undo button rendered inside the (possibly hidden) hamburger
+ * menu, so its current event index and expected-version come along for free.
+ * Ignored while a modal is open or while typing in a field.
+ */
+document.addEventListener('keydown', (event) => {
+  const isUndo = (event.ctrlKey || event.metaKey) && !event.shiftKey && !event.altKey && event.key.toLowerCase() === 'z';
+  if (!isUndo) return;
+
+  // Don't hijack undo inside text inputs or while a modal is focused.
+  const target = event.target;
+  if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
+  if (document.querySelector('.modal-overlay, .card-modal-overlay')) return;
+
+  const undoButton = document.querySelector('.undo-button');
+  if (!undoButton) return;
+
+  event.preventDefault();
+  undoButton.click();
+});
+
 document.addEventListener('keydown', (event) => {
   // Check if card modal is open
   const modal = document.querySelector('.card-modal-overlay');

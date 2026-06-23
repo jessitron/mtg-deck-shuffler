@@ -56,6 +56,8 @@ If new card locations are added (beyond Library, Hand, Table, Revealed), `listLi
 ### Modal System Changes
 Library search uses the shared modal pattern. Changes to modal overlay behavior, close mechanism, or container IDs affect this feature.
 
+The game-screen **hamburger menu** (`src/view/play-game/game-menu.ts`, `#game-menu-panel`) now hosts the Action History and debug "State" modal triggers (still targeting the shared `#modal-container`, same pattern). Its dropdown panel uses `z-index: 500`, deliberately below `.modal-overlay` (1000) and `.card-modal-overlay` (2000), so the library modal and overlaid card modal render on top of the menu. If you change library-modal z-index, keep it above the menu panel. (The Search button itself stayed in the library section, not the menu.)
+
 ### Deck Data Sources
 New deck adapters (beyond MTGJSON, Archidekt, local files) must ensure `cardTypes` is populated in `CardDefinition` (unioned across all faces) or grouping will put cards in "Other".
 

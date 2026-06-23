@@ -27,8 +27,10 @@
 ## JavaScript (client-side animation triggers)
 
 - `public/game.js`
-  - Lines 71-92: `htmx:beforeRequest` handler — copies card image to clipboard on Play
-  - Lines 138-242: Drag-and-drop setup — removes animation classes on drag start (lines 175-178)
+  - `htmx:beforeSwap`/`htmx:afterSwap` handlers near the top — stash/restore hand & revealed scroll positions; `afterSwap` also calls `syncMenuToggleAria()`. Note: the hamburger menu's open state is NOT restored here (it lives on `document.body`, which swaps never touch — see architecture.md "settle phase" gotcha).
+  - `htmx:beforeRequest` handler — copies card image to clipboard on Play
+  - Drag-and-drop setup — removes animation classes on drag start
+  - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`
   - Lines 35-78: Manages `search-active` class to disable/enable tile fade-in
 

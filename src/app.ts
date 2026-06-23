@@ -8,7 +8,6 @@ import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
-import { formatDebugSectionHtmlFragment } from "./view/debug/debug-section.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
@@ -994,12 +993,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       console.error("Error loading debug state:", error);
       res.status(500).send(`<div>Error loading debug state</div>`);
     }
-  });
-
-  app.get("/debug-section/:gameId", loadGameFromParams, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const html = formatDebugSectionHtmlFragment(game.gameId, game.getStateVersion());
-    res.send(html);
   });
 
   // Returns game section fragment - for HTMX updates

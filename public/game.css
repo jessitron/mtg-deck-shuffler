@@ -250,6 +250,17 @@ h4.cute-header {
   min-height: 278px;
 }
 
+.mulligan-row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.mulligan-button {
+  padding: 6px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .game-top-row {
   --min-title-slab-height: 6rem;
 }
@@ -597,21 +608,75 @@ h4.cute-header {
   padding-left: 20px;
 }
 
-.history-actions {
+/* Hamburger menu (square corners; physical round elements are the exception) */
+.game-menu {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  gap: 20px;
-  padding-right: 50px;
-  margin-top: 40px;
+  position: relative;
+}
+
+.menu-toggle {
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 4px 14px;
+  border: 2px solid black;
+  cursor: pointer;
+  background-color: var(--playmat-one);
+  color: black;
+}
+
+.menu-toggle:hover {
+  background-color: var(--playmat-two);
+  color: white;
+}
+
+.game-menu-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 500;
+  /* below .modal-overlay (1000) and .card-modal-overlay (2000) */
+  min-width: 240px;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: #1e1e1e;
+  border: 2px solid black;
+  box-shadow: 4px 4px black;
+}
+
+body.game-menu-open .game-menu-panel {
+  display: flex;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #444;
+}
+
+.menu-section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.menu-section button {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-section .inline-form {
+  margin: 0;
 }
 
 .history-actions button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   background-color: var(--playmat-two);
   color: white;
 }
@@ -621,25 +686,22 @@ h4.cute-header {
   color: black;
 }
 
-.end-game-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding-right: 20px;
-}
-
 .end-game-actions button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   background-color: #6c757d;
   color: white;
 }
 
 .end-game-actions button:hover {
   background-color: #5a6268;
+}
+
+.menu-debug {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.menu-debug p {
+  margin: 0;
 }
 
 /* Modal styles moved to playmat.css (shared between game and prepare) */

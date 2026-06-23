@@ -44,6 +44,12 @@ In `src/view/common/shared-components.ts` (lines 115-127):
 
 All game actions use immediate `hx-swap="outerHTML"`. There are currently no exit animations (the card play exit animation was removed in `943ece6`).
 
+### Gotcha: the settle phase reverts classes on swapped-in elements
+
+HTMX swaps have two phases: **swap** (insert new DOM, fire `htmx:afterSwap`) then **settle** (~20ms later, finalize). The settle phase reconciles attributes/classes on swapped-in elements back toward the server-rendered markup. So **manually adding a class to an element inside a swapped region during `htmx:afterSwap` races the settle phase and gets silently reverted** (no JS runs, no second swap — the class just disappears within a few hundred ms).
+
+This bit the hamburger menu: keeping its open state as an `.open` class on `#game-menu` (which lives inside the swapped `#game-container`) and re-applying it in `afterSwap` failed intermittently. The fix: store transient UI state that must survive swaps as a class on a **stable element HTMX never swaps** — the menu uses `document.body` (`body.game-menu-open`) and drives visibility purely via CSS (`body.game-menu-open .game-menu-panel { display: flex }`). The same principle applies to any future animation/UI state that needs to outlive a swap: don't re-apply it to swapped content; anchor it on `body` (or another non-swapped ancestor). Scroll-position restore (also in `game.js` `afterSwap`) works because it sets a *property* (`scrollLeft`) that settle doesn't reconcile, not a class.
+
 ## CSS Keyframes
 
 All animation keyframes live in `public/game.css` except:

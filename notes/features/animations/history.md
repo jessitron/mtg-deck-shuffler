@@ -37,6 +37,11 @@
 - `8097bbd` - "Add smooth animation to deck selection width transition"
 - `3970e53` - "Skip fade-in animation on precon tiles during search" — disabled animation during active search
 
+### Hamburger Menu (game-screen chrome relocation)
+
+- Moved Undo, Action History, Restart Game, Choose Another Deck, and the debug/game-state block into a hamburger menu at the top of the game screen. Edited `game.js`'s `htmx:beforeSwap`/`afterSwap` handlers (scroll restore unchanged; added `syncMenuToggleAria()`).
+- **Lesson (see architecture.md)**: re-applying an `.open` class to `#game-menu` in `afterSwap` raced the HTMX **settle phase** and got reverted. Fixed by storing open state on `document.body` (`body.game-menu-open`) instead of on the swapped-in menu element.
+
 ### CSS Organization
 
 - `ca27f4c` - "Separate game styles from home page styles"
