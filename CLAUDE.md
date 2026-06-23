@@ -106,6 +106,8 @@ The file is .gitignored since IDs depend on local DB state.
 
 Requires `.env` for OpenTelemetry config. SQLite persistence by default (`data.db`). Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
 
+Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
+
 ## Data Sources & Adapters
 
 - **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (precons with release dates)

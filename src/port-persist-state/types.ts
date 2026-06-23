@@ -81,6 +81,7 @@ export interface GameCard {
 // renamed types -> cardTypes (commit f76b49c). The game-state envelope itself is
 // unchanged, but the card data its scryfallIds resolve to is now incompatible, so
 // games saved before this are not loadable. fromPersistedGameState rejects them.
+// When/how to bump: notes/DESIGN-persistence-versioning.md
 export const PERSISTED_GAME_STATE_VERSION: 8 = 8;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */

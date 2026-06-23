@@ -5,6 +5,7 @@ export type PrepId = number;
 // Bumped 2 -> 3 when CardDefinition changed (commit f76b49c). A prep embeds a
 // full Deck, so old preps carry old-shape cards (types instead of cardTypes) and
 // can't be rendered correctly. Routes reject mismatched versions loudly.
+// When/how to bump: notes/DESIGN-persistence-versioning.md
 export const PERSISTED_GAME_PREP_VERSION: 3 = 3;
 
 /** Thrown when a persisted prep was saved in a format this build can't load. */
