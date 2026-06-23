@@ -16,7 +16,7 @@
         "U",
         "W"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Creature"
       ],
@@ -37,7 +37,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Sorcery"
       ],
@@ -56,7 +56,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Kindred",
         "Enchantment"
@@ -76,7 +76,7 @@
       "colorIdentity": [
         "R"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Creature"
       ],
@@ -95,7 +95,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Creature"
       ],
@@ -112,7 +112,7 @@
       "twoFaced": false,
       "oracleCardName": "Coat of Arms",
       "colorIdentity": [],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Artifact"
       ],
@@ -131,7 +131,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Instant"
       ],
@@ -148,7 +148,7 @@
       "twoFaced": false,
       "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Artifact"
       ],
@@ -165,7 +165,7 @@
       "twoFaced": false,
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Artifact"
       ],
@@ -184,7 +184,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Creature"
       ],
@@ -204,7 +204,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -223,7 +223,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -243,7 +243,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -262,7 +262,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Enchantment"
       ],
@@ -281,7 +281,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Instant"
       ],
@@ -302,7 +302,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -319,7 +319,7 @@
       "twoFaced": false,
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Artifact"
       ],
@@ -340,7 +340,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -359,7 +359,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Instant"
       ],
@@ -378,7 +378,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Enchantment"
       ],
@@ -395,7 +395,7 @@
       "twoFaced": false,
       "oracleCardName": "Bloodline Pretender",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Artifact",
         "Creature"
@@ -417,7 +417,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -437,7 +437,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -457,7 +457,7 @@
         "G",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -476,7 +476,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -496,7 +496,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -513,7 +513,7 @@
       "twoFaced": false,
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -532,7 +532,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Kindred",
         "Instant"
@@ -552,7 +552,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -572,7 +572,7 @@
         "B",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -591,7 +591,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -610,7 +610,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Enchantment"
       ],
@@ -627,7 +627,7 @@
       "twoFaced": false,
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -644,7 +644,7 @@
       "twoFaced": false,
       "oracleCardName": "Fabled Passage",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -663,7 +663,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -682,7 +682,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -701,7 +701,7 @@
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -722,7 +722,7 @@
         "R",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -741,7 +741,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -761,7 +761,7 @@
         "B",
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -780,7 +780,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -799,7 +799,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -818,7 +818,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -837,7 +837,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -856,7 +856,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -877,7 +877,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -897,7 +897,7 @@
         "G",
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -916,7 +916,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Enchantment"
       ],
@@ -935,7 +935,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -954,7 +954,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -975,7 +975,7 @@
         "R",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -994,7 +994,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -1014,7 +1014,7 @@
         "B",
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1033,7 +1033,7 @@
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1052,7 +1052,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1071,7 +1071,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1090,7 +1090,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1110,7 +1110,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1130,7 +1130,7 @@
         "G",
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1149,7 +1149,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1170,7 +1170,7 @@
         "G",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1187,7 +1187,7 @@
       "twoFaced": false,
       "oracleCardName": "Mutavault",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1206,7 +1206,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Kindred",
         "Instant"
@@ -1228,7 +1228,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1248,7 +1248,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1265,7 +1265,7 @@
       "twoFaced": false,
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1284,7 +1284,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Instant"
       ],
@@ -1301,7 +1301,7 @@
       "twoFaced": false,
       "oracleCardName": "Realmbreaker, the Invasion Tree",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Artifact"
       ],
@@ -1320,7 +1320,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1341,7 +1341,7 @@
         "R",
         "W"
       ],
-      "set": "SLD",
+      "set": "Secret Lair Drop",
       "cardTypes": [
         "Creature"
       ],
@@ -1361,7 +1361,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1384,7 +1384,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1405,7 +1405,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1425,7 +1425,7 @@
         "B",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1444,7 +1444,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1463,7 +1463,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Kindred",
         "Instant"
@@ -1483,7 +1483,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1504,7 +1504,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1524,7 +1524,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Instant"
       ],
@@ -1543,7 +1543,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Sorcery"
       ],
@@ -1563,7 +1563,7 @@
         "G",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1586,7 +1586,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1606,7 +1606,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Enchantment"
       ],
@@ -1629,7 +1629,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1646,7 +1646,7 @@
       "twoFaced": false,
       "oracleCardName": "Universal Automaton",
       "colorIdentity": [],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Artifact",
         "Creature"
@@ -1667,7 +1667,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Creature"
       ],
@@ -1687,7 +1687,7 @@
         "U",
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1707,7 +1707,7 @@
         "G",
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1726,7 +1726,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1745,7 +1745,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1764,7 +1764,7 @@
       "colorIdentity": [
         "G"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1783,7 +1783,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1802,7 +1802,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1821,7 +1821,7 @@
       "colorIdentity": [
         "W"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1840,7 +1840,7 @@
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1859,7 +1859,7 @@
       "colorIdentity": [
         "R"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1878,7 +1878,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1897,7 +1897,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1916,7 +1916,7 @@
       "colorIdentity": [
         "U"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
@@ -1935,7 +1935,7 @@
       "colorIdentity": [
         "B"
       ],
-      "set": "PLST",
+      "set": "The List",
       "cardTypes": [
         "Land"
       ],
