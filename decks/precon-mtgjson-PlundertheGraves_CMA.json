@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1937272287,
   "name": "Plunder the Graves",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever another creature you control dies, you get an experience counter.\nAt the beginning of your end step, choose target creature card in your graveyard. If that card's mana value is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Satyr Wayfinder",
@@ -51,12 +45,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Viridian Emissary",
@@ -68,12 +59,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Wall of Blossoms",
@@ -85,12 +73,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Viridian Zealot",
@@ -102,12 +87,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{G}",
-      "cmc": 2,
-      "oracleText": "{1}{G}, Sacrifice this creature: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Korozda Guildmage",
@@ -120,12 +102,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "{1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{2}{B}{G}, Sacrifice a nontoken creature: Create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness."
+      ]
     },
     {
       "name": "Lotleth Troll",
@@ -138,12 +117,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Trample\nDiscard a creature card: Put a +1/+1 counter on this creature.\n{B}: Regenerate this creature."
+      ]
     },
     {
       "name": "Blood Bairn",
@@ -155,12 +131,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Sacrifice another creature: This creature gets +2/+2 until end of turn."
+      ]
     },
     {
       "name": "Phyrexian Rager",
@@ -172,12 +145,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Skullwinder",
@@ -189,12 +159,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhen this creature enters, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand."
+      ]
     },
     {
       "name": "Wood Elves",
@@ -206,12 +173,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -223,12 +187,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Corpse Augur",
@@ -240,12 +201,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard."
+      ]
     },
     {
       "name": "Centaur Vinecrasher",
@@ -257,12 +215,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nThis creature enters with a number of +1/+1 counters on it equal to the number of land cards in all graveyards.\nWhenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Bloodspore Thrinax",
@@ -274,12 +229,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Devour 1 (As this creature enters, you may sacrifice any number of creatures. It enters with that many +1/+1 counters on it.)\nEach other creature you control enters with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Jarad, Golgari Lich Lord",
@@ -292,12 +244,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Jarad gets +1/+1 for each creature card in your graveyard.\n{1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.\nSacrifice a Swamp and a Forest: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Shriekmaw",
@@ -309,12 +258,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen this creature enters, destroy target nonartifact, nonblack creature.\nEvoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Indrik Stomphowler",
@@ -326,12 +272,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Kessig Cagebreakers",
@@ -343,12 +286,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature attacks, create a 2/2 green Wolf creature token that's tapped and attacking for each creature card in your graveyard."
+      ]
     },
     {
       "name": "Banshee of the Dread Choir",
@@ -360,12 +300,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever this creature deals combat damage to a player, that player discards a card."
+      ]
     },
     {
       "name": "Phyrexian Plaguelord",
@@ -377,12 +314,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "{T}, Sacrifice this creature: Target creature gets -4/-4 until end of turn.\nSacrifice a creature: Target creature gets -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -394,12 +328,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Mycoloth",
@@ -411,12 +342,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +1/+1 counters on it.)\nAt the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Mazirek, Kraul Death Priest",
@@ -429,12 +357,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a player sacrifices another permanent, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Vulturous Zombie",
@@ -447,12 +372,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Great Oak Guardian",
@@ -464,12 +386,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nReach\nWhen this creature enters, creatures target player controls get +2/+2 until end of turn. Untap them."
+      ]
     },
     {
       "name": "Champion of Stray Souls",
@@ -481,12 +400,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "{3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creature cards from your graveyard to the battlefield.\n{5}{B}{B}: Put this card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Extractor Demon",
@@ -498,12 +414,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever another creature leaves the battlefield, you may have target player mill two cards.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Thief of Blood",
@@ -515,12 +428,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs this creature enters, remove all counters from all permanents. This creature enters with a +1/+1 counter on it for each counter removed this way."
+      ]
     },
     {
       "name": "Pathbreaker Ibex",
@@ -532,12 +442,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever this creature attacks, creatures you control gain trample and get +X/+X until end of turn, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Cloudthresher",
@@ -549,12 +456,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Flash\nReach\nWhen this creature enters, it deals 2 damage to each creature with flying and each player.\nEvoke {2}{G}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Butcher of Malakir",
@@ -566,12 +470,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Eater of Hope",
@@ -583,12 +484,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\n{B}, Sacrifice another creature: Regenerate this creature.\n{2}{B}, Sacrifice two other creatures: Destroy target creature."
+      ]
     },
     {
       "name": "Scourge of Nel Toth",
@@ -600,12 +498,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nYou may cast this creature from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost."
+      ]
     },
     {
       "name": "Caller of the Pack",
@@ -617,12 +512,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)"
+      ]
     },
     {
       "name": "Terastodon",
@@ -634,12 +526,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Verdant Force",
@@ -651,12 +540,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "At the beginning of each upkeep, create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Mulch",
@@ -668,12 +554,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard."
+      ]
     },
     {
       "name": "Victimize",
@@ -685,12 +568,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+      ]
     },
     {
       "name": "Primal Growth",
@@ -702,12 +582,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Kicker—Sacrifice a creature. (You may sacrifice a creature in addition to any other costs as you cast this spell.)\nSearch your library for a basic land card, put that card onto the battlefield, then shuffle. If this spell was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Ambition's Cost",
@@ -719,12 +596,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "You draw three cards and you lose 3 life."
+      ]
     },
     {
       "name": "Sever the Bloodline",
@@ -736,12 +610,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Exile target creature and all other creatures with the same name as that creature.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Barter in Blood",
@@ -753,12 +624,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Each player sacrifices two creatures of their choice."
+      ]
     },
     {
       "name": "Rise from the Grave",
@@ -770,12 +638,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types."
+      ]
     },
     {
       "name": "Spider Spawning",
@@ -788,12 +653,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -805,12 +667,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Dread Summons",
@@ -822,12 +681,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token. (To mill a card, a player puts the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Altar's Reap",
@@ -839,12 +695,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards."
+      ]
     },
     {
       "name": "Tribute to the Wild",
@@ -856,12 +709,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Each opponent sacrifices an artifact or enchantment of their choice."
+      ]
     },
     {
       "name": "Golgari Charm",
@@ -874,12 +724,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• All creatures get -1/-1 until end of turn.\n• Destroy target enchantment.\n• Regenerate each creature you control."
+      ]
     },
     {
       "name": "Grisly Salvage",
@@ -892,12 +739,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Putrefy",
@@ -910,12 +754,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Wretched Confluence",
@@ -927,12 +768,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Choose three. You may choose the same mode more than once.\n• Target player draws a card and loses 1 life.\n• Target creature gets -2/-2 until end of turn.\n• Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -942,12 +780,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -957,12 +792,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Golgari Signet",
@@ -975,12 +807,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -990,12 +819,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1005,12 +831,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Bonehoard",
@@ -1020,12 +843,9 @@
       "oracleCardName": "Bonehoard",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
+      ]
     },
     {
       "name": "Eldrazi Monument",
@@ -1035,12 +855,9 @@
       "oracleCardName": "Eldrazi Monument",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +1/+1 and have flying and indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice this artifact."
+      ]
     },
     {
       "name": "Diabolic Servitude",
@@ -1052,12 +869,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this enchantment enters, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with this enchantment dies, exile it and return this enchantment to its owner's hand.\nWhen this enchantment leaves the battlefield, exile the creature put onto the battlefield with this enchantment."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1067,11 +881,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1081,11 +893,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Golgari Guildgate",
@@ -1098,11 +908,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1115,11 +923,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Grim Backwoods",
@@ -1132,11 +938,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card."
+      ]
     },
     {
       "name": "High Market",
@@ -1146,11 +950,9 @@
       "oracleCardName": "High Market",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life."
+      ]
     },
     {
       "name": "Jungle Hollow",
@@ -1163,11 +965,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Polluted Mire",
@@ -1179,11 +979,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Slippery Karst",
@@ -1195,11 +993,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Tainted Wood",
@@ -1212,11 +1008,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1226,11 +1020,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Vivid Grove",
@@ -1242,11 +1034,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {G}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Vivid Marsh",
@@ -1258,11 +1048,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {B}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Swamp",
@@ -1274,11 +1062,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1290,11 +1076,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1306,11 +1090,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1322,11 +1104,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1338,11 +1118,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1354,11 +1132,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1370,11 +1146,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1386,11 +1160,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1402,11 +1174,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1418,11 +1188,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1434,11 +1202,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1450,11 +1216,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1466,11 +1230,9 @@
         "B"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1482,11 +1244,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1498,11 +1258,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1514,11 +1272,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1530,11 +1286,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1546,11 +1300,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1562,11 +1314,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1578,11 +1328,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1594,11 +1342,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1610,11 +1356,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1626,11 +1370,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1642,11 +1384,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1658,15 +1398,13 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.325Z",
+    "retrievedDate": "2026-06-23T17:40:39.225Z",
     "sourceUrl": "PlunderTheGraves_CMA.json",
     "deckSource": "precon",
     "createdAt": "2017-06-09T00:00:00.000Z"

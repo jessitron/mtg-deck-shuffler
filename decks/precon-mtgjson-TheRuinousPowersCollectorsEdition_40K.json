@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1868200847,
   "name": "The Ruinous Powers Collector's Edition",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Trample\nMark of Chaos Ascendant — During your turn, spells you cast from your hand with mana value X or less have cascade, where X is the total amount of life your opponents have lost this turn."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Decree of Pain",
@@ -49,12 +43,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.\nCycling {3}{B}{B} ({3}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, all creatures get -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -65,12 +56,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Deny Reality",
@@ -82,12 +70,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nReturn target permanent to its owner's hand."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -98,12 +83,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Reverberate",
@@ -114,12 +96,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{R}",
-      "cmc": 2,
-      "oracleText": "Copy target instant or sorcery spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Bile Blight",
@@ -130,12 +109,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn."
+      ]
     },
     {
       "name": "Bituminous Blast",
@@ -147,12 +123,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nBituminous Blast deals 4 damage to target creature."
+      ]
     },
     {
       "name": "Brainstorm",
@@ -163,12 +136,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Draw three cards, then put two cards from your hand on top of your library in any order."
+      ]
     },
     {
       "name": "Dark Ritual",
@@ -179,12 +149,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Add {B}{B}{B}."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -193,12 +160,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Assault Suit",
@@ -207,12 +171,9 @@
       "oracleCardName": "Assault Suit",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -221,12 +182,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Creativity",
@@ -238,12 +196,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -255,12 +210,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -272,12 +224,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -286,12 +235,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -300,12 +246,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -314,12 +257,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Warstorm Surge",
@@ -330,12 +270,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control enters, it deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -344,11 +281,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -360,11 +295,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -376,11 +309,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -391,11 +322,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -408,11 +337,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Molten Slagheap",
@@ -424,11 +351,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {B} and/or {R}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -437,11 +362,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Command Tower",
@@ -450,11 +373,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dismal Backwater",
@@ -466,11 +387,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -479,11 +398,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -494,11 +411,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -507,11 +422,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Swiftwater Cliffs",
@@ -523,11 +436,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -536,11 +447,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mountain",
@@ -551,11 +460,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -566,11 +473,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -581,11 +486,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -596,11 +499,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -611,11 +512,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -626,11 +525,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -641,11 +538,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -656,11 +551,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -671,11 +564,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -686,11 +577,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -701,11 +590,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -716,11 +603,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -731,11 +616,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -746,11 +629,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -761,11 +642,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -776,11 +655,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Island",
@@ -791,11 +668,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -806,11 +681,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -821,11 +694,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -836,11 +707,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -851,11 +720,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -866,11 +733,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -881,11 +746,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -896,11 +759,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Be'lakor, the Dark Master",
@@ -913,12 +774,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nPrince of Chaos — When Be'lakor enters, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon you control enters, it deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Lord of Change",
@@ -929,12 +787,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Flying, ward {3}\nArchitect of Deception — When this creature enters, draw three cards."
+      ]
     },
     {
       "name": "Blight Grenade",
@@ -945,12 +800,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Destroy target creature.\nAll creatures get -3/-3 until end of turn."
+      ]
     },
     {
       "name": "Great Unclean One",
@@ -961,12 +813,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Reverberating Summons — At the beginning of your end step, each opponent loses 2 life. Then for each opponent who has less life than you, create a 1/3 black Demon creature token named Plaguebearer of Nurgle."
+      ]
     },
     {
       "name": "Mandate of Abaddon",
@@ -977,12 +826,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Choose target creature you control. Destroy all creatures with power less than that creature's power."
+      ]
     },
     {
       "name": "Mortarion, Daemon Primarch",
@@ -993,12 +839,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nPrimarch of the Death Guard — At the beginning of your end step, you may pay {X}. If you do, create X 2/2 black Astartes Warrior creature tokens with menace. X can't be greater than the amount of life you lost this turn."
+      ]
     },
     {
       "name": "Nurgle's Conscription",
@@ -1009,12 +852,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard."
+      ]
     },
     {
       "name": "Plague Drone",
@@ -1025,12 +865,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nRot Fly — If an opponent would gain life, that player loses that much life instead."
+      ]
     },
     {
       "name": "Poxwalkers",
@@ -1041,12 +878,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nCurse of the Walking Pox — Whenever you cast a spell from anywhere other than your hand, return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Sloppity Bilepiper",
@@ -1057,12 +891,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Jolly Gutpipes — {2}, {T}, Sacrifice a creature: The next creature spell you cast this turn has cascade. (When you next cast a creature spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Tallyman of Nurgle",
@@ -1073,12 +904,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Lifelink\nThe Seven-fold Chant — At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life."
+      ]
     },
     {
       "name": "Venomcrawler",
@@ -1089,13 +917,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nDevourer of Souls — Whenever another creature dies, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Aspiring Champion",
@@ -1106,12 +931,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Menace\nRuinous Ascension — When this creature deals combat damage to a player, sacrifice it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield, then shuffle the rest into your library. If that creature is a Demon, it deals damage equal to its power to each opponent."
+      ]
     },
     {
       "name": "Bloodthirster",
@@ -1122,12 +944,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nWhenever this creature deals combat damage to a player, untap it. After this phase, there is an additional combat phase.\nThis creature can't attack a player it has already attacked this turn."
+      ]
     },
     {
       "name": "Dark Apostle",
@@ -1138,12 +957,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Gift of Chaos — {3}, {T}: The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Keeper of Secrets",
@@ -1154,12 +970,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "First strike, haste\nSymphony of Pain — Whenever you cast a spell from anywhere other than your hand, this creature deals damage equal to that spell's mana value to target opponent."
+      ]
     },
     {
       "name": "Khârn the Betrayer",
@@ -1170,12 +983,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Berzerker — Khârn the Betrayer attacks or blocks each combat if able.\nSigil of Corruption — When you lose control of Khârn the Betrayer, draw two cards.\nThe Betrayer — If damage would be dealt to Khârn the Betrayer, prevent that damage and an opponent of your choice gains control of it."
+      ]
     },
     {
       "name": "Knight Rampager",
@@ -1186,13 +996,10 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Trample\nFrenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. This creature attacks that player this combat if able.\nWhen this creature dies, it deals 4 damage to target opponent chosen at random."
+      ]
     },
     {
       "name": "Let the Galaxy Burn",
@@ -1203,12 +1010,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{5}{R}",
-      "cmc": 6,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nLet the Galaxy Burn deals X plus 2 damage to each creature that didn't enter this turn."
+      ]
     },
     {
       "name": "Blood for the Blood God!",
@@ -1220,12 +1024,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{8}{B}{B}{R}",
-      "cmc": 11,
-      "oracleText": "This spell costs {1} less to cast for each creature that died this turn.\nDiscard your hand, then draw eight cards. Blood for the Blood God! deals 8 damage to each opponent. Exile Blood for the Blood God!"
+      ]
     },
     {
       "name": "Chaos Defiler",
@@ -1237,13 +1038,10 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Trample\nBattle Cannon — When this creature enters or dies, for each opponent, choose a nonland permanent that player controls. Destroy one of them chosen at random."
+      ]
     },
     {
       "name": "Chaos Mutation",
@@ -1255,12 +1053,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Exile any number of target creatures controlled by different players. For each creature exiled this way, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order."
+      ]
     },
     {
       "name": "Drach'Nyen",
@@ -1272,12 +1067,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Echo of the First Murder — When Drach'Nyen enters, exile up to one target creature.\nDaemon Sword — Equipped creature has menace and gets +X/+0, where X is the exiled card's power.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Exalted Flamer of Tzeentch",
@@ -1289,12 +1081,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Sorcerous Inspiration — At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.\nFire of Tzeentch — Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Helbrute",
@@ -1306,13 +1095,10 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Haste\nSarcophagus — You may cast this card from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs."
+      ]
     },
     {
       "name": "The Horus Heresy",
@@ -1325,12 +1111,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}{B}{R}",
-      "cmc": 6,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as this Saga remains on the battlefield.\nII — Draw a card for each creature you control but don't own.\nIII — Starting with you, each player chooses a creature. Destroy each creature chosen this way."
+      ]
     },
     {
       "name": "Kill! Maim! Burn!",
@@ -1342,12 +1125,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Kill! Maim! Burn! deals 3 damage to target player."
+      ]
     },
     {
       "name": "Lucius the Eternal",
@@ -1359,12 +1139,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Haste\nArmour of Shrieking Souls — When Lucius the Eternal dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return this card from exile to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "Magnus the Red",
@@ -1376,12 +1153,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nUnearthly Power — Instant and sorcery spells you cast cost {1} less to cast for each creature token you control.\nBlade of Magnus — Whenever Magnus the Red deals combat damage to a player, create a 3/3 red Spawn creature token."
+      ]
     },
     {
       "name": "Mutalith Vortex Beast",
@@ -1393,12 +1167,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{R}",
-      "cmc": 6,
-      "oracleText": "Trample\nWarp Vortex — When this creature enters, flip a coin for each opponent you have. For each flip you win, draw a card. For each flip you lose, this creature deals 3 damage to that player."
+      ]
     },
     {
       "name": "Pink Horror",
@@ -1410,12 +1181,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Coruscating Flames — Whenever you cast an instant or sorcery spell, this creature deals 2 damage to any target.\nSplit — When this creature dies, create two 2/2 blue and red Demon Horror creature tokens named Blue Horror with \"Whenever you cast an instant or sorcery spell, this token deals 1 damage to any target.\""
+      ]
     },
     {
       "name": "The Ruinous Powers",
@@ -1427,12 +1195,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, choose an opponent at random. Exile the top card of that player's library. Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it. When you cast a spell this way, its owner loses life equal to its mana value."
+      ]
     },
     {
       "name": "Tzaangor Shaman",
@@ -1444,12 +1209,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nSorcerous Elixir — Whenever this creature deals combat damage to a player, copy the next instant or sorcery spell you cast this turn when you cast it. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Heralds of Tzeentch",
@@ -1460,12 +1222,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Nurgle's Rot",
@@ -1476,12 +1235,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Enchant creature an opponent controls\nWhen enchanted creature dies, return this card to its owner's hand and you create a 1/3 black Demon creature token named Plaguebearer of Nurgle."
+      ]
     },
     {
       "name": "Bloodcrusher of Khorne",
@@ -1492,12 +1248,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Trample\nDevastating Charge — Other creatures you control have trample."
+      ]
     },
     {
       "name": "Chaos Terminator Lord",
@@ -1508,12 +1261,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Lord of Chaos — At the beginning of combat on your turn, another target creature you control gains double strike until end of turn."
+      ]
     },
     {
       "name": "Herald of Slaanesh",
@@ -1524,12 +1274,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Locus of Slaanesh — Demon spells you cast cost {2} less to cast.\nOther Demons you control have haste."
+      ]
     },
     {
       "name": "Noise Marine",
@@ -1540,12 +1287,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nSonic Blaster — When this creature enters, it deals damage equal to the number of spells you've cast this turn to any target."
+      ]
     },
     {
       "name": "Seeker of Slaanesh",
@@ -1556,12 +1300,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nAllure of Slaanesh — Each opponent must attack with at least one creature each combat if able."
+      ]
     },
     {
       "name": "The Lost and the Damned",
@@ -1573,16 +1314,13 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a land you control enters from anywhere other than your hand or you cast a spell from anywhere other than your hand, create a 3/3 red Spawn creature token."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.958Z",
+    "retrievedDate": "2026-06-23T17:40:40.323Z",
     "sourceUrl": "TheRuinousPowersCollectorSEdition_40K.json",
     "deckSource": "precon",
     "createdAt": "2022-10-07T00:00:00.000Z"

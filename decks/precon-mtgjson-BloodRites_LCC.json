@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1417699163,
   "name": "Blood Rites",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains \"When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.\""
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a player sacrifices a permanent, put a +1/+1 counter on Carmen and you gain 1 life.\nWhenever Carmen attacks, return up to one target permanent card with mana value less than or equal to Carmen's power from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Charismatic Conqueror",
@@ -52,12 +46,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Vigilance\nWhenever an artifact or creature an opponent controls enters untapped, they may tap that permanent. If they don't, you create a 1/1 white Vampire creature token with lifelink."
+      ]
     },
     {
       "name": "Elenda's Hierophant",
@@ -69,12 +60,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you gain life, put a +1/+1 counter on this creature.\nWhen this creature dies, create X 1/1 white Vampire creature tokens with lifelink, where X is its power."
+      ]
     },
     {
       "name": "March of the Canonized",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, create X 1/1 white Vampire creature tokens with lifelink.\nAt the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying."
+      ]
     },
     {
       "name": "Redemption Choir",
@@ -103,12 +88,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nCoven — Whenever this creature enters or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Dusk Legion Sergeant",
@@ -120,12 +102,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Menace\n{1}{B}, Sacrifice this creature: Each nontoken Vampire creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
+      ]
     },
     {
       "name": "Master of Dark Rites",
@@ -137,12 +116,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{T}, Sacrifice another creature: Add {B}{B}{B}. Spend this mana only to cast Vampire, Cleric, and/or Demon spells."
+      ]
     },
     {
       "name": "Promise of Aclazotz // Foul Rebirth",
@@ -154,12 +130,10 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
-        "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your end step, you may sacrifice a non-Demon creature. If you do, populate. (Create a token that's a copy of a creature token you control.)"
+      "cardTypes": [
+        "Enchantment",
+        "Sorcery"
+      ]
     },
     {
       "name": "Order of Sacred Dusk",
@@ -172,12 +146,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{W}{B}",
-      "cmc": 8,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, lifelink, haste\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nOther Vampires you control have exalted."
+      ]
     },
     {
       "name": "Austere Command",
@@ -189,12 +160,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Kindred Boon",
@@ -206,12 +174,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose a creature type.\n{1}{W}: Put a divinity counter on target creature you control of the chosen type.\nEach creature you control with a divinity counter on it has indestructible."
+      ]
     },
     {
       "name": "Mavren Fein, Dusk Apostle",
@@ -223,12 +188,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink."
+      ]
     },
     {
       "name": "Radiant Destiny",
@@ -240,12 +202,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1. As long as you have the city's blessing, they also have vigilance."
+      ]
     },
     {
       "name": "Welcoming Vampire",
@@ -257,12 +216,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever one or more other creatures you control with power 2 or less enter, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Bloodghast",
@@ -274,12 +230,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "This creature can't block.\nThis creature has haste as long as an opponent has 10 or less life.\nLandfall — Whenever a land you control enters, you may return this card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Bloodtracker",
@@ -291,12 +244,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\n{B}, Pay 2 life: Put a +1/+1 counter on this creature.\nWhen this creature leaves the battlefield, draw a card for each +1/+1 counter on it."
+      ]
     },
     {
       "name": "Butcher of Malakir",
@@ -308,12 +258,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Champion of Dusk",
@@ -325,12 +272,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, you draw X cards and you lose X life, where X is the number of Vampires you control."
+      ]
     },
     {
       "name": "Cordial Vampire",
@@ -342,12 +286,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature dies, put a +1/+1 counter on each Vampire you control."
+      ]
     },
     {
       "name": "Crossway Troublemakers",
@@ -359,12 +300,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Attacking Vampires you control have deathtouch and lifelink. (Any amount of damage they deal to a creature is enough to destroy it. Damage dealt by those creatures also causes their controller to gain that much life.)\nWhenever a Vampire you control dies, you may pay 2 life. If you do, draw a card."
+      ]
     },
     {
       "name": "Damn",
@@ -377,12 +315,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. A creature destroyed this way can't be regenerated.\nOverload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Drana, Liberator of Malakir",
@@ -394,12 +329,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Flying, first strike\nWhenever Drana deals combat damage to a player, put a +1/+1 counter on each attacking creature you control."
+      ]
     },
     {
       "name": "Exquisite Blood",
@@ -411,12 +343,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever an opponent loses life, you gain that much life."
+      ]
     },
     {
       "name": "Glass-Cast Heart",
@@ -428,12 +357,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more Vampires you control attack, create a Blood token. (It's an artifact with \"{1}, {T}, Discard a card, Sacrifice this token: Draw a card.\")\n{B}, {T}, Pay 1 life: Create a 1/1 white and black Vampire creature token with lifelink.\n{B}{B}, {T}, Sacrifice this artifact and thirteen Blood tokens: Each opponent loses 13 life and you gain 13 life."
+      ]
     },
     {
       "name": "New Blood",
@@ -445,12 +371,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "As an additional cost to cast this spell, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire."
+      ]
     },
     {
       "name": "Nighthawk Scavenger",
@@ -462,12 +385,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Flying, deathtouch, lifelink\nNighthawk Scavenger's power is equal to 1 plus the number of card types among cards in your opponents' graveyards."
+      ]
     },
     {
       "name": "Olivia's Wrath",
@@ -479,12 +399,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Each non-Vampire creature gets -X/-X until end of turn, where X is the number of Vampires you control."
+      ]
     },
     {
       "name": "Pact of the Serpent",
@@ -496,12 +413,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Choose a creature type. Target player draws X cards and loses X life, where X is the number of creatures they control of the chosen type."
+      ]
     },
     {
       "name": "Patron of the Vein",
@@ -513,12 +427,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, destroy target creature an opponent controls.\nWhenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control."
+      ]
     },
     {
       "name": "Sanctum Seeker",
@@ -530,12 +441,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Timothar, Baron of Bats",
@@ -547,12 +455,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Ward—Discard a card.\nWhenever another nontoken Vampire you control dies, you may pay {1} and exile it. If you do, create a 1/1 black Bat creature token with flying. It gains \"When this token deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped.\""
+      ]
     },
     {
       "name": "Twilight Prophet",
@@ -564,12 +469,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value."
+      ]
     },
     {
       "name": "Yahenni, Undying Partisan",
@@ -581,12 +483,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni.\nSacrifice another creature: Yahenni gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Elenda, the Dusk Rose",
@@ -599,12 +498,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nWhenever another creature dies, put a +1/+1 counter on Elenda.\nWhen Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power."
+      ]
     },
     {
       "name": "Sorin, Lord of Innistrad",
@@ -617,12 +513,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "[+1]: Create a 1/1 black Vampire creature token with lifelink.\n[−2]: You get an emblem with \"Creatures you control get +1/+0.\"\n[−6]: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control."
+      ]
     },
     {
       "name": "Utter End",
@@ -635,12 +528,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Exile target nonland permanent."
+      ]
     },
     {
       "name": "Vona, Butcher of Magan",
@@ -653,12 +543,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate only during your turn."
+      ]
     },
     {
       "name": "Blade of the Bloodchief",
@@ -668,12 +555,9 @@
       "oracleCardName": "Blade of the Bloodchief",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.\nEquip {1}"
+      ]
     },
     {
       "name": "Isolated Chapel",
@@ -686,11 +570,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Shineshadow Snarl",
@@ -703,11 +585,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -720,11 +600,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Vault of the Archangel",
@@ -737,11 +615,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{W}{B}, {T}: Creatures you control gain deathtouch and lifelink until end of turn."
+      ]
     },
     {
       "name": "Voldaren Estate",
@@ -751,11 +627,9 @@
       "oracleCardName": "Voldaren Estate",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a Vampire spell.\n{5}, {T}: Create a Blood token. This ability costs {1} less to activate for each Vampire you control. (It's an artifact with \"{1}, {T}, Discard a card, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Windbrisk Heights",
@@ -767,11 +641,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn."
+      ]
     },
     {
       "name": "Martyr of Dusk",
@@ -783,12 +655,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature dies, create a 1/1 white Vampire creature token with lifelink."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -800,12 +669,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -817,12 +683,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Blood Artist",
@@ -834,12 +697,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Bloodline Necromancer",
@@ -851,12 +711,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Lifelink\nWhen this creature enters, you may return target Vampire or Wizard creature card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Dusk Legion Zealot",
@@ -868,12 +725,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Falkenrath Noble",
@@ -885,12 +739,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Indulgent Aristocrat",
@@ -902,12 +753,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Lifelink\n{2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control."
+      ]
     },
     {
       "name": "Oathsworn Vampire",
@@ -919,12 +767,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "This creature enters tapped.\nYou may cast this card from your graveyard if you gained life this turn."
+      ]
     },
     {
       "name": "Village Rites",
@@ -936,12 +781,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards."
+      ]
     },
     {
       "name": "Viscera Seer",
@@ -953,12 +795,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Bartolomé del Presidio",
@@ -971,12 +810,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Sacrifice another creature or artifact: Put a +1/+1 counter on Bartolomé del Presidio."
+      ]
     },
     {
       "name": "Cruel Celebrant",
@@ -989,12 +825,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Etchings of the Chosen",
@@ -1007,12 +840,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "As this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{1}, Sacrifice a creature of the chosen type: Target creature you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)"
+      ]
     },
     {
       "name": "Legion Lieutenant",
@@ -1025,12 +855,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Other Vampires you control get +1/+1."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1040,12 +867,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1055,12 +879,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -1070,12 +891,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1085,12 +903,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -1103,12 +918,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1118,12 +930,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1133,12 +942,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Talisman of Hierarchy",
@@ -1151,12 +957,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1166,12 +969,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1183,11 +983,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1197,11 +995,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1211,11 +1007,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1228,11 +1022,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1242,11 +1034,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1256,11 +1046,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1270,11 +1058,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Tainted Field",
@@ -1287,11 +1073,9 @@
         "W"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1301,11 +1085,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1315,11 +1097,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Plains",
@@ -1331,11 +1111,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1347,11 +1125,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1363,11 +1139,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1379,11 +1153,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1395,11 +1167,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1411,11 +1181,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1427,11 +1195,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1443,11 +1209,9 @@
         "W"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1459,11 +1223,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1475,11 +1237,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1491,11 +1251,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1507,11 +1265,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1523,11 +1279,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1539,11 +1293,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1555,11 +1307,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1571,11 +1321,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1587,11 +1335,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1603,11 +1349,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1619,11 +1363,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1635,11 +1377,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1651,15 +1391,13 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.476Z",
+    "retrievedDate": "2026-06-23T17:40:36.066Z",
     "sourceUrl": "BloodRites_LCC.json",
     "deckSource": "precon",
     "createdAt": "2023-11-17T00:00:00.000Z"

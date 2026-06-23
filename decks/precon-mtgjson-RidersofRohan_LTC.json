@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1919384970,
   "name": "Riders of Rohan",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}{W}",
-      "cmc": 5,
-      "oracleText": "First strike\nAt the beginning of combat on your turn, if another Human entered the battlefield under your control this turn, create two 2/2 red Human Knight creature tokens with trample and haste. Then if you control six or more Humans, draw a card."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance, lifelink\nWhen Aragorn enters, you become the monarch.\nWhenever Aragorn attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn."
+      ]
     },
     {
       "name": "Beregond of the Guard",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever Beregond or another Human you control enters, creatures you control get +1/+1 and gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Champions of Minas Tirith",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, you become the monarch.\nAt the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat."
+      ]
     },
     {
       "name": "Gilraen, Dúnedain Protector",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "{2}, {T}: Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it."
+      ]
     },
     {
       "name": "Grey Host Reinforcements",
@@ -105,12 +90,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying, ward {3}\nWhen this creature enters, exile target player's graveyard. Put a number of +1/+1 counters on this creature equal to the number of creature cards exiled this way."
+      ]
     },
     {
       "name": "Lossarnach Captain",
@@ -122,12 +104,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "First strike\nWhenever this creature or another Human you control enters, tap target creature an opponent controls.\nAt the beginning of your upkeep, create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Archivist of Gondor",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When your commander deals combat damage to a player, if there is no monarch, you become the monarch.\nAt the beginning of the monarch's end step, that player draws a card."
+      ]
     },
     {
       "name": "Denethor, Stone Seer",
@@ -157,12 +133,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "When Denethor enters, scry 2.\n{3}{R}, {T}, Sacrifice Denethor: Target player becomes the monarch. Denethor deals 3 damage to any target."
+      ]
     },
     {
       "name": "Fealty to the Realm",
@@ -174,12 +147,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Enchant creature\nWhen this Aura enters, you become the monarch.\nThe monarch controls enchanted creature.\nEnchanted creature attacks each combat if able and can't attack you."
+      ]
     },
     {
       "name": "Call for Aid",
@@ -191,12 +161,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Gain control of all creatures target opponent controls until end of turn. Untap those creatures. They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn."
+      ]
     },
     {
       "name": "Gimli of the Glittering Caves",
@@ -208,12 +175,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Double strike\nWhenever another legendary creature you control enters, put a +1/+1 counter on Gimli.\nWhenever Gimli deals combat damage to a player, create a Treasure token."
+      ]
     },
     {
       "name": "Boromir, Gondor's Hope",
@@ -226,12 +190,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever Boromir enters or attacks, look at the top six cards of your library. You may reveal a Human or artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Éomer, King of Rohan",
@@ -244,12 +205,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Double strike\nÉomer enters with a +1/+1 counter on it for each other Human you control.\nWhen Éomer enters, target player becomes the monarch. Éomer deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Faramir, Steward of Gondor",
@@ -262,12 +220,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a legendary creature you control with mana value 4 or greater enters, you become the monarch.\nAt the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens."
+      ]
     },
     {
       "name": "Forth Eorlingas!",
@@ -280,12 +235,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 2/2 red Human Knight creature tokens with trample and haste.\nWhenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch."
+      ]
     },
     {
       "name": "Oath of Eorl",
@@ -298,12 +250,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create two 1/1 white Human Soldier creature tokens.\nII — Create two 2/2 red Human Knight creature tokens with trample and haste.\nIII — Put an indestructible counter on up to one target Human. You become the monarch."
+      ]
     },
     {
       "name": "Riders of Rohan",
@@ -316,12 +265,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create two 2/2 red Human Knight creature tokens with trample and haste.\nDash {4}{R}{W} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)"
+      ]
     },
     {
       "name": "Taunt from the Rampart",
@@ -334,12 +280,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Goad all creatures your opponents control. Until your next turn, those creatures can't block. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Crown of Gondor",
@@ -349,12 +292,9 @@
       "oracleCardName": "Crown of Gondor",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +1/+1 for each creature you control.\nWhen a legendary creature you control enters, if there is no monarch, you become the monarch.\nEquip {4}. This ability costs {3} less to activate if you're the monarch."
+      ]
     },
     {
       "name": "Bastion Protector",
@@ -366,12 +306,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you control get +2/+2 and have indestructible."
+      ]
     },
     {
       "name": "Dearly Departed",
@@ -383,12 +320,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs long as this creature is in your graveyard, each Human creature you control enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Frontline Medic",
@@ -400,12 +334,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Battalion — Whenever this creature and at least two other creatures attack, creatures you control gain indestructible until end of turn.\nSacrifice this creature: Counter target spell with {X} in its mana cost unless its controller pays {3}."
+      ]
     },
     {
       "name": "Increasing Devotion",
@@ -417,12 +348,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.\nFlashback {7}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Marshal's Anthem",
@@ -434,12 +362,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Multikicker {1}{W} (You may pay an additional {1}{W} any number of times as you cast this spell.)\nCreatures you control get +1/+1.\nWhen this enchantment enters, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times this enchantment was kicked."
+      ]
     },
     {
       "name": "Selfless Squire",
@@ -451,12 +376,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this creature enters, prevent all damage that would be dealt to you this turn.\nWhenever damage that would be dealt to you is prevented, put that many +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Unbreakable Formation",
@@ -468,12 +390,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Verge Rangers",
@@ -485,12 +404,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "First strike\nYou may look at the top card of your library any time.\nAs long as an opponent controls more lands than you, you may play lands from the top of your library. (You can play a land this way only if you have an available land play remaining.)"
+      ]
     },
     {
       "name": "Visions of Glory",
@@ -502,12 +418,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Create a 1/1 white Human creature token for each creature you control.\nFlashback {8}{W}{W}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Weathered Wayfarer",
@@ -519,12 +432,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{W}, {T}: Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you."
+      ]
     },
     {
       "name": "Combat Celebrant",
@@ -536,12 +446,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "If this creature hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase. (An exerted creature won't untap during your next untap step.)"
+      ]
     },
     {
       "name": "Court of Ire",
@@ -553,12 +460,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When this enchantment enters, you become the monarch.\nAt the beginning of your upkeep, this enchantment deals 2 damage to any target. If you're the monarch, it deals 7 damage instead."
+      ]
     },
     {
       "name": "Earthquake",
@@ -570,12 +474,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "Earthquake deals X damage to each creature without flying and each player."
+      ]
     },
     {
       "name": "Flamerush Rider",
@@ -587,12 +488,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature attacks, create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat.\nDash {2}{R}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)"
+      ]
     },
     {
       "name": "Frontier Warmonger",
@@ -604,12 +502,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn."
+      ]
     },
     {
       "name": "Harsh Mentor",
@@ -621,12 +516,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, this creature deals 2 damage to that player."
+      ]
     },
     {
       "name": "Shared Animosity",
@@ -638,12 +530,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it."
+      ]
     },
     {
       "name": "Zealous Conscripts",
@@ -655,12 +544,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Haste\nWhen this creature enters, gain control of target permanent until end of turn. Untap that permanent. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Supreme Verdict",
@@ -673,12 +559,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}{U}",
-      "cmc": 4,
-      "oracleText": "This spell can't be countered.\nDestroy all creatures."
+      ]
     },
     {
       "name": "Door of Destinies",
@@ -688,12 +571,9 @@
       "oracleCardName": "Door of Destinies",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "As this artifact enters, choose a creature type.\nWhenever you cast a spell of the chosen type, put a charge counter on this artifact.\nCreatures you control of the chosen type get +1/+1 for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -703,12 +583,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -721,11 +598,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -738,11 +613,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -752,11 +625,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -769,11 +640,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -786,11 +655,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Port Town",
@@ -803,11 +670,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -820,11 +685,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -837,11 +700,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Throne of the High City",
@@ -851,11 +712,9 @@
       "oracleCardName": "Throne of the High City",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}, Sacrifice this land: You become the monarch."
+      ]
     },
     {
       "name": "Windbrisk Heights",
@@ -867,11 +726,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn."
+      ]
     },
     {
       "name": "Lost to Legend",
@@ -883,12 +740,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "Put target nonland historic permanent into its owner's library fourth from the top. (Artifacts, legendaries, and Sagas are historic.)"
+      ]
     },
     {
       "name": "Erkenbrand, Lord of Westfold",
@@ -900,12 +754,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever Erkenbrand or another Human you control enters, creatures you control get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Banishing Light",
@@ -917,12 +768,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
+      ]
     },
     {
       "name": "Fiend Hunter",
@@ -934,12 +782,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may exile another target creature.\nWhen this creature leaves the battlefield, return the exiled card to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "Palace Jailer",
@@ -951,12 +796,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you become the monarch.\nWhen this creature enters, exile target creature an opponent controls until an opponent becomes the monarch."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -968,12 +810,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sunset Revelry",
@@ -985,12 +824,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "If an opponent has more life than you, you gain 4 life.\nIf an opponent controls more creatures than you, create two 1/1 white Human creature tokens.\nIf an opponent has more cards in hand than you, draw a card."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1002,12 +838,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Village Bell-Ringer",
@@ -1019,12 +852,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, untap all creatures you control."
+      ]
     },
     {
       "name": "Prince Imrahil the Fair",
@@ -1037,12 +867,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw your second card each turn, create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Humble Defector",
@@ -1054,12 +881,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw two cards. Target opponent gains control of this creature. Activate only during your turn."
+      ]
     },
     {
       "name": "Théoden, King of Rohan",
@@ -1072,12 +896,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever Théoden or another Human you control enters, target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1087,12 +908,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1102,12 +920,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -1117,12 +932,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -1132,12 +944,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1147,12 +956,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1165,12 +971,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -1183,12 +986,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1198,12 +998,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1213,12 +1010,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1228,11 +1022,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1242,11 +1034,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Field of Ruin",
@@ -1256,11 +1046,9 @@
       "oracleCardName": "Field of Ruin",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1270,11 +1058,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1284,11 +1070,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1298,11 +1082,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1312,11 +1094,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tranquil Cove",
@@ -1329,11 +1109,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Wind-Scarred Crag",
@@ -1346,11 +1124,9 @@
         "W"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Plains",
@@ -1362,11 +1138,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1378,11 +1152,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1394,11 +1166,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1410,11 +1180,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1426,11 +1194,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1442,11 +1208,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1458,11 +1222,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1474,11 +1236,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1490,11 +1250,9 @@
         "W"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1506,11 +1264,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1522,11 +1278,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1538,11 +1292,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1554,11 +1306,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1570,11 +1320,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1586,11 +1334,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1602,11 +1348,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1618,11 +1362,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1634,11 +1376,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1650,15 +1390,13 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.505Z",
+    "retrievedDate": "2026-06-23T17:40:39.565Z",
     "sourceUrl": "RidersOfRohan_LTC.json",
     "deckSource": "precon",
     "createdAt": "2023-06-23T00:00:00.000Z"

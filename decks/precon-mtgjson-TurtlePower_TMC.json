@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2057439008,
   "name": "Turtle Power!",
   "totalCards": 100,
@@ -17,12 +17,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Vigilance, menace, trample, haste\nWhenever one or more Mutants, Ninjas, and/or Turtles you control deal combat damage to a player, put a +1/+1 counter on each of those creatures and draw a card."
+      ]
     }
   ],
   "cards": [
@@ -39,12 +36,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever a token you control enters, you may put a +1/+1 counter on each creature you control. Do this only once each turn.\n{W}{U}{B}{R}{G}: Creatures you control gain menace, trample, and lifelink until end of turn.\nPartner—Character select (You can have two commanders if both have this ability.)"
+      ]
     },
     {
       "name": "Donatello, the Brains",
@@ -55,12 +49,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "If one or more tokens would be created under your control, those tokens plus a Mutagen token are created instead.\nPartner—Character select (You can have two commanders if both have this ability.)"
+      ]
     },
     {
       "name": "Splinter, the Mentor",
@@ -71,12 +62,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Menace\nWhenever Splinter or another nontoken creature you control leaves the battlefield, create a Mutagen token.\nPartner—Character select (You can have two commanders if both have this ability.)"
+      ]
     },
     {
       "name": "Raphael, the Muscle",
@@ -87,12 +75,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Double all damage that creatures you control with counters on them would deal.\nWhen Raphael enters, create a Mutagen token.\nPartner—Character select (You can have two commanders if both have this ability.)"
+      ]
     },
     {
       "name": "Michelangelo, the Heart",
@@ -103,12 +88,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Trample\nRaid (the Fridge) — At the beginning of your second main phase, if you attacked this turn, put a +1/+1 counter on target creature and create a Food token.\nPartner—Character select (You can have two commanders if both have this ability.)"
+      ]
     },
     {
       "name": "Continue?",
@@ -119,12 +101,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose up to four target creature cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield."
+      ]
     },
     {
       "name": "Endless Foot Assault",
@@ -135,12 +114,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Squad {1}{W} (As an additional cost to cast this spell, you may pay {1}{W} any number of times. When this enchantment enters, create that many tokens that are copies of it.)\nWhenever you attack, for each opponent, create a 1/1 black Ninja creature token that's tapped and attacking that player."
+      ]
     },
     {
       "name": "April O'Neil, Live on the Scene",
@@ -151,12 +127,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nPartner—Character select"
+      ]
     },
     {
       "name": "Baxter, Fly in the Ointment",
@@ -167,12 +140,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever Baxter enters or attacks, each creature you control with a counter on it gains flying until end of turn.\nWhenever you draw a card, put a +1/+1 counter on Baxter."
+      ]
     },
     {
       "name": "Here Comes a New Hero!",
@@ -183,12 +153,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws X cards. Create a token that's a copy of up to one target creature with mana value X or less."
+      ]
     },
     {
       "name": "Irma, Part-Time Mutant",
@@ -199,12 +166,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "At the beginning of combat on your turn, Irma becomes a copy of up to one other target creature you control, except her name is Irma, Part-Time Mutant and she has this ability. Then put a +1/+1 counter on her."
+      ]
     },
     {
       "name": "Krang, the All-Powerful",
@@ -215,13 +179,10 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "If a player drawing a card causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nWhenever a player draws their second card each turn, put a +1/+1 counter on Krang."
+      ]
     },
     {
       "name": "Ray Fillet, Wave Warrior",
@@ -232,12 +193,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever a creature you control with a counter on it deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Bebop, Skull & Crossbones",
@@ -248,12 +206,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Partner with Rocksteady, Mutant Marauder (When this creature enters, target player may put Rocksteady into their hand from their library, then shuffle.)\nDeathtouch\nWhenever Bebop deals combat damage to a player, you may draw X cards, where X is the number of counters on Bebop. If you do, you lose X life."
+      ]
     },
     {
       "name": "Dimension X Pizzasaur",
@@ -264,13 +219,10 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, put two +1/+1 counters on target creature. When you do, destroy up to one target creature with mana value less than or equal to the number of counters among permanents you control.\n{2}, {T}, Sacrifice this creature: You gain 3 life and each opponent loses 3 life."
+      ]
     },
     {
       "name": "Foot Chopper",
@@ -281,12 +233,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "When this Equipment enters, create a 1/1 black Ninja creature token, then attach this Equipment to it.\nEquipped creature has flying.\nWhenever equipped creature deals combat damage to a player, you may sacrifice it. If you do, draw cards equal to its power.\nEquip {2}"
+      ]
     },
     {
       "name": "Game Over",
@@ -297,12 +246,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "This spell costs {2} less to cast if a player's life total is less than or equal to half their starting life total.\nDestroy all creatures."
+      ]
     },
     {
       "name": "Rat King, Pale Piper",
@@ -313,12 +259,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhenever Rat King or another nontoken creature you control leaves the battlefield, create a 1/1 black Rat creature token.\n{2}, Sacrifice a token: Draw a card."
+      ]
     },
     {
       "name": "Shredder, Shadow Master",
@@ -329,12 +272,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever Shredder attacks a player, for each other opponent, create a token that's a copy of Shredder tapped and attacking that player, except it isn't legendary. Sacrifice those tokens at end of combat.\nWhenever Shredder deals combat damage to a player, that player loses half their life, rounded up."
+      ]
     },
     {
       "name": "Swift Demise",
@@ -345,12 +285,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Swift Demise deals 1 damage to target creature. Then destroy each creature you don't control that was dealt damage this turn."
+      ]
     },
     {
       "name": "Casey Jones, Back Alley Brute",
@@ -361,12 +298,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhenever Casey Jones attacks, put a +1/+1 counter on target attacking creature.\nWhenever you put one or more +1/+1 counters on a creature you control, Casey Jones deals that much damage to target opponent."
+      ]
     },
     {
       "name": "Electric Seaweed",
@@ -377,12 +311,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Defender, haste\nWhen this creature enters, until end of turn, whenever another creature dies, this creature deals 1 damage to each non-Wall creature.\n{T}: This creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Fast Forward",
@@ -393,12 +324,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "This spell costs {1} less to cast for each opponent you attacked this turn.\nGoad all creatures your opponents control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Shellshock",
@@ -409,12 +337,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "For each opponent, choose up to one target creature that player controls. Shellshock deals X damage to each of those creatures. You create a Mutagen token for each creature dealt damage this way. (They're artifacts with \"{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.\")"
+      ]
     },
     {
       "name": "Special Move",
@@ -425,12 +350,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Choose two —\n• Jump Kick — Destroy target artifact.\n• Dash Attack — Put two +1/+1 counters on target attacking or blocking creature you control.\n• Foot Toss — Target creature you control deals damage equal to its power to any other target. Then sacrifice it."
+      ]
     },
     {
       "name": "Tempestra, Dame of Games",
@@ -441,12 +363,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{2}{R}, {T}, Sacrifice an artifact: Create a token that's a copy of another target creature you control, except it isn't legendary. It gains haste. Sacrifice it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Tokka & Rahzar, Unsupervised",
@@ -457,12 +376,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "First strike\nWhenever another nontoken creature you control leaves the battlefield, put a +1/+1 counter on Tokka & Rahzar and create a Treasure token. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "High Score",
@@ -473,12 +389,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.\nAt the beginning of your end step, draw a card if you control a creature with the greatest power among creatures on the battlefield."
+      ]
     },
     {
       "name": "Leatherhead, Iron Gator",
@@ -489,12 +402,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample, haste\nWhenever Leatherhead attacks, put two +1/+1 counters on each creature you control."
+      ]
     },
     {
       "name": "Level Up",
@@ -505,12 +415,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nWhen this Aura enters, put a +1/+1 counter on enchanted creature.\nEnchanted creature has \"Whenever this creature attacks, double the number of +1/+1 counters on it. Then if it has power 10 or greater, draw a card.\""
+      ]
     },
     {
       "name": "Ninja Pizza",
@@ -521,12 +428,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Foods you control have \"{T}, Sacrifice this artifact: Add one mana of any color.\"\nAt the beginning of your second main phase, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+      ]
     },
     {
       "name": "Rocksteady, Mutant Marauder",
@@ -537,12 +441,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Partner with Bebop, Skull & Crossbones (When this creature enters, target player may put Bebop into their hand from their library, then shuffle.)\nTrample\nWhenever another nontoken creature you control enters, put a +1/+1 counter on target creature."
+      ]
     },
     {
       "name": "Super Combo",
@@ -553,12 +454,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Replicate {2} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTarget creature you control deals damage equal to its power to target creature an opponent controls."
+      ]
     },
     {
       "name": "Double Jump // Flying Kick",
@@ -570,12 +468,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 4,
-      "oracleText": "Put a flying counter on target creature you control. Until end of turn, it has base power and toughness 5/5.\nFuse (You may cast one or both halves of this card from your hand.)"
+      ]
     },
     {
       "name": "Arcade Cabinet",
@@ -584,12 +479,9 @@
       "oracleCardName": "Arcade Cabinet",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "When this artifact enters, put a +1/+1 counter on each of up to four target creatures.\n{2}, {T}, Sacrifice a token: Double the number of each kind of counter on target creature."
+      ]
     },
     {
       "name": "Big Mother Mouser",
@@ -598,13 +490,10 @@
       "oracleCardName": "Big Mother Mouser",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\nWhenever this creature attacks, double the number of +1/+1 counters on it.\nWhen this creature dies, create a number of 1/1 colorless Robot artifact creature tokens equal to the number of +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Coin of Mastery",
@@ -613,12 +502,9 @@
       "oracleCardName": "Coin of Mastery",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Each creature you control enters with an additional +1/+1 counter on it for each mana from an artifact source spent to cast it.\n{T}: Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Exploding Barrel",
@@ -627,12 +513,9 @@
       "oracleCardName": "Exploding Barrel",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color. Put a pressure counter on this artifact.\n{8}, {T}, Sacrifice this artifact: It deals 20 damage to target creature. This ability costs {1} less to activate for each pressure counter on this artifact. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Mole Module",
@@ -641,12 +524,9 @@
       "oracleCardName": "Mole Module",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Menace\nWhenever this Vehicle deals combat damage to a player, mill four cards. You may put a permanent card from among them onto the battlefield.\nCrew 2"
+      ]
     },
     {
       "name": "Roadkill Rodney",
@@ -655,13 +535,10 @@
       "oracleCardName": "Roadkill Rodney",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Squad {3} (As an additional cost to cast this spell, you may pay {3} any number of times. When this creature enters, create that many tokens that are copies of it.)\nDeathtouch\nWhenever this creature deals combat damage to a player, create a Mutagen token."
+      ]
     },
     {
       "name": "Big Apple, 3 a.m.",
@@ -670,11 +547,9 @@
       "oracleCardName": "Big Apple, 3 a.m.",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{5}, {T}: Create a 1/1 black Rat creature token for each opponent you have."
+      ]
     },
     {
       "name": "Hidden Hideout",
@@ -683,11 +558,9 @@
       "oracleCardName": "Hidden Hideout",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity.\n{2}, {T}: Target creature you control with a counter on it gains lifelink until end of turn."
+      ]
     },
     {
       "name": "Together Forever",
@@ -698,12 +571,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand."
+      ]
     },
     {
       "name": "Vanquish the Horde",
@@ -714,12 +584,9 @@
         "W"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nDestroy all creatures."
+      ]
     },
     {
       "name": "Wave Goodbye",
@@ -730,12 +597,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Return each creature without a +1/+1 counter on it to its owner's hand."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -746,12 +610,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Biogenic Ooze",
@@ -762,12 +623,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create a 2/2 green Ooze creature token.\nAt the beginning of your end step, put a +1/+1 counter on each Ooze you control.\n{1}{G}{G}{G}: Create a 2/2 green Ooze creature token."
+      ]
     },
     {
       "name": "Steelbane Hydra",
@@ -778,12 +636,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "This creature enters with X +1/+1 counters on it.\n{2}{G}, Remove a +1/+1 counter from this creature: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Vigor",
@@ -794,12 +649,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nIf damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way.\nWhen Vigor is put into a graveyard from anywhere, shuffle it into its owner's library."
+      ]
     },
     {
       "name": "Voracious Hydra",
@@ -810,12 +662,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "Trample\nThis creature enters with X +1/+1 counters on it.\nWhen this creature enters, choose one —\n• Double the number of +1/+1 counters on this creature.\n• This creature fights target creature you don't control."
+      ]
     },
     {
       "name": "Assassin's Trophy",
@@ -827,12 +676,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Destroy target permanent an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Corpsejack Menace",
@@ -844,12 +690,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -858,12 +701,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -875,11 +715,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "City of Brass",
@@ -888,11 +726,9 @@
       "oracleCardName": "City of Brass",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Whenever this land becomes tapped, it deals 1 damage to you.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -904,11 +740,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -917,11 +751,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fabled Passage",
@@ -930,11 +762,9 @@
       "oracleCardName": "Fabled Passage",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+      ]
     },
     {
       "name": "Grand Coliseum",
@@ -943,11 +773,9 @@
       "oracleCardName": "Grand Coliseum",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -959,11 +787,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Rain-Slicked Copse",
@@ -975,11 +801,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Rootbound Crag",
@@ -991,11 +815,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -1007,11 +829,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sodden Verdure",
@@ -1023,11 +843,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spire Garden",
@@ -1039,11 +857,9 @@
         "R"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -1055,11 +871,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Undergrowth Stadium",
@@ -1071,11 +885,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Vernal Fen",
@@ -1087,11 +899,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Lita, Little Orphan Amphibian",
@@ -1102,12 +912,9 @@
         "W"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Alliance — Whenever another creature you control enters, choose one that hasn't been chosen this turn.\n• Put a +1/+1 counter on Lita.\n• Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\n• Scry 1."
+      ]
     },
     {
       "name": "Mona Lisa, Science Geek",
@@ -1118,12 +925,9 @@
         "G"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\n{T}: Add X mana of any one color, where X is Mona Lisa's power."
+      ]
     },
     {
       "name": "Lessons from Life",
@@ -1135,12 +939,9 @@
         "U"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Draw three cards. You may put a land card from your hand onto the battlefield tapped."
+      ]
     },
     {
       "name": "Everything Pizza",
@@ -1155,12 +956,9 @@
         "W"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{2}{W}{U}{B}{R}{G}, {T}, Sacrifice this artifact: Target player gains 3 life and draws a card. Each of your opponents discards a card. This artifact deals 3 damage to any target. Put three +1/+1 counters on up to one target creature."
+      ]
     },
     {
       "name": "Escape Tunnel",
@@ -1169,11 +967,9 @@
       "oracleCardName": "Escape Tunnel",
       "colorIdentity": [],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked this turn."
+      ]
     },
     {
       "name": "Turtle Lair",
@@ -1182,11 +978,9 @@
       "oracleCardName": "Turtle Lair",
       "colorIdentity": [],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell.\n{3}, {T}: Target Ninja or Turtle can't be blocked this turn."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -1197,12 +991,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Cultivate",
@@ -1213,12 +1004,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Harmonize",
@@ -1229,12 +1017,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1243,12 +1028,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1257,12 +1039,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1271,11 +1050,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1284,11 +1061,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1297,11 +1072,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1310,11 +1083,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Thriving Grove",
@@ -1325,11 +1096,9 @@
         "G"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than green.\n{T}: Add {G} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Isle",
@@ -1340,11 +1109,9 @@
         "U"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Moor",
@@ -1355,11 +1122,9 @@
         "B"
       ],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Vibrant Cityscape",
@@ -1368,11 +1133,9 @@
       "oracleCardName": "Vibrant Cityscape",
       "colorIdentity": [],
       "set": "TMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Plains",
@@ -1383,11 +1146,9 @@
         "W"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1398,11 +1159,9 @@
         "W"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1413,11 +1172,9 @@
         "U"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1428,11 +1185,9 @@
         "U"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1443,11 +1198,9 @@
         "B"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1458,11 +1211,9 @@
         "B"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1473,11 +1224,9 @@
         "R"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1488,11 +1237,9 @@
         "R"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1503,11 +1250,9 @@
         "G"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1518,11 +1263,9 @@
         "G"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1533,11 +1276,9 @@
         "G"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1548,15 +1289,13 @@
         "G"
       ],
       "set": "TMT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:57.373Z",
+    "retrievedDate": "2026-06-23T17:40:40.580Z",
     "sourceUrl": "TurtlePower_TMC.json",
     "deckSource": "precon",
     "createdAt": "2026-03-06T00:00:00.000Z"

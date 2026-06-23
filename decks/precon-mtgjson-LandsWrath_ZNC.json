@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1745067217,
   "name": "Land's Wrath",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.\nLandfall — Whenever a land you control enters, put a +1/+1 counter on target creature."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may exile target nonland permanent other than this creature.\nWhen this creature leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control."
+      ]
     },
     {
       "name": "Trove Warden",
@@ -52,12 +46,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nLandfall — Whenever a land you control enters, exile target permanent card with mana value 3 or less from your graveyard.\nWhen this creature dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner."
+      ]
     },
     {
       "name": "Geode Rager",
@@ -69,12 +60,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nLandfall — Whenever a land you control enters, goad each creature target player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Emeria Angel",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may create a 1/1 white Bird creature token with flying."
+      ]
     },
     {
       "name": "Emeria Shepherd",
@@ -103,12 +88,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead."
+      ]
     },
     {
       "name": "Sun Titan",
@@ -120,12 +102,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Multani, Yavimaya's Avatar",
@@ -137,12 +116,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach, trample\nMultani gets +1/+1 for each land you control and each land card in your graveyard.\n{1}{G}, Return two lands you control to their owner's hand: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -154,12 +130,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Sylvan Advocate",
@@ -171,12 +144,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Vigilance\nAs long as you control six or more lands, this creature and land creatures you control get +2/+2."
+      ]
     },
     {
       "name": "Waker of the Wilds",
@@ -188,12 +158,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "{X}{G}{G}: Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land."
+      ]
     },
     {
       "name": "Living Twister",
@@ -206,12 +173,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{R}{G}",
-      "cmc": 3,
-      "oracleText": "{1}{R}, Discard a land card: This creature deals 2 damage to any target.\n{G}: Return a tapped land you control to its owner's hand."
+      ]
     },
     {
       "name": "Mina and Denn, Wildborn",
@@ -224,12 +188,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "You may play an additional land on each of your turns.\n{R}{G}, Return a land you control to its owner's hand: Target creature gains trample until end of turn."
+      ]
     },
     {
       "name": "Omnath, Locus of Rage",
@@ -242,12 +203,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 5/5 red and green Elemental creature token.\nWhenever Omnath or another Elemental you control dies, Omnath deals 3 damage to any target."
+      ]
     },
     {
       "name": "Abzan Falconer",
@@ -259,12 +217,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying."
+      ]
     },
     {
       "name": "Elite Scaleguard",
@@ -276,12 +231,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls."
+      ]
     },
     {
       "name": "Kor Cartographer",
@@ -293,12 +245,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -310,12 +259,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Armorcraft Judge",
@@ -327,12 +273,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, draw a card for each creature you control with a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Elvish Rejuvenator",
@@ -344,12 +287,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Embodiment of Insight",
@@ -361,12 +301,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nLand creatures you control have vigilance.\nLandfall — Whenever a land you control enters, you may have target land you control become a 3/3 Elemental creature with haste until end of turn. It's still a land."
+      ]
     },
     {
       "name": "Evolution Sage",
@@ -378,12 +315,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Fertilid",
@@ -395,12 +329,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from this creature: Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles."
+      ]
     },
     {
       "name": "Keeper of Fables",
@@ -412,12 +343,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Satyr Wayfinder",
@@ -429,12 +357,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Sporemound",
@@ -446,12 +371,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Springbloom Druid",
@@ -463,12 +385,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tuskguard Captain",
@@ -480,12 +399,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Outlast {G} ({G}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has trample."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -497,12 +413,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Sandstone Oracle",
@@ -512,13 +425,10 @@
       "oracleCardName": "Sandstone Oracle",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference."
+      ]
     },
     {
       "name": "Scaretiller",
@@ -528,13 +438,10 @@
       "oracleCardName": "Scaretiller",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Murasa Rootgrazer",
@@ -547,12 +454,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Vigilance\n{T}: You may put a basic land card from your hand onto the battlefield.\n{T}: Return target basic land you control to its owner's hand."
+      ]
     },
     {
       "name": "Hour of Revelation",
@@ -564,12 +468,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}{W}",
-      "cmc": 6,
-      "oracleText": "This spell costs {3} less to cast if there are ten or more nonland permanents on the battlefield.\nDestroy all nonland permanents."
+      ]
     },
     {
       "name": "Planar Outburst",
@@ -581,12 +482,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all nonland creatures.\nAwaken 4—{5}{W}{W}{W} (If you cast this spell for {5}{W}{W}{W}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)"
+      ]
     },
     {
       "name": "Nissa's Renewal",
@@ -598,12 +496,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You gain 7 life."
+      ]
     },
     {
       "name": "Beanstalk Giant // Fertile Footsteps",
@@ -615,12 +510,10 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Beanstalk Giant's power and toughness are each equal to the number of lands you control."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Circuitous Route",
@@ -632,12 +525,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Far Wanderings",
@@ -649,12 +539,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nThreshold — If there are seven or more cards in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Harmonize",
@@ -666,12 +553,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -683,12 +567,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Ground Assault",
@@ -701,12 +582,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{G}",
-      "cmc": 2,
-      "oracleText": "Ground Assault deals damage to target creature equal to the number of lands you control."
+      ]
     },
     {
       "name": "Treacherous Terrain",
@@ -719,12 +597,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{R}{G}",
-      "cmc": 8,
-      "oracleText": "Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -736,12 +611,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Condemn",
@@ -753,12 +625,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness."
+      ]
     },
     {
       "name": "Crush Contraband",
@@ -770,12 +639,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Choose one or both —\n• Exile target artifact.\n• Exile target enchantment."
+      ]
     },
     {
       "name": "Harrow",
@@ -787,12 +653,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Inspiring Call",
@@ -804,12 +667,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Naya Charm",
@@ -823,12 +683,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Naya Charm deals 3 damage to target creature.\n• Return target card from a graveyard to its owner's hand.\n• Tap all creatures target player controls."
+      ]
     },
     {
       "name": "Sylvan Reclamation",
@@ -841,12 +698,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Roiling Regrowth",
@@ -858,12 +712,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Seer's Sundial",
@@ -873,12 +724,9 @@
       "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -888,12 +736,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -903,12 +748,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Together Forever",
@@ -920,12 +762,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand."
+      ]
     },
     {
       "name": "Abundance",
@@ -937,12 +776,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order."
+      ]
     },
     {
       "name": "The Mending of Dominaria",
@@ -954,12 +790,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library."
+      ]
     },
     {
       "name": "Rites of Flourishing",
@@ -971,12 +804,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns."
+      ]
     },
     {
       "name": "Banishing Light",
@@ -988,12 +818,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
+      ]
     },
     {
       "name": "Retreat to Emeria",
@@ -1005,12 +832,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Khalni Heart Expedition",
@@ -1022,12 +846,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Retreat to Kazandu",
@@ -1039,12 +860,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Put a +1/+1 counter on target creature.\n• You gain 2 life."
+      ]
     },
     {
       "name": "Zendikar's Roil",
@@ -1056,12 +874,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 2/2 green Elemental creature token."
+      ]
     },
     {
       "name": "Needle Spires",
@@ -1074,11 +889,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}: Until end of turn, this land becomes a 2/1 red and white Elemental creature with double strike. It's still a land."
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -1090,11 +903,9 @@
         "G"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1107,11 +918,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Boros Guildgate",
@@ -1124,11 +933,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1138,11 +945,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Cryptic Caves",
@@ -1152,11 +957,9 @@
       "oracleCardName": "Cryptic Caves",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1166,11 +969,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Gruul Guildgate",
@@ -1183,11 +984,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Gruul Turf",
@@ -1200,11 +999,9 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -1218,11 +1015,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -1232,11 +1027,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1246,11 +1039,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Naya Panorama",
@@ -1260,11 +1051,9 @@
       "oracleCardName": "Naya Panorama",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Selesnya Guildgate",
@@ -1277,11 +1066,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -1294,11 +1081,9 @@
         "W"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1308,11 +1093,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Plains",
@@ -1324,11 +1107,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1340,11 +1121,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1356,11 +1135,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1372,11 +1149,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1388,11 +1163,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1404,11 +1177,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1420,11 +1191,9 @@
         "W"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1436,11 +1205,9 @@
         "R"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1452,11 +1219,9 @@
         "R"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1468,11 +1233,9 @@
         "R"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1484,11 +1247,9 @@
         "R"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1500,11 +1261,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1516,11 +1275,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1532,11 +1289,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1548,11 +1303,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1564,11 +1317,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1580,11 +1331,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1596,11 +1345,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1612,11 +1359,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1628,11 +1373,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1644,11 +1387,9 @@
         "G"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Struggle // Survive",
@@ -1661,16 +1402,14 @@
         "R"
       ],
       "set": "ZNC",
-      "types": [
-        "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 5,
-      "oracleText": "Struggle deals damage to target creature equal to the number of lands you control."
+      "cardTypes": [
+        "Instant",
+        "Sorcery"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.773Z",
+    "retrievedDate": "2026-06-23T17:40:38.230Z",
     "sourceUrl": "LandSWrath_ZNC.json",
     "deckSource": "precon",
     "createdAt": "2020-09-25T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1728883827,
   "name": "Arm for Battle",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever Wyleth attacks, draw a card for each Aura and Equipment attached to it."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Relic Seeker",
@@ -51,12 +45,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhen this creature becomes renowned, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Sram, Senior Edificer",
@@ -68,12 +59,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card."
+      ]
     },
     {
       "name": "Brass Squire",
@@ -83,13 +71,10 @@
       "oracleCardName": "Brass Squire",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Attach target Equipment you control to target creature you control."
+      ]
     },
     {
       "name": "Danitha Capashen, Paragon",
@@ -101,12 +86,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "First strike, vigilance, lifelink\nAura and Equipment spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Dualcaster Mage",
@@ -118,12 +100,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, copy target instant or sorcery spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Flickerwisp",
@@ -135,12 +114,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Ironclad Slayer",
@@ -152,12 +128,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target Aura or Equipment card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Kor Cartographer",
@@ -169,12 +142,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Odric, Lunarch Marshal",
@@ -186,12 +156,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance."
+      ]
     },
     {
       "name": "Tiana, Ship's Caretaker",
@@ -204,12 +171,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, first strike\nWhenever an Aura or Equipment you control is put into a graveyard from the battlefield, you may return that card to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Condemn",
@@ -221,12 +185,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness."
+      ]
     },
     {
       "name": "Expedite",
@@ -238,12 +199,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Target creature gains haste until end of turn.\nDraw a card."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -255,12 +213,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Abrade",
@@ -272,12 +227,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Boros Charm",
@@ -290,12 +242,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Boros Charm deals 4 damage to target player or planeswalker.\n• Permanents you control gain indestructible until end of turn.\n• Target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Comet Storm",
@@ -307,12 +256,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose any target, then choose another target for each time this spell was kicked. Comet Storm deals X damage to each of them."
+      ]
     },
     {
       "name": "Dawn Charm",
@@ -324,12 +270,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Prevent all combat damage that would be dealt this turn.\n• Regenerate target creature.\n• Counter target spell that targets you."
+      ]
     },
     {
       "name": "Deflecting Palm",
@@ -342,12 +285,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller."
+      ]
     },
     {
       "name": "Disenchant",
@@ -359,12 +299,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Fists of Flame",
@@ -376,12 +313,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)"
+      ]
     },
     {
       "name": "Temur Battle Rage",
@@ -393,12 +327,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Target creature gains double strike until end of turn.\nFerocious — That creature also gains trample until end of turn if you control a creature with power 4 or greater."
+      ]
     },
     {
       "name": "Valorous Stance",
@@ -410,12 +341,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Target creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)\n• Destroy target creature with toughness 4 or greater."
+      ]
     },
     {
       "name": "Generous Gift",
@@ -427,12 +355,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Unbreakable Formation",
@@ -444,12 +369,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Volcanic Fallout",
@@ -461,12 +383,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "This spell can't be countered.\nVolcanic Fallout deals 2 damage to each creature and each player."
+      ]
     },
     {
       "name": "Wear // Tear",
@@ -479,12 +398,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact.\nFuse (You may cast one or both halves of this card from your hand.)"
+      ]
     },
     {
       "name": "White Sun's Zenith",
@@ -496,12 +412,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Master Warcraft",
@@ -514,12 +427,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R/W}{R/W}",
-      "cmc": 4,
-      "oracleText": "Cast this spell only before attackers are declared.\nYou choose which creatures attack this turn.\nYou choose which creatures block this turn and how those creatures block."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -531,12 +441,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Wild Ricochet",
@@ -548,12 +455,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Word of Seizing",
@@ -565,12 +469,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nUntap target permanent and gain control of it until end of turn. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Response // Resurgence",
@@ -583,12 +484,10 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
-        "Instant"
-      ],
-      "manaCost": "{R/W}{R/W}",
-      "cmc": 7,
-      "oracleText": "Response deals 5 damage to target attacking or blocking creature."
+      "cardTypes": [
+        "Instant",
+        "Sorcery"
+      ]
     },
     {
       "name": "Jaya's Immolating Inferno",
@@ -600,12 +499,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nJaya's Immolating Inferno deals X damage to each of up to three targets."
+      ]
     },
     {
       "name": "Martial Coup",
@@ -617,12 +513,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures."
+      ]
     },
     {
       "name": "Relentless Assault",
@@ -634,12 +527,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase."
+      ]
     },
     {
       "name": "Winds of Rath",
@@ -651,12 +541,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures that aren't enchanted. They can't be regenerated."
+      ]
     },
     {
       "name": "Bonesplitter",
@@ -666,12 +553,9 @@
       "oracleCardName": "Bonesplitter",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +2/+0.\nEquip {1}"
+      ]
     },
     {
       "name": "Explorer's Scope",
@@ -681,12 +565,9 @@
       "oracleCardName": "Explorer's Scope",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -696,12 +577,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Blackblade Reforged",
@@ -711,12 +589,9 @@
       "oracleCardName": "Blackblade Reforged",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}"
+      ]
     },
     {
       "name": "Blazing Sunsteel",
@@ -728,12 +603,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+0 for each opponent you have.\nWhenever equipped creature is dealt damage, it deals that much damage to any target.\nEquip {4}"
+      ]
     },
     {
       "name": "Boros Signet",
@@ -746,12 +618,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Hero's Blade",
@@ -761,12 +630,9 @@
       "oracleCardName": "Hero's Blade",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +3/+2.\nWhenever a legendary creature you control enters, you may attach this Equipment to it.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Mask of Avacyn",
@@ -776,12 +642,9 @@
       "oracleCardName": "Mask of Avacyn",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+2 and has hexproof. (It can't be the target of spells or abilities your opponents control.)\nEquip {3}"
+      ]
     },
     {
       "name": "Ring of Thune",
@@ -791,12 +654,9 @@
       "oracleCardName": "Ring of Thune",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has vigilance. (Attacking doesn't cause it to tap.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Ring of Valkas",
@@ -806,12 +666,9 @@
       "oracleCardName": "Ring of Valkas",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste. (It can attack and {T} no matter when it came under your control.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's red.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -821,12 +678,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Fireshrieker",
@@ -836,12 +690,9 @@
       "oracleCardName": "Fireshrieker",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Haunted Cloak",
@@ -851,12 +702,9 @@
       "oracleCardName": "Haunted Cloak",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature has vigilance, trample, and haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Loxodon Warhammer",
@@ -866,12 +714,9 @@
       "oracleCardName": "Loxodon Warhammer",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+0 and has trample and lifelink.\nEquip {3}"
+      ]
     },
     {
       "name": "Sunforger",
@@ -884,12 +729,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +4/+0.\n{R}{W}, Unattach this Equipment: Search your library for a red or white instant card with mana value 4 or less and cast that card without paying its mana cost. Then shuffle.\nEquip {3}"
+      ]
     },
     {
       "name": "Sword of Vengeance",
@@ -899,12 +741,9 @@
       "oracleCardName": "Sword of Vengeance",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}"
+      ]
     },
     {
       "name": "Sigarda's Aid",
@@ -916,12 +755,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "You may cast Aura and Equipment spells as though they had flash.\nWhenever an Equipment you control enters, you may attach it to target creature you control."
+      ]
     },
     {
       "name": "Spirit Mantle",
@@ -933,12 +769,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and has protection from creatures."
+      ]
     },
     {
       "name": "Timely Ward",
@@ -950,12 +783,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "You may cast this spell as though it had flash if it targets a commander.\nEnchant creature\nEnchanted creature has indestructible."
+      ]
     },
     {
       "name": "Unquestioned Authority",
@@ -967,12 +797,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature has protection from creatures."
+      ]
     },
     {
       "name": "Faith Unbroken",
@@ -984,12 +811,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Enchant creature you control\nWhen this Aura enters, exile target creature an opponent controls until this Aura leaves the battlefield.\nEnchanted creature gets +2/+2."
+      ]
     },
     {
       "name": "On Serra's Wings",
@@ -1001,12 +825,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nEnchanted creature is legendary, gets +1/+1, and has flying, vigilance, and lifelink."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1019,11 +840,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Boros Guildgate",
@@ -1036,11 +855,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1050,11 +867,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Encroaching Wastes",
@@ -1064,11 +879,9 @@
       "oracleCardName": "Encroaching Wastes",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}, Sacrifice this land: Destroy target nonbasic land."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1078,11 +891,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1094,11 +905,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Memorial to War",
@@ -1110,11 +919,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice this land: Destroy target land."
+      ]
     },
     {
       "name": "Mountain",
@@ -1126,11 +933,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1142,11 +947,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1158,11 +961,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1174,11 +975,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1190,11 +989,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1206,11 +1003,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1222,11 +1017,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1238,11 +1031,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1254,11 +1045,9 @@
         "R"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1268,11 +1057,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Plains",
@@ -1284,11 +1071,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1300,11 +1085,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1316,11 +1099,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1332,11 +1113,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1348,11 +1127,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1364,11 +1141,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1380,11 +1155,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1396,11 +1169,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1412,11 +1183,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1428,11 +1197,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1444,11 +1211,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1460,11 +1225,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1476,11 +1239,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1492,11 +1253,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1506,11 +1265,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1520,11 +1277,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1536,11 +1291,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Slayers' Stronghold",
@@ -1553,11 +1306,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R}{W}, {T}: Target creature gets +2/+0 and gains vigilance and haste until end of turn."
+      ]
     },
     {
       "name": "Stone Quarry",
@@ -1570,11 +1321,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Sunhome, Fortress of the Legion",
@@ -1587,11 +1336,9 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{R}{W}, {T}: Target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1601,11 +1348,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Transguild Promenade",
@@ -1615,11 +1360,9 @@
       "oracleCardName": "Transguild Promenade",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Wind-Scarred Crag",
@@ -1632,15 +1375,13 @@
         "W"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {W}."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.340Z",
+    "retrievedDate": "2026-06-23T17:40:35.822Z",
     "sourceUrl": "ArmForBattle_CMR.json",
     "deckSource": "precon",
     "createdAt": "2020-11-20T00:00:00.000Z"

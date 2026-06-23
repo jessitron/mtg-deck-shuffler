@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1810949469,
   "name": "Counter Intelligence",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\n1+ | At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.\n8+ | Flying\nOther artifacts you control have hexproof and indestructible."
+      ]
     }
   ],
   "cards": [
@@ -35,13 +32,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever Kilo becomes tapped, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Patrolling Peacemaker",
@@ -52,13 +46,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\nWhenever an opponent commits a crime, proliferate. (They commit a crime if they target an opponent, anything an opponent controls, and/or cards in an opponent's graveyard. To proliferate, you choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Insight Engine",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{2}, {T}: Put a charge counter on this artifact, then draw a card for each charge counter on it."
+      ]
     },
     {
       "name": "Uthros Research Craft",
@@ -85,12 +73,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\n3+ | Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.\n12+ | Flying\nThis Spacecraft gets +1/+0 for each artifact you control."
+      ]
     },
     {
       "name": "Depthshaker Titan",
@@ -101,13 +86,10 @@
         "R"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, any number of target noncreature artifacts you control become 3/3 artifact creatures. Sacrifice them at the beginning of the next end step.\nEach artifact creature you control has melee, trample, and haste. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)"
+      ]
     },
     {
       "name": "Long-Range Sensor",
@@ -118,12 +100,9 @@
         "R"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you attack a player, put a charge counter on this artifact.\n{1}, Remove two charge counters from this artifact: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Moxite Refinery",
@@ -132,12 +111,9 @@
       "oracleCardName": "Moxite Refinery",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery.\n• Put X charge counters on target artifact.\n• Put X +1/+1 counters on target creature."
+      ]
     },
     {
       "name": "Solar Array",
@@ -146,12 +122,9 @@
       "oracleCardName": "Solar Array",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)"
+      ]
     },
     {
       "name": "Surge Conductor",
@@ -160,13 +133,10 @@
       "oracleCardName": "Surge Conductor",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Glittering Massif",
@@ -178,11 +148,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Radiant Summit",
@@ -194,11 +162,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Swan Song",
@@ -209,12 +175,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -225,12 +188,9 @@
         "R"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Cloud Key",
@@ -239,12 +199,9 @@
       "oracleCardName": "Cloud Key",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.\nSpells you cast of the chosen type cost {1} less to cast."
+      ]
     },
     {
       "name": "Gavel of the Righteous",
@@ -253,12 +210,9 @@
       "oracleCardName": "Gavel of the Righteous",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "At the beginning of combat on your turn, put a charge counter on this Equipment.\nEquipped creature gets +1/+1 for each counter on this Equipment.\nAs long as this Equipment has four or more counters on it, equipped creature has double strike.\nEquip—Pay {3} or remove a counter from this Equipment."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -270,11 +224,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Angel of the Ruins",
@@ -285,13 +237,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile up to two target artifacts and/or enchantments.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Fumigate",
@@ -302,12 +251,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures. You gain 1 life for each creature destroyed this way."
+      ]
     },
     {
       "name": "Organic Extinction",
@@ -318,12 +264,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{W}{W}",
-      "cmc": 10,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures."
+      ]
     },
     {
       "name": "Resourceful Defense",
@@ -334,12 +277,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on target permanent you control.\n{4}{W}: Move any number of counters from target permanent you control onto a second target permanent you control."
+      ]
     },
     {
       "name": "Chrome Host Seedshark",
@@ -350,12 +290,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, incubate X, where X is that spell's mana value. (Create an Incubator token with X +1/+1 counters on it and \"{2}: Transform this token.\" It transforms into a 0/0 Phyrexian artifact creature.)"
+      ]
     },
     {
       "name": "Cyberdrive Awakener",
@@ -366,13 +303,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nOther artifact creatures you control have flying.\nWhen this creature enters, each noncreature artifact you control becomes a 4/4 artifact creature until end of turn."
+      ]
     },
     {
       "name": "Deepglow Skate",
@@ -383,12 +317,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, double the number of each kind of counter on any number of target permanents."
+      ]
     },
     {
       "name": "Emry, Lurker of the Loch",
@@ -399,12 +330,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Emry enters, mill four cards.\n{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Kappa Cannoneer",
@@ -415,13 +343,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever this creature or another artifact you control enters, put a +1/+1 counter on this creature. It can't be blocked this turn."
+      ]
     },
     {
       "name": "Phyrexian Metamorph",
@@ -432,13 +357,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nYou may have this creature enter as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Pull from Tomorrow",
@@ -449,12 +371,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards, then discard a card."
+      ]
     },
     {
       "name": "Ripples of Potential",
@@ -465,12 +384,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. Treat phased-out permanents and anything attached to them as though they don't exist until their controller's next turn.)"
+      ]
     },
     {
       "name": "Tekuthal, Inquiry Dominus",
@@ -481,12 +397,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nIf you would proliferate, proliferate twice instead.\n{1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on Tekuthal. ({U/P} can be paid with either {U} or 2 life.)"
+      ]
     },
     {
       "name": "Thought Monitor",
@@ -497,13 +410,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen this creature enters, draw two cards."
+      ]
     },
     {
       "name": "Universal Surveillance",
@@ -514,12 +424,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw X cards."
+      ]
     },
     {
       "name": "Chain Reaction",
@@ -530,12 +437,9 @@
         "R"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Alibou, Ancient Witness",
@@ -547,13 +451,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Other artifact creatures you control have haste.\nWhenever one or more artifact creatures you control attack, Alibou deals X damage to any target and you scry X, where X is the number of tapped artifacts you control."
+      ]
     },
     {
       "name": "Jhoira, Weatherlight Captain",
@@ -565,12 +466,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)"
+      ]
     },
     {
       "name": "Wake the Past",
@@ -582,12 +480,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{W}",
-      "cmc": 7,
-      "oracleText": "Return all artifact cards from your graveyard to the battlefield. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Astral Cornucopia",
@@ -596,12 +491,9 @@
       "oracleCardName": "Astral Cornucopia",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{X}{X}{X}",
-      "cmc": 0,
-      "oracleText": "This artifact enters with X charge counters on it.\n{T}: Choose a color. Add one mana of that color for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Crystalline Crawler",
@@ -610,13 +502,10 @@
       "oracleCardName": "Crystalline Crawler",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.\nRemove a +1/+1 counter from this creature: Add one mana of any color.\n{T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Darksteel Reactor",
@@ -625,12 +514,9 @@
       "oracleCardName": "Darksteel Reactor",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\nAt the beginning of your upkeep, you may put a charge counter on this artifact.\nWhen this artifact has twenty or more charge counters on it, you win the game."
+      ]
     },
     {
       "name": "Empowered Autogenerator",
@@ -639,12 +525,9 @@
       "oracleCardName": "Empowered Autogenerator",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This artifact enters tapped.\n{T}: Put a charge counter on this artifact. Add X mana of any one color, where X is the number of charge counters on this artifact."
+      ]
     },
     {
       "name": "Hangarback Walker",
@@ -653,13 +536,10 @@
       "oracleCardName": "Hangarback Walker",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{X}{X}",
-      "cmc": 0,
-      "oracleText": "This creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on this creature.\n{1}, {T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Lux Artillery",
@@ -668,12 +548,9 @@
       "oracleCardName": "Lux Artillery",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an artifact creature spell, it gains sunburst. (It enters with a +1/+1 counter on it for each color of mana spent to cast it.)\nAt the beginning of your end step, if there are thirty or more counters among artifacts and creatures you control, this artifact deals 10 damage to each opponent."
+      ]
     },
     {
       "name": "Lux Cannon",
@@ -682,12 +559,9 @@
       "oracleCardName": "Lux Cannon",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Put a charge counter on this artifact.\n{T}, Remove three charge counters from this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Steel Overseer",
@@ -696,13 +570,10 @@
       "oracleCardName": "Steel Overseer",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Put a +1/+1 counter on each artifact creature you control."
+      ]
     },
     {
       "name": "Threefold Thunderhulk",
@@ -711,13 +582,10 @@
       "oracleCardName": "Threefold Thunderhulk",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "This creature enters with three +1/+1 counters on it.\nWhenever this creature enters or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.\n{2}, Sacrifice another artifact: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Titan Forge",
@@ -726,12 +594,9 @@
       "oracleCardName": "Titan Forge",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, {T}: Put a charge counter on this artifact.\n{T}, Remove three charge counters from this artifact: Create a 9/9 colorless Golem artifact creature token."
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -743,11 +608,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Cascade Bluffs",
@@ -759,11 +622,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -775,11 +636,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -788,11 +647,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -804,11 +661,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -820,11 +675,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Karn's Bastion",
@@ -833,11 +686,9 @@
       "oracleCardName": "Karn's Bastion",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "The Mycosynth Gardens",
@@ -846,11 +697,9 @@
       "oracleCardName": "The Mycosynth Gardens",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{X}, {T}: This land becomes a copy of target nontoken artifact you control with mana value X."
+      ]
     },
     {
       "name": "Rugged Prairie",
@@ -862,11 +711,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -878,11 +725,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -894,11 +739,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Spire of Industry",
@@ -907,11 +750,9 @@
       "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -923,11 +764,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -939,11 +778,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -955,11 +792,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Triumph",
@@ -971,11 +806,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -986,12 +819,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Tezzeret's Gambit",
@@ -1002,12 +832,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Thirst for Knowledge",
@@ -1018,12 +845,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw three cards. Then discard two cards unless you discard an artifact card."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1032,12 +856,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Pentad Prism",
@@ -1046,12 +867,9 @@
       "oracleCardName": "Pentad Prism",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from this artifact: Add one mana of any color."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1060,12 +878,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1074,11 +889,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dispatch",
@@ -1089,12 +902,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature."
+      ]
     },
     {
       "name": "Etherium Sculptor",
@@ -1105,13 +915,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Artifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Experimental Augury",
@@ -1122,12 +929,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Thrummingbird",
@@ -1138,12 +942,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Enthusiastic Mechanaut",
@@ -1155,13 +956,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Flying\nArtifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Coretapper",
@@ -1170,13 +968,10 @@
       "oracleCardName": "Coretapper",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Put a charge counter on target artifact.\nSacrifice this creature: Put two charge counters on target artifact."
+      ]
     },
     {
       "name": "Etched Oracle",
@@ -1185,13 +980,10 @@
       "oracleCardName": "Etched Oracle",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.)\n{1}, Remove four +1/+1 counters from this creature: Target player draws three cards."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -1200,12 +992,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Golem Foundry",
@@ -1214,12 +1003,9 @@
       "oracleCardName": "Golem Foundry",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an artifact spell, you may put a charge counter on this artifact.\nRemove three charge counters from this artifact: Create a 3/3 colorless Golem artifact creature token."
+      ]
     },
     {
       "name": "Mindless Automaton",
@@ -1228,13 +1014,10 @@
       "oracleCardName": "Mindless Automaton",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}, Discard a card: Put a +1/+1 counter on this creature.\nRemove two +1/+1 counters from this creature: Draw a card."
+      ]
     },
     {
       "name": "Soul-Guide Lantern",
@@ -1243,12 +1026,9 @@
       "oracleCardName": "Soul-Guide Lantern",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this artifact enters, exile target card from a graveyard.\n{T}, Sacrifice this artifact: Exile each opponent's graveyard.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Ancient Den",
@@ -1259,12 +1039,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {W}."
+      ]
     },
     {
       "name": "Buried Ruin",
@@ -1273,11 +1051,9 @@
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1286,11 +1062,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Great Furnace",
@@ -1301,12 +1075,10 @@
         "R"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {R}."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1317,11 +1089,9 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1334,11 +1104,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Razortide Bridge",
@@ -1350,12 +1118,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Rustvale Bridge",
@@ -1367,12 +1133,10 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Seat of the Synod",
@@ -1383,12 +1147,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1399,11 +1161,9 @@
         "W"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Silverbluff Bridge",
@@ -1415,12 +1175,10 @@
         "U"
       ],
       "set": "EOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Plains",
@@ -1431,11 +1189,9 @@
         "W"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1446,11 +1202,9 @@
         "W"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1461,11 +1215,9 @@
         "W"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1476,11 +1228,9 @@
         "U"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1491,11 +1241,9 @@
         "U"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1506,11 +1254,9 @@
         "U"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1521,11 +1267,9 @@
         "R"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1536,11 +1280,9 @@
         "R"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1551,15 +1293,13 @@
         "R"
       ],
       "set": "EOE",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.738Z",
+    "retrievedDate": "2026-06-23T17:40:36.487Z",
     "sourceUrl": "CounterIntelligence_EOC.json",
     "deckSource": "precon",
     "createdAt": "2025-08-01T00:00:00.000Z"

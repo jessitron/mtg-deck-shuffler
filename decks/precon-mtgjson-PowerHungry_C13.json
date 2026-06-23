@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1683959816,
   "name": "Power Hungry",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}{G}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, create X 0/1 red Kobold creature tokens named Kobolds of Kher Keep, where X is the amount of mana spent to cast it.\nFlying\nSacrifice another creature: Prossh gets +1/+0 until end of turn."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each end step, each player gains control of all nontoken permanents they own."
+      ]
     },
     {
       "name": "Capricious Efreet",
@@ -52,12 +46,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random."
+      ]
     },
     {
       "name": "Charnelhoard Wurm",
@@ -71,12 +62,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhenever this creature deals damage to an opponent, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Deathbringer Thoctar",
@@ -89,12 +77,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever another creature dies, you may put a +1/+1 counter on this creature.\nRemove a +1/+1 counter from this creature: It deals 1 damage to any target."
+      ]
     },
     {
       "name": "Deepfire Elemental",
@@ -107,12 +92,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "{X}{X}{1}: Destroy target artifact or creature with mana value X."
+      ]
     },
     {
       "name": "Elvish Skysweeper",
@@ -124,12 +106,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{4}{G}, Sacrifice a creature: Destroy target creature with flying."
+      ]
     },
     {
       "name": "Endless Cockroaches",
@@ -141,12 +120,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, return it to its owner's hand."
+      ]
     },
     {
       "name": "Endrek Sahr, Master Breeder",
@@ -158,12 +134,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever you cast a creature spell, create X 1/1 black Thrull creature tokens, where X is that spell's mana value.\nWhen you control seven or more Thrulls, sacrifice Endrek Sahr."
+      ]
     },
     {
       "name": "Fell Shepherd",
@@ -175,12 +148,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Whenever this creature deals combat damage to a player, you may return to your hand all creature cards that were put into your graveyard from the battlefield this turn.\n{B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Goblin Sharpshooter",
@@ -192,12 +162,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "This creature doesn't untap during your untap step.\nWhenever a creature dies, untap this creature.\n{T}: This creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Golgari Guildmage",
@@ -210,12 +177,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B/G}{B/G}",
-      "cmc": 2,
-      "oracleText": "{4}{B}, Sacrifice a creature: Return target creature card from your graveyard to your hand.\n{4}{G}: Put a +1/+1 counter on target creature."
+      ]
     },
     {
       "name": "Hooded Horror",
@@ -227,12 +191,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "This creature can't be blocked as long as defending player controls the most creatures or is tied for the most."
+      ]
     },
     {
       "name": "Hua Tuo, Honored Physician",
@@ -244,12 +205,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "{T}: Put target creature card from your graveyard on top of your library. Activate only during your turn, before attackers are declared."
+      ]
     },
     {
       "name": "Hunted Troll",
@@ -261,12 +219,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, target opponent creates four 1/1 blue Faerie creature tokens with flying.\n{G}: Regenerate this creature."
+      ]
     },
     {
       "name": "Inferno Titan",
@@ -278,12 +233,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "{R}: This creature gets +1/+0 until end of turn.\nWhenever this creature enters or attacks, it deals 3 damage divided as you choose among one, two, or three targets."
+      ]
     },
     {
       "name": "Jade Mage",
@@ -295,12 +247,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{2}{G}: Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Ophiomancer",
@@ -312,12 +261,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."
+      ]
     },
     {
       "name": "Quagmire Druid",
@@ -330,12 +276,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{G}, {T}, Sacrifice a creature: Destroy target enchantment."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -347,12 +290,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Scarland Thrinax",
@@ -366,12 +306,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Sacrifice a creature: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Sek'Kuar, Deathkeeper",
@@ -385,12 +322,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste."
+      ]
     },
     {
       "name": "Shattergang Brothers",
@@ -404,12 +338,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}{G}",
-      "cmc": 4,
-      "oracleText": "{2}{B}, Sacrifice a creature: Each other player sacrifices a creature.\n{2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.\n{2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment."
+      ]
     },
     {
       "name": "Silklash Spider",
@@ -421,12 +352,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Reach\n{X}{G}{G}: This creature deals X damage to each creature with flying."
+      ]
     },
     {
       "name": "Sprouting Thrinax",
@@ -440,12 +368,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, create three 1/1 green Saproling creature tokens."
+      ]
     },
     {
       "name": "Stalking Vengeance",
@@ -457,12 +382,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Haste\nWhenever another creature you control dies, it deals damage equal to its power to target player or planeswalker."
+      ]
     },
     {
       "name": "Stronghold Assassin",
@@ -474,12 +396,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "{T}, Sacrifice a creature: Destroy target nonblack creature."
+      ]
     },
     {
       "name": "Terra Ravager",
@@ -491,12 +410,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls."
+      ]
     },
     {
       "name": "Viscera Seer",
@@ -508,12 +424,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Walker of the Grove",
@@ -525,12 +438,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature leaves the battlefield, create a 4/4 green Elemental creature token.\nEvoke {4}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Wight of Precinct Six",
@@ -542,12 +452,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "This creature gets +1/+1 for each creature card in your opponents' graveyards."
+      ]
     },
     {
       "name": "Dirge of Dread",
@@ -559,12 +466,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "All creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have target creature gain fear until end of turn."
+      ]
     },
     {
       "name": "Mass Mutiny",
@@ -576,12 +480,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Restore",
@@ -593,12 +494,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Put target land card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Rough // Tumble",
@@ -610,12 +508,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 8,
-      "oracleText": "Rough deals 2 damage to each creature without flying."
+      ]
     },
     {
       "name": "Spoils of Victory",
@@ -627,12 +522,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle."
+      ]
     },
     {
       "name": "Sudden Demise",
@@ -644,12 +536,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "Choose a color. Sudden Demise deals X damage to each creature of the chosen color."
+      ]
     },
     {
       "name": "Tempt with Vengeance",
@@ -661,12 +550,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "Tempting offer — Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste."
+      ]
     },
     {
       "name": "Jund Charm",
@@ -680,12 +566,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Jund Charm deals 2 damage to each creature.\n• Put two +1/+1 counters on target creature."
+      ]
     },
     {
       "name": "Reincarnation",
@@ -697,12 +580,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner."
+      ]
     },
     {
       "name": "Armillary Sphere",
@@ -712,12 +592,9 @@
       "oracleCardName": "Armillary Sphere",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Carnage Altar",
@@ -727,12 +604,9 @@
       "oracleCardName": "Carnage Altar",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{3}, Sacrifice a creature: Draw a card."
+      ]
     },
     {
       "name": "Jar of Eyeballs",
@@ -742,12 +616,9 @@
       "oracleCardName": "Jar of Eyeballs",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control dies, put two eyeball counters on this artifact.\n{3}, {T}, Remove all eyeball counters from this artifact: Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Obelisk of Jund",
@@ -761,12 +632,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Plague Boiler",
@@ -779,12 +647,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, put a plague counter on this artifact.\n{1}{B}{G}: Put a plague counter on this artifact or remove a plague counter from it.\nWhen this artifact has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -794,12 +659,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Spine of Ish Sah",
@@ -809,12 +671,9 @@
       "oracleCardName": "Spine of Ish Sah",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this artifact enters, destroy target permanent.\nWhen this artifact is put into a graveyard from the battlefield, return it to its owner's hand."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -824,12 +683,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Blood Rites",
@@ -841,12 +697,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "{1}{R}, Sacrifice a creature: This enchantment deals 2 damage to any target."
+      ]
     },
     {
       "name": "Curse of Chaos",
@@ -858,12 +711,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card."
+      ]
     },
     {
       "name": "Curse of Predation",
@@ -875,12 +725,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a creature attacks enchanted player, put a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Curse of Shallow Graves",
@@ -892,12 +739,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Fecundity",
@@ -909,12 +753,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature dies, that creature's controller may draw a card."
+      ]
     },
     {
       "name": "Foster",
@@ -926,12 +767,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard."
+      ]
     },
     {
       "name": "Furnace Celebration",
@@ -943,12 +781,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you sacrifice another permanent, you may pay {2}. If you do, this enchantment deals 2 damage to any target."
+      ]
     },
     {
       "name": "Goblin Bombardment",
@@ -960,12 +795,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Sacrifice a creature: This enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Night Soil",
@@ -977,12 +809,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}{G}",
-      "cmc": 2,
-      "oracleText": "{1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Primal Vigor",
@@ -994,12 +823,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "If one or more tokens would be created, twice that many of those tokens are created instead.\nIf one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead."
+      ]
     },
     {
       "name": "Tooth and Claw",
@@ -1011,12 +837,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Sacrifice two creatures: Create a 3/1 red Beast creature token named Carnivore."
+      ]
     },
     {
       "name": "Vile Requiem",
@@ -1028,12 +851,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, you may put a verse counter on this enchantment.\n{1}{B}, Sacrifice this enchantment: Destroy up to X target nonblack creatures, where X is the number of verse counters on this enchantment. They can't be regenerated."
+      ]
     },
     {
       "name": "Widespread Panic",
@@ -1045,12 +865,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library."
+      ]
     },
     {
       "name": "Akoum Refuge",
@@ -1063,11 +880,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1077,11 +892,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1091,11 +904,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forest",
@@ -1107,11 +918,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1123,11 +932,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1139,11 +946,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1155,11 +960,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1171,11 +974,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1187,11 +988,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1203,11 +1002,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Golgari Guildgate",
@@ -1220,11 +1017,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1237,11 +1032,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Grim Backwoods",
@@ -1254,11 +1047,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card."
+      ]
     },
     {
       "name": "Gruul Guildgate",
@@ -1271,11 +1062,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Jund Panorama",
@@ -1285,11 +1074,9 @@
       "oracleCardName": "Jund Panorama",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kazandu Refuge",
@@ -1302,11 +1089,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Khalni Garden",
@@ -1318,11 +1103,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, create a 0/1 green Plant creature token.\n{T}: Add {G}."
+      ]
     },
     {
       "name": "Kher Keep",
@@ -1334,11 +1117,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep."
+      ]
     },
     {
       "name": "Llanowar Reborn",
@@ -1350,11 +1131,9 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nGraft 1 (This land enters with a +1/+1 counter on it. Whenever a creature enters, you may move a +1/+1 counter from this land onto it.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1366,11 +1145,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1382,11 +1159,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1398,11 +1173,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1414,11 +1187,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1430,11 +1201,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1446,11 +1215,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1462,11 +1229,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1476,11 +1241,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Rakdos Guildgate",
@@ -1493,11 +1256,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1507,11 +1268,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Savage Lands",
@@ -1525,11 +1284,9 @@
         "R"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Swamp",
@@ -1541,11 +1298,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1557,11 +1312,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1573,11 +1326,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1589,11 +1340,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1605,11 +1354,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1621,11 +1368,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1635,11 +1380,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1649,11 +1392,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Vivid Grove",
@@ -1665,15 +1406,13 @@
         "G"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {G}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.342Z",
+    "retrievedDate": "2026-06-23T17:40:39.253Z",
     "sourceUrl": "PowerHungry_C13.json",
     "deckSource": "precon",
     "createdAt": "2013-11-01T00:00:00.000Z"

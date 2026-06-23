@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1306018483,
   "name": "Quantum Quandrix",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{G}{G}{G}",
-      "cmc": 5,
-      "oracleText": "[+1]: Create a 3/3 green Beast creature token.\n[−3]: Draw cards equal to the greatest power among creatures you control.\n[−6]: Create a 6/6 green Wurm creature token for each land you control."
+      ]
     },
     {
       "name": "Esix, Fractal Bloom",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nThe first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix and create that many tokens that are copies of that creature."
+      ]
     },
     {
       "name": "Curiosity Crafter",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nYou have no maximum hand size.\nWhenever a creature token you control deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Deekah, Fractal Theorist",
@@ -86,12 +74,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value.\n{3}{U}: Target creature token can't be blocked this turn."
+      ]
     },
     {
       "name": "Spawning Kraken",
@@ -103,12 +88,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Whenever a Kraken, Leviathan, Octopus, or Serpent you control deals combat damage to a player, create a 9/9 blue Kraken creature token."
+      ]
     },
     {
       "name": "Guardian Augmenter",
@@ -120,12 +102,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Flash\nCommander creatures you control get +2/+2.\nCommanders you control have hexproof."
+      ]
     },
     {
       "name": "Ruxa, Patient Professor",
@@ -137,12 +116,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.\nCreatures you control with no abilities get +1/+1.\nFor each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked."
+      ]
     },
     {
       "name": "Desolation Twin",
@@ -152,12 +128,9 @@
       "oracleCardName": "Desolation Twin",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "When you cast this spell, create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Champion of Wits",
@@ -169,12 +142,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may draw cards equal to its power. If you do, discard two cards.\nEternalize {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Snake Wizard with no mana cost. Eternalize only as a sorcery.)"
+      ]
     },
     {
       "name": "Crafty Cutpurse",
@@ -186,12 +156,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this creature enters, each token that would be created under an opponent's control this turn is created under your control instead."
+      ]
     },
     {
       "name": "Reef Worm",
@@ -203,12 +170,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, create a 3/3 blue Fish creature token with \"When this token dies, create a 6/6 blue Whale creature token with 'When this token dies, create a 9/9 blue Kraken creature token.'\""
+      ]
     },
     {
       "name": "Arashi, the Sky Asunder",
@@ -220,12 +184,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "{X}{G}, {T}: Arashi deals X damage to target creature with flying.\nChannel — {X}{G}{G}, Discard this card: It deals X damage to each creature with flying."
+      ]
     },
     {
       "name": "Forgotten Ancient",
@@ -237,12 +198,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
+      ]
     },
     {
       "name": "Hornet Nest",
@@ -254,12 +212,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Defender (This creature can't attack.)\nWhenever this creature is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -271,12 +226,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Hydra Broodmaster",
@@ -288,12 +240,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, create X X/X green Hydra creature tokens."
+      ]
     },
     {
       "name": "Incubation Druid",
@@ -305,12 +254,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any type that a land you control could produce. If this creature has a +1/+1 counter on it, add three mana of that type instead.\n{3}{G}{G}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)"
+      ]
     },
     {
       "name": "Kazandu Tuskcaller",
@@ -322,12 +268,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-5\n1/1\n{T}: Create a 3/3 green Elephant creature token.\nLEVEL 6+\n1/1\n{T}: Create two 3/3 green Elephant creature tokens."
+      ]
     },
     {
       "name": "Managorger Hydra",
@@ -339,12 +282,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever a player casts a spell, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -356,12 +296,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Terastodon",
@@ -373,12 +310,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Kaseto, Orochi Archmage",
@@ -391,12 +325,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "{G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn."
+      ]
     },
     {
       "name": "Master Biomancer",
@@ -409,12 +340,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Each other creature you control enters with a number of additional +1/+1 counters on it equal to this creature's power and as a Mutant in addition to its other types."
+      ]
     },
     {
       "name": "Biomathematician",
@@ -427,12 +355,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on each Fractal you control."
+      ]
     },
     {
       "name": "Quandrix Cultivator",
@@ -445,12 +370,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G/U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic Forest or Island card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Zimone, Quandrix Prodigy",
@@ -463,12 +385,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: You may put a land card from your hand onto the battlefield tapped.\n{4}, {T}: Draw a card. If you control eight or more lands, draw two cards instead."
+      ]
     },
     {
       "name": "Coiling Oracle",
@@ -481,12 +400,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "Plaxcaster Frogling",
@@ -499,12 +415,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Graft 3 (This creature enters with three +1/+1 counters on it. Whenever another creature enters, you may move a +1/+1 counter from this creature onto it.)\n{2}: Target creature with a +1/+1 counter on it gains shroud until end of turn. (It can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Trygon Predator",
@@ -517,12 +430,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, you may destroy target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Replication Technique",
@@ -534,12 +444,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nCreate a token that's a copy of target permanent you control."
+      ]
     },
     {
       "name": "Oversimplify",
@@ -552,12 +459,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Exile all creatures. Each player creates a 0/0 green and blue Fractal creature token and puts a number of +1/+1 counters on it equal to the total power of creatures they controlled that were exiled this way."
+      ]
     },
     {
       "name": "Curse of the Swine",
@@ -569,12 +473,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
+      ]
     },
     {
       "name": "Rite of Replication",
@@ -586,12 +487,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead."
+      ]
     },
     {
       "name": "Shamanic Revelation",
@@ -603,12 +501,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+      ]
     },
     {
       "name": "Spitting Image",
@@ -621,12 +516,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G/U}{G/U}",
-      "cmc": 6,
-      "oracleText": "Create a token that's a copy of target creature.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Golden Ratio",
@@ -639,12 +531,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each different power among creatures you control."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -656,12 +545,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Incubation // Incongruity",
@@ -674,12 +560,10 @@
         "U"
       ],
       "set": "C21",
-      "types": [
-        "Sorcery"
-      ],
-      "manaCost": "{G/U}",
-      "cmc": 4,
-      "oracleText": "Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      "cardTypes": [
+        "Sorcery",
+        "Instant"
+      ]
     },
     {
       "name": "Perplexing Test",
@@ -691,12 +575,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Return all creature tokens to their owners' hands.\n• Return all nontoken creatures to their owners' hands."
+      ]
     },
     {
       "name": "Theoretical Duplication",
@@ -708,12 +589,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature an opponent controls enters this turn, create a token that's a copy of that creature."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -725,12 +603,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Biomass Mutation",
@@ -743,12 +618,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G/U}{G/U}",
-      "cmc": 2,
-      "oracleText": "Creatures you control have base power and toughness X/X until end of turn."
+      ]
     },
     {
       "name": "Eureka Moment",
@@ -761,12 +633,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Draw two cards. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Rapid Hybridization",
@@ -778,12 +647,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token."
+      ]
     },
     {
       "name": "Beast Within",
@@ -795,12 +661,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Krosan Grip",
@@ -812,12 +675,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nDestroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Fractal Harness",
@@ -829,12 +689,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{X}{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this Equipment enters, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and attach this Equipment to it.\nWhenever equipped creature attacks, double the number of +1/+1 counters on it.\nEquip {2}"
+      ]
     },
     {
       "name": "Sequence Engine",
@@ -846,12 +703,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "{X}, {T}: Exile target creature card with mana value X from a graveyard. Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Geometric Nexus",
@@ -861,12 +715,9 @@
       "oracleCardName": "Geometric Nexus",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever a player casts an instant or sorcery spell, put a number of charge counters on this artifact equal to that spell's mana value.\n{6}, {T}, Remove all charge counters from this artifact: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of charge counters removed this way."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -876,12 +727,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -891,12 +739,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -909,12 +754,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -924,12 +766,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Paradox Zone",
@@ -941,12 +780,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "This enchantment enters with a growth counter on it.\nAt the beginning of your end step, double the number of growth counters on this enchantment. Then create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of growth counters on this enchantment."
+      ]
     },
     {
       "name": "Primal Empathy",
@@ -959,12 +795,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, draw a card if you control a creature with the greatest power among creatures on the battlefield. Otherwise, put a +1/+1 counter on a creature you control."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -974,11 +807,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Lumbering Falls",
@@ -991,11 +822,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}.\n{2}{G}{U}: Until end of turn, this land becomes a 3/3 green and blue Elemental creature with hexproof. It's still a land."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -1007,11 +836,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Oran-Rief, the Vastwood",
@@ -1023,11 +850,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -1040,11 +865,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -1057,11 +880,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Quandrix Campus",
@@ -1074,11 +895,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Scry 1."
+      ]
     },
     {
       "name": "Study Hall",
@@ -1088,11 +907,9 @@
       "oracleCardName": "Study Hall",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -1104,11 +921,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1118,11 +933,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Llanowar Reborn",
@@ -1134,11 +947,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nGraft 1 (This land enters with a +1/+1 counter on it. Whenever a creature enters, you may move a +1/+1 counter from this land onto it.)"
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1150,11 +961,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1164,11 +973,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Novijen, Heart of Progress",
@@ -1181,11 +988,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G}{U}, {T}: Put a +1/+1 counter on each creature that entered this turn."
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1195,11 +1000,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1212,11 +1015,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1226,11 +1027,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1242,11 +1041,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1258,11 +1055,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1274,11 +1069,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1290,11 +1083,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1306,11 +1097,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1322,11 +1111,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1338,11 +1125,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1354,11 +1139,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1370,11 +1153,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1386,11 +1167,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1402,11 +1181,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1418,11 +1195,9 @@
         "G"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1434,11 +1209,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1450,11 +1223,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1466,11 +1237,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1482,11 +1251,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1498,11 +1265,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1514,11 +1279,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1530,11 +1293,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1546,11 +1307,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1562,11 +1321,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1578,11 +1335,9 @@
         "U"
       ],
       "set": "STX",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Commander's Insight",
@@ -1594,12 +1349,9 @@
         "U"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game."
+      ]
     },
     {
       "name": "Ezuri's Predation",
@@ -1611,12 +1363,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those tokens fights a different one of those creatures."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -1628,12 +1377,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Nissa's Expedition",
@@ -1645,12 +1391,9 @@
         "G"
       ],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1660,15 +1403,13 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "C21",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.380Z",
+    "retrievedDate": "2026-06-23T17:40:39.343Z",
     "sourceUrl": "QuantumQuandrix_C21.json",
     "deckSource": "precon",
     "createdAt": "2021-04-23T00:00:00.000Z"

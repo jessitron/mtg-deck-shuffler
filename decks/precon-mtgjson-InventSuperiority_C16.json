@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1204229271,
   "name": "Invent Superiority",
   "totalCards": 100,
@@ -17,13 +17,10 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "When Breya enters, create two 1/1 blue Thopter artifact creature tokens with flying.\n{2}, Sacrifice two artifacts: Choose one —\n• Breya deals 3 damage to target player or planeswalker.\n• Target creature gets -4/-4 until end of turn.\n• You gain 5 life."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "[+2]: Discard up to two cards, then draw that many cards.\n[−2]: Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.\n[−10]: You get an emblem with \"Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step.\"\nDaretti, Scrap Savant can be your commander."
+      ]
     },
     {
       "name": "Myr Retriever",
@@ -52,13 +46,10 @@
       "oracleCardName": "Myr Retriever",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this creature dies, return another target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Chief Engineer",
@@ -70,12 +61,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)"
+      ]
     },
     {
       "name": "Etherium Sculptor",
@@ -87,13 +75,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Artifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Vedalken Engineer",
@@ -105,12 +90,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "{T}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts."
+      ]
     },
     {
       "name": "Slobad, Goblin Tinkerer",
@@ -122,12 +104,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Sacrifice an artifact: Target artifact gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Baleful Strix",
@@ -140,13 +119,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Akiri, Line-Slinger",
@@ -159,12 +135,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "First strike, vigilance\nAkiri gets +1/+0 for each artifact you control.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Armory Automaton",
@@ -174,13 +147,10 @@
       "oracleCardName": "Armory Automaton",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature enters or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)"
+      ]
     },
     {
       "name": "Shimmer Myr",
@@ -190,13 +160,10 @@
       "oracleCardName": "Shimmer Myr",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flash\nYou may cast artifact spells as though they had flash."
+      ]
     },
     {
       "name": "Master of Etherium",
@@ -208,13 +175,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Trinket Mage",
@@ -226,12 +190,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for an artifact card with mana value 1 or less, reveal that card, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Magus of the Will",
@@ -243,12 +204,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{2}{B}, {T}, Exile this creature: Until end of turn, you may play lands and cast spells from your graveyard. If a card would be put into your graveyard from anywhere this turn, exile that card instead."
+      ]
     },
     {
       "name": "Hanna, Ship's Navigator",
@@ -261,12 +219,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "{1}{W}{U}, {T}: Return target artifact or enchantment card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Silas Renn, Seeker Adept",
@@ -279,13 +234,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhenever Silas Renn deals combat damage to a player, choose target artifact card in your graveyard. You may cast that card this turn.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Sydri, Galvanic Genius",
@@ -299,12 +251,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}",
-      "cmc": 3,
-      "oracleText": "{U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.\n{W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn."
+      ]
     },
     {
       "name": "Etched Oracle",
@@ -314,13 +263,10 @@
       "oracleCardName": "Etched Oracle",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.)\n{1}, Remove four +1/+1 counters from this creature: Target player draws three cards."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -330,13 +276,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Sanctum Gargoyle",
@@ -348,13 +291,10 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, you may return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Faerie Artisans",
@@ -366,12 +306,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a nontoken creature an opponent controls enters, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with this creature."
+      ]
     },
     {
       "name": "Bruse Tarl, Boorish Herder",
@@ -384,12 +321,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever Bruse Tarl enters or attacks, target creature you control gains double strike and lifelink until end of turn.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Ethersworn Adjudicator",
@@ -403,13 +337,10 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\n{1}{W}{B}, {T}: Destroy target creature or enchantment.\n{2}{U}: Untap this creature."
+      ]
     },
     {
       "name": "Sphinx Summoner",
@@ -422,13 +353,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, you may search your library for an artifact creature card, reveal it, put it into your hand. then shuffle."
+      ]
     },
     {
       "name": "Jor Kadeen, the Prevailer",
@@ -441,12 +369,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "First strike\nMetalcraft — Creatures you control get +3/+0 as long as you control three or more artifacts."
+      ]
     },
     {
       "name": "Soul of New Phyrexia",
@@ -456,13 +381,10 @@
       "oracleCardName": "Soul of New Phyrexia",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Trample\n{5}: Permanents you control gain indestructible until end of turn.\n{5}, Exile this card from your graveyard: Permanents you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Godo, Bandit Warlord",
@@ -474,12 +396,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "When Godo enters, you may search your library for an Equipment card, put it onto the battlefield, then shuffle.\nWhenever Godo attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Hellkite Tyrant",
@@ -491,12 +410,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nWhenever this creature deals combat damage to a player, gain control of all artifacts that player controls.\nAt the beginning of your upkeep, if you control twenty or more artifacts, you win the game."
+      ]
     },
     {
       "name": "Sharuum the Hegemon",
@@ -510,13 +426,10 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen Sharuum enters, you may return target artifact card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Myr Battlesphere",
@@ -526,13 +439,10 @@
       "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create four 1/1 colorless Myr artifact creature tokens.\nWhenever this creature attacks, you may tap X untapped Myr you control. If you do, this creature gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking."
+      ]
     },
     {
       "name": "Hellkite Igniter",
@@ -544,12 +454,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\n{1}{R}: This creature gets +X/+0 until end of turn, where X is the number of artifacts you control."
+      ]
     },
     {
       "name": "Filigree Angel",
@@ -562,13 +469,10 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}{U}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhen this creature enters, you gain 3 life for each artifact you control."
+      ]
     },
     {
       "name": "Whipflare",
@@ -580,12 +484,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whipflare deals 2 damage to each nonartifact creature."
+      ]
     },
     {
       "name": "Parting Thoughts",
@@ -597,12 +498,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature."
+      ]
     },
     {
       "name": "Trash for Treasure",
@@ -614,12 +512,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice an artifact.\nReturn target artifact card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Beacon of Unrest",
@@ -631,12 +526,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library."
+      ]
     },
     {
       "name": "Migratory Route",
@@ -649,12 +541,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Open the Vaults",
@@ -666,12 +555,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control. (Auras with nothing to enchant remain in graveyards.)"
+      ]
     },
     {
       "name": "Phyrexian Rebirth",
@@ -683,12 +569,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, where X is the number of creatures destroyed this way."
+      ]
     },
     {
       "name": "Grave Upheaval",
@@ -701,12 +584,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. It gains haste.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Coastal Breach",
@@ -718,12 +598,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nReturn all nonland permanents to their owners' hands."
+      ]
     },
     {
       "name": "Grip of Phyresis",
@@ -735,12 +612,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Gain control of target Equipment, then create a 0/0 black Phyrexian Germ creature token and attach that Equipment to it."
+      ]
     },
     {
       "name": "Ancient Excavation",
@@ -753,12 +627,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Read the Runes",
@@ -770,12 +641,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}",
-      "cmc": 1,
-      "oracleText": "Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent."
+      ]
     },
     {
       "name": "Trial // Error",
@@ -789,12 +657,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 4,
-      "oracleText": "Return all creatures blocking or blocked by target creature to their owner's hand."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -804,12 +669,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -819,12 +681,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -834,12 +693,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Dispeller's Capsule",
@@ -851,12 +707,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{2}{W}, {T}, Sacrifice this artifact: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Executioner's Capsule",
@@ -868,12 +721,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{1}{B}, {T}, Sacrifice this artifact: Destroy target nonblack creature."
+      ]
     },
     {
       "name": "Cranial Plating",
@@ -885,12 +735,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+0 for each artifact you control.\n{B}{B}: Attach this Equipment to target creature you control.\nEquip {1}"
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -900,12 +747,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Ichor Wellspring",
@@ -915,12 +759,9 @@
       "oracleCardName": "Ichor Wellspring",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters or is put into a graveyard from the battlefield, draw a card."
+      ]
     },
     {
       "name": "Mycosynth Wellspring",
@@ -930,12 +771,9 @@
       "oracleCardName": "Mycosynth Wellspring",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters or is put into a graveyard from the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -945,12 +783,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Thopter Foundry",
@@ -964,12 +799,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{W/B}{U}",
-      "cmc": 2,
-      "oracleText": "{1}, Sacrifice a nontoken artifact: Create a 1/1 blue Thopter artifact creature token with flying. You gain 1 life."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -979,12 +811,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Loxodon Warhammer",
@@ -994,12 +823,9 @@
       "oracleCardName": "Loxodon Warhammer",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+0 and has trample and lifelink.\nEquip {3}"
+      ]
     },
     {
       "name": "Bonehoard",
@@ -1009,12 +835,9 @@
       "oracleCardName": "Bonehoard",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
+      ]
     },
     {
       "name": "Nevinyrral's Disk",
@@ -1024,12 +847,9 @@
       "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This artifact enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
+      ]
     },
     {
       "name": "Trading Post",
@@ -1039,12 +859,9 @@
       "oracleCardName": "Trading Post",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}, Discard a card: You gain 4 life.\n{1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token.\n{1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.\n{1}, {T}, Sacrifice an artifact: Draw a card."
+      ]
     },
     {
       "name": "Blinkmoth Urn",
@@ -1054,12 +871,9 @@
       "oracleCardName": "Blinkmoth Urn",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "At the beginning of each player's first main phase, if this artifact is untapped, that player adds {C} for each artifact they control."
+      ]
     },
     {
       "name": "Darksteel Citadel",
@@ -1069,12 +883,10 @@
       "oracleCardName": "Darksteel Citadel",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Indestructible\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Seat of the Synod",
@@ -1086,12 +898,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}."
+      ]
     },
     {
       "name": "Curse of Vengeance",
@@ -1103,12 +913,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Enchant player\nWhenever enchanted player casts a spell, put a spite counter on this Aura.\nWhen enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on this Aura."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1122,11 +929,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1136,11 +941,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1153,11 +956,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1170,11 +971,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Buried Ruin",
@@ -1184,11 +983,9 @@
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1198,11 +995,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1216,11 +1011,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1233,11 +1026,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1247,11 +1038,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1261,11 +1050,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1279,11 +1066,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -1297,11 +1082,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1314,11 +1097,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1328,11 +1109,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1342,11 +1121,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1356,11 +1133,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Transguild Promenade",
@@ -1370,11 +1145,9 @@
       "oracleCardName": "Transguild Promenade",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Plains",
@@ -1386,11 +1159,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1402,11 +1173,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1418,11 +1187,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1434,11 +1201,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1450,11 +1215,9 @@
         "W"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1466,11 +1229,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1482,11 +1243,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1498,11 +1257,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1514,11 +1271,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1530,11 +1285,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1546,11 +1299,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1562,11 +1313,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1578,11 +1327,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1594,11 +1341,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1610,11 +1355,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1626,11 +1369,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1642,11 +1383,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1658,15 +1397,13 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.629Z",
+    "retrievedDate": "2026-06-23T17:40:38.005Z",
     "sourceUrl": "InventSuperiority_C16.json",
     "deckSource": "precon",
     "createdAt": "2016-11-11T00:00:00.000Z"

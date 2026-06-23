@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2054498862,
   "name": "Wakanda Forever",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever T'Challa enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and \"{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\")\nWhenever you cast an artifact spell with mana value 4 or greater, put two +1/+1 counters on T'Challa."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token. (It's an artifact with indestructible and \"{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\")\nSacrifice this creature: Legendary permanents you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Everett K. Ross, Hapless Attaché",
@@ -48,12 +42,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you control get +1/+1 and have lifelink.\nWhenever an opponent attacks you with two or more creatures, draw a card."
+      ]
     },
     {
       "name": "Hatut Zeraze Strike Force",
@@ -64,12 +55,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nWhen this creature enters, destroy up to one target artifact or enchantment."
+      ]
     },
     {
       "name": "King Solomon's Frogs",
@@ -80,12 +68,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen King Solomon's Frogs enters, if you cast it, for each opponent, exile up to one target permanent that player controls with mana value 3 or greater. For each permanent exiled this way, its controller draws a card.\n{3}, {T}, Exile King Solomon's Frogs: You become the monarch."
+      ]
     },
     {
       "name": "Midnight Angel Armor",
@@ -96,12 +81,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "When this Equipment enters, create a 1/1 white Soldier creature token, then attach this Equipment to it.\nEquipped creature gets +3/+3 and has flying and vigilance.\nEquip {3}"
+      ]
     },
     {
       "name": "Queen Mother Ramonda",
@@ -112,12 +94,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "When Queen Mother Ramonda enters, you become the monarch.\nAs long as you're the monarch, creatures with power 2 or less can't attack you."
+      ]
     },
     {
       "name": "Royal Talon Fighter Jet",
@@ -128,12 +107,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Flying\nThis Vehicle enters with X +1/+1 counters on it.\nWhenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it.\nCrew 2"
+      ]
     },
     {
       "name": "The Spear of Bashenga",
@@ -144,12 +120,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "When The Spear of Bashenga enters, if there is no monarch, you become the monarch.\nEquipped creature gets +2/+2 and has vigilance.\nWhenever equipped creature attacks the monarch, destroy target tapped nonland permanent that player controls.\nEquip {2}"
+      ]
     },
     {
       "name": "Ancestral Communion",
@@ -160,12 +133,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell while you control your commander, copy this spell. You may choose a new target for the copy.\nReturn target permanent card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Fight for the Throne",
@@ -176,12 +146,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls. When the creature an opponent controls dies this turn, if you control your commander, you become the monarch."
+      ]
     },
     {
       "name": "M'Baku, Jabari Chieftain",
@@ -192,12 +159,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, if there is no monarch, target opponent becomes the monarch.\nWhenever a creature attacks one of your opponents, if that player is the monarch, that creature gets +1/+1 and gains trample until end of turn."
+      ]
     },
     {
       "name": "Nakia, Wakandan Operative",
@@ -208,12 +172,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nWhenever your commander enters, you become the monarch.\n{2}, {T}: Put two +1/+1 counters on target creature or Vehicle. Activate only as a sorcery."
+      ]
     },
     {
       "name": "W'Kabi, Shield of the Nation",
@@ -224,12 +185,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Vigilance\nWhenever you attack with your commander, if you control an artifact with mana value 4 or greater, create a 4/4 green Rhino creature token with trample."
+      ]
     },
     {
       "name": "Wakanda Forever!",
@@ -240,12 +198,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reveal the top six cards of your library. You may put a permanent card from among them onto the battlefield with an indestructible counter on it. You may put a permanent card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Zuri, Warrior of Wakanda",
@@ -256,12 +211,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Trample\nWhenever you cast an artifact spell with mana value 4 or greater, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Bast, Panther Goddess",
@@ -273,12 +225,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Reach, trample, indestructible\nBast can't attack or block unless you control three or more creatures.\nWhenever you attack, target attacking creature gets +X/+X until end of turn, where X is the number of creatures you control."
+      ]
     },
     {
       "name": "Okoye, Mighty and Adored",
@@ -290,12 +239,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "When Okoye enters, you become the monarch.\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever that creature attacks the monarch this turn, it gains double strike and trample until end of turn."
+      ]
     },
     {
       "name": "Shuri, the Black Panther",
@@ -307,12 +253,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Lifelink\nWhenever Shuri attacks, draw a card if you control three or more artifacts. Then if you control six or more artifacts, creatures you control get +2/+2 until end of turn."
+      ]
     },
     {
       "name": "Storm, Queen of Wakanda",
@@ -324,12 +267,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever Storm attacks, until end of turn, another target attacking creature gains flying and gets +X/+0, where X is Storm's power.\nWhenever a creature with flying attacks you, Storm deals damage equal to her power to that creature."
+      ]
     },
     {
       "name": "T'Chaka, Venerable King",
@@ -341,12 +281,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "When T'Chaka enters, mill three cards, then you may put an artifact or land card from among the milled cards into your hand.\n{3}, Exile this card from your graveyard: You become the monarch. Activate only if you control your commander."
+      ]
     },
     {
       "name": "Heart-Shaped Herb",
@@ -355,12 +292,9 @@
       "oracleCardName": "Heart-Shaped Herb",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If a source an opponent controls would deal damage to you, prevent 1 of that damage.\n{2}, {T}, Sacrifice this artifact: You may sacrifice a creature. If you do, return that card to the battlefield under its owner's control with three +1/+1 counters on it and you become the monarch."
+      ]
     },
     {
       "name": "Kimoyo Beads",
@@ -369,12 +303,9 @@
       "oracleCardName": "Kimoyo Beads",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, choose one that hasn't been chosen —\n• AV Bead — Draw a card.\n• Communication Bead — Create two 1/1 white Soldier creature tokens.\n• Prime Bead — You gain 3 life. Exile this artifact, then return it to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "N'Yami-Class Mother Ship",
@@ -383,12 +314,9 @@
       "oracleCardName": "N'Yami-Class Mother Ship",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying, vigilance, haste\nWhenever this Vehicle deals combat damage to a player, look at the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you don't put it onto the battlefield, put it into your hand.\nCrew 3"
+      ]
     },
     {
       "name": "Panther Habit",
@@ -397,12 +325,9 @@
       "oracleCardName": "Panther Habit",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.\nEquip {2}"
+      ]
     },
     {
       "name": "Panther Robot",
@@ -411,13 +336,10 @@
       "oracleCardName": "Panther Robot",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nReach, trample"
+      ]
     },
     {
       "name": "Shuri's Fabricator",
@@ -426,12 +348,9 @@
       "oracleCardName": "Shuri's Fabricator",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this artifact enters, create two tapped Vibranium tokens. (They're artifacts with indestructible and \"{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\")\n{6}, {T}: Return target artifact card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a permanent with a finality counter on it would be put into a graveyard, exile it instead.)"
+      ]
     },
     {
       "name": "Vibranium Mining Mech",
@@ -440,12 +359,9 @@
       "oracleCardName": "Vibranium Mining Mech",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Trample\nWhenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and \"{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\")\n{2}: This Vehicle gets +1/+0 until end of turn.\nCrew 2"
+      ]
     },
     {
       "name": "Vibranium Strike Gauntlets",
@@ -454,12 +370,9 @@
       "oracleCardName": "Vibranium Strike Gauntlets",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this Equipment enters, attach it to target creature you control.\nEquipped creature gets +3/+0 and has trample and \"Whenever this creature deals combat damage to a player, draw a card.\"\nEquip {3}"
+      ]
     },
     {
       "name": "The Great Mound",
@@ -468,11 +381,9 @@
       "oracleCardName": "The Great Mound",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Create a tapped Vibranium token. (It's an artifact with indestructible and \"{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\")\n{6}, {T}: Draw a card."
+      ]
     },
     {
       "name": "Divine Visitation",
@@ -483,12 +394,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead."
+      ]
     },
     {
       "name": "Loyal Retainers",
@@ -499,12 +407,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Sacrifice this creature: Return target legendary creature card from your graveyard to the battlefield. Activate only during your turn, before attackers are declared."
+      ]
     },
     {
       "name": "Martial Coup",
@@ -515,12 +420,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures."
+      ]
     },
     {
       "name": "Vanquish the Horde",
@@ -531,12 +433,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nDestroy all creatures."
+      ]
     },
     {
       "name": "Birds of Paradise",
@@ -547,12 +446,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Flying\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Conduit of Worlds",
@@ -563,12 +459,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "You may play lands from your graveyard.\n{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Greater Good",
@@ -579,12 +472,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards."
+      ]
     },
     {
       "name": "Nature's Lore",
@@ -595,12 +485,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -611,12 +498,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Coveted Jewel",
@@ -625,12 +509,9 @@
       "oracleCardName": "Coveted Jewel",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When this artifact enters, draw three cards.\n{T}: Add three mana of any one color.\nWhenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact. Untap it."
+      ]
     },
     {
       "name": "Gilded Lotus",
@@ -639,12 +520,9 @@
       "oracleCardName": "Gilded Lotus",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "{T}: Add three mana of any one color."
+      ]
     },
     {
       "name": "Helm of the Host",
@@ -653,12 +531,9 @@
       "oracleCardName": "Helm of the Host",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary. That token gains haste.\nEquip {5}"
+      ]
     },
     {
       "name": "Metalwork Colossus",
@@ -667,13 +542,10 @@
       "oracleCardName": "Metalwork Colossus",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{11}",
-      "cmc": 11,
-      "oracleText": "This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control.\nSacrifice two artifacts: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -682,13 +554,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Trading Post",
@@ -697,12 +566,9 @@
       "oracleCardName": "Trading Post",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}, Discard a card: You gain 4 life.\n{1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token.\n{1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.\n{1}, {T}, Sacrifice an artifact: Draw a card."
+      ]
     },
     {
       "name": "Bountiful Promenade",
@@ -714,11 +580,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -730,11 +594,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Fortified Village",
@@ -746,11 +608,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Razorverge Thicket",
@@ -762,11 +622,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Scattered Groves",
@@ -778,11 +636,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -791,11 +647,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -807,11 +661,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Sunpetal Grove",
@@ -823,11 +675,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Throne of the High City",
@@ -836,11 +686,9 @@
       "oracleCardName": "Throne of the High City",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}, Sacrifice this land: You become the monarch."
+      ]
     },
     {
       "name": "Scourglass",
@@ -851,12 +699,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "{T}, Sacrifice this artifact: Destroy all permanents except for artifacts and lands. Activate only during your upkeep."
+      ]
     },
     {
       "name": "Fleecemane Lion",
@@ -868,12 +713,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "{3}{G}{W}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nAs long as this creature is monstrous, it has hexproof and indestructible."
+      ]
     },
     {
       "name": "Hammer of Nazahn",
@@ -882,12 +724,9 @@
       "oracleCardName": "Hammer of Nazahn",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever Hammer of Nazahn or another Equipment you control enters, you may attach that Equipment to target creature you control.\nEquipped creature gets +2/+0 and has indestructible.\nEquip {4}"
+      ]
     },
     {
       "name": "Mind's Eye",
@@ -896,12 +735,9 @@
       "oracleCardName": "Mind's Eye",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Whenever an opponent draws a card, you may pay {1}. If you do, draw a card."
+      ]
     },
     {
       "name": "Sword of the Animist",
@@ -910,12 +746,9 @@
       "oracleCardName": "Sword of the Animist",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1.\nWhenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nEquip {2}"
+      ]
     },
     {
       "name": "Thran Dynamo",
@@ -924,12 +757,9 @@
       "oracleCardName": "Thran Dynamo",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}{C}."
+      ]
     },
     {
       "name": "Dispatch",
@@ -940,12 +770,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature."
+      ]
     },
     {
       "name": "Generous Gift",
@@ -956,12 +783,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Ingenious Smith",
@@ -972,12 +796,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nWhenever one or more artifacts you control enter, put a +1/+1 counter on this creature. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Palace Jailer",
@@ -988,12 +809,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you become the monarch.\nWhen this creature enters, exile target creature an opponent controls until an opponent becomes the monarch."
+      ]
     },
     {
       "name": "Valorous Stance",
@@ -1004,12 +822,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Target creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)\n• Destroy target creature with toughness 4 or greater."
+      ]
     },
     {
       "name": "Beast Within",
@@ -1020,12 +835,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Harmonize",
@@ -1036,12 +848,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Loyal Guardian",
@@ -1052,12 +861,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1066,12 +872,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -1080,13 +883,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1095,12 +895,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Whispersilk Cloak",
@@ -1109,12 +906,9 @@
       "oracleCardName": "Whispersilk Cloak",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1123,11 +917,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1136,11 +928,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1149,11 +939,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1162,11 +950,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Plains",
@@ -1177,11 +963,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1192,11 +976,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1207,11 +989,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1222,11 +1002,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1237,11 +1015,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1252,11 +1028,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1267,11 +1041,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1282,11 +1054,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1297,11 +1067,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1312,11 +1080,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1327,11 +1093,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1342,11 +1106,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1357,11 +1119,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1372,11 +1132,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1387,11 +1145,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1402,11 +1158,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1417,11 +1171,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1432,11 +1184,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1447,11 +1197,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1462,11 +1210,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1477,11 +1223,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1492,11 +1236,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1507,11 +1249,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1522,15 +1262,13 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:57.474Z",
+    "retrievedDate": "2026-06-23T17:40:40.769Z",
     "sourceUrl": "WakandaForever_MSC.json",
     "deckSource": "precon",
     "createdAt": "2026-06-26T00:00:00.000Z"

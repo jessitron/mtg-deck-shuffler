@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1531351855,
   "name": "Everyone's Invited!",
   "totalCards": 100,
@@ -17,12 +17,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Changeling (This card is every creature type.)\nAs Morophon enters, choose a creature type.\nSpells of the chosen type you cast cost {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.\nOther creatures you control of the chosen type get +1/+1."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands."
+      ]
     },
     {
       "name": "Bitterblossom",
@@ -51,13 +45,10 @@
         "B"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying."
+      ]
     },
     {
       "name": "Taurean Mauler",
@@ -68,12 +59,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -84,12 +72,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Coat of Arms",
@@ -98,12 +83,9 @@
       "oracleCardName": "Coat of Arms",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Goblin Warriors and a Goblin Shaman are on the battlefield, each gets +2/+2.)"
+      ]
     },
     {
       "name": "Kindred Summons",
@@ -114,12 +96,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Choose a creature type. Reveal cards from the top of your library until you reveal X creature cards of the chosen type, where X is the number of creatures you control of that type. Put those cards onto the battlefield, then shuffle the rest of the revealed cards into your library."
+      ]
     },
     {
       "name": "Maskwood Nexus",
@@ -128,12 +107,9 @@
       "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -142,12 +118,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Tendershoot Dryad",
@@ -158,12 +131,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of each upkeep, create a 1/1 green Saproling creature token.\nSaprolings you control get +2/+2 as long as you have the city's blessing."
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -175,11 +145,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Amoeboid Changeling",
@@ -190,12 +158,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\n{T}: Target creature gains all creature types until end of turn.\n{T}: Target creature loses all creature types until end of turn."
+      ]
     },
     {
       "name": "Ancient Amphitheater",
@@ -207,11 +172,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Giant card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Arcane Adaptation",
@@ -222,12 +185,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "As this enchantment enters, choose a creature type.\nCreatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -238,12 +198,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -256,11 +213,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -269,12 +224,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Atla Palani, Nest Tender",
@@ -287,12 +239,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "{2}, {T}: Create a 0/1 green Egg creature token with defender.\nWhenever an Egg you control dies, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Beast Within",
@@ -303,12 +252,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Black Market Connections",
@@ -319,12 +265,9 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your first main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
+      ]
     },
     {
       "name": "Bloodline Pretender",
@@ -333,13 +276,10 @@
       "oracleCardName": "Bloodline Pretender",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nWhenever another creature you control of the chosen type enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Brenard, Ginger Sculptor",
@@ -352,12 +292,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Each creature you control that's a Food or a Golem gets +2/+2 and has trample.\nWhenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's a 1/1 Food Golem artifact creature in addition to its other types and it has \"{2}, {T}, Sacrifice this token: You gain 3 life.\""
+      ]
     },
     {
       "name": "Bruse Tarl, Roving Rancher",
@@ -369,12 +306,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Oxen you control have double strike.\nWhenever Bruse Tarl enters or attacks, exile the top card of your library. If it's a land card, create a 2/2 white Ox creature token. Otherwise, you may cast it until the end of your next turn."
+      ]
     },
     {
       "name": "Brushland",
@@ -386,11 +320,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Chameleon Colossus",
@@ -401,12 +333,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Changeling (This card is every creature type.)\nProtection from black\n{2}{G}{G}: This creature gets +X/+X until end of turn, where X is its power."
+      ]
     },
     {
       "name": "Cloudshredder Sliver",
@@ -418,12 +347,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have flying and haste."
+      ]
     },
     {
       "name": "Command Tower",
@@ -432,11 +358,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crib Swap",
@@ -447,13 +371,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling."
+      ]
     },
     {
       "name": "Cultivate",
@@ -464,12 +385,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -481,11 +399,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Distant Melody",
@@ -496,12 +412,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Double Down",
@@ -512,12 +425,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an outlaw spell, copy that spell. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Copies of permanent spells become tokens.)"
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -526,11 +436,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fabled Passage",
@@ -539,11 +447,9 @@
       "oracleCardName": "Fabled Passage",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+      ]
     },
     {
       "name": "Farseek",
@@ -554,12 +460,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Feline Sovereign",
@@ -570,12 +473,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Other Cats you control get +1/+1 and have protection from Dogs.\nWhenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Fire-Belly Changeling",
@@ -586,12 +486,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\n{R}: This creature gets +1/+0 until end of turn. Activate no more than twice each turn."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -604,11 +501,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Gemhide Sliver",
@@ -619,12 +514,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "All Slivers have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Gilt-Leaf Palace",
@@ -636,11 +528,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Elf card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Graveshifter",
@@ -651,12 +541,9 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Changeling (This card is every creature type.)\nWhen this creature enters, you may return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Guardian Gladewalker",
@@ -667,12 +554,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\nWhen this creature enters, put a +1/+1 counter on target creature."
+      ]
     },
     {
       "name": "Harabaz Druid",
@@ -683,12 +567,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add X mana of any one color, where X is the number of Allies you control."
+      ]
     },
     {
       "name": "Harper Recruiter",
@@ -699,12 +580,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this creature attacks, look at the top four cards of your library. You may reveal a Cleric card, a Rogue card, a Warrior card, and/or a Wizard card from among them and put those cards into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Impostor of the Sixth Pride",
@@ -715,12 +593,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)"
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -733,11 +608,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Karplusan Forest",
@@ -749,11 +622,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Kindred Discovery",
@@ -764,12 +635,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever a creature you control of the chosen type enters or attacks, draw a card."
+      ]
     },
     {
       "name": "Kindred Dominance",
@@ -780,12 +648,9 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Choose a creature type. Destroy all creatures that aren't of the chosen type."
+      ]
     },
     {
       "name": "Kinsbaile Cavalier",
@@ -796,12 +661,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Knight creatures you control have double strike."
+      ]
     },
     {
       "name": "Kirri, Talented Sprout",
@@ -814,12 +676,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Other Plants and Treefolk you control get +2/+0.\nAt the beginning of each of your postcombat main phases, return target Plant, Treefolk, or land card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -830,12 +689,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -847,11 +703,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Magda, Brazen Outlaw",
@@ -862,12 +716,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Other Dwarves you control get +1/+0.\nWhenever a Dwarf you control becomes tapped, create a Treasure token.\nSacrifice five Treasures: Search your library for an artifact or Dragon card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Manaweft Sliver",
@@ -878,12 +729,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Masked Vandal",
@@ -894,12 +742,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\nWhen this creature enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls."
+      ]
     },
     {
       "name": "Mirror Entity",
@@ -910,12 +755,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types."
+      ]
     },
     {
       "name": "Moritte of the Frost",
@@ -927,12 +769,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Changeling (This card is every creature type.)\nYou may have Moritte enter as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -944,11 +783,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mothdust Changeling",
@@ -959,12 +796,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Changeling (This card is every creature type.)\nTap an untapped creature you control: This creature gains flying until end of turn."
+      ]
     },
     {
       "name": "Murmuring Bosk",
@@ -977,11 +811,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)\nAs this land enters, you may reveal a Treefolk card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Mutavault",
@@ -990,11 +822,9 @@
       "oracleCardName": "Mutavault",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}: This land becomes a 2/2 creature with all creature types until end of turn. It's still a land."
+      ]
     },
     {
       "name": "Nameless Inversion",
@@ -1005,13 +835,10 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\nTarget creature gets +3/-3 and loses all creature types until end of turn."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1024,11 +851,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -1040,11 +865,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1053,11 +876,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Pongify",
@@ -1068,12 +889,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+      ]
     },
     {
       "name": "Realmbreaker, the Invasion Tree",
@@ -1082,12 +900,9 @@
       "oracleCardName": "Realmbreaker, the Invasion Tree",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}, {T}: Target opponent mills three cards. Put a land card from their graveyard onto the battlefield tapped under your control. It gains \"If this land would leave the battlefield, exile it instead of putting it anywhere else.\"\n{10}, {T}, Sacrifice Realmbreaker: Search your library for any number of Praetor cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Realmwalker",
@@ -1098,12 +913,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nYou may look at the top card of your library any time.\nYou may cast creature spells of the chosen type from the top of your library."
+      ]
     },
     {
       "name": "Rin and Seri, Inseparable",
@@ -1116,12 +928,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a Dog spell, create a 1/1 green Cat creature token.\nWhenever you cast a Cat spell, create a 1/1 white Dog creature token.\n{R}{G}{W}, {T}: Rin and Seri deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control."
+      ]
     },
     {
       "name": "Risen Reef",
@@ -1133,12 +942,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature or another Elemental you control enters, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand."
+      ]
     },
     {
       "name": "Rukarumel, Biologist",
@@ -1153,12 +959,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "As Rukarumel enters, choose a creature type.\nSlivers you control and nontoken creatures you control are the chosen type in addition to their other creature types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 1/1 colorless Sliver creature token."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1171,11 +974,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Secluded Glen",
@@ -1187,11 +988,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Faerie card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Shapesharer",
@@ -1202,12 +1001,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\n{2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn."
+      ]
     },
     {
       "name": "Shields of Velis Vel",
@@ -1218,13 +1014,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Changeling (This card is every creature type.)\nCreatures target player controls get +0/+1 and gain all creature types until end of turn."
+      ]
     },
     {
       "name": "Skeletal Changeling",
@@ -1235,12 +1028,9 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\n{1}{B}: Regenerate this creature."
+      ]
     },
     {
       "name": "Sophia, Dogged Detective",
@@ -1253,12 +1043,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "When Sophia enters, create Tiny, a legendary 2/2 green Dog Detective creature token with trample.\n{1}, Sacrifice an artifact token: Put a +1/+1 counter on each Dog you control.\nWhenever a Dog you control deals combat damage to a player, create a Food token, then investigate."
+      ]
     },
     {
       "name": "Spoils of Adventure",
@@ -1270,12 +1057,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{W}{U}",
-      "cmc": 6,
-      "oracleText": "This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)\nYou gain 3 life and draw three cards."
+      ]
     },
     {
       "name": "Stick Together",
@@ -1286,12 +1070,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Each player chooses a party from among creatures they control, then sacrifices the rest. (To choose a party, choose up to one each of Cleric, Rogue, Warrior, and Wizard.)"
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -1303,11 +1084,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Tazri, Beacon of Unity",
@@ -1322,12 +1101,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "This spell costs {1} less to cast for each creature in your party.\n{2/U}{2/B}{2/R}{2/G}: Look at the top six cards of your library. You may reveal up to two Cleric, Rogue, Warrior, Wizard, and/or Ally cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "The Bears of Littjara",
@@ -1339,12 +1115,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 2/2 blue Shapeshifter creature token with changeling.\nII — Any number of target Shapeshifter creatures you control have base power and toughness 4/4.\nIII — Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent."
+      ]
     },
     {
       "name": "The World Tree",
@@ -1359,11 +1132,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nAs long as you control six or more lands, lands you control have \"{T}: Add one mana of any color.\"\n{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice this land: Search your library for any number of God cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Universal Automaton",
@@ -1372,13 +1143,10 @@
       "oracleCardName": "Universal Automaton",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Changeling (This card is every creature type.)"
+      ]
     },
     {
       "name": "Unsettled Mariner",
@@ -1390,12 +1158,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}."
+      ]
     },
     {
       "name": "Wanderwine Hub",
@@ -1407,11 +1172,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Merfolk card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -1423,11 +1186,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Forest",
@@ -1438,11 +1199,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1453,11 +1212,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1468,11 +1225,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1483,11 +1238,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1498,11 +1251,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1513,11 +1264,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1528,11 +1277,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1543,11 +1290,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1558,11 +1303,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1573,11 +1316,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1588,11 +1329,9 @@
         "U"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1603,15 +1342,13 @@
         "B"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.186Z",
+    "retrievedDate": "2026-06-23T17:40:37.239Z",
     "sourceUrl": "EveryoneSInvited_SLD.json",
     "deckSource": "precon",
     "createdAt": "2025-05-12T00:00:00.000Z"

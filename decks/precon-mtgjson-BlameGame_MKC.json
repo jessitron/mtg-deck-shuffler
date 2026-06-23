@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 409297027,
   "name": "Blame Game",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nWhenever Nelly Borca attacks, suspect target creature. Then goad all suspected creatures. (A suspected creature has menace and can't block.)\nWhenever one or more creatures an opponent controls deal combat damage to one or more of your opponents, you and the controller of those creatures each draw a card."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying, lifelink\nWhenever you cast a noncreature spell that targets only Feather, you may choose any number of other creatures that spell could target and pay {2} for each of those creatures. If you do, for each of those creatures, copy that spell. The copy targets that creature. (Copies of permanent spells become tokens.)"
+      ]
     },
     {
       "name": "Immortal Obligation",
@@ -52,12 +46,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Return target creature card from an opponent's graveyard to the battlefield under their control with a duty counter on it. For as long as that creature has a duty counter on it, it is goaded, can't attack you or a permanent you control, and can't block creatures you control."
+      ]
     },
     {
       "name": "Otherworldly Escort",
@@ -69,12 +60,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this creature dies, if it's not a Spirit, return it to the battlefield under its owner's control with four charge counters on it. It's a Spirit Detective. (It's no longer a Human.)\n{1}{W}, {T}, Remove a charge counter from this creature: Destroy target creature that dealt damage to you this turn."
+      ]
     },
     {
       "name": "Redemption Arc",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\n{1}{W}: Exile enchanted creature."
+      ]
     },
     {
       "name": "Trouble in Pairs",
@@ -103,12 +88,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "If an opponent would begin an extra turn, that player skips that turn instead.\nWhenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card."
+      ]
     },
     {
       "name": "Havoc Eater",
@@ -120,12 +102,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, for each opponent, goad up to one target creature that opponent controls. Put X +1/+1 counters on this creature, where X is the total power of creatures goaded this way."
+      ]
     },
     {
       "name": "Hot Pursuit",
@@ -137,12 +116,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, suspect target creature an opponent controls. As long as this enchantment remains on the battlefield, that creature is also goaded.\nAt the beginning of combat on your turn, if two or more players have lost the game, gain control of all goaded and/or suspected creatures until end of turn. Untap them. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Mob Verdict",
@@ -154,12 +130,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Secret council — Each player secretly votes for another player, then those votes are revealed. For each vote an opponent received, Mob Verdict deals 2 damage to that player and each creature that player controls. For each vote you received, draw a card."
+      ]
     },
     {
       "name": "Prisoner's Dilemma",
@@ -171,12 +144,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Each opponent secretly chooses silence or snitch, then the choices are revealed. If each opponent chose silence, Prisoner's Dilemma deals 4 damage to each of them. If each opponent chose snitch, Prisoner's Dilemma deals 8 damage to each of them. Otherwise, Prisoner's Dilemma deals 12 damage to each opponent who chose silence.\nFlashback {5}{R}{R}"
+      ]
     },
     {
       "name": "Take the Bait",
@@ -189,12 +159,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Cast this spell only during combat on an opponent's turn.\nPrevent all combat damage that would be dealt to you and planeswalkers you control this turn. Untap all attacking creatures and goad them. After this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Ransom Note",
@@ -204,12 +171,9 @@
       "oracleCardName": "Ransom Note",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
+      ]
     },
     {
       "name": "Angel of the Ruins",
@@ -221,13 +185,10 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile up to two target artifacts and/or enchantments.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Comeuppance",
@@ -239,12 +200,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller."
+      ]
     },
     {
       "name": "Darien, King of Kjeldor",
@@ -256,12 +214,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens."
+      ]
     },
     {
       "name": "Duelist's Heritage",
@@ -273,12 +228,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more creatures attack, you may have target attacking creature gain double strike until end of turn."
+      ]
     },
     {
       "name": "Elspeth, Sun's Champion",
@@ -290,12 +242,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "[+1]: Create three 1/1 white Soldier creature tokens.\n[−3]: Destroy all creatures with power 4 or greater.\n[−7]: You get an emblem with \"Creatures you control get +2/+2 and have flying.\""
+      ]
     },
     {
       "name": "Keeper of the Accord",
@@ -307,12 +256,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.\nAt the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Loran of the Third Path",
@@ -324,12 +270,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhen Loran enters, destroy up to one target artifact or enchantment.\n{T}: You and target opponent each draw a card."
+      ]
     },
     {
       "name": "Promise of Loyalty",
@@ -341,12 +284,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+      ]
     },
     {
       "name": "Selfless Squire",
@@ -358,12 +298,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this creature enters, prevent all damage that would be dealt to you this turn.\nWhenever damage that would be dealt to you is prevented, put that many +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Sevinne's Reclamation",
@@ -375,12 +312,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Return target permanent card with mana value 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.\nFlashback {4}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Smuggler's Share",
@@ -392,12 +326,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then create a Treasure token for each opponent who had two or more lands enter the battlefield under their control this turn."
+      ]
     },
     {
       "name": "Stalking Leonin",
@@ -409,12 +340,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, secretly choose an opponent.\nReveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once."
+      ]
     },
     {
       "name": "Sun Titan",
@@ -426,12 +354,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Windborn Muse",
@@ -443,12 +368,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nCreatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Winds of Rath",
@@ -460,12 +382,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures that aren't enchanted. They can't be regenerated."
+      ]
     },
     {
       "name": "Agitator Ant",
@@ -477,12 +396,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Brash Taunter",
@@ -494,12 +410,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Indestructible\nWhenever this creature is dealt damage, it deals that much damage to target opponent.\n{2}{R}, {T}: This creature fights another target creature."
+      ]
     },
     {
       "name": "Disrupt Decorum",
@@ -511,12 +424,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Goad all creatures you don't control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Etali, Primal Storm",
@@ -528,12 +438,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever Etali attacks, exile the top card of each player's library, then you may cast any number of spells from among those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Fiendish Duo",
@@ -545,12 +452,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\nIf a source would deal damage to an opponent, it deals double that damage to that player instead."
+      ]
     },
     {
       "name": "Frontier Warmonger",
@@ -562,12 +466,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn."
+      ]
     },
     {
       "name": "Kazuul, Tyrant of the Cliffs",
@@ -579,12 +480,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}."
+      ]
     },
     {
       "name": "Spectacular Showdown",
@@ -596,12 +494,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)\nOverload {4}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Vengeful Ancestor",
@@ -613,12 +508,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature enters or attacks, goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever a goaded creature attacks, it deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Anya, Merciless Angel",
@@ -631,12 +523,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nAnya gets +3/+3 for each opponent whose life total is less than half their starting life total.\nAs long as an opponent's life total is less than half their starting life total, Anya has indestructible."
+      ]
     },
     {
       "name": "Boros Reckoner",
@@ -649,12 +538,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R/W}{R/W}{R/W}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature is dealt damage, it deals that much damage to any target.\n{R/W}: This creature gains first strike until end of turn."
+      ]
     },
     {
       "name": "Deflecting Palm",
@@ -667,12 +553,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller."
+      ]
     },
     {
       "name": "Gisela, Blade of Goldnight",
@@ -685,12 +568,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying, first strike\nIf a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.\nIf a source would deal damage to you or a permanent you control, prevent half that damage, rounded up."
+      ]
     },
     {
       "name": "Ancient Stone Idol",
@@ -700,13 +580,10 @@
       "oracleCardName": "Ancient Stone Idol",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Flash\nThis spell costs {1} less to cast for each attacking creature.\nTrample\nWhen this creature dies, create a 6/12 colorless Construct artifact creature token with trample."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -716,13 +593,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -732,13 +606,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Tome of Legends",
@@ -748,12 +619,9 @@
       "oracleCardName": "Tome of Legends",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters with a page counter on it.\nWhenever your commander enters or attacks, put a page counter on this artifact.\n{1}, {T}, Remove a page counter from this artifact: Draw a card."
+      ]
     },
     {
       "name": "Castle Ardenvale",
@@ -765,11 +633,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains.\n{T}: Add {W}.\n{2}{W}{W}, {T}: Create a 1/1 white Human creature token."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -779,11 +645,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -796,11 +660,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Kher Keep",
@@ -812,11 +674,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep."
+      ]
     },
     {
       "name": "Labyrinth of Skophos",
@@ -826,11 +686,9 @@
       "oracleCardName": "Labyrinth of Skophos",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Remove target attacking or blocking creature from combat."
+      ]
     },
     {
       "name": "Needle Spires",
@@ -843,11 +701,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}: Until end of turn, this land becomes a 2/1 red and white Elemental creature with double strike. It's still a land."
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -857,11 +713,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Slayers' Stronghold",
@@ -874,11 +728,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R}{W}, {T}: Target creature gets +2/+0 and gains vigilance and haste until end of turn."
+      ]
     },
     {
       "name": "Temple of Triumph",
@@ -891,11 +743,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Throne of the High City",
@@ -905,11 +755,9 @@
       "oracleCardName": "Throne of the High City",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}, Sacrifice this land: You become the monarch."
+      ]
     },
     {
       "name": "War Room",
@@ -919,11 +767,9 @@
       "oracleCardName": "War Room",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Pay life equal to the number of colors in your commanders' color identity: Draw a card."
+      ]
     },
     {
       "name": "Ghostly Prison",
@@ -935,12 +781,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Gideon's Sacrifice",
@@ -952,12 +795,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Choose a creature or planeswalker you control. All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield)."
+      ]
     },
     {
       "name": "Martial Impetus",
@@ -969,12 +809,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Orzhov Advokist",
@@ -986,12 +823,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn."
+      ]
     },
     {
       "name": "Seal of Cleansing",
@@ -1003,12 +837,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this enchantment: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Soul Snare",
@@ -1020,12 +851,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{W}, Sacrifice this enchantment: Exile target creature that's attacking you or a planeswalker you control."
+      ]
     },
     {
       "name": "Vow of Duty",
@@ -1037,12 +865,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Wall of Omens",
@@ -1054,12 +879,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Curse of Opulence",
@@ -1071,12 +893,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Enchant player\nWhenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with \"Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Rite of the Raging Storm",
@@ -1088,12 +907,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Creatures named Lightning Rager can't attack you or planeswalkers you control.\nAt the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager. It has trample, haste, and \"At the beginning of the end step, sacrifice this token.\""
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -1105,12 +921,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Vow of Lightning",
@@ -1122,12 +935,9 @@
         "R"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1137,12 +947,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Bloodthirsty Blade",
@@ -1152,12 +959,9 @@
       "oracleCardName": "Bloodthirsty Blade",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\n{1}: Attach this Equipment to target creature an opponent controls. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1167,12 +971,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1182,12 +983,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1197,12 +995,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1215,12 +1010,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1230,12 +1022,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Access Tunnel",
@@ -1245,11 +1034,9 @@
       "oracleCardName": "Access Tunnel",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Target creature with power 3 or less can't be blocked this turn."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1259,11 +1046,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1276,11 +1061,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1290,11 +1073,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Escape Tunnel",
@@ -1304,11 +1085,9 @@
       "oracleCardName": "Escape Tunnel",
       "colorIdentity": [],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked this turn."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1318,11 +1097,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1332,11 +1109,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1346,11 +1121,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Sunhome, Fortress of the Legion",
@@ -1363,11 +1136,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{R}{W}, {T}: Target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1377,11 +1148,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Plains",
@@ -1393,11 +1162,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1409,11 +1176,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1425,11 +1190,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1441,11 +1204,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1457,11 +1218,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1473,11 +1232,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1489,11 +1246,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1505,11 +1260,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1521,11 +1274,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1537,11 +1288,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1553,11 +1302,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1569,11 +1316,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1585,11 +1330,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1601,11 +1344,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1617,11 +1358,9 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1633,15 +1372,13 @@
         "R"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.449Z",
+    "retrievedDate": "2026-06-23T17:40:36.023Z",
     "sourceUrl": "BlameGame_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

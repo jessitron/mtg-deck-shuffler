@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1709118835,
   "name": "Adaptive Enchantment",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "[+2]: Untap each enchanted permanent you control.\n[−1]: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and umbra armor.\n[−7]: Mill seven cards. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.\nEstrid, the Masked can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}{U}",
-      "cmc": 6,
-      "oracleText": "Flying, vigilance\nWhenever Bruna attacks or blocks, you may attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand."
+      ]
     },
     {
       "name": "Eidolon of Blossoms",
@@ -53,13 +47,10 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, draw a card."
+      ]
     },
     {
       "name": "Hydra Omnivore",
@@ -71,12 +62,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever this creature deals combat damage to an opponent, it deals that much damage to each other opponent."
+      ]
     },
     {
       "name": "Ajani's Chosen",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever an enchantment you control enters, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token."
+      ]
     },
     {
       "name": "Celestial Archon",
@@ -105,13 +90,10 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Bestow {5}{W}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nFlying, first strike\nEnchanted creature gets +4/+4 and has flying and first strike."
+      ]
     },
     {
       "name": "Silent Sentinel",
@@ -123,12 +105,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature attacks, you may return target enchantment card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Boon Satyr",
@@ -140,13 +119,10 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Flash\nBestow {3}{G}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nEnchanted creature gets +4/+2."
+      ]
     },
     {
       "name": "Herald of the Pantheon",
@@ -158,12 +134,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchantment spells you cast cost {1} less to cast.\nWhenever you cast an enchantment spell, you gain 1 life."
+      ]
     },
     {
       "name": "Cold-Eyed Selkie",
@@ -176,12 +149,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G/U}{G/U}",
-      "cmc": 3,
-      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever this creature deals combat damage to a player, you may draw that many cards."
+      ]
     },
     {
       "name": "Daxos of Meletis",
@@ -194,12 +164,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Daxos can't be blocked by creatures with power 3 or greater.\nWhenever Daxos deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's mana value. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
+      ]
     },
     {
       "name": "Elderwood Scion",
@@ -212,12 +179,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Trample, lifelink\nSpells you cast that target this creature cost {2} less to cast.\nSpells your opponents cast that target this creature cost {2} more to cast."
+      ]
     },
     {
       "name": "Archetype of Imagination",
@@ -229,13 +193,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Creatures you control have flying.\nCreatures your opponents control lose flying and can't have or gain flying."
+      ]
     },
     {
       "name": "Whitewater Naiads",
@@ -247,13 +208,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Aura Gnarlid",
@@ -265,12 +223,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Creatures with power less than this creature's power can't block it.\nThis creature gets +1/+1 for each Aura on the battlefield."
+      ]
     },
     {
       "name": "Reclamation Sage",
@@ -282,12 +237,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Yavimaya Enchantress",
@@ -299,12 +251,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature gets +1/+1 for each enchantment on the battlefield."
+      ]
     },
     {
       "name": "Martial Coup",
@@ -316,12 +265,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures."
+      ]
     },
     {
       "name": "Phyrexian Rebirth",
@@ -333,12 +279,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, where X is the number of creatures destroyed this way."
+      ]
     },
     {
       "name": "Winds of Rath",
@@ -350,12 +293,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures that aren't enchanted. They can't be regenerated."
+      ]
     },
     {
       "name": "Creeping Renaissance",
@@ -367,12 +307,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand.\nFlashback {5}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Kruphix's Insight",
@@ -384,12 +321,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard."
+      ]
     },
     {
       "name": "Dismantling Blow",
@@ -402,12 +336,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nDestroy target artifact or enchantment. If this spell was kicked, draw two cards."
+      ]
     },
     {
       "name": "Bant Charm",
@@ -421,12 +352,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Destroy target artifact.\n• Put target creature on the bottom of its owner's library.\n• Counter target instant spell."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -436,12 +364,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Sigil of the Empty Throne",
@@ -453,12 +378,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying."
+      ]
     },
     {
       "name": "Dictate of Kruphix",
@@ -470,12 +392,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nAt the beginning of each player's draw step, that player draws an additional card."
+      ]
     },
     {
       "name": "Bear Umbra",
@@ -487,12 +406,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and has \"Whenever this creature attacks, untap all lands you control.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Enchantress's Presence",
@@ -504,12 +420,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, draw a card."
+      ]
     },
     {
       "name": "Epic Proportions",
@@ -521,12 +434,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Flash\nEnchant creature\nEnchanted creature gets +5/+5 and has trample."
+      ]
     },
     {
       "name": "Ground Seal",
@@ -538,12 +448,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, draw a card.\nCards in graveyards can't be the targets of spells or abilities."
+      ]
     },
     {
       "name": "Spawning Grounds",
@@ -555,12 +462,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Enchant land\nEnchanted land has \"{T}: Create a 5/5 green Beast creature token with trample.\""
+      ]
     },
     {
       "name": "Finest Hour",
@@ -574,12 +478,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that creature. After this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Righteous Authority",
@@ -592,12 +493,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.\nAt the beginning of the draw step of enchanted creature's controller, that player draws an additional card."
+      ]
     },
     {
       "name": "Sage's Reverie",
@@ -609,12 +507,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card for each Aura you control that's attached to a creature.\nEnchanted creature gets +1/+1 for each Aura you control that's attached to a creature."
+      ]
     },
     {
       "name": "Soul Snare",
@@ -626,12 +521,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{W}, Sacrifice this enchantment: Exile target creature that's attacking you or a planeswalker you control."
+      ]
     },
     {
       "name": "Unquestioned Authority",
@@ -643,12 +535,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature has protection from creatures."
+      ]
     },
     {
       "name": "Eel Umbra",
@@ -660,12 +549,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +1/+1.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Vow of Flight",
@@ -677,12 +563,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has flying, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Dawn's Reflection",
@@ -694,12 +577,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional two mana in any combination of colors."
+      ]
     },
     {
       "name": "Fertile Ground",
@@ -711,12 +591,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color."
+      ]
     },
     {
       "name": "Overgrowth",
@@ -728,12 +605,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}."
+      ]
     },
     {
       "name": "Snake Umbra",
@@ -745,12 +619,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and has \"Whenever this creature deals damage to an opponent, you may draw a card.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Vow of Wildness",
@@ -762,12 +633,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +3/+3, has trample, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Wild Growth",
@@ -779,12 +647,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}."
+      ]
     },
     {
       "name": "Unflinching Courage",
@@ -797,12 +662,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and has trample and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)"
+      ]
     },
     {
       "name": "Plains",
@@ -814,11 +676,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -830,11 +690,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -846,11 +704,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -862,11 +718,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -878,11 +732,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -894,11 +746,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -910,11 +760,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -926,11 +774,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -942,11 +788,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -958,11 +802,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -974,11 +816,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -990,11 +830,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1006,11 +844,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1022,11 +858,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1038,11 +872,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1054,11 +886,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1070,11 +900,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1086,11 +914,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1102,11 +928,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1118,11 +942,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1134,11 +956,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1150,11 +970,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1166,11 +984,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1183,11 +999,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Blossoming Sands",
@@ -1200,11 +1014,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1214,11 +1026,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1228,11 +1038,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -1242,11 +1050,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Meandering River",
@@ -1259,11 +1065,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -1275,11 +1079,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1293,11 +1095,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -1310,11 +1110,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1327,11 +1125,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1341,11 +1137,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1358,11 +1152,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Tranquil Cove",
@@ -1375,11 +1167,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Tranquil Expanse",
@@ -1392,11 +1182,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Woodland Stream",
@@ -1409,11 +1197,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Kestia, the Cultivator",
@@ -1427,13 +1213,10 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Bestow {3}{G}{W}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nEnchanted creature gets +4/+4.\nWhenever an enchanted creature or enchantment creature you control attacks, draw a card."
+      ]
     },
     {
       "name": "Tuvasa the Sunlit",
@@ -1447,12 +1230,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Tuvasa gets +1/+1 for each enchantment you control.\nWhenever you cast your first enchantment spell each turn, draw a card."
+      ]
     },
     {
       "name": "Empyrial Storm",
@@ -1464,12 +1244,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nCreate a 4/4 white Angel creature token with flying."
+      ]
     },
     {
       "name": "Heavenly Blademaster",
@@ -1481,12 +1258,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, double strike\nWhen this creature enters, you may attach any number of Auras and Equipment you control to it.\nOther creatures you control get +1/+1 for each Aura and Equipment attached to this creature."
+      ]
     },
     {
       "name": "Estrid's Invocation",
@@ -1498,12 +1272,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "You may have this enchantment enter as a copy of an enchantment you control, except it has \"At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.\""
+      ]
     },
     {
       "name": "Ever-Watching Threshold",
@@ -1515,12 +1286,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent attacks, if they attacked you and/or a planeswalker you control, draw a card."
+      ]
     },
     {
       "name": "Octopus Umbra",
@@ -1532,12 +1300,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Enchant creature\nEnchanted creature has base power and toughness 8/8 and has \"Whenever this creature attacks, you may tap target creature with power 8 or less.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Genesis Storm",
@@ -1549,12 +1314,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nReveal cards from the top of your library until you reveal a nonland permanent card. You may put that card onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Myth Unbound",
@@ -1566,12 +1328,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Your commander costs {1} less to cast for each time it's been cast from the command zone this game.\nWhenever your commander is put into the command zone from anywhere, draw a card."
+      ]
     },
     {
       "name": "Nylea's Colossus",
@@ -1583,13 +1342,10 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, double target creature's power and toughness until end of turn."
+      ]
     },
     {
       "name": "Ravenous Slime",
@@ -1601,12 +1357,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature can't be blocked by creatures with power 2 or less.\nIf a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on this creature."
+      ]
     },
     {
       "name": "Arixmethes, Slumbering Isle",
@@ -1619,12 +1372,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Arixmethes enters tapped with five slumber counters on it.\nAs long as Arixmethes has a slumber counter on it, it's a land. (It's not a creature.)\nWhenever you cast a spell, you may remove a slumber counter from Arixmethes.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Loyal Unicorn",
@@ -1636,12 +1386,9 @@
         "W"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nLieutenant — At the beginning of combat on your turn, if you control your commander, prevent all combat damage that would be dealt to creatures you control this turn. Other creatures you control gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Loyal Drake",
@@ -1653,12 +1400,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nLieutenant — At the beginning of combat on your turn, if you control your commander, draw a card."
+      ]
     },
     {
       "name": "Loyal Guardian",
@@ -1670,12 +1414,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Forge of Heroes",
@@ -1685,15 +1426,13 @@
       "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.193Z",
+    "retrievedDate": "2026-06-23T17:40:35.613Z",
     "sourceUrl": "AdaptiveEnchantment_C18.json",
     "deckSource": "precon",
     "createdAt": "2018-08-10T00:00:00.000Z"

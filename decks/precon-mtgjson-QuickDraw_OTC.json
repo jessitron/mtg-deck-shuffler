@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 681446441,
   "name": "Quick Draw",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast your second spell each turn, exile the top card of your library. Until the end of your next turn, you may play that card.\n{T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{U}{R}",
-      "cmc": 10,
-      "oracleText": "This spell costs {2} less to cast for each different mana value among instant and sorcery cards in your graveyard.\nFlying, prowess\nWhenever you cast your second spell each turn, create a 4/4 red Dragon Elemental creature token with flying and prowess."
+      ]
     },
     {
       "name": "Archmage Emeritus",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card."
+      ]
     },
     {
       "name": "Baral's Expertise",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return up to three target artifacts and/or creatures to their owners' hands.\nYou may cast a spell with mana value 4 or less from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Tezzeret's Gambit",
@@ -86,12 +74,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Midnight Clock",
@@ -103,12 +88,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U}.\n{2}{U}: Put an hour counter on this artifact.\nAt the beginning of each upkeep, put an hour counter on this artifact.\nWhen the twelfth hour counter is put on this artifact, shuffle your hand and graveyard into your library, then draw seven cards. Exile this artifact."
+      ]
     },
     {
       "name": "Haughty Djinn",
@@ -120,12 +102,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nHaughty Djinn's power is equal to the number of instant and sorcery cards in your graveyard.\nInstant and sorcery spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Dig Through Time",
@@ -137,12 +116,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nLook at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Winged Boots",
@@ -154,12 +130,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has flying and ward {4}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)\nEquip {1}"
+      ]
     },
     {
       "name": "Talrand, Sky Summoner",
@@ -171,12 +144,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying."
+      ]
     },
     {
       "name": "Octavia, Living Thesis",
@@ -188,12 +158,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{U}{U}",
-      "cmc": 10,
-      "oracleText": "This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard.\nWard {8}\nMagecraft — Whenever you cast or copy an instant or sorcery spell, target creature has base power and toughness 8/8 until end of turn."
+      ]
     },
     {
       "name": "Thunderclap Drake",
@@ -205,12 +172,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nInstant and sorcery spells you cast cost {1} less to cast.\n{2}{U}, Sacrifice this creature: When you next cast an instant or sorcery spell this turn, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies."
+      ]
     },
     {
       "name": "Lock and Load",
@@ -222,12 +186,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw a card, then draw a card for each other instant and sorcery spell you've cast this turn.\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"
+      ]
     },
     {
       "name": "Forger's Foundry",
@@ -239,12 +200,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U}. When you spend this mana to cast an instant or sorcery spell with mana value 3 or less, you may exile that spell instead of putting it into its owner's graveyard as it resolves.\n{3}{U}{U}, {T}: You may cast any number of spells from among cards exiled with this artifact without paying their mana costs. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Finale of Revelation",
@@ -256,12 +214,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.\nExile Finale of Revelation."
+      ]
     },
     {
       "name": "Curse of the Swine",
@@ -273,12 +228,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
+      ]
     },
     {
       "name": "Mizzix's Mastery",
@@ -290,12 +242,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery.\nOverload {5}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -307,12 +256,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Crackling Spellslinger",
@@ -324,12 +270,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flash\nWhen this creature enters, if you cast it, the next instant or sorcery spell you cast this turn has storm. (When you cast that spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+      ]
     },
     {
       "name": "Pyretic Charge",
@@ -341,12 +284,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Discard your hand, then draw four cards. For each card discarded this way, creatures you control get +1/+0 until end of turn.\nPlot {3}{R} (You may pay {3}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"
+      ]
     },
     {
       "name": "Smoldering Stagecoach",
@@ -358,12 +298,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Smoldering Stagecoach's power is equal to the number of instant and sorcery cards in your graveyard.\nWhenever this Vehicle attacks, the next instant spell and the next sorcery spell you cast this turn each have cascade.\nCrew 2"
+      ]
     },
     {
       "name": "Elemental Eruption",
@@ -375,12 +312,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Create a 4/4 red Dragon Elemental creature token with flying and prowess.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)"
+      ]
     },
     {
       "name": "Rousing Refrain",
@@ -392,12 +326,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Add {R} for each card in target opponent's hand. Until end of turn, you don't lose this mana as steps and phases end. Exile Rousing Refrain with three time counters on it.\nSuspend 3—{1}{R} (Rather than cast this card from your hand, you may pay {1}{R} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Cursed Mirror",
@@ -409,12 +340,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {R}.\nAs this artifact enters, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste."
+      ]
     },
     {
       "name": "Bloodthirsty Adversary",
@@ -426,12 +354,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nWhen this creature enters, you may pay {2}{R} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on this creature, then exile up to that many target instant and/or sorcery cards with mana value 3 or less from your graveyard and copy them. You may cast any number of the copies without paying their mana costs."
+      ]
     },
     {
       "name": "Finale of Promise",
@@ -443,12 +368,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "You may cast up to one target instant card and/or up to one target sorcery card from your graveyard each with mana value X or less without paying their mana costs. If a spell cast this way would be put into your graveyard, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies."
+      ]
     },
     {
       "name": "Arcane Bombardment",
@@ -460,12 +382,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at random from your graveyard. Then copy each card exiled with this enchantment. You may cast any number of the copies without paying their mana costs."
+      ]
     },
     {
       "name": "Niv-Mizzet, Parun",
@@ -478,12 +397,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{U}{U}{R}{R}{R}",
-      "cmc": 6,
-      "oracleText": "This spell can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card."
+      ]
     },
     {
       "name": "Kaza, Roil Chaser",
@@ -496,12 +412,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Flying, haste\n{T}: The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves."
+      ]
     },
     {
       "name": "Shark Typhoon",
@@ -513,12 +426,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.\nCycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, create an X/X blue Shark creature token with flying."
+      ]
     },
     {
       "name": "Galvanic Iteration",
@@ -531,12 +441,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\nFlashback {1}{U}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Epic Experiment",
@@ -549,12 +456,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{R}",
-      "cmc": 2,
-      "oracleText": "Exile the top X cards of your library. You may cast instant and sorcery spells with mana value X or less from among them without paying their mana costs. Then put all cards exiled this way that weren't cast into your graveyard."
+      ]
     },
     {
       "name": "Veyran, Voice of Duality",
@@ -567,12 +471,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Magecraft — Whenever you cast or copy an instant or sorcery spell, Veyran gets +1/+1 until end of turn.\nIf you casting or copying an instant or sorcery spell causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Leyline Dowser",
@@ -582,12 +483,9 @@
       "oracleCardName": "Leyline Dowser",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Mill a card. You may put an instant or sorcery card milled this way into your hand.\nTap an untapped legendary creature you control: Untap this artifact."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -597,11 +495,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -614,11 +510,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -631,11 +525,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -648,11 +540,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -665,11 +555,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Cascade Bluffs",
@@ -682,11 +570,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."
+      ]
     },
     {
       "name": "Ferrous Lake",
@@ -699,11 +585,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Treasure Cruise",
@@ -715,12 +599,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Preordain",
@@ -732,12 +613,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Ponder",
@@ -749,12 +627,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card."
+      ]
     },
     {
       "name": "Murmuring Mystic",
@@ -766,12 +641,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -783,12 +655,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Radical Idea",
@@ -800,12 +669,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)"
+      ]
     },
     {
       "name": "Opt",
@@ -817,12 +683,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\nDraw a card."
+      ]
     },
     {
       "name": "Think Twice",
@@ -834,12 +697,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -851,12 +711,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Pteramander",
@@ -868,12 +725,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Flying\n{7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)"
+      ]
     },
     {
       "name": "Vandalblast",
@@ -885,12 +739,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Pongify",
@@ -902,12 +753,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+      ]
     },
     {
       "name": "Serum Visions",
@@ -919,12 +767,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Draw a card. Scry 2."
+      ]
     },
     {
       "name": "Faithless Looting",
@@ -936,12 +781,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Big Score",
@@ -953,12 +795,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards and create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Storm-Kiln Artist",
@@ -970,12 +809,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "This creature gets +1/+0 for each artifact you control.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token."
+      ]
     },
     {
       "name": "Young Pyromancer",
@@ -987,12 +823,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token."
+      ]
     },
     {
       "name": "Electrostatic Field",
@@ -1004,12 +837,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Guttersnipe",
@@ -1021,12 +851,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Volcanic Torrent",
@@ -1038,12 +865,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nVolcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn."
+      ]
     },
     {
       "name": "Windfall",
@@ -1055,12 +879,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Goblin Electromancer",
@@ -1073,12 +894,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Instant and sorcery spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Third Path Iconoclast",
@@ -1091,12 +909,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Soldier artifact creature token."
+      ]
     },
     {
       "name": "Expressive Iteration",
@@ -1109,12 +924,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1124,12 +936,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -1142,12 +951,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1157,12 +963,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1172,11 +975,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1186,11 +987,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1200,11 +999,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Izzet Boilerworks",
@@ -1217,11 +1014,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Propaganda",
@@ -1233,12 +1028,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Island",
@@ -1250,11 +1042,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1266,11 +1056,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1282,11 +1070,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1298,11 +1084,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1314,11 +1098,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1330,11 +1112,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1346,11 +1126,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1362,11 +1140,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1378,11 +1154,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1394,11 +1168,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1410,11 +1182,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1426,11 +1196,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1442,11 +1210,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1458,11 +1224,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1474,11 +1238,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1490,11 +1252,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1506,11 +1266,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1522,11 +1280,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1538,11 +1294,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1554,11 +1308,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1570,11 +1322,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1586,11 +1336,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1602,11 +1350,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1618,11 +1364,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1634,11 +1378,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1650,11 +1392,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1666,15 +1406,13 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.389Z",
+    "retrievedDate": "2026-06-23T17:40:39.356Z",
     "sourceUrl": "QuickDraw_OTC.json",
     "deckSource": "precon",
     "createdAt": "2024-04-19T00:00:00.000Z"

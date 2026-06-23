@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 832926116,
   "name": "Political Puppets",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.\n{U}{R}{W}: Target opponent gains control of target permanent you control."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Whenever this creature blocks or becomes blocked, target opponent gains control of it. (This removes this creature from combat.)"
+      ]
     },
     {
       "name": "Spurnmage Advocate",
@@ -52,12 +46,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{T}: Return two target cards from an opponent's graveyard to their hand. Destroy target attacking creature."
+      ]
     },
     {
       "name": "Jötun Grunt",
@@ -69,12 +60,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Cumulative upkeep—Put two cards from a single graveyard on the bottom of their owner's library. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)"
+      ]
     },
     {
       "name": "Wall of Omens",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Fog Bank",
@@ -103,12 +88,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Defender (This creature can't attack.)\nFlying\nPrevent all combat damage that would be dealt to and dealt by this creature."
+      ]
     },
     {
       "name": "Nin, the Pain Artist",
@@ -121,12 +103,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "{X}{U}{R}, {T}: Nin deals X damage to target creature. That creature's controller draws X cards."
+      ]
     },
     {
       "name": "Azorius Guildmage",
@@ -139,12 +118,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W/U}{W/U}",
-      "cmc": 2,
-      "oracleText": "{2}{W}: Tap target creature.\n{2}{U}: Counter target activated ability. (Mana abilities can't be targeted.)"
+      ]
     },
     {
       "name": "Court Hussar",
@@ -157,12 +133,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhen this creature enters, look at the top three cards of your library, then put one of them into your hand and the rest on the bottom of your library in any order.\nWhen this creature enters, sacrifice it unless {W} was spent to cast it."
+      ]
     },
     {
       "name": "Gomazoa",
@@ -174,12 +147,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Defender, flying\n{T}: Put this creature and each creature it's blocking on top of their owners' libraries, then those players shuffle."
+      ]
     },
     {
       "name": "Guard Gomazoa",
@@ -191,12 +161,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Defender, flying\nPrevent all combat damage that would be dealt to this creature."
+      ]
     },
     {
       "name": "Vedalken Plotter",
@@ -208,12 +175,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, exchange control of target land you control and target land an opponent controls."
+      ]
     },
     {
       "name": "Wall of Denial",
@@ -226,12 +190,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Defender, flying\nShroud (This creature can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Plumeveil",
@@ -244,12 +205,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W/U}{W/U}{W/U}",
-      "cmc": 3,
-      "oracleText": "Flash\nDefender, flying"
+      ]
     },
     {
       "name": "Flametongue Kavu",
@@ -261,12 +219,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, it deals 4 damage to target creature."
+      ]
     },
     {
       "name": "Windborn Muse",
@@ -278,12 +233,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nCreatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "False Prophet",
@@ -295,12 +247,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, exile all creatures."
+      ]
     },
     {
       "name": "Brion Stoutarm",
@@ -313,12 +262,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Lifelink\n{R}, {T}, Sacrifice another creature: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player or planeswalker."
+      ]
     },
     {
       "name": "Ruhan of the Fomori",
@@ -332,12 +278,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, choose an opponent at random. Ruhan attacks that player this combat if able."
+      ]
     },
     {
       "name": "Chromeshell Crab",
@@ -349,12 +292,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Morph {4}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, you may exchange control of target creature you control and target creature an opponent controls."
+      ]
     },
     {
       "name": "Izzet Chronarch",
@@ -367,12 +307,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, return target instant or sorcery card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Dominus of Fealty",
@@ -385,12 +322,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U/R}{U/R}{U/R}{U/R}{U/R}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of your upkeep, you may gain control of target permanent until end of turn. If you do, untap it and it gains haste until end of turn."
+      ]
     },
     {
       "name": "Rapacious One",
@@ -402,12 +336,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, create that many 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Numot, the Devastator",
@@ -421,12 +352,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever Numot deals combat damage to a player, you may pay {2}{R}. If you do, destroy up to two target lands."
+      ]
     },
     {
       "name": "Arbiter of Knollridge",
@@ -438,12 +366,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{W}",
-      "cmc": 7,
-      "oracleText": "Vigilance\nWhen this creature enters, each player's life total becomes the highest life total among all players."
+      ]
     },
     {
       "name": "Breath of Darigaaz",
@@ -455,12 +380,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Kicker {2} (You may pay an additional {2} as you cast this spell.)\nBreath of Darigaaz deals 1 damage to each creature without flying and each player. If this spell was kicked, it deals 4 damage to each creature without flying and each player instead."
+      ]
     },
     {
       "name": "Trade Secrets",
@@ -472,12 +394,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as they choose."
+      ]
     },
     {
       "name": "Death by Dragons",
@@ -489,12 +408,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Each player other than target player creates a 5/5 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Austere Command",
@@ -506,12 +422,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Insurrection",
@@ -523,12 +436,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{R}{R}",
-      "cmc": 8,
-      "oracleText": "Untap all creatures and gain control of them until end of turn. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Skyscribing",
@@ -540,12 +450,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Each player draws X cards.\nForecast — {2}{U}, Reveal this card from your hand: Each player draws a card. (Activate only during your upkeep and only once each turn.)"
+      ]
     },
     {
       "name": "Brainstorm",
@@ -557,12 +464,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Draw three cards, then put two cards from your hand on top of your library in any order."
+      ]
     },
     {
       "name": "Flusterstorm",
@@ -574,12 +478,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Counter target instant or sorcery spell unless its controller pays {1}.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+      ]
     },
     {
       "name": "Lash Out",
@@ -591,12 +492,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)"
+      ]
     },
     {
       "name": "Punishing Fire",
@@ -608,12 +506,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Punishing Fire deals 2 damage to any target.\nWhenever an opponent gains life, you may pay {R}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Pollen Lullaby",
@@ -625,12 +520,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)"
+      ]
     },
     {
       "name": "Perilous Research",
@@ -642,12 +534,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Draw two cards, then sacrifice a permanent."
+      ]
     },
     {
       "name": "Vision Skeins",
@@ -659,12 +548,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Each player draws two cards."
+      ]
     },
     {
       "name": "Whirlpool Whelm",
@@ -676,12 +562,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)"
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -693,12 +576,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Oblation",
@@ -710,12 +590,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "The owner of target nonland permanent shuffles it into their library, then draws two cards."
+      ]
     },
     {
       "name": "Murmurs from Beyond",
@@ -727,12 +604,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand."
+      ]
     },
     {
       "name": "Repulse",
@@ -744,12 +618,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Return target creature to its owner's hand.\nDraw a card."
+      ]
     },
     {
       "name": "Spell Crumple",
@@ -761,12 +632,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library."
+      ]
     },
     {
       "name": "Wild Ricochet",
@@ -778,12 +646,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Reins of Power",
@@ -795,12 +660,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn."
+      ]
     },
     {
       "name": "Scattering Stroke",
@@ -812,12 +674,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add an amount of {C} equal to that spell's mana value. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -827,12 +686,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Armillary Sphere",
@@ -842,12 +698,9 @@
       "oracleCardName": "Armillary Sphere",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -857,12 +710,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Howling Mine",
@@ -872,12 +722,9 @@
       "oracleCardName": "Howling Mine",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "At the beginning of each player's draw step, if this artifact is untapped, that player draws an additional card."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -887,12 +734,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Prophetic Prism",
@@ -902,12 +746,9 @@
       "oracleCardName": "Prophetic Prism",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters, draw a card.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Champion's Helm",
@@ -917,12 +758,9 @@
       "oracleCardName": "Champion's Helm",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+2.\nAs long as equipped creature is legendary, it has hexproof. (It can't be the target of spells or abilities your opponents control.)\nEquip {1}"
+      ]
     },
     {
       "name": "Darksteel Ingot",
@@ -932,12 +770,9 @@
       "oracleCardName": "Darksteel Ingot",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -947,12 +782,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Soul Snare",
@@ -964,12 +796,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{W}, Sacrifice this enchantment: Exile target creature that's attacking you or a planeswalker you control."
+      ]
     },
     {
       "name": "Journey to Nowhere",
@@ -981,12 +810,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, exile target creature.\nWhen this enchantment leaves the battlefield, return the exiled card to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "Vow of Lightning",
@@ -998,12 +824,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Ghostly Prison",
@@ -1015,12 +838,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Vow of Duty",
@@ -1032,12 +852,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Propaganda",
@@ -1049,12 +866,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Vow of Flight",
@@ -1066,12 +880,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has flying, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Prison Term",
@@ -1083,12 +894,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nWhenever a creature an opponent controls enters, you may attach this Aura to that creature."
+      ]
     },
     {
       "name": "Crescendo of War",
@@ -1100,12 +908,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each upkeep, put a strife counter on this enchantment.\nAttacking creatures get +1/+0 for each strife counter on this enchantment.\nBlocking creatures you control get +1/+0 for each strife counter on this enchantment."
+      ]
     },
     {
       "name": "Martyr's Bond",
@@ -1117,12 +922,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Whenever this enchantment or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent of their choice that shares a card type with it."
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1135,11 +937,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1152,11 +952,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1166,11 +964,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1180,11 +976,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Izzet Boilerworks",
@@ -1197,11 +991,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1211,11 +1003,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mountain",
@@ -1227,11 +1017,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1243,11 +1031,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1259,11 +1045,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1275,11 +1059,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1291,11 +1073,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1307,11 +1087,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1323,11 +1101,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1339,11 +1115,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1355,11 +1129,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1371,11 +1143,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1387,11 +1157,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1403,11 +1171,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1419,11 +1185,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1435,11 +1199,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1451,11 +1213,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1467,11 +1227,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1483,11 +1241,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1499,11 +1255,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1515,11 +1269,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1531,11 +1283,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1547,11 +1297,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1563,11 +1311,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1579,11 +1325,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1595,11 +1339,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1611,11 +1353,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1627,11 +1367,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1643,11 +1381,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1659,15 +1395,13 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.334Z",
+    "retrievedDate": "2026-06-23T17:40:39.239Z",
     "sourceUrl": "PoliticalPuppets_CMD.json",
     "deckSource": "precon",
     "createdAt": "2011-06-17T00:00:00.000Z"

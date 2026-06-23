@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 228434656,
   "name": "Eldrazi Unbound",
   "totalCards": 100,
@@ -12,12 +12,9 @@
       "oracleCardName": "Zhulodok, Void Gorger",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{C}",
-      "cmc": 6,
-      "oracleText": "Colorless spells you cast from your hand with mana value 7 or greater have \"Cascade, cascade.\" (When you cast one, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order. Then do it again.)"
+      ]
     }
   ],
   "cards": [
@@ -29,12 +26,9 @@
       "oracleCardName": "Omarthis, Ghostfire Initiate",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{X}",
-      "cmc": 0,
-      "oracleText": "Omarthis enters with X +1/+1 counters on it.\nWhenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on Omarthis.\nWhen Omarthis dies, manifest a number of cards from the top of your library equal to the number of counters on it."
+      ]
     },
     {
       "name": "Kozilek, the Great Distortion",
@@ -44,12 +38,9 @@
       "oracleCardName": "Kozilek, the Great Distortion",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{C}{C}",
-      "cmc": 10,
-      "oracleText": "When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference.\nMenace\nDiscard a card with mana value X: Counter target spell with mana value X."
+      ]
     },
     {
       "name": "Abstruse Archaic",
@@ -59,12 +50,9 @@
       "oracleCardName": "Abstruse Archaic",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Vigilance\n{1}, {T}: Copy target activated or triggered ability you control from a colorless source. You may choose new targets for the copy. (Mana abilities can't be targeted.)"
+      ]
     },
     {
       "name": "Calamity of the Titans",
@@ -74,12 +62,9 @@
       "oracleCardName": "Calamity of the Titans",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{C}{C}",
-      "cmc": 6,
-      "oracleText": "As an additional cost to cast this spell, reveal a colorless creature card from your hand.\nExile each creature and planeswalker with mana value less than the revealed card's mana value."
+      ]
     },
     {
       "name": "Desecrate Reality",
@@ -89,12 +74,9 @@
       "oracleCardName": "Desecrate Reality",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "For each opponent, exile up to one target permanent that player controls with an even mana value. (Zero is even.)\nAdamant — If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Flayer of Loyalties",
@@ -104,12 +86,9 @@
       "oracleCardName": "Flayer of Loyalties",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{C}{C}",
-      "cmc": 10,
-      "oracleText": "When you cast this spell, gain control of target creature until end of turn. Untap that creature. Until end of turn, it has base power and toughness 10/10 and gains trample, annihilator 2, and haste.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)\nTrample"
+      ]
     },
     {
       "name": "Rise of the Eldrazi",
@@ -119,12 +98,9 @@
       "oracleCardName": "Rise of the Eldrazi",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{9}{C}{C}{C}",
-      "cmc": 12,
-      "oracleText": "This spell can't be countered.\nDestroy target permanent. Target player draws four cards. Take an extra turn after this one.\nExile Rise of the Eldrazi."
+      ]
     },
     {
       "name": "Skittering Cicada",
@@ -134,12 +110,9 @@
       "oracleCardName": "Skittering Cicada",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flash\nYou may cast colorless spells as though they had flash.\nWhenever you cast a colorless spell, until end of turn, this creature gains trample and gets +X/+X, where X is that spell's mana value."
+      ]
     },
     {
       "name": "Ugin's Mastery",
@@ -149,12 +122,9 @@
       "oracleCardName": "Ugin's Mastery",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a colorless creature spell, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever you attack with creatures with total power 6 or greater, you may turn a face-down creature you control face up."
+      ]
     },
     {
       "name": "Darksteel Monolith",
@@ -164,12 +134,9 @@
       "oracleCardName": "Darksteel Monolith",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Indestructible\nOnce each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand."
+      ]
     },
     {
       "name": "All Is Dust",
@@ -179,13 +146,10 @@
       "oracleCardName": "All Is Dust",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Each player sacrifices all permanents they control that are one or more colors."
+      ]
     },
     {
       "name": "Endbringer",
@@ -195,12 +159,9 @@
       "oracleCardName": "Endbringer",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{C}",
-      "cmc": 6,
-      "oracleText": "Untap this creature during each other player's untap step.\n{T}: This creature deals 1 damage to any target.\n{C}, {T}: Target creature can't attack or block this turn.\n{C}{C}, {T}: Draw a card."
+      ]
     },
     {
       "name": "Endless One",
@@ -210,12 +171,9 @@
       "oracleCardName": "Endless One",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}",
-      "cmc": 0,
-      "oracleText": "This creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "It That Betrays",
@@ -225,12 +183,9 @@
       "oracleCardName": "It That Betrays",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{12}",
-      "cmc": 12,
-      "oracleText": "Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)\nWhenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control."
+      ]
     },
     {
       "name": "Matter Reshaper",
@@ -240,12 +195,9 @@
       "oracleCardName": "Matter Reshaper",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{C}",
-      "cmc": 3,
-      "oracleText": "({C} represents colorless mana.)\nWhen this creature dies, reveal the top card of your library. You may put that card onto the battlefield if it's a permanent card with mana value 3 or less. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "Oblivion Sower",
@@ -255,12 +207,9 @@
       "oracleCardName": "Oblivion Sower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control."
+      ]
     },
     {
       "name": "Ugin, the Ineffable",
@@ -270,12 +219,9 @@
       "oracleCardName": "Ugin, the Ineffable",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Colorless spells you cast cost {2} less to cast.\n[+1]: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.\n[−3]: Destroy target permanent that's one or more colors."
+      ]
     },
     {
       "name": "Ancient Stone Idol",
@@ -285,13 +231,10 @@
       "oracleCardName": "Ancient Stone Idol",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Flash\nThis spell costs {1} less to cast for each attacking creature.\nTrample\nWhen this creature dies, create a 6/12 colorless Construct artifact creature token with trample."
+      ]
     },
     {
       "name": "Duplicant",
@@ -301,13 +244,10 @@
       "oracleCardName": "Duplicant",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Imprint — When this creature enters, you may exile target nontoken creature.\nAs long as a card exiled with this creature is a creature card, this creature has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter."
+      ]
     },
     {
       "name": "Endless Atlas",
@@ -317,12 +257,9 @@
       "oracleCardName": "Endless Atlas",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Draw a card. Activate only if you control three or more lands with the same name."
+      ]
     },
     {
       "name": "Forsaken Monument",
@@ -332,12 +269,9 @@
       "oracleCardName": "Forsaken Monument",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Colorless creatures you control get +2/+2.\nWhenever you tap a permanent for {C}, add an additional {C}.\nWhenever you cast a colorless spell, you gain 2 life."
+      ]
     },
     {
       "name": "Hangarback Walker",
@@ -347,13 +281,10 @@
       "oracleCardName": "Hangarback Walker",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{X}{X}",
-      "cmc": 0,
-      "oracleText": "This creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on this creature.\n{1}, {T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Investigator's Journal",
@@ -363,12 +294,9 @@
       "oracleCardName": "Investigator's Journal",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.\n{2}, {T}, Remove a suspect counter from this artifact: Draw a card.\n{2}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Kaldra Compleat",
@@ -378,12 +306,9 @@
       "oracleCardName": "Kaldra Compleat",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Living weapon\nIndestructible\nEquipped creature gets +5/+5 and has first strike, trample, indestructible, haste, and \"Whenever this creature deals combat damage to a creature, exile that creature.\"\nEquip {7}"
+      ]
     },
     {
       "name": "Mazemind Tome",
@@ -393,12 +318,9 @@
       "oracleCardName": "Mazemind Tome",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{2}, {T}, Put a page counter on this artifact: Draw a card.\nWhen there are four or more page counters on this artifact, exile it. If you do, you gain 4 life."
+      ]
     },
     {
       "name": "Metalwork Colossus",
@@ -408,13 +330,10 @@
       "oracleCardName": "Metalwork Colossus",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{11}",
-      "cmc": 11,
-      "oracleText": "This spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control.\nSacrifice two artifacts: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Mirage Mirror",
@@ -424,12 +343,9 @@
       "oracleCardName": "Mirage Mirror",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
+      ]
     },
     {
       "name": "Myriad Construct",
@@ -439,13 +355,10 @@
       "oracleCardName": "Myriad Construct",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Kicker {3}\nIf this creature was kicked, it enters with a +1/+1 counter on it for each nonbasic land your opponents control.\nWhen this creature becomes the target of a spell, sacrifice it and create a number of 1/1 colorless Construct artifact creature tokens equal to its power."
+      ]
     },
     {
       "name": "Mystic Forge",
@@ -455,12 +368,9 @@
       "oracleCardName": "Mystic Forge",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library."
+      ]
     },
     {
       "name": "Perilous Vault",
@@ -470,12 +380,9 @@
       "oracleCardName": "Perilous Vault",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{5}, {T}, Exile this artifact: Exile all nonland permanents."
+      ]
     },
     {
       "name": "Phyrexian Triniform",
@@ -485,13 +392,10 @@
       "oracleCardName": "Phyrexian Triniform",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "When this creature dies, create three 3/3 colorless Phyrexian Golem artifact creature tokens.\nEncore {12} ({12}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -501,13 +405,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Soul of New Phyrexia",
@@ -517,13 +418,10 @@
       "oracleCardName": "Soul of New Phyrexia",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Trample\n{5}: Permanents you control gain indestructible until end of turn.\n{5}, Exile this card from your graveyard: Permanents you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -533,13 +431,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Stonecoil Serpent",
@@ -549,13 +444,10 @@
       "oracleCardName": "Stonecoil Serpent",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{X}",
-      "cmc": 0,
-      "oracleText": "Reach, trample, protection from multicolored\nThis creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Transmogrifying Wand",
@@ -565,12 +457,9 @@
       "oracleCardName": "Transmogrifying Wand",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters with three charge counters on it.\n{1}, {T}, Remove a charge counter from this artifact: Destroy target creature. Its controller creates a 2/4 white Ox creature token. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Arch of Orazca",
@@ -580,11 +469,9 @@
       "oracleCardName": "Arch of Orazca",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{5}, {T}: Draw a card. Activate only if you have the city's blessing."
+      ]
     },
     {
       "name": "Blast Zone",
@@ -594,11 +481,9 @@
       "oracleCardName": "Blast Zone",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters with a charge counter on it.\n{T}: Add {C}.\n{X}{X}, {T}: Put X charge counters on this land.\n{3}, {T}, Sacrifice this land: Destroy each nonland permanent with mana value equal to the number of charge counters on this land."
+      ]
     },
     {
       "name": "Bonders' Enclave",
@@ -608,11 +493,9 @@
       "oracleCardName": "Bonders' Enclave",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
+      ]
     },
     {
       "name": "Geier Reach Sanitarium",
@@ -622,11 +505,9 @@
       "oracleCardName": "Geier Reach Sanitarium",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Each player draws a card, then discards a card."
+      ]
     },
     {
       "name": "Mirrorpool",
@@ -636,11 +517,9 @@
       "oracleCardName": "Mirrorpool",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}{C}, {T}, Sacrifice this land: Copy target instant or sorcery spell you control. You may choose new targets for the copy.\n{4}{C}, {T}, Sacrifice this land: Create a token that's a copy of target creature you control."
+      ]
     },
     {
       "name": "Ruins of Oran-Rief",
@@ -650,11 +529,9 @@
       "oracleCardName": "Ruins of Oran-Rief",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}. ({C} represents colorless mana.)\n{T}: Put a +1/+1 counter on target colorless creature that entered this turn."
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -664,11 +541,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Sea Gate Wreckage",
@@ -678,11 +553,9 @@
       "oracleCardName": "Sea Gate Wreckage",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. ({C} represents colorless mana.)\n{2}{C}, {T}: Draw a card. Activate only if you have no cards in hand."
+      ]
     },
     {
       "name": "Shrine of the Forsaken Gods",
@@ -692,11 +565,9 @@
       "oracleCardName": "Shrine of the Forsaken Gods",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands."
+      ]
     },
     {
       "name": "Tyrite Sanctum",
@@ -706,11 +577,9 @@
       "oracleCardName": "Tyrite Sanctum",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Target legendary creature becomes a God in addition to its other types. Put a +1/+1 counter on it.\n{4}, {T}, Sacrifice this land: Put an indestructible counter on target God."
+      ]
     },
     {
       "name": "War Room",
@@ -720,11 +589,9 @@
       "oracleCardName": "War Room",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Pay life equal to the number of colors in your commanders' color identity: Draw a card."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -734,13 +601,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Geode Golem",
@@ -750,13 +614,10 @@
       "oracleCardName": "Geode Golem",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, you may cast your commander from the command zone without paying its mana cost. (You still pay any additional costs.)"
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -766,12 +627,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -781,13 +639,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -797,12 +652,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -812,12 +664,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Thran Dynamo",
@@ -827,12 +676,9 @@
       "oracleCardName": "Thran Dynamo",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}{C}."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -842,12 +688,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -857,11 +700,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -871,11 +712,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Artisan of Kozilek",
@@ -885,12 +724,9 @@
       "oracleCardName": "Artisan of Kozilek",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"
+      ]
     },
     {
       "name": "Bane of Bala Ged",
@@ -900,12 +736,9 @@
       "oracleCardName": "Bane of Bala Ged",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Whenever this creature attacks, defending player exiles two permanents they control."
+      ]
     },
     {
       "name": "Not of This World",
@@ -915,13 +748,10 @@
       "oracleCardName": "Not of This World",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Counter target spell or ability that targets a permanent you control.\nThis spell costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater."
+      ]
     },
     {
       "name": "Spatial Contortion",
@@ -931,12 +761,9 @@
       "oracleCardName": "Spatial Contortion",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{C}",
-      "cmc": 2,
-      "oracleText": "({C} represents colorless mana.)\nTarget creature gets +3/-3 until end of turn."
+      ]
     },
     {
       "name": "Titan's Presence",
@@ -946,12 +773,9 @@
       "oracleCardName": "Titan's Presence",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, reveal a colorless creature card from your hand.\nExile target creature if its power is less than or equal to the revealed card's power."
+      ]
     },
     {
       "name": "Warping Wail",
@@ -961,12 +785,9 @@
       "oracleCardName": "Warping Wail",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{C}",
-      "cmc": 2,
-      "oracleText": "({C} represents colorless mana.)\nChoose one —\n• Exile target creature with power or toughness 1 or less.\n• Counter target sorcery spell.\n• Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Crashing Drawbridge",
@@ -976,13 +797,10 @@
       "oracleCardName": "Crashing Drawbridge",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Defender\n{T}: Creatures you control gain haste until end of turn."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -992,12 +810,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -1007,12 +822,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Fireshrieker",
@@ -1022,12 +834,9 @@
       "oracleCardName": "Fireshrieker",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Hedron Archive",
@@ -1037,12 +846,9 @@
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1052,12 +858,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Ornithopter of Paradise",
@@ -1067,13 +870,10 @@
       "oracleCardName": "Ornithopter of Paradise",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Flying\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Palladium Myr",
@@ -1083,13 +883,10 @@
       "oracleCardName": "Palladium Myr",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Scaretiller",
@@ -1099,13 +896,10 @@
       "oracleCardName": "Scaretiller",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Suspicious Bookcase",
@@ -1115,13 +909,10 @@
       "oracleCardName": "Suspicious Bookcase",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Defender\n{3}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -1131,12 +922,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Arcane Lighthouse",
@@ -1146,11 +934,9 @@
       "oracleCardName": "Arcane Lighthouse",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud."
+      ]
     },
     {
       "name": "Eldrazi Temple",
@@ -1160,11 +946,9 @@
       "oracleCardName": "Eldrazi Temple",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi."
+      ]
     },
     {
       "name": "Forge of Heroes",
@@ -1174,11 +958,9 @@
       "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
+      ]
     },
     {
       "name": "Guildless Commons",
@@ -1188,11 +970,9 @@
       "oracleCardName": "Guildless Commons",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Mage-Ring Network",
@@ -1202,11 +982,9 @@
       "oracleCardName": "Mage-Ring Network",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{T}, Remove any number of storage counters from this land: Add {C} for each storage counter removed this way."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1216,11 +994,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Tomb of the Spirit Dragon",
@@ -1230,11 +1006,9 @@
       "oracleCardName": "Tomb of the Spirit Dragon",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: You gain 1 life for each colorless creature you control."
+      ]
     },
     {
       "name": "Urza's Mine",
@@ -1244,11 +1018,9 @@
       "oracleCardName": "Urza's Mine",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead."
+      ]
     },
     {
       "name": "Urza's Power Plant",
@@ -1258,11 +1030,9 @@
       "oracleCardName": "Urza's Power Plant",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead."
+      ]
     },
     {
       "name": "Urza's Tower",
@@ -1272,11 +1042,9 @@
       "oracleCardName": "Urza's Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead."
+      ]
     },
     {
       "name": "Wastes",
@@ -1286,11 +1054,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1300,11 +1066,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1314,11 +1078,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1328,11 +1090,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1342,11 +1102,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1356,11 +1114,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1370,11 +1126,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1384,11 +1138,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1398,11 +1150,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1412,11 +1162,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1426,11 +1174,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1440,11 +1186,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1454,11 +1198,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1468,11 +1210,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Wastes",
@@ -1482,15 +1222,13 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.064Z",
+    "retrievedDate": "2026-06-23T17:40:37.032Z",
     "sourceUrl": "EldraziUnbound_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

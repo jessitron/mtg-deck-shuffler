@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 173348606,
   "name": "Eldrazi Incursion Collector's Edition",
   "totalCards": 100,
@@ -17,12 +17,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{C/W}{C/U}{C/B}{C/R}{C/G}",
-      "cmc": 5,
-      "oracleText": "Devoid (This card has no color.)\nWhenever you cast an Eldrazi spell, you may pay {C}{C}. If you do, copy all spells you control, then copy all other activated and triggered abilities you control. You may choose new targets for the copies. (Mana abilities can't be copied.)"
+      ]
     }
   ],
   "cards": [
@@ -39,12 +36,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever Azlask or another colorless creature you control dies, you get an experience counter.\n{W}{U}{B}{R}{G}: Creatures you control get +X/+X until end of turn, where X is the number of experience counters you have. Scions and Spawns you control gain indestructible and annihilator 1 until end of turn."
+      ]
     },
     {
       "name": "Ulamog's Dreadsire",
@@ -54,12 +48,9 @@
       "oracleCardName": "Ulamog's Dreadsire",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Vigilance\nWard—Sacrifice a permanent with mana value 1 or greater.\n{T}: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Benthic Anomaly",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, for each opponent, choose a creature that player controls. Create a token that's a copy of one of those creatures, except its power is equal to the total power of those creatures, its toughness is equal to the total toughness of those creatures, and it's a colorless Eldrazi creature."
+      ]
     },
     {
       "name": "Eldritch Immunity",
@@ -86,13 +74,10 @@
       "oracleCardName": "Eldritch Immunity",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{C}",
-      "cmc": 1,
-      "oracleText": "Target creature you control gains protection from each color until end of turn.\nOverload {4}{C} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Selective Obliteration",
@@ -102,12 +87,9 @@
       "oracleCardName": "Selective Obliteration",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{C}{C}",
-      "cmc": 5,
-      "oracleText": "Each player chooses a color. Then exile each permanent unless it's colorless or it's only the color its controller chose."
+      ]
     },
     {
       "name": "Angelic Aberration",
@@ -119,12 +101,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Devoid (This card has no color.)\nFlying, vigilance\nWhen this creature enters, sacrifice any number of creatures each with base power or toughness 1 or less. Create that many 4/4 colorless Eldrazi Angel creature tokens with flying and vigilance."
+      ]
     },
     {
       "name": "Bismuth Mindrender",
@@ -136,12 +115,9 @@
         "B"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Devoid (This card has no color.)\nMenace\nWhenever this creature deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to the spell's mana value rather than paying its mana cost."
+      ]
     },
     {
       "name": "Hideous Taskmaster",
@@ -153,12 +129,9 @@
         "R"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{R}",
-      "cmc": 7,
-      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, for each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain trample, haste, and annihilator 1 until end of turn.\nTrample, haste, annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent of their choice.)"
+      ]
     },
     {
       "name": "Twins of Discord",
@@ -168,12 +141,9 @@
       "oracleCardName": "Twins of Discord",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Whenever you attack, choose odd or even. Creatures with mana value of that quality can't block this turn. (Zero is even.)\nEach other colorless creature you control has bloodthirst 2. (If an opponent was dealt damage this turn, that creature enters with two additional +1/+1 counters on it.)"
+      ]
     },
     {
       "name": "Mutated Cultist",
@@ -185,12 +155,9 @@
         "B"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, remove all counters from up to one target permanent or opponent. The next spell you cast this turn costs {1} less to cast for each counter removed this way.\nDeathtouch"
+      ]
     },
     {
       "name": "Eldrazi Confluence",
@@ -200,12 +167,9 @@
       "oracleCardName": "Eldrazi Confluence",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{C}{C}",
-      "cmc": 4,
-      "oracleText": "Choose three. You may choose the same mode more than once.\n• Target creature gets +3/-3 until end of turn.\n• Exile target nonland permanent, then return it to the battlefield tapped under its owner's control.\n• Create a 1/1 colorless Eldrazi Scion creature token with \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Spawnbed Protector",
@@ -215,12 +179,9 @@
       "oracleCardName": "Spawnbed Protector",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "At the beginning of your end step, return up to one target Eldrazi creature card from your graveyard to your hand. Create two 1/1 colorless Eldrazi Scion creature tokens with \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Chittering Dispatcher",
@@ -232,12 +193,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\nMyriad\nWhen this creature leaves the battlefield, create a 0/1 colorless Eldrazi Spawn creature token with \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Inversion Behemoth",
@@ -247,12 +205,9 @@
       "oracleCardName": "Inversion Behemoth",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{C}{C}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, switch the power and toughness of each of any number of target creatures until end of turn."
+      ]
     },
     {
       "name": "Ugin, the Ineffable",
@@ -262,12 +217,9 @@
       "oracleCardName": "Ugin, the Ineffable",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Colorless spells you cast cost {2} less to cast.\n[+1]: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.\n[−3]: Destroy target permanent that's one or more colors."
+      ]
     },
     {
       "name": "Eldrazi Conscription",
@@ -277,13 +229,10 @@
       "oracleCardName": "Eldrazi Conscription",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Enchant creature\nEnchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents of their choice.)"
+      ]
     },
     {
       "name": "Cascading Cataracts",
@@ -293,11 +242,9 @@
       "oracleCardName": "Cascading Cataracts",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Indestructible\n{T}: Add {C}.\n{5}, {T}: Add five mana in any combination of colors."
+      ]
     },
     {
       "name": "Eldrazi Monument",
@@ -307,12 +254,9 @@
       "oracleCardName": "Eldrazi Monument",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +1/+1 and have flying and indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice this artifact."
+      ]
     },
     {
       "name": "Sire of Stagnation",
@@ -325,12 +269,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Devoid (This card has no color.)\nWhenever a land an opponent controls enters, that player exiles the top two cards of their library and you draw two cards."
+      ]
     },
     {
       "name": "Shrine of the Forsaken Gods",
@@ -340,11 +281,9 @@
       "oracleCardName": "Shrine of the Forsaken Gods",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands."
+      ]
     },
     {
       "name": "Ugin's Insight",
@@ -356,12 +295,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Scry X, where X is the greatest mana value among permanents you control, then draw three cards."
+      ]
     },
     {
       "name": "Drowner of Hope",
@@ -373,12 +309,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Devoid (This card has no color.)\nWhen this creature enters, create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this token: Add {C}.\"\nSacrifice an Eldrazi Scion: Tap target creature."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -390,12 +323,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Tendo Ice Bridge",
@@ -405,11 +335,9 @@
       "oracleCardName": "Tendo Ice Bridge",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters with a charge counter on it.\n{T}: Add {C}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -422,11 +350,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -439,11 +365,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Brushland",
@@ -456,11 +380,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Underground River",
@@ -473,11 +395,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Oblivion Sower",
@@ -487,12 +407,9 @@
       "oracleCardName": "Oblivion Sower",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control."
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -505,11 +422,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Karplusan Forest",
@@ -522,11 +437,9 @@
         "R"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -539,11 +452,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sulfurous Springs",
@@ -556,11 +467,9 @@
         "R"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Caves of Koilos",
@@ -573,11 +482,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -590,11 +497,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Imprisoned in the Moon",
@@ -606,12 +511,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature, land, or planeswalker\nEnchanted permanent is a colorless land with \"{T}: Add {C}\" and loses all other card types and abilities."
+      ]
     },
     {
       "name": "Temple of Malady",
@@ -624,11 +526,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -641,11 +541,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Morophon, the Boundless",
@@ -661,12 +559,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Changeling (This card is every creature type.)\nAs Morophon enters, choose a creature type.\nSpells of the chosen type you cast cost {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.\nOther creatures you control of the chosen type get +1/+1."
+      ]
     },
     {
       "name": "Kozilek's Return",
@@ -678,12 +573,9 @@
         "R"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\nKozilek's Return deals 2 damage to each creature.\nWhenever you cast an Eldrazi creature spell with mana value 7 or greater, you may exile this card from your graveyard. If you do, this card deals 5 damage to each creature."
+      ]
     },
     {
       "name": "World Breaker",
@@ -695,12 +587,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell, exile target artifact, enchantment, or land.\nReach\n{2}{C}, Sacrifice a land: Return this card from your graveyard to your hand. ({C} represents colorless mana.)"
+      ]
     },
     {
       "name": "Ruins of Oran-Rief",
@@ -710,11 +599,9 @@
       "oracleCardName": "Ruins of Oran-Rief",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}. ({C} represents colorless mana.)\n{T}: Put a +1/+1 counter on target colorless creature that entered this turn."
+      ]
     },
     {
       "name": "Sifter of Skulls",
@@ -726,12 +613,9 @@
         "B"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Devoid (This card has no color.)\nWhenever another nontoken creature you control dies, create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\" ({C} represents colorless mana.)"
+      ]
     },
     {
       "name": "Endbringer",
@@ -741,12 +625,9 @@
       "oracleCardName": "Endbringer",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{C}",
-      "cmc": 6,
-      "oracleText": "Untap this creature during each other player's untap step.\n{T}: This creature deals 1 damage to any target.\n{C}, {T}: Target creature can't attack or block this turn.\n{C}{C}, {T}: Draw a card."
+      ]
     },
     {
       "name": "Corrupted Crossroads",
@@ -756,11 +637,9 @@
       "oracleCardName": "Corrupted Crossroads",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid."
+      ]
     },
     {
       "name": "Deepfathom Skulker",
@@ -772,12 +651,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Devoid (This card has no color.)\nWhenever a creature you control deals combat damage to a player, you may draw a card.\n{3}{C}: Target creature can't be blocked this turn. ({C} represents colorless mana.)"
+      ]
     },
     {
       "name": "Vile Redeemer",
@@ -789,12 +665,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\nFlash\nWhen you cast this spell, you may pay {C}. If you do, create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. Those tokens have \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Eldrazi Displacer",
@@ -806,12 +679,9 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\n{2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control. ({C} represents colorless mana.)"
+      ]
     },
     {
       "name": "Mystic Forge",
@@ -821,12 +691,9 @@
       "oracleCardName": "Mystic Forge",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library."
+      ]
     },
     {
       "name": "All Is Dust",
@@ -836,13 +703,10 @@
       "oracleCardName": "All Is Dust",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Each player sacrifices all permanents they control that are one or more colors."
+      ]
     },
     {
       "name": "Rishkar's Expertise",
@@ -854,12 +718,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw cards equal to the greatest power among creatures you control.\nYou may cast a spell with mana value 5 or less from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Awakening Zone",
@@ -871,12 +732,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Eldrazi Temple",
@@ -886,11 +744,9 @@
       "oracleCardName": "Eldrazi Temple",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi."
+      ]
     },
     {
       "name": "Elder Deep-Fiend",
@@ -902,12 +758,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Flash\nEmerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, tap up to four target permanents."
+      ]
     },
     {
       "name": "Bonders' Enclave",
@@ -917,11 +770,9 @@
       "oracleCardName": "Bonders' Enclave",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -931,11 +782,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Forsaken Monument",
@@ -945,12 +794,9 @@
       "oracleCardName": "Forsaken Monument",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Colorless creatures you control get +2/+2.\nWhenever you tap a permanent for {C}, add an additional {C}.\nWhenever you cast a colorless spell, you gain 2 life."
+      ]
     },
     {
       "name": "Snapping Voidcraw",
@@ -962,12 +808,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\n{T}: Add {C}{C}.\n{3}{C}, {T}: Draw a card."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -977,12 +820,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -992,12 +832,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Glaring Fleshraker",
@@ -1006,12 +843,9 @@
       "oracleCardName": "Glaring Fleshraker",
       "colorIdentity": [],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{C}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with \"Sacrifice this token: Add {C}.\"\nWhenever another colorless creature you control enters, this creature deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Wastescape Battlemage",
@@ -1023,12 +857,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{C}",
-      "cmc": 2,
-      "oracleText": "Kicker {G} and/or {1}{U}\nWhen you cast this spell, if it was kicked with its {G} kicker, exile target artifact or enchantment an opponent controls.\nWhen you cast this spell, if it was kicked with its {1}{U} kicker, return target creature an opponent controls to its owner's hand."
+      ]
     },
     {
       "name": "Crib Swap",
@@ -1040,13 +871,10 @@
         "W"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling."
+      ]
     },
     {
       "name": "Titans' Vanguard",
@@ -1058,12 +886,9 @@
         "R"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Devoid (This card has no color.)\nWhen you cast this spell and whenever this creature attacks, put a +1/+1 counter on each colorless creature you control.\nTrample"
+      ]
     },
     {
       "name": "Talisman of Resilience",
@@ -1076,12 +901,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Hedron Archive",
@@ -1091,12 +913,9 @@
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Spawning Bed",
@@ -1106,11 +925,9 @@
       "oracleCardName": "Spawning Bed",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{6}, {T}, Sacrifice this land: Create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Ulamog's Nullifier",
@@ -1123,12 +940,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Devoid (This card has no color.)\nFlash\nFlying\nWhen this creature enters, you may put two cards your opponents own from exile into their owners' graveyards. If you do, counter target spell."
+      ]
     },
     {
       "name": "Twisted Landscape",
@@ -1141,11 +955,9 @@
         "R"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.\nCycling {B}{R}{G} ({B}{R}{G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Tranquil Landscape",
@@ -1158,11 +970,9 @@
         "W"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle.\nCycling {G}{W}{U} ({G}{W}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Tectonic Edge",
@@ -1172,11 +982,9 @@
       "oracleCardName": "Tectonic Edge",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Destroy target nonbasic land. Activate only if an opponent controls four or more lands."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1186,11 +994,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1200,12 +1006,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Artisan of Kozilek",
@@ -1215,12 +1018,9 @@
       "oracleCardName": "Artisan of Kozilek",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1230,11 +1030,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -1244,12 +1042,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1259,12 +1054,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Tomb of the Spirit Dragon",
@@ -1274,11 +1066,9 @@
       "oracleCardName": "Tomb of the Spirit Dragon",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: You gain 1 life for each colorless creature you control."
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1288,11 +1078,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -1302,12 +1090,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Wastes",
@@ -1317,11 +1102,9 @@
       "oracleCardName": "Wastes",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}."
+      ]
     },
     {
       "name": "Talisman of Curiosity",
@@ -1334,12 +1117,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Impulse",
@@ -1352,12 +1132,9 @@
         "R"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Warping Wail",
@@ -1367,12 +1144,9 @@
       "oracleCardName": "Warping Wail",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{C}",
-      "cmc": 2,
-      "oracleText": "({C} represents colorless mana.)\nChoose one —\n• Exile target creature with power or toughness 1 or less.\n• Counter target sorcery spell.\n• Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -1385,12 +1159,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1400,11 +1171,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1414,11 +1183,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Ancient Stirrings",
@@ -1430,12 +1197,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. Then put the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Ulamog's Crusher",
@@ -1445,12 +1209,9 @@
       "oracleCardName": "Ulamog's Crusher",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)\nThis creature attacks each combat if able."
+      ]
     },
     {
       "name": "Garruk's Uprising",
@@ -1462,12 +1223,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
+      ]
     },
     {
       "name": "Suffer the Past",
@@ -1479,12 +1237,9 @@
         "B"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{B}",
-      "cmc": 1,
-      "oracleText": "Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Skittering Invasion",
@@ -1494,13 +1249,10 @@
       "oracleCardName": "Skittering Invasion",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Create five 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1510,11 +1262,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1524,11 +1274,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Plains",
@@ -1539,11 +1287,9 @@
         "W"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1554,11 +1300,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1569,11 +1313,9 @@
         "B"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1584,11 +1326,9 @@
         "R"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1599,15 +1339,13 @@
         "G"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.050Z",
+    "retrievedDate": "2026-06-23T17:40:37.006Z",
     "sourceUrl": "EldraziIncursionCollectorSEdition_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

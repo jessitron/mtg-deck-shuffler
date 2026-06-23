@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1936405395,
   "name": "Chaos Incarnate",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "When Kardur enters, until your next turn, creatures your opponents control attack each combat if able and attack a player other than you if able.\nWhenever an attacking creature dies, each opponent loses 1 life and you gain 1 life."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest."
+      ]
     },
     {
       "name": "Bloodgift Demon",
@@ -48,12 +42,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of your upkeep, target player draws a card and loses 1 life."
+      ]
     },
     {
       "name": "Deadly Tempest",
@@ -64,12 +55,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destroyed this way."
+      ]
     },
     {
       "name": "Dredge the Mire",
@@ -80,12 +68,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each opponent chooses a creature card in their graveyard. Put those cards onto the battlefield under your control."
+      ]
     },
     {
       "name": "Ob Nixilis Reignited",
@@ -96,12 +81,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "[+1]: You draw a card and you lose 1 life.\n[−3]: Destroy target creature.\n[−8]: Target opponent gets an emblem with \"Whenever a player draws a card, you lose 2 life.\""
+      ]
     },
     {
       "name": "Profane Command",
@@ -112,12 +94,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Choose two —\n• Target player loses X life.\n• Return target creature card with mana value X or less from your graveyard to the battlefield.\n• Target creature gets -X/-X until end of turn.\n• Up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)"
+      ]
     },
     {
       "name": "Rakshasa Debaser",
@@ -128,12 +107,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Whenever this creature attacks, put target creature card from defending player's graveyard onto the battlefield under your control.\nEncore {6}{B}{B} ({6}{B}{B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Reign of the Pit",
@@ -144,12 +120,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Each player sacrifices a creature of their choice. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way."
+      ]
     },
     {
       "name": "Sangromancer",
@@ -160,12 +133,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a creature an opponent controls dies, you may gain 3 life.\nWhenever an opponent discards a card, you may gain 3 life."
+      ]
     },
     {
       "name": "Scythe Specter",
@@ -176,12 +146,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, each opponent discards a card. Each player who discarded a card with the greatest mana value among cards discarded this way loses life equal to that mana value."
+      ]
     },
     {
       "name": "Sepulchral Primordial",
@@ -192,12 +159,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhen this creature enters, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Soul Shatter",
@@ -208,12 +172,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Each opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control."
+      ]
     },
     {
       "name": "Titan Hunter",
@@ -224,12 +185,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "At the beginning of each player's end step, if no creatures died this turn, this creature deals 4 damage to that player.\n{1}{B}, Sacrifice a creature: You gain 4 life."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -240,12 +198,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Brash Taunter",
@@ -256,12 +211,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Indestructible\nWhenever this creature is dealt damage, it deals that much damage to target opponent.\n{2}{R}, {T}: This creature fights another target creature."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -272,12 +224,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Combustible Gearhulk",
@@ -288,13 +237,10 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nWhen this creature enters, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then this creature deals damage to that player equal to the total mana value of those cards."
+      ]
     },
     {
       "name": "Dictate of the Twin Gods",
@@ -305,12 +251,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flash\nIf a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead."
+      ]
     },
     {
       "name": "Fiery Confluence",
@@ -321,12 +264,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Choose three. You may choose the same mode more than once.\n• Fiery Confluence deals 1 damage to each creature.\n• Fiery Confluence deals 2 damage to each opponent.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Geode Rager",
@@ -337,12 +277,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nLandfall — Whenever a land you control enters, goad each creature target player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Kazuul, Tyrant of the Cliffs",
@@ -353,12 +290,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}."
+      ]
     },
     {
       "name": "Magmatic Force",
@@ -369,12 +303,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}{R}",
-      "cmc": 8,
-      "oracleText": "At the beginning of each upkeep, this creature deals 3 damage to any target."
+      ]
     },
     {
       "name": "Sunbird's Invocation",
@@ -385,12 +316,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a spell from your hand, reveal the top X cards of your library, where X is that spell's mana value. You may cast a spell with mana value X or less from among cards revealed this way without paying its mana cost. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Tectonic Giant",
@@ -401,12 +329,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks or becomes the target of a spell an opponent controls, choose one —\n• This creature deals 3 damage to each opponent.\n• Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."
+      ]
     },
     {
       "name": "Wild Ricochet",
@@ -417,12 +342,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Wildfire Devils",
@@ -433,12 +355,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "When this creature enters and at the beginning of your upkeep, choose a player at random. That player exiles an instant or sorcery card from their graveyard. Copy that card. You may cast the copy without paying its mana cost."
+      ]
     },
     {
       "name": "Kaervek the Merciless",
@@ -450,12 +369,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{R}",
-      "cmc": 7,
-      "oracleText": "Whenever an opponent casts a spell, Kaervek deals damage equal to that spell's mana value to any target."
+      ]
     },
     {
       "name": "Spiteful Visions",
@@ -467,12 +383,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B/R}{B/R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each player's draw step, that player draws an additional card.\nWhenever a player draws a card, this enchantment deals 1 damage to that player."
+      ]
     },
     {
       "name": "Stormfist Crusader",
@@ -484,12 +397,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Menace\nAt the beginning of your upkeep, each player draws a card and loses 1 life."
+      ]
     },
     {
       "name": "Theater of Horrors",
@@ -501,12 +411,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, exile the top card of your library.\nDuring your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with this enchantment.\n{3}{R}: This enchantment deals 1 damage to target opponent or planeswalker."
+      ]
     },
     {
       "name": "Coveted Jewel",
@@ -515,12 +422,9 @@
       "oracleCardName": "Coveted Jewel",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When this artifact enters, draw three cards.\n{T}: Add three mana of any one color.\nWhenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact. Untap it."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -529,13 +433,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -547,11 +448,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -563,11 +462,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Stensia Bloodhall",
@@ -579,11 +476,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{B}{R}, {T}: This land deals 2 damage to target player or planeswalker."
+      ]
     },
     {
       "name": "Temple of Malice",
@@ -595,11 +490,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Ambition's Cost",
@@ -610,12 +503,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "You draw three cards and you lose 3 life."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -626,12 +516,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Indulgent Tormentor",
@@ -642,12 +529,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of your upkeep, draw a card unless target opponent sacrifices a creature of their choice or pays 3 life."
+      ]
     },
     {
       "name": "Read the Bones",
@@ -658,12 +542,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Sign in Blood",
@@ -674,12 +555,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Target player draws two cards and loses 2 life."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -690,12 +568,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Vampire Nighthawk",
@@ -706,12 +581,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)"
+      ]
     },
     {
       "name": "Abrade",
@@ -722,12 +594,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Explosion of Riches",
@@ -738,12 +607,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Draw a card, then each other player may draw a card. Whenever a card is drawn this way, Explosion of Riches deals 5 damage to target opponent chosen at random from among your opponents."
+      ]
     },
     {
       "name": "Guttersnipe",
@@ -754,12 +620,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Hate Mirage",
@@ -770,12 +633,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Choose up to two target creatures you don't control. For each of those creatures, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step."
+      ]
     },
     {
       "name": "Mana Geyser",
@@ -786,12 +646,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Add {R} for each tapped land your opponents control."
+      ]
     },
     {
       "name": "Thermo-Alchemist",
@@ -802,12 +659,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Defender\n{T}: This creature deals 1 damage to each opponent.\nWhenever you cast an instant or sorcery spell, untap this creature."
+      ]
     },
     {
       "name": "Breath of Malfegor",
@@ -819,12 +673,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Breath of Malfegor deals 5 damage to each opponent."
+      ]
     },
     {
       "name": "Rakdos Charm",
@@ -836,12 +687,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Terminate",
@@ -853,12 +701,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Unlicensed Disintegration",
@@ -870,12 +715,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature. If you control an artifact, Unlicensed Disintegration deals 3 damage to that creature's controller."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -884,12 +726,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -898,13 +737,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -913,12 +749,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -927,12 +760,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Nihil Spellbomb",
@@ -943,12 +773,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}, Sacrifice this artifact: Exile target player's graveyard.\nWhen this artifact is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -960,12 +787,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -974,12 +798,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -991,12 +812,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1005,12 +823,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -1019,12 +834,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Akoum Refuge",
@@ -1036,11 +848,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Bloodfell Caves",
@@ -1052,11 +862,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Cinder Barrens",
@@ -1068,11 +876,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1081,11 +887,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Molten Slagheap",
@@ -1097,11 +901,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {B} and/or {R}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1110,11 +912,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Urborg Volcano",
@@ -1126,11 +926,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Swamp",
@@ -1141,11 +939,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1156,11 +952,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1171,11 +965,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1186,11 +978,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1201,11 +991,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1216,11 +1004,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1231,11 +1017,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1246,11 +1030,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1261,11 +1043,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1276,11 +1056,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1291,11 +1069,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1306,11 +1082,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1321,11 +1095,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1336,11 +1108,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1351,11 +1121,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1366,11 +1134,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1381,11 +1147,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1396,11 +1160,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1411,11 +1173,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1426,11 +1186,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1441,11 +1199,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1456,11 +1212,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1471,11 +1225,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1486,11 +1238,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1501,11 +1251,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1516,11 +1264,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1531,11 +1277,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1546,11 +1290,9 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1561,15 +1303,13 @@
         "R"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.626Z",
+    "retrievedDate": "2026-06-23T17:40:36.312Z",
     "sourceUrl": "ChaosIncarnate_SCD.json",
     "deckSource": "precon",
     "createdAt": "2022-12-02T00:00:00.000Z"

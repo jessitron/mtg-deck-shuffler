@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1022624223,
   "name": "Entropic Uprising",
   "totalCards": 100,
@@ -17,12 +17,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nWhenever Yidris deals combat damage to a player, as you cast spells from your hand this turn, they gain cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Wall of Blossoms",
@@ -53,12 +47,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Coiling Oracle",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "Thrasios, Triton Hero",
@@ -89,12 +77,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "{4}: Scry 1, then reveal the top card of your library. If it's a land card, put it onto the battlefield tapped. Otherwise, draw a card.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Goblin Spymaster",
@@ -106,12 +91,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "First strike\nAt the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\""
+      ]
     },
     {
       "name": "Spellheart Chimera",
@@ -124,12 +106,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Flying, trample\nSpellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard."
+      ]
     },
     {
       "name": "Vial Smasher the Fierce",
@@ -142,12 +121,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast your first spell each turn, choose an opponent at random. Vial Smasher deals damage equal to that spell's mana value to that player or a planeswalker that player controls.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Academy Elite",
@@ -159,12 +135,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "This creature enters with X +1/+1 counters on it, where X is the number of instant and sorcery cards in all graveyards.\n{2}{U}, Remove a +1/+1 counter from this creature: Draw a card, then discard a card."
+      ]
     },
     {
       "name": "Gamekeeper",
@@ -176,12 +149,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, you may exile it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard."
+      ]
     },
     {
       "name": "Sangromancer",
@@ -193,12 +163,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a creature an opponent controls dies, you may gain 3 life.\nWhenever an opponent discards a card, you may gain 3 life."
+      ]
     },
     {
       "name": "Bloodbraid Elf",
@@ -211,12 +178,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Haste (This creature can attack and {T} as soon as it comes under your control.)\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Horizon Chimera",
@@ -229,12 +193,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Flash\nFlying, trample\nWhenever you draw a card, you gain 1 life."
+      ]
     },
     {
       "name": "Kydele, Chosen of Kruphix",
@@ -247,12 +208,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C} for each card you've drawn this turn.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Glint-Eye Nephilim",
@@ -267,12 +225,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature deals combat damage to a player, draw that many cards.\n{1}, Discard a card: This creature gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Aeon Chronicler",
@@ -284,12 +239,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Aeon Chronicler's power and toughness are each equal to the number of cards in your hand.\nSuspend X—{X}{3}{U}. X can't be 0.\nWhenever a time counter is removed from this card while it's exiled, draw a card."
+      ]
     },
     {
       "name": "Guiltfeeder",
@@ -301,12 +253,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever this creature attacks and isn't blocked, defending player loses 1 life for each card in their graveyard."
+      ]
     },
     {
       "name": "Consuming Aberration",
@@ -319,12 +268,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard."
+      ]
     },
     {
       "name": "Nath of the Gilt-Leaf",
@@ -337,12 +283,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your upkeep, you may have target opponent discard a card at random.\nWhenever an opponent discards a card, you may create a 1/1 green Elf Warrior creature token."
+      ]
     },
     {
       "name": "Runehorn Hellkite",
@@ -354,12 +297,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\n{5}{R}, Exile this card from your graveyard: Each player discards their hand, then draws seven cards."
+      ]
     },
     {
       "name": "Etherium-Horn Sorcerer",
@@ -372,13 +312,10 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{R}",
-      "cmc": 6,
-      "oracleText": "{1}{U}{R}: Return this creature to its owner's hand.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Dragon Mage",
@@ -390,12 +327,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, each player discards their hand, then draws seven cards."
+      ]
     },
     {
       "name": "Blood Tyrant",
@@ -409,12 +343,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{B}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nAt the beginning of your upkeep, each player loses 1 life. Put a +1/+1 counter on this creature for each 1 life lost this way.\nWhenever a player loses the game, put five +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Wheel of Fate",
@@ -426,11 +357,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "cmc": 0,
-      "oracleText": "Suspend 4—{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)\nEach player discards their hand, then draws seven cards."
+      ]
     },
     {
       "name": "Windfall",
@@ -442,12 +371,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Parting Thoughts",
@@ -459,12 +385,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature."
+      ]
     },
     {
       "name": "Far Wanderings",
@@ -476,12 +399,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nThreshold — If there are seven or more cards in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Past in Flames",
@@ -493,12 +413,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Whispering Madness",
@@ -511,12 +428,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)"
+      ]
     },
     {
       "name": "Decimate",
@@ -529,12 +443,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
+      ]
     },
     {
       "name": "Devastation Tide",
@@ -546,12 +457,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return all nonland permanents to their owners' hands.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Reforge the Soul",
@@ -563,12 +471,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Each player discards their hand, then draws seven cards.\nMiracle {1}{R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Worm Harvest",
@@ -581,12 +486,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B/G}{B/G}{B/G}",
-      "cmc": 5,
-      "oracleText": "Create a 1/1 black and green Worm creature token for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Spelltwine",
@@ -598,12 +500,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs. Exile Spelltwine."
+      ]
     },
     {
       "name": "Whims of the Fates",
@@ -615,12 +514,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents. (Piles can be empty.)"
+      ]
     },
     {
       "name": "Grave Upheaval",
@@ -633,12 +529,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. It gains haste.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Cruel Entertainment",
@@ -650,12 +543,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}",
-      "cmc": 7,
-      "oracleText": "Choose target player and another target player. The first player controls the second player during the second player's next turn, and the second player controls the first player during the first player's next turn."
+      ]
     },
     {
       "name": "Ghastly Conscription",
@@ -667,12 +557,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Volcanic Vision",
@@ -684,12 +571,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Return target instant or sorcery card from your graveyard to your hand. Volcanic Vision deals damage equal to that card's mana value to each creature your opponents control. Exile Volcanic Vision."
+      ]
     },
     {
       "name": "Treasure Cruise",
@@ -701,12 +585,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Treacherous Terrain",
@@ -719,12 +600,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{R}{G}",
-      "cmc": 8,
-      "oracleText": "Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Army of the Damned",
@@ -736,12 +614,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Create thirteen tapped 2/2 black Zombie creature tokens.\nFlashback {7}{B}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "In Garruk's Wake",
@@ -753,12 +628,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures you don't control and all planeswalkers you don't control."
+      ]
     },
     {
       "name": "Chain of Vapor",
@@ -770,12 +642,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy."
+      ]
     },
     {
       "name": "Rakdos Charm",
@@ -788,12 +657,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -805,12 +671,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Ancient Excavation",
@@ -823,12 +686,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Evacuation",
@@ -840,12 +700,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return all creatures to their owners' hands."
+      ]
     },
     {
       "name": "Bituminous Blast",
@@ -858,12 +715,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nBituminous Blast deals 4 damage to target creature."
+      ]
     },
     {
       "name": "Curtains' Call",
@@ -875,12 +729,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -890,12 +741,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -905,12 +753,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -923,12 +768,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -941,12 +783,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -956,12 +795,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -971,12 +807,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Whispersilk Cloak",
@@ -986,12 +819,9 @@
       "oracleCardName": "Whispersilk Cloak",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}"
+      ]
     },
     {
       "name": "Boompile",
@@ -1001,12 +831,9 @@
       "oracleCardName": "Boompile",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Flip a coin. If you win the flip, destroy all nonland permanents."
+      ]
     },
     {
       "name": "Burgeoning",
@@ -1018,12 +845,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Waste Not",
@@ -1035,12 +859,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.\nWhenever an opponent discards a land card, add {B}{B}.\nWhenever an opponent discards a noncreature, nonland card, draw a card."
+      ]
     },
     {
       "name": "Frenzied Fugue",
@@ -1052,12 +873,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Enchant permanent\nWhen this Aura enters and at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1067,11 +885,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1081,11 +897,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1099,11 +913,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Dismal Backwater",
@@ -1116,11 +928,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1130,11 +940,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1144,11 +952,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1162,11 +968,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Jungle Hollow",
@@ -1179,11 +983,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1197,11 +999,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1214,11 +1014,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1228,11 +1026,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Rugged Highlands",
@@ -1245,11 +1041,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1259,11 +1053,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Savage Lands",
@@ -1277,11 +1069,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -1294,11 +1084,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1311,11 +1099,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Swiftwater Cliffs",
@@ -1328,11 +1114,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1342,11 +1126,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1359,11 +1141,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -1375,11 +1155,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1391,11 +1169,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1407,11 +1183,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1423,11 +1197,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1439,11 +1211,9 @@
         "U"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1455,11 +1225,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1471,11 +1239,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1487,11 +1253,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1503,11 +1267,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1519,11 +1281,9 @@
         "B"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1535,11 +1295,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1551,11 +1309,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1567,11 +1323,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1583,11 +1337,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1599,11 +1351,9 @@
         "R"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1615,11 +1365,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1631,11 +1379,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1647,11 +1393,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1663,11 +1407,9 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1679,15 +1421,13 @@
         "G"
       ],
       "set": "C16",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.143Z",
+    "retrievedDate": "2026-06-23T17:40:37.160Z",
     "sourceUrl": "EntropicUprising_C16.json",
     "deckSource": "precon",
     "createdAt": "2016-11-11T00:00:00.000Z"

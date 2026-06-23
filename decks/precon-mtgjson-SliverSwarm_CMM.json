@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1635781749,
   "name": "Sliver Swarm",
   "totalCards": 100,
@@ -18,12 +18,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "The \"legend rule\" doesn't apply to Slivers you control.\nEach Sliver creature card in your graveyard has encore {X}, where X is its mana value.\nEncore {5} ({5}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     }
   ],
   "cards": [
@@ -41,12 +38,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "As Rukarumel enters, choose a creature type.\nSlivers you control and nontoken creatures you control are the chosen type in addition to their other creature types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 1/1 colorless Sliver creature token."
+      ]
     },
     {
       "name": "Regal Sliver",
@@ -58,12 +52,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control have \"When this creature enters, Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch.\""
+      ]
     },
     {
       "name": "Taunting Sliver",
@@ -75,12 +66,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control have \"When this creature enters, goad target creature an opponent controls.\" (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)"
+      ]
     },
     {
       "name": "Titan of Littjara",
@@ -92,12 +80,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nWhenever this creature enters or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card."
+      ]
     },
     {
       "name": "Lazotep Sliver",
@@ -109,12 +94,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control have afflict 2. (Whenever a creature with afflict 2 becomes blocked, defending player loses 2 life.)\nWhenever a nontoken Sliver you control dies, amass Slivers 2. (Put two +1/+1 counters on an Army you control. It's also a Sliver. If you don't control an Army, create a 0/0 black Sliver Army creature token first.)"
+      ]
     },
     {
       "name": "Capricious Sliver",
@@ -126,12 +108,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control have \"Whenever this creature deals combat damage to a player, exile the top card of your library. You may play that card this turn.\""
+      ]
     },
     {
       "name": "Descendants' Fury",
@@ -143,12 +122,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If you do, reveal cards from the top of your library until you reveal a creature card that shares a creature type with the sacrificed creature. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "For the Ancestors",
@@ -160,12 +136,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Choose a creature type. Look at the top six cards of your library. You may reveal any number of cards of the chosen type from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in a random order.\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Hatchery Sliver",
@@ -177,12 +150,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Replicate {1}{G} (When you cast this spell, copy it for each time you paid its replicate cost.)\nEach Sliver spell you cast has replicate. The replicate cost is equal to its mana cost. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Bonescythe Sliver",
@@ -194,12 +164,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control have double strike. (They deal both first-strike and regular combat damage.)"
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -211,12 +178,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Harsh Mercy",
@@ -228,12 +192,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated."
+      ]
     },
     {
       "name": "Galerider Sliver",
@@ -245,12 +206,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Sliver creatures you control have flying."
+      ]
     },
     {
       "name": "Synapse Sliver",
@@ -262,12 +220,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever a Sliver deals combat damage to a player, its controller may draw a card."
+      ]
     },
     {
       "name": "Crippling Fear",
@@ -279,12 +234,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn."
+      ]
     },
     {
       "name": "Syphon Sliver",
@@ -296,12 +248,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Sliver creatures you control have lifelink. (Damage dealt by a Sliver creature you control also causes you to gain that much life.)"
+      ]
     },
     {
       "name": "Spiteful Sliver",
@@ -313,12 +262,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Sliver creatures you control have \"Whenever this creature is dealt damage, it deals that much damage to target player or planeswalker.\""
+      ]
     },
     {
       "name": "Brood Sliver",
@@ -330,12 +276,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token."
+      ]
     },
     {
       "name": "Megantic Sliver",
@@ -347,12 +290,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Sliver creatures you control get +3/+3."
+      ]
     },
     {
       "name": "Realmwalker",
@@ -364,12 +304,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nYou may look at the top card of your library any time.\nYou may cast creature spells of the chosen type from the top of your library."
+      ]
     },
     {
       "name": "Cloudshredder Sliver",
@@ -382,12 +319,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have flying and haste."
+      ]
     },
     {
       "name": "Decimate",
@@ -400,12 +334,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
+      ]
     },
     {
       "name": "Sliver Hivelord",
@@ -421,12 +352,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Sliver creatures you control have indestructible. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Icon of Ancestry",
@@ -436,12 +364,9 @@
       "oracleCardName": "Icon of Ancestry",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -451,12 +376,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -469,11 +391,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -486,11 +406,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -500,11 +418,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -517,11 +433,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -534,11 +448,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Scattered Groves",
@@ -551,11 +463,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Sheltered Thicket",
@@ -568,11 +478,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -585,11 +493,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -602,11 +508,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -616,12 +520,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -631,12 +532,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -646,12 +544,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -661,11 +556,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -675,11 +568,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -689,11 +580,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Constricting Sliver",
@@ -705,12 +594,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Sliver creatures you control have \"When this creature enters, you may exile target creature an opponent controls until this creature leaves the battlefield.\""
+      ]
     },
     {
       "name": "Sentinel Sliver",
@@ -722,12 +608,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have vigilance. (Attacking doesn't cause them to tap.)"
+      ]
     },
     {
       "name": "Sinew Sliver",
@@ -739,12 +622,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "All Sliver creatures get +1/+1."
+      ]
     },
     {
       "name": "Diffusion Sliver",
@@ -756,12 +636,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}."
+      ]
     },
     {
       "name": "Distant Melody",
@@ -773,12 +650,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Shifting Sliver",
@@ -790,12 +664,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Slivers can't be blocked except by Slivers."
+      ]
     },
     {
       "name": "Windfall",
@@ -807,12 +678,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Winged Sliver",
@@ -824,12 +692,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "All Sliver creatures have flying."
+      ]
     },
     {
       "name": "Clot Sliver",
@@ -841,12 +706,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "All Slivers have \"{2}: Regenerate this permanent.\""
+      ]
     },
     {
       "name": "Crypt Sliver",
@@ -858,12 +720,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "All Slivers have \"{T}: Regenerate target Sliver.\""
+      ]
     },
     {
       "name": "Blade Sliver",
@@ -875,12 +734,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "All Sliver creatures get +1/+0."
+      ]
     },
     {
       "name": "Blur Sliver",
@@ -892,12 +748,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Sliver creatures you control have haste. (They can attack and {T} as soon as they come under your control.)"
+      ]
     },
     {
       "name": "Bonesplitter Sliver",
@@ -909,12 +762,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "All Sliver creatures get +2/+0."
+      ]
     },
     {
       "name": "Cleaving Sliver",
@@ -926,12 +776,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Sliver creatures you control get +2/+0."
+      ]
     },
     {
       "name": "Hollowhead Sliver",
@@ -943,12 +790,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Sliver creatures you control have \"{T}, Discard a card: Draw a card.\""
+      ]
     },
     {
       "name": "Striking Sliver",
@@ -960,12 +804,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Sliver creatures you control have first strike. (They deal combat damage before creatures without first strike.)"
+      ]
     },
     {
       "name": "Two-Headed Sliver",
@@ -977,12 +818,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)"
+      ]
     },
     {
       "name": "Cultivate",
@@ -994,12 +832,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -1011,12 +846,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Gemhide Sliver",
@@ -1028,12 +860,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "All Slivers have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Manaweft Sliver",
@@ -1045,12 +874,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Might Sliver",
@@ -1062,12 +888,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "All Sliver creatures get +2/+2."
+      ]
     },
     {
       "name": "Nature's Lore",
@@ -1079,12 +902,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Quick Sliver",
@@ -1096,12 +916,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Flash\nAny player may cast Sliver spells as though they had flash."
+      ]
     },
     {
       "name": "Three Visits",
@@ -1113,12 +930,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Venom Sliver",
@@ -1130,12 +944,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sliver creatures you control have deathtouch. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Crystalline Sliver",
@@ -1148,12 +959,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 2,
-      "oracleText": "All Slivers have shroud. (They can't be the targets of spells or abilities.)"
+      ]
     },
     {
       "name": "Firewake Sliver",
@@ -1166,12 +974,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "All Sliver creatures have haste.\nAll Slivers have \"{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn.\""
+      ]
     },
     {
       "name": "Harmonic Sliver",
@@ -1184,12 +989,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "All Slivers have \"When this permanent enters, destroy target artifact or enchantment.\""
+      ]
     },
     {
       "name": "Hibernation Sliver",
@@ -1202,12 +1004,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand.\""
+      ]
     },
     {
       "name": "Lavabelly Sliver",
@@ -1220,12 +1019,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Sliver creatures you control have \"When this creature enters, it deals 1 damage to target player or planeswalker and you gain 1 life.\""
+      ]
     },
     {
       "name": "Necrotic Sliver",
@@ -1238,12 +1034,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "All Slivers have \"{3}, Sacrifice this permanent: Destroy target permanent.\""
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -1253,12 +1046,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Pillar of Origins",
@@ -1268,12 +1058,9 @@
       "oracleCardName": "Pillar of Origins",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "As this artifact enters, choose a creature type.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Flood Plain",
@@ -1283,11 +1070,9 @@
       "oracleCardName": "Flood Plain",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1301,11 +1086,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Grasslands",
@@ -1315,11 +1098,9 @@
       "oracleCardName": "Grasslands",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -1333,11 +1114,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Mountain Valley",
@@ -1347,11 +1126,9 @@
       "oracleCardName": "Mountain Valley",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1365,11 +1142,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -1383,11 +1158,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1401,11 +1174,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Rocky Tar Pit",
@@ -1415,11 +1186,9 @@
       "oracleCardName": "Rocky Tar Pit",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Sandsteppe Citadel",
@@ -1433,11 +1202,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {B}, or {G}."
+      ]
     },
     {
       "name": "Savage Lands",
@@ -1451,11 +1218,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1469,11 +1234,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1483,11 +1246,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1497,11 +1258,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Plains",
@@ -1513,11 +1272,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1529,11 +1286,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1545,11 +1300,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1561,11 +1314,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1577,11 +1328,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1593,11 +1342,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1609,11 +1356,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1625,11 +1370,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1641,11 +1384,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1657,11 +1398,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1673,15 +1412,13 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.708Z",
+    "retrievedDate": "2026-06-23T17:40:39.907Z",
     "sourceUrl": "SliverSwarm_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1135131247,
   "name": "Evasive Maneuvers",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen Derevi enters and whenever a creature you control deals combat damage to a player, you may tap or untap target permanent.\n{1}{G}{W}{U}: Put Derevi onto the battlefield from the command zone."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Aerie Mystics",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\n{1}{G}{U}: Creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)"
+      ]
     },
     {
       "name": "Angel of Finality",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, exile target player's graveyard."
+      ]
     },
     {
       "name": "Azami, Lady of Scrolls",
@@ -88,12 +76,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Tap an untapped Wizard you control: Draw a card."
+      ]
     },
     {
       "name": "Bane of Progress",
@@ -105,12 +90,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for each permanent destroyed this way."
+      ]
     },
     {
       "name": "Deceiver Exarch",
@@ -122,12 +104,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, choose one —\n• Untap target permanent you control.\n• Tap target permanent an opponent controls."
+      ]
     },
     {
       "name": "Diviner Spirit",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature deals combat damage to a player, you and that player each draw that many cards."
+      ]
     },
     {
       "name": "Djinn of Infinite Deceits",
@@ -156,12 +132,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\n{T}: Exchange control of two target nonlegendary creatures. You can't activate this ability during combat."
+      ]
     },
     {
       "name": "Dungeon Geists",
@@ -173,12 +146,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature."
+      ]
     },
     {
       "name": "Farhaven Elf",
@@ -190,12 +160,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fiend Hunter",
@@ -207,12 +174,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may exile another target creature.\nWhen this creature leaves the battlefield, return the exiled card to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "Flickerwisp",
@@ -224,12 +188,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Hada Spy Patrol",
@@ -241,12 +202,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Level up {2}{U} ({2}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/2\nThis creature can't be blocked.\nLEVEL 3+\n3/3\nShroud (This creature can't be the target of spells or abilities.)\nThis creature can't be blocked."
+      ]
     },
     {
       "name": "Karmic Guide",
@@ -258,12 +216,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, protection from black\nEcho {3}{W}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters, return target creature card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Kazandu Tuskcaller",
@@ -275,12 +230,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-5\n1/1\n{T}: Create a 3/3 green Elephant creature token.\nLEVEL 6+\n1/1\n{T}: Create two 3/3 green Elephant creature tokens."
+      ]
     },
     {
       "name": "Lu Xun, Scholar General",
@@ -292,12 +244,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Lu Xun deals damage to an opponent, you may draw a card."
+      ]
     },
     {
       "name": "Mirror Entity",
@@ -309,12 +258,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types."
+      ]
     },
     {
       "name": "Mistmeadow Witch",
@@ -327,12 +273,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W/U}",
-      "cmc": 2,
-      "oracleText": "{2}{W}{U}: Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Murkfiend Liege",
@@ -345,12 +288,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G/U}{G/U}{G/U}",
-      "cmc": 5,
-      "oracleText": "Other green creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.\nUntap all green and/or blue creatures you control during each other player's untap step."
+      ]
     },
     {
       "name": "Phantom Nantuko",
@@ -362,12 +302,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nThis creature enters with two +1/+1 counters on it.\nIf damage would be dealt to this creature, prevent that damage. Remove a +1/+1 counter from this creature.\n{T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Pilgrim's Eye",
@@ -377,13 +314,10 @@
       "oracleCardName": "Pilgrim's Eye",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Roon of the Hidden Realm",
@@ -397,12 +331,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Vigilance, trample\n{2}, {T}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Rubinia Soulsinger",
@@ -416,12 +347,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "You may choose not to untap Rubinia Soulsinger during your untap step.\n{T}: Gain control of target creature for as long as you control Rubinia Soulsinger and Rubinia Soulsinger remains tapped."
+      ]
     },
     {
       "name": "Selesnya Guildmage",
@@ -434,12 +362,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G/W}{G/W}",
-      "cmc": 2,
-      "oracleText": "{3}{G}: Create a 1/1 green Saproling creature token.\n{3}{W}: Creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Skyward Eye Prophets",
@@ -453,12 +378,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}{U}",
-      "cmc": 6,
-      "oracleText": "Vigilance\n{T}: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand."
+      ]
     },
     {
       "name": "Stonecloaker",
@@ -470,12 +392,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, return a creature you control to its owner's hand.\nWhen this creature enters, exile target card from a graveyard."
+      ]
     },
     {
       "name": "Thornwind Faeries",
@@ -487,12 +406,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\n{T}: This creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Winged Coatl",
@@ -505,12 +421,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nFlying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Wonder",
@@ -522,12 +435,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nAs long as this card is in your graveyard and you control an Island, creatures you control have flying."
+      ]
     },
     {
       "name": "Borrowing 100,000 Arrows",
@@ -539,12 +449,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each tapped creature target opponent controls."
+      ]
     },
     {
       "name": "Kirtar's Wrath",
@@ -556,12 +463,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Destroy all creatures. They can't be regenerated.\nThreshold — If there are seven or more cards in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated."
+      ]
     },
     {
       "name": "Restore",
@@ -573,12 +477,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Put target land card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Tempt with Glory",
@@ -590,12 +491,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Tempting offer — Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Wash Out",
@@ -607,12 +505,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Return all permanents of the color of your choice to their owners' hands."
+      ]
     },
     {
       "name": "Aethermage's Touch",
@@ -625,12 +520,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains \"At the beginning of your end step, return this creature to its owner's hand.\" Then put the rest of the cards revealed this way on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -642,12 +534,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Blue Sun's Zenith",
@@ -659,12 +548,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Krosan Grip",
@@ -676,12 +562,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nDestroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Selesnya Charm",
@@ -694,12 +577,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Target creature gets +2/+2 and gains trample until end of turn.\n• Exile target creature with power 5 or greater.\n• Create a 2/2 white Knight creature token with vigilance."
+      ]
     },
     {
       "name": "Unexpectedly Absent",
@@ -711,12 +591,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Put target nonland permanent into its owner's library just beneath the top X cards of that library."
+      ]
     },
     {
       "name": "Azorius Keyrune",
@@ -729,12 +606,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {W} or {U}.\n{W}{U}: This artifact becomes a 2/2 white and blue Bird artifact creature with flying until end of turn."
+      ]
     },
     {
       "name": "Basalt Monolith",
@@ -744,12 +618,9 @@
       "oracleCardName": "Basalt Monolith",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{3}: Untap this artifact."
+      ]
     },
     {
       "name": "Conjurer's Closet",
@@ -759,12 +630,9 @@
       "oracleCardName": "Conjurer's Closet",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control."
+      ]
     },
     {
       "name": "Darksteel Ingot",
@@ -774,12 +642,9 @@
       "oracleCardName": "Darksteel Ingot",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Leonin Bladetrap",
@@ -789,12 +654,9 @@
       "oracleCardName": "Leonin Bladetrap",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\n{2}, Sacrifice this artifact: It deals 2 damage to each attacking creature without flying."
+      ]
     },
     {
       "name": "Selesnya Signet",
@@ -807,12 +669,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -825,12 +684,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -840,12 +696,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Surveyor's Scope",
@@ -855,12 +708,9 @@
       "oracleCardName": "Surveyor's Scope",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Exile this artifact: Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those cards onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -870,12 +720,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sword of the Paruns",
@@ -885,12 +732,9 @@
       "oracleCardName": "Sword of the Paruns",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "As long as equipped creature is tapped, tapped creatures you control get +2/+0.\nAs long as equipped creature is untapped, untapped creatures you control get +0/+2.\n{3}: You may tap or untap equipped creature.\nEquip {3}"
+      ]
     },
     {
       "name": "Thousand-Year Elixir",
@@ -900,12 +744,9 @@
       "oracleCardName": "Thousand-Year Elixir",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "You may activate abilities of creatures you control as though those creatures had haste.\n{1}, {T}: Untap target creature."
+      ]
     },
     {
       "name": "Thunderstaff",
@@ -915,12 +756,9 @@
       "oracleCardName": "Thunderstaff",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As long as this artifact is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.\n{2}, {T}: Attacking creatures get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Control Magic",
@@ -932,12 +770,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nYou control enchanted creature."
+      ]
     },
     {
       "name": "Curse of Inertia",
@@ -949,12 +784,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice."
+      ]
     },
     {
       "name": "Curse of Predation",
@@ -966,12 +798,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a creature attacks enchanted player, put a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Curse of the Forsaken",
@@ -983,12 +812,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a creature attacks enchanted player, its controller gains 1 life."
+      ]
     },
     {
       "name": "Darksteel Mutation",
@@ -1000,12 +826,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nEnchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types."
+      ]
     },
     {
       "name": "Flickerform",
@@ -1017,12 +840,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\n{2}{W}{W}: Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature."
+      ]
     },
     {
       "name": "Leafdrake Roost",
@@ -1035,12 +855,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Enchant land\nEnchanted land has \"{G}{U}, {T}: Create a 2/2 green and blue Drake creature token with flying.\""
+      ]
     },
     {
       "name": "Presence of Gond",
@@ -1052,12 +869,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature has \"{T}: Create a 1/1 green Elf Warrior creature token.\""
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1070,11 +884,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Azorius Guildgate",
@@ -1087,11 +899,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Bant Panorama",
@@ -1101,11 +911,9 @@
       "oracleCardName": "Bant Panorama",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1115,11 +923,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1129,11 +935,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Faerie Conclave",
@@ -1145,11 +949,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{1}{U}: This land becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land."
+      ]
     },
     {
       "name": "Forest",
@@ -1161,11 +963,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1177,11 +977,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1193,11 +991,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1209,11 +1005,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1225,11 +1019,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1241,11 +1033,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1257,11 +1047,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1273,11 +1061,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1289,11 +1075,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1305,11 +1089,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1321,11 +1103,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1337,11 +1117,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1353,11 +1131,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1367,11 +1143,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Plains",
@@ -1383,11 +1157,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1399,11 +1171,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1415,11 +1185,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1431,11 +1199,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1447,11 +1213,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1463,11 +1227,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1479,11 +1241,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1493,11 +1253,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Saltcrusted Steppe",
@@ -1510,11 +1268,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {G} and/or {W}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1528,11 +1284,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1544,11 +1298,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Sejiri Refuge",
@@ -1561,11 +1313,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Selesnya Guildgate",
@@ -1578,11 +1328,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -1595,11 +1343,9 @@
         "W"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Simic Guildgate",
@@ -1612,11 +1358,9 @@
         "U"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1626,11 +1370,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1640,11 +1382,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Transguild Promenade",
@@ -1654,15 +1394,13 @@
       "oracleCardName": "Transguild Promenade",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.173Z",
+    "retrievedDate": "2026-06-23T17:40:37.215Z",
     "sourceUrl": "EvasiveManeuvers_CMA.json",
     "deckSource": "precon",
     "createdAt": "2017-06-09T00:00:00.000Z"

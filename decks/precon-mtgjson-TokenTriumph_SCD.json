@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 188014420,
   "name": "Token Triumph",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever Emmara becomes tapped, create a 1/1 white Soldier creature token with lifelink."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "[+1]: Put a +1/+1 counter on up to one target creature.\n[−3]: Target creature gains flying and double strike until end of turn.\n[−8]: Create X 2/2 white Cat creature tokens, where X is your life total."
+      ]
     },
     {
       "name": "Citywide Bust",
@@ -48,12 +42,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy all creatures with toughness 4 or greater."
+      ]
     },
     {
       "name": "Commander's Insignia",
@@ -64,12 +55,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game."
+      ]
     },
     {
       "name": "Dawn of Hope",
@@ -80,12 +68,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you gain life, you may pay {2}. If you do, draw a card.\n{3}{W}: Create a 1/1 white Soldier creature token with lifelink."
+      ]
     },
     {
       "name": "Dictate of Heliod",
@@ -96,12 +81,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flash\nCreatures you control get +2/+2."
+      ]
     },
     {
       "name": "Felidar Retreat",
@@ -112,12 +94,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Create a 2/2 white Cat Beast creature token.\n• Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Hour of Reckoning",
@@ -128,12 +107,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures."
+      ]
     },
     {
       "name": "Mentor of the Meek",
@@ -144,12 +120,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card."
+      ]
     },
     {
       "name": "White Sun's Zenith",
@@ -160,12 +133,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Champion of Lambholt",
@@ -176,12 +146,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Citanul Hierophants",
@@ -192,12 +159,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Creatures you control have \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Collective Unconscious",
@@ -208,12 +172,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw a card for each creature you control."
+      ]
     },
     {
       "name": "Harvest Season",
@@ -224,12 +185,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to X basic land cards, where X is the number of tapped creatures you control, put those cards onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Hornet Nest",
@@ -240,12 +198,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Defender (This creature can't attack.)\nWhenever this creature is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -256,12 +211,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Rishkar, Peema Renegade",
@@ -272,12 +224,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When Rishkar enters, put a +1/+1 counter on each of up to two target creatures.\nEach creature you control with a counter on it has \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Scavenging Ooze",
@@ -288,12 +237,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on this creature and you gain 1 life."
+      ]
     },
     {
       "name": "Thunderfoot Baloth",
@@ -304,12 +250,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you control get +2/+2 and have trample."
+      ]
     },
     {
       "name": "Verdant Force",
@@ -320,12 +263,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "At the beginning of each upkeep, create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Aura Mutation",
@@ -337,12 +277,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Destroy target enchantment. Create X 1/1 green Saproling creature tokens, where X is that enchantment's mana value."
+      ]
     },
     {
       "name": "Camaraderie",
@@ -354,12 +291,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{W}",
-      "cmc": 6,
-      "oracleText": "You gain X life and draw X cards, where X is the number of creatures you control. Creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Collective Blessing",
@@ -371,12 +305,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}{W}",
-      "cmc": 6,
-      "oracleText": "Creatures you control get +3/+3."
+      ]
     },
     {
       "name": "Dauntless Escort",
@@ -388,12 +319,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Sacrifice this creature: Creatures you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "March of the Multitudes",
@@ -405,12 +333,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate X 1/1 white Soldier creature tokens with lifelink."
+      ]
     },
     {
       "name": "Trostani Discordant",
@@ -422,12 +347,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Other creatures you control get +1/+1.\nWhen Trostani enters, create two 1/1 white Soldier creature tokens with lifelink.\nAt the beginning of your end step, each player gains control of all creatures they own."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -436,12 +358,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Slate of Ancestry",
@@ -450,12 +369,9 @@
       "oracleCardName": "Slate of Ancestry",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{4}, {T}, Discard your hand: Draw a card for each creature you control."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -467,11 +383,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Fortified Village",
@@ -483,11 +397,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Temple of Plenty",
@@ -499,11 +411,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Conclave Tribunal",
@@ -514,12 +424,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
+      ]
     },
     {
       "name": "Devouring Light",
@@ -530,12 +437,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nExile target attacking or blocking creature."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -546,12 +450,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rootborn Defenses",
@@ -562,12 +463,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Populate. Creatures you control gain indestructible until end of turn. (To populate, create a token that's a copy of a creature token you control.)"
+      ]
     },
     {
       "name": "Valor in Akros",
@@ -578,12 +476,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control enters, creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Avacyn's Pilgrim",
@@ -595,12 +490,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {W}."
+      ]
     },
     {
       "name": "Curse of Bounty",
@@ -611,12 +503,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant player\nWhenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -627,12 +516,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Farhaven Elf",
@@ -643,12 +529,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Great Oak Guardian",
@@ -659,12 +542,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nReach\nWhen this creature enters, creatures target player controls get +2/+2 until end of turn. Untap them."
+      ]
     },
     {
       "name": "Harmonize",
@@ -675,12 +555,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Jade Mage",
@@ -691,12 +568,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{2}{G}: Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Jaspera Sentinel",
@@ -707,12 +581,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Reach\n{T}, Tap an untapped creature you control: Add one mana of any color."
+      ]
     },
     {
       "name": "Karametra's Favor",
@@ -723,12 +594,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature has \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Leafkin Druid",
@@ -739,12 +607,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {G}. If you control four or more creatures, add {G}{G} instead."
+      ]
     },
     {
       "name": "Loyal Guardian",
@@ -755,12 +620,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Nissa's Expedition",
@@ -771,12 +633,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Nullmage Shepherd",
@@ -787,12 +646,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Tap four untapped creatures you control: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Overrun",
@@ -803,12 +659,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +3/+3 and gain trample until end of turn. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)"
+      ]
     },
     {
       "name": "Overwhelming Instinct",
@@ -819,12 +672,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you attack with three or more creatures, draw a card."
+      ]
     },
     {
       "name": "Presence of Gond",
@@ -835,12 +685,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature has \"{T}: Create a 1/1 green Elf Warrior creature token.\""
+      ]
     },
     {
       "name": "Reclamation Sage",
@@ -851,12 +698,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Scatter the Seeds",
@@ -867,12 +711,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate three 1/1 green Saproling creature tokens."
+      ]
     },
     {
       "name": "Sporemound",
@@ -883,12 +724,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Voice of Many",
@@ -899,12 +737,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, draw a card for each opponent who controls fewer creatures than you."
+      ]
     },
     {
       "name": "Maja, Bretagard Protector",
@@ -916,12 +751,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Other creatures you control get +1/+1.\nLandfall — Whenever a land you control enters, create a 1/1 white Human Warrior creature token."
+      ]
     },
     {
       "name": "Selesnya Evangel",
@@ -933,12 +765,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}, Tap an untapped creature you control: Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Selesnya Guildmage",
@@ -950,12 +779,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G/W}{G/W}",
-      "cmc": 2,
-      "oracleText": "{3}{G}: Create a 1/1 green Saproling creature token.\n{3}{W}: Creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Sylvan Reclamation",
@@ -967,12 +793,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -981,12 +804,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -995,12 +815,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1009,12 +826,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Unity",
@@ -1026,12 +840,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Blossoming Sands",
@@ -1043,11 +854,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1056,11 +865,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Elfhame Palace",
@@ -1072,11 +879,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Graypelt Refuge",
@@ -1088,11 +893,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Holdout Settlement",
@@ -1101,11 +904,9 @@
       "oracleCardName": "Holdout Settlement",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Tap an untapped creature you control: Add one mana of any color."
+      ]
     },
     {
       "name": "Tranquil Expanse",
@@ -1117,11 +918,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Vitu-Ghazi, the City-Tree",
@@ -1133,11 +932,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{G}{W}, {T}: Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Forest",
@@ -1148,11 +945,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1163,11 +958,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1178,11 +971,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1193,11 +984,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1208,11 +997,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1223,11 +1010,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1238,11 +1023,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1253,11 +1036,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1268,11 +1049,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1283,11 +1062,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1298,11 +1075,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1313,11 +1088,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1328,11 +1101,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1343,11 +1114,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1358,11 +1127,9 @@
         "G"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1373,11 +1140,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1388,11 +1153,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1403,11 +1166,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1418,11 +1179,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1433,11 +1192,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1448,11 +1205,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1463,11 +1218,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1478,11 +1231,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1493,11 +1244,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1508,11 +1257,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1523,11 +1270,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1538,11 +1283,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1553,11 +1296,9 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1568,15 +1309,13 @@
         "W"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.075Z",
+    "retrievedDate": "2026-06-23T17:40:40.510Z",
     "sourceUrl": "TokenTriumph_SCD.json",
     "deckSource": "precon",
     "createdAt": "2022-12-02T00:00:00.000Z"

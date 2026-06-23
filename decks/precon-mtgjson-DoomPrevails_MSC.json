@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2084872455,
   "name": "Doom Prevails",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you discard one or more land cards, each opponent loses 2 life.\nAt the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     }
   ],
   "cards": [
@@ -31,12 +28,9 @@
       "oracleCardName": "Molecule Man",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Nonland cards in your hand have miracle {0}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Extract Power",
@@ -47,12 +41,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Look at the top card of each player's library, then exile those cards face down. You may play them without paying their mana costs for as long as they remain exiled."
+      ]
     },
     {
       "name": "Glorious Purpose",
@@ -63,12 +54,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control connives, put a +1/+1 counter on that creature and a plan counter on this enchantment.\nWhen the sixth plan counter is put on this enchantment, sacrifice it. If you do, exile the top four cards of your library. You may cast any number of spells from among them without paying their mana costs. Put the rest into your hand."
+      ]
     },
     {
       "name": "Helmut Zemo, Mastermind",
@@ -79,12 +67,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever Helmut Zemo attacks, you may cast target instant or sorcery card with mana value less than or equal to his power from your graveyard. If that spell would be put into your graveyard, exile it instead. If you cast a spell this way, put a +1/+1 counter on Helmut Zemo."
+      ]
     },
     {
       "name": "Kang Dynasty",
@@ -95,12 +80,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — For each opponent, tap up to one target creature that player controls. Goad those creatures. Until your next turn, whenever any of those creatures deals combat damage to a player, draw a card.\nIII — Target creature you control gets +1/+1 until end of turn for each card in your hand and can't be blocked this turn."
+      ]
     },
     {
       "name": "Age of Ultron",
@@ -111,12 +93,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, destroy up to one target nonartifact creature that player controls.\nII — For each opponent, you create a 2/2 colorless Robot Villain artifact creature token.\nIII — Artifact creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on each of them."
+      ]
     },
     {
       "name": "Damocles Base, Sword of Kang",
@@ -127,12 +106,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Flying, deathtouch\nWhenever Damocles Base deals combat damage to a player, that player faces a villainous choice — They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards.\nCrew 3"
+      ]
     },
     {
       "name": "Endless Ranks of HYDRA",
@@ -143,12 +119,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "For each opponent, you create a 2/1 black Villain creature token with menace.\nWhenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "The Frightful Four",
@@ -159,12 +132,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhenever an opponent casts their first noncreature spell each turn, that player loses life equal to that spell's mana value."
+      ]
     },
     {
       "name": "Iron Monger, Sadistic Tycoon",
@@ -175,13 +145,10 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever a creature you control connives, put a +1/+1 counter on each Villain you control."
+      ]
     },
     {
       "name": "Klaw, Master of Sound",
@@ -192,12 +159,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhenever you play a card from exile, Klaw gains indestructible until end of turn.\nWhenever Klaw deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play it for as long as it remains exiled. Mana of any type can be spent to cast a spell this way."
+      ]
     },
     {
       "name": "Abomination, World Ravager",
@@ -208,12 +172,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{R}",
-      "cmc": 8,
-      "oracleText": "Menace, trample\nMayhem {4}{R} (You may cast this card from your graveyard for {4}{R} if you discarded it this turn. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Batroc the Leaper",
@@ -224,12 +185,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nBatroc enters with a +1/+1 counter on him for each time he was kicked.\nWhen Batroc enters, he deals damage equal to his power to each of up to X targets, where X is the number of times he was kicked."
+      ]
     },
     {
       "name": "Killmonger, Ruthless Usurper",
@@ -240,12 +198,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever Killmonger attacks, he gets +1/+0 until end of turn for each artifact defending player controls.\nWhenever Killmonger deals combat damage to a player, that player sacrifices an artifact of their choice and you create a Treasure token."
+      ]
     },
     {
       "name": "Lady Loki, Agent of Chaos",
@@ -256,12 +211,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast your first instant, sorcery, or Villain spell each turn, exile it, then exile cards from the top of your library until you exile a nonland card. Lady Loki deals damage to each opponent equal to the difference between that spell's mana value and that nonland card's mana value. You may cast that card without paying its mana cost."
+      ]
     },
     {
       "name": "Living Laser",
@@ -272,12 +224,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Haste\nWhenever Living Laser attacks, for each card you've discarded this turn, create a token that's a copy of Living Laser, except the token isn't legendary. The tokens enter tapped and attacking. Exile the tokens at the beginning of the next end step."
+      ]
     },
     {
       "name": "Loki's Scepter",
@@ -288,12 +237,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When Loki's Scepter enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it becomes a Villain in addition to its other types and gains haste.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Puppet Master, String Puller",
@@ -304,12 +250,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you attack, goad target creature an opponent controls. It can't block this turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever one or more goaded creatures deal combat damage to one of your opponents, create a Treasure token."
+      ]
     },
     {
       "name": "Stilt-Man, Towering Terror",
@@ -320,12 +263,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Reach\nWhenever one or more Villains you control deal combat damage to a player, gain control of target noncreature, nonland permanent that player controls until the end of your next turn. It gains \"This permanent can't be sacrificed\" until the end of your next turn."
+      ]
     },
     {
       "name": "Titania, Proud Pummeler",
@@ -336,12 +276,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "First strike\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther creatures you control have melee."
+      ]
     },
     {
       "name": "Archnemesis",
@@ -353,12 +290,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant opponent\nWhenever you attack enchanted player, that player loses 2 life. You draw a card and gain 2 life.\nWhenever a player attacks you, you may attach this Aura to that player."
+      ]
     },
     {
       "name": "Kang Prime",
@@ -370,12 +304,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever Kang Prime enters or attacks, exile cards from the top of your library until you exile a nonland card. Put two time counters on that card. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. If it's a creature, it has haste.)"
+      ]
     },
     {
       "name": "Loki, the Deceiver",
@@ -388,12 +319,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever Loki attacks, create a tapped and attacking token that's a copy of another target Villain you control, except it isn't legendary and it's an Illusion in addition to its other types. Sacrifice that token at the beginning of the next end step.\nWhenever one or more Villains you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Red Ghost, Intangible Genius",
@@ -405,12 +333,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Ward {2}\nRed Ghost can't be blocked.\nWhenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste."
+      ]
     },
     {
       "name": "The Squadron Sinister",
@@ -422,12 +347,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\nOther Villains you control get +2/+2 and have flying and haste.\nMayhem {3}{U}{R} (You may cast this card from your graveyard for {3}{U}{R} if you discarded it this turn. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Typhoid Mary, Fractured",
@@ -439,12 +361,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever Typhoid Mary attacks, choose one at random. If you discarded a card this turn, you choose one instead.\n• Mary — Create a Treasure token.\n• Typhoid Mary — Draw a card.\n• Bloody Mary — Each opponent loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "Ultron, Unlimited",
@@ -456,13 +375,10 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever Ultron attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever a creature you control connives, you may pay {1}. If you do, create a 2/2 colorless Robot Villain artifact creature token."
+      ]
     },
     {
       "name": "Doom's Time Platform",
@@ -471,12 +387,9 @@
       "oracleCardName": "Doom's Time Platform",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever you attack, exile target nonland card from your graveyard with two time counters on it. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. If it's a creature, it has haste.)"
+      ]
     },
     {
       "name": "Tri-Sentinel, Act of Vengeance",
@@ -485,13 +398,10 @@
       "oracleCardName": "Tri-Sentinel, Act of Vengeance",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Flying, menace, trample\nWhen Tri-Sentinel enters, for each opponent, Tri-Sentinel deals 3 damage to up to one target creature that player controls.\nUnearth {7} ({7}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Black Market Connections",
@@ -502,12 +412,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your first main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
+      ]
     },
     {
       "name": "Kindred Dominance",
@@ -518,12 +425,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Choose a creature type. Destroy all creatures that aren't of the chosen type."
+      ]
     },
     {
       "name": "Lethal Scheme",
@@ -534,12 +438,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     },
     {
       "name": "Toxic Deluge",
@@ -550,12 +451,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -566,12 +464,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -582,12 +477,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Bedevil",
@@ -599,12 +491,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, creature, or planeswalker."
+      ]
     },
     {
       "name": "Currency Converter",
@@ -613,12 +502,9 @@
       "oracleCardName": "Currency Converter",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard.\n{2}, {T}: Draw a card, then discard a card.\n{T}: Put a card exiled with this artifact into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token."
+      ]
     },
     {
       "name": "Progenitor's Icon",
@@ -627,12 +513,9 @@
       "oracleCardName": "Progenitor's Icon",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\n{T}: Add one mana of any color.\n{T}: The next spell of the chosen type you cast this turn can be cast as though it had flash."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -641,12 +524,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Canyon Slough",
@@ -658,11 +538,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -674,11 +552,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Coastal Peak",
@@ -690,11 +566,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -706,11 +580,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Drowned Catacomb",
@@ -722,11 +594,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -735,11 +605,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fetid Pools",
@@ -751,11 +619,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -767,11 +633,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -783,11 +647,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Luxury Suite",
@@ -799,11 +661,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -812,11 +672,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Scorched Geyser",
@@ -828,11 +686,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -844,11 +700,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -860,11 +714,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -876,11 +728,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spark Double",
@@ -891,12 +741,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "You may have this creature enter as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary."
+      ]
     },
     {
       "name": "Titan of Littjara",
@@ -907,12 +754,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nWhenever this creature enters or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card."
+      ]
     },
     {
       "name": "Baron Strucker, HYDRA Overlord",
@@ -923,12 +767,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Villain spells you cast cost {1} less to cast.\nWhenever another Villain you control enters, you may have it connive. Do this only once each turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     },
     {
       "name": "Moonstone, Harsh Mistress",
@@ -939,12 +780,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you discard a card, you may exile that card from your graveyard. If you do, until the end of your next turn, you may play that card."
+      ]
     },
     {
       "name": "Kang, Temporal Tyrant",
@@ -956,12 +794,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Madame Hydra",
@@ -973,12 +808,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a Villain spell, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)"
+      ]
     },
     {
       "name": "Villainous Hideout",
@@ -987,11 +819,9 @@
       "oracleCardName": "Villainous Hideout",
       "colorIdentity": [],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source.\n{3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     },
     {
       "name": "Containment Construct",
@@ -1000,13 +830,10 @@
       "oracleCardName": "Containment Construct",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever you discard a card, you may exile that card from your graveyard. If you do, you may play that card this turn."
+      ]
     },
     {
       "name": "Chameleon, Master of Disguise",
@@ -1017,12 +844,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "You may have Chameleon enter as a copy of a creature you control, except his name is Chameleon, Master of Disguise.\nMayhem {2}{U} (You may cast this card from your graveyard for {2}{U} if you discarded it this turn. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Propaganda",
@@ -1033,12 +857,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Night's Whisper",
@@ -1049,12 +870,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "You draw two cards and lose 2 life."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -1065,12 +883,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Tombstone, Career Criminal",
@@ -1081,12 +896,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When Tombstone enters, return target Villain card from your graveyard to your hand.\nVillain spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Withering Torment",
@@ -1097,12 +909,9 @@
         "B"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or enchantment. You lose 2 life."
+      ]
     },
     {
       "name": "Superior Foes of Spider-Man",
@@ -1113,12 +922,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature."
+      ]
     },
     {
       "name": "Vandalblast",
@@ -1129,12 +935,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Prowler, Clawed Thief",
@@ -1146,12 +949,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)"
+      ]
     },
     {
       "name": "Terminate",
@@ -1163,12 +963,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1177,12 +974,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Patchwork Banner",
@@ -1191,12 +985,9 @@
       "oracleCardName": "Patchwork Banner",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1205,12 +996,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1219,12 +1007,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -1236,12 +1021,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -1253,12 +1035,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1267,11 +1046,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1284,11 +1061,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1297,11 +1072,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1310,11 +1083,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1323,11 +1094,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1336,11 +1105,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Island",
@@ -1351,11 +1118,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1366,11 +1131,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1381,11 +1144,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1396,11 +1157,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1411,11 +1170,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1426,11 +1183,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1441,11 +1196,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1456,11 +1209,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1471,11 +1222,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1486,11 +1235,9 @@
         "B"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1501,11 +1248,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1516,11 +1261,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1531,11 +1274,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1546,11 +1287,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1561,15 +1300,13 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:54.417Z",
+    "retrievedDate": "2026-06-23T17:40:36.845Z",
     "sourceUrl": "DoomPrevails_MSC.json",
     "deckSource": "precon",
     "createdAt": "2026-06-26T00:00:00.000Z"

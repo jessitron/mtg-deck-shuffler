@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 780930968,
   "name": "Guided by Nature",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "[+2]: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G}.\"\n[−2]: Destroy target artifact or enchantment.\n[−6]: Draw a card for each green creature you control.\nFreyalise, Llanowar's Fury can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {G}."
+      ]
     },
     {
       "name": "Elvish Skysweeper",
@@ -50,12 +44,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{4}{G}, Sacrifice a creature: Destroy target creature with flying."
+      ]
     },
     {
       "name": "Essence Warden",
@@ -67,12 +58,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Whenever another creature enters, you gain 1 life."
+      ]
     },
     {
       "name": "Joraga Warcaller",
@@ -84,12 +72,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Multikicker {1}{G} (You may pay an additional {1}{G} any number of times as you cast this spell.)\nThis creature enters with a +1/+1 counter on it for each time it was kicked.\nOther Elf creatures you control get +1/+1 for each +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Llanowar Elves",
@@ -101,12 +86,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {G}."
+      ]
     },
     {
       "name": "Sylvan Safekeeper",
@@ -118,12 +100,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Sacrifice a land: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Elvish Visionary",
@@ -135,12 +114,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, draw a card."
+      ]
     },
     {
       "name": "Priest of Titania",
@@ -152,12 +128,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {G} for each Elf on the battlefield."
+      ]
     },
     {
       "name": "Sylvan Ranger",
@@ -169,12 +142,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Thornweald Archer",
@@ -186,12 +156,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Wellwisher",
@@ -203,12 +170,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: You gain 1 life for each Elf on the battlefield."
+      ]
     },
     {
       "name": "Farhaven Elf",
@@ -220,12 +184,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Imperious Perfect",
@@ -237,12 +198,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Other Elves you control get +1/+1.\n{G}, {T}: Create a 1/1 green Elf Warrior creature token."
+      ]
     },
     {
       "name": "Reclamation Sage",
@@ -254,12 +212,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Timberwatch Elf",
@@ -271,12 +226,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "{T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield."
+      ]
     },
     {
       "name": "Titania's Chosen",
@@ -288,12 +240,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a player casts a green spell, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Wood Elves",
@@ -305,12 +254,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Elvish Archdruid",
@@ -322,12 +268,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control."
+      ]
     },
     {
       "name": "Ezuri, Renegade Leader",
@@ -339,12 +282,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "{G}: Regenerate another target Elf.\n{2}{G}{G}{G}: Elf creatures you control get +3/+3 and gain trample until end of turn."
+      ]
     },
     {
       "name": "Drove of Elves",
@@ -356,12 +296,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Hexproof\nDrove of Elves's power and toughness are each equal to the number of green permanents you control."
+      ]
     },
     {
       "name": "Immaculate Magistrate",
@@ -373,12 +310,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "{T}: Put a +1/+1 counter on target creature for each Elf you control."
+      ]
     },
     {
       "name": "Wren's Run Packmaster",
@@ -390,12 +324,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Champion an Elf (When this creature enters, sacrifice it unless you exile another Elf you control. When this creature leaves the battlefield, that card returns to the battlefield.)\n{2}{G}: Create a 2/2 green Wolf creature token.\nWolves you control have deathtouch."
+      ]
     },
     {
       "name": "Lys Alana Huntmaster",
@@ -407,12 +338,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token."
+      ]
     },
     {
       "name": "Masked Admirers",
@@ -424,12 +352,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, draw a card.\nWhenever you cast a creature spell, you may pay {G}{G}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Wolfbriar Elemental",
@@ -441,12 +366,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Multikicker {G} (You may pay an additional {G} any number of times as you cast this spell.)\nWhen this creature enters, create a 2/2 green Wolf creature token for each time it was kicked."
+      ]
     },
     {
       "name": "Creeperhulk",
@@ -458,12 +380,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\n{1}{G}: Until end of turn, target creature you control has base power and toughness 5/5 and gains trample."
+      ]
     },
     {
       "name": "Silklash Spider",
@@ -475,12 +394,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Reach\n{X}{G}{G}: This creature deals X damage to each creature with flying."
+      ]
     },
     {
       "name": "Titania, Protector of Argoth",
@@ -492,12 +408,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "When Titania enters, return target land card from your graveyard to the battlefield.\nWhenever a land you control is put into a graveyard from the battlefield, create a 5/3 green Elemental creature token."
+      ]
     },
     {
       "name": "Grave Sifter",
@@ -509,12 +422,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand."
+      ]
     },
     {
       "name": "Primordial Sage",
@@ -526,12 +436,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a creature spell, you may draw a card."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -543,12 +450,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Soul of the Harvest",
@@ -560,12 +464,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nWhenever another nontoken creature you control enters, you may draw a card."
+      ]
     },
     {
       "name": "Thunderfoot Baloth",
@@ -577,12 +478,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you control get +2/+2 and have trample."
+      ]
     },
     {
       "name": "Siege Behemoth",
@@ -594,12 +492,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Hexproof\nAs long as this creature is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked."
+      ]
     },
     {
       "name": "Tornado Elemental",
@@ -611,12 +506,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, it deals 6 damage to each creature with flying.\nYou may have this creature assign its combat damage as though it weren't blocked."
+      ]
     },
     {
       "name": "Terastodon",
@@ -628,12 +520,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Lifeblood Hydra",
@@ -645,12 +534,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nThis creature enters with X +1/+1 counters on it.\nWhen this creature dies, you gain life and draw cards equal to its power."
+      ]
     },
     {
       "name": "Hunting Triad",
@@ -662,13 +548,10 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Create three 1/1 green Elf Warrior creature tokens.\nReinforce 3—{3}{G} ({3}{G}, Discard this card: Put three +1/+1 counters on target creature.)"
+      ]
     },
     {
       "name": "Whirlwind",
@@ -680,12 +563,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy all creatures with flying."
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -697,12 +577,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Overrun",
@@ -714,12 +591,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +3/+3 and gain trample until end of turn. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)"
+      ]
     },
     {
       "name": "Grim Flowering",
@@ -731,12 +605,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Draw a card for each creature card in your graveyard."
+      ]
     },
     {
       "name": "Collective Unconscious",
@@ -748,12 +619,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw a card for each creature you control."
+      ]
     },
     {
       "name": "Desert Twister",
@@ -765,12 +633,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Destroy target permanent."
+      ]
     },
     {
       "name": "Wave of Vitriol",
@@ -782,12 +647,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles."
+      ]
     },
     {
       "name": "Praetor's Counsel",
@@ -799,12 +661,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Return all cards from your graveyard to your hand. Exile Praetor's Counsel. You have no maximum hand size for the rest of the game."
+      ]
     },
     {
       "name": "Sylvan Offering",
@@ -816,12 +675,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Choose an opponent. You and that player each create an X/X green Treefolk creature token.\nChoose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens."
+      ]
     },
     {
       "name": "Harrow",
@@ -833,12 +689,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Fresh Meat",
@@ -850,12 +703,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -865,12 +715,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -880,12 +727,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Emerald Medallion",
@@ -895,12 +739,9 @@
       "oracleCardName": "Emerald Medallion",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Green spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Moss Diamond",
@@ -912,12 +753,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {G}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -927,12 +765,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -942,12 +777,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Assault Suit",
@@ -957,12 +789,9 @@
       "oracleCardName": "Assault Suit",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}"
+      ]
     },
     {
       "name": "Seer's Sundial",
@@ -972,12 +801,9 @@
       "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Predator, Flagship",
@@ -987,12 +813,9 @@
       "oracleCardName": "Predator, Flagship",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "{2}: Target creature gains flying until end of turn.\n{5}, {T}: Destroy target creature with flying."
+      ]
     },
     {
       "name": "Loreseeker's Stone",
@@ -1002,12 +825,9 @@
       "oracleCardName": "Loreseeker's Stone",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand."
+      ]
     },
     {
       "name": "Beastmaster Ascension",
@@ -1019,12 +839,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control attacks, you may put a quest counter on this enchantment.\nAs long as this enchantment has seven or more quest counters on it, creatures you control get +5/+5."
+      ]
     },
     {
       "name": "Song of the Dryads",
@@ -1036,12 +853,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant permanent\nEnchanted permanent is a colorless Forest land."
+      ]
     },
     {
       "name": "Wolfcaller's Howl",
@@ -1053,12 +867,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand."
+      ]
     },
     {
       "name": "Crystal Vein",
@@ -1068,11 +879,9 @@
       "oracleCardName": "Crystal Vein",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Add {C}{C}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1082,11 +891,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Gargoyle Castle",
@@ -1096,11 +903,9 @@
       "oracleCardName": "Gargoyle Castle",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}, Sacrifice this land: Create a 3/4 colorless Gargoyle artifact creature token with flying."
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -1110,11 +915,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Haunted Fengraf",
@@ -1124,11 +927,9 @@
       "oracleCardName": "Haunted Fengraf",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Sacrifice this land: Return a creature card at random from your graveyard to your hand."
+      ]
     },
     {
       "name": "Havenwood Battleground",
@@ -1140,11 +941,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}, Sacrifice this land: Add {G}{G}."
+      ]
     },
     {
       "name": "Jungle Basin",
@@ -1156,11 +955,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Forest you control to its owner's hand.\n{T}: Add {C}{G}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1170,11 +967,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Oran-Rief, the Vastwood",
@@ -1186,11 +981,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
+      ]
     },
     {
       "name": "Slippery Karst",
@@ -1202,11 +995,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1216,11 +1007,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1232,11 +1021,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1248,11 +1035,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1264,11 +1049,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1280,11 +1063,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1296,11 +1077,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1312,11 +1091,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1328,11 +1105,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1344,11 +1119,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1360,11 +1133,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1376,11 +1147,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1392,11 +1161,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1408,11 +1175,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1424,11 +1189,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1440,11 +1203,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1456,11 +1217,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1472,11 +1231,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1488,11 +1245,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1504,11 +1259,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1520,11 +1273,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1536,11 +1287,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1552,11 +1301,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1568,11 +1315,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1584,11 +1329,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1600,11 +1343,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1616,11 +1357,9 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1632,15 +1371,13 @@
         "G"
       ],
       "set": "CMA",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.456Z",
+    "retrievedDate": "2026-06-23T17:40:37.727Z",
     "sourceUrl": "GuidedByNature_CMA.json",
     "deckSource": "precon",
     "createdAt": "2017-06-09T00:00:00.000Z"

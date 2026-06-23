@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 23735063,
   "name": "Squirrel Invasion",
   "totalCards": 100,
@@ -13,12 +13,9 @@
         "G"
       ],
       "set": "Marvel Super Heroes",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Do You Like Squirrels? — Whenever The Unbeatable Squirrel Girl enters or attacks, create a 1/1 green Squirrel creature token.\nI LOVE Squirrels! — {1}{G}{G}{G}: Create X 1/1 green Squirrel creature tokens, where X is the number of Squirrels you control."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "G"
       ],
       "set": "Core Set 2020",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "If this card is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you tap a creature for mana, add an additional {G}.\n{6}{G}{G}: Put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Kenrith's Transformation",
@@ -49,12 +43,9 @@
         "G"
       ],
       "set": "Wilds of Eldraine Commander",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3. (It loses all other card types and creature types.)"
+      ]
     },
     {
       "name": "Archdruid's Charm",
@@ -66,12 +57,9 @@
         "G"
       ],
       "set": "Murders at Karlov Manor",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.\n• Put a +1/+1 counter on target creature you control. It deals damage equal to its power to target creature you don't control.\n• Exile target artifact or enchantment."
+      ]
     },
     {
       "name": "Concordant Crossroads",
@@ -82,12 +70,9 @@
         "G"
       ],
       "set": "Secret Lair Drop",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "All creatures have haste."
+      ]
     },
     {
       "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
@@ -99,21 +84,10 @@
         "G"
       ],
       "set": "The Lost Caverns of Ixalan",
-      "types": [
-        "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When Growing Rites of Itlimoc enters, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\nAt the beginning of your end step, if you control four or more creatures, transform Growing Rites of Itlimoc.",
-      "backFace": {
-        "name": "Itlimoc, Cradle of the Sun",
-        "types": [
-          "Land"
-        ],
-        "manaCost": "",
-        "cmc": 3,
-        "oracleText": "(Transforms from Growing Rites of Itlimoc.)\n{T}: Add {G}.\n{T}: Add {G} for each creature you control."
-      }
+      "cardTypes": [
+        "Enchantment",
+        "Land"
+      ]
     },
     {
       "name": "Scurry of Squirrels",
@@ -125,12 +99,9 @@
         "G"
       ],
       "set": "Bloomburrow Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Myriad, myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Then do it again. Exile the tokens at end of combat.)\nWhenever this creature deals combat damage to a player, put a +1/+1 counter on target creature you control."
+      ]
     },
     {
       "name": "Ulvenwald Oddity // Ulvenwald Behemoth",
@@ -142,21 +113,9 @@
         "G"
       ],
       "set": "Innistrad: Crimson Vow",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Trample, haste\n{5}{G}{G}: Transform this creature.",
-      "backFace": {
-        "name": "Ulvenwald Behemoth",
-        "types": [
-          "Creature"
-        ],
-        "manaCost": "",
-        "cmc": 4,
-        "oracleText": "Trample, haste\nOther creatures you control get +1/+1 and have trample and haste."
-      }
+      ]
     },
     {
       "name": "Curious Forager",
@@ -168,12 +127,9 @@
         "G"
       ],
       "set": "Bloomburrow",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may forage. When you do, return target permanent card from your graveyard to your hand. (To forage, exile three cards from your graveyard or sacrifice a Food.)"
+      ]
     },
     {
       "name": "Forest",
@@ -185,12 +141,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -202,12 +155,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -219,12 +169,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -236,12 +183,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -253,12 +197,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -270,12 +211,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -287,12 +225,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -304,12 +239,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -321,12 +253,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -338,12 +267,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -355,12 +281,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -372,12 +295,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -389,12 +309,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -406,12 +323,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -423,12 +337,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -440,12 +351,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -457,12 +365,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -474,12 +379,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -491,12 +393,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -508,12 +407,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -525,12 +421,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -542,12 +435,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -559,12 +449,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -576,12 +463,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -593,12 +477,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -610,12 +491,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -627,12 +505,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -644,12 +519,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -661,12 +533,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -678,12 +547,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -695,12 +561,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -712,12 +575,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -729,12 +589,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Thrashing Brontodon",
@@ -746,12 +603,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "{1}, Sacrifice this creature: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -760,12 +614,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "Avatar: The Last Airbender Eternal",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "A Realm Reborn",
@@ -776,12 +627,9 @@
         "G"
       ],
       "set": "Final Fantasy",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Other permanents you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Elven Chorus",
@@ -793,12 +641,9 @@
         "G"
       ],
       "set": "The Lord of the Rings: Tales of Middle-earth",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.\nCreatures you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Toski, Bearer of Secrets",
@@ -810,12 +655,9 @@
         "G"
       ],
       "set": "Kaldheim",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "This spell can't be countered.\nIndestructible\nToski attacks each combat if able.\nWhenever a creature you control deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Crashing Drawbridge",
@@ -825,13 +667,10 @@
       "oracleCardName": "Crashing Drawbridge",
       "colorIdentity": [],
       "set": "Tarkir: Dragonstorm Commander",
-      "types": [
+      "cardTypes": [
         "Creature",
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Defender\n{T}: Creatures you control gain haste until end of turn."
+      ]
     },
     {
       "name": "Spider Food",
@@ -843,12 +682,9 @@
         "G"
       ],
       "set": "Wilds of Eldraine",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy up to one target artifact, enchantment, or creature with flying. Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+      ]
     },
     {
       "name": "Chord of Calling",
@@ -860,12 +696,9 @@
         "G"
       ],
       "set": "Ravnica Remastered",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nSearch your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Nature's Lore",
@@ -877,12 +710,9 @@
         "G"
       ],
       "set": "Dominaria Remastered",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Seismic Sense",
@@ -893,12 +723,9 @@
         "G"
       ],
       "set": "Avatar: The Last Airbender",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Look at the top X cards of your library, where X is the number of lands you control. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -907,12 +734,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "Marvel Super Heroes Commander",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -924,12 +748,9 @@
         "G"
       ],
       "set": "Double Masters 2022",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Enduring Vitality",
@@ -941,13 +762,10 @@
         "G"
       ],
       "set": "Duskmourn: House of Horror",
-      "types": [
+      "cardTypes": [
         "Creature",
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nCreatures you control have \"{T}: Add one mana of any color.\"\nWhen Enduring Vitality dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)"
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -957,12 +775,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "Tales of Middle-earth Commander",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Squirrel Nest",
@@ -974,12 +789,9 @@
         "G"
       ],
       "set": "Bloomburrow Commander",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant land\nEnchanted land has \"{T}: Create a 1/1 green Squirrel creature token.\""
+      ]
     },
     {
       "name": "Cryptolith Rite",
@@ -991,12 +803,9 @@
         "G"
       ],
       "set": "Innistrad Remastered",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Creatures you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Thornvault Forager",
@@ -1008,12 +817,9 @@
         "G"
       ],
       "set": "Bloomburrow",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {G}.\n{T}, Forage: Add two mana in any combination of colors. (To forage, exile three cards from your graveyard or sacrifice a Food.)\n{3}{G}, {T}: Search your library for a Squirrel card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "冒険の衝動",
@@ -1024,12 +830,9 @@
         "G"
       ],
       "set": "Strixhaven Mystical Archive",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Look at the top three cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Steward of the Harvest",
@@ -1041,12 +844,9 @@
         "G"
       ],
       "set": "Tarkir: Dragonstorm Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile up to three target land cards from your graveyard.\nCreatures you control have all activated abilities of all land cards exiled with this creature."
+      ]
     },
     {
       "name": "Heraldic Banner",
@@ -1056,12 +856,9 @@
       "oracleCardName": "Heraldic Banner",
       "colorIdentity": [],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a color.\nCreatures you control of the chosen color get +1/+0.\n{T}: Add one mana of the chosen color."
+      ]
     },
     {
       "name": "Broken Wings",
@@ -1073,12 +870,9 @@
         "G"
       ],
       "set": "Aetherdrift",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, enchantment, or creature with flying."
+      ]
     },
     {
       "name": "Tyvar's Stand",
@@ -1089,12 +883,9 @@
         "G"
       ],
       "set": "Secrets of Strixhaven Commander",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be the target of spells or abilities your opponents control. Damage and effects that say \"destroy\" don't destroy it.)"
+      ]
     },
     {
       "name": "Fade into Antiquity",
@@ -1106,12 +897,9 @@
         "G"
       ],
       "set": "Kamigawa: Neon Dynasty",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Exile target artifact or enchantment."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1120,12 +908,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "Marvel Super Heroes Commander",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Saved by the Shell",
@@ -1136,12 +921,9 @@
         "G"
       ],
       "set": "Teenage Mutant Ninja Turtles",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "This spell costs {1} less to cast if you control a Turtle.\nPut a +1/+1 counter on target creature you control. It gains trample, hexproof, and indestructible until end of turn."
+      ]
     },
     {
       "name": "Root Snare",
@@ -1153,12 +935,9 @@
         "G"
       ],
       "set": "Ravnica Allegiance",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Prevent all combat damage that would be dealt this turn."
+      ]
     },
     {
       "name": "Commune with Beavers",
@@ -1169,12 +948,9 @@
         "G"
       ],
       "set": "Final Fantasy",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Look at the top three cards of your library. You may reveal an artifact, creature, or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Citanul Hierophants",
@@ -1186,12 +962,9 @@
         "G"
       ],
       "set": "Duskmourn: House of Horror Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Creatures you control have \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Swarmyard",
@@ -1200,12 +973,9 @@
       "oracleCardName": "Swarmyard",
       "colorIdentity": [],
       "set": "Edge of Eternities: Stellar Sights",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Regenerate target Insect, Rat, Spider, or Squirrel. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
+      ]
     },
     {
       "name": "Springbloom Druid",
@@ -1216,12 +986,9 @@
         "G"
       ],
       "set": "Secrets of Strixhaven Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Jar of Eyeballs",
@@ -1231,12 +998,9 @@
       "oracleCardName": "Jar of Eyeballs",
       "colorIdentity": [],
       "set": "Commander 2013",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control dies, put two eyeball counters on this artifact.\n{3}, {T}, Remove all eyeball counters from this artifact: Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "New Generation's Technique",
@@ -1247,12 +1011,9 @@
         "G"
       ],
       "set": "Teenage Mutant Ninja Turtles",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Sneak {2}{G} (You may cast this spell for {2}{G} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "For the Common Good",
@@ -1264,12 +1025,9 @@
         "G"
       ],
       "set": "Bloomburrow",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{G}",
-      "cmc": 1,
-      "oracleText": "Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control."
+      ]
     },
     {
       "name": "Snakeskin Veil",
@@ -1281,12 +1039,9 @@
         "G"
       ],
       "set": "Tarkir: Dragonstorm",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
+      ]
     },
     {
       "name": "Thornweald Archer",
@@ -1298,12 +1053,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Shamanic Revelation",
@@ -1315,12 +1067,9 @@
         "G"
       ],
       "set": "Bloomburrow Commander",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+      ]
     },
     {
       "name": "Oran-Rief, the Vastwood",
@@ -1331,12 +1080,9 @@
         "G"
       ],
       "set": "Secrets of Strixhaven Commander",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "manaCost": "",
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
+      ]
     },
     {
       "name": "Llanowar Elves",
@@ -1348,12 +1094,9 @@
         "G"
       ],
       "set": "Foundations Jumpstart",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {G}."
+      ]
     },
     {
       "name": "Akroma's Memorial",
@@ -1363,12 +1106,9 @@
       "oracleCardName": "Akroma's Memorial",
       "colorIdentity": [],
       "set": "Time Spiral Remastered",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red."
+      ]
     },
     {
       "name": "Jaheira, Friend of the Forest",
@@ -1380,12 +1120,9 @@
         "G"
       ],
       "set": "Commander Legends: Battle for Baldur's Gate",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Tokens you control have \"{T}: Add {G}.\"\nChoose a Background (You can have a Background as a second commander.)"
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -1396,12 +1133,9 @@
         "G"
       ],
       "set": "Magic Online Promos",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Regrowth",
@@ -1413,12 +1147,9 @@
         "G"
       ],
       "set": "Strixhaven Mystical Archive",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Essence Warden",
@@ -1430,12 +1161,9 @@
         "G"
       ],
       "set": "Tales of Middle-earth Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Whenever another creature enters, you gain 1 life."
+      ]
     },
     {
       "name": "Keeper of Fables",
@@ -1446,12 +1174,9 @@
         "G"
       ],
       "set": "The List",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Abundant Harvest",
@@ -1463,12 +1188,9 @@
         "G"
       ],
       "set": "Commander Masters",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Choose land or nonland. Reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Atraxa's Fall",
@@ -1480,12 +1202,9 @@
         "G"
       ],
       "set": "March of the Machine",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Destroy target artifact, battle, enchantment, or creature with flying."
+      ]
     },
     {
       "name": "Cache Grab",
@@ -1497,12 +1216,9 @@
         "G"
       ],
       "set": "Bloomburrow",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Mill four cards. You may put a permanent card from among the cards milled this way into your hand. If you control a Squirrel or returned a Squirrel card to your hand this way, create a Food token. (To mill four cards, put the top four cards of your library into your graveyard. A Food token is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+      ]
     },
     {
       "name": "Honored Dreyleader",
@@ -1514,12 +1230,9 @@
         "G"
       ],
       "set": "Bloomburrow",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhen this creature enters, put a +1/+1 counter on it for each other Squirrel and/or Food you control.\nWhenever another Squirrel or Food you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Commune with Spirits",
@@ -1531,12 +1244,9 @@
         "G"
       ],
       "set": "Kamigawa: Neon Dynasty",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Look at the top four cards of your library. You may reveal an enchantment or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Shang-Chi, Master of Kung Fu",
@@ -1547,12 +1257,9 @@
         "G"
       ],
       "set": "Marvel Super Heroes",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may activate abilities of creatures you control as though those creatures had haste.\n{T}: Add two mana of any one color. Spend this mana only to activate abilities of creature sources."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -1561,12 +1268,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "Marvel Super Heroes Commander",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Studious First-Year // Rampant Growth",
@@ -1577,12 +1281,10 @@
         "G"
       ],
       "set": "Secrets of Strixhaven",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)"
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Green Sun's Zenith",
@@ -1594,12 +1296,9 @@
         "G"
       ],
       "set": "Double Masters 2022",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle Green Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Springleaf Parade",
@@ -1610,12 +1309,9 @@
         "G"
       ],
       "set": "Lorwyn Eclipsed Commander",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)\nCreature tokens you control have \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Genesis Wave",
@@ -1627,12 +1323,9 @@
         "G"
       ],
       "set": "Foundations",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -1642,12 +1335,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "Bloomburrow Commander",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Deep Forest Hermit",
@@ -1659,12 +1349,9 @@
         "G"
       ],
       "set": "Bloomburrow Commander",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Vanishing 3 (This creature enters with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen this creature enters, create four 1/1 green Squirrel creature tokens.\nSquirrels you control get +1/+1."
+      ]
     },
     {
       "name": "Defense of the Heart",
@@ -1675,16 +1362,13 @@
         "G"
       ],
       "set": "Secret Lair Drop",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice this enchantment, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:14:57.439Z",
+    "retrievedDate": "2026-06-23T17:39:49.905Z",
     "sourceUrl": "https://archidekt.com/decks/23735063",
     "deckSource": "archidekt",
     "createdAt": "2026-06-22T19:52:37.330Z"

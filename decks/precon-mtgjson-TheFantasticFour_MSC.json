@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 16215578,
   "name": "The Fantastic Four",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a 0/3 colorless Wall creature token with defender and reach.\nWhenever you attack, you may pay {R}{G}{W}{U}. When you do, target creature gets +1/+0 until end of turn for each creature you control and can't be blocked this turn."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Vigilance, reach\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card.\n{R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies."
+      ]
     },
     {
       "name": "Human Torch",
@@ -56,12 +50,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, Human Torch gains flying, double strike, and haste until end of turn.\nWhenever Human Torch attacks, you may pay {R}{G}{W}{U}. If you do, until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent."
+      ]
     },
     {
       "name": "The Thing",
@@ -75,12 +66,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, put four +1/+1 counters on The Thing.\nWhenever The Thing attacks, you may pay {R}{G}{W}{U}. When you do, double the number of each kind of counter on any number of target permanents you control."
+      ]
     },
     {
       "name": "Galactus, Devourer of Worlds",
@@ -89,12 +77,9 @@
       "oracleCardName": "Galactus, Devourer of Worlds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Flying, trample, indestructible\nWhen Galactus enters, exile target permanent.\nInsatiable Hunger — Galactus attacks an opponent with the most life among your opponents each combat if able unless you control a creature named Silver Surfer, Galactus's Herald."
+      ]
     },
     {
       "name": "Silver Surfer, Galactus's Herald",
@@ -103,12 +88,9 @@
       "oracleCardName": "Silver Surfer, Galactus's Herald",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen Silver Surfer enters, you may search your library for a card named Galactus, Devourer of Worlds, reveal it, put it into your hand, then shuffle.\nWhenever Silver Surfer deals combat damage to a player, until the end of your next turn, target creature attacks that player each combat if able."
+      ]
     },
     {
       "name": "Invisible Force Field",
@@ -119,12 +101,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Up to four target permanents you control gain indestructible until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Ultimate Nullification",
@@ -135,12 +114,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a legendary creature.\nExile all creatures and graveyards. Put Ultimate Nullification on the bottom of its owner's library."
+      ]
     },
     {
       "name": "Council of Reeds",
@@ -151,12 +127,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "The \"legend rule\" doesn't apply to creatures you control.\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of Council of Reeds."
+      ]
     },
     {
       "name": "Fantastic Elasticity",
@@ -167,12 +140,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Return target nonland permanent to its owner's hand.\n• Return target instant or sorcery card from your graveyard to your hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Lockjaw, Slobbering Teleporter",
@@ -183,12 +153,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Vigilance\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on Lockjaw. When you do, Lockjaw and up to one other target creature you control can't be blocked this turn."
+      ]
     },
     {
       "name": "Valeria Richards, Precocious",
@@ -199,12 +166,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Noncreature spells you cast cost {1} less to cast.\nWhenever you cast your first noncreature spell each turn, draw a card."
+      ]
     },
     {
       "name": "Alicia Masters, Skilled Sculptor",
@@ -215,12 +179,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a Treasure token.\nSense the Good — At the beginning of your end step, each player gains control of all creatures they own."
+      ]
     },
     {
       "name": "Flame On!",
@@ -231,12 +192,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Put X +1/+1 counters on target creature, where X is the number of noncreature, nonland cards in your graveyard. It gains flying until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Franklin Richards, Ascendant",
@@ -247,12 +205,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "At the beginning of combat on your turn, if you've cast a noncreature spell this turn, discover 6. (Exile cards from the top of your library until you exile a nonland card with mana value 6 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Nova Flame",
@@ -263,12 +218,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Put X +1/+1 counters on target creature you control. It deals damage equal to its power to each other creature."
+      ]
     },
     {
       "name": "It's Clobberin' Time!",
@@ -279,12 +231,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact or enchantment.\nRebound"
+      ]
     },
     {
       "name": "Medusa, Inhuman Queen",
@@ -295,12 +244,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Vigilance, reach\nWhenever a player casts a noncreature spell, put a +1/+1 counter on Medusa."
+      ]
     },
     {
       "name": "Black Bolt, Inhuman King",
@@ -312,12 +258,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, Black Bolt gets +2/+2 until end of turn.\nLethal Voice — Whenever Black Bolt becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls."
+      ]
     },
     {
       "name": "Cosmic Crucible",
@@ -329,12 +272,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "At the beginning of your first main phase, add four mana in any combination of colors.\nWhenever you cast a noncreature spell, you may copy it. You may choose new targets for the copy. Do this only once each turn. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Crystal, Inhuman Princess",
@@ -348,12 +288,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, Crystal deals X damage to each opponent, where X is the number of colors that spell is.\n{T}: Add {R}, {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Dragon Man, Reformed Robot",
@@ -365,13 +302,10 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nDragon Man's power is equal to the greatest mana value among noncreature permanents you control and noncreature cards in your graveyard.\nYou may cast this card from your graveyard by discarding a card in addition to paying its other costs."
+      ]
     },
     {
       "name": "First Family",
@@ -383,12 +317,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn."
+      ]
     },
     {
       "name": "Namor, Atlantean King",
@@ -400,12 +331,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, create a 1/1 blue Merfolk creature token.\nWhenever Namor attacks a player who has more life than you, other creatures you control attacking that player get +2/+0 until end of turn."
+      ]
     },
     {
       "name": "Power Pack",
@@ -419,12 +347,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Flying, vigilance, trample, haste\nWhenever Power Pack deals combat damage to a player, exile target instant or sorcery card from your graveyard chosen at random. At the beginning of your next upkeep, you may cast that card without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+      ]
     },
     {
       "name": "Willie Lumpkin, Postman",
@@ -436,12 +361,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 2,
-      "oracleText": "Willie Lumpkin can't be blocked.\nWhenever Willie Lumpkin deals combat damage to an opponent, you draw a card and that player may draw a card. If they do, that player can't attack you or permanents you control during their next turn."
+      ]
     },
     {
       "name": "The Fantasticar",
@@ -450,12 +372,9 @@
       "oracleCardName": "The Fantasticar",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, you may have The Fantasticar become an artifact creature until end of turn.\nWhenever you cast your fourth noncreature spell each turn, you may sacrifice The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste."
+      ]
     },
     {
       "name": "H.E.R.B.I.E., Lovable Robot",
@@ -464,13 +383,10 @@
       "oracleCardName": "H.E.R.B.I.E., Lovable Robot",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Flying\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Negative Zone Portal",
@@ -479,12 +395,9 @@
       "oracleCardName": "Negative Zone Portal",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Exile target card from an opponent's graveyard. If it's a creature card, draw a card.\nAt the beginning of your upkeep, if there are four or more creature cards exiled with this artifact, flip a coin. If you lose the flip, sacrifice this artifact and return a card exiled with it at random to its owner's hand."
+      ]
     },
     {
       "name": "Unstable Molecule Suit",
@@ -493,12 +406,9 @@
       "oracleCardName": "Unstable Molecule Suit",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+2 and has indestructible.\nEquip commander {2}\nEquip {4}"
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -509,12 +419,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Clever Concealment",
@@ -525,12 +432,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAny number of target nonland permanents you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)"
+      ]
     },
     {
       "name": "Collective Effort",
@@ -541,12 +445,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Escalate—Tap an untapped creature you control. (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Destroy target creature with power 4 or greater.\n• Destroy target enchantment.\n• Put a +1/+1 counter on each creature target player controls."
+      ]
     },
     {
       "name": "Monologue Tax",
@@ -557,12 +458,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent casts their second spell each turn, you create a Treasure token."
+      ]
     },
     {
       "name": "Promise of Loyalty",
@@ -573,12 +471,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+      ]
     },
     {
       "name": "Tragic Arrogance",
@@ -589,12 +484,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control."
+      ]
     },
     {
       "name": "Quantum Misalignment",
@@ -605,12 +497,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Create a token that's a copy of target creature you control, except it isn't legendary.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Recurring Insight",
@@ -621,12 +510,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Draw cards equal to the number of cards in target opponent's hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Into the Time Vortex",
@@ -637,12 +523,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Seize the Day",
@@ -653,12 +536,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Path of Discovery",
@@ -669,12 +549,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Galvanic Iteration",
@@ -686,12 +563,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\nFlashback {1}{U}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Taunt from the Rampart",
@@ -703,12 +577,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Goad all creatures your opponents control. Until your next turn, those creatures can't block. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Whirlwind of Thought",
@@ -721,12 +592,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a noncreature spell, draw a card."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -735,12 +603,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Mirage Mirror",
@@ -749,12 +614,9 @@
       "oracleCardName": "Mirage Mirror",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -766,11 +628,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -782,11 +642,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -798,11 +656,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -811,11 +667,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fabled Passage",
@@ -824,11 +678,9 @@
       "oracleCardName": "Fabled Passage",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -840,11 +692,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -856,11 +706,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -872,11 +720,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Radiant Summit",
@@ -888,11 +734,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Rejuvenating Springs",
@@ -904,11 +748,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Rootbound Crag",
@@ -920,11 +762,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Scorched Geyser",
@@ -936,11 +776,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sodden Verdure",
@@ -952,11 +790,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -968,11 +804,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Sunpetal Grove",
@@ -984,11 +818,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -997,11 +829,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mind's Dilation",
@@ -1012,12 +842,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost."
+      ]
     },
     {
       "name": "Annie Joins Up",
@@ -1030,12 +857,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "When Annie Joins Up enters, it deals 5 damage to target creature or planeswalker an opponent controls.\nIf a triggered ability of a legendary creature you control triggers, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Genesis Ultimatum",
@@ -1048,12 +872,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}{G}{U}{U}{U}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile Genesis Ultimatum."
+      ]
     },
     {
       "name": "Mister Fantastic, Reed Richards",
@@ -1064,12 +885,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reach\nWhenever one or more tokens you control enter, you may draw a card."
+      ]
     },
     {
       "name": "Baxter Building",
@@ -1078,11 +896,9 @@
       "oracleCardName": "Baxter Building",
       "colorIdentity": [],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Add four mana in any combination of colors.\n{4}, {T}: Draw a card. Activate only if you control a creature with toughness 4 or greater."
+      ]
     },
     {
       "name": "Bovine Intervention",
@@ -1093,12 +909,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token."
+      ]
     },
     {
       "name": "Cut a Deal",
@@ -1109,12 +922,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Each opponent draws a card, then you draw a card for each opponent who drew a card this way."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -1125,12 +935,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -1141,12 +948,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Cultivate",
@@ -1157,12 +961,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -1173,12 +974,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Terramorph",
@@ -1189,12 +987,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Three Visits",
@@ -1205,12 +1000,9 @@
         "G"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Expressive Iteration",
@@ -1222,12 +1014,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn."
+      ]
     },
     {
       "name": "Hull Breach",
@@ -1239,12 +1028,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{G}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1253,12 +1039,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -1267,12 +1050,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1281,12 +1061,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1295,11 +1072,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1308,11 +1083,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1321,11 +1094,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1336,11 +1107,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1351,11 +1120,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1366,11 +1133,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1381,11 +1146,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1396,11 +1159,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1411,11 +1172,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1426,11 +1185,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1441,11 +1198,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1456,11 +1211,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1471,11 +1224,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1486,11 +1237,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1501,11 +1250,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1516,11 +1263,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1531,11 +1276,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1546,11 +1289,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1561,11 +1302,9 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1576,15 +1315,13 @@
         "G"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:57.125Z",
+    "retrievedDate": "2026-06-23T17:40:40.267Z",
     "sourceUrl": "TheFantasticFour_MSC.json",
     "deckSource": "precon",
     "createdAt": "2026-06-26T00:00:00.000Z"

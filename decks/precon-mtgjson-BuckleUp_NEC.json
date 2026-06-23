@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 447878265,
   "name": "Buckle Up",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Vehicles you control have crew 2.\nAt the beginning of combat on your turn, target artifact creature you control gains lifelink and vigilance until end of turn."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}: Draw two cards, then discard a card. Create a 1/1 colorless Pilot creature token with \"This token crews Vehicles as though its power were 2 greater.\"\nCrew 8 (Tap any number of creatures you control with total power 8 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Jace, Architect of Thought",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "[+1]: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[−2]: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[−8]: For each player, search that player's library for a nonland card and exile it, then that player shuffles. You may cast those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Drumbellower",
@@ -69,12 +60,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nUntap all creatures you control during each other player's untap step."
+      ]
     },
     {
       "name": "Ironsoul Enforcer",
@@ -86,13 +74,10 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature or a commander you control attacks alone, return target artifact card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Cyberdrive Awakener",
@@ -104,13 +89,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nOther artifact creatures you control have flying.\nWhen this creature enters, each noncreature artifact you control becomes a 4/4 artifact creature until end of turn."
+      ]
     },
     {
       "name": "Kappa Cannoneer",
@@ -122,13 +104,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever this creature or another artifact you control enters, put a +1/+1 counter on this creature. It can't be blocked this turn."
+      ]
     },
     {
       "name": "Katsumasa, the Animator",
@@ -140,12 +119,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\n{2}{U}: Until end of turn, target noncreature artifact you control becomes an artifact creature and gains flying. If it's not a Vehicle, it has base power and toughness 1/1 until end of turn.\nAt the beginning of your upkeep, put a +1/+1 counter on each of up to three target noncreature artifacts."
+      ]
     },
     {
       "name": "Research Thief",
@@ -157,13 +133,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flash\nFlying\nWhenever an artifact creature you control deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Aeronaut Admiral",
@@ -175,12 +148,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nVehicles you control have flying."
+      ]
     },
     {
       "name": "Cataclysmic Gearhulk",
@@ -192,13 +162,10 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nWhen this creature enters, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest."
+      ]
     },
     {
       "name": "Indomitable Archangel",
@@ -210,12 +177,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nMetalcraft — Artifacts you control have shroud as long as you control three or more artifacts. (An artifact with shroud can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Myrsmith",
@@ -227,12 +191,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an artifact spell, you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token."
+      ]
     },
     {
       "name": "Sram, Senior Edificer",
@@ -244,12 +205,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card."
+      ]
     },
     {
       "name": "Teshar, Ancestor's Apostle",
@@ -261,12 +219,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you cast a historic spell, return target creature card with mana value 3 or less from your graveyard to the battlefield. (Artifacts, legendaries, and Sagas are historic.)"
+      ]
     },
     {
       "name": "Emry, Lurker of the Loch",
@@ -278,12 +233,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Emry enters, mill four cards.\n{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Etherium Sculptor",
@@ -295,13 +247,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Artifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Master of Etherium",
@@ -313,13 +262,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Riddlesmith",
@@ -331,12 +277,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an artifact spell, you may draw a card. If you do, discard a card."
+      ]
     },
     {
       "name": "Sai, Master Thopterist",
@@ -348,12 +291,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.\n{1}{U}, Sacrifice two artifacts: Draw a card."
+      ]
     },
     {
       "name": "Vedalken Engineer",
@@ -365,12 +305,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "{T}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -382,12 +319,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Arcanist's Owl",
@@ -400,13 +334,10 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{W/U}{W/U}{W/U}{W/U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, look at the top four cards of your library. You may reveal an artifact or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Hanna, Ship's Navigator",
@@ -419,12 +350,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "{1}{W}{U}, {T}: Return target artifact or enchantment card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Raff Capashen, Ship's Mage",
@@ -437,12 +365,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flash\nFlying\nYou may cast historic spells as though they had flash. (Artifacts, legendaries, and Sagas are historic.)"
+      ]
     },
     {
       "name": "Foundry Inspector",
@@ -452,13 +377,10 @@
       "oracleCardName": "Foundry Inspector",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Artifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Gold Myr",
@@ -470,13 +392,10 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {W}."
+      ]
     },
     {
       "name": "Shimmer Myr",
@@ -486,13 +405,10 @@
       "oracleCardName": "Shimmer Myr",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flash\nYou may cast artifact spells as though they had flash."
+      ]
     },
     {
       "name": "Silver Myr",
@@ -504,13 +420,10 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {U}."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -520,13 +433,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Organic Extinction",
@@ -538,12 +448,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{W}{W}",
-      "cmc": 10,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures."
+      ]
     },
     {
       "name": "Universal Surveillance",
@@ -555,12 +462,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw X cards."
+      ]
     },
     {
       "name": "Thoughtcast",
@@ -572,12 +476,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nDraw two cards."
+      ]
     },
     {
       "name": "Dance of the Manse",
@@ -590,12 +491,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{U}",
-      "cmc": 2,
-      "oracleText": "Return up to X target artifact and/or non-Aura enchantment cards each with mana value X or less from your graveyard to the battlefield. If X is 6 or more, those permanents are 4/4 creatures in addition to their other types."
+      ]
     },
     {
       "name": "Release to Memory",
@@ -607,12 +505,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target opponent's graveyard. For each creature card exiled this way, create a 1/1 colorless Spirit creature token."
+      ]
     },
     {
       "name": "Access Denied",
@@ -624,12 +519,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Counter target spell. Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell's mana value."
+      ]
     },
     {
       "name": "Armed and Armored",
@@ -641,12 +533,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it."
+      ]
     },
     {
       "name": "Crush Contraband",
@@ -658,12 +547,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Choose one or both —\n• Exile target artifact.\n• Exile target enchantment."
+      ]
     },
     {
       "name": "Dispatch",
@@ -675,12 +561,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature."
+      ]
     },
     {
       "name": "Generous Gift",
@@ -692,12 +575,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -709,12 +589,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -726,12 +603,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Aerial Surveyor",
@@ -743,12 +617,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this Vehicle attacks, if defending player controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.\nCrew 2"
+      ]
     },
     {
       "name": "Imposter Mech",
@@ -760,12 +631,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "You may have this Vehicle enter as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.\nCrew 3"
+      ]
     },
     {
       "name": "Imperial Recovery Unit",
@@ -777,12 +645,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever this Vehicle attacks, return target creature or Vehicle card with mana value 2 or less from your graveyard to your hand.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Mobilizer Mech",
@@ -794,12 +659,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this Vehicle becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Prodigy's Prototype",
@@ -812,12 +674,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with \"This token crews Vehicles as though its power were 2 greater.\"\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Surgehacker Mech",
@@ -827,12 +686,9 @@
       "oracleCardName": "Surgehacker Mech",
       "colorIdentity": [],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhen this Vehicle enters, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.\nCrew 4"
+      ]
     },
     {
       "name": "Parhelion II",
@@ -844,12 +700,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "Flying, first strike, vigilance\nWhenever Parhelion II attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -859,12 +712,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -877,12 +727,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Colossal Plow",
@@ -894,12 +741,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever this Vehicle attacks, add {W}{W}{W} and you gain 3 life. Until end of turn, you don't lose this mana as steps and phases end.\nCrew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Cultivator's Caravan",
@@ -909,12 +753,9 @@
       "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -924,12 +765,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Mirage Mirror",
@@ -939,12 +777,9 @@
       "oracleCardName": "Mirage Mirror",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
+      ]
     },
     {
       "name": "Peacewalker Colossus",
@@ -956,12 +791,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{1}{W}: Another target Vehicle you control becomes an artifact creature until end of turn.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Raiders' Karve",
@@ -971,12 +803,9 @@
       "oracleCardName": "Raiders' Karve",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever this Vehicle attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Skysovereign, Consul Flagship",
@@ -986,12 +815,9 @@
       "oracleCardName": "Skysovereign, Consul Flagship",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever Skysovereign enters or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Smuggler's Copter",
@@ -1001,12 +827,9 @@
       "oracleCardName": "Smuggler's Copter",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this Vehicle attacks or blocks, you may draw a card. If you do, discard a card.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1016,12 +839,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Weatherlight",
@@ -1031,12 +851,9 @@
       "oracleCardName": "Weatherlight",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Weatherlight deals combat damage to a player, look at the top five cards of your library. You may reveal a historic card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. (Artifacts, legendaries, and Sagas are historic.)\nCrew 3"
+      ]
     },
     {
       "name": "Swift Reconfiguration",
@@ -1048,12 +865,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Flash\nEnchant creature or Vehicle\nEnchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types. (It's not a creature unless it's crewed.)"
+      ]
     },
     {
       "name": "Thopter Spy Network",
@@ -1065,12 +879,9 @@
         "U"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1080,11 +891,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1094,11 +903,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Port Town",
@@ -1111,11 +918,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -1128,11 +933,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -1145,11 +948,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Spire of Industry",
@@ -1159,11 +960,9 @@
       "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -1176,11 +975,9 @@
         "W"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Plains",
@@ -1192,11 +989,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1208,11 +1003,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1224,11 +1017,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1240,11 +1031,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1256,11 +1045,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1272,11 +1059,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1288,11 +1073,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1304,11 +1087,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1320,11 +1101,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1336,11 +1115,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1352,11 +1129,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1368,11 +1143,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1384,11 +1157,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1400,11 +1171,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1416,11 +1185,9 @@
         "W"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1432,11 +1199,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1448,11 +1213,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1464,11 +1227,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1480,11 +1241,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1496,11 +1255,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1512,11 +1269,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1528,11 +1283,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1544,11 +1297,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1560,11 +1311,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1576,11 +1325,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1592,11 +1339,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1608,11 +1353,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1624,11 +1367,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1640,11 +1381,9 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1656,15 +1395,13 @@
         "U"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.546Z",
+    "retrievedDate": "2026-06-23T17:40:36.181Z",
     "sourceUrl": "BuckleUp_NEC.json",
     "deckSource": "precon",
     "createdAt": "2022-02-18T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1776337914,
   "name": "Upgrades Unleashed",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever an Aura or Equipment you control enters, create a 2/2 red Spirit creature token with menace.\nAt the beginning of your end step, put a +1/+1 counter on each modified creature you control. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, goad each creature your opponents control that's enchanted by an Aura you control. Put a +1/+1 counter on Kaima for each creature goaded this way. (Until your next turn, the goaded creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Ox of Agonas",
@@ -52,12 +46,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, discard your hand, then draw three cards.\nEscape—{R}{R}, Exile eight other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Akki Battle Squad",
@@ -69,12 +60,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever one or more modified creatures you control attack, untap all modified creatures you control. After this phase, there is an additional combat phase. This ability triggers only once each turn. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Kami of Celebration",
@@ -86,12 +74,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever a modified creature you control attacks, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)\nWhenever you cast a spell from exile, put a +1/+1 counter on target creature you control."
+      ]
     },
     {
       "name": "Komainu Battle Armor",
@@ -103,13 +88,10 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace\nEquipped creature gets +2/+2 and has menace.\nWhenever this creature or equipped creature deals combat damage to a player, goad each creature that player controls.\nReconfigure {4} ({4}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
+      ]
     },
     {
       "name": "Ascendant Acolyte",
@@ -121,12 +103,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "This creature enters with a +1/+1 counter on it for each +1/+1 counter among other creatures you control.\nAt the beginning of your upkeep, double the number of +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Kosei, Penitent Warlord",
@@ -138,12 +117,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "As long as Kosei is enchanted, equipped, and has a counter on it, Kosei has \"Whenever Kosei deals combat damage to an opponent, you draw that many cards and Kosei deals that much damage to each other opponent.\""
+      ]
     },
     {
       "name": "Rampant Rejuvenator",
@@ -155,12 +131,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\nWhen this creature dies, search your library for up to X basic land cards, where X is this creature's power, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Tanuki Transplanter",
@@ -172,13 +145,10 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature or equipped creature attacks, add an amount of {G} equal to its power. Until end of turn, you don't lose this mana as steps and phases end.\nReconfigure {3} ({3}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
+      ]
     },
     {
       "name": "Orochi Merge-Keeper",
@@ -190,12 +160,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {G}.\nAs long as this creature is modified, it has \"{T}: Add {G}{G}.\" (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Towashi Guide-Bot",
@@ -205,13 +172,10 @@
       "oracleCardName": "Towashi Guide-Bot",
       "colorIdentity": [],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, put a +1/+1 counter on target creature you control.\n{4}, {T}: Draw a card. This ability costs {1} less to activate for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Walking Skyscraper",
@@ -221,13 +185,10 @@
       "oracleCardName": "Walking Skyscraper",
       "colorIdentity": [],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "This spell costs {1} less to cast for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)\nTrample\nThis creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)"
+      ]
     },
     {
       "name": "Agitator Ant",
@@ -239,12 +200,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Goblin Razerunners",
@@ -256,12 +214,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "{1}{R}, Sacrifice a land: Put a +1/+1 counter on this creature.\nAt the beginning of your end step, you may have this creature deal damage equal to the number of +1/+1 counters on it to target player or planeswalker."
+      ]
     },
     {
       "name": "Krenko, Tin Street Kingpin",
@@ -273,12 +228,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever Krenko attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to Krenko's power."
+      ]
     },
     {
       "name": "Taurean Mauler",
@@ -290,12 +242,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -307,12 +256,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Champion of Lambholt",
@@ -324,12 +270,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Fertilid",
@@ -341,12 +284,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from this creature: Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles."
+      ]
     },
     {
       "name": "Forgotten Ancient",
@@ -358,12 +298,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
+      ]
     },
     {
       "name": "Genesis Hydra",
@@ -375,12 +312,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell, reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library.\nThis creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Loyal Guardian",
@@ -392,12 +326,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Primeval Protector",
@@ -409,12 +340,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}{G}",
-      "cmc": 11,
-      "oracleText": "This spell costs {1} less to cast for each creature your opponents control.\nWhen this creature enters, put a +1/+1 counter on each other creature you control."
+      ]
     },
     {
       "name": "Rishkar, Peema Renegade",
@@ -426,12 +354,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When Rishkar enters, put a +1/+1 counter on each of up to two target creatures.\nEach creature you control with a counter on it has \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -443,12 +368,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Spearbreaker Behemoth",
@@ -460,12 +382,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Indestructible\n{1}: Target creature with power 5 or greater gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Whiptongue Hydra",
@@ -477,12 +396,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Reach\nWhen this creature enters, destroy all creatures with flying. Put a +1/+1 counter on this creature for each creature destroyed this way."
+      ]
     },
     {
       "name": "Grumgully, the Generous",
@@ -495,12 +411,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Each other non-Human creature you control enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Ulasht, the Hate Seed",
@@ -513,12 +426,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Ulasht enters with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.\n{1}, Remove a +1/+1 counter from Ulasht: Choose one —\n• Ulasht deals 1 damage to target creature.\n• Create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Collision of Realms",
@@ -530,12 +440,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{R}",
-      "cmc": 7,
-      "oracleText": "Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order."
+      ]
     },
     {
       "name": "Smoke Spirits' Aid",
@@ -547,12 +454,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and \"When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token.\""
+      ]
     },
     {
       "name": "Chain Reaction",
@@ -564,12 +468,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -581,12 +482,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -598,12 +496,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rishkar's Expertise",
@@ -615,12 +510,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw cards equal to the greatest power among creatures you control.\nYou may cast a spell with mana value 5 or less from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Shamanic Revelation",
@@ -632,12 +524,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+      ]
     },
     {
       "name": "Soul's Majesty",
@@ -649,12 +538,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Draw cards equal to the power of target creature you control."
+      ]
     },
     {
       "name": "Vastwood Surge",
@@ -666,12 +552,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Kicker {4} (You may pay an additional {4} as you cast this spell.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, put two +1/+1 counters on each creature you control."
+      ]
     },
     {
       "name": "Decimate",
@@ -684,12 +567,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
+      ]
     },
     {
       "name": "Silkguard",
@@ -701,12 +581,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Put a +1/+1 counter on each of up to X target creatures you control.\nAuras, Equipment, and modified creatures you control gain hexproof until end of turn. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -718,12 +595,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Starstorm",
@@ -735,12 +609,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Beast Within",
@@ -752,12 +623,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Hunter's Insight",
@@ -769,12 +637,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards."
+      ]
     },
     {
       "name": "Mage Slayer",
@@ -787,12 +652,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever equipped creature attacks, it deals damage equal to its power to the player or planeswalker it's attacking.\nEquip {3}"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -802,12 +664,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Blackblade Reforged",
@@ -817,12 +676,9 @@
       "oracleCardName": "Blackblade Reforged",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}"
+      ]
     },
     {
       "name": "Bonehoard",
@@ -832,12 +688,9 @@
       "oracleCardName": "Bonehoard",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
+      ]
     },
     {
       "name": "Fireshrieker",
@@ -847,12 +700,9 @@
       "oracleCardName": "Fireshrieker",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -862,12 +712,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -877,12 +724,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sword of Vengeance",
@@ -892,12 +736,9 @@
       "oracleCardName": "Sword of Vengeance",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}"
+      ]
     },
     {
       "name": "Unquenchable Fury",
@@ -909,12 +750,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature has \"Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand.\"\nWhen this Aura is put into your graveyard from the battlefield, return it to your hand."
+      ]
     },
     {
       "name": "Concord with the Kami",
@@ -926,12 +764,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, choose one or more —\n• Put a +1/+1 counter on target creature with a counter on it.\n• Draw a card if you control an enchanted creature.\n• Create a 1/1 colorless Spirit creature token if you control an equipped creature."
+      ]
     },
     {
       "name": "One with the Kami",
@@ -943,12 +778,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Flash\nEnchant creature you control\nWhenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Invigorating Hot Spring",
@@ -961,12 +793,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "This enchantment enters with four +1/+1 counters on it.\nModified creatures you control have haste. (Equipment, Auras you control, and counters are modifications.)\nRemove a +1/+1 counter from this enchantment: Put a +1/+1 counter on target creature you control. Activate only as a sorcery and only once each turn."
+      ]
     },
     {
       "name": "Elemental Mastery",
@@ -978,12 +807,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nEnchanted creature has \"{T}: Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step.\""
+      ]
     },
     {
       "name": "Shifting Shadow",
@@ -995,12 +821,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature has haste and \"At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order.\""
+      ]
     },
     {
       "name": "Bear Umbra",
@@ -1012,12 +835,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and has \"Whenever this creature attacks, untap all lands you control.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Ordeal of Nylea",
@@ -1029,12 +849,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice this Aura.\nWhen you sacrifice this Aura, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Snake Umbra",
@@ -1046,12 +863,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and has \"Whenever this creature deals damage to an opponent, you may draw a card.\"\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+      ]
     },
     {
       "name": "Rhythm of the Wild",
@@ -1064,12 +878,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Creature spells you control can't be countered.\nNontoken creatures you control have riot. (They enter with your choice of a +1/+1 counter or haste.)"
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -1082,11 +893,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1096,11 +905,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1110,11 +917,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Game Trail",
@@ -1127,11 +932,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Gruul Turf",
@@ -1144,11 +947,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -1161,11 +962,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -1178,11 +977,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1192,11 +989,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Oran-Rief, the Vastwood",
@@ -1208,11 +1003,9 @@
         "G"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn."
+      ]
     },
     {
       "name": "Raging Ravine",
@@ -1225,11 +1018,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}: Until end of turn, this land becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land."
+      ]
     },
     {
       "name": "Temple of Abandon",
@@ -1242,11 +1033,9 @@
         "R"
       ],
       "set": "NEC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Mountain",
@@ -1258,11 +1047,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1274,11 +1061,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1290,11 +1075,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1306,11 +1089,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1322,11 +1103,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1338,11 +1117,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1354,11 +1131,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1370,11 +1145,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1386,11 +1159,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1402,11 +1173,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1418,11 +1187,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1434,11 +1201,9 @@
         "R"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1450,11 +1215,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1466,11 +1229,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1482,11 +1243,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1498,11 +1257,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1514,11 +1271,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1530,11 +1285,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1546,11 +1299,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1562,11 +1313,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1578,11 +1327,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1594,11 +1341,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1610,11 +1355,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1626,11 +1369,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1642,11 +1383,9 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1658,15 +1397,13 @@
         "G"
       ],
       "set": "NEO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.147Z",
+    "retrievedDate": "2026-06-23T17:40:40.646Z",
     "sourceUrl": "UpgradesUnleashed_NEC.json",
     "deckSource": "precon",
     "createdAt": "2022-02-18T00:00:00.000Z"

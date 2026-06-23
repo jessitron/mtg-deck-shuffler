@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 909019807,
   "name": "Endless Punishment",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWard—Pay 2 life.\nWhenever an opponent loses life for the first time during each of their turns, put a +1/+1 counter on Valgavoth and draw a card."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Menace\nYour opponents can't gain life.\nWhenever a player casts their first spell each turn, choose another target player. The Lord of Pain deals damage equal to that spell's mana value to the chosen player."
+      ]
     },
     {
       "name": "Persistent Constrictor",
@@ -52,12 +46,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "At the beginning of each opponent's upkeep, they lose 1 life and you put a -1/-1 counter on up to one target creature they control.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
+      ]
     },
     {
       "name": "Sadistic Shell Game",
@@ -69,12 +60,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Starting with the next opponent in turn order, each player chooses a creature you don't control. Destroy the chosen creatures."
+      ]
     },
     {
       "name": "Suspended Sentence",
@@ -86,12 +74,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Destroy target creature an opponent controls. That player loses 3 life. Exile Suspended Sentence with three time counters on it.\nSuspend 3—{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Barbflare Gremlin",
@@ -103,12 +88,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "First strike, haste\nWhenever a player taps a land for mana, if this creature is tapped, that player adds one mana of any type that land produced. Then that land deals 1 damage to that player."
+      ]
     },
     {
       "name": "Gleeful Arsonist",
@@ -120,12 +102,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent casts a noncreature spell, this creature deals damage equal to its power to that player.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Spiked Corridor // Torture Pit",
@@ -137,12 +116,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 8,
-      "oracleText": "When you unlock this door, create three 1/1 red Devil creature tokens with \"When this token dies, it deals 1 damage to any target.\"\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Star Athlete",
@@ -154,12 +130,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Menace\nWhenever this creature attacks, choose up to one target nonland permanent. Its controller may sacrifice it. If they don't, this creature deals 5 damage to that player.\nBlitz {3}{R} (If you cast this spell for its blitz cost, it gains haste and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.)"
+      ]
     },
     {
       "name": "Séance Board",
@@ -169,12 +142,9 @@
       "oracleCardName": "Séance Board",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Morbid — At the beginning of each end step, if a creature died this turn, put a soul counter on this artifact.\n{T}: Add X mana of any one color, where X is the number of soul counters on this artifact. Spend this mana only to cast instant, sorcery, Demon, and Spirit spells."
+      ]
     },
     {
       "name": "Bedevil",
@@ -187,12 +157,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, creature, or planeswalker."
+      ]
     },
     {
       "name": "Mogis, God of Slaughter",
@@ -205,13 +172,10 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Indestructible\nAs long as your devotion to black and red is less than seven, Mogis isn't a creature.\nAt the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature of their choice."
+      ]
     },
     {
       "name": "Braids, Arisen Nightmare",
@@ -223,12 +187,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card."
+      ]
     },
     {
       "name": "Decree of Pain",
@@ -240,12 +201,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.\nCycling {3}{B}{B} ({3}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, all creatures get -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Fate Unraveler",
@@ -257,13 +215,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever an opponent draws a card, this creature deals 1 damage to that player."
+      ]
     },
     {
       "name": "Kederekt Parasite",
@@ -275,12 +230,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Whenever an opponent draws a card, if you control a red permanent, you may have this creature deal 1 damage to that player."
+      ]
     },
     {
       "name": "Mask of Griselbrand",
@@ -292,12 +244,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Equipped creature has flying and lifelink.\nWhenever equipped creature dies, you may pay X life, where X is its power. If you do, draw X cards.\nEquip {3}"
+      ]
     },
     {
       "name": "Massacre Girl",
@@ -309,12 +258,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Menace\nWhen Massacre Girl enters, each other creature gets -1/-1 until end of turn. Whenever a creature dies this turn, each creature other than Massacre Girl gets -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Massacre Wurm",
@@ -326,12 +272,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life."
+      ]
     },
     {
       "name": "Nightshade Harvester",
@@ -343,12 +286,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever a land an opponent controls enters, that player loses 1 life. Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -360,12 +300,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Brash Taunter",
@@ -377,12 +314,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Indestructible\nWhenever this creature is dealt damage, it deals that much damage to target opponent.\n{2}{R}, {T}: This creature fights another target creature."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -394,12 +328,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Combustible Gearhulk",
@@ -411,13 +342,10 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nWhen this creature enters, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then this creature deals damage to that player equal to the total mana value of those cards."
+      ]
     },
     {
       "name": "Enchanter's Bane",
@@ -429,12 +357,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your end step, target enchantment deals damage equal to its mana value to its controller unless that player sacrifices it."
+      ]
     },
     {
       "name": "Harsh Mentor",
@@ -446,12 +371,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, this creature deals 2 damage to that player."
+      ]
     },
     {
       "name": "Rampaging Ferocidon",
@@ -463,12 +385,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace\nPlayers can't gain life.\nWhenever another creature enters, this creature deals 1 damage to that creature's controller."
+      ]
     },
     {
       "name": "Tectonic Giant",
@@ -480,12 +399,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks or becomes the target of a spell an opponent controls, choose one —\n• This creature deals 3 damage to each opponent.\n• Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."
+      ]
     },
     {
       "name": "Florian, Voldaren Scion",
@@ -498,12 +414,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "First strike\nAt the beginning of each of your postcombat main phases, look at the top X cards of your library, where X is the total amount of life your opponents lost this turn. Exile one of those cards and put the rest on the bottom of your library in a random order. You may play the exiled card this turn."
+      ]
     },
     {
       "name": "Kaervek the Merciless",
@@ -516,12 +429,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{R}",
-      "cmc": 7,
-      "oracleText": "Whenever an opponent casts a spell, Kaervek deals damage equal to that spell's mana value to any target."
+      ]
     },
     {
       "name": "Rakdos, Lord of Riots",
@@ -534,12 +444,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}{R}{R}",
-      "cmc": 4,
-      "oracleText": "You can't cast Rakdos unless an opponent lost life this turn.\nFlying, trample\nCreature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn."
+      ]
     },
     {
       "name": "Spiteful Visions",
@@ -552,12 +459,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B/R}{B/R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each player's draw step, that player draws an additional card.\nWhenever a player draws a card, this enchantment deals 1 damage to that player."
+      ]
     },
     {
       "name": "Stormfist Crusader",
@@ -570,12 +474,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Menace\nAt the beginning of your upkeep, each player draws a card and loses 1 life."
+      ]
     },
     {
       "name": "Theater of Horrors",
@@ -588,12 +489,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, exile the top card of your library.\nDuring your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with this enchantment.\n{3}{R}: This enchantment deals 1 damage to target opponent or planeswalker."
+      ]
     },
     {
       "name": "Vial Smasher the Fierce",
@@ -606,12 +504,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast your first spell each turn, choose an opponent at random. Vial Smasher deals damage equal to that spell's mana value to that player or a planeswalker that player controls.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Basilisk Collar",
@@ -621,12 +516,9 @@
       "oracleCardName": "Basilisk Collar",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destroy it. Damage dealt by this creature also causes you to gain that much life.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -636,13 +528,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Blackcleave Cliffs",
@@ -655,11 +544,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Canyon Slough",
@@ -672,11 +559,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -689,11 +574,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -703,11 +586,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -720,11 +601,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Graven Cairns",
@@ -737,11 +616,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{B/R}, {T}: Add {B}{B}, {B}{R}, or {R}{R}."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -754,11 +631,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Shivan Gorge",
@@ -770,11 +645,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{R}, {T}: Shivan Gorge deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -787,11 +660,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spinerock Knoll",
@@ -803,11 +674,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+      ]
     },
     {
       "name": "Sulfurous Springs",
@@ -820,11 +689,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Temple of Malice",
@@ -837,11 +704,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Witch's Clinic",
@@ -851,11 +716,9 @@
       "oracleCardName": "Witch's Clinic",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Target commander gains lifelink until end of turn."
+      ]
     },
     {
       "name": "Fear of Burning Alive",
@@ -867,13 +730,10 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, it deals 4 damage to each opponent.\nDelirium — Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, this creature deals that amount of damage to target creature that player controls."
+      ]
     },
     {
       "name": "Grab the Prize",
@@ -885,12 +745,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -900,11 +757,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Blood Pact",
@@ -916,12 +771,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Target player draws two cards and loses 2 life."
+      ]
     },
     {
       "name": "Blood Seeker",
@@ -933,12 +785,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature an opponent controls enters, you may have that player lose 1 life."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -950,12 +799,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -965,12 +811,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -980,12 +823,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -995,12 +835,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1010,11 +847,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Bastion of Remembrance",
@@ -1026,12 +861,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, create a 1/1 white Human Soldier creature token.\nWhenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Blood Artist",
@@ -1043,12 +875,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Falkenrath Noble",
@@ -1060,12 +889,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Gray Merchant of Asphodel",
@@ -1077,12 +903,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)"
+      ]
     },
     {
       "name": "Infernal Grasp",
@@ -1094,12 +917,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. You lose 2 life."
+      ]
     },
     {
       "name": "Morbid Opportunist",
@@ -1111,12 +931,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Sign in Blood",
@@ -1128,12 +945,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Target player draws two cards and loses 2 life."
+      ]
     },
     {
       "name": "Syr Konrad, the Grim",
@@ -1145,12 +959,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Light Up the Stage",
@@ -1162,12 +973,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nExile the top two cards of your library. Until the end of your next turn, you may play those cards."
+      ]
     },
     {
       "name": "Kardur, Doomscourge",
@@ -1180,12 +988,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "When Kardur enters, until your next turn, creatures your opponents control attack each combat if able and attack a player other than you if able.\nWhenever an attacking creature dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Mayhem Devil",
@@ -1198,12 +1003,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a player sacrifices a permanent, this creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Rakdos Charm",
@@ -1216,12 +1018,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1231,12 +1030,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1246,12 +1042,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -1264,12 +1057,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -1282,12 +1072,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1297,12 +1084,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1312,11 +1096,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Bloodfell Caves",
@@ -1329,11 +1111,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1343,11 +1123,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Geothermal Bog",
@@ -1360,11 +1138,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Leechridden Swamp",
@@ -1376,11 +1152,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)\nThis land enters tapped.\n{B}, {T}: Each opponent loses 1 life. Activate only if you control two or more black permanents."
+      ]
     },
     {
       "name": "Tainted Peak",
@@ -1393,11 +1167,9 @@
         "R"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1407,11 +1179,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Swamp",
@@ -1423,11 +1193,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1439,11 +1207,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1455,11 +1221,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1471,11 +1235,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1487,11 +1249,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1503,11 +1263,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1519,11 +1277,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1535,11 +1291,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1551,11 +1305,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1567,11 +1319,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1583,11 +1333,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1599,11 +1347,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1615,11 +1361,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1631,11 +1375,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1647,11 +1389,9 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1663,15 +1403,13 @@
         "R"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.114Z",
+    "retrievedDate": "2026-06-23T17:40:37.119Z",
     "sourceUrl": "EndlessPunishment_DSC.json",
     "deckSource": "precon",
     "createdAt": "2024-09-27T00:00:00.000Z"

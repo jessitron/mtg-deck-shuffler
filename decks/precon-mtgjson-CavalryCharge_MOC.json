@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1222507446,
   "name": "Cavalry Charge",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Eminence — Whenever you attack with one or more Knights, if Sidar Jabari is in the command zone or on the battlefield, draw a card, then discard a card.\nFlying, first strike\nWhenever Sidar Jabari deals combat damage to a player, return target Knight creature card from your graveyard to the battlefield."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Flying, ward {2}\nWhenever Elenda and Azor attacks, you may pay {X}{W}{U}{B}. If you do, draw X cards.\nAt the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn."
+      ]
     },
     {
       "name": "Exsanguinator Cavalry",
@@ -54,12 +48,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace, lifelink\nWhenever a Knight you control deals combat damage to a player, put a +1/+1 counter on that creature and create a Blood token. (It's an artifact with \"{1}, {T}, Discard a card, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Ichor Elixir",
@@ -69,12 +60,9 @@
       "oracleCardName": "Ichor Elixir",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Herald of Hoofbeats",
@@ -86,12 +74,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nOther Knights you control have horsemanship."
+      ]
     },
     {
       "name": "Locthwain Lancer",
@@ -103,12 +88,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Menace\nWhenever a nontoken Knight you control dies, each opponent loses 1 life and you draw a card."
+      ]
     },
     {
       "name": "Chivalric Alliance",
@@ -120,12 +102,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you attack with two or more creatures, draw a card.\n{2}, Discard a card: Create a 2/2 white and blue Knight creature token with vigilance."
+      ]
     },
     {
       "name": "Path of the Enigma",
@@ -137,12 +116,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Target player draws four cards.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues."
+      ]
     },
     {
       "name": "Vodalian Wave-Knight",
@@ -155,12 +131,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you draw a card, put a +1/+1 counter on each other Merfolk and/or Knight you control."
+      ]
     },
     {
       "name": "Conjurer's Mantle",
@@ -172,12 +145,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1 and has vigilance.\nWhenever equipped creature attacks, look at the top six cards of your library. You may reveal a card that shares a creature type with that creature from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Ethersworn Adjudicator",
@@ -191,13 +161,10 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\n{1}{W}{B}, {T}: Destroy target creature or enchantment.\n{2}{U}: Untap this creature."
+      ]
     },
     {
       "name": "Hero of Bladehold",
@@ -209,12 +176,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever this creature attacks, create two 1/1 white Soldier creature tokens that are tapped and attacking."
+      ]
     },
     {
       "name": "Vona, Butcher of Magan",
@@ -227,12 +191,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate only during your turn."
+      ]
     },
     {
       "name": "Acclaimed Contender",
@@ -244,12 +205,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Adeline, Resplendent Cathar",
@@ -261,12 +219,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nAdeline's power is equal to the number of creatures you control.\nWhenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control."
+      ]
     },
     {
       "name": "Aryel, Knight of Windgrace",
@@ -279,12 +234,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Vigilance\n{2}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.\n{B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -297,11 +249,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -311,11 +261,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fell the Mighty",
@@ -327,12 +275,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures with power greater than target creature's power."
+      ]
     },
     {
       "name": "Haakon, Stromgald Scourge",
@@ -344,12 +289,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "You may cast this card from your graveyard, but not from anywhere else.\nAs long as Haakon is on the battlefield, you may cast Knight spells from your graveyard.\nWhen Haakon dies, you lose 2 life."
+      ]
     },
     {
       "name": "Josu Vess, Lich Knight",
@@ -361,12 +303,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Kicker {5}{B} (You may pay an additional {5}{B} as you cast this spell.)\nMenace\nWhen Josu Vess enters, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace."
+      ]
     },
     {
       "name": "Knight Exemplar",
@@ -378,12 +317,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\nOther Knight creatures you control get +1/+1 and have indestructible. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Knight of the White Orchid",
@@ -395,12 +331,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Knights' Charge",
@@ -413,12 +346,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever a Knight you control attacks, each opponent loses 1 life and you gain 1 life.\n{6}{W}{B}, Sacrifice this enchantment: Return all Knight creature cards from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Liliana's Standard Bearer",
@@ -430,12 +360,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, draw X cards, where X is the number of creatures that died under your control this turn."
+      ]
     },
     {
       "name": "Maul of the Skyclaves",
@@ -447,12 +374,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this Equipment enters, attach it to target creature you control.\nEquipped creature gets +2/+2 and has flying and first strike.(It deals combat damage before creatures without first strike.)\nEquip {2}{W}{W}"
+      ]
     },
     {
       "name": "Midnight Reaper",
@@ -464,12 +388,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
+      ]
     },
     {
       "name": "Murderous Rider // Swift End",
@@ -481,12 +402,10 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Lifelink\nWhen this creature dies, put it on the bottom of its owner's library."
+      "cardTypes": [
+        "Creature",
+        "Instant"
+      ]
     },
     {
       "name": "Painful Truths",
@@ -498,12 +417,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Converge — You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell."
+      ]
     },
     {
       "name": "Port Town",
@@ -516,11 +432,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -533,11 +447,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Promise of Loyalty",
@@ -549,12 +461,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+      ]
     },
     {
       "name": "Pull from Tomorrow",
@@ -566,12 +475,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards, then discard a card."
+      ]
     },
     {
       "name": "Shineshadow Snarl",
@@ -584,11 +490,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Sigiled Sword of Valeron",
@@ -598,12 +502,9 @@
       "oracleCardName": "Sigiled Sword of Valeron",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+0, has vigilance, and is a Knight in addition to its other types.\nWhenever equipped creature attacks, create a 2/2 white Knight creature token with vigilance that's attacking.\nEquip {3}"
+      ]
     },
     {
       "name": "Silverwing Squadron",
@@ -615,12 +516,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, vigilance\nSilverwing Squadron's power and toughness are each equal to the number of creatures you control.\nWhenever this creature attacks, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you have."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -633,11 +531,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -650,11 +546,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -667,11 +561,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -684,11 +576,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Time Wipe",
@@ -701,12 +591,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Return a creature you control to its owner's hand, then destroy all creatures."
+      ]
     },
     {
       "name": "Unbreakable Formation",
@@ -718,12 +605,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Valiant Knight",
@@ -735,12 +619,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Other Knights you control get +1/+1.\n{3}{W}{W}: Knights you control gain double strike until end of turn."
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -750,12 +631,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "Worthy Knight",
@@ -767,12 +645,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast a Knight spell, create a 1/1 white Human creature token."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -784,11 +659,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -798,11 +671,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -812,12 +683,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Distant Melody",
@@ -829,12 +697,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -844,11 +709,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fractured Powerstone",
@@ -858,12 +721,9 @@
       "oracleCardName": "Fractured Powerstone",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -876,12 +736,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -891,11 +748,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Read the Bones",
@@ -907,12 +762,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Smitten Swordmaster // Curry Favor",
@@ -924,12 +776,10 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Lifelink"
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -939,11 +789,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thriving Heath",
@@ -955,11 +803,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Isle",
@@ -971,11 +817,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Moor",
@@ -987,11 +831,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1005,11 +847,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1019,12 +859,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Arvad the Cursed",
@@ -1037,12 +874,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Deathtouch, lifelink\nOther legendary creatures you control get +2/+2."
+      ]
     },
     {
       "name": "Corpse Knight",
@@ -1055,12 +889,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever another creature you control enters, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Despark",
@@ -1073,12 +904,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Exile target permanent with mana value 4 or greater."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1088,12 +916,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Foulmire Knight // Profane Insight",
@@ -1105,12 +930,10 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Deathtouch"
+      "cardTypes": [
+        "Creature",
+        "Instant"
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -1120,12 +943,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Knight of the Last Breath",
@@ -1138,12 +958,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{B}",
-      "cmc": 7,
-      "oracleText": "{3}, Sacrifice another nontoken creature: Create a 1/1 white and black Spirit creature token with flying.\nAfterlife 3 (When this creature dies, create three 1/1 white and black Spirit creature tokens with flying.)"
+      ]
     },
     {
       "name": "Knights of the Black Rose",
@@ -1156,12 +973,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, you become the monarch.\nWhenever an opponent becomes the monarch, if you were the monarch as the turn began, that player loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1171,12 +985,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1186,11 +997,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Order of Midnight // Alter Fate",
@@ -1202,12 +1011,10 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nThis creature can't block."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Path to Exile",
@@ -1219,12 +1026,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -1236,12 +1040,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1251,12 +1052,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1268,12 +1066,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Syr Elenora, the Discerning",
@@ -1285,12 +1080,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Syr Elenora's power is equal to the number of cards in your hand.\nWhen Syr Elenora enters, draw a card.\nSpells your opponents cast that target Syr Elenora cost {2} more to cast."
+      ]
     },
     {
       "name": "Syr Konrad, the Grim",
@@ -1302,12 +1094,9 @@
         "B"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1317,11 +1106,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Wintermoor Commander",
@@ -1334,12 +1121,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Deathtouch\nWintermoor Commander's toughness is equal to the number of Knights you control.\nWhenever this creature attacks, another target Knight you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)"
+      ]
     },
     {
       "name": "Xerex Strobe-Knight",
@@ -1351,12 +1135,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying, vigilance\n{T}: Create a 2/2 white and blue Knight creature token with vigilance. Activate only if you've cast two or more spells this turn."
+      ]
     },
     {
       "name": "Plains",
@@ -1368,11 +1149,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1384,11 +1163,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1400,11 +1177,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1416,11 +1191,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1432,11 +1205,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1448,11 +1219,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1464,11 +1233,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1480,11 +1247,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1496,11 +1261,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1512,11 +1275,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1528,11 +1289,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1544,11 +1303,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1560,11 +1317,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1576,11 +1331,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1592,11 +1345,9 @@
         "B"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1608,11 +1359,9 @@
         "B"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1624,11 +1373,9 @@
         "B"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1640,11 +1387,9 @@
         "B"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1656,15 +1401,13 @@
         "B"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.602Z",
+    "retrievedDate": "2026-06-23T17:40:36.272Z",
     "sourceUrl": "CavalryCharge_MOC.json",
     "deckSource": "precon",
     "createdAt": "2023-04-21T00:00:00.000Z"

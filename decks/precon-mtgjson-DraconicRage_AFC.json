@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 189987676,
   "name": "Draconic Rage",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Enrage — Whenever Vrondiss is dealt damage, you may create a 5/4 red and green Dragon Spirit creature token with \"When this token deals damage, sacrifice it.\"\nWhenever you roll one or more dice, you may have Vrondiss deal 1 damage to itself."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{R}{R}",
-      "cmc": 8,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, it deals 5 damage divided as you choose among any number of targets."
+      ]
     },
     {
       "name": "Demanding Dragon",
@@ -51,12 +45,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, it deals 5 damage to target opponent unless that player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Dragonmaster Outcast",
@@ -68,12 +59,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Hoard-Smelter Dragon",
@@ -85,12 +73,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\n{3}{R}: Destroy target artifact. This creature gets +X/+0 until end of turn, where X is that artifact's mana value."
+      ]
     },
     {
       "name": "Opportunistic Dragon",
@@ -102,12 +87,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, choose target Human or artifact an opponent controls. For as long as this creature remains on the battlefield, gain control of that permanent, it loses all abilities, and it can't attack or block."
+      ]
     },
     {
       "name": "Scourge of Valkas",
@@ -119,12 +101,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature or another Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control.\n{R}: This creature gets +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Shivan Hellkite",
@@ -136,12 +115,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{R}: This creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Skyline Despot",
@@ -153,12 +129,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you become the monarch.\nAt the beginning of your upkeep, if you're the monarch, create a 5/5 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Skyship Stalker",
@@ -170,12 +143,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\n{R}: This creature gets +1/+0 until end of turn.\n{R}: This creature gains first strike until end of turn.\n{R}: This creature gains haste until end of turn."
+      ]
     },
     {
       "name": "Taurean Mauler",
@@ -187,12 +157,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Terror of Mount Velus",
@@ -204,12 +171,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nDouble strike (This creature deals both first-strike and regular combat damage.)\nWhen this creature enters, creatures you control gain double strike until end of turn."
+      ]
     },
     {
       "name": "Thunderbreak Regent",
@@ -221,12 +185,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, this creature deals 3 damage to that player."
+      ]
     },
     {
       "name": "Chameleon Colossus",
@@ -238,12 +199,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Changeling (This card is every creature type.)\nProtection from black\n{2}{G}{G}: This creature gets +X/+X until end of turn, where X is its power."
+      ]
     },
     {
       "name": "Atarka, World Render",
@@ -256,12 +214,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nWhenever a Dragon you control attacks, it gains double strike until end of turn."
+      ]
     },
     {
       "name": "Anger",
@@ -273,12 +228,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nAs long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+      ]
     },
     {
       "name": "Dragonlord's Servant",
@@ -290,12 +242,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Dragon spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Savage Ventmaw",
@@ -308,12 +257,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{G}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end."
+      ]
     },
     {
       "name": "Dragonspeaker Shaman",
@@ -325,12 +271,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Dragon spells you cast cost {2} less to cast."
+      ]
     },
     {
       "name": "Chain Reaction",
@@ -342,12 +285,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Rishkar's Expertise",
@@ -359,12 +299,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw cards equal to the greatest power among creatures you control.\nYou may cast a spell with mana value 5 or less from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Shamanic Revelation",
@@ -376,12 +313,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+      ]
     },
     {
       "name": "Rile",
@@ -393,12 +327,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn.\nDraw a card."
+      ]
     },
     {
       "name": "Cultivate",
@@ -410,12 +341,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explore",
@@ -427,12 +355,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -444,12 +369,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Magmaquake",
@@ -461,12 +383,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Magmaquake deals X damage to each creature without flying and each planeswalker."
+      ]
     },
     {
       "name": "Spit Flame",
@@ -478,12 +397,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Spit Flame deals 4 damage to target creature.\nWhenever a Dragon you control enters, you may pay {R}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Decree of Savagery",
@@ -495,12 +411,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{7}{G}{G}",
-      "cmc": 9,
-      "oracleText": "Put four +1/+1 counters on each creature you control.\nCycling {4}{G}{G} ({4}{G}{G}, Discard this card: Draw a card.)\nWhen you cycle this card, you may put four +1/+1 counters on target creature."
+      ]
     },
     {
       "name": "Kindred Summons",
@@ -512,12 +425,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Choose a creature type. Reveal cards from the top of your library until you reveal X creature cards of the chosen type, where X is the number of creatures you control of that type. Put those cards onto the battlefield, then shuffle the rest of the revealed cards into your library."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -529,12 +439,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Beast Within",
@@ -546,12 +453,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Return to Nature",
@@ -563,12 +467,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard."
+      ]
     },
     {
       "name": "Dragon's Hoard",
@@ -578,12 +479,9 @@
       "oracleCardName": "Dragon's Hoard",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a Dragon you control enters, put a gold counter on this artifact.\n{T}, Remove a gold counter from this artifact: Draw a card.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -593,12 +491,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -608,12 +503,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Gruul Signet",
@@ -626,12 +518,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -641,12 +530,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -656,12 +542,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Gratuitous Violence",
@@ -673,12 +556,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}{R}{R}",
-      "cmc": 5,
-      "oracleText": "If a creature you control would deal damage to a permanent or player, it deals double that damage instead."
+      ]
     },
     {
       "name": "Outpost Siege",
@@ -690,12 +570,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, this enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Warstorm Surge",
@@ -707,12 +584,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control enters, it deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Colossal Majesty",
@@ -724,12 +598,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, if you control a creature with power 4 or greater, draw a card."
+      ]
     },
     {
       "name": "Garruk's Uprising",
@@ -741,12 +612,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -759,11 +627,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Crucible of the Spirit Dragon",
@@ -773,11 +639,9 @@
       "oracleCardName": "Crucible of the Spirit Dragon",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{T}, Remove X storage counters from this land: Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -787,11 +651,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Game Trail",
@@ -804,11 +666,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Haven of the Spirit Dragon",
@@ -818,11 +678,9 @@
       "oracleCardName": "Haven of the Spirit Dragon",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Dragon creature spell.\n{2}, {T}, Sacrifice this land: Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -835,11 +693,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -851,11 +707,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Command Tower",
@@ -865,11 +719,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Desert",
@@ -879,11 +731,9 @@
       "oracleCardName": "Desert",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: This land deals 1 damage to target attacking creature. Activate only during the end of combat step."
+      ]
     },
     {
       "name": "Gruul Turf",
@@ -896,11 +746,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -910,11 +758,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -926,11 +772,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -942,11 +786,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -958,11 +800,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -974,11 +814,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -990,11 +828,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1006,11 +842,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1022,11 +856,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1038,11 +870,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1054,11 +884,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1070,11 +898,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1086,11 +912,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1102,11 +926,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1118,11 +940,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1134,11 +954,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1150,11 +968,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1166,11 +982,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1182,11 +996,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1198,11 +1010,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1214,11 +1024,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1230,11 +1038,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1246,11 +1052,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1262,11 +1066,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1278,11 +1080,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1294,11 +1094,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1310,11 +1108,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1326,11 +1122,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1342,11 +1136,9 @@
         "G"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Klauth, Unrivaled Ancient",
@@ -1359,12 +1151,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\nWhenever Klauth attacks, add X mana in any combination of colors, where X is the total power of attacking creatures. Spend this mana only to cast spells. Until end of turn, you don't lose this mana as steps and phases end."
+      ]
     },
     {
       "name": "Berserker's Frenzy",
@@ -1376,12 +1165,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Cast this spell only before combat or during combat before blockers are declared.\nRoll two d20 and ignore the lower roll.\n1—14 | Choose any number of creatures. They block this turn if able.\n15—20 | You choose which creatures block this turn and how those creatures block."
+      ]
     },
     {
       "name": "Chaos Dragon",
@@ -1393,12 +1179,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Flying, haste\nThis creature attacks each combat if able.\nAt the beginning of combat on your turn, each player rolls a d20. If one or more opponents had the highest result, this creature can't attack those players or planeswalkers they control this combat."
+      ]
     },
     {
       "name": "Maddening Hex",
@@ -1410,12 +1193,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever enchanted player casts a noncreature spell, roll a d6. This Aura deals damage to that player equal to the result. Then attach this Aura to another one of your opponents chosen at random."
+      ]
     },
     {
       "name": "Vengeful Ancestor",
@@ -1427,12 +1207,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature enters or attacks, goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever a goaded creature attacks, it deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Bag of Tricks",
@@ -1444,12 +1221,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{4}{G}, {T}: Roll a d8. Reveal cards from the top of your library until you reveal a creature card with mana value equal to the result. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Druid of Purification",
@@ -1461,12 +1235,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way."
+      ]
     },
     {
       "name": "Indomitable Might",
@@ -1478,12 +1249,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Flash\nEnchant creature\nEnchanted creature gets +3/+3.\nEnchanted creature's controller may have it assign its combat damage as though it weren't blocked."
+      ]
     },
     {
       "name": "Neverwinter Hydra",
@@ -1495,12 +1263,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "As this creature enters, roll X d6. It enters with a number of +1/+1 counters on it equal to the total of those results.\nTrample\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)"
+      ]
     },
     {
       "name": "Wild Endeavor",
@@ -1512,12 +1277,9 @@
         "G"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Roll two d4 and choose one result. Create a number of 3/3 green Beast creature tokens equal to that result. Then search your library for a number of basic land cards equal to the other result, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Dragonborn Champion",
@@ -1530,12 +1292,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nWhenever a source you control deals 5 or more damage to a player, draw a card."
+      ]
     },
     {
       "name": "Klauth's Will",
@@ -1548,12 +1307,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Breathe Flame — Klauth's Will deals X damage to each creature without flying.\n• Smash Relics — Destroy up to X target artifacts and/or enchantments."
+      ]
     },
     {
       "name": "Wulfgar of Icewind Dale",
@@ -1566,12 +1322,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nIf a creature you control attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Barbarian Class",
@@ -1583,12 +1336,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "(Gain the next level as a sorcery to add its ability.)\nIf you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.\n{1}{R}: Level 2\nWhenever you roll one or more dice, target creature you control gets +2/+0 and gains menace until end of turn.\n{2}{R}: Level 3\nCreatures you control have haste."
+      ]
     },
     {
       "name": "Earth-Cult Elemental",
@@ -1600,12 +1350,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Siege Monster — When this creature enters, roll a d20.\n1—9 | Each player sacrifices a permanent of their choice.\n10—19 | Each opponent sacrifices a permanent of their choice.\n20 | Each opponent sacrifices two permanents of their choice."
+      ]
     },
     {
       "name": "Component Pouch",
@@ -1615,12 +1362,9 @@
       "oracleCardName": "Component Pouch",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}, Remove a component counter from this artifact: Add two mana of different colors.\n{T}: Roll a d20.\n1—9 | Put a component counter on this artifact.\n10—20 | Put two component counters on this artifact."
+      ]
     },
     {
       "name": "Sword of Hours",
@@ -1630,12 +1374,9 @@
       "oracleCardName": "Sword of Hours",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever equipped creature attacks, put a +1/+1 counter on it.\nWhenever equipped creature deals combat damage, roll a d12. If the result is greater than the damage dealt or the result is 12, double the number of +1/+1 counters on that creature.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Underdark Rift",
@@ -1645,15 +1386,13 @@
       "oracleCardName": "Underdark Rift",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}, Exile this land: Roll a d10. Put target artifact, creature, or planeswalker into its owner's library just beneath the top X cards of that library, where X is the result. Activate only as a sorcery."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.982Z",
+    "retrievedDate": "2026-06-23T17:40:36.899Z",
     "sourceUrl": "DraconicRage_AFC.json",
     "deckSource": "precon",
     "createdAt": "2021-07-23T00:00:00.000Z"

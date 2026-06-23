@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2078486056,
   "name": "Forces of the Imperium",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nUnquestionable Wisdom — Other creatures you control get +1/+0 and have vigilance.\nHunt for Heresy — {1}, {T}: Tap target creature an opponent controls. Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you control get +2/+2 and have indestructible."
+      ]
     },
     {
       "name": "Collective Effort",
@@ -52,12 +46,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Escalate—Tap an untapped creature you control. (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Destroy target creature with power 4 or greater.\n• Destroy target enchantment.\n• Put a +1/+1 counter on each creature target player controls."
+      ]
     },
     {
       "name": "Deploy to the Front",
@@ -69,12 +60,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Fell the Mighty",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures with power greater than target creature's power."
+      ]
     },
     {
       "name": "Hour of Reckoning",
@@ -103,12 +88,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures."
+      ]
     },
     {
       "name": "Launch the Fleet",
@@ -120,12 +102,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Strive — This spell costs {1} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each gain \"Whenever this creature attacks, create a 1/1 white Soldier creature token that's tapped and attacking.\""
+      ]
     },
     {
       "name": "Martial Coup",
@@ -137,12 +116,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures."
+      ]
     },
     {
       "name": "Entrapment Maneuver",
@@ -154,12 +130,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Target player sacrifices an attacking creature of their choice. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness."
+      ]
     },
     {
       "name": "Utter End",
@@ -172,12 +145,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Exile target nonland permanent."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -189,12 +159,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Mortify",
@@ -207,12 +174,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or enchantment."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -222,12 +186,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -237,12 +198,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -252,12 +210,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -267,12 +222,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -285,12 +237,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Hierarchy",
@@ -303,12 +252,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -321,12 +267,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -336,12 +279,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -351,12 +291,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Reconnaissance Mission",
@@ -368,12 +305,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -386,11 +320,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -403,11 +335,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -417,11 +347,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Port Town",
@@ -434,11 +362,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -451,11 +377,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -468,11 +392,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -485,11 +407,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -503,11 +423,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -517,11 +435,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Memorial to Glory",
@@ -533,11 +449,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\n{3}{W}, {T}, Sacrifice this land: Create two 1/1 white Soldier creature tokens."
+      ]
     },
     {
       "name": "Command Tower",
@@ -547,11 +461,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dismal Backwater",
@@ -564,11 +476,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -578,11 +488,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -592,11 +500,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Scoured Barrens",
@@ -609,11 +515,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -623,11 +527,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tranquil Cove",
@@ -640,11 +542,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -656,11 +556,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -672,11 +570,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -688,11 +584,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -704,11 +598,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -720,11 +612,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -736,11 +626,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -752,11 +640,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -768,11 +654,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -784,11 +668,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -800,11 +682,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -816,11 +696,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -832,11 +710,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -848,11 +724,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -864,11 +738,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -880,11 +752,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -896,11 +766,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -912,11 +780,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -928,11 +794,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -944,11 +808,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -960,11 +822,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Marneus Calgar",
@@ -978,12 +838,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Double strike\nMaster Tactician — Whenever one or more tokens you control enter, draw a card.\nChapter Master — {6}: Create two 2/2 white Astartes Warrior creature tokens with vigilance."
+      ]
     },
     {
       "name": "Celestine, the Living Saint",
@@ -995,12 +852,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, lifelink\nHealing Tears — At the beginning of your end step, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn."
+      ]
     },
     {
       "name": "Defenders of Humanity",
@@ -1012,12 +866,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{X}{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, create X 2/2 white Astartes Warrior creature tokens with vigilance.\n{X}{2}{W}, Exile this enchantment: Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn."
+      ]
     },
     {
       "name": "For the Emperor!",
@@ -1029,12 +880,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Creatures you control get +2/+2 and gain vigilance and lifelink until end of turn."
+      ]
     },
     {
       "name": "Space Marine Devastator",
@@ -1046,12 +894,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nGrav-cannon — When this creature enters, destroy up to one target artifact or enchantment."
+      ]
     },
     {
       "name": "Triumph of Saint Katherine",
@@ -1063,12 +908,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Lifelink\nPraesidium Protectiva — When this creature is put into your graveyard from the battlefield, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.\nMiracle {1}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Ultramarines Honour Guard",
@@ -1080,12 +922,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nOther creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Vexilus Praetor",
@@ -1097,12 +936,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nVigilance\nAegis of the Emperor — Commanders you control have protection from everything."
+      ]
     },
     {
       "name": "Zephyrim",
@@ -1114,12 +950,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nFlying, vigilance\nMiracle {1}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Sister of Silence",
@@ -1131,12 +964,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flash\nPsychic Abomination — When this creature enters, counter target instant spell, sorcery spell, activated ability, or triggered ability."
+      ]
     },
     {
       "name": "Vanguard Suppressor",
@@ -1148,12 +978,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nFlying\nSuppressing Fire — Whenever this creature deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Arco-Flagellant",
@@ -1165,12 +992,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nThis creature can't block.\nEndurant — Pay 3 life: This creature gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Primaris Eliminator",
@@ -1182,12 +1006,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, choose one —\n• Executioner Round — Destroy target creature.\n• Hyperfrag Round — Creatures target player controls get -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Assault Intercessor",
@@ -1200,12 +1021,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "First strike, menace\nChainsword — Whenever a creature an opponent controls dies, that player loses 2 life."
+      ]
     },
     {
       "name": "Belisarius Cawl",
@@ -1218,13 +1036,10 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Ultima Founding — {T}, Tap two untapped artifacts you control: Create a 2/2 white Astartes Warrior creature token with vigilance.\nMaster of Machines — {T}, Tap X untapped creatures you control: Look at the top X cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Birth of the Imperium",
@@ -1238,12 +1053,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{U}{B}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.\nII — Each opponent sacrifices a creature of their choice.\nIII — Draw two cards for each opponent who controls fewer creatures than you."
+      ]
     },
     {
       "name": "Callidus Assassin",
@@ -1256,12 +1068,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Flash\nPolymorphine — You may have this creature enter tapped as a copy of any creature on the battlefield, except it has \"When this creature enters, destroy up to one other target creature with the same name as this creature.\""
+      ]
     },
     {
       "name": "Commissar Severina Raine",
@@ -1274,12 +1083,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Leading from the Front — Whenever Commissar Severina Raine attacks, each opponent loses X life, where X is the number of other attacking creatures.\nSummary Execution — {2}, Sacrifice another creature: You gain 2 life and draw a card."
+      ]
     },
     {
       "name": "Company Commander",
@@ -1292,12 +1098,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Command Section — When this creature enters, create a number of 1/1 white Soldier creature tokens equal to the number of opponents you have.\nBring it Down! — Whenever this creature attacks, creatures you control gain deathtouch until end of turn."
+      ]
     },
     {
       "name": "Cybernetica Datasmith",
@@ -1310,13 +1113,10 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Protection from Robots\nField Reprogramming — {U}, {T}: Target player draws a card. Another target player creates a 4/4 colorless Robot artifact creature token with \"This token can't block.\""
+      ]
     },
     {
       "name": "Epistolary Librarian",
@@ -1329,12 +1129,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Veil of Time — Whenever this creature attacks, you may cast a spell with mana value X or less from your hand without paying its mana cost, where X is the number of attacking creatures."
+      ]
     },
     {
       "name": "Exterminatus",
@@ -1347,12 +1144,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{W}{B}",
-      "cmc": 7,
-      "oracleText": "Nonland permanents your opponents control lose indestructible until end of turn.\nDestroy all nonland permanents."
+      ]
     },
     {
       "name": "The Flesh Is Weak",
@@ -1366,12 +1160,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{U}{B}",
-      "cmc": 5,
-      "oracleText": "When this enchantment enters, put a +1/+1 counter on each creature you control.\nCreatures you control with +1/+1 counters on them are artifacts in addition to their other types.\nNonartifact creatures get -1/-1."
+      ]
     },
     {
       "name": "Inquisitor Eisenhorn",
@@ -1384,12 +1175,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying.\nWhenever Inquisitor Eisenhorn deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Neyam Shai Murad",
@@ -1402,12 +1190,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Rogue Trader — Whenever Neyam Shai Murad deals combat damage to a player, you may have that player return target permanent card from their graveyard to their hand. If you do, that player chooses a permanent card in your graveyard, then you put it onto the battlefield under your control."
+      ]
     },
     {
       "name": "Sister Hospitaller",
@@ -1420,12 +1205,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{B}",
-      "cmc": 6,
-      "oracleText": "Medicus Ministorum — When this creature enters, return target creature card from your graveyard to the battlefield. You gain life equal to its mana value."
+      ]
     },
     {
       "name": "Sister Repentia",
@@ -1438,12 +1220,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Martyrdom — When this creature dies, you gain 2 life and draw two cards.\nMiracle {W}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "The Golden Throne",
@@ -1453,12 +1232,9 @@
       "oracleCardName": "The Golden Throne",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Arcane Life-support — If you would lose the game, instead exile The Golden Throne and your life total becomes 1.\nA Thousand Souls Die Every Day — {T}, Sacrifice a creature: Add three mana in any combination of colors."
+      ]
     },
     {
       "name": "Inquisitorial Rosette",
@@ -1468,12 +1244,9 @@
       "oracleCardName": "Inquisitorial Rosette",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Inquisition Agents — Whenever equipped creature attacks, create a 2/2 white Astartes Warrior creature token with vigilance that's attacking. Then attacking creatures gain menace until end of turn.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Knight Paladin",
@@ -1483,12 +1256,9 @@
       "oracleCardName": "Knight Paladin",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Trample\nRapid-fire Battle Cannon — When this Vehicle enters, it deals 4 damage to each opponent.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Reaver Titan",
@@ -1498,12 +1268,9 @@
       "oracleCardName": "Reaver Titan",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Void Shields — Protection from mana value 3 or less\nGatling Blaster — Whenever this Vehicle attacks, it deals 5 damage to each opponent.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Redemptor Dreadnought",
@@ -1513,13 +1280,10 @@
       "oracleCardName": "Redemptor Dreadnought",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Fallen Warrior — As an additional cost to cast this spell, you may exile a creature card from your graveyard.\nTrample\nPlasma Incinerator — Whenever this creature attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card."
+      ]
     },
     {
       "name": "Thunderhawk Gunship",
@@ -1529,12 +1293,9 @@
       "oracleCardName": "Thunderhawk Gunship",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this Vehicle enters, create two 2/2 white Astartes Warrior creature tokens with vigilance.\nWhenever this Vehicle attacks, attacking creatures you control gain flying until end of turn.\nCrew 2"
+      ]
     },
     {
       "name": "And They Shall Know No Fear",
@@ -1546,12 +1307,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose a creature type. Creatures you control of the chosen type get +1/+0 and gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Grey Knight Paragon",
@@ -1563,12 +1321,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flash\nRites of Banishment — When this creature enters, destroy target attacking creature. If that creature is a Demon, exile it instead."
+      ]
     },
     {
       "name": "Space Marine Scout",
@@ -1580,12 +1335,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "First strike, vigilance\nConcealed Position — When this creature enters, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thunderwolf Cavalry",
@@ -1597,12 +1349,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "First strike\nCrushing Teeth — Whenever this creature deals combat damage to a player, put a +1/+1 counter on each other creature you control."
+      ]
     },
     {
       "name": "Sicarian Infiltrator",
@@ -1614,13 +1363,10 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash\nSquad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nBenediction of the Omnissiah — When this creature enters, draw a card."
+      ]
     },
     {
       "name": "Sanguinary Priest",
@@ -1632,12 +1378,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nBlood Chalice — Whenever another creature you control dies, this creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Deny the Witch",
@@ -1651,12 +1394,9 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Counter target spell, activated ability, or triggered ability. Its controller loses life equal to the number of creatures you control."
+      ]
     },
     {
       "name": "Primaris Chaplain",
@@ -1669,16 +1409,13 @@
         "W"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nRosarius — Whenever this creature attacks, it gains indestructible until end of turn."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.324Z",
+    "retrievedDate": "2026-06-23T17:40:37.478Z",
     "sourceUrl": "ForcesOfTheImperium_40K.json",
     "deckSource": "precon",
     "createdAt": "2022-10-07T00:00:00.000Z"

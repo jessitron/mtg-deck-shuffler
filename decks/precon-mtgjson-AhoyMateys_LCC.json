@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1799656562,
   "name": "Ahoy Mateys",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}{R}",
-      "cmc": 5,
-      "oracleText": "When Admiral Brass enters, mill four cards.\nAt the beginning of combat on your turn, you may return target Pirate creature card from your graveyard to the battlefield with a finality counter on it. It has base power and toughness 4/4. It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)"
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Each creature you control but don't own gets +2/+2, has menace and deathtouch, and is a Pirate in addition to its other types.\nWhenever you cast a noncreature spell you don't own, create two tapped Treasure tokens."
+      ]
     },
     {
       "name": "The Indomitable",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Trample\nWhenever a creature you control deals combat damage to a player, draw a card.\nCrew 3\nYou may cast this card from your graveyard as long as you control three or more tapped Pirates and/or Vehicles."
+      ]
     },
     {
       "name": "Storm Fleet Negotiator",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nParley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card. (A Map token is an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")"
+      ]
     },
     {
       "name": "Francisco, Fowl Marauder",
@@ -88,12 +76,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nFrancisco can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "The Grim Captain's Locker",
@@ -105,12 +90,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "{T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Until end of turn, each creature card in your graveyard gains \"Escape—{3}{B}, Exile four other cards from your graveyard.\" (You may cast a card with escape from your graveyard for its escape cost.)"
+      ]
     },
     {
       "name": "Skeleton Crew",
@@ -122,12 +104,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other creature you control that's a Skeleton or Pirate gets +1/+1.\nWhenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token. (This ability triggers only from the battlefield.)\n{5}{B}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Broadside Bombardiers",
@@ -139,12 +118,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace, haste\nBoast — Sacrifice another creature or artifact: This creature deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)"
+      ]
     },
     {
       "name": "Gemcutter Buccaneer",
@@ -156,12 +132,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature or another Pirate you control enters, create a tapped Treasure token.\nTreasures you control are Equipment in addition to their other types and have \"Equipped creature gets +2/+0,\" equip Pirate {1}, and equip {3}."
+      ]
     },
     {
       "name": "Arm-Mounted Anchor",
@@ -171,12 +144,9 @@
       "oracleCardName": "Arm-Mounted Anchor",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+2 and has menace.\nWhenever equipped creature deals combat damage to a player, draw two cards. Then discard two cards unless you discard a Pirate card.\nEquip {2}. This ability costs {2} less to activate if you have one or fewer cards in hand."
+      ]
     },
     {
       "name": "Amphin Mutineer",
@@ -188,12 +158,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Bident of Thassa",
@@ -205,13 +172,10 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Artifact"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\n{1}{U}, {T}: Creatures your opponents control attack this turn if able."
+      ]
     },
     {
       "name": "Corsair Captain",
@@ -223,12 +187,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nOther Pirates you control get +1/+1."
+      ]
     },
     {
       "name": "Evacuation",
@@ -240,12 +201,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return all creatures to their owners' hands."
+      ]
     },
     {
       "name": "Timestream Navigator",
@@ -257,12 +215,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{2}{U}{U}, {T}, Put this creature on the bottom of its owner's library: Take an extra turn after this one. Activate only if you have the city's blessing."
+      ]
     },
     {
       "name": "Warkite Marauder",
@@ -274,12 +229,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn."
+      ]
     },
     {
       "name": "Black Market Connections",
@@ -291,12 +243,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your first main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life. (It is every creature type.)"
+      ]
     },
     {
       "name": "Blood Money",
@@ -308,12 +257,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all creatures. For each nontoken creature destroyed this way, you create a tapped Treasure token."
+      ]
     },
     {
       "name": "Dire Fleet Ravager",
@@ -325,12 +271,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Menace, deathtouch\nWhen this creature enters, each player loses a third of their life, rounded up."
+      ]
     },
     {
       "name": "Fathom Fleet Captain",
@@ -342,12 +285,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Menace\nWhenever this creature attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace."
+      ]
     },
     {
       "name": "Lethal Scheme",
@@ -359,12 +299,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     },
     {
       "name": "Angrath's Marauders",
@@ -376,12 +313,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -393,12 +327,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Captain Lannery Storm",
@@ -410,12 +341,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever Captain Lannery Storm attacks, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nWhenever you sacrifice a Treasure, Captain Lannery Storm gets +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Captivating Crew",
@@ -427,12 +355,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -444,12 +369,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Coercive Recruiter",
@@ -461,12 +383,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature or another Pirate you control enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types."
+      ]
     },
     {
       "name": "Dire Fleet Daredevil",
@@ -478,12 +397,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Kari Zev, Skyship Raider",
@@ -495,12 +411,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "First strike, menace\nWhenever Kari Zev attacks, create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters tapped and attacking. Exile that token at end of combat."
+      ]
     },
     {
       "name": "Port Razer",
@@ -512,12 +425,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature deals combat damage to a player, untap each creature you control. After this phase, there is an additional combat phase.\nThis creature can't attack a player it has already attacked this turn."
+      ]
     },
     {
       "name": "Shared Animosity",
@@ -529,12 +439,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it."
+      ]
     },
     {
       "name": "Admiral Beckett Brass",
@@ -548,12 +455,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Other Pirates you control get +1/+1.\nAt the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn."
+      ]
     },
     {
       "name": "Hostage Taker",
@@ -566,12 +470,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile another target creature or artifact until this creature leaves the battlefield. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "King Narfi's Betrayal",
@@ -584,12 +485,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.\nII, III — Until end of turn, you may cast spells from among cards exiled with this Saga, and you may spend mana as though it were mana of any color to cast those spells."
+      ]
     },
     {
       "name": "Prismari Command",
@@ -602,12 +500,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Choose two —\n• Prismari Command deals 2 damage to any target.\n• Target player draws two cards, then discards two cards.\n• Target player creates a Treasure token.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Zara, Renegade Recruiter",
@@ -620,12 +515,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever Zara attacks, look at defending player's hand. You may put a creature card from it onto the battlefield under your control tapped and attacking that player or a planeswalker they control. Return that creature to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Icon of Ancestry",
@@ -635,12 +527,9 @@
       "oracleCardName": "Icon of Ancestry",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -650,12 +539,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -668,11 +554,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Desolate Lighthouse",
@@ -685,11 +569,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{U}{R}, {T}: Draw a card, then discard a card."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -699,11 +581,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -716,11 +596,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -733,11 +611,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Geier Reach Sanitarium",
@@ -747,11 +623,9 @@
       "oracleCardName": "Geier Reach Sanitarium",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Each player draws a card, then discards a card."
+      ]
     },
     {
       "name": "Nephalia Drownyard",
@@ -764,11 +638,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{U}{B}, {T}: Target player mills three cards."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -781,11 +653,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -798,11 +668,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -815,11 +683,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Azure Fleet Admiral",
@@ -831,12 +697,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you become the monarch.\nThis creature can't be blocked by creatures the monarch controls."
+      ]
     },
     {
       "name": "Enterprising Scallywag",
@@ -848,12 +711,9 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)"
+      ]
     },
     {
       "name": "Daring Saboteur",
@@ -865,12 +725,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "{2}{U}: This creature can't be blocked this turn.\nWhenever this creature deals combat damage to a player, you may draw a card. If you do, discard a card."
+      ]
     },
     {
       "name": "Departed Deckhand",
@@ -882,12 +739,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature becomes the target of a spell, sacrifice it.\nThis creature can't be blocked except by Spirits.\n{3}{U}: Another target creature you control can't be blocked this turn except by Spirits."
+      ]
     },
     {
       "name": "Distant Melody",
@@ -899,12 +753,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Ghost of Ramirez DePietro",
@@ -916,12 +767,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Ghost of Ramirez DePietro can't be blocked by creatures with toughness 3 or greater.\nWhenever Ghost of Ramirez DePietro deals combat damage to a player, choose up to one target card in a graveyard that was discarded or put there from a library this turn. Put that card into its owner's hand.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Malcolm, Keen-Eyed Navigator",
@@ -933,12 +781,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever one or more Pirates you control deal damage to your opponents, you create a Treasure token for each opponent dealt damage. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Merchant Raiders",
@@ -950,12 +795,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature or another Pirate you control enters, tap up to one target creature. That creature doesn't untap during its controller's untap step for as long as you control this creature."
+      ]
     },
     {
       "name": "Siren Stormtamer",
@@ -967,12 +809,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Flying\n{U}, Sacrifice this creature: Counter target spell or ability that targets you or a creature you control."
+      ]
     },
     {
       "name": "Spectral Sailor",
@@ -984,12 +823,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nFlying\n{3}{U}: Draw a card."
+      ]
     },
     {
       "name": "Windfall",
@@ -1001,12 +837,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -1018,12 +851,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Pitiless Plunderer",
@@ -1035,12 +865,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever another creature you control dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Breeches, Brazen Plunderer",
@@ -1052,12 +879,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Faithless Looting",
@@ -1069,12 +893,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Rakdos Charm",
@@ -1087,12 +908,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Ramirez DePietro, Pillager",
@@ -1105,12 +923,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "When Ramirez DePietro enters, you lose 2 life and create two Treasure tokens.\nWhenever one or more Pirates you control deal combat damage to a player, exile the top card of that player's library. You may cast that card for as long as it remains exiled."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1120,12 +935,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1135,12 +947,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -1153,12 +962,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -1168,12 +974,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -1186,12 +989,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -1204,12 +1004,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1219,12 +1016,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1234,12 +1028,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1249,11 +1040,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1267,11 +1056,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1281,11 +1068,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1295,11 +1080,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Port of Karfell",
@@ -1312,11 +1095,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice this land: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1326,11 +1107,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1340,11 +1119,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1354,11 +1131,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thriving Bluff",
@@ -1370,11 +1145,9 @@
         "R"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than red.\n{T}: Add {R} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Isle",
@@ -1386,11 +1159,9 @@
         "U"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Moor",
@@ -1402,11 +1173,9 @@
         "B"
       ],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1416,11 +1185,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "LCC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Island",
@@ -1432,11 +1199,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1448,11 +1213,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1464,11 +1227,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1480,11 +1241,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1496,11 +1255,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1512,11 +1269,9 @@
         "U"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1528,11 +1283,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1544,11 +1297,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1560,11 +1311,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1576,11 +1325,9 @@
         "B"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1592,11 +1339,9 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1608,11 +1353,9 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1624,11 +1367,9 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1640,11 +1381,9 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1656,15 +1395,13 @@
         "R"
       ],
       "set": "LCI",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.246Z",
+    "retrievedDate": "2026-06-23T17:40:35.682Z",
     "sourceUrl": "AhoyMateys_LCC.json",
     "deckSource": "precon",
     "createdAt": "2023-11-17T00:00:00.000Z"

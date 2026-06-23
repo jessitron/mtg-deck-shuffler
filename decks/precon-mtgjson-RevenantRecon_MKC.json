@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1195919382,
   "name": "Revenant Recon",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Flying, vigilance\nWhenever you surveil, put a +1/+1 counter on Mirko.\nAt the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it. (If it would die, exile it instead.)"
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever Marvo attacks, clash with defending player. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)\nWhenever you win a clash, draw a card. Then you may cast a spell from your hand with mana value 8 or less without paying its mana cost."
+      ]
     },
     {
       "name": "Case of the Shifting Visage",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, surveil 1.\nTo solve — There are fifteen or more cards in your graveyard. (If unsolved, solve at the beginning of your end step.)\nSolved — Whenever you cast a nonlegendary creature spell, copy that spell. (The copy becomes a token.)"
+      ]
     },
     {
       "name": "Copy Catchers",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever you surveil, you may pay {1}{U}. If you do, create a token that's a copy of this creature."
+      ]
     },
     {
       "name": "Final-Word Phantom",
@@ -86,12 +74,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash\nFlying\nDuring each opponent's end step, you may cast spells as though they had flash."
+      ]
     },
     {
       "name": "Watcher of Hours",
@@ -103,12 +88,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Flying, ward {3}\nWhenever you remove a time counter from this card while it's exiled, surveil 1.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)"
+      ]
     },
     {
       "name": "Charnel Serenade",
@@ -120,12 +102,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Surveil 3, then return a creature card from your graveyard to the battlefield with a finality counter on it. Exile Charnel Serenade with three time counters on it.\nSuspend 3—{2}{B} (Rather than cast this card from your hand, you may pay {2}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Eye of Duskmantle",
@@ -137,12 +116,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying, lifelink\nYou may play lands and cast spells from among cards in your graveyard you've surveilled this turn. If you cast a spell this way, you pay life equal to its mana value rather than paying its mana cost."
+      ]
     },
     {
       "name": "Foreboding Steamboat",
@@ -154,12 +130,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield.\nWhenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.\nCrew 2"
+      ]
     },
     {
       "name": "Unshakable Tail",
@@ -171,12 +144,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters and at the beginning of your upkeep, surveil 1.\nWhenever one or more creature cards are put into your graveyard from your library, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{2}, Sacrifice a Clue: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Counterpoint",
@@ -189,12 +159,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Counter target spell. You may cast a creature, instant, sorcery, or planeswalker spell from your graveyard with mana value less than or equal to that spell's mana value without paying its mana cost."
+      ]
     },
     {
       "name": "Ransom Note",
@@ -204,12 +171,9 @@
       "oracleCardName": "Ransom Note",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
+      ]
     },
     {
       "name": "Amphin Mutineer",
@@ -221,12 +185,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Dream Eater",
@@ -238,12 +199,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, surveil 4. When you do, you may return target nonland permanent an opponent controls to its owner's hand. (To surveil 4, look at the top four cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Mission Briefing",
@@ -255,12 +213,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}",
-      "cmc": 2,
-      "oracleText": "Surveil 2, then choose an instant or sorcery card in your graveyard. You may cast it this turn. If that spell would be put into your graveyard, exile it instead. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Phyrexian Metamorph",
@@ -272,13 +227,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nYou may have this creature enter as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Sphinx of the Second Sun",
@@ -290,12 +242,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Flying\nAt the beginning of each of your postcombat main phases, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)"
+      ]
     },
     {
       "name": "Vizier of Many Faces",
@@ -307,12 +256,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "You may have this creature enter as a copy of any creature on the battlefield, except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.\nEmbalm {3}{U}{U}"
+      ]
     },
     {
       "name": "Black Sun's Zenith",
@@ -324,12 +270,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Dogged Detective",
@@ -341,12 +284,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nWhenever an opponent draws their second card each turn, you may return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Doom Whisperer",
@@ -358,12 +298,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying, trample\nPay 2 life: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Grave Titan",
@@ -375,12 +312,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\nWhenever this creature enters or attacks, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Massacre Wurm",
@@ -392,12 +326,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life."
+      ]
     },
     {
       "name": "Overseer of the Damned",
@@ -409,12 +340,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Phyrexian Arena",
@@ -426,12 +354,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Pile On",
@@ -443,12 +368,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Reanimate",
@@ -460,12 +382,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+      ]
     },
     {
       "name": "Rise of the Dark Realms",
@@ -477,12 +396,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Put all creature cards from all graveyards onto the battlefield under your control."
+      ]
     },
     {
       "name": "Toxic Deluge",
@@ -494,12 +410,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
+      ]
     },
     {
       "name": "Twilight Prophet",
@@ -511,12 +424,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value."
+      ]
     },
     {
       "name": "Baleful Strix",
@@ -529,13 +439,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Connive // Concoct",
@@ -548,12 +455,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U/B}{U/B}",
-      "cmc": 9,
-      "oracleText": "Gain control of target creature with power 2 or less."
+      ]
     },
     {
       "name": "Lazav, the Multifarious",
@@ -566,12 +470,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "When Lazav enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{X}: Lazav becomes a copy of target creature card in your graveyard with mana value X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability."
+      ]
     },
     {
       "name": "Master of Death",
@@ -584,12 +485,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nAt the beginning of your upkeep, if this card is in your graveyard, you may pay 1 life. If you do, return it to your hand."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -602,11 +500,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -619,11 +515,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Drownyard Temple",
@@ -633,11 +527,9 @@
       "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Fetid Pools",
@@ -650,11 +542,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Hostile Desert",
@@ -664,11 +554,9 @@
       "oracleCardName": "Hostile Desert",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, Exile a land card from your graveyard: This land becomes a 3/4 Elemental creature until end of turn. It's still a land."
+      ]
     },
     {
       "name": "River of Tears",
@@ -681,11 +569,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}. If you played a land this turn, add {B} instead."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -698,11 +584,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Brainstorm",
@@ -714,12 +598,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Draw three cards, then put two cards from your hand on top of your library in any order."
+      ]
     },
     {
       "name": "Consider",
@@ -731,12 +612,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nDraw a card."
+      ]
     },
     {
       "name": "Curate",
@@ -748,12 +626,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nDraw a card."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -765,12 +640,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Enhanced Surveillance",
@@ -782,12 +654,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "You may look at an additional two cards each time you surveil.\nExile this enchantment: Shuffle your graveyard into your library."
+      ]
     },
     {
       "name": "Ephara's Dispersal",
@@ -799,12 +668,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "This spell costs {2} less to cast if it targets an attacking creature.\nReturn target creature to its owner's hand. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Mulldrifter",
@@ -816,12 +682,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Nightveil Sprite",
@@ -833,12 +696,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+      ]
     },
     {
       "name": "Otherworldly Gaze",
@@ -850,12 +710,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Thoughtbound Phantasm",
@@ -867,12 +724,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Defender\nWhenever you surveil, put a +1/+1 counter on this creature.\nAs long as this creature has three or more +1/+1 counters on it, it can attack as though it didn't have defender."
+      ]
     },
     {
       "name": "Animate Dead",
@@ -884,12 +738,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Enchant creature card in a graveyard\nWhen this Aura enters, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with this Aura.\" Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets -1/-0."
+      ]
     },
     {
       "name": "Necromancy",
@@ -901,12 +752,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen this enchantment enters, if it's on the battlefield, it becomes an Aura with \"enchant creature put onto the battlefield with Necromancy.\" Put target creature card from a graveyard onto the battlefield under your control and attach this enchantment to it. When this enchantment leaves the battlefield, that creature's controller sacrifices it."
+      ]
     },
     {
       "name": "Price of Fame",
@@ -918,12 +766,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "This spell costs {2} less to cast if it targets a legendary creature.\nDestroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Ravenous Chupacabra",
@@ -935,12 +780,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, destroy target creature an opponent controls."
+      ]
     },
     {
       "name": "Shriekmaw",
@@ -952,12 +794,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen this creature enters, destroy target nonartifact, nonblack creature.\nEvoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Sinister Starfish",
@@ -969,12 +808,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "{T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+      ]
     },
     {
       "name": "Syr Konrad, the Grim",
@@ -986,12 +822,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Whispering Snitch",
@@ -1003,12 +836,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever you surveil for the first time each turn, this creature deals 1 damage to each opponent and you gain 1 life."
+      ]
     },
     {
       "name": "Dimir Spybug",
@@ -1021,12 +851,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nMenace (This creature can't be blocked except by two or more creatures.)\nWhenever you surveil, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Discovery // Dispersal",
@@ -1039,12 +866,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
-        "Sorcery"
-      ],
-      "manaCost": "{1}{U/B}",
-      "cmc": 7,
-      "oracleText": "Surveil 2, then draw a card. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      "cardTypes": [
+        "Sorcery",
+        "Instant"
+      ]
     },
     {
       "name": "Disinformation Campaign",
@@ -1057,12 +882,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, you draw a card and each opponent discards a card.\nWhenever you surveil, return this enchantment to its owner's hand."
+      ]
     },
     {
       "name": "Notion Rain",
@@ -1075,12 +897,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Surveil 2, then draw two cards. Notion Rain deals 2 damage to you. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1090,12 +909,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -1108,12 +924,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -1123,12 +936,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1138,12 +948,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1153,12 +960,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -1171,12 +975,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1186,12 +987,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1201,11 +999,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1217,11 +1013,9 @@
         "B"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1231,11 +1025,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1248,11 +1040,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1262,11 +1052,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mystic Sanctuary",
@@ -1278,11 +1066,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)\nThis land enters tapped unless you control three or more other Islands.\nWhen this land enters untapped, you may put target instant or sorcery card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Port of Karfell",
@@ -1295,11 +1081,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice this land: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1309,11 +1093,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1323,11 +1105,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Tainted Isle",
@@ -1340,11 +1120,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1354,11 +1132,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Tocasia's Dig Site",
@@ -1368,11 +1144,9 @@
       "oracleCardName": "Tocasia's Dig Site",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+      ]
     },
     {
       "name": "Island",
@@ -1384,11 +1158,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1400,11 +1172,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1416,11 +1186,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1432,11 +1200,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1448,11 +1214,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1464,11 +1228,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1480,11 +1242,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1496,11 +1256,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1512,11 +1270,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1528,11 +1284,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1544,11 +1298,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1560,11 +1312,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1576,11 +1326,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1592,11 +1340,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1608,11 +1354,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1624,11 +1368,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1640,11 +1382,9 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1656,15 +1396,13 @@
         "B"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.482Z",
+    "retrievedDate": "2026-06-23T17:40:39.522Z",
     "sourceUrl": "RevenantRecon_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1092303918,
   "name": "Tricky Terrain Collector's Edition",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G/U}",
-      "cmc": 3,
-      "oracleText": "Whenever Omo enters or attacks, put an everything counter on each of up to one target land and up to one target creature.\nEach land with an everything counter on it is every land type in addition to its other types.\nEach nonland creature with an everything counter on it is every creature type."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "When Jyoti enters, create a 1/1 green Forest Dryad land creature token for each time you've cast your commander from the command zone this game. (They're affected by summoning sickness.)\nAt the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is Jyoti's power."
+      ]
     },
     {
       "name": "March from Velis Vel",
@@ -50,12 +44,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Choose a nonbasic land type. Each land you control of that type becomes a copy of target creature you control until end of turn and gains haste until end of turn.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Wonderscape Sage",
@@ -67,12 +58,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\n{T}, Return a land you control to its owner's hand: Draw a card. Then discard a card unless that land had a nonbasic land type."
+      ]
     },
     {
       "name": "Copy Land",
@@ -84,12 +72,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "You may have this enchantment enter as a copy of any land on the battlefield, except it's an enchantment in addition to its other types."
+      ]
     },
     {
       "name": "Desert Warfare",
@@ -101,12 +86,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or library, put that card onto the battlefield under your control at the beginning of your next end step.\nAt the beginning of combat on your turn, if you control five or more Deserts, create that many 1/1 red, green, and white Sand Warrior creature tokens. They gain haste."
+      ]
     },
     {
       "name": "Trenchpost",
@@ -116,11 +98,9 @@
       "oracleCardName": "Trenchpost",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Target player mills a card for each Locus you control."
+      ]
     },
     {
       "name": "Sage of the Maze",
@@ -132,12 +112,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "{T}: Add two mana in any combination of colors.\n{T}: Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.\nTap an untapped Gate you control: Untap this creature."
+      ]
     },
     {
       "name": "Lazotep Quarry",
@@ -147,11 +124,9 @@
       "oracleCardName": "Lazotep Quarry",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice a creature: Add one mana of any color.\n{X}{2}, {T}, Sacrifice a Desert: Exile target creature card with mana value X from your graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Rampant Frogantua",
@@ -163,12 +138,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nThis creature gets +10/+10 for each player who has lost the game.\nWhenever this creature deals combat damage to a player, you may mill that many cards. Put any number of land cards from among them onto the battlefield tapped."
+      ]
     },
     {
       "name": "Sunken Palace",
@@ -180,11 +152,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{1}{U}, {T}, Exile seven cards from your graveyard: Add {U}. When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy. (Mana abilities can't be copied.)"
+      ]
     },
     {
       "name": "Horizon of Progress",
@@ -194,11 +164,9 @@
       "oracleCardName": "Horizon of Progress",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Pay 1 life: Add one mana of any type that a land you control could produce.\n{3}, {T}: You may put a land card from your hand onto the battlefield tapped.\n{1}, {T}, Sacrifice this land: Draw a card."
+      ]
     },
     {
       "name": "Planar Nexus",
@@ -208,11 +176,9 @@
       "oracleCardName": "Planar Nexus",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Power-Plant, Sphere, Tower, and Urza's.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Aggressive Biomancy",
@@ -225,12 +191,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{G}{U}",
-      "cmc": 2,
-      "oracleText": "Create X tokens that are copies of target creature you control, except they have \"When this token enters, it fights up to one target creature you don't control.\""
+      ]
     },
     {
       "name": "Talon Gates of Madara",
@@ -240,11 +203,9 @@
       "oracleCardName": "Talon Gates of Madara",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, up to one target creature phases out.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}: Put this card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Hydroid Krasis",
@@ -257,12 +218,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{U}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell, you gain half X life and draw half X cards. Round down each time.\nFlying, trample\nThis creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Terastodon",
@@ -274,12 +232,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Lair of the Hydra",
@@ -291,11 +246,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "If you control two or more other lands, this land enters tapped.\n{T}: Add {G}.\n{X}{G}: Until end of turn, this land becomes an X/X green Hydra creature. It's still a land. X can't be 0."
+      ]
     },
     {
       "name": "Nissa, Steward of Elements",
@@ -308,12 +261,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{X}{G}{U}",
-      "cmc": 2,
-      "oracleText": "[+2]: Scry 2.\n[0]: Look at the top card of your library. If it's a land card or a creature card with mana value less than or equal to the number of loyalty counters on Nissa, you may put that card onto the battlefield.\n[−6]: Untap up to two target lands you control. They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands."
+      ]
     },
     {
       "name": "Magus of the Candelabra",
@@ -325,12 +275,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{X}, {T}: Untap X target lands."
+      ]
     },
     {
       "name": "Lumbering Falls",
@@ -343,11 +290,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}.\n{2}{G}{U}: Until end of turn, this land becomes a 3/3 green and blue Elemental creature with hexproof. It's still a land."
+      ]
     },
     {
       "name": "Blast Zone",
@@ -357,11 +302,9 @@
       "oracleCardName": "Blast Zone",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters with a charge counter on it.\n{T}: Add {C}.\n{X}{X}, {T}: Put X charge counters on this land.\n{3}, {T}, Sacrifice this land: Destroy each nonland permanent with mana value equal to the number of charge counters on this land."
+      ]
     },
     {
       "name": "Apex Devastator",
@@ -373,12 +316,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{G}{G}",
-      "cmc": 10,
-      "oracleText": "Cascade, cascade, cascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order. Multiple instances of cascade each trigger separately.)"
+      ]
     },
     {
       "name": "Dreamroot Cascade",
@@ -391,11 +331,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Summary Dismissal",
@@ -407,12 +345,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Exile all other spells and counter all abilities."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -425,11 +360,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -442,11 +375,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Hour of Promise",
@@ -458,12 +389,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Ramunap Excavator",
@@ -475,12 +403,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may play lands from your graveyard."
+      ]
     },
     {
       "name": "Hydra Broodmaster",
@@ -492,12 +417,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, create X X/X green Hydra creature tokens."
+      ]
     },
     {
       "name": "Drown in Dreams",
@@ -509,12 +431,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{2}{U}",
-      "cmc": 3,
-      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Target player draws X cards.\n• Target player mills twice X cards."
+      ]
     },
     {
       "name": "Vineglimmer Snarl",
@@ -527,11 +446,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Vivien Reid",
@@ -543,12 +460,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "[+1]: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\n[−3]: Destroy target artifact, enchantment, or creature with flying.\n[−8]: You get an emblem with \"Creatures you control get +2/+2 and have vigilance, trample, and indestructible.\""
+      ]
     },
     {
       "name": "Yavimaya, Cradle of Growth",
@@ -558,11 +472,9 @@
       "oracleCardName": "Yavimaya, Cradle of Growth",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Each land is a Forest in addition to its other land types."
+      ]
     },
     {
       "name": "Dryad of the Ilysian Grove",
@@ -574,13 +486,10 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may play an additional land on each of your turns.\nLands you control are every basic land type in addition to their other types."
+      ]
     },
     {
       "name": "Mirage Mirror",
@@ -590,12 +499,9 @@
       "oracleCardName": "Mirage Mirror",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}: This artifact becomes a copy of target artifact, creature, enchantment, or land until end of turn."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -608,11 +514,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -625,11 +529,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -639,12 +541,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Oblivion Stone",
@@ -654,12 +553,9 @@
       "oracleCardName": "Oblivion Stone",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{4}, {T}: Put a fate counter on target permanent.\n{5}, {T}, Sacrifice this artifact: Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents."
+      ]
     },
     {
       "name": "Scute Swarm",
@@ -671,12 +567,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead."
+      ]
     },
     {
       "name": "Ulvenwald Hydra",
@@ -688,12 +581,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach\nUlvenwald Hydra's power and toughness are each equal to the number of lands you control.\nWhen this creature enters, you may search your library for a land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Evacuation",
@@ -705,12 +595,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return all creatures to their owners' hands."
+      ]
     },
     {
       "name": "Replication Technique",
@@ -722,12 +609,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nCreate a token that's a copy of target permanent you control."
+      ]
     },
     {
       "name": "Finale of Revelation",
@@ -739,12 +623,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.\nExile Finale of Revelation."
+      ]
     },
     {
       "name": "Mana Reflection",
@@ -756,12 +637,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "If you tap a permanent for mana, it produces twice as much of that mana instead."
+      ]
     },
     {
       "name": "Uro, Titan of Nature's Wrath",
@@ -774,12 +652,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "When Uro enters, sacrifice it unless it escaped.\nWhenever Uro enters or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.\nEscape—{G}{G}{U}{U}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)"
+      ]
     },
     {
       "name": "Curse of the Swine",
@@ -791,12 +666,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
+      ]
     },
     {
       "name": "Vesuva",
@@ -806,11 +678,9 @@
       "oracleCardName": "Vesuva",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You may have this land enter tapped as a copy of any land on the battlefield."
+      ]
     },
     {
       "name": "Dark Depths",
@@ -820,11 +690,9 @@
       "oracleCardName": "Dark Depths",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Dark Depths enters with ten ice counters on it.\n{3}: Remove an ice counter from Dark Depths.\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible."
+      ]
     },
     {
       "name": "Thespian's Stage",
@@ -834,11 +702,9 @@
       "oracleCardName": "Thespian's Stage",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: This land becomes a copy of target land, except it has this ability."
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -850,12 +716,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Seer's Sundial",
@@ -865,12 +728,9 @@
       "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -882,12 +742,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Fog Bank",
@@ -899,12 +756,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Defender (This creature can't attack.)\nFlying\nPrevent all combat damage that would be dealt to and dealt by this creature."
+      ]
     },
     {
       "name": "Urza's Power Plant",
@@ -914,11 +768,9 @@
       "oracleCardName": "Urza's Power Plant",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead."
+      ]
     },
     {
       "name": "Urza's Tower",
@@ -928,11 +780,9 @@
       "oracleCardName": "Urza's Tower",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead."
+      ]
     },
     {
       "name": "Urza's Mine",
@@ -942,11 +792,9 @@
       "oracleCardName": "Urza's Mine",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead."
+      ]
     },
     {
       "name": "Satyr Wayfinder",
@@ -958,12 +806,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -975,12 +820,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Simic Guildgate",
@@ -993,11 +835,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Treasure Cruise",
@@ -1009,12 +849,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1024,12 +861,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Basilisk Gate",
@@ -1039,11 +873,9 @@
       "oracleCardName": "Basilisk Gate",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Beast Within",
@@ -1055,12 +887,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Tatyova, Benthic Druid",
@@ -1073,12 +902,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, you gain 1 life and draw a card."
+      ]
     },
     {
       "name": "Propaganda",
@@ -1090,12 +916,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1108,11 +931,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Floriferous Vinewall",
@@ -1124,12 +945,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, look at the top six cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1139,12 +957,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Desert of the Indomitable",
@@ -1156,11 +971,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {1}{G} ({1}{G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Hashep Oasis",
@@ -1172,11 +985,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add {G}.\n{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Expedition Map",
@@ -1186,12 +997,9 @@
       "oracleCardName": "Expedition Map",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Hidden Cataract",
@@ -1203,11 +1011,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Hidden Nursery",
@@ -1219,11 +1025,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\n{4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Volatile Fault",
@@ -1233,11 +1037,9 @@
       "oracleCardName": "Volatile Fault",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That player may search their library for a basic land card, put it onto the battlefield, then shuffle. You create a Treasure token."
+      ]
     },
     {
       "name": "Growth Spiral",
@@ -1250,12 +1052,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Elvish Rejuvenator",
@@ -1267,12 +1066,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Urban Evolution",
@@ -1285,12 +1081,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Draw three cards. You may play an additional land this turn."
+      ]
     },
     {
       "name": "Harmonize",
@@ -1302,12 +1095,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1320,11 +1110,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Cloudpost",
@@ -1334,11 +1122,9 @@
       "oracleCardName": "Cloudpost",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C} for each Locus on the battlefield."
+      ]
     },
     {
       "name": "Sylvan Scrying",
@@ -1350,12 +1136,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -1367,12 +1150,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Pongify",
@@ -1384,12 +1164,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+      ]
     },
     {
       "name": "Lush Oasis",
@@ -1402,11 +1179,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, it deals 1 damage to target opponent.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Skullwinder",
@@ -1418,12 +1193,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhen this creature enters, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand."
+      ]
     },
     {
       "name": "Desert of the Mindful",
@@ -1435,11 +1207,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1449,11 +1219,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Poison Dart Frog",
@@ -1465,12 +1233,9 @@
         "G"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reach\n{T}: Add one mana of any color.\n{2}: This creature gains deathtouch until end of turn."
+      ]
     },
     {
       "name": "Glimmerpost",
@@ -1480,11 +1245,9 @@
       "oracleCardName": "Glimmerpost",
       "colorIdentity": [],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, you gain 1 life for each Locus on the battlefield.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Eureka Moment",
@@ -1497,12 +1260,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Draw two cards. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Quandrix Campus",
@@ -1515,11 +1275,9 @@
         "U"
       ],
       "set": "M3C",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Scry 1."
+      ]
     },
     {
       "name": "Island",
@@ -1530,11 +1288,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1545,11 +1301,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1560,11 +1314,9 @@
         "U"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1575,11 +1327,9 @@
         "G"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1590,11 +1340,9 @@
         "G"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1605,11 +1353,9 @@
         "G"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1620,15 +1366,13 @@
         "G"
       ],
       "set": "MH3",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.098Z",
+    "retrievedDate": "2026-06-23T17:40:40.546Z",
     "sourceUrl": "TrickyTerrainCollectorSEdition_M3C.json",
     "deckSource": "precon",
     "createdAt": "2024-06-14T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 604367267,
   "name": "Science!",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an artifact spell, you get {E} (an energy counter).\n{T}, Pay {E}: Target creature gets +1/+0 and gains trample and haste until end of turn.\n{T}, Pay {E}{E}{E}: Draw a card.\n{T}, Pay {E}{E}{E}{E}{E}: Return target artifact card from your graveyard to the battlefield tapped."
+      ]
     }
   ],
   "cards": [
@@ -37,13 +34,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Vigilance, trample, haste\nWhenever Liberty Prime attacks or blocks, sacrifice it unless you pay {E}{E} (two energy counters).\n{2}, {T}, Sacrifice an artifact: You get {E}{E} and draw a card."
+      ]
     },
     {
       "name": "Automated Assembly Line",
@@ -55,12 +49,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever one or more artifact creatures you control deal combat damage to a player, you get {E} (an energy counter).\nPay {E}{E}{E}: Create a tapped 3/3 colorless Robot artifact creature token."
+      ]
     },
     {
       "name": "Brotherhood Scribe",
@@ -72,12 +63,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Metalcraft — {T}: You get {E} (an energy counter). Activate only if you control three or more artifacts.\nWhenever you get one or more {E} during your turn, creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Overencumbered",
@@ -89,12 +77,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant opponent\nWhen this Aura enters, enchanted opponent creates a Clue token, a Food token, and a Junk token.\nAt the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat."
+      ]
     },
     {
       "name": "The Prydwen, Steel Flagship",
@@ -106,12 +91,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever another nontoken artifact you control enters, create a 2/2 white Human Knight creature token with \"This token gets +2/+2 as long as an artifact entered the battlefield under your control this turn.\"\nCrew 2"
+      ]
     },
     {
       "name": "Sentry Bot",
@@ -123,13 +105,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flash\nThis spell costs {1} less to cast for each creature attacking you.\nWhen this creature enters, you get {E} for each creature attacking you.\nAt the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Vault 13: Dweller's Journey",
@@ -141,12 +120,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each player, exile up to one other target enchantment or creature that player controls until this Saga leaves the battlefield.\nII — You gain 2 life and scry 2.\nIII — Return two cards exiled with this Saga to the battlefield under their owners' control and put the rest on the bottom of their owners' libraries."
+      ]
     },
     {
       "name": "Curie, Emergent Intelligence",
@@ -158,13 +134,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever Curie deals combat damage to a player, draw cards equal to its base power.\n{1}{U}, Exile another nontoken artifact creature you control: Curie becomes a copy of the exiled creature, except it has \"Whenever this creature deals combat damage to a player, draw cards equal to its base power.\""
+      ]
     },
     {
       "name": "James, Wandering Dad // Follow Him",
@@ -176,12 +149,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}{C}. Spend this mana only to activate abilities."
+      "cardTypes": [
+        "Creature",
+        "Instant"
+      ]
     },
     {
       "name": "Nick Valentine, Private Eye",
@@ -193,13 +164,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Nick Valentine can't be blocked except by artifact creatures.\nWhenever Nick Valentine or another artifact creature you control dies, you may investigate. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Synth Infiltrator",
@@ -211,13 +179,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nYou may have this creature enter as a copy of any creature on the battlefield, except it's a Synth artifact creature in addition to its other types."
+      ]
     },
     {
       "name": "Assaultron Dominator",
@@ -229,13 +194,10 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, you get {E}{E} (two energy counters).\nWhenever an artifact creature you control attacks, you may pay {E}. If you do, put your choice of a +1/+1, first strike, or trample counter on that creature."
+      ]
     },
     {
       "name": "The Motherlode, Excavator",
@@ -247,13 +209,10 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When The Motherlode enters, choose target opponent. You get an amount of {E} (energy counters) equal to the number of nonbasic lands that player controls.\nWhenever The Motherlode attacks, you may pay {E}{E}{E}{E}. When you do, destroy target nonbasic land defending player controls, and creatures that player controls without flying can't block this turn."
+      ]
     },
     {
       "name": "Plasma Caster",
@@ -265,12 +224,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1.\nWhenever equipped creature attacks, you get {E}{E} (two energy counters).\nPay {E}{E}: Choose target creature that's blocking equipped creature. Flip a coin. If you win the flip, exile the chosen creature. Otherwise, this Equipment deals 1 damage to it.\nEquip {2}"
+      ]
     },
     {
       "name": "Synth Eradicator",
@@ -282,13 +238,10 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever this creature attacks, exile the top card of your library. You may get {E}{E} (two energy counters). If you don't, you may play that card this turn.\n{T}, Pay {E}{E}{E}: This creature deals 3 damage to any target."
+      ]
     },
     {
       "name": "Arcade Gannon",
@@ -301,12 +254,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "{T}: Draw a card, then discard a card. Put a quest counter on Arcade Gannon.\nFor Auld Lang Syne — Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon."
+      ]
     },
     {
       "name": "Electrosiphon",
@@ -319,12 +269,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Counter target spell. You get an amount of {E} (energy counters) equal to its mana value."
+      ]
     },
     {
       "name": "Red Death, Shipwrecker",
@@ -337,12 +284,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Alluring Eyes — {T}: Goad target creature an opponent controls. That player draws a card. You add {R}. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)"
+      ]
     },
     {
       "name": "Rex, Cyber-Hound",
@@ -355,13 +299,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever Rex deals combat damage to a player, they mill two cards and you get {E}{E} (two energy counters).\nPay {E}{E}: Choose target creature card in a graveyard. Exile it with a brain counter on it. Activate only as a sorcery.\nRex has all activated abilities of all cards in exile with brain counters on them."
+      ]
     },
     {
       "name": "Sentinel Sarah Lyons",
@@ -374,12 +315,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Haste\nAs long as an artifact entered the battlefield under your control this turn, creatures you control get +2/+2.\nBattalion — Whenever Sentinel Sarah Lyons and at least two other creatures attack, Sentinel Sarah Lyons deals damage equal to the number of artifacts you control to target player."
+      ]
     },
     {
       "name": "Shaun, Father of Synths",
@@ -392,12 +330,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever you attack, you may create a tapped and attacking token that's a copy of target attacking legendary creature you control other than Shaun, except it's not legendary and it's a Synth artifact creature in addition to its other types.\nWhen Shaun leaves the battlefield, exile all Synth tokens you control."
+      ]
     },
     {
       "name": "Vault 112: Sadistic Simulation",
@@ -410,12 +345,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Tap up to one target creature and put a stun counter on it. You get {E}{E} (two energy counters).\nIII — Pay any amount of {E}. If you paid one or more {E} this way, shuffle your library, then exile that many cards from the top. You may play one of those cards without paying its mana cost."
+      ]
     },
     {
       "name": "Brotherhood Vertibird",
@@ -425,12 +357,9 @@
       "oracleCardName": "Brotherhood Vertibird",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nBrotherhood Vertibird's power is equal to the number of artifacts you control.\nCrew 2 (Tap any number of creatures you control with total power 2 or greater: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "T-45 Power Armor",
@@ -440,12 +369,9 @@
       "oracleCardName": "T-45 Power Armor",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this Equipment enters, you get {E}{E} (two energy counters).\nEquipped creature gets +3/+3 and doesn't untap during its controller's untap step.\nAt the beginning of your upkeep, you may pay {E}. If you do, untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it.\nEquip {3}"
+      ]
     },
     {
       "name": "Ferrous Lake",
@@ -458,11 +384,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "HELIOS One",
@@ -472,11 +396,9 @@
       "oracleCardName": "HELIOS One",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: You get {E} (an energy counter).\n{3}, {T}, Pay X {E}, Sacrifice this land: Destroy target nonland permanent with mana value X. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Austere Command",
@@ -488,12 +410,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Open the Vaults",
@@ -505,12 +424,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control. (Auras with nothing to enchant remain in graveyards.)"
+      ]
     },
     {
       "name": "Mechanized Production",
@@ -522,12 +438,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."
+      ]
     },
     {
       "name": "One with the Machine",
@@ -539,12 +452,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Draw cards equal to the greatest mana value among artifacts you control."
+      ]
     },
     {
       "name": "Wake the Past",
@@ -557,12 +467,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{W}",
-      "cmc": 7,
-      "oracleText": "Return all artifact cards from your graveyard to the battlefield. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Mystic Forge",
@@ -572,12 +479,9 @@
       "oracleCardName": "Mystic Forge",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library."
+      ]
     },
     {
       "name": "Panharmonicon",
@@ -587,12 +491,9 @@
       "oracleCardName": "Panharmonicon",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -602,13 +503,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Steel Overseer",
@@ -618,13 +516,10 @@
       "oracleCardName": "Steel Overseer",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Put a +1/+1 counter on each artifact creature you control."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -637,11 +532,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -651,11 +544,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -668,11 +559,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -685,11 +574,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -702,11 +589,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -719,11 +604,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Spire of Industry",
@@ -733,11 +616,9 @@
       "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -750,11 +631,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -767,11 +646,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -784,11 +661,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Treasure Vault",
@@ -798,12 +673,10 @@
       "oracleCardName": "Treasure Vault",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{X}{X}, {T}, Sacrifice this land: Create X Treasure tokens."
+      ]
     },
     {
       "name": "Paladin Danse, Steel Maverick",
@@ -815,13 +688,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance, lifelink\nExile Paladin Danse: Each creature you control that's an artifact or Human gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Nerd Rage",
@@ -833,12 +703,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nWhen this Aura enters, draw two cards.\nEnchanted creature has \"You have no maximum hand size\" and \"Whenever this creature attacks, if you have ten or more cards in hand, it gets +10/+10 until end of turn.\""
+      ]
     },
     {
       "name": "Robobrain War Mind",
@@ -850,13 +717,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Robobrain War Mind's power is equal to the number of cards in your hand.\nWhen this creature enters, you get an amount of {E} (energy counters) equal to the number of artifact creatures you control.\nWhenever this creature attacks, you may pay {E}{E}{E}. If you do, draw a card."
+      ]
     },
     {
       "name": "Bottle-Cap Blast",
@@ -868,12 +732,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nBottle-Cap Blast deals 5 damage to any target. If excess damage was dealt to a permanent this way, create that many tapped Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Elder Owyn Lyons",
@@ -886,12 +747,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Artifacts you control have ward {1}. (Whenever an artifact you control becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nWhen Elder Owyn Lyons enters or dies, return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Behemoth of Vault 0",
@@ -901,13 +759,10 @@
       "oracleCardName": "Behemoth of Vault 0",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Trample\nWhen this creature enters, you get {E}{E}{E}{E} (four energy counters).\nWhen this creature dies, you may pay an amount of {E} equal to target nonland permanent's mana value. When you do, destroy that permanent."
+      ]
     },
     {
       "name": "C.A.M.P.",
@@ -917,12 +772,9 @@
       "oracleCardName": "C.A.M.P.",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever fortified land is tapped for mana, put a +1/+1 counter on target creature you control. If that creature shares a color with the mana that land produced, create a Junk token. (It's an artifact with \"{T}, Sacrifice this token: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.\")\nFortify {3} ({3}: Attach to target land you control. Fortify only as a sorcery.)"
+      ]
     },
     {
       "name": "Endurance Bobblehead",
@@ -932,12 +784,9 @@
       "oracleCardName": "Endurance Bobblehead",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{3}, {T}: Up to X target creatures you control get +1/+0 and gain indestructible until end of turn, where X is the number of Bobbleheads you control as you activate this ability. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Expert-Level Safe",
@@ -947,12 +796,9 @@
       "oracleCardName": "Expert-Level Safe",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters, exile the top two cards of your library face down.\n{1}, {T}: You and target opponent each secretly choose 1, 2, or 3. Then those choices are revealed. If they match, sacrifice this artifact and put all cards exiled with it into their owners' hands. Otherwise, exile the top card of your library face down."
+      ]
     },
     {
       "name": "Intelligence Bobblehead",
@@ -962,12 +808,9 @@
       "oracleCardName": "Intelligence Bobblehead",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{5}, {T}: Draw X cards, where X is the number of Bobbleheads you control."
+      ]
     },
     {
       "name": "Nuka-Cola Vending Machine",
@@ -977,12 +820,9 @@
       "oracleCardName": "Nuka-Cola Vending Machine",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{1}, {T}: Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nWhenever you sacrifice a Food, create a tapped Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Crush Contraband",
@@ -994,12 +834,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Choose one or both —\n• Exile target artifact.\n• Exile target enchantment."
+      ]
     },
     {
       "name": "Dispatch",
@@ -1011,12 +848,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1028,12 +862,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Glimmer of Genius",
@@ -1045,12 +876,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Scry 2, then draw two cards. You get {E}{E} (two energy counters)."
+      ]
     },
     {
       "name": "Thirst for Knowledge",
@@ -1062,12 +890,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw three cards. Then discard two cards unless you discard an artifact card."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -1079,12 +904,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Loyal Apprentice",
@@ -1096,12 +918,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
+      ]
     },
     {
       "name": "Unexpected Windfall",
@@ -1113,12 +932,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards and create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1128,12 +944,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -1143,12 +956,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -1158,12 +968,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1173,12 +980,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1188,12 +992,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1206,12 +1007,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Creativity",
@@ -1224,12 +1022,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -1242,12 +1037,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1257,12 +1049,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1272,12 +1061,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1287,11 +1073,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Buried Ruin",
@@ -1301,11 +1085,9 @@
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1315,11 +1097,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1329,11 +1109,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1343,11 +1121,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1361,11 +1137,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1375,11 +1149,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Razortide Bridge",
@@ -1392,12 +1164,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Rustvale Bridge",
@@ -1410,12 +1180,10 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Silverbluff Bridge",
@@ -1428,12 +1196,10 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1443,11 +1209,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Island",
@@ -1459,11 +1223,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1475,11 +1237,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1491,11 +1251,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1507,11 +1265,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1523,11 +1279,9 @@
         "U"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1539,11 +1293,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1555,11 +1307,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1571,11 +1321,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1587,11 +1335,9 @@
         "R"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1603,11 +1349,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1619,11 +1363,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1635,11 +1377,9 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1651,15 +1391,13 @@
         "W"
       ],
       "set": "PIP",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.585Z",
+    "retrievedDate": "2026-06-23T17:40:39.693Z",
     "sourceUrl": "Science_PIP.json",
     "deckSource": "precon",
     "createdAt": "2024-03-08T00:00:00.000Z"

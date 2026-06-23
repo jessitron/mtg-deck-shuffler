@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1747394202,
   "name": "Peer Through Time",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "[+1]: Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.\n[−1]: Untap up to four target permanents.\n[−10]: You get an emblem with \"You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.\"\nTeferi, Temporal Archmage can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "{3}{U}: Draw a card."
+      ]
     },
     {
       "name": "Fathom Seer",
@@ -50,12 +44,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Morph—Return two Islands you control to their owner's hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, draw two cards."
+      ]
     },
     {
       "name": "Fog Bank",
@@ -67,12 +58,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Defender (This creature can't attack.)\nFlying\nPrevent all combat damage that would be dealt to and dealt by this creature."
+      ]
     },
     {
       "name": "Willbender",
@@ -84,12 +72,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, change the target of target spell or ability with a single target."
+      ]
     },
     {
       "name": "Dulcet Sirens",
@@ -101,12 +86,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{U}, {T}: Target creature attacks target opponent this turn if able.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
+      ]
     },
     {
       "name": "Riptide Survivor",
@@ -118,12 +100,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Morph {1}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, discard two cards, then draw three cards."
+      ]
     },
     {
       "name": "Sea Gate Oracle",
@@ -135,12 +114,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library."
+      ]
     },
     {
       "name": "Shaper Parasite",
@@ -152,12 +128,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Morph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, target creature gets +2/-2 or -2/+2 until end of turn."
+      ]
     },
     {
       "name": "Reef Worm",
@@ -169,12 +142,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, create a 3/3 blue Fish creature token with \"When this token dies, create a 6/6 blue Whale creature token with 'When this token dies, create a 9/9 blue Kraken creature token.'\""
+      ]
     },
     {
       "name": "Mulldrifter",
@@ -186,12 +156,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Ixidron",
@@ -203,12 +170,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "As this creature enters, turn all other nontoken creatures face down. (They're 2/2 creatures.)\nIxidron's power and toughness are each equal to the number of face-down creatures on the battlefield."
+      ]
     },
     {
       "name": "Stitcher Geralf",
@@ -220,12 +184,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "{2}{U}, {T}: Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way."
+      ]
     },
     {
       "name": "Stormsurge Kraken",
@@ -237,12 +198,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Hexproof\nLieutenant — As long as you control your commander, this creature gets +2/+2 and has \"Whenever this creature becomes blocked, you may draw two cards.\""
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -252,13 +210,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Brine Elemental",
@@ -270,12 +225,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Morph {5}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, each opponent skips their next untap step."
+      ]
     },
     {
       "name": "Frost Titan",
@@ -287,12 +239,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.\nWhenever this creature enters or attacks, tap target permanent. It doesn't untap during its controller's next untap step."
+      ]
     },
     {
       "name": "Sphinx of Jwar Isle",
@@ -304,12 +253,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nShroud (This creature can't be the target of spells or abilities.)\nYou may look at the top card of your library any time."
+      ]
     },
     {
       "name": "Sphinx of Magosi",
@@ -321,12 +267,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}{U}: Draw a card, then put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Phyrexian Ingester",
@@ -338,12 +281,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Imprint — When this creature enters, you may exile target nontoken creature.\nThis creature gets +X/+Y, where X is the exiled creature card's power and Y is its toughness."
+      ]
     },
     {
       "name": "Sphinx of Uthuun",
@@ -355,12 +295,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Hoverguard Sweepers",
@@ -372,12 +309,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhen this creature enters, you may return up to two target creatures to their owners' hands."
+      ]
     },
     {
       "name": "Lorthos, the Tidemaker",
@@ -389,12 +323,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Whenever Lorthos attacks, you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps."
+      ]
     },
     {
       "name": "Artisan of Kozilek",
@@ -404,12 +335,9 @@
       "oracleCardName": "Artisan of Kozilek",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"
+      ]
     },
     {
       "name": "Breaching Leviathan",
@@ -421,12 +349,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{U}{U}",
-      "cmc": 9,
-      "oracleText": "When this creature enters, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."
+      ]
     },
     {
       "name": "Deep-Sea Kraken",
@@ -438,12 +363,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{U}{U}{U}",
-      "cmc": 10,
-      "oracleText": "This creature can't be blocked.\nSuspend 9—{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with nine time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)\nWhenever an opponent casts a spell, if this card is suspended, remove a time counter from it."
+      ]
     },
     {
       "name": "Call to Mind",
@@ -455,12 +377,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Return target instant or sorcery card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Compulsive Research",
@@ -472,12 +391,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws three cards. Then that player discards two cards unless they discard a land card."
+      ]
     },
     {
       "name": "Concentrate",
@@ -489,12 +405,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Rite of Replication",
@@ -506,12 +419,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead."
+      ]
     },
     {
       "name": "Rush of Knowledge",
@@ -523,12 +433,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Draw cards equal to the greatest mana value among permanents you control."
+      ]
     },
     {
       "name": "Aether Gale",
@@ -540,12 +447,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return six target nonland permanents to their owners' hands."
+      ]
     },
     {
       "name": "Distorting Wake",
@@ -557,12 +461,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Return X target nonland permanents to their owners' hands."
+      ]
     },
     {
       "name": "Pongify",
@@ -574,12 +475,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+      ]
     },
     {
       "name": "Cyclonic Rift",
@@ -591,12 +489,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Return target nonland permanent you don't control to its owner's hand.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Into the Roil",
@@ -608,12 +503,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card."
+      ]
     },
     {
       "name": "Turn to Frog",
@@ -625,12 +517,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1."
+      ]
     },
     {
       "name": "Exclude",
@@ -642,12 +531,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target creature spell.\nDraw a card."
+      ]
     },
     {
       "name": "Cackling Counterpart",
@@ -659,12 +545,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Create a token that's a copy of target creature you control.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Domineering Will",
@@ -676,12 +559,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able."
+      ]
     },
     {
       "name": "Dismiss",
@@ -693,12 +573,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Counter target spell.\nDraw a card."
+      ]
     },
     {
       "name": "Intellectual Offering",
@@ -710,12 +587,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Choose an opponent. You and that player each draw three cards.\nChoose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls."
+      ]
     },
     {
       "name": "Stroke of Genius",
@@ -727,12 +601,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws X cards."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -742,12 +613,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -757,12 +625,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -772,12 +637,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sapphire Medallion",
@@ -787,12 +649,9 @@
       "oracleCardName": "Sapphire Medallion",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Blue spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Sky Diamond",
@@ -804,12 +663,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {U}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -819,12 +675,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Crown of Doom",
@@ -834,12 +687,9 @@
       "oracleCardName": "Crown of Doom",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.\n{2}: Target player other than this artifact's owner gains control of it. Activate only during your turn."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -849,12 +699,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -864,12 +711,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Assault Suit",
@@ -879,12 +723,9 @@
       "oracleCardName": "Assault Suit",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}"
+      ]
     },
     {
       "name": "Thran Dynamo",
@@ -894,12 +735,9 @@
       "oracleCardName": "Thran Dynamo",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}{C}."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -909,12 +747,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Tormod's Crypt",
@@ -924,12 +759,9 @@
       "oracleCardName": "Tormod's Crypt",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this artifact: Exile target player's graveyard."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -939,12 +771,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Nevinyrral's Disk",
@@ -954,12 +783,9 @@
       "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This artifact enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
+      ]
     },
     {
       "name": "Ur-Golem's Eye",
@@ -969,12 +795,9 @@
       "oracleCardName": "Ur-Golem's Eye",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Infinite Reflection",
@@ -986,12 +809,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Enchant creature\nWhen this Aura enters attached to a creature, each other nontoken creature you control becomes a copy of that creature.\nNontoken creatures you control enter as a copy of enchanted creature."
+      ]
     },
     {
       "name": "Well of Ideas",
@@ -1003,12 +823,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "When this enchantment enters, draw two cards.\nAt the beginning of each other player's draw step, that player draws an additional card.\nAt the beginning of your draw step, draw two additional cards."
+      ]
     },
     {
       "name": "Fool's Demise",
@@ -1020,12 +837,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control.\nWhen this Aura is put into a graveyard from the battlefield, return it to its owner's hand."
+      ]
     },
     {
       "name": "Coral Atoll",
@@ -1037,11 +851,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Island you control to its owner's hand.\n{T}: Add {C}{U}."
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -1051,11 +863,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1067,11 +877,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1081,11 +889,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Remote Isle",
@@ -1097,11 +903,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Tectonic Edge",
@@ -1111,11 +915,9 @@
       "oracleCardName": "Tectonic Edge",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Destroy target nonbasic land. Activate only if an opponent controls four or more lands."
+      ]
     },
     {
       "name": "Zoetic Cavern",
@@ -1125,11 +927,9 @@
       "oracleCardName": "Zoetic Cavern",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nMorph {2} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
+      ]
     },
     {
       "name": "Island",
@@ -1141,11 +941,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1157,11 +955,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1173,11 +969,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1189,11 +983,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1205,11 +997,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1221,11 +1011,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1237,11 +1025,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1253,11 +1039,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1269,11 +1053,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1285,11 +1067,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1301,11 +1081,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1317,11 +1095,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1333,11 +1109,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1349,11 +1123,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1365,11 +1137,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1381,11 +1151,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1397,11 +1165,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1413,11 +1179,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1429,11 +1193,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1445,11 +1207,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1461,11 +1221,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1477,11 +1235,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1493,11 +1249,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1509,11 +1263,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1525,11 +1277,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1541,11 +1291,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1557,11 +1305,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1573,11 +1319,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1589,11 +1333,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1605,11 +1347,9 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1621,15 +1361,13 @@
         "U"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.262Z",
+    "retrievedDate": "2026-06-23T17:40:39.112Z",
     "sourceUrl": "PeerThroughTime_C14.json",
     "deckSource": "precon",
     "createdAt": "2014-11-07T00:00:00.000Z"

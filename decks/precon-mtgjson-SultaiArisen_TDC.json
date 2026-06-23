@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 904014290,
   "name": "Sultai Arisen",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Teval attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped.\nWhenever one or more cards leave your graveyard, create a 2/2 black Zombie Druid creature token."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.\nWhenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put two +1/+1 counters on Kotis."
+      ]
     },
     {
       "name": "Diviner of Mist",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature attacks, mill four cards. You may cast an instant or sorcery spell from your graveyard with mana value 4 or less without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+      ]
     },
     {
       "name": "Afterlife from the Loam",
@@ -71,12 +62,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFor each player, choose up to one target creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're Zombies in addition to their other types."
+      ]
     },
     {
       "name": "Teval's Judgment",
@@ -88,12 +76,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more cards leave your graveyard, choose one that hasn't been chosen this turn —\n• Draw a card.\n• Create a Treasure token.\n• Create a 2/2 black Zombie Druid creature token."
+      ]
     },
     {
       "name": "Welcome the Dead",
@@ -105,12 +90,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Floral Evoker",
@@ -122,12 +104,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.\n{G}, Discard a creature card: Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Steward of the Harvest",
@@ -139,12 +118,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile up to three target land cards from your graveyard.\nCreatures you control have all activated abilities of all land cards exiled with this creature."
+      ]
     },
     {
       "name": "Will of the Sultai",
@@ -156,12 +132,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Target player mills three cards. Return all land cards from your graveyard to the battlefield tapped.\n• Put X +1/+1 counters on target creature, where X is the number of lands you control. It gains trample until end of turn."
+      ]
     },
     {
       "name": "Colossal Grave-Reaver",
@@ -174,12 +147,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{B}{G}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhenever this creature enters or attacks, mill three cards.\nWhenever one or more creature cards are put into your graveyard from your library, put one of them onto the battlefield."
+      ]
     },
     {
       "name": "Gravecrawler",
@@ -191,12 +161,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "This creature can't block.\nYou may cast this card from your graveyard as long as you control a Zombie."
+      ]
     },
     {
       "name": "Life from the Loam",
@@ -208,12 +175,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Return up to three target land cards from your graveyard to your hand.\nDredge 3 (If you would draw a card, you may mill three cards instead. If you do, return this card from your graveyard to your hand.)"
+      ]
     },
     {
       "name": "Casualties of War",
@@ -226,12 +190,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Destroy target enchantment.\n• Destroy target land.\n• Destroy target planeswalker."
+      ]
     },
     {
       "name": "Amphin Mutineer",
@@ -243,12 +204,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "River Kelpie",
@@ -260,12 +218,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature or another permanent enters from a graveyard, draw a card.\nWhenever a player casts a spell from a graveyard, draw a card.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
+      ]
     },
     {
       "name": "Dauthi Voidwalker",
@@ -277,12 +232,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Shadow (This creature can block or be blocked by only creatures with shadow.)\nIf a card would be put into an opponent's graveyard from anywhere, instead exile it with a void counter on it.\n{T}, Sacrifice this creature: Choose an exiled card an opponent owns with a void counter on it. You may play it this turn without paying its mana cost."
+      ]
     },
     {
       "name": "Disciple of Bolas",
@@ -294,12 +246,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power."
+      ]
     },
     {
       "name": "Junji, the Midnight Sky",
@@ -311,12 +260,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying, menace\nWhen Junji dies, choose one —\n• Each opponent discards two cards and loses 2 life.\n• Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life."
+      ]
     },
     {
       "name": "Lethal Scheme",
@@ -328,12 +274,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)"
+      ]
     },
     {
       "name": "Living Death",
@@ -345,12 +288,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield."
+      ]
     },
     {
       "name": "Lord of the Forsaken",
@@ -362,12 +302,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\n{B}, Sacrifice another creature: Target player mills three cards.\nPay 1 life: Add {C}. Spend this mana only to cast a spell from your graveyard."
+      ]
     },
     {
       "name": "Necromantic Selection",
@@ -379,12 +316,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection."
+      ]
     },
     {
       "name": "Necropolis Fiend",
@@ -396,12 +330,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\n{X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn."
+      ]
     },
     {
       "name": "Noxious Gearhulk",
@@ -413,13 +344,10 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Menace\nWhen this creature enters, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness."
+      ]
     },
     {
       "name": "Ob Nixilis, the Fallen",
@@ -431,12 +359,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, you may have target player lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis."
+      ]
     },
     {
       "name": "Tasigur, the Golden Fang",
@@ -450,12 +375,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\n{2}{G/U}{G/U}: Mill two cards, then return a nonland card of an opponent's choice from your graveyard to your hand."
+      ]
     },
     {
       "name": "Woe Strider",
@@ -467,12 +389,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with two +1/+1 counters on it."
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -484,12 +403,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Conduit of Worlds",
@@ -501,12 +417,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "You may play lands from your graveyard.\n{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Multani, Yavimaya's Avatar",
@@ -518,12 +431,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach, trample\nMultani gets +1/+1 for each land you control and each land card in your graveyard.\n{1}{G}, Return two lands you control to their owner's hand: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Shigeki, Jukai Visionary",
@@ -535,13 +445,10 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{1}{G}, {T}, Return Shigeki to its owner's hand: Reveal the top four cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest into your graveyard.\nChannel — {X}{X}{G}{G}, Discard this card: Return X target nonlegendary cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Consuming Aberration",
@@ -554,12 +461,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard."
+      ]
     },
     {
       "name": "Jarad, Golgari Lich Lord",
@@ -572,12 +476,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Jarad gets +1/+1 for each creature card in your graveyard.\n{1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.\nSacrifice a Swamp and a Forest: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Lord of Extinction",
@@ -590,12 +491,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards."
+      ]
     },
     {
       "name": "Meren of Clan Nel Toth",
@@ -608,12 +506,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever another creature you control dies, you get an experience counter.\nAt the beginning of your end step, choose target creature card in your graveyard. If that card's mana value is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand."
+      ]
     },
     {
       "name": "Command Beacon",
@@ -623,11 +518,9 @@
       "oracleCardName": "Command Beacon",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Put your commander into your hand from the command zone."
+      ]
     },
     {
       "name": "Crypt of Agadeem",
@@ -639,11 +532,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}, {T}: Add {B} for each black creature card in your graveyard."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -656,11 +547,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Dreamroot Cascade",
@@ -673,11 +562,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Drownyard Temple",
@@ -687,11 +574,9 @@
       "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -701,11 +586,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fetid Pools",
@@ -718,11 +601,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -735,11 +616,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -752,11 +631,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -769,11 +646,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Malady",
@@ -786,11 +661,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Woodland Cemetery",
@@ -803,11 +676,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Essence Anchor",
@@ -819,12 +690,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -833,12 +701,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -847,12 +712,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -861,11 +723,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Forbidden Alchemy",
@@ -878,12 +738,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Hedron Crab",
@@ -895,12 +752,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Landfall — Whenever a land you control enters, target player mills three cards. (They put the top three cards of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Treasure Cruise",
@@ -912,12 +766,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Wonder",
@@ -929,12 +780,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nAs long as this card is in your graveyard and you control an Island, creatures you control have flying."
+      ]
     },
     {
       "name": "Phyrexian Reclamation",
@@ -946,12 +794,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{1}{B}, Pay 2 life: Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Reassembling Skeleton",
@@ -963,12 +808,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "{1}{B}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Stitcher's Supplier",
@@ -980,12 +822,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "When this creature enters or dies, mill three cards. (Put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Victimize",
@@ -997,12 +836,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+      ]
     },
     {
       "name": "Kishla Skimmer",
@@ -1015,12 +851,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever a card leaves your graveyard during your turn, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Crawling Sensation",
@@ -1032,12 +865,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nWhenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token."
+      ]
     },
     {
       "name": "Cultivate",
@@ -1049,12 +879,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -1066,12 +893,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Grapple with the Past",
@@ -1083,12 +907,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Mill three cards, then you may return a creature or land card from your graveyard to your hand. (To mill three cards, put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Harrow",
@@ -1100,12 +921,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1119,11 +937,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1135,12 +951,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -1152,12 +965,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Satyr Wayfinder",
@@ -1169,12 +979,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Springbloom Druid",
@@ -1186,12 +993,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tear Asunder",
@@ -1204,12 +1008,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nExile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead."
+      ]
     },
     {
       "name": "Timeless Witness",
@@ -1221,12 +1022,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, return target card from your graveyard to your hand.\nEternalize {5}{G}{G} ({5}{G}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Human Shaman with no mana cost. Eternalize only as a sorcery.)"
+      ]
     },
     {
       "name": "Grisly Salvage",
@@ -1239,12 +1037,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Nyx Weaver",
@@ -1257,13 +1052,10 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nAt the beginning of your upkeep, mill two cards. (Put the top two cards of your library into your graveyard.)\n{1}{B}{G}, Exile this creature: Return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Putrefy",
@@ -1276,12 +1068,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Skull Prophet",
@@ -1294,12 +1083,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {B} or {G}.\n{T}: Mill two cards. (Put the top two cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Millikin",
@@ -1309,13 +1095,10 @@
       "oracleCardName": "Millikin",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Mill a card: Add {C}. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Cephalid Coliseum",
@@ -1327,11 +1110,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}. This land deals 1 damage to you.\nThreshold — {U}, {T}, Sacrifice this land: Target player draws three cards, then discards three cards. Activate only if there are seven or more cards in your graveyard."
+      ]
     },
     {
       "name": "Contaminated Aquifer",
@@ -1344,11 +1125,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Foreboding Landscape",
@@ -1362,11 +1141,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Swamp, Forest, or Island card, put it onto the battlefield tapped, then shuffle.\nCycling {B}{G}{U} ({B}{G}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1379,11 +1156,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Haunted Mire",
@@ -1396,11 +1171,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {G}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Memorial to Folly",
@@ -1412,11 +1185,9 @@
         "B"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice this land: Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1426,11 +1197,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1440,11 +1209,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Island",
@@ -1456,11 +1223,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1472,11 +1237,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1488,11 +1251,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1504,11 +1265,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1520,11 +1279,9 @@
         "B"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1536,11 +1293,9 @@
         "B"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1552,11 +1307,9 @@
         "B"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1568,11 +1321,9 @@
         "B"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1584,11 +1335,9 @@
         "B"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1600,11 +1349,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1616,11 +1363,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1632,11 +1377,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1648,11 +1391,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1664,11 +1405,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1680,15 +1419,13 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.835Z",
+    "retrievedDate": "2026-06-23T17:40:40.106Z",
     "sourceUrl": "SultaiArisen_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"

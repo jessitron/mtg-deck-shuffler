@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1787396007,
   "name": "Death Toll",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhenever Winter attacks, mill three cards.\nDelirium — At the beginning of your end step, you may exile any number of cards from your graveyard with four or more card types among them. If you do, put a permanent card from among them onto the battlefield with a finality counter on it."
+      ]
     }
   ],
   "cards": [
@@ -35,13 +32,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Menace, reach\nWhen Rendmaw enters and whenever you play a card with two or more card types, each player creates a tapped 2/2 black Bird creature token with flying. The tokens are goaded for the rest of the game. (They attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Deluge of Doom",
@@ -53,12 +47,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "All creatures get -X/-X until end of turn, where X is the number of card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Demonic Covenant",
@@ -70,13 +61,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Whenever one or more Demons you control attack a player, you draw a card and lose 1 life.\nAt the beginning of your end step, create a 5/5 black Demon creature token with flying, then mill two cards. If two cards that share all their card types were milled this way, sacrifice this enchantment."
+      ]
     },
     {
       "name": "Into the Pit",
@@ -88,12 +76,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast spells from the top of your library by sacrificing a nonland permanent in addition to paying their other costs."
+      ]
     },
     {
       "name": "Polluted Cistern // Dim Oubliette",
@@ -105,12 +90,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 7,
-      "oracleText": "Whenever one or more cards are put into your graveyard from your library, each opponent loses 1 life for each card type among those cards.\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Demolisher Spawn",
@@ -122,13 +104,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample, haste\nDelirium — Whenever this creature attacks, if there are four or more card types among cards in your graveyard, other attacking creatures get +4/+4 until end of turn."
+      ]
     },
     {
       "name": "Formless Genesis",
@@ -140,13 +119,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nCreate an X/X colorless Shapeshifter creature token with changeling and deathtouch, where X is the number of land cards in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Ursine Monstrosity",
@@ -158,12 +134,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nAt the beginning of combat on your turn, mill a card and choose an opponent at random. This creature attacks that player this combat if able. Until end of turn, this creature gains indestructible and gets +1/+1 for each card type among cards in your graveyard."
+      ]
     },
     {
       "name": "Convert to Slime",
@@ -176,12 +149,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Destroy up to one target artifact, up to one target creature, and up to one target enchantment.\nDelirium — Then if there are four or more card types among cards in your graveyard, create an X/X green Ooze creature token, where X is the total mana value of permanents destroyed this way."
+      ]
     },
     {
       "name": "Moldgraf Monstrosity",
@@ -193,12 +163,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhen this creature dies, exile it, then return two creature cards at random from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Culling Ritual",
@@ -211,12 +178,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way."
+      ]
     },
     {
       "name": "Cemetery Tampering",
@@ -228,12 +192,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost."
+      ]
     },
     {
       "name": "Noxious Gearhulk",
@@ -245,13 +206,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Menace\nWhen this creature enters, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness."
+      ]
     },
     {
       "name": "Ob Nixilis Reignited",
@@ -263,12 +221,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "[+1]: You draw a card and you lose 1 life.\n[−3]: Destroy target creature.\n[−8]: Target opponent gets an emblem with \"Whenever a player draws a card, you lose 2 life.\""
+      ]
     },
     {
       "name": "Professor Onyx",
@@ -280,12 +235,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.\n[+1]: You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n[−3]: Each opponent sacrifices a creature with the greatest power among creatures that player controls.\n[−8]: Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times."
+      ]
     },
     {
       "name": "Reanimate",
@@ -297,12 +249,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+      ]
     },
     {
       "name": "Whip of Erebos",
@@ -314,13 +263,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Artifact"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Creatures you control have lifelink.\n{2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Arachnogenesis",
@@ -332,12 +278,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Prevent all combat damage that would be dealt this turn by non-Spider creatures."
+      ]
     },
     {
       "name": "Deathcap Cultivator",
@@ -350,12 +293,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {B} or {G}.\nDelirium — This creature has deathtouch as long as there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Giant Adephage",
@@ -367,12 +307,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, create a token that's a copy of this creature."
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -384,12 +321,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Inscription of Abundance",
@@ -401,12 +335,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Kicker {2}{G}\nChoose one. If this spell was kicked, choose any number instead.\n• Put two +1/+1 counters on target creature.\n• Target player gains X life, where X is the greatest power among creatures they control.\n• Target creature you control fights target creature you don't control."
+      ]
     },
     {
       "name": "Ishkanah, Grafwidow",
@@ -419,12 +350,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Reach\nDelirium — When Ishkanah enters, if there are four or more card types among cards in your graveyard, create three 1/2 green Spider creature tokens with reach.\n{6}{B}: Target opponent loses 1 life for each Spider you control."
+      ]
     },
     {
       "name": "Scavenging Ooze",
@@ -436,12 +364,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on this creature and you gain 1 life."
+      ]
     },
     {
       "name": "Titania, Nature's Force",
@@ -453,12 +378,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "You may play Forests from your graveyard.\nWhenever a Forest you control enters, create a 5/3 green Elemental creature token.\nWhenever an Elemental you control dies, you may mill three cards."
+      ]
     },
     {
       "name": "Wrenn and Seven",
@@ -470,12 +392,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "[+1]: Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.\n[0]: Put any number of land cards from your hand onto the battlefield tapped.\n[−3]: Create a green Treefolk creature token with reach and \"This token's power and toughness are each equal to the number of lands you control.\"\n[−8]: Return all permanent cards from your graveyard to your hand. You get an emblem with \"You have no maximum hand size.\""
+      ]
     },
     {
       "name": "Deadbridge Chant",
@@ -488,12 +407,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}{G}",
-      "cmc": 6,
-      "oracleText": "When this enchantment enters, mill ten cards.\nAt the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand."
+      ]
     },
     {
       "name": "Grim Flayer",
@@ -506,12 +422,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nDelirium — This creature gets +2/+2 as long as there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Grist, the Hunger Tide",
@@ -524,12 +437,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "As long as Grist isn't on the battlefield, it's a 1/1 Insect creature in addition to its other types.\n[+1]: Create a 1/1 black and green Insect creature token, then mill a card. If an Insect card was milled this way, put a loyalty counter on Grist and repeat this process.\n[−2]: You may sacrifice a creature. When you do, destroy target creature or planeswalker.\n[−5]: Each opponent loses life equal to the number of creature cards in your graveyard."
+      ]
     },
     {
       "name": "Old Stickfingers",
@@ -542,12 +452,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{B}{G}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell, reveal cards from the top of your library until you reveal X creature cards. Put all creature cards revealed this way into your graveyard, then put the rest on the bottom of your library in a random order.\nOld Stickfingers's power and toughness are each equal to the number of creature cards in your graveyard."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -557,13 +464,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Dryad Arbor",
@@ -575,12 +479,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land",
         "Creature"
-      ],
-      "cmc": 0,
-      "oracleText": "(This land isn't a spell, it's affected by summoning sickness, and it has \"{T}: Add {G}.\")"
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -590,11 +492,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Grim Backwoods",
@@ -607,11 +507,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -624,11 +522,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Necroblossom Snarl",
@@ -641,11 +537,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Temple of Malady",
@@ -658,11 +552,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Twilight Mire",
@@ -675,11 +567,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{B/G}, {T}: Add {B}{B}, {B}{G}, or {G}{G}."
+      ]
     },
     {
       "name": "Viridescent Bog",
@@ -692,11 +582,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Woodland Cemetery",
@@ -709,11 +597,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Vile Mutilator",
@@ -725,12 +611,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a creature or enchantment.\nFlying, trample\nWhen this creature enters, each opponent sacrifices a nontoken enchantment of their choice, then sacrifices a nontoken creature of their choice."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -740,11 +623,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Night's Whisper",
@@ -756,12 +637,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "You draw two cards and lose 2 life."
+      ]
     },
     {
       "name": "Grapple with the Past",
@@ -773,12 +651,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Mill three cards, then you may return a creature or land card from your graveyard to your hand. (To mill three cards, put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Deathreap Ritual",
@@ -791,12 +666,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card."
+      ]
     },
     {
       "name": "Putrefy",
@@ -809,12 +681,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -824,12 +693,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -839,12 +705,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Suspicious Bookcase",
@@ -854,13 +717,10 @@
       "oracleCardName": "Suspicious Bookcase",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Defender\n{3}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Command Tower",
@@ -870,11 +730,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Carrion Grub",
@@ -886,12 +744,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "This creature gets +X/+0, where X is the greatest power among creature cards in your graveyard.\nWhen this creature enters, mill four cards. (Put the top four cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Stitcher's Supplier",
@@ -903,12 +758,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "When this creature enters or dies, mill three cards. (Put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Crawling Sensation",
@@ -920,12 +772,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nWhenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token."
+      ]
     },
     {
       "name": "Gnarlwood Dryad",
@@ -937,12 +786,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Deathtouch\nDelirium — This creature gets +2/+2 as long as there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Harmonize",
@@ -954,12 +800,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Harrow",
@@ -971,12 +814,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Moldgraf Millipede",
@@ -988,12 +828,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, mill three cards, then put a +1/+1 counter on this creature for each creature card in your graveyard. (To mill three cards, put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Mulch",
@@ -1005,12 +842,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard."
+      ]
     },
     {
       "name": "Obsessive Skinner",
@@ -1022,12 +856,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, put a +1/+1 counter on target creature.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, put a +1/+1 counter on target creature."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1039,12 +870,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -1056,12 +884,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Skola Grovedancer",
@@ -1073,13 +898,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever a land card is put into your graveyard from anywhere, you gain 1 life.\n{2}{G}: Mill a card. (Put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Binding the Old Gods",
@@ -1092,12 +914,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target nonland permanent an opponent controls.\nII — Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.\nIII — Creatures you control gain deathtouch until end of turn."
+      ]
     },
     {
       "name": "Grisly Salvage",
@@ -1110,12 +929,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Nyx Weaver",
@@ -1128,13 +944,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nAt the beginning of your upkeep, mill two cards. (Put the top two cards of your library into your graveyard.)\n{1}{B}{G}, Exile this creature: Return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -1144,13 +957,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1160,12 +970,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Golgari Signet",
@@ -1178,12 +985,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Haywire Mite",
@@ -1195,13 +999,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this creature dies, you gain 2 life.\n{G}, Sacrifice this creature: Exile target noncreature artifact or noncreature enchantment."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1211,12 +1012,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Talisman of Resilience",
@@ -1229,12 +1027,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Whispersilk Cloak",
@@ -1244,12 +1039,9 @@
       "oracleCardName": "Whispersilk Cloak",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}"
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1259,11 +1051,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1275,11 +1065,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1291,11 +1079,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Darkmoss Bridge",
@@ -1308,12 +1094,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1323,11 +1107,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1340,11 +1122,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Jungle Hollow",
@@ -1357,11 +1137,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1371,11 +1149,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Tainted Wood",
@@ -1388,11 +1164,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1402,11 +1176,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1418,11 +1190,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Tree of Tales",
@@ -1434,12 +1204,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {G}."
+      ]
     },
     {
       "name": "Vault of Whispers",
@@ -1451,12 +1219,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {B}."
+      ]
     },
     {
       "name": "Swamp",
@@ -1468,11 +1234,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1484,11 +1248,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1500,11 +1262,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1516,11 +1276,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1532,11 +1290,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1548,11 +1304,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1564,11 +1318,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1580,11 +1332,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1596,11 +1346,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1612,11 +1360,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1628,11 +1374,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1644,11 +1388,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1660,11 +1402,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1676,15 +1416,13 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.843Z",
+    "retrievedDate": "2026-06-23T17:40:36.644Z",
     "sourceUrl": "DeathToll_DSC.json",
     "deckSource": "precon",
     "createdAt": "2024-09-27T00:00:00.000Z"

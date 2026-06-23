@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1021209974,
   "name": "Grand Larceny",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Spells you cast but don't own cost {1} less to cast.\nWhenever one or more creatures you control deal combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Menace, ward {2}\nIf a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Thieving Skydiver",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Kicker {X}. X can't be 0. (You may pay an additional {X} as you cast this spell.)\nFlying\nWhen this creature enters, if it was kicked, gain control of target artifact with mana value X or less. If that artifact is an Equipment, attach it to this creature."
+      ]
     },
     {
       "name": "Sage of the Beyond",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nSpells you cast from anywhere other than your hand cost {2} less to cast.\nForetell {4}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Ghostly Pilferer",
@@ -88,12 +76,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature becomes untapped, you may pay {2}. If you do, draw a card.\nWhenever an opponent casts a spell from anywhere other than their hand, draw a card.\nDiscard a card: This creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Diluvian Primordial",
@@ -105,12 +90,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Stolen Goods",
@@ -122,12 +104,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost."
+      ]
     },
     {
       "name": "Curse of the Swine",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
+      ]
     },
     {
       "name": "Dazzling Sphinx",
@@ -156,12 +132,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, that player exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then that player puts the exiled cards that weren't cast this way on the bottom of their library in a random order."
+      ]
     },
     {
       "name": "Arcane Heist",
@@ -173,12 +146,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost. If that spell would be put into their graveyard, exile it instead.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)"
+      ]
     },
     {
       "name": "Smirking Spelljacker",
@@ -190,12 +160,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, exile target spell an opponent controls.\nWhenever this creature attacks, if a card is exiled with it, you may cast the exiled card without paying its mana cost."
+      ]
     },
     {
       "name": "Mind's Dilation",
@@ -207,12 +174,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost."
+      ]
     },
     {
       "name": "Gonti, Lord of Luxury",
@@ -224,12 +188,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhen Gonti enters, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Predators' Hour",
@@ -241,12 +202,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Until end of turn, creatures you control gain menace and \"Whenever this creature deals combat damage to a player, exile the top card of that player's library face down. You may look at and play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.\""
+      ]
     },
     {
       "name": "Brainstealer Dragon",
@@ -258,12 +216,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nAt the beginning of your end step, exile the top card of each opponent's library. You may play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.\nWhenever a nonland permanent an opponent owns enters the battlefield under your control, they lose life equal to its mana value."
+      ]
     },
     {
       "name": "Cunning Rhetoric",
@@ -275,12 +230,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent attacks you and/or one or more planeswalkers you control, exile the top card of that player's library. You may play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it."
+      ]
     },
     {
       "name": "Thieving Amalgam",
@@ -292,12 +244,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "At the beginning of each opponent's upkeep, you manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "Orochi Soul-Reaver",
@@ -309,12 +258,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token and manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Thieving Varmint",
@@ -326,12 +272,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Deathtouch, lifelink\n{T}, Pay 1 life: Add two mana of any one color. Spend this mana only to cast spells you don't own."
+      ]
     },
     {
       "name": "Heartless Conscription",
@@ -343,12 +286,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Exile all creatures. For each card exiled this way, you may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell. Exile Heartless Conscription."
+      ]
     },
     {
       "name": "Nashi, Moon Sage's Scion",
@@ -360,12 +300,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Nashi deals combat damage to a player, exile the top card of each player's library. Until end of turn, you may play one of those cards. If you cast a spell this way, pay life equal to its mana value rather than paying its mana cost."
+      ]
     },
     {
       "name": "Baleful Mastery",
@@ -377,12 +314,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "You may pay {1}{B} rather than pay this spell's mana cost.\nIf the {1}{B} cost was paid, an opponent draws a card.\nExile target creature or planeswalker."
+      ]
     },
     {
       "name": "Ohran Frostfang",
@@ -394,12 +328,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Attacking creatures you control have deathtouch.\nWhenever a creature you control deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Savvy Trader",
@@ -411,12 +342,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile target permanent card from your graveyard. You may play that card for as long as it remains exiled.\nSpells you cast from anywhere other than your hand cost {1} less to cast."
+      ]
     },
     {
       "name": "Tower Winder",
@@ -428,12 +356,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Reach, deathtouch\nWhen this creature enters, search your library and/or graveyard for a card named Command Tower, reveal it, and put it into your hand. If you search your library this way, shuffle."
+      ]
     },
     {
       "name": "Cazur, Ruthless Stalker",
@@ -445,12 +370,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Partner with Ukkima, Stalking Shadow (When this creature enters, target player may put Ukkima into their hand from their library, then shuffle.)\nWhenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature."
+      ]
     },
     {
       "name": "Silent-Blade Oni",
@@ -463,12 +385,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Ninjutsu {4}{U}{B} ({4}{U}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever this creature deals combat damage to a player, look at that player's hand. You may cast a spell from among those cards without paying its mana cost."
+      ]
     },
     {
       "name": "Hostage Taker",
@@ -481,12 +400,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile another target creature or artifact until this creature leaves the battlefield. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Edric, Spymaster of Trest",
@@ -499,12 +415,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card."
+      ]
     },
     {
       "name": "Fallen Shinobi",
@@ -517,12 +430,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Ninjutsu {2}{U}{B} ({2}{U}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever this creature deals combat damage to a player, that player exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Cold-Eyed Selkie",
@@ -535,12 +445,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G/U}{G/U}",
-      "cmc": 3,
-      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever this creature deals combat damage to a player, you may draw that many cards."
+      ]
     },
     {
       "name": "Siphon Insight",
@@ -553,12 +460,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Look at the top two cards of target opponent's library. Exile one of them face down and put the other on the bottom of that library. You may play the exiled card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.\nFlashback {1}{U}{B}"
+      ]
     },
     {
       "name": "Extract Brain",
@@ -571,12 +475,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{B}",
-      "cmc": 2,
-      "oracleText": "Target opponent chooses X cards from their hand. Look at those cards. You may cast a spell from among them without paying its mana cost."
+      ]
     },
     {
       "name": "Shadowmage Infiltrator",
@@ -589,12 +490,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever this creature deals combat damage to a player, you may draw a card."
+      ]
     },
     {
       "name": "Baleful Strix",
@@ -607,13 +505,10 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Culling Ritual",
@@ -626,12 +521,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way."
+      ]
     },
     {
       "name": "Thief of Sanity",
@@ -644,12 +536,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Villainous Wealth",
@@ -663,12 +552,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Target opponent exiles the top X cards of their library. You may cast any number of spells with mana value X or less from among them without paying their mana costs."
+      ]
     },
     {
       "name": "The Mimeoplasm",
@@ -682,12 +568,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}{U}",
-      "cmc": 5,
-      "oracleText": "As The Mimeoplasm enters, you may exile two creature cards from graveyards. If you do, it enters as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card."
+      ]
     },
     {
       "name": "Plasm Capture",
@@ -700,12 +583,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{G}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Counter target spell. At the beginning of your next first main phase, add X mana in any combination of colors, where X is that spell's mana value."
+      ]
     },
     {
       "name": "Ukkima, Stalking Shadow",
@@ -718,12 +598,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Partner with Cazur, Ruthless Stalker (When this creature enters, target player may put Cazur into their hand from their library, then shuffle.)\nUkkima can't be blocked.\nWhen Ukkima leaves the battlefield, it deals X damage to target player and you gain X life, where X is its power."
+      ]
     },
     {
       "name": "Bladegriff Prototype",
@@ -733,13 +610,10 @@
       "oracleCardName": "Bladegriff Prototype",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, destroy target nonland permanent of that player's choice that one of your opponents controls."
+      ]
     },
     {
       "name": "Chaos Wand",
@@ -749,12 +623,9 @@
       "oracleCardName": "Chaos Wand",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order."
+      ]
     },
     {
       "name": "Dream-Thief's Bandana",
@@ -764,12 +635,9 @@
       "oracleCardName": "Dream-Thief's Bandana",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever equipped creature deals combat damage to a player, look at the top card of their library, then exile it face down. For as long as it remains exiled, you may play it, and mana of any type can be spent to cast that spell.\nEquip {1}"
+      ]
     },
     {
       "name": "Oblivion Sower",
@@ -779,12 +647,9 @@
       "oracleCardName": "Oblivion Sower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -797,11 +662,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Drowned Catacomb",
@@ -814,11 +677,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -831,11 +692,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Temple of Malady",
@@ -848,11 +707,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -865,11 +722,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Fetid Pools",
@@ -882,11 +737,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -899,11 +752,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Viridescent Bog",
@@ -916,11 +767,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -930,11 +779,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Underground River",
@@ -947,11 +794,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Woodland Cemetery",
@@ -964,11 +809,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -981,11 +824,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -998,11 +839,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -1015,11 +854,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Darkslick Shores",
@@ -1032,11 +869,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -1049,11 +884,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Twilight Mire",
@@ -1066,11 +899,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{B/G}, {T}: Add {B}{B}, {B}{G}, or {G}{G}."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -1083,11 +914,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Slither Blade",
@@ -1099,12 +928,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "This creature can't be blocked."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -1116,12 +942,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Triton Shorestalker",
@@ -1133,12 +956,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "This creature can't be blocked."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -1150,12 +970,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Silhana Ledgewalker",
@@ -1167,12 +984,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nThis creature can't be blocked except by creatures with flying."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1184,12 +998,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -1201,12 +1012,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Void Attendant",
@@ -1218,12 +1026,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Devoid (This card has no color.)\n{1}{G}, Put a card an opponent owns from exile into that player's graveyard: Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Three Visits",
@@ -1235,12 +1040,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Putrefy",
@@ -1253,12 +1055,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Trygon Predator",
@@ -1271,12 +1070,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, you may destroy target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Doc Aurlock, Grizzled Genius",
@@ -1289,12 +1085,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Spells you cast from your graveyard or from exile cost {2} less to cast.\nPlotting cards from your hand costs {2} less."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1304,12 +1097,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Darksteel Ingot",
@@ -1319,12 +1109,9 @@
       "oracleCardName": "Darksteel Ingot",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1334,12 +1121,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Prismatic Lens",
@@ -1349,12 +1133,9 @@
       "oracleCardName": "Prismatic Lens",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1364,12 +1145,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1379,11 +1157,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1393,11 +1169,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Access Tunnel",
@@ -1407,11 +1181,9 @@
       "oracleCardName": "Access Tunnel",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Target creature with power 3 or less can't be blocked this turn."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1424,11 +1196,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1442,11 +1212,9 @@
         "U"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -1458,11 +1226,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1474,11 +1240,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1490,11 +1254,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1506,11 +1268,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1522,11 +1282,9 @@
         "U"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1538,11 +1296,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1554,11 +1310,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1570,11 +1324,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1586,11 +1338,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1602,11 +1352,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1618,11 +1366,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1634,11 +1380,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1650,11 +1394,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1666,11 +1408,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1682,15 +1422,13 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.394Z",
+    "retrievedDate": "2026-06-23T17:40:37.620Z",
     "sourceUrl": "GrandLarceny_OTC.json",
     "deckSource": "precon",
     "createdAt": "2024-04-19T00:00:00.000Z"

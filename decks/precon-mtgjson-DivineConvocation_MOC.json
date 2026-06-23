@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1460649724,
   "name": "Divine Convocation",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}{W}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance, haste\nWhenever you cast another spell that has convoke, scry 2, then draw a card."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever Saint Traft and Rem Karolus becomes tapped, create a 1/1 red Human creature token if this is the first time this ability has resolved this turn. If it's the second time, create a 1/1 blue Spirit creature token with flying. If it's the third time, create a 4/4 white Angel creature token with flying.\nWhenever you cast a spell that has convoke, untap Saint Traft and Rem Karolus."
+      ]
     },
     {
       "name": "Wand of the Worldsoul",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {W}.\n{T}: The next spell you cast this turn has convoke."
+      ]
     },
     {
       "name": "Flockchaser Phantom",
@@ -72,12 +63,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{U}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance\nWhenever this creature attacks, the next spell you cast this turn has convoke."
+      ]
     },
     {
       "name": "Wildfire Awakener",
@@ -90,12 +78,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this creature enters, create X 1/1 red Elemental creature tokens with \"Whenever this token becomes tapped, it deals 1 damage to target player.\""
+      ]
     },
     {
       "name": "Ichor Elixir",
@@ -105,12 +90,9 @@
       "oracleCardName": "Ichor Elixir",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Path of the Ghosthunter",
@@ -122,12 +104,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{1}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Spirit creature tokens with flying.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues."
+      ]
     },
     {
       "name": "Deluxe Dragster",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "This Vehicle can't be blocked except by Vehicles.\nWhenever this Vehicle deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.\nCrew 2"
+      ]
     },
     {
       "name": "Mistmeadow Vanisher",
@@ -157,12 +133,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W/U}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature becomes tapped, exile up to one target nonland, nontoken permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Nesting Dovehawk",
@@ -174,12 +147,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nAt the beginning of combat on your turn, populate. (Create a token that's a copy of a creature token you control.)\nWhenever a creature token you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Kykar, Wind's Fury",
@@ -193,12 +163,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying.\nSacrifice a Spirit: Add {R}."
+      ]
     },
     {
       "name": "Elspeth, Sun's Champion",
@@ -210,12 +177,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "[+1]: Create three 1/1 white Soldier creature tokens.\n[−3]: Destroy all creatures with power 4 or greater.\n[−7]: You get an emblem with \"Creatures you control get +2/+2 and have flying.\""
+      ]
     },
     {
       "name": "The Locust God",
@@ -228,12 +192,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.\n{2}{U}{R}: Draw a card, then discard a card.\nWhen The Locust God dies, return it to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Angel of Finality",
@@ -245,12 +206,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, exile target player's graveyard."
+      ]
     },
     {
       "name": "Angel of Salvation",
@@ -262,12 +220,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "Flash; convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying\nWhen this creature enters, prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose."
+      ]
     },
     {
       "name": "Austere Command",
@@ -279,12 +234,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Chasm Skulker",
@@ -296,12 +248,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you draw a card, put a +1/+1 counter on this creature.\nWhen this creature dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on this creature. (They can't be blocked as long as defending player controls an Island.)"
+      ]
     },
     {
       "name": "Cultivator's Caravan",
@@ -311,12 +260,9 @@
       "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Emeria Angel",
@@ -328,12 +274,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may create a 1/1 white Bird creature token with flying."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -343,11 +286,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -360,11 +301,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -377,11 +316,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Hour of Reckoning",
@@ -393,12 +330,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures."
+      ]
     },
     {
       "name": "Keeper of the Accord",
@@ -410,12 +344,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.\nAt the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kher Keep",
@@ -427,11 +358,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep."
+      ]
     },
     {
       "name": "Mentor of the Meek",
@@ -443,12 +372,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card."
+      ]
     },
     {
       "name": "Nadir Kraken",
@@ -460,12 +386,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you draw a card, you may pay {1}. If you do, put a +1/+1 counter on this creature and create a 1/1 blue Tentacle creature token."
+      ]
     },
     {
       "name": "Port Town",
@@ -478,11 +401,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -495,11 +416,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Secure the Wastes",
@@ -511,12 +430,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}",
-      "cmc": 1,
-      "oracleText": "Create X 1/1 white Warrior creature tokens."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -529,11 +445,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -546,11 +460,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -563,11 +475,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Triumph",
@@ -580,11 +490,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Venerated Loxodon",
@@ -596,12 +504,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this creature enters, put a +1/+1 counter on each creature that convoked it."
+      ]
     },
     {
       "name": "Whirlwind of Thought",
@@ -615,12 +520,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a noncreature spell, draw a card."
+      ]
     },
     {
       "name": "Cloud of Faeries",
@@ -632,12 +534,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhen this creature enters, untap up to two lands.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -647,11 +546,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -661,12 +558,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Ephemeral Shields",
@@ -678,12 +572,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTarget creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)"
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -693,11 +584,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fractured Powerstone",
@@ -707,12 +596,9 @@
       "oracleCardName": "Fractured Powerstone",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Goblin Instigator",
@@ -724,12 +610,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, create a 1/1 red Goblin creature token."
+      ]
     },
     {
       "name": "Goblin Medics",
@@ -741,12 +624,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature becomes tapped, it deals 1 damage to any target."
+      ]
     },
     {
       "name": "Impact Tremors",
@@ -758,12 +638,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Spirited Companion",
@@ -775,13 +652,10 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, draw a card."
+      ]
     },
     {
       "name": "Suture Priest",
@@ -793,12 +667,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever another creature you control enters, you may gain 1 life.\nWhenever a creature an opponent controls enters, you may have that player lose 1 life."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -808,11 +679,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Village Bell-Ringer",
@@ -824,12 +693,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, untap all creatures you control."
+      ]
     },
     {
       "name": "Banisher Priest",
@@ -841,12 +707,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -856,12 +719,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Battle Screech",
@@ -873,12 +733,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Create two 1/1 white Bird creature tokens with flying.\nFlashback—Tap three untapped white creatures you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Chant of Vitu-Ghazi",
@@ -890,12 +747,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPrevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way."
+      ]
     },
     {
       "name": "Conclave Tribunal",
@@ -907,12 +761,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
+      ]
     },
     {
       "name": "Devouring Light",
@@ -924,12 +775,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nExile target attacking or blocking creature."
+      ]
     },
     {
       "name": "Duergar Hedge-Mage",
@@ -942,12 +790,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R/W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, if you control two or more Mountains, you may destroy target artifact.\nWhen this creature enters, if you control two or more Plains, you may destroy target enchantment."
+      ]
     },
     {
       "name": "Fallowsage",
@@ -959,12 +804,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, you may draw a card."
+      ]
     },
     {
       "name": "Flight of Equenauts",
@@ -976,12 +818,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{W}",
-      "cmc": 8,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying"
+      ]
     },
     {
       "name": "Improbable Alliance",
@@ -994,12 +833,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw your second card each turn, create a 1/1 blue Faerie creature token with flying.\n{4}{U}{R}: Draw a card, then discard a card."
+      ]
     },
     {
       "name": "Migratory Route",
@@ -1012,12 +848,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1031,11 +864,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1045,11 +876,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Seraph of the Masses",
@@ -1061,12 +890,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying\nSeraph of the Masses's power and toughness are each equal to the number of creatures you control."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -1076,12 +902,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1091,12 +914,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Stoke the Flames",
@@ -1108,12 +928,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nStoke the Flames deals 4 damage to any target."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1125,12 +942,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Tetsuko Umezawa, Fugitive",
@@ -1142,12 +956,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Creatures you control with power or toughness 1 or less can't be blocked."
+      ]
     },
     {
       "name": "Wear // Tear",
@@ -1160,12 +971,9 @@
         "W"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact.\nFuse (You may cast one or both halves of this card from your hand.)"
+      ]
     },
     {
       "name": "Temporal Cleansing",
@@ -1177,12 +985,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nThe owner of target nonland permanent puts it into their library second from the top or on the bottom."
+      ]
     },
     {
       "name": "Meeting of Minds",
@@ -1194,12 +999,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDraw two cards."
+      ]
     },
     {
       "name": "Shatter the Source",
@@ -1211,12 +1013,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one —\n• Shatter the Source deals 6 damage to target creature, planeswalker, or battle.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Wrenn's Resolve",
@@ -1228,12 +1027,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Exile the top two cards of your library. Until the end of your next turn, you may play those cards."
+      ]
     },
     {
       "name": "Cut Short",
@@ -1245,12 +1041,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target planeswalker that was activated this turn or tapped creature."
+      ]
     },
     {
       "name": "Joyful Stormsculptor",
@@ -1263,12 +1056,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create two 1/1 blue and red Elemental creature tokens.\nWhenever you cast a spell that has convoke, this creature deals 1 damage to each opponent and each battle they protect."
+      ]
     },
     {
       "name": "Artistic Refusal",
@@ -1280,12 +1070,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one or both —\n• Counter target spell.\n• Draw two cards, then discard a card."
+      ]
     },
     {
       "name": "Plains",
@@ -1297,11 +1084,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1313,11 +1098,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1329,11 +1112,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1345,11 +1126,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1361,11 +1140,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1377,11 +1154,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1393,11 +1168,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1409,11 +1182,9 @@
         "W"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1425,11 +1196,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1441,11 +1210,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1457,11 +1224,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1473,11 +1238,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1489,11 +1252,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1505,11 +1266,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1521,11 +1280,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1537,11 +1294,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1553,11 +1308,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1569,11 +1322,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1585,11 +1336,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1601,11 +1350,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1617,11 +1364,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1633,11 +1378,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1649,11 +1392,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1665,15 +1406,13 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.916Z",
+    "retrievedDate": "2026-06-23T17:40:36.770Z",
     "sourceUrl": "DivineConvocation_MOC.json",
     "deckSource": "precon",
     "createdAt": "2023-04-21T00:00:00.000Z"

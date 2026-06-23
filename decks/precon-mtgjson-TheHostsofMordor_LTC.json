@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1920202428,
   "name": "The Hosts of Mordor",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{B}{R}",
-      "cmc": 8,
-      "oracleText": "When you cast this spell, amass Orcs 5, mill five cards, then return a creature card from your graveyard to the battlefield.\nTrample\nWhenever a commander an opponent controls dies, the Ring tempts you."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a noncreature spell, amass Orcs X, where X is that spell's mana value. (Put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)\nGoblins and Orcs you control have ward {2}."
+      ]
     },
     {
       "name": "Corsairs of Umbar",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "{2}{U}: Target Goblin, Orc, or Pirate can't be blocked this turn.\nWhenever this creature deals combat damage to a player, amass Orcs 3. (Put three +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)"
+      ]
     },
     {
       "name": "Monstrosity of the Lake",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When Monstrosity of the Lake enters, you may pay {5}. If you do, tap all creatures your opponents control, then put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Subjugate the Hobbits",
@@ -88,12 +76,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Gain control of each noncommander creature with mana value 3 or less."
+      ]
     },
     {
       "name": "Shelob, Dread Weaver",
@@ -105,12 +90,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever a nontoken creature an opponent controls dies, exile it.\n{2}{B}, Put a creature card exiled with Shelob into its owner's graveyard: Put two +1/+1 counters on Shelob. Draw a card.\n{X}{1}{B}: Put target creature card with mana value X exiled with Shelob onto the battlefield tapped under your control."
+      ]
     },
     {
       "name": "Cavern-Hoard Dragon",
@@ -122,12 +104,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{R}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.\nFlying, trample, haste\nWhenever this creature deals combat damage to a player, you create a Treasure token for each artifact that player controls."
+      ]
     },
     {
       "name": "Orcish Siegemaster",
@@ -139,12 +118,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Trample\nOther Orcs and Goblins you control have trample.\nWhenever this creature attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Rampaging War Mammoth",
@@ -156,12 +132,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Trample\nCycling {X}{2}{R} ({X}{2}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy up to X target artifacts."
+      ]
     },
     {
       "name": "The Balrog of Moria",
@@ -174,12 +147,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}{R}",
-      "cmc": 7,
-      "oracleText": "Trample, haste\nWhen The Balrog of Moria dies, you may exile it. When you do, for each opponent, exile up to one target creature that player controls.\nCycling {3}{R} ({3}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, create two Treasure tokens."
+      ]
     },
     {
       "name": "Gríma, Saruman's Footman",
@@ -192,12 +162,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Gríma can't be blocked.\nWhenever Gríma deals combat damage to a player, that player exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then that player puts the exiled cards that weren't cast this way on the bottom of their library in a random order."
+      ]
     },
     {
       "name": "In the Darkness Bind Them",
@@ -211,12 +178,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{B}{R}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Create a 3/3 black Wraith creature token with menace. The Ring tempts you.\nIV — For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn. The Ring tempts you."
+      ]
     },
     {
       "name": "Lidless Gaze",
@@ -229,12 +193,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Exile the top card of each player's library. Until the end of your next turn, you may play those cards, and mana of any type can be spent to cast those spells.\nFlashback {2}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Lord of the Nazgûl",
@@ -247,12 +208,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWraiths you control have protection from Ring-bearers.\nWhenever you cast an instant or sorcery spell, create a 3/3 black Wraith creature token with menace. Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn."
+      ]
     },
     {
       "name": "Moria Scavenger",
@@ -265,12 +223,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Deathtouch, haste\n{T}, Discard a card: Draw a card. If the discarded card was a creature card, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)"
+      ]
     },
     {
       "name": "Summons of Saruman",
@@ -283,12 +238,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{R}",
-      "cmc": 2,
-      "oracleText": "Amass Orcs X. Mill X cards. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. (To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)\nFlashback—{3}{U}{R}, Exile X cards from your graveyard."
+      ]
     },
     {
       "name": "Too Greedily, Too Deep",
@@ -301,12 +253,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{R}",
-      "cmc": 7,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature."
+      ]
     },
     {
       "name": "Wake the Dragon",
@@ -319,12 +268,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{R}",
-      "cmc": 6,
-      "oracleText": "Create a 6/6 black and red Dragon creature token with flying, menace, and \"Whenever this token deals combat damage to a player, gain control of target artifact that player controls.\"\nFlashback {6}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Relic of Sauron",
@@ -338,12 +284,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add two mana in any combination of {U}, {B}, and/or {R}.\n{3}, {T}: Draw two cards, then discard a card."
+      ]
     },
     {
       "name": "The Black Gate",
@@ -355,11 +298,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As The Black Gate enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {B}.\n{1}{B}, {T}: Choose a player with the most life or tied for most life. Target creature can't be blocked by creatures that player controls this turn."
+      ]
     },
     {
       "name": "Decree of Pain",
@@ -371,12 +312,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.\nCycling {3}{B}{B} ({3}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, all creatures get -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Languish",
@@ -388,12 +326,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "All creatures get -4/-4 until end of turn."
+      ]
     },
     {
       "name": "Living Death",
@@ -405,12 +340,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield."
+      ]
     },
     {
       "name": "Reanimate",
@@ -422,12 +354,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -439,12 +368,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Goblin Dark-Dwellers",
@@ -456,12 +382,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+      ]
     },
     {
       "name": "Inferno Titan",
@@ -473,12 +396,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "{R}: This creature gets +1/+0 until end of turn.\nWhenever this creature enters or attacks, it deals 3 damage divided as you choose among one, two, or three targets."
+      ]
     },
     {
       "name": "Knollspine Dragon",
@@ -490,12 +410,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may discard your hand and draw cards equal to the damage dealt to target opponent this turn."
+      ]
     },
     {
       "name": "Scourge of the Throne",
@@ -507,12 +424,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nWhenever this creature attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Siege-Gang Commander",
@@ -524,12 +438,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create three 1/1 red Goblin creature tokens.\n{1}{R}, Sacrifice a Goblin: This creature deals 2 damage to any target."
+      ]
     },
     {
       "name": "Treasure Nabber",
@@ -541,12 +452,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn."
+      ]
     },
     {
       "name": "Hostage Taker",
@@ -559,12 +467,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, exile another target creature or artifact until this creature leaves the battlefield. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Notion Thief",
@@ -577,12 +482,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Flash\nIf an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -595,11 +497,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Desolate Lighthouse",
@@ -612,11 +512,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{U}{R}, {T}: Draw a card, then discard a card."
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -629,11 +527,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Drowned Catacomb",
@@ -646,11 +542,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -663,11 +557,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -680,11 +572,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -697,11 +587,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -714,11 +602,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Sulfurous Springs",
@@ -731,11 +617,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -748,11 +632,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Underground River",
@@ -765,11 +647,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Treason of Isengard",
@@ -781,12 +661,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Put up to one target instant or sorcery card from your graveyard on top of your library.\nAmass Orcs 2. (To amass Orcs 2, put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)"
+      ]
     },
     {
       "name": "Bitter Downfall",
@@ -798,12 +675,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "This spell costs {3} less to cast if it targets a creature that was dealt damage this turn.\nDestroy target creature. Its controller loses 2 life."
+      ]
     },
     {
       "name": "Troll of Khazad-dûm",
@@ -815,12 +689,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "This creature can't be blocked except by three or more creatures.\nSwampcycling {1} ({1}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Voracious Fell Beast",
@@ -832,12 +703,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, each opponent sacrifices a creature of their choice. Create a Food token for each creature sacrificed this way. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")"
+      ]
     },
     {
       "name": "Fiery Inscription",
@@ -849,12 +717,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, the Ring tempts you.\nWhenever you cast an instant or sorcery spell, this enchantment deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Grishnákh, Brash Instigator",
@@ -866,12 +731,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When Grishnákh enters, amass Orcs 2. When you do, until end of turn, gain control of target nonlegendary creature an opponent controls with power less than or equal to the amassed Army's power. Untap that creature. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -883,12 +745,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Boon of the Wish-Giver",
@@ -900,12 +759,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Draw four cards.\nCycling {1} ({1}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Consider",
@@ -917,12 +773,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nDraw a card."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -934,12 +787,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Fact or Fiction",
@@ -951,12 +801,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Forbidden Alchemy",
@@ -969,12 +816,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -986,12 +830,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Merciless Executioner",
@@ -1003,12 +844,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, each player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Revenge of Ravens",
@@ -1020,12 +858,9 @@
         "B"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Anger",
@@ -1037,12 +872,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nAs long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+      ]
     },
     {
       "name": "Faithless Looting",
@@ -1054,12 +886,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "The Mouth of Sauron",
@@ -1072,12 +901,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "When The Mouth of Sauron enters, target player mills three cards. Then amass Orcs X, where X is the number of instant and sorcery cards in that player's graveyard. (Put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)"
+      ]
     },
     {
       "name": "Goblin Cratermaker",
@@ -1089,12 +915,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{1}, Sacrifice this creature: Choose one —\n• This creature deals 2 damage to target creature.\n• Destroy target colorless nonland permanent."
+      ]
     },
     {
       "name": "Guttersnipe",
@@ -1106,12 +929,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -1123,12 +943,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Thrill of Possibility",
@@ -1140,12 +957,9 @@
         "R"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards."
+      ]
     },
     {
       "name": "Extract from Darkness",
@@ -1158,12 +972,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1173,12 +984,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Basalt Monolith",
@@ -1188,12 +996,9 @@
       "oracleCardName": "Basalt Monolith",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{3}: Untap this artifact."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1203,12 +1008,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -1218,12 +1020,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1233,12 +1032,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1248,12 +1044,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -1263,12 +1056,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1278,11 +1068,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1296,11 +1084,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1310,11 +1096,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Field of Ruin",
@@ -1324,11 +1108,9 @@
       "oracleCardName": "Field of Ruin",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1338,11 +1120,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1352,11 +1132,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1366,11 +1144,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Island",
@@ -1382,11 +1158,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1398,11 +1172,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1414,11 +1186,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1430,11 +1200,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1446,11 +1214,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1462,11 +1228,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1478,11 +1242,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1494,11 +1256,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1510,11 +1270,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1526,11 +1284,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1542,11 +1298,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1558,11 +1312,9 @@
         "B"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1574,11 +1326,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1590,11 +1340,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1606,11 +1354,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1622,11 +1368,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1638,11 +1382,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1654,11 +1396,9 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1670,15 +1410,13 @@
         "R"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.935Z",
+    "retrievedDate": "2026-06-23T17:40:40.285Z",
     "sourceUrl": "TheHostsOfMordor_LTC.json",
     "deckSource": "precon",
     "createdAt": "2023-06-23T00:00:00.000Z"

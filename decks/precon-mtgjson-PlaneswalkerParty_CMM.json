@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1769434733,
   "name": "Planeswalker Party",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, put a loyalty counter on another target planeswalker you control.\n[+1]: Create a 1/1 red Wizard creature token with \"{T}: Add {R}. Spend this mana only to cast a planeswalker spell.\"\n[−3]: You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control.\nCommodore Guff can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Flying, vigilance\nWhenever Leori deals combat damage to a player, choose a planeswalker type. Until end of turn, whenever you activate an ability of a planeswalker of that type, copy that ability. You may choose new targets for the copies."
+      ]
     },
     {
       "name": "Mangara, the Diplomat",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.\nWhenever an opponent casts their second spell each turn, draw a card."
+      ]
     },
     {
       "name": "Gatewatch Beacon",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "This artifact enters with three loyalty counters on it.\n{T}: Add {W}.\nWhenever a planeswalker you control enters, if this artifact has loyalty counters on it, you may move a loyalty counter from this artifact onto that planeswalker."
+      ]
     },
     {
       "name": "Onakke Oathkeeper",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Creatures can't attack planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control.\n{4}{W}{W}, Exile this card from your graveyard: Return target planeswalker card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Teyo, Geometric Tactician",
@@ -105,12 +90,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When Teyo enters, create a 0/4 white Wall creature token with defender and flying.\n[+1]: You and target opponent each draw a card.\n[−2]: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent."
+      ]
     },
     {
       "name": "Sparkshaper Visionary",
@@ -122,12 +104,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "At the beginning of combat on your turn, choose any number of target planeswalkers you control. Until end of turn, they become 3/3 blue Bird creatures with flying, hexproof, and \"Whenever this creature deals combat damage to a player, scry 1.\" (They're no longer planeswalkers. Loyalty abilities can still be activated.)"
+      ]
     },
     {
       "name": "Vronos, Masked Inquisitor",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "[+1]: Up to two other target planeswalkers you control phase out at the beginning of the next end step. (Treat them and anything attached to them as though they don't exist until your next turn.)\n[−2]: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.\n[−7]: Target artifact you control becomes a 9/9 Construct artifact creature and gains vigilance, indestructible, and \"This creature can't be blocked.\""
+      ]
     },
     {
       "name": "Chandra, Legacy of Fire",
@@ -156,12 +132,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, Chandra deals X damage to each opponent, where X is the number of planeswalkers you control.\n[+1]: Add {R} for each planeswalker you control.\n[0]: Remove a loyalty counter from each of any number of permanents you control. Exile that many cards from the top of your library. You may play them this turn."
+      ]
     },
     {
       "name": "Guff Rewrites History",
@@ -173,12 +146,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "For each player, choose target nonenchantment, nonland permanent that player controls. Those permanents' owners shuffle them into their libraries. Each player who controlled one of those permanents exiles cards from the top of their library until they exile a nonland card, then puts the rest on the bottom of their library in a random order. Each player may cast the nonland card they exiled without paying its mana cost."
+      ]
     },
     {
       "name": "Jaya's Phoenix",
@@ -190,12 +160,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Flying, haste\nWhenever this creature deals combat damage to a player or planeswalker, copy the next loyalty ability you activate this turn when you activate it. You may choose new targets for the copy.\nWhenever you cast a planeswalker spell, you may return this card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Ajani Steadfast",
@@ -207,12 +174,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "[+1]: Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.\n[−2]: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.\n[−7]: You get an emblem with \"If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.\""
+      ]
     },
     {
       "name": "Deploy the Gatewatch",
@@ -224,12 +188,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Elspeth, Sun's Champion",
@@ -241,12 +202,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "[+1]: Create three 1/1 white Soldier creature tokens.\n[−3]: Destroy all creatures with power 4 or greater.\n[−7]: You get an emblem with \"Creatures you control get +2/+2 and have flying.\""
+      ]
     },
     {
       "name": "Gideon Jura",
@@ -258,12 +216,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "[+2]: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[−2]: Destroy target tapped creature.\n[0]: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn."
+      ]
     },
     {
       "name": "Norn's Annex",
@@ -275,12 +230,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{W/P}{W/P}",
-      "cmc": 5,
-      "oracleText": "({W/P} can be paid with either {W} or 2 life.)\nCreatures can't attack you or planeswalkers you control unless their controller pays {W/P} for each of those creatures."
+      ]
     },
     {
       "name": "Oath of Gideon",
@@ -292,12 +244,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When Oath of Gideon enters, create two 1/1 white Kor Ally creature tokens.\nEach planeswalker you control enters with an additional loyalty counter on it."
+      ]
     },
     {
       "name": "Promise of Loyalty",
@@ -309,12 +258,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+      ]
     },
     {
       "name": "Semester's End",
@@ -326,12 +272,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Exile any number of target creatures and/or planeswalkers you control. At the beginning of the next end step, return each of them to the battlefield under its owner's control. Each of them enters with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker."
+      ]
     },
     {
       "name": "Urza's Ruinous Blast",
@@ -343,12 +286,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nExile all nonland permanents that aren't legendary."
+      ]
     },
     {
       "name": "Deepglow Skate",
@@ -360,12 +300,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, double the number of each kind of counter on any number of target permanents."
+      ]
     },
     {
       "name": "Jace Beleren",
@@ -377,12 +314,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "[+2]: Each player draws a card.\n[−1]: Target player draws a card.\n[−10]: Target player mills twenty cards."
+      ]
     },
     {
       "name": "Jace, Architect of Thought",
@@ -394,12 +328,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "[+1]: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[−2]: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[−8]: For each player, search that player's library for a nonland card and exile it, then that player shuffles. You may cast those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Jace, Mirror Mage",
@@ -411,12 +342,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Kicker {2}\nWhen Jace enters, if Jace was kicked, create a token that's a copy of Jace, except it's not legendary and its starting loyalty is 1.\n[+1]: Scry 2.\n[0]: Draw a card and reveal it. Remove a number of loyalty counters equal to that card's mana value from Jace."
+      ]
     },
     {
       "name": "Oath of Jace",
@@ -428,12 +356,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When Oath of Jace enters, draw three cards, then discard two cards.\nAt the beginning of your upkeep, scry X, where X is the number of planeswalkers you control."
+      ]
     },
     {
       "name": "Spark Double",
@@ -445,12 +370,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "You may have this creature enter as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -462,12 +384,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Chandra, Awakened Inferno",
@@ -479,12 +398,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "This spell can't be countered.\n[+2]: Each opponent gets an emblem with \"At the beginning of your upkeep, this emblem deals 1 damage to you.\"\n[−3]: Chandra deals 3 damage to each non-Elemental creature.\n[−X]: Chandra deals X damage to target creature or planeswalker. If a permanent dealt damage this way would die this turn, exile it instead."
+      ]
     },
     {
       "name": "Chandra, Torch of Defiance",
@@ -496,12 +412,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "[+1]: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.\n[+1]: Add {R}{R}.\n[−3]: Chandra deals 4 damage to target creature.\n[−7]: You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\""
+      ]
     },
     {
       "name": "Repeated Reverberation",
@@ -513,12 +426,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies."
+      ]
     },
     {
       "name": "Sarkhan the Masterless",
@@ -530,12 +440,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature attacks you or a planeswalker you control, each Dragon you control deals 1 damage to that creature.\n[+1]: Until end of turn, each planeswalker you control becomes a 4/4 red Dragon creature and gains flying.\n[−3]: Create a 4/4 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Nahiri, the Harbinger",
@@ -548,12 +455,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "[+2]: You may discard a card. If you do, draw a card.\n[−2]: Exile target enchantment, tapped artifact, or tapped creature.\n[−8]: Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Narset of the Ancient Way",
@@ -567,12 +471,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U}{R}{W}",
-      "cmc": 4,
-      "oracleText": "[+1]: You gain 2 life. Add {U}, {R}, or {W}. Spend this mana only to cast a noncreature spell.\n[−2]: Draw a card, then you may discard a card. When you discard a nonland card this way, Narset deals damage equal to that card's mana value to target creature or planeswalker.\n[−6]: You get an emblem with \"Whenever you cast a noncreature spell, this emblem deals 2 damage to any target.\""
+      ]
     },
     {
       "name": "Narset, Enlightened Master",
@@ -586,12 +487,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}{W}",
-      "cmc": 6,
-      "oracleText": "First strike, hexproof\nWhenever Narset attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Oath of Teferi",
@@ -604,12 +502,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "When Oath of Teferi enters, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.\nYou may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once."
+      ]
     },
     {
       "name": "The Chain Veil",
@@ -619,12 +514,9 @@
       "oracleCardName": "The Chain Veil",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.\n{4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn."
+      ]
     },
     {
       "name": "Nevinyrral's Disk",
@@ -634,12 +526,9 @@
       "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This artifact enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
+      ]
     },
     {
       "name": "Silent Arbiter",
@@ -649,13 +538,10 @@
       "oracleCardName": "Silent Arbiter",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "No more than one creature can attack each combat.\nNo more than one creature can block each combat."
+      ]
     },
     {
       "name": "Cascade Bluffs",
@@ -668,11 +554,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -682,11 +566,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -699,11 +581,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -716,11 +596,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Karn's Bastion",
@@ -730,11 +608,9 @@
       "oracleCardName": "Karn's Bastion",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Mobilized District",
@@ -744,11 +620,9 @@
       "oracleCardName": "Mobilized District",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}: This land becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control."
+      ]
     },
     {
       "name": "Mystic Gate",
@@ -761,11 +635,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Port Town",
@@ -778,11 +650,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -795,11 +665,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Rugged Prairie",
@@ -812,11 +680,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -829,11 +695,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -846,11 +710,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -863,11 +725,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Triumph",
@@ -880,11 +740,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Cartographer's Hawk",
@@ -896,12 +754,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhen this creature deals combat damage to a player who controls more lands than you, return it to its owner's hand. If you do, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -913,12 +768,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kazuul, Tyrant of the Cliffs",
@@ -930,12 +782,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -945,12 +794,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -960,12 +806,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -975,12 +818,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -990,11 +830,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1004,11 +842,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1018,11 +854,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Grateful Apparition",
@@ -1034,12 +868,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Oreskos Explorer",
@@ -1051,12 +882,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1068,12 +896,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "The Wanderer",
@@ -1085,12 +910,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Prevent all noncombat damage that would be dealt to you and other permanents you control.\n[−2]: Exile target creature with power 4 or greater."
+      ]
     },
     {
       "name": "Flux Channeler",
@@ -1102,12 +924,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Fog Bank",
@@ -1119,12 +938,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Defender (This creature can't attack.)\nFlying\nPrevent all combat damage that would be dealt to and dealt by this creature."
+      ]
     },
     {
       "name": "Narset, Parter of Veils",
@@ -1136,12 +952,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Each opponent can't draw more than one card each turn.\n[−2]: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Thrummingbird",
@@ -1153,12 +966,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Saheeli, Sublime Artificer",
@@ -1171,12 +981,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U/R}{U/R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Wall of Denial",
@@ -1189,12 +996,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Defender, flying\nShroud (This creature can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -1207,12 +1011,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Boros Signet",
@@ -1225,12 +1026,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Honor-Worn Shaku",
@@ -1240,12 +1038,9 @@
       "oracleCardName": "Honor-Worn Shaku",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\nTap an untapped legendary permanent you control: Untap this artifact."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -1258,12 +1053,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1276,12 +1068,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Creativity",
@@ -1294,12 +1083,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -1312,12 +1098,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1327,12 +1110,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forge of Heroes",
@@ -1342,11 +1122,9 @@
       "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
+      ]
     },
     {
       "name": "Interplanar Beacon",
@@ -1356,11 +1134,9 @@
       "oracleCardName": "Interplanar Beacon",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Whenever you cast a planeswalker spell, you gain 1 life.\n{T}: Add {C}.\n{1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1374,11 +1150,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Island",
@@ -1390,11 +1164,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1406,11 +1178,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1422,11 +1192,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1438,11 +1206,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1454,11 +1220,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1470,11 +1234,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1486,11 +1248,9 @@
         "U"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1502,11 +1262,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1518,11 +1276,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1534,11 +1290,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1550,11 +1304,9 @@
         "R"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1566,11 +1318,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1582,11 +1332,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1598,11 +1346,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1614,11 +1360,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1630,11 +1374,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1646,11 +1388,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1662,15 +1402,13 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.312Z",
+    "retrievedDate": "2026-06-23T17:40:39.198Z",
     "sourceUrl": "PlaneswalkerParty_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

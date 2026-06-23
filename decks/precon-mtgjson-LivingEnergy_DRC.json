@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1678824415,
   "name": "Living Energy",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an Artificer or artifact spell, you get {E} (an energy counter).\nAt the beginning of combat on your turn, you may pay {E}{E}{E}. When you do, create a token that's a copy of target permanent you control, except it's a 5/5 artifact creature in addition to its other types and has haste. Sacrifice it at the beginning of the next end step."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more artifact creatures you control deal combat damage to a player, you get {E}{E} (two energy counters).\nAt the beginning of your end step, you may pay one or more {E}. If you do, create an X/X colorless Vehicle artifact token named Nalaar Aetherjet with flying and crew 2, where X is the amount of {E} paid this way."
+      ]
     },
     {
       "name": "Territorial Aetherkite",
@@ -54,12 +48,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying, haste\nWhen this creature enters, you get {E}{E} (two energy counters). Then you may pay one or more {E}. When you do, this creature deals that much damage to each other creature."
+      ]
     },
     {
       "name": "Nissa, Worldsoul Speaker",
@@ -71,12 +62,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).\nYou may pay eight {E} rather than pay the mana cost for permanent spells you cast."
+      ]
     },
     {
       "name": "Peema Trailblazer",
@@ -88,12 +76,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, you get that many {E} (energy counters).\nExhaust — Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)"
+      ]
     },
     {
       "name": "Rampaging Aetherhood",
@@ -105,12 +90,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample, ward {2}\nAt the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Adaptive Omnitool",
@@ -120,12 +102,9 @@
       "oracleCardName": "Adaptive Omnitool",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1 for each artifact you control.\nWhenever equipped creature attacks, look at the top six cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nEquip {3}"
+      ]
     },
     {
       "name": "Aetherflux Conduit",
@@ -135,12 +114,9 @@
       "oracleCardName": "Aetherflux Conduit",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a spell, you get an amount of {E} (energy counters) equal to the amount of mana spent to cast that spell.\n{T}, Pay fifty {E}: Draw seven cards. You may cast any number of spells from your hand without paying their mana costs."
+      ]
     },
     {
       "name": "Aetheric Amplifier",
@@ -150,12 +126,9 @@
       "oracleCardName": "Aetheric Amplifier",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{4}, {T}: Choose one. Activate only as a sorcery.\n• Double the number of each kind of counter on target permanent.\n• Double the number of each kind of counter you have."
+      ]
     },
     {
       "name": "Stridehangar Automaton",
@@ -165,13 +138,10 @@
       "oracleCardName": "Stridehangar Automaton",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Thopters you control get +1/+1.\nIf one or more artifact tokens would be created under your control, those tokens plus an additional 1/1 colorless Thopter artifact creature token with flying are created instead."
+      ]
     },
     {
       "name": "Chain Reaction",
@@ -183,12 +153,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -200,12 +167,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Druid of Purification",
@@ -217,12 +181,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -232,12 +193,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Duplicant",
@@ -247,13 +205,10 @@
       "oracleCardName": "Duplicant",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Imprint — When this creature enters, you may exile target nontoken creature.\nAs long as a card exiled with this creature is a creature card, this creature has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter."
+      ]
     },
     {
       "name": "Academy Ruins",
@@ -265,11 +220,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{U}, {T}: Put target artifact card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Aethersquall Ancient",
@@ -281,12 +234,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nAt the beginning of your upkeep, you get {E}{E}{E} (three energy counters).\nPay eight {E}: Return all other creatures to their owners' hands. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Aethertide Whale",
@@ -298,12 +248,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, you get six {E} (energy counters).\nPay {E}{E}{E}{E}: Return this creature to its owner's hand."
+      ]
     },
     {
       "name": "Confiscation Coup",
@@ -315,12 +262,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Choose target artifact or creature. You get {E}{E}{E}{E} (four energy counters), then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it."
+      ]
     },
     {
       "name": "Disallow",
@@ -332,12 +276,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell, activated ability, or triggered ability. (Mana abilities can't be targeted.)"
+      ]
     },
     {
       "name": "Midnight Clock",
@@ -349,12 +290,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U}.\n{2}{U}: Put an hour counter on this artifact.\nAt the beginning of each upkeep, put an hour counter on this artifact.\nWhen the twelfth hour counter is put on this artifact, shuffle your hand and graveyard into your library, then draw seven cards. Exile this artifact."
+      ]
     },
     {
       "name": "One with the Machine",
@@ -366,12 +304,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Draw cards equal to the greatest mana value among artifacts you control."
+      ]
     },
     {
       "name": "Sai, Master Thopterist",
@@ -383,12 +318,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.\n{1}{U}, Sacrifice two artifacts: Draw a card."
+      ]
     },
     {
       "name": "Thopter Spy Network",
@@ -400,12 +332,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -417,12 +346,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Combustible Gearhulk",
@@ -434,13 +360,10 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nWhen this creature enters, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then this creature deals damage to that player equal to the total mana value of those cards."
+      ]
     },
     {
       "name": "Lightning Runner",
@@ -452,12 +375,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Double strike, haste\nWhenever this creature attacks, you get {E}{E} (two energy counters), then you may pay eight {E}. If you pay, untap all creatures you control, and after this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Pia and Kiran Nalaar",
@@ -469,12 +389,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "When Pia and Kiran Nalaar enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\n{2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target."
+      ]
     },
     {
       "name": "Aetherwind Basker",
@@ -486,12 +403,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhenever this creature enters or attacks, you get {E} (an energy counter) for each creature you control.\nPay {E}: This creature gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Architect of the Untamed",
@@ -503,12 +417,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, you get {E} (an energy counter).\nPay eight {E}: Create a 6/6 colorless Beast artifact creature token."
+      ]
     },
     {
       "name": "Bootleggers' Stash",
@@ -520,12 +431,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Lands you control have \"{T}: Create a Treasure token.\""
+      ]
     },
     {
       "name": "Elder Gargaroth",
@@ -537,12 +445,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Vigilance, reach, trample\nWhenever this creature attacks or blocks, choose one —\n• Create a 3/3 green Beast creature token.\n• You gain 3 life.\n• Draw a card."
+      ]
     },
     {
       "name": "Aetherworks Marvel",
@@ -552,12 +457,9 @@
       "oracleCardName": "Aetherworks Marvel",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever a permanent you control is put into a graveyard, you get {E} (an energy counter).\n{T}, Pay six {E}: Look at the top six cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Conjurer's Closet",
@@ -567,12 +469,9 @@
       "oracleCardName": "Conjurer's Closet",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control."
+      ]
     },
     {
       "name": "Cultivator's Caravan",
@@ -582,12 +481,9 @@
       "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Panharmonicon",
@@ -597,12 +493,9 @@
       "oracleCardName": "Panharmonicon",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Retrofitter Foundry",
@@ -612,12 +505,9 @@
       "oracleCardName": "Retrofitter Foundry",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{3}: Untap this artifact.\n{2}, {T}: Create a 1/1 colorless Servo artifact creature token.\n{1}, {T}, Sacrifice a Servo: Create a 1/1 colorless Thopter artifact creature token with flying.\n{T}, Sacrifice a Thopter: Create a 4/4 colorless Construct artifact creature token."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -627,13 +517,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Triplicate Titan",
@@ -643,13 +530,10 @@
       "oracleCardName": "Triplicate Titan",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "Flying, vigilance, trample\nWhen this creature dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -659,11 +543,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -676,11 +558,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -693,11 +573,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Karplusan Forest",
@@ -710,11 +588,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -727,11 +603,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Rootbound Crag",
@@ -744,11 +618,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Sheltered Thicket",
@@ -761,11 +633,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -778,11 +648,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Spire of Industry",
@@ -792,11 +660,9 @@
       "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -809,11 +675,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -826,11 +690,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Treasure Vault",
@@ -840,12 +702,10 @@
       "oracleCardName": "Treasure Vault",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{X}{X}, {T}, Sacrifice this land: Create X Treasure tokens."
+      ]
     },
     {
       "name": "Vineglimmer Snarl",
@@ -858,11 +718,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -875,11 +733,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -891,12 +747,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -906,12 +759,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -921,12 +771,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -936,12 +783,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -951,11 +795,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -967,12 +809,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Bespoke Battlewagon",
@@ -984,12 +823,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "{T}: You get {E}{E} (two energy counters).\n{T}, Pay {E}{E}: Tap target creature.\n{T}, Pay {E}{E}{E}: Draw a card.\nPay {E}{E}{E}{E}: This Vehicle becomes an artifact creature until end of turn.\nCrew 4"
+      ]
     },
     {
       "name": "Era of Innovation",
@@ -1001,12 +837,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever an artifact or Artificer you control enters, you may pay {1}. If you do, you get {E}{E} (two energy counters).\nPay six {E}, Sacrifice this enchantment: Draw three cards."
+      ]
     },
     {
       "name": "Glimmer of Genius",
@@ -1018,12 +851,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Scry 2, then draw two cards. You get {E}{E} (two energy counters)."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -1035,12 +865,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Loyal Apprentice",
@@ -1052,12 +879,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
+      ]
     },
     {
       "name": "Reckless Fireweaver",
@@ -1069,12 +893,9 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever an artifact you control enters, this creature deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Attune with Aether",
@@ -1086,12 +907,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You get {E}{E} (two energy counters)."
+      ]
     },
     {
       "name": "Explosive Vegetation",
@@ -1103,12 +921,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Peema Aether-Seer",
@@ -1120,12 +935,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you get an amount of {E} (energy counters) equal to the greatest power among creatures you control.\nPay {E}{E}{E}: Target creature blocks this turn if able."
+      ]
     },
     {
       "name": "Servant of the Conduit",
@@ -1137,12 +949,9 @@
         "G"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Add one mana of any color."
+      ]
     },
     {
       "name": "Rogue Refiner",
@@ -1155,12 +964,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, draw a card and you get {E}{E} (two energy counters)."
+      ]
     },
     {
       "name": "Saheeli, Sublime Artificer",
@@ -1173,12 +979,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U/R}{U/R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Whirler Virtuoso",
@@ -1191,12 +994,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flying."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1206,12 +1006,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Decoction Module",
@@ -1221,12 +1018,9 @@
       "oracleCardName": "Decoction Module",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control enters, you get {E} (an energy counter).\n{4}, {T}: Return target creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Ornithopter of Paradise",
@@ -1236,13 +1030,10 @@
       "oracleCardName": "Ornithopter of Paradise",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Flying\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Solar Transformer",
@@ -1252,12 +1043,9 @@
       "oracleCardName": "Solar Transformer",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\nWhen this artifact enters, you get {E}{E}{E} (three energy counters).\n{T}: Add {C}.\n{T}, Pay {E}: Add one mana of any color."
+      ]
     },
     {
       "name": "Soul-Guide Lantern",
@@ -1267,12 +1055,9 @@
       "oracleCardName": "Soul-Guide Lantern",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this artifact enters, exile target card from a graveyard.\n{T}, Sacrifice this artifact: Exile each opponent's graveyard.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Talisman of Curiosity",
@@ -1285,12 +1070,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Aether Hub",
@@ -1300,11 +1082,9 @@
       "oracleCardName": "Aether Hub",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, you get {E} (an energy counter).\n{T}: Add {C}.\n{T}, Pay {E}: Add one mana of any color."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1314,11 +1094,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1332,11 +1110,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1346,11 +1122,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Slagwoods Bridge",
@@ -1363,12 +1137,10 @@
         "R"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Tanglepool Bridge",
@@ -1381,12 +1153,10 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nIndestructible\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -1398,11 +1168,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1414,11 +1182,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1430,11 +1196,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1446,11 +1210,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1462,11 +1224,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1478,11 +1238,9 @@
         "R"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1494,11 +1252,9 @@
         "R"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1510,11 +1266,9 @@
         "R"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1526,11 +1280,9 @@
         "R"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1542,11 +1294,9 @@
         "R"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1558,11 +1308,9 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1574,11 +1322,9 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1590,11 +1336,9 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1606,11 +1350,9 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1622,11 +1364,9 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1638,15 +1378,13 @@
         "G"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.829Z",
+    "retrievedDate": "2026-06-23T17:40:38.322Z",
     "sourceUrl": "LivingEnergy_DRC.json",
     "deckSource": "precon",
     "createdAt": "2025-02-14T00:00:00.000Z"

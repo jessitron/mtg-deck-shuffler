@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1935527631,
   "name": "Jump Scare!",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, manifest dread if this is the first time this ability has resolved this turn. Otherwise, you may turn a permanent you control face up. (To manifest dread, look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "As long as Kianne's power is even, you may cast noncreature spells as though they had flash.\nAs long as Kianne's power is odd, you may cast creature spells as though they had flash.\nWhenever you draw a card, put a +1/+1 counter on Kianne."
+      ]
     },
     {
       "name": "Glitch Interpreter",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, if you control no face-down permanents, return this creature to its owner's hand and manifest dread.\nWhenever one or more colorless creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "They Came from the Pipes",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this enchantment enters, manifest dread twice. (To manifest dread, look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a face-down creature you control enters, draw a card."
+      ]
     },
     {
       "name": "Zimone's Hypothesis",
@@ -86,12 +74,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "You may put a +1/+1 counter on a creature. Then choose odd or even. Return each creature with power of the chosen quality to its owner's hand. (Zero is even.)"
+      ]
     },
     {
       "name": "Curator Beastie",
@@ -103,12 +88,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach\nColorless creatures you control enter with two additional +1/+1 counters on them.\nWhenever this creature enters or attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Disorienting Choice",
@@ -120,12 +102,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "For each opponent, choose up to one target artifact or enchantment that player controls. For each permanent chosen this way, its controller may exile it. Then if one or more of the chosen permanents are still on the battlefield, you search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Experimental Lab // Staff Room",
@@ -137,12 +116,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 7,
-      "oracleText": "When you unlock this door, manifest dread, then put two +1/+1 counters and a trample counter on that creature.\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Shriekwood Devourer",
@@ -154,12 +130,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhenever you attack with one or more creatures, untap up to X lands, where X is the greatest power among those creatures."
+      ]
     },
     {
       "name": "Giggling Skitterspike",
@@ -169,13 +142,10 @@
       "oracleCardName": "Giggling Skitterspike",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Indestructible\nWhenever this creature attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.\n{5}: Monstrosity 5. (If this creature isn't monstrous, put five +1/+1 counters on it and it becomes monstrous.)"
+      ]
     },
     {
       "name": "Cackling Counterpart",
@@ -187,12 +157,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Create a token that's a copy of target creature you control.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Citanul Hierophants",
@@ -204,12 +171,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Creatures you control have \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Aether Gale",
@@ -221,12 +185,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return six target nonland permanents to their owners' hands."
+      ]
     },
     {
       "name": "Body of Knowledge",
@@ -238,12 +199,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Body of Knowledge's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhenever this creature is dealt damage, draw that many cards."
+      ]
     },
     {
       "name": "Dig Through Time",
@@ -255,12 +213,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nLook at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Kefnet the Mindful",
@@ -272,12 +227,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying, indestructible\nKefnet can't attack or block unless you have seven or more cards in hand.\n{3}{U}: Draw a card, then you may return a land you control to its owner's hand."
+      ]
     },
     {
       "name": "Kheru Spellsnatcher",
@@ -289,12 +241,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Morph {4}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost for as long as it remains exiled."
+      ]
     },
     {
       "name": "Primordial Mist",
@@ -306,12 +255,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, you may manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nExile a face-down permanent you control face up: You may play that card this turn. (You still pay its costs. Timing rules still apply.)"
+      ]
     },
     {
       "name": "Skaab Ruinator",
@@ -323,12 +269,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, exile three creature cards from your graveyard.\nFlying\nYou may cast this card from your graveyard."
+      ]
     },
     {
       "name": "Ashaya, Soul of the Wild",
@@ -340,12 +283,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Ashaya's power and toughness are each equal to the number of lands you control.\nNontoken creatures you control are Forest lands in addition to their other types. (They're still affected by summoning sickness.)"
+      ]
     },
     {
       "name": "Augur of Autumn",
@@ -357,12 +297,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "You may look at the top card of your library any time.\nYou may play lands from the top of your library.\nCoven — As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library."
+      ]
     },
     {
       "name": "Deathmist Raptor",
@@ -374,12 +311,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhenever a permanent you control is turned face up, you may return this card from your graveyard to the battlefield face up or face down.\nMegamorph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Ezuri's Predation",
@@ -391,12 +325,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those tokens fights a different one of those creatures."
+      ]
     },
     {
       "name": "Hydra Omnivore",
@@ -408,12 +339,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever this creature deals combat damage to an opponent, it deals that much damage to each other opponent."
+      ]
     },
     {
       "name": "Multani, Yavimaya's Avatar",
@@ -425,12 +353,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach, trample\nMultani gets +1/+1 for each land you control and each land card in your graveyard.\n{1}{G}, Return two lands you control to their owner's hand: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -442,12 +367,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Sandwurm Convergence",
@@ -459,12 +381,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Creatures with flying can't attack you or planeswalkers you control.\nAt the beginning of your end step, create a 5/5 green Wurm creature token."
+      ]
     },
     {
       "name": "Scute Swarm",
@@ -476,12 +395,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead."
+      ]
     },
     {
       "name": "Shigeki, Jukai Visionary",
@@ -493,13 +409,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{1}{G}, {T}, Return Shigeki to its owner's hand: Reveal the top four cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest into your graveyard.\nChannel — {X}{X}{G}{G}, Discard this card: Return X target nonlegendary cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Temur War Shaman",
@@ -511,12 +424,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a permanent you control is turned face up, if it's a creature, you may have it fight target creature you don't control."
+      ]
     },
     {
       "name": "Thunderfoot Baloth",
@@ -528,12 +438,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLieutenant — As long as you control your commander, this creature gets +2/+2 and other creatures you control get +2/+2 and have trample."
+      ]
     },
     {
       "name": "Trail of Mystery",
@@ -545,12 +452,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever a face-down creature you control enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nWhenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn."
+      ]
     },
     {
       "name": "Whisperwood Elemental",
@@ -562,12 +466,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nSacrifice this creature: Until end of turn, face-up nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.\""
+      ]
     },
     {
       "name": "Worldspine Wurm",
@@ -579,12 +480,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}{G}{G}{G}",
-      "cmc": 11,
-      "oracleText": "Trample\nWhen this creature dies, create three 5/5 green Wurm creature tokens with trample.\nWhen Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library."
+      ]
     },
     {
       "name": "Aesi, Tyrant of Gyre Strait",
@@ -597,12 +495,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "You may play an additional land on each of your turns.\nLandfall — Whenever a land you control enters, you may draw a card."
+      ]
     },
     {
       "name": "Arixmethes, Slumbering Isle",
@@ -615,12 +510,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Arixmethes enters tapped with five slumber counters on it.\nAs long as Arixmethes has a slumber counter on it, it's a land. (It's not a creature.)\nWhenever you cast a spell, you may remove a slumber counter from Arixmethes.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Biomass Mutation",
@@ -633,12 +525,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G/U}{G/U}",
-      "cmc": 2,
-      "oracleText": "Creatures you control have base power and toughness X/X until end of turn."
+      ]
     },
     {
       "name": "Oversimplify",
@@ -651,12 +540,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Exile all creatures. Each player creates a 0/0 green and blue Fractal creature token and puts a number of +1/+1 counters on it equal to the total power of creatures they controlled that were exiled this way."
+      ]
     },
     {
       "name": "Rashmi, Eternities Crafter",
@@ -669,12 +555,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast your first spell each turn, reveal the top card of your library. You may cast it without paying its mana cost if it's a spell with lesser mana value. If you don't cast it, put it into your hand."
+      ]
     },
     {
       "name": "Scroll of Fate",
@@ -684,12 +567,9 @@
       "oracleCardName": "Scroll of Fate",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Castle Vantress",
@@ -701,11 +581,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island.\n{T}: Add {U}.\n{2}{U}{U}, {T}: Scry 2."
+      ]
     },
     {
       "name": "Drownyard Temple",
@@ -715,11 +593,9 @@
       "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -732,11 +608,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -749,11 +623,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -765,11 +637,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -782,11 +652,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -799,11 +667,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Vineglimmer Snarl",
@@ -816,11 +682,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -833,11 +697,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Overgrown Zealot",
@@ -849,12 +711,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color.\n{T}: Add two mana of any one color. Spend this mana only to turn permanents face up."
+      ]
     },
     {
       "name": "Growing Dread",
@@ -867,12 +726,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Flash\nWhen this enchantment enters, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever you turn a permanent face up, put a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -882,11 +738,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Beast Within",
@@ -898,12 +752,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Growth Spiral",
@@ -916,12 +767,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -931,12 +779,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -946,12 +791,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -961,11 +803,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Counterspell",
@@ -977,12 +817,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -994,12 +831,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Retreat to Coralhelm",
@@ -1011,12 +845,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• You may tap or untap target creature.\n• Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Beanstalk Giant // Fertile Footsteps",
@@ -1028,12 +859,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Beanstalk Giant's power and toughness are each equal to the number of lands you control."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Cultivate",
@@ -1045,12 +874,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explosive Vegetation",
@@ -1062,12 +888,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Greater Tanuki",
@@ -1079,13 +902,10 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nChannel — {2}{G}, Discard this card: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1097,12 +917,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -1114,12 +931,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Wilderness Reclamation",
@@ -1131,12 +945,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, untap all lands you control."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -1148,12 +959,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Yedora, Grave Gardener",
@@ -1165,12 +973,9 @@
         "G"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its owner's control. It's a Forest land. (It has no other types or abilities.)"
+      ]
     },
     {
       "name": "Eureka Moment",
@@ -1183,12 +988,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Draw two cards. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Tatyova, Benthic Druid",
@@ -1201,12 +1003,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, you gain 1 life and draw a card."
+      ]
     },
     {
       "name": "Trygon Predator",
@@ -1219,12 +1018,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, you may destroy target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -1237,12 +1033,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1252,11 +1045,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1266,11 +1057,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1280,11 +1069,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Quandrix Campus",
@@ -1297,11 +1084,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Scry 1."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1311,11 +1096,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1328,11 +1111,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Tangled Islet",
@@ -1345,11 +1126,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {U}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1359,11 +1138,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1376,11 +1153,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -1392,11 +1167,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1408,11 +1181,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1424,11 +1195,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1440,11 +1209,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1456,11 +1223,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1472,11 +1237,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1488,11 +1251,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1504,11 +1265,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1520,11 +1279,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1536,11 +1293,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1552,11 +1307,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1568,11 +1321,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1584,11 +1335,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1600,11 +1349,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1616,11 +1363,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1632,11 +1377,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1648,11 +1391,9 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1664,15 +1405,13 @@
         "G"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.691Z",
+    "retrievedDate": "2026-06-23T17:40:38.099Z",
     "sourceUrl": "JumpScare_DSC.json",
     "deckSource": "precon",
     "createdAt": "2024-09-27T00:00:00.000Z"

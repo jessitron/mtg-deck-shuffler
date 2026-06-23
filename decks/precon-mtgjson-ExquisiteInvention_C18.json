@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 775637575,
   "name": "Exquisite Invention",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "[+1]: Create a 1/1 colorless Servo artifact creature token.\n[+1]: The next spell you cast this turn has affinity for artifacts. (It costs {1} less to cast for each artifact you control as you cast it.)\n[−7]: For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.\nSaheeli, the Gifted can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWhen this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying."
+      ]
     },
     {
       "name": "Soul of New Phyrexia",
@@ -50,13 +44,10 @@
       "oracleCardName": "Soul of New Phyrexia",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Trample\n{5}: Permanents you control gain indestructible until end of turn.\n{5}, Exile this card from your graveyard: Permanents you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Inkwell Leviathan",
@@ -68,13 +59,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}{U}{U}",
-      "cmc": 9,
-      "oracleText": "Trample\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)\nShroud (This creature can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Sharding Sphinx",
@@ -86,13 +74,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying."
+      ]
     },
     {
       "name": "Hellkite Igniter",
@@ -104,12 +89,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\n{1}{R}: This creature gets +X/+0 until end of turn, where X is the number of artifacts you control."
+      ]
     },
     {
       "name": "Bosh, Iron Golem",
@@ -121,13 +103,10 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Trample\n{3}{R}, Sacrifice an artifact: Bosh deals damage equal to the sacrificed artifact's mana value to any target."
+      ]
     },
     {
       "name": "Darksteel Juggernaut",
@@ -137,13 +116,10 @@
       "oracleCardName": "Darksteel Juggernaut",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Indestructible\nDarksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.\nThis creature attacks each combat if able."
+      ]
     },
     {
       "name": "Duplicant",
@@ -153,13 +129,10 @@
       "oracleCardName": "Duplicant",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Imprint — When this creature enters, you may exile target nontoken creature.\nAs long as a card exiled with this creature is a creature card, this creature has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter."
+      ]
     },
     {
       "name": "Myr Battlesphere",
@@ -169,13 +142,10 @@
       "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create four 1/1 colorless Myr artifact creature tokens.\nWhenever this creature attacks, you may tap X untapped Myr you control. If you do, this creature gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking."
+      ]
     },
     {
       "name": "Psychosis Crawler",
@@ -185,13 +155,10 @@
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Scuttling Doom Engine",
@@ -201,13 +168,10 @@
       "oracleCardName": "Scuttling Doom Engine",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "This creature can't be blocked by creatures with power 2 or less.\nWhen this creature dies, it deals 6 damage to target opponent or planeswalker."
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -217,13 +181,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Thopter Assembly",
@@ -233,13 +194,10 @@
       "oracleCardName": "Thopter Assembly",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\nAt the beginning of your upkeep, if you control no Thopters other than this creature, return this creature to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying."
+      ]
     },
     {
       "name": "Etherium Sculptor",
@@ -251,13 +209,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Artifact spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -269,12 +224,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Chief of the Foundry",
@@ -284,13 +236,10 @@
       "oracleCardName": "Chief of the Foundry",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Other artifact creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Pilgrim's Eye",
@@ -300,13 +249,10 @@
       "oracleCardName": "Pilgrim's Eye",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Saheeli's Artistry",
@@ -318,12 +264,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Choose one or both —\n• Create a token that's a copy of target artifact.\n• Create a token that's a copy of target creature, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -335,12 +278,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Reverse Engineer",
@@ -352,12 +292,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Tidings",
@@ -369,12 +306,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Draw four cards."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -386,12 +320,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Magmaquake",
@@ -403,12 +334,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Magmaquake deals X damage to each creature without flying and each planeswalker."
+      ]
     },
     {
       "name": "Into the Roil",
@@ -420,12 +348,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card."
+      ]
     },
     {
       "name": "Thirst for Knowledge",
@@ -437,12 +362,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw three cards. Then discard two cards unless you discard an artifact card."
+      ]
     },
     {
       "name": "Blinkmoth Urn",
@@ -452,12 +374,9 @@
       "oracleCardName": "Blinkmoth Urn",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "At the beginning of each player's first main phase, if this artifact is untapped, that player adds {C} for each artifact they control."
+      ]
     },
     {
       "name": "Mimic Vat",
@@ -467,12 +386,9 @@
       "oracleCardName": "Mimic Vat",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Imprint — Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with this artifact to its owner's graveyard.\n{3}, {T}: Create a token that's a copy of a card exiled with this artifact. It gains haste. Exile it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Mirrorworks",
@@ -482,12 +398,9 @@
       "oracleCardName": "Mirrorworks",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of that artifact."
+      ]
     },
     {
       "name": "Prototype Portal",
@@ -497,12 +410,9 @@
       "oracleCardName": "Prototype Portal",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Imprint — When this artifact enters, you may exile an artifact card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the mana value of that card."
+      ]
     },
     {
       "name": "Unwinding Clock",
@@ -512,12 +422,9 @@
       "oracleCardName": "Unwinding Clock",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Untap all artifacts you control during each other player's untap step."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -527,12 +434,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -542,12 +446,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Hedron Archive",
@@ -557,12 +458,9 @@
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -575,12 +473,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Magnifying Glass",
@@ -590,12 +485,9 @@
       "oracleCardName": "Magnifying Glass",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Mind Stone",
@@ -605,12 +497,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Prismatic Lens",
@@ -620,12 +509,9 @@
       "oracleCardName": "Prismatic Lens",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Scrabbling Claws",
@@ -635,12 +521,9 @@
       "oracleCardName": "Scrabbling Claws",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Target player exiles a card from their graveyard.\n{1}, Sacrifice this artifact: Exile target card from a graveyard. Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -650,12 +533,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -665,12 +545,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -680,12 +557,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Vessel of Endless Rest",
@@ -695,12 +569,9 @@
       "oracleCardName": "Vessel of Endless Rest",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "When this artifact enters, put target card from a graveyard on the bottom of its owner's library.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -710,12 +581,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Darksteel Citadel",
@@ -725,12 +593,10 @@
       "oracleCardName": "Darksteel Citadel",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Indestructible\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Great Furnace",
@@ -742,12 +608,10 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {R}."
+      ]
     },
     {
       "name": "Seat of the Synod",
@@ -759,12 +623,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}."
+      ]
     },
     {
       "name": "Thopter Spy Network",
@@ -776,12 +638,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Island",
@@ -793,11 +652,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -809,11 +666,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -825,11 +680,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -841,11 +694,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -857,11 +708,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -873,11 +722,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -889,11 +736,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -905,11 +750,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -921,11 +764,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -937,11 +778,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -953,11 +792,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -969,11 +806,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -985,11 +820,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1001,11 +834,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1017,11 +848,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1033,11 +862,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1049,11 +876,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1065,11 +890,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1081,11 +904,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1097,11 +918,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1113,11 +932,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1129,11 +946,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1145,11 +960,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1161,11 +974,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1177,11 +988,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1193,11 +1002,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1209,11 +1016,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Buried Ruin",
@@ -1223,11 +1028,9 @@
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1237,11 +1040,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Foundry of the Consuls",
@@ -1251,11 +1052,9 @@
       "oracleCardName": "Foundry of the Consuls",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}, Sacrifice this land: Create two 1/1 colorless Thopter artifact creature tokens with flying."
+      ]
     },
     {
       "name": "Highland Lake",
@@ -1268,11 +1067,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Izzet Boilerworks",
@@ -1285,11 +1082,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Izzet Guildgate",
@@ -1302,11 +1097,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Swiftwater Cliffs",
@@ -1319,11 +1112,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Brudiclad, Telchor Engineer",
@@ -1336,13 +1127,10 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{R}",
-      "cmc": 6,
-      "oracleText": "Creature tokens you control have haste.\nAt the beginning of combat on your turn, create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token."
+      ]
     },
     {
       "name": "Tawnos, Urza's Apprentice",
@@ -1355,12 +1143,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\n{U}{R}, {T}: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. (Mana abilities can't be targeted.)"
+      ]
     },
     {
       "name": "Echo Storm",
@@ -1372,12 +1157,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nCreate a token that's a copy of target artifact."
+      ]
     },
     {
       "name": "Vedalken Humiliator",
@@ -1389,12 +1171,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Metalcraft — Whenever this creature attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn."
+      ]
     },
     {
       "name": "Enchanter's Bane",
@@ -1406,12 +1185,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your end step, target enchantment deals damage equal to its mana value to its controller unless that player sacrifices it."
+      ]
     },
     {
       "name": "Saheeli's Directive",
@@ -1423,12 +1199,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Improvise (Each artifact you tap after you're done activating mana abilities pays for {1}.)\nReveal the top X cards of your library. You may put any number of artifact cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard."
+      ]
     },
     {
       "name": "Treasure Nabber",
@@ -1440,12 +1213,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn."
+      ]
     },
     {
       "name": "Varchild, Betrayer of Kjeldor",
@@ -1457,12 +1227,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever Varchild deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.\nSurvivors your opponents control can't block, and they can't attack you or planeswalkers you control.\nWhen Varchild leaves the battlefield, gain control of all Survivors."
+      ]
     },
     {
       "name": "Ancient Stone Idol",
@@ -1472,13 +1239,10 @@
       "oracleCardName": "Ancient Stone Idol",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{10}",
-      "cmc": 10,
-      "oracleText": "Flash\nThis spell costs {1} less to cast for each attacking creature.\nTrample\nWhen this creature dies, create a 6/12 colorless Construct artifact creature token with trample."
+      ]
     },
     {
       "name": "Coveted Jewel",
@@ -1488,12 +1252,9 @@
       "oracleCardName": "Coveted Jewel",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When this artifact enters, draw three cards.\n{T}: Add three mana of any one color.\nWhenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact. Untap it."
+      ]
     },
     {
       "name": "Endless Atlas",
@@ -1503,12 +1264,9 @@
       "oracleCardName": "Endless Atlas",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Draw a card. Activate only if you control three or more lands with the same name."
+      ]
     },
     {
       "name": "Retrofitter Foundry",
@@ -1518,12 +1276,9 @@
       "oracleCardName": "Retrofitter Foundry",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{3}: Untap this artifact.\n{2}, {T}: Create a 1/1 colorless Servo artifact creature token.\n{1}, {T}, Sacrifice a Servo: Create a 1/1 colorless Thopter artifact creature token with flying.\n{T}, Sacrifice a Thopter: Create a 4/4 colorless Construct artifact creature token."
+      ]
     },
     {
       "name": "Aether Gale",
@@ -1535,12 +1290,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return six target nonland permanents to their owners' hands."
+      ]
     },
     {
       "name": "Loyal Drake",
@@ -1552,12 +1304,9 @@
         "U"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nLieutenant — At the beginning of combat on your turn, if you control your commander, draw a card."
+      ]
     },
     {
       "name": "Loyal Apprentice",
@@ -1569,12 +1318,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
+      ]
     },
     {
       "name": "Geode Golem",
@@ -1584,13 +1330,10 @@
       "oracleCardName": "Geode Golem",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, you may cast your commander from the command zone without paying its mana cost. (You still pay any additional costs.)"
+      ]
     },
     {
       "name": "Thopter Engineer",
@@ -1602,12 +1345,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, create a 1/1 colorless Thopter artifact creature token with flying.\nArtifact creatures you control have haste. (They can attack and {T} as soon as they come under your control.)"
+      ]
     },
     {
       "name": "Forge of Heroes",
@@ -1617,15 +1357,13 @@
       "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.211Z",
+    "retrievedDate": "2026-06-23T17:40:37.287Z",
     "sourceUrl": "ExquisiteInvention_C18.json",
     "deckSource": "precon",
     "createdAt": "2018-08-10T00:00:00.000Z"

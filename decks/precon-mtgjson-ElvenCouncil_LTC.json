@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 662468647,
   "name": "Elven Council",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Will of the council — At the beginning of combat on your turn, if another Elf entered the battlefield under your control this turn, starting with you, each player votes for dominion or guidance. If dominion gets more votes, the Ring tempts you, then you put a +1/+1 counter on your Ring-bearer. If guidance gets more votes or the vote is tied, draw a card."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever you cast a spell with mana value 5 or greater, each opponent reveals the top card of their library. If any of those cards shares a card type with that spell, copy that spell, you may choose new targets for the copy, and each opponent draws a card. Otherwise, you draw a card. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Raise the Palisade",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands."
+      ]
     },
     {
       "name": "Trap the Trespassers",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Secret council — Each player secretly votes for a creature you don't control, then those votes are revealed. For each creature with one or more votes, put that many stun counters on it, then tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"
+      ]
     },
     {
       "name": "Arwen, Weaver of Hope",
@@ -86,12 +74,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Each other creature you control enters with a number of additional +1/+1 counters on it equal to Arwen's toughness."
+      ]
     },
     {
       "name": "Galadhrim Ambush",
@@ -103,12 +88,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Create X 1/1 green Elf Warrior creature tokens, where X is the number of attacking creatures.\nPrevent all combat damage that would be dealt this turn by non-Elf creatures."
+      ]
     },
     {
       "name": "Haldir, Lórien Lieutenant",
@@ -120,12 +102,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Haldir enters with X +1/+1 counters on it.\nVigilance\n{5}{G}: Until end of turn, other Elves you control gain vigilance and get +1/+1 for each +1/+1 counter on Haldir."
+      ]
     },
     {
       "name": "Legolas Greenleaf",
@@ -137,12 +116,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nLegolas can't be blocked by creatures with power 2 or less.\nWhenever another legendary creature you control enters, put a +1/+1 counter on Legolas.\nWhenever Legolas deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Mirkwood Elk",
@@ -154,12 +130,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nWhenever this creature enters or attacks, return target Elf card from your graveyard to your hand. You gain life equal to that card's power."
+      ]
     },
     {
       "name": "Travel Through Caradhras",
@@ -171,12 +144,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Council's dilemma — Starting with you, each player votes for Redhorn Pass or Mines of Moria. For each Redhorn Pass vote, search your library for a basic land card and put it onto the battlefield tapped. If you search your library this way, shuffle. For each Mines of Moria vote, return a card from your graveyard to your hand.\nExile Travel Through Caradhras."
+      ]
     },
     {
       "name": "Windswift Slice",
@@ -188,12 +158,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Target creature you control deals damage equal to its power to target creature you don't control. Create a number of 1/1 green Elf Warrior creature tokens equal to the amount of excess damage dealt this way."
+      ]
     },
     {
       "name": "Círdan the Shipwright",
@@ -206,12 +173,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nSecret council — Whenever Círdan enters or attacks, each player secretly votes for a player, then those votes are revealed. Each player draws a card for each vote they received. Each player who received no votes may put a permanent card from their hand onto the battlefield."
+      ]
     },
     {
       "name": "Elrond of the White Council",
@@ -224,12 +188,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Secret council — When Elrond enters, each player secretly votes for fellowship or aid, then those votes are revealed. For each fellowship vote, the voter chooses a creature they control. You gain control of each creature chosen this way, and they gain \"This creature can't attack its owner.\" Then for each aid vote, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Erestor of the Council",
@@ -242,12 +203,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever players finish voting, each opponent who voted for a choice you voted for creates a Treasure token. You scry X, where X is the number of opponents who voted for a choice you didn't vote for. Draw a card."
+      ]
     },
     {
       "name": "Mirkwood Trapper",
@@ -260,12 +218,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a player attacks you, target attacking creature gets -2/-0 until end of turn.\nWhenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn."
+      ]
     },
     {
       "name": "Radagast, Wizard of Wilds",
@@ -278,12 +233,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Ward {1}\nBeasts and Birds you control have ward {1}.\nWhenever you cast a spell with mana value 5 or greater, choose one —\n• Create a 3/3 green Beast creature token.\n• Create a 2/2 blue Bird creature token with flying."
+      ]
     },
     {
       "name": "Sail into the West",
@@ -296,12 +248,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Will of the council — Starting with you, each player votes for return or embark. If return gets more votes, each player returns up to two cards from their graveyard to their hand, then you exile Sail into the West. If embark gets more votes or the vote is tied, each player may discard their hand and draw seven cards."
+      ]
     },
     {
       "name": "Song of Eärendil",
@@ -314,12 +263,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Scry 2, then draw two cards.\nII — Create a Treasure token and a 2/2 blue Bird creature token with flying.\nIII — Put a flying counter on each creature you control without flying."
+      ]
     },
     {
       "name": "Lothlórien Blade",
@@ -329,12 +275,9 @@
       "oracleCardName": "Lothlórien Blade",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.\nEquip Elf {2}\nEquip {5}"
+      ]
     },
     {
       "name": "Model of Unity",
@@ -344,12 +287,9 @@
       "oracleCardName": "Model of Unity",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever players finish voting, you and each opponent who voted for a choice you voted for may scry 2.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Colossal Whale",
@@ -361,12 +301,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever this creature attacks, you may exile target creature defending player controls until this creature leaves the battlefield. (That creature returns under its owner's control.)"
+      ]
     },
     {
       "name": "Devastation Tide",
@@ -378,12 +315,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Return all nonland permanents to their owners' hands.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Mystic Confluence",
@@ -395,12 +329,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Choose three. You may choose the same mode more than once.\n• Counter target spell unless its controller pays {3}.\n• Return target creature to its owner's hand.\n• Draw a card."
+      ]
     },
     {
       "name": "Plea for Power",
@@ -412,12 +343,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Will of the council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards."
+      ]
     },
     {
       "name": "Swan Song",
@@ -429,12 +357,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying."
+      ]
     },
     {
       "name": "Asceticism",
@@ -446,12 +371,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Creatures you control have hexproof.\n{1}{G}: Regenerate target creature. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
+      ]
     },
     {
       "name": "Elvish Archdruid",
@@ -463,12 +385,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control."
+      ]
     },
     {
       "name": "Elvish Piper",
@@ -480,12 +399,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "{G}, {T}: You may put a creature card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Elvish Warmaster",
@@ -497,12 +413,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever one or more other Elves you control enter, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.\n{5}{G}{G}: Elves you control get +2/+2 and gain deathtouch until end of turn."
+      ]
     },
     {
       "name": "Genesis Wave",
@@ -514,12 +427,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard."
+      ]
     },
     {
       "name": "Heroic Intervention",
@@ -531,12 +441,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Permanents you control gain hexproof and indestructible until end of turn."
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -548,12 +455,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Inscription of Abundance",
@@ -565,12 +469,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Kicker {2}{G}\nChoose one. If this spell was kicked, choose any number instead.\n• Put two +1/+1 counters on target creature.\n• Target player gains X life, where X is the greatest power among creatures they control.\n• Target creature you control fights target creature you don't control."
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -582,12 +483,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Realm Seekers",
@@ -599,12 +497,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "This creature enters with X +1/+1 counters on it, where X is the total number of cards in all players' hands.\n{2}{G}, Remove a +1/+1 counter from this creature: Search your library for a land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Seeds of Renewal",
@@ -616,12 +511,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nReturn up to two target cards from your graveyard to your hand. Exile Seeds of Renewal."
+      ]
     },
     {
       "name": "Sylvan Offering",
@@ -633,12 +525,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Choose an opponent. You and that player each create an X/X green Treefolk creature token.\nChoose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -648,11 +537,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -665,11 +552,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -682,11 +567,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Rejuvenating Springs",
@@ -699,11 +582,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Vineglimmer Snarl",
@@ -716,11 +597,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Lórien Revealed",
@@ -732,12 +611,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Draw three cards.\nIslandcycling {1} ({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Celeborn the Wise",
@@ -749,12 +625,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever you attack with one or more Elves, scry 1.\nWhenever you scry, Celeborn gets +1/+1 until end of turn for each card looked at while scrying this way."
+      ]
     },
     {
       "name": "Elven Farsight",
@@ -766,12 +639,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card."
+      ]
     },
     {
       "name": "Wose Pathfinder",
@@ -783,12 +653,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color.\n{6}{G}, {T}: Another target creature gets +3/+3 and gains trample until end of turn."
+      ]
     },
     {
       "name": "Learn from the Past",
@@ -800,12 +667,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player shuffles their graveyard into their library.\nDraw a card."
+      ]
     },
     {
       "name": "Opt",
@@ -817,12 +681,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\nDraw a card."
+      ]
     },
     {
       "name": "Preordain",
@@ -834,12 +695,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Arbor Elf",
@@ -851,12 +709,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Untap target Forest."
+      ]
     },
     {
       "name": "Beast Within",
@@ -868,12 +723,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Cultivate",
@@ -885,12 +737,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Elvish Mystic",
@@ -902,12 +751,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {G}."
+      ]
     },
     {
       "name": "Elvish Visionary",
@@ -919,12 +765,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, draw a card."
+      ]
     },
     {
       "name": "Farhaven Elf",
@@ -936,12 +779,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mirror of Galadriel",
@@ -951,12 +791,9 @@
       "oracleCardName": "Mirror of Galadriel",
       "colorIdentity": [],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{5}, {T}: Scry 1, then draw a card. This ability costs {1} less to activate for each legendary creature you control."
+      ]
     },
     {
       "name": "Lignify",
@@ -968,13 +805,10 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nEnchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities."
+      ]
     },
     {
       "name": "Paradise Druid",
@@ -986,12 +820,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1003,12 +834,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reclamation Sage",
@@ -1020,12 +848,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Wood Elves",
@@ -1037,12 +862,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Growth Spiral",
@@ -1055,12 +877,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1070,12 +889,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1085,12 +901,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -1100,12 +913,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1115,12 +925,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Whispersilk Cloak",
@@ -1130,12 +937,9 @@
       "oracleCardName": "Whispersilk Cloak",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)\nEquip {2}"
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1145,11 +949,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1159,11 +961,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Field of Ruin",
@@ -1173,11 +973,9 @@
       "oracleCardName": "Field of Ruin",
       "colorIdentity": [],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1189,11 +987,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1206,11 +1002,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1222,11 +1016,9 @@
         "G"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Woodland Stream",
@@ -1239,11 +1031,9 @@
         "U"
       ],
       "set": "LTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Island",
@@ -1255,11 +1045,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1271,11 +1059,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1287,11 +1073,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1303,11 +1087,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1319,11 +1101,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1335,11 +1115,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1351,11 +1129,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1367,11 +1143,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1383,11 +1157,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1399,11 +1171,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1415,11 +1185,9 @@
         "U"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1431,11 +1199,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1447,11 +1213,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1463,11 +1227,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1479,11 +1241,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1495,11 +1255,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1511,11 +1269,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1527,11 +1283,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1543,11 +1297,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1559,11 +1311,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1575,11 +1325,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1591,11 +1339,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1607,11 +1353,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1623,11 +1367,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1639,11 +1381,9 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1655,15 +1395,13 @@
         "G"
       ],
       "set": "LTR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.087Z",
+    "retrievedDate": "2026-06-23T17:40:37.070Z",
     "sourceUrl": "ElvenCouncil_LTC.json",
     "deckSource": "precon",
     "createdAt": "2023-06-23T00:00:00.000Z"

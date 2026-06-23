@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 120422143,
   "name": "Revival Trance Collector's Edition (FINAL FANTASY VI)",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Trance — At the beginning of combat on your turn, mill two cards. Terra gains flying until end of turn.\nWhenever Terra deals combat damage to a player, you may pay {2}. When you do, return target creature card with power 3 or less from your graveyard to the battlefield tapped."
+      ]
     }
   ],
   "cards": [
@@ -33,13 +30,10 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile up to two target artifacts and/or enchantments.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Anger",
@@ -50,12 +44,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nAs long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -64,12 +55,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Archfiend of Depravity",
@@ -80,12 +68,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -94,11 +79,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Banon, the Returners' Leader",
@@ -110,12 +93,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Pray — Once during each of your turns, you may cast a creature spell from among cards in your graveyard that were put there from anywhere other than the battlefield this turn.\nWhenever you attack, you may pay {1} and discard a card. If you do, draw a card."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -127,11 +107,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Bedevil",
@@ -143,12 +121,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, creature, or planeswalker."
+      ]
     },
     {
       "name": "Big Score",
@@ -159,12 +134,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards and create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Celes, Rune Knight",
@@ -177,12 +149,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}{B}",
-      "cmc": 4,
-      "oracleText": "When Celes enters, discard any number of cards, then draw that many cards plus one.\nWhenever one or more other creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -194,11 +163,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Coin of Fate",
@@ -209,12 +176,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters, surveil 1.\n{3}{W}, {T}, Exile two creature cards from your graveyard, Sacrifice this artifact: An opponent chooses one of the exiled cards. You put that card on the bottom of your library and return the other to the battlefield tapped. You become the monarch."
+      ]
     },
     {
       "name": "Combustible Gearhulk",
@@ -225,13 +189,10 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "First strike\nWhen this creature enters, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then this creature deals damage to that player equal to the total mana value of those cards."
+      ]
     },
     {
       "name": "Command Tower",
@@ -240,11 +201,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -253,12 +212,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Crackling Doom",
@@ -271,12 +227,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures that player controls."
+      ]
     },
     {
       "name": "Cyan, Vengeful Samurai",
@@ -287,12 +240,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{W}",
-      "cmc": 7,
-      "oracleText": "This spell costs {1} less to cast for each creature card in your graveyard.\nDouble strike\nWhenever one or more creature cards leave your graveyard, put a +1/+1 counter on Cyan."
+      ]
     },
     {
       "name": "Demolition Field",
@@ -301,11 +251,9 @@
       "oracleCardName": "Demolition Field",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Desolate Mire",
@@ -317,11 +265,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -333,11 +279,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Edgar, Master Machinist",
@@ -349,12 +293,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.\nTools — Whenever Edgar attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control."
+      ]
     },
     {
       "name": "Espers to Magicite",
@@ -365,12 +306,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Exile each opponent's graveyard. When you do, choose up to one target creature card exiled this way. Create a token that's a copy of that card, except it's an artifact and it loses all other card types."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -379,11 +317,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -392,11 +328,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fetid Heath",
@@ -408,11 +342,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}."
+      ]
     },
     {
       "name": "Flayer of the Hatebound",
@@ -423,12 +355,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nWhenever this creature or another creature enters from your graveyard, that creature deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -440,11 +369,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -456,11 +383,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Gau, Feral Youth",
@@ -471,12 +396,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Rage — Whenever Gau attacks, put a +1/+1 counter on it.\nAt the beginning of each end step, if a card left your graveyard this turn, Gau deals damage equal to its power to each opponent."
+      ]
     },
     {
       "name": "General Leo Cristophe",
@@ -487,12 +409,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "When General Leo Cristophe enters, return up to one target creature card with mana value 3 or less from your graveyard to the battlefield. Then put a +1/+1 counter on General Leo Cristophe for each creature you control."
+      ]
     },
     {
       "name": "Geothermal Bog",
@@ -504,11 +423,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Gogo, Mysterious Mime",
@@ -519,12 +436,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of combat on your turn, you may have Gogo become a copy of another target creature you control until end of turn, except its name is Gogo, Mysterious Mime. If you do, Gogo and that creature each get +2/+0 and gain haste until end of turn and attack this turn if able."
+      ]
     },
     {
       "name": "Graven Cairns",
@@ -536,11 +450,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{B/R}, {T}: Add {B}{B}, {B}{R}, or {R}{R}."
+      ]
     },
     {
       "name": "High Market",
@@ -549,11 +461,9 @@
       "oracleCardName": "High Market",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life."
+      ]
     },
     {
       "name": "Interceptor, Shadow's Hound",
@@ -564,12 +474,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Menace\nAssassins you control have menace.\nWhenever you attack with one or more legendary creatures, you may pay {2}{B}. If you do, return this card from your graveyard to the battlefield tapped and attacking."
+      ]
     },
     {
       "name": "Isolated Chapel",
@@ -581,11 +488,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Kefka, Dancing Mad",
@@ -597,12 +502,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{R}",
-      "cmc": 7,
-      "oracleText": "During your turn, Kefka has indestructible.\nAt the beginning of your end step, exile a card at random from each opponent's graveyard. You may cast any number of spells from among cards exiled this way without paying their mana costs. Then each player who owns a spell you cast this way loses life equal to its mana value."
+      ]
     },
     {
       "name": "Key to the City",
@@ -611,12 +513,9 @@
       "oracleCardName": "Key to the City",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Discard a card: Up to one target creature can't be blocked this turn.\nWhenever this artifact becomes untapped, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Laughing Mad",
@@ -627,12 +526,9 @@
         "R"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)"
+      ]
     },
     {
       "name": "Legions to Ashes",
@@ -644,12 +540,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent."
+      ]
     },
     {
       "name": "Locke, Treasure Hunter",
@@ -661,12 +554,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Locke can't be blocked by creatures with greater power.\nMug — Whenever Locke attacks, each player mills a card. If a land card was milled this way, create a Treasure token. Until end of turn, you may cast a spell from among those cards."
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -675,13 +565,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Millikin",
@@ -690,13 +577,10 @@
       "oracleCardName": "Millikin",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Mill a card: Add {C}. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Mind Stone",
@@ -705,12 +589,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Mog, Moogle Warrior",
@@ -722,12 +603,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Lifelink\nDance — At the beginning of your end step, each player may discard a card. Each player who discarded a card this way draws a card. If a creature card was discarded this way, you create a 1/2 white Moogle creature token with lifelink. Then if a noncreature card was discarded this way, put a +1/+1 counter on each Moogle you control."
+      ]
     },
     {
       "name": "Morbid Opportunist",
@@ -738,12 +616,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Mortify",
@@ -755,12 +630,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or enchantment."
+      ]
     },
     {
       "name": "Mountain",
@@ -771,11 +643,9 @@
         "R"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -786,11 +656,9 @@
         "R"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -801,11 +669,9 @@
         "R"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Night's Whisper",
@@ -816,12 +682,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "You draw two cards and lose 2 life."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -834,11 +697,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Palace Jailer",
@@ -849,12 +710,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you become the monarch.\nWhen this creature enters, exile target creature an opponent controls until an opponent becomes the monarch."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -863,11 +721,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Phoenix Down",
@@ -878,12 +734,9 @@
         "W"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{1}{W}, {T}, Exile this artifact: Choose one —\n• Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.\n• Exile target Skeleton, Spirit, or Zombie."
+      ]
     },
     {
       "name": "Pitiless Plunderer",
@@ -894,12 +747,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever another creature you control dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Plains",
@@ -910,11 +760,9 @@
         "W"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -925,11 +773,9 @@
         "W"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -940,11 +786,9 @@
         "W"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -955,11 +799,9 @@
         "W"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Priest of Fell Rites",
@@ -971,12 +813,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "{T}, Pay 3 life, Sacrifice this creature: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.\nUnearth {3}{W}{B} ({3}{W}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Reanimate",
@@ -987,12 +826,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+      ]
     },
     {
       "name": "Rejoin the Fight",
@@ -1003,12 +839,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Mill three cards. Then starting with the next opponent in turn order, each opponent chooses a creature card in your graveyard that hasn't been chosen. Return each card chosen this way to the battlefield under your control."
+      ]
     },
     {
       "name": "Rise of the Dark Realms",
@@ -1019,12 +852,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Put all creature cards from all graveyards onto the battlefield under your control."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1033,11 +863,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Rugged Prairie",
@@ -1049,11 +877,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
+      ]
     },
     {
       "name": "Ruin Grinder",
@@ -1064,13 +890,10 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Menace\nWhen this creature dies, each player may discard their hand and draw seven cards.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Ruinous Ultimatum",
@@ -1083,12 +906,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{R}{W}{W}{W}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all nonland permanents your opponents control."
+      ]
     },
     {
       "name": "Sabin, Master Monk",
@@ -1099,12 +919,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Double strike\nBlitz—{2}{R}{R}, Discard a card. (If you cast this spell for its blitz cost, it gains haste and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.)\nYou may cast this card from your graveyard using its blitz ability."
+      ]
     },
     {
       "name": "Sacred Peaks",
@@ -1116,11 +933,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Sepulchral Primordial",
@@ -1131,12 +946,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhen this creature enters, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Setzer, Wandering Gambler",
@@ -1148,12 +960,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "When Setzer enters, create The Blackjack, a legendary 3/3 colorless Vehicle artifact token with flying and crew 2.\nWhenever a Vehicle you control deals combat damage to a player, flip a coin.\nWhenever you win a coin flip, create two tapped Treasure tokens."
+      ]
     },
     {
       "name": "Shadow, Mysterious Assassin",
@@ -1164,12 +973,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nThrow — Whenever Shadow deals combat damage to a player, you may sacrifice another nonland permanent. If you do, draw two cards and each opponent loses life equal to the mana value of the sacrificed permanent."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -1181,11 +987,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Shineshadow Snarl",
@@ -1197,11 +1001,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Siegfried, Famed Swordsman",
@@ -1212,12 +1014,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhen Siegfried enters, mill three cards. Then put X +1/+1 counters on Siegfried, where X is twice the number of creature cards in your graveyard."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -1229,11 +1028,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Snort",
@@ -1244,12 +1041,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Each player may discard their hand and draw five cards. Then Snort deals 5 damage to each opponent who discarded their hand this way.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1258,12 +1052,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -1272,13 +1063,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Stitch Together",
@@ -1289,12 +1077,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Return target creature card from your graveyard to your hand.\nThreshold — Return that card from your graveyard to the battlefield instead if there are seven or more cards in your graveyard."
+      ]
     },
     {
       "name": "Stitcher's Supplier",
@@ -1305,12 +1090,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "When this creature enters or dies, mill three cards. (Put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Strago and Relm",
@@ -1321,12 +1103,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Sketch and Lore — {2}{R}, {T}: Target opponent exiles cards from the top of their library until they exile an instant, sorcery, or creature card. You may cast that card without paying its mana cost. If you cast a creature spell this way, it gains haste and \"At the beginning of the end step, sacrifice this creature.\" Activate only as a sorcery."
+      ]
     },
     {
       "name": "Sulfurous Springs",
@@ -1338,11 +1117,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Summon: Esper Valigarmanda",
@@ -1353,13 +1130,10 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Exile an instant or sorcery card from each graveyard.\nII, III, IV — Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.\nFlying, haste"
+      ]
     },
     {
       "name": "Sun Titan",
@@ -1370,12 +1144,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Sunlit Marsh",
@@ -1387,11 +1158,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {B}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Sunscorched Divide",
@@ -1403,11 +1172,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Swamp",
@@ -1418,11 +1185,9 @@
         "B"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1433,11 +1198,9 @@
         "B"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1448,11 +1211,9 @@
         "B"
       ],
       "set": "FIN",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1461,12 +1222,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1478,12 +1236,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -1495,12 +1250,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "The Falcon, Airship Restored",
@@ -1511,12 +1263,9 @@
         "B"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever The Falcon deals combat damage to a player, you may sacrifice it. When you do, return target creature card from your graveyard to the battlefield.\n{4}{B}: Return this card from your graveyard to the battlefield tapped.\nCrew 2"
+      ]
     },
     {
       "name": "The Warring Triad",
@@ -1525,13 +1274,10 @@
       "oracleCardName": "The Warring Triad",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying, trample, haste\nAs long as there are fewer than eight cards in your graveyard, The Warring Triad isn't a creature.\n{T}, Mill a card: Target player adds one mana of any color."
+      ]
     },
     {
       "name": "Tragic Arrogance",
@@ -1542,12 +1288,9 @@
         "W"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control."
+      ]
     },
     {
       "name": "Umaro, Raging Yeti",
@@ -1558,12 +1301,9 @@
         "R"
       ],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Trample\nAt the beginning of combat on your turn, choose one at random —\n• Other creatures you control get +3/+0 and gain trample until end of turn.\n• Discard your hand, then draw four cards.\n• Umaro deals 5 damage to any target."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1572,16 +1312,13 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "FIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.489Z",
+    "retrievedDate": "2026-06-23T17:40:39.534Z",
     "sourceUrl": "RevivalTranceCollectorSEditionFinalFantasyVi_FIC.json",
     "deckSource": "precon",
     "createdAt": "2025-06-13T00:00:00.000Z"

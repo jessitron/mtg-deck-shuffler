@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 744197259,
   "name": "Temur Roar",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a creature spell, put a +1/+1 counter on Eshki. If that spell's power is 4 or greater, draw a card. If that spell's power is 6 or greater, Eshki deals damage equal to Eshki's power to each opponent."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nWhenever Ureni enters or attacks, look at the top eight cards of your library. You may put a Dragon creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Deceptive Frostkite",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nYou may have this creature enter as a copy of a creature you control with power 4 or greater, except it's a Dragon in addition to its other types and it has flying."
+      ]
     },
     {
       "name": "Hammerhead Tyrant",
@@ -71,12 +62,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever you cast a spell, return up to one target nonland permanent an opponent controls with mana value less than or equal to that spell's mana value to its owner's hand."
+      ]
     },
     {
       "name": "Will of the Temur",
@@ -88,12 +76,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Create a token that's a copy of target permanent, except it's a 4/4 Dragon creature with flying in addition to its other types.\n• Target player draws cards equal to the greatest mana value among permanents you control."
+      ]
     },
     {
       "name": "Parapet Thrasher",
@@ -105,12 +90,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever one or more Dragons you control deal combat damage to an opponent, choose one that hasn't been chosen this turn —\n• Destroy target artifact that opponent controls.\n• This creature deals 4 damage to each other opponent.\n• Exile the top card of your library. You may play it this turn."
+      ]
     },
     {
       "name": "Thundermane Dragon",
@@ -122,12 +104,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nYou may look at the top card of your library any time.\nYou may cast creature spells with power 4 or greater from the top of your library. If you cast a creature spell this way, it gains haste until end of turn."
+      ]
     },
     {
       "name": "Zenith Festival",
@@ -139,12 +118,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Exile the top X cards of your library. You may play them until the end of your next turn.\nHarmonize {X}{R}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by an amount of generic mana equal to its power. Then exile this spell.)"
+      ]
     },
     {
       "name": "Become the Avalanche",
@@ -156,12 +132,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Draw a card for each creature you control with power 4 or greater. Then creatures you control get +X/+X until end of turn, where X is the number of cards in your hand."
+      ]
     },
     {
       "name": "Broodcaller Scourge",
@@ -173,12 +146,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever one or more Dragons you control deal combat damage to a player, you may put a permanent card with mana value less than or equal to that damage from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Keiga, the Tide Star",
@@ -190,12 +160,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen Keiga dies, gain control of target creature."
+      ]
     },
     {
       "name": "Reflections of Littjara",
@@ -207,12 +174,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever you cast a spell of the chosen type, copy that spell. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Atsushi, the Blazing Sky",
@@ -224,12 +188,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying, trample\nWhen Atsushi dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -241,12 +202,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -258,12 +216,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Dragonmaster Outcast",
@@ -275,12 +230,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Gadrak, the Crown-Scourge",
@@ -292,12 +244,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Flying\nGadrak can't attack unless you control four or more artifacts.\nAt the beginning of your end step, create a Treasure token for each nontoken creature that died this turn. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Glorybringer",
@@ -309,12 +258,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying, haste\nYou may exert this creature as it attacks. When you do, it deals 4 damage to target non-Dragon creature an opponent controls. (An exerted creature won't untap during your next untap step.)"
+      ]
     },
     {
       "name": "Hellkite Courser",
@@ -326,12 +272,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, you may put a commander you own from the command zone onto the battlefield. It gains haste. Return it to the command zone at the beginning of the next end step."
+      ]
     },
     {
       "name": "Lathliss, Dragon Queen",
@@ -343,12 +286,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever another nontoken Dragon you control enters, create a 5/5 red Dragon creature token with flying.\n{1}{R}: Dragons you control get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Leyline Tyrant",
@@ -360,12 +300,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nYou don't lose unspent red mana as steps and phases end.\nWhen this creature dies, you may pay any amount of {R}. When you do, it deals that much damage to any target."
+      ]
     },
     {
       "name": "Nesting Dragon",
@@ -377,12 +314,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, create a 0/2 red Dragon Egg creature token with defender and \"When this token dies, create a 2/2 red Dragon creature token with flying and '{R}: This token gets +1/+0 until end of turn.'\""
+      ]
     },
     {
       "name": "Nogi, Draco-Zealot",
@@ -394,12 +328,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Dragon spells you cast cost {1} less to cast.\nWhenever Nogi attacks, if you control three or more Dragons, until end of turn, Nogi becomes a Dragon with base power and toughness 5/5 and gains flying."
+      ]
     },
     {
       "name": "Opportunistic Dragon",
@@ -411,12 +342,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, choose target Human or artifact an opponent controls. For as long as this creature remains on the battlefield, gain control of that permanent, it loses all abilities, and it can't attack or block."
+      ]
     },
     {
       "name": "Scourge of the Throne",
@@ -428,12 +356,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nWhenever this creature attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase."
+      ]
     },
     {
       "name": "Skarrgan Hellkite",
@@ -445,12 +370,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nFlying\n{3}{R}: This creature deals 2 damage divided as you choose among one or two targets. Activate only if this creature has a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Spit Flame",
@@ -462,12 +384,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Spit Flame deals 4 damage to target creature.\nWhenever a Dragon you control enters, you may pay {R}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Storm's Wrath",
@@ -479,12 +398,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Storm's Wrath deals 4 damage to each creature and each planeswalker."
+      ]
     },
     {
       "name": "Stormbreath Dragon",
@@ -496,12 +412,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying, haste, protection from white\n{5}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand."
+      ]
     },
     {
       "name": "Taurean Mauler",
@@ -513,12 +426,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Territorial Hellkite",
@@ -530,12 +440,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying, haste\nAt the beginning of combat on your turn, choose an opponent at random that this creature didn't attack during your last combat. This creature attacks that player this combat if able. If you can't choose an opponent this way, tap this creature."
+      ]
     },
     {
       "name": "Thunderbreak Regent",
@@ -547,12 +454,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, this creature deals 3 damage to that player."
+      ]
     },
     {
       "name": "Vengeful Ancestor",
@@ -564,12 +468,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature enters or attacks, goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever a goaded creature attacks, it deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Verix Bladewing",
@@ -581,12 +482,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Kicker {3} (You may pay an additional {3} as you cast this spell.)\nFlying\nWhen Verix Bladewing enters, if it was kicked, create Karox Bladewing, a legendary 4/4 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Frontier Siege",
@@ -598,12 +496,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of each of your main phases, add {G}{G}.\n• Dragons — Whenever a creature you control with flying enters, you may have it fight target creature you don't control."
+      ]
     },
     {
       "name": "Selvala's Stampede",
@@ -615,12 +510,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Council's dilemma — Starting with you, each player votes for wild or free. Reveal cards from the top of your library until you reveal a creature card for each wild vote. Put those creature cards onto the battlefield, then shuffle the rest into your library. You may put a permanent card from your hand onto the battlefield for each free vote."
+      ]
     },
     {
       "name": "Atarka, World Render",
@@ -633,12 +525,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nWhenever a Dragon you control attacks, it gains double strike until end of turn."
+      ]
     },
     {
       "name": "Dragonlord Atarka",
@@ -651,12 +540,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nWhen Dragonlord Atarka enters, it deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control."
+      ]
     },
     {
       "name": "Harbinger of the Hunt",
@@ -669,12 +555,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\n{2}{R}: This creature deals 1 damage to each creature without flying.\n{2}{G}: This creature deals 1 damage to each other creature with flying."
+      ]
     },
     {
       "name": "Sarkhan, Soul Aflame",
@@ -687,12 +570,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Dragon spells you cast cost {1} less to cast.\nWhenever a Dragon you control enters, you may have Sarkhan become a copy of it until end of turn, except its name is Sarkhan, Soul Aflame and it's legendary in addition to its other types."
+      ]
     },
     {
       "name": "Temur Ascendancy",
@@ -706,12 +586,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Creatures you control have haste.\nWhenever a creature you control with power 4 or greater enters, you may draw a card."
+      ]
     },
     {
       "name": "Dragon's Hoard",
@@ -721,12 +598,9 @@
       "oracleCardName": "Dragon's Hoard",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a Dragon you control enters, put a gold counter on this artifact.\n{T}, Remove a gold counter from this artifact: Draw a card.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -736,13 +610,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -755,11 +626,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -769,11 +638,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -786,11 +653,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Haven of the Spirit Dragon",
@@ -800,11 +665,9 @@
       "oracleCardName": "Haven of the Spirit Dragon",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Dragon creature spell.\n{2}, {T}, Sacrifice this land: Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -817,11 +680,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Karplusan Forest",
@@ -834,11 +695,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Kessig Wolf Run",
@@ -851,11 +710,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -868,11 +725,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -884,11 +739,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Rockfall Vale",
@@ -901,11 +754,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Rootbound Crag",
@@ -918,11 +769,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Sheltered Thicket",
@@ -935,11 +784,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -952,11 +799,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -969,11 +814,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Abandon",
@@ -986,11 +829,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -1003,11 +844,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -1020,11 +859,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Dragon Tempest",
@@ -1036,12 +873,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control with flying enters, it gains haste until end of turn.\nWhenever a Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control."
+      ]
     },
     {
       "name": "Breaching Dragonstorm",
@@ -1053,12 +887,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "When this enchantment enters, exile cards from the top of your library until you exile a nonland card. You may cast it without paying its mana cost if that spell's mana value is 8 or less. If you don't, put that card into your hand.\nWhen a Dragon you control enters, return this enchantment to its owner's hand."
+      ]
     },
     {
       "name": "Temple of the Dragon Queen",
@@ -1068,11 +899,9 @@
       "oracleCardName": "Temple of the Dragon Queen",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you control a Dragon.\nAs this land enters, choose a color.\n{T}: Add one mana of the chosen color."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1081,12 +910,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1095,12 +921,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1109,11 +932,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Stormshriek Feral // Flush Out",
@@ -1125,12 +946,10 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Flying, haste\n{1}{R}: This creature gets +1/+0 until end of turn."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Encroaching Dragonstorm",
@@ -1142,12 +961,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this enchantment enters, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nWhen a Dragon you control enters, return this enchantment to its owner's hand."
+      ]
     },
     {
       "name": "Draconic Lore",
@@ -1159,12 +975,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "This spell costs {2} less to cast if you control a Dragon.\nDraw three cards."
+      ]
     },
     {
       "name": "Rapid Hybridization",
@@ -1176,12 +989,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -1193,12 +1003,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Dragonlord's Servant",
@@ -1210,12 +1017,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Dragon spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Rapacious Dragon",
@@ -1227,12 +1031,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, create two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Whirlwing Stormbrood // Dynamic Soar",
@@ -1245,12 +1046,10 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flash\nFlying\nYou may cast sorcery spells and Dragon spells as though they had flash."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Beast Within",
@@ -1262,12 +1061,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Elemental Bond",
@@ -1279,12 +1075,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control with power 3 or greater enters, draw a card."
+      ]
     },
     {
       "name": "Farseek",
@@ -1296,12 +1089,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1311,11 +1101,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1329,11 +1117,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -1345,12 +1131,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Migration Path",
@@ -1362,12 +1145,9 @@
         "G"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1377,12 +1157,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Talisman of Creativity",
@@ -1395,12 +1172,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Impulse",
@@ -1413,12 +1187,9 @@
         "R"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {G}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Bountiful Landscape",
@@ -1432,11 +1203,9 @@
         "U"
       ],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Search your library for a basic Forest, Island, or Mountain card, put it onto the battlefield tapped, then shuffle.\nCycling {G}{U}{R} ({G}{U}{R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1446,11 +1215,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "TDC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Island",
@@ -1462,11 +1229,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1478,11 +1243,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1494,11 +1257,9 @@
         "U"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1510,11 +1271,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1526,11 +1285,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1542,11 +1299,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1558,11 +1313,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1574,11 +1327,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1590,11 +1341,9 @@
         "R"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1606,11 +1355,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1622,11 +1369,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1638,11 +1383,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1654,11 +1397,9 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1670,15 +1411,13 @@
         "G"
       ],
       "set": "TDM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.890Z",
+    "retrievedDate": "2026-06-23T17:40:40.188Z",
     "sourceUrl": "TemurRoar_TDC.json",
     "deckSource": "precon",
     "createdAt": "2025-04-11T00:00:00.000Z"

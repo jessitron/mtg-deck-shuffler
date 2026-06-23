@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 313241160,
   "name": "Peace Offering",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nWhenever you cast a spell, target opponent draws a card. Put a +1/+1 counter on target creature. It gains flying until end of turn. If this is the second time this ability has resolved this turn, you draw two cards."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Lifelink\nWhenever Mr. Foxglove attacks, draw cards equal to the number of cards in defending player's hand minus the number of cards in your hand. If you didn't draw cards this way, you may put a creature card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Tamiyo, Field Researcher",
@@ -56,12 +50,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "[+1]: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.\n[−2]: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.\n[−7]: Draw three cards. You get an emblem with \"You may cast spells from your hand without paying their mana costs.\""
+      ]
     },
     {
       "name": "Tenuous Truce",
@@ -73,12 +64,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant opponent\nAt the beginning of enchanted opponent's end step, you and that player each draw a card.\nWhen you attack enchanted opponent or a planeswalker they control or when they attack you or a planeswalker you control, sacrifice this Aura."
+      ]
     },
     {
       "name": "Loran of the Third Path",
@@ -90,12 +78,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhen Loran enters, destroy up to one target artifact or enchantment.\n{T}: You and target opponent each draw a card."
+      ]
     },
     {
       "name": "Steelburr Champion",
@@ -107,12 +92,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Offspring {1}{W} (You may pay an additional {1}{W} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nVigilance\nWhenever an opponent casts a noncreature spell, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Tempt with Bunnies",
@@ -124,12 +106,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Tempting Offer — Draw a card and create a 1/1 white Rabbit creature token. Then each opponent may draw a card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you create a 1/1 white Rabbit creature token."
+      ]
     },
     {
       "name": "Perch Protection",
@@ -141,12 +120,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Gift an extra turn (You may promise an opponent a gift as you cast this spell. If you do, they take an extra turn after this one.)\nCreate four 2/2 blue Bird creature tokens with flying. If the gift was promised, all permanents you control phase out, and until your next turn, your life total can't change and you gain protection from everything.\nExile Perch Protection."
+      ]
     },
     {
       "name": "Sunscorch Regent",
@@ -158,12 +134,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on this creature and you gain 1 life."
+      ]
     },
     {
       "name": "Promise of Loyalty",
@@ -175,12 +148,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it."
+      ]
     },
     {
       "name": "Hoofprints of the Stag",
@@ -192,13 +162,10 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw a card, you may put a hoofprint counter on this enchantment.\n{2}{W}, Remove four hoofprint counters from this enchantment: Create a 4/4 white Elemental creature token with flying. Activate only during your turn."
+      ]
     },
     {
       "name": "Mangara, the Diplomat",
@@ -210,12 +177,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, draw a card.\nWhenever an opponent casts their second spell each turn, draw a card."
+      ]
     },
     {
       "name": "Realm-Cloaked Giant // Cast Off",
@@ -227,12 +191,10 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Vigilance"
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Sphinx of Enlightenment",
@@ -244,12 +206,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, target opponent draws a card and you draw three cards."
+      ]
     },
     {
       "name": "Forgotten Ancient",
@@ -261,12 +220,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
+      ]
     },
     {
       "name": "Bloodroot Apothecary",
@@ -278,12 +234,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Toxic 2 (Players dealt combat damage by this creature also get two poison counters. A player with ten or more poison counters loses the game.)\nWhen this creature enters, you and target opponent each create a Treasure token.\nWhenever an opponent sacrifices a noncreature token, that player gets two poison counters."
+      ]
     },
     {
       "name": "Communal Brewing",
@@ -295,12 +248,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, any number of target opponents each draw a card. Put an ingredient counter on this enchantment, then put an ingredient counter on it for each card drawn this way.\nWhenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of ingredient counters on this enchantment."
+      ]
     },
     {
       "name": "Managorger Hydra",
@@ -312,12 +262,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever a player casts a spell, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Rishkar, Peema Renegade",
@@ -329,12 +276,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When Rishkar enters, put a +1/+1 counter on each of up to two target creatures.\nEach creature you control with a counter on it has \"{T}: Add {G}.\""
+      ]
     },
     {
       "name": "Rites of Flourishing",
@@ -346,12 +290,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns."
+      ]
     },
     {
       "name": "Tempt with Discovery",
@@ -363,12 +304,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Tempting offer — Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles."
+      ]
     },
     {
       "name": "Kalonian Hydra",
@@ -380,12 +318,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nThis creature enters with four +1/+1 counters on it.\nWhenever this creature attacks, double the number of +1/+1 counters on each creature you control."
+      ]
     },
     {
       "name": "Faeburrow Elder",
@@ -398,12 +333,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nThis creature gets +1/+1 for each color among permanents you control.\n{T}: For each color among permanents you control, add one mana of that color."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -413,11 +345,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Simic Ascendancy",
@@ -430,12 +360,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "{1}{G}{U}: Put a +1/+1 counter on target creature you control.\nWhenever one or more +1/+1 counters are put on a creature you control, put that many growth counters on this enchantment.\nAt the beginning of your upkeep, if this enchantment has twenty or more growth counters on it, you win the game."
+      ]
     },
     {
       "name": "Ghirapur Orrery",
@@ -445,12 +372,9 @@
       "oracleCardName": "Ghirapur Orrery",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Each player may play an additional land on each of their turns.\nAt the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."
+      ]
     },
     {
       "name": "Psychosis Crawler",
@@ -460,13 +384,10 @@
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -479,11 +400,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -496,11 +415,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Seachrome Coast",
@@ -513,11 +430,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -530,11 +445,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Hinterland Harbor",
@@ -547,11 +460,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Razorverge Thicket",
@@ -564,11 +475,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Flooded Grove",
@@ -581,11 +490,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -598,11 +505,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -615,11 +520,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -632,11 +535,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Brushland",
@@ -649,11 +550,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -666,11 +565,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -683,11 +580,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Overflowing Basin",
@@ -700,11 +595,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -717,11 +610,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Sunpetal Grove",
@@ -734,11 +625,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Triskaidekaphile",
@@ -750,12 +639,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\nAt the beginning of your upkeep, if you have exactly thirteen cards in your hand, you win the game.\n{3}{U}: Draw a card."
+      ]
     },
     {
       "name": "Octomancer",
@@ -768,12 +654,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Gift an Octopus (You may promise an opponent a gift as you cast this spell. If you do, when it enters, they create an 8/8 blue Octopus creature token.)\nAt the beginning of each end step, create a token that's a copy of target creature token that entered the battlefield this turn."
+      ]
     },
     {
       "name": "Twenty-Toed Toad",
@@ -785,12 +668,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Your maximum hand size is twenty.\nWhenever you attack with two or more creatures, put a +1/+1 counter on this creature and draw a card.\nWhenever this creature attacks, you win the game if there are twenty or more counters on it or you have twenty or more cards in hand."
+      ]
     },
     {
       "name": "Intellectual Offering",
@@ -802,12 +682,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Choose an opponent. You and that player each draw three cards.\nChoose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls."
+      ]
     },
     {
       "name": "Illusionist's Gambit",
@@ -819,12 +696,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Cast this spell only during the declare blockers step on an opponent's turn.\nRemove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat."
+      ]
     },
     {
       "name": "Body of Knowledge",
@@ -836,12 +710,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Body of Knowledge's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhenever this creature is dealt damage, draw that many cards."
+      ]
     },
     {
       "name": "Chasm Skulker",
@@ -853,12 +724,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you draw a card, put a +1/+1 counter on this creature.\nWhen this creature dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on this creature. (They can't be blocked as long as defending player controls an Island.)"
+      ]
     },
     {
       "name": "Perplexing Test",
@@ -870,12 +738,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Return all creature tokens to their owners' hands.\n• Return all nontoken creatures to their owners' hands."
+      ]
     },
     {
       "name": "Jolrael, Mwonvuli Recluse",
@@ -887,12 +752,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw your second card each turn, create a 2/2 green Cat creature token.\n{4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand."
+      ]
     },
     {
       "name": "Fisher's Talent",
@@ -905,12 +767,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your upkeep, look at the top card of your library. You may reveal it if it's a land card. Create a 1/1 blue Fish creature token if you revealed it this way. Then draw a card.\n{G}{U}: Level 2\nIf you would create a Fish token, create a 3/3 blue Shark creature token instead.\n{2}{G}{U}: Level 3\nIf you would create a Shark token, create an 8/8 blue Octopus creature token instead."
+      ]
     },
     {
       "name": "Selvala, Explorer Returned",
@@ -923,12 +782,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Parley — {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card."
+      ]
     },
     {
       "name": "Kwain, Itinerant Meddler",
@@ -941,12 +797,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}",
-      "cmc": 2,
-      "oracleText": "{T}: Each player may draw a card, then each player who drew a card this way gains 1 life."
+      ]
     },
     {
       "name": "Coveted Jewel",
@@ -956,12 +809,9 @@
       "oracleCardName": "Coveted Jewel",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "When this artifact enters, draw three cards.\n{T}: Add three mana of any one color.\nWhenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact. Untap it."
+      ]
     },
     {
       "name": "Temple of Plenty",
@@ -974,11 +824,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Generous Gift",
@@ -990,12 +838,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1007,12 +852,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Secret Rendezvous",
@@ -1024,12 +866,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "You and target opponent each draw three cards."
+      ]
     },
     {
       "name": "Baird, Steward of Argive",
@@ -1041,12 +880,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nCreatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures."
+      ]
     },
     {
       "name": "An Offer You Can't Refuse",
@@ -1058,12 +894,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Wizard Class",
@@ -1075,12 +908,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "(Gain the next level as a sorcery to add its ability.)\nYou have no maximum hand size.\n{2}{U}: Level 2\nWhen this Class becomes level 2, draw two cards.\n{4}{U}: Level 3\nWhenever you draw a card, put a +1/+1 counter on target creature you control."
+      ]
     },
     {
       "name": "Cultivate",
@@ -1092,12 +922,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -1109,12 +936,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Broken Wings",
@@ -1126,12 +950,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, enchantment, or creature with flying."
+      ]
     },
     {
       "name": "Spore Frog",
@@ -1143,12 +964,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Sacrifice this creature: Prevent all combat damage that would be dealt this turn."
+      ]
     },
     {
       "name": "Wear Down",
@@ -1160,12 +978,9 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nDestroy target artifact or enchantment. If the gift was promised, instead destroy two target artifacts and/or enchantments."
+      ]
     },
     {
       "name": "Peerless Recycling",
@@ -1177,12 +992,9 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nReturn target permanent card from your graveyard to your hand. If the gift was promised, instead return two target permanent cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Coiling Oracle",
@@ -1195,12 +1007,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "Riot Control",
@@ -1212,12 +1021,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn."
+      ]
     },
     {
       "name": "Martial Impetus",
@@ -1229,12 +1035,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Jolly Gerbils",
@@ -1246,12 +1049,9 @@
         "W"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you give a gift, draw a card."
+      ]
     },
     {
       "name": "Long River's Pull",
@@ -1263,12 +1063,9 @@
         "U"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}",
-      "cmc": 2,
-      "oracleText": "Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nCounter target creature spell. If the gift was promised, instead counter target spell."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1278,12 +1075,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1293,12 +1087,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1308,12 +1099,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1323,12 +1111,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1338,12 +1123,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1353,12 +1135,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Thriving Heath",
@@ -1370,11 +1149,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Isle",
@@ -1386,11 +1163,9 @@
         "U"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Grove",
@@ -1402,11 +1177,9 @@
         "G"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than green.\n{T}: Add {G} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1416,11 +1189,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1430,11 +1201,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1444,11 +1213,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1458,11 +1225,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1476,11 +1241,9 @@
         "W"
       ],
       "set": "BLC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Plains",
@@ -1492,11 +1255,9 @@
         "W"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1508,11 +1269,9 @@
         "W"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1524,11 +1283,9 @@
         "W"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1540,11 +1297,9 @@
         "W"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1556,11 +1311,9 @@
         "U"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1572,11 +1325,9 @@
         "U"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1588,11 +1339,9 @@
         "U"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1604,11 +1353,9 @@
         "U"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1620,11 +1367,9 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1636,11 +1381,9 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1652,11 +1395,9 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1668,15 +1409,13 @@
         "G"
       ],
       "set": "BLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.255Z",
+    "retrievedDate": "2026-06-23T17:40:39.100Z",
     "sourceUrl": "PeaceOffering_BLC.json",
     "deckSource": "precon",
     "createdAt": "2024-08-02T00:00:00.000Z"

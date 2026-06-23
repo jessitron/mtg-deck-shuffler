@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1167706599,
   "name": "Sworn To Darkness",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "[+2]: Each opponent loses 1 life. You gain life equal to the life lost this way.\n[−2]: Create a 5/5 black Demon creature token with flying. You lose 2 life.\n[−8]: You get an emblem with \"{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power.\"\nOb Nixilis of the Black Oath can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Morbid — {T}, Tap two untapped creatures you control: Create a 5/5 black Demon creature token with flying. Activate only if a creature died this turn."
+      ]
     },
     {
       "name": "Nantuko Shade",
@@ -50,12 +44,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "{B}: This creature gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Vampire Hexmage",
@@ -67,12 +58,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "First strike\nSacrifice this creature: Remove all counters from target permanent."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -82,13 +70,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Flesh Carver",
@@ -100,12 +85,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{1}{B}, Sacrifice another creature: Put two +1/+1 counters on this creature.\nWhen this creature dies, create an X/X black Horror creature token, where X is this creature's power."
+      ]
     },
     {
       "name": "Crypt Ghast",
@@ -117,12 +99,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever you tap a Swamp for mana, add an additional {B}."
+      ]
     },
     {
       "name": "Disciple of Bolas",
@@ -134,12 +113,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power."
+      ]
     },
     {
       "name": "Evernight Shade",
@@ -151,12 +127,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "{B}: This creature gets +1/+1 until end of turn.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Abyssal Persecutor",
@@ -168,12 +141,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying, trample\nYou can't win the game and your opponents can't lose the game."
+      ]
     },
     {
       "name": "Nekrataal",
@@ -185,12 +155,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "First strike\nWhen this creature enters, destroy target nonartifact, nonblack creature. That creature can't be regenerated."
+      ]
     },
     {
       "name": "Magus of the Coffers",
@@ -202,12 +169,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "{2}, {T}: Add {B} for each Swamp you control."
+      ]
     },
     {
       "name": "Raving Dead",
@@ -219,12 +183,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Deathtouch\nAt the beginning of combat on your turn, choose an opponent at random. This creature attacks that player this combat if able.\nWhenever this creature deals combat damage to a player, that player loses half their life, rounded down."
+      ]
     },
     {
       "name": "Shriekmaw",
@@ -236,12 +197,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen this creature enters, destroy target nonartifact, nonblack creature.\nEvoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Bloodgift Demon",
@@ -253,12 +211,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nAt the beginning of your upkeep, target player draws a card and loses 1 life."
+      ]
     },
     {
       "name": "Demon of Wailing Agonies",
@@ -270,12 +225,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nLieutenant — As long as you control your commander, this creature gets +2/+2 and has \"Whenever this creature deals combat damage to a player, that player sacrifices a creature of their choice.\""
+      ]
     },
     {
       "name": "Drana, Kalastria Bloodchief",
@@ -287,12 +239,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\n{X}{B}{B}: Target creature gets -0/-X until end of turn and Drana gets +X/+0 until end of turn."
+      ]
     },
     {
       "name": "Ghoulcaller Gisa",
@@ -304,12 +253,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "{B}, {T}, Sacrifice another creature: Create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power."
+      ]
     },
     {
       "name": "Gray Merchant of Asphodel",
@@ -321,12 +267,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)"
+      ]
     },
     {
       "name": "Morkrut Banshee",
@@ -338,12 +281,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Morbid — When this creature enters, if a creature died this turn, target creature gets -4/-4 until end of turn."
+      ]
     },
     {
       "name": "Grave Titan",
@@ -355,12 +295,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\nWhenever this creature enters or attacks, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Phyrexian Gargantua",
@@ -372,12 +309,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, you draw two cards and you lose 2 life."
+      ]
     },
     {
       "name": "Pontiff of Blight",
@@ -389,12 +323,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nOther creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)"
+      ]
     },
     {
       "name": "Reaper from the Abyss",
@@ -406,12 +337,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nMorbid — At the beginning of each end step, if a creature died this turn, destroy target non-Demon creature."
+      ]
     },
     {
       "name": "Butcher of Malakir",
@@ -423,12 +351,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Overseer of the Damned",
@@ -440,12 +365,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Pestilence Demon",
@@ -457,12 +379,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Flying\n{B}: This creature deals 1 damage to each creature and each player."
+      ]
     },
     {
       "name": "Liliana's Reaver",
@@ -474,12 +393,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhenever this creature deals combat damage to a player, that player discards a card and you create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Xathrid Demon",
@@ -491,12 +407,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than this creature, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap this creature and you lose 7 life."
+      ]
     },
     {
       "name": "Sign in Blood",
@@ -508,12 +421,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Target player draws two cards and loses 2 life."
+      ]
     },
     {
       "name": "Read the Bones",
@@ -525,12 +435,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Victimize",
@@ -542,12 +449,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -559,12 +463,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Dread Return",
@@ -576,12 +477,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Return target creature card from your graveyard to the battlefield.\nFlashback—Sacrifice three creatures. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Mutilate",
@@ -593,12 +491,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "All creatures get -1/-1 until end of turn for each Swamp you control."
+      ]
     },
     {
       "name": "Infernal Offering",
@@ -610,12 +505,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards.\nChoose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield."
+      ]
     },
     {
       "name": "Aether Snap",
@@ -627,12 +519,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Remove all counters from all permanents and exile all tokens."
+      ]
     },
     {
       "name": "Promise of Power",
@@ -644,12 +533,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• You draw five cards and you lose 5 life.\n• Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.\nEntwine {4} (Choose both if you pay the entwine cost.)"
+      ]
     },
     {
       "name": "Necromantic Selection",
@@ -661,12 +547,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection."
+      ]
     },
     {
       "name": "Profane Command",
@@ -678,12 +561,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Choose two —\n• Target player loses X life.\n• Return target creature card with mana value X or less from your graveyard to the battlefield.\n• Target creature gets -X/-X until end of turn.\n• Up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)"
+      ]
     },
     {
       "name": "Dregs of Sorrow",
@@ -695,12 +575,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{4}{B}",
-      "cmc": 5,
-      "oracleText": "Destroy X target nonblack creatures. Draw X cards."
+      ]
     },
     {
       "name": "Black Sun's Zenith",
@@ -712,12 +589,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Spoils of Blood",
@@ -729,12 +603,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Create an X/X black Horror creature token, where X is the number of creatures that died this turn."
+      ]
     },
     {
       "name": "Tragic Slip",
@@ -746,12 +617,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Target creature gets -1/-1 until end of turn.\nMorbid — That creature gets -13/-13 until end of turn instead if a creature died this turn."
+      ]
     },
     {
       "name": "Malicious Affliction",
@@ -763,12 +631,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Morbid — When you cast this spell, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.\nDestroy target nonblack creature."
+      ]
     },
     {
       "name": "Sudden Spoiling",
@@ -780,12 +645,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nUntil end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2."
+      ]
     },
     {
       "name": "Tendrils of Corruption",
@@ -797,12 +659,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control."
+      ]
     },
     {
       "name": "Annihilate",
@@ -814,12 +673,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Destroy target nonblack creature. It can't be regenerated.\nDraw a card."
+      ]
     },
     {
       "name": "Skeletal Scrying",
@@ -831,12 +687,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{B}",
-      "cmc": 1,
-      "oracleText": "As an additional cost to cast this spell, exile X cards from your graveyard.\nYou draw X cards and you lose X life."
+      ]
     },
     {
       "name": "Wake the Dead",
@@ -848,12 +701,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Cast this spell only during combat on an opponent's turn.\nReturn X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -863,12 +713,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Charcoal Diamond",
@@ -880,12 +727,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Jet Medallion",
@@ -895,12 +739,9 @@
       "oracleCardName": "Jet Medallion",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Black spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -910,12 +751,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -925,12 +763,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -940,12 +775,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Worn Powerstone",
@@ -955,12 +787,9 @@
       "oracleCardName": "Worn Powerstone",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Lashwrithe",
@@ -972,12 +801,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each Swamp you control.\nEquip {B/P}{B/P} ({B/P} can be paid with either {B} or 2 life.)"
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -987,12 +813,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Bad Moon",
@@ -1004,12 +827,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Black creatures get +1/+1."
+      ]
     },
     {
       "name": "Arcane Lighthouse",
@@ -1019,11 +839,9 @@
       "oracleCardName": "Arcane Lighthouse",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1035,11 +853,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1051,11 +867,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Crypt of Agadeem",
@@ -1067,11 +881,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}, {T}: Add {B} for each black creature card in your graveyard."
+      ]
     },
     {
       "name": "Everglades",
@@ -1083,11 +895,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Swamp you control to its owner's hand.\n{T}: Add {C}{B}."
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -1097,11 +907,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1111,11 +919,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Polluted Mire",
@@ -1127,11 +933,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1143,11 +947,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1159,11 +961,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1175,11 +975,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1191,11 +989,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1207,11 +1003,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1223,11 +1017,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1239,11 +1031,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1255,11 +1045,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1271,11 +1059,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1287,11 +1073,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1303,11 +1087,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1319,11 +1101,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1335,11 +1115,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1351,11 +1129,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1367,11 +1143,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1383,11 +1157,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1399,11 +1171,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1415,11 +1185,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1431,11 +1199,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1447,11 +1213,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1463,11 +1227,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1479,11 +1241,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1495,11 +1255,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1511,11 +1269,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1527,11 +1283,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1543,11 +1297,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1559,11 +1311,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1575,11 +1325,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1591,11 +1339,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1607,11 +1353,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1623,11 +1367,9 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1639,15 +1381,13 @@
         "B"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.861Z",
+    "retrievedDate": "2026-06-23T17:40:40.144Z",
     "sourceUrl": "SwornToDarkness_C14.json",
     "deckSource": "precon",
     "createdAt": "2014-11-07T00:00:00.000Z"

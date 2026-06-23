@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1038203839,
   "name": "Nature's Vengeance",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "[+2]: Discard a card, then draw a card. If a land card is discarded this way, draw an additional card.\n[−3]: Return up to two target land cards from your graveyard to the battlefield.\n[−11]: Destroy up to six target nonland permanents, then create six 2/2 green Cat Warrior creature tokens with forestwalk.\nLord Windgrace can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhenever this creature deals damage to an opponent, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -54,12 +48,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Soul of Innistrad",
@@ -71,12 +62,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\n{3}{B}{B}: Return up to three target creature cards from your graveyard to your hand.\n{3}{B}{B}, Exile this card from your graveyard: Return up to three target creature cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Flameblast Dragon",
@@ -88,12 +76,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature attacks, you may pay {X}{R}. If you do, it deals X damage to any target."
+      ]
     },
     {
       "name": "Budoka Gardener // Dokai, Weaver of Life",
@@ -105,12 +90,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip this creature."
+      ]
     },
     {
       "name": "Centaur Vinecrasher",
@@ -122,12 +104,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nThis creature enters with a number of +1/+1 counters on it equal to the number of land cards in all graveyards.\nWhenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Moldgraf Monstrosity",
@@ -139,12 +118,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nWhen this creature dies, exile it, then return two creature cards at random from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -156,12 +132,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Scute Mob",
@@ -173,12 +146,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Rubblehulk",
@@ -191,12 +161,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{G}",
-      "cmc": 6,
-      "oracleText": "Rubblehulk's power and toughness are each equal to the number of lands you control.\nBloodrush — {1}{R}{G}, Discard this card: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -208,12 +175,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Baloth Woodcrasher",
@@ -225,12 +189,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Landfall — Whenever a land you control enters, this creature gets +4/+4 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)"
+      ]
     },
     {
       "name": "Borderland Explorer",
@@ -242,12 +203,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle."
+      ]
     },
     {
       "name": "Farhaven Elf",
@@ -259,12 +217,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -276,12 +231,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -293,12 +245,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Zendikar Incarnate",
@@ -311,12 +260,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Zendikar Incarnate's power is equal to the number of lands you control."
+      ]
     },
     {
       "name": "Ruinous Path",
@@ -328,12 +274,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or planeswalker.\nAwaken 4—{5}{B}{B} (If you cast this spell for {5}{B}{B}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)"
+      ]
     },
     {
       "name": "Chain Reaction",
@@ -345,12 +288,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Decimate",
@@ -363,12 +303,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
+      ]
     },
     {
       "name": "Gaze of Granite",
@@ -381,12 +318,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy each nonland permanent with mana value X or less."
+      ]
     },
     {
       "name": "Lavalanche",
@@ -400,12 +334,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Lavalanche deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls."
+      ]
     },
     {
       "name": "Worm Harvest",
@@ -418,12 +349,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B/G}{B/G}{B/G}",
-      "cmc": 5,
-      "oracleText": "Create a 1/1 black and green Worm creature token for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Stitch Together",
@@ -435,12 +363,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Return target creature card from your graveyard to your hand.\nThreshold — Return that card from your graveyard to the battlefield instead if there are seven or more cards in your graveyard."
+      ]
     },
     {
       "name": "Cultivate",
@@ -452,12 +377,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explore",
@@ -469,12 +391,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Explosive Vegetation",
@@ -486,12 +405,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Far Wanderings",
@@ -503,12 +419,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nThreshold — If there are seven or more cards in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Hunting Wilds",
@@ -520,12 +433,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Kicker {3}{G} (You may pay an additional {3}{G} as you cast this spell.)\nSearch your library for up to two Forest cards, put them onto the battlefield tapped, then shuffle.\nIf this spell was kicked, untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands."
+      ]
     },
     {
       "name": "Savage Twister",
@@ -538,12 +448,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{G}",
-      "cmc": 2,
-      "oracleText": "Savage Twister deals X damage to each creature."
+      ]
     },
     {
       "name": "Moonlight Bargain",
@@ -555,12 +462,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Look at the top five cards of your library. For each card, put that card into your graveyard unless you pay 2 life. Then put the rest into your hand."
+      ]
     },
     {
       "name": "Consign to Dust",
@@ -572,12 +476,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Strive — This spell costs {2}{G} more to cast for each target beyond the first.\nDestroy any number of target artifacts and/or enchantments."
+      ]
     },
     {
       "name": "Grapple with the Past",
@@ -589,12 +490,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Mill three cards, then you may return a creature or land card from your graveyard to your hand. (To mill three cards, put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Harrow",
@@ -606,12 +504,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Grisly Salvage",
@@ -624,12 +519,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Putrefy",
@@ -642,12 +534,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Seer's Sundial",
@@ -657,12 +546,9 @@
       "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -672,12 +558,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Retreat to Hagra",
@@ -689,12 +572,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Target creature gets +1/+0 and gains deathtouch until end of turn.\n• Each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Khalni Heart Expedition",
@@ -706,12 +586,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Deathreap Ritual",
@@ -724,12 +601,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card."
+      ]
     },
     {
       "name": "Swamp",
@@ -741,11 +615,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -757,11 +629,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -773,11 +643,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -789,11 +657,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -805,11 +671,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -821,11 +685,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -837,11 +699,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -853,11 +713,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -869,11 +727,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -885,11 +741,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -901,11 +755,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -917,11 +769,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -933,11 +783,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -949,11 +797,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -965,11 +811,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -981,11 +825,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -997,11 +839,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1013,11 +853,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Akoum Refuge",
@@ -1030,11 +868,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1046,11 +882,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -1062,11 +896,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1078,11 +910,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1092,11 +922,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1106,11 +934,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1122,11 +948,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1139,11 +963,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Grim Backwoods",
@@ -1156,11 +978,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card."
+      ]
     },
     {
       "name": "Gruul Turf",
@@ -1173,11 +993,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Haunted Fengraf",
@@ -1187,11 +1005,9 @@
       "oracleCardName": "Haunted Fengraf",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Sacrifice this land: Return a creature card at random from your graveyard to your hand."
+      ]
     },
     {
       "name": "Jund Panorama",
@@ -1201,11 +1017,9 @@
       "oracleCardName": "Jund Panorama",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Jungle Hollow",
@@ -1218,11 +1032,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Kazandu Refuge",
@@ -1235,11 +1047,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Khalni Garden",
@@ -1251,11 +1061,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, create a 0/1 green Plant creature token.\n{T}: Add {G}."
+      ]
     },
     {
       "name": "Mountain Valley",
@@ -1265,11 +1073,9 @@
       "oracleCardName": "Mountain Valley",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1279,11 +1085,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1296,11 +1100,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Rocky Tar Pit",
@@ -1310,11 +1112,9 @@
       "oracleCardName": "Rocky Tar Pit",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Savage Lands",
@@ -1328,11 +1128,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1342,11 +1140,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1356,11 +1152,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1372,11 +1166,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Warped Landscape",
@@ -1386,11 +1178,9 @@
       "oracleCardName": "Warped Landscape",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Gyrus, Waker of Corpses",
@@ -1404,12 +1194,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Gyrus enters with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nWhenever Gyrus attacks, you may exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at end of combat."
+      ]
     },
     {
       "name": "Thantis, the Warweaver",
@@ -1423,12 +1210,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}{G}",
-      "cmc": 6,
-      "oracleText": "Vigilance, reach\nAll creatures attack each combat if able.\nWhenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Thantis."
+      ]
     },
     {
       "name": "Bloodtracker",
@@ -1440,12 +1224,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\n{B}, Pay 2 life: Put a +1/+1 counter on this creature.\nWhen this creature leaves the battlefield, draw a card for each +1/+1 counter on it."
+      ]
     },
     {
       "name": "Emissary of Grudges",
@@ -1457,12 +1238,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Flying, haste\nAs this creature enters, secretly choose an opponent.\nReveal the player you chose: Choose new targets for target spell or ability if it's controlled by the chosen player and if it targets you or a permanent you control. Activate only once."
+      ]
     },
     {
       "name": "Fury Storm",
@@ -1474,12 +1252,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nCopy target instant or sorcery spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Nesting Dragon",
@@ -1491,12 +1266,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, create a 0/2 red Dragon Egg creature token with defender and \"When this token dies, create a 2/2 red Dragon creature token with flying and '{R}: This token gets +1/+0 until end of turn.'\""
+      ]
     },
     {
       "name": "Reality Scramble",
@@ -1508,12 +1280,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Put target permanent you own on the bottom of your library. Reveal cards from the top of your library until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Crash of Rhino Beetles",
@@ -1525,12 +1294,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nThis creature gets +10/+10 as long as you control ten or more lands."
+      ]
     },
     {
       "name": "Turntimber Sower",
@@ -1542,12 +1308,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more land cards are put into your graveyard from anywhere, create a 0/1 green Plant creature token.\n{G}, Sacrifice three creatures: Return target land card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Whiptongue Hydra",
@@ -1559,12 +1322,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Reach\nWhen this creature enters, destroy all creatures with flying. Put a +1/+1 counter on this creature for each creature destroyed this way."
+      ]
     },
     {
       "name": "Windgrace's Judgment",
@@ -1577,12 +1337,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "For any number of opponents, destroy target nonland permanent that player controls."
+      ]
     },
     {
       "name": "Xantcha, Sleeper Agent",
@@ -1595,12 +1352,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Xantcha enters under the control of an opponent of your choice.\nXantcha attacks each combat if able and can't attack its owner or planeswalkers its owner controls.\n{3}: Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability."
+      ]
     },
     {
       "name": "Loyal Subordinate",
@@ -1612,12 +1366,9 @@
         "B"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nLieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life."
+      ]
     },
     {
       "name": "Loyal Apprentice",
@@ -1629,12 +1380,9 @@
         "R"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
+      ]
     },
     {
       "name": "Loyal Guardian",
@@ -1646,12 +1394,9 @@
         "G"
       ],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nLieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Forge of Heroes",
@@ -1661,15 +1406,13 @@
       "oracleCardName": "Forge of Heroes",
       "colorIdentity": [],
       "set": "C18",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Choose target commander that entered this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.116Z",
+    "retrievedDate": "2026-06-23T17:40:38.852Z",
     "sourceUrl": "NatureSVengeance_C18.json",
     "deckSource": "precon",
     "createdAt": "2018-08-10T00:00:00.000Z"

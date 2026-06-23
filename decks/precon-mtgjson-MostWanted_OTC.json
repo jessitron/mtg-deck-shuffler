@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1741704724,
   "name": "Most Wanted",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Flying, lifelink\nWhenever one or more outlaws you control deal combat damage to a player, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\n{3}, Sacrifice two Treasures: Put two +1/+1 counters on each creature you control. Activate only as a sorcery."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Other outlaws you control have vigilance and haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nAt the beginning of combat on your turn, you may have Treasures you control become 3/3 Construct Assassin artifact creatures in addition to their other types until end of turn."
+      ]
     },
     {
       "name": "Council's Judgment",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Will of the council — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes."
+      ]
     },
     {
       "name": "Heliod's Intervention",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Destroy X target artifacts and/or enchantments.\n• Target player gains twice X life."
+      ]
     },
     {
       "name": "Angelic Sell-Sword",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, vigilance\nWhenever this creature or another nontoken creature you control enters, create a 1/1 red Mercenary creature token with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"\nWhenever this creature attacks, if its power is 6 or greater, draw a card."
+      ]
     },
     {
       "name": "We Ride at Dawn",
@@ -105,12 +90,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Legendary creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a legendary creature spell pays for {1} or one mana of that creature's color.)\nWhenever your commander attacks, create a 1/1 red Mercenary creature token with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\""
+      ]
     },
     {
       "name": "Massacre Girl",
@@ -122,12 +104,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Menace\nWhen Massacre Girl enters, each other creature gets -1/-1 until end of turn. Whenever a creature dies this turn, each creature other than Massacre Girl gets -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Fain, the Broker",
@@ -139,12 +118,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{T}, Sacrifice a creature: Put two +1/+1 counters on target creature.\n{T}, Remove a counter from a creature you control: Create a Treasure token.\n{T}, Sacrifice an artifact: Create a 2/1 white and black Inkling creature token with flying.\n{3}{B}: Untap Fain."
+      ]
     },
     {
       "name": "Witch of the Moors",
@@ -156,12 +132,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Deathtouch\nAt the beginning of your end step, if you gained life this turn, each opponent sacrifices a creature of their choice and you return up to one target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Nighthawk Scavenger",
@@ -173,12 +146,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Flying, deathtouch, lifelink\nNighthawk Scavenger's power is equal to 1 plus the number of card types among cards in your opponents' graveyards."
+      ]
     },
     {
       "name": "Curtains' Call",
@@ -190,12 +160,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures."
+      ]
     },
     {
       "name": "Misfortune Teller",
@@ -207,12 +174,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhenever this creature enters or deals combat damage to a player, exile target card from a graveyard. If it was a creature card, create a 2/2 black Rogue creature token. If it was a land card, create a Treasure token. Otherwise, you gain 3 life."
+      ]
     },
     {
       "name": "Painful Truths",
@@ -224,12 +188,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Converge — You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell."
+      ]
     },
     {
       "name": "Kamber, the Plunderer",
@@ -241,12 +202,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Partner with Laurine, the Diversion (When this creature enters, target player may put Laurine into their hand from their library, then shuffle.)\nLifelink\nWhenever a creature an opponent controls dies, you gain 1 life and create a Blood token. (It's an artifact with \"{1}, {T}, Discard a card, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Ogre Slumlord",
@@ -258,12 +216,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken creature dies, you may create a 1/1 black Rat creature token.\nRats you control have deathtouch."
+      ]
     },
     {
       "name": "Hex",
@@ -275,12 +230,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy six target creatures."
+      ]
     },
     {
       "name": "Mari, the Killing Quill",
@@ -292,12 +244,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature an opponent controls dies, exile it with a hit counter on it.\nAssassins, Mercenaries, and Rogues you control have deathtouch and \"Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens.\""
+      ]
     },
     {
       "name": "Discreet Retreat",
@@ -309,12 +258,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Enchant land\nEnchanted land has \"{T}: Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities of outlaw sources.\" (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nWhenever you cast your first outlaw spell each turn, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Charred Graverobber",
@@ -326,12 +272,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, return target outlaw card from your graveyard to your hand.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Back in Town",
@@ -343,12 +286,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{2}{B}",
-      "cmc": 3,
-      "oracleText": "Return X target outlaw creature cards from your graveyard to the battlefield. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)"
+      ]
     },
     {
       "name": "Marshland Bloodcaster",
@@ -360,12 +300,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\n{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value."
+      ]
     },
     {
       "name": "Veinwitch Coven",
@@ -377,12 +314,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace\nWhenever you gain life, you may pay {B}. If you do, return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Rankle, Master of Pranks",
@@ -394,12 +328,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying, haste\nWhenever Rankle deals combat damage to a player, choose any number —\n• Each player discards a card.\n• Each player loses 1 life and draws a card.\n• Each player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Dire Fleet Ravager",
@@ -411,12 +342,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Menace, deathtouch\nWhen this creature enters, each player loses a third of their life, rounded up."
+      ]
     },
     {
       "name": "Mirror Entity",
@@ -428,12 +356,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types."
+      ]
     },
     {
       "name": "Dire Fleet Daredevil",
@@ -445,12 +370,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Captain Lannery Storm",
@@ -462,12 +384,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever Captain Lannery Storm attacks, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nWhenever you sacrifice a Treasure, Captain Lannery Storm gets +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Seize the Spotlight",
@@ -479,12 +398,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Each opponent chooses fame or fortune. For each player who chose fame, gain control of a creature that player controls until end of turn. Untap those creatures and they gain haste until end of turn. For each player who chose fortune, you draw a card and create a Treasure token."
+      ]
     },
     {
       "name": "Grenzo, Havoc Raiser",
@@ -496,12 +412,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, choose one —\n• Goad target creature that player controls.\n• Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
+      ]
     },
     {
       "name": "Angrath's Marauders",
@@ -513,12 +426,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead."
+      ]
     },
     {
       "name": "Captivating Crew",
@@ -530,12 +440,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Rain of Riches",
@@ -547,12 +454,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When this enchantment enters, create two Treasure tokens.\nThe first spell you cast each turn that mana from a Treasure was spent to cast has cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Laurine, the Diversion",
@@ -564,12 +468,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Partner with Kamber, the Plunderer (When this creature enters, target player may put Kamber into their hand from their library, then shuffle.)\nFirst strike\n{2}, Sacrifice an artifact or creature: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)"
+      ]
     },
     {
       "name": "Mass Mutiny",
@@ -581,12 +482,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn."
+      ]
     },
     {
       "name": "Dead Before Sunrise",
@@ -598,12 +496,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Until end of turn, outlaw creatures you control get +1/+0 and gain \"{T}: This creature deals damage equal to its power to target creature.\" (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)"
+      ]
     },
     {
       "name": "Graywater's Fixer",
@@ -616,12 +511,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Each outlaw creature card in your graveyard has encore {X}, where X is its mana value. (Exile it and pay its encore cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Life Insurance",
@@ -634,12 +526,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever a nontoken creature dies, you lose 1 life and create a Treasure token."
+      ]
     },
     {
       "name": "Breena, the Demagogue",
@@ -652,12 +541,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever a player attacks one of your opponents, if that opponent has more life than another of your opponents, that attacking player draws a card and you put two +1/+1 counters on a creature you control."
+      ]
     },
     {
       "name": "Queen Marchesa",
@@ -671,12 +557,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch, haste\nWhen Queen Marchesa enters, you become the monarch.\nAt the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -686,12 +569,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Academy Manufactor",
@@ -701,13 +581,10 @@
       "oracleCardName": "Academy Manufactor",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "If you would create a Clue, Food, or Treasure token, instead create one of each."
+      ]
     },
     {
       "name": "Bounty Board",
@@ -717,12 +594,9 @@
       "oracleCardName": "Bounty Board",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{1}, {T}: Put a bounty counter on target creature. Activate only as a sorcery.\nWhenever a creature with a bounty counter on it dies, each of its controller's opponents draws a card and gains 2 life."
+      ]
     },
     {
       "name": "Fetid Heath",
@@ -735,11 +609,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}."
+      ]
     },
     {
       "name": "Command Beacon",
@@ -749,11 +621,9 @@
       "oracleCardName": "Command Beacon",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Put your commander into your hand from the command zone."
+      ]
     },
     {
       "name": "Vault of the Archangel",
@@ -766,11 +636,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{W}{B}, {T}: Creatures you control gain deathtouch and lifelink until end of turn."
+      ]
     },
     {
       "name": "Dragonskull Summit",
@@ -783,11 +651,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -800,11 +666,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Temple of Malice",
@@ -817,11 +681,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -831,11 +693,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Temple of Triumph",
@@ -848,11 +708,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -865,11 +723,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Isolated Chapel",
@@ -882,11 +738,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Bonders' Enclave",
@@ -896,11 +750,9 @@
       "oracleCardName": "Bonders' Enclave",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
+      ]
     },
     {
       "name": "Caves of Koilos",
@@ -913,11 +765,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -930,11 +780,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Sulfurous Springs",
@@ -947,11 +795,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Rugged Prairie",
@@ -964,11 +810,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."
+      ]
     },
     {
       "name": "Desolate Mire",
@@ -981,11 +825,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -998,11 +840,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Canyon Slough",
@@ -1015,11 +855,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -1032,11 +870,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Blackcleave Cliffs",
@@ -1049,11 +885,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Mistmeadow Skulk",
@@ -1065,12 +899,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Lifelink, protection from mana value 3 or greater"
+      ]
     },
     {
       "name": "Requisition Raid",
@@ -1082,12 +913,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Spree (Choose one or more additional costs.)\n+ {1} — Destroy target artifact.\n+ {1} — Destroy target enchantment.\n+ {1} — Put a +1/+1 counter on each creature target player controls."
+      ]
     },
     {
       "name": "Changeling Outcast",
@@ -1099,12 +927,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Changeling (This card is every creature type.)\nThis creature can't block and can't be blocked."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -1116,12 +941,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Deadly Dispute",
@@ -1133,12 +955,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Morbid Opportunist",
@@ -1150,12 +969,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Aetherborn Marauder",
@@ -1167,12 +983,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying, lifelink\nWhen this creature enters, move any number of +1/+1 counters from other permanents you control onto this creature."
+      ]
     },
     {
       "name": "Tenured Inkcaster",
@@ -1184,12 +997,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, put a +1/+1 counter on target creature.\nWhenever a creature you control with a +1/+1 counter on it attacks, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Shoot the Sheriff",
@@ -1201,12 +1011,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyone else is fair game.)"
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -1216,12 +1023,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Impulsive Pilferer",
@@ -1233,12 +1037,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "When this creature dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nEncore {3}{R} ({3}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -1250,12 +1051,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Humble Defector",
@@ -1267,12 +1065,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw two cards. Target opponent gains control of this creature. Activate only during your turn."
+      ]
     },
     {
       "name": "Glittering Stockpile",
@@ -1284,12 +1079,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {R}. Put a stash counter on this artifact.\n{T}, Sacrifice this artifact: Add X mana of any one color, where X is the number of stash counters on this artifact."
+      ]
     },
     {
       "name": "Boros Charm",
@@ -1302,12 +1094,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Boros Charm deals 4 damage to target player or planeswalker.\n• Permanents you control gain indestructible until end of turn.\n• Target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1317,12 +1106,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Trailblazer's Boots",
@@ -1332,12 +1118,9 @@
       "oracleCardName": "Trailblazer's Boots",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has nonbasic landwalk. (It can't be blocked as long as defending player controls a nonbasic land.)\nEquip {2}"
+      ]
     },
     {
       "name": "Bandit's Haul",
@@ -1347,12 +1130,9 @@
       "oracleCardName": "Bandit's Haul",
       "colorIdentity": [],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever you commit a crime, put a loot counter on this artifact. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n{T}: Add one mana of any color.\n{2}, {T}, Remove two loot counters from this artifact: Draw a card."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -1365,12 +1145,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1380,12 +1157,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -1398,12 +1172,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1413,11 +1184,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1429,11 +1198,9 @@
         "B"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1443,11 +1210,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1457,11 +1222,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Demolition Field",
@@ -1471,11 +1234,9 @@
       "oracleCardName": "Demolition Field",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Tainted Peak",
@@ -1488,11 +1249,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Sunhome, Fortress of the Legion",
@@ -1505,11 +1264,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}{R}{W}, {T}: Target creature gains double strike until end of turn."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -1523,11 +1280,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1537,11 +1292,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Plains",
@@ -1553,11 +1306,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1569,11 +1320,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1585,11 +1334,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1601,11 +1348,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1617,11 +1362,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1633,11 +1376,9 @@
         "B"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1649,11 +1390,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1665,15 +1404,13 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.068Z",
+    "retrievedDate": "2026-06-23T17:40:38.767Z",
     "sourceUrl": "MostWanted_OTC.json",
     "deckSource": "precon",
     "createdAt": "2024-04-19T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 974452174,
   "name": "Planar Portal",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nMystic Arcanum — At the beginning of your end step, exile the top card of your library. Until the end of your next turn, you may play that card.\nPact Boon — Whenever you play a card from exile, create a Treasure token."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.\n{1}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Fiend of the Shadows",
@@ -51,12 +45,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.\nSacrifice a Human: Regenerate this creature."
+      ]
     },
     {
       "name": "Gonti, Lord of Luxury",
@@ -68,12 +59,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhen Gonti enters, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Marionette Master",
@@ -85,12 +73,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Fabricate 3 (When this creature enters, put three +1/+1 counters on it or create three 1/1 colorless Servo artifact creature tokens.)\nWhenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to this creature's power."
+      ]
     },
     {
       "name": "Ogre Slumlord",
@@ -102,12 +87,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken creature dies, you may create a 1/1 black Rat creature token.\nRats you control have deathtouch."
+      ]
     },
     {
       "name": "Piper of the Swarm",
@@ -119,12 +101,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Rats you control have menace.\n{1}{B}, {T}: Create a 1/1 black Rat creature token.\n{2}{B}{B}, {T}, Sacrifice three Rats: Gain control of target creature."
+      ]
     },
     {
       "name": "Pontiff of Blight",
@@ -136,12 +115,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nOther creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)"
+      ]
     },
     {
       "name": "Dark-Dweller Oracle",
@@ -153,12 +129,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{1}, Sacrifice a creature: Exile the top card of your library. You may play that card this turn. (You still pay its costs. You can play a land this way only if you have an available land play remaining.)"
+      ]
     },
     {
       "name": "Dire Fleet Daredevil",
@@ -170,12 +143,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Dream Pillager",
@@ -187,12 +157,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards."
+      ]
     },
     {
       "name": "Etali, Primal Storm",
@@ -204,12 +171,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever Etali attacks, exile the top card of each player's library, then you may cast any number of spells from among those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Izzet Chemister",
@@ -221,12 +185,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\n{R}, {T}: Exile target instant or sorcery card from your graveyard.\n{1}{R}, {T}, Sacrifice this creature: Cast any number of cards exiled with this creature without paying their mana costs."
+      ]
     },
     {
       "name": "Tectonic Giant",
@@ -238,12 +199,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks or becomes the target of a spell an opponent controls, choose one —\n• This creature deals 3 damage to each opponent.\n• Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."
+      ]
     },
     {
       "name": "Loyal Apprentice",
@@ -255,12 +213,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."
+      ]
     },
     {
       "name": "Consuming Vapors",
@@ -272,12 +227,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Target player sacrifices a creature of their choice. You gain life equal to that creature's toughness.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Hex",
@@ -289,12 +241,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy six target creatures."
+      ]
     },
     {
       "name": "Apex of Power",
@@ -306,12 +255,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{R}{R}{R}",
-      "cmc": 10,
-      "oracleText": "Exile the top seven cards of your library. Until end of turn, you may cast spells from among them.\nIf this spell was cast from your hand, add ten mana of any one color."
+      ]
     },
     {
       "name": "Disrupt Decorum",
@@ -323,12 +269,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Goad all creatures you don't control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Ignite the Future",
@@ -340,12 +283,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Exile the top three cards of your library. Until the end of your next turn, you may play those cards. If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.\nFlashback {7}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Phthisis",
@@ -357,12 +297,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy target creature. Its controller loses life equal to its power plus its toughness.\nSuspend 5—{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Light Up the Stage",
@@ -374,12 +311,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nExile the top two cards of your library. Until the end of your next turn, you may play those cards."
+      ]
     },
     {
       "name": "Throes of Chaos",
@@ -391,12 +325,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Vandalblast",
@@ -408,12 +339,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -425,12 +353,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Commune with Lava",
@@ -442,12 +367,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Exile the top X cards of your library. Until the end of your next turn, you may play those cards."
+      ]
     },
     {
       "name": "Bedevil",
@@ -460,12 +382,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, creature, or planeswalker."
+      ]
     },
     {
       "name": "Bituminous Blast",
@@ -478,12 +397,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nBituminous Blast deals 4 damage to target creature."
+      ]
     },
     {
       "name": "Rakdos Charm",
@@ -496,12 +412,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Exile target player's graveyard.\n• Destroy target artifact.\n• Each creature deals 1 damage to its controller."
+      ]
     },
     {
       "name": "Terminate",
@@ -514,12 +427,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Chaos Wand",
@@ -529,12 +439,9 @@
       "oracleCardName": "Chaos Wand",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -544,12 +451,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -559,12 +463,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -574,12 +475,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -589,12 +487,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Orazca Relic",
@@ -604,12 +499,9 @@
       "oracleCardName": "Orazca Relic",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{T}, Sacrifice this artifact: You gain 3 life and draw a card. Activate only if you have the city's blessing."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -622,12 +514,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -637,12 +526,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Indulgence",
@@ -655,12 +541,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -670,12 +553,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Dead Man's Chest",
@@ -687,12 +567,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Enchant creature an opponent controls\nWhen enchanted creature dies, exile cards equal to its power from the top of its owner's library. You may cast spells from among those cards for as long as they remain exiled, and mana of any type can be spent to cast them."
+      ]
     },
     {
       "name": "Theater of Horrors",
@@ -705,12 +582,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, exile the top card of your library.\nDuring your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with this enchantment.\n{3}{R}: This enchantment deals 1 damage to target opponent or planeswalker."
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -722,12 +596,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -737,11 +608,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Foreboding Ruins",
@@ -754,11 +623,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -771,11 +638,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -788,11 +653,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spinerock Knoll",
@@ -804,11 +667,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -820,11 +681,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -834,11 +693,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Mortuary Mire",
@@ -850,11 +707,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you may put target creature card from your graveyard on top of your library.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -867,11 +722,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Tainted Peak",
@@ -884,11 +737,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {R}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Zhalfirin Void",
@@ -898,11 +749,9 @@
       "oracleCardName": "Zhalfirin Void",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Swamp",
@@ -914,11 +763,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -930,11 +777,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -946,11 +791,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -962,11 +805,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -978,11 +819,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -994,11 +833,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1010,11 +847,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1026,11 +861,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1042,11 +875,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1058,11 +889,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1074,11 +903,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1090,11 +917,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1106,11 +931,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1122,11 +945,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1138,11 +959,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1154,11 +973,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1170,11 +987,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1186,11 +1001,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1202,11 +1015,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1218,11 +1029,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1234,11 +1043,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1250,11 +1057,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1266,11 +1071,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1282,11 +1085,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1298,11 +1099,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1314,11 +1113,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1330,11 +1127,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Karazikar, the Eye Tyrant",
@@ -1347,12 +1142,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Whenever you attack a player, tap target creature that player controls and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nWhenever an opponent attacks another one of your opponents, you and the attacking player each draw a card and lose 1 life."
+      ]
     },
     {
       "name": "Bag of Devouring",
@@ -1364,12 +1156,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Whenever you sacrifice another nontoken artifact or creature, exile it.\n{2}, {T}, Sacrifice another artifact or creature: Draw a card.\n{3}, {T}, Sacrifice this artifact: Roll a d10. Return up to X cards from among cards exiled with this artifact to their owners' hands, where X is the result."
+      ]
     },
     {
       "name": "Danse Macabre",
@@ -1381,12 +1170,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Each player sacrifices a nontoken creature of their choice. Roll a d20 and add the toughness of the creature you sacrificed this way.\n1—14 | Return a creature card put into a graveyard this way to the battlefield under your control.\n15+ | Return up to two creature cards put into graveyards this way to the battlefield under your control."
+      ]
     },
     {
       "name": "Death Tyrant",
@@ -1398,12 +1184,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Menace\nNegative Energy Cone — Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token.\n{5}{B}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Grim Hireling",
@@ -1415,12 +1198,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever one or more creatures you control deal combat damage to a player, create two Treasure tokens.\n{B}, Sacrifice X Treasures: Target creature gets -X/-X until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Hellish Rebuke",
@@ -1432,12 +1212,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Until end of turn, permanents your opponents control gain \"When this permanent deals damage to the player who cast Hellish Rebuke, sacrifice this permanent. You lose 2 life.\""
+      ]
     },
     {
       "name": "Lorcan, Warlock Collector",
@@ -1449,12 +1226,9 @@
         "B"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever a creature card is put into an opponent's graveyard from anywhere, you may pay life equal to its mana value. If you do, put it onto the battlefield under your control. It's a Warlock in addition to its other types.\nIf a Warlock you control would die, exile it instead."
+      ]
     },
     {
       "name": "Fiendlash",
@@ -1466,12 +1240,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +2/+0 and has reach.\nWhenever equipped creature is dealt damage, it deals damage equal to its power to target player or planeswalker.\nEquip {2}{R}"
+      ]
     },
     {
       "name": "Reckless Endeavor",
@@ -1483,12 +1254,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Roll two d12 and choose one result. Reckless Endeavor deals damage equal to that result to each creature. Then create a number of Treasure tokens equal to the other result."
+      ]
     },
     {
       "name": "Share the Spoils",
@@ -1500,12 +1268,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters and whenever an opponent loses the game, exile the top card of each player's library.\nDuring each player's turn, that player may play a land or cast a spell from among cards exiled with this enchantment, and they may spend mana as though it were mana of any color to cast that spell. When they do, exile the top card of their library."
+      ]
     },
     {
       "name": "Wild-Magic Sorcerer",
@@ -1517,12 +1282,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "The first spell you cast from exile each turn has cascade. (When you cast your first spell from exile, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Fevered Suspicion",
@@ -1535,12 +1297,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}{R}",
-      "cmc": 8,
-      "oracleText": "Each opponent exiles cards from the top of their library until they exile a nonland card. You may cast any number of spells from among those nonland cards without paying their mana costs.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Hurl Through Hell",
@@ -1553,12 +1312,9 @@
         "R"
       ],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
+      ]
     },
     {
       "name": "Warlock Class",
@@ -1570,12 +1326,9 @@
         "B"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your end step, if a creature died this turn, each opponent loses 1 life.\n{1}{B}: Level 2\nWhen this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n{6}{B}: Level 3\nAt the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)"
+      ]
     },
     {
       "name": "Chaos Channeler",
@@ -1587,12 +1340,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Wild Magic Surge — Whenever this creature attacks, roll a d20.\n1—9 | Exile the top card of your library. You may play it this turn.\n10—19 | Exile the top two cards of your library. You may play them this turn.\n20 | Exile the top three cards of your library. You may play them this turn."
+      ]
     },
     {
       "name": "You Find Some Prisoners",
@@ -1604,12 +1354,9 @@
         "R"
       ],
       "set": "AFR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Break Their Chains — Destroy target artifact.\n• Interrogate Them — Exile the top three cards of target opponent's library. Choose one of them. Until the end of your next turn, you may play that card, and you may spend mana as though it were mana of any color to cast it."
+      ]
     },
     {
       "name": "Bucknard's Everfull Purse",
@@ -1619,12 +1366,9 @@
       "oracleCardName": "Bucknard's Everfull Purse",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Roll a d4 and create a number of Treasure tokens equal to the result. The player to your right gains control of this artifact."
+      ]
     },
     {
       "name": "Ebony Fly",
@@ -1634,12 +1378,9 @@
       "oracleCardName": "Ebony Fly",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}.\n{4}: Roll a d6. Until end of turn, you may have this artifact become an X/X Insect artifact creature with flying, where X is the result.\nWhenever this artifact attacks, another target attacking creature gains flying until end of turn."
+      ]
     },
     {
       "name": "Underdark Rift",
@@ -1649,15 +1390,13 @@
       "oracleCardName": "Underdark Rift",
       "colorIdentity": [],
       "set": "AFC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}, Exile this land: Roll a d10. Put target artifact, creature, or planeswalker into its owner's library just beneath the top X cards of that library, where X is the result. Activate only as a sorcery."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.301Z",
+    "retrievedDate": "2026-06-23T17:40:39.179Z",
     "sourceUrl": "PlanarPortal_AFC.json",
     "deckSource": "precon",
     "createdAt": "2021-07-23T00:00:00.000Z"

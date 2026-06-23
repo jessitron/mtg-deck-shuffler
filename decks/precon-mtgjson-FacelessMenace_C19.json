@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 152278231,
   "name": "Faceless Menace",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}{U}",
-      "cmc": 4,
-      "oracleText": "The first face-down creature spell you cast each turn costs {3} less to cast.\nWhenever a face-down creature you control enters, draw a card."
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "[+1]: Until your next turn, whenever a creature deals combat damage to Vraska, destroy that creature.\n[−3]: Destroy target nonland permanent.\n[−7]: Create three 1/1 black Assassin creature tokens with \"Whenever this token deals combat damage to a player, that player loses the game.\""
+      ]
     },
     {
       "name": "Rayami, First of the Fallen",
@@ -55,12 +49,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}{U}",
-      "cmc": 4,
-      "oracleText": "If a nontoken creature would die, exile that card with a blood counter on it instead.\nAs long as an exiled creature card with a blood counter on it has flying, Rayami has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance."
+      ]
     },
     {
       "name": "Volrath, the Shapestealer",
@@ -74,12 +65,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}{U}",
-      "cmc": 5,
-      "oracleText": "At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.\n{1}: Until your next turn, Volrath becomes a copy of target creature with a counter on it, except it's 7/5 and it has this ability."
+      ]
     },
     {
       "name": "Kadena's Silencer",
@@ -91,12 +79,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature is turned face up, counter all abilities your opponents control.\nMegamorph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Thought Sponge",
@@ -108,12 +93,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flash\nThis creature enters with a number of +1/+1 counters on it equal to the greatest number of cards an opponent has drawn this turn.\nWhen this creature dies, draw cards equal to its power."
+      ]
     },
     {
       "name": "Thieving Amalgam",
@@ -125,12 +107,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "At the beginning of each opponent's upkeep, you manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "Apex Altisaur",
@@ -142,12 +121,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{G}{G}",
-      "cmc": 9,
-      "oracleText": "When this creature enters, it fights up to one target creature you don't control.\nEnrage — Whenever this creature is dealt damage, it fights up to one target creature you don't control."
+      ]
     },
     {
       "name": "Grismold, the Dreadsower",
@@ -160,12 +136,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nAt the beginning of your end step, each player creates a 1/1 green Plant creature token.\nWhenever a creature token dies, put a +1/+1 counter on Grismold."
+      ]
     },
     {
       "name": "Deathmist Raptor",
@@ -177,12 +150,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhenever a permanent you control is turned face up, you may return this card from your graveyard to the battlefield face up or face down.\nMegamorph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Hooded Hydra",
@@ -194,12 +164,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "This creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.\nMorph {3}{G}{G}\nAs this creature is turned face up, put five +1/+1 counters on it."
+      ]
     },
     {
       "name": "Chromeshell Crab",
@@ -211,12 +178,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Morph {4}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, you may exchange control of target creature you control and target creature an opponent controls."
+      ]
     },
     {
       "name": "Ixidron",
@@ -228,12 +192,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "As this creature enters, turn all other nontoken creatures face down. (They're 2/2 creatures.)\nIxidron's power and toughness are each equal to the number of face-down creatures on the battlefield."
+      ]
     },
     {
       "name": "Kheru Spellsnatcher",
@@ -245,12 +206,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Morph {4}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost for as long as it remains exiled."
+      ]
     },
     {
       "name": "Stratus Dancer",
@@ -262,12 +220,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nMegamorph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, counter target instant or sorcery spell."
+      ]
     },
     {
       "name": "Thousand Winds",
@@ -279,12 +234,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nMorph {5}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, return all other tapped creatures to their owners' hands."
+      ]
     },
     {
       "name": "Vesuvan Shapeshifter",
@@ -296,12 +248,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "As this creature enters or is turned face up, you may choose another creature on the battlefield. If you do, until this creature is turned face down, it becomes a copy of that creature, except it has \"At the beginning of your upkeep, you may turn this creature face down.\"\nMorph {1}{U}"
+      ]
     },
     {
       "name": "Bane of the Living",
@@ -313,12 +262,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Morph {X}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, all creatures get -X/-X until end of turn."
+      ]
     },
     {
       "name": "Grim Haruspex",
@@ -330,12 +276,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhenever another nontoken creature you control dies, draw a card."
+      ]
     },
     {
       "name": "Silumgar Assassin",
@@ -347,12 +290,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Creatures with power greater than this creature's power can't block it.\nMegamorph {2}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, destroy target creature with power 3 or less an opponent controls."
+      ]
     },
     {
       "name": "Den Protector",
@@ -364,12 +304,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Creatures with power less than this creature's power can't block it.\nMegamorph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Seedborn Muse",
@@ -381,12 +318,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Untap all permanents you control during each other player's untap step."
+      ]
     },
     {
       "name": "Thelonite Hermit",
@@ -398,12 +332,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "All Saprolings get +1/+1.\nMorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, create four 1/1 green Saproling creature tokens."
+      ]
     },
     {
       "name": "Sagu Mauler",
@@ -416,12 +347,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "Trample, hexproof\nMorph {3}{G}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
+      ]
     },
     {
       "name": "Voice of Many",
@@ -433,12 +361,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, draw a card for each opponent who controls fewer creatures than you."
+      ]
     },
     {
       "name": "Scaretiller",
@@ -448,13 +373,10 @@
       "oracleCardName": "Scaretiller",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Willbender",
@@ -466,12 +388,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, change the target of target spell or ability with a single target."
+      ]
     },
     {
       "name": "Skinthinner",
@@ -483,12 +402,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Morph {3}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, destroy target nonblack creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Ainok Survivalist",
@@ -500,12 +416,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Megamorph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen this creature is turned face up, destroy target artifact or enchantment an opponent controls."
+      ]
     },
     {
       "name": "Great Oak Guardian",
@@ -517,12 +430,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nReach\nWhen this creature enters, creatures target player controls get +2/+2 until end of turn. Untap them."
+      ]
     },
     {
       "name": "Nantuko Vigilante",
@@ -534,12 +444,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Morph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -551,12 +458,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Icefeather Aven",
@@ -569,12 +473,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nMorph {1}{G}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, you may return another target creature to its owner's hand."
+      ]
     },
     {
       "name": "Road of Return",
@@ -586,12 +487,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{G}{G}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Return target permanent card from your graveyard to your hand.\n• Put your commander into your hand from the command zone.\nEntwine {2} (Choose both if you pay the entwine cost.)"
+      ]
     },
     {
       "name": "Ghastly Conscription",
@@ -603,12 +501,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Hex",
@@ -620,12 +515,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy six target creatures."
+      ]
     },
     {
       "name": "Overwhelming Stampede",
@@ -637,12 +529,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control."
+      ]
     },
     {
       "name": "Tempt with Discovery",
@@ -654,12 +543,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Tempting offer — Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles."
+      ]
     },
     {
       "name": "Mire in Misery",
@@ -671,12 +557,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Each opponent sacrifices a creature or enchantment of their choice."
+      ]
     },
     {
       "name": "Tezzeret's Gambit",
@@ -688,12 +571,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Cultivate",
@@ -705,12 +585,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explore",
@@ -722,12 +599,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Farseek",
@@ -739,12 +613,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Urban Evolution",
@@ -757,12 +628,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Draw three cards. You may play an additional land this turn."
+      ]
     },
     {
       "name": "Sudden Substitution",
@@ -774,12 +642,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nExchange control of target noncreature spell and target creature. Then the spell's controller may choose new targets for it."
+      ]
     },
     {
       "name": "Biomass Mutation",
@@ -792,12 +657,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{G/U}{G/U}",
-      "cmc": 2,
-      "oracleText": "Creatures you control have base power and toughness X/X until end of turn."
+      ]
     },
     {
       "name": "Leadership Vacuum",
@@ -809,12 +671,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player returns each commander they control from the battlefield to the command zone.\nDraw a card."
+      ]
     },
     {
       "name": "Echoing Truth",
@@ -826,12 +685,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -843,12 +699,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Putrefy",
@@ -861,12 +714,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Sultai Charm",
@@ -880,12 +730,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Destroy target monocolored creature.\n• Destroy target artifact or enchantment.\n• Draw two cards, then discard a card."
+      ]
     },
     {
       "name": "Pendant of Prosperity",
@@ -895,12 +742,9 @@
       "oracleCardName": "Pendant of Prosperity",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "This artifact enters under the control of an opponent of your choice.\n{2}, {T}: Draw a card, then you may put a land card from your hand onto the battlefield. This artifact's owner draws a card, then that player may put a land card from their hand onto the battlefield."
+      ]
     },
     {
       "name": "Scroll of Fate",
@@ -910,12 +754,9 @@
       "oracleCardName": "Scroll of Fate",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)"
+      ]
     },
     {
       "name": "Strionic Resonator",
@@ -925,12 +766,9 @@
       "oracleCardName": "Strionic Resonator",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words \"when,\" \"whenever,\" or \"at.\")"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -940,12 +778,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Thran Dynamo",
@@ -955,12 +790,9 @@
       "oracleCardName": "Thran Dynamo",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}{C}."
+      ]
     },
     {
       "name": "Gift of Doom",
@@ -972,12 +804,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Enchant creature\nEnchanted creature has deathtouch and indestructible.\nMorph—Sacrifice another creature. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nAs this Aura is turned face up, you may attach it to a creature."
+      ]
     },
     {
       "name": "Trail of Mystery",
@@ -989,12 +818,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever a face-down creature you control enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nWhenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn."
+      ]
     },
     {
       "name": "Bounty of the Luxa",
@@ -1007,12 +833,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your first main phase, remove all flood counters from this enchantment. If no counters were removed this way, put a flood counter on this enchantment and draw a card. Otherwise, add {C}{G}{U}."
+      ]
     },
     {
       "name": "Secret Plans",
@@ -1025,12 +848,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Face-down creatures you control get +0/+1.\nWhenever a permanent you control is turned face up, draw a card."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -1043,11 +863,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1057,11 +875,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Llanowar Wastes",
@@ -1074,11 +890,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Shrine of the Forsaken Gods",
@@ -1088,11 +902,9 @@
       "oracleCardName": "Shrine of the Forsaken Gods",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -1105,11 +917,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Thespian's Stage",
@@ -1119,11 +929,9 @@
       "oracleCardName": "Thespian's Stage",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: This land becomes a copy of target land, except it has this ability."
+      ]
     },
     {
       "name": "Yavimaya Coast",
@@ -1136,11 +944,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Island",
@@ -1152,11 +958,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1168,11 +972,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1184,11 +986,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1200,11 +1000,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1216,11 +1014,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1232,11 +1028,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1248,11 +1042,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1264,11 +1056,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1280,11 +1070,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1296,11 +1084,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1312,11 +1098,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1328,11 +1112,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1344,11 +1126,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1360,11 +1140,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1376,11 +1154,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1390,11 +1166,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1406,11 +1180,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1420,11 +1192,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1437,11 +1207,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1451,11 +1219,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Foul Orchard",
@@ -1468,11 +1234,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Golgari Guildgate",
@@ -1485,11 +1249,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1502,11 +1264,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Jungle Hollow",
@@ -1519,11 +1279,9 @@
         "G"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1533,11 +1291,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1551,11 +1307,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1565,11 +1319,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1582,11 +1334,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Simic Guildgate",
@@ -1599,11 +1349,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1613,11 +1361,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1627,11 +1373,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1644,11 +1388,9 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Woodland Stream",
@@ -1661,15 +1403,13 @@
         "U"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.221Z",
+    "retrievedDate": "2026-06-23T17:40:37.301Z",
     "sourceUrl": "FacelessMenace_C19.json",
     "deckSource": "precon",
     "createdAt": "2019-08-23T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1980037717,
   "name": "Avengers Assemble",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "This spell costs {2} less to cast if a player attacked you during their last turn.\nDestroy all creatures. You gain 1 life for each creature destroyed this way."
+      ]
     },
     {
       "name": "Falcon and Redwing",
@@ -49,12 +43,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing."
+      ]
     },
     {
       "name": "Hercules, Olympian Hero",
@@ -65,12 +56,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever Hercules attacks, put a +1/+1 counter on him. He gains indestructible until end of turn.\nWhenever Hercules is dealt damage for the first time each turn, put that many +1/+1 counters on him. (He must survive the damage to get the counters.)"
+      ]
     },
     {
       "name": "Heroic Return",
@@ -81,12 +69,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "This spell costs {2} less to cast if a creature is attacking you.\nReturn target creature card from your graveyard to the battlefield. If a Hero enters this way, it enters with two additional +1/+1 counters on it."
+      ]
     },
     {
       "name": "Heroic Sacrifice",
@@ -97,12 +82,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose target creature you control. Until end of turn, all damage that would be dealt to you and creatures you control is dealt to the chosen creature instead (if it's still on the battlefield). When that creature dies this turn, put its counters on up to one target creature you control and draw a card."
+      ]
     },
     {
       "name": "Methods of the Mighty",
@@ -113,12 +95,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Choose one or more —\n• Destroy target artifact.\n• Destroy target tapped creature.\n• Put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Winter Soldier, Reborn Avenger",
@@ -129,12 +108,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever Winter Soldier attacks, return target creature card with mana value less than or equal to Winter Soldier's power from your graveyard to the battlefield. If a Hero enters this way, it enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Iron Man, Armored Avenger",
@@ -145,13 +121,10 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you draw a card, put a +1/+1 counter on target creature.\nWhenever Iron Man attacks, other attacking modified creatures gain flying until end of turn. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Jarvis, Earth's Mightiest Butler",
@@ -162,12 +135,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a Hero spell, draw a card."
+      ]
     },
     {
       "name": "Professor Hulk",
@@ -178,12 +148,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Trample\nWhenever Professor Hulk deals combat damage to a player, draw that many cards."
+      ]
     },
     {
       "name": "The Wasp, Winsome Avenger",
@@ -194,12 +161,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flash\nFlying\nWhen The Wasp enters, target Hero gains hexproof until end of turn.\nWhenever The Wasp attacks, tap target creature defending player controls."
+      ]
     },
     {
       "name": "West Coast Expansion",
@@ -210,12 +174,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards. If X is 5 or more, you may cast a Hero spell from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Firebird, Blazing Ranger",
@@ -226,12 +187,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever Firebird attacks, other attacking creatures get +X/+0 until end of turn, where X is Firebird's power."
+      ]
     },
     {
       "name": "Photon, Mighty Marvel",
@@ -242,12 +200,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Photon deals combat damage to a player, add that much mana of any one color. Until end of turn, you don't lose this mana as steps and phases end."
+      ]
     },
     {
       "name": "She-Hulk, Wallbreaker",
@@ -258,12 +213,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Trample\nOther Heroes you control have trample.\nWhenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it."
+      ]
     },
     {
       "name": "War Machine, Avenging Arsenal",
@@ -274,13 +226,10 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever War Machine attacks, attacking modified creatures you control gain double strike until end of turn. (Equipment, Auras you control, and counters are modifications.)"
+      ]
     },
     {
       "name": "Ant-Man, Elusive Avenger",
@@ -292,12 +241,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Ant-Man can't be blocked by creatures with greater power.\nWhenever Ant-Man deals combat damage to a player, create that many Treasure tokens."
+      ]
     },
     {
       "name": "Black Widow, Agile Avenger",
@@ -309,12 +255,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Menace\nWhenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card."
+      ]
     },
     {
       "name": "Captain Marvel, Apex Avenger",
@@ -326,12 +269,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{W}",
-      "cmc": 7,
-      "oracleText": "Flying, double strike, indestructible\nWhenever you put one or more counters on another creature, if it's not a Kree, you may put the same number and kind of counters on Captain Marvel."
+      ]
     },
     {
       "name": "Director Nick Fury",
@@ -344,12 +284,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{R}{W}",
-      "cmc": 3,
-      "oracleText": "Hero spells you cast cost {1} less to cast.\nWhenever you attack, look at the top four cards of your library. You may reveal a Hero card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Hawkeye, Avenging Archer",
@@ -361,12 +298,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Reach\nWhenever a creature an opponent controls dies, if Hawkeye dealt damage to it this turn, draw a card.\n{T}: Hawkeye deals 1 damage to any target."
+      ]
     },
     {
       "name": "Love on the Battlefield",
@@ -378,12 +312,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you attack with exactly two creatures, those creatures gain first strike until end of turn, then draw a card. Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Quicksilver, Speedster",
@@ -395,12 +326,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flash\nDouble strike, haste\nAs long as Quicksilver is tapped, you may cast spells as though they had flash."
+      ]
     },
     {
       "name": "Scarlet Witch, Chaotic Avenger",
@@ -412,12 +340,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Scarlet Witch deals combat damage to a player, look at the top two cards of your library, then exile them face down. Then you may cast a Hero or noncreature spell from among cards exiled with Scarlet Witch without paying its mana cost."
+      ]
     },
     {
       "name": "Shang-Chi and the Ten Rings",
@@ -429,12 +354,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "First strike\nWhenever you draw a card, put a +1/+1 counter on Shang-Chi.\nWhen the tenth +1/+1 counter is put on Shang-Chi, you draw five cards and gain 5 life."
+      ]
     },
     {
       "name": "Avengers Quinjet",
@@ -443,12 +365,9 @@
       "oracleCardName": "Avengers Quinjet",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this Vehicle enters or attacks, choose one —\n• You may put a Hero creature card from your hand onto the battlefield.\n• Return target Hero creature card from your graveyard to your hand.\nCrew 3"
+      ]
     },
     {
       "name": "Hulkbuster Armor",
@@ -457,12 +376,9 @@
       "oracleCardName": "Hulkbuster Armor",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature has base power and toughness 9/9 and has flying.\nEquip Hero {3}\nEquip {6}"
+      ]
     },
     {
       "name": "Jocasta, Automaton Avenger",
@@ -471,13 +387,10 @@
       "oracleCardName": "Jocasta, Automaton Avenger",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever your commander deals combat damage to a player, put a +1/+1 counter on Jocasta.\nWhenever you attack with your commander, if this card is in your graveyard, you may return it to the battlefield tapped and attacking."
+      ]
     },
     {
       "name": "Vision, Synthezoid Avenger",
@@ -486,13 +399,10 @@
       "oracleCardName": "Vision, Synthezoid Avenger",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a player casts a spell, if it isn't that player's turn, choose one —\n• Put a +1/+1 counter on Vision.\n• Vision phases out. (Treat him and anything attached to him as though they don't exist until your next turn.)"
+      ]
     },
     {
       "name": "Austere Command",
@@ -503,12 +413,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Bastion Protector",
@@ -519,12 +426,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you control get +2/+2 and have indestructible."
+      ]
     },
     {
       "name": "Dismantling Wave",
@@ -535,12 +439,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "For each opponent, destroy up to one target artifact or enchantment that player controls.\nCycling {6}{W}{W} ({6}{W}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Folk Hero",
@@ -551,12 +452,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Commander creatures you own have \"Whenever you cast a spell that shares a creature type with this creature, draw a card. This ability triggers only once each turn.\""
+      ]
     },
     {
       "name": "Gift of Immortality",
@@ -567,12 +465,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under its owner's control. Return this card to the battlefield attached to that creature at the beginning of the next end step."
+      ]
     },
     {
       "name": "Kindred Discovery",
@@ -583,12 +478,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever a creature you control of the chosen type enters or attacks, draw a card."
+      ]
     },
     {
       "name": "Door of Destinies",
@@ -597,12 +489,9 @@
       "oracleCardName": "Door of Destinies",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "As this artifact enters, choose a creature type.\nWhenever you cast a spell of the chosen type, put a charge counter on this artifact.\nCreatures you control of the chosen type get +1/+1 for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Metallic Mimic",
@@ -611,13 +500,10 @@
       "oracleCardName": "Metallic Mimic",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nEach other creature you control of the chosen type enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Tome of Legends",
@@ -626,12 +512,9 @@
       "oracleCardName": "Tome of Legends",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters with a page counter on it.\nWhenever your commander enters or attacks, put a page counter on this artifact.\n{1}, {T}, Remove a page counter from this artifact: Draw a card."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -643,11 +526,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Coastal Peak",
@@ -659,11 +540,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -672,11 +551,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -688,11 +565,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Furycalm Snarl",
@@ -704,11 +579,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -720,11 +593,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Glittering Massif",
@@ -736,11 +607,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -752,11 +621,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Plaza of Heroes",
@@ -765,11 +632,9 @@
       "oracleCardName": "Plaza of Heroes",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell.\n{T}: Add one mana of any color among legendary permanents you control.\n{3}, {T}, Exile this land: Target legendary creature gains hexproof and indestructible until end of turn."
+      ]
     },
     {
       "name": "Port Town",
@@ -781,11 +646,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -797,11 +660,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Radiant Summit",
@@ -813,11 +674,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -826,11 +685,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Scorched Geyser",
@@ -842,11 +699,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spectator Seating",
@@ -858,11 +713,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you have two or more opponents.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Sulfur Falls",
@@ -874,11 +727,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Raise the Palisade",
@@ -889,12 +740,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands."
+      ]
     },
     {
       "name": "Thor, Asgard's Avenger",
@@ -905,12 +753,9 @@
         "R"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\nIf another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead."
+      ]
     },
     {
       "name": "Captain Mar-Vell, Space-Born",
@@ -921,12 +766,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, vigilance\nCosmic Awareness — As long as an opponent has cast a spell this turn, you may cast spells as though they had flash."
+      ]
     },
     {
       "name": "Patriot, Shield Wielder",
@@ -937,12 +779,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Another target creature you control gets +2/+0 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
+      ]
     },
     {
       "name": "Speed, Young Avenger",
@@ -953,12 +792,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Haste\nWhenever you cast a noncreature spell, you may pay {1}. When you do, target creature with haste can't be blocked this turn except by creatures with haste."
+      ]
     },
     {
       "name": "Captain America, Living Legend",
@@ -970,12 +806,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhenever a creature you control becomes tapped during your turn, if it's the first time that creature has become tapped this turn, untap it."
+      ]
     },
     {
       "name": "Avengers Tower",
@@ -984,11 +817,9 @@
       "oracleCardName": "Avengers Tower",
       "colorIdentity": [],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source.\n{4}, {T}: Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Destroy Evil",
@@ -999,12 +830,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Destroy target creature with toughness 4 or greater.\n• Destroy target enchantment."
+      ]
     },
     {
       "name": "Make Your Move",
@@ -1015,12 +843,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact, enchantment, or creature with power 4 or greater."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1031,12 +856,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -1047,12 +869,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Reconnaissance Mission",
@@ -1063,12 +882,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Rip Apart",
@@ -1080,12 +896,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Rip Apart deals 3 damage to target creature or planeswalker.\n• Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1094,12 +907,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Hero's Blade",
@@ -1108,12 +918,9 @@
       "oracleCardName": "Hero's Blade",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +3/+2.\nWhenever a legendary creature you control enters, you may attach this Equipment to it.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Relic of Legends",
@@ -1122,12 +929,9 @@
       "oracleCardName": "Relic of Legends",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nTap an untapped legendary creature you control: Add one mana of any color."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1136,12 +940,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Conviction",
@@ -1153,12 +954,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Creativity",
@@ -1170,12 +968,9 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -1187,12 +982,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -1201,12 +993,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1215,11 +1004,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1232,11 +1019,9 @@
         "W"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1245,11 +1030,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Secluded Courtyard",
@@ -1258,11 +1041,9 @@
       "oracleCardName": "Secluded Courtyard",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1271,11 +1052,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -1284,12 +1063,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -1298,12 +1074,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Rescue, Pepper Potts",
@@ -1314,13 +1087,10 @@
         "U"
       ],
       "set": "MSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flash\nFlying\nWhen Rescue enters, return up to one other target artifact or creature you control to its owner's hand. If it was an artifact, put a +1/+1 counter on Rescue."
+      ]
     },
     {
       "name": "Plains",
@@ -1331,11 +1101,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1346,11 +1114,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1361,11 +1127,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1376,11 +1140,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1391,11 +1153,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1406,11 +1166,9 @@
         "W"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1421,11 +1179,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1436,11 +1192,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1451,11 +1205,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1466,11 +1218,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1481,11 +1231,9 @@
         "U"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1496,11 +1244,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1511,11 +1257,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1526,11 +1270,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1541,11 +1283,9 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1556,15 +1296,13 @@
         "R"
       ],
       "set": "MSH",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:53.679Z",
+    "retrievedDate": "2026-06-23T17:40:35.909Z",
     "sourceUrl": "AvengersAssemble_MSC.json",
     "deckSource": "precon",
     "createdAt": "2026-06-26T00:00:00.000Z"

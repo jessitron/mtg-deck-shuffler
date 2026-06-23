@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 531736170,
   "name": "Necron Dynasties Collector's Edition",
   "totalCards": 100,
@@ -13,13 +13,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nMy Will Be Done — Whenever Szarekh attacks, mill three cards. You may put an artifact creature card or Vehicle card from among the cards milled this way into your hand."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library."
+      ]
     },
     {
       "name": "Living Death",
@@ -48,12 +42,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield."
+      ]
     },
     {
       "name": "Mutilate",
@@ -64,12 +55,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "All creatures get -1/-1 until end of turn for each Swamp you control."
+      ]
     },
     {
       "name": "Dread Return",
@@ -80,12 +68,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Return target creature card from your graveyard to the battlefield.\nFlashback—Sacrifice three creatures. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Defile",
@@ -96,12 +81,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Target creature gets -1/-1 until end of turn for each Swamp you control."
+      ]
     },
     {
       "name": "Darkness",
@@ -112,12 +94,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Prevent all combat damage that would be dealt this turn."
+      ]
     },
     {
       "name": "Go for the Throat",
@@ -128,12 +107,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target nonartifact creature."
+      ]
     },
     {
       "name": "Caged Sun",
@@ -142,12 +118,9 @@
       "oracleCardName": "Caged Sun",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "As this artifact enters, choose a color.\nCreatures you control of the chosen color get +1/+1.\nWhenever a land's ability causes you to add one or more mana of the chosen color, add an additional one mana of that color."
+      ]
     },
     {
       "name": "Endless Atlas",
@@ -156,12 +129,9 @@
       "oracleCardName": "Endless Atlas",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Draw a card. Activate only if you control three or more lands with the same name."
+      ]
     },
     {
       "name": "Gilded Lotus",
@@ -170,12 +140,9 @@
       "oracleCardName": "Gilded Lotus",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "{T}: Add three mana of any one color."
+      ]
     },
     {
       "name": "Mystic Forge",
@@ -184,12 +151,9 @@
       "oracleCardName": "Mystic Forge",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "You may look at the top card of your library any time.\nYou may cast artifact spells and colorless spells from the top of your library.\n{T}, Pay 1 life: Exile the top card of your library."
+      ]
     },
     {
       "name": "Sculpting Steel",
@@ -198,12 +162,9 @@
       "oracleCardName": "Sculpting Steel",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "You may have this artifact enter as a copy of any artifact on the battlefield."
+      ]
     },
     {
       "name": "Cranial Plating",
@@ -214,12 +175,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+0 for each artifact you control.\n{B}{B}: Attach this Equipment to target creature you control.\nEquip {1}"
+      ]
     },
     {
       "name": "Hedron Archive",
@@ -228,12 +186,9 @@
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Mask of Memory",
@@ -242,12 +197,9 @@
       "oracleCardName": "Mask of Memory",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever equipped creature deals combat damage to a player, you may draw two cards. If you do, discard a card.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -256,12 +208,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -270,12 +219,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -284,12 +230,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -298,12 +241,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -312,12 +252,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -326,12 +263,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -340,12 +274,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -356,11 +287,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -369,11 +298,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -382,11 +309,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Desert of the Glorified",
@@ -397,11 +322,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Polluted Mire",
@@ -412,11 +335,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Vault of Whispers",
@@ -427,12 +348,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {B}."
+      ]
     },
     {
       "name": "Swamp",
@@ -443,11 +362,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -458,11 +375,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -473,11 +388,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -488,11 +401,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -503,11 +414,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -518,11 +427,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -533,11 +440,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -548,11 +453,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -563,11 +466,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -578,11 +479,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -593,11 +492,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -608,11 +505,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -623,11 +518,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -638,11 +531,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -653,11 +544,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -668,11 +557,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -683,11 +570,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -698,11 +583,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -713,11 +596,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -728,11 +609,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -743,11 +622,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -758,11 +635,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -773,11 +648,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -788,11 +661,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -803,11 +674,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -818,11 +687,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -833,11 +700,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -848,11 +713,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -863,11 +726,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -878,11 +739,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Imotekh the Stormlord",
@@ -893,13 +752,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Phaeron — Whenever one or more artifact cards leave your graveyard, create two 2/2 black Necron Warrior artifact creature tokens.\nGrand Strategist — At the beginning of combat on your turn, another target artifact creature you control gets +2/+2 and gains menace until end of turn."
+      ]
     },
     {
       "name": "Anrakyr the Traveller",
@@ -910,13 +766,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost."
+      ]
     },
     {
       "name": "Biotransference",
@@ -927,12 +780,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Creatures you control are artifacts in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\nWhenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token."
+      ]
     },
     {
       "name": "Chronomancer",
@@ -943,13 +793,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nAtomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Cryptek",
@@ -960,13 +807,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "{1}{B}, {T}: Choose another target artifact creature you control. When that creature dies this turn, return it to the battlefield tapped under your control."
+      ]
     },
     {
       "name": "Illuminor Szeras",
@@ -977,13 +821,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Secrets of the Soul — {T}, Sacrifice another creature: Add an amount of {B} equal to the sacrificed creature's mana value."
+      ]
     },
     {
       "name": "Lokhust Heavy Destroyer",
@@ -994,13 +835,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nEnmitic Exterminator — When this creature enters, each player sacrifices a creature of their choice.\nUnearth {5}{B}{B}{B} ({5}{B}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Lychguard",
@@ -1011,13 +849,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Guardian Protocols — {3}{B}, Sacrifice this creature: Return all legendary creature cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Necron Deathmark",
@@ -1028,13 +863,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flash\nSynaptic Disintegrator — When this creature enters, destroy up to one target creature and target player mills three cards."
+      ]
     },
     {
       "name": "Necron Overlord",
@@ -1045,13 +877,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Relentless March — {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life."
+      ]
     },
     {
       "name": "Out of the Tombs",
@@ -1062,12 +891,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, put two eon counters on this enchantment, then mill cards equal to the number of eon counters on it.\nIf you would draw a card while your library has no cards in it, instead return a creature card from your graveyard to the battlefield. If you can't, you lose the game."
+      ]
     },
     {
       "name": "Royal Warden",
@@ -1078,13 +904,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Phalanx Commander — When this creature enters, create two tapped 2/2 black Necron Warrior artifact creature tokens.\nUnearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Shard of the Nightbringer",
@@ -1095,12 +918,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Flying\nDrain Life — When this creature enters, if you cast it, target opponent loses half their life, rounded up. You gain life equal to the life lost this way."
+      ]
     },
     {
       "name": "Shard of the Void Dragon",
@@ -1111,12 +931,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nSpear of the Void Dragon — Whenever this creature attacks, each opponent sacrifices a nonland permanent of their choice.\nMatter Absorption — Whenever an artifact is put into a graveyard from the battlefield or is put into exile from the battlefield, put two +1/+1 counters on this creature."
+      ]
     },
     {
       "name": "Skorpekh Lord",
@@ -1127,13 +944,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace\nCommand Protocols — Other artifact creatures you control get +1/+0 and have menace.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Technomancer",
@@ -1144,13 +958,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, mill three cards, then return any number of artifact creature cards with total mana value 6 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Their Name Is Death",
@@ -1161,12 +972,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy all nonartifact creatures."
+      ]
     },
     {
       "name": "Their Number Is Legion",
@@ -1177,12 +985,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile Their Number Is Legion.\nYou may cast this card from your graveyard."
+      ]
     },
     {
       "name": "Tomb Blade",
@@ -1193,13 +998,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, that player loses life equal to the number of creatures they control unless they sacrifice a creature of their choice.\nUnearth {6}{B}{B}"
+      ]
     },
     {
       "name": "Trazyn the Infinite",
@@ -1210,13 +1012,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\nPrismatic Gallery — As long as Trazyn is on the battlefield, it has all activated abilities of all artifact cards in your graveyard."
+      ]
     },
     {
       "name": "Triarch Stalker",
@@ -1227,13 +1026,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Targeting Relay — At the beginning of combat on your turn, choose an opponent.\nCreatures attacking the last chosen player have menace."
+      ]
     },
     {
       "name": "The War in Heaven",
@@ -1244,12 +1040,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You draw three cards and you lose 3 life.\nII — Mill three cards.\nIII — Choose up to three target creature cards with total mana value 8 or less in your graveyard. Return each of them to the battlefield with a necrodermis counter on it. They're artifacts in addition to their other types."
+      ]
     },
     {
       "name": "Canoptek Scarab Swarm",
@@ -1258,13 +1051,10 @@
       "oracleCardName": "Canoptek Scarab Swarm",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Flying\nFeeder Mandibles — When this creature enters, exile target player's graveyard. For each artifact or land card exiled this way, create a 1/1 colorless Insect artifact creature token with flying."
+      ]
     },
     {
       "name": "Canoptek Spyder",
@@ -1273,13 +1063,10 @@
       "oracleCardName": "Canoptek Spyder",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Flying\nFabricator Claw Array — Whenever another nontoken artifact creature or Vehicle you control enters, draw a card."
+      ]
     },
     {
       "name": "Canoptek Tomb Sentinel",
@@ -1288,13 +1075,10 @@
       "oracleCardName": "Canoptek Tomb Sentinel",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nExile Cannon — When this creature enters from a graveyard, exile up to one target nonland permanent.\nUnearth {7} ({7}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Canoptek Wraith",
@@ -1303,13 +1087,10 @@
       "oracleCardName": "Canoptek Wraith",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Wraith Form — This creature can't be blocked.\nTransdimensional Scout — When this creature deals combat damage to a player, you may pay {3} and sacrifice it. If you do, choose a land you control. Then search your library for up to two basic land cards which have the same name as the chosen land, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Convergence of Dominion",
@@ -1318,12 +1099,9 @@
       "oracleCardName": "Convergence of Dominion",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can't reduce the mana in that ability's activation cost to less than one mana.\nTranslocation Protocols — {3}, {T}: Mill three cards."
+      ]
     },
     {
       "name": "Cryptothrall",
@@ -1332,13 +1110,10 @@
       "oracleCardName": "Cryptothrall",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Protector — Other artifact creatures you control have hexproof."
+      ]
     },
     {
       "name": "Ghost Ark",
@@ -1347,12 +1122,9 @@
       "oracleCardName": "Ghost Ark",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Flying\nRepair Barge — Whenever this Vehicle becomes crewed, each artifact creature card in your graveyard gains unearth {3} until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Necron Monolith",
@@ -1361,12 +1133,9 @@
       "oracleCardName": "Necron Monolith",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Flying, indestructible\nEternity Gate — Whenever this Vehicle attacks, mill three cards. For each creature card milled this way, create a 2/2 black Necron Warrior artifact creature token.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     },
     {
       "name": "Resurrection Orb",
@@ -1375,12 +1144,9 @@
       "oracleCardName": "Resurrection Orb",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has lifelink.\nWhenever equipped creature dies, return that card to the battlefield under its owner's control at the beginning of the next end step.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sceptre of Eternal Glory",
@@ -1389,12 +1155,9 @@
       "oracleCardName": "Sceptre of Eternal Glory",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add one mana of any color.\n{T}: Add three mana of any one color. Activate only if you control three or more lands with the same name."
+      ]
     },
     {
       "name": "Tomb Fortress",
@@ -1405,11 +1168,9 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}{B}{B}{B}, {T}, Exile this land: Mill four cards, then return a creature card from your graveyard to the battlefield. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Flayed One",
@@ -1420,13 +1181,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Lifelink\nFlesh Flayer — When this creature enters, mill three cards."
+      ]
     },
     {
       "name": "Hexmark Destroyer",
@@ -1437,13 +1195,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Multi-threat Eliminator — This creature can't be blocked except by six or more creatures.\nUnearth {4}{B}{B} ({4}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Plasmancer",
@@ -1454,13 +1209,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nDynastic Advisor — When this creature enters, search your library for a basic Swamp card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Psychomancer",
@@ -1471,13 +1223,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nHarbinger of Despair — Whenever this creature or another nontoken artifact you control is put into a graveyard from the battlefield or is put into exile from the battlefield, target opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Sautekh Immortal",
@@ -1488,13 +1237,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Flash\nElite Troops — This creature enters with a +1/+1 counter on it for each creature that died this turn."
+      ]
     },
     {
       "name": "Skorpekh Destroyer",
@@ -1505,13 +1251,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nHyperphase Threshers — Whenever an artifact you control enters, this creature gains first strike until end of turn."
+      ]
     },
     {
       "name": "Triarch Praetorian",
@@ -1522,13 +1265,10 @@
         "B"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nDynastic Codes — When this creature enters from a graveyard, you draw two cards and you lose 2 life.\nUnearth {4}{B} ({4}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Night Scythe",
@@ -1537,16 +1277,13 @@
       "oracleCardName": "Night Scythe",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nInvasion Beams — When this Vehicle enters, create a 2/2 black Necron Warrior artifact creature token.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.123Z",
+    "retrievedDate": "2026-06-23T17:40:38.866Z",
     "sourceUrl": "NecronDynastiesCollectorSEdition_40K.json",
     "deckSource": "precon",
     "createdAt": "2022-10-07T00:00:00.000Z"

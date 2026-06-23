@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1684740411,
   "name": "Timeless Wisdom",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}{W}",
-      "cmc": 5,
-      "oracleText": "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.\nWhenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "[+1]: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.\n[0]: Discard all the cards in your hand, then draw that many cards plus one.\n[−X]: Chandra deals X damage to each creature."
+      ]
     },
     {
       "name": "Akim, the Soaring Wind",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever you create one or more tokens for the first time each turn, create a 1/1 white Bird creature token with flying.\n{3}{U}{R}{W}: Creature tokens you control gain double strike until end of turn."
+      ]
     },
     {
       "name": "Brallin, Skyshark Rider",
@@ -71,12 +62,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Partner with Shabraz, the Skyshark (When this creature enters, target player may put Shabraz into their hand from their library, then shuffle.)\nWhenever you discard a card, put a +1/+1 counter on Brallin and it deals 1 damage to each opponent.\n{R}: Target Shark gains trample until end of turn."
+      ]
     },
     {
       "name": "Shabraz, the Skyshark",
@@ -89,12 +77,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Partner with Brallin, Skyshark Rider\nFlying\nWhenever you draw a card, put a +1/+1 counter on Shabraz and you gain 1 life.\n{W/U}: Target Human gains flying until end of turn."
+      ]
     },
     {
       "name": "Cryptic Trilobite",
@@ -104,12 +89,9 @@
       "oracleCardName": "Cryptic Trilobite",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{X}",
-      "cmc": 0,
-      "oracleText": "This creature enters with X +1/+1 counters on it.\nRemove a +1/+1 counter from this creature: Add {C}{C}. Spend this mana only to activate abilities.\n{1}, {T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Herald of the Forgotten",
@@ -121,12 +103,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhen this creature enters, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Ethereal Forager",
@@ -138,12 +117,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\nWhenever this creature attacks, you may return an instant or sorcery card exiled with this creature to its owner's hand."
+      ]
     },
     {
       "name": "Agitator Ant",
@@ -155,12 +131,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Spellpyre Phoenix",
@@ -172,12 +145,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, you may return target instant or sorcery card with a cycling ability from your graveyard to your hand.\nAt the beginning of each end step, if you cycled two or more cards this turn, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Surly Badgersaur",
@@ -189,12 +159,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you discard a creature card, put a +1/+1 counter on this creature.\nWhenever you discard a land card, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nWhenever you discard a noncreature, nonland card, this creature fights up to one target creature you don't control."
+      ]
     },
     {
       "name": "Eternal Dragon",
@@ -206,12 +173,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\n{3}{W}{W}: Return this card from your graveyard to your hand. Activate only during your upkeep.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Sun Titan",
@@ -223,12 +187,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Curator of Mysteries",
@@ -240,12 +201,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever you cycle or discard another card, scry 1.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Nimble Obstructionist",
@@ -257,12 +215,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash\nFlying\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, counter target activated or triggered ability you don't control."
+      ]
     },
     {
       "name": "Portal Mage",
@@ -274,12 +229,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)"
+      ]
     },
     {
       "name": "Isperia, Supreme Judge",
@@ -292,12 +244,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever a creature attacks you or a planeswalker you control, you may draw a card."
+      ]
     },
     {
       "name": "Mercurial Chemister",
@@ -310,12 +259,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "{U}, {T}: Draw two cards.\n{R}, {T}, Discard a card: This creature deals damage to target creature equal to the discarded card's mana value."
+      ]
     },
     {
       "name": "Niv-Mizzet, the Firemind",
@@ -328,12 +274,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever you draw a card, Niv-Mizzet deals 1 damage to any target.\n{T}: Draw a card."
+      ]
     },
     {
       "name": "The Locust God",
@@ -346,12 +289,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.\n{2}{U}{R}: Draw a card, then discard a card.\nWhen The Locust God dies, return it to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Psychosis Crawler",
@@ -361,13 +301,10 @@
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Valiant Rescuer",
@@ -379,12 +316,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cycle another card for the first time each turn, create a 1/1 white Human Soldier creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Rooting Moloch",
@@ -396,12 +330,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, exile target card with a cycling ability from your graveyard. Until the end of your next turn, you may play that card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Savai Thundermane",
@@ -414,12 +345,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cycle a card, you may pay {2}. When you do, this creature deals 2 damage to target creature and you gain 2 life."
+      ]
     },
     {
       "name": "Vizier of Tumbling Sands",
@@ -431,12 +359,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{T}: Untap another target permanent.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, untap target permanent."
+      ]
     },
     {
       "name": "Dismantling Wave",
@@ -448,12 +373,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "For each opponent, destroy up to one target artifact or enchantment that player controls.\nCycling {6}{W}{W} ({6}{W}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Akroma's Vengeance",
@@ -465,12 +387,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Destroy all artifacts, creatures, and enchantments.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Decree of Justice",
@@ -482,12 +401,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Create X 4/4 white Angel creature tokens with flying.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens."
+      ]
     },
     {
       "name": "Descend upon the Sinful",
@@ -499,12 +415,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Exile all creatures.\nDelirium — Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Boon of the Wish-Giver",
@@ -516,12 +429,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Draw four cards.\nCycling {1} ({1}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Windfall",
@@ -533,12 +443,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Slice and Dice",
@@ -550,12 +457,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Slice and Dice deals 4 damage to each creature.\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have it deal 1 damage to each creature."
+      ]
     },
     {
       "name": "Migratory Route",
@@ -568,12 +472,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Fierce Guardianship",
@@ -585,12 +486,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "If you control a commander, you may cast this spell without paying its mana cost.\nCounter target noncreature spell."
+      ]
     },
     {
       "name": "Neutralize",
@@ -602,12 +500,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Zenith Flare",
@@ -620,12 +515,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "Zenith Flare deals X damage to any target and you gain X life, where X is the number of cards with a cycling ability in your graveyard."
+      ]
     },
     {
       "name": "Hieroglyphic Illumination",
@@ -637,12 +529,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Draw two cards.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Abandoned Sarcophagus",
@@ -652,12 +541,9 @@
       "oracleCardName": "Abandoned Sarcophagus",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "You may cast spells that have a cycling ability from your graveyard.\nIf a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead."
+      ]
     },
     {
       "name": "Fluctuator",
@@ -667,12 +553,9 @@
       "oracleCardName": "Fluctuator",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Cycling abilities you activate cost {2} less to activate."
+      ]
     },
     {
       "name": "Bonder's Ornament",
@@ -682,12 +565,9 @@
       "oracleCardName": "Bonder's Ornament",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{4}, {T}: Each player who controls a permanent named Bonder's Ornament draws a card."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -697,12 +577,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -715,12 +592,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Boros Signet",
@@ -733,12 +607,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -748,12 +619,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -766,12 +634,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -781,12 +646,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Raugrin Crystal",
@@ -800,12 +662,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U}, {R}, or {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Crystalline Resonance",
@@ -817,12 +676,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cycle a card, you may have this enchantment become a copy of another target permanent until your next turn, except it has this ability."
+      ]
     },
     {
       "name": "Astral Drift",
@@ -834,12 +690,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever you cycle this card or cycle another card while this enchantment is on the battlefield, you may exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Hoofprints of the Stag",
@@ -851,13 +704,10 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw a card, you may put a hoofprint counter on this enchantment.\n{2}{W}, Remove four hoofprint counters from this enchantment: Create a 4/4 white Elemental creature token with flying. Activate only during your turn."
+      ]
     },
     {
       "name": "Drake Haven",
@@ -869,12 +719,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying."
+      ]
     },
     {
       "name": "New Perspectives",
@@ -886,12 +733,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "When this enchantment enters, draw three cards.\nAs long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs."
+      ]
     },
     {
       "name": "Tectonic Reformation",
@@ -903,12 +747,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Each land card in your hand has cycling {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Ominous Seas",
@@ -920,12 +761,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw a card, put a foreshadow counter on this enchantment.\nRemove eight foreshadow counters from this enchantment: Create an 8/8 blue Kraken creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Reconnaissance Mission",
@@ -937,12 +775,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, you may draw a card.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Martial Impetus",
@@ -954,12 +789,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Psychic Impetus",
@@ -971,12 +803,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you scry 2."
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -988,12 +817,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Cast Out",
@@ -1005,12 +831,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Spirit Cairn",
@@ -1022,12 +845,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Lightning Rift",
@@ -1039,12 +859,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a player cycles a card, you may pay {1}. If you do, this enchantment deals 2 damage to any target."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1054,11 +871,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Hostile Desert",
@@ -1068,11 +883,9 @@
       "oracleCardName": "Hostile Desert",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, Exile a land card from your graveyard: This land becomes a 3/4 Elemental creature until end of turn. It's still a land."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -1085,11 +898,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -1102,11 +913,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Shivan Reef",
@@ -1119,11 +928,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {R}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -1136,11 +943,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1150,11 +955,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1167,11 +970,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1184,11 +985,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1198,11 +997,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Desert of the Fervent",
@@ -1214,11 +1011,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Desert of the Mindful",
@@ -1230,11 +1025,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Desert of the True",
@@ -1246,11 +1039,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Drifting Meadow",
@@ -1262,11 +1053,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1278,11 +1067,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Izzet Boilerworks",
@@ -1295,11 +1082,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1311,11 +1096,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1325,11 +1108,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1343,11 +1124,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1357,11 +1136,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Remote Isle",
@@ -1373,11 +1150,9 @@
         "U"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1389,11 +1164,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Smoldering Crater",
@@ -1405,11 +1178,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1419,11 +1190,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Island",
@@ -1435,11 +1204,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1451,11 +1218,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1467,11 +1232,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1483,11 +1246,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1499,11 +1260,9 @@
         "U"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1515,11 +1274,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1531,11 +1288,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1547,11 +1302,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1563,11 +1316,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1579,11 +1330,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1595,11 +1344,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1611,11 +1358,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1627,11 +1372,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1643,11 +1386,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1659,15 +1400,13 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.049Z",
+    "retrievedDate": "2026-06-23T17:40:40.468Z",
     "sourceUrl": "TimelessWisdom_C20.json",
     "deckSource": "precon",
     "createdAt": "2020-04-17T00:00:00.000Z"

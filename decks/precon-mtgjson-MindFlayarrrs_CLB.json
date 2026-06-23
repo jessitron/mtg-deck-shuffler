@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 21293398,
   "name": "Mind Flayarrrs",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Horrors you control have menace.\nWhenever a Horror you control deals combat damage to a player, that player mills that many cards.\nAt the beginning of your end step, choose target artifact or creature card in an opponent's graveyard that was put there from their library this turn. Put it onto the battlefield under your control."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you draw a card, put a +1/+1 counter on this creature.\nWhen this creature dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on this creature. (They can't be blocked as long as defending player controls an Island.)"
+      ]
     },
     {
       "name": "Forgotten Creation",
@@ -51,12 +45,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards."
+      ]
     },
     {
       "name": "Grazilaxx, Illithid Scholar",
@@ -68,12 +59,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control becomes blocked, you may return it to its owner's hand.\nWhenever one or more creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Hullbreaker Horror",
@@ -85,12 +73,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flash\nThis spell can't be countered.\nWhenever you cast a spell, choose up to one —\n• Return target spell you don't control to its owner's hand.\n• Return target nonland permanent to its owner's hand."
+      ]
     },
     {
       "name": "Mind Flayer",
@@ -102,12 +87,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Dominate Monster — When this creature enters, gain control of target creature for as long as you control this creature."
+      ]
     },
     {
       "name": "Overcharged Amalgam",
@@ -119,12 +101,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flash\nFlying\nExploit (When this creature enters, you may sacrifice a creature.)\nWhen this creature exploits a creature, counter target spell, activated ability, or triggered ability."
+      ]
     },
     {
       "name": "Sludge Monster",
@@ -136,12 +115,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature enters or attacks, put a slime counter on up to one other target creature.\nNon-Horror creatures with slime counters on them lose all abilities and have base power and toughness 2/2."
+      ]
     },
     {
       "name": "Wharf Infiltrator",
@@ -153,12 +129,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Skulk (This creature can't be blocked by creatures with greater power.)\nWhenever this creature deals combat damage to a player, you may draw a card. If you do, discard a card.\nWhenever you discard a creature card, you may pay {2}. If you do, create a 3/2 colorless Eldrazi Horror creature token."
+      ]
     },
     {
       "name": "Dark Hatchling",
@@ -170,12 +143,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, destroy target nonblack creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Dross Harvester",
@@ -187,12 +157,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Protection from white\nAt the beginning of your end step, you lose 4 life.\nWhenever a creature dies, you gain 2 life."
+      ]
     },
     {
       "name": "Guiltfeeder",
@@ -204,12 +171,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever this creature attacks and isn't blocked, defending player loses 1 life for each card in their graveyard."
+      ]
     },
     {
       "name": "Hunted Horror",
@@ -221,12 +185,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Trample\nWhen this creature enters, target opponent creates two 3/3 green Centaur creature tokens with protection from black."
+      ]
     },
     {
       "name": "Nighthowler",
@@ -238,13 +199,10 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Bestow {2}{B}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nThis creature and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards."
+      ]
     },
     {
       "name": "Nihilith",
@@ -256,12 +214,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSuspend 7—{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with seven time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)\nWhenever a card is put into an opponent's graveyard from anywhere, if this card is suspended, you may remove a time counter from this card."
+      ]
     },
     {
       "name": "Sewer Nemesis",
@@ -273,12 +228,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "As this creature enters, choose a player.\nSewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.\nWhenever the chosen player casts a spell, that player mills a card."
+      ]
     },
     {
       "name": "Woe Strider",
@@ -290,12 +242,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with two +1/+1 counters on it."
+      ]
     },
     {
       "name": "Consuming Aberration",
@@ -308,12 +257,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard."
+      ]
     },
     {
       "name": "Nemesis of Reason",
@@ -326,12 +272,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature attacks, defending player mills ten cards."
+      ]
     },
     {
       "name": "Phyrexian Revoker",
@@ -341,13 +284,10 @@
       "oracleCardName": "Phyrexian Revoker",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "As this creature enters, choose a nonland card name.\nActivated abilities of sources with the chosen name can't be activated."
+      ]
     },
     {
       "name": "Psychosis Crawler",
@@ -357,13 +297,10 @@
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Spellskite",
@@ -375,13 +312,10 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{U/P}: Change a target of target spell or ability to this creature. ({U/P} can be paid with either {U} or 2 life.)"
+      ]
     },
     {
       "name": "Dauthi Horror",
@@ -393,12 +327,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Shadow (This creature can block or be blocked by only creatures with shadow.)\nThis creature can't be blocked by white creatures."
+      ]
     },
     {
       "name": "Dusk Mangler",
@@ -410,12 +341,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a creature, discard a card, or pay 4 life.\nWhen this creature enters, each opponent sacrifices a creature of their choice, discards a card, and loses 4 life."
+      ]
     },
     {
       "name": "Phyrexian Rager",
@@ -427,12 +355,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Plague Spitter",
@@ -444,12 +369,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, this creature deals 1 damage to each creature and each player.\nWhen this creature dies, it deals 1 damage to each creature and each player."
+      ]
     },
     {
       "name": "Ravenous Chupacabra",
@@ -461,12 +383,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, destroy target creature an opponent controls."
+      ]
     },
     {
       "name": "Fractured Sanity",
@@ -478,12 +397,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Each opponent mills fourteen cards.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, each opponent mills four cards."
+      ]
     },
     {
       "name": "Crippling Fear",
@@ -495,12 +411,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn."
+      ]
     },
     {
       "name": "Hex",
@@ -512,12 +425,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy six target creatures."
+      ]
     },
     {
       "name": "In Garruk's Wake",
@@ -529,12 +439,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures you don't control and all planeswalkers you don't control."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -546,12 +453,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -563,12 +467,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Extract from Darkness",
@@ -581,12 +482,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Pull from Tomorrow",
@@ -598,12 +496,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards, then discard a card."
+      ]
     },
     {
       "name": "Curtains' Call",
@@ -615,12 +510,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures."
+      ]
     },
     {
       "name": "Memory Plunder",
@@ -633,12 +525,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U/B}{U/B}{U/B}{U/B}",
-      "cmc": 4,
-      "oracleText": "You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost."
+      ]
     },
     {
       "name": "Fact or Fiction",
@@ -650,12 +539,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Drown in the Loch",
@@ -668,12 +554,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Counter target spell with mana value less than or equal to the number of cards in its controller's graveyard.\n• Destroy target creature with mana value less than or equal to the number of cards in its controller's graveyard."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -683,12 +566,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -698,12 +578,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dimir Keyrune",
@@ -716,12 +593,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U} or {B}.\n{U}{B}: This artifact becomes a 2/2 blue and black Horror artifact creature until end of turn and can't be blocked this turn."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -734,12 +608,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -749,12 +620,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -764,12 +632,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -779,12 +644,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Mindcrank",
@@ -794,12 +656,9 @@
       "oracleCardName": "Mindcrank",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever an opponent loses life, that player mills that many cards. (Damage causes loss of life.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -809,12 +668,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -827,12 +683,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Thought Vessel",
@@ -842,12 +695,9 @@
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Leyline of Anticipation",
@@ -859,12 +709,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "If this card is in your opening hand, you may begin the game with it on the battlefield.\nYou may cast spells as though they had flash."
+      ]
     },
     {
       "name": "Reflections of Littjara",
@@ -876,12 +723,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever you cast a spell of the chosen type, copy that spell. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Black Market",
@@ -893,12 +737,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature dies, put a charge counter on this enchantment.\nAt the beginning of your first main phase, add {B} for each charge counter on this enchantment."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -911,11 +752,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Creeping Tar Pit",
@@ -928,11 +767,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}.\n{1}{U}{B}: Until end of turn, this land becomes a 3/2 blue and black Elemental creature. It's still a land. It can't be blocked this turn."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -945,11 +782,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Drownyard Temple",
@@ -959,11 +794,9 @@
       "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -973,11 +806,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Nephalia Drownyard",
@@ -990,11 +821,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{U}{B}, {T}: Target player mills three cards."
+      ]
     },
     {
       "name": "River of Tears",
@@ -1007,11 +836,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {U}. If you played a land this turn, add {B} instead."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -1024,11 +851,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -1041,11 +866,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1055,11 +878,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1069,11 +890,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1086,11 +905,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1100,11 +917,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1114,11 +929,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Port of Karfell",
@@ -1131,11 +944,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice this land: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1145,11 +956,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Tainted Isle",
@@ -1162,11 +971,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1176,11 +983,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Island",
@@ -1192,11 +997,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1208,11 +1011,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1224,11 +1025,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1240,11 +1039,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1256,11 +1053,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1272,11 +1067,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1288,11 +1081,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1304,11 +1095,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1320,11 +1109,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1336,11 +1123,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1352,11 +1137,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1368,11 +1151,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1384,11 +1165,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1400,11 +1179,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1416,11 +1193,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1432,11 +1207,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1448,11 +1221,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1464,11 +1235,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1480,11 +1249,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1496,11 +1263,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Zellix, Sanity Flayer",
@@ -1512,12 +1277,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Hive Mind — Whenever a player mills one or more creature cards, you create a 1/1 black Horror creature token.\n{1}, {T}: Target player mills three cards.\nChoose a Background (You can have a Background as a second commander.)"
+      ]
     },
     {
       "name": "Haunted One",
@@ -1529,12 +1291,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you own have \"Whenever this creature becomes tapped, it and other creatures you control that share a creature type with it each get +2/+0 and gain undying until end of turn.\" (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Aboleth Spawn",
@@ -1546,12 +1305,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flash\nWard {2}\nProbing Telepathy — Whenever a creature entering under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Endless Evil",
@@ -1563,12 +1319,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature, except the token is 1/1.\nWhen enchanted creature dies, if that creature was a Horror, return this card to its owner's hand."
+      ]
     },
     {
       "name": "Grell Philosopher",
@@ -1580,12 +1333,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Aberrant Tinkering — When this creature enters and at the beginning of your upkeep, each Horror you control gains all activated abilities of target artifact an opponent controls until end of turn. You may spend blue mana as though it were mana of any color to activate those abilities."
+      ]
     },
     {
       "name": "Psionic Ritual",
@@ -1597,12 +1347,9 @@
         "U"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Replicate—Tap an untapped Horror you control. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nExile target instant or sorcery card from a graveyard and copy it. You may cast the copy without paying its mana cost.\nExile Psionic Ritual."
+      ]
     },
     {
       "name": "Brainstealer Dragon",
@@ -1614,12 +1361,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nAt the beginning of your end step, exile the top card of each opponent's library. You may play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.\nWhenever a nonland permanent an opponent owns enters the battlefield under your control, they lose life equal to its mana value."
+      ]
     },
     {
       "name": "From the Catacombs",
@@ -1631,12 +1375,9 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control with a corpse counter on it. You take the initiative. If that creature would leave the battlefield, exile it instead of putting it anywhere else.\nEscape—{3}{B}{B}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)"
+      ]
     },
     {
       "name": "Uchuulon",
@@ -1648,16 +1389,13 @@
         "B"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.\nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of this creature."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.997Z",
+    "retrievedDate": "2026-06-23T17:40:38.636Z",
     "sourceUrl": "MindFlayarrrs_CLB.json",
     "deckSource": "precon",
     "createdAt": "2022-06-10T00:00:00.000Z"

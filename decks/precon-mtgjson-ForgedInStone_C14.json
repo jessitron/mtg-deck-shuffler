@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 419093613,
   "name": "Forged In Stone",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "[+2]: Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.\n[−2]: You may put an Equipment card from your hand or graveyard onto the battlefield.\n[−10]: Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}.\nNahiri, the Lithomancer can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flash\nIf a nontoken creature would enter and it wasn't cast, exile it instead."
+      ]
     },
     {
       "name": "Whitemane Lion",
@@ -50,12 +44,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flash\nWhen this creature enters, return a creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Grand Abolisher",
@@ -67,12 +58,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments."
+      ]
     },
     {
       "name": "Kor Sanctifiers",
@@ -84,12 +72,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Kicker {W} (You may pay an additional {W} as you cast this spell.)\nWhen this creature enters, if it was kicked, destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Mentor of the Meek",
@@ -101,12 +86,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card."
+      ]
     },
     {
       "name": "Flickerwisp",
@@ -118,12 +100,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Hallowed Spiritkeeper",
@@ -135,12 +114,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhen this creature dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard."
+      ]
     },
     {
       "name": "Kemba, Kha Regent",
@@ -152,12 +128,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, create a 2/2 white Cat creature token for each Equipment attached to Kemba."
+      ]
     },
     {
       "name": "Silverblade Paladin",
@@ -169,12 +142,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)\nAs long as this creature is paired with another creature, both creatures have double strike."
+      ]
     },
     {
       "name": "Skyhunter Skirmisher",
@@ -186,12 +156,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying, double strike"
+      ]
     },
     {
       "name": "Angelic Field Marshal",
@@ -203,12 +170,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nLieutenant — As long as you control your commander, this creature gets +2/+2 and creatures you control have vigilance."
+      ]
     },
     {
       "name": "Celestial Crusader",
@@ -220,12 +184,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nSplit second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nFlying\nOther white creatures get +1/+1."
+      ]
     },
     {
       "name": "Jazal Goldmane",
@@ -237,12 +198,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\n{3}{W}{W}: Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures."
+      ]
     },
     {
       "name": "Geist-Honored Monk",
@@ -254,12 +212,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nGeist-Honored Monk's power and toughness are each equal to the number of creatures you control.\nWhen this creature enters, create two 1/1 white Spirit creature tokens with flying."
+      ]
     },
     {
       "name": "Requiem Angel",
@@ -271,12 +226,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever another non-Spirit creature you control dies, create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Adarkar Valkyrie",
@@ -288,12 +240,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, vigilance\n{T}: When target creature other than this creature dies this turn, return that card to the battlefield under your control."
+      ]
     },
     {
       "name": "Sun Titan",
@@ -305,12 +254,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Sunblast Angel",
@@ -322,12 +268,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, destroy all tapped creatures."
+      ]
     },
     {
       "name": "Twilight Shepherd",
@@ -339,12 +282,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, vigilance\nWhen this creature enters, return to your hand all cards in your graveyard that were put there from the battlefield this turn.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
+      ]
     },
     {
       "name": "Angel of the Dire Hour",
@@ -356,12 +296,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, if you cast it from your hand, exile all attacking creatures."
+      ]
     },
     {
       "name": "Serra Avatar",
@@ -373,12 +310,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Serra Avatar's power and toughness are each equal to your life total.\nWhen Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library."
+      ]
     },
     {
       "name": "Gift of Estates",
@@ -390,12 +324,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Spectral Procession",
@@ -407,12 +338,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2/W}{2/W}{2/W}",
-      "cmc": 6,
-      "oracleText": "Create three 1/1 white Spirit creature tokens with flying."
+      ]
     },
     {
       "name": "Fell the Mighty",
@@ -424,12 +352,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures with power greater than target creature's power."
+      ]
     },
     {
       "name": "Nomads' Assembly",
@@ -441,12 +366,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Create a 1/1 white Kor Soldier creature token for each creature you control.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Deploy to the Front",
@@ -458,12 +380,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield."
+      ]
     },
     {
       "name": "Martial Coup",
@@ -475,12 +394,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures."
+      ]
     },
     {
       "name": "Decree of Justice",
@@ -492,12 +408,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Create X 4/4 white Angel creature tokens with flying.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens."
+      ]
     },
     {
       "name": "Brave the Elements",
@@ -509,12 +422,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Choose a color. White creatures you control gain protection from the chosen color until end of turn."
+      ]
     },
     {
       "name": "Condemn",
@@ -526,12 +436,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness."
+      ]
     },
     {
       "name": "Afterlife",
@@ -543,12 +450,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature. It can't be regenerated. Its controller creates a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Midnight Haunting",
@@ -560,12 +464,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Create two 1/1 white Spirit creature tokens with flying."
+      ]
     },
     {
       "name": "Oblation",
@@ -577,12 +478,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "The owner of target nonland permanent shuffles it into their library, then draws two cards."
+      ]
     },
     {
       "name": "Wing Shards",
@@ -594,12 +492,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Target player sacrifices an attacking creature of their choice.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+      ]
     },
     {
       "name": "Benevolent Offering",
@@ -611,12 +506,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.\nChoose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control."
+      ]
     },
     {
       "name": "Comeuppance",
@@ -628,12 +520,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -645,12 +534,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "White Sun's Zenith",
@@ -662,12 +548,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Masterwork of Ingenuity",
@@ -677,12 +560,9 @@
       "oracleCardName": "Masterwork of Ingenuity",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "You may have this Equipment enter as a copy of any Equipment on the battlefield."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -692,12 +572,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -707,12 +584,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Marble Diamond",
@@ -724,12 +598,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {W}."
+      ]
     },
     {
       "name": "Mask of Memory",
@@ -739,12 +610,9 @@
       "oracleCardName": "Mask of Memory",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever equipped creature deals combat damage to a player, you may draw two cards. If you do, discard a card.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Pearl Medallion",
@@ -754,12 +622,9 @@
       "oracleCardName": "Pearl Medallion",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "White spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -769,12 +634,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -784,12 +646,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Loxodon Warhammer",
@@ -799,12 +658,9 @@
       "oracleCardName": "Loxodon Warhammer",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+0 and has trample and lifelink.\nEquip {3}"
+      ]
     },
     {
       "name": "Strata Scythe",
@@ -814,12 +670,9 @@
       "oracleCardName": "Strata Scythe",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Imprint — When this Equipment enters, search your library for a land card, exile it, then shuffle.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}"
+      ]
     },
     {
       "name": "Sword of Vengeance",
@@ -829,12 +682,9 @@
       "oracleCardName": "Sword of Vengeance",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.\nEquip {3}"
+      ]
     },
     {
       "name": "Assault Suit",
@@ -844,12 +694,9 @@
       "oracleCardName": "Assault Suit",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}"
+      ]
     },
     {
       "name": "Bonehoard",
@@ -859,12 +706,9 @@
       "oracleCardName": "Bonehoard",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
+      ]
     },
     {
       "name": "Moonsilver Spear",
@@ -874,12 +718,9 @@
       "oracleCardName": "Moonsilver Spear",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Equipped creature has first strike.\nWhenever equipped creature attacks, create a 4/4 white Angel creature token with flying.\nEquip {4}"
+      ]
     },
     {
       "name": "Argentum Armor",
@@ -889,12 +730,9 @@
       "oracleCardName": "Argentum Armor",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Equipped creature gets +6/+6.\nWhenever equipped creature attacks, destroy target permanent.\nEquip {6}"
+      ]
     },
     {
       "name": "Loreseeker's Stone",
@@ -904,12 +742,9 @@
       "oracleCardName": "Loreseeker's Stone",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand."
+      ]
     },
     {
       "name": "Armistice",
@@ -921,12 +756,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "{3}{W}{W}: You draw a card and target opponent gains 3 life."
+      ]
     },
     {
       "name": "Mobilization",
@@ -938,12 +770,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Soldier creatures have vigilance.\n{2}{W}: Create a 1/1 white Soldier creature token."
+      ]
     },
     {
       "name": "Sacred Mesa",
@@ -955,12 +784,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, sacrifice this enchantment unless you sacrifice a Pegasus.\n{1}{W}: Create a 1/1 white Pegasus creature token with flying."
+      ]
     },
     {
       "name": "Marshal's Anthem",
@@ -972,12 +798,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Multikicker {1}{W} (You may pay an additional {1}{W} any number of times as you cast this spell.)\nCreatures you control get +1/+1.\nWhen this enchantment enters, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times this enchantment was kicked."
+      ]
     },
     {
       "name": "Cathars' Crusade",
@@ -989,12 +812,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature you control enters, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "True Conviction",
@@ -1006,12 +826,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Creatures you control have double strike and lifelink."
+      ]
     },
     {
       "name": "Arcane Lighthouse",
@@ -1021,11 +838,9 @@
       "oracleCardName": "Arcane Lighthouse",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud."
+      ]
     },
     {
       "name": "Drifting Meadow",
@@ -1037,11 +852,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Emeria, the Sky Ruin",
@@ -1053,11 +866,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nAt the beginning of your upkeep, if you control seven or more Plains, you may return target creature card from your graveyard to the battlefield.\n{T}: Add {W}."
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -1067,11 +878,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Karoo",
@@ -1083,11 +892,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Plains you control to its owner's hand.\n{T}: Add {C}{W}."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1099,11 +906,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1113,11 +918,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Plains",
@@ -1129,11 +932,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1145,11 +946,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1161,11 +960,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1177,11 +974,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1193,11 +988,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1209,11 +1002,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1225,11 +1016,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1241,11 +1030,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1257,11 +1044,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1273,11 +1058,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1289,11 +1072,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1305,11 +1086,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1321,11 +1100,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1337,11 +1114,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1353,11 +1128,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1369,11 +1142,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1385,11 +1156,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1401,11 +1170,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1417,11 +1184,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1433,11 +1198,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1449,11 +1212,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1465,11 +1226,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1481,11 +1240,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1497,11 +1254,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1513,11 +1268,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1529,11 +1282,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1545,11 +1296,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1561,11 +1310,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1577,11 +1324,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1593,11 +1338,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1609,11 +1352,9 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1625,15 +1366,13 @@
         "W"
       ],
       "set": "C14",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.331Z",
+    "retrievedDate": "2026-06-23T17:40:37.493Z",
     "sourceUrl": "ForgedInStone_C14.json",
     "deckSource": "precon",
     "createdAt": "2014-11-07T00:00:00.000Z"

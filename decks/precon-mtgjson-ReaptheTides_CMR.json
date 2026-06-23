@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2029643760,
   "name": "Reap the Tides",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "You may play an additional land on each of your turns.\nLandfall — Whenever a land you control enters, you may draw a card."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -52,12 +46,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Ramunap Excavator",
@@ -69,12 +60,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may play lands from your graveyard."
+      ]
     },
     {
       "name": "Reclamation Sage",
@@ -86,12 +74,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Stumpsquall Hydra",
@@ -103,12 +88,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, distribute X +1/+1 counters among it and any number of commanders."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -120,12 +102,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Fathom Mage",
@@ -138,12 +117,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever a +1/+1 counter is put on this creature, you may draw a card."
+      ]
     },
     {
       "name": "Sharktocrab",
@@ -156,12 +132,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "{2}{G}{U}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever one or more +1/+1 counters are put on this creature, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step."
+      ]
     },
     {
       "name": "Wickerbough Elder",
@@ -173,12 +146,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "This creature enters with a -1/-1 counter on it.\n{G}, Remove a -1/-1 counter from this creature: Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -190,12 +160,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Meloku the Clouded Mirror",
@@ -207,12 +174,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\n{1}, Return a land you control to its owner's hand: Create a 1/1 blue Illusion creature token with flying."
+      ]
     },
     {
       "name": "Mulldrifter",
@@ -224,12 +188,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Murkfiend Liege",
@@ -242,12 +203,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G/U}{G/U}{G/U}",
-      "cmc": 5,
-      "oracleText": "Other green creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.\nUntap all green and/or blue creatures you control during each other player's untap step."
+      ]
     },
     {
       "name": "Sporemound",
@@ -259,12 +217,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Saproling creature token."
+      ]
     },
     {
       "name": "Rampaging Baloths",
@@ -276,12 +231,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+      ]
     },
     {
       "name": "Shipbreaker Kraken",
@@ -293,12 +245,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "{6}{U}{U}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control this creature."
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -310,12 +259,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -325,13 +271,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Molimo, Maro-Sorcerer",
@@ -343,12 +286,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nMolimo's power and toughness are each equal to the number of lands you control."
+      ]
     },
     {
       "name": "Nezahal, Primal Tide",
@@ -360,12 +300,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "This spell can't be countered.\nYou have no maximum hand size.\nWhenever an opponent casts a noncreature spell, draw a card.\nDiscard three cards: Exile Nezahal. Return it to the battlefield tapped under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Scourge of Fleets",
@@ -377,12 +314,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control."
+      ]
     },
     {
       "name": "Simic Sky Swallower",
@@ -395,12 +329,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{U}",
-      "cmc": 7,
-      "oracleText": "Flying, trample\nShroud (This creature can't be the target of spells or abilities.)"
+      ]
     },
     {
       "name": "Sphinx of Uthuun",
@@ -412,12 +343,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Trench Behemoth",
@@ -429,12 +357,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Return a land you control to its owner's hand: Untap this creature. It gains hexproof until end of turn.\nLandfall — Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able."
+      ]
     },
     {
       "name": "Tromokratis",
@@ -446,12 +371,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Tromokratis has hexproof unless it's attacking or blocking.\nTromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)"
+      ]
     },
     {
       "name": "Verdant Sun's Avatar",
@@ -463,12 +385,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Whenever this creature or another creature you control enters, you gain life equal to that creature's toughness."
+      ]
     },
     {
       "name": "Elder Deep-Fiend",
@@ -480,12 +399,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Flash\nEmerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, tap up to four target permanents."
+      ]
     },
     {
       "name": "Slinn Voda, the Rising Deep",
@@ -497,12 +413,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Slinn Voda enters, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents."
+      ]
     },
     {
       "name": "Stormtide Leviathan",
@@ -514,12 +427,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nAll lands are Islands in addition to their other types.\nCreatures without flying or islandwalk can't attack."
+      ]
     },
     {
       "name": "Terastodon",
@@ -531,12 +441,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "When this creature enters, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -548,12 +455,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Counterspell",
@@ -565,12 +469,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell."
+      ]
     },
     {
       "name": "Growth Spiral",
@@ -583,12 +484,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Into the Roil",
@@ -600,12 +498,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card."
+      ]
     },
     {
       "name": "Peel from Reality",
@@ -617,12 +512,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Return target creature you control and target creature you don't control to their owners' hands."
+      ]
     },
     {
       "name": "Simic Charm",
@@ -635,12 +527,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Target creature gets +3/+3 until end of turn.\n• Permanents you control gain hexproof until end of turn.\n• Return target creature to its owner's hand."
+      ]
     },
     {
       "name": "Beast Within",
@@ -652,12 +541,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Fact or Fiction",
@@ -669,12 +555,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Explore",
@@ -686,12 +569,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -703,12 +583,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Compulsive Research",
@@ -720,12 +597,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws three cards. Then that player discards two cards unless they discard a land card."
+      ]
     },
     {
       "name": "Cultivate",
@@ -737,12 +611,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -754,12 +625,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Search for Tomorrow",
@@ -771,12 +639,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nSuspend 2—{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Harmonize",
@@ -788,12 +653,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Whelming Wave",
@@ -805,12 +667,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses, and Serpents."
+      ]
     },
     {
       "name": "Urban Evolution",
@@ -823,12 +682,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Draw three cards. You may play an additional land this turn."
+      ]
     },
     {
       "name": "Spitting Image",
@@ -841,12 +697,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G/U}{G/U}",
-      "cmc": 6,
-      "oracleText": "Create a token that's a copy of target creature.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Ior Ruin Expedition",
@@ -858,12 +711,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Draw two cards."
+      ]
     },
     {
       "name": "Khalni Heart Expedition",
@@ -875,12 +725,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Retreat to Kazandu",
@@ -892,12 +739,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Put a +1/+1 counter on target creature.\n• You gain 2 life."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -907,12 +751,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -925,12 +766,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -940,12 +778,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Seer's Sundial",
@@ -955,12 +790,9 @@
       "oracleCardName": "Seer's Sundial",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -972,11 +804,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -986,11 +816,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Coral Atoll",
@@ -1002,11 +830,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Island you control to its owner's hand.\n{T}: Add {C}{U}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1016,11 +842,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forest",
@@ -1032,11 +856,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1048,11 +870,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1064,11 +884,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1080,11 +898,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1096,11 +912,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1112,11 +926,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1128,11 +940,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1144,11 +954,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1160,11 +968,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1176,11 +982,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1192,11 +996,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1208,11 +1010,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1224,11 +1024,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1240,11 +1038,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1256,11 +1052,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1272,11 +1066,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1288,11 +1080,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1304,11 +1094,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1320,11 +1108,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1336,11 +1122,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1352,11 +1136,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1368,11 +1150,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1384,11 +1164,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1400,11 +1178,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1416,11 +1192,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1432,11 +1206,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1448,11 +1220,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1464,11 +1234,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1480,11 +1248,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1496,11 +1262,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Jungle Basin",
@@ -1512,11 +1276,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Forest you control to its owner's hand.\n{T}: Add {C}{G}."
+      ]
     },
     {
       "name": "Memorial to Genius",
@@ -1528,11 +1290,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice this land: Draw two cards."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1542,11 +1302,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1559,11 +1317,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Simic Guildgate",
@@ -1576,11 +1332,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1590,11 +1344,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -1607,11 +1359,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Vivid Creek",
@@ -1623,11 +1373,9 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {U}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Vivid Grove",
@@ -1639,11 +1387,9 @@
         "G"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {G}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Woodland Stream",
@@ -1656,15 +1402,13 @@
         "U"
       ],
       "set": "CMR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.438Z",
+    "retrievedDate": "2026-06-23T17:40:39.444Z",
     "sourceUrl": "ReapTheTides_CMR.json",
     "deckSource": "precon",
     "createdAt": "2020-11-20T00:00:00.000Z"

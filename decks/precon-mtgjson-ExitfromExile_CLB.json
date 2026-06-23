@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 737334811,
   "name": "Exit from Exile",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a spell from exile or a land you control enters from exile, create a 2/2 green Wolf creature token.\n{1}, {T}, Discard a card: Exile the top card of your library. You may play it this turn."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may cast creature spells as though they had flash.\n[+1]: Until your next turn, up to one target creature gains vigilance and reach.\n[−2]: Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may cast it if it's a creature spell."
+      ]
     },
     {
       "name": "Xenagos, the Reveler",
@@ -52,12 +46,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "[+1]: Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control.\n[0]: Create a 2/2 red and green Satyr creature token with haste.\n[−6]: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield."
+      ]
     },
     {
       "name": "Aurora Phoenix",
@@ -69,12 +60,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nWhenever you cast a spell with cascade, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Bonecrusher Giant // Stomp",
@@ -86,12 +74,10 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller."
+      "cardTypes": [
+        "Creature",
+        "Instant"
+      ]
     },
     {
       "name": "Dire Fleet Daredevil",
@@ -103,12 +89,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Dream Pillager",
@@ -120,12 +103,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards."
+      ]
     },
     {
       "name": "Etali, Primal Storm",
@@ -137,12 +117,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever Etali attacks, exile the top card of each player's library, then you may cast any number of spells from among those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Greater Gargadon",
@@ -154,12 +131,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{9}{R}",
-      "cmc": 10,
-      "oracleText": "Suspend 10—{R}\nSacrifice an artifact, creature, or land: Remove a time counter from this card. Activate only if this card is suspended."
+      ]
     },
     {
       "name": "Izzet Chemister",
@@ -171,12 +145,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\n{R}, {T}: Exile target instant or sorcery card from your graveyard.\n{1}{R}, {T}, Sacrifice this creature: Cast any number of cards exiled with this creature without paying their mana costs."
+      ]
     },
     {
       "name": "Laelia, the Blade Reforged",
@@ -188,12 +159,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhenever Laelia attacks, exile the top card of your library. You may play that card this turn.\nWhenever one or more cards are put into exile from your library and/or your graveyard, put a +1/+1 counter on Laelia."
+      ]
     },
     {
       "name": "Tectonic Giant",
@@ -205,12 +173,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks or becomes the target of a spell an opponent controls, choose one —\n• This creature deals 3 damage to each opponent.\n• Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."
+      ]
     },
     {
       "name": "Urabrask the Hidden",
@@ -222,12 +187,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Creatures you control have haste.\nCreatures your opponents control enter tapped."
+      ]
     },
     {
       "name": "Wild-Magic Sorcerer",
@@ -239,12 +201,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "The first spell you cast from exile each turn has cascade. (When you cast your first spell from exile, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Arasta of the Endless Web",
@@ -256,13 +215,10 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Reach\nWhenever an opponent casts an instant or sorcery spell, create a 1/2 green Spider creature token with reach."
+      ]
     },
     {
       "name": "Battle Mammoth",
@@ -274,12 +230,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.\nForetell {2}{G}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "End-Raze Forerunners",
@@ -291,12 +244,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Vigilance, trample, haste\nWhen this creature enters, other creatures you control get +2/+2 and gain vigilance and trample until end of turn."
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -308,12 +258,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Lovestruck Beast // Heart's Desire",
@@ -325,12 +272,10 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature can't attack unless you control a 1/1 creature."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Managorger Hydra",
@@ -342,12 +287,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever a player casts a spell, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Sweet-Gum Recluse",
@@ -359,12 +301,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Flash\nCascade\nReach\nWhen this creature enters, put three +1/+1 counters on each of any number of target creatures that entered this turn."
+      ]
     },
     {
       "name": "Embereth Shieldbreaker // Battle Display",
@@ -376,11 +315,10 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Sakura-Tribe Elder",
@@ -392,12 +330,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Bloodbraid Elf",
@@ -410,12 +345,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Haste (This creature can attack and {T} as soon as it comes under your control.)\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Grumgully, the Generous",
@@ -428,12 +360,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Each other non-Human creature you control enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Ignite the Future",
@@ -445,12 +374,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Exile the top three cards of your library. Until the end of your next turn, you may play those cards. If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.\nFlashback {7}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Jeska's Will",
@@ -462,12 +388,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Add {R} for each card in target opponent's hand.\n• Exile the top three cards of your library. You may play them this turn."
+      ]
     },
     {
       "name": "Mizzium Mortars",
@@ -479,12 +402,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Mizzium Mortars deals 4 damage to target creature you don't control.\nOverload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Ezuri's Predation",
@@ -496,12 +416,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{G}{G}{G}",
-      "cmc": 8,
-      "oracleText": "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those tokens fights a different one of those creatures."
+      ]
     },
     {
       "name": "Escape to the Wilds",
@@ -514,12 +431,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Exile the top five cards of your library. You may play cards exiled this way until the end of your next turn.\nYou may play an additional land this turn."
+      ]
     },
     {
       "name": "Nature's Lore",
@@ -531,12 +445,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Light Up the Stage",
@@ -548,12 +459,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nExile the top two cards of your library. Until the end of your next turn, you may play those cards."
+      ]
     },
     {
       "name": "Beanstalk Giant // Fertile Footsteps",
@@ -565,12 +473,10 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "Beanstalk Giant's power and toughness are each equal to the number of lands you control."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Cultivate",
@@ -582,12 +488,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explore",
@@ -599,12 +502,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -616,12 +516,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Search for Tomorrow",
@@ -633,12 +530,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nSuspend 2—{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Terramorph",
@@ -650,12 +544,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Three Visits",
@@ -667,12 +558,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -684,12 +572,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Demon Bolt",
@@ -701,12 +586,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Demon Bolt deals 4 damage to target creature or planeswalker.\nForetell {R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Beast Within",
@@ -718,12 +600,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Natural Reclamation",
@@ -735,12 +614,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nDestroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Chaos Wand",
@@ -750,12 +626,9 @@
       "oracleCardName": "Chaos Wand",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -765,12 +638,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -780,12 +650,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Outpost Siege",
@@ -797,12 +664,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, this enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Stolen Strategy",
@@ -814,12 +678,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells."
+      ]
     },
     {
       "name": "Warstorm Surge",
@@ -831,12 +692,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control enters, it deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Primeval Bounty",
@@ -848,12 +706,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a creature spell, create a 3/3 green Beast creature token.\nWhenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.\nLandfall — Whenever a land you control enters, you gain 3 life."
+      ]
     },
     {
       "name": "Sandwurm Convergence",
@@ -865,12 +720,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Creatures with flying can't attack you or planeswalkers you control.\nAt the beginning of your end step, create a 5/5 green Wurm creature token."
+      ]
     },
     {
       "name": "Castle Embereth",
@@ -882,11 +734,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -899,11 +749,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Game Trail",
@@ -916,11 +764,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Kessig Wolf Run",
@@ -933,11 +779,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn."
+      ]
     },
     {
       "name": "Mossfire Valley",
@@ -950,11 +794,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Mosswort Bridge",
@@ -966,11 +808,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater."
+      ]
     },
     {
       "name": "Raging Ravine",
@@ -983,11 +823,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}: Until end of turn, this land becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land."
+      ]
     },
     {
       "name": "Spinerock Knoll",
@@ -999,11 +837,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+      ]
     },
     {
       "name": "Temple of Abandon",
@@ -1016,11 +852,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1030,11 +864,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1044,11 +876,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -1060,11 +890,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Gruul Turf",
@@ -1077,11 +905,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Highland Forest",
@@ -1094,11 +920,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1108,11 +932,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1122,11 +944,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Mountain",
@@ -1138,11 +958,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1154,11 +972,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1170,11 +986,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1186,11 +1000,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1202,11 +1014,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1218,11 +1028,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1234,11 +1042,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1250,11 +1056,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1266,11 +1070,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1282,11 +1084,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1298,11 +1098,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1314,11 +1112,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1330,11 +1126,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1346,11 +1140,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1362,11 +1154,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1378,11 +1168,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1394,11 +1182,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1410,11 +1196,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1426,11 +1210,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1442,11 +1224,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1458,11 +1238,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1474,11 +1252,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1490,11 +1266,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Durnan of the Yawning Portal",
@@ -1506,12 +1280,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever Durnan attacks, look at the top four cards of your library. You may exile a creature card from among them. Put the rest on the bottom of your library in any order. For as long as that card remains exiled, you may cast it. That spell has undaunted. (It costs {1} less to cast for each opponent.)\nChoose a Background (You can have a Background as a second commander.)"
+      ]
     },
     {
       "name": "Passionate Archaeologist",
@@ -1523,12 +1294,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Commander creatures you own have \"Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent.\""
+      ]
     },
     {
       "name": "Delayed Blast Fireball",
@@ -1540,12 +1308,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Delayed Blast Fireball deals 2 damage to each opponent and each creature they control. If this spell was cast from exile, it deals 5 damage to each opponent and each creature they control instead.\nForetell {4}{R}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Nalfeshnee",
@@ -1557,12 +1322,9 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever you cast a spell from exile, copy it. You may choose new targets for the copy. If it's a permanent spell, the copy gains haste and \"At the beginning of the end step, sacrifice this permanent.\" (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Green Slime",
@@ -1574,12 +1336,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, counter target activated or triggered ability from an artifact or enchantment source. If a permanent's ability is countered this way, destroy that permanent.\nForetell {G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Journey to the Lost City",
@@ -1591,12 +1350,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, exile the top four cards of your library, then roll a d20.\n1—9 | You may put a land card from among those cards onto the battlefield.\n10—19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.\n20 | Put all permanent cards exiled with this enchantment onto the battlefield, then sacrifice it."
+      ]
     },
     {
       "name": "Tlincalli Hunter // Retrieve Prey",
@@ -1608,12 +1364,10 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Trample\nOnce each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile."
+      "cardTypes": [
+        "Creature",
+        "Sorcery"
+      ]
     },
     {
       "name": "Venture Forth",
@@ -1625,12 +1379,9 @@
         "G"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Exile cards from the top of your library until you exile a land card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Exile Venture Forth with three time counters on it.\nSuspend 3—{1}{G}"
+      ]
     },
     {
       "name": "Sarevok's Tome",
@@ -1640,12 +1391,9 @@
       "oracleCardName": "Sarevok's Tome",
       "colorIdentity": [],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this artifact enters, you take the initiative.\n{T}: Add {C}. If you have the initiative, add {C}{C} instead.\n{3}, {T}: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost. Activate only if you've completed a dungeon."
+      ]
     },
     {
       "name": "Volcanic Torrent",
@@ -1657,16 +1405,13 @@
         "R"
       ],
       "set": "CLB",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nVolcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.194Z",
+    "retrievedDate": "2026-06-23T17:40:37.255Z",
     "sourceUrl": "ExitFromExile_CLB.json",
     "deckSource": "precon",
     "createdAt": "2022-06-10T00:00:00.000Z"

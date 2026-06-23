@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1142755114,
   "name": "Breed Lethality",
   "totalCards": 100,
@@ -17,12 +17,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Festercreep",
@@ -53,12 +47,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "This creature enters with a +1/+1 counter on it.\n{1}{B}, Remove a +1/+1 counter from this creature: All other creatures get -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Scavenging Ooze",
@@ -70,12 +61,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on this creature and you gain 1 life."
+      ]
     },
     {
       "name": "Abzan Falconer",
@@ -87,12 +75,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying."
+      ]
     },
     {
       "name": "Orzhov Advokist",
@@ -104,12 +89,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn."
+      ]
     },
     {
       "name": "Tuskguard Captain",
@@ -121,12 +103,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Outlast {G} ({G}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has trample."
+      ]
     },
     {
       "name": "Necroplasm",
@@ -138,12 +117,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, put a +1/+1 counter on this creature.\nAt the beginning of your end step, destroy each creature with mana value equal to the number of +1/+1 counters on this creature.\nDredge 2 (If you would draw a card, you may mill two cards instead. If you do, return this card from your graveyard to your hand.)"
+      ]
     },
     {
       "name": "Champion of Lambholt",
@@ -155,12 +131,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Reyhan, Last of the Abzan",
@@ -173,12 +146,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Reyhan enters with three +1/+1 counters on it.\nWhenever a creature you control dies or is put into the command zone, if it had one or more +1/+1 counters on it, you may put that many +1/+1 counters on target creature.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Vorel of the Hull Clade",
@@ -191,12 +161,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "{G}{U}, {T}: Double the number of each kind of counter on target artifact, creature, or land."
+      ]
     },
     {
       "name": "Crystalline Crawler",
@@ -206,13 +173,10 @@
       "oracleCardName": "Crystalline Crawler",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.\nRemove a +1/+1 counter from this creature: Add one mana of any color.\n{T}: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Custodi Soulbinders",
@@ -224,12 +188,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "This creature enters with X +1/+1 counters on it, where X is the number of other creatures on the battlefield.\n{2}{W}, Remove a +1/+1 counter from this creature: Create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Forgotten Ancient",
@@ -241,12 +202,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever a player casts a spell, you may put a +1/+1 counter on this creature.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from this creature onto other creatures."
+      ]
     },
     {
       "name": "Bane of the Living",
@@ -258,12 +216,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Morph {X}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, all creatures get -X/-X until end of turn."
+      ]
     },
     {
       "name": "Ishai, Ojutai Dragonspeaker",
@@ -276,12 +231,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever an opponent casts a spell, put a +1/+1 counter on Ishai.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Corpsejack Menace",
@@ -294,12 +246,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead."
+      ]
     },
     {
       "name": "Fathom Mage",
@@ -312,12 +261,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever a +1/+1 counter is put on this creature, you may draw a card."
+      ]
     },
     {
       "name": "Master Biomancer",
@@ -330,12 +276,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Each other creature you control enters with a number of additional +1/+1 counters on it equal to this creature's power and as a Mutant in addition to its other types."
+      ]
     },
     {
       "name": "Elite Scaleguard",
@@ -347,12 +290,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls."
+      ]
     },
     {
       "name": "Reveillark",
@@ -364,12 +304,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.\nEvoke {5}{W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Deepglow Skate",
@@ -381,12 +318,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, double the number of each kind of counter on any number of target permanents."
+      ]
     },
     {
       "name": "Kalonian Hydra",
@@ -398,12 +332,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nThis creature enters with four +1/+1 counters on it.\nWhenever this creature attacks, double the number of +1/+1 counters on each creature you control."
+      ]
     },
     {
       "name": "Ikra Shidiqi, the Usurper",
@@ -416,12 +347,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Menace\nWhenever a creature you control deals combat damage to a player, you gain life equal to that creature's toughness.\nPartner (You can have two commanders if both have partner.)"
+      ]
     },
     {
       "name": "Vulturous Zombie",
@@ -434,12 +362,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Juniper Order Ranger",
@@ -452,12 +377,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Ghave, Guru of Spores",
@@ -471,12 +393,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Ghave enters with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from a creature you control: Create a 1/1 green Saproling creature token.\n{1}, Sacrifice a creature: Put a +1/+1 counter on target creature."
+      ]
     },
     {
       "name": "Enduring Scalelord",
@@ -489,12 +408,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Manifold Insights",
@@ -506,12 +422,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Reveal the top ten cards of your library. Starting with the next opponent in turn order, each opponent chooses a different nonland card from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Languish",
@@ -523,12 +436,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "All creatures get -4/-4 until end of turn."
+      ]
     },
     {
       "name": "Tezzeret's Gambit",
@@ -540,12 +450,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U/P}",
-      "cmc": 4,
-      "oracleText": "({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+      ]
     },
     {
       "name": "Migratory Route",
@@ -558,12 +465,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Merciless Eviction",
@@ -576,12 +480,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{B}",
-      "cmc": 6,
-      "oracleText": "Choose one —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all planeswalkers."
+      ]
     },
     {
       "name": "Spitting Image",
@@ -594,12 +495,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G/U}{G/U}",
-      "cmc": 6,
-      "oracleText": "Create a token that's a copy of target creature.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Sublime Exhalation",
@@ -611,12 +509,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{W}",
-      "cmc": 7,
-      "oracleText": "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy all creatures."
+      ]
     },
     {
       "name": "Duneblast",
@@ -630,12 +525,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{B}{G}",
-      "cmc": 7,
-      "oracleText": "Choose up to one creature. Destroy the rest."
+      ]
     },
     {
       "name": "Treasure Cruise",
@@ -647,12 +539,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{U}",
-      "cmc": 8,
-      "oracleText": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Disdainful Stroke",
@@ -664,12 +553,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell with mana value 4 or greater."
+      ]
     },
     {
       "name": "Solidarity of Heroes",
@@ -681,12 +567,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Strive — This spell costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them."
+      ]
     },
     {
       "name": "Grip of Phyresis",
@@ -698,12 +581,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Gain control of target Equipment, then create a 0/0 black Phyrexian Germ creature token and attach that Equipment to it."
+      ]
     },
     {
       "name": "Inspiring Call",
@@ -715,12 +595,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Mortify",
@@ -733,12 +610,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or enchantment."
+      ]
     },
     {
       "name": "Putrefy",
@@ -751,12 +625,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Ancient Excavation",
@@ -769,12 +640,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Mirrorweave",
@@ -787,12 +655,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W/U}{W/U}",
-      "cmc": 4,
-      "oracleText": "Each other creature becomes a copy of target nonlegendary creature until end of turn."
+      ]
     },
     {
       "name": "Sylvan Reclamation",
@@ -805,12 +670,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -820,12 +682,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -835,12 +694,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Golgari Signet",
@@ -853,12 +709,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -871,12 +724,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -889,12 +739,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -904,12 +751,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Darksteel Ingot",
@@ -919,12 +763,9 @@
       "oracleCardName": "Darksteel Ingot",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Cauldron of Souls",
@@ -934,12 +775,9 @@
       "oracleCardName": "Cauldron of Souls",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "{T}: Choose any number of target creatures. Each of those creatures gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)"
+      ]
     },
     {
       "name": "Astral Cornucopia",
@@ -949,12 +787,9 @@
       "oracleCardName": "Astral Cornucopia",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{X}{X}{X}",
-      "cmc": 0,
-      "oracleText": "This artifact enters with X charge counters on it.\n{T}: Choose a color. Add one mana of that color for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Hardened Scales",
@@ -966,12 +801,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead."
+      ]
     },
     {
       "name": "Brave the Sands",
@@ -983,12 +815,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Creatures you control have vigilance.\nEach creature you control can block an additional creature each combat."
+      ]
     },
     {
       "name": "Duelist's Heritage",
@@ -1000,12 +829,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more creatures attack, you may have target attacking creature gain double strike until end of turn."
+      ]
     },
     {
       "name": "Bred for the Hunt",
@@ -1018,12 +844,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card."
+      ]
     },
     {
       "name": "Citadel Siege",
@@ -1035,12 +858,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls."
+      ]
     },
     {
       "name": "Cathars' Crusade",
@@ -1052,12 +872,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature you control enters, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1071,11 +888,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1085,11 +900,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1102,11 +915,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1116,11 +927,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Darkwater Catacombs",
@@ -1133,11 +942,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Dreadship Reef",
@@ -1150,11 +957,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {U} and/or {B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1164,11 +969,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1178,11 +981,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1195,11 +996,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Murmuring Bosk",
@@ -1213,11 +1012,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)\nAs this land enters, you may reveal a Treefolk card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1227,11 +1024,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1245,11 +1040,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Sandsteppe Citadel",
@@ -1263,11 +1056,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {B}, or {G}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1281,11 +1072,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -1298,11 +1087,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1312,11 +1099,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1326,11 +1111,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Underground River",
@@ -1343,11 +1126,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Plains",
@@ -1359,11 +1140,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1375,11 +1154,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1391,11 +1168,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1407,11 +1182,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1423,11 +1196,9 @@
         "W"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1439,11 +1210,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1455,11 +1224,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1471,11 +1238,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1487,11 +1252,9 @@
         "U"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1503,11 +1266,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1519,11 +1280,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1535,11 +1294,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1551,11 +1308,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1567,11 +1322,9 @@
         "B"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1583,11 +1336,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1599,11 +1350,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1615,11 +1364,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1631,11 +1378,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1647,11 +1392,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1663,11 +1406,9 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1679,15 +1420,13 @@
         "G"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.535Z",
+    "retrievedDate": "2026-06-23T17:40:36.159Z",
     "sourceUrl": "BreedLethality_CM2.json",
     "deckSource": "precon",
     "createdAt": "2018-06-08T00:00:00.000Z"

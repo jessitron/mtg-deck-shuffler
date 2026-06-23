@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1410759520,
   "name": "Goblin Storm",
   "totalCards": 100,
@@ -13,12 +13,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast an instant or sorcery spell that targets only Zada, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures."
+      ]
     }
   ],
   "cards": [
@@ -31,12 +28,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control."
+      ]
     },
     {
       "name": "Pashalik Mons",
@@ -47,12 +41,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.\n{3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens."
+      ]
     },
     {
       "name": "Brightstone Ritual",
@@ -63,12 +54,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Add {R} for each Goblin on the battlefield."
+      ]
     },
     {
       "name": "Broadside Bombardiers",
@@ -79,12 +67,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace, haste\nBoast — Sacrifice another creature or artifact: This creature deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)"
+      ]
     },
     {
       "name": "Conspicuous Snoop",
@@ -95,12 +80,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{R}",
-      "cmc": 2,
-      "oracleText": "Play with the top card of your library revealed.\nYou may cast Goblin spells from the top of your library.\nAs long as the top card of your library is a Goblin card, this creature has all activated abilities of that card."
+      ]
     },
     {
       "name": "Empty the Warrens",
@@ -111,12 +93,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Create two 1/1 red Goblin creature tokens.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)"
+      ]
     },
     {
       "name": "Grapeshot",
@@ -127,12 +106,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Grapeshot deals 1 damage to any target.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+      ]
     },
     {
       "name": "Skirk Prospector",
@@ -143,12 +119,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Sacrifice a Goblin: Add {R}."
+      ]
     },
     {
       "name": "Roaming Throne",
@@ -157,13 +130,10 @@
       "oracleCardName": "Roaming Throne",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Ward {2}\nAs this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nIf a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -172,12 +142,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -186,12 +153,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -202,12 +166,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -218,12 +179,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Frontline Heroism",
@@ -234,12 +192,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, create a 1/1 red Soldier creature token with haste.\nWhenever you cast a spell that targets only a single creature you control, create a 1/1 red Soldier creature token with haste, then copy that spell. The copy targets that token."
+      ]
     },
     {
       "name": "Goblin Bombardment",
@@ -250,12 +205,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Sacrifice a creature: This enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Goblin Chieftain",
@@ -266,12 +218,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Haste (This creature can attack and {T} as soon as it comes under your control.)\nOther Goblin creatures you control get +1/+1 and have haste."
+      ]
     },
     {
       "name": "Goblin Dark-Dwellers",
@@ -282,12 +231,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead."
+      ]
     },
     {
       "name": "Goblin Lackey",
@@ -298,12 +244,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Whenever this creature deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Goblin Trashmaster",
@@ -314,12 +257,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Other Goblins you control get +1/+1.\nSacrifice a Goblin: Destroy target artifact."
+      ]
     },
     {
       "name": "Great Train Heist",
@@ -330,12 +270,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Spree (Choose one or more additional costs.)\n+ {2}{R} — Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase.\n+ {2} — Creatures you control get +1/+0 and gain first strike until end of turn.\n+ {R} — Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token."
+      ]
     },
     {
       "name": "Grenzo, Havoc Raiser",
@@ -346,12 +283,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control deals combat damage to a player, choose one —\n• Goad target creature that player controls.\n• Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell."
+      ]
     },
     {
       "name": "Howlsquad Heavy",
@@ -362,12 +296,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Start your engines!\nOther Goblins you control have haste.\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.\nMax speed — {T}: Add {R} for each Goblin you control."
+      ]
     },
     {
       "name": "Past in Flames",
@@ -378,12 +309,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Redcap Gutter-Dweller",
@@ -394,12 +322,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Menace\nWhen this creature enters, create two 1/1 black Rat creature tokens with \"This token can't block.\"\nAt the beginning of your upkeep, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature and exile the top card of your library. You may play that card this turn."
+      ]
     },
     {
       "name": "Rundvelt Hordemaster",
@@ -410,12 +335,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Other Goblins you control get +1/+1.\nWhenever this creature or another Goblin you control dies, exile the top card of your library. If it's a Goblin creature card, you may cast that card until the end of your next turn."
+      ]
     },
     {
       "name": "Searslicer Goblin",
@@ -426,12 +348,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token."
+      ]
     },
     {
       "name": "Siege-Gang Commander",
@@ -442,12 +361,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create three 1/1 red Goblin creature tokens.\n{1}{R}, Sacrifice a Goblin: This creature deals 2 damage to any target."
+      ]
     },
     {
       "name": "Siege-Gang Lieutenant",
@@ -458,12 +374,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Lieutenant — At the beginning of combat on your turn, if you control your commander, create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn.\n{2}, Sacrifice a Goblin: This creature deals 1 damage to any target."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -472,12 +385,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Ruby Medallion",
@@ -486,12 +396,9 @@
       "oracleCardName": "Ruby Medallion",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Red spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Throne of Eldraine",
@@ -500,12 +407,9 @@
       "oracleCardName": "Throne of Eldraine",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As Throne of Eldraine enters, choose a color.\n{T}: Add four mana of the chosen color. Spend this mana only to cast monocolored spells of that color.\n{3}, {T}: Draw two cards. Spend only mana of the chosen color to activate this ability."
+      ]
     },
     {
       "name": "Arena of Glory",
@@ -516,11 +420,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{R}, {T}, Exert this land: Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)"
+      ]
     },
     {
       "name": "Castle Embereth",
@@ -531,11 +433,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Den of the Bugbear",
@@ -546,11 +446,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "If you control two or more other lands, this land enters tapped.\n{T}: Add {R}.\n{3}{R}: Until end of turn, this land becomes a 3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\" It's still a land."
+      ]
     },
     {
       "name": "Fountainport",
@@ -559,11 +457,9 @@
       "oracleCardName": "Fountainport",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a token: Draw a card.\n{3}, {T}, Pay 1 life: Create a 1/1 blue Fish creature token.\n{4}, {T}: Create a Treasure token."
+      ]
     },
     {
       "name": "Kher Keep",
@@ -574,11 +470,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep."
+      ]
     },
     {
       "name": "Spinerock Knoll",
@@ -589,11 +483,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+      ]
     },
     {
       "name": "War Room",
@@ -602,11 +494,9 @@
       "oracleCardName": "War Room",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Pay life equal to the number of colors in your commanders' color identity: Draw a card."
+      ]
     },
     {
       "name": "Shinka, the Bloodsoaked Keep",
@@ -617,11 +507,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {R}.\n{R}, {T}: Target legendary creature gains first strike until end of turn."
+      ]
     },
     {
       "name": "Ancestors' Aid",
@@ -632,12 +520,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Target creature gets +2/+0 and gains first strike until end of turn.\nCreate a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Battle Hymn",
@@ -648,12 +533,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Add {R} for each creature you control."
+      ]
     },
     {
       "name": "Boggart Shenanigans",
@@ -664,13 +546,10 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever another Goblin you control is put into a graveyard from the battlefield, you may have this enchantment deal 1 damage to target player or planeswalker."
+      ]
     },
     {
       "name": "Crimson Wisps",
@@ -681,12 +560,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Target creature becomes red and gains haste until end of turn. (It can attack and {T} this turn.)\nDraw a card."
+      ]
     },
     {
       "name": "Daring Discovery",
@@ -697,12 +573,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Up to three target creatures can't block this turn.\nDiscover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Dragon Fodder",
@@ -713,12 +586,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Create two 1/1 red Goblin creature tokens."
+      ]
     },
     {
       "name": "Expedite",
@@ -729,12 +599,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Target creature gains haste until end of turn.\nDraw a card."
+      ]
     },
     {
       "name": "Faithless Looting",
@@ -745,12 +612,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Fists of Flame",
@@ -761,12 +625,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)"
+      ]
     },
     {
       "name": "Gempalm Incinerator",
@@ -777,12 +638,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Cycling {1}{R} ({1}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield."
+      ]
     },
     {
       "name": "General Kreat, the Boltbringer",
@@ -793,12 +651,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking.\nWhenever another creature you control enters, General Kreat deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Glimpse the Impossible",
@@ -809,12 +664,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Goblin Bushwhacker",
@@ -825,12 +677,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Kicker {R} (You may pay an additional {R} as you cast this spell.)\nWhen this creature enters, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn."
+      ]
     },
     {
       "name": "Goblin Matron",
@@ -841,12 +690,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may search your library for a Goblin card, reveal that card, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Goblin Negotiation",
@@ -857,12 +703,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Goblin Negotiation deals X damage to target creature. Create a number of 1/1 red Goblin creature tokens equal to the amount of excess damage dealt to that creature this way."
+      ]
     },
     {
       "name": "Goblin Warchief",
@@ -873,12 +716,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Goblin spells you cast cost {1} less to cast.\nGoblins you control have haste."
+      ]
     },
     {
       "name": "Haze of Rage",
@@ -889,12 +729,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreatures you control get +1/+0 until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)"
+      ]
     },
     {
       "name": "Impact Tremors",
@@ -905,12 +742,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Impulsive Pilferer",
@@ -921,12 +755,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "When this creature dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nEncore {3}{R} ({3}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Krenko's Command",
@@ -937,12 +768,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Create two 1/1 red Goblin creature tokens."
+      ]
     },
     {
       "name": "Mana Geyser",
@@ -953,12 +781,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Add {R} for each tapped land your opponents control."
+      ]
     },
     {
       "name": "Mogg War Marshal",
@@ -969,12 +794,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Echo {1}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters or dies, create a 1/1 red Goblin creature token."
+      ]
     },
     {
       "name": "Quest for the Goblin Lord",
@@ -985,12 +807,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Whenever a Goblin you control enters, you may put a quest counter on this enchantment.\nAs long as this enchantment has five or more quest counters on it, creatures you control get +2/+0."
+      ]
     },
     {
       "name": "Renegade Tactics",
@@ -1001,12 +820,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Target creature can't block this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Sazacap's Brew",
@@ -1017,12 +833,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)\nAs an additional cost to cast this spell, discard a card.\nTarget player draws two cards. If the gift was promised, target creature you control gets +2/+0 until end of turn."
+      ]
     },
     {
       "name": "Seething Song",
@@ -1033,12 +846,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Add {R}{R}{R}{R}{R}."
+      ]
     },
     {
       "name": "Spreading Insurrection",
@@ -1049,12 +859,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Gain control of target creature you don't control until end of turn. Untap that creature. It gains haste until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)"
+      ]
     },
     {
       "name": "Storm-Kiln Artist",
@@ -1065,12 +872,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "This creature gets +1/+0 for each artifact you control.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Vandalblast",
@@ -1081,12 +885,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Wild Ride",
@@ -1097,12 +898,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Target creature gets +3/+0 and gains haste until end of turn.\nHarmonize {4}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)"
+      ]
     },
     {
       "name": "Witch's Mark",
@@ -1113,12 +911,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "You may discard a card. If you do, draw two cards.\nCreate a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1127,12 +922,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Dwarven Mine",
@@ -1143,11 +935,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)\nThis land enters tapped unless you control three or more other Mountains.\nWhen this land enters untapped, create a 1/1 red Dwarf creature token."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1158,11 +948,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Goblin Burrows",
@@ -1173,11 +961,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{R}, {T}: Target Goblin creature gets +2/+0 until end of turn."
+      ]
     },
     {
       "name": "Hidden Volcano",
@@ -1188,11 +974,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1201,11 +985,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Smoldering Crater",
@@ -1216,11 +998,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1231,11 +1011,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1246,11 +1024,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1261,11 +1037,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1276,11 +1050,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1291,11 +1063,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1306,11 +1076,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1321,11 +1089,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1336,11 +1102,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1351,11 +1115,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1366,11 +1128,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1381,11 +1141,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1396,11 +1154,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1411,11 +1167,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1426,11 +1180,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1441,11 +1193,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1456,11 +1206,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1471,11 +1219,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1486,11 +1232,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1501,11 +1245,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1516,11 +1258,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1531,11 +1271,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1546,15 +1284,13 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-06-23T17:09:54.912Z",
+    "retrievedDate": "2026-06-23T17:40:37.583Z",
     "sourceUrl": "GoblinStorm_SLD.json",
     "deckSource": "precon",
     "createdAt": "2026-05-18T00:00:00.000Z"

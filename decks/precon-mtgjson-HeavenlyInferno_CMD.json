@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1677953879,
   "name": "Heavenly Inferno",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Kaalia attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{T}: Target creature you control gains protection from the color of your choice until end of turn."
+      ]
     },
     {
       "name": "Orzhov Guildmage",
@@ -53,12 +47,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W/B}{W/B}",
-      "cmc": 2,
-      "oracleText": "{2}{W}: Target player gains 1 life.\n{2}{B}: Each player loses 1 life."
+      ]
     },
     {
       "name": "Boros Guildmage",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R/W}{R/W}",
-      "cmc": 2,
-      "oracleText": "{1}{R}: Target creature gains haste until end of turn.\n{1}{W}: Target creature gains first strike until end of turn."
+      ]
     },
     {
       "name": "Gwyllion Hedge-Mage",
@@ -89,12 +77,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W/B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, if you control two or more Plains, you may create a 1/1 white Kithkin Soldier creature token.\nWhen this creature enters, if you control two or more Swamps, you may put a -1/-1 counter on target creature."
+      ]
     },
     {
       "name": "Duergar Hedge-Mage",
@@ -107,12 +92,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R/W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, if you control two or more Mountains, you may destroy target artifact.\nWhen this creature enters, if you control two or more Plains, you may destroy target enchantment."
+      ]
     },
     {
       "name": "Lightkeeper of Emeria",
@@ -124,12 +106,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Multikicker {W} (You may pay an additional {W} any number of times as you cast this spell.)\nFlying\nWhen this creature enters, you gain 2 life for each time it was kicked."
+      ]
     },
     {
       "name": "Razorjaw Oni",
@@ -141,12 +120,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Black creatures can't block."
+      ]
     },
     {
       "name": "Anger",
@@ -158,12 +134,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nAs long as this card is in your graveyard and you control a Mountain, creatures you control have haste."
+      ]
     },
     {
       "name": "Voice of All",
@@ -175,12 +148,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nAs this creature enters, choose a color.\nThis creature has protection from the chosen color."
+      ]
     },
     {
       "name": "Dragon Whelp",
@@ -192,12 +162,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\n{R}: This creature gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice this creature at the beginning of the next end step."
+      ]
     },
     {
       "name": "Furnace Whelp",
@@ -209,12 +176,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying\n{R}: This creature gets +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Serra Angel",
@@ -226,12 +190,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nVigilance (Attacking doesn't cause this creature to tap.)"
+      ]
     },
     {
       "name": "Shattered Angel",
@@ -243,12 +204,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a land an opponent controls enters, you may gain 3 life."
+      ]
     },
     {
       "name": "Fallen Angel",
@@ -260,12 +218,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nSacrifice a creature: This creature gets +2/+1 until end of turn."
+      ]
     },
     {
       "name": "Basandra, Battle Seraph",
@@ -278,12 +233,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nPlayers can't cast spells during combat.\n{R}: Target creature attacks this turn if able."
+      ]
     },
     {
       "name": "Oni of Wild Places",
@@ -295,12 +247,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Haste\nAt the beginning of your upkeep, return a red creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Mana-Charged Dragon",
@@ -312,12 +261,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nJoin forces — Whenever this creature attacks or blocks, each player starting with you may pay any amount of mana. This creature gets +X/+0 until end of turn, where X is the total amount of mana paid this way."
+      ]
     },
     {
       "name": "Oros, the Avenger",
@@ -331,12 +277,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever Oros deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature."
+      ]
     },
     {
       "name": "Malfegor",
@@ -349,12 +292,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen Malfegor enters, discard your hand. Each opponent sacrifices a creature of their choice for each card discarded this way."
+      ]
     },
     {
       "name": "Angelic Arbiter",
@@ -366,12 +306,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nEach opponent who cast a spell this turn can't attack with creatures.\nEach opponent who attacked with a creature this turn can't cast spells."
+      ]
     },
     {
       "name": "Archangel of Strife",
@@ -383,12 +320,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nAs this creature enters, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3."
+      ]
     },
     {
       "name": "Tariel, Reckoner of Souls",
@@ -402,12 +336,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{W}{B}",
-      "cmc": 7,
-      "oracleText": "Flying, vigilance\n{T}: Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control."
+      ]
     },
     {
       "name": "Angel of Despair",
@@ -420,12 +351,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, destroy target permanent."
+      ]
     },
     {
       "name": "Bladewing the Risen",
@@ -438,12 +366,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen Bladewing enters, you may return target Dragon permanent card from your graveyard to the battlefield.\n{B}{R}: Dragon creatures get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Avatar of Slaughter",
@@ -455,12 +380,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{R}{R}",
-      "cmc": 8,
-      "oracleText": "All creatures have double strike and attack each combat if able."
+      ]
     },
     {
       "name": "Akroma, Angel of Fury",
@@ -472,12 +394,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}{R}",
-      "cmc": 8,
-      "oracleText": "This spell can't be countered.\nFlying, trample, protection from white and from blue\n{R}: Akroma gets +1/+0 until end of turn.\nMorph {3}{R}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
+      ]
     },
     {
       "name": "Reiver Demon",
@@ -489,12 +408,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhen this creature enters, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated."
+      ]
     },
     {
       "name": "Dread Cacodemon",
@@ -506,12 +422,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{7}{B}{B}{B}",
-      "cmc": 10,
-      "oracleText": "When this creature enters, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -523,12 +436,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Diabolic Tutor",
@@ -540,12 +450,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Search your library for a card, put that card into your hand, then shuffle."
+      ]
     },
     {
       "name": "Evincar's Justice",
@@ -557,12 +464,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nEvincar's Justice deals 2 damage to each creature and each player."
+      ]
     },
     {
       "name": "Syphon Flesh",
@@ -574,12 +478,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way."
+      ]
     },
     {
       "name": "Akroma's Vengeance",
@@ -591,12 +492,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Destroy all artifacts, creatures, and enchantments.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Death by Dragons",
@@ -608,12 +506,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Each player other than target player creates a 5/5 red Dragon creature token with flying."
+      ]
     },
     {
       "name": "Earthquake",
@@ -625,12 +520,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}",
-      "cmc": 1,
-      "oracleText": "Earthquake deals X damage to each creature without flying and each player."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -642,12 +534,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Bathe in Light",
@@ -659,12 +548,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Radiance — Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn."
+      ]
     },
     {
       "name": "Terminate",
@@ -677,12 +563,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Orim's Thunder",
@@ -695,12 +578,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Kicker {R} (You may pay an additional {R} as you cast this spell.)\nDestroy target artifact or enchantment. If this spell was kicked, it deals damage equal to that permanent's mana value to target creature."
+      ]
     },
     {
       "name": "Mortify",
@@ -713,12 +593,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature or enchantment."
+      ]
     },
     {
       "name": "Congregate",
@@ -730,12 +607,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Target player gains 2 life for each creature on the battlefield."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -747,12 +621,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Sulfurous Blast",
@@ -764,12 +635,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead."
+      ]
     },
     {
       "name": "Wrecking Ball",
@@ -782,12 +650,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Destroy target creature or land."
+      ]
     },
     {
       "name": "Master Warcraft",
@@ -800,12 +665,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R/W}{R/W}",
-      "cmc": 4,
-      "oracleText": "Cast this spell only before attackers are declared.\nYou choose which creatures attack this turn.\nYou choose which creatures block this turn and how those creatures block."
+      ]
     },
     {
       "name": "Cleansing Beam",
@@ -817,12 +679,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it."
+      ]
     },
     {
       "name": "Comet Storm",
@@ -834,12 +693,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose any target, then choose another target for each time this spell was kicked. Comet Storm deals X damage to each of them."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -849,12 +705,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Armillary Sphere",
@@ -864,12 +717,9 @@
       "oracleCardName": "Armillary Sphere",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Boros Signet",
@@ -882,12 +732,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -897,12 +744,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -915,12 +759,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -933,12 +774,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Darksteel Ingot",
@@ -948,12 +786,9 @@
       "oracleCardName": "Darksteel Ingot",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Soul Snare",
@@ -965,12 +800,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "{W}, Sacrifice this enchantment: Exile target creature that's attacking you or a planeswalker you control."
+      ]
     },
     {
       "name": "Vow of Duty",
@@ -982,12 +814,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Vow of Malice",
@@ -999,12 +828,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has intimidate, and can't attack you or planeswalkers you control. (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)"
+      ]
     },
     {
       "name": "Vow of Lightning",
@@ -1016,12 +842,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Stranglehold",
@@ -1033,12 +856,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Your opponents can't search libraries.\nIf an opponent would begin an extra turn, that player skips that turn instead."
+      ]
     },
     {
       "name": "Pyrohemia",
@@ -1050,12 +870,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "At the beginning of the end step, if no creatures are on the battlefield, sacrifice this enchantment.\n{R}: This enchantment deals 1 damage to each creature and each player."
+      ]
     },
     {
       "name": "Righteous Cause",
@@ -1067,12 +884,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever a creature attacks, you gain 1 life."
+      ]
     },
     {
       "name": "Akoum Refuge",
@@ -1085,11 +899,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1101,11 +913,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1117,11 +927,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1134,11 +942,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1148,11 +954,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1162,11 +966,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1178,11 +980,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Molten Slagheap",
@@ -1195,11 +995,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {B} and/or {R}."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1212,11 +1010,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1229,11 +1025,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1243,11 +1037,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1259,11 +1051,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Vivid Meadow",
@@ -1275,11 +1065,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped with two charge counters on it.\n{T}: Add {W}.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+      ]
     },
     {
       "name": "Zoetic Cavern",
@@ -1289,11 +1077,9 @@
       "oracleCardName": "Zoetic Cavern",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nMorph {2} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1305,11 +1091,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1321,11 +1105,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1337,11 +1119,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1353,11 +1133,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1369,11 +1147,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1385,11 +1161,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1401,11 +1175,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1417,11 +1189,9 @@
         "W"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1433,11 +1203,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1449,11 +1217,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1465,11 +1231,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1481,11 +1245,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1497,11 +1259,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1513,11 +1273,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1529,11 +1287,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1545,11 +1301,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1561,11 +1315,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1577,11 +1329,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1593,11 +1343,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1609,11 +1357,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1625,11 +1371,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1641,11 +1385,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1657,11 +1399,9 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1673,15 +1413,13 @@
         "R"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.510Z",
+    "retrievedDate": "2026-06-23T17:40:37.821Z",
     "sourceUrl": "HeavenlyInferno_CMD.json",
     "deckSource": "precon",
     "createdAt": "2011-06-17T00:00:00.000Z"

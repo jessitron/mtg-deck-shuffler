@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1772985566,
   "name": "Grave Danger",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "When Gisa and Geralf enters, mill four cards.\nOnce during each of your turns, you may cast a Zombie creature spell from your graveyard."
+      ]
     }
   ],
   "cards": [
@@ -32,12 +29,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, target player mills five cards.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+      ]
     },
     {
       "name": "Laboratory Drudge",
@@ -48,12 +42,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each end step, draw a card if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn."
+      ]
     },
     {
       "name": "Army of the Damned",
@@ -64,12 +55,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}{B}",
-      "cmc": 8,
-      "oracleText": "Create thirteen tapped 2/2 black Zombie creature tokens.\nFlashback {7}{B}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Cemetery Reaper",
@@ -80,12 +68,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Champion of the Perished",
@@ -96,12 +81,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Whenever another Zombie you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Crippling Fear",
@@ -112,12 +94,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn."
+      ]
     },
     {
       "name": "Gravespawn Sovereign",
@@ -128,12 +107,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Josu Vess, Lich Knight",
@@ -144,12 +120,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Kicker {5}{B} (You may pay an additional {5}{B} as you cast this spell.)\nMenace\nWhen Josu Vess enters, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace."
+      ]
     },
     {
       "name": "Liliana, Untouched by Death",
@@ -160,12 +133,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "[+1]: Mill three cards. If at least one Zombie card is milled this way, each opponent loses 2 life and you gain 2 life.\n[−2]: Target creature gets -X/-X until end of turn, where X is the number of Zombies you control.\n[−3]: You may cast Zombie spells from your graveyard this turn."
+      ]
     },
     {
       "name": "Liliana's Mastery",
@@ -176,12 +146,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Zombies you control get +1/+1.\nWhen this enchantment enters, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Liliana's Standard Bearer",
@@ -192,12 +159,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, draw X cards, where X is the number of creatures that died under your control this turn."
+      ]
     },
     {
       "name": "Midnight Reaper",
@@ -208,12 +172,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
+      ]
     },
     {
       "name": "Necromantic Selection",
@@ -224,12 +185,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection."
+      ]
     },
     {
       "name": "Necrotic Hex",
@@ -240,12 +198,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{B}",
-      "cmc": 7,
-      "oracleText": "Each player sacrifices six creatures of their choice. You create six tapped 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Open the Graves",
@@ -256,12 +211,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever a nontoken creature you control dies, create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Overseer of the Damned",
@@ -272,12 +224,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Scourge of Nel Toth",
@@ -288,12 +237,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nYou may cast this creature from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost."
+      ]
     },
     {
       "name": "Unbreathing Horde",
@@ -304,12 +250,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "This creature enters with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard.\nIf this creature would be dealt damage, prevent that damage and remove a +1/+1 counter from it."
+      ]
     },
     {
       "name": "Zombie Apocalypse",
@@ -320,12 +263,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans."
+      ]
     },
     {
       "name": "Enter the God-Eternals",
@@ -337,12 +277,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Enter the God-Eternals deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player mills four cards. Amass Zombies 4. (Put four +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
+      ]
     },
     {
       "name": "Havengul Lich",
@@ -354,12 +291,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "{1}: You may cast target creature card in a graveyard this turn. When you cast it this turn, this creature gains all activated abilities of that card until end of turn."
+      ]
     },
     {
       "name": "Undermine",
@@ -371,12 +305,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Counter target spell. Its controller loses 3 life."
+      ]
     },
     {
       "name": "Vela the Night-Clad",
@@ -388,12 +319,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nOther creatures you control have intimidate.\nWhenever Vela or another creature you control leaves the battlefield, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Grimoire of the Dead",
@@ -402,12 +330,9 @@
       "oracleCardName": "Grimoire of the Dead",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}, Discard a card: Put a study counter on Grimoire of the Dead.\n{T}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types."
+      ]
     },
     {
       "name": "Choked Estuary",
@@ -419,11 +344,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -435,11 +358,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -451,11 +372,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -466,12 +385,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Distant Melody",
@@ -482,12 +398,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Eternal Skylord",
@@ -498,12 +411,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have flying."
+      ]
     },
     {
       "name": "Lazotep Plating",
@@ -514,12 +424,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nYou and permanents you control gain hexproof until end of turn. (You and they can't be the targets of spells or abilities your opponents control.)"
+      ]
     },
     {
       "name": "Sinister Sabotage",
@@ -530,12 +437,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell.\nSurveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+      ]
     },
     {
       "name": "Cruel Revival",
@@ -546,12 +450,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Curse of Disturbance",
@@ -562,12 +463,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same."
+      ]
     },
     {
       "name": "Feed the Swarm",
@@ -578,12 +476,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value."
+      ]
     },
     {
       "name": "Fleshbag Marauder",
@@ -594,12 +489,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, each player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Gray Merchant of Asphodel",
@@ -610,12 +502,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)"
+      ]
     },
     {
       "name": "Lazotep Reaver",
@@ -626,12 +515,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
+      ]
     },
     {
       "name": "Liliana's Devotee",
@@ -642,12 +528,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Zombies you control get +1/+0.\nAt the beginning of your end step, if a creature died this turn, you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Lord of the Accursed",
@@ -658,12 +541,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Other Zombies you control get +1/+1.\n{1}{B}, {T}: All Zombies gain menace until end of turn."
+      ]
     },
     {
       "name": "Lotleth Giant",
@@ -674,12 +554,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{B}",
-      "cmc": 7,
-      "oracleText": "Undergrowth — When this creature enters, it deals 1 damage to target opponent for each creature card in your graveyard."
+      ]
     },
     {
       "name": "Loyal Subordinate",
@@ -690,12 +567,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace (This creature can't be blocked except by two or more creatures.)\nLieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life."
+      ]
     },
     {
       "name": "Mire Triton",
@@ -706,12 +580,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Deathtouch\nWhen this creature enters, mill two cards and you gain 2 life. (To mill a card, put the top card of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Murder",
@@ -722,12 +593,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature."
+      ]
     },
     {
       "name": "Spark Reaper",
@@ -738,12 +606,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice a creature or planeswalker: You gain 1 life and draw a card."
+      ]
     },
     {
       "name": "Syphon Flesh",
@@ -754,12 +619,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way."
+      ]
     },
     {
       "name": "Undead Augur",
@@ -770,12 +632,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another Zombie you control dies, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Vampiric Rites",
@@ -786,12 +645,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{1}{B}, Sacrifice a creature: You gain 1 life and draw a card."
+      ]
     },
     {
       "name": "Vengeful Dead",
@@ -802,12 +658,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature or another Zombie dies, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Victimize",
@@ -818,12 +671,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+      ]
     },
     {
       "name": "Vizier of the Scorpion",
@@ -834,12 +684,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have deathtouch."
+      ]
     },
     {
       "name": "Withered Wretch",
@@ -850,12 +697,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "{1}: Exile target card from a graveyard."
+      ]
     },
     {
       "name": "Diregraf Captain",
@@ -867,12 +711,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nOther Zombie creatures you control get +1/+1.\nWhenever another Zombie you control dies, target opponent loses 1 life."
+      ]
     },
     {
       "name": "Gleaming Overseer",
@@ -884,12 +725,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have hexproof and menace."
+      ]
     },
     {
       "name": "Pilfered Plans",
@@ -901,12 +739,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Target player mills two cards. Draw two cards."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -915,12 +750,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -929,12 +761,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -946,12 +775,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Heraldic Banner",
@@ -960,12 +786,9 @@
       "oracleCardName": "Heraldic Banner",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a color.\nCreatures you control of the chosen color get +1/+0.\n{T}: Add one mana of the chosen color."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -974,12 +797,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -991,12 +811,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -1005,12 +822,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -1019,12 +833,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1033,11 +844,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dismal Backwater",
@@ -1049,11 +858,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Jwar Isle Refuge",
@@ -1065,11 +872,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Salt Marsh",
@@ -1081,11 +886,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Submerged Boneyard",
@@ -1097,11 +900,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Island",
@@ -1112,11 +913,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1127,11 +926,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1142,11 +939,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1157,11 +952,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1172,11 +965,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1187,11 +978,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1202,11 +991,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1217,11 +1004,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1232,11 +1017,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1247,11 +1030,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1262,11 +1043,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1277,11 +1056,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1292,11 +1069,9 @@
         "U"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1307,11 +1082,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1322,11 +1095,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1337,11 +1108,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1352,11 +1121,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1367,11 +1134,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1382,11 +1147,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1397,11 +1160,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1412,11 +1173,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1427,11 +1186,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1442,11 +1199,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1457,11 +1212,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1472,11 +1225,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1487,11 +1238,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1502,11 +1251,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1517,11 +1264,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1532,11 +1277,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1547,11 +1290,9 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1562,15 +1303,13 @@
         "B"
       ],
       "set": "SCD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.403Z",
+    "retrievedDate": "2026-06-23T17:40:37.635Z",
     "sourceUrl": "GraveDanger_SCD.json",
     "deckSource": "precon",
     "createdAt": "2022-12-02T00:00:00.000Z"

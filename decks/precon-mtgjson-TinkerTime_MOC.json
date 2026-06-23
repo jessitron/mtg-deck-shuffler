@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 789049554,
   "name": "Tinker Time",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Artifact creatures you control have trample.\nAt the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast your first spell during each of your turns, exile the top card of target opponent's library and create a Treasure token. Then you may cast the exiled card without paying its mana cost if it's a spell with mana value less than the number of artifacts you control. If you don't cast it this way, you may cast it this turn."
+      ]
     },
     {
       "name": "Schema Thief",
@@ -54,12 +48,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, create a token that's a copy of target artifact that player controls."
+      ]
     },
     {
       "name": "Sandsteppe War Riders",
@@ -71,12 +62,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nAt the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control. (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)"
+      ]
     },
     {
       "name": "Cutthroat Negotiator",
@@ -89,12 +77,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Parley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a tapped Treasure token. Then each player draws a card."
+      ]
     },
     {
       "name": "Hedron Detonator",
@@ -106,12 +91,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever an artifact you control enters, this creature deals 1 damage to target opponent.\n{T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn."
+      ]
     },
     {
       "name": "Ichor Elixir",
@@ -121,12 +103,9 @@
       "oracleCardName": "Ichor Elixir",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.\n{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Path of the Animist",
@@ -138,12 +117,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues."
+      ]
     },
     {
       "name": "Pain Distributor",
@@ -155,12 +131,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace\nWhenever a player casts their first spell each turn, they create a Treasure token.\nWhenever an artifact an opponent controls is put into a graveyard from the battlefield, this creature deals 1 damage to that player."
+      ]
     },
     {
       "name": "Dance with Calamity",
@@ -172,12 +145,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{R}",
-      "cmc": 8,
-      "oracleText": "Shuffle your library. As many times as you choose, you may exile the top card of your library. If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs."
+      ]
     },
     {
       "name": "Pia and Kiran Nalaar",
@@ -189,12 +159,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "When Pia and Kiran Nalaar enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\n{2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target."
+      ]
     },
     {
       "name": "Feldon of the Third Path",
@@ -206,12 +173,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -223,12 +187,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Stroke of Genius",
@@ -240,12 +201,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{2}{U}",
-      "cmc": 3,
-      "oracleText": "Target player draws X cards."
+      ]
     },
     {
       "name": "Academy Manufactor",
@@ -255,13 +213,10 @@
       "oracleCardName": "Academy Manufactor",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "If you would create a Clue, Food, or Treasure token, instead create one of each."
+      ]
     },
     {
       "name": "Aid from the Cowl",
@@ -273,12 +228,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Revolt — At the beginning of your end step, if a permanent left the battlefield under your control this turn, reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library."
+      ]
     },
     {
       "name": "Bloodforged Battle-Axe",
@@ -288,12 +240,9 @@
       "oracleCardName": "Bloodforged Battle-Axe",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +2/+0.\nWhenever equipped creature deals combat damage to a player, create a token that's a copy of this Equipment.\nEquip {2}"
+      ]
     },
     {
       "name": "Brass's Bounty",
@@ -305,12 +254,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{R}",
-      "cmc": 7,
-      "oracleText": "For each land you control, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -323,11 +269,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Echo Storm",
@@ -339,12 +283,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nCreate a token that's a copy of target artifact."
+      ]
     },
     {
       "name": "Everquill Phoenix",
@@ -356,12 +297,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Mutate {3}{R} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying\nWhenever this creature mutates, create a red artifact token named Feather with \"{1}, Sacrifice this token: Return target Phoenix card from your graveyard to the battlefield tapped.\""
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -371,11 +309,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fiery Confluence",
@@ -387,12 +323,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Choose three. You may choose the same mode more than once.\n• Fiery Confluence deals 1 damage to each creature.\n• Fiery Confluence deals 2 damage to each opponent.\n• Destroy target artifact."
+      ]
     },
     {
       "name": "Frostboil Snarl",
@@ -405,11 +338,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Game Trail",
@@ -422,11 +353,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Gilded Goose",
@@ -438,12 +367,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Flying\nWhen this creature enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\n{1}{G}, {T}: Create a Food token.\n{T}, Sacrifice a Food: Add one mana of any color."
+      ]
     },
     {
       "name": "Hellkite Igniter",
@@ -455,12 +381,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\n{1}{R}: This creature gets +X/+0 until end of turn, where X is the number of artifacts you control."
+      ]
     },
     {
       "name": "Imprisoned in the Moon",
@@ -472,12 +395,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature, land, or planeswalker\nEnchanted permanent is a colorless land with \"{T}: Add {C}\" and loses all other card types and abilities."
+      ]
     },
     {
       "name": "Inspiring Statuary",
@@ -487,12 +407,9 @@
       "oracleCardName": "Inspiring Statuary",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)"
+      ]
     },
     {
       "name": "Master of Etherium",
@@ -504,13 +421,10 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Masterful Replication",
@@ -522,12 +436,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Choose one —\n• Create two 3/3 colorless Golem artifact creature tokens.\n• Choose target artifact you control. Each other artifact you control becomes a copy of that artifact until end of turn."
+      ]
     },
     {
       "name": "Perplexing Test",
@@ -539,12 +450,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Return all creature tokens to their owners' hands.\n• Return all nontoken creatures to their owners' hands."
+      ]
     },
     {
       "name": "Rise and Shine",
@@ -556,12 +464,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on each artifact that became a creature this way.\nOverload {4}{U}{U} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Saheeli's Artistry",
@@ -573,12 +478,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Choose one or both —\n• Create a token that's a copy of target artifact.\n• Create a token that's a copy of target creature, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Sharding Sphinx",
@@ -590,13 +492,10 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying."
+      ]
     },
     {
       "name": "Shimmer Dragon",
@@ -608,12 +507,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs long as you control four or more artifacts, this creature has hexproof. (It can't be the target of spells or abilities your opponents control.)\nTap two untapped artifacts you control: Draw a card."
+      ]
     },
     {
       "name": "Skyclave Relic",
@@ -623,12 +519,9 @@
       "oracleCardName": "Skyclave Relic",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Kicker {3}\nIndestructible\nWhen this artifact enters, if it was kicked, create two tapped tokens that are copies of this artifact.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Spell Swindle",
@@ -640,12 +533,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Counter target spell. Create X Treasure tokens, where X is that spell's mana value. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Spine of Ish Sah",
@@ -655,12 +545,9 @@
       "oracleCardName": "Spine of Ish Sah",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this artifact enters, destroy target permanent.\nWhen this artifact is put into a graveyard from the battlefield, return it to its owner's hand."
+      ]
     },
     {
       "name": "Temple of Abandon",
@@ -673,11 +560,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -690,11 +575,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -707,11 +590,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Thopter Assembly",
@@ -721,13 +602,10 @@
       "oracleCardName": "Thopter Assembly",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\nAt the beginning of your upkeep, if you control no Thopters other than this creature, return this creature to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying."
+      ]
     },
     {
       "name": "Thopter Spy Network",
@@ -739,12 +617,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.\nWhenever one or more artifact creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Tireless Tracker",
@@ -756,12 +631,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Vedalken Humiliator",
@@ -773,12 +645,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Metalcraft — Whenever this creature attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn."
+      ]
     },
     {
       "name": "Vineglimmer Snarl",
@@ -791,11 +660,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Workshop Elders",
@@ -807,12 +674,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Artifact creatures you control have flying.\nAt the beginning of combat on your turn, you may have target noncreature artifact you control become a 0/0 artifact creature. If you do, put four +1/+1 counters on it."
+      ]
     },
     {
       "name": "Command Tower",
@@ -822,11 +686,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crack Open",
@@ -838,12 +700,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or enchantment. Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -853,11 +712,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fractured Powerstone",
@@ -867,12 +724,9 @@
       "oracleCardName": "Fractured Powerstone",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Gruul Signet",
@@ -885,12 +739,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{G}."
+      ]
     },
     {
       "name": "Izzet Signet",
@@ -903,12 +754,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{R}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -918,11 +766,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Reverse Engineer",
@@ -934,12 +780,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw three cards."
+      ]
     },
     {
       "name": "Root Out",
@@ -951,12 +794,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or enchantment.\nInvestigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -969,11 +809,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -986,12 +824,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1001,11 +836,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thoughtcast",
@@ -1017,12 +850,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nDraw two cards."
+      ]
     },
     {
       "name": "Replicating Ring",
@@ -1032,12 +862,9 @@
       "oracleCardName": "Replicating Ring",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nAt the beginning of your upkeep, put a night counter on this artifact. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1047,12 +874,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Combine Chrysalis",
@@ -1065,12 +889,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Creature tokens you control have flying.\n{2}{G}{U}, {T}, Sacrifice a token: Create a 4/4 green Beast creature token. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Curse of Opulence",
@@ -1082,12 +903,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Enchant player\nWhenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with \"Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1101,11 +919,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Ghirapur Aether Grid",
@@ -1117,12 +933,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Tap two untapped artifacts you control: This enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Junk Winder",
@@ -1134,12 +947,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Affinity for tokens (This spell costs {1} less to cast for each token you control.)\nWhenever a token you control enters, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1149,11 +959,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Reality Shift",
@@ -1165,12 +973,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)"
+      ]
     },
     {
       "name": "Saheeli, Sublime Artificer",
@@ -1183,12 +988,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{1}{U/R}{U/R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1198,12 +1000,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Struggle // Survive",
@@ -1216,12 +1015,10 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
-        "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 5,
-      "oracleText": "Struggle deals damage to target creature equal to the number of lands you control."
+      "cardTypes": [
+        "Instant",
+        "Sorcery"
+      ]
     },
     {
       "name": "Tireless Provisioner",
@@ -1233,12 +1030,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" Treasure is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Vampires' Vengeance",
@@ -1250,12 +1044,9 @@
         "R"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Vampires' Vengeance deals 2 damage to each non-Vampire creature. Create a Blood token. (It's an artifact with \"{1}, {T}, Discard a card, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Weirding Wood",
@@ -1267,12 +1058,9 @@
         "G"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant land\nWhen this Aura enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nEnchanted land has \"{T}: Add two mana of any one color.\""
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -1284,12 +1072,9 @@
         "U"
       ],
       "set": "MOC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Island",
@@ -1301,11 +1086,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1317,11 +1100,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1333,11 +1114,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1349,11 +1128,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1365,11 +1142,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1381,11 +1156,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1397,11 +1170,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1413,11 +1184,9 @@
         "U"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1429,11 +1198,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1445,11 +1212,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1461,11 +1226,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1477,11 +1240,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1493,11 +1254,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1509,11 +1268,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1525,11 +1282,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1541,11 +1296,9 @@
         "R"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1557,11 +1310,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1573,11 +1324,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1589,11 +1338,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1605,11 +1352,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1621,11 +1366,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1637,11 +1380,9 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1653,15 +1394,13 @@
         "G"
       ],
       "set": "MOM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.067Z",
+    "retrievedDate": "2026-06-23T17:40:40.495Z",
     "sourceUrl": "TinkerTime_MOC.json",
     "deckSource": "precon",
     "createdAt": "2023-04-21T00:00:00.000Z"

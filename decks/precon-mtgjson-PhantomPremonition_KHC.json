@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2085306815,
   "name": "Phantom Premonition",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flying, vigilance\nThe first card you foretell each turn costs {0} to foretell.\nWhenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield, create a 1/1 white Spirit creature token with flying."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, exile target player's graveyard."
+      ]
     },
     {
       "name": "Angel of Serenity",
@@ -51,12 +45,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.\nWhen this creature leaves the battlefield, return the exiled cards to their owners' hands."
+      ]
     },
     {
       "name": "Arcane Artisan",
@@ -68,12 +59,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "{2}{U}, {T}: Target player draws a card, then exiles a card from their hand. If a creature card is exiled this way, that player creates a token that's a copy of that card.\nWhen this creature leaves the battlefield, exile all tokens created with it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Brago, King Eternal",
@@ -86,12 +74,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever Brago deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -101,13 +86,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Cloudblazer",
@@ -120,12 +102,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, you gain 2 life and draw two cards."
+      ]
     },
     {
       "name": "Cloudgoat Ranger",
@@ -137,12 +116,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, create three 1/1 white Kithkin Soldier creature tokens.\nTap three untapped Kithkin you control: This creature gets +2/+0 and gains flying until end of turn."
+      ]
     },
     {
       "name": "Empyrean Eagle",
@@ -155,12 +131,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nOther creatures you control with flying get +1/+1."
+      ]
     },
     {
       "name": "Ethereal Valkyrie",
@@ -173,12 +146,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature enters or attacks, draw a card, then exile a card from your hand face down. It becomes foretold. Its foretell cost is its mana cost reduced by {2}. (On a later turn, you may cast it for its foretell cost, even if this creature has left the battlefield.)"
+      ]
     },
     {
       "name": "Evangel of Heliod",
@@ -190,12 +160,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, create a number of 1/1 white Soldier creature tokens equal to your devotion to white. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)"
+      ]
     },
     {
       "name": "Flickerwisp",
@@ -207,12 +174,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Geist-Honored Monk",
@@ -224,12 +188,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nGeist-Honored Monk's power and toughness are each equal to the number of creatures you control.\nWhen this creature enters, create two 1/1 white Spirit creature tokens with flying."
+      ]
     },
     {
       "name": "Goldnight Commander",
@@ -241,12 +202,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever another creature you control enters, creatures you control get +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Hero of Bretagard",
@@ -258,12 +216,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield, put that many +1/+1 counters on this creature.\nAs long as this creature has five or more counters on it, it has flying and is an Angel in addition to its other types.\nAs long as this creature has ten or more counters on it, it has indestructible and is a God in addition to its other types."
+      ]
     },
     {
       "name": "Inspired Sphinx",
@@ -275,12 +230,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, draw cards equal to the number of opponents you have.\n{3}{U}: Create a 1/1 colorless Thopter artifact creature token with flying."
+      ]
     },
     {
       "name": "Kor Cartographer",
@@ -292,12 +244,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -307,13 +256,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Mist Raven",
@@ -325,12 +271,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, return target creature to its owner's hand."
+      ]
     },
     {
       "name": "Mistmeadow Witch",
@@ -343,12 +286,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W/U}",
-      "cmc": 2,
-      "oracleText": "{2}{W}{U}: Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Mulldrifter",
@@ -360,12 +300,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Restoration Angel",
@@ -377,12 +314,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, you may exile target non-Angel creature you control, then return that card to the battlefield under your control."
+      ]
     },
     {
       "name": "Sage of the Beyond",
@@ -394,12 +328,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Flying\nSpells you cast from anywhere other than your hand cost {2} less to cast.\nForetell {4}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Sea Gate Oracle",
@@ -411,12 +342,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library."
+      ]
     },
     {
       "name": "Soulherder",
@@ -429,12 +357,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature is exiled from the battlefield, put a +1/+1 counter on this creature.\nAt the beginning of your end step, you may exile another target creature you control, then return that card to the battlefield under its owner's control."
+      ]
     },
     {
       "name": "Stoic Farmer",
@@ -446,12 +371,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise, put it into your hand. Then shuffle.\nForetell {1}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Sun Titan",
@@ -463,12 +385,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Surtland Elementalist",
@@ -480,12 +399,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "As an additional cost to cast this spell, reveal a Giant card from your hand or pay {2}.\nWhenever this creature attacks, you may cast an instant or sorcery spell from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Thunderclap Wyvern",
@@ -498,12 +414,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}",
-      "cmc": 4,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nFlying\nOther creatures you control with flying get +1/+1."
+      ]
     },
     {
       "name": "Vega, the Watcher",
@@ -516,12 +429,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever you cast a spell from anywhere other than your hand, draw a card."
+      ]
     },
     {
       "name": "Wall of Omens",
@@ -533,12 +443,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -550,12 +457,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Behold the Multiverse",
@@ -567,12 +471,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Scry 2, then draw two cards.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Cosmic Intervention",
@@ -584,12 +485,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step.\nForetell {1}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Eerie Interlude",
@@ -601,12 +499,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step."
+      ]
     },
     {
       "name": "Ghostly Flicker",
@@ -618,12 +513,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control."
+      ]
     },
     {
       "name": "Iron Verdict",
@@ -635,12 +527,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Iron Verdict deals 5 damage to target tapped creature.\nForetell {W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Momentary Blink",
@@ -653,12 +542,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Exile target creature you control, then return it to the battlefield under its owner's control.\nFlashback {3}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Return to Dust",
@@ -670,12 +556,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Saw It Coming",
@@ -687,12 +570,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Synthetic Destiny",
@@ -704,12 +584,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library."
+      ]
     },
     {
       "name": "Warhorn Blast",
@@ -721,12 +598,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +2/+1 until end of turn.\nForetell {2}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -738,12 +612,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Curse of the Swine",
@@ -755,12 +626,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token."
+      ]
     },
     {
       "name": "Migratory Route",
@@ -773,12 +641,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Ravenform",
@@ -790,12 +655,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.\nForetell {U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Spectral Deluge",
@@ -807,12 +669,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.\nForetell {1}{U}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Storm Herd",
@@ -824,12 +683,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{W}{W}",
-      "cmc": 10,
-      "oracleText": "Create X 1/1 white Pegasus creature tokens with flying, where X is your life total."
+      ]
     },
     {
       "name": "Tales of the Ancestors",
@@ -841,12 +697,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)"
+      ]
     },
     {
       "name": "Windfall",
@@ -858,12 +711,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Banishing Light",
@@ -875,12 +725,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."
+      ]
     },
     {
       "name": "Day of the Dragons",
@@ -892,12 +739,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}{U}{U}",
-      "cmc": 7,
-      "oracleText": "When this enchantment enters, exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying.\nWhen this enchantment leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control."
+      ]
     },
     {
       "name": "Ghostly Prison",
@@ -909,12 +753,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you."
+      ]
     },
     {
       "name": "Marshal's Anthem",
@@ -926,12 +767,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Multikicker {1}{W} (You may pay an additional {1}{W} any number of times as you cast this spell.)\nCreatures you control get +1/+1.\nWhen this enchantment enters, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times this enchantment was kicked."
+      ]
     },
     {
       "name": "Niko Defies Destiny",
@@ -944,12 +782,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{U}",
-      "cmc": 3,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You gain 2 life for each foretold card you own in exile.\nII — Add {W}{U}. Spend this mana only to foretell cards or cast spells that have foretell.\nIII — Return target card with foretell from your graveyard to your hand."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -959,12 +794,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -977,12 +809,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -992,12 +821,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Marble Diamond",
@@ -1009,12 +835,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {W}."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1024,12 +847,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Replicating Ring",
@@ -1039,12 +859,9 @@
       "oracleCardName": "Replicating Ring",
       "colorIdentity": [],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\nAt the beginning of your upkeep, put a night counter on this artifact. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Sky Diamond",
@@ -1056,12 +873,9 @@
         "U"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {U}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1071,12 +885,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1086,12 +897,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1104,11 +912,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Azorius Guildgate",
@@ -1121,11 +927,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1135,11 +939,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Cryptic Caves",
@@ -1149,11 +951,9 @@
       "oracleCardName": "Cryptic Caves",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Gates of Istfell",
@@ -1166,11 +966,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\n{2}{W}{U}{U}, {T}, Sacrifice this land: You gain 2 life and draw two cards."
+      ]
     },
     {
       "name": "Glacial Floodplain",
@@ -1183,11 +981,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped."
+      ]
     },
     {
       "name": "Island",
@@ -1199,11 +995,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1215,11 +1009,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1231,11 +1023,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1247,11 +1037,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1263,11 +1051,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1279,11 +1065,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1295,11 +1079,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1311,11 +1093,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1327,11 +1107,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1343,11 +1121,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1359,11 +1135,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1375,11 +1149,9 @@
         "U"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Meandering River",
@@ -1392,11 +1164,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1406,11 +1176,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1420,11 +1188,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Plains",
@@ -1436,11 +1202,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1452,11 +1216,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1468,11 +1230,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1484,11 +1244,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1500,11 +1258,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1516,11 +1272,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1532,11 +1286,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1548,11 +1300,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1564,11 +1314,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1580,11 +1328,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1596,11 +1342,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1612,11 +1356,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1628,11 +1370,9 @@
         "W"
       ],
       "set": "KHM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Sejiri Refuge",
@@ -1645,11 +1385,9 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Tranquil Cove",
@@ -1662,15 +1400,13 @@
         "W"
       ],
       "set": "KHC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {U}."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.271Z",
+    "retrievedDate": "2026-06-23T17:40:39.127Z",
     "sourceUrl": "PhantomPremonition_KHC.json",
     "deckSource": "precon",
     "createdAt": "2021-02-05T00:00:00.000Z"

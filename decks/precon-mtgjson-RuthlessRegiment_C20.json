@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 317861187,
   "name": "Ruthless Regiment",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{W}{B}",
-      "cmc": 4,
-      "oracleText": "When Jirina Kudro enters, create a 1/1 white Human Soldier creature token for each time you've cast a commander from the command zone this game.\nOther Humans you control get +2/+0."
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "[+2]: You may discard a card. If you do, draw a card.\n[−2]: Exile target enchantment, tapped artifact, or tapped creature.\n[−8]: Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Kelsien, the Plague",
@@ -55,12 +49,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Vigilance, haste\nKelsien gets +1/+1 for each experience counter you have.\n{T}: Kelsien deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter."
+      ]
     },
     {
       "name": "Trynn, Champion of Freedom",
@@ -72,12 +63,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Partner with Silvar, Devourer of the Free (When this creature enters, target player may put Silvar into their hand from their library, then shuffle.)\nAt the beginning of your end step, if you attacked this turn, create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Silvar, Devourer of the Free",
@@ -90,12 +78,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Partner with Trynn, Champion of Freedom (When this creature enters, target player may put Trynn into their hand from their library, then shuffle.)\nMenace\nSacrifice a Human: Put a +1/+1 counter on Silvar. It gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Verge Rangers",
@@ -107,12 +92,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "First strike\nYou may look at the top card of your library any time.\nAs long as an opponent controls more lands than you, you may play lands from the top of your library. (You can play a land this way only if you have an available land play remaining.)"
+      ]
     },
     {
       "name": "Species Specialist",
@@ -124,12 +106,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "As this creature enters, choose a creature type.\nWhenever a creature of the chosen type dies, you may draw a card."
+      ]
     },
     {
       "name": "Titan Hunter",
@@ -141,12 +120,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "At the beginning of each player's end step, if no creatures died this turn, this creature deals 4 damage to that player.\n{1}{B}, Sacrifice a creature: You gain 4 life."
+      ]
     },
     {
       "name": "Fireflux Squad",
@@ -158,12 +134,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Haste\nWhenever this creature attacks, you may exile another target attacking creature you control. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield tapped and attacking and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Frontier Warmonger",
@@ -175,12 +148,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever one or more creatures attack one of your opponents or a planeswalker they control, those creatures gain menace until end of turn."
+      ]
     },
     {
       "name": "Bounty Agent",
@@ -192,12 +162,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Vigilance\n{T}, Sacrifice this creature: Destroy target legendary permanent that's an artifact, creature, or enchantment."
+      ]
     },
     {
       "name": "Dearly Departed",
@@ -209,12 +176,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs long as this creature is in your graveyard, each Human creature you control enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Frontline Medic",
@@ -226,12 +190,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Battalion — Whenever this creature and at least two other creatures attack, creatures you control gain indestructible until end of turn.\nSacrifice this creature: Counter target spell with {X} in its mana cost unless its controller pays {3}."
+      ]
     },
     {
       "name": "Knight of the White Orchid",
@@ -243,12 +204,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Magus of the Disk",
@@ -260,12 +218,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "This creature enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
+      ]
     },
     {
       "name": "Odric, Master Tactician",
@@ -277,12 +232,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric and at least three other creatures attack, you choose which creatures block this combat and how those creatures block."
+      ]
     },
     {
       "name": "Riders of Gavony",
@@ -294,12 +246,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nAs this creature enters, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type."
+      ]
     },
     {
       "name": "Thalia's Lieutenant",
@@ -311,12 +260,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, put a +1/+1 counter on each other Human you control.\nWhenever another Human you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Thraben Doomsayer",
@@ -328,12 +274,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "{T}: Create a 1/1 white Human creature token.\nFateful hour — As long as you have 5 or less life, other creatures you control get +2/+2."
+      ]
     },
     {
       "name": "Disciple of Bolas",
@@ -345,12 +288,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power."
+      ]
     },
     {
       "name": "Xathrid Necromancer",
@@ -362,12 +302,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature or another Human creature you control dies, create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Alesha, Who Smiles at Death",
@@ -381,12 +318,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "First strike\nWhenever Alesha attacks, you may pay {W/B}{W/B}. If you do, return target creature card with power 2 or less from your graveyard to the battlefield tapped and attacking."
+      ]
     },
     {
       "name": "Captivating Crew",
@@ -398,12 +332,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Fumiko the Lowblood",
@@ -415,12 +346,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Fumiko has bushido X, where X is the number of attacking creatures. (Whenever this creature blocks or becomes blocked, it gets +X/+X until end of turn.)\nCreatures your opponents control attack each combat if able."
+      ]
     },
     {
       "name": "Magus of the Wheel",
@@ -432,12 +360,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "{1}{R}, {T}, Sacrifice this creature: Each player discards their hand, then draws seven cards."
+      ]
     },
     {
       "name": "Titan of Eternal Fire",
@@ -449,12 +374,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Each Human creature you control has \"{R}, {T}: This creature deals 1 damage to any target.\""
+      ]
     },
     {
       "name": "Adriana, Captain of the Guard",
@@ -467,12 +389,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{W}",
-      "cmc": 5,
-      "oracleText": "Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther creatures you control have melee. (If a creature has multiple instances of melee, each triggers separately.)"
+      ]
     },
     {
       "name": "General's Enforcer",
@@ -485,12 +404,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Legendary Humans you control have indestructible.\n{2}{W}{B}: Exile target card from a graveyard. If it was a creature card, create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Banisher Priest",
@@ -502,12 +418,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield."
+      ]
     },
     {
       "name": "Cavalry Pegasus",
@@ -519,12 +432,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature attacks, each attacking Human gains flying until end of turn."
+      ]
     },
     {
       "name": "Devout Chaplain",
@@ -536,12 +446,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "{T}, Tap two untapped Humans you control: Exile target artifact or enchantment."
+      ]
     },
     {
       "name": "Zulaport Cutthroat",
@@ -553,12 +460,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Humble Defector",
@@ -570,12 +474,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw two cards. Target opponent gains control of this creature. Activate only during your turn."
+      ]
     },
     {
       "name": "Garna, the Bloodflame",
@@ -588,12 +489,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Flash\nWhen Garna enters, return to your hand all creature cards in your graveyard that were put there from anywhere this turn.\nOther creatures you control have haste."
+      ]
     },
     {
       "name": "Citywide Bust",
@@ -605,12 +503,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy all creatures with toughness 4 or greater."
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -622,12 +517,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Increasing Devotion",
@@ -639,12 +531,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.\nFlashback {7}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Painful Truths",
@@ -656,12 +545,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Converge — You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell."
+      ]
     },
     {
       "name": "Ambition's Cost",
@@ -673,12 +559,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "You draw three cards and you lose 3 life."
+      ]
     },
     {
       "name": "Call the Coppercoats",
@@ -690,12 +573,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Strive — This spell costs {1}{W} more to cast for each target beyond the first.\nChoose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, where X is the number of creatures those opponents control."
+      ]
     },
     {
       "name": "Flawless Maneuver",
@@ -707,12 +587,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "If you control a commander, you may cast this spell without paying its mana cost.\nCreatures you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Unexpectedly Absent",
@@ -724,12 +601,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}",
-      "cmc": 2,
-      "oracleText": "Put target nonland permanent into its owner's library just beneath the top X cards of that library."
+      ]
     },
     {
       "name": "Crackling Doom",
@@ -743,12 +617,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{W}{B}",
-      "cmc": 3,
-      "oracleText": "Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures that player controls."
+      ]
     },
     {
       "name": "Dire Tactics",
@@ -761,12 +632,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Exile target creature. If you don't control a Human, you lose life equal to that creature's toughness."
+      ]
     },
     {
       "name": "Terminate",
@@ -779,12 +647,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Sanctuary Blade",
@@ -794,12 +659,9 @@
       "oracleCardName": "Sanctuary Blade",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "As this Equipment becomes attached to a creature, choose a color.\nEquipped creature gets +2/+0 and has protection from the last chosen color.\nEquip {3}"
+      ]
     },
     {
       "name": "Bonder's Ornament",
@@ -809,12 +671,9 @@
       "oracleCardName": "Bonder's Ornament",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{4}, {T}: Each player who controls a permanent named Bonder's Ornament draws a card."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -824,12 +683,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Boros Signet",
@@ -842,12 +698,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -857,12 +710,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -872,12 +722,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -890,12 +737,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Rakdos Signet",
@@ -908,12 +752,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Skullclamp",
@@ -923,12 +764,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Sol Ring",
@@ -938,12 +776,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Molten Echoes",
@@ -955,12 +790,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose a creature type.\nWhenever a nontoken creature you control of the chosen type enters, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Outpost Siege",
@@ -972,12 +804,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, this enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Shared Animosity",
@@ -989,12 +818,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it."
+      ]
     },
     {
       "name": "Sanctuary Lockdown",
@@ -1006,12 +832,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Humans you control get +1/+1.\n{2}, Tap two untapped Humans you control: Tap target creature an opponent controls."
+      ]
     },
     {
       "name": "Bastion of Remembrance",
@@ -1023,12 +846,9 @@
         "B"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, create a 1/1 white Human Soldier creature token.\nWhenever a creature you control dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Martial Impetus",
@@ -1040,12 +860,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Parasitic Impetus",
@@ -1057,12 +874,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, its controller loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "Shiny Impetus",
@@ -1074,12 +888,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+      ]
     },
     {
       "name": "Vigilante Justice",
@@ -1091,12 +902,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever a Human you control enters, this enchantment deals 1 damage to any target."
+      ]
     },
     {
       "name": "Battlefield Forge",
@@ -1109,11 +917,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {R} or {W}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1123,11 +929,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Shadowblood Ridge",
@@ -1140,11 +944,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -1157,11 +959,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Spinerock Knoll",
@@ -1173,11 +973,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn."
+      ]
     },
     {
       "name": "Windbrisk Heights",
@@ -1189,11 +987,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1205,11 +1001,9 @@
         "B"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Boros Garrison",
@@ -1222,11 +1016,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {R}{W}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1236,11 +1028,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1250,11 +1040,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -1268,11 +1056,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1285,11 +1071,9 @@
         "W"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1299,11 +1083,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1316,11 +1098,9 @@
         "R"
       ],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1330,11 +1110,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -1344,11 +1122,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "C20",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Bloodfell Caves",
@@ -1361,11 +1137,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1375,11 +1149,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Scoured Barrens",
@@ -1392,11 +1164,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Wind-Scarred Crag",
@@ -1409,11 +1179,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Mountain",
@@ -1425,11 +1193,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1441,11 +1207,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1457,11 +1221,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1473,11 +1235,9 @@
         "R"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1489,11 +1249,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1505,11 +1263,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1521,11 +1277,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1537,11 +1291,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1553,11 +1305,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1569,11 +1319,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1585,11 +1333,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1601,11 +1347,9 @@
         "W"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1617,11 +1361,9 @@
         "B"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1633,11 +1375,9 @@
         "B"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1649,11 +1389,9 @@
         "B"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1665,15 +1403,13 @@
         "B"
       ],
       "set": "IKO",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.552Z",
+    "retrievedDate": "2026-06-23T17:40:39.636Z",
     "sourceUrl": "RuthlessRegiment_C20.json",
     "deckSource": "precon",
     "createdAt": "2020-04-17T00:00:00.000Z"

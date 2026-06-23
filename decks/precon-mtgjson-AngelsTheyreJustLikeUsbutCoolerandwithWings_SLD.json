@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1773331867,
   "name": "Angels: They're Just Like Us but Cooler and with Wings",
   "totalCards": 100,
@@ -13,12 +13,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying, first strike, lifelink\nAt the beginning of your end step, if you both own and control Gisela and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares."
+      ]
     }
   ],
   "cards": [
@@ -31,12 +28,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "When you cast this spell, you may return target Angel or Human creature card from your graveyard to the battlefield.\nFlying, vigilance\n(Melds with Gisela, the Broken Blade.)"
+      ]
     },
     {
       "name": "Ajani, Strength of the Pride",
@@ -47,12 +41,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "[+1]: You gain life equal to the number of creatures you control plus the number of planeswalkers you control.\n[−2]: Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with \"Whenever you gain life, put a +1/+1 counter on this token.\"\n[0]: If you have at least 15 life more than your starting life total, exile Ajani and each artifact and creature your opponents control."
+      ]
     },
     {
       "name": "Angel of Destiny",
@@ -63,12 +54,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying, double strike\nWhenever a creature you control deals combat damage to a player, you and that player each gain that much life.\nAt the beginning of your end step, if you have at least 15 life more than your starting life total, each player this creature attacked this turn loses the game."
+      ]
     },
     {
       "name": "Angel of Finality",
@@ -79,12 +67,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, exile target player's graveyard."
+      ]
     },
     {
       "name": "Angel of Serenity",
@@ -95,12 +80,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.\nWhen this creature leaves the battlefield, return the exiled cards to their owners' hands."
+      ]
     },
     {
       "name": "Angel of the Ruins",
@@ -111,13 +93,10 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile up to two target artifacts and/or enchantments.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Angel of Vitality",
@@ -128,12 +107,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nIf you would gain life, you gain that much life plus 1 instead.\nThis creature gets +2/+2 as long as you have 25 or more life."
+      ]
     },
     {
       "name": "Angelic Accord",
@@ -144,12 +120,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying."
+      ]
     },
     {
       "name": "Angelic Field Marshal",
@@ -160,12 +133,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nLieutenant — As long as you control your commander, this creature gets +2/+2 and creatures you control have vigilance."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -174,12 +144,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Arch of Orazca",
@@ -188,11 +155,9 @@
       "oracleCardName": "Arch of Orazca",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{5}, {T}: Draw a card. Activate only if you have the city's blessing."
+      ]
     },
     {
       "name": "Archangel of Thune",
@@ -203,12 +168,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhenever you gain life, put a +1/+1 counter on each creature you control."
+      ]
     },
     {
       "name": "Archangel of Tithes",
@@ -219,12 +181,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nAs long as this creature is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.\nAs long as this creature is attacking, creatures can't block unless their controller pays {1} for each of those creatures."
+      ]
     },
     {
       "name": "Arden Angel",
@@ -235,12 +194,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nAt the beginning of your upkeep, if Arden Angel is in your graveyard, roll a four-sided die. If the result is 1, return Arden Angel from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Austere Command",
@@ -251,12 +207,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose two —\n• Destroy all artifacts.\n• Destroy all enchantments.\n• Destroy all creatures with mana value 3 or less.\n• Destroy all creatures with mana value 4 or greater."
+      ]
     },
     {
       "name": "Bishop of Wings",
@@ -267,12 +220,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever an Angel you control enters, you gain 4 life.\nWhenever an Angel you control dies, create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Bonders' Enclave",
@@ -281,11 +231,9 @@
       "oracleCardName": "Bonders' Enclave",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
+      ]
     },
     {
       "name": "Breathkeeper Seraph",
@@ -296,12 +244,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)\nAs long as Breathkeeper Seraph is paired with another creature, each of those creatures has \"When this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep.\""
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -312,12 +257,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Commander's Plate",
@@ -326,12 +268,9 @@
       "oracleCardName": "Commander's Plate",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +3/+3 and has protection from each color that's not in your commander's color identity.\nEquip commander {3}\nEquip {5}"
+      ]
     },
     {
       "name": "Cosmos Elixir",
@@ -340,12 +279,9 @@
       "oracleCardName": "Cosmos Elixir",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, draw a card if your life total is greater than your starting life total. Otherwise, you gain 2 life."
+      ]
     },
     {
       "name": "Court of Grace",
@@ -356,12 +292,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "When this enchantment enters, you become the monarch.\nAt the beginning of your upkeep, create a 1/1 white Spirit creature token with flying. If you're the monarch, create a 4/4 white Angel creature token with flying instead."
+      ]
     },
     {
       "name": "Dawn of Hope",
@@ -372,12 +305,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you gain life, you may pay {2}. If you do, draw a card.\n{3}{W}: Create a 1/1 white Soldier creature token with lifelink."
+      ]
     },
     {
       "name": "Dawnbreak Reclaimer",
@@ -388,12 +318,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nAt the beginning of your end step, choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control."
+      ]
     },
     {
       "name": "Dismantling Wave",
@@ -404,12 +331,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "For each opponent, destroy up to one target artifact or enchantment that player controls.\nCycling {6}{W}{W} ({6}{W}{W}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Emeria Shepherd",
@@ -420,12 +344,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead."
+      ]
     },
     {
       "name": "Emeria, the Sky Ruin",
@@ -436,11 +357,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nAt the beginning of your upkeep, if you control seven or more Plains, you may return target creature card from your graveyard to the battlefield.\n{T}: Add {W}."
+      ]
     },
     {
       "name": "Endless Atlas",
@@ -449,12 +368,9 @@
       "oracleCardName": "Endless Atlas",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}: Draw a card. Activate only if you control three or more lands with the same name."
+      ]
     },
     {
       "name": "Entreat the Angels",
@@ -465,12 +381,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 4/4 white Angel creature tokens with flying.\nMiracle {X}{W}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -479,12 +392,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Giada, Font of Hope",
@@ -495,12 +405,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flying, vigilance\nEach other Angel you control enters with an additional +1/+1 counter on it for each Angel you already control.\n{T}: Add {W}. Spend this mana only to cast an Angel spell."
+      ]
     },
     {
       "name": "Griffin Aerie",
@@ -511,12 +418,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your end step, if you gained 3 or more life this turn, create a 2/2 white Griffin creature token with flying."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -525,12 +429,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Invoke the Divine",
@@ -541,12 +442,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Destroy target artifact or enchantment. You gain 4 life."
+      ]
     },
     {
       "name": "Karoo",
@@ -557,11 +455,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Plains you control to its owner's hand.\n{T}: Add {C}{W}."
+      ]
     },
     {
       "name": "Keeper of the Accord",
@@ -572,12 +468,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.\nAt the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kindred Boon",
@@ -588,12 +481,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose a creature type.\n{1}{W}: Put a divinity counter on target creature you control of the chosen type.\nEach creature you control with a divinity counter on it has indestructible."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -602,12 +492,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Marble Diamond",
@@ -618,12 +505,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {W}."
+      ]
     },
     {
       "name": "Mazemind Tome",
@@ -632,12 +516,9 @@
       "oracleCardName": "Mazemind Tome",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Put a page counter on this artifact: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{2}, {T}, Put a page counter on this artifact: Draw a card.\nWhen there are four or more page counters on this artifact, exile it. If you do, you gain 4 life."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -646,12 +527,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -660,11 +538,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Nykthos Paragon",
@@ -675,13 +551,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Whenever you gain life, you may put that many +1/+1 counters on each creature you control. Do this only once each turn."
+      ]
     },
     {
       "name": "Nykthos, Shrine to Nyx",
@@ -690,11 +563,9 @@
       "oracleCardName": "Nykthos, Shrine to Nyx",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)"
+      ]
     },
     {
       "name": "Oketra's Monument",
@@ -703,12 +574,9 @@
       "oracleCardName": "Oketra's Monument",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "White creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, create a 1/1 white Warrior creature token with vigilance."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -717,11 +585,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Path to Exile",
@@ -732,12 +598,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Pearl Medallion",
@@ -746,12 +609,9 @@
       "oracleCardName": "Pearl Medallion",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "White spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Plains",
@@ -762,11 +622,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -777,11 +635,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -792,11 +648,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -807,11 +661,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -822,11 +674,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -837,11 +687,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -852,11 +700,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -867,11 +713,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -882,11 +726,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -897,11 +739,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -912,11 +752,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -927,11 +765,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -942,11 +778,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -957,11 +791,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -972,11 +804,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -987,11 +817,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1002,11 +830,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1017,11 +843,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1032,11 +856,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1047,11 +869,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1062,11 +882,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1077,11 +895,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1092,11 +908,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1107,11 +921,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1122,11 +934,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1137,11 +947,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1152,11 +960,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1167,11 +973,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1182,11 +986,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1197,11 +999,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Righteous Valkyrie",
@@ -1212,12 +1012,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.\nAs long as you have at least 7 life more than your starting life total, creatures you control get +2/+2."
+      ]
     },
     {
       "name": "Search for Glory",
@@ -1228,12 +1025,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle. You gain 1 life for each {S} spent to cast this spell. ({S} is mana from a snow source.)"
+      ]
     },
     {
       "name": "Sephara, Sky's Blade",
@@ -1244,12 +1038,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "You may pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost.\nFlying, lifelink\nOther creatures you control with flying have indestructible. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Seraph Sanctuary",
@@ -1258,11 +1049,9 @@
       "oracleCardName": "Seraph Sanctuary",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, you gain 1 life.\nWhenever an Angel you control enters, you gain 1 life.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Serra Ascendant",
@@ -1273,12 +1062,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nAs long as you have 30 or more life, this creature gets +5/+5 and has flying."
+      ]
     },
     {
       "name": "Shattered Angel",
@@ -1289,12 +1075,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a land an opponent controls enters, you may gain 3 life."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1303,12 +1086,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Speaker of the Heavens",
@@ -1319,12 +1099,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Vigilance, lifelink (Attacking doesn't cause this creature to tap. Damage dealt by this creature also causes you to gain that much life.)\n{T}: Create a 4/4 white Angel creature token with flying. Activate only if you have at least 7 life more than your starting life total and only as a sorcery."
+      ]
     },
     {
       "name": "Starnheim Aspirant",
@@ -1335,12 +1112,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Angel spells you cast cost {2} less to cast."
+      ]
     },
     {
       "name": "Sunblast Angel",
@@ -1351,12 +1125,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, destroy all tapped creatures."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -1365,12 +1136,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Sword of the Animist",
@@ -1379,12 +1147,9 @@
       "oracleCardName": "Sword of the Animist",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1.\nWhenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nEquip {2}"
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -1395,12 +1160,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Thalia's Lancers",
@@ -1411,12 +1173,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "First strike\nWhen this creature enters, you may search your library for a legendary card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "The Book of Exalted Deeds",
@@ -1427,12 +1186,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.\n{W}{W}{W}, {T}, Exile The Book of Exalted Deeds: Put an enlightened counter on target Angel. It gains \"You can't lose the game and your opponents can't win the game.\" Activate only as a sorcery."
+      ]
     },
     {
       "name": "Tome of Legends",
@@ -1441,12 +1197,9 @@
       "oracleCardName": "Tome of Legends",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters with a page counter on it.\nWhenever your commander enters or attacks, put a page counter on this artifact.\n{1}, {T}, Remove a page counter from this artifact: Draw a card."
+      ]
     },
     {
       "name": "Urza's Incubator",
@@ -1455,12 +1208,9 @@
       "oracleCardName": "Urza's Incubator",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells of the chosen type cost {2} less to cast."
+      ]
     },
     {
       "name": "Valkyrie Harbinger",
@@ -1471,12 +1221,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nAt the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance."
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -1485,12 +1232,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "War Room",
@@ -1499,11 +1243,9 @@
       "oracleCardName": "War Room",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}, {T}, Pay life equal to the number of colors in your commanders' color identity: Draw a card."
+      ]
     },
     {
       "name": "Well of Lost Dreams",
@@ -1512,16 +1254,13 @@
       "oracleCardName": "Well of Lost Dreams",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.291Z",
+    "retrievedDate": "2026-06-23T17:40:35.747Z",
     "sourceUrl": "AngelsTheyReJustLikeUsButCoolerAndWithWings_SLD.json",
     "deckSource": "precon",
     "createdAt": "2023-08-14T00:00:00.000Z"

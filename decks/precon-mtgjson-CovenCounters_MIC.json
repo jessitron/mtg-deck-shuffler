@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1069719556,
   "name": "Coven Counters",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Coven — At the beginning of combat on your turn, put a +1/+1 counter on up to one target creature you control. Then if you control three or more creatures with different powers, draw a card."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Bastion Protector",
@@ -51,12 +45,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Commander creatures you control get +2/+2 and have indestructible."
+      ]
     },
     {
       "name": "Custodi Soulbinders",
@@ -68,12 +59,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "This creature enters with X +1/+1 counters on it, where X is the number of other creatures on the battlefield.\n{2}{W}, Remove a +1/+1 counter from this creature: Create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Dearly Departed",
@@ -85,12 +73,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs long as this creature is in your graveyard, each Human creature you control enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Herald of War",
@@ -102,12 +87,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature attacks, put a +1/+1 counter on it.\nAngel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Knight of the White Orchid",
@@ -119,12 +101,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{W}",
-      "cmc": 2,
-      "oracleText": "First strike\nWhen this creature enters, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Mikaeus, the Lunarch",
@@ -136,12 +115,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{W}",
-      "cmc": 1,
-      "oracleText": "Mikaeus enters with X +1/+1 counters on it.\n{T}: Put a +1/+1 counter on Mikaeus.\n{T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control."
+      ]
     },
     {
       "name": "Odric, Master Tactician",
@@ -153,12 +129,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric and at least three other creatures attack, you choose which creatures block this combat and how those creatures block."
+      ]
     },
     {
       "name": "Riders of Gavony",
@@ -170,12 +143,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Vigilance\nAs this creature enters, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type."
+      ]
     },
     {
       "name": "Victory's Envoy",
@@ -187,12 +157,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your upkeep, put a +1/+1 counter on each other creature you control."
+      ]
     },
     {
       "name": "Champion of Lambholt",
@@ -204,12 +171,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Creatures with power less than this creature's power can't block creatures you control.\nWhenever another creature you control enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Gyre Sage",
@@ -221,12 +185,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{T}: Add {G} for each +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Kessig Cagebreakers",
@@ -238,12 +199,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature attacks, create a 2/2 green Wolf creature token that's tapped and attacking for each creature card in your graveyard."
+      ]
     },
     {
       "name": "Somberwald Sage",
@@ -255,12 +213,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "{T}: Add three mana of any one color. Spend this mana only to cast creature spells."
+      ]
     },
     {
       "name": "Verdurous Gearhulk",
@@ -272,13 +227,10 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Trample\nWhen this creature enters, distribute four +1/+1 counters among any number of target creatures you control."
+      ]
     },
     {
       "name": "Wild Beastmaster",
@@ -290,12 +242,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature attacks, each other creature you control gets +X/+X until end of turn, where X is this creature's power."
+      ]
     },
     {
       "name": "Heron's Grace Champion",
@@ -308,12 +257,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nLifelink\nWhen this creature enters, other Humans you control get +1/+1 and gain lifelink until end of turn."
+      ]
     },
     {
       "name": "Sigarda, Heron's Grace",
@@ -326,12 +272,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nYou and Humans you control have hexproof.\n{2}, Exile a card from your graveyard: Create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Abzan Falconer",
@@ -343,12 +286,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying."
+      ]
     },
     {
       "name": "Ainok Bond-Kin",
@@ -360,12 +300,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Outlast {1}{W} ({1}{W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has first strike."
+      ]
     },
     {
       "name": "Elite Scaleguard",
@@ -377,12 +314,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls."
+      ]
     },
     {
       "name": "Orzhov Advokist",
@@ -394,12 +328,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn."
+      ]
     },
     {
       "name": "Avacyn's Pilgrim",
@@ -412,12 +343,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {W}."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -429,12 +357,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -446,12 +371,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Enduring Scalelord",
@@ -464,12 +386,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{W}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Juniper Order Ranger",
@@ -482,12 +401,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Trostani's Summoner",
@@ -500,12 +416,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{W}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample."
+      ]
     },
     {
       "name": "Cleansing Nova",
@@ -517,12 +430,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments."
+      ]
     },
     {
       "name": "Hour of Reckoning",
@@ -534,12 +444,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures."
+      ]
     },
     {
       "name": "Shamanic Revelation",
@@ -551,12 +458,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater."
+      ]
     },
     {
       "name": "Bestial Menace",
@@ -568,12 +472,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Create a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token."
+      ]
     },
     {
       "name": "Biogenic Upgrade",
@@ -585,12 +486,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Distribute three +1/+1 counters among one, two, or three target creatures, then double the number of +1/+1 counters on each of those creatures."
+      ]
     },
     {
       "name": "Growth Spasm",
@@ -602,12 +500,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\""
+      ]
     },
     {
       "name": "Unbreakable Formation",
@@ -619,12 +514,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Return to Dust",
@@ -636,12 +528,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -653,12 +542,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Beast Within",
@@ -670,12 +556,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Inspiring Call",
@@ -687,12 +570,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Lifecrafter's Bestiary",
@@ -704,12 +584,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, scry 1.\nWhenever you cast a creature spell, you may pay {G}. If you do, draw a card."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -719,12 +596,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -734,12 +608,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -749,12 +620,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Talisman of Unity",
@@ -767,12 +635,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Citadel Siege",
@@ -784,12 +649,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "As this enchantment enters, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls."
+      ]
     },
     {
       "name": "Death's Presence",
@@ -801,12 +663,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -819,11 +678,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -833,11 +690,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fortified Village",
@@ -850,11 +705,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -867,11 +720,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Temple of Plenty",
@@ -884,11 +735,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Blighted Woodland",
@@ -900,11 +749,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -914,11 +761,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -928,11 +773,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -942,11 +785,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -956,11 +797,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -970,11 +809,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -987,11 +824,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1001,11 +836,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Forest",
@@ -1017,11 +850,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1033,11 +864,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1049,11 +878,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1065,11 +892,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1081,11 +906,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1097,11 +920,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1113,11 +934,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1129,11 +948,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1145,11 +962,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1161,11 +976,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1177,11 +990,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1193,11 +1004,9 @@
         "G"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1209,11 +1018,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1225,11 +1032,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1241,11 +1046,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1257,11 +1060,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1273,11 +1074,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1289,11 +1088,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1305,11 +1102,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1321,11 +1116,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1337,11 +1130,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1353,11 +1144,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1369,11 +1158,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1385,11 +1172,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Kyler, Sigardian Emissary",
@@ -1402,12 +1187,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever another Human you control enters, put a +1/+1 counter on Kyler.\nOther Humans you control get +1/+1 for each counter on Kyler."
+      ]
     },
     {
       "name": "Celestial Judgment",
@@ -1419,12 +1201,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "For each different power among creatures on the battlefield, choose a creature with that power. Destroy each creature not chosen this way."
+      ]
     },
     {
       "name": "Curse of Conformity",
@@ -1436,12 +1215,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Enchant player\nNonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types."
+      ]
     },
     {
       "name": "Moorland Rescuer",
@@ -1453,12 +1229,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "When this creature dies, return any number of other creature cards with total power X or less from your graveyard to the battlefield, where X is this creature's power. Exile this card."
+      ]
     },
     {
       "name": "Sigarda's Vanguard",
@@ -1470,12 +1243,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flash\nFlying\nWhenever this creature enters or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn."
+      ]
     },
     {
       "name": "Stalwart Pathlighter",
@@ -1487,12 +1257,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nCoven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control gain indestructible until end of turn."
+      ]
     },
     {
       "name": "Wall of Mourning",
@@ -1504,12 +1271,9 @@
         "W"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Defender\nWhen this creature enters, exile a card from the top of your library face down for each opponent you have.\nCoven — At the beginning of your end step, if you control three or more creatures with different powers, put a card exiled with this creature into its owner's hand."
+      ]
     },
     {
       "name": "Celebrate the Harvest",
@@ -1521,12 +1285,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to X basic land cards, where X is the number of different powers among creatures you control. Put those cards onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Curse of Clinging Webs",
@@ -1538,12 +1299,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a nontoken creature enchanted player controls dies, exile it and you create a 1/2 green Spider creature token with reach."
+      ]
     },
     {
       "name": "Heronblade Elite",
@@ -1555,12 +1313,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhenever another Human you control enters, put a +1/+1 counter on this creature.\n{T}: Add X mana of any one color, where X is this creature's power."
+      ]
     },
     {
       "name": "Kurbis, Harvest Celebrant",
@@ -1572,12 +1327,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "Kurbis enters with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nRemove a +1/+1 counter from Kurbis: Prevent all damage that would be dealt this turn to another target creature with a +1/+1 counter on it."
+      ]
     },
     {
       "name": "Ruinous Intrusion",
@@ -1589,12 +1341,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. Put X +1/+1 counters on target creature you control, where X is the mana value of the permanent exiled this way."
+      ]
     },
     {
       "name": "Sigardian Zealot",
@@ -1606,12 +1355,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "At the beginning of combat on your turn, choose any number of creatures with different powers. Each of them gets +X/+X and gains vigilance until end of turn, where X is this creature's power."
+      ]
     },
     {
       "name": "Somberwald Beastmaster",
@@ -1623,12 +1369,9 @@
         "G"
       ],
       "set": "MIC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 2/2 green Wolf creature token, a 3/3 green Beast creature token, and a 4/4 green Beast creature token.\nCreature tokens you control have deathtouch. (Any amount of damage they deal to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Dawnhart Wardens",
@@ -1641,12 +1384,9 @@
         "W"
       ],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nCoven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Moonsilver Key",
@@ -1656,16 +1396,13 @@
       "oracleCardName": "Moonsilver Key",
       "colorIdentity": [],
       "set": "MID",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}, Sacrifice this artifact: Search your library for an artifact card with a mana ability or a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.756Z",
+    "retrievedDate": "2026-06-23T17:40:36.519Z",
     "sourceUrl": "CovenCounters_MIC.json",
     "deckSource": "precon",
     "createdAt": "2021-09-24T00:00:00.000Z"

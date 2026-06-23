@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 607445039,
   "name": "Raining Cats and Dogs",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever you cast a Dog spell, create a 1/1 green Cat creature token.\nWhenever you cast a Cat spell, create a 1/1 white Dog creature token.\n{R}{G}{W}, {T}: Rin and Seri deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control."
+      ]
     }
   ],
   "cards": [
@@ -35,21 +32,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures.",
-      "backFace": {
-        "name": "Jetmir, Nexus of Revels",
-        "types": [
-          "Creature"
-        ],
-        "manaCost": "{1}{R}{G}{W}",
-        "cmc": 4,
-        "oracleText": "Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures."
-      }
+      ]
     },
     {
       "name": "Jinnie Fay, Jetmir's Second // Jinnie Fay, Jetmir's Second",
@@ -62,21 +47,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R/G}{G}{G/W}",
-      "cmc": 3,
-      "oracleText": "If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance.",
-      "backFace": {
-        "name": "Jinnie Fay, Jetmir's Second",
-        "types": [
-          "Creature"
-        ],
-        "manaCost": "{R/G}{G}{G/W}",
-        "cmc": 3,
-        "oracleText": "If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance."
-      }
+      ]
     },
     {
       "name": "Anointed Procession // Anointed Procession",
@@ -87,21 +60,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.",
-      "backFace": {
-        "name": "Anointed Procession",
-        "types": [
-          "Enchantment"
-        ],
-        "manaCost": "{3}{W}",
-        "cmc": 4,
-        "oracleText": "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."
-      }
+      ]
     },
     {
       "name": "Sol Ring // Sol Ring",
@@ -110,21 +71,9 @@
       "oracleCardName": "Sol Ring // Sol Ring",
       "colorIdentity": [],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}.",
-      "backFace": {
-        "name": "Sol Ring",
-        "types": [
-          "Artifact"
-        ],
-        "manaCost": "{1}",
-        "cmc": 1,
-        "oracleText": "{T}: Add {C}{C}."
-      }
+      ]
     },
     {
       "name": "Alms Collector",
@@ -135,12 +84,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nIf an opponent would draw two or more cards, instead you and that player each draw a card."
+      ]
     },
     {
       "name": "Highcliff Felidar",
@@ -151,12 +97,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Vigilance\nWhen this creature enters, for each opponent, choose a creature with the greatest power among creatures that player controls. Destroy those creatures."
+      ]
     },
     {
       "name": "Kitt Kanto, Mayhem Diva",
@@ -169,12 +112,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "When Kitt Kanto enters, create a 1/1 green and white Citizen creature token.\nAt the beginning of combat on each player's turn, you may tap two untapped creatures you control. When you do, target creature that player controls gets +2/+2 and gains trample until end of turn. Goad that creature."
+      ]
     },
     {
       "name": "Brimaz, King of Oreskos",
@@ -185,12 +125,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nWhenever Brimaz attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.\nWhenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature."
+      ]
     },
     {
       "name": "Stalking Leonin",
@@ -201,12 +138,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, secretly choose an opponent.\nReveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once."
+      ]
     },
     {
       "name": "Cast Out",
@@ -217,12 +151,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Phabine, Boss's Confidant",
@@ -235,12 +166,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{G}{W}",
-      "cmc": 6,
-      "oracleText": "Creature tokens you control have haste.\nParley — At the beginning of combat on your turn, each player reveals the top card of their library. For each land card revealed this way, you create a 1/1 green and white Citizen creature token. Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way. Then each player draws a card."
+      ]
     },
     {
       "name": "Crib Swap",
@@ -251,13 +179,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Instant"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -268,12 +193,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "King of the Pride",
@@ -284,12 +206,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Other Cats you control get +2/+1."
+      ]
     },
     {
       "name": "Felidar Retreat",
@@ -300,12 +219,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Create a 2/2 white Cat Beast creature token.\n• Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn."
+      ]
     },
     {
       "name": "White Sun's Zenith",
@@ -316,12 +232,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library."
+      ]
     },
     {
       "name": "Komainu Battle Armor",
@@ -332,13 +245,10 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Menace\nEquipped creature gets +2/+2 and has menace.\nWhenever this creature or equipped creature deals combat damage to a player, goad each creature that player controls.\nReconfigure {4} ({4}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
+      ]
     },
     {
       "name": "Skyhunter Strike Force",
@@ -349,12 +259,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flying\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nLieutenant — As long as you control your commander, other creatures you control have melee."
+      ]
     },
     {
       "name": "Whitemane Lion",
@@ -365,12 +272,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Flash\nWhen this creature enters, return a creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Loyal Warhound",
@@ -381,12 +285,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Vigilance\nWhen this creature enters, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Regal Caracal",
@@ -397,12 +298,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Other Cats you control get +1/+1 and have lifelink. (Damage dealt by those creatures also causes you to gain that much life.)\nWhen this creature enters, create two 1/1 white Cat creature tokens with lifelink."
+      ]
     },
     {
       "name": "Lion Sash",
@@ -413,13 +311,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "{W}: Exile target card from a graveyard. If it was a permanent card, put a +1/+1 counter on this permanent.\nEquipped creature gets +1/+1 for each +1/+1 counter on this Equipment.\nReconfigure {2} ({2}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)"
+      ]
     },
     {
       "name": "Pack Leader",
@@ -430,12 +325,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Other Dogs you control get +1/+1.\nWhenever this creature attacks, prevent all combat damage that would be dealt this turn to Dogs you control."
+      ]
     },
     {
       "name": "Tocasia's Welcome",
@@ -446,12 +338,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more creatures you control with mana value 3 or less enter, draw a card. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Hungry Lynx",
@@ -462,12 +351,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Cats you control have protection from Rats. (They can't be blocked, targeted, or dealt damage by Rats.)\nAt the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch.\nWhenever a Rat dies, put a +1/+1 counter on each Cat you control."
+      ]
     },
     {
       "name": "Seht's Tiger",
@@ -478,12 +364,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, you gain protection from the color of your choice until end of turn. (You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)"
+      ]
     },
     {
       "name": "Mirror Entity",
@@ -494,12 +377,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\n{X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types."
+      ]
     },
     {
       "name": "Qasali Slingers",
@@ -510,12 +390,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Reach\nWhenever this creature or another Cat you control enters, you may destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Spirited Companion",
@@ -526,13 +403,10 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, draw a card."
+      ]
     },
     {
       "name": "Marisi, Breaker of the Coil",
@@ -545,12 +419,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Your opponents can't cast spells during combat.\nWhenever a creature you control deals combat damage to a player, goad each creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)"
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -563,11 +434,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Cursed Mirror",
@@ -578,12 +447,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {R}.\nAs this artifact enters, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -592,12 +458,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -606,11 +469,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Oreskos Explorer",
@@ -621,12 +482,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Jazal Goldmane",
@@ -637,12 +495,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "First strike (This creature deals combat damage before creatures without first strike.)\n{3}{W}{W}: Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures."
+      ]
     },
     {
       "name": "Fleetfoot Panther",
@@ -654,12 +509,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, return a green or white creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Taurean Mauler",
@@ -670,12 +522,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -684,11 +533,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Impact Tremors",
@@ -699,12 +546,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whenever a creature you control enters, this enchantment deals 1 damage to each opponent."
+      ]
     },
     {
       "name": "Temur Sabertooth",
@@ -715,12 +559,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "{1}{G}: You may return another creature you control to its owner's hand. If you do, this creature gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -729,11 +570,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Nacatl War-Pride",
@@ -744,12 +583,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}{G}",
-      "cmc": 6,
-      "oracleText": "This creature must be blocked by exactly one creature if able.\nWhenever this creature attacks, create X tokens that are copies of it and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step."
+      ]
     },
     {
       "name": "Warp World",
@@ -760,12 +596,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{R}{R}{R}",
-      "cmc": 8,
-      "oracleText": "Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -774,12 +607,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Beastmaster Ascension",
@@ -790,12 +620,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control attacks, you may put a quest counter on this enchantment.\nAs long as this enchantment has seven or more quest counters on it, creatures you control get +5/+5."
+      ]
     },
     {
       "name": "Keeper of Fables",
@@ -806,12 +633,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Nature's Lore",
@@ -822,12 +646,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put that card onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Command Tower",
@@ -836,11 +657,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -851,12 +670,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Feline Sovereign",
@@ -867,12 +683,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Other Cats you control get +1/+1 and have protection from Dogs.\nWhenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Masked Vandal",
@@ -883,12 +696,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Changeling (This card is every creature type.)\nWhen this creature enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls."
+      ]
     },
     {
       "name": "Realmwalker",
@@ -899,12 +709,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nYou may look at the top card of your library any time.\nYou may cast creature spells of the chosen type from the top of your library."
+      ]
     },
     {
       "name": "Greater Tanuki",
@@ -915,13 +722,10 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nChannel — {2}{G}, Discard this card: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Lurking Predators",
@@ -932,12 +736,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library."
+      ]
     },
     {
       "name": "Rootbound Crag",
@@ -949,11 +750,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Sunpetal Grove",
@@ -965,11 +764,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Showdown of the Skalds",
@@ -981,12 +778,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}{W}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile the top four cards of your library. Until the end of your next turn, you may play those cards.\nII, III — Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control."
+      ]
     },
     {
       "name": "Basilisk Collar",
@@ -995,12 +789,9 @@
       "oracleCardName": "Basilisk Collar",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature has deathtouch and lifelink. (Any amount of damage it deals to a creature is enough to destroy it. Damage dealt by this creature also causes you to gain that much life.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Oketra's Monument",
@@ -1009,12 +800,9 @@
       "oracleCardName": "Oketra's Monument",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "White creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, create a 1/1 white Warrior creature token with vigilance."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -1026,11 +814,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -1042,11 +828,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Bloodline Pretender",
@@ -1055,13 +839,10 @@
       "oracleCardName": "Bloodline Pretender",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Changeling (This card is every creature type.)\nAs this creature enters, choose a creature type.\nWhenever another creature you control of the chosen type enters, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Clifftop Retreat",
@@ -1073,11 +854,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Mountain or a Plains.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Maskwood Nexus",
@@ -1086,12 +865,9 @@
       "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)"
+      ]
     },
     {
       "name": "Animal Sanctuary",
@@ -1100,11 +876,9 @@
       "oracleCardName": "Animal Sanctuary",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Put a +1/+1 counter on target Bird, Cat, Dog, Goat, Ox, or Snake."
+      ]
     },
     {
       "name": "Scattered Groves",
@@ -1116,11 +890,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Sheltered Thicket",
@@ -1132,11 +904,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Jetmir's Garden",
@@ -1149,11 +919,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}, {G}, or {W}.)\nThis land enters tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Skullclamp",
@@ -1162,12 +930,9 @@
       "oracleCardName": "Skullclamp",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}"
+      ]
     },
     {
       "name": "Vanquisher's Banner",
@@ -1176,12 +941,9 @@
       "oracleCardName": "Vanquisher's Banner",
       "colorIdentity": [],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card."
+      ]
     },
     {
       "name": "Three Visits",
@@ -1192,12 +954,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Cultivate",
@@ -1208,12 +967,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -1224,12 +980,9 @@
         "G"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fortified Village",
@@ -1241,11 +994,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Game Trail",
@@ -1257,11 +1008,9 @@
         "R"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Dusk // Dawn",
@@ -1272,12 +1021,9 @@
         "W"
       ],
       "set": "PLST",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures with power 3 or greater."
+      ]
     },
     {
       "name": "Plains",
@@ -1288,11 +1034,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1303,11 +1047,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1318,11 +1060,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1333,11 +1073,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1348,11 +1086,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1363,11 +1099,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1378,11 +1112,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1393,11 +1125,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1408,11 +1138,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1423,11 +1151,9 @@
         "W"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1438,11 +1164,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1453,11 +1177,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1468,11 +1190,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1483,11 +1203,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1498,11 +1216,9 @@
         "R"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1513,11 +1229,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1528,11 +1242,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1543,11 +1255,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1558,11 +1268,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1573,11 +1281,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1588,11 +1294,9 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1603,15 +1307,13 @@
         "G"
       ],
       "set": "SLD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.397Z",
+    "retrievedDate": "2026-06-23T17:40:39.370Z",
     "sourceUrl": "RainingCatsAndDogs_SLD.json",
     "deckSource": "precon",
     "createdAt": "2024-01-22T00:00:00.000Z"

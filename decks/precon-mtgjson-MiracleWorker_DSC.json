@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 740188595,
   "name": "Miracle Worker",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nEach enchantment card in your hand has miracle. Its miracle cost is equal to its mana cost reduced by {4}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     }
   ],
   "cards": [
@@ -37,13 +34,10 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{X}{W}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen The Master of Keys enters, put X +1/+1 counters on it and mill twice X cards.\nEach enchantment card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)"
+      ]
     },
     {
       "name": "Redress Fate",
@@ -55,12 +49,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{W}{W}",
-      "cmc": 8,
-      "oracleText": "Return all artifact and enchantment cards from your graveyard to the battlefield.\nMiracle {3}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Secret Arcade // Dusty Parlor",
@@ -72,12 +63,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 8,
-      "oracleText": "Nonland permanents you control and permanent spells you control are enchantments in addition to their other types.\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Soaring Lightbringer",
@@ -89,13 +77,10 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nOther enchantment creatures you control have flying.\nWhenever you attack a player, create a 1/1 white Glimmer enchantment creature token that's tapped and attacking that player."
+      ]
     },
     {
       "name": "Fear of Sleep Paralysis",
@@ -107,13 +92,10 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nEerie — Whenever this creature or another enchantment you control enters and whenever you fully unlock a Room, tap up to one target creature and put a stun counter on it.\nStun counters can't be removed from permanents your opponents control. (They won't untap if they have stun counters.)"
+      ]
     },
     {
       "name": "Ancient Cellarspawn",
@@ -125,13 +107,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Each spell you cast that's a Demon, Horror, or Nightmare costs {1} less to cast.\nWhenever you cast a spell, if the amount of mana spent to cast it was less than its mana value, target opponent loses life equal to the difference."
+      ]
     },
     {
       "name": "Cramped Vents // Access Maze",
@@ -143,12 +122,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 11,
-      "oracleText": "When you unlock this door, this Room deals 6 damage to target creature an opponent controls. You gain life equal to the excess damage dealt this way.\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Metamorphosis Fanatic",
@@ -160,12 +136,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Lifelink\nWhen this creature enters, return up to one target creature card from your graveyard to the battlefield with a lifelink counter on it.\nMiracle {1}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Phenomenon Investigators",
@@ -178,12 +151,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "As this creature enters, choose Believe or Doubt.\n• Believe — Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.\n• Doubt — At the beginning of your end step, you may return a nonland permanent you own to your hand. If you do, draw a card."
+      ]
     },
     {
       "name": "Mesa Enchantress",
@@ -195,12 +165,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, you may draw a card."
+      ]
     },
     {
       "name": "Terminus",
@@ -212,12 +179,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Put all creatures on the bottom of their owners' libraries.\nMiracle {W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Aminatou's Augury",
@@ -229,12 +193,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "Exile the top eight cards of your library. You may put a land card from among them onto the battlefield. Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards without paying its mana cost."
+      ]
     },
     {
       "name": "Utter End",
@@ -247,12 +208,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{B}",
-      "cmc": 4,
-      "oracleText": "Exile target nonland permanent."
+      ]
     },
     {
       "name": "Entreat the Angels",
@@ -264,12 +222,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{X}{W}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Create X 4/4 white Angel creature tokens with flying.\nMiracle {X}{W}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)"
+      ]
     },
     {
       "name": "Monologue Tax",
@@ -281,12 +236,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent casts their second spell each turn, you create a Treasure token."
+      ]
     },
     {
       "name": "Ondu Spiritdancer",
@@ -298,12 +250,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever an enchantment you control enters, you may create a token that's a copy of it. Do this only once each turn."
+      ]
     },
     {
       "name": "Sigil of the Empty Throne",
@@ -315,12 +264,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying."
+      ]
     },
     {
       "name": "Starfield Mystic",
@@ -332,12 +278,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchantment spells you cast cost {1} less to cast.\nWhenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Timely Ward",
@@ -349,12 +292,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "You may cast this spell as though it had flash if it targets a commander.\nEnchant creature\nEnchanted creature has indestructible."
+      ]
     },
     {
       "name": "Verge Rangers",
@@ -366,12 +306,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "First strike\nYou may look at the top card of your library any time.\nAs long as an opponent controls more lands than you, you may play lands from the top of your library. (You can play a land this way only if you have an available land play remaining.)"
+      ]
     },
     {
       "name": "Dream Eater",
@@ -383,12 +320,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, surveil 4. When you do, you may return target nonland permanent an opponent controls to its owner's hand. (To surveil 4, look at the top four cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Extravagant Replication",
@@ -400,12 +334,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "At the beginning of your upkeep, create a token that's a copy of another target nonland permanent you control."
+      ]
     },
     {
       "name": "Mirrormade",
@@ -417,12 +348,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "You may have this enchantment enter as a copy of any artifact or enchantment on the battlefield."
+      ]
     },
     {
       "name": "One with the Multiverse",
@@ -434,12 +362,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{6}{U}{U}",
-      "cmc": 8,
-      "oracleText": "You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library.\nOnce during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost."
+      ]
     },
     {
       "name": "Prognostic Sphinx",
@@ -451,12 +376,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nDiscard a card: This creature gains hexproof until end of turn. Tap it.\nWhenever this creature attacks, scry 3."
+      ]
     },
     {
       "name": "Shark Typhoon",
@@ -468,12 +390,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.\nCycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, create an X/X blue Shark creature token with flying."
+      ]
     },
     {
       "name": "Arvinox, the Mind Flail",
@@ -485,13 +404,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Arvinox isn't a creature unless you control three or more permanents you don't own.\nAt the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells."
+      ]
     },
     {
       "name": "Demon of Fate's Design",
@@ -503,13 +419,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nOnce during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.\n{2}{B}, Sacrifice another enchantment: This creature gets +X/+0 until end of turn, where X is the sacrificed enchantment's mana value."
+      ]
     },
     {
       "name": "Doomwake Giant",
@@ -521,13 +434,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Nightmare Shepherd",
@@ -539,13 +449,10 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and it's a Nightmare in addition to its other types."
+      ]
     },
     {
       "name": "Athreos, Shroud-Veiled",
@@ -558,13 +465,10 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{W}{B}",
-      "cmc": 6,
-      "oracleText": "Indestructible\nAs long as your devotion to white and black is less than seven, Athreos isn't a creature.\nAt the beginning of your end step, put a coin counter on another target creature.\nWhenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control."
+      ]
     },
     {
       "name": "Inkshield",
@@ -577,12 +481,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Prevent all combat damage that would be dealt to you this turn. For each 1 damage prevented this way, create a 2/1 white and black Inkling creature token with flying."
+      ]
     },
     {
       "name": "Life Insurance",
@@ -595,12 +496,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever a nontoken creature dies, you lose 1 life and create a Treasure token."
+      ]
     },
     {
       "name": "Spirit-Sister's Call",
@@ -613,12 +511,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{B}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your end step, choose target permanent card in your graveyard. You may sacrifice a permanent that shares a card type with the chosen card. If you do, return the chosen card from your graveyard to the battlefield and it gains \"If this permanent would leave the battlefield, exile it instead of putting it anywhere else.\""
+      ]
     },
     {
       "name": "Time Wipe",
@@ -631,12 +526,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Return a creature you control to its owner's hand, then destroy all creatures."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -646,13 +538,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -665,11 +554,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Caves of Koilos",
@@ -682,11 +569,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Hall of Heliod's Generosity",
@@ -698,11 +583,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{W}, {T}: Put target enchantment card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -715,11 +598,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -732,11 +613,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -749,11 +628,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Underground River",
@@ -766,11 +643,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Bottomless Pool // Locker Room",
@@ -782,12 +657,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{U}",
-      "cmc": 6,
-      "oracleText": "When you unlock this door, return up to one target creature to its owner's hand.\n(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -797,11 +669,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Auramancer",
@@ -813,12 +683,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target enchantment card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -830,12 +697,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Moon-Blessed Cleric",
@@ -847,12 +711,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Divine Intervention — When this creature enters, you may search your library for an enchantment card, reveal it, then shuffle and put that card on top."
+      ]
     },
     {
       "name": "Ponder",
@@ -864,12 +725,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card."
+      ]
     },
     {
       "name": "Portent",
@@ -881,12 +739,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle.\nDraw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Telling Time",
@@ -898,12 +753,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library."
+      ]
     },
     {
       "name": "Diabolic Vision",
@@ -916,12 +768,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Look at the top five cards of your library. Put one of them into your hand and the rest on top of your library in any order."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -931,12 +780,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -946,12 +792,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -961,11 +804,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Cast Out",
@@ -977,12 +818,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Return to Dust",
@@ -994,12 +832,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Sphere of Safety",
@@ -1011,12 +846,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Creatures can't attack you or planeswalkers you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control."
+      ]
     },
     {
       "name": "Arcane Denial",
@@ -1028,12 +860,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep."
+      ]
     },
     {
       "name": "Archetype of Imagination",
@@ -1045,13 +874,10 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Creatures you control have flying.\nCreatures your opponents control lose flying and can't have or gain flying."
+      ]
     },
     {
       "name": "Brainstorm",
@@ -1063,12 +889,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Draw three cards, then put two cards from your hand on top of your library in any order."
+      ]
     },
     {
       "name": "Otherworldly Gaze",
@@ -1080,12 +903,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Thirst for Meaning",
@@ -1097,12 +917,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Draw three cards. Then discard two cards unless you discard an enchantment card."
+      ]
     },
     {
       "name": "The Eldest Reborn",
@@ -1114,12 +931,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature or planeswalker of their choice.\nII — Each opponent discards a card.\nIII — Put target creature or planeswalker card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Read the Bones",
@@ -1131,12 +945,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -1149,12 +960,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Brainstone",
@@ -1164,12 +972,9 @@
       "oracleCardName": "Brainstone",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Draw three cards, then put two cards from your hand on top of your library in any order."
+      ]
     },
     {
       "name": "Burnished Hart",
@@ -1179,13 +984,10 @@
       "oracleCardName": "Burnished Hart",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1195,12 +997,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1210,12 +1009,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -1228,12 +1024,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1247,11 +1040,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1261,11 +1052,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1278,11 +1067,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Bojuka Bog",
@@ -1294,11 +1081,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1311,11 +1096,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1325,11 +1108,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Halimar Depths",
@@ -1341,11 +1122,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, look at the top three cards of your library, then put them back in any order.\n{T}: Add {U}."
+      ]
     },
     {
       "name": "Obscura Storefront",
@@ -1355,11 +1134,9 @@
       "oracleCardName": "Obscura Storefront",
       "colorIdentity": [],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, sacrifice it. When you do, search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1372,11 +1149,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Tainted Field",
@@ -1389,11 +1164,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Tainted Isle",
@@ -1406,11 +1179,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Thriving Heath",
@@ -1422,11 +1193,9 @@
         "W"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Isle",
@@ -1438,11 +1207,9 @@
         "U"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Thriving Moor",
@@ -1454,11 +1221,9 @@
         "B"
       ],
       "set": "DSC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color."
+      ]
     },
     {
       "name": "Plains",
@@ -1470,11 +1235,9 @@
         "W"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1486,11 +1249,9 @@
         "W"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1502,11 +1263,9 @@
         "W"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1518,11 +1277,9 @@
         "W"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1534,11 +1291,9 @@
         "W"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1550,11 +1305,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1566,11 +1319,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1582,11 +1333,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1598,11 +1347,9 @@
         "U"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1614,11 +1361,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1630,11 +1375,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1646,11 +1389,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1662,11 +1403,9 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1678,15 +1417,13 @@
         "B"
       ],
       "set": "DSK",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.013Z",
+    "retrievedDate": "2026-06-23T17:40:38.665Z",
     "sourceUrl": "MiracleWorker_DSC.json",
     "deckSource": "precon",
     "createdAt": "2024-09-27T00:00:00.000Z"

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2054213176,
   "name": "Desert Bloom",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{G}{W}",
-      "cmc": 8,
-      "oracleText": "This spell costs {1} less to cast for each land card in your graveyard.\nWhenever Yuma enters or attacks, you may sacrifice a land. If you do, draw a card.\nWhenever a Desert card is put into your graveyard from anywhere, create a 4/2 green Plant Warrior creature token with reach."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Other Plants and Treefolk you control get +2/+0.\nAt the beginning of each of your postcombat main phases, return target Plant, Treefolk, or land card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Scavenger Grounds",
@@ -52,11 +46,9 @@
       "oracleCardName": "Scavenger Grounds",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all graveyards."
+      ]
     },
     {
       "name": "Sun Titan",
@@ -68,12 +60,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Vigilance\nWhenever this creature enters or attacks, you may return target permanent card with mana value 3 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Omnath, Locus of Rage",
@@ -86,12 +75,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 5/5 red and green Elemental creature token.\nWhenever Omnath or another Elemental you control dies, Omnath deals 3 damage to any target."
+      ]
     },
     {
       "name": "Descend upon the Sinful",
@@ -103,12 +89,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Exile all creatures.\nDelirium — Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Chromatic Lantern",
@@ -118,12 +101,9 @@
       "oracleCardName": "Chromatic Lantern",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Lands you control have \"{T}: Add one mana of any color.\"\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Marshal's Anthem",
@@ -135,12 +115,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Multikicker {1}{W} (You may pay an additional {1}{W} any number of times as you cast this spell.)\nCreatures you control get +1/+1.\nWhen this enchantment enters, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times this enchantment was kicked."
+      ]
     },
     {
       "name": "Sheltered Thicket",
@@ -153,11 +130,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Scute Swarm",
@@ -169,12 +144,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead."
+      ]
     },
     {
       "name": "Hour of Promise",
@@ -186,12 +158,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Oracle of Mul Daya",
@@ -203,12 +172,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "You may play an additional land on each of your turns.\nPlay with the top card of your library revealed.\nYou may play lands from the top of your library."
+      ]
     },
     {
       "name": "Ramunap Excavator",
@@ -220,12 +186,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may play lands from your graveyard."
+      ]
     },
     {
       "name": "Scattered Groves",
@@ -238,11 +201,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "World Shaper",
@@ -254,12 +215,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature attacks, you may mill three cards.\nWhen this creature dies, return all land cards from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Nesting Dragon",
@@ -271,12 +229,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nLandfall — Whenever a land you control enters, create a 0/2 red Dragon Egg creature token with defender and \"When this token dies, create a 2/2 red Dragon creature token with flying and '{R}: This token gets +1/+0 until end of turn.'\""
+      ]
     },
     {
       "name": "Turntimber Sower",
@@ -288,12 +243,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever one or more land cards are put into your graveyard from anywhere, create a 0/1 green Plant creature token.\n{G}, Sacrifice three creatures: Return target land card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Sevinne's Reclamation",
@@ -305,12 +257,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Return target permanent card with mana value 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.\nFlashback {4}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Ancient Greenwarden",
@@ -322,12 +271,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Reach (This creature can block creatures with flying.)\nYou may play lands from your graveyard.\nIf a land entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time."
+      ]
     },
     {
       "name": "Titania, Protector of Argoth",
@@ -339,12 +285,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "When Titania enters, return target land card from your graveyard to the battlefield.\nWhenever a land you control is put into a graveyard from the battlefield, create a 5/3 green Elemental creature token."
+      ]
     },
     {
       "name": "Return of the Wildspeaker",
@@ -356,12 +299,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Draw cards equal to the greatest power among non-Human creatures you control.\n• Non-Human creatures you control get +3/+3 until end of turn."
+      ]
     },
     {
       "name": "Perennial Behemoth",
@@ -373,13 +313,10 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "You may play lands from your graveyard.\nUnearth {G}{G} ({G}{G}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Avenger of Zendikar",
@@ -391,12 +328,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}{G}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control."
+      ]
     },
     {
       "name": "Hazezon, Shaper of Sand",
@@ -410,12 +344,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Desertwalk (This creature can't be blocked as long as defending player controls a Desert.)\nYou may play Desert lands from your graveyard.\nWhenever a Desert you control enters, create two 1/1 red, green, and white Sand Warrior creature tokens."
+      ]
     },
     {
       "name": "Escape to the Wilds",
@@ -428,12 +359,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Exile the top five cards of your library. You may play cards exiled this way until the end of your next turn.\nYou may play an additional land this turn."
+      ]
     },
     {
       "name": "Heaven // Earth",
@@ -446,12 +374,10 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
-        "Instant"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 3,
-      "oracleText": "Heaven deals X damage to each creature with flying."
+      "cardTypes": [
+        "Instant",
+        "Sorcery"
+      ]
     },
     {
       "name": "Genesis Hydra",
@@ -463,12 +389,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{G}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell, reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library.\nThis creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Sunscorched Divide",
@@ -481,11 +404,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {R}{W}."
+      ]
     },
     {
       "name": "The Mending of Dominaria",
@@ -497,12 +418,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library."
+      ]
     },
     {
       "name": "Decimate",
@@ -515,12 +433,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy target artifact, target creature, target enchantment, and target land. (You can't cast this spell unless you have legal choices for all its targets.)"
+      ]
     },
     {
       "name": "Sand Scout",
@@ -532,12 +447,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, if an opponent controls more lands than you, search your library for a Desert card, put it onto the battlefield tapped, then shuffle.\nWhenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Embrace the Unknown",
@@ -549,12 +461,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)"
+      ]
     },
     {
       "name": "Dune Chanter",
@@ -566,12 +475,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nLands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.\nLands you control have \"{T}: Add one mana of any color.\"\n{T}: Mill two cards. You gain 1 life for each land card milled this way."
+      ]
     },
     {
       "name": "Cataclysmic Prospecting",
@@ -583,12 +489,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Cataclysmic Prospecting deals X damage to each creature. For each mana from a Desert spent to cast this spell, create a tapped Treasure token."
+      ]
     },
     {
       "name": "Vengeful Regrowth",
@@ -600,12 +503,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Return up to three target land cards from your graveyard to the battlefield tapped. Create that many 4/2 green Plant Warrior creature tokens with reach.\nFlashback {6}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Angel of Indemnity",
@@ -617,12 +517,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}",
-      "cmc": 6,
-      "oracleText": "Flying, lifelink\nWhen this creature enters, return target permanent card with mana value 4 or less from your graveyard to the battlefield.\nEncore {6}{W}{W} ({6}{W}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"
+      ]
     },
     {
       "name": "Cactus Preserve",
@@ -632,11 +529,9 @@
       "oracleCardName": "Cactus Preserve",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any type that a land you control could produce.\n{3}: Until end of turn, this land becomes an X/X green Plant creature with reach, where X is the greatest mana value among your commanders. It's still a land."
+      ]
     },
     {
       "name": "Rumbleweed",
@@ -648,12 +543,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}{G}",
-      "cmc": 11,
-      "oracleText": "This spell costs {1} less to cast for each land card in your graveyard.\nVigilance, reach, trample\nWhen this creature enters, other creatures you control get +3/+3 and gain trample until end of turn."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -663,11 +555,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -677,11 +567,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -691,12 +579,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Explore",
@@ -708,12 +593,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -723,12 +605,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Satyr Wayfinder",
@@ -740,12 +619,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard."
+      ]
     },
     {
       "name": "Perpetual Timepiece",
@@ -755,12 +631,9 @@
       "oracleCardName": "Perpetual Timepiece",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Mill two cards.\n{2}, Exile this artifact: Shuffle any number of target cards from your graveyard into your library."
+      ]
     },
     {
       "name": "Crawling Sensation",
@@ -772,12 +645,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nWhenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token."
+      ]
     },
     {
       "name": "Painted Bluffs",
@@ -787,11 +657,9 @@
       "oracleCardName": "Painted Bluffs",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Command Tower",
@@ -801,11 +669,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Magmatic Insight",
@@ -817,12 +683,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "As an additional cost to cast this spell, discard a land card.\nDraw two cards."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -832,11 +695,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Desert of the True",
@@ -848,11 +709,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Skullwinder",
@@ -864,12 +723,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Deathtouch\nWhen this creature enters, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand."
+      ]
     },
     {
       "name": "Desert of the Indomitable",
@@ -881,11 +737,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {1}{G} ({1}{G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -899,11 +753,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Bitter Reunion",
@@ -915,12 +767,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, you may discard a card. If you do, draw two cards.\n{1}, Sacrifice this enchantment: Creatures you control gain haste until end of turn."
+      ]
     },
     {
       "name": "Desert of the Fervent",
@@ -932,11 +781,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Valorous Stance",
@@ -948,12 +795,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Target creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)\n• Destroy target creature with toughness 4 or greater."
+      ]
     },
     {
       "name": "Dunes of the Dead",
@@ -963,11 +807,9 @@
       "oracleCardName": "Dunes of the Dead",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nWhen this land is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Shefet Dunes",
@@ -979,11 +821,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add {W}.\n{2}{W}{W}, {T}, Sacrifice a Desert: Creatures you control get +1/+1 until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Hashep Oasis",
@@ -995,11 +835,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add {G}.\n{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Elvish Rejuvenator",
@@ -1011,12 +849,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Winding Way",
@@ -1028,12 +863,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Choose creature or land. Reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard."
+      ]
     },
     {
       "name": "Springbloom Druid",
@@ -1045,12 +877,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1060,12 +889,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Unholy Heat",
@@ -1077,12 +903,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Unholy Heat deals 2 damage to target creature or planeswalker.\nDelirium — Unholy Heat deals 6 damage instead if there are four or more card types among cards in your graveyard."
+      ]
     },
     {
       "name": "Thrilling Discovery",
@@ -1095,12 +918,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{W}",
-      "cmc": 2,
-      "oracleText": "You gain 2 life. Then you may discard two cards. If you do, draw three cards."
+      ]
     },
     {
       "name": "Electric Revelation",
@@ -1112,12 +932,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, discard a card.\nDraw two cards.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)"
+      ]
     },
     {
       "name": "Eccentric Farmer",
@@ -1129,12 +946,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, mill three cards, then you may return a land card from your graveyard to your hand. (To mill three cards, put the top three cards of your library into your graveyard.)"
+      ]
     },
     {
       "name": "Harrow",
@@ -1146,12 +960,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Ramunap Ruins",
@@ -1163,11 +974,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add {R}.\n{2}{R}{R}, {T}, Sacrifice a Desert: This land deals 2 damage to each opponent."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -1179,12 +988,9 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Requisition Raid",
@@ -1196,12 +1002,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Spree (Choose one or more additional costs.)\n+ {1} — Destroy target artifact.\n+ {1} — Destroy target enchantment.\n+ {1} — Put a +1/+1 counter on each creature target player controls."
+      ]
     },
     {
       "name": "Bovine Intervention",
@@ -1213,12 +1016,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token."
+      ]
     },
     {
       "name": "Map the Frontier",
@@ -1230,12 +1030,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Conduit Pylons",
@@ -1245,11 +1042,9 @@
       "oracleCardName": "Conduit Pylons",
       "colorIdentity": [],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Mirage Mesa",
@@ -1259,11 +1054,9 @@
       "oracleCardName": "Mirage Mesa",
       "colorIdentity": [],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color."
+      ]
     },
     {
       "name": "Wreck and Rebuild",
@@ -1276,12 +1069,9 @@
         "R"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Destroy target artifact or enchantment.\n• Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped.\nFlashback {3}{R}{G}"
+      ]
     },
     {
       "name": "Angel of the Ruins",
@@ -1293,13 +1083,10 @@
         "W"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, exile up to two target artifacts and/or enchantments.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Bristling Backwoods",
@@ -1312,11 +1099,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, it deals 1 damage to target opponent.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Creosote Heath",
@@ -1329,11 +1114,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, it deals 1 damage to target opponent.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Abraded Bluffs",
@@ -1346,11 +1129,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, it deals 1 damage to target opponent.\n{T}: Add {R} or {W}."
+      ]
     },
     {
       "name": "Scaretiller",
@@ -1360,13 +1141,10 @@
       "oracleCardName": "Scaretiller",
       "colorIdentity": [],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Nantuko Cultivator",
@@ -1378,12 +1156,9 @@
         "G"
       ],
       "set": "OTC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may discard any number of land cards. Put that many +1/+1 counters on this creature and draw that many cards."
+      ]
     },
     {
       "name": "Plains",
@@ -1395,11 +1170,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1411,11 +1184,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1427,11 +1198,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1443,11 +1212,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1459,11 +1226,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1475,11 +1240,9 @@
         "W"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1491,11 +1254,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1507,11 +1268,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1523,11 +1282,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1539,11 +1296,9 @@
         "R"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1555,11 +1310,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1571,11 +1324,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1587,11 +1338,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1603,11 +1352,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1619,11 +1366,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1635,11 +1380,9 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1651,15 +1394,13 @@
         "G"
       ],
       "set": "OTJ",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.872Z",
+    "retrievedDate": "2026-06-23T17:40:36.695Z",
     "sourceUrl": "DesertBloom_OTC.json",
     "deckSource": "precon",
     "createdAt": "2024-04-19T00:00:00.000Z"

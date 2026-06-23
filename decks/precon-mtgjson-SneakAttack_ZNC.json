@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2060574444,
   "name": "Sneak Attack",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Other Rogues you control get +1/+1.\nWhenever one or more Rogues you control deal combat damage to a player, that player mills a card for each 1 damage dealt to them. If the player mills at least one creature card this way, you draw a card. (To mill a card, a player puts the top card of their library into their graveyard.)"
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{U}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Hexproof\nWhenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav become a copy of that card, except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability."
+      ]
     },
     {
       "name": "Enigma Thief",
@@ -52,12 +46,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Prowl {3}{U} (You may cast this spell for its prowl cost if you dealt combat damage to a player this turn with a Sphinx or Rogue.)\nFlying\nWhen this creature enters, for each opponent, return up to one target nonland permanent that player controls to its owner's hand."
+      ]
     },
     {
       "name": "Scourge of Fleets",
@@ -69,12 +60,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control."
+      ]
     },
     {
       "name": "Gonti, Lord of Luxury",
@@ -86,12 +74,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\nWhen Gonti enters, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell."
+      ]
     },
     {
       "name": "Nighthowler",
@@ -103,13 +88,10 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Bestow {2}{B}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nThis creature and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards."
+      ]
     },
     {
       "name": "Ogre Slumlord",
@@ -121,12 +103,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another nontoken creature dies, you may create a 1/1 black Rat creature token.\nRats you control have deathtouch."
+      ]
     },
     {
       "name": "Sepulchral Primordial",
@@ -138,12 +117,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhen this creature enters, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Consuming Aberration",
@@ -156,12 +132,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard."
+      ]
     },
     {
       "name": "Notion Thief",
@@ -174,12 +147,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Flash\nIf an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card."
+      ]
     },
     {
       "name": "Oona, Queen of the Fae",
@@ -192,12 +162,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U/B}{U/B}{U/B}",
-      "cmc": 6,
-      "oracleText": "Flying\n{X}{U/B}: Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying."
+      ]
     },
     {
       "name": "Sygg, River Cutthroat",
@@ -210,12 +177,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U/B}{U/B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card. (Damage causes loss of life.)"
+      ]
     },
     {
       "name": "Faerie Vandal",
@@ -227,12 +191,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhenever you draw your second card each turn, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Invisible Stalker",
@@ -244,12 +205,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nThis creature can't be blocked."
+      ]
     },
     {
       "name": "Latchkey Faerie",
@@ -261,12 +219,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nProwl {2}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Faerie or Rogue.)\nWhen this creature enters, if its prowl cost was paid, draw a card."
+      ]
     },
     {
       "name": "Marang River Prowler",
@@ -278,12 +233,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "This creature can't block and can't be blocked.\nYou may cast this card from your graveyard as long as you control a black or green permanent."
+      ]
     },
     {
       "name": "Master Thief",
@@ -295,12 +247,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, gain control of target artifact for as long as you control this creature."
+      ]
     },
     {
       "name": "Nightveil Sprite",
@@ -312,12 +261,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+      ]
     },
     {
       "name": "Slither Blade",
@@ -329,12 +275,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "This creature can't be blocked."
+      ]
     },
     {
       "name": "Triton Shorestalker",
@@ -346,12 +289,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "This creature can't be blocked."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -363,12 +303,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Changeling Outcast",
@@ -380,12 +317,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Changeling (This card is every creature type.)\nThis creature can't block and can't be blocked."
+      ]
     },
     {
       "name": "Frogtosser Banneret",
@@ -397,12 +331,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Haste\nGoblin spells and Rogue spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Marsh Flitter",
@@ -414,12 +345,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, create two 1/1 black Goblin Rogue creature tokens.\nSacrifice a Goblin: This creature has base power and toughness 3/3 until end of turn."
+      ]
     },
     {
       "name": "Oona's Blackguard",
@@ -431,12 +359,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nEach other Rogue creature you control enters with an additional +1/+1 counter on it.\nWhenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card."
+      ]
     },
     {
       "name": "Stinkdrinker Bandit",
@@ -448,12 +373,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn."
+      ]
     },
     {
       "name": "Syr Konrad, the Grim",
@@ -465,12 +387,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Zulaport Cutthroat",
@@ -482,12 +401,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Merfolk Windrobber",
@@ -499,12 +415,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, that player mills a card. (They put the top card of their library into their graveyard.)\nSacrifice this creature: Draw a card. Activate only if an opponent has eight or more cards in their graveyard."
+      ]
     },
     {
       "name": "Sure-Footed Infiltrator",
@@ -516,12 +429,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Tap another untapped Rogue you control: This creature can't be blocked this turn.\nWhenever this creature deals combat damage to a player, draw a card."
+      ]
     },
     {
       "name": "Soaring Thought-Thief",
@@ -534,12 +444,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flash\nFlying\nAs long as an opponent has eight or more cards in their graveyard, Rogues you control get +1/+0.\nWhenever one or more Rogues you control attack, each opponent mills two cards."
+      ]
     },
     {
       "name": "Notorious Throng",
@@ -551,13 +458,10 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Kindred",
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Prowl {5}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nCreate X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn. If this spell's prowl cost was paid, take an extra turn after this one."
+      ]
     },
     {
       "name": "Stolen Identity",
@@ -569,12 +473,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Create a token that's a copy of target artifact or creature.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)"
+      ]
     },
     {
       "name": "In Garruk's Wake",
@@ -586,12 +487,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures you don't control and all planeswalkers you don't control."
+      ]
     },
     {
       "name": "Necromantic Selection",
@@ -603,12 +501,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection."
+      ]
     },
     {
       "name": "Distant Melody",
@@ -620,12 +515,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose a creature type. Draw a card for each permanent you control of that type."
+      ]
     },
     {
       "name": "Open into Wonder",
@@ -637,12 +529,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "X target creatures can't be blocked this turn. Until end of turn, those creatures gain \"Whenever this creature deals combat damage to a player, draw a card.\""
+      ]
     },
     {
       "name": "Endless Obedience",
@@ -654,12 +543,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPut target creature card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Rise from the Grave",
@@ -671,12 +557,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types."
+      ]
     },
     {
       "name": "Extract from Darkness",
@@ -689,12 +572,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Fated Return",
@@ -706,12 +586,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{B}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2."
+      ]
     },
     {
       "name": "Silumgar's Command",
@@ -724,12 +601,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Choose two —\n• Counter target noncreature spell.\n• Return target permanent to its owner's hand.\n• Target creature gets -3/-3 until end of turn.\n• Destroy target planeswalker."
+      ]
     },
     {
       "name": "Spinal Embrace",
@@ -742,12 +616,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Cast this spell only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness."
+      ]
     },
     {
       "name": "Aetherize",
@@ -759,12 +630,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Return all attacking creatures to their owner's hand."
+      ]
     },
     {
       "name": "Fact or Fiction",
@@ -776,12 +644,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Murder",
@@ -793,12 +658,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy target creature."
+      ]
     },
     {
       "name": "Price of Fame",
@@ -810,12 +672,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "This spell costs {2} less to cast if it targets a legendary creature.\nDestroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+      ]
     },
     {
       "name": "Soul Manipulation",
@@ -828,12 +687,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Choose one or both —\n• Counter target creature spell.\n• Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Whispersteel Dagger",
@@ -845,12 +701,9 @@
         "B"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +2/+0.\nWhenever equipped creature deals combat damage to a player, you may cast a creature spell from that player's graveyard this turn, and you may spend mana as though it were mana of any color to cast that spell.\nEquip {3}"
+      ]
     },
     {
       "name": "Blackblade Reforged",
@@ -860,12 +713,9 @@
       "oracleCardName": "Blackblade Reforged",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}"
+      ]
     },
     {
       "name": "Bonehoard",
@@ -875,12 +725,9 @@
       "oracleCardName": "Bonehoard",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}"
+      ]
     },
     {
       "name": "Obelisk of Urd",
@@ -890,12 +737,9 @@
       "oracleCardName": "Obelisk of Urd",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAs this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +2/+2."
+      ]
     },
     {
       "name": "Scytheclaw",
@@ -905,12 +749,9 @@
       "oracleCardName": "Scytheclaw",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1.\nWhenever equipped creature deals combat damage to a player, that player loses half their life, rounded up.\nEquip {3}"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -920,12 +761,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -935,12 +773,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dimir Keyrune",
@@ -953,12 +788,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U} or {B}.\n{U}{B}: This artifact becomes a 2/2 blue and black Horror artifact creature until end of turn and can't be blocked this turn."
+      ]
     },
     {
       "name": "Dimir Locket",
@@ -971,12 +803,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {U} or {B}.\n{U/B}{U/B}{U/B}{U/B}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -989,12 +818,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Heirloom Blade",
@@ -1004,12 +830,9 @@
       "oracleCardName": "Heirloom Blade",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Equipped creature gets +3/+1.\nWhenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. Put that card into your hand and the rest on the bottom of your library in a random order.\nEquip {1}"
+      ]
     },
     {
       "name": "Mind Stone",
@@ -1019,12 +842,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1034,12 +854,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Military Intelligence",
@@ -1051,12 +868,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever you attack with two or more creatures, draw a card."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1066,11 +880,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1083,11 +895,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Dimir Guildgate",
@@ -1100,11 +910,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Dismal Backwater",
@@ -1117,11 +925,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Jwar Isle Refuge",
@@ -1134,11 +940,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1148,11 +952,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rogue's Passage",
@@ -1162,11 +964,9 @@
       "oracleCardName": "Rogue's Passage",
       "colorIdentity": [],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Submerged Boneyard",
@@ -1179,11 +979,9 @@
         "U"
       ],
       "set": "ZNC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Island",
@@ -1195,11 +993,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1211,11 +1007,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1227,11 +1021,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1243,11 +1035,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1259,11 +1049,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1275,11 +1063,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1291,11 +1077,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1307,11 +1091,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1323,11 +1105,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1339,11 +1119,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1355,11 +1133,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1371,11 +1147,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1387,11 +1161,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1403,11 +1175,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1419,11 +1189,9 @@
         "U"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1435,11 +1203,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1451,11 +1217,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1467,11 +1231,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1483,11 +1245,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1499,11 +1259,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1515,11 +1273,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1531,11 +1287,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1547,11 +1301,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1563,11 +1315,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1579,11 +1329,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1595,11 +1343,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1611,11 +1357,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1627,11 +1371,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1643,11 +1385,9 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1659,15 +1399,13 @@
         "B"
       ],
       "set": "ZNR",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.724Z",
+    "retrievedDate": "2026-06-23T17:40:39.932Z",
     "sourceUrl": "SneakAttack_ZNC.json",
     "deckSource": "precon",
     "createdAt": "2020-09-25T00:00:00.000Z"

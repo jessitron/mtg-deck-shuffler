@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 651972356,
   "name": "Deep Clue Sea",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}{U}",
-      "cmc": 3,
-      "oracleText": "You have no maximum hand size.\nAt the beginning of your upkeep, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you draw your second card each turn, put two +1/+1 counters on Morska."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}{U}",
-      "cmc": 4,
-      "oracleText": "When Sophia enters, create Tiny, a legendary 2/2 green Dog Detective creature token with trample.\n{1}, Sacrifice an artifact token: Put a +1/+1 counter on each Dog you control.\nWhenever a Dog you control deals combat damage to a player, create a Food token, then investigate."
+      ]
     },
     {
       "name": "Armed with Proof",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nClues you control are Equipment in addition to their other types and have \"Equipped creature gets +2/+0\" and equip {2}."
+      ]
     },
     {
       "name": "Merchant of Truth",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhenever a nontoken creature you control dies, investigate.\nClues you control have exalted. (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn for each instance of exalted among permanents you control.)"
+      ]
     },
     {
       "name": "Serene Sleuth",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nAt the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded."
+      ]
     },
     {
       "name": "Detective of the Month",
@@ -105,12 +90,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs long as you have the city's blessing, Detectives you control can't be blocked.\nWhenever you draw your second card each turn, create a 2/2 white and blue Detective creature token."
+      ]
     },
     {
       "name": "Follow the Bodies",
@@ -122,12 +104,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn.)\nInvestigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Tangletrove Kelp",
@@ -139,13 +118,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Ward {2}\nAt the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Innocuous Researcher",
@@ -157,12 +133,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Parley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you investigate. Then each player draws a card.\nAt the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn."
+      ]
     },
     {
       "name": "On the Trail",
@@ -174,12 +147,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw your second card each turn, you may put a land card from your hand onto the battlefield tapped."
+      ]
     },
     {
       "name": "Knowledge Is Power",
@@ -192,12 +162,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +X/+X, where X is the number of cards you've drawn this turn."
+      ]
     },
     {
       "name": "Ransom Note",
@@ -207,12 +174,9 @@
       "oracleCardName": "Ransom Note",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "When this artifact enters, surveil 1.\n{2}, Sacrifice this artifact: Choose one —\n• Cloak the top card of your library.\n• Goad target creature.\n• Draw a card."
+      ]
     },
     {
       "name": "Aerial Extortionist",
@@ -224,12 +188,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature enters or deals combat damage to a player, exile up to one target nonland permanent. For as long as that card remains exiled, its owner may cast it.\nWhenever another player casts a spell from anywhere other than their hand, draw a card."
+      ]
     },
     {
       "name": "Bennie Bracks, Zoologist",
@@ -241,12 +202,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAt the beginning of each end step, if you created a token this turn, draw a card."
+      ]
     },
     {
       "name": "Farewell",
@@ -258,12 +216,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "Choose one or more —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all graveyards."
+      ]
     },
     {
       "name": "Fumigate",
@@ -275,12 +230,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Destroy all creatures. You gain 1 life for each creature destroyed this way."
+      ]
     },
     {
       "name": "Organic Extinction",
@@ -292,12 +244,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{W}{W}",
-      "cmc": 10,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures."
+      ]
     },
     {
       "name": "Search the Premises",
@@ -309,12 +258,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature attacks you or a planeswalker you control, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Alandra, Sky Dreamer",
@@ -326,12 +272,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Whenever you draw your second card each turn, create a 2/2 blue Drake creature token with flying.\nWhenever you draw your fifth card each turn, Alandra and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand."
+      ]
     },
     {
       "name": "Confirm Suspicions",
@@ -343,12 +286,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}",
-      "cmc": 5,
-      "oracleText": "Counter target spell.\nInvestigate three times. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Ethereal Investigator",
@@ -360,12 +300,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nWhen this creature enters, investigate X times, where X is the number of opponents you have. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you draw your second card each turn, create a 1/1 white Spirit creature token with flying."
+      ]
     },
     {
       "name": "Finale of Revelation",
@@ -377,12 +314,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.\nExile Finale of Revelation."
+      ]
     },
     {
       "name": "Kappa Cannoneer",
@@ -394,13 +328,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{U}",
-      "cmc": 6,
-      "oracleText": "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever this creature or another artifact you control enters, put a +1/+1 counter on this creature. It can't be blocked this turn."
+      ]
     },
     {
       "name": "Mechanized Production",
@@ -412,12 +343,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."
+      ]
     },
     {
       "name": "Nadir Kraken",
@@ -429,12 +357,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever you draw a card, you may pay {1}. If you do, put a +1/+1 counter on this creature and create a 1/1 blue Tentacle creature token."
+      ]
     },
     {
       "name": "Shimmer Dragon",
@@ -446,12 +371,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nAs long as you control four or more artifacts, this creature has hexproof. (It can't be the target of spells or abilities your opponents control.)\nTap two untapped artifacts you control: Draw a card."
+      ]
     },
     {
       "name": "Teferi's Ageless Insight",
@@ -463,12 +385,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead."
+      ]
     },
     {
       "name": "Tezzeret, Betrayer of Flesh",
@@ -480,12 +399,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "The first activated ability of an artifact you activate each turn costs {2} less to activate.\n[+1]: Draw two cards. Then discard two cards unless you discard an artifact card.\n[−2]: Target artifact becomes an artifact creature. If it isn't a Vehicle, it has base power and toughness 4/4.\n[−6]: You get an emblem with \"Whenever an artifact you control becomes tapped, draw a card.\""
+      ]
     },
     {
       "name": "Thought Monitor",
@@ -497,13 +413,10 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}{U}",
-      "cmc": 7,
-      "oracleText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen this creature enters, draw two cards."
+      ]
     },
     {
       "name": "Hornet Queen",
@@ -515,12 +428,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}{G}",
-      "cmc": 7,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch."
+      ]
     },
     {
       "name": "Jolrael, Mwonvuli Recluse",
@@ -532,12 +442,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Whenever you draw your second card each turn, create a 2/2 green Cat creature token.\n{4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand."
+      ]
     },
     {
       "name": "Killer Service",
@@ -549,12 +456,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, create a number of Food tokens equal to the number of opponents you have. (They're artifacts with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nAt the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token."
+      ]
     },
     {
       "name": "Tireless Tracker",
@@ -566,12 +470,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Adrix and Nev, Twincasters",
@@ -584,12 +485,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead."
+      ]
     },
     {
       "name": "Chulane, Teller of Tales",
@@ -603,12 +501,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nWhenever you cast a creature spell, draw a card, then you may put a land card from your hand onto the battlefield.\n{3}, {T}: Return target creature you control to its owner's hand."
+      ]
     },
     {
       "name": "Disorder in the Court",
@@ -621,12 +516,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{W}{U}",
-      "cmc": 2,
-      "oracleText": "Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Esix, Fractal Bloom",
@@ -639,12 +531,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nThe first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix and create that many tokens that are copies of that creature."
+      ]
     },
     {
       "name": "Hydroid Krasis",
@@ -657,12 +546,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{U}",
-      "cmc": 2,
-      "oracleText": "When you cast this spell, you gain half X life and draw half X cards. Round down each time.\nFlying, trample\nThis creature enters with X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Koma, Cosmos Serpent",
@@ -675,12 +561,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}{U}{U}",
-      "cmc": 7,
-      "oracleText": "This spell can't be countered.\nAt the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.\nSacrifice another Serpent: Choose one —\n• Tap target permanent. Its activated abilities can't be activated this turn.\n• Koma gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Lonis, Cryptozoologist",
@@ -693,12 +576,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever another nontoken creature you control enters, investigate.\n{T}, Sacrifice X Clues: Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order."
+      ]
     },
     {
       "name": "Selvala, Explorer Returned",
@@ -711,12 +591,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Parley — {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card."
+      ]
     },
     {
       "name": "Academy Manufactor",
@@ -726,13 +603,10 @@
       "oracleCardName": "Academy Manufactor",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "If you would create a Clue, Food, or Treasure token, instead create one of each."
+      ]
     },
     {
       "name": "Idol of Oblivion",
@@ -742,12 +616,9 @@
       "oracleCardName": "Idol of Oblivion",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+      ]
     },
     {
       "name": "Inspiring Statuary",
@@ -757,12 +628,9 @@
       "oracleCardName": "Inspiring Statuary",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)"
+      ]
     },
     {
       "name": "Nettlecyst",
@@ -772,12 +640,9 @@
       "oracleCardName": "Nettlecyst",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each artifact and/or enchantment you control.\nEquip {2}"
+      ]
     },
     {
       "name": "Psychosis Crawler",
@@ -787,13 +652,10 @@
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -806,11 +668,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -820,11 +680,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -837,11 +695,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -854,11 +710,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Scattered Groves",
@@ -871,11 +725,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Skycloud Expanse",
@@ -888,11 +740,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Spire of Industry",
@@ -902,11 +752,9 @@
       "oracleCardName": "Spire of Industry",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -919,11 +767,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Temple of Enlightenment",
@@ -936,11 +782,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -953,11 +797,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Temple of Plenty",
@@ -970,11 +812,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -986,12 +826,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Erdwal Illuminator",
@@ -1003,12 +840,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nWhenever you investigate for the first time each turn, investigate an additional time."
+      ]
     },
     {
       "name": "Junk Winder",
@@ -1020,12 +854,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "Affinity for tokens (This spell costs {1} less to cast for each token you control.)\nWhenever a token you control enters, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step."
+      ]
     },
     {
       "name": "Ongoing Investigation",
@@ -1038,12 +869,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Whenever one or more creatures you control deal combat damage to a player, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life."
+      ]
     },
     {
       "name": "Whirler Rogue",
@@ -1055,12 +883,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nTap two untapped artifacts you control: Target creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Graf Mole",
@@ -1072,12 +897,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you sacrifice a Clue, you gain 3 life."
+      ]
     },
     {
       "name": "Ulvenwald Mysteries",
@@ -1089,12 +911,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature you control dies, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a Clue, create a 1/1 white Human Soldier creature token."
+      ]
     },
     {
       "name": "Wilderness Reclamation",
@@ -1106,12 +925,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "At the beginning of your end step, untap all lands you control."
+      ]
     },
     {
       "name": "Wavesifter",
@@ -1124,12 +940,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nEvoke {G}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -1139,12 +952,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Azorius Signet",
@@ -1157,12 +967,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Simic Signet",
@@ -1175,12 +982,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -1190,12 +994,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Talisman of Curiosity",
@@ -1208,12 +1009,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Progress",
@@ -1226,12 +1024,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Unity",
@@ -1244,12 +1039,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {G} or {W}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1262,11 +1054,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Magnifying Glass",
@@ -1276,12 +1066,9 @@
       "oracleCardName": "Magnifying Glass",
       "colorIdentity": [],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1291,11 +1078,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -1305,11 +1090,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1321,11 +1104,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -1335,11 +1116,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1349,11 +1128,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1367,11 +1144,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Secluded Steppe",
@@ -1383,11 +1158,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -1400,11 +1173,9 @@
         "W"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1417,11 +1188,9 @@
         "U"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1431,11 +1200,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1447,11 +1214,9 @@
         "G"
       ],
       "set": "MKC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1463,11 +1228,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1479,11 +1242,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1495,11 +1256,9 @@
         "W"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1511,11 +1270,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1527,11 +1284,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1543,11 +1298,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1559,11 +1312,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1575,11 +1326,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1591,11 +1340,9 @@
         "U"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1607,11 +1354,9 @@
         "G"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1623,11 +1368,9 @@
         "G"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1639,11 +1382,9 @@
         "G"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1655,11 +1396,9 @@
         "G"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1671,15 +1410,13 @@
         "G"
       ],
       "set": "MKM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.860Z",
+    "retrievedDate": "2026-06-23T17:40:36.673Z",
     "sourceUrl": "DeepClueSea_MKC.json",
     "deckSource": "precon",
     "createdAt": "2024-02-09T00:00:00.000Z"

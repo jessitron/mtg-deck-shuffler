@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1763232518,
   "name": "Built From Scratch",
   "totalCards": 100,
@@ -14,12 +14,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "[+2]: Discard up to two cards, then draw that many cards.\n[−2]: Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.\n[−10]: You get an emblem with \"Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step.\"\nDaretti, Scrap Savant can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -33,12 +30,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "{T}: Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield."
+      ]
     },
     {
       "name": "Epochrasite",
@@ -48,13 +42,10 @@
       "oracleCardName": "Epochrasite",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This creature enters with three +1/+1 counters on it if you didn't cast it from your hand.\nWhen this creature dies, exile it with three time counters on it and it gains suspend. (At the beginning of its owner's upkeep, they remove a time counter. When the last is removed, they may cast this card without paying its mana cost. It has haste.)"
+      ]
     },
     {
       "name": "Myr Retriever",
@@ -64,13 +55,10 @@
       "oracleCardName": "Myr Retriever",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this creature dies, return another target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Myr Sire",
@@ -80,13 +68,10 @@
       "oracleCardName": "Myr Sire",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this creature dies, create a 1/1 colorless Phyrexian Myr artifact creature token."
+      ]
     },
     {
       "name": "Bottle Gnomes",
@@ -96,13 +81,10 @@
       "oracleCardName": "Bottle Gnomes",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Sacrifice this creature: You gain 3 life."
+      ]
     },
     {
       "name": "Cathodion",
@@ -112,13 +94,10 @@
       "oracleCardName": "Cathodion",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, add {C}{C}{C}."
+      ]
     },
     {
       "name": "Junk Diver",
@@ -128,13 +107,10 @@
       "oracleCardName": "Junk Diver",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature dies, return another target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Palladium Myr",
@@ -144,13 +120,10 @@
       "oracleCardName": "Palladium Myr",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Pilgrim's Eye",
@@ -160,13 +133,10 @@
       "oracleCardName": "Pilgrim's Eye",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Flying\nWhen this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Tuktuk the Explorer",
@@ -178,12 +148,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\nWhen Tuktuk the Explorer dies, create Tuktuk the Returned, a legendary 5/5 colorless Goblin Golem artifact creature token."
+      ]
     },
     {
       "name": "Dualcaster Mage",
@@ -195,12 +162,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this creature enters, copy target instant or sorcery spell. You may choose new targets for the copy."
+      ]
     },
     {
       "name": "Feldon of the Third Path",
@@ -212,12 +176,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -227,13 +188,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Flametongue Kavu",
@@ -245,12 +203,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, it deals 4 damage to target creature."
+      ]
     },
     {
       "name": "Beetleback Chief",
@@ -262,12 +217,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, create two 1/1 red Goblin creature tokens."
+      ]
     },
     {
       "name": "Ingot Chewer",
@@ -279,12 +231,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, destroy target artifact.\nEvoke {R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Steel Hellkite",
@@ -294,13 +243,10 @@
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Flying\n{2}: This creature gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by this creature this turn. Activate only once each turn."
+      ]
     },
     {
       "name": "Wurmcoil Engine",
@@ -310,13 +256,10 @@
       "oracleCardName": "Wurmcoil Engine",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "Deathtouch, lifelink\nWhen this creature dies, create a 3/3 colorless Phyrexian Wurm artifact creature token with deathtouch and a 3/3 colorless Phyrexian Wurm artifact creature token with lifelink."
+      ]
     },
     {
       "name": "Spitebellows",
@@ -328,12 +271,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "When this creature leaves the battlefield, it deals 6 damage to target creature.\nEvoke {1}{R}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Hoard-Smelter Dragon",
@@ -345,12 +285,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\n{3}{R}: Destroy target artifact. This creature gets +X/+0 until end of turn, where X is that artifact's mana value."
+      ]
     },
     {
       "name": "Warmonger Hellkite",
@@ -362,12 +299,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "Flying\nAll creatures attack each combat if able.\n{1}{R}: Attacking creatures get +1/+0 until end of turn."
+      ]
     },
     {
       "name": "Myr Battlesphere",
@@ -377,13 +311,10 @@
       "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create four 1/1 colorless Myr artifact creature tokens.\nWhenever this creature attacks, you may tap X untapped Myr you control. If you do, this creature gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking."
+      ]
     },
     {
       "name": "Pentavus",
@@ -393,13 +324,10 @@
       "oracleCardName": "Pentavus",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "This creature enters with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from this creature: Create a 1/1 colorless Pentavite artifact creature token with flying.\n{1}, Sacrifice a Pentavite: Put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Tyrant's Familiar",
@@ -411,12 +339,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}{R}",
-      "cmc": 7,
-      "oracleText": "Flying, haste\nLieutenant — As long as you control your commander, this creature gets +2/+2 and has \"Whenever this creature attacks, it deals 7 damage to target creature defending player controls.\""
+      ]
     },
     {
       "name": "Bosh, Iron Golem",
@@ -428,13 +353,10 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{8}",
-      "cmc": 8,
-      "oracleText": "Trample\n{3}{R}, Sacrifice an artifact: Bosh deals damage equal to the sacrificed artifact's mana value to any target."
+      ]
     },
     {
       "name": "Bogardan Hellkite",
@@ -446,12 +368,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{R}{R}",
-      "cmc": 8,
-      "oracleText": "Flash\nFlying\nWhen this creature enters, it deals 5 damage divided as you choose among any number of targets."
+      ]
     },
     {
       "name": "Faithless Looting",
@@ -463,12 +382,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}",
-      "cmc": 1,
-      "oracleText": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Whipflare",
@@ -480,12 +396,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Whipflare deals 2 damage to each nonartifact creature."
+      ]
     },
     {
       "name": "Scrap Mastery",
@@ -497,12 +410,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts they control, then puts all cards they exiled this way onto the battlefield."
+      ]
     },
     {
       "name": "Incite Rebellion",
@@ -514,12 +424,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}{R}",
-      "cmc": 6,
-      "oracleText": "For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures they control."
+      ]
     },
     {
       "name": "Blasphemous Act",
@@ -531,12 +438,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{8}{R}",
-      "cmc": 9,
-      "oracleText": "This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature."
+      ]
     },
     {
       "name": "Impact Resonance",
@@ -548,12 +452,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn."
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -565,12 +466,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Volcanic Offering",
@@ -582,12 +480,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.\nVolcanic Offering deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control."
+      ]
     },
     {
       "name": "Word of Seizing",
@@ -599,12 +494,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{R}{R}",
-      "cmc": 5,
-      "oracleText": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nUntap target permanent and gain control of it until end of turn. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Magmaquake",
@@ -616,12 +508,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Magmaquake deals X damage to each creature without flying and each planeswalker."
+      ]
     },
     {
       "name": "Starstorm",
@@ -633,12 +522,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Everflowing Chalice",
@@ -648,12 +534,9 @@
       "oracleCardName": "Everflowing Chalice",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{0}",
-      "cmc": 0,
-      "oracleText": "Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nThis artifact enters with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on this artifact."
+      ]
     },
     {
       "name": "Panic Spellbomb",
@@ -665,12 +548,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}, Sacrifice this artifact: Target creature can't block this turn.\nWhen this artifact is put into a graveyard from the battlefield, you may pay {R}. If you do, draw a card."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -680,12 +560,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Wayfarer's Bauble",
@@ -695,12 +572,9 @@
       "oracleCardName": "Wayfarer's Bauble",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Fire Diamond",
@@ -712,12 +586,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {R}."
+      ]
     },
     {
       "name": "Ichor Wellspring",
@@ -727,12 +598,9 @@
       "oracleCardName": "Ichor Wellspring",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters or is put into a graveyard from the battlefield, draw a card."
+      ]
     },
     {
       "name": "Liquimetal Coating",
@@ -742,12 +610,9 @@
       "oracleCardName": "Liquimetal Coating",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Target permanent becomes an artifact in addition to its other types until end of turn."
+      ]
     },
     {
       "name": "Mind Stone",
@@ -757,12 +622,9 @@
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Mycosynth Wellspring",
@@ -772,12 +634,9 @@
       "oracleCardName": "Mycosynth Wellspring",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters or is put into a graveyard from the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."
+      ]
     },
     {
       "name": "Ruby Medallion",
@@ -787,12 +646,9 @@
       "oracleCardName": "Ruby Medallion",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Red spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -802,12 +658,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -817,12 +670,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Jalum Tome",
@@ -832,12 +682,9 @@
       "oracleCardName": "Jalum Tome",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{2}, {T}: Draw a card, then discard a card."
+      ]
     },
     {
       "name": "Pristine Talisman",
@@ -847,12 +694,9 @@
       "oracleCardName": "Pristine Talisman",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}. You gain 1 life."
+      ]
     },
     {
       "name": "Unstable Obelisk",
@@ -862,12 +706,9 @@
       "oracleCardName": "Unstable Obelisk",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent."
+      ]
     },
     {
       "name": "Trading Post",
@@ -877,12 +718,9 @@
       "oracleCardName": "Trading Post",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}, Discard a card: You gain 4 life.\n{1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token.\n{1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.\n{1}, {T}, Sacrifice an artifact: Draw a card."
+      ]
     },
     {
       "name": "Caged Sun",
@@ -892,12 +730,9 @@
       "oracleCardName": "Caged Sun",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "As this artifact enters, choose a color.\nCreatures you control of the chosen color get +1/+1.\nWhenever a land's ability causes you to add one or more mana of the chosen color, add an additional one mana of that color."
+      ]
     },
     {
       "name": "Dreamstone Hedron",
@@ -907,12 +742,9 @@
       "oracleCardName": "Dreamstone Hedron",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{T}: Add {C}{C}{C}.\n{3}, {T}, Sacrifice this artifact: Draw three cards."
+      ]
     },
     {
       "name": "Loreseeker's Stone",
@@ -922,12 +754,9 @@
       "oracleCardName": "Loreseeker's Stone",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{6}",
-      "cmc": 6,
-      "oracleText": "{3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand."
+      ]
     },
     {
       "name": "Spine of Ish Sah",
@@ -937,12 +766,9 @@
       "oracleCardName": "Spine of Ish Sah",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this artifact enters, destroy target permanent.\nWhen this artifact is put into a graveyard from the battlefield, return it to its owner's hand."
+      ]
     },
     {
       "name": "Darksteel Citadel",
@@ -952,12 +778,10 @@
       "oracleCardName": "Darksteel Citadel",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Indestructible\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Great Furnace",
@@ -969,12 +793,10 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {R}."
+      ]
     },
     {
       "name": "Bitter Feud",
@@ -986,12 +808,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "As this enchantment enters, choose two players.\nIf a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead."
+      ]
     },
     {
       "name": "Arcane Lighthouse",
@@ -1001,11 +820,9 @@
       "oracleCardName": "Arcane Lighthouse",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud."
+      ]
     },
     {
       "name": "Buried Ruin",
@@ -1015,11 +832,9 @@
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Dormant Volcano",
@@ -1031,11 +846,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you return an untapped Mountain you control to its owner's hand.\n{T}: Add {C}{R}."
+      ]
     },
     {
       "name": "Flamekin Village",
@@ -1047,11 +860,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal an Elemental card from your hand. If you don't, this land enters tapped.\n{T}: Add {R}.\n{R}, {T}: Target creature gains haste until end of turn."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1063,11 +874,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Ghost Quarter",
@@ -1077,11 +886,9 @@
       "oracleCardName": "Ghost Quarter",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}, Sacrifice this land: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Phyrexia's Core",
@@ -1091,11 +898,9 @@
       "oracleCardName": "Phyrexia's Core",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice an artifact: You gain 1 life."
+      ]
     },
     {
       "name": "Reliquary Tower",
@@ -1105,11 +910,9 @@
       "oracleCardName": "Reliquary Tower",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "You have no maximum hand size.\n{T}: Add {C}."
+      ]
     },
     {
       "name": "Smoldering Crater",
@@ -1121,11 +924,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1135,11 +936,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Mountain",
@@ -1151,11 +950,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1167,11 +964,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1183,11 +978,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1199,11 +992,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1215,11 +1006,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1231,11 +1020,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1247,11 +1034,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1263,11 +1048,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1279,11 +1062,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1295,11 +1076,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1311,11 +1090,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1327,11 +1104,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1343,11 +1118,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1359,11 +1132,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1375,11 +1146,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1391,11 +1160,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1407,11 +1174,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1423,11 +1188,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1439,11 +1202,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1455,11 +1216,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1471,11 +1230,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1487,11 +1244,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1503,11 +1258,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1519,11 +1272,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1535,11 +1286,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1551,11 +1300,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1567,11 +1314,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1583,11 +1328,9 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1599,15 +1342,13 @@
         "R"
       ],
       "set": "CM2",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.561Z",
+    "retrievedDate": "2026-06-23T17:40:36.205Z",
     "sourceUrl": "BuiltFromScratch_CM2.json",
     "deckSource": "precon",
     "createdAt": "2018-06-08T00:00:00.000Z"

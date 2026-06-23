@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2081927762,
   "name": "Enduring Enchantments",
   "totalCards": 100,
@@ -16,13 +16,10 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Menace\nOther enchantment creatures you control have menace.\nWhenever Anikthea enters or attacks, exile up to one target non-Aura enchantment card from your graveyard. Create a token that's a copy of that card, except it's a 3/3 black Zombie creature in addition to its other types."
+      ]
     }
   ],
   "cards": [
@@ -38,12 +35,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Lifelink\nWhenever you sacrifice an enchantment, draw a card.\nWhenever the final chapter ability of a Saga you control resolves, each opponent loses X life and you gain X life, where X is that Saga's mana value."
+      ]
     },
     {
       "name": "Battle at the Helvault",
@@ -55,12 +49,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}{W}",
-      "cmc": 6,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — For each player, exile up to one target non-Saga, nonland permanent that player controls until this Saga leaves the battlefield.\nIII — Create Avacyn, a legendary 8/8 white Angel creature token with flying, vigilance, and indestructible."
+      ]
     },
     {
       "name": "Boon of the Spirit Realm",
@@ -72,12 +63,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Constellation — Whenever this enchantment or another enchantment you control enters, put a blessing counter on this enchantment.\nCreatures you control get +1/+1 for each blessing counter on this enchantment."
+      ]
     },
     {
       "name": "Ondu Spiritdancer",
@@ -89,12 +77,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever an enchantment you control enters, you may create a token that's a copy of it. Do this only once each turn."
+      ]
     },
     {
       "name": "Cacophony Unleashed",
@@ -106,12 +91,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "When this enchantment enters, if you cast it, destroy all nonenchantment creatures.\nWhenever this enchantment or another enchantment you control enters, until end of turn, this enchantment becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment."
+      ]
     },
     {
       "name": "Demon of Fate's Design",
@@ -123,13 +105,10 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nOnce during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.\n{2}{B}, Sacrifice another enchantment: This creature gets +X/+0 until end of turn, where X is the sacrificed enchantment's mana value."
+      ]
     },
     {
       "name": "Ghoulish Impetus",
@@ -141,12 +120,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +1/+1, has deathtouch, and is goaded.\nWhen enchanted creature dies, return this card to the battlefield at the beginning of the next end step."
+      ]
     },
     {
       "name": "Composer of Spring",
@@ -158,12 +134,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Constellation — Whenever an enchantment you control enters, you may put a land card from your hand onto the battlefield tapped. If you control six or more enchantments, instead you may put a creature or land card from your hand onto the battlefield tapped."
+      ]
     },
     {
       "name": "Nyxborn Behemoth",
@@ -175,13 +148,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{10}{G}{G}",
-      "cmc": 12,
-      "oracleText": "This spell costs {X} less to cast, where X is the total mana value of noncreature enchantments you control.\nTrample\n{1}{G}, Sacrifice another enchantment: This creature gains indestructible until end of turn."
+      ]
     },
     {
       "name": "Archon of Sun's Grace",
@@ -193,12 +163,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nPegasus creatures you control have lifelink.\nConstellation — Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying."
+      ]
     },
     {
       "name": "Felidar Retreat",
@@ -210,12 +177,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Landfall — Whenever a land you control enters, choose one —\n• Create a 2/2 white Cat Beast creature token.\n• Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn."
+      ]
     },
     {
       "name": "Grasp of Fate",
@@ -227,12 +191,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield. (Those permanents return under their owners' control.)"
+      ]
     },
     {
       "name": "Heliod, God of the Sun",
@@ -244,13 +205,10 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Indestructible\nAs long as your devotion to white is less than five, Heliod isn't a creature. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)\nOther creatures you control have vigilance.\n{2}{W}{W}: Create a 2/1 white Cleric enchantment creature token."
+      ]
     },
     {
       "name": "Mesa Enchantress",
@@ -262,12 +220,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, you may draw a card."
+      ]
     },
     {
       "name": "Sigil of the Empty Throne",
@@ -279,12 +234,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying."
+      ]
     },
     {
       "name": "Starfield Mystic",
@@ -296,12 +248,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchantment spells you cast cost {1} less to cast.\nWhenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Starfield of Nyx",
@@ -313,12 +262,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{W}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.\nAs long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its mana value."
+      ]
     },
     {
       "name": "Cunning Rhetoric",
@@ -330,12 +276,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent attacks you and/or one or more planeswalkers you control, exile the top card of that player's library. You may play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it."
+      ]
     },
     {
       "name": "Doomwake Giant",
@@ -347,13 +290,10 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn."
+      ]
     },
     {
       "name": "Dreadhorde Invasion",
@@ -365,12 +305,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your upkeep, you lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nWhenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn."
+      ]
     },
     {
       "name": "Erebos, Bleak-Hearted",
@@ -382,13 +319,10 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Indestructible\nAs long as your devotion to black is less than five, Erebos isn't a creature.\nWhenever another creature you control dies, you may pay 2 life. If you do, draw a card.\n{1}{B}, Sacrifice another creature: Target creature gets -2/-1 until end of turn."
+      ]
     },
     {
       "name": "Abundance",
@@ -400,12 +334,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Arasta of the Endless Web",
@@ -417,13 +348,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Reach\nWhenever an opponent casts an instant or sorcery spell, create a 1/2 green Spider creature token with reach."
+      ]
     },
     {
       "name": "Courser of Kruphix",
@@ -435,13 +363,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Play with the top card of your library revealed.\nYou may play lands from the top of your library.\nLandfall — Whenever a land you control enters, you gain 1 life."
+      ]
     },
     {
       "name": "Dryad of the Ilysian Grove",
@@ -453,13 +378,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "You may play an additional land on each of your turns.\nLands you control are every basic land type in addition to their other types."
+      ]
     },
     {
       "name": "Eidolon of Blossoms",
@@ -471,13 +393,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Constellation — Whenever this creature or another enchantment you control enters, draw a card."
+      ]
     },
     {
       "name": "Enchantress's Presence",
@@ -489,12 +408,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, draw a card."
+      ]
     },
     {
       "name": "Herald of the Pantheon",
@@ -506,12 +422,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Enchantment spells you cast cost {1} less to cast.\nWhenever you cast an enchantment spell, you gain 1 life."
+      ]
     },
     {
       "name": "The Mending of Dominaria",
@@ -523,12 +436,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library."
+      ]
     },
     {
       "name": "Sanctum Weaver",
@@ -540,13 +450,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "{T}: Add X mana of any one color, where X is the number of enchantments you control."
+      ]
     },
     {
       "name": "Sandwurm Convergence",
@@ -558,12 +465,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{6}{G}{G}",
-      "cmc": 8,
-      "oracleText": "Creatures with flying can't attack you or planeswalkers you control.\nAt the beginning of your end step, create a 5/5 green Wurm creature token."
+      ]
     },
     {
       "name": "Setessan Champion",
@@ -575,12 +479,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Constellation — Whenever an enchantment you control enters, put a +1/+1 counter on this creature and draw a card."
+      ]
     },
     {
       "name": "Verduran Enchantress",
@@ -592,12 +493,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, you may draw a card."
+      ]
     },
     {
       "name": "Battle for Bretagard",
@@ -610,12 +508,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human Warrior creature token.\nII — Create a 1/1 green Elf Warrior creature token.\nIII — Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token that's a copy of it."
+      ]
     },
     {
       "name": "Calix, Destiny's Hand",
@@ -628,12 +523,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "[+1]: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.\n[−3]: Exile target creature or enchantment you don't control until target enchantment you control leaves the battlefield.\n[−7]: Return all enchantment cards from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Culling Ritual",
@@ -646,12 +538,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way."
+      ]
     },
     {
       "name": "Mirari's Wake",
@@ -664,12 +553,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Creatures you control get +1/+1.\nWhenever you tap a land for mana, add one mana of any type that land produced."
+      ]
     },
     {
       "name": "Sythis, Harvest's Hand",
@@ -682,13 +568,10 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast an enchantment spell, you gain 1 life and draw a card."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -701,11 +584,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -715,11 +596,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fortified Village",
@@ -732,11 +611,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Necroblossom Snarl",
@@ -749,11 +626,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Shineshadow Snarl",
@@ -766,11 +641,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Plains or Swamp card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Sungrass Prairie",
@@ -783,11 +656,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{1}, {T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Temple of Malady",
@@ -800,11 +671,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+      ]
     },
     {
       "name": "Temple of Plenty",
@@ -817,11 +686,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {W}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -834,11 +701,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -850,12 +715,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Extinguish All Hope",
@@ -867,12 +729,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy all nonenchantment creatures."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -884,12 +743,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -899,12 +755,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -914,12 +767,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -929,11 +779,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -943,11 +791,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Cast Out",
@@ -959,12 +805,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Love Song of Night and Day",
@@ -976,12 +819,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — You and target opponent each draw two cards.\nII — Create a 1/1 white Bird creature token with flying.\nIII — Put a +1/+1 counter on each of up to two target creatures."
+      ]
     },
     {
       "name": "Omen of the Sun",
@@ -993,12 +833,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this enchantment enters, create two 1/1 white Human Soldier creature tokens and you gain 2 life.\n{2}{W}, Sacrifice this enchantment: Scry 2."
+      ]
     },
     {
       "name": "Spirited Companion",
@@ -1010,13 +847,10 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, draw a card."
+      ]
     },
     {
       "name": "The Eldest Reborn",
@@ -1028,12 +862,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature or planeswalker of their choice.\nII — Each opponent discards a card.\nIII — Put target creature or planeswalker card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Mindwrack Harpy",
@@ -1045,13 +876,10 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Flying\nAt the beginning of combat on your turn, each player mills three cards."
+      ]
     },
     {
       "name": "The Binding of the Titans",
@@ -1063,12 +891,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player mills three cards.\nII — Exile up to two target cards from graveyards. For each creature card exiled this way, you gain 1 life.\nIII — Return target creature or land card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Destiny Spinner",
@@ -1080,13 +905,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Creature and enchantment spells you control can't be countered.\n{3}{G}: Target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is the number of enchantments you control. It's still a land."
+      ]
     },
     {
       "name": "Farseek",
@@ -1098,12 +920,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Font of Fertility",
@@ -1115,12 +934,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "{1}{G}, Sacrifice this enchantment: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Greater Tanuki",
@@ -1132,13 +948,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{4}{G}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nChannel — {2}{G}, Discard this card: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Khalni Heart Expedition",
@@ -1150,12 +963,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Landfall — Whenever a land you control enters, you may put a quest counter on this enchantment.\nRemove three quest counters from this enchantment and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Nessian Wanderer",
@@ -1167,12 +977,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Constellation — Whenever an enchantment you control enters, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Omen of the Hunt",
@@ -1184,12 +991,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Flash\nWhen this enchantment enters, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{2}{G}, Sacrifice this enchantment: Scry 2."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -1201,12 +1005,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Binding the Old Gods",
@@ -1219,12 +1020,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}{G}",
-      "cmc": 4,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target nonland permanent an opponent controls.\nII — Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.\nIII — Creatures you control gain deathtouch until end of turn."
+      ]
     },
     {
       "name": "Jukai Naturalist",
@@ -1237,13 +1035,10 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Lifelink\nEnchantment spells you cast cost {1} less to cast."
+      ]
     },
     {
       "name": "Nyx Weaver",
@@ -1256,13 +1051,10 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Reach\nAt the beginning of your upkeep, mill two cards. (Put the top two cards of your library into your graveyard.)\n{1}{B}{G}, Exile this creature: Return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Satyr Enchanter",
@@ -1275,12 +1067,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast an enchantment spell, draw a card."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1293,11 +1082,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -1307,11 +1094,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1324,11 +1109,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Sandsteppe Citadel",
@@ -1342,11 +1125,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {B}, or {G}."
+      ]
     },
     {
       "name": "Selesnya Sanctuary",
@@ -1359,11 +1140,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{W}."
+      ]
     },
     {
       "name": "Tainted Field",
@@ -1376,11 +1155,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Tainted Wood",
@@ -1393,11 +1170,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {B} or {G}. Activate only if you control a Swamp."
+      ]
     },
     {
       "name": "Plains",
@@ -1409,11 +1184,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1425,11 +1198,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1441,11 +1212,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1457,11 +1226,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1473,11 +1240,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1489,11 +1254,9 @@
         "W"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1505,11 +1268,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1521,11 +1282,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1537,11 +1296,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1553,11 +1310,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1569,11 +1324,9 @@
         "B"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1585,11 +1338,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1601,11 +1352,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1617,11 +1366,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1633,11 +1380,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1649,11 +1394,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1665,11 +1408,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1681,11 +1422,9 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1697,15 +1436,13 @@
         "G"
       ],
       "set": "CMM",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.120Z",
+    "retrievedDate": "2026-06-23T17:40:37.133Z",
     "sourceUrl": "EnduringEnchantments_CMM.json",
     "deckSource": "precon",
     "createdAt": "2023-08-04T00:00:00.000Z"

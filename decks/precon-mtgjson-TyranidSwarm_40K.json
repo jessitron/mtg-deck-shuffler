@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 105429139,
   "name": "Tyranid Swarm",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{U}{R}",
-      "cmc": 6,
-      "oracleText": "Rapid Regeneration — The Swarmlord enters with two +1/+1 counters on it for each time you've cast your commander from the command zone this game.\nXenos Cunning — Whenever a creature you control with a counter on it dies, draw a card."
+      ]
     }
   ],
   "cards": [
@@ -36,12 +33,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{R}{G}",
-      "cmc": 2,
-      "oracleText": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment."
+      ]
     },
     {
       "name": "Cultivate",
@@ -53,12 +47,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Explore",
@@ -70,12 +61,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Farseek",
@@ -87,12 +75,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rampant Growth",
@@ -104,12 +89,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Starstorm",
@@ -121,12 +103,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{R}{R}",
-      "cmc": 2,
-      "oracleText": "Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Aetherize",
@@ -138,12 +117,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Return all attacking creatures to their owner's hand."
+      ]
     },
     {
       "name": "Inspiring Call",
@@ -155,12 +131,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+      ]
     },
     {
       "name": "Harrow",
@@ -172,12 +145,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for up to two basic land cards, put them onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Icon of Ancestry",
@@ -187,12 +157,9 @@
       "oracleCardName": "Icon of Ancestry",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Herald's Horn",
@@ -202,12 +169,9 @@
       "oracleCardName": "Herald's Horn",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "As this artifact enters, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -217,12 +181,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -232,12 +193,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Abundance",
@@ -249,12 +207,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Death's Presence",
@@ -266,12 +221,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died."
+      ]
     },
     {
       "name": "Hardened Scales",
@@ -283,12 +235,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead."
+      ]
     },
     {
       "name": "Bred for the Hunt",
@@ -301,12 +250,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card."
+      ]
     },
     {
       "name": "New Horizons",
@@ -318,12 +264,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant land\nWhen this Aura enters, put a +1/+1 counter on target creature you control.\nEnchanted land has \"{T}: Add two mana of any one color.\""
+      ]
     },
     {
       "name": "Overgrowth",
@@ -335,12 +278,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -353,11 +293,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -367,11 +305,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Game Trail",
@@ -384,11 +320,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Temple of Abandon",
@@ -401,11 +335,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Temple of Epiphany",
@@ -418,11 +350,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {R}."
+      ]
     },
     {
       "name": "Temple of Mystery",
@@ -435,11 +365,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -449,11 +377,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -467,11 +393,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Unclaimed Territory",
@@ -481,11 +405,9 @@
       "oracleCardName": "Unclaimed Territory",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+      ]
     },
     {
       "name": "Cave of Temptation",
@@ -495,11 +417,9 @@
       "oracleCardName": "Cave of Temptation",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Command Tower",
@@ -509,11 +429,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -523,11 +441,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Opal Palace",
@@ -537,11 +453,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -551,11 +465,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Rugged Highlands",
@@ -568,11 +480,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {R} or {G}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -582,11 +492,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Thornwood Falls",
@@ -599,11 +507,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+      ]
     },
     {
       "name": "Mountain",
@@ -615,11 +521,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -631,11 +535,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -647,11 +549,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -663,11 +563,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -679,11 +577,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -695,11 +591,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -711,11 +605,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Island",
@@ -727,11 +619,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -743,11 +633,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -759,11 +647,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -775,11 +661,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -791,11 +675,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -807,11 +689,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -823,11 +703,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -839,11 +717,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -855,11 +731,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -871,11 +745,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -887,11 +759,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -903,11 +773,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -919,11 +787,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -935,11 +801,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -951,11 +815,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Magus Lucea Kane",
@@ -969,12 +831,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}{R}",
-      "cmc": 4,
-      "oracleText": "Spiritual Leader — At the beginning of combat on your turn, put a +1/+1 counter on target creature.\nPsychic Stimulus — {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its activation cost this turn, copy that spell or ability. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)"
+      ]
     },
     {
       "name": "Genestealer Patriarch",
@@ -986,12 +845,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Genestealer's Kiss — Whenever this creature attacks, put an infection counter on target creature defending player controls.\nChildren of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types."
+      ]
     },
     {
       "name": "Exocrine",
@@ -1003,12 +859,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{2}{R}",
-      "cmc": 3,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nBio-plasmic Barrage — When this creature enters, it deals X damage to each player and each other creature."
+      ]
     },
     {
       "name": "The Red Terror",
@@ -1020,12 +873,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Advanced Species — Whenever a red source you control deals damage to one or more permanents and/or players, put a +1/+1 counter on The Red Terror."
+      ]
     },
     {
       "name": "Screamer-Killer",
@@ -1037,12 +887,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Trample\nBio-Plasmic Scream — Whenever you cast a creature spell with mana value 5 or greater, this creature deals 5 damage to any target."
+      ]
     },
     {
       "name": "Biophagus",
@@ -1054,12 +901,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Genomic Enhancement — {T}: Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters with an additional +1/+1 counter on it."
+      ]
     },
     {
       "name": "Bone Sabres",
@@ -1071,12 +915,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Whenever equipped creature attacks, put four +1/+1 counters on it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Broodlord",
@@ -1088,12 +929,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{3}{G}",
-      "cmc": 4,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nBrood Telepathy — When this creature enters, distribute X +1/+1 counters among any number of other target creatures you control."
+      ]
     },
     {
       "name": "Clamavus",
@@ -1105,12 +943,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it."
+      ]
     },
     {
       "name": "Haruspex",
@@ -1122,12 +957,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Rapacious Hunger — Whenever another creature dies, put a +1/+1 counter on this creature.\nDevouring Monster — {T}, Remove X +1/+1 counters from this creature: Add X mana of any one color."
+      ]
     },
     {
       "name": "Hierophant Bio-Titan",
@@ -1139,12 +971,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{10}{G}{G}",
-      "cmc": 12,
-      "oracleText": "Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — This creature can't be blocked by creatures with power 2 or less."
+      ]
     },
     {
       "name": "Hormagaunt Horde",
@@ -1156,12 +985,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nEndless Swarm — Whenever a land you control enters, you may pay {2}{G}. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Lictor",
@@ -1173,12 +999,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Flash\nPheromone Trail — When this creature enters, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample."
+      ]
     },
     {
       "name": "Nexos",
@@ -1190,12 +1013,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Strategic Coordinator — Basic lands you control have \"{T}: Add {C}{C}. Spend this mana only on costs that contain {X}.\""
+      ]
     },
     {
       "name": "Old One Eye",
@@ -1207,12 +1027,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{G}",
-      "cmc": 6,
-      "oracleText": "Trample\nOther creatures you control have trample.\nWhen Old One Eye enters, create a 5/5 green Tyranid creature token.\nFast Healing — At the beginning of your first main phase, you may discard two cards. If you do, return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Sporocyst",
@@ -1224,12 +1041,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{X}{G}",
-      "cmc": 1,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDefender\nSpore Chimney — When this creature enters, search your library for up to X basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Termagant Swarm",
@@ -1241,12 +1055,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}",
-      "cmc": 1,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDeath Frenzy — When this creature dies, create a number of 1/1 green Tyranid creature tokens equal to this creature's power."
+      ]
     },
     {
       "name": "Tervigon",
@@ -1258,12 +1069,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{1}{G}",
-      "cmc": 2,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nSpawn Termagants — Whenever this creature deals combat damage to a player, create that many 1/1 green Tyranid creature tokens."
+      ]
     },
     {
       "name": "Toxicrene",
@@ -1275,12 +1083,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Reach, deathtouch\nHypertoxic Miasma — All lands have \"{T}: Add one mana of any color\" and lose all other abilities."
+      ]
     },
     {
       "name": "Tyrant Guard",
@@ -1292,12 +1097,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{2}{G}",
-      "cmc": 3,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nShieldwall — Sacrifice this creature: Creatures you control with counters on them gain hexproof and indestructible until end of turn."
+      ]
     },
     {
       "name": "Atalan Jackal",
@@ -1310,12 +1112,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Trample, haste\nSkilled Outrider — Whenever this creature deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Deathleaper, Terror Weapon",
@@ -1328,12 +1127,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Flash\nHaste\nFlesh Hooks — Creatures you control that entered this turn have double strike."
+      ]
     },
     {
       "name": "The First Tyrannic War",
@@ -1347,12 +1143,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}{U}{R}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.\nII, III — Double the number of each kind of counter on target creature you control."
+      ]
     },
     {
       "name": "Gargoyle Flock",
@@ -1365,12 +1158,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nSkyswarm — At the beginning of your end step, if a creature entered the battlefield under your control this turn, create a 1/1 blue Tyranid Gargoyle creature token with flying."
+      ]
     },
     {
       "name": "Ghyrson Starn, Kelermorph",
@@ -1383,12 +1173,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{R}",
-      "cmc": 3,
-      "oracleText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nThree Autostubs — Whenever another source you control deals exactly 1 damage to a permanent or player, Ghyrson Starn deals 2 damage to that permanent or player."
+      ]
     },
     {
       "name": "Malanthrope",
@@ -1401,12 +1188,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nScavenge the Dead — When this creature enters, exile target player's graveyard. Put a +1/+1 counter on this creature for each creature card exiled this way."
+      ]
     },
     {
       "name": "Mawloc",
@@ -1419,12 +1203,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{R}{G}",
-      "cmc": 2,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTerror from the Deep — When this creature enters, it fights up to one target creature an opponent controls. If that creature would die this turn, exile it instead."
+      ]
     },
     {
       "name": "Ravener",
@@ -1437,12 +1218,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{G}{U}",
-      "cmc": 2,
-      "oracleText": "Flash\nRavenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nWhen this creature enters, target creature attacks target opponent this turn if able."
+      ]
     },
     {
       "name": "Shadow in the Warp",
@@ -1455,12 +1233,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{R}{G}",
-      "cmc": 3,
-      "oracleText": "The first creature spell you cast each turn costs {2} less to cast.\nWhenever an opponent casts their first noncreature spell each turn, this enchantment deals 2 damage to that player."
+      ]
     },
     {
       "name": "Tyranid Harridan",
@@ -1473,12 +1248,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{G}{U}",
-      "cmc": 6,
-      "oracleText": "Flying, ward {4}\nShrieking Gargoyles — Whenever this creature or another Tyranid you control deals combat damage to a player, create a 1/1 blue Tyranid Gargoyle creature token with flying."
+      ]
     },
     {
       "name": "Tyranid Prime",
@@ -1491,12 +1263,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nSynapse Creature — Other creatures you control have evolve."
+      ]
     },
     {
       "name": "Winged Hive Tyrant",
@@ -1509,12 +1278,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flying, haste\nThe Will of the Hive Mind — Other creatures you control with counters on them have flying and haste."
+      ]
     },
     {
       "name": "Zoanthrope",
@@ -1527,12 +1293,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{U}{R}",
-      "cmc": 2,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nFlying, ward {2}\nWarp Blast — When this creature enters, it deals X damage to any target."
+      ]
     },
     {
       "name": "Genestealer Locus",
@@ -1544,12 +1307,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.\nWhenever a creature attacks one of your opponents, it gets +0/+1 until end of turn."
+      ]
     },
     {
       "name": "Acolyte Hybrid",
@@ -1561,12 +1321,9 @@
         "R"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Heavy Rock Cutter — Whenever this creature attacks, destroy up to one target artifact. If an artifact is destroyed this way, its controller draws a card."
+      ]
     },
     {
       "name": "Aberrant",
@@ -1578,12 +1335,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{X}{1}{G}",
-      "cmc": 2,
-      "oracleText": "Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nHeavy Power Hammer — Whenever this creature deals combat damage to a player, destroy target artifact or enchantment that player controls."
+      ]
     },
     {
       "name": "Purestrain Genestealer",
@@ -1595,12 +1349,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "This creature enters with two +1/+1 counters on it.\nVanguard Species — Whenever this creature attacks, you may remove a +1/+1 counter from it. If you do, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tyranid Invasion",
@@ -1612,12 +1363,9 @@
         "G"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Create a number of 3/3 green Tyranid Warrior creature tokens with trample equal to the number of opponents you have."
+      ]
     },
     {
       "name": "Trygon Prime",
@@ -1630,12 +1378,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Subterranean Assault — Whenever this creature attacks, put a +1/+1 counter on it and a +1/+1 counter on up to one other target attacking creature. That creature can't be blocked this turn."
+      ]
     },
     {
       "name": "Venomthrope",
@@ -1648,12 +1393,9 @@
         "U"
       ],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Flying, deathtouch, hexproof"
+      ]
     },
     {
       "name": "Goliath Truck",
@@ -1663,16 +1405,13 @@
       "oracleCardName": "Goliath Truck",
       "colorIdentity": [],
       "set": "40K",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Stowage — Whenever this Vehicle attacks, put two +1/+1 counters on another target attacking creature.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:47.122Z",
+    "retrievedDate": "2026-06-23T17:40:40.604Z",
     "sourceUrl": "TyranidSwarm_40K.json",
     "deckSource": "precon",
     "createdAt": "2022-10-07T00:00:00.000Z"

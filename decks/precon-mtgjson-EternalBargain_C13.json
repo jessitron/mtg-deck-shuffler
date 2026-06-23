@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 2045079215,
   "name": "Eternal Bargain",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}{B}",
-      "cmc": 6,
-      "oracleText": "At the beginning of your upkeep, you gain 2 life.\nWhenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.\nAt the beginning of your upkeep, if Oloro is in the command zone, you gain 2 life."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you gain life, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Augury Adept",
@@ -53,12 +47,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W/U}{W/U}",
-      "cmc": 3,
-      "oracleText": "Whenever this creature deals combat damage to a player, reveal the top card of your library and put that card into your hand. You gain life equal to its mana value."
+      ]
     },
     {
       "name": "Azorius Herald",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "This creature can't be blocked.\nWhen this creature enters, you gain 4 life.\nWhen this creature enters, sacrifice it unless {U} was spent to cast it."
+      ]
     },
     {
       "name": "Disciple of Griselbrand",
@@ -88,12 +76,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "{1}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness."
+      ]
     },
     {
       "name": "Diviner Spirit",
@@ -105,12 +90,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature deals combat damage to a player, you and that player each draw that many cards."
+      ]
     },
     {
       "name": "Divinity of Pride",
@@ -123,12 +105,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W/B}{W/B}{W/B}{W/B}{W/B}",
-      "cmc": 5,
-      "oracleText": "Flying, lifelink\nThis creature gets +4/+4 as long as you have 25 or more life."
+      ]
     },
     {
       "name": "Filigree Angel",
@@ -141,13 +120,10 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{W}{U}",
-      "cmc": 8,
-      "oracleText": "Flying\nWhen this creature enters, you gain 3 life for each artifact you control."
+      ]
     },
     {
       "name": "Hooded Horror",
@@ -159,12 +135,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "This creature can't be blocked as long as defending player controls the most creatures or is tied for the most."
+      ]
     },
     {
       "name": "Kongming, \"Sleeping Dragon\"",
@@ -176,12 +149,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 4,
-      "oracleText": "Other creatures you control get +1/+1."
+      ]
     },
     {
       "name": "Marrow Bats",
@@ -193,12 +163,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nPay 4 life: Regenerate this creature."
+      ]
     },
     {
       "name": "Myr Battlesphere",
@@ -208,13 +175,10 @@
       "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, create four 1/1 colorless Myr artifact creature tokens.\nWhenever this creature attacks, you may tap X untapped Myr you control. If you do, this creature gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking."
+      ]
     },
     {
       "name": "Phyrexian Delver",
@@ -226,12 +190,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, return target creature card from your graveyard to the battlefield. You lose life equal to that card's mana value."
+      ]
     },
     {
       "name": "Phyrexian Gargantua",
@@ -243,12 +204,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "When this creature enters, you draw two cards and you lose 2 life."
+      ]
     },
     {
       "name": "Raven Familiar",
@@ -260,12 +218,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Flying\nEcho {2}{U} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order."
+      ]
     },
     {
       "name": "Razor Hippogriff",
@@ -277,12 +232,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, return target artifact card from your graveyard to your hand. You gain life equal to that card's mana value."
+      ]
     },
     {
       "name": "Serene Master",
@@ -294,12 +246,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature blocks, exchange its power and the power of target creature it's blocking until end of combat."
+      ]
     },
     {
       "name": "Serra Avatar",
@@ -311,12 +260,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{W}{W}{W}",
-      "cmc": 7,
-      "oracleText": "Serra Avatar's power and toughness are each equal to your life total.\nWhen Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library."
+      ]
     },
     {
       "name": "Sharding Sphinx",
@@ -328,13 +274,10 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying."
+      ]
     },
     {
       "name": "Sharuum the Hegemon",
@@ -348,13 +291,10 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{3}{W}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen Sharuum enters, you may return target artifact card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Sphinx of the Steel Wind",
@@ -368,13 +308,10 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{5}{W}{U}{B}",
-      "cmc": 8,
-      "oracleText": "Flying, first strike, vigilance, lifelink, protection from red and from green"
+      ]
     },
     {
       "name": "Stormscape Battlemage",
@@ -388,12 +325,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Kicker {W} and/or {2}{B} (You may pay an additional {W} and/or {2}{B} as you cast this spell.)\nWhen this creature enters, if it was kicked with its {W} kicker, you gain 3 life.\nWhen this creature enters, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated."
+      ]
     },
     {
       "name": "Sydri, Galvanic Genius",
@@ -407,12 +341,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}",
-      "cmc": 3,
-      "oracleText": "{U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.\n{W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn."
+      ]
     },
     {
       "name": "Tidal Force",
@@ -424,12 +355,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}{U}",
-      "cmc": 8,
-      "oracleText": "At the beginning of each upkeep, you may tap or untap target permanent."
+      ]
     },
     {
       "name": "Tidehollow Strix",
@@ -442,13 +370,10 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+      ]
     },
     {
       "name": "Tower Gargoyle",
@@ -462,13 +387,10 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}",
-      "cmc": 4,
-      "oracleText": "Flying"
+      ]
     },
     {
       "name": "Vizkopa Guildmage",
@@ -481,12 +403,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "{1}{W}{B}: Target creature gains lifelink until end of turn.\n{1}{W}{B}: Whenever you gain life this turn, each opponent loses that much life."
+      ]
     },
     {
       "name": "Wall of Reverence",
@@ -498,12 +417,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Defender, flying\nAt the beginning of your end step, you may gain life equal to the power of target creature you control."
+      ]
     },
     {
       "name": "Brilliant Plan",
@@ -515,12 +431,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Draw three cards."
+      ]
     },
     {
       "name": "Death Grasp",
@@ -533,12 +446,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{W}{B}",
-      "cmc": 2,
-      "oracleText": "Death Grasp deals X damage to any target. You gain X life."
+      ]
     },
     {
       "name": "Deep Analysis",
@@ -550,12 +460,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+      ]
     },
     {
       "name": "Famine",
@@ -567,12 +474,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Famine deals 3 damage to each creature and each player."
+      ]
     },
     {
       "name": "Order of Succession",
@@ -584,12 +488,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose."
+      ]
     },
     {
       "name": "Survival Cache",
@@ -601,12 +502,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "You gain 2 life. Then if you have more life than an opponent, draw a card.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)"
+      ]
     },
     {
       "name": "Tempt with Immortality",
@@ -618,12 +516,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Tempting offer — Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Toxic Deluge",
@@ -635,12 +530,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
+      ]
     },
     {
       "name": "Dromar's Charm",
@@ -654,12 +546,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{U}{B}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• You gain 5 life.\n• Counter target spell.\n• Target creature gets -2/-2 until end of turn."
+      ]
     },
     {
       "name": "Lim-Dûl's Vault",
@@ -672,12 +561,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle and put the last cards you looked at this way on top in any order."
+      ]
     },
     {
       "name": "Reckless Spite",
@@ -689,12 +575,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Destroy two target nonblack creatures. You lose 5 life."
+      ]
     },
     {
       "name": "Spinal Embrace",
@@ -707,12 +590,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Cast this spell only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness."
+      ]
     },
     {
       "name": "Crawlspace",
@@ -722,12 +602,9 @@
       "oracleCardName": "Crawlspace",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "No more than two creatures can attack you each combat."
+      ]
     },
     {
       "name": "Nevinyrral's Disk",
@@ -737,12 +614,9 @@
       "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "This artifact enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments."
+      ]
     },
     {
       "name": "Nihil Spellbomb",
@@ -754,12 +628,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}, Sacrifice this artifact: Exile target player's graveyard.\nWhen this artifact is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card."
+      ]
     },
     {
       "name": "Obelisk of Esper",
@@ -773,12 +644,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Pristine Talisman",
@@ -788,12 +656,9 @@
       "oracleCardName": "Pristine Talisman",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {C}. You gain 1 life."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -803,12 +668,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Sun Droplet",
@@ -818,12 +680,9 @@
       "oracleCardName": "Sun Droplet",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever you're dealt damage, put that many charge counters on this artifact.\nAt the beginning of each upkeep, you may remove a charge counter from this artifact. If you do, you gain 1 life."
+      ]
     },
     {
       "name": "Swiftfoot Boots",
@@ -833,12 +692,9 @@
       "oracleCardName": "Swiftfoot Boots",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"
+      ]
     },
     {
       "name": "Thopter Foundry",
@@ -852,12 +708,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{W/B}{U}",
-      "cmc": 2,
-      "oracleText": "{1}, Sacrifice a nontoken artifact: Create a 1/1 blue Thopter artifact creature token with flying. You gain 1 life."
+      ]
     },
     {
       "name": "Well of Lost Dreams",
@@ -867,12 +720,9 @@
       "oracleCardName": "Well of Lost Dreams",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards."
+      ]
     },
     {
       "name": "Act of Authority",
@@ -884,12 +734,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}{W}",
-      "cmc": 3,
-      "oracleText": "When this enchantment enters, you may exile target artifact or enchantment.\nAt the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of this enchantment."
+      ]
     },
     {
       "name": "Cradle of Vitality",
@@ -901,12 +748,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained."
+      ]
     },
     {
       "name": "Curse of Inertia",
@@ -918,12 +762,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice."
+      ]
     },
     {
       "name": "Curse of Shallow Graves",
@@ -935,12 +776,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Curse of the Forsaken",
@@ -952,12 +790,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "Enchant player\nWhenever a creature attacks enchanted player, its controller gains 1 life."
+      ]
     },
     {
       "name": "Darksteel Mutation",
@@ -969,12 +804,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Enchant creature\nEnchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types."
+      ]
     },
     {
       "name": "Greed",
@@ -986,12 +818,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "{B}, Pay 2 life: Draw a card."
+      ]
     },
     {
       "name": "Phyrexian Reclamation",
@@ -1003,12 +832,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{1}{B}, Pay 2 life: Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Sanguine Bond",
@@ -1020,12 +846,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever you gain life, target opponent loses that much life."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1039,11 +862,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Azorius Chancery",
@@ -1056,11 +877,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{U}."
+      ]
     },
     {
       "name": "Azorius Guildgate",
@@ -1073,11 +892,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1089,11 +906,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1103,11 +918,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Guildgate",
@@ -1120,11 +933,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Esper Panorama",
@@ -1134,11 +945,9 @@
       "oracleCardName": "Esper Panorama",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1148,11 +957,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Island",
@@ -1164,11 +971,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1180,11 +985,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1196,11 +999,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1212,11 +1013,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1228,11 +1027,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1244,11 +1041,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Jwar Isle Refuge",
@@ -1261,11 +1056,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1277,11 +1070,9 @@
         "U"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Opal Palace",
@@ -1291,11 +1082,9 @@
       "oracleCardName": "Opal Palace",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1308,11 +1097,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Orzhov Guildgate",
@@ -1325,11 +1112,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Plains",
@@ -1341,11 +1126,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1357,11 +1140,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1373,11 +1154,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1389,11 +1168,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1405,11 +1182,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1421,11 +1196,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1437,11 +1210,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1453,11 +1224,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1469,11 +1238,9 @@
         "W"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1483,11 +1250,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Springjack Pasture",
@@ -1497,11 +1262,9 @@
       "oracleCardName": "Springjack Pasture",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{4}, {T}: Create a 0/1 white Goat creature token.\n{T}, Sacrifice X Goats: Add X mana of any one color. You gain X life."
+      ]
     },
     {
       "name": "Swamp",
@@ -1513,11 +1276,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1529,11 +1290,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1545,11 +1304,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1561,11 +1318,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1577,11 +1332,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1593,11 +1346,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1609,11 +1360,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1625,11 +1374,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1641,11 +1388,9 @@
         "B"
       ],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1655,11 +1400,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Transguild Promenade",
@@ -1669,15 +1412,13 @@
       "oracleCardName": "Transguild Promenade",
       "colorIdentity": [],
       "set": "C13",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.152Z",
+    "retrievedDate": "2026-06-23T17:40:37.175Z",
     "sourceUrl": "EternalBargain_C13.json",
     "deckSource": "precon",
     "createdAt": "2013-11-01T00:00:00.000Z"

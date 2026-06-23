@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 358434700,
   "name": "Eternal Might",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{U}{B}",
-      "cmc": 5,
-      "oracleText": "Vigilance, menace\nWhenever you attack, draw a card, then discard a card.\nWhenever you draw a card, Zombies you control get +1/+1 until end of turn."
+      ]
     }
   ],
   "cards": [
@@ -37,12 +34,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever you discard a creature card, you may pay {2}{U}. If you do, create a tapped token that's a copy of that card, except it's a 4/4 black Zombie."
+      ]
     },
     {
       "name": "On Wings of Gold",
@@ -54,12 +48,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Creatures you control that are Zombies and/or tokens get +1/+1 and have flying.\nWhenever one or more cards leave your graveyard, create a 1/1 white Zombie creature token."
+      ]
     },
     {
       "name": "Priest of the Crossing",
@@ -71,12 +62,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flying\nAt the beginning of each end step, put X +1/+1 counters on each creature you control, where X is the number of creatures that died under your control this turn."
+      ]
     },
     {
       "name": "Renewed Solidarity",
@@ -88,12 +76,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{W}",
-      "cmc": 3,
-      "oracleText": "As this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+0.\nAt the beginning of your end step, for each token you control of the chosen type that entered this turn, create a token that's a copy of it."
+      ]
     },
     {
       "name": "Wizened Mentor",
@@ -105,12 +90,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever an opponent activates an ability of a permanent that isn't a mana ability, you create a 1/1 white Zombie creature token. This ability triggers only once each turn."
+      ]
     },
     {
       "name": "Prophet of the Scarab",
@@ -122,12 +104,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Vigilance\nWhen this creature enters, draw cards equal to the number of Zombies you control or the number of Zombie cards in your graveyard, whichever is greater."
+      ]
     },
     {
       "name": "Rhet-Tomb Mystic",
@@ -139,12 +118,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Flying\nEach creature card in your hand has cycling {1}{U}. ({1}{U}, Discard that card: Draw a card.)"
+      ]
     },
     {
       "name": "Lost Monarch of Ifnir",
@@ -156,12 +132,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nOther Zombies you control have afflict 3.\nAt the beginning of your second main phase, if a player was dealt combat damage by a Zombie this turn, mill three cards, then you may return a creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Accursed Duneyard",
@@ -171,11 +144,9 @@
       "oracleCardName": "Accursed Duneyard",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
+      ]
     },
     {
       "name": "Commence the Endgame",
@@ -187,12 +158,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{U}{U}",
-      "cmc": 6,
-      "oracleText": "This spell can't be countered.\nDraw two cards, then amass Zombies X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
+      ]
     },
     {
       "name": "Cryptbreaker",
@@ -204,12 +172,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{1}{B}, {T}, Discard a card: Create a 2/2 black Zombie creature token.\nTap three untapped Zombies you control: You draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Grave Titan",
@@ -221,12 +186,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\nWhenever this creature enters or attacks, create two 2/2 black Zombie creature tokens."
+      ]
     },
     {
       "name": "Gravecrawler",
@@ -238,12 +200,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "This creature can't block.\nYou may cast this card from your graveyard as long as you control a Zombie."
+      ]
     },
     {
       "name": "Midnight Reaper",
@@ -255,12 +214,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
+      ]
     },
     {
       "name": "Murderous Rider // Swift End",
@@ -272,12 +228,10 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
-        "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Lifelink\nWhen this creature dies, put it on the bottom of its owner's library."
+      "cardTypes": [
+        "Creature",
+        "Instant"
+      ]
     },
     {
       "name": "Zombie Master",
@@ -289,12 +243,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)\nOther Zombies have \"{B}: Regenerate this permanent.\""
+      ]
     },
     {
       "name": "Angel of Sanctions",
@@ -306,12 +257,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, you may exile target nonland permanent an opponent controls until this creature leaves the battlefield.\nEmbalm {5}{W} ({5}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Angel with no mana cost. Embalm only as a sorcery.)"
+      ]
     },
     {
       "name": "Dusk // Dawn",
@@ -323,12 +271,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures with power 3 or greater."
+      ]
     },
     {
       "name": "God-Eternal Oketra",
@@ -340,12 +285,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Double strike\nWhenever you cast a creature spell, create a 4/4 black Zombie Warrior creature token with vigilance.\nWhen God-Eternal Oketra dies or is put into exile from the battlefield, you may put it into its owner's library third from the top."
+      ]
     },
     {
       "name": "Timeless Dragon",
@@ -357,12 +299,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{W}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)\nEternalize {2}{W}{W} ({2}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Dragon with no mana cost. Eternalize only as a sorcery.)"
+      ]
     },
     {
       "name": "Champion of Wits",
@@ -374,12 +313,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may draw cards equal to its power. If you do, discard two cards.\nEternalize {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Snake Wizard with no mana cost. Eternalize only as a sorcery.)"
+      ]
     },
     {
       "name": "Forgotten Creation",
@@ -391,12 +327,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards."
+      ]
     },
     {
       "name": "Pull from Tomorrow",
@@ -408,12 +341,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{X}{U}{U}",
-      "cmc": 2,
-      "oracleText": "Draw X cards, then discard a card."
+      ]
     },
     {
       "name": "Vizier of Many Faces",
@@ -425,12 +355,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "You may have this creature enter as a copy of any creature on the battlefield, except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.\nEmbalm {3}{U}{U}"
+      ]
     },
     {
       "name": "Archfiend of Ifnir",
@@ -442,12 +369,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever you cycle or discard another card, put a -1/-1 counter on each creature your opponents control.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Cemetery Reaper",
@@ -459,12 +383,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Crowded Crypt",
@@ -476,12 +397,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {B}.\nWhenever a creature you control dies, put a corpse counter on this artifact.\n{4}{B}{B}, {T}, Sacrifice this artifact: Create a 2/2 black Zombie creature token with decayed for each corpse counter on this artifact. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)"
+      ]
     },
     {
       "name": "Damn",
@@ -494,12 +412,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. A creature destroyed this way can't be regenerated.\nOverload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change \"target\" in its text to \"each.\")"
+      ]
     },
     {
       "name": "Dread Summons",
@@ -511,12 +426,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{B}",
-      "cmc": 2,
-      "oracleText": "Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token. (To mill a card, a player puts the top card of their library into their graveyard.)"
+      ]
     },
     {
       "name": "Dreadhorde Invasion",
@@ -528,12 +440,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of your upkeep, you lose 1 life and amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nWhenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn."
+      ]
     },
     {
       "name": "Liliana, Death's Majesty",
@@ -545,12 +454,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "[+1]: Create a 2/2 black Zombie creature token. Mill two cards.\n[−3]: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.\n[−7]: Destroy all non-Zombie creatures."
+      ]
     },
     {
       "name": "Never // Return",
@@ -562,12 +468,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Destroy target creature or planeswalker."
+      ]
     },
     {
       "name": "Plague Belcher",
@@ -579,12 +482,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Menace\nWhen this creature enters, put two -1/-1 counters on target creature you control.\nWhenever another Zombie you control dies, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Rot Hulk",
@@ -596,12 +496,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Menace\nWhen this creature enters, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."
+      ]
     },
     {
       "name": "The Scarab God",
@@ -614,12 +511,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{B}",
-      "cmc": 5,
-      "oracleText": "At the beginning of your upkeep, each opponent loses X life and you scry X, where X is the number of Zombies you control.\n{2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.\nWhen The Scarab God dies, return it to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "God-Pharaoh's Gift",
@@ -629,12 +523,9 @@
       "oracleCardName": "God-Pharaoh's Gift",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn."
+      ]
     },
     {
       "name": "Maskwood Nexus",
@@ -644,12 +535,9 @@
       "oracleCardName": "Maskwood Nexus",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)"
+      ]
     },
     {
       "name": "Adarkar Wastes",
@@ -662,11 +550,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {U}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Caves of Koilos",
@@ -679,11 +565,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Drowned Catacomb",
@@ -696,11 +580,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -710,11 +592,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Fetid Pools",
@@ -727,11 +607,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Glacial Fortress",
@@ -744,11 +622,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+      ]
     },
     {
       "name": "Irrigated Farmland",
@@ -761,11 +637,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Isolated Chapel",
@@ -778,11 +652,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped unless you control a Plains or a Swamp.\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -795,11 +667,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -812,11 +682,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Temple of Deceit",
@@ -829,11 +697,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Temple of Silence",
@@ -846,11 +712,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {W} or {B}."
+      ]
     },
     {
       "name": "Underground River",
@@ -863,11 +727,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Unholy Grotto",
@@ -879,11 +741,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{B}, {T}: Put target Zombie card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Swords to Plowshares",
@@ -895,12 +755,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller gains life equal to its power."
+      ]
     },
     {
       "name": "Corpse Augur",
@@ -912,12 +769,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard."
+      ]
     },
     {
       "name": "Corpse Knight",
@@ -930,12 +784,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever another creature you control enters, each opponent loses 1 life."
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -945,12 +796,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -960,12 +808,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -975,11 +820,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Path of Ancestry",
@@ -989,11 +832,9 @@
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+      ]
     },
     {
       "name": "Binding Mummy",
@@ -1005,12 +846,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever another Zombie you control enters, you may tap target artifact or creature."
+      ]
     },
     {
       "name": "Cast Out",
@@ -1022,12 +860,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{3}{W}",
-      "cmc": 4,
-      "oracleText": "Flash\nWhen this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.\nCycling {W} ({W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Eternal Skylord",
@@ -1039,12 +874,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "When this creature enters, amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have flying."
+      ]
     },
     {
       "name": "Fleshbag Marauder",
@@ -1056,12 +888,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, each player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Gempalm Polluter",
@@ -1073,12 +902,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "Cycling {B}{B} ({B}{B}, Discard this card: Draw a card.)\nWhen you cycle this card, you may have target player lose life equal to the number of Zombies on the battlefield."
+      ]
     },
     {
       "name": "Lord of the Accursed",
@@ -1090,12 +916,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Other Zombies you control get +1/+1.\n{1}{B}, {T}: All Zombies gain menace until end of turn."
+      ]
     },
     {
       "name": "Twisted Abomination",
@@ -1107,12 +930,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}",
-      "cmc": 6,
-      "oracleText": "{B}: Regenerate this creature. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Undead Augur",
@@ -1124,12 +944,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever this creature or another Zombie you control dies, you draw a card and you lose 1 life."
+      ]
     },
     {
       "name": "Despark",
@@ -1142,12 +959,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Exile target permanent with mana value 4 or greater."
+      ]
     },
     {
       "name": "Gleaming Overseer",
@@ -1160,12 +974,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{U}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, amass Zombies 1. (Put a +1/+1 counter on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have hexproof and menace."
+      ]
     },
     {
       "name": "Lazotep Chancellor",
@@ -1178,12 +989,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever you discard a card, you may pay {1}. If you do, amass Zombies 2. (Put two +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, create a 0/0 black Zombie Army creature token first.)"
+      ]
     },
     {
       "name": "Wayward Servant",
@@ -1196,12 +1004,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{B}",
-      "cmc": 2,
-      "oracleText": "Whenever another Zombie you control enters, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Bontu's Monument",
@@ -1211,12 +1016,9 @@
       "oracleCardName": "Bontu's Monument",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Black creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, each opponent loses 1 life and you gain 1 life."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -1226,12 +1028,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -1244,12 +1043,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Gate to the Afterlife",
@@ -1259,12 +1055,9 @@
       "oracleCardName": "Gate to the Afterlife",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.\n{2}, {T}, Sacrifice this artifact: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you search your library this way, shuffle. Activate only if there are six or more creature cards in your graveyard."
+      ]
     },
     {
       "name": "Orzhov Signet",
@@ -1277,12 +1070,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Talisman of Dominance",
@@ -1295,12 +1085,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {U} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Talisman of Hierarchy",
@@ -1313,12 +1100,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add {C}.\n{T}: Add {W} or {B}. This artifact deals 1 damage to you."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -1332,11 +1116,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1346,11 +1128,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Desert of the Glorified",
@@ -1362,11 +1142,9 @@
         "B"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Desert of the Mindful",
@@ -1378,11 +1156,9 @@
         "U"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Desert of the True",
@@ -1394,11 +1170,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1408,11 +1182,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Orzhov Basilica",
@@ -1425,11 +1197,9 @@
         "W"
       ],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {W}{B}."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1439,11 +1209,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DRC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Plains",
@@ -1455,11 +1223,9 @@
         "W"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1471,11 +1237,9 @@
         "W"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1487,11 +1251,9 @@
         "W"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1503,11 +1265,9 @@
         "W"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1519,11 +1279,9 @@
         "W"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1535,11 +1293,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1551,11 +1307,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1567,11 +1321,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1583,11 +1335,9 @@
         "U"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1599,11 +1349,9 @@
         "B"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1615,11 +1363,9 @@
         "B"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1631,11 +1377,9 @@
         "B"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1647,11 +1391,9 @@
         "B"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1663,15 +1405,13 @@
         "B"
       ],
       "set": "DFT",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.158Z",
+    "retrievedDate": "2026-06-23T17:40:37.187Z",
     "sourceUrl": "EternalMight_DRC.json",
     "deckSource": "precon",
     "createdAt": "2025-02-14T00:00:00.000Z"

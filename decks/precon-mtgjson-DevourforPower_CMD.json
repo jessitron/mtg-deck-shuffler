@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 674540837,
   "name": "Devour for Power",
   "totalCards": 100,
@@ -16,12 +16,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{G}{U}",
-      "cmc": 5,
-      "oracleText": "As The Mimeoplasm enters, you may exile two creature cards from graveyards. If you do, it enters as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card."
+      ]
     }
   ],
   "cards": [
@@ -35,12 +32,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "{1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip this creature."
+      ]
     },
     {
       "name": "Skullbriar, the Walking Grave",
@@ -53,12 +47,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}{G}",
-      "cmc": 2,
-      "oracleText": "Haste\nWhenever Skullbriar deals combat damage to a player, put a +1/+1 counter on it.\nCounters remain on Skullbriar as it moves to any zone other than a player's hand or library."
+      ]
     },
     {
       "name": "Riddlekeeper",
@@ -70,12 +61,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever a creature attacks you or a planeswalker you control, that creature's controller mills two cards."
+      ]
     },
     {
       "name": "Fleshbag Marauder",
@@ -87,12 +75,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, each player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Eternal Witness",
@@ -104,12 +89,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, you may return target card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Troll Ascetic",
@@ -121,12 +103,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate this creature."
+      ]
     },
     {
       "name": "Yavimaya Elder",
@@ -138,12 +117,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{G}",
-      "cmc": 3,
-      "oracleText": "When this creature dies, you may search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n{2}, Sacrifice this creature: Draw a card."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -153,13 +129,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Brawn",
@@ -171,12 +144,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Trample\nAs long as this card is in your graveyard and you control a Forest, creatures you control have trample."
+      ]
     },
     {
       "name": "Wonder",
@@ -188,12 +158,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Flying\nAs long as this card is in your graveyard and you control an Island, creatures you control have flying."
+      ]
     },
     {
       "name": "Sewer Nemesis",
@@ -205,12 +172,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "As this creature enters, choose a player.\nSewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.\nWhenever the chosen player casts a spell, that player mills a card."
+      ]
     },
     {
       "name": "Gravedigger",
@@ -222,12 +186,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Lhurgoyf",
@@ -239,12 +200,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{G}",
-      "cmc": 4,
-      "oracleText": "Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1."
+      ]
     },
     {
       "name": "Dreamborn Muse",
@@ -256,12 +214,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{U}{U}",
-      "cmc": 4,
-      "oracleText": "At the beginning of each player's upkeep, that player mills X cards, where X is the number of cards in their hand."
+      ]
     },
     {
       "name": "Mortivore",
@@ -273,12 +228,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.\n{B}: Regenerate this creature. (The next time this creature would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)"
+      ]
     },
     {
       "name": "Desecrator Hag",
@@ -291,12 +243,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B/G}{B/G}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them."
+      ]
     },
     {
       "name": "Mulldrifter",
@@ -308,12 +257,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{U}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)"
+      ]
     },
     {
       "name": "Acidic Slime",
@@ -325,12 +271,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{G}{G}",
-      "cmc": 5,
-      "oracleText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land."
+      ]
     },
     {
       "name": "Vulturous Zombie",
@@ -343,12 +286,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on this creature."
+      ]
     },
     {
       "name": "Dark Hatchling",
@@ -360,12 +300,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhen this creature enters, destroy target nonblack creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Extractor Demon",
@@ -377,12 +314,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever another creature leaves the battlefield, you may have target player mill two cards.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+      ]
     },
     {
       "name": "Scythe Specter",
@@ -394,12 +328,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, each opponent discards a card. Each player who discarded a card with the greatest mana value among cards discarded this way loses life equal to that mana value."
+      ]
     },
     {
       "name": "Wrexial, the Risen Deep",
@@ -412,12 +343,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}{B}",
-      "cmc": 6,
-      "oracleText": "Islandwalk, swampwalk (This creature can't be blocked as long as defending player controls an Island or a Swamp.)\nWhenever Wrexial deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead."
+      ]
     },
     {
       "name": "Vorosh, the Hunter",
@@ -431,12 +359,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{G}{U}",
-      "cmc": 6,
-      "oracleText": "Flying\nWhenever Vorosh deals combat damage to a player, you may pay {2}{G}. If you do, put six +1/+1 counters on Vorosh."
+      ]
     },
     {
       "name": "Triskelavus",
@@ -446,13 +371,10 @@
       "oracleCardName": "Triskelavus",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "Flying\nThis creature enters with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from this creature: Create a 1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this token: This token deals 1 damage to any target.\""
+      ]
     },
     {
       "name": "Slipstream Eel",
@@ -464,12 +386,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{U}{U}",
-      "cmc": 7,
-      "oracleText": "This creature can't attack unless defending player controls an Island.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Butcher of Malakir",
@@ -481,12 +400,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Patron of the Nezumi",
@@ -498,12 +414,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Rat offering (You may cast this spell any time you could cast an instant by sacrificing a Rat and paying the difference in mana costs between this and the sacrificed Rat. Mana cost includes color.)\nWhenever a permanent is put into an opponent's graveyard, that player loses 1 life."
+      ]
     },
     {
       "name": "Damia, Sage of Stone",
@@ -517,12 +430,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{G}{U}",
-      "cmc": 7,
-      "oracleText": "Deathtouch\nSkip your draw step.\nAt the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference."
+      ]
     },
     {
       "name": "Szadek, Lord of Secrets",
@@ -535,12 +445,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{U}{U}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nIf Szadek would deal combat damage to a player, instead put that many +1/+1 counters on Szadek and that player mills that many cards."
+      ]
     },
     {
       "name": "Avatar of Woe",
@@ -552,12 +459,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{6}{B}{B}",
-      "cmc": 8,
-      "oracleText": "If there are ten or more creature cards total in all graveyards, this spell costs {6} less to cast.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{T}: Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Artisan of Kozilek",
@@ -567,12 +471,9 @@
       "oracleCardName": "Artisan of Kozilek",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{9}",
-      "cmc": 9,
-      "oracleText": "When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"
+      ]
     },
     {
       "name": "Minds Aglow",
@@ -584,12 +485,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{U}",
-      "cmc": 1,
-      "oracleText": "Join forces — Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way."
+      ]
     },
     {
       "name": "Shared Trauma",
@@ -601,12 +499,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Join forces — Starting with you, each player may pay any amount of mana. Each player mills X cards, where X is the total amount of mana paid this way."
+      ]
     },
     {
       "name": "Sign in Blood",
@@ -618,12 +513,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Target player draws two cards and loses 2 life."
+      ]
     },
     {
       "name": "Stitch Together",
@@ -635,12 +527,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}{B}",
-      "cmc": 2,
-      "oracleText": "Return target creature card from your graveyard to your hand.\nThreshold — Return that card from your graveyard to the battlefield instead if there are seven or more cards in your graveyard."
+      ]
     },
     {
       "name": "Cultivate",
@@ -652,12 +541,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Windfall",
@@ -669,12 +555,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way."
+      ]
     },
     {
       "name": "Buried Alive",
@@ -686,12 +569,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to three creature cards, put them into your graveyard, then shuffle."
+      ]
     },
     {
       "name": "Syphon Mind",
@@ -703,12 +583,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each other player discards a card. You draw a card for each card discarded this way."
+      ]
     },
     {
       "name": "Unnerve",
@@ -720,12 +597,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Each opponent discards two cards."
+      ]
     },
     {
       "name": "Rise from the Grave",
@@ -737,12 +611,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types."
+      ]
     },
     {
       "name": "Syphon Flesh",
@@ -754,12 +625,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way."
+      ]
     },
     {
       "name": "Living Death",
@@ -771,12 +639,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield."
+      ]
     },
     {
       "name": "Tribute to the Wild",
@@ -788,12 +653,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Each opponent sacrifices an artifact or enchantment of their choice."
+      ]
     },
     {
       "name": "Spell Crumple",
@@ -805,12 +667,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library."
+      ]
     },
     {
       "name": "Fact or Fiction",
@@ -822,12 +681,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{U}",
-      "cmc": 4,
-      "oracleText": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+      ]
     },
     {
       "name": "Relic Crush",
@@ -839,12 +695,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{G}",
-      "cmc": 5,
-      "oracleText": "Destroy target artifact or enchantment and up to one other target artifact or enchantment."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -854,12 +707,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Dimir Signet",
@@ -872,12 +722,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Golgari Signet",
@@ -890,12 +737,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Lightning Greaves",
@@ -905,12 +749,9 @@
       "oracleCardName": "Lightning Greaves",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+      ]
     },
     {
       "name": "Simic Signet",
@@ -923,12 +764,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{1}, {T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Oblivion Stone",
@@ -938,12 +776,9 @@
       "oracleCardName": "Oblivion Stone",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{4}, {T}: Put a fate counter on target permanent.\n{5}, {T}, Sacrifice this artifact: Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents."
+      ]
     },
     {
       "name": "Vow of Wildness",
@@ -955,12 +790,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +3/+3, has trample, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Vow of Flight",
@@ -972,12 +804,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{U}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has flying, and can't attack you or planeswalkers you control."
+      ]
     },
     {
       "name": "Vow of Malice",
@@ -989,12 +818,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Enchant creature\nEnchanted creature gets +2/+2, has intimidate, and can't attack you or planeswalkers you control. (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)"
+      ]
     },
     {
       "name": "Memory Erosion",
@@ -1006,12 +832,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{U}{U}",
-      "cmc": 3,
-      "oracleText": "Whenever an opponent casts a spell, that player mills two cards."
+      ]
     },
     {
       "name": "Grave Pact",
@@ -1023,12 +846,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}{B}{B}",
-      "cmc": 4,
-      "oracleText": "Whenever a creature you control dies, each other player sacrifices a creature of their choice."
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1040,11 +860,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Command Tower",
@@ -1054,11 +872,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Dimir Aqueduct",
@@ -1071,11 +887,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {U}{B}."
+      ]
     },
     {
       "name": "Dreadship Reef",
@@ -1088,11 +902,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}, {T}: Put a storage counter on this land.\n{1}, Remove X storage counters from this land: Add X mana in any combination of {U} and/or {B}."
+      ]
     },
     {
       "name": "Golgari Rot Farm",
@@ -1105,11 +917,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+      ]
     },
     {
       "name": "Jwar Isle Refuge",
@@ -1122,11 +932,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} or {B}."
+      ]
     },
     {
       "name": "Lonely Sandbar",
@@ -1138,11 +946,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Rupture Spire",
@@ -1152,11 +958,9 @@
       "oracleCardName": "Rupture Spire",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Simic Growth Chamber",
@@ -1169,11 +973,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {G}{U}."
+      ]
     },
     {
       "name": "Svogthos, the Restless Tomb",
@@ -1186,11 +988,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}{B}{G}: Until end of turn, this land becomes a black and green Plant Zombie creature with \"This creature's power and toughness are each equal to the number of creature cards in your graveyard.\" It's still a land."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1200,11 +1000,9 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1214,11 +1012,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Tranquil Thicket",
@@ -1230,11 +1026,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1246,11 +1040,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1262,11 +1054,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1278,11 +1068,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1294,11 +1082,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1310,11 +1096,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1326,11 +1110,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1342,11 +1124,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1358,11 +1138,9 @@
         "G"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1374,11 +1152,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1390,11 +1166,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1406,11 +1180,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1422,11 +1194,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1438,11 +1208,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1454,11 +1222,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1470,11 +1236,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1486,11 +1250,9 @@
         "U"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1502,11 +1264,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1518,11 +1278,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1534,11 +1292,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1550,11 +1306,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1566,11 +1320,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1582,11 +1334,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1598,11 +1348,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1614,11 +1362,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1630,11 +1376,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1646,11 +1390,9 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1662,15 +1404,13 @@
         "B"
       ],
       "set": "CMD",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:44.892Z",
+    "retrievedDate": "2026-06-23T17:40:36.728Z",
     "sourceUrl": "DevourForPower_CMD.json",
     "deckSource": "precon",
     "createdAt": "2011-06-17T00:00:00.000Z"

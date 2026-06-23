@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 1331463668,
   "name": "Merciless Rage",
   "totalCards": 100,
@@ -15,12 +15,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{R}",
-      "cmc": 3,
-      "oracleText": "Haste\n{T}, Discard a card: Draw a card.\nWhenever you discard a card, if it has madness, untap Anje Falkenrath."
+      ]
     }
   ],
   "cards": [
@@ -34,12 +31,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "[+1]: You draw a card and you lose 1 life.\n[−3]: Destroy target creature.\n[−8]: Target opponent gets an emblem with \"Whenever a player draws a card, you lose 2 life.\""
+      ]
     },
     {
       "name": "Chainer, Nightmare Adept",
@@ -52,12 +46,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Discard a card: You may cast a creature spell from your graveyard this turn. Activate only once each turn.\nWhenever a nontoken creature you control enters, if you didn't cast it from your hand, it gains haste until your next turn."
+      ]
     },
     {
       "name": "Greven, Predator Captain",
@@ -70,12 +61,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{R}",
-      "cmc": 5,
-      "oracleText": "Menace\nGreven gets +X/+0, where X is the amount of life you've lost this turn.\nWhenever Greven attacks, you may sacrifice another creature. If you do, you draw cards equal to that creature's power and you lose life equal to that creature's toughness."
+      ]
     },
     {
       "name": "Archfiend of Spite",
@@ -87,12 +75,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhenever a source an opponent controls deals damage to this creature, that source's controller loses that much life unless they sacrifice that many permanents of their choice.\nMadness {3}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Bone Miser",
@@ -104,12 +89,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever you discard a creature card, create a 2/2 black Zombie creature token.\nWhenever you discard a land card, add {B}{B}.\nWhenever you discard a noncreature, nonland card, draw a card."
+      ]
     },
     {
       "name": "K'rrik, Son of Yawgmoth",
@@ -121,12 +103,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B/P}{B/P}{B/P}",
-      "cmc": 7,
-      "oracleText": "({B/P} can be paid with either {B} or 2 life.)\nLifelink\nFor each {B} in a cost, you may pay 2 life rather than pay that mana.\nWhenever you cast a black spell, put a +1/+1 counter on K'rrik."
+      ]
     },
     {
       "name": "Anje's Ravager",
@@ -138,12 +117,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "This creature attacks each combat if able.\nWhenever this creature attacks, discard your hand, then draw three cards.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Skyfire Phoenix",
@@ -155,12 +131,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Flying, haste\nWhen you cast your commander, return this card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Wildfire Devils",
@@ -172,12 +145,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "When this creature enters and at the beginning of your upkeep, choose a player at random. That player exiles an instant or sorcery card from their graveyard. Copy that card. You may cast the copy without paying its mana cost."
+      ]
     },
     {
       "name": "Champion of Stray Souls",
@@ -189,12 +159,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "{3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creature cards from your graveyard to the battlefield.\n{5}{B}{B}: Put this card from your graveyard on top of your library."
+      ]
     },
     {
       "name": "Geth, Lord of the Vault",
@@ -206,12 +173,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{X}{B}: Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards."
+      ]
     },
     {
       "name": "Soul of Innistrad",
@@ -223,12 +187,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Deathtouch\n{3}{B}{B}: Return up to three target creature cards from your graveyard to your hand.\n{3}{B}{B}, Exile this card from your graveyard: Return up to three target creature cards from your graveyard to your hand."
+      ]
     },
     {
       "name": "Asylum Visitor",
@@ -240,12 +201,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Doomed Necromancer",
@@ -257,12 +215,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "{B}, {T}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Overseer of the Damned",
@@ -274,12 +229,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Flying\nWhen this creature enters, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Flayer of the Hatebound",
@@ -291,12 +243,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nWhenever this creature or another creature enters from your graveyard, that creature deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Magus of the Wheel",
@@ -308,12 +257,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "{1}{R}, {T}, Sacrifice this creature: Each player discards their hand, then draws seven cards."
+      ]
     },
     {
       "name": "Squee, Goblin Nabob",
@@ -325,12 +271,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "At the beginning of your upkeep, you may return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Stromkirk Occultist",
@@ -342,12 +285,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Trample\nWhenever this creature deals combat damage to a player, exile the top card of your library. Until end of turn, you may play that card.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Bloodhall Priest",
@@ -360,12 +300,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{R}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature enters or attacks, if you have no cards in hand, this creature deals 2 damage to any target.\nMadness {1}{B}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -375,13 +312,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Scaretiller",
@@ -391,13 +325,10 @@
       "oracleCardName": "Scaretiller",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature becomes tapped, choose one —\n• You may put a land card from your hand onto the battlefield tapped.\n• Return target land card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Big Game Hunter",
@@ -409,12 +340,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, destroy target creature with power 4 or greater. It can't be regenerated.\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Gorgon Recluse",
@@ -426,12 +354,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Whenever this creature blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.\nMadness {B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Grave Scrabbler",
@@ -443,12 +368,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{3}{B}",
-      "cmc": 4,
-      "oracleText": "Madness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nWhen this creature enters, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand."
+      ]
     },
     {
       "name": "Nightshade Assassin",
@@ -460,12 +382,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}{B}",
-      "cmc": 4,
-      "oracleText": "First strike\nWhen this creature enters, you may reveal X black cards in your hand. If you do, target creature gets -X/-X until end of turn.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Plaguecrafter",
@@ -477,12 +396,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who can't discards a card."
+      ]
     },
     {
       "name": "Sanitarium Skeleton",
@@ -494,12 +410,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "{2}{B}: Return this card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Meteor Golem",
@@ -509,13 +422,10 @@
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{7}",
-      "cmc": 7,
-      "oracleText": "When this creature enters, destroy target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Nightmare Unmaking",
@@ -527,12 +437,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Choose one —\n• Exile each creature with power greater than the number of cards in your hand.\n• Exile each creature with power less than the number of cards in your hand."
+      ]
     },
     {
       "name": "Boneyard Parley",
@@ -544,12 +451,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "Exile up to five target creature cards from graveyards. An opponent separates those cards into two piles. Put all cards from the pile of your choice onto the battlefield under your control and the rest into their owners' graveyards."
+      ]
     },
     {
       "name": "Beacon of Unrest",
@@ -561,12 +465,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library."
+      ]
     },
     {
       "name": "From Under the Floorboards",
@@ -578,12 +479,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{B}{B}",
-      "cmc": 5,
-      "oracleText": "Madness {X}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nCreate three tapped 2/2 black Zombie creature tokens and you gain 3 life. If this spell's madness cost was paid, instead create X of those tokens and you gain X life."
+      ]
     },
     {
       "name": "In Garruk's Wake",
@@ -595,12 +493,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{7}{B}{B}",
-      "cmc": 9,
-      "oracleText": "Destroy all creatures you don't control and all planeswalkers you don't control."
+      ]
     },
     {
       "name": "Avacyn's Judgment",
@@ -612,12 +507,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{R}",
-      "cmc": 2,
-      "oracleText": "Madness {X}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nAvacyn's Judgment deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those permanents and/or players instead."
+      ]
     },
     {
       "name": "Mire in Misery",
@@ -629,12 +521,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Each opponent sacrifices a creature or enchantment of their choice."
+      ]
     },
     {
       "name": "Hate Mirage",
@@ -646,12 +535,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Choose up to two target creatures you don't control. For each of those creatures, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step."
+      ]
     },
     {
       "name": "Call to the Netherworld",
@@ -663,12 +549,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{B}",
-      "cmc": 1,
-      "oracleText": "Return target black creature card from your graveyard to your hand.\nMadness {0} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Murderous Compulsion",
@@ -680,12 +563,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Destroy target tapped creature.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Alchemist's Greeting",
@@ -697,12 +577,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{R}",
-      "cmc": 5,
-      "oracleText": "Alchemist's Greeting deals 4 damage to target creature.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Malevolent Whispers",
@@ -714,12 +591,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{R}",
-      "cmc": 4,
-      "oracleText": "Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.\nMadness {3}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Chaos Warp",
@@ -731,12 +605,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+      ]
     },
     {
       "name": "Dark Withering",
@@ -748,12 +619,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Destroy target nonblack creature.\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Fiery Temper",
@@ -765,12 +633,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}{R}",
-      "cmc": 3,
-      "oracleText": "Fiery Temper deals 3 damage to any target.\nMadness {R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Violent Eruption",
@@ -782,12 +647,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{R}{R}{R}",
-      "cmc": 4,
-      "oracleText": "Violent Eruption deals 4 damage divided as you choose among any number of targets.\nMadness {1}{R}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Aeon Engine",
@@ -797,12 +659,9 @@
       "oracleCardName": "Aeon Engine",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{5}",
-      "cmc": 5,
-      "oracleText": "This artifact enters tapped.\n{T}, Exile this artifact: Reverse the game's turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)"
+      ]
     },
     {
       "name": "Grimoire of the Dead",
@@ -812,12 +671,9 @@
       "oracleCardName": "Grimoire of the Dead",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{1}, {T}, Discard a card: Put a study counter on Grimoire of the Dead.\n{T}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types."
+      ]
     },
     {
       "name": "Key to the City",
@@ -827,12 +683,9 @@
       "oracleCardName": "Key to the City",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}, Discard a card: Up to one target creature can't be blocked this turn.\nWhenever this artifact becomes untapped, you may pay {2}. If you do, draw a card."
+      ]
     },
     {
       "name": "Bloodthirsty Blade",
@@ -842,12 +695,9 @@
       "oracleCardName": "Bloodthirsty Blade",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\n{1}: Attach this Equipment to target creature an opponent controls. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Armillary Sphere",
@@ -857,12 +707,9 @@
       "oracleCardName": "Armillary Sphere",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{2}, {T}, Sacrifice this artifact: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle."
+      ]
     },
     {
       "name": "Hedron Archive",
@@ -872,12 +719,9 @@
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Rakdos Locket",
@@ -890,12 +734,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add {B} or {R}.\n{B/R}{B/R}{B/R}{B/R}, {T}, Sacrifice this artifact: Draw two cards."
+      ]
     },
     {
       "name": "Sol Ring",
@@ -905,12 +746,9 @@
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{1}",
-      "cmc": 1,
-      "oracleText": "{T}: Add {C}{C}."
+      ]
     },
     {
       "name": "Curse of Fool's Wisdom",
@@ -922,12 +760,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}{B}",
-      "cmc": 6,
-      "oracleText": "Enchant player\nWhenever enchanted player draws a card, they lose 2 life and you gain 2 life.\nMadness {3}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"
+      ]
     },
     {
       "name": "Hedonist's Trove",
@@ -939,12 +774,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{B}{B}",
-      "cmc": 7,
-      "oracleText": "When this enchantment enters, exile target opponent's graveyard.\nYou may play lands from among cards exiled with this enchantment.\nYou may cast spells from among cards exiled with this enchantment. You can't cast more than one spell this way each turn."
+      ]
     },
     {
       "name": "Warstorm Surge",
@@ -956,12 +788,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{5}{R}",
-      "cmc": 6,
-      "oracleText": "Whenever a creature you control enters, it deals damage equal to its power to any target."
+      ]
     },
     {
       "name": "Faith of the Devoted",
@@ -973,12 +802,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Whenever you cycle or discard a card, you may pay {1}. If you do, each opponent loses 2 life and you gain 2 life."
+      ]
     },
     {
       "name": "The Eldest Reborn",
@@ -990,12 +816,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{4}{B}",
-      "cmc": 5,
-      "oracleText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature or planeswalker of their choice.\nII — Each opponent discards a card.\nIII — Put target creature or planeswalker card from a graveyard onto the battlefield under your control."
+      ]
     },
     {
       "name": "Zombie Infestation",
@@ -1007,12 +830,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{B}",
-      "cmc": 2,
-      "oracleText": "Discard two cards: Create a 2/2 black Zombie creature token."
+      ]
     },
     {
       "name": "Sanctum of Eternity",
@@ -1022,11 +842,9 @@
       "oracleCardName": "Sanctum of Eternity",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Return target commander you own from the battlefield to your hand. Activate only during your turn."
+      ]
     },
     {
       "name": "Drownyard Temple",
@@ -1036,11 +854,9 @@
       "oracleCardName": "Drownyard Temple",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{3}: Return this card from your graveyard to the battlefield tapped."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1050,11 +866,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Geier Reach Sanitarium",
@@ -1064,11 +878,9 @@
       "oracleCardName": "Geier Reach Sanitarium",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{2}, {T}: Each player draws a card, then discards a card."
+      ]
     },
     {
       "name": "Swamp",
@@ -1080,11 +892,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1096,11 +906,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1112,11 +920,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1128,11 +934,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1144,11 +948,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1160,11 +962,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1176,11 +976,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1192,11 +990,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1208,11 +1004,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1224,11 +1018,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1240,11 +1032,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1256,11 +1046,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1272,11 +1060,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1288,11 +1074,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1304,11 +1088,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1320,11 +1102,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1336,11 +1116,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1352,11 +1130,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1368,11 +1144,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1384,11 +1158,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Akoum Refuge",
@@ -1401,11 +1173,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Ash Barrens",
@@ -1415,11 +1185,9 @@
       "oracleCardName": "Ash Barrens",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Barren Moor",
@@ -1431,11 +1199,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Bloodfell Caves",
@@ -1448,11 +1214,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Cinder Barrens",
@@ -1465,11 +1229,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1479,11 +1241,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1493,11 +1253,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Forgotten Cave",
@@ -1509,11 +1267,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}.\nCycling {R} ({R}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Memorial to Folly",
@@ -1525,11 +1281,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice this land: Return target creature card from your graveyard to your hand."
+      ]
     },
     {
       "name": "Mortuary Mire",
@@ -1541,11 +1295,9 @@
         "B"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, you may put target creature card from your graveyard on top of your library.\n{T}: Add {B}."
+      ]
     },
     {
       "name": "Myriad Landscape",
@@ -1555,11 +1307,9 @@
       "oracleCardName": "Myriad Landscape",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Rakdos Carnarium",
@@ -1572,11 +1322,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{R}."
+      ]
     },
     {
       "name": "Rakdos Guildgate",
@@ -1589,11 +1337,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B} or {R}."
+      ]
     },
     {
       "name": "Rix Maadi, Dungeon Palace",
@@ -1606,11 +1352,9 @@
         "R"
       ],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{1}{B}{R}, {T}: Each player discards a card. Activate only as a sorcery."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1620,11 +1364,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Temple of the False God",
@@ -1634,15 +1376,13 @@
       "oracleCardName": "Temple of the False God",
       "colorIdentity": [],
       "set": "C19",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:45.985Z",
+    "retrievedDate": "2026-06-23T17:40:38.613Z",
     "sourceUrl": "MercilessRage_C19.json",
     "deckSource": "precon",
     "createdAt": "2019-08-23T00:00:00.000Z"

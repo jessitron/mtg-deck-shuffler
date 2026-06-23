@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": 863222548,
   "name": "Painbow",
   "totalCards": 100,
@@ -18,12 +18,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Planeswalker"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "[+1]: Create a 3/3 Kavu creature token with trample that's all colors.\n[−3]: Choose up to two target creatures. For each of them, put a number of +1/+1 counters on it equal to the number of colors it is.\n[−6]: Return target multicolored card from your graveyard to your hand. If that card was all colors, draw a card and create two Treasure tokens.\nJared Carthalion can be your commander."
+      ]
     }
   ],
   "cards": [
@@ -39,12 +36,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}{U}",
-      "cmc": 4,
-      "oracleText": "As long as Archelos is tapped, other permanents enter tapped.\nAs long as Archelos is untapped, other permanents enter untapped."
+      ]
     },
     {
       "name": "Atla Palani, Nest Tender",
@@ -58,12 +52,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{R}{G}{W}",
-      "cmc": 4,
-      "oracleText": "{2}, {T}: Create a 0/1 green Egg creature token with defender.\nWhenever an Egg you control dies, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order."
+      ]
     },
     {
       "name": "Baleful Strix",
@@ -76,13 +67,10 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{U}{B}",
-      "cmc": 2,
-      "oracleText": "Flying, deathtouch\nWhen this creature enters, draw a card."
+      ]
     },
     {
       "name": "Chromanticore",
@@ -98,13 +86,10 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Enchantment",
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Bestow {2}{W}{U}{B}{R}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nFlying, first strike, vigilance, trample, lifelink\nEnchanted creature gets +4/+4 and has flying, first strike, vigilance, trample, and lifelink."
+      ]
     },
     {
       "name": "Coiling Oracle",
@@ -117,12 +102,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "When this creature enters, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand."
+      ]
     },
     {
       "name": "O-Kagachi, Vengeful Kami",
@@ -138,12 +120,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}{R}{G}",
-      "cmc": 6,
-      "oracleText": "Flying, trample\nWhenever O-Kagachi deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls."
+      ]
     },
     {
       "name": "Faeburrow Elder",
@@ -156,12 +135,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Vigilance\nThis creature gets +1/+1 for each color among permanents you control.\n{T}: For each color among permanents you control, add one mana of that color."
+      ]
     },
     {
       "name": "Fusion Elemental",
@@ -177,11 +153,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5
+      ]
     },
     {
       "name": "Zaxara, the Exemplary",
@@ -195,12 +169,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{B}{G}{U}",
-      "cmc": 4,
-      "oracleText": "Deathtouch\n{T}: Add two mana of any one color.\nWhenever you cast a spell with {X} in its mana cost, create a 0/0 green Hydra creature token, then put X +1/+1 counters on it."
+      ]
     },
     {
       "name": "Hero of Precinct One",
@@ -212,12 +183,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast a multicolored spell, create a 1/1 white Human creature token."
+      ]
     },
     {
       "name": "Illuna, Apex of Wishes",
@@ -231,12 +199,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Mutate {3}{R/G}{U}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying, trample\nWhenever this creature mutates, exile cards from the top of your library until you exile a nonland permanent card. Put that card onto the battlefield or into your hand."
+      ]
     },
     {
       "name": "Knight of New Alara",
@@ -249,12 +214,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{W}",
-      "cmc": 4,
-      "oracleText": "Each other multicolored creature you control gets +1/+1 for each of its colors."
+      ]
     },
     {
       "name": "Maelstrom Archangel",
@@ -270,12 +232,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever this creature deals combat damage to a player, you may cast a spell from your hand without paying its mana cost."
+      ]
     },
     {
       "name": "Nethroi, Apex of Death",
@@ -289,12 +248,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{W}{B}{G}",
-      "cmc": 5,
-      "oracleText": "Mutate {4}{G/W}{B}{B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nDeathtouch, lifelink\nWhenever this creature mutates, return any number of target creature cards with total power 10 or less from your graveyard to the battlefield."
+      ]
     },
     {
       "name": "Rienne, Angel of Rebirth",
@@ -308,12 +264,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{R}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Flying\nOther multicolored creatures you control get +1/+0.\nWhenever another multicolored creature you control dies, return it to its owner's hand at the beginning of the next end step."
+      ]
     },
     {
       "name": "Selvala, Explorer Returned",
@@ -326,12 +279,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Parley — {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card."
+      ]
     },
     {
       "name": "Solemn Simulacrum",
@@ -341,13 +291,10 @@
       "oracleCardName": "Solemn Simulacrum",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+      ]
     },
     {
       "name": "Surrak Dragonclaw",
@@ -361,12 +308,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flash\nThis spell can't be countered.\nCreature spells you control can't be countered.\nOther creatures you control have trample."
+      ]
     },
     {
       "name": "Transguild Courier",
@@ -382,13 +326,10 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{4}",
-      "cmc": 4,
-      "oracleText": "Transguild Courier is all colors."
+      ]
     },
     {
       "name": "Glint-Eye Nephilim",
@@ -403,12 +344,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{U}{B}{R}{G}",
-      "cmc": 4,
-      "oracleText": "Whenever this creature deals combat damage to a player, draw that many cards.\n{1}, Discard a card: This creature gets +1/+1 until end of turn."
+      ]
     },
     {
       "name": "Xyris, the Writhing Storm",
@@ -422,12 +360,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}{U}{R}",
-      "cmc": 5,
-      "oracleText": "Flying\nWhenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.\nWhenever Xyris deals combat damage to a player, you and that player each draw that many cards."
+      ]
     },
     {
       "name": "Cultivate",
@@ -439,12 +374,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Duneblast",
@@ -458,12 +390,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{B}{G}",
-      "cmc": 7,
-      "oracleText": "Choose up to one creature. Destroy the rest."
+      ]
     },
     {
       "name": "Explore",
@@ -475,12 +404,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "You may play an additional land this turn.\nDraw a card."
+      ]
     },
     {
       "name": "Explosive Vegetation",
@@ -492,12 +418,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Farseek",
@@ -509,12 +432,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Kodama's Reach",
@@ -526,12 +446,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+      ]
     },
     {
       "name": "Lavalanche",
@@ -545,12 +462,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{X}{B}{R}{G}",
-      "cmc": 3,
-      "oracleText": "Lavalanche deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls."
+      ]
     },
     {
       "name": "Merciless Eviction",
@@ -563,12 +477,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{4}{W}{B}",
-      "cmc": 6,
-      "oracleText": "Choose one —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all planeswalkers."
+      ]
     },
     {
       "name": "Migration Path",
@@ -580,12 +491,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{3}{G}",
-      "cmc": 4,
-      "oracleText": "Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+      ]
     },
     {
       "name": "Painful Truths",
@@ -597,12 +505,9 @@
         "B"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{B}",
-      "cmc": 3,
-      "oracleText": "Converge — You draw X cards and lose X life, where X is the number of colors of mana spent to cast this spell."
+      ]
     },
     {
       "name": "Radiant Flames",
@@ -614,12 +519,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Converge — Radiant Flames deals X damage to each creature, where X is the number of colors of mana spent to cast this spell."
+      ]
     },
     {
       "name": "Search for Tomorrow",
@@ -631,12 +533,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Search your library for a basic land card, put it onto the battlefield, then shuffle.\nSuspend 2—{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)"
+      ]
     },
     {
       "name": "Time Wipe",
@@ -649,12 +548,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{2}{W}{W}{U}",
-      "cmc": 5,
-      "oracleText": "Return a creature you control to its owner's hand, then destroy all creatures."
+      ]
     },
     {
       "name": "Abzan Charm",
@@ -668,12 +564,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}{B}{G}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Exile target creature with power 3 or greater.\n• You draw two cards and you lose 2 life.\n• Distribute two +1/+1 counters among one or two target creatures."
+      ]
     },
     {
       "name": "Beast Within",
@@ -685,12 +578,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+      ]
     },
     {
       "name": "Echoing Truth",
@@ -702,12 +592,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{1}{U}",
-      "cmc": 2,
-      "oracleText": "Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands."
+      ]
     },
     {
       "name": "Growth Spiral",
@@ -720,12 +607,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{G}{U}",
-      "cmc": 2,
-      "oracleText": "Draw a card. You may put a land card from your hand onto the battlefield."
+      ]
     },
     {
       "name": "Terminate",
@@ -738,12 +622,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{R}",
-      "cmc": 2,
-      "oracleText": "Destroy target creature. It can't be regenerated."
+      ]
     },
     {
       "name": "Naya Charm",
@@ -757,12 +638,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{R}{G}{W}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Naya Charm deals 3 damage to target creature.\n• Return target card from a graveyard to its owner's hand.\n• Tap all creatures target player controls."
+      ]
     },
     {
       "name": "Path to Exile",
@@ -774,12 +652,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{W}",
-      "cmc": 1,
-      "oracleText": "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Sultai Charm",
@@ -793,12 +668,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{B}{G}{U}",
-      "cmc": 3,
-      "oracleText": "Choose one —\n• Destroy target monocolored creature.\n• Destroy target artifact or enchantment.\n• Draw two cards, then discard a card."
+      ]
     },
     {
       "name": "Sylvan Reclamation",
@@ -811,12 +683,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{3}{G}{W}",
-      "cmc": 5,
-      "oracleText": "Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+      ]
     },
     {
       "name": "Arcane Signet",
@@ -826,12 +695,9 @@
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Coalition Relic",
@@ -841,12 +707,9 @@
       "oracleCardName": "Coalition Relic",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color.\n{T}: Put a charge counter on this artifact.\nAt the beginning of your first main phase, remove all charge counters from this artifact. Add one mana of any color for each charge counter removed this way."
+      ]
     },
     {
       "name": "Fellwar Stone",
@@ -856,12 +719,9 @@
       "oracleCardName": "Fellwar Stone",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Commander's Sphere",
@@ -871,12 +731,9 @@
       "oracleCardName": "Commander's Sphere",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{3}",
-      "cmc": 3,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice this artifact: Draw a card."
+      ]
     },
     {
       "name": "Prophetic Prism",
@@ -886,12 +743,9 @@
       "oracleCardName": "Prophetic Prism",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "When this artifact enters, draw a card.\n{1}, {T}: Add one mana of any color."
+      ]
     },
     {
       "name": "Abundant Growth",
@@ -903,12 +757,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{G}",
-      "cmc": 1,
-      "oracleText": "Enchant land\nWhen this Aura enters, draw a card.\nEnchanted land has \"{T}: Add one mana of any color.\""
+      ]
     },
     {
       "name": "Maelstrom Nexus",
@@ -924,12 +775,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)"
+      ]
     },
     {
       "name": "Path to the World Tree",
@@ -945,12 +793,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{1}{G}",
-      "cmc": 2,
-      "oracleText": "When this enchantment enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{2}{W}{U}{B}{R}{G}, Sacrifice this enchantment: You gain 2 life and draw two cards. Target opponent loses 2 life. This enchantment deals 2 damage to up to one target creature. You create a 2/2 green Bear creature token."
+      ]
     },
     {
       "name": "Bad River",
@@ -960,11 +805,9 @@
       "oracleCardName": "Bad River",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Arcane Sanctum",
@@ -978,11 +821,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {U}, or {B}."
+      ]
     },
     {
       "name": "Canopy Vista",
@@ -995,11 +836,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G} or {W}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Cascading Cataracts",
@@ -1009,11 +848,9 @@
       "oracleCardName": "Cascading Cataracts",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "Indestructible\n{T}: Add {C}.\n{5}, {T}: Add five mana in any combination of colors."
+      ]
     },
     {
       "name": "Cinder Glade",
@@ -1026,11 +863,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Command Tower",
@@ -1040,11 +875,9 @@
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color in your commander's color identity."
+      ]
     },
     {
       "name": "Crumbling Necropolis",
@@ -1058,11 +891,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {B}, or {R}."
+      ]
     },
     {
       "name": "Crystal Quarry",
@@ -1078,11 +909,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add {C}.\n{5}, {T}: Add {W}{U}{B}{R}{G}."
+      ]
     },
     {
       "name": "Evolving Wilds",
@@ -1092,11 +921,9 @@
       "oracleCardName": "Evolving Wilds",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Exotic Orchard",
@@ -1106,11 +933,9 @@
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}: Add one mana of any color that a land an opponent controls could produce."
+      ]
     },
     {
       "name": "Flood Plain",
@@ -1120,11 +945,9 @@
       "oracleCardName": "Flood Plain",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Frontier Bivouac",
@@ -1138,11 +961,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {U}, or {R}."
+      ]
     },
     {
       "name": "Grasslands",
@@ -1152,11 +973,9 @@
       "oracleCardName": "Grasslands",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Jungle Shrine",
@@ -1170,11 +989,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}."
+      ]
     },
     {
       "name": "Krosan Verge",
@@ -1184,11 +1001,9 @@
       "oracleCardName": "Krosan Verge",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Mountain Valley",
@@ -1198,11 +1013,9 @@
       "oracleCardName": "Mountain Valley",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Murmuring Bosk",
@@ -1216,11 +1029,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)\nAs this land enters, you may reveal a Treefolk card from your hand. If you don't, this land enters tapped.\n{T}: Add {W} or {B}. This land deals 1 damage to you."
+      ]
     },
     {
       "name": "Mystic Monastery",
@@ -1234,11 +1045,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {U}, {R}, or {W}."
+      ]
     },
     {
       "name": "Nomad Outpost",
@@ -1252,11 +1061,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {R}, {W}, or {B}."
+      ]
     },
     {
       "name": "Opulent Palace",
@@ -1270,11 +1077,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {G}, or {U}."
+      ]
     },
     {
       "name": "Prairie Stream",
@@ -1287,11 +1092,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W} or {U}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Rocky Tar Pit",
@@ -1301,11 +1104,9 @@
       "oracleCardName": "Rocky Tar Pit",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+      ]
     },
     {
       "name": "Sandsteppe Citadel",
@@ -1319,11 +1120,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {W}, {B}, or {G}."
+      ]
     },
     {
       "name": "Savage Lands",
@@ -1337,11 +1136,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {B}, {R}, or {G}."
+      ]
     },
     {
       "name": "Seaside Citadel",
@@ -1355,11 +1152,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "This land enters tapped.\n{T}: Add {G}, {W}, or {U}."
+      ]
     },
     {
       "name": "Smoldering Marsh",
@@ -1372,11 +1167,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B} or {R}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Sunken Hollow",
@@ -1389,11 +1182,9 @@
         "U"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U} or {B}.)\nThis land enters tapped unless you control two or more basic lands."
+      ]
     },
     {
       "name": "Terramorphic Expanse",
@@ -1403,11 +1194,9 @@
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+      ]
     },
     {
       "name": "Jenson Carthalion, Druid Exile",
@@ -1423,12 +1212,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{G}{W}",
-      "cmc": 2,
-      "oracleText": "Whenever you cast a multicolored spell, scry 1. If that spell was all colors, create a 4/4 white Angel creature token with flying and vigilance.\n{5}, {T}: Add {W}{U}{B}{R}{G}."
+      ]
     },
     {
       "name": "Two-Headed Hellkite",
@@ -1444,12 +1230,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{1}{W}{U}{B}{R}{G}",
-      "cmc": 6,
-      "oracleText": "Flying, menace, haste\nWhenever this creature attacks, draw two cards."
+      ]
     },
     {
       "name": "Tiller Engine",
@@ -1459,13 +1242,10 @@
       "oracleCardName": "Tiller Engine",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact",
         "Creature"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "Whenever a land you control enters tapped, choose one —\n• Untap that land.\n• Tap target nonland permanent an opponent controls."
+      ]
     },
     {
       "name": "Unite the Coalition",
@@ -1481,12 +1261,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Instant"
-      ],
-      "manaCost": "{2}{W}{U}{B}{R}{G}",
-      "cmc": 7,
-      "oracleText": "Choose five. You may choose the same mode more than once.\n• Target permanent phases out.\n• Target player draws a card.\n• Exile target player's graveyard.\n• Unite the Coalition deals 2 damage to any target.\n• Destroy target artifact or enchantment."
+      ]
     },
     {
       "name": "Fallaji Wayfarer",
@@ -1498,12 +1275,9 @@
         "G"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{2}{G}",
-      "cmc": 3,
-      "oracleText": "Fallaji Wayfarer is all colors. This ability doesn't affect its color identity. (It can be in any deck whose commander's color identity includes green.)\nMulticolored spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a multicolored spell pays for {1} or one mana of a color that creature is.)"
+      ]
     },
     {
       "name": "Iridian Maelstrom",
@@ -1519,12 +1293,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Sorcery"
-      ],
-      "manaCost": "{W}{U}{B}{R}{G}",
-      "cmc": 5,
-      "oracleText": "Destroy each creature that isn't all colors."
+      ]
     },
     {
       "name": "Mana Cannons",
@@ -1536,12 +1307,9 @@
         "R"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Enchantment"
-      ],
-      "manaCost": "{2}{R}",
-      "cmc": 3,
-      "oracleText": "Whenever you cast a multicolored spell, this enchantment deals X damage to any target, where X is the number of colors that spell is."
+      ]
     },
     {
       "name": "Primeval Spawn",
@@ -1557,12 +1325,9 @@
         "W"
       ],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Creature"
-      ],
-      "manaCost": "{5}{W}{U}{B}{R}{G}",
-      "cmc": 10,
-      "oracleText": "If this creature would enter and it wasn't cast or no mana was spent to cast it, exile it instead.\nVigilance, trample, lifelink\nWhen this creature leaves the battlefield, exile the top ten cards of your library. You may cast any number of spells with total mana value 10 or less from among them without paying their mana costs."
+      ]
     },
     {
       "name": "Obsidian Obelisk",
@@ -1572,12 +1337,9 @@
       "oracleCardName": "Obsidian Obelisk",
       "colorIdentity": [],
       "set": "DMC",
-      "types": [
+      "cardTypes": [
         "Artifact"
-      ],
-      "manaCost": "{2}",
-      "cmc": 2,
-      "oracleText": "This artifact enters tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a multicolored spell."
+      ]
     },
     {
       "name": "Forest",
@@ -1589,11 +1351,9 @@
         "G"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1605,11 +1365,9 @@
         "G"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Forest",
@@ -1621,11 +1379,9 @@
         "G"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {G}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1637,11 +1393,9 @@
         "R"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Mountain",
@@ -1653,11 +1407,9 @@
         "R"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {R}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1669,11 +1421,9 @@
         "U"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Island",
@@ -1685,11 +1435,9 @@
         "U"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {U}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1701,11 +1449,9 @@
         "W"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Plains",
@@ -1717,11 +1463,9 @@
         "W"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {W}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1733,11 +1477,9 @@
         "B"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     },
     {
       "name": "Swamp",
@@ -1749,15 +1491,13 @@
         "B"
       ],
       "set": "DMU",
-      "types": [
+      "cardTypes": [
         "Land"
-      ],
-      "cmc": 0,
-      "oracleText": "({T}: Add {B}.)"
+      ]
     }
   ],
   "provenance": {
-    "retrievedDate": "2026-02-23T17:33:46.230Z",
+    "retrievedDate": "2026-06-23T17:40:39.056Z",
     "sourceUrl": "Painbow_DMC.json",
     "deckSource": "precon",
     "createdAt": "2022-09-09T00:00:00.000Z"
