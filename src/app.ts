@@ -47,23 +47,27 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     next();
   });
 
-  // Stamp the matched route template (http.route) and route params onto the
-  // request span. Express's auto-instrumentation isn't emitting http.route here,
-  // so we set it ourselves: this gives a low-cardinality field to group traffic
-  // by (e.g. /game/:gameId) while the raw url.path stays high-cardinality. Each
-  // param also becomes its own attribute (http.route.param.gameId, etc.).
+  // Stamp each matched route param onto the root server span as its own
+  // attribute (http.route.param.gameId, etc.). The route template itself
+  // (http.route, e.g. /game/:gameId) is set automatically by the Express
+  // auto-instrumentation; this adds the high-cardinality param values alongside
+  // it, on the same span, so you can break down by route and drill into a
+  // specific id.
   //
-  // req.route is only populated once routing matches, so we set the attributes
-  // as late as possible. We wrap res.end (rather than listen for "finish")
-  // because the HTTP instrumentation ends the span by wrapping res.end too; our
-  // middleware runs after it, so our wrapper is outermost and runs first, while
-  // the span is still open.
-  app.use((req, res, next) => {
+  // Two timing subtleties:
+  //  - req.params is only populated once routing matches, so we defer the writes
+  //    to res.end (when params are known) rather than running them here.
+  //  - We capture the span HERE (not in res.end): Express instrumentation is
+  //    told to ignore this layer (see tracing.ts), so the active span at this
+  //    point is the root server span — the one carrying http.route — and it
+  //    stays open through res.end. (At res.end the active span would instead be
+  //    the request-handler child span.)
+  // The function name "stampRouteParams" must match the ignoreLayers entry.
+  app.use(function stampRouteParams(req, res, next) {
     const span = trace.getActiveSpan();
     const originalEnd = res.end.bind(res);
     res.end = function (...args: Parameters<typeof originalEnd>) {
       if (span) {
-        if (req.route?.path) span.setAttribute("http.route", req.route.path);
         for (const [key, value] of Object.entries(req.params)) {
           span.setAttribute(`http.route.param.${key}`, String(value));
         }

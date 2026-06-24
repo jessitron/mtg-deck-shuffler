@@ -32,7 +32,7 @@ fi
 
 # Start server on port 3001 in the background
 echo -e "${YELLOW}Starting server on port 3001...${NC}"
-PORT=3001 node -r ./dist/tracing.js dist/server.js &
+PORT=3001 node --import ./dist/tracing.js dist/server.js &
 SERVER_PID=$!
 
 # Function to cleanup server on exit

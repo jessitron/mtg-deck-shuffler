@@ -1,9 +1,19 @@
+import { register } from "node:module";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { TraceIdRatioBasedSampler, ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
 import { Sampler, SamplingResult } from "@opentelemetry/sdk-trace-base";
 import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
+
+// This app is ESM ("type": "module"). OTel's instrumentations patch modules via
+// require-in-the-middle, which only sees CommonJS require() calls — so without
+// this hook, anything loaded by `import` (express, pg, etc.) is never patched.
+// import-in-the-middle (re-exported here by @opentelemetry/instrumentation)
+// installs an ESM loader hook so imported modules get instrumented too. This is
+// why the launch command uses `node --import ./dist/tracing.js` rather than the
+// old `-r` (CommonJS) preload: register() must run before the app's imports.
+register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
 
 // Custom sampler that heavily samples down kube-probe requests to /
 class KubeProbeAwareSampler implements Sampler {
@@ -41,6 +51,16 @@ const sdk: NodeSDK = new NodeSDK({
       // We recommend disabling fs automatic instrumentation because it is noisy during startup
       "@opentelemetry/instrumentation-fs": {
         enabled: false,
+      },
+      // Our `stampRouteParams` middleware (in app.ts) reads the active span to
+      // attach http.route.param.* to the root server span. If Express
+      // instrumentation wraps it in its own middleware span, that span ends
+      // when the middleware calls next(), and our deferred res.end writes would
+      // hit an ended span. Ignoring this one layer means the middleware runs in
+      // the parent (root server span) context, so the active span is the same
+      // span that carries http.route. Matched by layer name: "middleware - <fn name>".
+      "@opentelemetry/instrumentation-express": {
+        ignoreLayers: ["middleware - stampRouteParams"],
       },
     }),
   ],
