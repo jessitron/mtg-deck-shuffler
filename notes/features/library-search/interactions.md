@@ -56,6 +56,8 @@ If new card locations are added (beyond Library, Hand, Table, Revealed), `listLi
 ### Modal System Changes
 Library search uses the shared modal pattern. Changes to modal overlay behavior, close mechanism, or container IDs affect this feature.
 
+Other co-tenants of `#modal-container` / `/close-modal` (same pattern, not part of library search): the table/history/debug modals, and the **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`, opened by `GET /mulligan-advisor/end-chat-modal/:gameId`, Cancel → `/close-modal`, submit clears the container via an OOB swap `<div id="modal-container" hx-swap-oob="true">`). Changes to the shared modal classes or `/close-modal` affect all of them.
+
 The game-screen **hamburger menu** (`src/view/play-game/game-menu.ts`, `#game-menu-panel`) now hosts the Action History and debug "State" modal triggers (still targeting the shared `#modal-container`, same pattern). Its dropdown panel uses `z-index: 500`, deliberately below `.modal-overlay` (1000) and `.card-modal-overlay` (2000), so the library modal and overlaid card modal render on top of the menu. If you change library-modal z-index, keep it above the menu panel. (The Search button itself stayed in the library section, not the menu.)
 
 ### Deck Data Sources

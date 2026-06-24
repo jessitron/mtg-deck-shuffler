@@ -33,6 +33,8 @@
   - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`
   - Lines 35-78: Manages `search-active` class to disable/enable tile fade-in
+- `public/trainer-chat.js` (loaded in `<head>` via `html-layout.ts`)
+  - Not an animation, but it manages `body.advisor-chat-open`: a global `trainer-chat-ended` listener removes the class when the chat ends (fired by an `HX-Trigger` header). Also reformats the `#advisor-chat-last-seen` "minutes ago" label every 60s. Listens on `document` (not `document.body`) because it loads in `<head>`.
 
 ## Data Model
 

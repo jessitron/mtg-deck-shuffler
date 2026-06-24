@@ -9,9 +9,11 @@ import { formatHistoryModalHtmlFragment } from "./view/play-game/history-compone
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
-import { formatAdvisorChatExchangeHtmlFragment } from "./view/play-game/advisor-chat.js";
+import { formatAdvisorChatExchangeHtmlFragment, formatAdvisorChatMessagesInner } from "./view/play-game/advisor-chat.js";
+import { formatTrainerEvalModalHtmlFragment } from "./view/play-game/trainer-eval-modal.js";
 import { recommendMulligan } from "./mulligan/recommendMulligan.js";
 import { askMulliganAdvisorAgent, AdvisorChatContext } from "./mulligan/advisorChat.js";
+import { TrainerConversationStore } from "./mulligan/trainerConversationStore.js";
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -25,7 +27,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort): express.Application {
+export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort, trainerStore: TrainerConversationStore = new TrainerConversationStore()): express.Application {
   const app = express();
 
   // Configure EJS view engine
@@ -479,7 +481,8 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
+      const conversation = trainerStore.get(gameId);
+      const html = formatGamePageHtmlPage(game, {}, res.locals.devMode, conversation);
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
@@ -1273,16 +1276,18 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Dev-mode Mulligan Advisor chat. The hand snapshot is sent to the Trainer ONLY
-  // with the FIRST message of a session ("start"); after that the AgentCore
-  // session holds it, so continuation messages carry only text and we never
-  // re-read game state. One session = one frozen hand. Returns the exchange as
-  // HTML appended to the chat. Placeholder reply until the Trainer is wired in —
-  // see src/mulligan/advisorChat.ts and notes/DESIGN-mulligan-advisor.md.
+  // Dev-mode Trainer chat. The hand snapshot is sent to the Trainer ONLY with the
+  // FIRST message of a session; after that the AgentCore session holds it, so
+  // continuation messages carry only text and we never re-read game state. One
+  // session = one frozen hand. Whether this is the first message is derived from
+  // the backend conversation store (no client-supplied flag). Conversation state
+  // (messages + timestamps + sessionId) lives in trainerStore so it survives page
+  // reloads. Returns the exchange as HTML appended to the chat. Placeholder reply
+  // until the Trainer is wired in — see src/mulligan/advisorChat.ts and
+  // notes/DESIGN-mulligan-advisor.md.
   app.post("/mulligan-advisor/chat/:gameId", async (req, res) => {
     const gameId = parseInt(req.params.gameId);
     const message = (req.body.message ?? "").toString().trim();
-    const isSessionStart = (req.body["session-state"] ?? "start").toString() !== "continue";
 
     if (!message) {
       res.status(400).send(`<div>Cannot send an empty message</div>`);
@@ -1290,11 +1295,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
 
     try {
+      // The session is born on the first message; `isNew` tells us to snapshot.
+      const { conversation, isNew } = trainerStore.startOrGet(gameId);
+      // Always put the Trainer session id on the current span for filtering.
+      trace.getActiveSpan()?.setAttribute("trainer.session_id", conversation.sessionId);
+
       // Snapshot the hand exactly once, on the first message of the session.
       let context: AdvisorChatContext | null = null;
-      if (isSessionStart) {
+      if (isNew) {
         const persistedGame = await persistStatePort.retrieve(gameId);
         if (!persistedGame) {
+          trainerStore.end(gameId); // undo the empty session we just created
           res.status(404).send(`<div>Game ${gameId} not found</div>`);
           return;
         }
@@ -1306,11 +1317,74 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         };
         context = { input, recommendation: recommendMulligan(input) };
       }
-      const reply = await askMulliganAdvisorAgent(context, message);
-      res.send(formatAdvisorChatExchangeHtmlFragment(message, reply));
+      const reply = await askMulliganAdvisorAgent(context, message, conversation.sessionId);
+      const receivedAt = Date.now();
+      trainerStore.recordExchange(gameId, message, reply, receivedAt);
+      res.send(formatAdvisorChatExchangeHtmlFragment(message, reply, receivedAt));
     } catch (error) {
       console.error("Error in advisor chat:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Advisor chat failed"}</div>`);
+    }
+  });
+
+  // End Chat step 1: show the evaluation modal.
+  app.get("/mulligan-advisor/end-chat-modal/:gameId", (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    res.send(formatTrainerEvalModalHtmlFragment(gameId));
+  });
+
+  // End Chat step 2: record the developer's evaluation of the Trainer as a
+  // `trainer.evaluation` span (carrying the full conversation + session id), then
+  // wipe the in-memory conversation. The response resets the chat to its intro and
+  // OOB-clears the modal; the form's after-request closes the drawer.
+  app.post("/mulligan-advisor/end-chat/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const ratingRaw = (req.body.rating ?? "").toString();
+    const feedback = (req.body.feedback ?? "").toString().trim();
+
+    if (!ratingRaw) {
+      res.status(400).send(`<div>A rating is required to end the chat</div>`);
+      return;
+    }
+
+    try {
+      const conversation = trainerStore.get(gameId);
+      const isNa = ratingRaw === "na";
+
+      // Emit the evaluation as a span. The per-turn agent calls are already traced;
+      // including the whole conversation here makes the eval self-contained.
+      const span = trace.getTracer("mtg-deck-shuffler").startSpan("trainer.evaluation");
+      span.setAttribute("trainer.session_id", conversation?.sessionId ?? "");
+      span.setAttribute("trainer.evaluation.rating_na", isNa);
+      if (!isNa) {
+        span.setAttribute("trainer.evaluation.rating", parseInt(ratingRaw));
+      }
+      if (feedback) {
+        span.setAttribute("trainer.evaluation.feedback", feedback);
+      }
+      span.setAttribute("trainer.message_count", conversation?.messages.length ?? 0);
+      span.setAttribute("trainer.conversation", JSON.stringify(conversation?.messages ?? []));
+      span.end();
+      // Also tag the active request span so the evaluation is findable by session.
+      trace.getActiveSpan()?.setAttribute("trainer.session_id", conversation?.sessionId ?? "");
+
+      // Wipe last, so nothing is lost if the emit throws.
+      trainerStore.end(gameId);
+
+      // Reset the chat region to its intro and clear the modal (OOB). The game must
+      // still exist to recompute the intro recommendation. Closing the drawer is
+      // signalled via HX-Trigger (a global listener removes the body class) rather
+      // than the form's after-request, because the OOB swap detaches the form
+      // before that would fire. See public/trainer-chat.js.
+      res.set("HX-Trigger", "trainer-chat-ended");
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      const messagesInner = persistedGame
+        ? formatAdvisorChatMessagesInner(await GameState.fromPersistedGameState(persistedGame, cardRepository))
+        : "";
+      res.send(`${messagesInner}<div id="modal-container" hx-swap-oob="true"></div>`);
+    } catch (error) {
+      console.error("Error ending advisor chat:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not end chat"}</div>`);
     }
   });
 

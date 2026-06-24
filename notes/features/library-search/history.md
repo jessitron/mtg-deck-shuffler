@@ -76,6 +76,10 @@
   - **Behavior improvement**: split/adventure/prepare cards now group under ALL their parts' types (the MTGJSON adapter unions `otherFaceIds` faces). Previously only the front part's type was stored (e.g. `Eiganjo Dynastorian // Replenish` was `[Creature]`; now `[Creature, Sorcery]`).
 - **`ef75759`** - Regenerated all 190 precons + the Archidekt example deck for the `cardTypes` format (PERSISTED_DECK_VERSION 3).
 
+### New Co-Tenant of the Modal System
+
+- The **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`) now shares `#modal-container` and the `/close-modal` route, using the standard `.modal-overlay`/`.modal-dialog`/`.modal-header`/`.modal-body` classes — same pattern as the library modal. No change to library search itself; noted in interactions.md so future modal-system changes account for it.
+
 ## Design Decision: EJS vs TypeScript Template
 
 The library search modal is an EJS template (`views/partials/library-modal.ejs`) rather than a TypeScript view function (like `src/view/play-game/`). This follows the project's convention: EJS for informational/pre-game pages and modals, TypeScript for active gameplay page structure.

@@ -10,6 +10,7 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
+import { TrainerConversationStore } from "./mulligan/trainerConversationStore.js";
 import { createApp } from "./app.js";
 
 function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
@@ -59,7 +60,11 @@ const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
-const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository);
+// Trainer chat conversations live in memory for this single-instance server's
+// lifetime (short-lived dev-mode chats; not persisted).
+const trainerStore = new TrainerConversationStore();
+
+const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, trainerStore);
 const PORT = process.env.PORT || 3333;
 
 

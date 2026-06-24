@@ -47,11 +47,19 @@
 - Added an undocumented developer mode: the secret URL `/dontdie` sets a `devMode` cookie; `formatPageWrapper` then renders `<body class="dev-mode">`. The debug block (`.menu-debug`) in the hamburger menu is `display:none` by default and revealed only under `body.dev-mode` (plus an "Exit dev mode" link → `/dontdie/off`).
 - **Lesson (see architecture.md)**: this is a second instance of the "anchor swap-surviving state on `body`, not on swapped content" principle — and the cleanest one, since the state is known at full-page render and set server-side, so CSS handles everything with **no `afterSwap` JS** (contrast `body.game-menu-open`, which is toggled by JS).
 
-### Mulligan Advisor chat drawer (dev mode)
+### Trainer chat drawer (dev mode)
 
-- **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Mulligan Advisor, opening with a **0.25s CSS transition (dev mode)**.
+(Formerly "Mulligan Advisor chat drawer" — the chat agent is the **Trainer**; the Advisor is the deterministic recommender function.)
+
+- **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Trainer, opening with a **0.25s CSS transition (dev mode)**.
 - **Layout (final shape):** the drawer is a **real flex sibling** of the playmat inside a `.game-layout` flex row (`formatGamePageHtmlPage`). Opening animates the drawer's **width / `flex-basis` from 0 to 380px**; the playmat (`.page-container`, `flex: 0 1 auto`, `min-width: 0`) shrinks to make room and stays centered via `margin: 0 auto`. An inner `.advisor-chat-inner` holds a fixed 380px width so the content doesn't reflow while the outer width animates. (An earlier cut used a `position: fixed` `translateX(100%)` off-canvas overlay with a `margin-right` push on `#game-container` and `body.dev-mode { overflow-x: hidden }` to suppress the resulting horizontal scrollbar — all replaced by the flex-sibling approach, which needs no overflow hack.)
-- **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`), toggled by inline `onclick` on `body`. The drawer is rendered once **outside `#game-container`** (but inside `.game-layout`), so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — visibility/width are pure CSS off the body class.
+- **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`). The drawer is rendered once **outside `#game-container`** (but inside `.game-layout`), so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — visibility/width are pure CSS off the body class.
+
+### Trainer chat: backend conversation state + auto-open + End Chat (dev mode)
+
+- Trainer conversation state moved to a backend in-memory store (`src/mulligan/trainerConversationStore.ts`); the drawer rehydrates on full page load and now **auto-opens** when a conversation exists — `formatPageWrapper` renders `body.advisor-chat-open` server-side (via `active-game-page.ts`), a fourth no-JS instance of the body-anchored pattern (alongside `dev-mode`).
+- `body.advisor-chat-open` is now driven three ways, all on `body`: inline `onclick` ("Improve this"), server-rendered auto-open, and **removed by a global `trainer-chat-ended` listener** in new `public/trainer-chat.js`, fired by an `HX-Trigger: trainer-chat-ended` response header from `POST /mulligan-advisor/end-chat`. The header approach is required because the eval modal's form is detached by its OOB swap before the form's own `after-request` could run.
+- New "End Chat" evaluation modal (`src/view/play-game/trainer-eval-modal.ts`) renders into the shared `#modal-container` with the standard `.modal-*` classes — **no open/close animation** (matches the library modal). `public/trainer-chat.js` also reformats a "minutes ago" label every 60s (not an animation, just text).
 
 ### CSS Organization
 

@@ -850,9 +850,35 @@ body.dev-mode.advisor-chat-open .advisor-chat {
   border-bottom: 1px solid #555;
 }
 
+.advisor-chat-header {
+  gap: 8px;
+}
+
 .advisor-chat-title {
   font-weight: bold;
   color: #eee;
+  margin-right: auto;
+}
+
+/* Relative time of the most recent message; kept current by trainer-chat.js. */
+.advisor-chat-last-seen {
+  color: #888;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.advisor-chat-end {
+  background: none;
+  border: 1px solid #777;
+  color: #ccc;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+
+.advisor-chat-end:hover {
+  background-color: #3a2f2f;
+  color: #fff;
 }
 
 .advisor-chat-close {
@@ -938,6 +964,100 @@ body.dev-mode.advisor-chat-open .advisor-chat {
 
 .advisor-chat-send:hover {
   background-color: #3a5a6e;
+}
+
+/* Trainer "End Chat" evaluation modal. Reuses the shared .modal-* shell (white
+   dialog), so these rules only cover the form-specific bits. */
+.trainer-eval-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trainer-eval-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trainer-eval-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.trainer-eval-feedback {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* DOM order is 5→1; row-reverse shows them 1→5 left-to-right and lets a hovered/
+   checked star fill itself and the lower stars via the ~ sibling selector. */
+.trainer-eval-stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.trainer-eval-star {
+  cursor: pointer;
+}
+
+.trainer-eval-star .trainer-eval-rating {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.trainer-eval-star-glyph {
+  font-size: 1.8rem;
+  color: #ccc;
+  transition: color 0.1s;
+}
+
+.trainer-eval-star:hover .trainer-eval-star-glyph,
+.trainer-eval-star .trainer-eval-rating:checked ~ .trainer-eval-star-glyph {
+  color: #f5b301;
+}
+
+.trainer-eval-na {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: #555;
+}
+
+.trainer-eval-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.trainer-eval-actions button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.trainer-eval-actions .trainer-eval-cancel {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.trainer-eval-actions .trainer-eval-submit {
+  background: #2f4858;
+  color: #fff;
+  border-color: #2f4858;
 }
 
 .exit-dev-mode {

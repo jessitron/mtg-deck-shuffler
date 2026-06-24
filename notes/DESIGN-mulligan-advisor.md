@@ -49,16 +49,55 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
 - **Session model — one session = one frozen hand.** The hand snapshot
   (`{ hand, commanders, mulligansSoFar, recommendation }`) is sent to the Trainer
   **only with the first message** of a conversation, and is **never re-read from
-  game state after that**. The chat form carries a hidden `session-state` field
-  (`start` → flipped to `continue` after the first successful send); the route
-  snapshots the hand only when `start`. The AgentCore session/VM stays alive for
-  the conversation and holds the snapshot, so continuation messages carry only the
-  developer's text. This is deliberate: you discuss *this* hand, not whatever the
-  board shows later (so mulliganing mid-conversation does NOT change the hand under
-  discussion). `askMulliganAdvisorAgent`'s `context` is therefore `null` on every
-  message after the first.
-- Verified: `test/verification/verify-mulligan-advisor.spec.ts` (covers a first
-  message + a continuation message).
+  game state after that**. First-message detection is **derived from the backend
+  store** (no client-supplied flag — see Phase 2.5): `trainerStore.startOrGet`
+  returns `isNew`, and the route snapshots the hand only when `isNew`. The
+  AgentCore session/VM stays alive for the conversation and holds the snapshot, so
+  continuation messages carry only the developer's text. This is deliberate: you
+  discuss *this* hand, not whatever the board shows later (so mulliganing
+  mid-conversation does NOT change the hand under discussion).
+  `askMulliganAdvisorAgent`'s `context` is therefore `null` on every message after
+  the first.
+- Verified: `test/verification/verify-mulligan-advisor.spec.ts`.
+
+### Phase 2.5 — conversation lives on the backend (persistence, session id, evaluation, trace)  ✅ DONE
+All Trainer chat state moved to the backend, consistent with the rest of the app
+(but in-memory only — these are short-lived dev chats and this is a single-instance
+server, so no SQLite/versioning).
+
+- **In-memory store** (`src/mulligan/trainerConversationStore.ts`):
+  `Map<gameId, { sessionId, messages: [{ role, text, receivedAt }] }>`. Created in
+  `server.ts`, injected into `createApp` (defaulted, so tests/callers are unaffected).
+- **Survives page reload.** `GET /game/:gameId` reads the conversation from the
+  store and passes it to `formatGamePageHtmlPage` → `formatAdvisorChatPanel`, which
+  rehydrates the bubbles. When a conversation exists the drawer **auto-opens** via a
+  server-rendered `body.advisor-chat-open` class (same swap-proof pattern as
+  `dev-mode`; no `afterSwap` JS).
+- **Session id.** Generated (`crypto.randomUUID()`) when the conversation is created
+  on the first message. Sent with every agent invocation, and set on the current
+  span as `trainer.session_id` on every chat/eval request.
+- **"Minutes ago" label.** Each bubble carries `data-received-at` (epoch ms, stamped
+  server-side). `public/trainer-chat.js` reformats the most-recent message's age
+  into `#advisor-chat-last-seen` every 60s (relative time is a view concern; the
+  timestamp is the backend's).
+- **Close vs End Chat.** "Close window" (`×`) is a client-side hide only — the
+  conversation lives on. **"End Chat"** opens an evaluation modal
+  (`src/view/play-game/trainer-eval-modal.ts`, reusing the shared `.modal-*` shell in
+  `#modal-container`): optional free-text feedback + a required rating (1–5 stars or
+  N/A). *Cancel* (`/close-modal`) is a no-op; *We're done here*
+  (`POST /mulligan-advisor/end-chat/:gameId`) emits a `trainer.evaluation` span
+  (attributes: `trainer.session_id`, `trainer.evaluation.rating` / `…rating_na`,
+  `trainer.evaluation.feedback`, `trainer.conversation` (full convo JSON),
+  `trainer.message_count`), **then** wipes the store (wipe is last, so nothing is
+  lost). The response resets the chat to its intro, OOB-clears the modal, and closes
+  the drawer via an `HX-Trigger: trainer-chat-ended` header (a global listener in
+  `trainer-chat.js` removes the body class — the form can't do it itself because its
+  OOB swap detaches it first).
+- **Trace context propagation.** `askMulliganAdvisorAgent(context, message, sessionId)`
+  injects the active W3C trace context (`propagation.inject`) into the request
+  headers and POSTs to `TRAINER_AGENT_URL` (when set), so the Trainer's HTTP
+  instrumentation continues the same trace. Unset URL → the placeholder reply, so
+  the UI/transport still works before the Trainer exists.
 
 ### Phase 3 — the Trainer (AgentCore, PR-only)  ⬜ NEXT — built in a separate repo
 - A coding agent with a checkout of this repo and a GitHub token, **scoped to edit
@@ -69,11 +108,14 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
   disagrees with a recommendation, the Trainer should propose adding that hand +
   verdict to the fixtures, so every conversation ratchets the suite forward.
 - **Init prompt for the Trainer: [`agentcore-advisor-agent-prompt.md`](agentcore-advisor-agent-prompt.md).**
-- When wiring it in: replace the body of `askMulliganAdvisorAgent(context, message)`
-  with the relay to AgentCore. `context != null` means "first message — start a new
-  AgentCore session seeded with this hand snapshot"; `context == null` means "send
-  this message to the already-running session." The VM persists for the
-  conversation, so the snapshot is sent exactly once.
+- When wiring it in: most of the relay already exists in
+  `askMulliganAdvisorAgent(context, message, sessionId)` — it POSTs to
+  `TRAINER_AGENT_URL` with `{ sessionId, message, context }` and injects W3C trace
+  context. Just stand up the AgentCore endpoint and set the env var. `context != null`
+  means "first message — start a new AgentCore session seeded with this hand
+  snapshot"; `context == null` means "send this message to the already-running
+  session" (correlate by `sessionId`). The VM persists for the conversation, so the
+  snapshot is sent exactly once.
 - Likely UI follow-ups (not yet built): a "working…" state and a clickable PR link
   in the Trainer's reply (today the reply is a plain string).
 

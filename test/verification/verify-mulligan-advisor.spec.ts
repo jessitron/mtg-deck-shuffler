@@ -93,6 +93,80 @@ test.describe('Mulligan Advisor chat', () => {
     console.log('SUCCESS: advisor chat opens, replies, survives swap, and closes');
   });
 
+  test('conversation comes back after a full page reload, with a "minutes ago" label', async ({ page }) => {
+    await page.goto(`${BASE_URL}/dontdie`);
+    await page.waitForLoadState('networkidle');
+
+    await setupGame(page);
+    await expect(page.locator('body')).toHaveClass(/dev-mode/);
+
+    // Open the drawer and send a message.
+    await page.locator('.mulligan-recommendation-improve').click();
+    await expect(page.locator('body')).toHaveClass(/advisor-chat-open/);
+    await page.locator('.advisor-chat-input').fill('does it weigh my commander colors?');
+    await page.locator('.advisor-chat-send').click();
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(1);
+
+    // The "minutes ago" label reports the most recent message (just sent → "just now").
+    const lastSeen = page.locator('#advisor-chat-last-seen');
+    await expect(lastSeen).toBeVisible();
+    await expect(lastSeen).toContainText(/just now|0 min|less than a minute/i);
+
+    // Reload the whole page. The conversation is backend in-memory, so it returns,
+    // and the drawer auto-opens because a conversation exists.
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    await expect(page.locator('body')).toHaveClass(/advisor-chat-open/);
+    await expect(page.locator('.advisor-chat-bubble-you')).toContainText('does it weigh my commander colors?');
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveText(/Well isn't that special/);
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(1);
+    await expect(page.locator('#advisor-chat-last-seen')).toBeVisible();
+
+    console.log('SUCCESS: conversation survives reload with a minutes-ago label');
+  });
+
+  test('End Chat shows an eval modal; Cancel keeps the chat, "We\'re done here" wipes it', async ({ page }) => {
+    await page.goto(`${BASE_URL}/dontdie`);
+    await page.waitForLoadState('networkidle');
+
+    await setupGame(page);
+    await page.locator('.mulligan-recommendation-improve').click();
+    await page.locator('.advisor-chat-input').fill('feedback for the trainer');
+    await page.locator('.advisor-chat-send').click();
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(1);
+
+    // End Chat opens the evaluation modal.
+    await page.locator('.advisor-chat-end').click();
+    await expect(page.locator('.trainer-eval-modal')).toBeVisible();
+    await expect(page.locator('.trainer-eval-modal')).toContainText(/How did the trainer do/i);
+
+    // Cancel: modal closes, chat is untouched (conversation still present after reload).
+    await page.locator('.trainer-eval-actions .trainer-eval-cancel').click();
+    await expect(page.locator('.trainer-eval-modal')).toHaveCount(0);
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(1);
+
+    // End Chat again, pick a rating, and finish. Rating is required.
+    await page.locator('.advisor-chat-end').click();
+    await expect(page.locator('.trainer-eval-modal')).toBeVisible();
+    await page.locator('.trainer-eval-feedback').fill('helpful, but slow');
+    // The radio is visually hidden behind the star glyph; click the star label.
+    await page.locator('.trainer-eval-star:has(.trainer-eval-rating[value="4"])').click();
+    await expect(page.locator('.trainer-eval-rating[value="4"]')).toBeChecked();
+    await page.locator('.trainer-eval-submit').click();
+
+    // Modal closes, drawer closes, conversation is wiped (gone after reload, drawer closed).
+    await expect(page.locator('.trainer-eval-modal')).toHaveCount(0);
+    await expect(page.locator('body')).not.toHaveClass(/advisor-chat-open/);
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    await expect(page.locator('body')).not.toHaveClass(/advisor-chat-open/);
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(0);
+
+    console.log('SUCCESS: End Chat eval modal cancels and wipes correctly');
+  });
+
   test('chat drawer is absent without dev mode', async ({ page }) => {
     await setupGame(page);
     await expect(page.locator('body')).not.toHaveClass(/dev-mode/);
