@@ -89,3 +89,7 @@ Excluded Card (Archidekt): a card that is associated with a deck, but not curren
 Commander: a card (or two) in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.
 
 Command Zone: This is a location on the screen. It is not a Location (MTG Deck Shuffler, game scope), because commanders are stored separately from game cards; they are not moved.
+
+Mulligan Advisor / Advisor (MTG Deck Shuffler): the deterministic function `recommendMulligan` (`src/mulligan/`) that looks at an opening hand and recommends keep-or-mulligan with a confidence and commentary. It is **plain code, not an LLM** — currently a single land-count heuristic. Shown in the hand section during the Mulligan Stage, dev-mode only. See `notes/DESIGN-mulligan-advisor.md`.
+
+Trainer (MTG Deck Shuffler): the agent (hosted on AWS AgentCore, built in a separate repo) that **improves the Advisor**. You chat with the Trainer in the dev-mode chat drawer; it edits the Advisor's code and opens PRs (PR-only — a human merges). The Trainer is **not** the Advisor: the Advisor gives the recommendation, the Trainer makes the Advisor better. Init prompt: `notes/agentcore-advisor-agent-prompt.md`.

@@ -89,3 +89,6 @@ mtg-deck-shuffler-z1y
 
 - when a game starts, automatically draw a hand of 7 cards. ✅ DONE - claude (auto-draws 7 on start/restart). STILL TODO: sort the hand by card type and then by mana value. Lands first, then creatures, then everything else.
   - real fun: generate a mulligan recommendation. Are there 2-4 lands? With the lands in the hand, what can be played? do any of those get you more land or mana? with only these cards, can you play a creature (could be your commander)? If not, do any of them get you more cards?
+    - 🚧 STARTED — the **Mulligan Advisor** (`recommendMulligan`) + dev-mode **Trainer** chat. Phases 1 & 2 done; the land-count heuristic is the first of these ideas. The rest (what can be played, ramp, creature/commander, card draw) are heuristics the Trainer will grow. See `notes/DESIGN-mulligan-advisor.md`.
+    - ⬜ NEXT (paused on user request, 2026-06-23): build the Trainer agent on AgentCore in a separate repo (`notes/agentcore-advisor-agent-prompt.md`), then point `askMulliganAdvisorAgent()` at it.
+    - ⬜ deferred: download a card database (MTGJSON/Scryfall) so heuristics can read mana cost / CMC / type line without bloating `CardDefinition` (inject via a port).

@@ -24,30 +24,42 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
 
 ## Phases
 
-### Phase 1 — deterministic core + a place to see it  ✅ (this commit)
-- `recommendMulligan({ hand, commanders, mulligansSoFar })` in `src/mulligan/`,
-  returning `{ decision, confidence, commentary }`.
-- **One real heuristic to start: land count.** Keep a 7-card hand with 2–5 lands;
-  mulligan otherwise. Confidence higher for 3–4 lands and for extreme land counts.
-- Unit tests as a table of **blessed cases** — the regression suite the improvement
-  agent must keep green (`test/mulligan/recommendMulligan.test.ts`).
-- Surfaced in the play-game hand section during the mulligan stage, **dev-mode only**.
+### Phase 1 — deterministic core + a place to see it  ✅ DONE (`1034189`)
+- `recommendMulligan({ hand, commanders, mulligansSoFar })` in
+  `src/mulligan/recommendMulligan.ts`, returning `{ decision, confidence, commentary }`.
+- **One real heuristic: land count.** Keep a 7-card hand with 2–5 lands; mulligan
+  otherwise. Confidence higher for 3–4 lands and for extreme land counts. Land
+  detection: `isLand(card) = card.cardTypes.includes("Land")` (catches MDFC lands).
+- Unit tests as a table of **blessed cases** — the regression suite the Trainer
+  must keep green (`test/mulligan/recommendMulligan.test.ts`).
+- Surfaced in the play-game hand section during the mulligan stage, **dev-mode only**
+  (rendered always, CSS-gated by `body.dev-mode` — survives HTMX swaps).
 
-### Phase 2 — chat window + transport
-- Dev-mode chat panel on the play screen.
-- App endpoint that relays `{ hand, commanders, mulligansSoFar, recommendation }` +
-  the developer's messages to the AgentCore agent and streams replies back.
-  Transport TBD; SSE is the natural fit for the existing server-rendered/HTMX stack.
-  Low volume.
+### Phase 2 — chat window + transport  ✅ DONE (`d0fa14d`, `0375723`)
+- "Improve this" button in the recommendation toggles `body.advisor-chat-open`.
+- Dev-mode chat **drawer** (`#advisor-chat`, `src/view/play-game/advisor-chat.ts`)
+  slides in from the right of the playmat. Rendered once in `formatGamePageHtmlPage`
+  **outside `#game-container`**, so the conversation survives game-state swaps.
+- `POST /mulligan-advisor/chat/:gameId` rebuilds the recommendation context and
+  calls `askMulliganAdvisorAgent()` (`src/mulligan/advisorChat.ts`) — **the seam**
+  where the Trainer plugs in. Returns the placeholder `"Well isn't that special"`.
+- **Transport decided:** plain HTMX request/response (not SSE). Trainer turns are
+  naturally request→response (do work, return a summary), and it's low-volume. If
+  the Trainer later streams tokens, revisit (see "next" below).
+- Verified: `test/verification/verify-mulligan-advisor.spec.ts`.
 
-### Phase 3 — the AgentCore agent (PR-only)
+### Phase 3 — the Trainer (AgentCore, PR-only)  ⬜ NEXT — built in a separate repo
 - A coding agent with a checkout of this repo and a GitHub token, **scoped to edit
   `src/mulligan/` + its fixtures**, that opens PRs. Never pushes to `main`.
 - The single guardrail is **PR-only** — humans review and merge. CI (build + test)
-  must pass, which means the agent cannot regress a blessed case without it showing.
+  must pass, which means the Trainer cannot regress a blessed case without it showing.
 - Most valuable artifact from a chat: **new blessed cases**. When the developer
-  disagrees with a recommendation, the agent should propose adding that hand +
+  disagrees with a recommendation, the Trainer should propose adding that hand +
   verdict to the fixtures, so every conversation ratchets the suite forward.
+- **Init prompt for the Trainer: [`agentcore-advisor-agent-prompt.md`](agentcore-advisor-agent-prompt.md).**
+- When wiring it in: replace the body of `askMulliganAdvisorAgent()` with the relay
+  to AgentCore. Likely UI follow-ups (not yet built): a "working…" state and a
+  clickable PR link in the Trainer's reply (today the reply is a plain string).
 
 ## Key design decisions
 
