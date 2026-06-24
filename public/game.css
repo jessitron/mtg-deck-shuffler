@@ -860,11 +860,18 @@ body.dev-mode.advisor-chat-open .advisor-chat {
   margin-right: auto;
 }
 
-/* Relative time of the most recent message; kept current by trainer-chat.js. */
+/* Relative time of the most recent message; kept current by trainer-chat.js.
+   Sits just below the messages list, under the latest reply. */
 .advisor-chat-last-seen {
   color: #888;
   font-size: 0.72rem;
   white-space: nowrap;
+  padding: 2px 12px 6px;
+}
+
+/* No "minutes ago" line until there's a message to age. */
+.advisor-chat-last-seen:empty {
+  display: none;
 }
 
 .advisor-chat-end {

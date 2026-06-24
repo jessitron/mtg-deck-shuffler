@@ -76,7 +76,6 @@ export function formatAdvisorChatPanel(game: GameState, conversation?: TrainerCo
         <div class="advisor-chat-inner">
           <div class="advisor-chat-header">
             <span class="advisor-chat-title">Improve the Advisor</span>
-            <span id="advisor-chat-last-seen" class="advisor-chat-last-seen" aria-live="polite"></span>
             <button type="button" class="advisor-chat-end"
                     hx-get="/mulligan-advisor/end-chat-modal/${game.gameId}"
                     hx-target="#modal-container"
@@ -88,6 +87,9 @@ export function formatAdvisorChatPanel(game: GameState, conversation?: TrainerCo
           <div id="advisor-chat-messages" class="advisor-chat-messages">
             ${messagesInner}
           </div>
+          <!-- "N min ago" for the most recent message, sitting just under the last
+               reply. Updated by public/trainer-chat.js; hidden while empty. -->
+          <div id="advisor-chat-last-seen" class="advisor-chat-last-seen" aria-live="polite"></div>
           <form class="advisor-chat-form"
                 hx-post="/mulligan-advisor/chat/${game.gameId}"
                 hx-target="#advisor-chat-messages"
