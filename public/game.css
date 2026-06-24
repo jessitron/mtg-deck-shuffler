@@ -8,7 +8,7 @@
    stays centered in the remaining space — see the advisor-chat block below. */
 .game-layout {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 /* Page container for game pages. As a flex item it fills the row up to its
@@ -812,6 +812,14 @@ body.dev-mode .mulligan-recommendation {
   flex: 0 0 0;
   width: 0;
   overflow: hidden;
+  /* Sit at the top of the row and stick to the top of the viewport while the
+     (taller) playmat scrolls, so the drawer is never taller than the screen.
+     The playmat can be far taller than the viewport, but the drawer caps at the
+     viewport height so the input stays visible alongside the messages. */
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100dvh;
   transition: width 0.25s ease, flex-basis 0.25s ease;
 }
 
@@ -822,8 +830,8 @@ body.dev-mode.advisor-chat-open .advisor-chat {
 }
 
 /* Fixed-width inner panel: keeps the drawer content from reflowing while the
-   outer width animates. align-items: stretch on .game-layout makes it as tall as
-   the playmat; the messages area (flex: 1) scrolls within. */
+   outer width animates. Fills the drawer's viewport-capped height; the messages
+   area (flex: 1) scrolls within while the header and input stay pinned. */
 .advisor-chat-inner {
   width: 380px;
   height: 100%;
