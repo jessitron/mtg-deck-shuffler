@@ -47,6 +47,32 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     next();
   });
 
+  // Stamp the matched route template (http.route) and route params onto the
+  // request span. Express's auto-instrumentation isn't emitting http.route here,
+  // so we set it ourselves: this gives a low-cardinality field to group traffic
+  // by (e.g. /game/:gameId) while the raw url.path stays high-cardinality. Each
+  // param also becomes its own attribute (http.route.param.gameId, etc.).
+  //
+  // req.route is only populated once routing matches, so we set the attributes
+  // as late as possible. We wrap res.end (rather than listen for "finish")
+  // because the HTTP instrumentation ends the span by wrapping res.end too; our
+  // middleware runs after it, so our wrapper is outermost and runs first, while
+  // the span is still open.
+  app.use((req, res, next) => {
+    const span = trace.getActiveSpan();
+    const originalEnd = res.end.bind(res);
+    res.end = function (...args: Parameters<typeof originalEnd>) {
+      if (span) {
+        if (req.route?.path) span.setAttribute("http.route", req.route.path);
+        for (const [key, value] of Object.entries(req.params)) {
+          span.setAttribute(`http.route.param.${key}`, String(value));
+        }
+      }
+      return originalEnd(...args);
+    } as typeof res.end;
+    next();
+  });
+
   // Developer mode: an undocumented per-browser toggle. Entered via the secret
   // /dontdie URL (sets the cookie below); exited via the menu link to
   // /dontdie/off. When set, full pages render <body class="dev-mode"> and CSS
