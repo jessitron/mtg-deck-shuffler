@@ -50,8 +50,9 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
   (`{ hand, commanders, mulligansSoFar, recommendation }`) is sent to the Trainer
   **only with the first message** of a conversation, and is **never re-read from
   game state after that**. First-message detection is **derived from the backend
-  store** (no client-supplied flag — see Phase 2.5): `trainerStore.startOrGet`
-  returns `isNew`, and the route snapshots the hand only when `isNew`. The
+  store** (no client-supplied flag — see Phase 2.5): the route starts a session
+  (snapshotting the hand) only when one doesn't already exist, and `MulliganTrainer`
+  sends the snapshot to the agent only on the conversation's first turn (Phase 2.6). The
   AgentCore session/VM stays alive for the conversation and holds the snapshot, so
   continuation messages carry only the developer's text. This is deliberate: you
   discuss *this* hand, not whatever the board shows later (so mulliganing
@@ -98,6 +99,32 @@ server, so no SQLite/versioning).
   headers and POSTs to `TRAINER_AGENT_URL` (when set), so the Trainer's HTTP
   instrumentation continues the same trace. Unset URL → the placeholder reply, so
   the UI/transport still works before the Trainer exists.
+
+### Phase 2.6 — clean module boundary for a future chat service  ✅ DONE
+Drew the seam now (while it's cheap) so the Trainer chat can later move to its own
+single-instance service without a redesign. **No behavior change** — pure refactor.
+
+- **`MulliganTrainer` (`src/mulligan/mulliganTrainer.ts`)** is the single facade the
+  app talks to. It owns the conversation lifecycle, the agent relay, and the
+  `trainer.evaluation` span. It **knows nothing about game state, persistence, or the
+  DB** — that import restriction *is* the boundary.
+- **Three doors, mapped to the future network split:**
+  - `startSession(gameId, context)` — **game-server side**. Only the game server can
+    build `context`, so this is the one stateful call. Lazily triggered by the route
+    on the first message (no UX change).
+  - `sendMessage(gameId, message)` — **chat-server side**. In-memory only; sends the
+    snapshot to the agent on the first turn, `null` after. Throws with no session.
+  - `endSession(gameId, evaluation)` + `hasSession` / `getConversation`.
+- **`buildAdvisorChatContext(gameId)` (in `app.ts`)** is the *only* code that reads
+  game state for the Trainer. In the future split it stays on the game server and its
+  result (`AdvisorChatContext`, made of `CardDefinition`s — already serialization-
+  friendly) is what crosses the wire.
+- **Why this cut:** the game server does the one stateful thing (start); the chat
+  server holds the in-memory `Map` and handles every turn. So the game server can
+  scale out while the chat server stays single-instance. Async chat (planned, for
+  agent-cost reasons) lands on `sendMessage` without touching the game side.
+- The relay is injected as an `AskTrainerAgent` port, so `MulliganTrainer` is tested
+  with a **fake** agent (`test/mulligan/mulliganTrainer.test.ts`), no network/mocks.
 
 ### Phase 3 — the Trainer (AgentCore, PR-only)  ⬜ NEXT — built in a separate repo
 - A coding agent with a checkout of this repo and a GitHub token, **scoped to edit

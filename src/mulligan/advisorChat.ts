@@ -7,6 +7,17 @@ export interface AdvisorChatContext {
   recommendation: MulliganRecommendation;
 }
 
+/**
+ * The relay to the Trainer agent, as a port. `askMulliganAdvisorAgent` is the
+ * production implementation (an HTTP POST); tests inject a fake. Defining it as a
+ * type keeps `MulliganTrainer` decoupled from the transport.
+ */
+export type AskTrainerAgent = (
+  context: AdvisorChatContext | null,
+  message: string,
+  sessionId: string
+) => Promise<string>;
+
 const PLACEHOLDER_REPLY = "Well isn't that special";
 
 /**

@@ -10,7 +10,7 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
-import { TrainerConversationStore } from "./mulligan/trainerConversationStore.js";
+import { MulliganTrainer } from "./mulligan/mulliganTrainer.js";
 import { createApp } from "./app.js";
 
 function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
@@ -60,11 +60,12 @@ const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
-// Trainer chat conversations live in memory for this single-instance server's
-// lifetime (short-lived dev-mode chats; not persisted).
-const trainerStore = new TrainerConversationStore();
+// The Trainer chat. Conversations live in memory for this single-instance server's
+// lifetime (short-lived dev-mode chats; not persisted). This is the component that
+// could later move to its own single-instance chat service — see MulliganTrainer.
+const trainer = new MulliganTrainer();
 
-const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, trainerStore);
+const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, trainer);
 const PORT = process.env.PORT || 3333;
 
 
