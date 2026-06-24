@@ -15,6 +15,13 @@ within the app**. Two layers:
 The recommender is plain code, not an LLM call, so the agent improves *code* that a
 human reviews and merges. The LLM is in the improvement loop, never in the hot path.
 
+**Vocabulary (keep these distinct):**
+- **Advisor** = the deterministic function (`recommendMulligan`). It is what says
+  "Keep, 60%". It is NOT an LLM.
+- **Trainer** = the AgentCore-hosted agent that improves the Advisor. You chat with
+  the Trainer (dev-mode chat window); it edits the Advisor's code and opens PRs.
+  The Trainer is not the Advisor.
+
 ## Phases
 
 ### Phase 1 — deterministic core + a place to see it  ✅ (this commit)
@@ -85,6 +92,14 @@ interface MulliganRecommendation {
 
 ## Open questions / future
 
+- **Card database (deferred, planned).** Richer heuristics (mana curve, color
+  sources vs. the commander's identity, ramp/draw counts) need canonical card data
+  — mana cost, CMC, full type line, oracle text. Per the two-faced-cards directive,
+  that data must NOT be re-stored on `CardDefinition`; instead the app + the agent
+  should read it from a **downloadable card database** (e.g. MTGJSON/Scryfall bulk
+  data). Deferred for now — land detection works off `cardTypes` and needs no DB.
+  When we add it, expose it to `recommendMulligan` via a port (keep the function
+  pure/deterministic — inject the lookup, don't do I/O inside).
 - v1 is keep/mulligan only. The London-mulligan "which cards to bottom" advice is a
   natural later step the agent can grow toward.
 - Observability: log each recommendation to Honeycomb (hand summary, decision,

@@ -70,13 +70,13 @@ test.describe('Mulligan Advisor chat', () => {
     await page.locator('.advisor-chat-send').click();
 
     await expect(page.locator('.advisor-chat-bubble-you')).toContainText('your rule ignores my commander colors');
-    await expect(page.locator('.advisor-chat-bubble-advisor')).toContainText("Well isn't that special");
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toContainText("Well isn't that special");
 
     // The conversation survives a game-state swap (rearrange-free action): mulligan.
     await page.locator('button.mulligan-button').click();
     await page.waitForTimeout(1700); // shuffle animation
     await expect(page.locator('body')).toHaveClass(/advisor-chat-open/);
-    await expect(page.locator('.advisor-chat-bubble-advisor')).toContainText("Well isn't that special");
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toContainText("Well isn't that special");
 
     // Close it.
     await page.locator('.advisor-chat-close').click();

@@ -10,9 +10,13 @@ function escapeHtml(text: string): string {
     .replace(/'/g, "&#39;");
 }
 
-/** A single chat bubble. `role` drives styling (developer vs advisor agent). */
-function formatBubble(role: "you" | "advisor", text: string): string {
-  const label = role === "you" ? "You" : "Advisor";
+/**
+ * A single chat bubble. `role` drives styling: the developer ("you") vs the
+ * Trainer — the agent that improves the Advisor function (it is NOT the Advisor;
+ * the Advisor is `recommendMulligan`).
+ */
+function formatBubble(role: "you" | "trainer", text: string): string {
+  const label = role === "you" ? "You" : "Trainer";
   return `<div class="advisor-chat-bubble advisor-chat-bubble-${role}">
             <span class="advisor-chat-bubble-role">${label}</span>
             <span class="advisor-chat-bubble-text">${escapeHtml(text)}</span>
@@ -23,8 +27,8 @@ function formatBubble(role: "you" | "advisor", text: string): string {
  * One request/response exchange, returned by POST /mulligan-advisor/chat and
  * appended (hx-swap="beforeend") to #advisor-chat-messages.
  */
-export function formatAdvisorChatExchangeHtmlFragment(userMessage: string, assistantMessage: string): string {
-  return `${formatBubble("you", userMessage)}${formatBubble("advisor", assistantMessage)}`;
+export function formatAdvisorChatExchangeHtmlFragment(userMessage: string, trainerMessage: string): string {
+  return `${formatBubble("you", userMessage)}${formatBubble("trainer", trainerMessage)}`;
 }
 
 /**
@@ -40,8 +44,8 @@ export function formatAdvisorChatPanel(game: GameState): string {
     mulligansSoFar: game.getMulliganCount(),
   });
 
-  const intro = `The advisor currently says <strong>${rec.decision === "keep" ? "Keep" : "Mulligan"}</strong> ` +
-    `(${Math.round(rec.confidence * 100)}% confident). Tell me how the recommendation could be better.`;
+  const intro = `I train the Advisor. On this hand it says <strong>${rec.decision === "keep" ? "Keep" : "Mulligan"}</strong> ` +
+    `(${Math.round(rec.confidence * 100)}% confident). How should its recommendation be better?`;
 
   return `<aside id="advisor-chat" class="advisor-chat" aria-label="Mulligan Advisor chat">
         <div class="advisor-chat-header">

@@ -8,8 +8,10 @@ below as the agent's instructions.
 
 ---
 
-You are the **Mulligan Advisor improvement agent** for the `mtg-deck-shuffler`
-project — a web app for playing Magic: The Gathering Commander remotely.
+You are the **Trainer** of the Mulligan Advisor for the `mtg-deck-shuffler`
+project — a web app for playing Magic: The Gathering Commander remotely. (The
+**Advisor** is the deterministic function `recommendMulligan` — the thing that
+says "Keep, 60%". You are *not* the Advisor; you improve it.)
 
 ## Your job
 
