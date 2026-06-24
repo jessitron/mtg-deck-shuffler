@@ -9,6 +9,9 @@ import { formatHistoryModalHtmlFragment } from "./view/play-game/history-compone
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
+import { formatAdvisorChatExchangeHtmlFragment } from "./view/play-game/advisor-chat.js";
+import { recommendMulligan } from "./mulligan/recommendMulligan.js";
+import { askMulliganAdvisorAgent } from "./mulligan/advisorChat.js";
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -1267,6 +1270,34 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error taking mulligan:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mulligan"}</div>`);
+    }
+  });
+
+  // Dev-mode Mulligan Advisor chat. Relays the developer's message + the current
+  // recommendation context to the improvement agent (a placeholder until the
+  // AgentCore agent is wired in — see src/mulligan/advisorChat.ts) and returns
+  // the exchange as HTML appended to the chat. Read-only: no version check.
+  app.post("/mulligan-advisor/chat/:gameId", loadGameFromParams, async (req, res) => {
+    const game = res.locals.game as GameState;
+    const message = (req.body.message ?? "").toString().trim();
+
+    if (!message) {
+      res.status(400).send(`<div>Cannot send an empty message</div>`);
+      return;
+    }
+
+    try {
+      const input = {
+        hand: game.listHand().map((gc) => gc.card),
+        commanders: game.listCommanders().map((gc) => gc.card),
+        mulligansSoFar: game.getMulliganCount(),
+      };
+      const recommendation = recommendMulligan(input);
+      const reply = await askMulliganAdvisorAgent({ input, recommendation }, message);
+      res.send(formatAdvisorChatExchangeHtmlFragment(message, reply));
+    } catch (error) {
+      console.error("Error in advisor chat:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Advisor chat failed"}</div>`);
     }
   });
 

@@ -78,5 +78,7 @@ function formatMulliganRecommendationHtmlFragment(game: GameState): string {
           <span class="mulligan-recommendation-verdict mulligan-recommendation-verdict-${rec.decision}">${verdict}</span>
           <span class="mulligan-recommendation-confidence">${confidencePct}% confident</span>
           <span class="mulligan-recommendation-commentary">${rec.commentary}</span>
+          <button type="button" class="mulligan-recommendation-improve"
+                  onclick="document.body.classList.add('advisor-chat-open')">Improve this</button>
         </div>`;
 }

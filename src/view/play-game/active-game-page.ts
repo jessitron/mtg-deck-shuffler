@@ -5,12 +5,17 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
+import { formatAdvisorChatPanel } from "./advisor-chat.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
+  // The advisor chat drawer is rendered once here (outside #game-container, which
+  // HTMX swaps) so the conversation survives game-state swaps. Dev-mode only.
+  const advisorChatHtml = devMode ? formatAdvisorChatPanel(game) : "";
   const contentWithModal = `
     <div class="page-container">
       ${gameContent}
+      ${advisorChatHtml}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>
     </div>`;
