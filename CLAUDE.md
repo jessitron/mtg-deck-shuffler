@@ -139,6 +139,7 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 
 - **Local tests**: environment `local`, dataset `mtg-deck-shuffler` (web/browser spans go to `mtg-deck-shuffler-web`).
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
+- **API key sourcing**: `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` (sourced on `cd` into this dir). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). `verify.sh` sources both in that order; if you start the server by hand for telemetry, do the same.
 
 ## Documentation
 

@@ -20,7 +20,12 @@ NC='\033[0m' # No Color
 echo -e "${YELLOW}Building app...${NC}"
 npm run build
 
-# Source .env file if it exists
+# Source .be BEFORE .env: .env's OTEL_EXPORTER_OTLP_HEADERS interpolates
+# $HONEYCOMB_API_KEY at source time, and that key is defined in .be. Wrong order
+# (or no .be) => telemetry silently 401s ("unknown API key").
+if [ -f .be ]; then
+    source .be
+fi
 if [ -f .env ]; then
     source .env
 fi
