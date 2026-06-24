@@ -47,6 +47,12 @@
 - Added an undocumented developer mode: the secret URL `/dontdie` sets a `devMode` cookie; `formatPageWrapper` then renders `<body class="dev-mode">`. The debug block (`.menu-debug`) in the hamburger menu is `display:none` by default and revealed only under `body.dev-mode` (plus an "Exit dev mode" link → `/dontdie/off`).
 - **Lesson (see architecture.md)**: this is a second instance of the "anchor swap-surviving state on `body`, not on swapped content" principle — and the cleanest one, since the state is known at full-page render and set server-side, so CSS handles everything with **no `afterSwap` JS** (contrast `body.game-menu-open`, which is toggled by JS).
 
+### Mulligan Advisor chat drawer (dev mode)
+
+- **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Mulligan Advisor. Slides in via a `transform: translateX` **CSS transition (0.25s)**, and the main content (`#game-container`) gets a matching `margin-right` transition so the drawer sits beside the playmat rather than over it.
+- **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`). The drawer is rendered once outside `#game-container`, so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — the `margin-right` rule re-matches the freshly-swapped container via a `body.advisor-chat-open #game-container` descendant selector.
+- Added `body.dev-mode { overflow-x: hidden }` to `game.css` so the off-canvas (closed) drawer doesn't introduce a horizontal scrollbar. `game.css` only loads on the game page, so this is game-scoped. Watch point: if the game page ever needs legitimate body-level horizontal scrolling in dev mode, revisit this.
+
 ### CSS Organization
 
 - `ca27f4c` - "Separate game styles from home page styles"
