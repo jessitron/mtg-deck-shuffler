@@ -72,11 +72,19 @@ test.describe('Mulligan Advisor chat', () => {
     await expect(page.locator('.advisor-chat-bubble-you')).toContainText('your rule ignores my commander colors');
     await expect(page.locator('.advisor-chat-bubble-trainer')).toContainText("Well isn't that special");
 
+    // A second message continues the same session (snapshot already sent on the
+    // first); it still gets a reply. Two exchanges now.
+    await page.locator('.advisor-chat-input').fill('what about ramp spells?');
+    await page.locator('.advisor-chat-send').click();
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(2);
+    await expect(page.locator('.advisor-chat-bubble-you')).toHaveCount(2);
+
     // The conversation survives a game-state swap (rearrange-free action): mulligan.
     await page.locator('button.mulligan-button').click();
     await page.waitForTimeout(1700); // shuffle animation
     await expect(page.locator('body')).toHaveClass(/advisor-chat-open/);
-    await expect(page.locator('.advisor-chat-bubble-trainer')).toContainText("Well isn't that special");
+    await expect(page.locator('.advisor-chat-bubble-trainer').first()).toContainText("Well isn't that special");
+    await expect(page.locator('.advisor-chat-bubble-trainer')).toHaveCount(2); // conversation intact across the swap
 
     // Close it.
     await page.locator('.advisor-chat-close').click();

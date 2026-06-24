@@ -40,13 +40,25 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
 - Dev-mode chat **drawer** (`#advisor-chat`, `src/view/play-game/advisor-chat.ts`)
   slides in from the right of the playmat. Rendered once in `formatGamePageHtmlPage`
   **outside `#game-container`**, so the conversation survives game-state swaps.
-- `POST /mulligan-advisor/chat/:gameId` rebuilds the recommendation context and
-  calls `askMulliganAdvisorAgent()` (`src/mulligan/advisorChat.ts`) — **the seam**
-  where the Trainer plugs in. Returns the placeholder `"Well isn't that special"`.
+- `POST /mulligan-advisor/chat/:gameId` calls `askMulliganAdvisorAgent(context, message)`
+  (`src/mulligan/advisorChat.ts`) — **the seam** where the Trainer plugs in. Returns
+  the placeholder `"Well isn't that special"`.
 - **Transport decided:** plain HTMX request/response (not SSE). Trainer turns are
   naturally request→response (do work, return a summary), and it's low-volume. If
   the Trainer later streams tokens, revisit (see "next" below).
-- Verified: `test/verification/verify-mulligan-advisor.spec.ts`.
+- **Session model — one session = one frozen hand.** The hand snapshot
+  (`{ hand, commanders, mulligansSoFar, recommendation }`) is sent to the Trainer
+  **only with the first message** of a conversation, and is **never re-read from
+  game state after that**. The chat form carries a hidden `session-state` field
+  (`start` → flipped to `continue` after the first successful send); the route
+  snapshots the hand only when `start`. The AgentCore session/VM stays alive for
+  the conversation and holds the snapshot, so continuation messages carry only the
+  developer's text. This is deliberate: you discuss *this* hand, not whatever the
+  board shows later (so mulliganing mid-conversation does NOT change the hand under
+  discussion). `askMulliganAdvisorAgent`'s `context` is therefore `null` on every
+  message after the first.
+- Verified: `test/verification/verify-mulligan-advisor.spec.ts` (covers a first
+  message + a continuation message).
 
 ### Phase 3 — the Trainer (AgentCore, PR-only)  ⬜ NEXT — built in a separate repo
 - A coding agent with a checkout of this repo and a GitHub token, **scoped to edit
@@ -57,9 +69,13 @@ human reviews and merges. The LLM is in the improvement loop, never in the hot p
   disagrees with a recommendation, the Trainer should propose adding that hand +
   verdict to the fixtures, so every conversation ratchets the suite forward.
 - **Init prompt for the Trainer: [`agentcore-advisor-agent-prompt.md`](agentcore-advisor-agent-prompt.md).**
-- When wiring it in: replace the body of `askMulliganAdvisorAgent()` with the relay
-  to AgentCore. Likely UI follow-ups (not yet built): a "working…" state and a
-  clickable PR link in the Trainer's reply (today the reply is a plain string).
+- When wiring it in: replace the body of `askMulliganAdvisorAgent(context, message)`
+  with the relay to AgentCore. `context != null` means "first message — start a new
+  AgentCore session seeded with this hand snapshot"; `context == null` means "send
+  this message to the already-running session." The VM persists for the
+  conversation, so the snapshot is sent exactly once.
+- Likely UI follow-ups (not yet built): a "working…" state and a clickable PR link
+  in the Trainer's reply (today the reply is a plain string).
 
 ## Key design decisions
 

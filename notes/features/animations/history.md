@@ -49,9 +49,9 @@
 
 ### Mulligan Advisor chat drawer (dev mode)
 
-- **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Mulligan Advisor. Slides in via a `transform: translateX` **CSS transition (0.25s)**, and the main content (`#game-container`) gets a matching `margin-right` transition so the drawer sits beside the playmat rather than over it.
-- **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`). The drawer is rendered once outside `#game-container`, so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — the `margin-right` rule re-matches the freshly-swapped container via a `body.advisor-chat-open #game-container` descendant selector.
-- Added `body.dev-mode { overflow-x: hidden }` to `game.css` so the off-canvas (closed) drawer doesn't introduce a horizontal scrollbar. `game.css` only loads on the game page, so this is game-scoped. Watch point: if the game page ever needs legitimate body-level horizontal scrolling in dev mode, revisit this.
+- **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Mulligan Advisor, opening with a **0.25s CSS transition (dev mode)**.
+- **Layout (final shape):** the drawer is a **real flex sibling** of the playmat inside a `.game-layout` flex row (`formatGamePageHtmlPage`). Opening animates the drawer's **width / `flex-basis` from 0 to 380px**; the playmat (`.page-container`, `flex: 0 1 auto`, `min-width: 0`) shrinks to make room and stays centered via `margin: 0 auto`. An inner `.advisor-chat-inner` holds a fixed 380px width so the content doesn't reflow while the outer width animates. (An earlier cut used a `position: fixed` `translateX(100%)` off-canvas overlay with a `margin-right` push on `#game-container` and `body.dev-mode { overflow-x: hidden }` to suppress the resulting horizontal scrollbar — all replaced by the flex-sibling approach, which needs no overflow hack.)
+- **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`), toggled by inline `onclick` on `body`. The drawer is rendered once **outside `#game-container`** (but inside `.game-layout`), so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — visibility/width are pure CSS off the body class.
 
 ### CSS Organization
 

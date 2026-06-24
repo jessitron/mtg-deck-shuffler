@@ -47,24 +47,31 @@ export function formatAdvisorChatPanel(game: GameState): string {
   const intro = `I train the Advisor. On this hand it says <strong>${rec.decision === "keep" ? "Keep" : "Mulligan"}</strong> ` +
     `(${Math.round(rec.confidence * 100)}% confident). How should its recommendation be better?`;
 
+  // The outer <aside> animates its width (0 ↔ 380px); the inner wrapper holds a
+  // fixed width so the content doesn't reflow while the drawer slides open/closed.
   return `<aside id="advisor-chat" class="advisor-chat" aria-label="Mulligan Advisor chat">
-        <div class="advisor-chat-header">
-          <span class="advisor-chat-title">Improve the Advisor</span>
-          <button type="button" class="advisor-chat-close"
-                  onclick="document.body.classList.remove('advisor-chat-open')"
-                  aria-label="Close advisor chat">&times;</button>
+        <div class="advisor-chat-inner">
+          <div class="advisor-chat-header">
+            <span class="advisor-chat-title">Improve the Advisor</span>
+            <button type="button" class="advisor-chat-close"
+                    onclick="document.body.classList.remove('advisor-chat-open')"
+                    aria-label="Close advisor chat">&times;</button>
+          </div>
+          <div id="advisor-chat-messages" class="advisor-chat-messages">
+            <div class="advisor-chat-intro">${intro}</div>
+          </div>
+          <form class="advisor-chat-form"
+                hx-post="/mulligan-advisor/chat/${game.gameId}"
+                hx-target="#advisor-chat-messages"
+                hx-swap="beforeend"
+                hx-on::after-request="if(event.detail.successful){this.querySelector('.advisor-chat-input').value='';this.querySelector('[name=session-state]').value='continue'}">
+            <!-- The hand snapshot is sent only with the first message ("start"); after a
+                 successful send this flips to "continue" so the session keeps one frozen hand. -->
+            <input type="hidden" name="session-state" value="start" />
+            <input type="text" name="message" class="advisor-chat-input"
+                   placeholder="e.g. it ignores my commander's colors" autocomplete="off" required />
+            <button type="submit" class="advisor-chat-send">Send</button>
+          </form>
         </div>
-        <div id="advisor-chat-messages" class="advisor-chat-messages">
-          <div class="advisor-chat-intro">${intro}</div>
-        </div>
-        <form class="advisor-chat-form"
-              hx-post="/mulligan-advisor/chat/${game.gameId}"
-              hx-target="#advisor-chat-messages"
-              hx-swap="beforeend"
-              hx-on::after-request="this.reset()">
-          <input type="text" name="message" class="advisor-chat-input"
-                 placeholder="e.g. it ignores my commander's colors" autocomplete="off" required />
-          <button type="submit" class="advisor-chat-send">Send</button>
-        </form>
       </aside>`;
 }

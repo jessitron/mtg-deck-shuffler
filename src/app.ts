@@ -11,7 +11,7 @@ import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { formatAdvisorChatExchangeHtmlFragment } from "./view/play-game/advisor-chat.js";
 import { recommendMulligan } from "./mulligan/recommendMulligan.js";
-import { askMulliganAdvisorAgent } from "./mulligan/advisorChat.js";
+import { askMulliganAdvisorAgent, AdvisorChatContext } from "./mulligan/advisorChat.js";
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -1273,13 +1273,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Dev-mode Mulligan Advisor chat. Relays the developer's message + the current
-  // recommendation context to the improvement agent (a placeholder until the
-  // AgentCore agent is wired in — see src/mulligan/advisorChat.ts) and returns
-  // the exchange as HTML appended to the chat. Read-only: no version check.
-  app.post("/mulligan-advisor/chat/:gameId", loadGameFromParams, async (req, res) => {
-    const game = res.locals.game as GameState;
+  // Dev-mode Mulligan Advisor chat. The hand snapshot is sent to the Trainer ONLY
+  // with the FIRST message of a session ("start"); after that the AgentCore
+  // session holds it, so continuation messages carry only text and we never
+  // re-read game state. One session = one frozen hand. Returns the exchange as
+  // HTML appended to the chat. Placeholder reply until the Trainer is wired in —
+  // see src/mulligan/advisorChat.ts and notes/DESIGN-mulligan-advisor.md.
+  app.post("/mulligan-advisor/chat/:gameId", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
     const message = (req.body.message ?? "").toString().trim();
+    const isSessionStart = (req.body["session-state"] ?? "start").toString() !== "continue";
 
     if (!message) {
       res.status(400).send(`<div>Cannot send an empty message</div>`);
@@ -1287,13 +1290,23 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
 
     try {
-      const input = {
-        hand: game.listHand().map((gc) => gc.card),
-        commanders: game.listCommanders().map((gc) => gc.card),
-        mulligansSoFar: game.getMulliganCount(),
-      };
-      const recommendation = recommendMulligan(input);
-      const reply = await askMulliganAdvisorAgent({ input, recommendation }, message);
+      // Snapshot the hand exactly once, on the first message of the session.
+      let context: AdvisorChatContext | null = null;
+      if (isSessionStart) {
+        const persistedGame = await persistStatePort.retrieve(gameId);
+        if (!persistedGame) {
+          res.status(404).send(`<div>Game ${gameId} not found</div>`);
+          return;
+        }
+        const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+        const input = {
+          hand: game.listHand().map((gc) => gc.card),
+          commanders: game.listCommanders().map((gc) => gc.card),
+          mulligansSoFar: game.getMulliganCount(),
+        };
+        context = { input, recommendation: recommendMulligan(input) };
+      }
+      const reply = await askMulliganAdvisorAgent(context, message);
       res.send(formatAdvisorChatExchangeHtmlFragment(message, reply));
     } catch (error) {
       console.error("Error in advisor chat:", error);

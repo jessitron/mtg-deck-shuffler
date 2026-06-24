@@ -12,12 +12,18 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
   // The advisor chat drawer is rendered once here (outside #game-container, which
   // HTMX swaps) so the conversation survives game-state swaps. Dev-mode only.
   const advisorChatHtml = devMode ? formatAdvisorChatPanel(game) : "";
+  // game-layout is a flex row: the playmat (.page-container) and the advisor
+  // drawer are real siblings. The drawer is OUTSIDE #game-container (which HTMX
+  // swaps) so the conversation survives game-state swaps, but inside game-layout
+  // so it takes real layout space and the playmat stays centered in what's left.
   const contentWithModal = `
-    <div class="page-container">
-      ${gameContent}
+    <div class="game-layout">
+      <div class="page-container">
+        ${gameContent}
+        <div id="modal-container"></div>
+        <div id="card-modal-container"></div>
+      </div>
       ${advisorChatHtml}
-      <div id="modal-container"></div>
-      <div id="card-modal-container"></div>
     </div>`;
   return formatPageWrapper({
     title: `MTG Game - ${game.deckName}`,

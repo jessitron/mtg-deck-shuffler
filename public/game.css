@@ -3,8 +3,21 @@
   --playmat-one: #f5dc8b;
   --playmat-two: #4b7bba;
 }
-/* Page container for game pages */
+/* Flex row holding the playmat and the advisor drawer as siblings (option c).
+   The drawer is a real layout item, so when it opens the playmat shrinks and
+   stays centered in the remaining space — see the advisor-chat block below. */
+.game-layout {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Page container for game pages. As a flex item it fills the row up to its
+   max-width and shrinks (min-width: 0) to make room for the drawer; margin auto
+   keeps it centered in whatever space is left. */
 .page-container {
+  width: 100%;
+  min-width: 0;
+  flex: 0 1 auto;
   max-width: 1800px;
   margin: 0 auto;
   background-image: url(https://cards.scryfall.io/png/front/3/3/33ea0047-bb86-4908-bb73-902d8db3b6de.png);
@@ -789,56 +802,35 @@ body.dev-mode .mulligan-recommendation {
 }
 
 /* --- Mulligan Advisor chat drawer (developer mode) ---
-   A right-side drawer rendered once outside #game-container (so HTMX swaps never
-   wipe the conversation). Hidden by default; revealed only under both
-   body.dev-mode and body.advisor-chat-open. The open state lives on body (never
-   swapped), mirroring body.game-menu-open. z-index sits above the menu panel
-   (500) but below modals (1000/2000) so card modals overlay it. */
+   A flex sibling of the playmat inside .game-layout, rendered once outside
+   #game-container (so HTMX swaps never wipe the conversation). It is only emitted
+   in dev mode, so no CSS display-gating is needed. Closed, it collapses to zero
+   width; opening (body.advisor-chat-open) animates its width to 380px, shrinking
+   the playmat beside it. The open state lives on body (never swapped), mirroring
+   body.game-menu-open. */
 .advisor-chat {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  /* The drawer is fixed to the viewport edge, but it lives inside .page-container
-     in the DOM, which applies margin: 0 2rem to every direct child. Zero that out
-     so the drawer sits flush against the right edge (where the page-container push
-     below expects it). */
-  margin: 0;
-  width: 380px;
-  max-width: 90vw;
-  height: 100%;
-  z-index: 600;
-  flex-direction: column;
-  background-color: #1f1f1f;
-  border-left: 1px solid #555;
-  transform: translateX(100%);
-  transition: transform 0.25s ease;
-}
-
-body.dev-mode .advisor-chat {
-  display: flex;
-}
-
-/* The closed drawer sits off the right edge (translateX(100%)); keep that from
-   adding horizontal scroll. game.css only loads on the game page, so this is
-   game-scoped. */
-body.dev-mode {
-  overflow-x: hidden;
+  flex: 0 0 0;
+  width: 0;
+  overflow: hidden;
+  transition: width 0.25s ease, flex-basis 0.25s ease;
 }
 
 body.dev-mode.advisor-chat-open .advisor-chat {
-  transform: translateX(0);
+  flex-basis: 380px;
+  width: 380px;
+  max-width: 90vw;
 }
 
-/* Make room for the drawer by shifting the whole page (option a). The drawer is
-   fixed to the viewport's right edge, so the gap has to be carved in the same
-   viewport coordinate space — not inside the centered, max-width .page-container.
-   Pushing #game-container (a child of the centered box) put the gap in the wrong
-   place; pushing .page-container itself reserves 380px on the right while its
-   margin-left stays auto, so the page slides over flush against the drawer at any
-   viewport width. */
-body.dev-mode.advisor-chat-open .page-container {
-  margin-right: 380px;
+/* Fixed-width inner panel: keeps the drawer content from reflowing while the
+   outer width animates. align-items: stretch on .game-layout makes it as tall as
+   the playmat; the messages area (flex: 1) scrolls within. */
+.advisor-chat-inner {
+  width: 380px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #1f1f1f;
+  border-left: 1px solid #555;
 }
 
 .advisor-chat-header {
