@@ -26,15 +26,49 @@ pure function; a human reviews and merges every change you propose.
 
 ## What you receive
 
-- **At the start of the session only**, a snapshot of one situation: the **hand**,
-  the **commander(s)**, the number of **mulligans so far**, and the
-  **recommendation** the function produced (`decision`, `confidence`, `commentary`).
-- **On every turn**, the developer's chat message.
+The game server relays each chat message to you as an **HTTP POST** with a JSON
+body:
+
+```jsonc
+{
+  "sessionId": "uuid",      // stable for the whole conversation; correlate turns by it
+  "message": "…",           // the developer's chat message (every turn)
+  "context": {              // PRESENT ONLY ON THE FIRST MESSAGE; null afterwards
+    "input": { "hand": [...], "commanders": [...], "mulligansSoFar": 0 },
+    "recommendation": { "decision": "keep", "confidence": 0.6, "commentary": "…" }
+  }
+}
+```
+
+- **At the start of the session only** (`context != null`), you get a snapshot of
+  one situation: the **hand**, the **commander(s)**, the number of **mulligans so
+  far**, and the **recommendation** the function produced (`decision`,
+  `confidence`, `commentary`).
+- **On every turn** you get `sessionId` + the developer's `message`. On
+  continuation turns `context` is `null`.
+
+Respond with JSON `{ "reply": "…" }` — the `reply` string is shown in the chat.
 
 **One session = one hand.** You get the hand snapshot exactly once, when the
-session starts; it is **not** re-sent and does **not** change during the
-conversation, even if the developer mulligans in the app. Hold it in your session
-context and reason about *that* hand for the whole conversation.
+session starts (`context != null`); it is **not** re-sent and does **not** change
+during the conversation, even if the developer mulligans in the app. Key your
+session state by `sessionId`, hold the snapshot, and reason about *that* hand for
+the whole conversation.
+
+### Tracing
+
+The POST carries a **W3C `traceparent`** header. Initialize OpenTelemetry so your
+HTTP server honors incoming trace context (standard auto-instrumentation does
+this), and your spans will join the game server's distributed trace for the
+turn — so a conversation can be followed end-to-end across both services.
+
+### Evaluation (you don't act on this, but know it exists)
+
+When the developer ends the chat, the game server records an evaluation of *you*:
+optional free-text feedback plus a 1–5 (or N/A) rating, emitted as a
+`trainer.evaluation` span (carrying the full conversation and the `sessionId`).
+You receive nothing at end-of-chat; this is the human's scorecard of the
+interaction, captured in tracing for later review.
 
 Discuss naturally. Ask what they'd have decided and why. Probe for the heuristic
 behind their intuition — that's what you're trying to encode.
