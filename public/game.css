@@ -799,6 +799,11 @@ body.dev-mode .mulligan-recommendation {
   position: fixed;
   top: 0;
   right: 0;
+  /* The drawer is fixed to the viewport edge, but it lives inside .page-container
+     in the DOM, which applies margin: 0 2rem to every direct child. Zero that out
+     so the drawer sits flush against the right edge (where the page-container push
+     below expects it). */
+  margin: 0;
   width: 380px;
   max-width: 90vw;
   height: 100%;
@@ -825,12 +830,15 @@ body.dev-mode.advisor-chat-open .advisor-chat {
   transform: translateX(0);
 }
 
-/* Push the game content over so the drawer sits beside the playmat, not over it.
-   Applied via a descendant selector from body, so the freshly-swapped
-   #game-container re-matches automatically (no afterSwap JS). */
-body.dev-mode.advisor-chat-open #game-container {
+/* Make room for the drawer by shifting the whole page (option a). The drawer is
+   fixed to the viewport's right edge, so the gap has to be carved in the same
+   viewport coordinate space — not inside the centered, max-width .page-container.
+   Pushing #game-container (a child of the centered box) put the gap in the wrong
+   place; pushing .page-container itself reserves 380px on the right while its
+   margin-left stays auto, so the page slides over flush against the drawer at any
+   viewport width. */
+body.dev-mode.advisor-chat-open .page-container {
   margin-right: 380px;
-  transition: margin-right 0.25s ease;
 }
 
 .advisor-chat-header {
