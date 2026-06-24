@@ -43,4 +43,22 @@ The point of the cut: the game server does the one stateful thing (start) and ca
 scale out; the chat server holds the in-memory conversation `Map` and stays
 single-instance. Planned async chat lands on `sendMessage` with no game-side change.
 
+## What the seam buys the *process*, not just runtime
+
+The contract crossing the boundary is small and explicit: `AdvisorChatContext` (built
+by `buildAdvisorChatContext`, handed over at `startSession`). That narrows the
+feature-owner consultation step (see CLAUDE.md "Task Implementation Process"):
+
+- **Changes *inside* `MulliganTrainer`** (conversation handling, agent relay,
+  `sendMessage`, evaluation) **do not need the game feature owners.** The boundary
+  guarantees this code can't reach game domain, so it can't affect them.
+- **Changes to the contract** — i.e. what gets snapshotted at `startSession` — **do**
+  need them, because building the snapshot reaches into game state. In particular the
+  **two-faced-cards** owner, since the snapshot carries `CardDefinition`s and they
+  explicitly flagged that consumer (see notes/DESIGN-mulligan-advisor.md, "Key design
+  decisions").
+
+So the seam is also a consultation boundary: cross it and you consult; stay inside and
+you don't.
+
 Full detail and rationale: notes/DESIGN-mulligan-advisor.md (Phase 2.6).
