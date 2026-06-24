@@ -88,6 +88,29 @@ For example, if the service is started with `node dist/server.js`, change it to 
 
 For example, if the service is started with `ts-node src/index.ts`, change it to `ts-node -r src/tracing.ts src/index.ts`.
 
+#### ESM gotcha: `-r` does NOT instrument `import`ed modules
+
+`-r` / `--require` is the **CommonJS** preload. OTel's instrumentations patch modules
+via `require-in-the-middle`, which only intercepts `require()` calls. If this project is
+ESM (`"type": "module"` in package.json, or `module: ESNext`/`NodeNext` in tsconfig),
+then framework modules are loaded with `import` and **never get patched**. The classic
+symptom: `instrumentation-http` still works (it patches Node's built-in `http`, reachable
+through the CJS preload), so you see bare `GET`/`POST` server spans — but there are **no
+framework spans** (no `middleware - …`, no `request handler - …`) and **no `http.route`**,
+and the root span name never upgrades from `GET` to `GET /your/:route`.
+
+Fix: register the `import-in-the-middle` ESM loader hook and launch with `--import`
+instead of `-r`. In `tracing.ts`, before `sdk.start()`:
+
+```
+import { register } from "node:module";
+register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
+```
+
+Then launch with `node --import ./dist/tracing.js dist/server.js`. (`@opentelemetry/instrumentation`
+re-exports the `import-in-the-middle` hook; it's already a transitive dependency.)
+Verify by confirming `middleware - …` / `request handler - …` spans and `http.route` appear.
+
 ### Option 2: load tracing in the main entry point
 
 [] In the main entry point, add the following code before anything else, import the tracing module.
@@ -132,6 +155,13 @@ If OTEL_EXPORTER_OTLP_HEADERS is undefined, then your environment variables are 
 OTEL_EXPORTER_OTLP_HEADERS should look a bit like "x-honeycomb-team=hcaik_1234567890abcdef1234567890abcdef". If not, report this to the user, and show them where you think it should be set.
 
 If it is getting a 400, then the endpoint might be wrong. Print that environment variable and check its value. Report to the user.
+
+### If HTTP spans appear but framework spans and `http.route` are missing
+
+You see bare `GET`/`POST` server spans, but no `middleware - …`/`request handler - …`
+spans and no `http.route`. This is almost always the ESM `-r` gotcha — see
+"ESM gotcha" under "Load the initialization before startup" above. Switch to the
+`import-in-the-middle` hook + `--import`.
 
 ### If no data is found in Honeycomb
 
