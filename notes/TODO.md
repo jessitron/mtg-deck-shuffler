@@ -8,25 +8,21 @@ I made a library search feature owner, because we were working on that feature.
 
 I'm making a two-faced card feature owner, because the feature interactions with that are extensive, and I tend to forget.
 
-- make the skill links
-
 CLAUDE.md is where agents get told to consult feature owners.
-
-Do I need a feature owner feature owner? yikes
 
 ## Structural
 
-- migrate the active game page to use ejs templates mtg-deck-shuffler-057
+- migrate the active game page to use ejs templates 
   - make the head.ejs take a list of extra .js, so we don't load game.js on the homepage for instance
 
 ## Features
 
-## Add card sleeves mtg-deck-shuffler-19r
+## Add card sleeves 
 
 - on the deck preview page, choose inner and outer sleeve colors
-- inner: mtg-deck-shuffler-10u
+- inner: 
 
-### Spectator mode mtg-deck-shuffler-qe1
+### Spectator mode 
 
 It would be cool if Charlotte could see our hands without worrying about messing up our game state.
 
@@ -38,11 +34,11 @@ It would be cool if Charlotte could see our hands without worrying about messing
 
 ## More Things to change
 
-- add a play counter to the command zone mtg-deck-shuffler-mwz
+- add a play counter to the command zone 
 
-- ~~mulligan button which puts them all back and reshuffles mtg-deck-shuffler-9bh~~ DONE - claude (button above the hand during the hand-acceptance stage; increments "Mulligan #2"…)
+- ~~mulligan button which puts them all back and reshuffles ~~ DONE - claude (button above the hand during the hand-acceptance stage; increments "Mulligan #2"…)
 
-- make cmd-Z undo mtg-deck-shuffler-236
+- make cmd-Z undo 
 
 ### animations
 
@@ -58,19 +54,19 @@ an example from claude desktop:
      hx-vals="js:{currentX: document.getElementById('image').dataset.currentX, 
                   currentY: document.getElementById('image').dataset.currentY}">
 
-mtg-deck-shuffler-z1y
+
 
 ### other
 
 - other-language editions. Offer English translations. Example: adventurous impulse in squirrel girl deck 23735063
 
-- in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table. mtg-deck-shuffler-199
+- in cards on table, track how it got there. Give people 'discard' and 'exile' buttons, which move it to the table. Display how it got there in the list of cards on the table. 
 
-- let people pick a playmat mtg-deck-shuffler-eds
+- let people pick a playmat 
 
-- let people pick sleeves mtg-deck-shuffler-19r
+- let people pick sleeves 
 
-- do we want redo? mtg-deck-shuffler-014
+- do we want redo? 
 
 [x] undo button will drive the implementation of state history tracking, with events.
 
@@ -81,7 +77,7 @@ mtg-deck-shuffler-z1y
   [ ] identify crucial fields to add as attributes
   [ ] create a library of utility functions specific to this project
 
-- game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty mtg-deck-shuffler-chq
+- game IDs should be fun word combos instead of numbers. That makes them not derivable, and still looks pretty 
 
 - it is physically possible for your commander to be in your library or hand. shit.
 
@@ -92,3 +88,7 @@ mtg-deck-shuffler-z1y
     - 🚧 STARTED — the **Mulligan Advisor** (`recommendMulligan`) + dev-mode **Trainer** chat. Phases 1 & 2 done; the land-count heuristic is the first of these ideas. The rest (what can be played, ramp, creature/commander, card draw) are heuristics the Trainer will grow. See `notes/DESIGN-mulligan-advisor.md`.
     - ⬜ NEXT (paused on user request, 2026-06-23): build the Trainer agent on AgentCore in a separate repo (`notes/agentcore-advisor-agent-prompt.md`), then point `askMulliganAdvisorAgent()` at it.
     - ⬜ deferred: download a card database (MTGJSON/Scryfall) so heuristics can read mana cost / CMC / type line without bloating `CardDefinition` (inject via a port).
+
+- remove the deck title section from the game page entirely
+
+- move the library to the right, that's where I put it in a real game
