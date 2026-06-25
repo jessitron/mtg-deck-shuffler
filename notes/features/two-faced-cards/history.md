@@ -73,7 +73,8 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 ## Test Infrastructure
 
 - **`b937ea2`** - Add two-faced card game to seed test data
-  - Seed script creates a game with "From Cute to Brute" precon (many two-faced cards) for testing
+  - The seed script created a game with "From Cute to Brute" precon (many two-faced cards) for testing
+  - The seed script (`src/scripts/seed-test-data.ts`) was later removed because it stopped working
 
 ## Layout-Gated Classification (single-image multi-face cards)
 

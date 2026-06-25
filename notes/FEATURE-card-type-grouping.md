@@ -19,9 +19,8 @@ Cherry-pick or re-implement the changes from commit `99322b9`. The diff touches:
 ## How to test
 
 1. Start the app: `PORT=3344 ./run`
-2. Run `npm run seed` to create test data
-3. Check `test/TEST-DATA.md` for URLs — it includes a direct link to the library search modal with `?groupBy=type`
-4. Verify in the browser:
+2. Create a game through the app (Home → Deck Selection → Deck Review → Play Game), then open the library search modal (append `?groupBy=type` to test grouping directly)
+3. Verify in the browser:
    - Library modal opens normally (ungrouped)
    - Clicking "Group by Type" groups cards by type with headers
    - Clicking again returns to library order

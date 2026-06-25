@@ -89,5 +89,4 @@
 
 | File | Role |
 |---|---|
-| `src/scripts/seed-test-data.ts` | Seeds game with "From Cute to Brute" precon (many two-faced cards) |
 | `test/decks/` | Local deck files — some contain two-faced cards |

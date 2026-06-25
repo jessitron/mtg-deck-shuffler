@@ -72,7 +72,6 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Fix at `e904a8c` addressed this — regression risk if card container structure changes
 
 ### Test Infrastructure
-- Seed script (`src/scripts/seed-test-data.ts`) creates a game with "From Cute to Brute" precon (47 two-faced cards)
 - Test generators (`test/generators.ts`) generate `cardTypes` and a `twoFaced` boolean (no `CardFace`/`backFace`)
 - `nicolBolas` fixture in generators is a ready-made two-faced card for tests
 
