@@ -5,11 +5,15 @@
 }
 
 body {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Ovo", Arial, sans-serif;
   text-align: left;
   margin: 0;
   background-color: var(--background-color);
   position: relative;
+}
+
+button {
+  font-family: inherit;
 }
 
 :root {
