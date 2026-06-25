@@ -55,3 +55,12 @@ A change is home when:
 - No user accounts / user tracking yet — someday, but not until we must.
 - No backwards-compatibility for persisted data — failing loudly on old versions is enough.
 - Not a public, multi-tenant product at scale; no native app (web only).
+
+## Tracking
+
+Where the live work for this project is recorded. The Mountains above are mirrored as Linear
+milestones; landings, sea monsters, and treasures live as issues — never in this doc.
+
+- backend: linear
+- project: [MTG Deck Shuffler](https://linear.app/honeycombio/project/mtg-deck-shuffler-7e9e20cc93e9)
+- team: jessitron

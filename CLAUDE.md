@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Use this additional RESPONSE_PREFIX: 🪄
 
+## Seamap
+
+This repo's seamap — the chart (North Star, Mountains, Safe Harbor) and the tracking adapter —
+lives in `SEAMAP.md`. Orient, capture, and log proactively; use `drop-buoy` to capture work
+without derailing.
+
 ## Project Overview
 
 MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks from MTGJSON or custom decks from Archidekt, displaying card info for remote gameplay via Mural/Miro and Discord.
