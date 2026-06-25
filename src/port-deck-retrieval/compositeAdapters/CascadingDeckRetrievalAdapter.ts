@@ -10,11 +10,11 @@ export class CascadingDeckRetrievalAdapter implements RetrieveDeckPort {
   listAvailableDecks(): AvailableDecks {
     const allDecks = this.adapters.flatMap((a) => a.listAvailableDecks());
 
-    // Sort by release date (newest first), treating missing dates as oldest
+    // Sort by full release date (newest first), treating missing dates as oldest
     return allDecks.sort((a, b) => {
-      const yearA = a.metadata?.createdYear ?? 0;
-      const yearB = b.metadata?.createdYear ?? 0;
-      return yearB - yearA; // Descending order (newest first)
+      const dateA = a.metadata?.createdAt ?? "";
+      const dateB = b.metadata?.createdAt ?? "";
+      return dateB.localeCompare(dateA); // Descending order (newest first)
     });
   }
 

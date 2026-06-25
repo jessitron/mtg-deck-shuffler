@@ -25,8 +25,8 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           imageUrl: getCardImageUrl(cmd, "art_crop", "front")
         }));
 
-        const createdYear = deck.provenance?.createdAt
-          ? new Date(deck.provenance.createdAt).getFullYear()
+        const createdAt = deck.provenance?.createdAt
+          ? new Date(deck.provenance.createdAt).toISOString()
           : undefined;
 
         // Format release date as "Month Year"
@@ -47,7 +47,7 @@ export class LocalFileAdapter implements RetrieveDeckPort {
           localFile: filename,
           metadata: {
             commanders,
-            createdYear,
+            createdAt,
             releaseDate
           }
         };

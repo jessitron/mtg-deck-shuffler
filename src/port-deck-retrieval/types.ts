@@ -33,7 +33,7 @@ export interface PreconMetadata {
     set?: string;
     imageUrl?: string;
   }>;
-  createdYear?: number;
+  createdAt?: string; // Full release date (ISO string), used for sorting
   releaseDate?: string; // Formatted as "Month Year" (e.g., "December 2024")
 }
 
