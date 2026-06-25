@@ -3,14 +3,6 @@ import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 
 export const CARD_BACK = "/images/mtg-card-back.jpg";
 
-const app_title = "MTG Deck Shuffler";
-
-export function formatTitleHtmlFragment(): string {
-  return `<div class="title-container">
-      <h1 class="homepage-title">${app_title}</h1>
-      </div>`;
-}
-
 export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number, expectedVersion?: number): string {
   const versionParam = expectedVersion !== undefined ? `?expected-version=${expectedVersion}` : '';
   return `<span class="card-name-link clickable-card-name"

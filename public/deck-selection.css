@@ -97,12 +97,6 @@
   box-sizing: border-box;
 }
 
-.archidekt-input-section .lets-play-button {
-  align-self: flex-start;
-  height: 3rem;
-  box-sizing: border-box;
-}
-
 .validation-message {
   text-align: left;
   margin-top: 5px;
