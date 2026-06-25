@@ -3,6 +3,10 @@
   --playmat-one: #f5dc8b;
   --playmat-two: #4b7bba;
 }
+
+body {
+  font-family: "Ovo", serif;
+}
 /* Flex row holding the playmat and the advisor drawer as siblings (option c).
    The drawer is a real layout item, so when it opens the playmat shrinks and
    stays centered in the remaining space — see the advisor-chat block below. */
@@ -33,20 +37,6 @@
 .page-container>* {
   margin-left: 2rem;
   margin-right: 2rem;
-}
-
-/* Deck review page headers */
-h4.cute-header {
-  font-family: var(--fancy-title-font);
-  font-size: 2rem;
-  font-weight: 300;
-}
-
-.cute-header-subtitle {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  margin-top: -1px;
 }
 
 /* Animation classes for card movement */
