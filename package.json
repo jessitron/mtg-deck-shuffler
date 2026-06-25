@@ -19,8 +19,7 @@
     "decks:backfill-images": "npm run build && node dist/scripts/backfill-deck-images.js",
     "decks:backfill-set-names": "npm run build && node dist/scripts/backfill-set-names.js",
     "card:inspect": "node dist/scripts/inspect-archidekt-card.js",
-    "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js",
-    "seed": "npm run build && node dist/scripts/seed-test-data.js"
+    "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
