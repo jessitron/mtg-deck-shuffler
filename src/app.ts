@@ -581,25 +581,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   });
 
   // Redirects to Choose Deck
-  app.post("/end-game", async (req, res) => {
-    const gameId: number = parseInt(req.body["game-id"]);
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (persistedGame) {
-        // Mark the game as ended by updating its status
-        const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-        // TODO: Add an "ended" status to GameState if needed
-        await persistStatePort.save(game.toPersistedGameState());
-      }
-
-      res.redirect("/choose-any-deck");
-    } catch (error) {
-      console.error("Error ending game:", error);
-      res.redirect("/");
-    }
-  });
-
   // Modal endpoints
   // Returns modal fragment - library contents modal
   app.get("/library-modal/:gameId", async (req, res) => {

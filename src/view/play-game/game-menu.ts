@@ -57,12 +57,7 @@ function formatEndGameActionsHtmlFragment(game: GameState): string {
         <input type="hidden" name="game-id" value="${game.gameId}" />
         <button type="submit">Restart Game</button>
       </form>
-      <form method="post" action="/end-game" class="inline-form">
-        <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button type="submit">Choose Another Deck</button>
-      </form>
-      <form method="get" action="/" class="inline-form">
-        <button type="submit">Home</button>
-      </form>
+      <a href="/choose-any-deck">Choose Another Deck</a>
+      <a href="/">Home</a>
     </div>`;
 }

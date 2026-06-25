@@ -555,14 +555,21 @@ body.game-menu-open .game-menu-panel {
   border-top: none;
 }
 
-.menu-section button {
+.menu-section button,
+.end-game-actions a {
   width: 100%;
+  box-sizing: border-box;
   padding: 10px 16px;
   font-size: 1rem;
   border: none;
   cursor: pointer;
   text-align: left;
   border-radius: 4px;
+}
+
+.end-game-actions a {
+  display: block;
+  text-decoration: none;
 }
 
 .menu-section .inline-form {
@@ -579,12 +586,14 @@ body.game-menu-open .game-menu-panel {
   color: black;
 }
 
-.end-game-actions button {
+.end-game-actions button,
+.end-game-actions a {
   background-color: #6c757d;
   color: white;
 }
 
-.end-game-actions button:hover {
+.end-game-actions button:hover,
+.end-game-actions a:hover {
   background-color: #5a6268;
 }
 
