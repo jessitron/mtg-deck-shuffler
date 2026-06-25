@@ -25,12 +25,13 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 - **Workflow**: Use subagents - research agent to understand codebase, then separate agents for each conceptual change.
 - **Testing**: User hates mocks. Use only fakes. Use generators in `test/generators.ts` for Deck objects. For PersistedGameState, instantiate GameState with generated Deck and call methods.
-- **Cleanup**: Look for newly-unused code to delete after each change.
+- **Cleanup**: Look for newly-unused code to delete after each change. Especially unused CSS.
 
 ## UI Style
 
 - Square corners except on physical round elements (cards, playmats)
 - Latest styling in `public/site.css`
+- The site pages (/, /choose) have different styles from the play pages (/prepare, /game)
 
 ## Key Files
 
@@ -38,7 +39,7 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 - `src/app.ts` - Express routes and middleware
 - `src/server.ts` - Server initialization and dependency creation
-- `run` - Shell script that sources `.env` and runs the app
+- `run` - Shell script that sources `.env` and runs the app. Jess uses this
 
 **Views** (EJS templates):
 
@@ -54,11 +55,7 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 **Styles**:
 
-- `public/site.css` (site-wide), `styles.css` (game), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
-
-**Scripts**:
-
-- `public/home-v3-parallax.js`, `deck-selection.js`
+- `public/site.css` (site-wide), `styles.css` (game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
 
 ## Development Commands
 
