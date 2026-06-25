@@ -21,8 +21,21 @@ but always in service of a single goal: animations that **spark joy** and feel
 physically real. His blog at https://blog.maximeheckel.com is the reference
 for this project's motion design.
 
-He uses **Framer Motion** as his primary animation library for React. This
-project should too.
+Maxime uses **Framer Motion** with React. **This project does not — yet.**
+
+> **Stack reality (read this first).** Today the app is **HTMX + server-rendered
+> HTML + CSS**. There is no React and no Framer Motion. So this skill has two
+> layers:
+>
+> - **The philosophy is what matters now.** "The Core Philosophy" and
+>   "Animating in HTMX + CSS today" (below) are the parts that apply to the
+>   current app. Bring Maxime's *intent* — motion as communication, physical
+>   weight, no decoration — to the CSS-keyframes mechanism we actually have.
+> - **The Framer Motion specifics are the future tabletop.** Everything under
+>   "⏭ The future tabletop" describes the shared-canvas tabletop we'll build
+>   later (likely React + Framer Motion). It is the vision, not current
+>   guidance. Don't reach for `motion`, `AnimatePresence`, or springs in the
+>   HTMX codebase — translate the *feel* into CSS instead.
 
 ---
 
@@ -43,6 +56,55 @@ Animation in this canvas serves two purposes:
 doing one of these two jobs.
 
 ---
+
+## Animating in HTMX + CSS today
+
+This is how motion actually works in the current app. Apply the philosophy
+above *through* this mechanism — don't fight it.
+
+**The mechanism is server-driven.** A player action mutates `GameState`, which
+returns a `WhatHappened` object describing what changed. The server re-renders
+HTML; `getAnimationClassHelper()` (`src/view/common/shared-components.ts`) maps
+`WhatHappened` to CSS class strings (e.g. `card-moved-left`); HTMX swaps the new
+HTML in and the browser runs the CSS animation on the freshly-arrived elements.
+Keyframes live in `public/game.css`. See the **animations feature owner**
+(`animations-context` skill, `notes/features/animations/`) before touching any
+of this.
+
+**Consequences for how you animate today:**
+
+- **Springs become easing curves.** We can't run Framer's spring solver, so the
+  *feel* Maxime wants comes from CSS keyframes + a deliberate easing curve. A
+  "snappy, no bounce" tap is `ease-out`; a little settle/pop is a keyframe that
+  overshoots and returns. Pick the curve to communicate weight; don't reach for
+  linear `transition: duration`.
+- **Entrance-only.** New content arrives with its animation class already on it,
+  so entrances are easy. **Exit animations don't work in our swap model** — the
+  client-driven exit (JS class + delayed swap) was tried and removed in
+  `943ece6`. Don't promise an exit animation; the element is gone the moment
+  HTMX swaps. (This is the real-world limit behind the "always use
+  `AnimatePresence`" advice below — we can't, yet.)
+- **The settle-phase gotcha.** Manually adding a class in `htmx:afterSwap` to an
+  element *inside* a swapped region gets silently reverted ~20ms later by HTMX's
+  settle phase. Anchor swap-surviving UI state on a stable element (`body`),
+  never on swapped content. See `architecture.md` for the full write-up.
+- **What actually animates right now:** card flip (a CSS `transition` toggling
+  `rotateY(180deg)` via `.card-flipped` — not a two-phase JS flip), card
+  move/draw/shuffle keyframes in `game.css`, and the home-page parallax.
+- **Parallax is the one Framer idea that already maps.** `home-v3-parallax.js`
+  drives CSS custom properties from a passive scroll listener with
+  `will-change: transform` — exactly the approach in the parallax section below.
+
+---
+
+# ⏭ The future tabletop (React + Framer Motion)
+
+**Everything below is the vision for the shared-canvas tabletop we'll build
+later, not how the app works today.** It assumes React + Framer Motion and a
+multiplayer canvas with life trackers, counters, zones, and AI suggestions —
+none of which exist yet. Keep it as the design target; when we build the
+tabletop we'll revisit the stack. For current work, use "Animating in HTMX +
+CSS today" above and translate the *feel*, not the API.
 
 ## Maxime's Principles, Applied to This Project
 
