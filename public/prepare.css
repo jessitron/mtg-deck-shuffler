@@ -106,22 +106,6 @@
   font-size: clamp(1.2rem, 3vw, 2rem);
 }
 
-
-h4.cute-header {
-  font-family: var(--fancy-title-font);
-  font-size: 2rem;
-  font-weight: 300;
-  margin-bottom: 5px;
-  color: var(--cute-heading-color);
-}
-
-.cute-header-subtitle {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-  margin-top: -1px;
-}
-
 .library-search-list {
   list-style: none;
   padding: 0;
