@@ -20,6 +20,22 @@ must feel approachable. That is exactly the problem Rasmus spent years solving.
 Read his documented principles at https://rsms.me/work/figma/ before proposing
 any significant UI direction.
 
+> **Scope reality (read this first).** This skill describes the **future
+> tabletop** — a shared, multiplayer, in-app "god-view canvas" with draggable
+> cards, tap-to-rotate, movable zones, life trackers, on-card counters, tokens,
+> auras, and an AI "dad" suggestion layer. **None of that exists yet.** Today
+> the app is a **single-player card-info view** (HTMX + EJS/TS-string pages);
+> the shared board lives in an *external* tool (Mural/Miro) plus Discord, per
+> `CLAUDE.md`. So treat everything below as the design target for when we build
+> the tabletop — not a description of the current app. For UI work on the app
+> as it exists today, the principles (low barriers/high ceilings, direct
+> manipulation, systematic-not-decorative, when-in-doubt-leave-it-out) still
+> apply; the specific canvas/zone/counter mechanics do not.
+>
+> One alignment note: `CLAUDE.md` says "square corners except on physical round
+> elements (cards, playmats)." Honor that in current work — only cards and
+> playmats get rounded corners.
+
 ---
 
 ## The Core Constraint

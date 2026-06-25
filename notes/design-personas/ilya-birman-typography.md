@@ -23,6 +23,26 @@ shared canvas.
 Read his writing at https://ilyabirman.net/meanwhile/ before proposing any
 significant typographic direction.
 
+> **Stack reality (read this first).** This skill has two layers, and they don't
+> currently agree with the shipped app:
+>
+> - **The principles apply now.** Stable alignment, large click areas, immediate
+>   feedback, hand-holding-not-patronizing, and contrast over art are all
+>   directly useful for the current HTMX app. Use them.
+> - **The font/size specifics describe a future direction, not the current
+>   site.** The app today already has its own type identity: **Orbitron**
+>   (primary sans), **Inter** (secondary sans), **Ovo** (serif), **Rampart One**
+>   (`--fancy-title-font`, set in `public/styles.css`), and **Risque** (cursive
+>   accents). That deliberately violates this skill's "one sans-serif only,
+>   Cinzel/Cormorant + Inter/DM Sans" advice, and the home page ships an
+>   all-caps `BEGIN` button. Several specifics here (life-tracker sizes, zone
+>   labels, counter badges) are for the not-yet-built tabletop canvas.
+>
+> **Before applying any font/size guidance from this skill, match the existing
+> type system** (the fonts above + `public/site.css`, `public/game.css`) unless
+> you've been told we're migrating the site's typography. The skill's specific
+> typeface picks are a proposal, not the current standard.
+
 ---
 
 ## The Core Constraint
