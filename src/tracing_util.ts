@@ -1,4 +1,4 @@
-import { Attributes, SpanStatusCode, trace } from "@opentelemetry/api";
+import { Attributes, Span, SpanStatusCode, trace } from "@opentelemetry/api";
 
 /** Common Span Attributes **
  *
@@ -30,6 +30,19 @@ function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attribu
 export function setCommonSpanAttributes(commonAttributes: CommonAttributes): void {
   const span = trace.getActiveSpan();
   span?.setAttributes(commonAttributesToSpanAttributes(commonAttributes));
+}
+
+/**
+ * Stamp each matched route param onto the span as http.route.param.<key>.
+ * Guards against a missing span (no active trace) and missing params — the
+ * latter is undefined on unmatched routes (404s), which would otherwise throw
+ * `Object.entries(undefined)` and crash the request.
+ */
+export function stampRouteParamsOnSpan(span: Span | undefined, params: Record<string, string> | undefined): void {
+  if (!span) return;
+  for (const [key, value] of Object.entries(params ?? {})) {
+    span.setAttribute(`http.route.param.${key}`, String(value));
+  }
 }
 
 // Should this one accept an exception as well?

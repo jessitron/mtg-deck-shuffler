@@ -15,7 +15,7 @@ import { recommendMulligan } from "./mulligan/recommendMulligan.js";
 import { AdvisorChatContext } from "./mulligan/advisorChat.js";
 import { MulliganTrainer } from "./mulligan/mulliganTrainer.js";
 import { GameState, GameCard } from "./GameState.js";
-import { setCommonSpanAttributes } from "./tracing_util.js";
+import { setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
@@ -67,11 +67,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const span = trace.getActiveSpan();
     const originalEnd = res.end.bind(res);
     res.end = function (...args: Parameters<typeof originalEnd>) {
-      if (span) {
-        for (const [key, value] of Object.entries(req.params)) {
-          span.setAttribute(`http.route.param.${key}`, String(value));
-        }
-      }
+      stampRouteParamsOnSpan(span, req.params);
       return originalEnd(...args);
     } as typeof res.end;
     next();
