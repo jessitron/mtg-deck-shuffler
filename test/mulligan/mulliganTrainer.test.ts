@@ -1,5 +1,5 @@
 import { MulliganTrainer } from "../../src/mulligan/mulliganTrainer.js";
-import { AdvisorChatContext, AskTrainerAgent } from "../../src/mulligan/advisorChat.js";
+import { AdvisorChatContext, AskTrainerAgent, TrainerReply } from "../../src/mulligan/advisorChat.js";
 import { CardDefinition } from "../../src/types.js";
 
 function card(name: string, cardTypes: string[]): CardDefinition {
@@ -30,7 +30,7 @@ function aContext(): AdvisorChatContext {
  */
 class FakeTrainerAgent {
   readonly calls: { context: AdvisorChatContext | null; message: string; sessionId: string }[] = [];
-  reply = "noted";
+  reply: TrainerReply = { reply: "noted", status: "chatting" };
 
   ask: AskTrainerAgent = async (context, message, sessionId) => {
     this.calls.push({ context, message, sessionId });
@@ -69,15 +69,35 @@ describe("MulliganTrainer — session boundary", () => {
     expect(agent.calls[0].sessionId).toBeTruthy();
   });
 
-  it("returns the exchange with the agent's reply and the stamped time", async () => {
+  it("returns the exchange with the agent's reply, status, PR link, and stamped time", async () => {
     const agent = new FakeTrainerAgent();
-    agent.reply = "try counting commander pips";
+    agent.reply = { reply: "opened a PR", status: "done", prUrl: "https://github.com/x/y/pull/1" };
     const trainer = trainerWith(agent);
 
     trainer.startSession(42, aContext());
     const exchange = await trainer.sendMessage(42, "why mulligan?");
 
-    expect(exchange).toEqual({ youText: "why mulligan?", trainerText: "try counting commander pips", receivedAt: 1000 });
+    expect(exchange).toEqual({
+      youText: "why mulligan?",
+      trainerText: "opened a PR",
+      status: "done",
+      prUrl: "https://github.com/x/y/pull/1",
+      receivedAt: 1000,
+    });
+  });
+
+  it("stores the Trainer reply's status and PR link on the trainer message", async () => {
+    const agent = new FakeTrainerAgent();
+    agent.reply = { reply: "opened a PR", status: "done", prUrl: "https://github.com/x/y/pull/1" };
+    const trainer = trainerWith(agent);
+
+    trainer.startSession(42, aContext());
+    await trainer.sendMessage(42, "go");
+
+    const messages = trainer.getConversation(42)!.messages;
+    const trainerMessage = messages.find((m) => m.role === "trainer")!;
+    expect(trainerMessage.status).toBe("done");
+    expect(trainerMessage.prUrl).toBe("https://github.com/x/y/pull/1");
   });
 
   it("refuses to send a message when no session has been started", async () => {

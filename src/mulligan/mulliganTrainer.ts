@@ -1,12 +1,14 @@
 import { trace } from "@opentelemetry/api";
 import { TrainerConversationStore, TrainerConversation } from "./trainerConversationStore.js";
-import { AdvisorChatContext, AskTrainerAgent, askMulliganAdvisorAgent } from "./advisorChat.js";
+import { AdvisorChatContext, AskTrainerAgent, TrainerStatus, askMulliganAdvisorAgent } from "./advisorChat.js";
 
 /** One request/response turn, ready for the view to render. */
 export interface TrainerExchange {
   youText: string;
   trainerText: string;
   receivedAt: number;
+  status: TrainerStatus;
+  prUrl?: string;
 }
 
 /** The developer's end-of-chat verdict on the Trainer. `rating` is 1..5 or "na". */
@@ -72,10 +74,10 @@ export class MulliganTrainer {
 
     const isFirstTurn = conversation.messages.length === 0;
     const context = isFirstTurn ? conversation.context : null;
-    const trainerText = await this.askAgent(context, message, conversation.sessionId);
+    const reply = await this.askAgent(context, message, conversation.sessionId);
     const receivedAt = this.now();
-    this.store.recordExchange(gameId, message, trainerText, receivedAt);
-    return { youText: message, trainerText, receivedAt };
+    this.store.recordExchange(gameId, message, reply, receivedAt);
+    return { youText: message, trainerText: reply.reply, status: reply.status, prUrl: reply.prUrl, receivedAt };
   }
 
   /**

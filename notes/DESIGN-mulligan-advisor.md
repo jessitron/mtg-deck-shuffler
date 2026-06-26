@@ -126,25 +126,52 @@ single-instance service without a redesign. **No behavior change** — pure refa
 - The relay is injected as an `AskTrainerAgent` port, so `MulliganTrainer` is tested
   with a **fake** agent (`test/mulligan/mulliganTrainer.test.ts`), no network/mocks.
 
-### Phase 3 — the Trainer (AgentCore, PR-only)  ⬜ NEXT — built in a separate repo
-- A coding agent with a checkout of this repo and a GitHub token, **scoped to edit
-  `src/mulligan/` + its fixtures**, that opens PRs. Never pushes to `main`.
-- The single guardrail is **PR-only** — humans review and merge. CI (build + test)
-  must pass, which means the Trainer cannot regress a blessed case without it showing.
+### Phase 3 — the Trainer (PR-only coding agent)  ✅ BUILT & DEPLOYED — separate repo
+- A coding agent (`jessitron/small-coding-agent`) with a checkout of this repo and a
+  GitHub token that opens PRs. Never pushes to `main`. The single guardrail is
+  **PR-only** — humans review and merge; CI (build + test) must pass, so the Trainer
+  can't regress a blessed case without it showing.
 - Most valuable artifact from a chat: **new blessed cases**. When the developer
   disagrees with a recommendation, the Trainer should propose adding that hand +
   verdict to the fixtures, so every conversation ratchets the suite forward.
 - **Init prompt for the Trainer: [`agentcore-advisor-agent-prompt.md`](agentcore-advisor-agent-prompt.md).**
-- When wiring it in: most of the relay already exists in
-  `askMulliganAdvisorAgent(context, message, sessionId)` — it POSTs to
-  `TRAINER_AGENT_URL` with `{ sessionId, message, context }` and injects W3C trace
-  context. Just stand up the AgentCore endpoint and set the env var. `context != null`
-  means "first message — start a new AgentCore session seeded with this hand
-  snapshot"; `context == null` means "send this message to the already-running
-  session" (correlate by `sessionId`). The VM persists for the conversation, so the
-  snapshot is sent exactly once.
-- Likely UI follow-ups (not yet built): a "working…" state and a clickable PR link
-  in the Trainer's reply (today the reply is a plain string).
+
+### Phase 3.5 — wire the app to the live Trainer (INTERFACE.md v1.0)  ✅ DONE (JES-100)
+The Trainer now publishes a canonical spec — **`INTERFACE.md`** — and a live public
+front door. We pin to it by **copying `INTERFACE.md` to this repo's root** (git
+history records the version we built against — **1.0**). Don't edit the copy; to
+change the contract, file a development request in the `small-coding-agent` Linear
+project (the collaboration interface).
+
+- **Wire contract (v1.0).** `POST {message, session_id}` to `TRAINER_AGENT_URL` with
+  `Authorization: Bearer <TRAINER_AGENT_TOKEN>`, `X-Trainer-Agent-Interface-Version: 1.0`,
+  a **≥300s read timeout** (`AbortSignal.timeout`, since a coding turn takes minutes),
+  and the active W3C trace context injected into the headers. Response is
+  `{ reply, status, pr_url? }` where `status ∈ chatting|coding|asking|done|error`.
+  All in `askMulliganAdvisorAgent` (`src/mulligan/advisorChat.ts`), which now returns
+  a structured `TrainerReply` (`{ reply, status, prUrl? }`) instead of a bare string.
+- **No `context` field on the wire.** The v1.0 contract carries only
+  `{message, session_id}`. The frozen hand snapshot is therefore **folded into the
+  first message's text** (`foldContextIntoMessage`) — hand, commanders, mulligans-so-far,
+  and the Advisor's verdict — and continuation turns send the bare message. (Session
+  model is unchanged: `context != null` only on the first turn; the agent's microVM
+  holds the hand after that.)
+- **`session_id`.** Generated as `mtg-deck-shuffler-${randomUUID()}` (≥33 chars, as the
+  contract requires) in `TrainerConversationStore.start`; reused for the whole
+  conversation.
+- **Token is a secret.** `TRAINER_AGENT_TOKEN` lives in `.be` (untracked), **never** in
+  the tracked `.env`. `.env` carries commented guidance + the public front-door URL.
+  Unset `TRAINER_AGENT_URL` → the placeholder reply (`"Well isn't that special"`,
+  `status: chatting`), so the UI/transport work with no agent (local/CI default).
+- **UI.** Trainer bubbles now render the `status` (a small tag — `chatting` is hidden
+  as the unremarkable default) and a **"View PR ↗"** link once `pr_url` exists. Both are
+  stored on the trainer `TrainerMessage` so they survive a page reload.
+- **Local/CI testing.** Unit tests use an injected fake `AskTrainerAgent`
+  (`mulliganTrainer.test.ts`); the wire contract itself is verified against a **real
+  local fake front door** (`askMulliganAdvisorAgent.test.ts`) — no mocks, no network to
+  AWS. For manual end-to-end testing without the real agent, run the **front-door stub**
+  (Docker image in private ECR; commands in the trainer-agent repo's
+  `notes/infrastructure.md`) on `localhost:8080` and point `TRAINER_AGENT_URL` at it.
 
 ## Key design decisions
 

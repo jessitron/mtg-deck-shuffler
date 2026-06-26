@@ -1289,9 +1289,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
   // session = one frozen hand. Whether this is the first message is derived from
   // the backend conversation store (no client-supplied flag). Conversation state
   // (messages + timestamps + sessionId) lives in trainerStore so it survives page
-  // reloads. Returns the exchange as HTML appended to the chat. Placeholder reply
-  // until the Trainer is wired in — see src/mulligan/advisorChat.ts and
-  // notes/DESIGN-mulligan-advisor.md.
+  // reloads. Returns the exchange as HTML (incl. the Trainer's status + any PR link)
+  // appended to the chat. Wired to the live front door per INTERFACE.md (v1.0); a
+  // placeholder reply stands in when TRAINER_AGENT_URL is unset — see
+  // src/mulligan/advisorChat.ts and notes/DESIGN-mulligan-advisor.md.
   // The Trainer's view of the current situation, built from game state. THIS is the
   // one place that reads game state for the Trainer; in a future split where the
   // chat moves to its own service, this stays on the game server and its result is
@@ -1334,7 +1335,12 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
       // Chat-server step: handle the turn from the in-memory conversation only.
       const exchange = await trainer.sendMessage(gameId, message);
-      res.send(formatAdvisorChatExchangeHtmlFragment(exchange.youText, exchange.trainerText, exchange.receivedAt));
+      res.send(
+        formatAdvisorChatExchangeHtmlFragment(exchange.youText, exchange.trainerText, exchange.receivedAt, {
+          status: exchange.status,
+          prUrl: exchange.prUrl,
+        })
+      );
     } catch (error) {
       console.error("Error in advisor chat:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Advisor chat failed"}</div>`);

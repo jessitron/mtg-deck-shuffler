@@ -817,6 +817,41 @@ body.dev-mode.advisor-chat-open .advisor-chat {
   white-space: pre-wrap;
 }
 
+/* Trainer status (coding/asking/done/error) — a small uppercase tag under the
+   reply. "chatting" is the default and not rendered. */
+.advisor-chat-bubble-status {
+  align-self: flex-start;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border: 1px solid #666;
+  color: #bbb;
+}
+
+.advisor-chat-bubble-status-coding {
+  color: #7fd1b9;
+  border-color: #7fd1b9;
+}
+
+.advisor-chat-bubble-status-error {
+  color: #e8927c;
+  border-color: #e8927c;
+}
+
+.advisor-chat-bubble-status-done {
+  color: #8fc7e8;
+  border-color: #8fc7e8;
+}
+
+/* Link to the PR the Trainer opened, shown once pr_url is present. */
+.advisor-chat-pr-link {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  color: #8fc7e8;
+  text-decoration: underline;
+}
+
 .advisor-chat-form {
   display: flex;
   gap: 6px;

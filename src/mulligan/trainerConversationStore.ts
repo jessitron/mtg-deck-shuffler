@@ -1,14 +1,18 @@
 import { randomUUID } from "crypto";
-import { AdvisorChatContext } from "./advisorChat.js";
+import { AdvisorChatContext, TrainerReply, TrainerStatus } from "./advisorChat.js";
 
 /**
  * One message in a Trainer conversation. `receivedAt` is epoch ms, stamped by the
  * server when the message is recorded — the client renders it relative ("3 min ago").
+ * `status` and `prUrl` are carried on `trainer` messages only (from the agent's
+ * `{reply, status, pr_url}`) so the PR link and status survive a page reload.
  */
 export interface TrainerMessage {
   role: "you" | "trainer";
   text: string;
   receivedAt: number;
+  status?: TrainerStatus;
+  prUrl?: string;
 }
 
 /**
@@ -42,7 +46,10 @@ export class TrainerConversationStore {
    * a new sessionId). Replaces any existing conversation for the game.
    */
   start(gameId: number, context: AdvisorChatContext): TrainerConversation {
-    const conversation: TrainerConversation = { sessionId: randomUUID(), context, messages: [] };
+    // Prefix the id so it is >= 33 chars (the contract's minimum) and easy to spot
+    // in the agent's telemetry — see INTERFACE.md → Request.
+    const sessionId = `mtg-deck-shuffler-${randomUUID()}`;
+    const conversation: TrainerConversation = { sessionId, context, messages: [] };
     this.byGame.set(gameId, conversation);
     return conversation;
   }
@@ -57,14 +64,24 @@ export class TrainerConversationStore {
     return this.byGame.get(gameId);
   }
 
-  /** Append a developer message and the Trainer's reply, both stamped `now`. */
-  recordExchange(gameId: number, youText: string, trainerText: string, now: number): void {
+  /**
+   * Append a developer message and the Trainer's reply, both stamped `now`. The
+   * trainer message carries the reply's `status`/`prUrl` so the view can render the
+   * status and PR link (and rehydrate them on reload).
+   */
+  recordExchange(gameId: number, youText: string, trainerReply: TrainerReply, now: number): void {
     const conversation = this.byGame.get(gameId);
     if (!conversation) {
       throw new Error(`No Trainer conversation for game ${gameId}`);
     }
     conversation.messages.push({ role: "you", text: youText, receivedAt: now });
-    conversation.messages.push({ role: "trainer", text: trainerText, receivedAt: now });
+    conversation.messages.push({
+      role: "trainer",
+      text: trainerReply.reply,
+      receivedAt: now,
+      status: trainerReply.status,
+      prUrl: trainerReply.prUrl,
+    });
   }
 
   /** Remove and return the conversation (End Chat). Undefined if there was none. */

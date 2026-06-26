@@ -1,5 +1,6 @@
 import { GameState } from "../../GameState.js";
 import { recommendMulligan } from "../../mulligan/recommendMulligan.js";
+import { TrainerStatus } from "../../mulligan/advisorChat.js";
 import { TrainerConversation } from "../../mulligan/trainerConversationStore.js";
 
 function escapeHtml(text: string): string {
@@ -11,28 +12,59 @@ function escapeHtml(text: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/** What the Trainer reported on a turn, for rendering inside its bubble. */
+interface TrainerTurnMeta {
+  status?: TrainerStatus;
+  prUrl?: string;
+}
+
+/**
+ * The status line + PR link shown under a Trainer reply (from the agent's
+ * `{status, pr_url}`). `chatting` is the unremarkable default, so it is not shown;
+ * `coding`/`asking`/`done`/`error` are surfaced. The PR link appears once a PR
+ * exists. Empty string for "you" bubbles or a plain chatting reply.
+ */
+function formatTrainerMeta(meta: TrainerTurnMeta): string {
+  const showStatus = meta.status && meta.status !== "chatting";
+  const statusHtml = showStatus
+    ? `<span class="advisor-chat-bubble-status advisor-chat-bubble-status-${meta.status}">${meta.status}</span>`
+    : "";
+  const prHtml = meta.prUrl
+    ? `<a class="advisor-chat-pr-link" href="${escapeHtml(meta.prUrl)}" target="_blank" rel="noopener noreferrer">View PR ↗</a>`
+    : "";
+  return statusHtml + prHtml;
+}
+
 /**
  * A single chat bubble. `role` drives styling: the developer ("you") vs the
  * Trainer — the agent that improves the Advisor function (it is NOT the Advisor;
  * the Advisor is `recommendMulligan`). `receivedAt` (epoch ms) is rendered into a
  * data attribute so the client can show "N minutes ago" for the most recent
- * message and keep it current (see public/trainer-chat.js).
+ * message and keep it current (see public/trainer-chat.js). `meta` carries the
+ * Trainer's status + PR link (ignored for "you" bubbles).
  */
-function formatBubble(role: "you" | "trainer", text: string, receivedAt: number): string {
+function formatBubble(role: "you" | "trainer", text: string, receivedAt: number, meta: TrainerTurnMeta = {}): string {
   const label = role === "you" ? "You" : "Trainer";
+  const metaHtml = role === "trainer" ? formatTrainerMeta(meta) : "";
   return `<div class="advisor-chat-bubble advisor-chat-bubble-${role}" data-received-at="${receivedAt}">
             <span class="advisor-chat-bubble-role">${label}</span>
             <span class="advisor-chat-bubble-text">${escapeHtml(text)}</span>
+            ${metaHtml}
           </div>`;
 }
 
 /**
  * One request/response exchange, returned by POST /mulligan-advisor/chat and
  * appended (hx-swap="beforeend") to #advisor-chat-messages. Both bubbles carry
- * the same `receivedAt`.
+ * the same `receivedAt`; the Trainer bubble carries its status + PR link.
  */
-export function formatAdvisorChatExchangeHtmlFragment(userMessage: string, trainerMessage: string, receivedAt: number): string {
-  return `${formatBubble("you", userMessage, receivedAt)}${formatBubble("trainer", trainerMessage, receivedAt)}`;
+export function formatAdvisorChatExchangeHtmlFragment(
+  userMessage: string,
+  trainerMessage: string,
+  receivedAt: number,
+  meta: TrainerTurnMeta = {}
+): string {
+  return `${formatBubble("you", userMessage, receivedAt)}${formatBubble("trainer", trainerMessage, receivedAt, meta)}`;
 }
 
 function mulliganIntro(game: GameState): string {
@@ -53,7 +85,7 @@ function mulliganIntro(game: GameState): string {
 export function formatAdvisorChatMessagesInner(game: GameState, conversation?: TrainerConversation): string {
   const intro = `<div class="advisor-chat-intro">${mulliganIntro(game)}</div>`;
   const bubbles = (conversation?.messages ?? [])
-    .map((m) => formatBubble(m.role, m.text, m.receivedAt))
+    .map((m) => formatBubble(m.role, m.text, m.receivedAt, { status: m.status, prUrl: m.prUrl }))
     .join("");
   return `${intro}${bubbles}`;
 }
