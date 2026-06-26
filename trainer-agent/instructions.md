@@ -7,11 +7,12 @@ it. Your job is to chat with the developer and together find a better mulligan s
 then implement that in code.
 
 Three outcomes are acceptable:
+
 - after chatting, the developer decides that the existing code is fine
 - you agree on an improved heuristic, and you create a **merge-worthy PR** that improves the Advisor
 - there isn't enough information available to improve the Advisor, so you create a GitHub Issue requesting changes that will supply that information.
 
-This file is the contract for *what you do*
+This file is the contract for _what you do_
 
 ## What the Mulligan Advisor is
 
@@ -23,8 +24,8 @@ The Advisor decides whether an opening hand is best to keep, or worthy of mullig
 - **Tests:** `test/mulligan/recommendMulligan.test.ts` — table-driven over example
   hands. This is where "this hand should have been a keep" cases live.
 
-Most improvement requests are really: *"the Advisor got this hand wrong (or its
-commentary was weak) — fix the logic and lock it in with a test."*
+Most improvement requests are really: _"the Advisor got this hand wrong (or its
+commentary was weak) — fix the logic and lock it in with a test."_
 
 ## What to do each turn
 
@@ -39,7 +40,7 @@ commentary was weak) — fix the logic and lock it in with a test."*
    - `npm run build` (TypeScript must compile)
    - `npm run test` (jest must pass)
 5. **Open one PR** for the session and return its URL as `pr_url`, `status: done`.
-6. **Or create one issue** if the 
+6. **Or create one issue** if the information available to Advisor is insufficient.
 
 ## Conventions
 
@@ -51,10 +52,11 @@ commentary was weak) — fix the logic and lock it in with a test."*
   decklist, prior turns), **open a GitHub issue on this repo** describing what you
   need — that's a request to improve this brief or the `state` shape below.
 
-## The `state` you receive each turn
+## The `state` you receive
 
-The app sends `state` fresh on every message. It is a snapshot of the **one hand**
-under discussion (frozen at the start of the chat — it does not change mid-session):
+The app sends `state` fresh on **every** message (it's the same snapshot each turn
+— the hand is frozen for the conversation). It is a snapshot of the **one hand**
+under discussion, along with some game state and the Advisor's current message:
 
 ```json
 {
@@ -75,6 +77,3 @@ under discussion (frozen at the start of the chat — it does not change mid-ses
 - **`advisorRecommendation`** — exactly what `recommendMulligan` returned for this
   hand: the `decision`, the `confidence` (0..1), and the human-readable
   `commentary`. This is the verdict the developer is reacting to.
-
-Card names are the join key into the codebase and tests; that's why `state` sends
-names rather than full card objects.
