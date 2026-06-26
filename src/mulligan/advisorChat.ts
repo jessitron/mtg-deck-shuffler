@@ -52,7 +52,7 @@ export type AskTrainerAgent = (
 
 /**
  * The interface version this app is pinned to — the version of the INTERFACE.md
- * copy at the repo root. Sent on every request so version drift shows up in
+ * copy in `trainer-agent/`. Sent on every request so version drift shows up in
  * Honeycomb (a mismatch is a warning, not an error). Bump this only by re-copying
  * a newer INTERFACE.md, never by editing locally — see INTERFACE.md → Versioning.
  */
@@ -93,7 +93,7 @@ export function buildTrainerState(context: AdvisorChatContext): TrainerGameState
 /**
  * Relay a developer's chat message to the Trainer — the coding agent that improves
  * the Advisor (`recommendMulligan`) by opening PRs against this repo. Implements
- * the v2.0 technical interface (the INTERFACE.md copy at the repo root).
+ * the v2.0 technical interface (the INTERFACE.md copy in `trainer-agent/`).
  *
  * WIRE CONTRACT: `POST {message, session_id, seq, state}` with
  * `Authorization: Bearer <token>` and `X-Trainer-Agent-Interface-Version: 2.0`, a

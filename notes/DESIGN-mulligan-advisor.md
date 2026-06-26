@@ -138,7 +138,7 @@ single-instance service without a redesign. **No behavior change** — pure refa
 
 ### Phase 3.5 — wire the app to the live Trainer (INTERFACE.md v2.0)  ✅ DONE (JES-100)
 The Trainer publishes a canonical spec — **`INTERFACE.md`** — and a live public
-front door. We pin to it by **copying `INTERFACE.md` to this repo's root** (git
+front door. We pin to it by **copying `INTERFACE.md` into `trainer-agent/`** (git
 history records the version we built against — **2.0**). Don't edit the copy; to
 change the contract, file a development request in the `small-coding-agent` Linear
 project (the collaboration interface).
