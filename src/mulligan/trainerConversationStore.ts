@@ -2,6 +2,14 @@ import { randomUUID } from "crypto";
 import { AdvisorChatContext, TrainerReply, TrainerStatus } from "./advisorChat.js";
 
 /**
+ * Mint a session id. Prefixed so it is >= 33 chars (the contract's minimum) and
+ * easy to spot in the agent's telemetry — see INTERFACE.md → Request.
+ */
+function newSessionId(): string {
+  return `mtg-deck-shuffler-${randomUUID()}`;
+}
+
+/**
  * One message in a Trainer conversation. `receivedAt` is epoch ms, stamped by the
  * server when the message is recorded — the client renders it relative ("3 min ago").
  * `status` and `prUrl` are carried on `trainer` messages only (from the agent's
@@ -19,13 +27,16 @@ export interface TrainerMessage {
  * A single Trainer chat session for one game. `sessionId` identifies the session
  * for the whole conversation: it is sent with every agent invocation and put on
  * the current span, and it appears on the `trainer.evaluation` span when the chat
- * ends. `context` is the frozen hand snapshot captured at session start — it is
- * sent to the agent on the first turn only and never re-read from game state, so
- * the discussion stays anchored to the one hand. Born on startSession, dies on End
- * Chat.
+ * ends. `seq` is the 1-based number to send for the NEXT user message (INTERFACE.md
+ * v2.0 → Request); it advances per accepted turn and resets to 1 (with a fresh
+ * `sessionId`) on a lost session. `context` is the frozen hand snapshot captured at
+ * session start; it is re-sent as `state` every turn and never re-read from game
+ * state, so the discussion stays anchored to the one hand. Born on startSession,
+ * dies on End Chat.
  */
 export interface TrainerConversation {
   sessionId: string;
+  seq: number;
   context: AdvisorChatContext;
   messages: TrainerMessage[];
 }
@@ -46,10 +57,7 @@ export class TrainerConversationStore {
    * a new sessionId). Replaces any existing conversation for the game.
    */
   start(gameId: number, context: AdvisorChatContext): TrainerConversation {
-    // Prefix the id so it is >= 33 chars (the contract's minimum) and easy to spot
-    // in the agent's telemetry — see INTERFACE.md → Request.
-    const sessionId = `mtg-deck-shuffler-${randomUUID()}`;
-    const conversation: TrainerConversation = { sessionId, context, messages: [] };
+    const conversation: TrainerConversation = { sessionId: newSessionId(), seq: 1, context, messages: [] };
     this.byGame.set(gameId, conversation);
     return conversation;
   }
@@ -82,6 +90,31 @@ export class TrainerConversationStore {
       status: trainerReply.status,
       prUrl: trainerReply.prUrl,
     });
+  }
+
+  /**
+   * Advance to the next turn's `seq` after a turn the agent accepted. Called once
+   * the reply is in and was not a lost-session error.
+   */
+  advanceSeq(gameId: number): void {
+    const conversation = this.byGame.get(gameId);
+    if (conversation) {
+      conversation.seq += 1;
+    }
+  }
+
+  /**
+   * Recover from a lost session (INTERFACE.md v2.0 → Response): mint a fresh
+   * `sessionId` and reset `seq` to 1, so the next message starts a clean
+   * conversation. The frozen `context`/`messages` are kept — `state` is re-sent, so
+   * the chat carries on about the same hand.
+   */
+  resetSession(gameId: number): void {
+    const conversation = this.byGame.get(gameId);
+    if (conversation) {
+      conversation.sessionId = newSessionId();
+      conversation.seq = 1;
+    }
   }
 
   /** Remove and return the conversation (End Chat). Undefined if there was none. */

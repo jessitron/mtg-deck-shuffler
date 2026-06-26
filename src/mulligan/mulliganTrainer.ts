@@ -1,6 +1,12 @@
 import { trace } from "@opentelemetry/api";
 import { TrainerConversationStore, TrainerConversation } from "./trainerConversationStore.js";
-import { AdvisorChatContext, AskTrainerAgent, TrainerStatus, askMulliganAdvisorAgent } from "./advisorChat.js";
+import {
+  AdvisorChatContext,
+  AskTrainerAgent,
+  TrainerStatus,
+  askMulliganAdvisorAgent,
+  buildTrainerState,
+} from "./advisorChat.js";
 
 /** One request/response turn, ready for the view to render. */
 export interface TrainerExchange {
@@ -60,9 +66,11 @@ export class MulliganTrainer {
 
   /**
    * Send one chat message within an existing session. CHAT-SERVER side: needs only
-   * the in-memory conversation. The frozen snapshot is sent to the agent on the
-   * first turn only; later turns send `null`. Throws if no session exists — the
-   * caller must `startSession` first.
+   * the in-memory conversation. The frozen hand snapshot is sent fresh as `state`
+   * every turn, with the session's current `seq`. On a lost-session error the
+   * session is reset (new id, seq back to 1) so the next message starts clean;
+   * otherwise `seq` advances. Throws if no session exists — the caller must
+   * `startSession` first.
    */
   async sendMessage(gameId: number, message: string): Promise<TrainerExchange> {
     const conversation = this.store.get(gameId);
@@ -70,13 +78,25 @@ export class MulliganTrainer {
       throw new Error(`No Trainer session for game ${gameId}`);
     }
     // Tag the active request span so turns are filterable by session.
-    trace.getActiveSpan()?.setAttribute("trainer.session_id", conversation.sessionId);
+    const span = trace.getActiveSpan();
+    span?.setAttribute("trainer.session_id", conversation.sessionId);
+    span?.setAttribute("trainer.seq", conversation.seq);
 
-    const isFirstTurn = conversation.messages.length === 0;
-    const context = isFirstTurn ? conversation.context : null;
-    const reply = await this.askAgent(context, message, conversation.sessionId);
+    const state = buildTrainerState(conversation.context);
+    const reply = await this.askAgent(message, conversation.sessionId, conversation.seq, state);
     const receivedAt = this.now();
     this.store.recordExchange(gameId, message, reply, receivedAt);
+
+    if (reply.status === "error") {
+      // Lost session (the agent's working tree/context is gone). Per INTERFACE.md
+      // v2.0, mint a new session_id and reset seq to 1; the next message re-sends
+      // `state`, so the chat carries on about the same hand.
+      span?.setAttribute("trainer.session_lost", true);
+      this.store.resetSession(gameId);
+    } else {
+      this.store.advanceSeq(gameId);
+    }
+
     return { youText: message, trainerText: reply.reply, status: reply.status, prUrl: reply.prUrl, receivedAt };
   }
 

@@ -1,5 +1,5 @@
 import { context as otelContext, propagation } from "@opentelemetry/api";
-import { MulliganInput, MulliganRecommendation } from "./recommendMulligan.js";
+import { MulliganDecision, MulliganInput, MulliganRecommendation } from "./recommendMulligan.js";
 
 /** Everything the improvement agent sees about the current situation. */
 export interface AdvisorChatContext {
@@ -7,11 +7,28 @@ export interface AdvisorChatContext {
   recommendation: MulliganRecommendation;
 }
 
-/** The Trainer's per-turn status (see INTERFACE.md v1.0 → Response). */
+/**
+ * The app-defined game `state` sent to the Trainer fresh on every turn (INTERFACE.md
+ * v2.0 → Request). Its shape is OURS — it is described by `trainer-agent/instructions.md`
+ * in this repo, not by INTERFACE.md. It is the frozen snapshot of the one hand under
+ * discussion: card names (the join key into the code/tests) plus the Advisor's verdict.
+ */
+export interface TrainerGameState {
+  hand: string[];
+  commanders: string[];
+  mulligansSoFar: number;
+  advisorRecommendation: {
+    decision: MulliganDecision;
+    confidence: number;
+    commentary: string;
+  };
+}
+
+/** The Trainer's per-turn status (see INTERFACE.md v2.0 → Response). */
 export type TrainerStatus = "chatting" | "coding" | "asking" | "done" | "error";
 
 /**
- * One structured reply from the Trainer — the v1.0 response shape
+ * One structured reply from the Trainer — the v2.0 response shape
  * (`{reply, status, pr_url?}`), with `pr_url` renamed to `prUrl` for the app's
  * camelCase convention. `prUrl` appears only once a PR exists.
  */
@@ -27,9 +44,10 @@ export interface TrainerReply {
  * type keeps `MulliganTrainer` decoupled from the transport.
  */
 export type AskTrainerAgent = (
-  context: AdvisorChatContext | null,
   message: string,
-  sessionId: string
+  sessionId: string,
+  seq: number,
+  state: TrainerGameState
 ) => Promise<TrainerReply>;
 
 /**
@@ -38,7 +56,7 @@ export type AskTrainerAgent = (
  * Honeycomb (a mismatch is a warning, not an error). Bump this only by re-copying
  * a newer INTERFACE.md, never by editing locally — see INTERFACE.md → Versioning.
  */
-const INTERFACE_VERSION = "1.0";
+const INTERFACE_VERSION = "2.0";
 
 /**
  * The call is synchronous and a coding turn can take minutes; the contract
@@ -54,49 +72,41 @@ const READ_TIMEOUT_MS = 300_000;
 const PLACEHOLDER_REPLY: TrainerReply = { reply: "Well isn't that special", status: "chatting" };
 
 /**
- * Fold the frozen hand snapshot into the first message's text. The v1.0 wire
- * contract carries only `{message, session_id}` — there is NO `context` field — so
- * the message is the one channel for the hand under discussion. We send it on the
- * first turn only (`context != null`); continuation turns send the bare message,
- * since the agent's session already holds the hand. (If the contract should grow a
- * structured context field, that's a development request against the
- * `small-coding-agent` project, not a local edit — see INTERFACE.md.)
+ * Build the `state` payload from the frozen hand snapshot. The shape is defined by
+ * this repo's `trainer-agent/instructions.md`; keep the two in sync. Sent fresh on
+ * every turn — the agent persists only its own conversation, not our game.
  */
-function foldContextIntoMessage(context: AdvisorChatContext | null, message: string): string {
-  if (!context) {
-    return message;
-  }
+export function buildTrainerState(context: AdvisorChatContext): TrainerGameState {
   const { input, recommendation } = context;
-  const hand = input.hand.map((c) => c.name).join(", ");
-  const commanders = input.commanders.map((c) => c.name).join(", ");
-  const verdict = `${recommendation.decision} (${Math.round(recommendation.confidence * 100)}% confident) — ${recommendation.commentary}`;
-  return [
-    "I'm discussing one opening hand from the MTG deck shuffler and how the Advisor (recommendMulligan) handled it.",
-    `Hand: ${hand}`,
-    `Commander(s): ${commanders}`,
-    `Mulligans so far: ${input.mulligansSoFar}`,
-    `Advisor said: ${verdict}`,
-    "",
-    message,
-  ].join("\n");
+  return {
+    hand: input.hand.map((c) => c.name),
+    commanders: input.commanders.map((c) => c.name),
+    mulligansSoFar: input.mulligansSoFar,
+    advisorRecommendation: {
+      decision: recommendation.decision,
+      confidence: recommendation.confidence,
+      commentary: recommendation.commentary,
+    },
+  };
 }
 
 /**
  * Relay a developer's chat message to the Trainer — the coding agent that improves
  * the Advisor (`recommendMulligan`) by opening PRs against this repo. Implements
- * the v1.0 technical interface (the INTERFACE.md copy at the repo root).
+ * the v2.0 technical interface (the INTERFACE.md copy at the repo root).
  *
- * SESSION MODEL: `context` (the hand snapshot) is provided ONLY on the first
- * message of a conversation; it is `null` on every continuation message. On the
- * first turn it is folded into the message text (the contract has no context
- * field — see `foldContextIntoMessage`). The `sessionId` is sent on every turn so
- * the agent keeps its microVM warm and its working tree intact across the
- * conversation.
+ * WIRE CONTRACT: `POST {message, session_id, seq, state}` with
+ * `Authorization: Bearer <token>` and `X-Trainer-Agent-Interface-Version: 2.0`, a
+ * >= 300s read timeout, and the active W3C trace context injected into the headers
+ * so the app, front door, and agent share one Honeycomb trace. Returns
+ * `{reply, status, pr_url?}`.
  *
- * WIRE CONTRACT: `POST {message, session_id}` with `Authorization: Bearer <token>`
- * and `X-Trainer-Agent-Interface-Version`, a >= 300s read timeout, and the active
- * W3C trace context injected into the headers so the app, front door, and agent
- * share one Honeycomb trace. Returns `{reply, status, pr_url?}`.
+ * SESSION MODEL: `sessionId` is sent on every turn so the agent keeps its microVM
+ * warm and its working tree intact. `seq` is the 1-based number of this user
+ * message in the session; the agent rejects a mismatched `seq` as a lost session
+ * (`status: error`). `state` (the frozen hand snapshot) is sent fresh every turn —
+ * the agent persists only its own conversation, not our game. The conversation
+ * layer (MulliganTrainer) owns seq bookkeeping and lost-session recovery.
  *
  * TRANSPORT: POSTs to `TRAINER_AGENT_URL` when set (the production Lambda Function
  * URL, or `http://localhost:8080/` for the front-door stub). Token from
@@ -105,9 +115,10 @@ function foldContextIntoMessage(context: AdvisorChatContext | null, message: str
  * INTERFACE.md.
  */
 export async function askMulliganAdvisorAgent(
-  context: AdvisorChatContext | null,
   message: string,
-  sessionId: string
+  sessionId: string,
+  seq: number,
+  state: TrainerGameState
 ): Promise<TrainerReply> {
   const url = process.env.TRAINER_AGENT_URL;
   if (!url) {
@@ -125,7 +136,7 @@ export async function askMulliganAdvisorAgent(
   const response = await fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify({ message: foldContextIntoMessage(context, message), session_id: sessionId }),
+    body: JSON.stringify({ message, session_id: sessionId, seq, state }),
     signal: AbortSignal.timeout(READ_TIMEOUT_MS),
   });
   if (!response.ok) {

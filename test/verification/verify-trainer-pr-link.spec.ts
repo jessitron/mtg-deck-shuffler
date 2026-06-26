@@ -1,13 +1,12 @@
 /**
  * End-to-End Verification: live Trainer wiring renders status + PR link.
  *
- * With TRAINER_AGENT_URL pointed at a fake front door that returns
- * `{status: "done", pr_url}`, sending a chat message should render the Trainer's
- * status tag and a clickable "View PR" link in the reply bubble.
+ * With TRAINER_AGENT_URL pointed at the front-door stub, a message containing
+ * "pr please" / "open the pr" makes the stub return `{status: "done", pr_url}`, so
+ * the reply bubble should render the Trainer's status tag and a clickable "View PR"
+ * link.
  *
- * RUN: start the fake front door (scratchpad/fake-frontdoor.mjs) on :8099, start a
- * server on port 3001 with TRAINER_AGENT_URL=http://localhost:8099/, then
- *   npx playwright test test/verification/verify-trainer-pr-link.spec.ts
+ * RUN: verify-trainer-live.sh — it starts the stub on :8099 and the app on :3001.
  */
 
 import { test, expect } from '@playwright/test';
@@ -31,10 +30,10 @@ async function setupGame(page: any): Promise<void> {
   await page.waitForLoadState('networkidle');
 }
 
-// This spec needs the app wired to the fake front door (TRAINER_AGENT_URL set).
+// This spec needs the app wired to the front-door stub (TRAINER_AGENT_URL set).
 // verify-trainer-live.sh sets TRAINER_LIVE_VERIFY; the default verify.sh run (no
-// fake door, placeholder reply) skips it.
-test.skip(!process.env.TRAINER_LIVE_VERIFY, 'requires the fake front door — run via verify-trainer-live.sh');
+// stub, placeholder reply) skips it.
+test.skip(!process.env.TRAINER_LIVE_VERIFY, 'requires the front-door stub — run via verify-trainer-live.sh');
 
 test('Trainer reply renders the status tag and a clickable PR link', async ({ page }) => {
   await page.goto(`${BASE_URL}/dontdie`);
@@ -46,10 +45,10 @@ test('Trainer reply renders the status tag and a clickable PR link', async ({ pa
   await page.locator('.mulligan-recommendation-improve').click();
   const input = page.locator('.advisor-chat-input');
   await expect(input).toBeVisible();
-  await input.fill('Please open a PR adding this hand as a blessed case');
+  await input.fill('pr please — add this hand as a blessed case');
   await page.locator('.advisor-chat-send').click();
 
-  // The PR link from the fake front door's pr_url.
+  // The PR link from the stub's pr_url.
   const prLink = page.locator('.advisor-chat-pr-link');
   await expect(prLink).toBeVisible({ timeout: 10000 });
   await expect(prLink).toHaveAttribute('href', 'https://github.com/jessitron/mtg-deck-shuffler/pull/0');

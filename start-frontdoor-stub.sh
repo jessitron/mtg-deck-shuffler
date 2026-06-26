@@ -8,7 +8,7 @@
 #
 # Idempotent: if a healthy stub is already answering on the port, it's reused.
 # The container is left running across app restarts; stop it with:
-#   docker rm -f trainer-frontdoor-stub
+#   docker rm -f trainer-frontdoor-stub-<port>   (e.g. trainer-frontdoor-stub-8080)
 #
 # Usage: ./start-frontdoor-stub.sh [port]   (default 8080, or $TRAINER_FRONTDOOR_PORT)
 
@@ -17,7 +17,9 @@ set -euo pipefail
 PORT="${1:-${TRAINER_FRONTDOOR_PORT:-8080}}"
 REGISTRY=414852377253.dkr.ecr.us-west-2.amazonaws.com
 IMAGE="$REGISTRY/trainer-agent-frontdoor-stub:latest"
-CONTAINER=trainer-frontdoor-stub
+# Name the container by port so stubs on different ports (e.g. ./run on 8080 and a
+# verify run on 8099) don't clobber each other.
+CONTAINER="trainer-frontdoor-stub-$PORT"
 # The bearer the stub will require; the app must send the same as TRAINER_AGENT_TOKEN.
 STUB_BEARER="${TRAINER_AGENT_TOKEN:-test-token}"
 

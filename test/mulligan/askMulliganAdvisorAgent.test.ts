@@ -1,6 +1,11 @@
 import http from "http";
 import { AddressInfo } from "net";
-import { askMulliganAdvisorAgent, AdvisorChatContext } from "../../src/mulligan/advisorChat.js";
+import {
+  askMulliganAdvisorAgent,
+  buildTrainerState,
+  AdvisorChatContext,
+  TrainerGameState,
+} from "../../src/mulligan/advisorChat.js";
 
 /** What the fake front door captured about the request it received. */
 interface CapturedRequest {
@@ -69,7 +74,11 @@ function aContext(): AdvisorChatContext {
 
 const SESSION_ID = "mtg-deck-shuffler-00000000-0000-0000-0000-000000000000";
 
-describe("askMulliganAdvisorAgent — v1.0 wire contract", () => {
+function aState(): TrainerGameState {
+  return buildTrainerState(aContext());
+}
+
+describe("askMulliganAdvisorAgent — v2.0 wire contract", () => {
   let frontDoor: FakeFrontDoor;
   const savedUrl = process.env.TRAINER_AGENT_URL;
   const savedToken = process.env.TRAINER_AGENT_TOKEN;
@@ -86,32 +95,32 @@ describe("askMulliganAdvisorAgent — v1.0 wire contract", () => {
     process.env.TRAINER_AGENT_TOKEN = savedToken;
   });
 
-  it("POSTs {message, session_id} with bearer auth and the interface-version header", async () => {
-    await askMulliganAdvisorAgent(null, "hello", SESSION_ID);
+  it("POSTs {message, session_id, seq, state} with bearer auth and the v2.0 version header", async () => {
+    const state = aState();
+    await askMulliganAdvisorAgent("hello", SESSION_ID, 1, state);
 
     const req = frontDoor.captured!;
     expect(req.method).toBe("POST");
     expect(req.headers["authorization"]).toBe("Bearer test-token");
-    expect(req.headers["x-trainer-agent-interface-version"]).toBe("1.0");
+    expect(req.headers["x-trainer-agent-interface-version"]).toBe("2.0");
     expect(req.headers["content-type"]).toContain("application/json");
-    // The wire contract is {message, session_id} — no `context` field.
-    expect(req.body).toEqual({ message: "hello", session_id: SESSION_ID });
+    expect(req.body).toEqual({ message: "hello", session_id: SESSION_ID, seq: 1, state });
   });
 
-  it("folds the hand snapshot into the first message's text (context has no wire field)", async () => {
-    await askMulliganAdvisorAgent(aContext(), "is this right?", SESSION_ID);
+  it("sends the hand snapshot as structured `state` (not folded into the message)", async () => {
+    await askMulliganAdvisorAgent("is this right?", SESSION_ID, 1, aState());
 
-    const message: string = frontDoor.captured!.body.message;
-    expect(message).toContain("Island");
-    expect(message).toContain("Atraxa");
-    expect(message).toContain("keep");
-    expect(message).toContain("is this right?");
-    expect(frontDoor.captured!.body.context).toBeUndefined();
+    const body = frontDoor.captured!.body;
+    expect(body.message).toBe("is this right?");
+    expect(body.state.hand).toContain("Island");
+    expect(body.state.commanders).toContain("Atraxa");
+    expect(body.state.mulligansSoFar).toBe(1);
+    expect(body.state.advisorRecommendation.decision).toBe("keep");
   });
 
-  it("sends the bare message on continuation turns (context = null)", async () => {
-    await askMulliganAdvisorAgent(null, "follow-up", SESSION_ID);
-    expect(frontDoor.captured!.body.message).toBe("follow-up");
+  it("sends the given seq on continuation turns", async () => {
+    await askMulliganAdvisorAgent("third message", SESSION_ID, 3, aState());
+    expect(frontDoor.captured!.body.seq).toBe(3);
   });
 
   it("maps the {reply, status, pr_url} response, renaming pr_url to prUrl", async () => {
@@ -121,7 +130,7 @@ describe("askMulliganAdvisorAgent — v1.0 wire contract", () => {
       pr_url: "https://github.com/jessitron/mtg-deck-shuffler/pull/0",
     };
 
-    const result = await askMulliganAdvisorAgent(null, "open the pr", SESSION_ID);
+    const result = await askMulliganAdvisorAgent("open the pr", SESSION_ID, 1, aState());
 
     expect(result).toEqual({
       reply: "opened a PR",
@@ -134,13 +143,13 @@ describe("askMulliganAdvisorAgent — v1.0 wire contract", () => {
     frontDoor.statusCode = 401;
     frontDoor.cannedResponse = { error: "unauthorized" };
 
-    await expect(askMulliganAdvisorAgent(null, "hi", SESSION_ID)).rejects.toThrow(/401/);
+    await expect(askMulliganAdvisorAgent("hi", SESSION_ID, 1, aState())).rejects.toThrow(/401/);
   });
 
   it("returns the placeholder (no network) when no URL is configured", async () => {
     delete process.env.TRAINER_AGENT_URL;
 
-    const result = await askMulliganAdvisorAgent(null, "hi", SESSION_ID);
+    const result = await askMulliganAdvisorAgent("hi", SESSION_ID, 1, aState());
 
     expect(result).toEqual({ reply: "Well isn't that special", status: "chatting" });
     expect(frontDoor.captured).toBeUndefined();

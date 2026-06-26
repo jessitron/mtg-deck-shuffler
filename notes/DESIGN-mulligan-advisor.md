@@ -136,51 +136,59 @@ single-instance service without a redesign. **No behavior change** — pure refa
   verdict to the fixtures, so every conversation ratchets the suite forward.
 - **Init prompt for the Trainer: [`agentcore-advisor-agent-prompt.md`](agentcore-advisor-agent-prompt.md).**
 
-### Phase 3.5 — wire the app to the live Trainer (INTERFACE.md v1.0)  ✅ DONE (JES-100)
-The Trainer now publishes a canonical spec — **`INTERFACE.md`** — and a live public
+### Phase 3.5 — wire the app to the live Trainer (INTERFACE.md v2.0)  ✅ DONE (JES-100)
+The Trainer publishes a canonical spec — **`INTERFACE.md`** — and a live public
 front door. We pin to it by **copying `INTERFACE.md` to this repo's root** (git
-history records the version we built against — **1.0**). Don't edit the copy; to
+history records the version we built against — **2.0**). Don't edit the copy; to
 change the contract, file a development request in the `small-coding-agent` Linear
 project (the collaboration interface).
 
-- **Wire contract (v1.0).** `POST {message, session_id}` to `TRAINER_AGENT_URL` with
-  `Authorization: Bearer <TRAINER_AGENT_TOKEN>`, `X-Trainer-Agent-Interface-Version: 1.0`,
-  a **≥300s read timeout** (`AbortSignal.timeout`, since a coding turn takes minutes),
-  and the active W3C trace context injected into the headers. Response is
-  `{ reply, status, pr_url? }` where `status ∈ chatting|coding|asking|done|error`.
-  All in `askMulliganAdvisorAgent` (`src/mulligan/advisorChat.ts`), which now returns
-  a structured `TrainerReply` (`{ reply, status, prUrl? }`) instead of a bare string.
-- **No `context` field on the wire.** The v1.0 contract carries only
-  `{message, session_id}`. The frozen hand snapshot is therefore **folded into the
-  first message's text** (`foldContextIntoMessage`) — hand, commanders, mulligans-so-far,
-  and the Advisor's verdict — and continuation turns send the bare message. (Session
-  model is unchanged: `context != null` only on the first turn; the agent's microVM
-  holds the hand after that.)
+- **Wire contract (v2.0).** `POST {message, session_id, seq, state}` to
+  `TRAINER_AGENT_URL` with `Authorization: Bearer <TRAINER_AGENT_TOKEN>`,
+  `X-Trainer-Agent-Interface-Version: 2.0`, a **≥300s read timeout**
+  (`AbortSignal.timeout`, since a coding turn takes minutes), and the active W3C trace
+  context injected into the headers. Response is `{ reply, status, pr_url? }` where
+  `status ∈ chatting|coding|asking|done|error`. All in `askMulliganAdvisorAgent`
+  (`src/mulligan/advisorChat.ts`), which returns a structured `TrainerReply`
+  (`{ reply, status, prUrl? }`).
+- **`state`, not folded text (the v2.0 change).** The frozen hand snapshot is sent as a
+  structured `state` object **fresh every turn** (`buildTrainerState` → `TrainerGameState`:
+  `hand`, `commanders`, `mulligansSoFar`, `advisorRecommendation`). Its shape is **ours**,
+  documented in **`trainer-agent/instructions.md`** (the agent's brief — required by v2.0;
+  missing/empty → the agent returns `error`). This replaced v1.0's `foldContextIntoMessage`.
+- **`seq` + lost-session recovery (the other v2.0 change).** `seq` is a 1-based per-message
+  counter held on the conversation (`TrainerConversationStore`). It advances per accepted
+  turn (`advanceSeq`); on a `status: error` reply (the agent's session/working tree is gone),
+  `MulliganTrainer.sendMessage` calls `resetSession` — a fresh `session_id`, `seq` back to 1 —
+  so the next message starts clean while `state` (the same hand) carries on. Spans carry
+  `trainer.seq` and `trainer.session_lost`.
 - **`session_id`.** Generated as `mtg-deck-shuffler-${randomUUID()}` (≥33 chars, as the
-  contract requires) in `TrainerConversationStore.start`; reused for the whole
-  conversation.
-- **Fake locally, real in prod.**
-  - **Local** uses the fake. With `TRAINER_AGENT_URL` unset (the tracked `.env`
-    default) the chat returns the placeholder (`"Well isn't that special"`,
-    `status: chatting`) — no agent calls, no setup. For a contract-faithful local
-    fake, run the front-door stub (`./verify-trainer-live.sh` stands one up) and
-    point at `http://localhost:8080/`. The real URL/token are **never** put in the
-    tracked `.env`.
+  contract requires) in `TrainerConversationStore`; reused for the whole conversation
+  (until a lost-session reset mints a new one).
+- **Stub locally, real in prod.**
+  - **Local** wires the **official front-door stub** automatically: `./run` calls
+    `./start-frontdoor-stub.sh`, which runs the `trainer-agent-frontdoor-stub` Docker
+    image (private ECR) on `:8080` — it enforces the real v2.0 contract (bearer,
+    `session_id` ≥ 33, version header, `seq` lost-session check) and returns canned
+    replies. `TRAINER_AGENT_TOKEN=test-token` matches the stub's `STUB_BEARER`. With
+    `TRAINER_AGENT_URL` unset entirely the chat falls back to the placeholder
+    (`"Well isn't that special"`, `status: chatting`). The real URL/token are **never**
+    put in the tracked `.env`.
   - **Prod** uses the real front door, wired in Kubernetes: `TRAINER_AGENT_URL` is in
     `k8s/configmap.yaml` (public Lambda URL, committed); `TRAINER_AGENT_TOKEN` is a
     key in the `mtg-deck-shuffler-secret` k8s Secret (never committed), loaded via the
     deployment's `envFrom: secretRef`. Set/rotate it with `./wire-prod-trainer-token.sh`
     (fetches the bearer from the trainer-agent sandbox Secrets Manager and merges it
     into the secret), then `kubectl rollout restart deployment/mtg-deck-shuffler`.
-- **UI.** Trainer bubbles now render the `status` (a small tag — `chatting` is hidden
+- **UI.** Trainer bubbles render the `status` (a small tag — `chatting` is hidden
   as the unremarkable default) and a **"View PR ↗"** link once `pr_url` exists. Both are
   stored on the trainer `TrainerMessage` so they survive a page reload.
 - **Local/CI testing.** Unit tests use an injected fake `AskTrainerAgent`
   (`mulliganTrainer.test.ts`); the wire contract itself is verified against a **real
   local fake front door** (`askMulliganAdvisorAgent.test.ts`) — no mocks, no network to
-  AWS. For manual end-to-end testing without the real agent, run the **front-door stub**
-  (Docker image in private ECR; commands in the trainer-agent repo's
-  `notes/infrastructure.md`) on `localhost:8080` and point `TRAINER_AGENT_URL` at it.
+  AWS. For end-to-end testing without the real agent, `./verify-trainer-live.sh` runs the
+  front-door stub on `:8099` and drives the chat through the browser
+  (`verify-trainer-pr-link.spec.ts`).
 
 ## Key design decisions
 

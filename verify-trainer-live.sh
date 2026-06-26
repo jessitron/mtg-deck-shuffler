@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# Verify the LIVE Trainer wiring (INTERFACE.md v1.0) end-to-end, without the real
+# Verify the LIVE Trainer wiring (INTERFACE.md v2.0) end-to-end, without the real
 # agent or AWS. This script:
-# 1. Starts a fake Trainer front door (test/verification/fake-frontdoor.mjs) on :8099
-#    that returns {status: "done", pr_url}
-# 2. Starts the app on port 3001 with TRAINER_AGENT_URL pointed at the fake door
-# 3. Runs the Trainer PR-link verification spec
-# 4. Shuts both down and returns the test exit code
+# 1. Starts the official front-door stub (start-frontdoor-stub.sh) on :8099 — it
+#    speaks the real v2.0 contract (bearer, session_id >= 33, version header, seq
+#    lost-session check) and returns canned replies driven by the message text.
+# 2. Starts the app on port 3001 with TRAINER_AGENT_URL pointed at the stub.
+# 3. Runs the Trainer PR-link verification spec.
+# 4. Shuts both down and returns the test exit code.
 
 set -e
 
@@ -15,10 +16,12 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+FRONTDOOR_PORT=8099
+
 echo -e "${YELLOW}Building app...${NC}"
 npm run build
 
-# Source .be then .env for OTEL config (non-fatal: this local fake-door check needs
+# Source .be then .env for OTEL config (non-fatal: this local stub check needs
 # no telemetry, so a hiccup sourcing personal env files shouldn't abort the run).
 set +e
 [ -f .be ] && source .be
@@ -28,12 +31,11 @@ set -e
 LOG_DIR=$(mktemp -d)
 echo -e "${YELLOW}Logs: $LOG_DIR${NC}"
 
-echo -e "${YELLOW}Starting fake Trainer front door on port 8099...${NC}"
-PORT=8099 node test/verification/fake-frontdoor.mjs > "$LOG_DIR/frontdoor.log" 2>&1 &
-FRONTDOOR_PID=$!
+echo -e "${YELLOW}Starting front-door stub on port $FRONTDOOR_PORT...${NC}"
+TRAINER_AGENT_TOKEN=test-token ./start-frontdoor-stub.sh "$FRONTDOOR_PORT"
 
-echo -e "${YELLOW}Starting app on port 3001 (wired to the fake front door)...${NC}"
-TRAINER_AGENT_URL=http://localhost:8099/ \
+echo -e "${YELLOW}Starting app on port 3001 (wired to the stub)...${NC}"
+TRAINER_AGENT_URL="http://localhost:$FRONTDOOR_PORT/" \
 TRAINER_AGENT_TOKEN=test-token \
 PORT_PERSIST_STATE=in-memory \
 PORT=3001 node --import ./dist/tracing.js dist/server.js > "$LOG_DIR/app.log" 2>&1 &
@@ -41,9 +43,8 @@ SERVER_PID=$!
 
 cleanup() {
     [ -n "$SERVER_PID" ] && kill $SERVER_PID 2>/dev/null || true
-    [ -n "$FRONTDOOR_PID" ] && kill $FRONTDOOR_PID 2>/dev/null || true
     wait $SERVER_PID 2>/dev/null || true
-    wait $FRONTDOOR_PID 2>/dev/null || true
+    docker rm -f "trainer-frontdoor-stub-$FRONTDOOR_PORT" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT INT TERM
 
@@ -70,7 +71,7 @@ if [ $TEST_EXIT_CODE -eq 0 ]; then
     echo -e "${GREEN}Live Trainer wiring verified!${NC}"
 else
     echo -e "${RED}Live Trainer verification failed! Logs:${NC}"
-    echo -e "${YELLOW}--- front door ---${NC}"; cat "$LOG_DIR/frontdoor.log" || true
+    echo -e "${YELLOW}--- stub (docker) ---${NC}"; docker logs "trainer-frontdoor-stub-$FRONTDOOR_PORT" 2>&1 | tail -20 || true
     echo -e "${YELLOW}--- app (trainer lines) ---${NC}"; grep -i "trainer\|advisor\|error" "$LOG_DIR/app.log" | tail -30 || true
 fi
 
