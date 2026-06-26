@@ -159,10 +159,19 @@ project (the collaboration interface).
 - **`session_id`.** Generated as `mtg-deck-shuffler-${randomUUID()}` (≥33 chars, as the
   contract requires) in `TrainerConversationStore.start`; reused for the whole
   conversation.
-- **Token is a secret.** `TRAINER_AGENT_TOKEN` lives in `.be` (untracked), **never** in
-  the tracked `.env`. `.env` carries commented guidance + the public front-door URL.
-  Unset `TRAINER_AGENT_URL` → the placeholder reply (`"Well isn't that special"`,
-  `status: chatting`), so the UI/transport work with no agent (local/CI default).
+- **Fake locally, real in prod.**
+  - **Local** uses the fake. With `TRAINER_AGENT_URL` unset (the tracked `.env`
+    default) the chat returns the placeholder (`"Well isn't that special"`,
+    `status: chatting`) — no agent calls, no setup. For a contract-faithful local
+    fake, run the front-door stub (`./verify-trainer-live.sh` stands one up) and
+    point at `http://localhost:8080/`. The real URL/token are **never** put in the
+    tracked `.env`.
+  - **Prod** uses the real front door, wired in Kubernetes: `TRAINER_AGENT_URL` is in
+    `k8s/configmap.yaml` (public Lambda URL, committed); `TRAINER_AGENT_TOKEN` is a
+    key in the `mtg-deck-shuffler-secret` k8s Secret (never committed), loaded via the
+    deployment's `envFrom: secretRef`. Set/rotate it with `./wire-prod-trainer-token.sh`
+    (fetches the bearer from the trainer-agent sandbox Secrets Manager and merges it
+    into the secret), then `kubectl rollout restart deployment/mtg-deck-shuffler`.
 - **UI.** Trainer bubbles now render the `status` (a small tag — `chatting` is hidden
   as the unremarkable default) and a **"View PR ↗"** link once `pr_url` exists. Both are
   stored on the trainer `TrainerMessage` so they survive a page reload.

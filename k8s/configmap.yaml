@@ -11,3 +11,7 @@ data:
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOG_LEVEL: "info"
+  # Trainer Agent front door (INTERFACE.md v1.0). Public Lambda Function URL, so it
+  # lives here; the bearer token is TRAINER_AGENT_TOKEN in mtg-deck-shuffler-secret.
+  # Prod talks to the real agent; local leaves this unset and uses the fake.
+  TRAINER_AGENT_URL: "https://3zpl56dwi54putsdjtecwnyqim0sdjmh.lambda-url.us-west-2.on.aws/"
