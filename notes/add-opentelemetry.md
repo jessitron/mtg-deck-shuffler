@@ -111,6 +111,20 @@ Then launch with `node --import ./dist/tracing.js dist/server.js`. (`@openteleme
 re-exports the `import-in-the-middle` hook; it's already a transitive dependency.)
 Verify by confirming `middleware - …` / `request handler - …` spans and `http.route` appear.
 
+> **Gotcha — keep the OTel stack current, or the ESM hook crashes the boot on Linux.**
+> With `@opentelemetry/sdk-node` 0.203.0 (which resolved `import-in-the-middle` 1.14.2),
+> the ESM loader hook crashed at startup **on the Linux `node:24-slim` image** (not on
+> macOS) with `TypeError [ERR_INVALID_RETURN_PROPERTY_VALUE]: Expected string … for the
+> "source" from the "load" hook but got undefined`. It is platform-specific (a module
+> that resolves to ESM on Linux trips an IITM bug), so it passes locally and only bites
+> in the container — prod image `31aaa75` never booted; the old pod kept serving so it
+> went unnoticed. Overriding just `import-in-the-middle` (even to 3.2.0) did **not** fix
+> it; **upgrading the OTel packages did** (`sdk-node`/`exporter-trace-otlp-http` → ^0.219.0,
+> `auto-instrumentations-node` → ^0.77.0), which pulls a matching, fixed IITM. Boot is
+> verified in-container by `./verify-container-boot.sh`. (Harmless leftover: a
+> "`import-in-the-middle` hook has already been initialized" warning — the newer SDK also
+> registers the hook; IITM dedupes, so the explicit `register()` above is belt-and-suspenders.)
+
 ### Option 2: load tracing in the main entry point
 
 [] In the main entry point, add the following code before anything else, import the tracing module.
