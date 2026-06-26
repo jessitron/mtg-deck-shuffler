@@ -78,7 +78,7 @@ function aState(): TrainerGameState {
   return buildTrainerState(aContext());
 }
 
-describe("askMulliganAdvisorAgent — v2.0 wire contract", () => {
+describe("askMulliganAdvisorAgent — v2.1 wire contract", () => {
   let frontDoor: FakeFrontDoor;
   const savedUrl = process.env.TRAINER_AGENT_URL;
   const savedToken = process.env.TRAINER_AGENT_TOKEN;
@@ -95,14 +95,14 @@ describe("askMulliganAdvisorAgent — v2.0 wire contract", () => {
     process.env.TRAINER_AGENT_TOKEN = savedToken;
   });
 
-  it("POSTs {message, session_id, seq, state} with bearer auth and the v2.0 version header", async () => {
+  it("POSTs {message, session_id, seq, state} with bearer auth and the v2.1 version header", async () => {
     const state = aState();
     await askMulliganAdvisorAgent("hello", SESSION_ID, 1, state);
 
     const req = frontDoor.captured!;
     expect(req.method).toBe("POST");
     expect(req.headers["authorization"]).toBe("Bearer test-token");
-    expect(req.headers["x-trainer-agent-interface-version"]).toBe("2.0");
+    expect(req.headers["x-trainer-agent-interface-version"]).toBe("2.1");
     expect(req.headers["content-type"]).toContain("application/json");
     expect(req.body).toEqual({ message: "hello", session_id: SESSION_ID, seq: 1, state });
   });
@@ -120,9 +120,11 @@ describe("askMulliganAdvisorAgent — v2.0 wire contract", () => {
     expect(body.state.advisorRecommendation.decision).toBe("keep");
   });
 
-  it("sends the given seq on continuation turns", async () => {
+  it("sends the given seq on continuation turns, and omits `state` after the first message", async () => {
     await askMulliganAdvisorAgent("third message", SESSION_ID, 3, aState());
     expect(frontDoor.captured!.body.seq).toBe(3);
+    // v2.1: `state` grounds the conversation on seq 1 only; the agent ignores it after.
+    expect(frontDoor.captured!.body.state).toBeUndefined();
   });
 
   it("maps the {reply, status, pr_url} response, renaming pr_url to prUrl", async () => {

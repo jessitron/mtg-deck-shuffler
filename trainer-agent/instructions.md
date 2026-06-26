@@ -54,9 +54,11 @@ commentary was weak) — fix the logic and lock it in with a test."_
 
 ## The `state` you receive
 
-The app sends `state` fresh on **every** message (it's the same snapshot each turn
-— the hand is frozen for the conversation). It is a snapshot of the **one hand**
-under discussion, along with some game state and the Advisor's current message:
+The app sends `state` on the **first** message of the session only (`seq: 1`); read
+it once to ground the conversation — you won't get it on later turns (the hand is
+frozen for the conversation, so there's nothing new to send). It is a snapshot of the
+**one hand** under discussion, along with some game state and the Advisor's current
+message:
 
 ```json
 {

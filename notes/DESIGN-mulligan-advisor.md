@@ -139,23 +139,27 @@ single-instance service without a redesign. **No behavior change** — pure refa
 ### Phase 3.5 — wire the app to the live Trainer (INTERFACE.md v2.0)  ✅ DONE (JES-100)
 The Trainer publishes a canonical spec — **`INTERFACE.md`** — and a live public
 front door. We pin to it by **copying `INTERFACE.md` into `trainer-agent/`** (git
-history records the version we built against — **2.0**). Don't edit the copy; to
+history records the version we built against — **2.1**). Don't edit the copy; to
 change the contract, file a development request in the `small-coding-agent` Linear
 project (the collaboration interface).
 
-- **Wire contract (v2.0).** `POST {message, session_id, seq, state}` to
+- **Wire contract (v2.1).** `POST {message, session_id, seq, state?}` to
   `TRAINER_AGENT_URL` with `Authorization: Bearer <TRAINER_AGENT_TOKEN>`,
-  `X-Trainer-Agent-Interface-Version: 2.0`, a **≥300s read timeout**
+  `X-Trainer-Agent-Interface-Version: 2.1`, a **≥300s read timeout**
   (`AbortSignal.timeout`, since a coding turn takes minutes), and the active W3C trace
   context injected into the headers. Response is `{ reply, status, pr_url? }` where
   `status ∈ chatting|coding|asking|done|error`. All in `askMulliganAdvisorAgent`
   (`src/mulligan/advisorChat.ts`), which returns a structured `TrainerReply`
   (`{ reply, status, prUrl? }`).
 - **`state`, not folded text (the v2.0 change).** The frozen hand snapshot is sent as a
-  structured `state` object **fresh every turn** (`buildTrainerState` → `TrainerGameState`:
-  `hand`, `commanders`, `mulligansSoFar`, `advisorRecommendation`). Its shape is **ours**,
-  documented in **`trainer-agent/instructions.md`** (the agent's brief — required by v2.0;
-  missing/empty → the agent returns `error`). This replaced v1.0's `foldContextIntoMessage`.
+  structured `state` object on the **first message only** (`seq === 1`, the v2.1 refinement):
+  the agent reads it once to ground the conversation, then works from its own server-side
+  conversation. The transport gates this in `askMulliganAdvisorAgent` (`buildTrainerState` →
+  `TrainerGameState`: `hand`, `commanders`, `mulligansSoFar`, `advisorRecommendation`); the
+  front door records `agent.state_included` on its span so the first-vs-later pattern is
+  visible in Honeycomb. Its shape is **ours**, documented in **`trainer-agent/instructions.md`**
+  (the agent's brief — required by v2.0; missing/empty → the agent returns `error`). This
+  replaced v1.0's `foldContextIntoMessage`.
 - **`seq` + lost-session recovery (the other v2.0 change).** `seq` is a 1-based per-message
   counter held on the conversation (`TrainerConversationStore`). It advances per accepted
   turn (`advanceSeq`); on a `status: error` reply (the agent's session/working tree is gone),
@@ -168,7 +172,7 @@ project (the collaboration interface).
 - **Stub locally, real in prod.**
   - **Local** wires the **official front-door stub** automatically: `./run` calls
     `./start-frontdoor-stub.sh`, which runs the `trainer-agent-frontdoor-stub` Docker
-    image (private ECR) on `:8080` — it enforces the real v2.0 contract (bearer,
+    image (private ECR) on `:8080` — it enforces the real v2.1 contract (bearer,
     `session_id` ≥ 33, version header, `seq` lost-session check) and returns canned
     replies. `TRAINER_AGENT_TOKEN=test-token` matches the stub's `STUB_BEARER`. With
     `TRAINER_AGENT_URL` unset entirely the chat falls back to the placeholder

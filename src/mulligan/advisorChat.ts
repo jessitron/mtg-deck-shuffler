@@ -18,8 +18,8 @@ export interface TrainerCard {
 }
 
 /**
- * The app-defined game `state` sent to the Trainer fresh on every turn (INTERFACE.md
- * v2.0 → Request). Its shape is OURS — it is described by `trainer-agent/instructions.md`
+ * The app-defined game `state` sent to the Trainer on a session's first message
+ * (INTERFACE.md v2.1 → Request). Its shape is OURS — it is described by `trainer-agent/instructions.md`
  * in this repo, not by INTERFACE.md. It is the frozen snapshot of the one hand under
  * discussion: card names (the join key into the code/tests) plus the Advisor's verdict.
  */
@@ -34,11 +34,11 @@ export interface TrainerGameState {
   };
 }
 
-/** The Trainer's per-turn status (see INTERFACE.md v2.0 → Response). */
+/** The Trainer's per-turn status (see INTERFACE.md v2.1 → Response). */
 export type TrainerStatus = "chatting" | "coding" | "asking" | "done" | "error";
 
 /**
- * One structured reply from the Trainer — the v2.0 response shape
+ * One structured reply from the Trainer — the v2.1 response shape
  * (`{reply, status, pr_url?}`), with `pr_url` renamed to `prUrl` for the app's
  * camelCase convention. `prUrl` appears only once a PR exists.
  */
@@ -66,7 +66,7 @@ export type AskTrainerAgent = (
  * Honeycomb (a mismatch is a warning, not an error). Bump this only by re-copying
  * a newer INTERFACE.md, never by editing locally — see INTERFACE.md → Versioning.
  */
-const INTERFACE_VERSION = "2.0";
+const INTERFACE_VERSION = "2.1";
 
 /**
  * The call is synchronous and a coding turn can take minutes; the contract
@@ -83,8 +83,9 @@ const PLACEHOLDER_REPLY: TrainerReply = { reply: "Well isn't that special", stat
 
 /**
  * Build the `state` payload from the frozen hand snapshot. The shape is defined by
- * this repo's `trainer-agent/instructions.md`; keep the two in sync. Sent fresh on
- * every turn — the agent persists only its own conversation, not our game.
+ * this repo's `trainer-agent/instructions.md`; keep the two in sync. Sent on the
+ * first message of a session only (v2.1) — the agent reads it once to ground the
+ * conversation, then works from its own server-side conversation.
  *
  * Cards are sent as objects ({ name }) rather than plain strings so that card names
  * containing commas (e.g. "Iron Monger, Sadistic Tycoon") are unambiguous to the
@@ -107,10 +108,10 @@ export function buildTrainerState(context: AdvisorChatContext): TrainerGameState
 /**
  * Relay a developer's chat message to the Trainer — the coding agent that improves
  * the Advisor (`recommendMulligan`) by opening PRs against this repo. Implements
- * the v2.0 technical interface (the INTERFACE.md copy in `trainer-agent/`).
+ * the v2.1 technical interface (the INTERFACE.md copy in `trainer-agent/`).
  *
- * WIRE CONTRACT: `POST {message, session_id, seq, state}` with
- * `Authorization: Bearer <token>` and `X-Trainer-Agent-Interface-Version: 2.0`, a
+ * WIRE CONTRACT: `POST {message, session_id, seq, state?}` with
+ * `Authorization: Bearer <token>` and `X-Trainer-Agent-Interface-Version: 2.1`, a
  * >= 300s read timeout, and the active W3C trace context injected into the headers
  * so the app, front door, and agent share one Honeycomb trace. Returns
  * `{reply, status, pr_url?}`.
@@ -118,9 +119,10 @@ export function buildTrainerState(context: AdvisorChatContext): TrainerGameState
  * SESSION MODEL: `sessionId` is sent on every turn so the agent keeps its microVM
  * warm and its working tree intact. `seq` is the 1-based number of this user
  * message in the session; the agent rejects a mismatched `seq` as a lost session
- * (`status: error`). `state` (the frozen hand snapshot) is sent fresh every turn —
- * the agent persists only its own conversation, not our game. The conversation
- * layer (MulliganTrainer) owns seq bookkeeping and lost-session recovery.
+ * (`status: error`). `state` (the frozen hand snapshot) is sent only on the first
+ * message (`seq === 1`); the agent reads it once to ground the conversation and
+ * works from its own server-side conversation after that. The conversation layer
+ * (MulliganTrainer) owns seq bookkeeping and lost-session recovery.
  *
  * TRANSPORT: POSTs to `TRAINER_AGENT_URL` when set (the production Lambda Function
  * URL, or `http://localhost:8080/` for the front-door stub). Token from
@@ -147,10 +149,14 @@ export async function askMulliganAdvisorAgent(
   // Propagate the current trace context to the agent (W3C traceparent/tracestate).
   propagation.inject(otelContext.active(), headers);
 
+  // v2.1: `state` grounds the conversation on the first message only; the agent reads
+  // it once and works from its server-side conversation after that. On lost-session
+  // recovery `seq` resets to 1, so the re-grounding message re-sends `state` for free.
+  const body = seq === 1 ? { message, session_id: sessionId, seq, state } : { message, session_id: sessionId, seq };
   const response = await fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify({ message, session_id: sessionId, seq, state }),
+    body: JSON.stringify(body),
     signal: AbortSignal.timeout(READ_TIMEOUT_MS),
   });
   if (!response.ok) {

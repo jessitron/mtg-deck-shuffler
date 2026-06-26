@@ -28,10 +28,10 @@ export interface TrainerMessage {
  * for the whole conversation: it is sent with every agent invocation and put on
  * the current span, and it appears on the `trainer.evaluation` span when the chat
  * ends. `seq` is the 1-based number to send for the NEXT user message (INTERFACE.md
- * v2.0 → Request); it advances per accepted turn and resets to 1 (with a fresh
+ * v2.1 → Request); it advances per accepted turn and resets to 1 (with a fresh
  * `sessionId`) on a lost session. `context` is the frozen hand snapshot captured at
- * session start; it is re-sent as `state` every turn and never re-read from game
- * state, so the discussion stays anchored to the one hand. Born on startSession,
+ * session start; it is sent as `state` on the first message only (v2.1) and never
+ * re-read from game state, so the discussion stays anchored to the one hand. Born on startSession,
  * dies on End Chat.
  */
 export interface TrainerConversation {
@@ -104,10 +104,10 @@ export class TrainerConversationStore {
   }
 
   /**
-   * Recover from a lost session (INTERFACE.md v2.0 → Response): mint a fresh
+   * Recover from a lost session (INTERFACE.md v2.1 → Response): mint a fresh
    * `sessionId` and reset `seq` to 1, so the next message starts a clean
-   * conversation. The frozen `context`/`messages` are kept — `state` is re-sent, so
-   * the chat carries on about the same hand.
+   * conversation. The frozen `context`/`messages` are kept — `seq` back at 1 means
+   * `state` is re-sent on that first message, so the chat carries on about the same hand.
    */
   resetSession(gameId: number): void {
     const conversation = this.byGame.get(gameId);

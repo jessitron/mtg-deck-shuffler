@@ -1,9 +1,16 @@
 # Working with the Trainer Agent
 
-> **Interface version: 2.0** — this document IS the spec for that version. The
+> **Interface version: 2.1** — this document IS the spec for that version. The
 > running service advertises the same version on every response
 > (`X-Trainer-Agent-Interface-Version`); this doc and the service are bumped
 > together. See [Versioning](#versioning) and [Changelog](#changelog).
+>
+> **Canonical source:**
+> <https://github.com/jessitron/small-coding-agent/blob/main/INTERFACE.md>.
+> If you're reading a copy in another repo, **that copy is a read-only snapshot** —
+> don't edit it to change the contract. The contract lives at the canonical source;
+> change it via a [development request](#requesting-development-the-collaboration-interface),
+> then [upgrade your copy](#upgrading-your-copy).
 
 **This is the single file you copy into another repo to learn how to work with
 the Trainer Agent.** It defines three interfaces at once:
@@ -140,7 +147,7 @@ rotated.
 Headers:
 
 `Content-Type: application/json`
-`X-Trainer-Agent-Interface-Version: 2.0`
+`X-Trainer-Agent-Interface-Version: 2.1`
 `traceparent: ...`
 
 Body:
@@ -166,11 +173,14 @@ Body:
   is gone, so the agent returns `status: error` asking the user to start a new
   conversation (see [Response](#response)). **Send it** so lost context is caught
   honestly instead of the agent acting on a deck it can no longer see.
-- **`state`** — the **current game state**, an object **you define**. The agent
-  passes it into its reasoning each turn; its shape is described by _your_
-  `trainer-agent/instructions.md`, not by this spec. Send it fresh each turn — the
-  agent persists only its own conversation, not your game. Omit it only if your
-  `instructions.md` says the agent doesn't need it.
+- **`state`** — the **game state**, an object **you define**. **Send it on the
+  first message of a session** (`seq: 1`); the agent reads it once to ground the
+  conversation and **doesn't expect it on later turns** — it works from its own
+  server-side conversation after that. Its shape is described by _your_
+  `trainer-agent/instructions.md`, not by this spec. The front door treats `state`
+  as optional: it never rejects on a missing or present `state`, forwards it
+  untouched, and records on its trace span whether `state` was sent. Omit it on the
+  first message only if your `instructions.md` says the agent doesn't need it.
 
 ### Response
 
@@ -226,8 +236,9 @@ No extra body fields are required — the `traceparent` **header** is enough.
 
 1. On a new conversation, mint a `session_id` (≥33 chars), keep it, and start a
    `seq` counter at `1`.
-2. For each user message: `POST` with that `session_id`, the current `seq`, and
-   the current `state`; render `reply`; increment `seq` for the next message.
+2. On the **first** message, `POST` with that `session_id`, `seq: 1`, and your
+   `state`. For each **later** message, `POST` with the `session_id` and the
+   incremented `seq` — no `state` needed. Render `reply` each turn.
 3. While `status` is `chatting`/`asking`/`coding`, keep letting the user reply.
 4. When `pr_url` appears, surface the PR link. `status: done` ends the task.
 5. On `status: error` for a lost session, start over at step 1 (new `session_id`,
@@ -241,7 +252,7 @@ No extra body fields are required — the `traceparent` **header** is enough.
 curl -sS -XPOST "https://3zpl56dwi54putsdjtecwnyqim0sdjmh.lambda-url.us-west-2.on.aws/" \
   -H "Authorization: Bearer $TRAINER_AGENT_TOKEN" \
   -H 'Content-Type: application/json' \
-  -H 'X-Trainer-Agent-Interface-Version: 2.0' \
+  -H 'X-Trainer-Agent-Interface-Version: 2.1' \
   -d '{"message":"Add a shuffle-animation toggle to the deck view","session_id":"mtg-deck-shuffler-3f9c1e6a-2b7d-4a55-9e21-abc123def456","seq":1,"state":{"deck_id":"boros-aggro","hand":["Mountain","Boros Charm"]}}'
 ```
 
@@ -279,7 +290,7 @@ Now hit `http://localhost:8080/` exactly as you would the real endpoint, using
 The stub is **OpenTelemetry-instrumented**, just like the real front door: each
 request emits a `frontdoor-stub.invocation` span carrying `stub.faking=true` (so
 it's unmistakable in Honeycomb that this is the fake, not the real agent), plus
-`agent.message`/`agent.status`/`agent.reply`/`pr.url`, and it **joins your trace**
+`agent.message`/`agent.status`/`agent.reply`/`pr.url`/`agent.state_included`, and it **joins your trace**
 via the `traceparent` header — so your app, the stub, and your handling of the
 reply land in one trace, mirroring the prod call path.
 
@@ -330,7 +341,7 @@ docker run -p 8080:8080 -e STUB_BEARER=test-token \
 
 ## Versioning
 
-This whole document is versioned `MAJOR.MINOR` (currently **2.0**) — **the version
+This whole document is versioned `MAJOR.MINOR` (currently **2.1**) — **the version
 covers expectations, not just the wire bytes.** A change to what a consumer should
 _expect_ — the conceptual framing, the collaboration convention, _or_ the
 technical contract — is a version bump. MAJOR when the change could confuse or
@@ -344,7 +355,7 @@ collaboration changes ride the same number so that one version describes one
 coherent set of expectations.)
 
 - **The service advertises its version** on every response:
-  `X-Trainer-Agent-Interface-Version: 2.0`.
+  `X-Trainer-Agent-Interface-Version: 2.1`.
 - **You should declare yours** by sending the same header on each **request**, set
   to the version you built against.
 - **A mismatch is a warning, not an error.** The front door never rejects a
@@ -354,14 +365,46 @@ coherent set of expectations.)
   at runtime. Sending the header is how you make that signal useful — if you omit
   it, the client version logs as `unset`.
 
-**Consumers pin by copying this doc.** Copy `INTERFACE.md` into your repo; its git
+**Consumers pin by copying this doc.** Copy `INTERFACE.md` into your repo from the
+**canonical source**
+(<https://github.com/jessitron/small-coding-agent/blob/main/INTERFACE.md>); its git
 history then records the version you integrate against, and the spec travels with
-you. When you want the contract to change, that's a
+you. Your copy is a **read-only snapshot** — don't edit it to change the contract.
+When you want the contract to change, that's a
 [development request](#requesting-development-the-collaboration-interface), not a
 local edit.
 
+### Upgrading your copy
+
+The service may move ahead of the version you copied. To upgrade:
+
+1. **Compare** the canonical `INTERFACE.md` against your copy (read the
+   [Changelog](#changelog) to see what moved between your version and the current
+   one). The canonical version is the one at the top of the doc at the link above.
+2. **Re-copy** the whole file over your snapshot — don't hand-merge. The doc is the
+   unit of versioning; a partial copy leaves you on an inconsistent version.
+3. **Update what you send:** set the
+   `X-Trainer-Agent-Interface-Version` request header to the new version, and adopt
+   any new request fields or consumer obligations the Changelog calls out (e.g.
+   `seq`, `state`, `trainer-agent/instructions.md` for 2.0).
+4. **Commit the upgraded copy** so your repo's git history records the new pinned
+   version.
+
+You don't have to upgrade in lockstep — [version mismatch is a warning, not an
+error](#versioning), surfaced in Honeycomb rather than rejected at runtime. Upgrade
+when you want a capability the new version adds.
+
 ## Changelog
 
+- **2.1** (2026-06-26) — `state` is **first-message-only**. Additive, hence MINOR
+  (a consumer still sending `state` every turn keeps working — the agent just
+  ignores it after the first):
+  - **`state` is expected only on a session's first message** (`seq: 1`), to ground
+    the conversation; the agent works from its server-side conversation after that.
+    Previously the spec said to send it every turn.
+  - **The front door records `agent.state_included`** on its trace span (was `state`
+    sent?), so the first-vs-later pattern is visible in Honeycomb. Still optional and
+    unenforced — the front door never rejects on a missing or present `state`.
 - **2.0** (2026-06-25) — the agent grew up from the "hi" stub into a real coding
   agent (the chat→PR loop). Breaking, hence MAJOR:
   - **Request gains `seq`** (1-based per-message counter) — the agent rejects a

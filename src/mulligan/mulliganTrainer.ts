@@ -66,11 +66,11 @@ export class MulliganTrainer {
 
   /**
    * Send one chat message within an existing session. CHAT-SERVER side: needs only
-   * the in-memory conversation. The frozen hand snapshot is sent fresh as `state`
-   * every turn, with the session's current `seq`. On a lost-session error the
-   * session is reset (new id, seq back to 1) so the next message starts clean;
-   * otherwise `seq` advances. Throws if no session exists — the caller must
-   * `startSession` first.
+   * the in-memory conversation. The frozen hand snapshot is passed as `state` with
+   * the session's current `seq`; the transport sends it only on the first message
+   * (v2.1). On a lost-session error the session is reset (new id, seq back to 1) so
+   * the next message starts clean; otherwise `seq` advances. Throws if no session
+   * exists — the caller must `startSession` first.
    */
   async sendMessage(gameId: number, message: string): Promise<TrainerExchange> {
     const conversation = this.store.get(gameId);
@@ -89,8 +89,9 @@ export class MulliganTrainer {
 
     if (reply.status === "error") {
       // Lost session (the agent's working tree/context is gone). Per INTERFACE.md
-      // v2.0, mint a new session_id and reset seq to 1; the next message re-sends
-      // `state`, so the chat carries on about the same hand.
+      // v2.1, mint a new session_id and reset seq to 1; the next message re-sends
+      // `state` (since it's a fresh first message), so the chat carries on about the
+      // same hand.
       span?.setAttribute("trainer.session_lost", true);
       this.store.resetSession(gameId);
     } else {
