@@ -4,5 +4,46 @@ port_override=$PORT
 
 source .env
 
+# Local Trainer wiring: stand up the fake front door (INTERFACE.md v1.0) so the
+# "Improve the Advisor" chat talks to a contract-faithful stub instead of the bare
+# placeholder reply. Prod uses the REAL front door via k8s (k8s/configmap.yaml +
+# the secret); this is local-only. Override the port with TRAINER_FRONTDOOR_PORT.
+FRONTDOOR_PORT=${TRAINER_FRONTDOOR_PORT:-8099}
+
+if lsof -ti tcp:"$FRONTDOOR_PORT" >/dev/null 2>&1; then
+  echo "Fake Trainer front door already running on :$FRONTDOOR_PORT"
+else
+  echo "Starting fake Trainer front door on :$FRONTDOOR_PORT"
+  PORT=$FRONTDOOR_PORT node test/verification/fake-frontdoor.mjs &
+  frontdoor_pid=$!
+  # Kill it on exit, but only the one we started.
+  trap '[ -n "$frontdoor_pid" ] && kill "$frontdoor_pid" 2>/dev/null' EXIT INT TERM
+fi
+
+export TRAINER_AGENT_URL="http://localhost:$FRONTDOOR_PORT/"
+export TRAINER_AGENT_TOKEN="${TRAINER_AGENT_TOKEN:-local-fake-token}"
+
 # port_override if defined, otherwise $PORT as defined in .env
-PORT=${port_override:-${PORT}} npm start
+APP_PORT=${port_override:-${PORT}}
+
+# Announce readiness once the app answers, so you (or a script) don't have to poll
+# by hand. Runs alongside npm start, which stays in the foreground as usual.
+(
+  for _ in $(seq 1 60); do
+    if curl -s "http://localhost:$APP_PORT/" >/dev/null 2>&1; then
+      echo "──────────────────────────────────────────────"
+      echo "✅ app ready          http://localhost:$APP_PORT/"
+      if curl -s -o /dev/null -X POST "$TRAINER_AGENT_URL" \
+        -H 'content-type: application/json' -d '{"message":"ping","session_id":"run-healthcheck"}' 2>/dev/null; then
+        echo "✅ trainer front door $TRAINER_AGENT_URL (fake, contract v1.0)"
+      else
+        echo "⚠️  trainer front door $TRAINER_AGENT_URL — not responding"
+      fi
+      echo "──────────────────────────────────────────────"
+      break
+    fi
+    sleep 0.5
+  done
+) &
+
+PORT=$APP_PORT npm start
