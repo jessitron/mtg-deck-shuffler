@@ -17,7 +17,13 @@
     <main class="prepare-container">
         <div class="playmat">
           <div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
-            <%- renderLibraryStack() %>
+            <div class="library-stack-clickable"
+                 hx-get="/prep-library-modal/<%= prep.prepId %>"
+                 hx-target="#modal-container"
+                 hx-swap="innerHTML"
+                 title="Search library">
+              <%- renderLibraryStack() %>
+            </div>
             <div class="library-buttons">
               <button class="search-button"
                       hx-get="/prep-library-modal/<%= prep.prepId %>"

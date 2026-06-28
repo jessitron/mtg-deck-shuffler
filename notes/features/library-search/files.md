@@ -22,7 +22,7 @@ All files involved in the library search feature, grouped by role.
 | File | Lines | Role |
 |------|-------|------|
 | `src/view/play-game/library-components.ts` | 20-23 | Search button on game page |
-| `views/prepare.ejs` | 22-25 | Search button on prep page |
+| `views/prepare.ejs` | 19-32 | Clickable library stack + Search button on prep page (both open the modal) |
 
 ## Client-Side Support
 
@@ -55,6 +55,7 @@ All files involved in the library search feature, grouped by role.
 | File | What It Tests |
 |------|---------------|
 | `test/verification/verify-library-grouping.spec.ts` | E2E: toggle button, grouped headers, group-scoped nav, flip preserves navList (game + prep) |
+| `test/verification/verify-prep-library-click.spec.ts` | E2E: clicking the library stack on the prep page opens the search modal |
 
 ## Documentation
 

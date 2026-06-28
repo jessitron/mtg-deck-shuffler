@@ -27,7 +27,7 @@ The app assists gameplay without enforcing MTG rules. Library search shows card 
 
 | Aspect | Detail |
 |--------|--------|
-| Entry points | "Search" button on game page and prep page |
+| Entry points | "Search" button on game page and prep page; on the prep page the library stack itself is also clickable |
 | Modal type | HTMX-loaded EJS partial into `#modal-container` |
 | URL params | `?openLibrary=true`, `?groupBy=type` |
 | Two routes | `/library-modal/:gameId` (game), `/prep-library-modal/:prepId` (prep) |

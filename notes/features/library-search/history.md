@@ -76,6 +76,14 @@
   - **Behavior improvement**: split/adventure/prepare cards now group under ALL their parts' types (the MTGJSON adapter unions `otherFaceIds` faces). Previously only the front part's type was stored (e.g. `Eiganjo Dynastorian // Replenish` was `[Creature]`; now `[Creature, Sorcery]`).
 - **`ef75759`** - Regenerated all 190 precons + the Archidekt example deck for the `cardTypes` format (PERSISTED_DECK_VERSION 3).
 
+### Clickable Library Stack on Prep Page
+
+- The library stack image on the prepare screen is now itself clickable to open the search modal (in addition to the existing "Search" button).
+  - `views/prepare.ejs`: `renderLibraryStack()` is wrapped in a `<div class="library-stack-clickable">` carrying the same HTMX attrs as the Search button (`hx-get="/prep-library-modal/<%= prep.prepId %>"`, `hx-target="#modal-container"`, `hx-swap="innerHTML"`).
+  - `public/prepare.css`: added `.library-stack-clickable { cursor: pointer }`.
+  - Prep-only: the shared `formatLibraryStack()` (used by the game page, where the stack participates in draw/drag behavior) was NOT modified.
+  - E2E: `test/verification/verify-prep-library-click.spec.ts`.
+
 ### New Co-Tenant of the Modal System
 
 - The **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`) now shares `#modal-container` and the `/close-modal` route, using the standard `.modal-overlay`/`.modal-dialog`/`.modal-header`/`.modal-body` classes — same pattern as the library modal. No change to library search itself; noted in interactions.md so future modal-system changes account for it.
