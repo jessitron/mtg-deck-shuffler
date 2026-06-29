@@ -8,14 +8,24 @@ export interface AdvisorChatContext {
 }
 
 /**
+ * A single card in the trainer state — an object so card names containing commas
+ * (e.g. "Iron Monger, Sadistic Tycoon" or "Atraxa, Praetors' Voice") are
+ * unambiguous to the agent. A plain string[] array would make comma-containing
+ * names look like multiple cards.
+ */
+export interface TrainerCard {
+  name: string;
+}
+
+/**
  * The app-defined game `state` sent to the Trainer fresh on every turn (INTERFACE.md
  * v2.0 → Request). Its shape is OURS — it is described by `trainer-agent/instructions.md`
  * in this repo, not by INTERFACE.md. It is the frozen snapshot of the one hand under
  * discussion: card names (the join key into the code/tests) plus the Advisor's verdict.
  */
 export interface TrainerGameState {
-  hand: string[];
-  commanders: string[];
+  hand: TrainerCard[];
+  commanders: TrainerCard[];
   mulligansSoFar: number;
   advisorRecommendation: {
     decision: MulliganDecision;
@@ -75,12 +85,16 @@ const PLACEHOLDER_REPLY: TrainerReply = { reply: "Well isn't that special", stat
  * Build the `state` payload from the frozen hand snapshot. The shape is defined by
  * this repo's `trainer-agent/instructions.md`; keep the two in sync. Sent fresh on
  * every turn — the agent persists only its own conversation, not our game.
+ *
+ * Cards are sent as objects ({ name }) rather than plain strings so that card names
+ * containing commas (e.g. "Iron Monger, Sadistic Tycoon") are unambiguous to the
+ * agent — a string[] would make such names look like multiple separate cards.
  */
 export function buildTrainerState(context: AdvisorChatContext): TrainerGameState {
   const { input, recommendation } = context;
   return {
-    hand: input.hand.map((c) => c.name),
-    commanders: input.commanders.map((c) => c.name),
+    hand: input.hand.map((c) => ({ name: c.name })),
+    commanders: input.commanders.map((c) => ({ name: c.name })),
     mulligansSoFar: input.mulligansSoFar,
     advisorRecommendation: {
       decision: recommendation.decision,

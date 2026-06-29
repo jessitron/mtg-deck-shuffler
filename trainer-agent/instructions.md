@@ -46,7 +46,7 @@ commentary was weak) — fix the logic and lock it in with a test."_
 
 - Tests use **fakes, never mocks**; deck/card generators live in
   `test/generators.ts`. Follow the surrounding style.
-- This repo's broader guidance is in `CLAUDE.md` and `notes/`. Honor it.
+- This repo's broader guidance is in `CLAUDE.md` and `notes/`. Follow it.
 - One PR per session, against `jessitron/mtg-deck-shuffler`.
 - If you need an input the app isn't sending (e.g. the deck's strategy, the full
   decklist, prior turns), **open a GitHub issue on this repo** describing what you
@@ -60,8 +60,14 @@ under discussion, along with some game state and the Advisor's current message:
 
 ```json
 {
-  "hand": ["Island", "Grizzly Bears", "..."],
-  "commanders": ["Atraxa, Praetors' Voice"],
+  "hand": [
+    { "name": "Island" },
+    { "name": "Grizzly Bears" },
+    { "name": "Atraxa, Praetors' Voice" }
+  ],
+  "commanders": [
+    { "name": "Atraxa, Praetors' Voice" }
+  ],
   "mulligansSoFar": 1,
   "advisorRecommendation": {
     "decision": "keep",
@@ -71,8 +77,11 @@ under discussion, along with some game state and the Advisor's current message:
 }
 ```
 
-- **`hand`** — card names in the opening hand being discussed.
-- **`commanders`** — the deck's commander(s).
+- **`hand`** — the cards in the opening hand being discussed. Each card is an
+  object `{ name: string }` rather than a plain string, so that card names
+  containing commas (e.g. `"Atraxa, Praetors' Voice"`) are unambiguous — a flat
+  string array would make such names look like multiple cards.
+- **`commanders`** — the deck's commander(s), same `{ name: string }` shape.
 - **`mulligansSoFar`** — how many mulligans preceded this hand (London mulligan).
 - **`advisorRecommendation`** — exactly what `recommendMulligan` returned for this
   hand: the `decision`, the `confidence` (0..1), and the human-readable
