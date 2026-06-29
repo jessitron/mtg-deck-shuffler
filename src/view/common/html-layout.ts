@@ -49,7 +49,6 @@ ${additionalStylesheetsHtml}
       ];
     </script>
     <script src="/game.js"></script>
-    <script src="/trainer-chat.js"></script>
     <script src="/modal-query-params.js"></script>
   </head>`;
 }
@@ -61,7 +60,6 @@ interface PageWrapperOptions {
   additionalStylesheets?: string[];
   includeFooter?: boolean;
   devMode?: boolean;
-  advisorChatOpen?: boolean;
 }
 
 function formatPageWrapper(options: PageWrapperOptions): string {
@@ -71,12 +69,11 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     footerContent = ``,
     additionalStylesheets = [],
     includeFooter = true,
-    devMode = false,
-    advisorChatOpen = false
+    devMode = false
   } = options;
 
   const headHtml = formatHtmlHead(title, additionalStylesheets);
-  const bodyClasses = [devMode ? "dev-mode" : "", advisorChatOpen ? "advisor-chat-open" : ""].filter(Boolean);
+  const bodyClasses = [devMode ? "dev-mode" : ""].filter(Boolean);
   const bodyClass = bodyClasses.length ? ` class="${bodyClasses.join(" ")}"` : ``;
   const footerHtml = includeFooter ? `
     <footer>

@@ -4,20 +4,6 @@ port_override=$PORT
 
 source .env
 
-# Local Trainer wiring: stand up the official front-door stub (INTERFACE.md v2.0)
-# so the "Improve the Advisor" chat talks to the REAL wire contract instead of the
-# bare placeholder reply. Prod uses the real front door via k8s (k8s/configmap.yaml +
-# the secret); this is local-only. Override the stub port with TRAINER_FRONTDOOR_PORT.
-FRONTDOOR_PORT=${TRAINER_FRONTDOOR_PORT:-8080}
-# Must match the bearer the stub requires (STUB_BEARER); start-frontdoor-stub.sh
-# defaults the stub to this same value.
-export TRAINER_AGENT_TOKEN="${TRAINER_AGENT_TOKEN:-test-token}"
-
-if ! ./start-frontdoor-stub.sh "$FRONTDOOR_PORT"; then
-  echo "⚠️  front-door stub didn't start — chat will fail locally (continuing anyway)"
-fi
-export TRAINER_AGENT_URL="http://localhost:$FRONTDOOR_PORT/"
-
 # port_override if defined, otherwise $PORT as defined in .env
 APP_PORT=${port_override:-${PORT}}
 
@@ -28,11 +14,6 @@ APP_PORT=${port_override:-${PORT}}
     if curl -s "http://localhost:$APP_PORT/" >/dev/null 2>&1; then
       echo "──────────────────────────────────────────────"
       echo "✅ app ready          http://localhost:$APP_PORT/"
-      if curl -sf "${TRAINER_AGENT_URL}ping" >/dev/null 2>&1; then
-        echo "✅ trainer front door $TRAINER_AGENT_URL (stub, contract v2.0)"
-      else
-        echo "⚠️  trainer front door $TRAINER_AGENT_URL — not responding"
-      fi
       echo "──────────────────────────────────────────────"
       break
     fi

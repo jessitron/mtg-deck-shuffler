@@ -40,8 +40,7 @@ const MAX_KEEPABLE_LANDS = 5;
 /**
  * Recommend whether to keep or mulligan an opening hand.
  *
- * This is the deterministic core of the Mulligan Advisor — the function the
- * self-improvement agent grows over time (see notes/DESIGN-mulligan-advisor.md).
+ * This is the deterministic core of the Mulligan Advisor.
  * It currently holds a single heuristic: land count.
  */
 export function recommendMulligan(input: MulliganInput): MulliganRecommendation {

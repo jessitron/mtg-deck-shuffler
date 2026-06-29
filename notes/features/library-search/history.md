@@ -86,7 +86,7 @@
 
 ### New Co-Tenant of the Modal System
 
-- The **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`) now shares `#modal-container` and the `/close-modal` route, using the standard `.modal-overlay`/`.modal-dialog`/`.modal-header`/`.modal-body` classes — same pattern as the library modal. No change to library search itself; noted in interactions.md so future modal-system changes account for it.
+- The **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`) briefly shared `#modal-container` and the `/close-modal` route, using the standard `.modal-overlay`/`.modal-dialog`/`.modal-header`/`.modal-body` classes — same pattern as the library modal. **Since removed** in the Trainer chat rip-out (the Trainer window is being re-implemented from scratch). The shared modal infrastructure is untouched; library search is unaffected. Co-tenant reference dropped from interactions.md.
 
 ## Design Decision: EJS vs TypeScript Template
 

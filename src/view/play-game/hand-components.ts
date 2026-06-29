@@ -57,8 +57,8 @@ function formatMulliganButtonHtmlFragment(game: GameState): string {
 /**
  * The Mulligan Advisor's recommendation, shown beside the mulligan button during
  * the opening-hand acceptance stage. Always rendered server-side, but hidden by
- * CSS unless <body class="dev-mode"> — see notes/DESIGN-mulligan-advisor.md. The
- * recommender is a pure heuristic function (src/mulligan/) the agent improves.
+ * CSS unless <body class="dev-mode">. The recommender is a pure heuristic function
+ * (src/mulligan/recommendMulligan.ts).
  */
 function formatMulliganRecommendationHtmlFragment(game: GameState): string {
   if (!game.isInMulliganStage()) {
@@ -78,7 +78,5 @@ function formatMulliganRecommendationHtmlFragment(game: GameState): string {
           <span class="mulligan-recommendation-verdict mulligan-recommendation-verdict-${rec.decision}">${verdict}</span>
           <span class="mulligan-recommendation-confidence">${confidencePct}% confident</span>
           <span class="mulligan-recommendation-commentary">${rec.commentary}</span>
-          <button type="button" class="mulligan-recommendation-improve"
-                  onclick="document.body.classList.add('advisor-chat-open')">Improve this</button>
         </div>`;
 }

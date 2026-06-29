@@ -70,11 +70,6 @@ echo "☸️  Deploying to Kubernetes..."
 # kubectl create secret generic mtg-deck-shuffler-secret \
 #     --from-literal=HONEYCOMB_API_KEY="$HONEYCOMB_API_KEY"
 
-# The same secret also holds TRAINER_AGENT_TOKEN (the Trainer front-door bearer, for
-# the real agent in prod). Set/rotate it with ./wire-prod-trainer-token.sh — it
-# fetches the bearer from Secrets Manager and merges it in without touching the
-# Honeycomb key.
-
 # Apply other manifests
 kubectl apply -f k8s/configmap.yaml
 kubectl apply -f k8s/pvc.yaml

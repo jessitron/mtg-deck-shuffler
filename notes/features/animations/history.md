@@ -47,7 +47,14 @@
 - Added an undocumented developer mode: the secret URL `/dontdie` sets a `devMode` cookie; `formatPageWrapper` then renders `<body class="dev-mode">`. The debug block (`.menu-debug`) in the hamburger menu is `display:none` by default and revealed only under `body.dev-mode` (plus an "Exit dev mode" link → `/dontdie/off`).
 - **Lesson (see architecture.md)**: this is a second instance of the "anchor swap-surviving state on `body`, not on swapped content" principle — and the cleanest one, since the state is known at full-page render and set server-side, so CSS handles everything with **no `afterSwap` JS** (contrast `body.game-menu-open`, which is toggled by JS).
 
-### Trainer chat drawer (dev mode)
+### Trainer chat drawer (dev mode) — REMOVED
+
+> **Removed in the Trainer chat rip-out** (the whole window is being re-implemented
+> from scratch). The `.advisor-chat` drawer, its width/`flex-basis` transition, the
+> `body.advisor-chat-open` state, the `.game-layout` flex row, and `public/trainer-chat.js`
+> are all gone. The game page now renders `.page-container` directly (no flex sibling).
+> The surviving body-anchored swap-surviving examples are `body.game-menu-open` and
+> `body.dev-mode`. The two sub-sections below are kept as historical record.
 
 (Formerly "Mulligan Advisor chat drawer" — the chat agent is the **Trainer**; the Advisor is the deterministic recommender function.)
 

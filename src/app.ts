@@ -9,11 +9,6 @@ import { formatHistoryModalHtmlFragment } from "./view/play-game/history-compone
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
-import { formatAdvisorChatExchangeHtmlFragment, formatAdvisorChatMessagesInner } from "./view/play-game/advisor-chat.js";
-import { formatTrainerEvalModalHtmlFragment } from "./view/play-game/trainer-eval-modal.js";
-import { recommendMulligan } from "./mulligan/recommendMulligan.js";
-import { AdvisorChatContext } from "./mulligan/advisorChat.js";
-import { MulliganTrainer } from "./mulligan/mulliganTrainer.js";
 import { GameState, GameCard } from "./GameState.js";
 import { setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -27,7 +22,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort, trainer: MulliganTrainer = new MulliganTrainer()): express.Application {
+export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort): express.Application {
   const app = express();
 
   // Configure EJS view engine
@@ -507,8 +502,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
-      const conversation = trainer.getConversation(gameId);
-      const html = formatGamePageHtmlPage(game, {}, res.locals.devMode, conversation);
+      const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
       res.send(html);
     } catch (error) {
       console.error("Error loading game:", error);
@@ -1280,115 +1274,6 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     } catch (error) {
       console.error("Error taking mulligan:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mulligan"}</div>`);
-    }
-  });
-
-  // Dev-mode Trainer chat. The hand snapshot is sent to the Trainer ONLY with the
-  // FIRST message of a session; after that the AgentCore session holds it, so
-  // continuation messages carry only text and we never re-read game state. One
-  // session = one frozen hand. Whether this is the first message is derived from
-  // the backend conversation store (no client-supplied flag). Conversation state
-  // (messages + timestamps + sessionId) lives in trainerStore so it survives page
-  // reloads. Returns the exchange as HTML (incl. the Trainer's status + any PR link)
-  // appended to the chat. Wired to the live front door per INTERFACE.md (v1.0); a
-  // placeholder reply stands in when TRAINER_AGENT_URL is unset — see
-  // src/mulligan/advisorChat.ts and notes/DESIGN-mulligan-advisor.md.
-  // The Trainer's view of the current situation, built from game state. THIS is the
-  // one place that reads game state for the Trainer; in a future split where the
-  // chat moves to its own service, this stays on the game server and its result is
-  // what crosses the wire (see MulliganTrainer's boundary note). Returns null if the
-  // game doesn't exist.
-  async function buildAdvisorChatContext(gameId: number): Promise<AdvisorChatContext | null> {
-    const persistedGame = await persistStatePort.retrieve(gameId);
-    if (!persistedGame) {
-      return null;
-    }
-    const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-    const input = {
-      hand: game.listHand().map((gc) => gc.card),
-      commanders: game.listCommanders().map((gc) => gc.card),
-      mulligansSoFar: game.getMulliganCount(),
-    };
-    return { input, recommendation: recommendMulligan(input) };
-  }
-
-  app.post("/mulligan-advisor/chat/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const message = (req.body.message ?? "").toString().trim();
-
-    if (!message) {
-      res.status(400).send(`<div>Cannot send an empty message</div>`);
-      return;
-    }
-
-    try {
-      // Game-server step: start the session from a hand snapshot (the one part that
-      // needs game state). Lazy — the session is born on the first message.
-      if (!trainer.hasSession(gameId)) {
-        const context = await buildAdvisorChatContext(gameId);
-        if (!context) {
-          res.status(404).send(`<div>Game ${gameId} not found</div>`);
-          return;
-        }
-        trainer.startSession(gameId, context);
-      }
-
-      // Chat-server step: handle the turn from the in-memory conversation only.
-      const exchange = await trainer.sendMessage(gameId, message);
-      res.send(
-        formatAdvisorChatExchangeHtmlFragment(exchange.youText, exchange.trainerText, exchange.receivedAt, {
-          status: exchange.status,
-          prUrl: exchange.prUrl,
-        })
-      );
-    } catch (error) {
-      console.error("Error in advisor chat:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Advisor chat failed"}</div>`);
-    }
-  });
-
-  // End Chat step 1: show the evaluation modal.
-  app.get("/mulligan-advisor/end-chat-modal/:gameId", (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    res.send(formatTrainerEvalModalHtmlFragment(gameId));
-  });
-
-  // End Chat step 2: record the developer's evaluation of the Trainer as a
-  // `trainer.evaluation` span (carrying the full conversation + session id), then
-  // wipe the in-memory conversation. The response resets the chat to its intro and
-  // OOB-clears the modal; the form's after-request closes the drawer.
-  app.post("/mulligan-advisor/end-chat/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
-    const ratingRaw = (req.body.rating ?? "").toString();
-    const feedback = (req.body.feedback ?? "").toString().trim();
-
-    if (!ratingRaw) {
-      res.status(400).send(`<div>A rating is required to end the chat</div>`);
-      return;
-    }
-
-    try {
-      // End the session: emits the evaluation span and wipes the conversation.
-      const isNa = ratingRaw === "na";
-      trainer.endSession(gameId, {
-        rating: isNa ? "na" : parseInt(ratingRaw),
-        feedback: feedback || undefined,
-      });
-
-      // Reset the chat region to its intro and clear the modal (OOB). The game must
-      // still exist to recompute the intro recommendation. Closing the drawer is
-      // signalled via HX-Trigger (a global listener removes the body class) rather
-      // than the form's after-request, because the OOB swap detaches the form
-      // before that would fire. See public/trainer-chat.js.
-      res.set("HX-Trigger", "trainer-chat-ended");
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      const messagesInner = persistedGame
-        ? formatAdvisorChatMessagesInner(await GameState.fromPersistedGameState(persistedGame, cardRepository))
-        : "";
-      res.send(`${messagesInner}<div id="modal-container" hx-swap-oob="true"></div>`);
-    } catch (error) {
-      console.error("Error ending advisor chat:", error);
-      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not end chat"}</div>`);
     }
   });
 

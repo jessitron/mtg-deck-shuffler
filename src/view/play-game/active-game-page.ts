@@ -5,38 +5,19 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
-import { formatAdvisorChatPanel } from "./advisor-chat.js";
-import { TrainerConversation } from "../../mulligan/trainerConversationStore.js";
 
-export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false, conversation?: TrainerConversation): string {
+export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  // The advisor chat drawer is rendered once here (outside #game-container, which
-  // HTMX swaps) so the conversation survives game-state swaps. The conversation
-  // itself lives in the backend store and is rehydrated here on every full page
-  // load. Dev-mode only.
-  const advisorChatHtml = devMode ? formatAdvisorChatPanel(game, conversation) : "";
-  // Auto-open the drawer when there's a conversation to come back to. Rendering
-  // the body class server-side (like dev-mode) means it survives game-state swaps
-  // with no afterSwap JS — see the animations feature owner's settle-phase note.
-  const advisorChatOpen = devMode && (conversation?.messages.length ?? 0) > 0;
-  // game-layout is a flex row: the playmat (.page-container) and the advisor
-  // drawer are real siblings. The drawer is OUTSIDE #game-container (which HTMX
-  // swaps) so the conversation survives game-state swaps, but inside game-layout
-  // so it takes real layout space and the playmat stays centered in what's left.
   const contentWithModal = `
-    <div class="game-layout">
-      <div class="page-container">
-        ${gameContent}
-        <div id="modal-container"></div>
-        <div id="card-modal-container"></div>
-      </div>
-      ${advisorChatHtml}
+    <div class="page-container">
+      ${gameContent}
+      <div id="modal-container"></div>
+      <div id="card-modal-container"></div>
     </div>`;
   return formatPageWrapper({
     title: `MTG Game - ${game.deckName}`,
     content: contentWithModal,
-    devMode,
-    advisorChatOpen
+    devMode
   });
 }
 

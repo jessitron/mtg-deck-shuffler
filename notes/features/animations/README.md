@@ -35,4 +35,3 @@ Same as the app: people Jessitron invites for remote MTG games. Animations serve
 | Deck tile fade-in | `.precon-tile` with `fadeInTile` | Working | 0.4s + stagger | CSS animation-delay on load |
 | Card flip | `.card-flipped` on `.flip-container-outer` | Working | 0.8s | CSS transition on class toggle |
 | Button shimmer | `.start-game-button:hover::before` | Working | 0.8s | CSS hover pseudo-element |
-| Advisor chat drawer | `.advisor-chat` width / `flex-basis` (0↔380px) | Working (dev mode) | 0.25s | CSS transition gated by `body.advisor-chat-open` |

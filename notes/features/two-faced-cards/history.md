@@ -119,7 +119,7 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 
 - **`1034189`** - Add Mulligan Advisor (Phase 1): land-count recommendation (dev mode)
   - New `src/mulligan/recommendMulligan.ts` is the long-anticipated "is this hand worth keeping?" feature (referenced in the `f76b49c` cardTypes simplification and watch point #1). As predicted, it does **not** re-store per-face card text — it reads `cardTypes`, the pre-unioned set of all faces' types, via `isLand(card) = card.cardTypes.includes("Land")`.
-  - Consequence for two-faced cards: an MDFC whose union includes `"Land"` is counted as a land with no special-casing. `cardTypes` now has **two** silent dependents on being the full union (library-search grouping + mulligan land counts). No `CardDefinition`/adapter/persistence changes — design doc at `notes/DESIGN-mulligan-advisor.md`.
+  - Consequence for two-faced cards: an MDFC whose union includes `"Land"` is counted as a land with no special-casing. `cardTypes` now has **two** silent dependents on being the full union (library-search grouping + mulligan land counts). No `CardDefinition`/adapter/persistence changes.
 
 ## What Was Tried and Abandoned
 
