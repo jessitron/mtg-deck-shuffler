@@ -107,13 +107,15 @@ describe("askMulliganAdvisorAgent — v2.0 wire contract", () => {
     expect(req.body).toEqual({ message: "hello", session_id: SESSION_ID, seq: 1, state });
   });
 
-  it("sends the hand snapshot as structured `state` (not folded into the message)", async () => {
+  it("sends hand and commanders as { name } objects so comma-containing names are unambiguous", async () => {
     await askMulliganAdvisorAgent("is this right?", SESSION_ID, 1, aState());
 
     const body = frontDoor.captured!.body;
     expect(body.message).toBe("is this right?");
-    expect(body.state.hand).toContain("Island");
-    expect(body.state.commanders).toContain("Atraxa");
+    // Cards are objects, not bare strings — a name like "Iron Monger, Sadistic Tycoon"
+    // is unambiguous where a flat string[] would look like two separate cards.
+    expect(body.state.hand).toContainEqual({ name: "Island" });
+    expect(body.state.commanders).toContainEqual({ name: "Atraxa" });
     expect(body.state.mulligansSoFar).toBe(1);
     expect(body.state.advisorRecommendation.decision).toBe("keep");
   });

@@ -53,8 +53,9 @@ describe("MulliganTrainer — session boundary", () => {
     await trainer.sendMessage(42, "second");
 
     expect(agent.calls).toHaveLength(2);
-    expect(agent.calls[0].state.hand).toContain("Island");
-    expect(agent.calls[1].state.hand).toContain("Island"); // re-sent fresh each turn
+    // hand is an array of { name } objects — check the first card's name
+    expect(agent.calls[0].state.hand[0].name).toBe("Island");
+    expect(agent.calls[1].state.hand[0].name).toBe("Island"); // re-sent fresh each turn
     expect(agent.calls[1].state.advisorRecommendation.decision).toBe("keep");
   });
 
