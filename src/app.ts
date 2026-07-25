@@ -10,7 +10,7 @@ import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard } from "./GameState.js";
-import { setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
+import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
@@ -110,12 +110,43 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
 
   // Middleware: Load game from route params (:gameId)
   async function loadGameFromParams(req: express.Request, res: express.Response, next: express.NextFunction) {
-    const gameId = parseInt(req.params.gameId);
+    const gameIdParam = req.params.gameId;
+    const gameId = Number(gameIdParam);
+    const span = trace.getActiveSpan();
+
+    if (!gameIdParam || !Number.isInteger(gameId)) {
+      const errorMessage = "Missing or invalid game ID";
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "game.load.failure": "invalid_game_id",
+        "game.game_id.param": gameIdParam ?? "",
+        "game.game_id.valid": false,
+        "game.game_id.missing": !gameIdParam,
+        "game.game_id.integer": Number.isInteger(gameId),
+      });
+      res.status(400).send(`<div>${errorMessage}</div>`);
+      return;
+    }
+
+    span?.setAttributes({
+      "game.game_id": gameId,
+      "game.game_id.param": gameIdParam,
+      "game.game_id.valid": true,
+    });
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        const errorMessage = `Game ${gameId} not found`;
+        markCurrentSpanAsError(errorMessage, {
+          "error.message": errorMessage,
+          "game.load.failure": "not_found",
+          "game.game_id": gameId,
+          "game.game_id.param": gameIdParam,
+          "game.game_id.valid": true,
+          "game.found": false,
+        });
+        res.status(404).send(`<div>${errorMessage}</div>`);
         return;
       }
 
@@ -124,6 +155,16 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       next();
     } catch (error) {
       if (error instanceof IncompatibleStateVersionError) {
+        markCurrentSpanAsError(error.message, {
+          "error.message": error.message,
+          "game.load.failure": "incompatible_state_version",
+          "game.game_id": gameId,
+          "game.game_id.param": gameIdParam,
+          "game.game_id.valid": true,
+          "game.state.version.compatible": false,
+          "game.state.version.found": String(error.foundVersion),
+          "game.state.version.expected": error.expectedVersion,
+        });
         console.warn(`Game ${gameId} has incompatible version:`, error.message);
         res.status(410).send(
           formatErrorPageHtmlPage({
@@ -135,54 +176,17 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         );
         return;
       }
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "game.load.failure": "unexpected_error",
+        "game.game_id": gameId,
+        "game.game_id.param": gameIdParam,
+        "game.game_id.valid": true,
+        "error.type": error instanceof Error ? error.name : typeof error,
+      });
       console.error("Error loading game:", error);
       res.status(500).send(`<div>Error loading game ${gameId}</div>`);
-    }
-  }
-
-  // Middleware: Load game from request body (game-id)
-  async function loadGameFromBody(req: express.Request, res: express.Response, next: express.NextFunction) {
-    const gameId = parseInt(req.body["game-id"]);
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(
-          formatErrorPageHtmlPage({
-            icon: "🎯",
-            title: "Game Not Found",
-            message: `Game <strong>${gameId}</strong> could not be found.`,
-            details: "It may have expired or the ID might be incorrect.",
-          })
-        );
-        return;
-      }
-
-      res.locals.game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-      res.locals.gameId = gameId;
-      next();
-    } catch (error) {
-      if (error instanceof IncompatibleStateVersionError) {
-        console.warn(`Game ${gameId} has incompatible version:`, error.message);
-        res.status(410).send(
-          formatErrorPageHtmlPage({
-            icon: "🕰️",
-            title: "Game Too Old to Load",
-            message: `Game <strong>${gameId}</strong> was saved in an older, incompatible format.`,
-            details: error.message,
-          })
-        );
-        return;
-      }
-      console.error("Error loading game:", error);
-      res.status(500).send(
-        formatErrorPageHtmlPage({
-          icon: "⚠️",
-          title: "Error Loading Game",
-          message: `Could not load game <strong>${gameId}</strong>.`,
-          details: "There may be a technical issue.",
-        })
-      );
     }
   }
 
@@ -620,6 +624,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     const gameId = parseInt(req.params.gameId);
 
     try {
+      // TODO: can this be middleware?
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
@@ -650,6 +655,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
 
       // Validate state version for optimistic concurrency control
+      // TODO: can this be middleware?
       const expectedVersionStr = req.query["expected-version"];
       if (expectedVersionStr) {
         const expectedVersion = parseInt(expectedVersionStr as string);

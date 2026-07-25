@@ -4,6 +4,8 @@
  * When a card modal is opened from a grouped library search,
  * the navList param scopes prev/next navigation to that section's cards
  * instead of the full zone order.
+ * 
+ * TODO: why is this in the root of src? seems like it should be with the library modal
  */
 
 export interface NavListNavigation {
