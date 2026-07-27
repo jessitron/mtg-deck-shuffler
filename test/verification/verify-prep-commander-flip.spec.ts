@@ -1,0 +1,60 @@
+/**
+ * End-to-End Verification: Flipping a two-faced commander on the prepare screen.
+ *
+ * The prepare screen has no game yet, so flipping there must not touch game state.
+ * Regression guard for JES-90: the inline flip button used to POST to the *game*
+ * route /flip-card/<prepId>/0, which replaced the commander with
+ * "Game <prepId> not found" (or, on an id collision, silently mutated an
+ * unrelated game).
+ *
+ * RUN: npm run test:verify
+ */
+
+import { test, expect, Page } from '@playwright/test';
+
+const BASE_URL = 'http://localhost:3001';
+
+// "From Cute to Brute" — its commander, Esika, God of the Tree // The Prismatic
+// Bridge, is a genuine two-faced (modal DFC) card, so it gets a flip button.
+const TWO_FACED_COMMANDER_DECK = 'precon-mtgjson-FromCutetoBrute_SLD.json';
+
+test.setTimeout(90000);
+
+async function setupPrepWithTwoFacedCommander(page: Page): Promise<string> {
+  const response = await page.request.post(`${BASE_URL}/deck`, {
+    form: { 'deck-source': 'precon', 'precon-deck': TWO_FACED_COMMANDER_DECK },
+  });
+  const match = response.url().match(/\/prepare\/(\d+)/);
+  if (!match) throw new Error(`Failed to create prep, landed at ${response.url()}`);
+  return match[1];
+}
+
+test.describe('Prepare screen - flipping a two-faced commander', () => {
+  test('clicking Flip shows the back face and does not touch game state', async ({ page }) => {
+    const prepId = await setupPrepWithTwoFacedCommander(page);
+
+    await page.goto(`${BASE_URL}/prepare/${prepId}`);
+    await page.waitForLoadState('networkidle');
+
+    const flipContainer = page.locator('#card-0-outer-flip-container');
+    const flipButton = page.locator('#card-0-flip-button');
+
+    await expect(flipButton).toBeVisible({ timeout: 5000 });
+    // Starts on the front face
+    await expect(flipContainer).not.toHaveClass(/card-flipped/);
+
+    await flipButton.click();
+
+    // Now showing the back face
+    await expect(page.locator('#card-0-outer-flip-container')).toHaveClass(/card-flipped/, { timeout: 5000 });
+
+    // The commander is still a card, not an error message
+    await expect(page.locator('#card-0-back-face')).toBeVisible();
+    await expect(page.locator('.playmat')).not.toContainText('not found');
+
+    // And flipping back returns to the front face
+    await page.locator('#card-0-flip-button').click();
+    await expect(page.locator('#card-0-outer-flip-container')).not.toHaveClass(/card-flipped/, { timeout: 5000 });
+    await expect(page.locator('#card-0-front-face')).toBeVisible();
+  });
+});

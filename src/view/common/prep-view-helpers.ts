@@ -23,9 +23,15 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     currentFace: "front" as const,
   }));
 
-  // Prep-specific version of formatCardContainer that uses /prep-card-modal route
+  // Prep-specific version of formatCardContainer. There is no game yet, so both the
+  // modal and the flip button must point at prep routes — a prepId handed to a game
+  // route finds no game, or worse, finds an unrelated one (JES-90).
   function renderPrepCommanderCard(commander: GameCard): string {
-    const html = formatCardContainer({ gameCard: commander, gameId: prep.prepId });
+    const html = formatCardContainer({
+      gameCard: commander,
+      gameId: prep.prepId,
+      flipRequest: { page: "prep", prepId: prep.prepId },
+    });
     // Replace /card-modal with /prep-card-modal in the generated HTML
     return html.replace(/hx-get="\/card-modal\//g, 'hx-get="/prep-card-modal/');
   }

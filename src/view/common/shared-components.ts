@@ -12,6 +12,18 @@ export function formatCardNameAsModalLink(cardName: string, gameId: number, card
                style="cursor: pointer;">${cardName}</span>`;
 }
 
+/**
+ * How the flip button asks the server for the other face of a two-faced card.
+ *
+ * In a game, flipping mutates persisted state, so it POSTs to the game and carries
+ * the optimistic-lock version. On the prepare screen there is no game yet — the deck
+ * is only being reviewed — so flipping is a stateless GET that re-renders the card on
+ * the requested face, the same `?face=` idiom the prep card modal uses.
+ */
+export type FlipRequest =
+  | { page: "game"; gameId: number; expectedVersion?: number }
+  | { page: "prep"; prepId: number };
+
 type CardRenderOptions = {
   gameCard: GameCard;
   gameId: number;
@@ -20,9 +32,11 @@ type CardRenderOptions = {
   whatHappened?: WhatHappened;
   draggable?: boolean;
   handPosition?: number;
+  /** Defaults to flipping within the game identified by `gameId`. */
+  flipRequest?: FlipRequest;
 };
 
-export function formatCardContainer({ gameCard, gameId, expectedVersion, actions = "", whatHappened, draggable = false, handPosition }: CardRenderOptions): string {
+export function formatCardContainer({ gameCard, gameId, expectedVersion, actions = "", whatHappened, draggable = false, handPosition, flipRequest }: CardRenderOptions): string {
   const finalAnimationClass = whatHappened ? getAnimationClassHelper(whatHappened, gameCard.gameCardIndex) : "";
 
   const cardId = `card-${gameCard.gameCardIndex}`;
@@ -44,7 +58,7 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      ${formatFlippingContainer(gameCard, gameId, expectedVersion)}
+      ${formatFlippingContainer(gameCard, flipRequest ?? { page: "game", gameId, expectedVersion })}
       ${actions}
     </div>`;
   } else {
@@ -62,7 +76,7 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
   }
 }
 
-export function formatFlippingContainer(gameCard: GameCard, gameId: number, expectedVersion?: number): string {
+export function formatFlippingContainer(gameCard: GameCard, flipRequest: FlipRequest): string {
   const frontImageUrl = getCardImageUrl(gameCard.card, "normal", "front");
   const backImageUrl = getCardImageUrl(gameCard.card, "normal", "back");
   const flippedClass = gameCard.currentFace === "back" ? " card-flipped" : "";
@@ -70,8 +84,14 @@ export function formatFlippingContainer(gameCard: GameCard, gameId: number, expe
   const cardId = `card-${gameCard.gameCardIndex}`;
   const flipContainerId = `${cardId}-outer-flip-container`;
 
-  const valsAttr = expectedVersion !== undefined ? `hx-vals='{"expected-version": ${expectedVersion}}'` : "";
-  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" hx-post="/flip-card/${gameId}/${gameCard.gameCardIndex}" ${valsAttr} hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
+  const otherFace = gameCard.currentFace === "back" ? "front" : "back";
+  const requestAttrs =
+    flipRequest.page === "game"
+      ? `hx-post="/flip-card/${flipRequest.gameId}/${gameCard.gameCardIndex}" ${
+          flipRequest.expectedVersion !== undefined ? `hx-vals='{"expected-version": ${flipRequest.expectedVersion}}'` : ""
+        }`
+      : `hx-get="/prep-flip-card/${flipRequest.prepId}/${gameCard.gameCardIndex}?face=${otherFace}"`;
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" ${requestAttrs} hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
 
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
             <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">

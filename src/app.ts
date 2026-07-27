@@ -883,6 +883,40 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
+  // Returns card fragment - flips a two-faced card on the prepare screen. There is no
+  // game yet, so this is stateless: the face to show comes from ?face= rather than from
+  // persisted state, and nothing is saved.
+  app.get("/prep-flip-card/:prepId/:cardIndex", async (req, res) => {
+    const prepId = parseInt(req.params.prepId);
+    const cardIndex = parseInt(req.params.cardIndex);
+
+    try {
+      const prep = await persistPrepPort.retrievePrep(prepId);
+      if (!prep) {
+        res.status(404).send(`<div>Prep ${prepId} not found</div>`);
+        return;
+      }
+
+      // Same card indexing as /prep-card-modal: commanders first, then library cards
+      const { commanders, libraryCards } = createPrepViewHelpers(prep);
+      const gameCard = [...commanders, ...libraryCards].find((gc) => gc.gameCardIndex === cardIndex);
+      if (!gameCard) {
+        res.status(404).send(`<div>Card ${cardIndex} not found</div>`);
+        return;
+      }
+      if (!gameCard.card.twoFaced) {
+        res.status(400).send(`<div>${gameCard.card.name} has only one face</div>`);
+        return;
+      }
+
+      const face: "front" | "back" = req.query.face === "back" ? "back" : "front";
+      res.send(formatFlippingContainer({ ...gameCard, currentFace: face }, { page: "prep", prepId }));
+    } catch (error) {
+      console.error("Error flipping prep card:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
+    }
+  });
+
   // Returns modal fragment - library contents modal for prep page (before game starts)
   app.get("/prep-library-modal/:prepId", async (req, res) => {
     const prepId = parseInt(req.params.prepId);
@@ -1348,7 +1382,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       // Return the commander container
-      const html = formatFlippingContainer(flippedCard, gameId);
+      const html = formatFlippingContainer(flippedCard, { page: "game", gameId });
       res.setHeader("HX-Trigger", "game-state-updated");
       res.send(html);
     } catch (error) {
