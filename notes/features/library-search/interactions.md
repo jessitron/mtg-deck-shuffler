@@ -7,13 +7,13 @@ How library search connects to other parts of the app.
 ### Card Repository & Persistence
 - Game route needs `persistStatePort.retrieve(gameId)` to load game state
 - Prep route needs `persistPrepPort.retrievePrep(prepId)` to load prep
-- Game route reconstructs `GameState` via `GameState.fromPersistedGameState(persisted, cardRepository)`
+- Game route reconstructs `GameState` via `GameState.fromPersistedGameState(persisted, cardRepository)` — since JES-127 this also mints `cardInstanceId` on load for old saves (optional field, no version bump, signature unchanged). Harmless to library search: reads that never save just re-mint until some action persists.
 - Card data must include `cardTypes: string[]` (union of all faces' types) and optionally `colorIdentity`
 
 ### GameState Model
 - `game.listLibrary()` - provides the cards to display
 - `game.getStateVersion()` - used for optimistic concurrency on card modal links
-- Library cards know their `gameCardIndex` for linking to card modals
+- Library cards know their `gameCardIndex` for linking to card modals. (`gameCardIndex` stays the internal modal-link key; the table-facing `cardInstanceId` (JES-127) is a separate, boundary-crossing identity — never swap one for the other.)
 
 ### Prep View Helpers
 - `createPrepViewHelpers(prep).libraryCards` - provides cards for prep page

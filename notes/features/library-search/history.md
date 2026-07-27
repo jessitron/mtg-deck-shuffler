@@ -88,6 +88,17 @@
 
 - The **Trainer "End Chat" evaluation modal** (`src/view/play-game/trainer-eval-modal.ts`) briefly shared `#modal-container` and the `/close-modal` route, using the standard `.modal-overlay`/`.modal-dialog`/`.modal-header`/`.modal-body` classes — same pattern as the library modal. **Since removed** in the Trainer chat rip-out (the Trainer window is being re-implemented from scratch). The shared modal infrastructure is untouched; library search is unaffected. Co-tenant reference dropped from interactions.md.
 
+## 2026-07-27: Tabletop v0 Part B (JES-127) — no library-search behavior change
+
+Neighbors changed around us; the feature is untouched. Recorded for accuracy:
+`fromPersistedGameState` mints `cardInstanceId` on load (optional field, no version
+bump, same signature); `PersistedGamePrep` gained optional
+`tableName`/`playerName`/`seatId`; the hand/revealed card modal action rows gained
+Discard + table-mode variants via a new optional 4th param on
+`getModalCardActionsByLocation(..., inTableMode)`; htmx `responseHandling` gained a
+502 entry. Modal co-tenancy (containers, `/close-modal`, z-index) unchanged; the new
+tabletop-failure error modal is another `#modal-container` co-tenant.
+
 ## Design Decision: EJS vs TypeScript Template
 
 The library search modal is an EJS template (`views/partials/library-modal.ejs`) rather than a TypeScript view function (like `src/view/play-game/`). This follows the project's convention: EJS for informational/pre-game pages and modals, TypeScript for active gameplay page structure.
