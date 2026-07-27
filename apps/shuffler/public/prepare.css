@@ -264,19 +264,47 @@
   align-items: center;
 }
 
-/* Table-mode join fields (JES-127): optional table + player name beside Shuffle Up.
-   Square corners — these are UI chrome, not physical objects. */
+/* Table-mode join fields (JES-127): optional table + player name, tucked behind a
+   "Join a table" disclosure so the playmat isn't cluttered by default. Boxed in an
+   opaque panel — the playmat background image makes bare text unreadable.
+   Square corners — this is UI chrome, not a physical object. */
+.join-table-details {
+  margin-bottom: 10px;
+  max-width: 216px;
+}
+
+.join-table-summary {
+  display: inline-block;
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #222;
+  cursor: pointer;
+  user-select: none;
+}
+
+.join-table-summary:hover {
+  background-color: #f0f0f0;
+}
+
 .join-table-fields {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #888;
+  border-top: none;
+  padding: 10px;
 }
 
 .join-table-label {
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
+  color: #222;
   gap: 2px;
 }
 
@@ -285,4 +313,6 @@
   border-radius: 0;
   padding: 4px 6px;
   font-size: 0.9rem;
+  color: #222;
+  background-color: white;
 }
