@@ -1,0 +1,130 @@
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import type { Server } from "node:http";
+import { startServer } from "../src/server/server";
+import { getRoomRegistry } from "../src/server/rooms";
+import { STACK_AREA, rowOrigin, GRAVEYARD_X } from "../src/server/cardLayout";
+
+/**
+ * A5: POST /api/tables/:tableName/cards — the seam the Spine absorbs.
+ * Dedup on event id AND on instanceId; lands go to the player's battlefield
+ * row, everything else to the stack; discards to the graveyard spot.
+ */
+let server: Server;
+let port: number;
+
+beforeAll(async () => {
+  server = await startServer(0);
+  const address = server.address();
+  if (typeof address === "object" && address) port = address.port;
+});
+
+afterAll(() => {
+  server.close();
+});
+
+let eventCounter = 0;
+function cardPlayed(overrides: Record<string, unknown> = {}) {
+  eventCounter++;
+  return {
+    id: `event-${eventCounter}-${Math.random().toString(36).slice(2)}`,
+    name: "card.played",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "seat-1", playerName: "Jess" },
+    card: { scryfallId: "11111111-2222-3333-4444-555555555555", instanceId: `instance-${eventCounter}` },
+    face: "front",
+    zoneHint: "stack",
+    imageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
+    cardName: "Lightning Bolt",
+    ...overrides,
+  };
+}
+
+async function post(tableName: string, body: unknown): Promise<Response> {
+  return fetch(`http://localhost:${port}/api/tables/${tableName}/cards`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+function shapesOf(tableName: string) {
+  const entry = getRoomRegistry().get(tableName);
+  if (!entry) return [];
+  return entry.room
+    .getCurrentSnapshot()
+    .documents.map((d) => d.state as any)
+    .filter((r) => r.typeName === "shape" && r.type === "image" && r.meta?.instanceId);
+}
+
+describe("card arrival", () => {
+  it("puts a stack-hinted card in the stack area with identity meta", async () => {
+    const event = cardPlayed();
+    const response = await post("arrival-basic", event);
+    expect(response.status).toBe(201);
+
+    const shapes = shapesOf("arrival-basic");
+    expect(shapes).toHaveLength(1);
+    expect(shapes[0].meta).toMatchObject({
+      instanceId: event.card.instanceId,
+      scryfallId: event.card.scryfallId,
+      cardName: "Lightning Bolt",
+    });
+    expect(shapes[0].x).toBeGreaterThanOrEqual(STACK_AREA.x);
+    expect(shapes[0].y).toBeGreaterThanOrEqual(STACK_AREA.y);
+    // no index anywhere in what the tabletop stores
+    expect(JSON.stringify(shapes[0].meta)).not.toContain("Index");
+  });
+
+  it("dedups a retried request (same event id): physical no-op", async () => {
+    const event = cardPlayed();
+    await post("arrival-dedup-id", event);
+    const retry = await post("arrival-dedup-id", event);
+    expect(retry.status).toBe(200);
+    expect((await retry.json()).deduped).toBe(true);
+    expect(shapesOf("arrival-dedup-id")).toHaveLength(1);
+  });
+
+  it("dedups a retried play (same instanceId, new event id): one instance exists once", async () => {
+    const event = cardPlayed();
+    await post("arrival-dedup-instance", event);
+    const replay = await post("arrival-dedup-instance", { ...cardPlayed(), card: event.card });
+    expect(replay.status).toBe(200);
+    expect((await replay.json()).deduped).toBe(true);
+    expect(shapesOf("arrival-dedup-instance")).toHaveLength(1);
+  });
+
+  it("puts a battlefield-hinted card (a land) in the player's battlefield row", async () => {
+    await post("arrival-zones", cardPlayed({ zoneHint: "battlefield", cardName: "Forest" }));
+    const [land] = shapesOf("arrival-zones");
+    const origin = rowOrigin(0);
+    expect(land.y).toBeGreaterThanOrEqual(origin.y);
+
+    await post("arrival-zones", cardPlayed({ zoneHint: "stack", cardName: "Llanowar Elves" }));
+    const stackCard = shapesOf("arrival-zones").find((s) => s.meta.cardName === "Llanowar Elves")!;
+    expect(stackCard.y).toBeLessThan(land.y); // stack area sits above the player rows
+  });
+
+  it("allocates battlefield rows per seatId in first-play order, keyed by seat not name", async () => {
+    await post("arrival-rows", cardPlayed({ zoneHint: "battlefield", initiator: { seatId: "seat-A", playerName: "Sam" } }));
+    await post("arrival-rows", cardPlayed({ zoneHint: "battlefield", initiator: { seatId: "seat-B", playerName: "Sam" } }));
+    const shapes = shapesOf("arrival-rows");
+    expect(shapes).toHaveLength(2);
+    expect(shapes[0].y).not.toBe(shapes[1].y); // same display name, different seats, different rows
+  });
+
+  it("puts a graveyard-hinted card in the player's graveyard spot", async () => {
+    await post("arrival-graveyard", cardPlayed({ zoneHint: "graveyard", cardName: "Doomed Dissenter" }));
+    const [card] = shapesOf("arrival-graveyard");
+    expect(card.x).toBeGreaterThanOrEqual(GRAVEYARD_X);
+  });
+
+  it("rejects a payload missing required fields (JES-128 validation point)", async () => {
+    const response = await post("arrival-invalid", { name: "card.played" });
+    expect(response.status).toBe(400);
+  });
+
+  it("rejects a payload carrying a gameCardIndex — the secret must not cross", async () => {
+    const response = await post("arrival-secret", { ...cardPlayed(), gameCardIndex: 7 });
+    expect(response.status).toBe(400);
+  });
+});
