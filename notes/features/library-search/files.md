@@ -1,5 +1,7 @@
 # Library Search Files
 
+_All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps/shuffler/src/app.ts`._
+
 All files involved in the library search feature, grouped by role.
 
 ## Core Implementation

@@ -1,5 +1,7 @@
 # Two-Faced Cards Files
 
+_All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps/shuffler/src/app.ts`._
+
 ## Core Types
 
 | File | Role |

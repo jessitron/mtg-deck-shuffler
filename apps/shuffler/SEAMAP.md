@@ -1,8 +1,7 @@
 # SEAMAP — Shuffler (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Shuffler owns the hidden zones — library
-and hand — for one player. _(Its code still lives at the repo root until restructuring
-lands; this map precedes the ship.)_
+and hand — for one player. Its code is this directory.
 
 ## North Star
 

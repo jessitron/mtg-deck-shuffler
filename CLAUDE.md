@@ -15,6 +15,21 @@ Orient, capture, and log proactively; use `drop-buoy` to capture work without de
 
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 
+## Repo Layout
+
+This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
+`.claude/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`. The ships:
+
+- `apps/shuffler/` — the Shuffler (all the code described below)
+- `apps/tabletop/` — not built yet, seamap only
+- `services/spine/` — not built yet, seamap only
+
+**Convention: every Shuffler path in this file and in `notes/` is relative to
+`apps/shuffler/`.** So `src/app.ts` means `apps/shuffler/src/app.ts`. Shuffler
+commands (`./run`, `./verify.sh`, `./deploy.sh`, `npm start`) are run **from
+`apps/shuffler/`**; `npm run build` and `npm test` also work from the root, where
+they pass through to the workspace.
+
 ## Project Overview
 
 MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks from MTGJSON or custom decks from Archidekt, displaying card info for remote gameplay via Mural/Miro and Discord.
@@ -50,6 +65,9 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 - `src/server.ts` - Server initialization and dependency creation
 - `run` - Shell script that sources `.env` and runs the app. Jess uses this
 
+- `Dockerfile` - Multi-stage build; its build **context is the repo root** (npm workspaces keeps the lockfile there)
+- `deploy.sh` - Build, push to ECR, apply `k8s/`. Run from `apps/shuffler/`
+
 **Views** (EJS templates):
 
 - `views/index.ejs`, `docs.ejs`, `about.ejs`, `choose-any-deck.ejs`, `prepare.ejs`
@@ -68,12 +86,13 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 ## Development Commands
 
-**Build & Run:**
+**Build & Run:** (from `apps/shuffler/`, except where noted)
 
-- `npm run build` - Compile TypeScript
-- `npm run clean` - Remove `dist/`
+- `npm run build` - Compile TypeScript (also works from the root)
+- `npm run clean` - Remove `dist/` (also works from the root)
 - `npm start` - Build and run
-- `PORT=3344 ./run` - Run with `.env` (preferred)
+- `PORT=3344 ./run` - Run with `.env` (preferred). Must be from `apps/shuffler/`
+- `npm install` - Run this **from the root**; the lockfile lives there
 
 **Deck Management Scripts:**
 
@@ -97,15 +116,16 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 ## Testing
 
-Verify changes with:
+Verify changes with (from `apps/shuffler/`):
 
 - `npm run build`
 - `npm run test`
 - `PORT=3344 ./run` - Verify app starts, click through to what you changed
+- `./verify.sh` - Playwright verification (builds, starts on 3001, runs the specs)
 
 ## Environment & Persistence
 
-Requires `.env` for OpenTelemetry config. SQLite persistence by default (`data.db`). Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
+Requires `apps/shuffler/.env` for OpenTelemetry config. SQLite persistence by default — `data.db` is created in the server's cwd, so `apps/shuffler/data.db`. Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
 
 Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
 
@@ -134,7 +154,7 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 
 - **Local tests**: environment `local`, dataset `mtg-deck-shuffler` (web/browser spans go to `mtg-deck-shuffler-web`).
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
-- **API key sourcing**: `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` (sourced on `cd` into this dir). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). `verify.sh` sources both in that order; if you start the server by hand for telemetry, do the same.
+- **API key sourcing**: `apps/shuffler/.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). `verify.sh` sources both in that order (it looks for `.be` in its own dir, then the git toplevel); if you start the server by hand for telemetry, do the same.
 
 ## Documentation
 

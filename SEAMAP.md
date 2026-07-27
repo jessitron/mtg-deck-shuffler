@@ -7,9 +7,6 @@ to an agent that learns the game. Each major component (ship) has its own seamap
 - [Tabletop](apps/tabletop/SEAMAP.md) — the shared tldraw canvas
 - [Spine](services/spine/SEAMAP.md) — tables, seats, the event log, the interpreter
 
-_(The component directories are being born; until restructuring lands, the Shuffler's
-code still lives at the repo root.)_
-
 The full vision: `notes/DESIGN-the-table-vision.md`. Vocabulary: `notes/GLOSSARY.md`.
 
 ## North Star

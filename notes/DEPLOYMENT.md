@@ -4,6 +4,8 @@
 
 Dead-simple deployment to push the MTG deck shuffler app to your existing EKS cluster using the provided files.
 
+**Everything here lives in and runs from `apps/shuffler/`** — paths below are relative to that directory. The one exception is the Docker **build context**, which is the repo root: npm workspaces keeps the authoritative `package-lock.json` there, so `npm ci` needs it. `deploy.sh` and `verify-container-boot.sh` handle this by passing `-f Dockerfile ../..`; if you build by hand from the repo root, use `docker build -f apps/shuffler/Dockerfile .`. The image itself is unchanged — the runtime stage still puts the app at `/app`.
+
 ## Prerequisites
 
 - EKS cluster is running and `kubectl` is configured to connect to it
@@ -42,7 +44,7 @@ Dead-simple deployment to push the MTG deck shuffler app to your existing EKS cl
 The following files are provided for deployment:
 
 ### 1. `Dockerfile`
-Multi-stage Docker build that compiles TypeScript and creates a minimal runtime image.
+Multi-stage Docker build that compiles TypeScript and creates a minimal runtime image. Built with the repo root as context (see Overview).
 
 ### 2. `k8s/` Directory
 Contains all Kubernetes manifests:

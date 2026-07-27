@@ -1,5 +1,7 @@
 # Animations Files
 
+_All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps/shuffler/src/app.ts`._
+
 ## CSS (animation definitions)
 
 - `public/game.css` — Primary animation file
