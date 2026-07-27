@@ -60,13 +60,13 @@ Architecture notes:
 - The Spine is the **core domain**; its event schema is a **published language** that
   the other contexts translate themselves into. The event contract is language-neutral
   (JSON Schema or similar), versioned, validated on both sides — not shared TS types.
-- The Spine will use the **Journeys** architecture pattern (Jess's boyfriend is
+- The Spine will use the **Journeys** architecture pattern (Avdi is
   inventing it). _Not yet documented here — Claude needs the tour before Spine internals
   get designed._
 - The interpreter is an **anti-corruption layer that happens to be an AI**: physical
   events in, game events out. Its boundary is sacred from day one even while it lives
   inside the Spine app, so extracting it later is a deployment decision, not a design
-  one.
+  one. The interpreter can add events to the logs, so both the explanans and explanandum show up in the log.
 
 ## Bounded contexts and their languages
 
@@ -92,6 +92,25 @@ One append-only log per table. Constraints, baked in from the first event:
   sees. Private events (you drew *Lyra*) belong to a player — and each casts a
   **public shadow** ("Jess drew a card", hand count 6→7). A spectator is a consumer of
   the public projection; so is the narration panel, mostly.
+- **Shadow logic lives at the source.** The Shuffler creates the shadow; the Spine
+  never receives the card's identity. Deciding what's public is part of translating
+  into the published language, and it belongs to the context that owns the secret.
+  The Spine can't leak what it doesn't hold (which matters pre-auth), it doesn't need
+  hidden contents (the Shuffler persists its own events for recovery), and the someday
+  modes that need more — spectators see hands, a hand-recommendation agent — become
+  the Shuffler *choosing to publish more*, per table mode: same translation point,
+  wider aperture. Consequence: the Spine's log is the story of *the table* — it knows
+  exactly what a person standing at the table would know. Also: if the agent someday
+  plays, it structurally cannot have seen opponents' hands along the way.
+- **Visibility in the Spine means audience scoping**, not zone secrecy: a card
+  revealed to one opponent, a spectator's private tutor-chat, a seat-directed
+  interpreter whisper. Two mechanisms, two jobs.
+- **Open subtlety: "look at" vs "reveal."** The Shuffler's current Reveal button is
+  really *look at* (private — flip the top of your library so *you* can see it).
+  MTG's *reveal* means showing a card to everyone (or to a chosen subset: "look at
+  target player's hand"). Look-at is a private event with a public shadow ("Jess is
+  looking at the top 3 cards of her library"); reveal is the Shuffler deliberately
+  publishing identity with an audience scope. Not yet designed.
 - **Never replace, supersede.** Physical events are evidence; you don't rewrite
   evidence. Interpretations are themselves events, appended later, that **cover**
   earlier events. A correction (from a player, in chat) triggers a superseding
@@ -154,11 +173,15 @@ Discord anyway, I'll tell you the table name."
 
 - Stays the owner of hidden zones and its own language. Its event-sourced GameState
   continues as-is.
-- **Play** sends the card to the seat's table (a Spine event) instead of the clipboard.
-  (Clipboard mode presumably survives as a fallback / solo mode.)
+- **Play and Discard buttons** (today there is only Play). Both are born-semantic game
+  events — "Jess played Lyra" / "Jess discarded Lyra" — no interpretation needed. The
+  verb implies the landing zone on the table: Play → the Stack for nonlands, straight
+  to battlefield for lands; Discard → the Graveyard area. Clipboard mode presumably
+  survives as a fallback / solo mode.
 - **Prep screen** gains "type a table name to join."
 - Emits public shadows of hidden-zone events to the Spine: drew a card, mulliganed,
-  hand count changes, library count.
+  hand count changes, library count. **The shadow logic lives here**, at the source —
+  the Spine never sees hidden-zone card identities (see the event model above).
 - Someday the hand renders as a tray inside the Tabletop page; for now, separate
   browser tabs are fine. The Shuffler gradually becomes a service behind the tabletop
   rather than a destination page.
@@ -207,9 +230,11 @@ early rungs and cross-component changes should be one commit; notes and feature 
 are repo-scoped and will span components; Claude works best with the whole change in
 one working tree.
 
-Deployment consequence: `Dockerfile`, `deploy.sh`, and `k8s/` currently assume the app
-is the repo root; restructuring must move/update these so the Shuffler keeps deploying
-(Safe Harbor requires it).
+Deployment: **each app is its own container with its own k8s deployment** — this is
+NOT one Docker image. The Shuffler, Tabletop (app + sync server), and Spine build,
+ship, and scale independently (shared namespace is fine). The existing `Dockerfile`
+and `k8s/` manifests become the Shuffler's and move with it; restructuring must keep
+the Shuffler deploying (Safe Harbor requires it).
 
 ## Non-goals (unchanged, plus)
 

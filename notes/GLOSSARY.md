@@ -82,7 +82,7 @@ Mulligan Stage / Hand Acceptance Stage (MTG Deck Shuffler, game scope): the stag
 
 Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. Each mulligan increments the mulligan count; the button is labeled "Mulligan", then "Mulligan #2", "#3", and so on. A mulligan is recorded as a single atomic event carrying all its moves, so it can be undone in one step (restoring the previous hand and library exactly).
 
-Reveal: flip a card from the top of the Library so that the player can look at it.
+Reveal (MTG Deck Shuffler UI): flip a card from the top of the Library so that the player can look at it. _Naming caution: in MTG rules language this is actually "look at" — private to the player. MTG's "reveal" means showing a card to everyone (or a chosen subset). The Shuffler's Reveal button is a look-at. This subtlety is not yet handled in the larger system; see "Look At vs Reveal (Spine)" below._
 
 Revealed cards (MTG Deck Shuffler, UI): a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
 
@@ -108,7 +108,9 @@ Event Log: the append-only record of everything that happened at a Table. One pe
 
 Visibility: an attribute of every event. Public events are seen by everyone at the table; private events belong to a player.
 
-Public Shadow: the public event cast by a private one. "Jess drew a card" (hand count 6→7) is the public shadow of "Jess drew Lyra Dawnbringer."
+Public Shadow: the public event cast by a private one. "Jess drew a card" (hand count 6→7) is the public shadow of "Jess drew Lyra Dawnbringer." **The shadow is created at the source**: the Shuffler sends only the shadow; the Spine never receives hidden-zone card identities. The Spine's log knows exactly what a person standing at the table would know. (Visibility in the Spine is for audience scoping — reveals to some players, private tutor-chats — not zone secrecy.)
+
+Look At vs Reveal (Spine, not yet designed): *look at* is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. *Reveal* is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at.
 
 Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event.
 

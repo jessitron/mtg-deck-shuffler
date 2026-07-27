@@ -16,9 +16,11 @@ hidden zones so your hands are free to play.
    (Discard/exile tracking and "library on the right" are migrating to the Tabletop's
    chart — the table stops being mysterious.)_
 2. **Join a table** — a Shuffler Game connects to a Seat at a Table (Spine context).
-   _Peaks: type a table name on the Prep screen; "play" sends the card to the table
-   instead of the clipboard (clipboard survives as solo mode); hidden-zone events cast
-   public shadows to the Spine (drew a card, hand count, mulligan)._
+   _Peaks: type a table name on the Prep screen; Play and Discard buttons send the
+   card to the table instead of the clipboard — the verb implies the landing zone
+   (clipboard survives as solo mode); hidden-zone events cast public shadows to the
+   Spine (drew a card, hand count, mulligan) — the shadow logic lives here, at the
+   source._
 3. **A tray, not a tab** — someday the hand renders inside the Tabletop page, and the
    Shuffler becomes a service behind the table rather than a destination. Separate
    browser tabs are fine for now.
