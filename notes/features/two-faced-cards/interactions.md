@@ -76,6 +76,10 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Test generators (`test/generators.ts`) generate `cardTypes` and a `twoFaced` boolean (no `CardFace`/`backFace`)
 - `nicolBolas` fixture in generators is a ready-made two-faced card for tests
 
+### The Tabletop port (card.played sender, JES-127)
+- `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table: it sends `face: gameCard.currentFace` and the face-specific `imageUrl` via `getCardImageUrl(card, "normal", currentFace)`. Any new face semantics (a third face? partner backs?) must go through here and the contract (`contracts/payloads/card.played.v1.json` — schemaVersion bump, new file).
+- Discard keeps `currentFace` (a flipped card is discarded as the face it was); mulligan resets it. If you add zone-moving operations, decide face-reset explicitly.
+
 ## Watch Points
 
 These are specific things that could break two-faced cards if changed elsewhere:

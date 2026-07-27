@@ -75,7 +75,10 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | File | Role |
 |---|---|
 | `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `card_types`/`image_uris`/`back_image_uris` as JSON, `two_faced` as integer; rebuilds the cache table on old schema, adds image columns via `ALTER TABLE` |
-| `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` between GameCard and PersistedGameCard |
+| `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` (and `cardInstanceId`) between GameCard and PersistedGameCard |
+| `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` + the face-specific `imageUrl` (JES-127/128) |
+| `src/port-tabletop/sendToTable.ts` | `sendCardToTableFirst` (send-then-commit) + `zoneHintForPlay` (reads `cardTypes` for land vs nonland) |
+| `src/port-tabletop/HttpTabletopGateway.ts`, `FakeTabletopGateway.ts` | Real/fake gateways behind `TabletopPort` |
 
 ## Tests
 
@@ -90,6 +93,9 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `test/port-card-repository/SqliteCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
 | `test/verification/verify-library-grouping.spec.ts` | E2E: flip preserves group-scoped navigation (game + prep) |
 | `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard) |
+| `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + face-specific image; never leaks gameCardIndex |
+| `test/port-tabletop/gateways.test.ts`, `sendToTable.test.ts` | Gateways record/fail; send-then-commit sending half |
+| `test/GameState-cardInstanceId.test.ts` | Instance ids: minted in newGame, mint-on-load durable across saves |
 
 ## Test Data
 

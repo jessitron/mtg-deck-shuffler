@@ -151,6 +151,13 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 - **FlipCardEvent**: Recording flip as a game event was added and removed. It cluttered history without purpose since flipping doesn't change the game's logical state.
 - **In-modal flip via HTMX swap**: Multiple attempts to flip a card inside the modal by swapping just the image or flip container. All caused the modal to close due to HTMX's swap mechanism removing the modal overlay. Solution was a dedicated route that re-renders the full modal.
 
+## The Shuffler Sends Faces (JES-127, Tabletop v0 Part B, 2026-07-27)
+
+- `POST /play-card` and the new `POST /discard-card` now send `card.played` to the Tabletop in table mode (send-then-commit), via `src/port-tabletop/sendToTable.ts` → `buildCardPlayedEvent` — **the CURRENT face and its face-specific imageUrl** (`getCardImageUrl(card, "normal", currentFace)`), exactly as contract.md prescribes.
+- **Discard does NOT reset `currentFace`**: a flipped MDFC goes to the graveyard as the face it was. Contrast `mulligan()`, which resets to front on return-to-library. TableLocation keeps the face.
+- `GameCard`/`PersistedGameCard` gained optional `cardInstanceId` (GUID; minted in `newGame` beside `gameCardIndex`, mint-on-load in `fromPersistedGameState`, durable on next save) — the optional-field exception, **no version bumps** (game state stays 11, prep stays 3). It lives on the *game card*, never `CardDefinition` — the SQLite card cache is untouched.
+- Solo Discard buttons carry `data-current-face` too, so clipboard copy uses the current face, same as Play.
+
 ## Contract Lands (JES-128 / JES-129)
 
 - **`9e3ca60`** - Event contract v0 written as JSON Schema in `contracts/` — `card.played.v1.json` carries `card: {scryfallId, instanceId}` + required sibling `face: "front"|"back"`, exactly the shape this owner's contract.md specified
