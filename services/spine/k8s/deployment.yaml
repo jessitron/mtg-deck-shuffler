@@ -52,7 +52,7 @@ spec:
               path: /up
               port: 4600
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 30
       volumes:
         - name: data-volume
           persistentVolumeClaim:

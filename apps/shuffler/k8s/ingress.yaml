@@ -10,7 +10,11 @@ metadata:
     alb.ingress.kubernetes.io/group.name: only-one-alb-please
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-path: /
+    # The ALB was health-checking / (which renders a template) every 15s — the
+    # default interval — and that was the single biggest source of traces in
+    # production. /health is cheap and the sampler keeps only 1% of it.
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
     alb.ingress.kubernetes.io/ssl-redirect: "443"
     alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=orion-alb-access-logs,access_logs.s3.prefix=orion-alb

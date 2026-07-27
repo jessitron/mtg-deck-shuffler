@@ -39,18 +39,21 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+          # Probes hit /health (cheap, no render), not / (renders a template).
+          # readinessProbe was every 5s, which by itself was most of our trace
+          # volume; 30s is plenty for a single-replica hobby deploy.
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 3333
             initialDelaySeconds: 30
             periodSeconds: 60
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 3333
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 30
       volumes:
         - name: data-volume
           persistentVolumeClaim:

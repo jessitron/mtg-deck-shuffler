@@ -11,7 +11,7 @@ APP_PORT=${port_override:-${PORT}}
 # by hand. Runs alongside npm start, which stays in the foreground as usual.
 (
   for _ in $(seq 1 60); do
-    if curl -s "http://localhost:$APP_PORT/" >/dev/null 2>&1; then
+    if curl -s "http://localhost:$APP_PORT/health" >/dev/null 2>&1; then
       echo "──────────────────────────────────────────────"
       echo "✅ app ready          http://localhost:$APP_PORT/"
       echo "──────────────────────────────────────────────"

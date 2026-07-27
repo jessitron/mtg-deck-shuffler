@@ -60,3 +60,36 @@ _2026-07-27._
   `shape.meta`.
 
 _2026-07-27, Tabletop v0._
+
+## Sampling health checks: the needle has to be lowercase too
+
+`src/telemetry-sampler.ts` samples background chatter (health checks, static assets) down
+to 1%. It lives apart from `src/tracing.ts` **so it can be unit tested** — the previous
+version was inline in tracing.ts, untestable, and silently broken for months:
+
+```ts
+if (userAgent.toLowerCase().includes("ELB-HealthChecker"))  // never true
+```
+
+The haystack was lowercased and the needle wasn't, so every ALB probe was traced at 100%.
+That one bug was the single largest source of spans in production: ~1440 probes per 2h,
+8 spans each, swamping real traffic. The `kube-probe` branch beside it worked only because
+that string happens to already be lowercase.
+
+Two lessons worth keeping:
+
+- **A sampler that fails open is invisible.** Nothing breaks, no error appears; you just
+  quietly pay for data. If you write sampling logic, unit test the predicate.
+- **Read both semconv spellings.** The predicate checks `http.user_agent` *and*
+  `user_agent.original` (likewise `http.target` / `url.path`), because the HTTP
+  instrumentation is mid-migration and a dependency bump would otherwise turn the
+  sampling off just as silently.
+
+Also: probes hit **`/health`** (cheap, no template render), not `/`. Express middleware
+spans are off entirely (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`), which is what
+took a typical trace from 8 spans to 2. That replaced the old
+`ignoreLayers: ["middleware - stampRouteParams"]` workaround — the reason that hack
+existed (keeping the root server span active through `res.end`) is satisfied by having no
+middleware spans at all.
+
+_2026-07-27._

@@ -2,9 +2,9 @@ import { register } from "node:module";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
-import { TraceIdRatioBasedSampler, ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
-import { Sampler, SamplingResult } from "@opentelemetry/sdk-trace-base";
-import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
+import { ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
+import { ExpressLayerType } from "@opentelemetry/instrumentation-express";
+import { BackgroundChatterSampler } from "./telemetry-sampler.js";
 
 // This app is ESM ("type": "module"). OTel's instrumentations patch modules via
 // require-in-the-middle, which only sees CommonJS require() calls — so without
@@ -15,36 +15,12 @@ import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
 // old `-r` (CommonJS) preload: register() must run before the app's imports.
 register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
 
-// Custom sampler that heavily samples down kube-probe requests to /
-class KubeProbeAwareSampler implements Sampler {
-  private defaultSampler = new TraceIdRatioBasedSampler(1.0); // 100% sampling by default
-  private kubeProbeRootSampler = new TraceIdRatioBasedSampler(0.001); // 0.1% sampling for kube-probe
-  private elbHealthcheckerRootSampler = new TraceIdRatioBasedSampler(0.01); // 1% sampling for ELB healthchecker
-
-  shouldSample(context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes, links: Link[]): SamplingResult {
-    // Check if this is an HTTP span for the root path with kube-probe user agent
-    const userAgent = String(attributes["http.user_agent"] || "");
-
-    if (userAgent.toLowerCase().includes("kube-probe")) {
-      return this.kubeProbeRootSampler.shouldSample(context, traceId);
-    }
-
-    if (userAgent.toLowerCase().includes("ELB-HealthChecker")) {
-      return this.elbHealthcheckerRootSampler.shouldSample(context, traceId);
-    }
-
-    return this.defaultSampler.shouldSample(context, traceId);
-  }
-
-  toString(): string {
-    return "KubeProbeAwareSampler";
-  }
-}
-
 const sdk: NodeSDK = new NodeSDK({
   traceExporter: new OTLPTraceExporter(),
+  // Health checks and static assets are sampled down hard; everything else is
+  // traced in full. See telemetry-sampler.ts for what counts and why.
   sampler: new ParentBasedSampler({
-    root: new KubeProbeAwareSampler(),
+    root: new BackgroundChatterSampler(),
   }),
   instrumentations: [
     getNodeAutoInstrumentations({
@@ -52,15 +28,20 @@ const sdk: NodeSDK = new NodeSDK({
       "@opentelemetry/instrumentation-fs": {
         enabled: false,
       },
-      // Our `stampRouteParams` middleware (in app.ts) reads the active span to
-      // attach http.route.param.* to the root server span. If Express
-      // instrumentation wraps it in its own middleware span, that span ends
-      // when the middleware calls next(), and our deferred res.end writes would
-      // hit an ended span. Ignoring this one layer means the middleware runs in
-      // the parent (root server span) context, so the active span is the same
-      // span that carries http.route. Matched by layer name: "middleware - <fn name>".
+      // No spans for middleware layers. Every request was carrying six of them
+      // (`middleware - query`, `expressInit`, `jsonParser`, `urlencodedParser`,
+      // and two anonymous), which is 6 of the 8 spans in a typical trace and
+      // told us nothing: the route span and the request-handler span are where
+      // the information is.
+      //
+      // This also gives us, for free, the thing `ignoreLayers:
+      // ["middleware - stampRouteParams"]` used to buy: our `stampRouteParams`
+      // middleware (in app.ts) captures the active span and writes to it at
+      // res.end. With no middleware span wrapping it, the active span there is
+      // the root server span — the one carrying http.route, and still open at
+      // res.end — rather than a middleware span that ended at next().
       "@opentelemetry/instrumentation-express": {
-        ignoreLayers: ["middleware - stampRouteParams"],
+        ignoreLayersType: [ExpressLayerType.MIDDLEWARE],
       },
     }),
   ],

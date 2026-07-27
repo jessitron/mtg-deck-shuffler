@@ -49,4 +49,4 @@ spec:
               path: /health
               port: 5180
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 30

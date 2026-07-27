@@ -168,6 +168,16 @@ Use `PORT=3344 ./run` to avoid conflict with user's testing server on the defaul
 
 Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernity`):
 
+- **Sampling**: `src/telemetry-sampler.ts` keeps 1% of "background chatter" — health-check
+  probes (by user agent, and the `/health` route) and static assets (by file extension) —
+  and 100% of everything else. Kept at 1% rather than dropped so you can still confirm from
+  traces that the app is up and serving. Unit tested in `test/telemetry-sampler.test.ts`;
+  see `notes/AGENT-NOTES.md` for why that test exists.
+- **Express middleware spans are off** (`ignoreLayersType`), so a normal trace is the root
+  server span plus `request handler - <route>`, not eight spans of parser middleware.
+- **`/health`** is the probe endpoint (k8s liveness/readiness and the ALB) — deliberately
+  the cheapest route in the app.
+
 - **Local tests**: environment `local`, dataset `mtg-deck-shuffler` (web/browser spans go to `mtg-deck-shuffler-web`).
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
 - **API key sourcing**: `apps/shuffler/.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). `verify.sh` sources both in that order (it looks for `.be` in its own dir, then the git toplevel); if you start the server by hand for telemetry, do the same.
