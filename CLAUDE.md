@@ -9,8 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Seamap
 
 This repo's seamap — the chart (North Star, Mountains, Safe Harbor) and the tracking adapter —
-lives in `SEAMAP.md`. Orient, capture, and log proactively; use `drop-buoy` to capture work
-without derailing.
+lives in `SEAMAP.md`. That's the fleet-level map; each major component has its own seamap
+(`apps/shuffler/SEAMAP.md`, `apps/tabletop/SEAMAP.md`, `services/spine/SEAMAP.md`).
+Orient, capture, and log proactively; use `drop-buoy` to capture work without derailing.
+
+The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 
 ## Project Overview
 

@@ -1,64 +1,93 @@
-# SEAMAP — MTG Deck Shuffler
+# SEAMAP — The Table (the fleet)
+
+This is the fleet-level map: the whole voyage from deck management to playing together
+to an agent that learns the game. Each major component (ship) has its own seamap:
+
+- [Shuffler](apps/shuffler/SEAMAP.md) — hidden zones: library and hand
+- [Tabletop](apps/tabletop/SEAMAP.md) — the shared tldraw canvas
+- [Spine](services/spine/SEAMAP.md) — tables, seats, the event log, the interpreter
+
+_(The component directories are being born; until restructuring lands, the Shuffler's
+code still lives at the repo root.)_
+
+The full vision: `notes/DESIGN-the-table-vision.md`. Vocabulary: `notes/GLOSSARY.md`.
 
 ## North Star
 
-Shuffle up and play any deck. The app manages the deck; you adjudicate the game; and along the way, learn more about playing MTG.
+Play Magic together, remotely, at a table the system can see. The apps manage the deck
+and the table; you adjudicate the game; an agent gradually learns to interpret the play
+— and someday, to play.
 
 ## The Mountains
 
-Three directions, each with a next peak. Currently sailing toward **Good play experience**.
+The ladder — playable at all times, increasingly useful and fun. A strangler fig over
+Mural, not a rewrite.
 
-1. **Good play experience** ← _active_ — the table feels real and fun to play on.
-   _Next peak: table fidelity — animations of cards moving, library on the right, discard/exile tracking, playmats, sleeves._
-2. **Multiplayer-aware** — more than one person shares the game.
-   _Next peak: spectator mode (watch a game without touching its state)._
-3. **Hand recommendations & evals** — the app shows a recommendation for your opening hand, and turns your reaction to it into evals.
-   _Not started. The recommender is a separate service (heuristics plus an LLM call) reached through a port — never hosted here. This app's part is to show a recommendation, let you rate it and say what would be better, and feed that to a database of evals._
+1. **The Tabletop replaces Mural** ← _active_ — a synced tldraw canvas where cards
+   arrive from the Shuffler instead of the clipboard; then card shapes and gestures
+   (tap, counters, zone areas) make common movements easy.
+2. **The Spine tells the story** — one event log per table; a narration panel showing
+   what happened, before any AI fills it.
+3. **The Interpreter learns to read the play** — guesses at unexplained physical
+   events, asks in chat, is corrected; then ears (per-player transcription); then
+   proactive help ("that triggers your rabbit").
+4. **Someday: it asks to play.**
+
+Spectator mode is a constraint on every mountain, not a mountain: anyone can join a
+table to look — public events, commentary, hand counts but never hands.
 
 ## Safe Harbor
 
 A change is home when:
-- it's deployed to the EKS cluster at https://mtg.jessitron.honeydemo.io and observable in Honeycomb (prod environment `mtg-deck-shuffler`);
+- it's deployed and observable in Honeycomb (prod environment `mtg-deck-shuffler`);
 - tests are green;
-- documentation is consistent with the code;
+- documentation — including each ship's seamap — is consistent with the code;
 - and nothing in the repo is wrong, deceptive, or extraneous.
 
 ## Success looks like
 
-- Playing a real game with your sister feels natural, not fiddly.
-- The code stays expressive of the domain — reading it teaches you the game, and that legibility is part of the learning.
-- Each session you, the AI, and the code come away having learned something.
+- Playing a real game with your sister feels natural, not fiddly — and the cards
+  arrive themselves.
+- The running narration is good company: "wait, what just happened?" has an answer.
+- The humans teach the AI in public, during play, at exactly the rate they enjoy.
+- The code stays expressive of the domain — reading it teaches you the game.
 - When something breaks, Honeycomb shows you why.
-
-## How will we know it's working?
-
-- Tests are green and cover the domain logic.
-- Clicking through the app, the change does what it should — and it's pleasant enough that you actually do it.
-- Honeycomb traces show what happened in a session, so you can answer "what did the app do?" without ad-hoc logging. (Traces come from your own clicking — there aren't enough users to generate them otherwise.)
 
 ## Enabling Constraints
 
-- HTMX for interactivity; custom JS only when HTMX can't do it (OTel, animations). _(This will shift once we track cards on the tabletop.)_
-- EJS templates for pre-game pages and any new pages. The TypeScript view functions on the gameplay pages are historical, not an intention to preserve.
-- Ports, adapters, and gateways for external data and side effects (`notes/PATTERN-port-adapter-gateway.md`). Fakes, never mocks, in tests.
-- Square corners (border-radius ≤ 4px) except on physically round things (cards, playmats). A me thing.
-- Games are tracked as a series of events — an event-sourcing architecture. Later this supports synchronization across players.
+- **Playable at all times.** Every rung of the ladder is a game you'd actually play.
+- **Physics vs meaning.** The Tabletop knows what hands do at a table; only the
+  interpreter knows what it means. The interpreter reads players, not rules.
+- **One append-only event log per table.** Visibility on every event; private events
+  cast public shadows. Never replace — supersede. Provenance on every inferred event.
+  The log is the eval dataset.
+- **The Spine's language is the published language**; the event contract is
+  language-neutral (JSON Schema), versioned, validated on both sides.
+- **Monorepo, polyglot**: TypeScript owns pixels (Shuffler, Tabletop), Ruby owns
+  meaning (Spine, via the Journeys pattern — tour pending).
+- **Don't carry what you can listen to**: Discord keeps the voice call; we transcribe.
+- Square corners (border-radius ≤ 4px) except on physically round things. A me thing.
 - Everything persisted is versioned (`notes/DESIGN-persistence-versioning.md`).
-- Feature owners hold deep context for tricky features and watch for cross-feature interactions.
+- Feature owners hold deep context for tricky features and watch for cross-feature
+  interactions.
+- Made with tldraw — we wear the watermark happily.
 
 ## Non-goals
 
-- Not a rules engine — the human adjudicates; the app won't enforce MTG rules or legality.
+- Not a rules engine — the human adjudicates; consensus is expressed physically.
 - Not a deck builder — decks come from Archidekt/MTGJSON.
+- Not a voice-transport service — Discord carries the call.
+- No login/auth yet, even for tables; randos are a risk we accept while demonstrating
+  usefulness.
 - Tablet support matters; **mobile does not** (except the home page).
-- No user accounts / user tracking yet — someday, but not until we must.
 - No backwards-compatibility for persisted data — failing loudly on old versions is enough.
 - Not a public, multi-tenant product at scale; no native app (web only).
 
 ## Tracking
 
-Where the live work for this project is recorded. The Mountains above are mirrored as Linear
-milestones; landings, sea monsters, and treasures live as issues — never in this doc.
+Where the live work for this project is recorded. The Mountains above are mirrored as
+Linear milestones (re-mirroring needed after this re-charting); landings, sea monsters,
+and treasures live as issues — never in this doc.
 
 - backend: linear
 - project: [MTG Deck Shuffler](https://linear.app/honeycombio/project/mtg-deck-shuffler-7e9e20cc93e9)
