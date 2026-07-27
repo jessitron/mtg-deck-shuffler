@@ -55,7 +55,7 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 - Square corners except on physical round elements (cards, playmats)
 - Latest styling in `public/site.css`
-- The site pages (/, /choose) have different styles from the play pages (/prepare, /game)
+- The site pages (/, /choose-any-deck) have different styles from the play pages (/prepare, /game)
 
 ## Key Files
 
@@ -159,6 +159,11 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 ## Documentation
 
 Design directives, features, vocabulary, and code structure in `notes/`. Keep updated with changes.
+
+`notes/AGENT-NOTES.md` collects gotchas learned while working here — non-obvious "oh,
+*that's* why" findings (why `./run` doesn't source `.be`, why the Docker build context is
+the repo root, and so on). Read it when something surprises you; append to it when
+something surprises you and wasn't written down.
 
 Update this file when anything in it changes.
 
