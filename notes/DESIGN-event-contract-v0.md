@@ -156,6 +156,26 @@ envelope version bump — old readers reject it loudly, by design. Until then th
 Spine's projections and the admin screen can filter on `name` prefixes, which is
 plenty at three event kinds.
 
+## v0 implementation notes (from the walking skeleton, JES-129)
+
+The schemas live in `contracts/` (envelope.v1 + three payloads). Resolutions the
+implementation made where this doc was silent:
+
+- **The Spine authors `table.created` itself** (occurredIn `spine`) in response to
+  `POST /tables` — it is never ingested through the events endpoint, which resolves
+  the chicken-and-egg of an envelope requiring a `tableId` the Spine hasn't minted yet.
+- **Submission vs. logged shape**: one envelope schema can't express "seq/acceptedAt
+  forbidden at submission"; the schema marks them optional and the Spine rejects
+  sender-supplied values in code.
+- Honeycomb trace links use the environment-wide `/trace?trace_id=` URL form.
+
+Deferred decisions the implementation surfaced (fine as-is for v0):
+
+- **`initiator` is a plain string** (`"seat 1"`, a player name). It likely wants a
+  structured `{kind, id}` before the Interpreter starts initiating events.
+- **`seatId` is a full UUID** (schema requires only minLength 8 — "short" undefined).
+- **`zoneHint` is a free string** (`stack`, `battlefield`, `graveyard`, …), not an enum.
+
 ## Not decided here (future docs)
 
 - Supersession/correction event shapes (Interpreter era) — durable causality via
