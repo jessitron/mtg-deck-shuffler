@@ -1,0 +1,29 @@
+<% content_for :title, "Spine — Tables" %>
+
+<header>
+  <h1>Spine</h1>
+  <p class="subtitle">Every table's story, told in events.</p>
+</header>
+
+<main>
+  <h2>Tables</h2>
+  <% if @tables.empty? %>
+    <p class="empty">No tables yet. <code>POST /tables {"name": "...", "creator": "..."}</code> starts one.</p>
+  <% else %>
+    <table class="log">
+      <thead>
+        <tr><th>name</th><th>status</th><th>tableId</th><th>created</th></tr>
+      </thead>
+      <tbody>
+        <% @tables.each do |table| %>
+          <tr>
+            <td><%= link_to table.name, admin_table_path(table) %></td>
+            <td><%= table.status %></td>
+            <td class="mono"><%= table.id %></td>
+            <td><%= table.created_at.utc.iso8601 %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</main>

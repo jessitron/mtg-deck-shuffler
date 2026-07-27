@@ -1,10 +1,70 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* Spine admin screen. Square corners — fleet style (nothing here is physically round). */
+
+:root {
+  --ink: #1a1a2e;
+  --paper: #f7f6f2;
+  --accent: #6b2fa0;
+  --line: #d8d4cc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 1.5rem 2rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+header h1 { margin: 0; }
+header h1 a { color: var(--accent); text-decoration: none; }
+.subtitle { margin-top: 0.25rem; color: #555; }
+
+h2 { border-bottom: 2px solid var(--accent); padding-bottom: 0.25rem; }
+h2 .count { font-size: 0.7em; color: #777; font-weight: normal; }
+
+.mono { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; }
+.empty { color: #777; font-style: italic; }
+
+table.log {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border: 1px solid var(--line);
+}
+table.log th,
+table.log td {
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+table.log th {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.8em;
+  text-transform: lowercase;
+}
+
+td.seq { text-align: right; font-family: ui-monospace, Menlo, monospace; }
+td.event-name { font-family: ui-monospace, Menlo, monospace; color: var(--accent); white-space: nowrap; }
+
+pre.payload {
+  margin: 0;
+  font-size: 0.75rem;
+  max-width: 40rem;
+  overflow-x: auto;
+}
+
+a.trace-link {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.8em;
+}
+a.trace-link:hover { background: #4d2273; }
