@@ -1,8 +1,7 @@
 # SEAMAP — Tabletop (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Tabletop is the shared canvas where play
-happens — Mural's freedom with Magic's physics. _(Not yet built; this map precedes the
-ship.)_
+happens — Mural's freedom with Magic's physics.
 
 ## North Star
 
@@ -13,7 +12,10 @@ event the Spine can hear.
 
 1. **A playable canvas** ← _active_ — a synced tldraw board; cards arrive from the
    Shuffler instead of the clipboard. Playable day one: Mural where the cards arrive
-   themselves.
+   themselves. _Landed (JES-127, 2026-07-27): synced canvas at `/t/:tableName`,
+   card-arrival API with per-seat battlefield rows + graveyard/exile spots, OTel on
+   server and browser, deployed at table.jessitron.honeydemo.io. Remaining for this
+   mountain: the Shuffler-side integration (Part B — prep inputs, play/discard send)._
 2. **The physics of Magic** — a custom CardShape that taps (rotate), flips, holds
    counters and notes; zone areas for Graveyard, Exile, and the Stack (geography, not
    rules). Common movements become gestures; every gesture is a physical event.

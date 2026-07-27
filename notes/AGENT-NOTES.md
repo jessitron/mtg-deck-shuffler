@@ -41,3 +41,22 @@ Not `/choose`. Routes are declared in `src/app.ts`; the site pages are `/`, `/do
 `/game/:gameId`. Curling `/choose` gets you a 404 that looks like a regression and isn't.
 
 _2026-07-27._
+
+## Tabletop gotchas (apps/tabletop)
+
+- **tldraw is pinned exactly** (5.2.5 line, no caret): `room.updateStore` (server-side
+  shape injection) is a young API, verified in `test/updateStore.test.ts`. Don't let a
+  routine dependency bump float it.
+- **Ports**: dev/prod server 5180, `verify.sh` runs its own on 5183. The Shuffler's
+  tests use 3344/3001, the Spine 4600 — keep them distinct.
+- **Rooms are in-memory**: restarting the server (or redeploying — `Recreate`, one
+  replica) wipes every board. Not a bug in v0; durable reconstruction is a tracked buoy.
+- **Browser spans don't go to the server**: they go to a collector. In prod that's
+  same-origin `/v1/traces`, ALB-routed to the `mtg-tabletop-collector` deployment;
+  locally `otel-collector-local.yaml` or the `local`-env key fallback. If browser spans
+  vanish, check `BROWSER_OTLP_TRACES_URL` before suspecting the web SDK.
+- **Card shapes carry no trace context**: correlation is by `card.instance_id` span
+  attribute (traces follow requests; cards persist). Don't add a traceparent to
+  `shape.meta`.
+
+_2026-07-27, Tabletop v0._

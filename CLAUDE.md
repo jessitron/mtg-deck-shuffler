@@ -21,7 +21,13 @@ This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
 `.claude/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`. The ships:
 
 - `apps/shuffler/` — the Shuffler (all the code described below)
-- `apps/tabletop/` — not built yet, seamap only
+- `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas with an
+  Express/ws sync server. `/t/:tableName` is a shared board; the card-arrival API
+  (`POST /api/tables/:tableName/cards`, SCAFFOLDING for the Spine's future feed)
+  places cards from the Shuffler. Run with `./run` from `apps/tabletop/` (port 5180);
+  tests `npx vitest run`; Playwright via `./verify.sh`; deploy with `./deploy.sh`
+  (table.jessitron.honeydemo.io). See `apps/tabletop/README.md` for Modes and
+  SCAFFOLDING callouts.
 - `services/spine/` — the Spine: Ruby on Rails 8 + SQLite. Tables, seats, one
   append-only event log per table; ingestion validates against `contracts/` and
   fails loudly. Admin screen (a table's log, with Honeycomb trace links) at
