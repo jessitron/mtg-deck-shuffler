@@ -42,6 +42,10 @@ COPY services/spine/lib/ ./lib/
 COPY services/spine/public/ ./public/
 RUN mkdir -p log tmp storage
 
+# Propshaft needs digested assets + a manifest in production, or the admin
+# screen's stylesheet_link_tag raises.
+RUN bin/rails assets:precompile
+
 EXPOSE 4600
 
 # db:prepare creates/migrates the SQLite db on the PVC (SQLITE_DB_PATH) at boot.
