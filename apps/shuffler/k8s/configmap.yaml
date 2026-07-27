@@ -11,3 +11,5 @@ data:
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOG_LEVEL: "info"
+  TABLETOP_URL: "http://mtg-tabletop-service"
+  TABLETOP_PUBLIC_URL: "https://table.jessitron.honeydemo.io"
