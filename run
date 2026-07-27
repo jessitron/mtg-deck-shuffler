@@ -1,0 +1,88 @@
+#!/bin/bash
+# Run the whole fleet locally: Spine, Tabletop, and Shuffler.
+#
+#   ./run                 all three, default ports
+#   SHUFFLER_PORT=3355 ./run    override any port
+#
+# Ports: Shuffler 3344, Tabletop 5180, Spine 4600 (defaults; each overridable).
+# Ctrl-C stops everything.
+#
+# Telemetry: .be (repo root) is sourced here, BEFORE each app's run script
+# sources its own .env — the .envs interpolate $HONEYCOMB_API_KEY at source
+# time, so the key must already be in the environment. Local spans go to
+# Honeycomb env `local`.
+
+set -e
+cd "$(dirname "$0")"
+
+if [ -f .be ]; then
+  source .be
+else
+  echo "⚠️  no .be at repo root — telemetry will 401 (app still runs)"
+fi
+
+SHUFFLER_PORT=${SHUFFLER_PORT:-3344}
+TABLETOP_PORT=${TABLETOP_PORT:-5180}
+SPINE_PORT=${SPINE_PORT:-4600}
+
+# The Shuffler talks to the local Tabletop, and its "at table" link points there too.
+export TABLETOP_URL="http://localhost:$TABLETOP_PORT"
+export TABLETOP_PUBLIC_URL="http://localhost:$TABLETOP_PORT"
+
+prefix() {
+  local label="$1"
+  while IFS= read -r line; do printf '%s %s\n' "$label" "$line"; done
+}
+
+PIDS=()
+
+start() {
+  local label="$1" dir="$2" port="$3"
+  (cd "$dir" && PORT="$port" ./run 2>&1 | prefix "$label") &
+  PIDS+=($!)
+}
+
+kill_tree() {
+  local pid=$1 child
+  for child in $(pgrep -P "$pid" 2>/dev/null); do kill_tree "$child"; done
+  kill "$pid" 2>/dev/null || true
+}
+
+cleanup() {
+  trap - INT TERM EXIT
+  echo ""
+  echo "⚓ furling sails — stopping the fleet..."
+  local pid
+  for pid in "${PIDS[@]}"; do kill_tree "$pid"; done
+  wait 2>/dev/null
+}
+trap cleanup INT TERM EXIT
+
+echo "⛵ launching the fleet: spine :$SPINE_PORT · tabletop :$TABLETOP_PORT · shuffler :$SHUFFLER_PORT"
+start "[spine   ]" services/spine "$SPINE_PORT"
+start "[tabletop]" apps/tabletop  "$TABLETOP_PORT"
+start "[shuffler]" apps/shuffler  "$SHUFFLER_PORT"
+
+# One combined readiness banner once all three answer.
+(
+  ok=0
+  for _ in $(seq 1 240); do
+    s=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$SPINE_PORT/up" 2>/dev/null || true)
+    t=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$TABLETOP_PORT/health" 2>/dev/null || true)
+    h=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$SHUFFLER_PORT/health" 2>/dev/null || true)
+    if [ "$s" = "200" ] && [ "$t" = "200" ] && [ "$h" = "200" ]; then
+      echo "══════════════════════════════════════════════════"
+      echo "⛵ the fleet is afloat"
+      echo "   shuffler   http://localhost:$SHUFFLER_PORT/"
+      echo "   tabletop   http://localhost:$TABLETOP_PORT/         (tables at /t/<name>)"
+      echo "   spine      http://localhost:$SPINE_PORT/admin/tables"
+      echo "══════════════════════════════════════════════════"
+      ok=1
+      break
+    fi
+    sleep 0.5
+  done
+  [ "$ok" = "1" ] || echo "⚠️  fleet not fully up after 120s — check the logs above"
+) &
+
+wait

@@ -105,6 +105,14 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 ## Development Commands
 
+**Run the whole fleet locally:**
+
+- `./run` **from the repo root** — starts all three services with prefixed logs:
+  Spine (:4600, admin at `/admin/tables`), Tabletop (:5180, tables at `/t/<name>`),
+  Shuffler (:3344, wired to the local Tabletop via `TABLETOP_URL`). Sources `.be`
+  once for telemetry (Honeycomb env `local`). Ctrl-C stops everything. Override
+  ports with `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
+
 **Build & Run:** (from `apps/shuffler/`, except where noted)
 
 - `npm run build` - Compile TypeScript (also works from the root)
