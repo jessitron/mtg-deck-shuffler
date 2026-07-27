@@ -90,12 +90,29 @@ User clicks "Flip" under the commander on the prepare screen (inline)
     → Reads prep from persistence (404 if absent)
     → Finds the card via createPrepViewHelpers — same commanders-then-library-cards
       indexing as /prep-card-modal (404 unknown index, 400 single-faced)
-    → Response: formatFlippingContainer() for the requested face
-    → hx-swap="outerHTML" onto #card-N-outer-flip-container-with-button
+    → Response: renderCommanderCard() — the WHOLE card container for that face
+    → hx-swap="outerHTML" onto #card-N-container
     → No state mutation, nothing persisted
 ```
 
-Key difference from game flip: prep flip is stateless. The face is a query parameter, not persisted. If the modal closes and reopens, or the page reloads, the card shows front face again.
+**Why prep swaps the whole container and game swaps only the flip container.** The
+container carries the card-modal URL. In a game that URL needs no face — the modal route
+reads `currentFace` off the game — so only the inner flip container is replaced. On the
+prepare screen the face is *page state*, so the container's URL carries `?face=` and must
+be re-rendered on every flip to stay truthful. Hence two different `hx-target`s from the
+same function, chosen by `FlipRequest.page`.
+
+**The rejected alternative, worth not re-deriving:** put `hx-vals='js:{face: …classList.contains("card-flipped") …}'`
+on the container to read the face at click time. It fails. `hx-vals` is inherited by
+descendants, the flip button is a descendant, and htmx appends GET params to an existing
+query string (`R.indexOf("?") < 0 ? "?" : "&"`), so the button would request
+`?face=back&face=front`. Express reads a repeated key as an **array**, so
+`req.query.face === "back"` is false and the route silently serves the front face —
+breaking Flip in the same invisible way as the original JES-90 bug.
+
+Key difference from game flip: prep flip is stateless. The face is a query parameter, not persisted. On a page reload the card shows the front face again.
+
+The two prep surfaces are deliberately one-way: the page tells the modal which face to open on (via `?face=` in the container's modal URL), but flipping *inside* the modal changes only the modal. That's intended — the modal is its own view of the card, not a controller for the page.
 
 **Never point a prep surface at a game flip route.** `prepId` and `gameId` come from independent SQLite sequences (`game_preps` vs `game_states`), so a prepId handed to `/flip-card/:gameId/...` either finds no game or finds an unrelated one — and `validateStateVersion` allows a missing `expected-version`, so the unrelated game would be mutated and saved. This was the JES-90 bug.
 

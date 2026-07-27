@@ -25,7 +25,7 @@
 | `POST /flip-card-modal/:gameId/:gameCardIndex` | ~1264-1377 | Modal flip — returns full card modal with navigation |
 | `GET /card-modal/:gameId/:cardIndex` | ~580-696 | Card modal — shows flip button if `twoFaced` |
 | `GET /prep-card-modal/:prepId/:cardIndex` | ~698-804 | Prep card modal — flip via `?face=` query param |
-| `GET /prep-flip-card/:prepId/:cardIndex` | ~886-919 | Prep inline flip (commander on the prepare screen) — stateless, `?face=` query param, returns `formatFlippingContainer()` |
+| `GET /prep-flip-card/:prepId/:cardIndex` | ~886-919 | Prep inline flip (commander on the prepare screen) — stateless, `?face=` query param, returns the whole card container via `renderCommanderCard()` so its modal URL carries the face |
 | `GET /library-modal/:gameId` | ~500-542 | Game library modal — maps `cardTypes` (already unioned) |
 | `GET /prep-library-modal/:prepId` | ~807-845 | Prep library modal — maps `cardTypes` (already unioned) |
 
@@ -35,7 +35,7 @@
 |---|---|
 | `src/view/common/shared-components.ts` | `FlipRequest` type — `{page:"game"; gameId; expectedVersion?}` \| `{page:"prep"; prepId}` |
 | `src/view/common/shared-components.ts` | `formatCardContainer()` — branches on `twoFaced`; optional `flipRequest` (defaults to game) |
-| `src/view/common/shared-components.ts` | `formatFlippingContainer(gameCard, flipRequest)` — builds 3D flip HTML structure and the flip button per `flipRequest` |
+| `src/view/common/shared-components.ts` | `formatFlippingContainer(gameCard, flipRequest)` — builds 3D flip HTML structure and the flip button per `flipRequest` (including its swap target: flip container in game, whole card container in prep) |
 | `src/view/common/prep-view-helpers.ts` | `renderPrepCommanderCard()` — passes `flipRequest: {page:"prep", prepId}` and rewrites `/card-modal/` → `/prep-card-modal/` |
 | `views/partials/card-modal.ejs` | Card modal template — receives `currentFace`, renders flip button |
 
