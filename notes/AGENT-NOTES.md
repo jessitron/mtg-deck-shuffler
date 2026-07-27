@@ -32,6 +32,18 @@ showed up while the restructure was in flight — a different chat window). **Ne
 `git add -A` blindly.** Stage the files you touched by name, or check `git status`
 against your own change list before committing.
 
+Two more ways this bites, both hit for real on 2026-07-27:
+
+- **`git checkout HEAD -- <file>` is destructive here.** Used to "un-mix" a shared file
+  before committing only your own hunks, it silently deleted 64 lines of another
+  session's uncommitted work. Recovered only because the file had been copied to a
+  scratchpad first. If you must isolate your hunks in a shared file, copy the file
+  somewhere safe first and restore it immediately after committing — or just leave the
+  file out of your commit.
+- **HEAD moves under you.** The other session committed while this one was working and
+  swept an edit of ours into *their* commit. Re-check `git log`/`git status` right before
+  committing rather than trusting the snapshot from the start of the session.
+
 _2026-07-27._
 
 ## The deck-selection page is `/choose-any-deck`
