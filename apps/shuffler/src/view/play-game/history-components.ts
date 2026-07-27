@@ -1,5 +1,5 @@
 import { GameState } from "../../GameState.js";
-import { GameEvent, nameMove } from "../../GameEvents.js";
+import { GameEvent, nameMoveCardEvent } from "../../GameEvents.js";
 import { formatCardNameAsModalLink } from "../common/shared-components.js";
 
 function formatModalHtmlFragment(title: string, bodyContent: string): string {
@@ -54,7 +54,7 @@ export function formatGameEventHtmlFragment(event: GameEvent, game: GameState, c
 function describeEvent(event: GameEvent, game: GameState, cardNamesAsLinks: boolean): string {
   switch (event.eventName) {
     case "move card":
-      const description = nameMove(event.move);
+      const description = nameMoveCardEvent(event);
       const card = cardIndexToDefinition(game, event.move.gameCardIndex);
       const cardName = cardNamesAsLinks
         ? formatCardNameAsModalLink(card.name, game.gameId, event.move.gameCardIndex, game.getStateVersion())

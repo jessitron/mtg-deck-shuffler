@@ -1352,6 +1352,70 @@ export function createApp(
     }
   });
 
+  // Returns active game fragment - discard: identical to play except the verb
+  // (JES-127, B4). The card lands in TableLocation; at a table it is sent
+  // FIRST with zoneHint "graveyard" (send-then-commit, same as /play-card).
+  app.post("/discard-card/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseInt(req.params.gameId);
+    const gameCardIndex = parseInt(req.params.gameCardIndex);
+    const browserTabId = res.locals.browserTabId as string | undefined;
+
+    try {
+      const persistedGame = await persistStatePort.retrieve(gameId);
+      if (!persistedGame) {
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      }
+
+      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+
+      if (game.gameStatus() !== "Active") {
+        res.status(400).send(`<div>Cannot discard card: Game is not active</div>`);
+        return;
+      }
+
+      const versionCheck = validateStateVersion(req, game);
+      if (!versionCheck.valid) {
+        res.status(409)
+           .setHeader('HX-Retarget', '#modal-container')
+           .setHeader('HX-Reswap', 'innerHTML')
+           .send(versionCheck.errorHtml);
+        return;
+      }
+
+      const cardToDiscard = game.findCardByIndex(gameCardIndex);
+      if (game.tableName && cardToDiscard && cardToDiscard.location.type === "Hand") {
+        trace.getActiveSpan()?.setAttributes({
+          "table.name": game.tableName,
+          "card.instance_id": cardToDiscard.cardInstanceId ?? "missing",
+          "zone.hint": "graveyard",
+        });
+        try {
+          await sendCardToTableFirst(tabletopPort, game, cardToDiscard, "graveyard");
+        } catch (error) {
+          console.error("Tabletop did not accept the card; blocking the discard:", error);
+          markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`);
+          res
+            .status(502)
+            .setHeader("HX-Retarget", "#modal-container")
+            .setHeader("HX-Reswap", "innerHTML")
+            .send(formatTabletopSendErrorModal("discard", cardToDiscard.card.name, game.tableName));
+          return;
+        }
+      }
+
+      const whatHappened = game.discardCard(gameCardIndex, browserTabId);
+      await persistStatePort.save(game.toPersistedGameState());
+
+      const html = formatActiveGameHtmlSection(game, whatHappened);
+      res.setHeader("HX-Trigger", "game-state-updated");
+      res.send(html);
+    } catch (error) {
+      console.error("Error discarding card:", error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not discard card"}</div>`);
+    }
+  });
+
   // Returns active game fragment - updated game board
   app.post("/shuffle/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;

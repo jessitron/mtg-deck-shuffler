@@ -429,7 +429,7 @@ export class GameState {
    * @param recording - Shuffling or un-shuffling sets it to false, since that's recorded in its own way.
    * @param browserTabId - Optional browser tab identifier for event tracking
    */
-  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string) {
+  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: "discard") {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
@@ -445,18 +445,18 @@ export class GameState {
     verifyLocationsAreIdentical(move.fromLocation, gameCard.location);
     gameCard.location = move.toLocation;
     if (recording) {
-      this.eventLog.record({ eventName: "move card", move, browserTabId });
+      this.eventLog.record({ eventName: "move card", move, browserTabId, ...(verb ? { verb } : {}) });
     }
   }
   // TODO: parallel moveCard for flipCard
 
-  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string) {
+  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string, verb?: "discard") {
     const move = {
       gameCardIndex: gameCard.gameCardIndex,
       fromLocation: gameCard.location,
       toLocation,
     };
-    return this.executeMove(move, true, browserTabId);
+    return this.executeMove(move, true, browserTabId, verb);
   }
 
   private addToRevealed(gameCard: GameCard, browserTabId?: string): this {
@@ -531,6 +531,36 @@ export class GameState {
 
     // Move card to table
     this.moveCard(cardToPlay, { type: "Table" }, browserTabId);
+
+    this.validateInvariants();
+
+    return {
+      movedLeft: cardsToMoveLeft,
+    };
+  }
+
+  /**
+   * Discard (JES-127, B4): identical to play except the verb — the card lands
+   * in TableLocation (the graveyard is table geography, not Shuffler state; at
+   * a table the route sends zoneHint "graveyard"). The current face is kept:
+   * a flipped MDFC goes to the graveyard as the face it was.
+   */
+  public discardCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
+    if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
+      throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
+    }
+
+    const cardToDiscard = this.gameCards[gameCardIndex];
+
+    if (!isInHand(cardToDiscard)) {
+      throw new Error(`Card at gameCardIndex ${gameCardIndex} is not in hand`);
+    }
+
+    const cardsToMoveLeft = this.gameCards
+      .filter(isInHand)
+      .filter((gc) => gc.location.position > cardToDiscard.location.position);
+
+    this.moveCard(cardToDiscard, { type: "Table" }, browserTabId, "discard");
 
     this.validateInvariants();
 

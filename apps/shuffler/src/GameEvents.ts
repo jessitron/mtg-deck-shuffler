@@ -34,6 +34,13 @@ export const StartGameEvent: StartEvent = {
 export type MoveCardEvent = {
   eventName: "move card";
   move: CardMove;
+  /**
+   * How the player meant the move (JES-127): "discard" distinguishes a discard
+   * from a play — both land in TableLocation (the graveyard is table geography,
+   * not Shuffler state). Absent for every other move; optional so old persisted
+   * events stay valid (nameMoveCardEvent falls back to location-based naming).
+   */
+  verb?: "discard";
 };
 
 
@@ -88,6 +95,17 @@ export function compactShuffleMoves(moves: CardMove[]): [number, number, number]
     (move.fromLocation as { type: "Library"; position: number }).position,
     (move.toLocation as { type: "Library"; position: number }).position,
   ]);
+}
+
+/**
+ * Human name for a move-card event: an explicit verb ("Discard") wins;
+ * otherwise the name is derived from the locations (nameMove).
+ */
+export function nameMoveCardEvent(event: MoveCardEvent): string {
+  if (event.verb === "discard") {
+    return "Discard";
+  }
+  return nameMove(event.move);
 }
 
 export function nameMove(move: CardMove): string {

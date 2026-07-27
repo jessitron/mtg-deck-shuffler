@@ -104,8 +104,10 @@ function formatModalActionButton(
 function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
   const playishClass = inTableMode ? "table-play-button" : "play-button";
   const playTitle = inTableMode ? "Send to the table and remove from hand" : "Copy image and remove from hand";
+  const discardTitle = inTableMode ? "Send to the graveyard on the table" : "Copy image and discard from hand";
   const actions: CardAction[] = [
     { action: "Play", endpoint: "/play-card", title: playTitle, cssClass: `modal-action-button ${playishClass}` },
+    { action: "Discard", endpoint: "/discard-card", title: discardTitle, cssClass: `modal-action-button discard-button ${playishClass}` },
     { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "modal-action-button put-on-top-button" },
     { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "modal-action-button put-on-bottom-button" },
   ];
