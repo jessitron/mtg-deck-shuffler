@@ -1,7 +1,12 @@
 # Two-Faced Cards — Contract component
 
 How faces appear in the fleet's published language (`notes/DESIGN-event-contract-v0.md`,
-JES-128; JSON Schema in `contracts/` when it lands).
+JES-128). **Landed** (JES-129, `9e3ca60`): the JSON Schema lives at
+`contracts/payloads/card.played.v1.json` — `card: { scryfallId, instanceId }` (both
+uuid-format) with a required sibling `face: enum ["front","back"]`. The Spine
+(`services/spine/`, Ruby) validates every ingested event against these schemas via
+`lib/event_contract.rb` and fails loudly (422) on unknown name/version or a payload
+that doesn't match.
 
 ## The rule
 
@@ -17,6 +22,11 @@ JES-128; JSON Schema in `contracts/` when it lands).
   the scaffolding's business, explicitly not contract.)
 
 ## Watch points
+
+- Changing `face`'s shape (or the card reference) in `contracts/payloads/card.played.v1.json`
+  is a payload schemaVersion bump: add a new `card.played.v2.json` file, never edit v1
+  in place — the Spine resolves schemas by `<name>.v<schemaVersion>.json` filename and
+  old senders keep validating against v1.
 
 - Adding a new card-referencing event kind? Ask "does this event reveal or choose a
   face?" If yes, `face` goes beside `card`, same shape as `card.played`.

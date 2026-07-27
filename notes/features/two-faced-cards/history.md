@@ -150,3 +150,8 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 
 - **FlipCardEvent**: Recording flip as a game event was added and removed. It cluttered history without purpose since flipping doesn't change the game's logical state.
 - **In-modal flip via HTMX swap**: Multiple attempts to flip a card inside the modal by swapping just the image or flip container. All caused the modal to close due to HTMX's swap mechanism removing the modal overlay. Solution was a dedicated route that re-renders the full modal.
+
+## Contract Lands (JES-128 / JES-129)
+
+- **`9e3ca60`** - Event contract v0 written as JSON Schema in `contracts/` — `card.played.v1.json` carries `card: {scryfallId, instanceId}` + required sibling `face: "front"|"back"`, exactly the shape this owner's contract.md specified
+- **`2fa5f30`** - The Spine (services/spine/, Ruby on Rails) ingests and validates `card.played` against the schema, failing loudly on unknown name/version; `card.instance_id`/`card.scryfall_id` go onto the ingestion span
