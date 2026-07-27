@@ -75,6 +75,13 @@ export interface GameCard {
   gameCardIndex: number;
   isCommander: boolean;
   currentFace: "front" | "back";
+  /**
+   * Opaque GUID: this card's *instance* identity for the event contract
+   * (JES-128) — "this particular Forest", minted per game. Optional only for
+   * old saves; GameState mints-on-load, so it is always present at runtime.
+   * This — never gameCardIndex — is what crosses the Shuffler's boundary.
+   */
+  cardInstanceId?: string;
 }
 
 // Bumped 7 -> 8 when CardDefinition dropped manaCost/cmc/oracleText/backFace and

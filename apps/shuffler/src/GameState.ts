@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { CardDefinition, DeckProvenance, Deck } from "./types.js";
 import {
   PersistedGameState,
@@ -102,6 +103,9 @@ export class GameState {
         : ({ type: "Library", position: libraryPositionCounter++ } as LibraryLocation),
       gameCardIndex: index,
       currentFace: "front" as const,
+      // Instance identity for the event contract (JES-128): an opaque GUID,
+      // minted per card per game. gameCardIndex stays Shuffler-internal.
+      cardInstanceId: randomUUID(),
     }));
 
     return new GameState({
@@ -156,6 +160,16 @@ export class GameState {
     }
 
     const hydratedGameCards = await hydrateGameCards(psg.gameCards, cardRepo);
+
+    // Mint-on-load (JES-128): games saved before cardInstanceId existed get
+    // their instance ids the next time they're touched. The minted ids are
+    // durable — toPersistedGameState carries them — so an instance id is
+    // stable across requests once assigned (the Tabletop dedups on it).
+    for (const gameCard of hydratedGameCards) {
+      if (!gameCard.cardInstanceId) {
+        gameCard.cardInstanceId = randomUUID();
+      }
+    }
 
     return new GameState({
       ...psg,

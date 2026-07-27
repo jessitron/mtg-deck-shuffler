@@ -102,6 +102,7 @@ export async function hydrateGameCards(
       gameCardIndex: pgc.gameCardIndex,
       isCommander: pgc.isCommander,
       currentFace: pgc.currentFace,
+      cardInstanceId: pgc.cardInstanceId,
     };
   });
 }
@@ -119,6 +120,7 @@ export function dehydrateGameCards(gameCards: GameCard[]): PersistedGameCard[] {
     gameCardIndex: gc.gameCardIndex,
     isCommander: gc.isCommander,
     currentFace: gc.currentFace,
+    cardInstanceId: gc.cardInstanceId,
   }));
 }
 

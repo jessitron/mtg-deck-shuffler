@@ -27,5 +27,9 @@ export interface PersistedGameCard {
   gameCardIndex: number;
   isCommander: boolean;
   currentFace: "front" | "back";
+  // Optional with a graceful fallback (GameState mints-on-load), so NO version
+  // bump — see the "optional fields" exception in
+  // notes/DESIGN-persistence-versioning.md. JES-128.
+  cardInstanceId?: string;
 }
 
