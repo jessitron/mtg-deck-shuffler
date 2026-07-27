@@ -43,7 +43,27 @@ How a card is serialized in any event payload, ever:
   may carry an `imageUrl` for rendering without a Scryfall lookup — that's the
   scaffolding's business, not the contract's.)
 
-Contract shape: `card: { scryfallId }` + sibling `face` where the event needs it.
+**Identity has two levels** (round 2): the *definition* and the *instance*.
+
+- **Definition** — `scryfallId`, as above: what kind of card this is.
+- **Instance** — `cardInstanceId`: *this particular Forest*, the way a physical deck
+  has one. A GUID minted by the Shuffler, one per card, when the deck becomes a
+  game's library. Game-mechanically two Forests are equivalent; log-wise they are
+  distinct individuals, so a single card can be followed through played → tapped →
+  sacrificed → graveyard, and conservation of cards is checkable: if the table ever
+  holds more or fewer Forests than the log accounts for, each instance's event
+  biography shows exactly where. (The Shuffler's internal `gameCardIndex` is the
+  embryo of this — positional, process-local; the contract needs nominal and
+  durable.)
+- Minting scope, decided-unless-vetoed: **per game**, at game start. "Same physical
+  card across game nights" (persisting instance ids into deck files) is a noted
+  future upgrade, fragile today because deck files are regenerated from
+  Archidekt/MTGJSON.
+
+Contract shape: `card: { scryfallId, instanceId }` + sibling `face` where the event
+needs it. Downstream consequence: the Tabletop should stamp `instanceId` into each
+card shape's `meta`, so future physical events (`card.moved`, tap) reference the
+same individual the game events do.
 
 ## Decision 1: The envelope — v2, renames from round 1 applied
 
@@ -72,7 +92,7 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
 - `table.created` — payload: table name, creator. Response/log carries the minted `tableId`.
 - `seat.taken` — payload: seat number (1–4), player name
 - `card.played` — from the Shuffler (Decision 3: **decided, game event**) —
-  payload: `card: { scryfallId }`, `face`, from which seat, zone hint
+  payload: `card: { scryfallId, instanceId }`, `face`, from which seat, zone hint
 
 Near-future, not v0: the Tabletop reporting the *physical* echo (`card.arrived`,
 scope visible) once it talks to the Spine — mostly ignored by interpretation because
