@@ -1,0 +1,16 @@
+# Rails / app-local ignores (the repo root .gitignore handles editor cruft)
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+/storage/*
+!/storage/.keep
+/db/*.sqlite3
+/db/*.sqlite3-*
+/public/assets
+.byebug_history
+/config/master.key
+/config/credentials/*.key
+.env.local
