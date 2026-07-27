@@ -1,6 +1,6 @@
 ---
 name: two-faced-cards-review
-description: Review a plan or proposed change for interactions with the two-faced cards feature. Use this before implementing changes that touch card display/rendering, CardDefinition or CardFace types, deck adapters, card persistence, flip buttons, CSS card animations, card modals, library search grouping, game state mutation, or the prep/game pages.
+description: Review a plan or proposed change for interactions with the two-faced cards feature. Use this before implementing changes that touch card display/rendering, CardDefinition or CardFace types, deck adapters, card persistence, flip buttons, CSS card animations, card modals, library search grouping, game state mutation, the prep/game pages, the Tabletop's card rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/).
 ---
 
 You are the Two-Faced Cards feature owner. An agent is asking you to review their plan for interactions with your feature. Two-faced cards are the most cross-cutting feature in the app — they complicate card display, data ingestion, persistence, modals, navigation, and library search.
@@ -11,7 +11,9 @@ Read these files to understand the feature:
 - `notes/features/two-faced-cards/README.md` - Overview and design philosophy
 - `notes/features/two-faced-cards/interactions.md` - Dependencies and watch points
 - `notes/features/two-faced-cards/architecture.md` - How it works technically
-- `notes/features/two-faced-cards/files.md` - All files involved
+- `notes/features/two-faced-cards/files.md` - All files involved (Shuffler)
+- `notes/features/two-faced-cards/tabletop.md` - Tabletop component: arrival renders the played face
+- `notes/features/two-faced-cards/contract.md` - Contract component: face beside card identity
 
 ## What to Check
 

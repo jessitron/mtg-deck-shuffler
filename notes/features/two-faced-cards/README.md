@@ -1,4 +1,25 @@
-# Two-Faced Cards
+# Two-Faced Cards — a fleet-scoped feature owner
+
+## The Charge
+
+**A card has faces; face is state, not identity.**
+
+Identity is the Scryfall ID — it captures the exact printing, all faces, all names,
+all image URIs. Which face is showing is *state* that travels with the card instance,
+matters at play time (MDFCs are played as a chosen face), and is never part of the
+card's identity. Every component of the fleet that touches cards must hold this:
+
+- **Shuffler** — tracks `currentFace` on each GameCard, renders flip buttons, sends
+  the current face when a card leaves its boundary. The bulk of this knowledge base
+  (architecture, interactions, files, history) is Shuffler-component knowledge.
+- **Tabletop** — renders the *played* face on arrival (`face` in the card.played
+  payload picks front/back image); a future flip gesture is Tabletop physics.
+  See [tabletop.md](tabletop.md).
+- **Contract** — every event about playing/revealing a card carries `face` beside
+  `card: { scryfallId, instanceId }`. Names and image URLs are derivable
+  conveniences, not identity. See [contract.md](contract.md).
+
+The sections below are the Shuffler-component view (the feature's birthplace).
 
 ## Why This Feature Exists
 
@@ -37,7 +58,9 @@ Players encounter two-faced cards throughout the app:
 
 ## Other Docs
 
-- [Architecture](architecture.md) - Data flow and technical details
-- [History](history.md) - How the feature evolved
-- [Interactions](interactions.md) - Dependencies and watch points
-- [Files](files.md) - Every file involved
+- [Architecture](architecture.md) - Data flow and technical details (Shuffler)
+- [History](history.md) - How the feature evolved (Shuffler)
+- [Interactions](interactions.md) - Dependencies and watch points (Shuffler)
+- [Files](files.md) - Every file involved (Shuffler)
+- [Tabletop](tabletop.md) - The Tabletop component's face knowledge
+- [Contract](contract.md) - How face appears in the event contract
