@@ -30,19 +30,19 @@ Install from the repo root, run from here:
 
 ### Unit Tests
 
-`npm test` - Run unit tests
+`npm test` - Run unit tests (`test/**/*.test.ts`). Also works from the repo root.
 
-### Snapshot Tests
+### Verification Tests
 
-`npm run test:snapshot` - Run HTML output snapshot tests
+`./verify.sh` - Build, start the app on port 3001, run the Playwright specs in
+`test/verification/`, shut down. This is how user-visible changes get verified.
 
-**Important**: Snapshot tests capture the current HTML output to detect unintended changes during refactoring.
+### No snapshot tests
 
-- **For HTML changes that are NOT intended**: Run `npm run test:snapshot` to verify no changes occurred
-- **For HTML changes that ARE intended**: Only run snapshot tests manually to review and approve changes by inspecting the generated `.actual` files
-
-`npm run test:snapshot:update` - Update snapshots (moves .actual files to replace snapshots)
-`npm run test:snapshot:diff` - View differences between snapshots and actual output
+There used to be HTML snapshot tests and `npm run test:snapshot*` scripts. They were
+removed in January 2026 — high maintenance, unclear signal, and the end-to-end
+verification tests cover user-facing behavior better. See
+[notes/snapshot-tests-removed.md](../../notes/snapshot-tests-removed.md).
 
 ## Technical notes
 
