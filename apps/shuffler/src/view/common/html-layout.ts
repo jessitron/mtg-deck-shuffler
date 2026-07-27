@@ -46,6 +46,10 @@ ${additionalStylesheetsHtml}
         {code: "204", swap: false},  // No Content
         {code: "2..", swap: true},   // All other 2xx
         {code: "409", swap: true},   // Conflict (stale state)
+        // Bad Gateway: tabletop rejected/unreachable. swap:true renders the
+        // error modal; error:true keeps event.detail.successful false so the
+        // table-play-button's conditional close-modal leaves the modal visible.
+        {code: "502", swap: true, error: true},
       ];
     </script>
     <script src="/game.js"></script>

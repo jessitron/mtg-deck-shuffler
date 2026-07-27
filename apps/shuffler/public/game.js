@@ -107,6 +107,16 @@ async function copyCardToClipboard(cardId, face) {
   });
 }
 
+// Table mode (JES-127): Play/Discard at a table send the card to the tabletop
+// instead of the clipboard. Optimistic button feedback, same spirit as
+// "Copied!" below; on failure the server returns an explanatory error modal.
+document.addEventListener("htmx:beforeRequest", function (evt) {
+  if (evt.detail.elt.classList.contains("table-play-button")) {
+    evt.detail.elt.textContent = "Sent to table";
+    evt.detail.elt.disabled = true;
+  }
+});
+
 // Handle clipboard copying when HTMX is about to make the request
 document.addEventListener("htmx:beforeRequest", async function (evt) {
   if (evt.detail.elt.classList.contains("play-button")) {

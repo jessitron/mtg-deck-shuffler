@@ -11,7 +11,9 @@ import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
-import { TabletopPort, buildCardPlayedEvent, ZoneHint } from "./port-tabletop/types.js";
+import { TabletopPort } from "./port-tabletop/types.js";
+import { sendCardToTableFirst, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
+import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
@@ -60,12 +62,11 @@ export function createApp(
   // Two timing subtleties:
   //  - req.params is only populated once routing matches, so we defer the writes
   //    to res.end (when params are known) rather than running them here.
-  //  - We capture the span HERE (not in res.end): Express instrumentation is
-  //    told to ignore this layer (see tracing.ts), so the active span at this
-  //    point is the root server span — the one carrying http.route — and it
-  //    stays open through res.end. (At res.end the active span would instead be
-  //    the request-handler child span.)
-  // The function name "stampRouteParams" must match the ignoreLayers entry.
+  //  - We capture the span HERE (not in res.end): Express instrumentation emits
+  //    no middleware spans (see tracing.ts), so the active span at this point is
+  //    the root server span — the one carrying http.route — and it stays open
+  //    through res.end. (At res.end the active span would instead be the
+  //    request-handler child span.)
   app.use(function stampRouteParams(req, res, next) {
     const span = trace.getActiveSpan();
     const originalEnd = res.end.bind(res);
@@ -218,6 +219,15 @@ export function createApp(
   // STATIC PAGES (about the game) - Use EJS templates from views/
   // These are informational pages that describe what the app does and how to use it
   // ============================================================================
+
+  // Liveness/readiness target for the ALB and for kubelet. Deliberately the
+  // cheapest route in the app — no template render, no persistence read — so
+  // the probes don't do real work every few seconds. The sampler (see
+  // telemetry-sampler.ts) keys on this path to keep 1% of the probe traces:
+  // enough to confirm in Honeycomb that we're up, without drowning the dataset.
+  app.get("/health", (req, res) => {
+    res.type("text/plain").send("ok");
+  });
 
   // Returns whole page - home page
   app.get("/", (req, res) => {
@@ -787,7 +797,7 @@ export function createApp(
       utilityButtonsHtml += `</div>`;
 
       // Build location-specific action buttons HTML
-      const locationActions = getModalCardActionsByLocation(gameCard, gameId, expectedVersion);
+      const locationActions = getModalCardActionsByLocation(gameCard, gameId, expectedVersion, !!game.tableName);
       const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
       // Build navigation URLs, preserving navList if present
@@ -1296,6 +1306,32 @@ export function createApp(
         return;
       }
 
+      // Send-then-commit (JES-127, B3): at a table, the tabletop gets the card
+      // FIRST; only on success does the game state change. On failure the play
+      // is blocked and the card stays in hand — a play that silently missed the
+      // tabletop is worse than one that says it failed.
+      const cardToPlay = game.findCardByIndex(gameCardIndex);
+      if (game.tableName && cardToPlay && (cardToPlay.location.type === "Hand" || cardToPlay.location.type === "Revealed")) {
+        const zoneHint = zoneHintForPlay(cardToPlay);
+        trace.getActiveSpan()?.setAttributes({
+          "table.name": game.tableName,
+          "card.instance_id": cardToPlay.cardInstanceId ?? "missing",
+          "zone.hint": zoneHint,
+        });
+        try {
+          await sendCardToTableFirst(tabletopPort, game, cardToPlay, zoneHint);
+        } catch (error) {
+          console.error("Tabletop did not accept the card; blocking the play:", error);
+          markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`);
+          res
+            .status(502)
+            .setHeader("HX-Retarget", "#modal-container")
+            .setHeader("HX-Reswap", "innerHTML")
+            .send(formatTabletopSendErrorModal("play", cardToPlay.card.name, game.tableName));
+          return;
+        }
+      }
+
       const whatHappened = game.playCard(gameCardIndex, browserTabId);
       const persistedGameState = game.toPersistedGameState();
       trace.getActiveSpan()?.setAttributes({
@@ -1520,7 +1556,7 @@ export function createApp(
       utilityButtonsHtml += `</div>`;
 
       // Build location-specific action buttons HTML
-      const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion);
+      const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion, !!game.tableName);
       const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
       // Build navigation URLs, preserving navList if present

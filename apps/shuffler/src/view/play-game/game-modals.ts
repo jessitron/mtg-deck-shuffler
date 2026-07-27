@@ -65,12 +65,25 @@ function formatModalActionButton(
   title: string,
   cssClass = "modal-action-button",
   cardId?: string,
-  currentFace?: "front" | "back"
+  currentFace?: "front" | "back",
+  inTableMode = false
 ): string {
-  const cardIdAttr = action === "Play" && cardId ? `data-card-id="${cardId}"` : "";
-  const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
+  // Play and Discard share the "card leaves your hand" behaviors: in solo mode
+  // game.js copies the card image to the clipboard (keyed on data attributes);
+  // at a table there is no clipboard — the card goes to the tabletop instead.
+  const leavesHand = action === "Play" || action === "Discard";
+  const cardIdAttr = leavesHand && !inTableMode && cardId ? `data-card-id="${cardId}"` : "";
+  const faceAttr = leavesHand && !inTableMode && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = `hx-swap="outerHTML"`;
+
+  // At a table, a failed send returns an error modal retargeted into
+  // #modal-container — close it only on success, or the explanation vanishes.
+  // The card modal always closes.
+  const afterRequest =
+    leavesHand && inTableMode
+      ? `htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); if (event.detail.successful) htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})`
+      : `htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})`;
 
   return `<button class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
@@ -78,16 +91,21 @@ function formatModalActionButton(
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
-                    hx-on::after-request="htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})"
+                    hx-on::after-request="${afterRequest}"
                     title="${title}">
                  ${action}
                </button>`;
 }
 
-// Generate action buttons for cards in hand
-function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expectedVersion: number): string {
+// Generate action buttons for cards in hand.
+// Solo: Play/Discard copy the card image to the clipboard (the `play-button`
+// class is game.js's clipboard hook). At a table: they send the card to the
+// tabletop instead (`table-play-button` — game.js shows "Sent to table").
+function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
+  const playishClass = inTableMode ? "table-play-button" : "play-button";
+  const playTitle = inTableMode ? "Send to the table and remove from hand" : "Copy image and remove from hand";
   const actions: CardAction[] = [
-    { action: "Play", endpoint: "/play-card", title: "Copy image and remove from hand", cssClass: "modal-action-button play-button" },
+    { action: "Play", endpoint: "/play-card", title: playTitle, cssClass: `modal-action-button ${playishClass}` },
     { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "modal-action-button put-on-top-button" },
     { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "modal-action-button put-on-bottom-button" },
   ];
@@ -103,16 +121,19 @@ function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expec
         action.title,
         action.cssClass,
         gameCard.card.scryfallId,
-        gameCard.currentFace
+        gameCard.currentFace,
+        inTableMode
       )
     )
     .join("");
 }
 
 // Generate action buttons for revealed cards
-function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard, expectedVersion: number): string {
+function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
+  const playishClass = inTableMode ? "table-play-button" : "play-button";
+  const playTitle = inTableMode ? "Send to the table and remove from revealed" : "Copy image and remove from revealed";
   const actions: CardAction[] = [
-    { action: "Play", endpoint: "/play-card", title: "Copy image and remove from revealed", cssClass: "modal-action-button play-button" },
+    { action: "Play", endpoint: "/play-card", title: playTitle, cssClass: `modal-action-button ${playishClass}` },
     { action: "Put in Hand", endpoint: "/put-in-hand", title: "Move card to hand", cssClass: "modal-action-button put-in-hand-button" },
     { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "modal-action-button put-on-top-button" },
     { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "modal-action-button put-on-bottom-button" },
@@ -129,7 +150,8 @@ function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard, e
         action.title,
         action.cssClass,
         gameCard.card.scryfallId,
-        gameCard.currentFace
+        gameCard.currentFace,
+        inTableMode
       )
     )
     .join("");
@@ -175,12 +197,12 @@ function formatModalCardActionsForTable(gameId: number, gameCard: GameCard, expe
 }
 
 // Get location-specific actions based on card location
-export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expectedVersion: number): string {
+export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expectedVersion: number, inTableMode = false): string {
   switch (gameCard.location.type) {
     case "Hand":
-      return formatModalCardActionsForHand(gameId, gameCard, expectedVersion);
+      return formatModalCardActionsForHand(gameId, gameCard, expectedVersion, inTableMode);
     case "Revealed":
-      return formatModalCardActionsForRevealed(gameId, gameCard, expectedVersion);
+      return formatModalCardActionsForRevealed(gameId, gameCard, expectedVersion, inTableMode);
     case "Library":
       return formatModalCardActionsForLibrary(gameId, gameCard, expectedVersion);
     case "Table":
@@ -193,6 +215,18 @@ export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number
 }
 
 
+
+/**
+ * Send-then-commit's failure face (JES-127): the tabletop didn't take the
+ * card, so the action was blocked and the card stays where it was.
+ */
+export function formatTabletopSendErrorModal(action: string, cardName: string, tableName: string): string {
+  return formatModalHtmlFragment(
+    "⚠️ The table didn't get the card",
+    `<p class="modal-message">Couldn't send <strong>${cardName}</strong> to table "<strong>${tableName}</strong>".</p>
+     <p class="modal-message">The ${action} was blocked — the card stays where it was. Check the tabletop and try again.</p>`
+  );
+}
 
 export function formatLossModalHtmlFragment(): string {
   return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);

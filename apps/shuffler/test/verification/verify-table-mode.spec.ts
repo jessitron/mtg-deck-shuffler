@@ -60,4 +60,30 @@ test.describe('Table mode', () => {
     await page.waitForURL('**/game/*', { timeout: 30000 });
     await expect(page.locator('.at-table-link')).toContainText('verify-table');
   });
+
+  test('send-then-commit: when the tabletop is unreachable, the play is blocked and the card stays in hand', async ({ page }) => {
+    // This test relies on no tabletop running at TABLETOP_URL (verify.sh does
+    // not start one for this suite; the two-app spec manages its own).
+    await goToPrepare(page);
+    await page.locator('input[name="table-name"]').fill('unreachable-table');
+    await page.locator('input[name="player-name"]').fill('Blocked Jess');
+    await page.locator('button.begin-button').click();
+    await page.waitForURL('**/game/*', { timeout: 30000 });
+
+    await expect(page.locator('.hand-count')).toHaveText('7');
+
+    // Open the first hand card's modal and try to play it
+    await page.locator('#hand-cards .card-container img').first().click();
+    const playButton = page.locator('.card-modal-overlay button:has-text("Play")');
+    await expect(playButton).toBeVisible({ timeout: 5000 });
+    await expect(playButton).toHaveClass(/table-play-button/);
+    await playButton.click();
+
+    // The play is blocked: an explanatory modal appears, the hand is unchanged
+    await expect(page.locator('.modal-overlay')).toContainText("didn't get the card", { timeout: 10000 });
+    await expect(page.locator('.modal-overlay')).toContainText('unreachable-table');
+    await page.locator('.modal-overlay .modal-close').click();
+    await expect(page.locator('.hand-count')).toHaveText('7');
+    await expect(page.locator('.table-cards-button')).toContainText('0 Cards on table');
+  });
 });
