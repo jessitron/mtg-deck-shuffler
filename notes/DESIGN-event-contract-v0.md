@@ -21,7 +21,8 @@ Guiding constraints (from SEAMAP.md / the vision doc, as amended by round 1):
 - Versioned from the start; old data fails loudly. Accepted consequence today: a
   deploy can invalidate a Table. If this ever becomes publicly useful, backwards
   compatibility must hold for at least the length of a game.
-- Not all events are game events — see Decision 6 (scope).
+- Not all events are game events — but classifying them (`scope`) is deferred until
+  we know the scopes (Decision 6).
 - **The developer can see the log**: the Spine includes an admin screen (a webapp
   component is fine) that shows a table's log human-readably, linking each event to
   its trace in Honeycomb. (Scoped into JES-129.)
@@ -38,22 +39,22 @@ How a card is serialized in any event payload, ever:
   played as a chosen face), so events about playing/revealing a card carry
   `face` alongside identity. The Shuffler already tracks `currentFace`; it must
   send it.
-- Names and image URLs are *derivable conveniences*, not identity, and don't belong
+- Names and image URLs are _derivable conveniences_, not identity, and don't belong
   in the contract's card reference. (The pre-Spine Shuffler→Tabletop scaffolding API
   may carry an `imageUrl` for rendering without a Scryfall lookup — that's the
   scaffolding's business, not the contract's.)
 
-**Identity has two levels** (round 2): the *definition* and the *instance*.
+**Identity has two levels** (round 2): the _definition_ and the _instance_.
 
 - **Definition** — `scryfallId`, as above: what kind of card this is.
-- **Instance** — `cardInstanceId`: *this particular Forest*, the way a physical deck
+- **Instance** — `cardInstanceId`: _this particular Forest_, the way a physical deck
   has one. A GUID minted by the Shuffler, one per card, when the deck becomes a
   game's library. Game-mechanically two Forests are equivalent; log-wise they are
   distinct individuals, so a single card can be followed through played → tapped →
   sacrificed → graveyard, and conservation of cards is checkable: if the table ever
   holds more or fewer Forests than the log accounts for, each instance's event
   biography shows exactly where. (The Shuffler's internal `gameCardIndex` is the
-  embryo of this — it *is* static for the life of a game, but it's assigned after
+  embryo of this — it _is_ static for the life of a game, but it's assigned after
   sorting the deck alphabetically (`GameState.newGame`), so an index is the card's
   alphabetical rank in a known decklist: **a decodable secret**. It must never cross
   the Shuffler's boundary; the contract gets an opaque GUID instead.)
@@ -69,21 +70,20 @@ same individual the game events do.
 
 ## Decision 1: The envelope — v2, renames from round 1 applied
 
-| field | who writes it | what it's for |
-|---|---|---|
-| `id` | **sender** mints a GUID | idempotency — the Spine elides a retried duplicate |
-| `tableId` | sender (after learning it) | which table's log. A GUID the **Spine mints at table creation** — the table *name* is a lookup alias, unique only among active tables, living in the `table.created` payload. **JESS TODO: bless or veto this** |
-| `seq` | **Spine**, on append | authoritative order within the log; senders cannot claim positions |
-| `name` | sender | the event's kind, namespaced (`card.played`); determines the payload schema. See Decision 6 |
-| `scope` | sender | what the event affects / how it's perceived — see Decision 6, OPEN |
-| `acceptedAt` | **Spine**, on append | Spine's clock: when the log accepted it |
-| `occurredAt` | sender, optional | the initiator app's clock, when physics preceded ingestion |
-| `initiator` | sender | *who* made this happen: a seat, a named spectator, later the interpreter |
-| `occurredIn` | sender | *which application* recorded/sent it: `shuffler`, `tabletop`, `spine`, later `interpreter` |
-| `visibility` | sender | `public` — the only legal value in v0; see Decision 4 |
-| `traceparent` | sender | W3C trace context — **observability only**, expires with the trace (60d); the admin screen links through it to Honeycomb |
-| `schemaVersion` | sender | integer version of this `name`'s payload schema |
-| `payload` | sender | the kind-specific body |
+| field           | who writes it              | what it's for                                                                                                                                                                 |
+| --------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`            | **sender** mints a GUID    | idempotency — the Spine elides a retried duplicate                                                                                                                            |
+| `tableId`       | sender (after learning it) | which table's log. A GUID the **Spine mints at table creation** — the table _name_ is a lookup alias, unique only among active tables, living in the `table.created` payload. |
+| `seq`           | **Spine**, on append       | authoritative order within the log; senders cannot claim positions                                                                                                            |
+| `name`          | sender                     | the event's kind, namespaced (`card.played`); determines the payload schema. (No `scope` field in v0 — see Decision 6)                                                        |
+| `acceptedAt`    | **Spine**, on append       | Spine's clock: when the log accepted it                                                                                                                                       |
+| `occurredAt`    | sender, optional           | the initiator app's clock, when physics preceded ingestion                                                                                                                    |
+| `initiator`     | sender                     | _who_ made this happen: a seat, a named spectator, later the interpreter                                                                                                      |
+| `occurredIn`    | sender                     | _which application_ recorded/sent it: `shuffler`, `tabletop`, `spine`, later `interpreter`                                                                                    |
+| `visibility`    | sender                     | `public` — the only legal value in v0; see Decision 4                                                                                                                         |
+| `traceparent`   | sender                     | W3C trace context — **observability only**, expires with the trace (60d); the admin screen links through it to Honeycomb                                                      |
+| `schemaVersion` | sender                     | integer version of this `name`'s payload schema                                                                                                                               |
+| `payload`       | sender                     | the kind-specific body                                                                                                                                                        |
 
 **The split in one line:** uniqueness travels with the event (sender GUID);
 truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
@@ -91,22 +91,23 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
 
 ## Decision 2: The v0 event catalog — OPEN, firming up
 
-**JESS TODO: confirm this three-kind catalog is the right v0** (or name what's missing).
-
 - `table.created` — payload: table name, creator. Response/log carries the minted `tableId`.
 - `seat.taken` — payload: seat number (1–4), player name
 - `card.played` — from the Shuffler (Decision 3: **decided, game event**) —
   payload: `card: { scryfallId, instanceId }`, `face`, from which seat, zone hint
 
-Near-future, not v0: the Tabletop reporting the *physical* echo (`card.arrived`,
-scope visible) once it talks to the Spine — mostly ignored by interpretation because
+Near-future, not v0: **more Shuffler game events** — it deterministically knows
+more than it says (`card.picked_up`, and the public shadows: drew a card, mulliganed,
+shuffled) — cheap to add once `card.played` flows, since it's the same pipe. Also
+near-future: the Tabletop reporting the _physical_ echo (`card.arrived`)
+once it talks to the Spine — mostly ignored by interpretation because
 it's expected; **interesting precisely when it doesn't arrive**. Also not v0: card
 movement/tap, chat, interpretation events. Kinds arrive when their producers do.
 
 ## Decision 3: Game event vs. physical — DECIDED: (a) game event
 
 The Shuffler is a deterministic, not-interpreted app: when it plays a card it knows
-the meaning, so it says so — `card.played`, scope `game`. Physical events are
+the meaning, so it says so — `card.played`. Physical events are
 reserved for genuinely observed/ambiguous happenings (the Tabletop's world), and the
 physical echo of a game event is a separate, expected, low-drama event (see
 Decision 2). This seeds the log with ground-truth game events for the Interpreter's
@@ -121,7 +122,7 @@ never which card). So v0's enum is exactly `public`, and the pair/shadow mechani
 are deferred until a producer actually wants to log a private fact. Envelope
 future-proofing kept: when shadows arrive, a shadow references the `id` of the event
 it shadows; adding an enum value is an envelope version bump that old readers reject
-loudly. (Whether the Spine *ever* holds seat-private facts is a real future
+loudly. (Whether the Spine _ever_ holds seat-private facts is a real future
 decision, not assumed.)
 
 ## Decision 5: Versioning mechanics — DECIDED
@@ -139,24 +140,19 @@ subscription is where TS-side contract validation lives. (In v0's scaffolding th
 Shuffler POSTs to the Tabletop directly; the code carries `// JES-128` markers where
 validation will land.)
 
-## Decision 6 (new, from round 1): `name` + `scope` are separate fields — OPEN
+## Decision 6: `scope` — DECIDED: leave it off v0
 
-**JESS TODO: this one most wants your brain** — react to the scope enum and the two
-sub-questions at the end of this section.
+Round 1's insight stands: filtering wants a dimension that payload-schema naming
+doesn't give — _what the event affects / how it's perceived_ (affects the table;
+affects the game; visible; audible, conceptually including chat). But we don't know
+what the scopes actually are yet (one or many per event? where does
+`interpretation.*` sit?), so v0 ships **`name` only** — namespaced for humans
+(`card.played`, `seat.taken`), determining the payload schema.
 
-Round 1's insight: filtering wants a dimension that payload-schema naming doesn't
-give. You'd filter by *what the event affects / how it's perceived*: affects the
-table; affects the game; is visible; is audible (conceptually including chat).
-Proposal to react to:
-
-- `name` — determines the payload schema, namespaced for humans: `card.played`,
-  `card.moved`, `seat.taken`, `chat.said`
-- `scope` — one of `table` | `game` | `visible` | `audible` (bikeshed welcome:
-  is a chat message `audible`? is a sticky note `visible`?)
-
-Open sub-questions: is scope exactly one value or could an event carry several
-(a spoken "I attack" is audible *and* affects the game)? Does the Interpreter's
-output (`interpretation.*`) get its own scope or is it `game`?
+When real filtering needs teach us the scope values, adding the field is an
+envelope version bump — old readers reject it loudly, by design. Until then the
+Spine's projections and the admin screen can filter on `name` prefixes, which is
+plenty at three event kinds.
 
 ## Not decided here (future docs)
 
