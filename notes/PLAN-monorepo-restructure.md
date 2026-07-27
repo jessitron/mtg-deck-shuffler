@@ -1,5 +1,14 @@
 # PLAN: Monorepo restructure (Phase 0 of the Table Vision)
 
+> **DONE 2026-07-27** (commits `2e0e0c1`…`41db752`). Executed as written, with three
+> deviations worth knowing: `.env` turned out to be **tracked**, so it moved with
+> `git mv` rather than by hand; `package-lock.json` stayed at the **root**, where npm
+> workspaces wants it, which forced the Docker **build context to the repo root**
+> (`-f Dockerfile ../..`) instead of `apps/shuffler/`; and rather than rewrite every
+> path in `notes/`, the convention "Shuffler paths are relative to `apps/shuffler/`"
+> is stated once in `CLAUDE.md` and banner-noted in the feature-owner `files.md` docs.
+> Kept for the record; safe to delete.
+
 _Handoff plan, written 2026-07-27, for an agent executing this without the design
 conversation in context. Read `notes/DESIGN-the-table-vision.md` (the why) and the
 root `SEAMAP.md` (the fleet map) first. This plan moves the Shuffler into
