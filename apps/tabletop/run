@@ -1,0 +1,34 @@
+#!/bin/bash
+# Run the Tabletop with local telemetry. Mirrors apps/shuffler/run.
+#
+# Source order matters: .be (repo root, defines HONEYCOMB_API_KEY) must come
+# BEFORE .env, whose OTEL_EXPORTER_OTLP_HEADERS interpolates the key at source
+# time. Wrong order => telemetry silently 401s.
+
+port_override=$PORT
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo ../..)"
+for candidate in .be "$REPO_ROOT/.be"; do
+  if [ -f "$candidate" ]; then
+    source "$candidate"
+    break
+  fi
+done
+
+source .env
+
+APP_PORT=${port_override:-${PORT}}
+
+(
+  for _ in $(seq 1 120); do
+    if curl -s "http://localhost:$APP_PORT/health" >/dev/null 2>&1; then
+      echo "──────────────────────────────────────────────"
+      echo "✅ tabletop ready     http://localhost:$APP_PORT/"
+      echo "──────────────────────────────────────────────"
+      break
+    fi
+    sleep 0.5
+  done
+) &
+
+PORT=$APP_PORT npm start

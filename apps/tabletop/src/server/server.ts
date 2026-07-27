@@ -15,6 +15,29 @@ export function createServer() {
     res.json({ ok: true });
   });
 
+  // Where the browser should send its spans (decision: an OTel Collector, not
+  // a proxy endpoint here and not a key baked into the page).
+  // - BROWSER_OTLP_TRACES_URL: the collector's OTLP-http traces endpoint
+  //   (must allow CORS for this origin).
+  // - Local-only fallback: with ALLOW_BROWSER_DIRECT_HONEYCOMB=true (set in
+  //   apps/tabletop/.env, never in k8s), the page exports straight to
+  //   Honeycomb using the server's key — acceptable exposure for env `local`.
+  app.get("/otel-config.json", (_req, res) => {
+    const collectorUrl = process.env.BROWSER_OTLP_TRACES_URL;
+    if (collectorUrl) {
+      res.json({ tracesUrl: collectorUrl });
+      return;
+    }
+    if (process.env.ALLOW_BROWSER_DIRECT_HONEYCOMB === "true" && process.env.HONEYCOMB_API_KEY) {
+      res.json({
+        tracesUrl: "https://api.honeycomb.io/v1/traces",
+        headers: { "x-honeycomb-team": process.env.HONEYCOMB_API_KEY },
+      });
+      return;
+    }
+    res.json({ tracesUrl: null });
+  });
+
   // Static app (Vite build output)
   app.use(express.static(CLIENT_DIR));
 

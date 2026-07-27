@@ -1,0 +1,33 @@
+# A minimal local OpenTelemetry Collector for browser spans, mirroring what the
+# cluster runs in prod. Optional for local dev — without it, the tabletop
+# server's ALLOW_BROWSER_DIRECT_HONEYCOMB fallback (see .env) sends browser
+# spans straight to Honeycomb.
+#
+# Run it:
+#   docker run --rm -p 4318:4318 \
+#     -v $(pwd)/otel-collector-local.yaml:/etc/otelcol-contrib/config.yaml \
+#     -e HONEYCOMB_API_KEY \
+#     otel/opentelemetry-collector-contrib:latest
+# then in .env: export BROWSER_OTLP_TRACES_URL=http://localhost:4318/v1/traces
+#               (and unset ALLOW_BROWSER_DIRECT_HONEYCOMB)
+
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+        cors:
+          allowed_origins:
+            - "http://localhost:*"
+
+exporters:
+  otlphttp:
+    endpoint: https://api.honeycomb.io
+    headers:
+      x-honeycomb-team: ${env:HONEYCOMB_API_KEY}
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [otlphttp]
