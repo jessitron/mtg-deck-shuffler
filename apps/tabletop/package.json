@@ -1,0 +1,47 @@
+{
+  "name": "mtg-tabletop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Tabletop: a shared tldraw canvas where cards arrive from the Shuffler",
+  "author": "Jessica Kerr <jessitron@gmail.com>",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.server.json",
+    "clean": "rm -rf dist",
+    "start": "npm run build && node --import ./dist/server/tracing.js dist/server/server.js",
+    "start:built": "node --import ./dist/server/tracing.js dist/server/server.js",
+    "test": "vitest run",
+    "test:verify": "./verify.sh"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.79.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.221.0",
+    "@opentelemetry/resources": "^2.10.0",
+    "@opentelemetry/sdk-node": "^0.221.0",
+    "@opentelemetry/sdk-trace-web": "^2.10.0",
+    "@opentelemetry/semantic-conventions": "^1.43.0",
+    "@tldraw/sync": "5.2.5",
+    "@tldraw/sync-core": "5.2.5",
+    "express": "^4.22.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "tldraw": "5.2.5",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.2.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/ws": "^8.18.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.9.2",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
