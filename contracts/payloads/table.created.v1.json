@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/table.created.v1.json",
+  "title": "table.created payload, schemaVersion 1",
+  "description": "A table came into being. The Spine mints the tableId (it's on the envelope); the name here is a lookup alias, unique among active tables only.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The table's human name — the thing you say over Discord. A lookup alias, not an identity."
+    },
+    "creator": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display name of whoever created the table."
+    }
+  },
+  "required": ["name", "creator"],
+  "additionalProperties": false
+}

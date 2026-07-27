@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.played.v1.json",
+  "title": "card.played payload, schemaVersion 1",
+  "description": "A game event from the Shuffler: it deterministically knows a card was played, so it says so. Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Names and image URLs are derivable conveniences and do not belong here.",
+  "type": "object",
+  "properties": {
+    "card": {
+      "type": "object",
+      "properties": {
+        "scryfallId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+        },
+        "instanceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Instance: this particular physical-ish card, minted per game at game start. Opaque — never the Shuffler's internal gameCardIndex, which is a decodable secret."
+        }
+      },
+      "required": ["scryfallId", "instanceId"],
+      "additionalProperties": false
+    },
+    "face": {
+      "type": "string",
+      "enum": ["front", "back"],
+      "description": "Face is card state, not identity — but MDFCs are played as a chosen face, so it rides along."
+    },
+    "seat": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Which seat played it."
+    },
+    "zoneHint": {
+      "type": "string",
+      "description": "Where the card is headed on the table (e.g. stack, battlefield, graveyard). A hint — geography, not rules."
+    }
+  },
+  "required": ["card", "face", "seat", "zoneHint"],
+  "additionalProperties": false
+}

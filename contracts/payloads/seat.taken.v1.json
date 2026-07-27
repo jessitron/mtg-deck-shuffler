@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/seat.taken.v1.json",
+  "title": "seat.taken payload, schemaVersion 1",
+  "description": "Someone sat down. Player names are not unique; seat identity is its own thing (the seatId). Spectators never take a seat — they need nothing.",
+  "type": "object",
+  "properties": {
+    "seatId": {
+      "type": "string",
+      "minLength": 8,
+      "description": "A short GUID identifying this seat-taking. Seat identity is distinct from the player's display name."
+    },
+    "seat": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Seat number at the table, 1-4."
+    },
+    "playerName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display only. Not unique, not an identity."
+    }
+  },
+  "required": ["seatId", "seat", "playerName"],
+  "additionalProperties": false
+}

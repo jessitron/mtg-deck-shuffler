@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/envelope.v1.json",
+  "title": "Spine Event Envelope",
+  "description": "The fleet's published language: the envelope every event wears, envelope version 1. Senders mint `id`; the Spine assigns `seq` and `acceptedAt` on append (they are absent at submission, present in the log). See contracts/README.md and notes/DESIGN-event-contract-v0.md.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Sender-minted GUID. Idempotency key: the Spine elides a retried duplicate."
+    },
+    "tableId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Which table's log. A GUID the Spine mints at table creation; the table *name* is only a lookup alias and lives in the table.created payload."
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Spine-assigned on append: authoritative order within the log. Senders must not set this."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z]+(\\.[a-z_]+)+$",
+      "description": "The event's kind, namespaced (e.g. card.played). Determines which payload schema applies."
+    },
+    "acceptedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Spine-assigned on append: the Spine's clock, when the log accepted it. Senders must not set this."
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Optional. The initiator app's clock, when physics preceded ingestion."
+    },
+    "initiator": {
+      "type": "string",
+      "description": "Who made this happen: a seat, a named spectator, later the interpreter."
+    },
+    "occurredIn": {
+      "type": "string",
+      "enum": ["shuffler", "tabletop", "spine"],
+      "description": "Which application recorded/sent it. `interpreter` joins this enum later (an envelope version bump)."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["public"],
+      "description": "public is the only legal value in v0. Adding an enum value is an envelope version bump; old readers reject it loudly."
+    },
+    "traceparent": {
+      "type": "string",
+      "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$",
+      "description": "W3C trace context. Observability ONLY — expires with the trace (~60d); durable causality uses event id references, never trace ids."
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Integer version of this `name`'s payload schema."
+    },
+    "payload": {
+      "type": "object",
+      "description": "The kind-specific body, validated against payloads/<name>.v<schemaVersion>.json."
+    }
+  },
+  "required": [
+    "id",
+    "tableId",
+    "name",
+    "initiator",
+    "occurredIn",
+    "visibility",
+    "traceparent",
+    "schemaVersion",
+    "payload"
+  ],
+  "additionalProperties": false
+}
