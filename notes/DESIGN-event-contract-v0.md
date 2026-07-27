@@ -53,8 +53,10 @@ How a card is serialized in any event payload, ever:
   sacrificed → graveyard, and conservation of cards is checkable: if the table ever
   holds more or fewer Forests than the log accounts for, each instance's event
   biography shows exactly where. (The Shuffler's internal `gameCardIndex` is the
-  embryo of this — positional, process-local; the contract needs nominal and
-  durable.)
+  embryo of this — it *is* static for the life of a game, but it's assigned after
+  sorting the deck alphabetically (`GameState.newGame`), so an index is the card's
+  alphabetical rank in a known decklist: **a decodable secret**. It must never cross
+  the Shuffler's boundary; the contract gets an opaque GUID instead.)
 - Minting scope, decided-unless-vetoed: **per game**, at game start. "Same physical
   card across game nights" (persisting instance ids into deck files) is a noted
   future upgrade, fragile today because deck files are regenerated from
