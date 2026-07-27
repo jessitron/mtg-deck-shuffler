@@ -60,9 +60,10 @@ Architecture notes:
 - The Spine is the **core domain**; its event schema is a **published language** that
   the other contexts translate themselves into. The event contract is language-neutral
   (JSON Schema or similar), versioned, validated on both sides — not shared TS types.
-- The Spine will use the **Journeys** architecture pattern (Avdi is
-  inventing it). _Not yet documented here — Claude needs the tour before Spine internals
-  get designed._
+- The **Interpreter** takes the **Journeys** architecture pattern (Avdi is
+  inventing it) as its architectural direction. The tour has arrived: README, guide,
+  ADRs, and glossary live at `services/spine/interpreter/docs/journeys/`. Journeys
+  implement an actor model, a natural fit for modeling cards on the table as actors.
 - The interpreter is an **anti-corruption layer that happens to be an AI**: physical
   events in, game events out. Its boundary is sacred from day one even while it lives
   inside the Spine app, so extracting it later is a deployment decision, not a design
@@ -208,11 +209,14 @@ Discord anyway, I'll tell you the table name."
 
 - Ruby service. Owns table identity, seats, membership, the event log, projections
   (current reading, public projection, evals), and — for now — the interpreter.
-- Built on the **Journeys** pattern (to be documented once Claude gets the tour).
+- Plain domain code for tables, seats, and the log; the Journeys pattern belongs to
+  the Interpreter (below).
 - The event schema is versioned and language-neutral; both TS apps validate against it.
 
 ### Interpreter
 
+- Architectural direction: the **Journeys** pattern. Docs (README, guide, ADRs,
+  glossary) at `services/spine/interpreter/docs/journeys/`.
 - Consumes physical + voice + chat events; produces interpretation events with
   provenance, causality, confidence, and commentary.
 - Asks questions in chat when interpretation fails; corrections supersede.

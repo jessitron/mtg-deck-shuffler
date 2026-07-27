@@ -61,7 +61,8 @@ A change is home when:
 - **The Spine's language is the published language**; the event contract is
   language-neutral (JSON Schema), versioned, validated on both sides.
 - **Monorepo, polyglot**: TypeScript owns pixels (Shuffler, Tabletop), Ruby owns
-  meaning (Spine, via the Journeys pattern — tour pending).
+  meaning (Spine; the **Journeys** pattern is the architectural direction for its
+  Interpreter component — docs at `services/spine/interpreter/docs/journeys/`).
 - **Don't carry what you can listen to**: Discord keeps the voice call; we transcribe.
 - **Observability is mandatory.** Every component sends telemetry to Honeycomb with
   OpenTelemetry and propagates trace context; all interesting info goes on spans.
