@@ -102,6 +102,14 @@ Table (Spine): the shared thing itself — 1–4 hands plus a tabletop plus an e
 
 Seat: a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat shows its public shadow (card counts); only the player sees the cards.
 
+Seat ID (Shuffler → contract): a short GUID minted by the Shuffler at prep/join time — the seat's identity, because player names are not unique. Travels as `initiator.seatId` in `card.played`; recorded on the Prep and the Game (becomes a Spine-owned sequence later).
+
+Solo Mode (Shuffler): the default — no table name. Play/Discard copy the card image to the clipboard for Mural-style play. Unchanged by table mode.
+
+Table Mode / At a Table (Shuffler): a game whose Prep supplied a table name + player name. Play and Discard send the card to the Tabletop instead of the clipboard, **send-then-commit**: the tabletop gets the card first; a failed send blocks the action and the card stays in hand. The game page's "at table _name_" link is the spectator-share URL.
+
+Discard (Shuffler): identical to Play except the verb — the card lands in the Table location (the graveyard is table geography, not Shuffler state); at a table it is sent with zone hint "graveyard".
+
 Spectator: someone at a Table without a Seat. Sees the public projection of the event log: what's happening, the commentary, hand counts but never hands. In some modes, may comment in chat.
 
 Event Log: the append-only record of everything that happened at a Table. One per table. Never rewritten — see Supersession.

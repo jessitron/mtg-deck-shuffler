@@ -17,6 +17,25 @@ So, given a deck in archidekt.com, this web app will
 
 ... that's enough for now.
 
+## Modes
+
+- **Solo (default)** — no table name. Play/Discard copy the card image to the
+  clipboard; play in Mural or wherever. The original workflow, unchanged.
+- **At a table** — enter a table name + player name on the Prep screen. Play and
+  Discard send the card to the Tabletop (`apps/tabletop`, `/t/:tableName`) instead
+  of the clipboard — **send-then-commit**: the tabletop gets the card first, and a
+  failed send blocks the action (the card stays in hand). The game page shows an
+  "at table _name_" link — share that URL for spectators.
+- **Spectating** — open the table URL with no Shuffler game at all.
+
+Env vars: `TABLETOP_URL` (server-to-server card sends; default `http://localhost:5180`,
+in-cluster `http://mtg-tabletop-service`) and `TABLETOP_PUBLIC_URL` (the browser-facing
+"at table" link; default `https://table.jessitron.honeydemo.io`).
+
+SCAFFOLDING: the Shuffler talks straight to the Tabletop today
+(`src/port-tabletop/`). In the Spine-shaped future it emits `card.played` to the
+Spine's event log and the Tabletop subscribes — the port stays, the gateway changes.
+
 ## Running
 
 The Shuffler is one ship in a monorepo (see the [fleet README](../../README.md)).

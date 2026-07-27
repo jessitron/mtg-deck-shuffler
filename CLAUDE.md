@@ -145,6 +145,28 @@ Requires `apps/shuffler/.env` for OpenTelemetry config. SQLite persistence by de
 
 Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
 
+## Table Mode (Tabletop integration, JES-127)
+
+Games can join a table on the Tabletop (`apps/tabletop`). Prep screen takes optional
+table name + player name; the Shuffler mints a short-GUID `seatId` at join and records
+all three on BOTH `PersistedGamePrep` and `PersistedGameState` (optional fields, no
+version bumps). `/restart-game` carries them forward.
+
+- **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`
+  are **send-then-commit** in table mode: send to the tabletop FIRST via
+  `src/port-tabletop/` (`HttpTabletopGateway`; `FakeTabletopGateway` for tests); only on
+  success mutate + persist. Failure → 502 error modal, card stays in hand. Solo mode
+  (no table): clipboard flow, untouched. Zone hints: land→battlefield, nonland→stack,
+  discard→graveyard.
+- **Env**: `TABLETOP_URL` (server-to-server sends; default `http://localhost:5180`,
+  prod `http://mtg-tabletop-service`), `TABLETOP_PUBLIC_URL` (browser "at table" link;
+  default `https://table.jessitron.honeydemo.io`).
+- **Identity**: each GameCard gets a `cardInstanceId` GUID (minted in `newGame`,
+  mint-on-load for old saves). `gameCardIndex` NEVER crosses the Shuffler's boundary
+  (decodable secret — see `src/port-tabletop/types.ts`, JES-128).
+- **Two-app verification**: `test/verification/verify-tabletop-integration.spec.ts`
+  spawns the tabletop from `apps/tabletop/dist` (build it first) on port 5180.
+
 ## Data Sources & Adapters
 
 - **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (precons with release dates)
