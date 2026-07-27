@@ -89,7 +89,7 @@ same individual the game events do.
 truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
 `acceptedAt`).
 
-## Decision 2: The v0 event catalog — OPEN, firming up
+## Decision 2: The v0 event catalog — DECIDED (three kinds)
 
 - `table.created` — payload: table name, creator. Response/log carries the minted `tableId`.
 - `seat.taken` — payload: seat number (1–4), player name
