@@ -43,7 +43,8 @@ npm run build
 # Build and push Docker image
 echo ""
 echo "🐳 Building Docker image..."
-docker build --platform=linux/arm64 -t mtg-deck-shuffler:${IMAGE_TAG} .
+# Build context is the repo root — the npm-workspaces lockfile lives there. See Dockerfile.
+docker build --platform=linux/arm64 -t mtg-deck-shuffler:${IMAGE_TAG} -f Dockerfile ../..
 docker tag mtg-deck-shuffler:${IMAGE_TAG} ${FULL_IMAGE_NAME}
 docker tag mtg-deck-shuffler:${IMAGE_TAG} ${LATEST_IMAGE_NAME}
 

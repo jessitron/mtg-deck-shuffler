@@ -1,0 +1,14 @@
+# The Docker build context is the repo root (see apps/shuffler/Dockerfile).
+# Keep the context small: everything the image needs is COPYed explicitly.
+node_modules
+**/node_modules
+dist
+**/dist
+test-results
+**/test-results
+*.db
+*.db.old
+.git
+.claude
+notes
+tmp

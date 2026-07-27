@@ -16,7 +16,8 @@ echo "Base image(s) in Dockerfile:"
 grep -nE "^FROM" Dockerfile
 
 echo "Building $IMAGE_TAG (this compiles TS + native better-sqlite3)..."
-docker build -t "$IMAGE_TAG" .
+# Build context is the repo root — the npm-workspaces lockfile lives there. See Dockerfile.
+docker build -t "$IMAGE_TAG" -f Dockerfile ../..
 
 docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
 echo "Running the container (in-memory persistence, no real OTLP needed)..."
