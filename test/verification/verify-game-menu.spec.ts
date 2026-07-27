@@ -66,7 +66,10 @@ test.describe('Game Hamburger Menu', () => {
     // The menu houses the relocated controls.
     await expect(panel.locator('button:has-text("Action History")')).toBeVisible();
     await expect(panel.locator('button:has-text("Restart Game")')).toBeVisible();
-    await expect(panel.locator('button:has-text("Choose Another Deck")')).toBeVisible();
+    // "Choose Another Deck" is an <a>, not a <button> — it navigates away rather
+    // than acting on the game. Match on the text, not the element, since which
+    // one it is doesn't matter to the player.
+    await expect(panel.getByText('Choose Another Deck')).toBeVisible();
     // The debug block (.game-id et al.) is now gated behind developer mode,
     // so it is hidden here. See verify-developer-mode.spec.ts.
     await expect(panel.locator('.game-id')).not.toBeVisible();
