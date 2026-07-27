@@ -232,12 +232,22 @@ Feature owners are agent skills that maintain deep knowledge about specific feat
 
 See `notes/features/HOW-TO-CREATE-A-FEATURE-OWNER.md` for creating new ones.
 
+## Capability & Invariant Owners
+
+A second, complementary kind of owner: standing guardians for a **capability** that must keep
+working or an **invariant** that must stay true, fleet-wide rather than per-feature. These are plain
+markdown knowledge bases (no skills) in **`owners/`**, one file each, indexed in
+**`owners/INDEX.md`** with a one-line "consult me when…" trigger. Scan that index when planning any
+change and open the files whose triggers match. Created with the
+`seamapping:create-capability-owner` skill.
+
 ## Task Implementation Process
 
 For each task, follow this workflow:
 
 1. **Research**: Look at the task and do any research needed
 2. **Consult feature owners**: List directories in `notes/features/*/`. For each feature owner found, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
+2b. **Consult capability/invariant owners**: Read `owners/INDEX.md` (one line each). For every "consult me when…" trigger the task could plausibly touch, read that owner's file and honor its invariants and watch points. These have no skills — they're documents.
 3. **Clarify**: Ask questions one at a time if needed
 4. **Plan**: Design the implementation approach
 5. **Review with feature owners**: For each feature owner that flagged potential interactions in step 2, invoke its `-review` skill with your plan. Adjust the plan based on their feedback.
