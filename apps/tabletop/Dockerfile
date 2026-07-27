@@ -17,6 +17,14 @@ WORKDIR /repo/apps/tabletop
 COPY apps/tabletop/tsconfig.json apps/tabletop/tsconfig.server.json apps/tabletop/vite.config.ts apps/tabletop/index.html ./
 COPY apps/tabletop/src/ ./src/
 
+# The tldraw license key must be present AT BUILD TIME: vite bakes it into the
+# client bundle. Without it the deployed canvas blanks out 5s after load (see
+# src/client/TablePage.tsx). Passed by deploy.sh via --build-arg. It is not a
+# secret — domain-bound and shipped to browsers by design — so a build arg,
+# rather than a mounted secret, is the right shape.
+ARG TLDRAW_LICENSE_KEY=""
+ENV TLDRAW_LICENSE_KEY=$TLDRAW_LICENSE_KEY
+
 RUN npm run build
 # Workspace-local node_modules holds packages whose versions differ from the
 # hoisted root ones (e.g. this app's newer OTel line). Make sure it exists so

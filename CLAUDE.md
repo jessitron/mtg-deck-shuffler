@@ -27,7 +27,10 @@ This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
   places cards from the Shuffler. Run with `./run` from `apps/tabletop/` (port 5180);
   tests `npx vitest run`; Playwright via `./verify.sh`; deploy with `./deploy.sh`
   (table.jessitron.honeydemo.io). See `apps/tabletop/README.md` for Modes and
-  SCAFFOLDING callouts.
+  SCAFFOLDING callouts. **Deploying needs `TLDRAW_LICENSE_KEY` in the repo-root
+  `.be`** — tldraw ≥ 4 blanks the canvas 5s after load on any HTTPS non-loopback
+  host, and localhost can't reproduce it. See README → Licensing and
+  `notes/AGENT-NOTES.md`.
 - `services/spine/` — the Spine: Ruby on Rails 8 + SQLite. Tables, seats, one
   append-only event log per table; ingestion validates against `contracts/` and
   fails loudly. Admin screen (a table's log, with Honeycomb trace links) at

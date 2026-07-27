@@ -4,6 +4,9 @@ The shared canvas where play happens — Mural's freedom with Magic's physics. A
 [tldraw](https://tldraw.dev) board (watermark worn happily) where cards arrive from the
 Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed.
 
+> **tldraw needs a license key in prod.** Not just for the watermark — without one the
+> canvas goes **blank 5 seconds after load**. See [Licensing](#licensing) before deploying.
+
 ## Modes (fleet vocabulary — how the Shuffler relates to a table)
 
 - **Solo (default)** — no table name. The Shuffler's Play/Discard copy the card image
@@ -75,6 +78,36 @@ OTel Collector (`k8s/collector.yaml`) — no API key in the page, no CORS drama.
 Shuffler POSTs in-cluster via `TABLETOP_URL=http://mtg-tabletop-service`.
 
 One replica, `Recreate` strategy: the rooms are in-memory, a redeploy wipes the board.
+
+## Licensing
+
+tldraw 3.x let an unlicensed production deployment run with a watermark. **tldraw 4.0
+changed that**: `LicenseProvider` now hides the editor entirely 5 seconds after load
+when the license state is `unlicensed-production` — replacing the canvas with a hidden
+`<div data-testid="tl-license-expired">`, i.e. a blank white page. Reload and you get
+5 more seconds. (This repo is on 5.2.5.)
+
+"Production" is decided **by URL alone**: any HTTPS request to a non-loopback hostname.
+Two consequences worth internalizing:
+
+- **localhost is always exempt.** `./run` and `./verify.sh` can never reproduce this,
+  no matter how thorough the Playwright spec. Local green tells you nothing about it.
+- **A key is domain-bound.** A key that doesn't cover `table.jessitron.honeydemo.io`
+  fails exactly like no key at all.
+
+So the key must be present, and the only place to verify it is the deployed host:
+
+- Put `export TLDRAW_LICENSE_KEY=...` in the **repo-root `.be`** — *not* in
+  `apps/tabletop/.env`, which is committed to a public repo. (The key itself isn't a
+  secret: it's domain-bound and shipped to browsers by design. It's still Jess's
+  license, so it stays out of git.)
+- `vite.config.ts` bakes it into the client bundle via `define`; `Dockerfile` takes it
+  as a build ARG; `deploy.sh` passes `--build-arg` and **refuses to deploy without it**
+  (override with `TLDRAW_LICENSE_KEY=none ./deploy.sh` to knowingly ship a blank table).
+- `node test/verification/check-deployed-canvas.mjs [baseUrl]` loads a table, waits out
+  the 5s gate, and fails if the canvas vanished. `deploy.sh` runs it after rollout.
+
+Free hobby license (non-commercial): <https://tldraw.dev/get-a-license/hobby>
 
 ## Style
 

@@ -73,6 +73,39 @@ _2026-07-27._
 
 _2026-07-27, Tabletop v0._
 
+## A blank table in prod is the tldraw license gate, not your code
+
+Symptom: `https://table.jessitron.honeydemo.io/t/whatever` loads, works for a moment,
+then goes blank. Reload and it works again for a moment. It looks like a sync
+disconnect, a React crash, or something you just changed. It is none of those.
+
+`@tldraw/editor`'s `LicenseProvider` hides the editor 5 seconds after load when the
+license state is `unlicensed-production`, swapping the canvas for a hidden
+`<div data-testid="tl-license-expired">`. `LICENSE_TIMEOUT = 5000`. No exception is
+thrown, nothing appears in `pageerror`, and the surrounding `tl-container` div stays in
+the DOM — so a smoke test that checks "did the page render" passes. **Grep the DOM for
+`tl-license-expired` first.** That single check would have saved an afternoon.
+
+Two facts that make this especially easy to chase in the wrong direction:
+
+- **"Production" is decided by URL alone** — any HTTPS non-loopback hostname. localhost
+  is *always* "development", so `./run` and `./verify.sh` are **structurally incapable**
+  of reproducing it. Local green is not evidence. The only place to observe it is the
+  deployed host, which is why `test/verification/check-deployed-canvas.mjs` takes a URL
+  and `deploy.sh` runs it after rollout.
+- **The timing invites a false cause.** 5 seconds is about how long it takes to notice
+  the page and drag a card, so it reliably *feels* caused by whatever you just did.
+  Ours was reported as "when I move the card the screen goes blank"; a timestamped DOM
+  poll showed the canvas disappearing before anything was drawn or moved.
+
+tldraw 3.x watermarked unlicensed production and kept working; **4.0 introduced the
+gate**, so the "watermark worn happily" plan predates the version we're on. Prod needs
+a real key (domain-bound — a key for the wrong domain fails identically). Full wiring in
+`apps/tabletop/README.md` → Licensing; the key lives in the repo-root `.be`, never in
+the committed `apps/tabletop/.env`.
+
+_2026-07-27._
+
 ## Sampling health checks: the needle has to be lowercase too
 
 `src/telemetry-sampler.ts` samples background chatter (health checks, static assets) down

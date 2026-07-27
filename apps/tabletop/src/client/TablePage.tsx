@@ -11,6 +11,20 @@ import { useCardArrivalSpans } from "./useCardArrivalSpans";
  * The "made with tldraw" watermark stays, worn happily.
  */
 
+// tldraw >= 4 HIDES THE WHOLE EDITOR 5 SECONDS AFTER LOAD when it decides it's
+// an unlicensed production deployment — the canvas is replaced by a hidden
+// <div data-testid="tl-license-expired">, i.e. a blank white page. "Production"
+// is decided by URL alone: any HTTPS non-loopback hostname. So localhost is
+// always fine and table.jessitron.honeydemo.io always needs a key. See
+// @tldraw/editor/src/lib/license/LicenseProvider.tsx.
+//
+// Baked into the bundle at build time from the shell's TLDRAW_LICENSE_KEY (see
+// vite.config.ts `define`). Empty string => undefined, which is what tldraw
+// wants when there is no key. The key is domain-bound and ships to browsers by
+// design, so it is not a secret — but it still lives in the repo-root .be
+// (untracked), NOT in apps/tabletop/.env, which is committed to a public repo.
+const licenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
+
 // v0 asset store: no upload service, so pasted/dropped images are inlined as
 // data URLs (they sync as part of the document). Server-injected card shapes
 // carry their own Scryfall URLs and never touch this path.
@@ -62,7 +76,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
       {store.status === "loading" ? (
         <div style={centered}>Joining table &ldquo;{tableSlug}&rdquo;…</div>
       ) : (
-        <Tldraw store={store.store} deepLinks />
+        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} />
       )}
     </div>
   );
