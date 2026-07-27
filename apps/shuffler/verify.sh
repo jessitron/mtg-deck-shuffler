@@ -23,9 +23,15 @@ npm run build
 # Source .be BEFORE .env: .env's OTEL_EXPORTER_OTLP_HEADERS interpolates
 # $HONEYCOMB_API_KEY at source time, and that key is defined in .be. Wrong order
 # (or no .be) => telemetry silently 401s ("unknown API key").
-if [ -f .be ]; then
-    source .be
-fi
+# .be lives at the repo root (it is sourced by a shell hook on cd into the repo),
+# while this script runs from apps/shuffler/ — so look in both places.
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo ..)"
+for candidate in .be "$REPO_ROOT/.be"; do
+    if [ -f "$candidate" ]; then
+        source "$candidate"
+        break
+    fi
+done
 if [ -f .env ]; then
     source .env
 fi
