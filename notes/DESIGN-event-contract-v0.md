@@ -57,10 +57,10 @@ How a card is serialized in any event payload, ever:
   sorting the deck alphabetically (`GameState.newGame`), so an index is the card's
   alphabetical rank in a known decklist: **a decodable secret**. It must never cross
   the Shuffler's boundary; the contract gets an opaque GUID instead.)
-- Minting scope, decided-unless-vetoed: **per game**, at game start. "Same physical
-  card across game nights" (persisting instance ids into deck files) is a noted
-  future upgrade, fragile today because deck files are regenerated from
-  Archidekt/MTGJSON.
+- Minting scope — **DECIDED: per game**, at game start (Jess confirmed "this
+  game"). "Same physical card across game nights" (persisting instance ids into
+  deck files) is a noted future upgrade, fragile today because deck files are
+  regenerated from Archidekt/MTGJSON.
 
 Contract shape: `card: { scryfallId, instanceId }` + sibling `face` where the event
 needs it. Downstream consequence: the Tabletop should stamp `instanceId` into each
@@ -72,7 +72,7 @@ same individual the game events do.
 | field | who writes it | what it's for |
 |---|---|---|
 | `id` | **sender** mints a GUID | idempotency — the Spine elides a retried duplicate |
-| `tableId` | sender (after learning it) | which table's log. A GUID the **Spine mints at table creation** — the table *name* is a lookup alias, unique only among active tables, living in the `table.created` payload. **PROPOSED, needs your yes** |
+| `tableId` | sender (after learning it) | which table's log. A GUID the **Spine mints at table creation** — the table *name* is a lookup alias, unique only among active tables, living in the `table.created` payload. **JESS TODO: bless or veto this** |
 | `seq` | **Spine**, on append | authoritative order within the log; senders cannot claim positions |
 | `name` | sender | the event's kind, namespaced (`card.played`); determines the payload schema. See Decision 6 |
 | `scope` | sender | what the event affects / how it's perceived — see Decision 6, OPEN |
@@ -90,6 +90,8 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
 `acceptedAt`).
 
 ## Decision 2: The v0 event catalog — OPEN, firming up
+
+**JESS TODO: confirm this three-kind catalog is the right v0** (or name what's missing).
 
 - `table.created` — payload: table name, creator. Response/log carries the minted `tableId`.
 - `seat.taken` — payload: seat number (1–4), player name
@@ -138,6 +140,9 @@ Shuffler POSTs to the Tabletop directly; the code carries `// JES-128` markers w
 validation will land.)
 
 ## Decision 6 (new, from round 1): `name` + `scope` are separate fields — OPEN
+
+**JESS TODO: this one most wants your brain** — react to the scope enum and the two
+sub-questions at the end of this section.
 
 Round 1's insight: filtering wants a dimension that payload-schema naming doesn't
 give. You'd filter by *what the event affects / how it's perceived*: affects the
