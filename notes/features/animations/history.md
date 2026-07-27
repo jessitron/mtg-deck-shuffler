@@ -56,7 +56,7 @@
 > The surviving body-anchored swap-surviving examples are `body.game-menu-open` and
 > `body.dev-mode`. The two sub-sections below are kept as historical record.
 
-(Formerly "Mulligan Advisor chat drawer" — the chat agent is the **Trainer**; the Advisor is the deterministic recommender function.)
+(Formerly "Mulligan Advisor chat drawer" — the chat agent was the **Trainer**; the Advisor was the deterministic recommender function. Both are gone as of 2026-07-26, and the vocabulary has been dropped from the glossary — it belongs to the future recommendation service's bounded context, not this app's.)
 
 - **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Trainer, opening with a **0.25s CSS transition (dev mode)**.
 - **Layout (final shape):** the drawer is a **real flex sibling** of the playmat inside a `.game-layout` flex row (`formatGamePageHtmlPage`). Opening animates the drawer's **width / `flex-basis` from 0 to 380px**; the playmat (`.page-container`, `flex: 0 1 auto`, `min-width: 0`) shrinks to make room and stays centered via `margin: 0 auto`. An inner `.advisor-chat-inner` holds a fixed 380px width so the content doesn't reflow while the outer width animates. (An earlier cut used a `position: fixed` `translateX(100%)` off-canvas overlay with a `margin-right` push on `#game-container` and `body.dev-mode { overflow-x: hidden }` to suppress the resulting horizontal scrollbar — all replaced by the flex-sibling approach, which needs no overflow hack.)
@@ -80,10 +80,28 @@
 - `hand-components.ts` renders a Mulligan button (`.mulligan-row > button.mulligan-button`) as a sibling above `#hand-cards` during the hand-acceptance stage. It does not alter `.card-container`, hand-drop-zones, or card markup, so the drag-and-drop animation-class cleanup in `game.js` is untouched. `game.css` gained `.mulligan-row`/`.mulligan-button` layout rules only (no keyframes/transitions).
 - `startGame()` now auto-draws seven cards, so the first game render shows a full hand (no animation involved — it's the initial render).
 
-### Mulligan Advisor (dev-mode fragment, no animation)
+### Mulligan Advisor (dev-mode fragment, no animation) — REMOVED
 
-- **`1034189`** - `hand-components.ts` now renders a `<div class="mulligan-recommendation">` sibling next to the mulligan button during the hand-acceptance stage (`formatMulliganRecommendationHtmlFragment`). It is **static, server-rendered, read-only text — no keyframes, transitions, or client JS**, so it touches none of the animation machinery (no `WhatHappened` fields, no `game.js` class cleanup).
-- `game.css` gained `.mulligan-recommendation` rules gated by `body.dev-mode` (default `display:none`), exactly mirroring the `.menu-debug` developer-mode pattern. Because the gate lives on `body` (never HTMX-swapped) and the fragment re-renders server-side on every game-state swap, it survives swaps with **no `afterSwap` handling** — a third clean example of the "anchor swap-surviving state on `body`" principle.
+> **Removed 2026-07-26**, along with the rest of the Advisor. `src/mulligan/` (the
+> `recommendMulligan` heuristic) and its unit test are gone;
+> `formatMulliganRecommendationHtmlFragment` and its call site are gone from
+> `hand-components.ts`; every `.mulligan-recommendation*` rule is gone from `game.css`
+> (it sat between `.menu-debug` and `.exit-dev-mode`). Nothing animation-related was
+> touched — the fragment never had keyframes, transitions, or client JS.
+>
+> The future hand-recommender is an external service behind a port plus an in-app
+> rating/evals UI, so the in-process heuristic was a different shape, not a seed of it.
+>
+> **The mulligan game mechanic is untouched** — `.mulligan-row`/`.mulligan-button`,
+> `GameState.mulligan()`, and the library-shuffle animation it drives via
+> `WhatHappened.shuffling` all remain (see "Mulligan / Opening Hand" above).
+>
+> With this and the Trainer chat drawer gone, the surviving body-anchored
+> swap-surviving examples are back to two: `body.game-menu-open` and `body.dev-mode`.
+> The sub-sections below are kept as historical record.
+
+- **`1034189`** - `hand-components.ts` rendered a `<div class="mulligan-recommendation">` sibling next to the mulligan button during the hand-acceptance stage (`formatMulliganRecommendationHtmlFragment`). It was **static, server-rendered, read-only text — no keyframes, transitions, or client JS**, so it touched none of the animation machinery (no `WhatHappened` fields, no `game.js` class cleanup).
+- `game.css` gained `.mulligan-recommendation` rules gated by `body.dev-mode` (default `display:none`), exactly mirroring the `.menu-debug` developer-mode pattern. Because the gate lived on `body` (never HTMX-swapped) and the fragment re-rendered server-side on every game-state swap, it survived swaps with **no `afterSwap` handling** — at the time, a third clean example of the "anchor swap-surviving state on `body`" principle.
 
 ## Design Decisions
 

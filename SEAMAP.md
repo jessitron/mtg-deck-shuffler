@@ -6,14 +6,14 @@ Shuffle up and play any deck. The app manages the deck; you adjudicate the game;
 
 ## The Mountains
 
-Three directions, each with a next peak. Currently sailing toward **The Trainer**.
+Three directions, each with a next peak. Currently sailing toward **Good play experience**.
 
-1. **Good play experience** — the table feels real and fun to play on.
+1. **Good play experience** ← _active_ — the table feels real and fun to play on.
    _Next peak: table fidelity — animations of cards moving, library on the right, discard/exile tracking, playmats, sleeves._
 2. **Multiplayer-aware** — more than one person shares the game.
    _Next peak: spectator mode (watch a game without touching its state)._
-3. **The Trainer** ← _active_ — the AI learns, helps you learn MTG, and helps the code learn.
-   _Next peak: a mulligan advisor with real heuristics, backed by the AgentCore Trainer agent; closing the loop so you can ask the Trainer for improvements and get a PR back to this repo._
+3. **Hand recommendations & evals** — the app shows a recommendation for your opening hand, and turns your reaction to it into evals.
+   _Not started. The recommender is a separate service (heuristics plus an LLM call) reached through a port — never hosted here. This app's part is to show a recommendation, let you rate it and say what would be better, and feed that to a database of evals._
 
 ## Safe Harbor
 
@@ -35,7 +35,6 @@ A change is home when:
 - Tests are green and cover the domain logic.
 - Clicking through the app, the change does what it should — and it's pleasant enough that you actually do it.
 - Honeycomb traces show what happened in a session, so you can answer "what did the app do?" without ad-hoc logging. (Traces come from your own clicking — there aren't enough users to generate them otherwise.)
-- The Trainer closes the loop on "helps the code learn": you can ask it for improvements and get a PR back to this repo.
 
 ## Enabling Constraints
 

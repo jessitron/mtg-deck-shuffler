@@ -115,11 +115,18 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
   - Tests: `test/cardImageUrl.test.ts` (stored vs fallback vs back), `test/scryfallCardImages.test.ts` (pure mapper), `test/enrichDeckWithImages.test.ts` (enrichment + fake). Verified against live Scryfall: Arcane Signet `normal` now 200 (was 404), DFC front+back both 200.
 - **`b825edc`** - Send `User-Agent`+`Accept` headers to Scryfall (it now 400s requests without them).
 
-## Mulligan Advisor — first consumer of cardTypes-as-land-signal
+## Mulligan Advisor — first consumer of cardTypes-as-land-signal — REMOVED
+
+> **Removed 2026-07-26.** `src/mulligan/recommendMulligan.ts` is gone, so `cardTypes`
+> is back to **one** silent dependent on being the full union: library-search grouping.
+> Watch point #1 still stands — a future "is this hand worth keeping?" feature should
+> read canonical data from MTGJSON/Scryfall rather than re-storing per-face text — but
+> that feature will now live in an external recommendation service, not in this repo.
+> Kept below as historical record.
 
 - **`1034189`** - Add Mulligan Advisor (Phase 1): land-count recommendation (dev mode)
-  - New `src/mulligan/recommendMulligan.ts` is the long-anticipated "is this hand worth keeping?" feature (referenced in the `f76b49c` cardTypes simplification and watch point #1). As predicted, it does **not** re-store per-face card text — it reads `cardTypes`, the pre-unioned set of all faces' types, via `isLand(card) = card.cardTypes.includes("Land")`.
-  - Consequence for two-faced cards: an MDFC whose union includes `"Land"` is counted as a land with no special-casing. `cardTypes` now has **two** silent dependents on being the full union (library-search grouping + mulligan land counts). No `CardDefinition`/adapter/persistence changes.
+  - `src/mulligan/recommendMulligan.ts` was the long-anticipated "is this hand worth keeping?" feature (referenced in the `f76b49c` cardTypes simplification and watch point #1). As predicted, it did **not** re-store per-face card text — it read `cardTypes`, the pre-unioned set of all faces' types, via `isLand(card) = card.cardTypes.includes("Land")`.
+  - Consequence for two-faced cards: an MDFC whose union included `"Land"` was counted as a land with no special-casing. While it existed, `cardTypes` had **two** silent dependents on being the full union (library-search grouping + mulligan land counts). No `CardDefinition`/adapter/persistence changes.
 
 ## What Was Tried and Abandoned
 

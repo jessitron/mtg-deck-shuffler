@@ -1,6 +1,5 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
 import { formatCardContainer } from "../common/shared-components.js";
-import { recommendMulligan } from "../../mulligan/recommendMulligan.js";
 
 export function formatHandSectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const handCardsList = game.listHand();
@@ -16,11 +15,9 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
     .join("");
 
   const mulliganButtonHtml = formatMulliganButtonHtmlFragment(game);
-  const mulliganRecommendationHtml = formatMulliganRecommendationHtmlFragment(game);
 
   return `<div id="hand-section" data-testid="hand-section">
         ${mulliganButtonHtml}
-        ${mulliganRecommendationHtml}
         <div id="hand-cards" class="hand-cards">
           <div class="hand-symbol">
             <div class="hand-count">${handCardsList.length}</div>
@@ -51,32 +48,5 @@ function formatMulliganButtonHtmlFragment(game: GameState): string {
                   hx-vals='{"expected-version": ${game.getStateVersion()}}'
                   hx-target="#game-container"
                   hx-swap="outerHTML">${label}</button>
-        </div>`;
-}
-
-/**
- * The Mulligan Advisor's recommendation, shown beside the mulligan button during
- * the opening-hand acceptance stage. Always rendered server-side, but hidden by
- * CSS unless <body class="dev-mode">. The recommender is a pure heuristic function
- * (src/mulligan/recommendMulligan.ts).
- */
-function formatMulliganRecommendationHtmlFragment(game: GameState): string {
-  if (!game.isInMulliganStage()) {
-    return "";
-  }
-
-  const rec = recommendMulligan({
-    hand: game.listHand().map((gc) => gc.card),
-    commanders: game.listCommanders().map((gc) => gc.card),
-    mulligansSoFar: game.getMulliganCount(),
-  });
-  const verdict = rec.decision === "keep" ? "Keep" : "Mulligan";
-  const confidencePct = Math.round(rec.confidence * 100);
-
-  return `<div class="mulligan-recommendation" data-testid="mulligan-recommendation">
-          <span class="mulligan-recommendation-label">Advisor:</span>
-          <span class="mulligan-recommendation-verdict mulligan-recommendation-verdict-${rec.decision}">${verdict}</span>
-          <span class="mulligan-recommendation-confidence">${confidencePct}% confident</span>
-          <span class="mulligan-recommendation-commentary">${rec.commentary}</span>
         </div>`;
 }
