@@ -158,6 +158,12 @@ Visibility cuts across all kinds orthogonally.
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
+- **Observability is mandatory.** Every component sends telemetry to Honeycomb via
+  OpenTelemetry and propagates trace context (also via OpenTelemetry) — across HTTP,
+  websockets, and the event log alike, so one trace can follow a card from the Play
+  button through the Spine to every player's canvas. All interesting info is added to
+  spans. "When something breaks, Honeycomb shows you why" applies to every ship, from
+  its first commit — not retrofitted.
 - **Made with tldraw** — we wear the watermark happily.
 
 ## Joining a table (for now)

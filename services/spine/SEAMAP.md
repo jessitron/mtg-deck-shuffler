@@ -42,6 +42,9 @@ believe it.
   so extraction later is a deployment decision, not a design one.
 - Not all Spine events are game events: table events, chat events, physical events,
   game events, interpretations/corrections — visibility cuts across them all.
+- Observability is mandatory: telemetry to Honeycomb via OpenTelemetry, trace context
+  propagated in and out (arriving events carry it; interpretations link back through
+  it), all interesting info on spans. From the first commit.
 
 ## Non-goals
 

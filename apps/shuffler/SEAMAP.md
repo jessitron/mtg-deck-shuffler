@@ -40,6 +40,8 @@ hidden zones so your hands are free to play.
   the gameplay pages are historical, not an intention to preserve.
 - Ports, adapters, gateways (`notes/PATTERN-port-adapter-gateway.md`). Fakes, never mocks.
 - Games are tracked as a series of events; everything persisted is versioned.
+- Observability is mandatory: telemetry to Honeycomb via OpenTelemetry, trace context
+  propagated (including into Spine events), all interesting info on spans.
 
 ## Non-goals
 

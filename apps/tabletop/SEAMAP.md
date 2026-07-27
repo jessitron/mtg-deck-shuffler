@@ -38,6 +38,9 @@ event the Spine can hear.
   Domain authority lives in the Spine.
 - React + tldraw (the pixels are TypeScript's).
 - Round corners allowed on cards and playmats only, as ever.
+- Observability is mandatory: telemetry to Honeycomb via OpenTelemetry, trace context
+  propagated (browser spans included, across the websocket sync), all interesting
+  info on spans. From the first commit.
 
 ## Non-goals
 

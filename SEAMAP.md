@@ -66,6 +66,9 @@ A change is home when:
 - **Monorepo, polyglot**: TypeScript owns pixels (Shuffler, Tabletop), Ruby owns
   meaning (Spine, via the Journeys pattern — tour pending).
 - **Don't carry what you can listen to**: Discord keeps the voice call; we transcribe.
+- **Observability is mandatory.** Every component sends telemetry to Honeycomb with
+  OpenTelemetry and propagates trace context; all interesting info goes on spans.
+  From each ship's first commit, not retrofitted.
 - Square corners (border-radius ≤ 4px) except on physically round things. A me thing.
 - Everything persisted is versioned (`notes/DESIGN-persistence-versioning.md`).
 - Feature owners hold deep context for tricky features and watch for cross-feature
